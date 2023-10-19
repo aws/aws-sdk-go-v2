@@ -18,7 +18,7 @@ import (
 )
 
 // Creates a policy store. A policy store is a container for policy resources.
-// Although Cedar supports multiple namespaces (https://docs.cedarpolicy.com/schema.html#namespace)
+// Although Cedar supports multiple namespaces (https://docs.cedarpolicy.com/schema/schema.html#namespace)
 // , Verified Permissions currently supports only one namespace per policy store.
 // Verified Permissions is eventually consistent (https://wikipedia.org/wiki/Eventual_consistency)
 // . It can take a few seconds for a new or changed element to be propagate through

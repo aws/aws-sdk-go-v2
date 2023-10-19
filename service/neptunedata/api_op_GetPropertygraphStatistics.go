@@ -16,7 +16,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets property graph statistics (Gremlin and openCypher).
+// Gets property graph statistics (Gremlin and openCypher). When invoking this
+// operation in a Neptune cluster that has IAM authentication enabled, the IAM user
+// or role making the request must have a policy attached that allows the
+// neptune-db:GetStatisticsStatus (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getstatisticsstatus)
+// IAM action in that cluster.
 func (c *Client) GetPropertygraphStatistics(ctx context.Context, params *GetPropertygraphStatisticsInput, optFns ...func(*Options)) (*GetPropertygraphStatisticsOutput, error) {
 	if params == nil {
 		params = &GetPropertygraphStatisticsInput{}
@@ -44,7 +48,8 @@ type GetPropertygraphStatisticsOutput struct {
 	Payload *types.Statistics
 
 	// The HTTP return code of the request. If the request succeeded, the code is 200.
-	// See Common error codes for DFE statistics request for a list of common errors.
+	// See Common error codes for DFE statistics request (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-dfe-statistics.html#neptune-dfe-statistics-errors)
+	// for a list of common errors.
 	//
 	// This member is required.
 	Status *string

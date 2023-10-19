@@ -538,8 +538,8 @@ type ProvisionedProductAttribute struct {
 	// One or more tags.
 	Tags []Tag
 
-	// The type of provisioned product. The supported values are CFN_STACK and
-	// CFN_STACKSET .
+	// The type of provisioned product. The supported values are CFN_STACK ,
+	// CFN_STACKSET , TERRAFORM_OPEN_SOURCE , TERRAFORM_CLOUD , and EXTERNAL .
 	Type *string
 
 	// The Amazon Resource Name (ARN) of the user.
@@ -620,8 +620,8 @@ type ProvisionedProductDetail struct {
 	// The current status message of the provisioned product.
 	StatusMessage *string
 
-	// The type of provisioned product. The supported values are CFN_STACK and
-	// CFN_STACKSET .
+	// The type of provisioned product. The supported values are CFN_STACK ,
+	// CFN_STACKSET , TERRAFORM_OPEN_SOURCE , TERRAFORM_CLOUD , and EXTERNAL .
 	Type *string
 
 	noSmithyDocumentSerde
@@ -761,8 +761,11 @@ type ProvisioningArtifactDetail struct {
 	// UpdateProvisioningArticat APIs. This field only exists for Repo-Synced products.
 	SourceRevision *string
 
-	// The type of provisioning artifact. CLOUD_FORMATION_TEMPLATE - CloudFormation
-	// template
+	// The type of provisioning artifact.
+	//   - CLOUD_FORMATION_TEMPLATE - CloudFormation template
+	//   - TERRAFORM_OPEN_SOURCE - Terraform Open Source configuration file
+	//   - TERRAFORM_CLOUD - Terraform Cloud configuration file
+	//   - EXTERNAL - External configuration file
 	Type ProvisioningArtifactType
 
 	noSmithyDocumentSerde
@@ -860,7 +863,9 @@ type ProvisioningArtifactProperties struct {
 
 	// The type of provisioning artifact.
 	//   - CLOUD_FORMATION_TEMPLATE - CloudFormation template
-	//   - TERRAFORM_OPEN_SOURCE - Terraform open source configuration file
+	//   - TERRAFORM_OPEN_SOURCE - Terraform Open Source configuration file
+	//   - TERRAFORM_CLOUD - Terraform Cloud configuration file
+	//   - EXTERNAL - External configuration file
 	Type ProvisioningArtifactType
 
 	noSmithyDocumentSerde
@@ -1008,7 +1013,7 @@ type RecordDetail struct {
 	ProvisionedProductName *string
 
 	// The type of provisioned product. The supported values are CFN_STACK ,
-	// CFN_STACKSET , TERRAFORM_OPEN_SOURCE , and TERRAFORM_CLOUD .
+	// CFN_STACKSET , TERRAFORM_OPEN_SOURCE , TERRAFORM_CLOUD , and EXTERNAL .
 	ProvisionedProductType *string
 
 	// The identifier of the provisioning artifact.

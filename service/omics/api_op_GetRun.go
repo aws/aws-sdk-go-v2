@@ -67,11 +67,17 @@ type GetRunOutput struct {
 	// The run's digest.
 	Digest *string
 
+	// The reason a run has failed.
+	FailureReason *string
+
 	// The run's ID.
 	Id *string
 
 	// The run's log level.
 	LogLevel types.RunLogLevel
+
+	// The location of the run log.
+	LogLocation *types.RunLogLocation
 
 	// The run's name.
 	Name *string

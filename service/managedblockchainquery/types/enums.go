@@ -49,6 +49,8 @@ const (
 	QueryNetworkBitcoinMainnet QueryNetwork = "BITCOIN_MAINNET"
 	// Bitcoin test network
 	QueryNetworkBitcoinTestnet QueryNetwork = "BITCOIN_TESTNET"
+	// SEPOLIA network (ethereum testnet)
+	QueryNetworkEthereumSepoliaTestnet QueryNetwork = "ETHEREUM_SEPOLIA_TESTNET"
 )
 
 // Values returns all known values for QueryNetwork. Note that this can be
@@ -59,6 +61,7 @@ func (QueryNetwork) Values() []QueryNetwork {
 		"ETHEREUM_MAINNET",
 		"BITCOIN_MAINNET",
 		"BITCOIN_TESTNET",
+		"ETHEREUM_SEPOLIA_TESTNET",
 	}
 }
 

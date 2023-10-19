@@ -1,0 +1,8 @@
+{
+    "id": "a1195700-dcba-4082-95c3-9dc9d0dc657f",
+    "type": "feature",
+    "description": "Improving Amazon Verified Permissions Create experience",
+    "modules": [
+        "service/verifiedpermissions"
+    ]
+}

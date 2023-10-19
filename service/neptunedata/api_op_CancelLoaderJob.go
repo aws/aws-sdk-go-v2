@@ -17,7 +17,10 @@ import (
 
 // Cancels a specified load job. This is an HTTP DELETE request. See Neptune
 // Loader Get-Status API (https://docs.aws.amazon.com/neptune/latest/userguide/load-api-reference-status.htm)
-// for more information.
+// for more information. When invoking this operation in a Neptune cluster that has
+// IAM authentication enabled, the IAM user or role making the request must have a
+// policy attached that allows the neptune-db:CancelLoaderJob (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelloaderjob)
+// IAM action in that cluster..
 func (c *Client) CancelLoaderJob(ctx context.Context, params *CancelLoaderJobInput, optFns ...func(*Options)) (*CancelLoaderJobOutput, error) {
 	if params == nil {
 		params = &CancelLoaderJobInput{}

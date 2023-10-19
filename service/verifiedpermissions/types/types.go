@@ -46,7 +46,7 @@ type AttributeValue interface {
 	isAttributeValue()
 }
 
-// An attribute value of Boolean (https://docs.cedarpolicy.com/syntax-datatypes.html#boolean)
+// An attribute value of Boolean (https://docs.cedarpolicy.com/policies/syntax-datatypes.html#boolean)
 // type. Example: {"boolean": true}
 type AttributeValueMemberBoolean struct {
 	Value bool
@@ -67,7 +67,7 @@ type AttributeValueMemberEntityIdentifier struct {
 
 func (*AttributeValueMemberEntityIdentifier) isAttributeValue() {}
 
-// An attribute value of Long (https://docs.cedarpolicy.com/syntax-datatypes.html#long)
+// An attribute value of Long (https://docs.cedarpolicy.com/policies/syntax-datatypes.html#long)
 // type. Example: {"long": 0}
 type AttributeValueMemberLong struct {
 	Value int64
@@ -77,7 +77,7 @@ type AttributeValueMemberLong struct {
 
 func (*AttributeValueMemberLong) isAttributeValue() {}
 
-// An attribute value of Record (https://docs.cedarpolicy.com/syntax-datatypes.html#record)
+// An attribute value of Record (https://docs.cedarpolicy.com/policies/syntax-datatypes.html#record)
 // type. Example: {"record": { "keyName": {} } }
 type AttributeValueMemberRecord struct {
 	Value map[string]AttributeValue
@@ -87,7 +87,7 @@ type AttributeValueMemberRecord struct {
 
 func (*AttributeValueMemberRecord) isAttributeValue() {}
 
-// An attribute value of Set (https://docs.cedarpolicy.com/syntax-datatypes.html#set)
+// An attribute value of Set (https://docs.cedarpolicy.com/policies/syntax-datatypes.html#set)
 // type. Example: {"set": [ {} ] }
 type AttributeValueMemberSet struct {
 	Value []AttributeValue
@@ -97,7 +97,7 @@ type AttributeValueMemberSet struct {
 
 func (*AttributeValueMemberSet) isAttributeValue() {}
 
-// An attribute value of String (https://docs.cedarpolicy.com/syntax-datatypes.html#string)
+// An attribute value of String (https://docs.cedarpolicy.com/policies/syntax-datatypes.html#string)
 // type. Example: {"string": "abc"}
 type AttributeValueMemberString struct {
 	Value string

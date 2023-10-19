@@ -22,7 +22,10 @@ import (
 // UUID token which you then include when calling ExecuteFastReset again with
 // action set to performDatabaseReset . See Empty an Amazon Neptune DB cluster
 // using the fast reset API (https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-fast-reset.html)
-// .
+// . When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the neptune-db:ResetDatabase (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#resetdatabase)
+// IAM action in that cluster.
 func (c *Client) ExecuteFastReset(ctx context.Context, params *ExecuteFastResetInput, optFns ...func(*Options)) (*ExecuteFastResetOutput, error) {
 	if params == nil {
 		params = &ExecuteFastResetInput{}

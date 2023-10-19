@@ -18,28 +18,16 @@ import (
 
 // Attaches tags to a secret. Tags consist of a key name and a value. Tags are
 // part of the secret's metadata. They are not associated with specific versions of
-// the secret. This operation appends tags to the existing list of tags. The
-// following restrictions apply to tags:
-//   - Maximum number of tags per secret: 50
-//   - Maximum key length: 127 Unicode characters in UTF-8
-//   - Maximum value length: 255 Unicode characters in UTF-8
-//   - Tag keys and values are case sensitive.
-//   - Do not use the aws: prefix in your tag names or values because Amazon Web
-//     Services reserves it for Amazon Web Services use. You can't edit or delete tag
-//     names or values with this prefix. Tags with this prefix do not count against
-//     your tags per secret limit.
-//   - If you use your tagging schema across multiple services and resources,
-//     other services might have restrictions on allowed characters. Generally allowed
-//     characters: letters, spaces, and numbers representable in UTF-8, plus the
-//     following special characters: + - = . _ : / @.
-//
-// If you use tags as part of your security strategy, then adding or removing a
-// tag can change permissions. If successfully completing this operation would
-// result in you losing your permissions for this secret, then the operation is
-// blocked and returns an Access Denied error. Secrets Manager generates a
-// CloudTrail log entry when you call this action. Do not include sensitive
-// information in request parameters because it might be logged. For more
-// information, see Logging Secrets Manager events with CloudTrail (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html)
+// the secret. This operation appends tags to the existing list of tags. For tag
+// quotas and naming restrictions, see Service quotas for Tagging (https://docs.aws.amazon.com/general/latest/gr/arg.html#taged-reference-quotas)
+// in the Amazon Web Services General Reference guide. If you use tags as part of
+// your security strategy, then adding or removing a tag can change permissions. If
+// successfully completing this operation would result in you losing your
+// permissions for this secret, then the operation is blocked and returns an Access
+// Denied error. Secrets Manager generates a CloudTrail log entry when you call
+// this action. Do not include sensitive information in request parameters because
+// it might be logged. For more information, see Logging Secrets Manager events
+// with CloudTrail (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html)
 // . Required permissions: secretsmanager:TagResource . For more information, see
 // IAM policy actions for Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
 // and Authentication and access control in Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html)

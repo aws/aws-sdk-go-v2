@@ -44484,6 +44484,46 @@ func awsRestjson1_deserializeDocumentDataPathSort(v **types.DataPathSort, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDataPathType(v **types.DataPathType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataPathType
+	if *v == nil {
+		sv = &types.DataPathType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PivotTableDataPathType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PivotTableDataPathType to be of type string, got %T instead", value)
+				}
+				sv.PivotTableDataPathType = types.PivotTableDataPathType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDataPathValue(v **types.DataPathValue, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -44506,6 +44546,11 @@ func awsRestjson1_deserializeDocumentDataPathValue(v **types.DataPathValue, valu
 
 	for key, value := range shape {
 		switch key {
+		case "DataPathType":
+			if err := awsRestjson1_deserializeDocumentDataPathType(&sv.DataPathType, value); err != nil {
+				return err
+			}
+
 		case "FieldId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -45986,6 +46031,16 @@ loop:
 			uv = &types.DataSourceParametersMemberSqlServerParameters{Value: mv}
 			break loop
 
+		case "StarburstParameters":
+			var mv types.StarburstParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentStarburstParameters(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberStarburstParameters{Value: mv}
+			break loop
+
 		case "TeradataParameters":
 			var mv types.TeradataParameters
 			destAddr := &mv
@@ -45994,6 +46049,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.DataSourceParametersMemberTeradataParameters{Value: mv}
+			break loop
+
+		case "TrinoParameters":
+			var mv types.TrinoParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentTrinoParameters(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberTrinoParameters{Value: mv}
 			break loop
 
 		case "TwitterParameters":
@@ -64561,6 +64626,11 @@ func awsRestjson1_deserializeDocumentPivotTotalOptions(v **types.PivotTotalOptio
 				sv.ScrollStatus = types.TableTotalsScrollStatus(jtv)
 			}
 
+		case "TotalAggregationOptions":
+			if err := awsRestjson1_deserializeDocumentTotalAggregationOptionList(&sv.TotalAggregationOptions, value); err != nil {
+				return err
+			}
+
 		case "TotalCellStyle":
 			if err := awsRestjson1_deserializeDocumentTableCellStyle(&sv.TotalCellStyle, value); err != nil {
 				return err
@@ -66029,6 +66099,15 @@ func awsRestjson1_deserializeDocumentReferenceLineDataConfiguration(v **types.Re
 		case "DynamicConfiguration":
 			if err := awsRestjson1_deserializeDocumentReferenceLineDynamicDataConfiguration(&sv.DynamicConfiguration, value); err != nil {
 				return err
+			}
+
+		case "SeriesType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReferenceLineSeriesType to be of type string, got %T instead", value)
+				}
+				sv.SeriesType = types.ReferenceLineSeriesType(jtv)
 			}
 
 		case "StaticConfiguration":
@@ -71820,6 +71899,77 @@ func awsRestjson1_deserializeDocumentSslProperties(v **types.SslProperties, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentStarburstParameters(v **types.StarburstParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StarburstParameters
+	if *v == nil {
+		sv = &types.StarburstParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Catalog":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Catalog to be of type string, got %T instead", value)
+				}
+				sv.Catalog = ptr.String(jtv)
+			}
+
+		case "Host":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Host to be of type string, got %T instead", value)
+				}
+				sv.Host = ptr.String(jtv)
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Port to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = int32(i64)
+			}
+
+		case "ProductType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StarburstProductType to be of type string, got %T instead", value)
+				}
+				sv.ProductType = types.StarburstProductType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentStringDatasetParameter(v **types.StringDatasetParameter, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -76112,6 +76262,11 @@ func awsRestjson1_deserializeDocumentTimeEqualityFilter(v **types.TimeEqualityFi
 				sv.ParameterName = ptr.String(jtv)
 			}
 
+		case "RollingDate":
+			if err := awsRestjson1_deserializeDocumentRollingDateConfiguration(&sv.RollingDate, value); err != nil {
+				return err
+			}
+
 		case "TimeGranularity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -78240,6 +78395,125 @@ func awsRestjson1_deserializeDocumentTotalAggregationComputation(v **types.Total
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentTotalAggregationFunction(v **types.TotalAggregationFunction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TotalAggregationFunction
+	if *v == nil {
+		sv = &types.TotalAggregationFunction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SimpleTotalAggregationFunction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SimpleTotalAggregationFunction to be of type string, got %T instead", value)
+				}
+				sv.SimpleTotalAggregationFunction = types.SimpleTotalAggregationFunction(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTotalAggregationOption(v **types.TotalAggregationOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TotalAggregationOption
+	if *v == nil {
+		sv = &types.TotalAggregationOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FieldId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldId to be of type string, got %T instead", value)
+				}
+				sv.FieldId = ptr.String(jtv)
+			}
+
+		case "TotalAggregationFunction":
+			if err := awsRestjson1_deserializeDocumentTotalAggregationFunction(&sv.TotalAggregationFunction, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTotalAggregationOptionList(v *[]types.TotalAggregationOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TotalAggregationOption
+	if *v == nil {
+		cv = []types.TotalAggregationOption{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TotalAggregationOption
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTotalAggregationOption(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTotalOptions(v **types.TotalOptions, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -78287,6 +78561,11 @@ func awsRestjson1_deserializeDocumentTotalOptions(v **types.TotalOptions, value 
 					return fmt.Errorf("expected TableTotalsScrollStatus to be of type string, got %T instead", value)
 				}
 				sv.ScrollStatus = types.TableTotalsScrollStatus(jtv)
+			}
+
+		case "TotalAggregationOptions":
+			if err := awsRestjson1_deserializeDocumentTotalAggregationOptionList(&sv.TotalAggregationOptions, value); err != nil {
+				return err
 			}
 
 		case "TotalCellStyle":
@@ -78815,6 +79094,68 @@ func awsRestjson1_deserializeDocumentTrendArrowOptions(v **types.TrendArrowOptio
 					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
 				}
 				sv.Visibility = types.Visibility(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTrinoParameters(v **types.TrinoParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TrinoParameters
+	if *v == nil {
+		sv = &types.TrinoParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Catalog":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Catalog to be of type string, got %T instead", value)
+				}
+				sv.Catalog = ptr.String(jtv)
+			}
+
+		case "Host":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Host to be of type string, got %T instead", value)
+				}
+				sv.Host = ptr.String(jtv)
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Port to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = int32(i64)
 			}
 
 		default:

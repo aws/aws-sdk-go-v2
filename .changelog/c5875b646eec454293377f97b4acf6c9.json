@@ -1,0 +1,8 @@
+{
+    "id": "c5875b64-6eec-4542-9337-7f97b4acf6c9",
+    "type": "documentation",
+    "description": "Doc changes to add IAM action mappings for the data actions.",
+    "modules": [
+        "service/neptunedata"
+    ]
+}

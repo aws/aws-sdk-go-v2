@@ -64,6 +64,10 @@ type CreateDataSourceInput struct {
 	// The parameters that Amazon QuickSight uses to connect to your underlying source.
 	DataSourceParameters types.DataSourceParameters
 
+	// When you create the data source, Amazon QuickSight adds the data source to
+	// these folders.
+	FolderArns []string
+
 	// A list of resource permissions on the data source.
 	Permissions []types.ResourcePermission
 

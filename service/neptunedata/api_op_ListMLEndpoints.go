@@ -17,7 +17,10 @@ import (
 
 // Lists existing inference endpoints. See Managing inference endpoints using the
 // endpoints command (https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html)
-// .
+// . When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the neptune-db:ListMLEndpoints (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#listmlendpoints)
+// IAM action in that cluster.
 func (c *Client) ListMLEndpoints(ctx context.Context, params *ListMLEndpointsInput, optFns ...func(*Options)) (*ListMLEndpointsOutput, error) {
 	if params == nil {
 		params = &ListMLEndpointsInput{}

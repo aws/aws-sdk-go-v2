@@ -7091,6 +7091,15 @@ func awsRestjson1_deserializeOpDocumentGetRunOutput(v **GetRunOutput, value inte
 				sv.Digest = ptr.String(jtv)
 			}
 
+		case "failureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RunFailureReason to be of type string, got %T instead", value)
+				}
+				sv.FailureReason = ptr.String(jtv)
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7107,6 +7116,11 @@ func awsRestjson1_deserializeOpDocumentGetRunOutput(v **GetRunOutput, value inte
 					return fmt.Errorf("expected RunLogLevel to be of type string, got %T instead", value)
 				}
 				sv.LogLevel = types.RunLogLevel(jtv)
+			}
+
+		case "logLocation":
+			if err := awsRestjson1_deserializeDocumentRunLogLocation(&sv.LogLocation, value); err != nil {
+				return err
 			}
 
 		case "name":
@@ -7722,6 +7736,15 @@ func awsRestjson1_deserializeOpDocumentGetRunTaskOutput(v **GetRunTaskOutput, va
 					return err
 				}
 				sv.CreationTime = ptr.Time(t)
+			}
+
+		case "failureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TaskFailureReason to be of type string, got %T instead", value)
+				}
+				sv.FailureReason = ptr.String(jtv)
 			}
 
 		case "gpus":
@@ -19170,6 +19193,55 @@ func awsRestjson1_deserializeDocumentRunListItem(v **types.RunListItem, value in
 					return fmt.Errorf("expected WorkflowId to be of type string, got %T instead", value)
 				}
 				sv.WorkflowId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRunLogLocation(v **types.RunLogLocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RunLogLocation
+	if *v == nil {
+		sv = &types.RunLogLocation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "engineLogStream":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EngineLogStream to be of type string, got %T instead", value)
+				}
+				sv.EngineLogStream = ptr.String(jtv)
+			}
+
+		case "runLogStream":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RunLogStream to be of type string, got %T instead", value)
+				}
+				sv.RunLogStream = ptr.String(jtv)
 			}
 
 		default:

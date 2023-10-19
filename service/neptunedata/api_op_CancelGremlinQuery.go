@@ -16,7 +16,10 @@ import (
 )
 
 // Cancels a Gremlin query. See Gremlin query cancellation (https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-api-status-cancel.html)
-// for more information.
+// for more information. When invoking this operation in a Neptune cluster that has
+// IAM authentication enabled, the IAM user or role making the request must have a
+// policy attached that allows the neptune-db:CancelQuery (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelquery)
+// IAM action in that cluster.
 func (c *Client) CancelGremlinQuery(ctx context.Context, params *CancelGremlinQueryInput, optFns ...func(*Options)) (*CancelGremlinQueryOutput, error) {
 	if params == nil {
 		params = &CancelGremlinQueryInput{}

@@ -354,6 +354,50 @@ func (LogType) Values() []LogType {
 	}
 }
 
+type MaintenanceStatus string
+
+// Enum values for MaintenanceStatus
+const (
+	MaintenanceStatusPending    MaintenanceStatus = "PENDING"
+	MaintenanceStatusInProgress MaintenanceStatus = "IN_PROGRESS"
+	MaintenanceStatusCompleted  MaintenanceStatus = "COMPLETED"
+	MaintenanceStatusFailed     MaintenanceStatus = "FAILED"
+	MaintenanceStatusTimedOut   MaintenanceStatus = "TIMED_OUT"
+)
+
+// Values returns all known values for MaintenanceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MaintenanceStatus) Values() []MaintenanceStatus {
+	return []MaintenanceStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"TIMED_OUT",
+	}
+}
+
+type MaintenanceType string
+
+// Enum values for MaintenanceType
+const (
+	MaintenanceTypeRebootNode           MaintenanceType = "REBOOT_NODE"
+	MaintenanceTypeRestartSearchProcess MaintenanceType = "RESTART_SEARCH_PROCESS"
+	MaintenanceTypeRestartDashboard     MaintenanceType = "RESTART_DASHBOARD"
+)
+
+// Values returns all known values for MaintenanceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MaintenanceType) Values() []MaintenanceType {
+	return []MaintenanceType{
+		"REBOOT_NODE",
+		"RESTART_SEARCH_PROCESS",
+		"RESTART_DASHBOARD",
+	}
+}
+
 type MasterNodeStatus string
 
 // Enum values for MasterNodeStatus

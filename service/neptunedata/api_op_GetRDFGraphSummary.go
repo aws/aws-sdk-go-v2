@@ -16,7 +16,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a graph summary for an RDF graph.
+// Gets a graph summary for an RDF graph. When invoking this operation in a
+// Neptune cluster that has IAM authentication enabled, the IAM user or role making
+// the request must have a policy attached that allows the
+// neptune-db:GetGraphSummary (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getgraphsummary)
+// IAM action in that cluster.
 func (c *Client) GetRDFGraphSummary(ctx context.Context, params *GetRDFGraphSummaryInput, optFns ...func(*Options)) (*GetRDFGraphSummaryOutput, error) {
 	if params == nil {
 		params = &GetRDFGraphSummaryInput{}

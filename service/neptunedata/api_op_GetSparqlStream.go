@@ -23,7 +23,14 @@ import (
 // enabled on your Neptune DBcluster. To enable streams, set the neptune_streams (https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html#parameters-db-cluster-parameters-neptune_streams)
 // DB cluster parameter to 1 . See Capturing graph changes in real time using
 // Neptune streams (https://docs.aws.amazon.com/neptune/latest/userguide/streams.html)
-// .
+// . When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the neptune-db:GetStreamRecords (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getstreamrecords)
+// IAM action in that cluster. Note that the neptune-db:QueryLanguage:Sparql (https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys)
+// IAM condition key can be used in the policy document to restrict the use of
+// SPARQL queries (see Condition keys available in Neptune IAM data-access policy
+// statements (https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)
+// ).
 func (c *Client) GetSparqlStream(ctx context.Context, params *GetSparqlStreamInput, optFns ...func(*Options)) (*GetSparqlStreamOutput, error) {
 	if params == nil {
 		params = &GetSparqlStreamInput{}

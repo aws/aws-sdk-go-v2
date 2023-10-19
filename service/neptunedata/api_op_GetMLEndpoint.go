@@ -18,7 +18,10 @@ import (
 
 // Retrieves details about an inference endpoint. See Managing inference endpoints
 // using the endpoints command (https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html)
-// .
+// . When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the neptune-db:GetMLEndpointStatus (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getmlendpointstatus)
+// IAM action in that cluster.
 func (c *Client) GetMLEndpoint(ctx context.Context, params *GetMLEndpointInput, optFns ...func(*Options)) (*GetMLEndpointOutput, error) {
 	if params == nil {
 		params = &GetMLEndpointInput{}

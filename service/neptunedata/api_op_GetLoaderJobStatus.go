@@ -19,7 +19,10 @@ import (
 // Gets status information about a specified load job. Neptune keeps track of the
 // most recent 1,024 bulk load jobs, and stores the last 10,000 error details per
 // job. See Neptune Loader Get-Status API (https://docs.aws.amazon.com/neptune/latest/userguide/load-api-reference-status.htm)
-// for more information.
+// for more information. When invoking this operation in a Neptune cluster that has
+// IAM authentication enabled, the IAM user or role making the request must have a
+// policy attached that allows the neptune-db:GetLoaderJobStatus (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getloaderjobstatus)
+// IAM action in that cluster..
 func (c *Client) GetLoaderJobStatus(ctx context.Context, params *GetLoaderJobStatusInput, optFns ...func(*Options)) (*GetLoaderJobStatusOutput, error) {
 	if params == nil {
 		params = &GetLoaderJobStatusInput{}

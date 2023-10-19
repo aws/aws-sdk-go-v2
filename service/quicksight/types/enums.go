@@ -1567,7 +1567,8 @@ type FolderType string
 
 // Enum values for FolderType
 const (
-	FolderTypeShared FolderType = "SHARED"
+	FolderTypeShared     FolderType = "SHARED"
+	FolderTypeRestricted FolderType = "RESTRICTED"
 )
 
 // Values returns all known values for FolderType. Note that this can be expanded
@@ -1576,6 +1577,7 @@ const (
 func (FolderType) Values() []FolderType {
 	return []FolderType{
 		"SHARED",
+		"RESTRICTED",
 	}
 }
 
@@ -2828,6 +2830,28 @@ func (PivotTableConditionalFormattingScopeRole) Values() []PivotTableConditional
 	}
 }
 
+type PivotTableDataPathType string
+
+// Enum values for PivotTableDataPathType
+const (
+	PivotTableDataPathTypeHierarchyRowsLayoutColumn PivotTableDataPathType = "HIERARCHY_ROWS_LAYOUT_COLUMN"
+	PivotTableDataPathTypeMultipleRowMetricsColumn  PivotTableDataPathType = "MULTIPLE_ROW_METRICS_COLUMN"
+	PivotTableDataPathTypeEmptyColumnHeader         PivotTableDataPathType = "EMPTY_COLUMN_HEADER"
+	PivotTableDataPathTypeCountMetricColumn         PivotTableDataPathType = "COUNT_METRIC_COLUMN"
+)
+
+// Values returns all known values for PivotTableDataPathType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PivotTableDataPathType) Values() []PivotTableDataPathType {
+	return []PivotTableDataPathType{
+		"HIERARCHY_ROWS_LAYOUT_COLUMN",
+		"MULTIPLE_ROW_METRICS_COLUMN",
+		"EMPTY_COLUMN_HEADER",
+		"COUNT_METRIC_COLUMN",
+	}
+}
+
 type PivotTableFieldCollapseState string
 
 // Enum values for PivotTableFieldCollapseState
@@ -3056,6 +3080,24 @@ func (ReferenceLinePatternType) Values() []ReferenceLinePatternType {
 		"SOLID",
 		"DASHED",
 		"DOTTED",
+	}
+}
+
+type ReferenceLineSeriesType string
+
+// Enum values for ReferenceLineSeriesType
+const (
+	ReferenceLineSeriesTypeBar  ReferenceLineSeriesType = "BAR"
+	ReferenceLineSeriesTypeLine ReferenceLineSeriesType = "LINE"
+)
+
+// Values returns all known values for ReferenceLineSeriesType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReferenceLineSeriesType) Values() []ReferenceLineSeriesType {
+	return []ReferenceLineSeriesType{
+		"BAR",
+		"LINE",
 	}
 }
 
@@ -3448,6 +3490,33 @@ func (SimpleNumericalAggregationFunction) Values() []SimpleNumericalAggregationF
 	}
 }
 
+type SimpleTotalAggregationFunction string
+
+// Enum values for SimpleTotalAggregationFunction
+const (
+	SimpleTotalAggregationFunctionDefault SimpleTotalAggregationFunction = "DEFAULT"
+	SimpleTotalAggregationFunctionSum     SimpleTotalAggregationFunction = "SUM"
+	SimpleTotalAggregationFunctionAverage SimpleTotalAggregationFunction = "AVERAGE"
+	SimpleTotalAggregationFunctionMin     SimpleTotalAggregationFunction = "MIN"
+	SimpleTotalAggregationFunctionMax     SimpleTotalAggregationFunction = "MAX"
+	SimpleTotalAggregationFunctionNone    SimpleTotalAggregationFunction = "NONE"
+)
+
+// Values returns all known values for SimpleTotalAggregationFunction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SimpleTotalAggregationFunction) Values() []SimpleTotalAggregationFunction {
+	return []SimpleTotalAggregationFunction{
+		"DEFAULT",
+		"SUM",
+		"AVERAGE",
+		"MIN",
+		"MAX",
+		"NONE",
+	}
+}
+
 type SmallMultiplesAxisPlacement string
 
 // Enum values for SmallMultiplesAxisPlacement
@@ -3580,6 +3649,24 @@ func (SpecialValue) Values() []SpecialValue {
 		"EMPTY",
 		"NULL",
 		"OTHER",
+	}
+}
+
+type StarburstProductType string
+
+// Enum values for StarburstProductType
+const (
+	StarburstProductTypeGalaxy     StarburstProductType = "GALAXY"
+	StarburstProductTypeEnterprise StarburstProductType = "ENTERPRISE"
+)
+
+// Values returns all known values for StarburstProductType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StarburstProductType) Values() []StarburstProductType {
+	return []StarburstProductType{
+		"GALAXY",
+		"ENTERPRISE",
 	}
 }
 

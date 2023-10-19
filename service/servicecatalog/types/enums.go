@@ -256,6 +256,7 @@ const (
 	ProductTypeMarketplace            ProductType = "MARKETPLACE"
 	ProductTypeTerraformOpenSource    ProductType = "TERRAFORM_OPEN_SOURCE"
 	ProductTypeTerraformCloud         ProductType = "TERRAFORM_CLOUD"
+	ProductTypeExternal               ProductType = "EXTERNAL"
 )
 
 // Values returns all known values for ProductType. Note that this can be expanded
@@ -267,6 +268,7 @@ func (ProductType) Values() []ProductType {
 		"MARKETPLACE",
 		"TERRAFORM_OPEN_SOURCE",
 		"TERRAFORM_CLOUD",
+		"EXTERNAL",
 	}
 }
 
@@ -459,6 +461,7 @@ const (
 	ProvisioningArtifactTypeMarketplaceCar         ProvisioningArtifactType = "MARKETPLACE_CAR"
 	ProvisioningArtifactTypeTerraformOpenSource    ProvisioningArtifactType = "TERRAFORM_OPEN_SOURCE"
 	ProvisioningArtifactTypeTerraformCloud         ProvisioningArtifactType = "TERRAFORM_CLOUD"
+	ProvisioningArtifactTypeExternal               ProvisioningArtifactType = "EXTERNAL"
 )
 
 // Values returns all known values for ProvisioningArtifactType. Note that this
@@ -471,6 +474,7 @@ func (ProvisioningArtifactType) Values() []ProvisioningArtifactType {
 		"MARKETPLACE_CAR",
 		"TERRAFORM_OPEN_SOURCE",
 		"TERRAFORM_CLOUD",
+		"EXTERNAL",
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "9b6eb821-b610-432f-8da9-e1d7566633af",
+    "type": "feature",
+    "description": "Introduce support for EXTERNAL product and provisioning artifact type in CreateProduct and CreateProvisioningArtifact APIs.",
+    "modules": [
+        "service/servicecatalog"
+    ]
+}

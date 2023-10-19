@@ -510,6 +510,26 @@ func (m *validateOpDissociatePackage) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDomainMaintenanceStatus struct {
+}
+
+func (*validateOpGetDomainMaintenanceStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDomainMaintenanceStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDomainMaintenanceStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDomainMaintenanceStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPackageVersionHistory struct {
 }
 
@@ -565,6 +585,26 @@ func (m *validateOpGetUpgradeStatus) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetUpgradeStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDomainMaintenances struct {
+}
+
+func (*validateOpListDomainMaintenances) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDomainMaintenances) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDomainMaintenancesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDomainMaintenancesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -790,6 +830,26 @@ func (m *validateOpRevokeVpcEndpointAccess) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartDomainMaintenance struct {
+}
+
+func (*validateOpStartDomainMaintenance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDomainMaintenance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDomainMaintenanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDomainMaintenanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartServiceSoftwareUpdate struct {
 }
 
@@ -1010,6 +1070,10 @@ func addOpDissociatePackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDissociatePackage{}, middleware.After)
 }
 
+func addOpGetDomainMaintenanceStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDomainMaintenanceStatus{}, middleware.After)
+}
+
 func addOpGetPackageVersionHistoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPackageVersionHistory{}, middleware.After)
 }
@@ -1020,6 +1084,10 @@ func addOpGetUpgradeHistoryValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetUpgradeStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetUpgradeStatus{}, middleware.After)
+}
+
+func addOpListDomainMaintenancesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDomainMaintenances{}, middleware.After)
 }
 
 func addOpListDomainsForPackageValidationMiddleware(stack *middleware.Stack) error {
@@ -1064,6 +1132,10 @@ func addOpRemoveTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRevokeVpcEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRevokeVpcEndpointAccess{}, middleware.After)
+}
+
+func addOpStartDomainMaintenanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDomainMaintenance{}, middleware.After)
 }
 
 func addOpStartServiceSoftwareUpdateValidationMiddleware(stack *middleware.Stack) error {
@@ -1724,6 +1796,24 @@ func validateOpDissociatePackageInput(v *DissociatePackageInput) error {
 	}
 }
 
+func validateOpGetDomainMaintenanceStatusInput(v *GetDomainMaintenanceStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDomainMaintenanceStatusInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.MaintenanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaintenanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetPackageVersionHistoryInput(v *GetPackageVersionHistoryInput) error {
 	if v == nil {
 		return nil
@@ -1759,6 +1849,21 @@ func validateOpGetUpgradeStatusInput(v *GetUpgradeStatusInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetUpgradeStatusInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDomainMaintenancesInput(v *ListDomainMaintenancesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDomainMaintenancesInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
@@ -1935,6 +2040,24 @@ func validateOpRevokeVpcEndpointAccessInput(v *RevokeVpcEndpointAccessInput) err
 	}
 	if v.Account == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Account"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartDomainMaintenanceInput(v *StartDomainMaintenanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDomainMaintenanceInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

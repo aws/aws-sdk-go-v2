@@ -18,7 +18,10 @@ import (
 
 // Retrieves information about a Neptune ML model training job. See Model training
 // using the modeltraining command (https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html)
-// .
+// . When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the neptune-db:GetMLModelTrainingJobStatus (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getmlmodeltrainingjobstatus)
+// IAM action in that cluster.
 func (c *Client) GetMLModelTrainingJob(ctx context.Context, params *GetMLModelTrainingJobInput, optFns ...func(*Options)) (*GetMLModelTrainingJobOutput, error) {
 	if params == nil {
 		params = &GetMLModelTrainingJobInput{}

@@ -386,7 +386,7 @@ type RDFGraphSummary struct {
 // Payload for an RDF graph summary response.
 type RDFGraphSummaryValueMap struct {
 
-	// The graph summary of an RDF graph. See Graph summary response for an RDF graph (https://docs.aws.amazon.com/neptune-graph-summary.html#neptune-graph-summary-rdf-response)
+	// The graph summary of an RDF graph. See Graph summary response for an RDF graph (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-graph-summary.html#neptune-graph-summary-rdf-response)
 	// .
 	GraphSummary *RDFGraphSummary
 

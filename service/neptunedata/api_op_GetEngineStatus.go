@@ -17,7 +17,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Check the status of the graph database on the host.
+// Retrieves the status of the graph database on the host. When invoking this
+// operation in a Neptune cluster that has IAM authentication enabled, the IAM user
+// or role making the request must have a policy attached that allows the
+// neptune-db:GetEngineStatus (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getenginestatus)
+// IAM action in that cluster.
 func (c *Client) GetEngineStatus(ctx context.Context, params *GetEngineStatusInput, optFns ...func(*Options)) (*GetEngineStatusOutput, error) {
 	if params == nil {
 		params = &GetEngineStatusInput{}

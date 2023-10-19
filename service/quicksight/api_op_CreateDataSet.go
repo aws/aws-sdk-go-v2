@@ -79,6 +79,10 @@ type CreateDataSetInput struct {
 	// The folder that contains fields and nested subfolders for your dataset.
 	FieldFolders map[string]types.FieldFolder
 
+	// When you create the dataset, Amazon QuickSight adds the dataset to these
+	// folders.
+	FolderArns []string
+
 	// Configures the combination and transformation of the data from the physical
 	// tables.
 	LogicalTableMap map[string]types.LogicalTable

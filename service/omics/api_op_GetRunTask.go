@@ -38,7 +38,7 @@ func (c *Client) GetRunTask(ctx context.Context, params *GetRunTaskInput, optFns
 
 type GetRunTaskInput struct {
 
-	// The task's ID.
+	// The workflow run ID.
 	//
 	// This member is required.
 	Id *string
@@ -58,6 +58,9 @@ type GetRunTaskOutput struct {
 
 	// When the task was created.
 	CreationTime *time.Time
+
+	// The reason a task has failed.
+	FailureReason *string
 
 	// The number of Graphics Processing Units (GPU) specified in the task.
 	Gpus *int32

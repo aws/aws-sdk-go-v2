@@ -20,7 +20,7 @@ import (
 // share the portfolio with principal name sharing enabled, the PrincipalARN
 // association is included in the share. The PortfolioID , PrincipalARN , and
 // PrincipalType parameters are required. You can associate a maximum of 10
-// Principals with a portfolio using PrincipalType as IAM_PATTERN When you
+// Principals with a portfolio using PrincipalType as IAM_PATTERN . When you
 // associate a principal with portfolio, a potential privilege escalation path may
 // occur when that portfolio is then shared with other accounts. For a user in a
 // recipient account who is not an Service Catalog Admin, but still has the ability

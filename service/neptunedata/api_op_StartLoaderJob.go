@@ -18,7 +18,10 @@ import (
 
 // Starts a Neptune bulk loader job to load data from an Amazon S3 bucket into a
 // Neptune DB instance. See Using the Amazon Neptune Bulk Loader to Ingest Data (https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load.html)
-// .
+// . When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the neptune-db:StartLoaderJob (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#startloaderjob)
+// IAM action in that cluster.
 func (c *Client) StartLoaderJob(ctx context.Context, params *StartLoaderJobInput, optFns ...func(*Options)) (*StartLoaderJobOutput, error) {
 	if params == nil {
 		params = &StartLoaderJobInput{}

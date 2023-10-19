@@ -3127,7 +3127,7 @@ type DataBarsOptions struct {
 	noSmithyDocumentSerde
 }
 
-// The required parameters that are needed to connect to a Databricks data source.
+// The parameters that are required to connect to a Databricks data source.
 type DatabricksParameters struct {
 
 	// The host name of the Databricks data source.
@@ -3309,17 +3309,35 @@ type DataPathSort struct {
 	noSmithyDocumentSerde
 }
 
+// The type of the data path value.
+type DataPathType struct {
+
+	// The type of data path value utilized in a pivot table. Choose one of the
+	// following options:
+	//   - HIERARCHY_ROWS_LAYOUT_COLUMN - The type of data path for the rows layout
+	//   column, when RowsLayout is set to HIERARCHY .
+	//   - MULTIPLE_ROW_METRICS_COLUMN - The type of data path for the metric column
+	//   when the row is set to Metric Placement.
+	//   - EMPTY_COLUMN_HEADER - The type of data path for the column with empty column
+	//   header, when there is no field in ColumnsFieldWell and the row is set to
+	//   Metric Placement.
+	//   - COUNT_METRIC_COLUMN - The type of data path for the column with COUNT as the
+	//   metric, when there is no field in the ValuesFieldWell .
+	PivotTableDataPathType PivotTableDataPathType
+
+	noSmithyDocumentSerde
+}
+
 // The data path that needs to be sorted.
 type DataPathValue struct {
 
+	// The type configuration of the field.
+	DataPathType *DataPathType
+
 	// The field ID of the field that needs to be sorted.
-	//
-	// This member is required.
 	FieldId *string
 
 	// The actual value of the field that needs to be sorted.
-	//
-	// This member is required.
 	FieldValue *string
 
 	noSmithyDocumentSerde
@@ -3751,7 +3769,9 @@ type DataSourceErrorInfo struct {
 //	DataSourceParametersMemberSnowflakeParameters
 //	DataSourceParametersMemberSparkParameters
 //	DataSourceParametersMemberSqlServerParameters
+//	DataSourceParametersMemberStarburstParameters
 //	DataSourceParametersMemberTeradataParameters
+//	DataSourceParametersMemberTrinoParameters
 //	DataSourceParametersMemberTwitterParameters
 type DataSourceParameters interface {
 	isDataSourceParameters()
@@ -3811,7 +3831,7 @@ type DataSourceParametersMemberAwsIotAnalyticsParameters struct {
 
 func (*DataSourceParametersMemberAwsIotAnalyticsParameters) isDataSourceParameters() {}
 
-// The required parameters that are needed to connect to a Databricks data source.
+// The parameters that are required to connect to a Databricks data source.
 type DataSourceParametersMemberDatabricksParameters struct {
 	Value DatabricksParameters
 
@@ -3946,6 +3966,15 @@ type DataSourceParametersMemberSqlServerParameters struct {
 
 func (*DataSourceParametersMemberSqlServerParameters) isDataSourceParameters() {}
 
+// The parameters that are required to connect to a Starburst data source.
+type DataSourceParametersMemberStarburstParameters struct {
+	Value StarburstParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceParametersMemberStarburstParameters) isDataSourceParameters() {}
+
 // The parameters for Teradata.
 type DataSourceParametersMemberTeradataParameters struct {
 	Value TeradataParameters
@@ -3954,6 +3983,15 @@ type DataSourceParametersMemberTeradataParameters struct {
 }
 
 func (*DataSourceParametersMemberTeradataParameters) isDataSourceParameters() {}
+
+// The parameters that are required to connect to a Trino data source.
+type DataSourceParametersMemberTrinoParameters struct {
+	Value TrinoParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceParametersMemberTrinoParameters) isDataSourceParameters() {}
 
 // The parameters for Twitter.
 type DataSourceParametersMemberTwitterParameters struct {
@@ -9236,6 +9274,9 @@ type PivotTotalOptions struct {
 	// The scroll status (pinned, scrolled) for the total cells.
 	ScrollStatus TableTotalsScrollStatus
 
+	// The total aggregation options for each value field.
+	TotalAggregationOptions []TotalAggregationOption
+
 	// The cell styling options for the total cells.
 	TotalCellStyle *TableCellStyle
 
@@ -9636,6 +9677,12 @@ type ReferenceLineDataConfiguration struct {
 
 	// The dynamic configuration of the reference line data configuration.
 	DynamicConfiguration *ReferenceLineDynamicDataConfiguration
+
+	// The series type of the reference line data configuration. Choose one of the
+	// following options:
+	//   - BAR
+	//   - LINE
+	SeriesType ReferenceLineSeriesType
 
 	// The static data configuration of the reference line data configuration.
 	StaticConfiguration *ReferenceLineStaticDataConfiguration
@@ -11360,6 +11407,30 @@ type SslProperties struct {
 	noSmithyDocumentSerde
 }
 
+// The parameters that are required to connect to a Starburst data source.
+type StarburstParameters struct {
+
+	// The catalog name for the Starburst data source.
+	//
+	// This member is required.
+	Catalog *string
+
+	// The host name of the Starburst data source.
+	//
+	// This member is required.
+	Host *string
+
+	// The port for the Starburst data source.
+	//
+	// This member is required.
+	Port int32
+
+	// The product type for the Starburst data source.
+	ProductType StarburstProductType
+
+	noSmithyDocumentSerde
+}
+
 // The state perssitence configuration of an embedded dashboard.
 type StatePersistenceConfigurations struct {
 
@@ -12491,14 +12562,18 @@ type TimeEqualityFilter struct {
 	FilterId *string
 
 	// The parameter whose value should be used for the filter value. This field is
-	// mutually exclusive to Value .
+	// mutually exclusive to Value and RollingDate .
 	ParameterName *string
+
+	// The rolling date input for the TimeEquality filter. This field is mutually
+	// exclusive to Value and ParameterName .
+	RollingDate *RollingDateConfiguration
 
 	// The level of time precision that is used to aggregate DateTime values.
 	TimeGranularity TimeGranularity
 
 	// The value of a TimeEquality filter. This field is mutually exclusive to
-	// ParameterName .
+	// RollingDate and ParameterName .
 	Value *time.Time
 
 	noSmithyDocumentSerde
@@ -13176,6 +13251,31 @@ type TotalAggregationComputation struct {
 	noSmithyDocumentSerde
 }
 
+// An aggregation function that aggregates the total values of a measure.
+type TotalAggregationFunction struct {
+
+	// A built in aggregation function for total values.
+	SimpleTotalAggregationFunction SimpleTotalAggregationFunction
+
+	noSmithyDocumentSerde
+}
+
+// The total aggregation settings map of a field id.
+type TotalAggregationOption struct {
+
+	// The field id that's associated with the total aggregation option.
+	//
+	// This member is required.
+	FieldId *string
+
+	// The total aggregation function that you want to set for a specified field id.
+	//
+	// This member is required.
+	TotalAggregationFunction *TotalAggregationFunction
+
+	noSmithyDocumentSerde
+}
+
 // The total options for a table visual.
 type TotalOptions struct {
 
@@ -13187,6 +13287,9 @@ type TotalOptions struct {
 
 	// The scroll status (pinned, scrolled) for the total cells.
 	ScrollStatus TableTotalsScrollStatus
+
+	// The total aggregation settings for each value field.
+	TotalAggregationOptions []TotalAggregationOption
 
 	// Cell styling options for the total cells.
 	TotalCellStyle *TableCellStyle
@@ -13399,6 +13502,27 @@ type TrendArrowOptions struct {
 
 	// The visibility of the trend arrows.
 	Visibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// The parameters that are required to connect to a Trino data source.
+type TrinoParameters struct {
+
+	// The catalog name for the Trino data source.
+	//
+	// This member is required.
+	Catalog *string
+
+	// The host name of the Trino data source.
+	//
+	// This member is required.
+	Host *string
+
+	// The port for the Trino data source.
+	//
+	// This member is required.
+	Port int32
 
 	noSmithyDocumentSerde
 }

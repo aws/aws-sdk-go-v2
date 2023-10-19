@@ -444,8 +444,8 @@ type ClusterConfig struct {
 	// OpenSearch Service instance type of the dedicated master nodes in the cluster.
 	DedicatedMasterType OpenSearchPartitionInstanceType
 
-	// Number of dedicated master nodes in the cluster. This number must be greater
-	// than 1, otherwise you receive a validation exception.
+	// Number of data nodes in the cluster. This number must be greater than 1,
+	// otherwise you receive a validation exception.
 	InstanceCount *int32
 
 	// Instance type of data nodes in the cluster.
@@ -723,6 +723,36 @@ type DomainInformationContainer struct {
 
 	// Information about an Amazon OpenSearch Service domain.
 	AWSDomainInformation *AWSDomainInformation
+
+	noSmithyDocumentSerde
+}
+
+// Container for the domain maintenance details.
+type DomainMaintenanceDetails struct {
+
+	// The name of the action.
+	Action MaintenanceType
+
+	// Contains time at which action created.
+	CreatedAt *time.Time
+
+	// The name of the domain.
+	DomainName *string
+
+	// Id of the requested action.
+	MaintenanceId *string
+
+	// Id of the data node.
+	NodeId *string
+
+	// The status of the action.
+	Status MaintenanceStatus
+
+	// The status message of the action.
+	StatusMessage *string
+
+	// Contains time at which action updated.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }

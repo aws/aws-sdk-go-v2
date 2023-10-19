@@ -1144,6 +1144,18 @@ type RunListItem struct {
 	noSmithyDocumentSerde
 }
 
+// The URI for the run log.
+type RunLogLocation struct {
+
+	// The log stream ARN for the engine log.
+	EngineLogStream *string
+
+	// The log stream ARN for the run log.
+	RunLogStream *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about a sequence.
 type SequenceInformation struct {
 

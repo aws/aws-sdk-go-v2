@@ -74,6 +74,10 @@ type CreateDashboardInput struct {
 	// must be provided in order for the request to be valid.
 	Definition *types.DashboardVersionDefinition
 
+	// When you create the dashboard, Amazon QuickSight adds the dashboard to these
+	// folders.
+	FolderArns []string
+
 	// The parameters for the creation of the dashboard, which you want to use to
 	// override the default settings. A dashboard can have any type of parameters, and
 	// some parameters might accept multiple values.

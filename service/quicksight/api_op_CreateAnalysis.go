@@ -57,6 +57,10 @@ type CreateAnalysisInput struct {
 	// must be provided in order for the request to be valid.
 	Definition *types.AnalysisDefinition
 
+	// When you create the analysis, Amazon QuickSight adds the analysis to these
+	// folders.
+	FolderArns []string
+
 	// The parameter names and override values that you want to use. An analysis can
 	// have any parameter type, and some parameters might accept multiple values.
 	Parameters *types.Parameters

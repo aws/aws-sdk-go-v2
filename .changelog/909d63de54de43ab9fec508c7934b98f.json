@@ -1,0 +1,8 @@
+{
+    "id": "909d63de-54de-43ab-9fec-508c7934b98f",
+    "type": "feature",
+    "description": "Added Cluster Administrative options for node restart, opensearch process restart and opensearch dashboard restart for Multi-AZ without standby domains",
+    "modules": [
+        "service/opensearch"
+    ]
+}

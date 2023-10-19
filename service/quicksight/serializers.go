@@ -456,6 +456,13 @@ func awsRestjson1_serializeOpDocumentCreateAnalysisInput(v *CreateAnalysisInput,
 		}
 	}
 
+	if v.FolderArns != nil {
+		ok := object.Key("FolderArns")
+		if err := awsRestjson1_serializeDocumentFolderArnList(v.FolderArns, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -603,6 +610,13 @@ func awsRestjson1_serializeOpDocumentCreateDashboardInput(v *CreateDashboardInpu
 	if v.Definition != nil {
 		ok := object.Key("Definition")
 		if err := awsRestjson1_serializeDocumentDashboardVersionDefinition(v.Definition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FolderArns != nil {
+		ok := object.Key("FolderArns")
+		if err := awsRestjson1_serializeDocumentFolderArnList(v.FolderArns, ok); err != nil {
 			return err
 		}
 	}
@@ -780,6 +794,13 @@ func awsRestjson1_serializeOpDocumentCreateDataSetInput(v *CreateDataSetInput, v
 		}
 	}
 
+	if v.FolderArns != nil {
+		ok := object.Key("FolderArns")
+		if err := awsRestjson1_serializeDocumentFolderArnList(v.FolderArns, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ImportMode) > 0 {
 		ok := object.Key("ImportMode")
 		ok.String(string(v.ImportMode))
@@ -930,6 +951,13 @@ func awsRestjson1_serializeOpDocumentCreateDataSourceInput(v *CreateDataSourceIn
 	if v.DataSourceParameters != nil {
 		ok := object.Key("DataSourceParameters")
 		if err := awsRestjson1_serializeDocumentDataSourceParameters(v.DataSourceParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FolderArns != nil {
+		ok := object.Key("FolderArns")
+		if err := awsRestjson1_serializeDocumentFolderArnList(v.FolderArns, ok); err != nil {
 			return err
 		}
 	}
@@ -19655,9 +19683,28 @@ func awsRestjson1_serializeDocumentDataPathSort(v *types.DataPathSort, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDataPathType(v *types.DataPathType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.PivotTableDataPathType) > 0 {
+		ok := object.Key("PivotTableDataPathType")
+		ok.String(string(v.PivotTableDataPathType))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDataPathValue(v *types.DataPathValue, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DataPathType != nil {
+		ok := object.Key("DataPathType")
+		if err := awsRestjson1_serializeDocumentDataPathType(v.DataPathType, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.FieldId != nil {
 		ok := object.Key("FieldId")
@@ -20173,9 +20220,21 @@ func awsRestjson1_serializeDocumentDataSourceParameters(v types.DataSourceParame
 			return err
 		}
 
+	case *types.DataSourceParametersMemberStarburstParameters:
+		av := object.Key("StarburstParameters")
+		if err := awsRestjson1_serializeDocumentStarburstParameters(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.DataSourceParametersMemberTeradataParameters:
 		av := object.Key("TeradataParameters")
 		if err := awsRestjson1_serializeDocumentTeradataParameters(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.DataSourceParametersMemberTrinoParameters:
+		av := object.Key("TrinoParameters")
+		if err := awsRestjson1_serializeDocumentTrinoParameters(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -22390,6 +22449,17 @@ func awsRestjson1_serializeDocumentFilterTextFieldControl(v *types.FilterTextFie
 		ok.String(*v.Title)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFolderArnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -28447,6 +28517,13 @@ func awsRestjson1_serializeDocumentPivotTotalOptions(v *types.PivotTotalOptions,
 		ok.String(string(v.ScrollStatus))
 	}
 
+	if v.TotalAggregationOptions != nil {
+		ok := object.Key("TotalAggregationOptions")
+		if err := awsRestjson1_serializeDocumentTotalAggregationOptionList(v.TotalAggregationOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TotalCellStyle != nil {
 		ok := object.Key("TotalCellStyle")
 		if err := awsRestjson1_serializeDocumentTableCellStyle(v.TotalCellStyle, ok); err != nil {
@@ -29070,6 +29147,11 @@ func awsRestjson1_serializeDocumentReferenceLineDataConfiguration(v *types.Refer
 		if err := awsRestjson1_serializeDocumentReferenceLineDynamicDataConfiguration(v.DynamicConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.SeriesType) > 0 {
+		ok := object.Key("SeriesType")
+		ok.String(string(v.SeriesType))
 	}
 
 	if v.StaticConfiguration != nil {
@@ -31449,6 +31531,33 @@ func awsRestjson1_serializeDocumentSslProperties(v *types.SslProperties, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentStarburstParameters(v *types.StarburstParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Catalog != nil {
+		ok := object.Key("Catalog")
+		ok.String(*v.Catalog)
+	}
+
+	if v.Host != nil {
+		ok := object.Key("Host")
+		ok.String(*v.Host)
+	}
+
+	{
+		ok := object.Key("Port")
+		ok.Integer(v.Port)
+	}
+
+	if len(v.ProductType) > 0 {
+		ok := object.Key("ProductType")
+		ok.String(string(v.ProductType))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentStatePersistenceConfigurations(v *types.StatePersistenceConfigurations, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -32912,6 +33021,13 @@ func awsRestjson1_serializeDocumentTimeEqualityFilter(v *types.TimeEqualityFilte
 		ok.String(*v.ParameterName)
 	}
 
+	if v.RollingDate != nil {
+		ok := object.Key("RollingDate")
+		if err := awsRestjson1_serializeDocumentRollingDateConfiguration(v.RollingDate, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.TimeGranularity) > 0 {
 		ok := object.Key("TimeGranularity")
 		ok.String(string(v.TimeGranularity))
@@ -33867,6 +33983,50 @@ func awsRestjson1_serializeDocumentTotalAggregationComputation(v *types.TotalAgg
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTotalAggregationFunction(v *types.TotalAggregationFunction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SimpleTotalAggregationFunction) > 0 {
+		ok := object.Key("SimpleTotalAggregationFunction")
+		ok.String(string(v.SimpleTotalAggregationFunction))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTotalAggregationOption(v *types.TotalAggregationOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FieldId != nil {
+		ok := object.Key("FieldId")
+		ok.String(*v.FieldId)
+	}
+
+	if v.TotalAggregationFunction != nil {
+		ok := object.Key("TotalAggregationFunction")
+		if err := awsRestjson1_serializeDocumentTotalAggregationFunction(v.TotalAggregationFunction, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTotalAggregationOptionList(v []types.TotalAggregationOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTotalAggregationOption(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentTotalOptions(v *types.TotalOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -33884,6 +34044,13 @@ func awsRestjson1_serializeDocumentTotalOptions(v *types.TotalOptions, value smi
 	if len(v.ScrollStatus) > 0 {
 		ok := object.Key("ScrollStatus")
 		ok.String(string(v.ScrollStatus))
+	}
+
+	if v.TotalAggregationOptions != nil {
+		ok := object.Key("TotalAggregationOptions")
+		if err := awsRestjson1_serializeDocumentTotalAggregationOptionList(v.TotalAggregationOptions, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.TotalCellStyle != nil {
@@ -34190,6 +34357,28 @@ func awsRestjson1_serializeDocumentTrendArrowOptions(v *types.TrendArrowOptions,
 	if len(v.Visibility) > 0 {
 		ok := object.Key("Visibility")
 		ok.String(string(v.Visibility))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTrinoParameters(v *types.TrinoParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Catalog != nil {
+		ok := object.Key("Catalog")
+		ok.String(*v.Catalog)
+	}
+
+	if v.Host != nil {
+		ok := object.Key("Host")
+		ok.String(*v.Host)
+	}
+
+	{
+		ok := object.Key("Port")
+		ok.Integer(v.Port)
 	}
 
 	return nil

@@ -16,7 +16,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes statistics for Gremlin and openCypher (property graph) data.
+// Deletes statistics for Gremlin and openCypher (property graph) data. When
+// invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the neptune-db:DeleteStatistics (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletestatistics)
+// IAM action in that cluster.
 func (c *Client) DeletePropertygraphStatistics(ctx context.Context, params *DeletePropertygraphStatisticsInput, optFns ...func(*Options)) (*DeletePropertygraphStatisticsOutput, error) {
 	if params == nil {
 		params = &DeletePropertygraphStatisticsInput{}
