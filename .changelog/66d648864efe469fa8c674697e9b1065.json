@@ -1,0 +1,8 @@
+{
+    "id": "66d64886-4efe-469f-a8c6-74697e9b1065",
+    "type": "feature",
+    "description": "Deprecate Gamesparks",
+    "modules": [
+        "."
+    ]
+}
