@@ -1,3 +1,7 @@
+# v1.21.0 (2023-10-19)
+
+* **Feature**: Added Cluster Administrative options for node restart, opensearch process restart and opensearch dashboard restart for Multi-AZ without standby domains
+
 # v1.20.0 (2023-10-16)
 
 * **Feature**: This release allows customers to list and associate optional plugin packages with compatible Amazon OpenSearch Service clusters for enhanced functionality.

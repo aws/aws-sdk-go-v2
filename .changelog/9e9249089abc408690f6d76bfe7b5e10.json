@@ -1,8 +1,0 @@
-{
-    "id": "9e924908-9abc-4086-90f6-d76bfe7b5e10",
-    "type": "feature",
-    "description": "This release adds support for Ethereum Sepolia network",
-    "modules": [
-        "service/managedblockchainquery"
-    ]
-}

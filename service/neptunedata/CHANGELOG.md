@@ -1,3 +1,7 @@
+# v1.0.4 (2023-10-19)
+
+* **Documentation**: Doc changes to add IAM action mappings for the data actions.
+
 # v1.0.3 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

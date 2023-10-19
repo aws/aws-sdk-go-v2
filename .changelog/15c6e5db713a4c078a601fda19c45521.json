@@ -1,8 +1,0 @@
-{
-    "id": "15c6e5db-713a-4c07-8a60-1fda19c45521",
-    "type": "feature",
-    "description": "This change enables customers to retrieve failure reasons with detailed status messages for their failed runs",
-    "modules": [
-        "service/omics"
-    ]
-}

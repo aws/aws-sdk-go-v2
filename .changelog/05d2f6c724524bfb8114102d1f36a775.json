@@ -1,8 +1,0 @@
-{
-    "id": "05d2f6c7-2452-4bfb-8114-102d1f36a775",
-    "type": "feature",
-    "description": "Amazon EC2 C7a instances, powered by 4th generation AMD EPYC processors, are ideal for high performance, compute-intensive workloads such as high performance computing. Amazon EC2 R7i instances are next-generation memory optimized and powered by custom 4th Generation Intel Xeon Scalable processors.",
-    "modules": [
-        "service/ec2"
-    ]
-}

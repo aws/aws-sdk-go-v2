@@ -1,3 +1,7 @@
+# v1.11.0 (2023-10-19)
+
+* **Feature**: This change enables customers to retrieve failure reasons with detailed status messages for their failed runs
+
 # v1.10.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

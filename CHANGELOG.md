@@ -1,3 +1,27 @@
+# Release (2023-10-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.126.0](service/ec2/CHANGELOG.md#v11260-2023-10-19)
+  * **Feature**: Amazon EC2 C7a instances, powered by 4th generation AMD EPYC processors, are ideal for high performance, compute-intensive workloads such as high performance computing. Amazon EC2 R7i instances are next-generation memory optimized and powered by custom 4th Generation Intel Xeon Scalable processors.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchainquery`: [v1.3.0](service/managedblockchainquery/CHANGELOG.md#v130-2023-10-19)
+  * **Feature**: This release adds support for Ethereum Sepolia network
+* `github.com/aws/aws-sdk-go-v2/service/neptunedata`: [v1.0.4](service/neptunedata/CHANGELOG.md#v104-2023-10-19)
+  * **Documentation**: Doc changes to add IAM action mappings for the data actions.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.11.0](service/omics/CHANGELOG.md#v1110-2023-10-19)
+  * **Feature**: This change enables customers to retrieve failure reasons with detailed status messages for their failed runs
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.21.0](service/opensearch/CHANGELOG.md#v1210-2023-10-19)
+  * **Feature**: Added Cluster Administrative options for node restart, opensearch process restart and opensearch dashboard restart for Multi-AZ without standby domains
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.46.0](service/quicksight/CHANGELOG.md#v1460-2023-10-19)
+  * **Feature**: This release adds the following: 1) Trino and Starburst Database Connectors 2) Custom total for tables and pivot tables 3) Enable restricted folders 4) Add rolling dates for time equality filters 5) Refine DataPathValue and introduce DataPathType 6) Add SeriesType to ReferenceLineDataConfiguration
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.21.6](service/secretsmanager/CHANGELOG.md#v1216-2023-10-19)
+  * **Documentation**: Documentation updates for Secrets Manager
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.22.0](service/servicecatalog/CHANGELOG.md#v1220-2023-10-19)
+  * **Feature**: Introduce support for EXTERNAL product and provisioning artifact type in CreateProduct and CreateProvisioningArtifact APIs.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.3.0](service/verifiedpermissions/CHANGELOG.md#v130-2023-10-19)
+  * **Feature**: Improving Amazon Verified Permissions Create experience
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.31.3](service/workspaces/CHANGELOG.md#v1313-2023-10-19)
+  * **Documentation**: Documentation updates for WorkSpaces
+
 # Release (2023-10-18)
 
 ## General Highlights

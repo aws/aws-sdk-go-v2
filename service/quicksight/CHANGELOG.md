@@ -1,3 +1,7 @@
+# v1.46.0 (2023-10-19)
+
+* **Feature**: This release adds the following: 1) Trino and Starburst Database Connectors 2) Custom total for tables and pivot tables 3) Enable restricted folders 4) Add rolling dates for time equality filters 5) Refine DataPathValue and introduce DataPathType 6) Add SeriesType to ReferenceLineDataConfiguration
+
 # v1.45.1 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

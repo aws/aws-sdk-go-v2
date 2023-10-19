@@ -1,3 +1,7 @@
+# v1.22.0 (2023-10-19)
+
+* **Feature**: Introduce support for EXTERNAL product and provisioning artifact type in CreateProduct and CreateProvisioningArtifact APIs.
+
 # v1.21.5 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

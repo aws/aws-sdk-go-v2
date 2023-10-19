@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.18.7
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.23.7
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.23.0
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.125.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.126.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.20.2
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/efs v1.21.9
@@ -68,8 +68,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.20.2
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.40.2
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.33.2
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.21.5
-	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.21.5
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.21.6
+	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/ses v1.16.10
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.19.7
 	github.com/aws/aws-sdk-go-v2/service/shield v1.20.2
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.14.2
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.15.2
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.39.3
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.31.2
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.31.3
 	github.com/aws/smithy-go v1.15.0
 	github.com/google/go-cmp v0.5.8
 )

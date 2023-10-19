@@ -1,3 +1,7 @@
+# v1.3.0 (2023-10-19)
+
+* **Feature**: Improving Amazon Verified Permissions Create experience
+
 # v1.2.3 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

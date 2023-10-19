@@ -1,3 +1,7 @@
+# v1.3.0 (2023-10-19)
+
+* **Feature**: This release adds support for Ethereum Sepolia network
+
 # v1.2.0 (2023-10-16)
 
 * **Feature**: This release introduces two new APIs: GetAssetContract and ListAssetContracts. This release also adds support for Bitcoin Testnet.
