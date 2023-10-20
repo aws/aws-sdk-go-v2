@@ -1,3 +1,7 @@
+# v1.39.0 (2023-10-20)
+
+* **Feature**: This release introduces a new API: DeleteOpsItem. This allows deletion of an OpsItem.
+
 # v1.38.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

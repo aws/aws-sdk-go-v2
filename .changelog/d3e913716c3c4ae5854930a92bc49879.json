@@ -1,8 +1,0 @@
-{
-    "id": "d3e91371-6c3c-4ae5-8549-30a92bc49879",
-    "type": "documentation",
-    "description": "Updates on documentation links",
-    "modules": [
-        "service/medicalimaging"
-    ]
-}

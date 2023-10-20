@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/acm v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.22.7
-	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.18.0
+	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.24.2
 	github.com/aws/aws-sdk-go-v2/service/athena v1.31.8
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.31.0
@@ -41,7 +41,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.21.6
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.20.8
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.16.2
-	github.com/aws/aws-sdk-go-v2/service/emr v1.28.8
+	github.com/aws/aws-sdk-go-v2/service/emr v1.28.9
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.22.2
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.22.4
@@ -76,7 +76,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.21.7
 	github.com/aws/aws-sdk-go-v2/service/sns v1.22.2
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.24.7
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.38.2
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.39.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.23.2
 	github.com/aws/aws-sdk-go-v2/service/support v1.16.7
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.19.2

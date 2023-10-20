@@ -1,8 +1,0 @@
-{
-    "id": "f5dc26db-4330-4079-a06e-54c3b5d18b60",
-    "type": "feature",
-    "description": "This release introduces a new API: DeleteOpsItem. This allows deletion of an OpsItem.",
-    "modules": [
-        "service/ssm"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.70.0 (2023-10-20)
+
+* **Feature**: This release adds support for updating phone number metadata, such as phone number description.
+
 # v1.69.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

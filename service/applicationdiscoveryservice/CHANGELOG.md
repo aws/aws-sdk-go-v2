@@ -1,3 +1,7 @@
+# v1.19.0 (2023-10-20)
+
+* **Feature**: This release introduces three new APIs: StartBatchDeleteConfigurationTask, DescribeBatchDeleteConfigurationTask, and BatchDeleteAgents.
+
 # v1.18.0 (2023-10-17)
 
 * **Feature**: This release introduces three new APIs: StartBatchDeleteConfigurationTask, DescribeBatchDeleteConfigurationTask, and BatchDeleteAgents.

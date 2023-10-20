@@ -1,3 +1,7 @@
+# v1.22.0 (2023-10-20)
+
+* **Feature**: Update KmsKeyIdentifier constraints to support AWS KMS multi-Region keys.
+
 # v1.21.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

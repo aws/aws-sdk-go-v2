@@ -1,3 +1,7 @@
+# v1.19.0 (2023-10-20)
+
+* **Feature**: Updated ScheduleConfig to be an optional input to CreateDataIntegration to support event driven downloading of files from sources such as Amazon s3 using Amazon Connect AppIntegrations.
+
 # v1.18.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,19 @@
+# Release (2023-10-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.22.0](service/appconfig/CHANGELOG.md#v1220-2023-10-20)
+  * **Feature**: Update KmsKeyIdentifier constraints to support AWS KMS multi-Region keys.
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.19.0](service/appintegrations/CHANGELOG.md#v1190-2023-10-20)
+  * **Feature**: Updated ScheduleConfig to be an optional input to CreateDataIntegration to support event driven downloading of files from sources such as Amazon s3 using Amazon Connect AppIntegrations.
+* `github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice`: [v1.19.0](service/applicationdiscoveryservice/CHANGELOG.md#v1190-2023-10-20)
+  * **Feature**: This release introduces three new APIs: StartBatchDeleteConfigurationTask, DescribeBatchDeleteConfigurationTask, and BatchDeleteAgents.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.70.0](service/connect/CHANGELOG.md#v1700-2023-10-20)
+  * **Feature**: This release adds support for updating phone number metadata, such as phone number description.
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.2.3](service/medicalimaging/CHANGELOG.md#v123-2023-10-20)
+  * **Documentation**: Updates on documentation links
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.39.0](service/ssm/CHANGELOG.md#v1390-2023-10-20)
+  * **Feature**: This release introduces a new API: DeleteOpsItem. This allows deletion of an OpsItem.
+
 # Release (2023-10-19)
 
 ## Module Highlights
