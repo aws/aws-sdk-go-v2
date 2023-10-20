@@ -160,6 +160,93 @@ func (c *Client) addOperationListConfigurationsMiddlewares(stack *middleware.Sta
 	return nil
 }
 
+// ListConfigurationsAPIClient is a client that implements the ListConfigurations
+// operation.
+type ListConfigurationsAPIClient interface {
+	ListConfigurations(context.Context, *ListConfigurationsInput, ...func(*Options)) (*ListConfigurationsOutput, error)
+}
+
+var _ ListConfigurationsAPIClient = (*Client)(nil)
+
+// ListConfigurationsPaginatorOptions is the paginator options for
+// ListConfigurations
+type ListConfigurationsPaginatorOptions struct {
+	// The total number of items to return. The maximum value is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListConfigurationsPaginator is a paginator for ListConfigurations
+type ListConfigurationsPaginator struct {
+	options   ListConfigurationsPaginatorOptions
+	client    ListConfigurationsAPIClient
+	params    *ListConfigurationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListConfigurationsPaginator returns a new ListConfigurationsPaginator
+func NewListConfigurationsPaginator(client ListConfigurationsAPIClient, params *ListConfigurationsInput, optFns ...func(*ListConfigurationsPaginatorOptions)) *ListConfigurationsPaginator {
+	if params == nil {
+		params = &ListConfigurationsInput{}
+	}
+
+	options := ListConfigurationsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListConfigurationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListConfigurationsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListConfigurations page.
+func (p *ListConfigurationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListConfigurationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListConfigurations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opListConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

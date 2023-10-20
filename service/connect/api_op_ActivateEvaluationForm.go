@@ -44,7 +44,7 @@ type ActivateEvaluationFormInput struct {
 	// provided, the latest version of the evaluation form is activated.
 	//
 	// This member is required.
-	EvaluationFormVersion *int32
+	EvaluationFormVersion int32
 
 	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
@@ -70,7 +70,7 @@ type ActivateEvaluationFormOutput struct {
 	// A version of the evaluation form.
 	//
 	// This member is required.
-	EvaluationFormVersion *int32
+	EvaluationFormVersion int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

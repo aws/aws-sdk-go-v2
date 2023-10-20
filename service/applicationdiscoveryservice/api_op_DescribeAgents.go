@@ -154,6 +154,93 @@ func (c *Client) addOperationDescribeAgentsMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
+// DescribeAgentsAPIClient is a client that implements the DescribeAgents
+// operation.
+type DescribeAgentsAPIClient interface {
+	DescribeAgents(context.Context, *DescribeAgentsInput, ...func(*Options)) (*DescribeAgentsOutput, error)
+}
+
+var _ DescribeAgentsAPIClient = (*Client)(nil)
+
+// DescribeAgentsPaginatorOptions is the paginator options for DescribeAgents
+type DescribeAgentsPaginatorOptions struct {
+	// The total number of agents/collectors to return in a single page of output. The
+	// maximum value is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeAgentsPaginator is a paginator for DescribeAgents
+type DescribeAgentsPaginator struct {
+	options   DescribeAgentsPaginatorOptions
+	client    DescribeAgentsAPIClient
+	params    *DescribeAgentsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeAgentsPaginator returns a new DescribeAgentsPaginator
+func NewDescribeAgentsPaginator(client DescribeAgentsAPIClient, params *DescribeAgentsInput, optFns ...func(*DescribeAgentsPaginatorOptions)) *DescribeAgentsPaginator {
+	if params == nil {
+		params = &DescribeAgentsInput{}
+	}
+
+	options := DescribeAgentsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeAgentsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeAgentsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeAgents page.
+func (p *DescribeAgentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeAgentsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeAgents(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opDescribeAgents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

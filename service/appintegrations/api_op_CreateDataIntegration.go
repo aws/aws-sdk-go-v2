@@ -47,11 +47,6 @@ type CreateDataIntegrationInput struct {
 	// This member is required.
 	Name *string
 
-	// The name of the data and how often it should be pulled from the source.
-	//
-	// This member is required.
-	ScheduleConfig *types.ScheduleConfiguration
-
 	// The URI of the data source.
 	//
 	// This member is required.
@@ -72,6 +67,9 @@ type CreateDataIntegrationInput struct {
 
 	// The configuration for what data should be pulled from the source.
 	ObjectConfiguration map[string]map[string][]string
+
+	// The name of the data and how often it should be pulled from the source.
+	ScheduleConfig *types.ScheduleConfiguration
 
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "tags": {"key1":"value1", "key2":"value2"} }.

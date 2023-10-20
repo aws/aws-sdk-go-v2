@@ -19,7 +19,14 @@ import (
 
 // Gets historical metric data from the specified Amazon Connect instance. For a
 // description of each historical metric, see Historical Metrics Definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
-// in the Amazon Connect Administrator Guide.
+// in the Amazon Connect Administrator Guide. We recommend using the
+// GetMetricDataV2 (https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricDataV2.html)
+// API. It provides more flexibility, features, and the ability to query longer
+// time ranges than GetMetricData . Use it to retrieve historical agent and contact
+// metrics for the last 3 months, at varying intervals. You can also use it to
+// build custom dashboards to measure historical queue and agent performance. For
+// example, you can track the number of incoming contacts for the last 7 days, with
+// data split by day, to see how contact volume changed per day of the week.
 func (c *Client) GetMetricData(ctx context.Context, params *GetMetricDataInput, optFns ...func(*Options)) (*GetMetricDataOutput, error) {
 	if params == nil {
 		params = &GetMetricDataInput{}

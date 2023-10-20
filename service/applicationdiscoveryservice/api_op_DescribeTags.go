@@ -147,6 +147,92 @@ func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, op
 	return nil
 }
 
+// DescribeTagsAPIClient is a client that implements the DescribeTags operation.
+type DescribeTagsAPIClient interface {
+	DescribeTags(context.Context, *DescribeTagsInput, ...func(*Options)) (*DescribeTagsOutput, error)
+}
+
+var _ DescribeTagsAPIClient = (*Client)(nil)
+
+// DescribeTagsPaginatorOptions is the paginator options for DescribeTags
+type DescribeTagsPaginatorOptions struct {
+	// The total number of items to return in a single page of output. The maximum
+	// value is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeTagsPaginator is a paginator for DescribeTags
+type DescribeTagsPaginator struct {
+	options   DescribeTagsPaginatorOptions
+	client    DescribeTagsAPIClient
+	params    *DescribeTagsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeTagsPaginator returns a new DescribeTagsPaginator
+func NewDescribeTagsPaginator(client DescribeTagsAPIClient, params *DescribeTagsInput, optFns ...func(*DescribeTagsPaginatorOptions)) *DescribeTagsPaginator {
+	if params == nil {
+		params = &DescribeTagsInput{}
+	}
+
+	options := DescribeTagsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeTagsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeTagsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeTags page.
+func (p *DescribeTagsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeTagsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeTags(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opDescribeTags(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

@@ -33,7 +33,9 @@ func (c *Client) CreateContactFlowModule(ctx context.Context, params *CreateCont
 
 type CreateContactFlowModuleInput struct {
 
-	// The content of the flow module.
+	// The JSON string that represents the content of the flow. For an example, see
+	// Example flow in Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html)
+	// .
 	//
 	// This member is required.
 	Content *string

@@ -151,6 +151,95 @@ func (c *Client) addOperationDescribeExportTasksMiddlewares(stack *middleware.St
 	return nil
 }
 
+// DescribeExportTasksAPIClient is a client that implements the
+// DescribeExportTasks operation.
+type DescribeExportTasksAPIClient interface {
+	DescribeExportTasks(context.Context, *DescribeExportTasksInput, ...func(*Options)) (*DescribeExportTasksOutput, error)
+}
+
+var _ DescribeExportTasksAPIClient = (*Client)(nil)
+
+// DescribeExportTasksPaginatorOptions is the paginator options for
+// DescribeExportTasks
+type DescribeExportTasksPaginatorOptions struct {
+	// The maximum number of volume results returned by DescribeExportTasks in
+	// paginated output. When this parameter is used, DescribeExportTasks only returns
+	// maxResults results in a single page along with a nextToken response element.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeExportTasksPaginator is a paginator for DescribeExportTasks
+type DescribeExportTasksPaginator struct {
+	options   DescribeExportTasksPaginatorOptions
+	client    DescribeExportTasksAPIClient
+	params    *DescribeExportTasksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeExportTasksPaginator returns a new DescribeExportTasksPaginator
+func NewDescribeExportTasksPaginator(client DescribeExportTasksAPIClient, params *DescribeExportTasksInput, optFns ...func(*DescribeExportTasksPaginatorOptions)) *DescribeExportTasksPaginator {
+	if params == nil {
+		params = &DescribeExportTasksInput{}
+	}
+
+	options := DescribeExportTasksPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeExportTasksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeExportTasksPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeExportTasks page.
+func (p *DescribeExportTasksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeExportTasksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeExportTasks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opDescribeExportTasks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

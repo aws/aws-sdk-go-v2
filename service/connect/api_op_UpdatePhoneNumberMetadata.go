@@ -15,58 +15,57 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates specified flow module for the specified Amazon Connect instance.
-func (c *Client) UpdateContactFlowModuleContent(ctx context.Context, params *UpdateContactFlowModuleContentInput, optFns ...func(*Options)) (*UpdateContactFlowModuleContentOutput, error) {
+// Updates a phone number’s metadata. To verify the status of a previous
+// UpdatePhoneNumberMetadata operation, call the DescribePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
+// API.
+func (c *Client) UpdatePhoneNumberMetadata(ctx context.Context, params *UpdatePhoneNumberMetadataInput, optFns ...func(*Options)) (*UpdatePhoneNumberMetadataOutput, error) {
 	if params == nil {
-		params = &UpdateContactFlowModuleContentInput{}
+		params = &UpdatePhoneNumberMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateContactFlowModuleContent", params, optFns, c.addOperationUpdateContactFlowModuleContentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePhoneNumberMetadata", params, optFns, c.addOperationUpdatePhoneNumberMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdateContactFlowModuleContentOutput)
+	out := result.(*UpdatePhoneNumberMetadataOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type UpdateContactFlowModuleContentInput struct {
+type UpdatePhoneNumberMetadataInput struct {
 
-	// The identifier of the flow module.
+	// The Amazon Resource Name (ARN) or resource ID of the phone number.
 	//
 	// This member is required.
-	ContactFlowModuleId *string
+	PhoneNumberId *string
 
-	// The JSON string that represents the content of the flow. For an example, see
-	// Example flow in Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html)
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see Making retries safe with
+	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
 	// .
-	//
-	// This member is required.
-	Content *string
+	ClientToken *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
-	//
-	// This member is required.
-	InstanceId *string
+	// The description of the phone number.
+	PhoneNumberDescription *string
 
 	noSmithyDocumentSerde
 }
 
-type UpdateContactFlowModuleContentOutput struct {
+type UpdatePhoneNumberMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdateContactFlowModuleContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateContactFlowModuleContent{}, middleware.After)
+func (c *Client) addOperationUpdatePhoneNumberMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePhoneNumberMetadata{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateContactFlowModuleContent{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePhoneNumberMetadata{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -109,13 +108,16 @@ func (c *Client) addOperationUpdateContactFlowModuleContentMiddlewares(stack *mi
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateContactFlowModuleContentResolveEndpointMiddleware(stack, options); err != nil {
+	if err = addUpdatePhoneNumberMetadataResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpUpdateContactFlowModuleContentValidationMiddleware(stack); err != nil {
+	if err = addIdempotencyToken_opUpdatePhoneNumberMetadataMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateContactFlowModuleContent(options.Region), middleware.Before); err != nil {
+	if err = addOpUpdatePhoneNumberMetadataValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePhoneNumberMetadata(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -136,25 +138,58 @@ func (c *Client) addOperationUpdateContactFlowModuleContentMiddlewares(stack *mi
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdateContactFlowModuleContent(region string) *awsmiddleware.RegisterServiceMetadata {
+type idempotencyToken_initializeOpUpdatePhoneNumberMetadata struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpUpdatePhoneNumberMetadata) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpUpdatePhoneNumberMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*UpdatePhoneNumberMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *UpdatePhoneNumberMetadataInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opUpdatePhoneNumberMetadataMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdatePhoneNumberMetadata{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
+}
+
+func newServiceMetadataMiddleware_opUpdatePhoneNumberMetadata(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "connect",
-		OperationName: "UpdateContactFlowModuleContent",
+		OperationName: "UpdatePhoneNumberMetadata",
 	}
 }
 
-type opUpdateContactFlowModuleContentResolveEndpointMiddleware struct {
+type opUpdatePhoneNumberMetadataResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  builtInParameterResolver
 }
 
-func (*opUpdateContactFlowModuleContentResolveEndpointMiddleware) ID() string {
+func (*opUpdatePhoneNumberMetadataResolveEndpointMiddleware) ID() string {
 	return "ResolveEndpointV2"
 }
 
-func (m *opUpdateContactFlowModuleContentResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *opUpdatePhoneNumberMetadataResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
@@ -256,8 +291,8 @@ func (m *opUpdateContactFlowModuleContentResolveEndpointMiddleware) HandleSerial
 	return next.HandleSerialize(ctx, in)
 }
 
-func addUpdateContactFlowModuleContentResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opUpdateContactFlowModuleContentResolveEndpointMiddleware{
+func addUpdatePhoneNumberMetadataResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opUpdatePhoneNumberMetadataResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
 		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,

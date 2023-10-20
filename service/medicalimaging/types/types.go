@@ -134,8 +134,8 @@ type DatastoreProperties struct {
 	// The Amazon Resource Name (ARN) for the data store.
 	DatastoreArn *string
 
-	// The Amazon Resource Name (ARN) assigned to the AWS Key Management Service (AWS
-	// KMS) key for accessing encrypted data.
+	// The Amazon Resource Name (ARN) assigned to the Key Management Service (KMS) key
+	// for accessing encrypted data.
 	KmsKeyArn *string
 
 	// The timestamp when the data store was last updated.
@@ -391,14 +391,14 @@ type ImageSetsMetadataSummary struct {
 	// This member is required.
 	ImageSetId *string
 
-	// The time an image set is created in AWS HealthImaging. Sample creation date is
-	// provided in 1985-04-12T23:20:50.52Z format.
+	// The time an image set is created. Sample creation date is provided in
+	// 1985-04-12T23:20:50.52Z format.
 	CreatedAt *time.Time
 
 	// The DICOM tags associated with the image set.
 	DICOMTags *DICOMTags
 
-	// The time when an image was last updated in AWS HealthImaging.
+	// The time an image set was last updated.
 	UpdatedAt *time.Time
 
 	// The image set version.

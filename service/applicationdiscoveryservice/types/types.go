@@ -78,6 +78,68 @@ type AgentNetworkInfo struct {
 	noSmithyDocumentSerde
 }
 
+// An object representing the agent or data collector that failed to delete, each
+// containing agentId, errorMessage, and errorCode.
+type BatchDeleteAgentError struct {
+
+	// The ID of the agent or data collector to delete.
+	//
+	// This member is required.
+	AgentId *string
+
+	// The type of error that occurred for the delete failed agent. Valid status are:
+	// AGENT_IN_USE | NOT_FOUND | INTERNAL_SERVER_ERROR.
+	//
+	// This member is required.
+	ErrorCode DeleteAgentErrorCode
+
+	// The description of the error that occurred for the delete failed agent.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// A metadata object that represents the deletion task being executed.
+type BatchDeleteConfigurationTask struct {
+
+	// The type of configuration item to delete. Supported types are: SERVER.
+	ConfigurationType DeletionConfigurationItemType
+
+	// The list of configuration IDs that were successfully deleted by the deletion
+	// task.
+	DeletedConfigurations []string
+
+	// A list of configuration IDs that produced warnings regarding their deletion,
+	// paired with a warning message.
+	DeletionWarnings []DeletionWarning
+
+	// An epoch seconds timestamp (UTC) of when the deletion task was completed or
+	// failed.
+	EndTime *time.Time
+
+	// A list of configuration IDs that failed to delete during the deletion task,
+	// each paired with an error message.
+	FailedConfigurations []FailedConfiguration
+
+	// The list of configuration IDs that were originally requested to be deleted by
+	// the deletion task.
+	RequestedConfigurations []string
+
+	// An epoch seconds timestamp (UTC) of when the deletion task was started.
+	StartTime *time.Time
+
+	// The current execution status of the deletion task. Valid status are:
+	// INITIALIZING | VALIDATING | DELETING | COMPLETED | FAILED.
+	Status BatchDeleteConfigurationTaskStatus
+
+	// The deletion task's unique identifier.
+	TaskId *string
+
+	noSmithyDocumentSerde
+}
+
 // Error messages returned for each import task that you deleted as a response for
 // this command.
 type BatchDeleteImportDataError struct {
@@ -375,6 +437,39 @@ type CustomerMeCollectorInfo struct {
 	noSmithyDocumentSerde
 }
 
+// An object representing the agent or data collector to be deleted along with the
+// optional configurations for error handling.
+type DeleteAgent struct {
+
+	// The ID of the agent or data collector to delete.
+	//
+	// This member is required.
+	AgentId *string
+
+	// Optional flag used to force delete an agent or data collector. It is needed to
+	// delete any agent in HEALTHY/UNHEALTHY/RUNNING status. Note that deleting an
+	// agent that is actively reporting health causes it to be re-registered with a
+	// different agent ID after data collector re-connects with Amazon Web Services.
+	Force bool
+
+	noSmithyDocumentSerde
+}
+
+// A configuration ID paired with a warning message.
+type DeletionWarning struct {
+
+	// The unique identifier of the configuration that produced a warning.
+	ConfigurationId *string
+
+	// The integer warning code associated with the warning message.
+	WarningCode int32
+
+	// A descriptive message of the warning the associated configuration ID produced.
+	WarningText *string
+
+	noSmithyDocumentSerde
+}
+
 // Indicates that the exported data must include EC2 instance type matches for
 // on-premises servers that are discovered through Amazon Web Services Application
 // Discovery Service.
@@ -501,6 +596,22 @@ type ExportPreferencesMemberEc2RecommendationsPreferences struct {
 }
 
 func (*ExportPreferencesMemberEc2RecommendationsPreferences) isExportPreferences() {}
+
+// A configuration ID paired with an error message.
+type FailedConfiguration struct {
+
+	// The unique identifier of the configuration the failed to delete.
+	ConfigurationId *string
+
+	// A descriptive message indicating why the associated configuration failed to
+	// delete.
+	ErrorMessage *string
+
+	// The integer error code associated with the error message.
+	ErrorStatusCode int32
+
+	noSmithyDocumentSerde
+}
 
 // A filter that can use conditional operators. For more information about
 // filters, see Querying Discovered Configuration Items (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html)

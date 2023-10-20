@@ -16,8 +16,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the traffic distribution for a given traffic distribution group. You
-// can change the SignInConfig distribution only for a default
+// Updates the traffic distribution for a given traffic distribution group. The
+// SignInConfig distribution is available only on a default
 // TrafficDistributionGroup (see the IsDefault parameter in the
 // TrafficDistributionGroup (https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html)
 // data type). If you call UpdateTrafficDistribution with a modified SignInConfig
@@ -52,7 +52,8 @@ type UpdateTrafficDistributionInput struct {
 	// The distribution of agents between the instance and its replica(s).
 	AgentConfig *types.AgentConfig
 
-	// The distribution of allowing signing in to the instance and its replica(s).
+	// The distribution that determines which Amazon Web Services Regions should be
+	// used to sign in agents in to both the instance and its replica(s).
 	SignInConfig *types.SignInConfig
 
 	// The distribution of traffic between the instance and its replica(s).

@@ -28,6 +28,7 @@
         "api_op_DeleteDocument.go",
         "api_op_DeleteInventory.go",
         "api_op_DeleteMaintenanceWindow.go",
+        "api_op_DeleteOpsItem.go",
         "api_op_DeleteOpsMetadata.go",
         "api_op_DeleteParameter.go",
         "api_op_DeleteParameters.go",

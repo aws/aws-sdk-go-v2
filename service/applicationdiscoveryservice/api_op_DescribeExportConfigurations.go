@@ -136,6 +136,96 @@ func (c *Client) addOperationDescribeExportConfigurationsMiddlewares(stack *midd
 	return nil
 }
 
+// DescribeExportConfigurationsAPIClient is a client that implements the
+// DescribeExportConfigurations operation.
+type DescribeExportConfigurationsAPIClient interface {
+	DescribeExportConfigurations(context.Context, *DescribeExportConfigurationsInput, ...func(*Options)) (*DescribeExportConfigurationsOutput, error)
+}
+
+var _ DescribeExportConfigurationsAPIClient = (*Client)(nil)
+
+// DescribeExportConfigurationsPaginatorOptions is the paginator options for
+// DescribeExportConfigurations
+type DescribeExportConfigurationsPaginatorOptions struct {
+	// A number between 1 and 100 specifying the maximum number of continuous export
+	// descriptions returned.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeExportConfigurationsPaginator is a paginator for
+// DescribeExportConfigurations
+type DescribeExportConfigurationsPaginator struct {
+	options   DescribeExportConfigurationsPaginatorOptions
+	client    DescribeExportConfigurationsAPIClient
+	params    *DescribeExportConfigurationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeExportConfigurationsPaginator returns a new
+// DescribeExportConfigurationsPaginator
+func NewDescribeExportConfigurationsPaginator(client DescribeExportConfigurationsAPIClient, params *DescribeExportConfigurationsInput, optFns ...func(*DescribeExportConfigurationsPaginatorOptions)) *DescribeExportConfigurationsPaginator {
+	if params == nil {
+		params = &DescribeExportConfigurationsInput{}
+	}
+
+	options := DescribeExportConfigurationsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeExportConfigurationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeExportConfigurationsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeExportConfigurations page.
+func (p *DescribeExportConfigurationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeExportConfigurationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeExportConfigurations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opDescribeExportConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

@@ -281,6 +281,12 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "elasticmapreduce-fips.us-east-2.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "elasticmapreduce.us-east-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -339,8 +345,20 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "cn-north-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "cn-north-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "elasticmapreduce.cn-north-1.api.amazonwebservices.com.cn",
+			},
+			endpoints.EndpointKey{
 				Region: "cn-northwest-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "cn-northwest-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "elasticmapreduce.cn-northwest-1.api.amazonwebservices.com.cn",
+			},
 		},
 	},
 	{
@@ -551,6 +569,12 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "elasticmapreduce.us-gov-east-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "elasticmapreduce.us-gov-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-gov-west-1",
 			}: endpoints.Endpoint{
 				Protocols: []string{"https"},
@@ -560,6 +584,13 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname:  "elasticmapreduce.us-gov-west-1.amazonaws.com",
+				Protocols: []string{"https"},
+			},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:  "elasticmapreduce.us-gov-west-1.api.aws",
 				Protocols: []string{"https"},
 			},
 		},

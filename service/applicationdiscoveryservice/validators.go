@@ -30,6 +30,26 @@ func (m *validateOpAssociateConfigurationItemsToApplication) HandleInitialize(ct
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchDeleteAgents struct {
+}
+
+func (*validateOpBatchDeleteAgents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteAgents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteAgentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteAgentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDeleteImportData struct {
 }
 
@@ -150,6 +170,26 @@ func (m *validateOpDescribeAgents) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeBatchDeleteConfigurationTask struct {
+}
+
+func (*validateOpDescribeBatchDeleteConfigurationTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeBatchDeleteConfigurationTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeBatchDeleteConfigurationTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeBatchDeleteConfigurationTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeConfigurations struct {
 }
 
@@ -265,6 +305,26 @@ func (m *validateOpListServerNeighbors) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListServerNeighborsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartBatchDeleteConfigurationTask struct {
+}
+
+func (*validateOpStartBatchDeleteConfigurationTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartBatchDeleteConfigurationTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartBatchDeleteConfigurationTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartBatchDeleteConfigurationTaskInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -394,6 +454,10 @@ func addOpAssociateConfigurationItemsToApplicationValidationMiddleware(stack *mi
 	return stack.Initialize.Add(&validateOpAssociateConfigurationItemsToApplication{}, middleware.After)
 }
 
+func addOpBatchDeleteAgentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteAgents{}, middleware.After)
+}
+
 func addOpBatchDeleteImportDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDeleteImportData{}, middleware.After)
 }
@@ -416,6 +480,10 @@ func addOpDeleteTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeAgentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAgents{}, middleware.After)
+}
+
+func addOpDescribeBatchDeleteConfigurationTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeBatchDeleteConfigurationTask{}, middleware.After)
 }
 
 func addOpDescribeConfigurationsValidationMiddleware(stack *middleware.Stack) error {
@@ -442,6 +510,10 @@ func addOpListServerNeighborsValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListServerNeighbors{}, middleware.After)
 }
 
+func addOpStartBatchDeleteConfigurationTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartBatchDeleteConfigurationTask{}, middleware.After)
+}
+
 func addOpStartDataCollectionByAgentIdsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartDataCollectionByAgentIds{}, middleware.After)
 }
@@ -464,6 +536,38 @@ func addOpStopDataCollectionByAgentIdsValidationMiddleware(stack *middleware.Sta
 
 func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateApplication{}, middleware.After)
+}
+
+func validateDeleteAgent(v *types.DeleteAgent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAgent"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeleteAgents(v []types.DeleteAgent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAgents"}
+	for i := range v {
+		if err := validateDeleteAgent(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateEc2RecommendationsExportPreferences(v *types.Ec2RecommendationsExportPreferences) error {
@@ -719,6 +823,25 @@ func validateOpAssociateConfigurationItemsToApplicationInput(v *AssociateConfigu
 	}
 }
 
+func validateOpBatchDeleteAgentsInput(v *BatchDeleteAgentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteAgentsInput"}
+	if v.DeleteAgents == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeleteAgents"))
+	} else if v.DeleteAgents != nil {
+		if err := validateDeleteAgents(v.DeleteAgents); err != nil {
+			invalidParams.AddNested("DeleteAgents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchDeleteImportDataInput(v *BatchDeleteImportDataInput) error {
 	if v == nil {
 		return nil
@@ -815,6 +938,21 @@ func validateOpDescribeAgentsInput(v *DescribeAgentsInput) error {
 		if err := validateFilters(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeBatchDeleteConfigurationTaskInput(v *DescribeBatchDeleteConfigurationTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeBatchDeleteConfigurationTaskInput"}
+	if v.TaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -922,6 +1060,24 @@ func validateOpListServerNeighborsInput(v *ListServerNeighborsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListServerNeighborsInput"}
 	if v.ConfigurationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartBatchDeleteConfigurationTaskInput(v *StartBatchDeleteConfigurationTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartBatchDeleteConfigurationTaskInput"}
+	if len(v.ConfigurationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationType"))
+	}
+	if v.ConfigurationIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

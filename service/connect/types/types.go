@@ -283,15 +283,16 @@ type ClaimedPhoneNumberSummary struct {
 	PhoneNumberId *string
 
 	// The status of the phone number.
-	//   - CLAIMED means the previous ClaimedPhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
+	//   - CLAIMED means the previous ClaimPhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html)
 	//   or UpdatePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
 	//   operation succeeded.
-	//   - IN_PROGRESS means a ClaimedPhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
-	//   or UpdatePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
+	//   - IN_PROGRESS means a ClaimPhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html)
+	//   , UpdatePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
+	//   , or UpdatePhoneNumberMetadata (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumberMetadata.html)
 	//   operation is still in progress and has not yet completed. You can call
 	//   DescribePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
 	//   at a later time to verify if the previous operation has completed.
-	//   - FAILED indicates that the previous ClaimedPhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
+	//   - FAILED indicates that the previous ClaimPhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html)
 	//   or UpdatePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
 	//   operation has failed. It will include a message indicating the failure reason. A
 	//   common reason for a failure may be that the TargetArn value you are claiming
@@ -400,8 +401,8 @@ type ContactFlow struct {
 	Arn *string
 
 	// The JSON string that represents the content of the flow. For an example, see
-	// Example contact flow in Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html)
-	// .
+	// Example flow in Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html)
+	// . Length Constraints: Minimum length of 1. Maximum length of 256000.
 	Content *string
 
 	// The description of the flow.
@@ -435,8 +436,8 @@ type ContactFlowModule struct {
 	Arn *string
 
 	// The JSON string that represents the content of the flow. For an example, see
-	// Example contact flow in Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html)
-	// . Length Constraints: Minimum length of 1. Maximum length of 256000.
+	// Example flow in Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html)
+	// .
 	Content *string
 
 	// The description of the flow module.
@@ -845,7 +846,7 @@ type EvaluationForm struct {
 	// A version of the evaluation form.
 	//
 	// This member is required.
-	EvaluationFormVersion *int32
+	EvaluationFormVersion int32
 
 	// Items that are part of the evaluation form. The total number of sections and
 	// questions must not exceed 100 each. Questions must be contained in a section.
@@ -907,7 +908,7 @@ type EvaluationFormContent struct {
 	// A version of the evaluation form.
 	//
 	// This member is required.
-	EvaluationFormVersion *int32
+	EvaluationFormVersion int32
 
 	// Items that are part of the evaluation form. The total number of sections and
 	// questions must not exceed 100 each. Questions must be contained in a section.
@@ -1248,7 +1249,7 @@ type EvaluationFormSummary struct {
 	// The version number of the latest evaluation form version.
 	//
 	// This member is required.
-	LatestVersion *int32
+	LatestVersion int32
 
 	// A title of the evaluation form.
 	//
@@ -1294,7 +1295,7 @@ type EvaluationFormVersionSummary struct {
 	// A version of the evaluation form.
 	//
 	// This member is required.
-	EvaluationFormVersion *int32
+	EvaluationFormVersion int32
 
 	// The Amazon Resource Name (ARN) of the user who last updated the evaluation form.
 	//
@@ -2391,15 +2392,16 @@ type PhoneNumberQuickConnectConfig struct {
 }
 
 // The status of the phone number.
-//   - CLAIMED means the previous ClaimedPhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
+//   - CLAIMED means the previous ClaimPhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html)
 //     or UpdatePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
 //     operation succeeded.
-//   - IN_PROGRESS means a ClaimedPhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
-//     or UpdatePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
+//   - IN_PROGRESS means a ClaimPhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html)
+//     , UpdatePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
+//     , or UpdatePhoneNumberMetadata (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumberMetadata.html)
 //     operation is still in progress and has not yet completed. You can call
 //     DescribePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
 //     at a later time to verify if the previous operation has completed.
-//   - FAILED indicates that the previous ClaimedPhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
+//   - FAILED indicates that the previous ClaimPhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html)
 //     or UpdatePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
 //     operation has failed. It will include a message indicating the failure reason. A
 //     common reason for a failure may be that the TargetArn value you are claiming
@@ -3388,7 +3390,8 @@ type SendNotificationActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// The distribution of allowing signing in to the instance and its replica(s).
+// The distribution that determines which Amazon Web Services Regions should be
+// used to sign in agents in to both the instance and its replica(s).
 type SignInConfig struct {
 
 	// Information about traffic distributions.
@@ -3688,12 +3691,10 @@ type TrafficDistributionGroup struct {
 	// Whether this is the default traffic distribution group created during instance
 	// replication. The default traffic distribution group cannot be deleted by the
 	// DeleteTrafficDistributionGroup API. The default traffic distribution group is
-	// deleted as part of the process for deleting a replica. You can change the
-	// SignInConfig distribution only for a default TrafficDistributionGroup (see the
-	// IsDefault parameter in the TrafficDistributionGroup (https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html)
-	// data type). If you call UpdateTrafficDistribution with a modified SignInConfig
-	// and a non-default TrafficDistributionGroup , an InvalidRequestException is
-	// returned.
+	// deleted as part of the process for deleting a replica. The SignInConfig
+	// distribution is available only on the default TrafficDistributionGroup . If you
+	// call UpdateTrafficDistribution with a modified SignInConfig and a non-default
+	// TrafficDistributionGroup , an InvalidRequestException is returned.
 	IsDefault bool
 
 	// The name of the traffic distribution group.
@@ -3710,7 +3711,7 @@ type TrafficDistributionGroup struct {
 	//   operation is still in progress and has not yet completed.
 	//   - DELETION_FAILED means the previous DeleteTrafficDistributionGroup (https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html)
 	//   operation has failed.
-	//   - UPDATE_IN_PROGRESS means the previous UpdateTrafficDistributionGroup (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html)
+	//   - UPDATE_IN_PROGRESS means the previous UpdateTrafficDistribution (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistribution.html)
 	//   operation is still in progress and has not yet completed.
 	Status TrafficDistributionGroupStatus
 

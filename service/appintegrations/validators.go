@@ -587,9 +587,7 @@ func validateOpCreateDataIntegrationInput(v *CreateDataIntegrationInput) error {
 	if v.SourceURI == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceURI"))
 	}
-	if v.ScheduleConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ScheduleConfig"))
-	} else if v.ScheduleConfig != nil {
+	if v.ScheduleConfig != nil {
 		if err := validateScheduleConfiguration(v.ScheduleConfig); err != nil {
 			invalidParams.AddNested("ScheduleConfig", err.(smithy.InvalidParamsError))
 		}

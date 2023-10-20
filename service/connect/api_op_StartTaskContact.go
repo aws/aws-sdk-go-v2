@@ -17,7 +17,33 @@ import (
 	"time"
 )
 
-// Initiates a flow to start a new task.
+// Initiates a flow to start a new task contact. For more information about task
+// contacts, see Concepts: Tasks in Amazon Connect (https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html)
+// in the Amazon Connect Administrator Guide. When using PreviousContactId and
+// RelatedContactId input parameters, note the following:
+//   - PreviousContactId
+//   - Any updates to user-defined task contact attributes on any contact linked
+//     through the same PreviousContactId will affect every contact in the chain.
+//   - There can be a maximum of 12 linked task contacts in a chain. That is, 12
+//     task contacts can be created that share the same PreviousContactId .
+//   - RelatedContactId
+//   - Copies contact attributes from the related task contact to the new contact.
+//   - Any update on attributes in a new task contact does not update attributes
+//     on previous contact.
+//   - There’s no limit on the number of task contacts that can be created that
+//     use the same RelatedContactId .
+//
+// In addition, when calling StartTaskContact include only one of these
+// parameters: ContactFlowID , QuickConnectID , or TaskTemplateID . Only one
+// parameter is required as long as the task template has a flow configured to run
+// it. If more than one parameter is specified, or only the TaskTemplateID is
+// specified but it does not have a flow configured, the request returns an error
+// because Amazon Connect cannot identify the unique flow to run when the task is
+// created. A ServiceQuotaExceededException occurs when the number of open tasks
+// exceeds the active tasks quota or there are already 12 tasks referencing the
+// same PreviousContactId . For more information about service quotas for task
+// contacts, see Amazon Connect service quotas (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
+// in the Amazon Connect Administrator Guide.
 func (c *Client) StartTaskContact(ctx context.Context, params *StartTaskContactInput, optFns ...func(*Options)) (*StartTaskContactOutput, error) {
 	if params == nil {
 		params = &StartTaskContactInput{}
@@ -72,17 +98,31 @@ type StartTaskContactInput struct {
 	// Panel (CCP).
 	Description *string
 
-	// The identifier of the previous chat, voice, or task contact.
+	// The identifier of the previous chat, voice, or task contact. Any updates to
+	// user-defined attributes to task contacts linked using the same PreviousContactID
+	// will affect every contact in the chain. There can be a maximum of 12 linked task
+	// contacts in a chain.
 	PreviousContactId *string
 
-	// The identifier for the quick connect.
+	// The identifier for the quick connect. Tasks that are created by using
+	// QuickConnectId will use the flow that is defined on agent or queue quick
+	// connect. For more information about quick connects, see Create quick connects (https://docs.aws.amazon.com/connect/latest/adminguide/quick-connects.html)
+	// .
 	QuickConnectId *string
 
 	// A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
+	// Tasks can have the following reference types at the time of creation: URL |
+	// NUMBER | STRING | DATE | EMAIL . ATTACHMENT is not a supported reference type
+	// during task creation.
 	References map[string]types.Reference
 
 	// The contactId that is related (https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html#linked-tasks)
-	// to this contact.
+	// to this contact. Linking tasks together by using RelatedContactID copies over
+	// contact attributes from the related task contact to the new task contact. All
+	// updates to user-defined attributes in the new task contact are limited to the
+	// individual contact ID, unlike what happens when tasks are linked by using
+	// PreviousContactID . There are no limits to the number of contacts that can be
+	// linked by using RelatedContactId .
 	RelatedContactId *string
 
 	// The timestamp, in Unix Epoch seconds format, at which to start running the
@@ -90,7 +130,9 @@ type StartTaskContactInput struct {
 	// 6 days in future.
 	ScheduledTime *time.Time
 
-	// A unique identifier for the task template.
+	// A unique identifier for the task template. For more information about task
+	// templates, see Create task templates (https://docs.aws.amazon.com/connect/latest/adminguide/task-templates.html)
+	// in the Amazon Connect Administrator Guide.
 	TaskTemplateId *string
 
 	noSmithyDocumentSerde

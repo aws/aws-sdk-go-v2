@@ -193,6 +193,7 @@
         "api_op_UpdateInstanceStorageConfig.go",
         "api_op_UpdateParticipantRoleConfig.go",
         "api_op_UpdatePhoneNumber.go",
+        "api_op_UpdatePhoneNumberMetadata.go",
         "api_op_UpdatePrompt.go",
         "api_op_UpdateQueueHoursOfOperation.go",
         "api_op_UpdateQueueMaxContacts.go",

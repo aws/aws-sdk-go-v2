@@ -3610,6 +3610,26 @@ func (m *validateOpUpdatePhoneNumber) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePhoneNumberMetadata struct {
+}
+
+func (*validateOpUpdatePhoneNumberMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePhoneNumberMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePhoneNumberMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePhoneNumberMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePrompt struct {
 }
 
@@ -4848,6 +4868,10 @@ func addOpUpdateParticipantRoleConfigValidationMiddleware(stack *middleware.Stac
 
 func addOpUpdatePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePhoneNumber{}, middleware.After)
+}
+
+func addOpUpdatePhoneNumberMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePhoneNumberMetadata{}, middleware.After)
 }
 
 func addOpUpdatePromptValidationMiddleware(stack *middleware.Stack) error {
@@ -6243,9 +6267,6 @@ func validateOpActivateEvaluationFormInput(v *ActivateEvaluationFormInput) error
 	if v.EvaluationFormId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationFormId"))
 	}
-	if v.EvaluationFormVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EvaluationFormVersion"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -7033,9 +7054,6 @@ func validateOpDeactivateEvaluationFormInput(v *DeactivateEvaluationFormInput) e
 	}
 	if v.EvaluationFormId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationFormId"))
-	}
-	if v.EvaluationFormVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EvaluationFormVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9550,9 +9568,6 @@ func validateOpUpdateEvaluationFormInput(v *UpdateEvaluationFormInput) error {
 	if v.EvaluationFormId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationFormId"))
 	}
-	if v.EvaluationFormVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EvaluationFormVersion"))
-	}
 	if v.Title == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Title"))
 	}
@@ -9682,6 +9697,21 @@ func validateOpUpdatePhoneNumberInput(v *UpdatePhoneNumberInput) error {
 	}
 	if v.TargetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePhoneNumberMetadataInput(v *UpdatePhoneNumberMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePhoneNumberMetadataInput"}
+	if v.PhoneNumberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

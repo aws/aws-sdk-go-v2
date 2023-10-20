@@ -28,6 +28,31 @@ func (AgentStatus) Values() []AgentStatus {
 	}
 }
 
+type BatchDeleteConfigurationTaskStatus string
+
+// Enum values for BatchDeleteConfigurationTaskStatus
+const (
+	BatchDeleteConfigurationTaskStatusInitializing BatchDeleteConfigurationTaskStatus = "INITIALIZING"
+	BatchDeleteConfigurationTaskStatusValidating   BatchDeleteConfigurationTaskStatus = "VALIDATING"
+	BatchDeleteConfigurationTaskStatusDeleting     BatchDeleteConfigurationTaskStatus = "DELETING"
+	BatchDeleteConfigurationTaskStatusCompleted    BatchDeleteConfigurationTaskStatus = "COMPLETED"
+	BatchDeleteConfigurationTaskStatusFailed       BatchDeleteConfigurationTaskStatus = "FAILED"
+)
+
+// Values returns all known values for BatchDeleteConfigurationTaskStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (BatchDeleteConfigurationTaskStatus) Values() []BatchDeleteConfigurationTaskStatus {
+	return []BatchDeleteConfigurationTaskStatus{
+		"INITIALIZING",
+		"VALIDATING",
+		"DELETING",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type BatchDeleteImportDataErrorCode string
 
 // Enum values for BatchDeleteImportDataErrorCode
@@ -112,6 +137,43 @@ const (
 func (DataSource) Values() []DataSource {
 	return []DataSource{
 		"AGENT",
+	}
+}
+
+type DeleteAgentErrorCode string
+
+// Enum values for DeleteAgentErrorCode
+const (
+	DeleteAgentErrorCodeNotFound            DeleteAgentErrorCode = "NOT_FOUND"
+	DeleteAgentErrorCodeInternalServerError DeleteAgentErrorCode = "INTERNAL_SERVER_ERROR"
+	DeleteAgentErrorCodeAgentInUse          DeleteAgentErrorCode = "AGENT_IN_USE"
+)
+
+// Values returns all known values for DeleteAgentErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeleteAgentErrorCode) Values() []DeleteAgentErrorCode {
+	return []DeleteAgentErrorCode{
+		"NOT_FOUND",
+		"INTERNAL_SERVER_ERROR",
+		"AGENT_IN_USE",
+	}
+}
+
+type DeletionConfigurationItemType string
+
+// Enum values for DeletionConfigurationItemType
+const (
+	DeletionConfigurationItemTypeServer DeletionConfigurationItemType = "SERVER"
+)
+
+// Values returns all known values for DeletionConfigurationItemType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DeletionConfigurationItemType) Values() []DeletionConfigurationItemType {
+	return []DeletionConfigurationItemType{
+		"SERVER",
 	}
 }
 

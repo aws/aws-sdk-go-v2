@@ -105,9 +105,9 @@ func awsRestjson1_serializeOpDocumentActivateEvaluationFormInput(v *ActivateEval
 	object := value.Object()
 	defer object.Close()
 
-	if v.EvaluationFormVersion != nil {
+	{
 		ok := object.Key("EvaluationFormVersion")
-		ok.Integer(*v.EvaluationFormVersion)
+		ok.Integer(v.EvaluationFormVersion)
 	}
 
 	return nil
@@ -3787,9 +3787,9 @@ func awsRestjson1_serializeOpDocumentDeactivateEvaluationFormInput(v *Deactivate
 	object := value.Object()
 	defer object.Close()
 
-	if v.EvaluationFormVersion != nil {
+	{
 		ok := object.Key("EvaluationFormVersion")
-		ok.Integer(*v.EvaluationFormVersion)
+		ok.Integer(v.EvaluationFormVersion)
 	}
 
 	return nil
@@ -15708,9 +15708,9 @@ func awsRestjson1_serializeOpDocumentUpdateEvaluationFormInput(v *UpdateEvaluati
 		ok.String(*v.Description)
 	}
 
-	if v.EvaluationFormVersion != nil {
+	{
 		ok := object.Key("EvaluationFormVersion")
-		ok.Integer(*v.EvaluationFormVersion)
+		ok.Integer(v.EvaluationFormVersion)
 	}
 
 	if v.Items != nil {
@@ -16236,6 +16236,99 @@ func awsRestjson1_serializeOpDocumentUpdatePhoneNumberInput(v *UpdatePhoneNumber
 	if v.TargetArn != nil {
 		ok := object.Key("TargetArn")
 		ok.String(*v.TargetArn)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdatePhoneNumberMetadata struct {
+}
+
+func (*awsRestjson1_serializeOpUpdatePhoneNumberMetadata) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdatePhoneNumberMetadata) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdatePhoneNumberMetadataInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/phone-number/{PhoneNumberId}/metadata")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdatePhoneNumberMetadataInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdatePhoneNumberMetadataInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdatePhoneNumberMetadataInput(v *UpdatePhoneNumberMetadataInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.PhoneNumberId == nil || len(*v.PhoneNumberId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PhoneNumberId must not be empty")}
+	}
+	if v.PhoneNumberId != nil {
+		if err := encoder.SetURI("PhoneNumberId").String(*v.PhoneNumberId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdatePhoneNumberMetadataInput(v *UpdatePhoneNumberMetadataInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.PhoneNumberDescription != nil {
+		ok := object.Key("PhoneNumberDescription")
+		ok.String(*v.PhoneNumberDescription)
 	}
 
 	return nil

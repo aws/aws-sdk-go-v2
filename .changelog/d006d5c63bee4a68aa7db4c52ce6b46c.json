@@ -1,0 +1,8 @@
+{
+    "id": "d006d5c6-3bee-4a68-aa7d-b4c52ce6b46c",
+    "type": "feature",
+    "description": "Update KmsKeyIdentifier constraints to support AWS KMS multi-Region keys.",
+    "modules": [
+        "service/appconfig"
+    ]
+}

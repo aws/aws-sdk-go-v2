@@ -46,6 +46,9 @@ type BatchDeleteImportDataInput struct {
 	// This member is required.
 	ImportTaskIds []string
 
+	// Set to true to remove the deleted import task from DescribeImportTasks .
+	DeleteHistory bool
+
 	noSmithyDocumentSerde
 }
 

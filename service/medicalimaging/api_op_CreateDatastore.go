@@ -42,8 +42,8 @@ type CreateDatastoreInput struct {
 	// The data store name.
 	DatastoreName *string
 
-	// The Amazon Resource Name (ARN) assigned to the AWS Key Management Service (AWS
-	// KMS) key for accessing encrypted data.
+	// The Amazon Resource Name (ARN) assigned to the Key Management Service (KMS) key
+	// for accessing encrypted data.
 	KmsKeyArn *string
 
 	// The tags provided when creating a data store.

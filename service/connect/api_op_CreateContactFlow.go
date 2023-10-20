@@ -37,7 +37,7 @@ func (c *Client) CreateContactFlow(ctx context.Context, params *CreateContactFlo
 type CreateContactFlowInput struct {
 
 	// The JSON string that represents the content of the flow. For an example, see
-	// Example contact flow in Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html)
+	// Example flow in Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html)
 	// . Length Constraints: Minimum length of 1. Maximum length of 256000.
 	//
 	// This member is required.

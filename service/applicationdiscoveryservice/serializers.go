@@ -73,6 +73,61 @@ func (m *awsAwsjson11_serializeOpAssociateConfigurationItemsToApplication) Handl
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpBatchDeleteAgents struct {
+}
+
+func (*awsAwsjson11_serializeOpBatchDeleteAgents) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpBatchDeleteAgents) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchDeleteAgentsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSPoseidonService_V2015_11_01.BatchDeleteAgents")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentBatchDeleteAgentsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpBatchDeleteImportData struct {
 }
 
@@ -388,6 +443,61 @@ func (m *awsAwsjson11_serializeOpDescribeAgents) HandleSerialize(ctx context.Con
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDescribeAgentsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeBatchDeleteConfigurationTask struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeBatchDeleteConfigurationTask) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeBatchDeleteConfigurationTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeBatchDeleteConfigurationTaskInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSPoseidonService_V2015_11_01.DescribeBatchDeleteConfigurationTask")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeBatchDeleteConfigurationTaskInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1003,6 +1113,61 @@ func (m *awsAwsjson11_serializeOpListServerNeighbors) HandleSerialize(ctx contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpStartBatchDeleteConfigurationTask struct {
+}
+
+func (*awsAwsjson11_serializeOpStartBatchDeleteConfigurationTask) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpStartBatchDeleteConfigurationTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartBatchDeleteConfigurationTaskInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSPoseidonService_V2015_11_01.StartBatchDeleteConfigurationTask")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentStartBatchDeleteConfigurationTaskInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpStartContinuousExport struct {
 }
 
@@ -1431,6 +1596,36 @@ func awsAwsjson11_serializeDocumentContinuousExportIds(v []string, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDeleteAgent(v *types.DeleteAgent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AgentId != nil {
+		ok := object.Key("agentId")
+		ok.String(*v.AgentId)
+	}
+
+	if v.Force {
+		ok := object.Key("force")
+		ok.Boolean(v.Force)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeleteAgents(v []types.DeleteAgent, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentDeleteAgent(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDescribeImportTasksFilterList(v []types.ImportTaskFilter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1834,9 +2029,28 @@ func awsAwsjson11_serializeOpDocumentAssociateConfigurationItemsToApplicationInp
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentBatchDeleteAgentsInput(v *BatchDeleteAgentsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeleteAgents != nil {
+		ok := object.Key("deleteAgents")
+		if err := awsAwsjson11_serializeDocumentDeleteAgents(v.DeleteAgents, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentBatchDeleteImportDataInput(v *BatchDeleteImportDataInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DeleteHistory {
+		ok := object.Key("deleteHistory")
+		ok.Boolean(v.DeleteHistory)
+	}
 
 	if v.ImportTaskIds != nil {
 		ok := object.Key("importTaskIds")
@@ -1947,6 +2161,18 @@ func awsAwsjson11_serializeOpDocumentDescribeAgentsInput(v *DescribeAgentsInput,
 	if v.NextToken != nil {
 		ok := object.Key("nextToken")
 		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribeBatchDeleteConfigurationTaskInput(v *DescribeBatchDeleteConfigurationTaskInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TaskId != nil {
+		ok := object.Key("taskId")
+		ok.String(*v.TaskId)
 	}
 
 	return nil
@@ -2184,6 +2410,25 @@ func awsAwsjson11_serializeOpDocumentListServerNeighborsInput(v *ListServerNeigh
 	if v.PortInformationNeeded {
 		ok := object.Key("portInformationNeeded")
 		ok.Boolean(v.PortInformationNeeded)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentStartBatchDeleteConfigurationTaskInput(v *StartBatchDeleteConfigurationTaskInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConfigurationIds != nil {
+		ok := object.Key("configurationIds")
+		if err := awsAwsjson11_serializeDocumentConfigurationIdList(v.ConfigurationIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ConfigurationType) > 0 {
+		ok := object.Key("configurationType")
+		ok.String(string(v.ConfigurationType))
 	}
 
 	return nil

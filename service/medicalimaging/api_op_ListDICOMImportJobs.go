@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List import jobs created by this AWS account for a specific data store.
+// List import jobs created for a specific data store.
 func (c *Client) ListDICOMImportJobs(ctx context.Context, params *ListDICOMImportJobsInput, optFns ...func(*Options)) (*ListDICOMImportJobsOutput, error) {
 	if params == nil {
 		params = &ListDICOMImportJobsInput{}
