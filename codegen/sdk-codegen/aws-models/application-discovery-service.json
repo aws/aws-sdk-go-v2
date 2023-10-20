@@ -37,6 +37,9 @@
                     "target": "com.amazonaws.applicationdiscoveryservice#AssociateConfigurationItemsToApplication"
                 },
                 {
+                    "target": "com.amazonaws.applicationdiscoveryservice#BatchDeleteAgents"
+                },
+                {
                     "target": "com.amazonaws.applicationdiscoveryservice#BatchDeleteImportData"
                 },
                 {
@@ -53,6 +56,9 @@
                 },
                 {
                     "target": "com.amazonaws.applicationdiscoveryservice#DescribeAgents"
+                },
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#DescribeBatchDeleteConfigurationTask"
                 },
                 {
                     "target": "com.amazonaws.applicationdiscoveryservice#DescribeConfigurations"
@@ -86,6 +92,9 @@
                 },
                 {
                     "target": "com.amazonaws.applicationdiscoveryservice#ListServerNeighbors"
+                },
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#StartBatchDeleteConfigurationTask"
                 },
                 {
                     "target": "com.amazonaws.applicationdiscoveryservice#StartContinuousExport"
@@ -1133,6 +1142,193 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.applicationdiscoveryservice#BatchDeleteAgentError": {
+            "type": "structure",
+            "members": {
+                "agentId": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#AgentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the agent or data collector to delete.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The description of the error that occurred for the delete failed agent.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorCode": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#DeleteAgentErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of error that occurred for the delete failed agent. \n      Valid status are: AGENT_IN_USE | NOT_FOUND | INTERNAL_SERVER_ERROR.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      An object representing the agent or data collector that failed to delete, each containing agentId, \n      errorMessage, and errorCode. \n    </p>"
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#BatchDeleteAgentErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationdiscoveryservice#BatchDeleteAgentError"
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#BatchDeleteAgents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationdiscoveryservice#BatchDeleteAgentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationdiscoveryservice#BatchDeleteAgentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#AuthorizationErrorException"
+                },
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#ServerInternalErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Deletes one or more agents or collectors as specified by ID. Deleting an agent or collector does not \n      delete the previously discovered data. \n      To delete the data collected, use <code>StartBatchDeleteConfigurationTask</code>.\n      \n    </p>"
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#BatchDeleteAgentsRequest": {
+            "type": "structure",
+            "members": {
+                "deleteAgents": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#DeleteAgents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The list of agents to delete.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#BatchDeleteAgentsResponse": {
+            "type": "structure",
+            "members": {
+                "errors": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#BatchDeleteAgentErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of agent IDs that failed to delete during the deletion task, each paired with an error message.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#BatchDeleteConfigurationTask": {
+            "type": "structure",
+            "members": {
+                "taskId": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The deletion task's unique identifier. \n    </p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#BatchDeleteConfigurationTaskStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The current execution status of the deletion task. \n      Valid status are: INITIALIZING | VALIDATING | DELETING | COMPLETED | FAILED.\n    </p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An epoch seconds timestamp (UTC) of when the deletion task was started.\n    </p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An epoch seconds timestamp (UTC) of when the deletion task was completed or failed.\n    </p>"
+                    }
+                },
+                "configurationType": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#DeletionConfigurationItemType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of configuration item to delete. Supported types are: SERVER.\n    </p>"
+                    }
+                },
+                "requestedConfigurations": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#ConfigurationIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The list of configuration IDs that were originally requested to be deleted by the deletion task.\n    </p>"
+                    }
+                },
+                "deletedConfigurations": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#ConfigurationIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The list of configuration IDs that were successfully deleted by the deletion task.\n    </p>"
+                    }
+                },
+                "failedConfigurations": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#FailedConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of configuration IDs that failed to delete during the deletion task, \n      each paired with an error message.\n    </p>"
+                    }
+                },
+                "deletionWarnings": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#DeletionWarningsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of configuration IDs that produced warnings regarding their deletion, \n      paired with a warning message.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      A metadata object that represents the deletion task being executed.\n    </p>"
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#BatchDeleteConfigurationTaskStatus": {
+            "type": "enum",
+            "members": {
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZING"
+                    }
+                },
+                "VALIDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.applicationdiscoveryservice#BatchDeleteImportData": {
             "type": "operation",
             "input": {
@@ -1228,6 +1424,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The IDs for the import tasks that you want to delete.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "deleteHistory": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n      Set to <code>true</code> to remove the deleted import task from \n      <a>DescribeImportTasks</a>.\n    </p>"
                     }
                 }
             },
@@ -1926,6 +2129,63 @@
                 }
             }
         },
+        "com.amazonaws.applicationdiscoveryservice#DeleteAgent": {
+            "type": "structure",
+            "members": {
+                "agentId": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#AgentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the agent or data collector to delete.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "force": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n      Optional flag used to force delete an agent or data collector. It is needed to delete any agent in \n      HEALTHY/UNHEALTHY/RUNNING status. Note that deleting an agent that is actively reporting health causes it \n      to be re-registered with a different agent ID after data collector re-connects with Amazon Web Services.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      An object representing the agent or data collector to be deleted along with \n      the optional configurations for error handling.\n    </p>"
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#DeleteAgentErrorCode": {
+            "type": "enum",
+            "members": {
+                "NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_FOUND"
+                    }
+                },
+                "INTERNAL_SERVER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVER_ERROR"
+                    }
+                },
+                "AGENT_IN_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT_IN_USE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#DeleteAgents": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationdiscoveryservice#DeleteAgent"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.applicationdiscoveryservice#DeleteApplications": {
             "type": "operation",
             "input": {
@@ -2037,6 +2297,50 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.applicationdiscoveryservice#DeletionConfigurationItemType": {
+            "type": "enum",
+            "members": {
+                "SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#DeletionWarning": {
+            "type": "structure",
+            "members": {
+                "configurationId": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#ConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The unique identifier of the configuration that produced a warning.\n    </p>"
+                    }
+                },
+                "warningCode": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#WarningCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n      The integer warning code associated with the warning message.\n    </p>"
+                    }
+                },
+                "warningText": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#WarningText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A descriptive message of the warning the associated configuration ID produced. \n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      A configuration ID paired with a warning message.\n    </p>"
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#DeletionWarningsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationdiscoveryservice#DeletionWarning"
+            }
+        },
         "com.amazonaws.applicationdiscoveryservice#DescribeAgents": {
             "type": "operation",
             "input": {
@@ -2063,7 +2367,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists agents or collectors as specified by ID or other filters. All agents/collectors\n      associated with your user can be listed if you call <code>DescribeAgents</code> as is\n      without passing any parameters.</p>"
+                "smithy.api#documentation": "<p>Lists agents or collectors as specified by ID or other filters. All agents/collectors\n      associated with your user can be listed if you call <code>DescribeAgents</code> as is\n      without passing any parameters.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "agentsInfo",
+                    "pageSize": "maxResults"
+                }
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeAgentsRequest": {
@@ -2112,6 +2422,61 @@
                     "target": "com.amazonaws.applicationdiscoveryservice#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>Token to retrieve the next set of results. For example, if you specified 100 IDs for\n        <code>DescribeAgentsRequest$agentIds</code> but set\n        <code>DescribeAgentsRequest$maxResults</code> to 10, you received a set of 10 results along\n      with this token. Use this token in the next query to retrieve the next set of 10.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#DescribeBatchDeleteConfigurationTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationdiscoveryservice#DescribeBatchDeleteConfigurationTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationdiscoveryservice#DescribeBatchDeleteConfigurationTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#AuthorizationErrorException"
+                },
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#HomeRegionNotSetException"
+                },
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#ServerInternalErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n        Takes a unique deletion task identifier as input and returns metadata about a configuration deletion task.</p>"
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#DescribeBatchDeleteConfigurationTaskRequest": {
+            "type": "structure",
+            "members": {
+                "taskId": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The ID of the task to delete.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#DescribeBatchDeleteConfigurationTaskResponse": {
+            "type": "structure",
+            "members": {
+                "task": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#BatchDeleteConfigurationTask",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The <code>BatchDeleteConfigurationTask</code> that represents the deletion task being executed.\n      </p>"
                     }
                 }
             },
@@ -2228,6 +2593,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "descriptions",
                     "pageSize": "maxResults"
                 }
             }
@@ -2317,7 +2683,13 @@
             ],
             "traits": {
                 "smithy.api#deprecated": {},
-                "smithy.api#documentation": "<p>\n            <code>DescribeExportConfigurations</code> is deprecated. Use <a href=\"https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html\">DescribeExportTasks</a>, instead.</p>"
+                "smithy.api#documentation": "<p>\n            <code>DescribeExportConfigurations</code> is deprecated. Use <a href=\"https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html\">DescribeExportTasks</a>, instead.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "exportsInfo",
+                    "pageSize": "maxResults"
+                }
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeExportConfigurationsRequest": {
@@ -2393,7 +2765,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieve status of one or more export tasks. You can retrieve the status of up to 100\n      export tasks.</p>"
+                "smithy.api#documentation": "<p>Retrieve status of one or more export tasks. You can retrieve the status of up to 100\n      export tasks.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "exportsInfo",
+                    "pageSize": "maxResults"
+                }
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeExportTasksRequest": {
@@ -2479,6 +2857,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "tasks",
                     "pageSize": "maxResults"
                 }
             }
@@ -2573,7 +2952,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of configuration items that have tags as specified by the key-value\n      pairs, name and value, passed to the optional parameter <code>filters</code>.</p>\n         <p>There are three valid tag filter names:</p>\n         <ul>\n            <li>\n               <p>tagKey</p>\n            </li>\n            <li>\n               <p>tagValue</p>\n            </li>\n            <li>\n               <p>configurationId</p>\n            </li>\n         </ul>\n         <p>Also, all configuration items associated with your user that have tags can be\n      listed if you call <code>DescribeTags</code> as is without passing any parameters.</p>"
+                "smithy.api#documentation": "<p>Retrieves a list of configuration items that have tags as specified by the key-value\n      pairs, name and value, passed to the optional parameter <code>filters</code>.</p>\n         <p>There are three valid tag filter names:</p>\n         <ul>\n            <li>\n               <p>tagKey</p>\n            </li>\n            <li>\n               <p>tagValue</p>\n            </li>\n            <li>\n               <p>configurationId</p>\n            </li>\n         </ul>\n         <p>Also, all configuration items associated with your user that have tags can be\n      listed if you call <code>DescribeTags</code> as is without passing any parameters.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "tags",
+                    "pageSize": "maxResults"
+                }
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeTagsRequest": {
@@ -2740,6 +3125,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>\n      Indicates that the exported data must include EC2 instance type matches for on-premises servers \n      that are discovered through Amazon Web Services Application Discovery Service.\n    </p>"
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.applicationdiscoveryservice#ErrorStatusCode": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
             }
         },
         "com.amazonaws.applicationdiscoveryservice#ExcludedInstanceTypes": {
@@ -2967,6 +3361,39 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.applicationdiscoveryservice#ExportInfo"
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#FailedConfiguration": {
+            "type": "structure",
+            "members": {
+                "configurationId": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#ConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The unique identifier of the configuration the failed to delete.\n    </p>"
+                    }
+                },
+                "errorStatusCode": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#ErrorStatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n      The integer error code associated with the error message.\n    </p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A descriptive message indicating why the associated configuration failed to delete.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      A configuration ID paired with an error message.\n    </p>"
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#FailedConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationdiscoveryservice#FailedConfiguration"
             }
         },
         "com.amazonaws.applicationdiscoveryservice#Filter": {
@@ -3435,6 +3862,19 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.applicationdiscoveryservice#LimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The limit of 200 configuration IDs per request has been exceeded.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.applicationdiscoveryservice#ListConfigurations": {
             "type": "operation",
             "input": {
@@ -3464,7 +3904,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of configuration items as specified by the value passed to the\n      required parameter <code>configurationType</code>. Optional filtering may be applied to refine\n      search results.</p>"
+                "smithy.api#documentation": "<p>Retrieves a list of configuration items as specified by the value passed to the\n      required parameter <code>configurationType</code>. Optional filtering may be applied to refine\n      search results.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "configurations",
+                    "pageSize": "maxResults"
+                }
             }
         },
         "com.amazonaws.applicationdiscoveryservice#ListConfigurationsRequest": {
@@ -3856,6 +4302,74 @@
                 "smithy.api#documentation": "<p>The server experienced an internal error. Try again.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#StartBatchDeleteConfigurationTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationdiscoveryservice#StartBatchDeleteConfigurationTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationdiscoveryservice#StartBatchDeleteConfigurationTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#AuthorizationErrorException"
+                },
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#HomeRegionNotSetException"
+                },
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#ServerInternalErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n        Takes a list of configurationId as input and starts an asynchronous deletion \n        task to remove the configurationItems. Returns a unique deletion task identifier.\n      </p>"
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#StartBatchDeleteConfigurationTaskRequest": {
+            "type": "structure",
+            "members": {
+                "configurationType": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#DeletionConfigurationItemType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The type of configuration item to delete. Supported types are: SERVER.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configurationIds": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#ConfigurationIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The list of configuration IDs that will be deleted by the task.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#StartBatchDeleteConfigurationTaskResponse": {
+            "type": "structure",
+            "members": {
+                "taskId": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The unique identifier associated with the newly started deletion task.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#StartContinuousExport": {
@@ -4423,6 +4937,12 @@
                 }
             }
         },
+        "com.amazonaws.applicationdiscoveryservice#UUID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+        },
         "com.amazonaws.applicationdiscoveryservice#UpdateApplication": {
             "type": "operation",
             "input": {
@@ -4530,6 +5050,15 @@
                 },
                 "smithy.api#pattern": "^[a-z]{2}-[a-z\\-]+-[0-9]+$"
             }
+        },
+        "com.amazonaws.applicationdiscoveryservice#WarningCode": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.applicationdiscoveryservice#WarningText": {
+            "type": "string"
         },
         "com.amazonaws.applicationdiscoveryservice#orderString": {
             "type": "enum",
