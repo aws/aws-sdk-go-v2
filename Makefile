@@ -13,13 +13,16 @@ init-node-modules:
 generate:
 	hugo --environment $(SITE_ENV) -d docs --gc
 
-container-generate:
+container-build:
 	docker build \
 		$(COMMON_DOCKER_BUILD_ARGS) \
 		-t aws-sdk-go-v2-docs \
 		-f ./Dockerfile \
 		.
+
+container-generate: container-build
 	docker run \
+		-v .:/aws-sdk-go-v2 \
 		-t aws-sdk-go-v2-docs \
 		make setup generate
 
@@ -30,17 +33,13 @@ preview:
 		--environment $(SITE_ENV) \
 		-d docs
 
-container-preview:
-	docker build \
-		$(COMMON_DOCKER_BUILD_ARGS) \
-		-t aws-sdk-go-v2-docs \
-		-f ./Dockerfile \
-		.
+container-preview: container-build
 	docker run \
+		-v .:/aws-sdk-go-v2 \
 		-p 127.0.0.1:$(PREVIEW_PORT):$(PREVIEW_PORT) \
 		--env PREVIEW_HOST=0.0.0.0 \
 		--env PREVIEW_PORT=$(PREVIEW_PORT) \
 		-i -t aws-sdk-go-v2-docs \
 		make setup preview
 
-.PHONY: setup init-node-modules init-submodules generate container-generate validate preview preview container-preview
+.PHONY: setup init-node-modules init-submodules generate container-build container-generate validate preview preview container-preview
