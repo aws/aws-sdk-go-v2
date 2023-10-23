@@ -1058,6 +1058,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of key-value tags associated with the Connect peer.</p>"
                     }
+                },
+                "SubnetArn": {
+                    "target": "com.amazonaws.networkmanager#SubnetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subnet ARN for the Connect peer.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1301,6 +1307,12 @@
                     "target": "com.amazonaws.networkmanager#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of key-value tags associated with the Connect peer summary.</p>"
+                    }
+                },
+                "SubnetArn": {
+                    "target": "com.amazonaws.networkmanager#SubnetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subnet ARN for the Connect peer summary.</p>"
                     }
                 }
             },
@@ -2322,8 +2334,7 @@
                 "InsideCidrBlocks": {
                     "target": "com.amazonaws.networkmanager#ConstrainedStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The inside IP addresses used for BGP peering.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The inside IP addresses used for BGP peering.</p>"
                     }
                 },
                 "Tags": {
@@ -2337,6 +2348,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The client token associated with the request.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "SubnetArn": {
+                    "target": "com.amazonaws.networkmanager#SubnetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subnet ARN for the Connect peer.</p>"
                     }
                 }
             },
@@ -8632,7 +8649,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -8675,7 +8691,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -8688,7 +8705,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -8702,7 +8718,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -8827,7 +8842,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -8862,7 +8876,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -8873,14 +8886,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -8894,14 +8909,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -8910,11 +8923,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -8925,14 +8938,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -8946,7 +8961,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -8966,7 +8980,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -8977,14 +8990,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -8995,9 +9010,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -10741,7 +10758,7 @@
                 "TransitGatewayRouteTableArn": {
                     "target": "com.amazonaws.networkmanager#TransitGatewayRouteTableArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the transit gateway route table.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the transit gateway route table for the attachment request. For example, <code>\"TransitGatewayRouteTableArn\": \"arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456\"</code>.</p>"
                     }
                 },
                 "CoreNetworkSegmentEdge": {
@@ -11626,6 +11643,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GRE"
+                    }
+                },
+                "NO_ENCAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_ENCAP"
                     }
                 }
             }

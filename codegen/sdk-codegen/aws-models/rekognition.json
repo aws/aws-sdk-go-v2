@@ -6399,6 +6399,139 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.rekognition#GetMediaAnalysisJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#GetMediaAnalysisJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#GetMediaAnalysisJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the results for a given media analysis job. \n        Takes a <code>JobId</code> returned by StartMediaAnalysisJob.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#GetMediaAnalysisJobRequest": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the media analysis job for which you want to retrieve results.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.rekognition#GetMediaAnalysisJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the media analysis job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobName": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the media analysis job.</p>"
+                    }
+                },
+                "OperationsConfig": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisOperationsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Operation configurations that were provided during job creation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the media analysis job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureDetails": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisJobFailureDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the error that resulted in failure of the job.</p>"
+                    }
+                },
+                "CreationTimestamp": {
+                    "target": "com.amazonaws.rekognition#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix date and time when the job was started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CompletionTimestamp": {
+                    "target": "com.amazonaws.rekognition#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix date and time when the job finished.</p>"
+                    }
+                },
+                "Input": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reference to the input manifest that was provided in the job creation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputConfig": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisOutputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Output configuration that was provided in the creation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.rekognition#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>KMS Key that was provided in the creation request.</p>"
+                    }
+                },
+                "Results": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Output manifest that contains prediction results.</p>"
+                    }
+                },
+                "ManifestSummary": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisManifestSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary manifest provides statistics on input manifest and errors identified in the input manifest.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.rekognition#GetPersonTracking": {
             "type": "operation",
             "input": {
@@ -7386,6 +7519,27 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The provided image format is not supported. </p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.rekognition#InvalidManifestException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.rekognition#String"
+                },
+                "Code": {
+                    "target": "com.amazonaws.rekognition#String"
+                },
+                "Logref": {
+                    "target": "com.amazonaws.rekognition#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A universally unique identifier (UUID) for the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that a provided manifest file is empty or larger than the allowed limit.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -8605,6 +8759,93 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.rekognition#ListMediaAnalysisJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#ListMediaAnalysisJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#ListMediaAnalysisJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidPaginationTokenException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of media analysis jobs. Results are sorted by <code>CreationTimestamp</code> in descending order.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.rekognition#ListMediaAnalysisJobsPageSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.rekognition#ListMediaAnalysisJobsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.rekognition#ExtendedPaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token, if the previous response was incomplete.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.rekognition#ListMediaAnalysisJobsPageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per paginated call. The largest value user can specify is 100. \n        If user specifies a value greater than 100, an <code>InvalidParameterException</code> error occurs. The default value is 100.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.rekognition#ListMediaAnalysisJobsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.rekognition#ExtendedPaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token, if the previous response was incomplete.</p>"
+                    }
+                },
+                "MediaAnalysisJobs": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisJobDescriptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a list of all media analysis jobs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.rekognition#ListProjectPolicies": {
             "type": "operation",
             "input": {
@@ -9127,6 +9368,333 @@
                     "min": 1,
                     "max": 500
                 }
+            }
+        },
+        "com.amazonaws.rekognition#MediaAnalysisDetectModerationLabelsConfig": {
+            "type": "structure",
+            "members": {
+                "MinConfidence": {
+                    "target": "com.amazonaws.rekognition#Percent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the minimum confidence level for the moderation labels to return. Amazon Rekognition\n            doesn't return any labels with a confidence level lower than this specified value.\n        </p>"
+                    }
+                },
+                "ProjectVersion": {
+                    "target": "com.amazonaws.rekognition#ProjectVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the custom moderation model to be used during the label detection job. \n        If not provided the pre-trained model is used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for Moderation Labels Detection.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#MediaAnalysisInput": {
+            "type": "structure",
+            "members": {
+                "S3Object": {
+                    "target": "com.amazonaws.rekognition#S3Object",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains input information for a media analysis job.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#MediaAnalysisJobDescription": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a media analysis job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobName": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a media analysis job.</p>"
+                    }
+                },
+                "OperationsConfig": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisOperationsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Operation configurations that were provided during job creation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the media analysis job being retrieved.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureDetails": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisJobFailureDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the error that resulted in failure of the job.</p>"
+                    }
+                },
+                "CreationTimestamp": {
+                    "target": "com.amazonaws.rekognition#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix date and time when the job was started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CompletionTimestamp": {
+                    "target": "com.amazonaws.rekognition#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix date and time when the job finished.</p>"
+                    }
+                },
+                "Input": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reference to the input manifest that was provided in the job creation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputConfig": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisOutputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Output configuration that was provided in the creation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.rekognition#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>KMS Key that was provided in the creation request.</p>"
+                    }
+                },
+                "Results": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Output manifest that contains prediction results.</p>"
+                    }
+                },
+                "ManifestSummary": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisManifestSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides statistics on input manifest and errors identified in the input manifest.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Description for a media analysis job.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#MediaAnalysisJobDescriptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rekognition#MediaAnalysisJobDescription"
+            }
+        },
+        "com.amazonaws.rekognition#MediaAnalysisJobFailureCode": {
+            "type": "enum",
+            "members": {
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                },
+                "INVALID_S3_OBJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_S3_OBJECT"
+                    }
+                },
+                "INVALID_MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_MANIFEST"
+                    }
+                },
+                "INVALID_OUTPUT_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_OUTPUT_CONFIG"
+                    }
+                },
+                "INVALID_KMS_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_KMS_KEY"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
+                    }
+                },
+                "RESOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_NOT_FOUND"
+                    }
+                },
+                "RESOURCE_NOT_READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_NOT_READY"
+                    }
+                },
+                "THROTTLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THROTTLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#MediaAnalysisJobFailureDetails": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisJobFailureCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error code for the failed job.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.rekognition#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Human readable error message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the error that resulted in failure of the job.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#MediaAnalysisJobId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.rekognition#MediaAnalysisJobName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.\\-]+$"
+            }
+        },
+        "com.amazonaws.rekognition#MediaAnalysisJobStatus": {
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                },
+                "QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#MediaAnalysisManifestSummary": {
+            "type": "structure",
+            "members": {
+                "S3Object": {
+                    "target": "com.amazonaws.rekognition#S3Object"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary that provides statistics on input manifest and errors identified in the input manifest.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#MediaAnalysisOperationsConfig": {
+            "type": "structure",
+            "members": {
+                "DetectModerationLabels": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisDetectModerationLabelsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration options for a DetectModerationLabels job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration options for a media analysis job. Configuration is operation-specific.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#MediaAnalysisOutputConfig": {
+            "type": "structure",
+            "members": {
+                "S3Bucket": {
+                    "target": "com.amazonaws.rekognition#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon S3 bucket to contain the output of the media analysis job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3KeyPrefix": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisS3KeyPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon S3 key prefix that comes after the name of the bucket you have\n            designated for storage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output configuration provided in the job creation request.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#MediaAnalysisResults": {
+            "type": "structure",
+            "members": {
+                "S3Object": {
+                    "target": "com.amazonaws.rekognition#S3Object"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the results for a media analysis job created with StartMediaAnalysisJob.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#MediaAnalysisS3KeyPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 800
+                },
+                "smithy.api#pattern": "^\\S*$"
             }
         },
         "com.amazonaws.rekognition#MinCoveragePercentage": {
@@ -10556,6 +11124,9 @@
                     "target": "com.amazonaws.rekognition#GetLabelDetection"
                 },
                 {
+                    "target": "com.amazonaws.rekognition#GetMediaAnalysisJob"
+                },
+                {
                     "target": "com.amazonaws.rekognition#GetPersonTracking"
                 },
                 {
@@ -10578,6 +11149,9 @@
                 },
                 {
                     "target": "com.amazonaws.rekognition#ListFaces"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ListMediaAnalysisJobs"
                 },
                 {
                     "target": "com.amazonaws.rekognition#ListProjectPolicies"
@@ -10623,6 +11197,9 @@
                 },
                 {
                     "target": "com.amazonaws.rekognition#StartLabelDetection"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#StartMediaAnalysisJob"
                 },
                 {
                     "target": "com.amazonaws.rekognition#StartPersonTracking"
@@ -10714,7 +11291,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -10757,7 +11333,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -10770,7 +11347,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -10784,7 +11360,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -10807,7 +11382,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -10842,7 +11416,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -10853,14 +11426,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -10874,14 +11449,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -10890,11 +11463,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -10905,14 +11478,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -10926,7 +11501,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -10946,7 +11520,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -10957,14 +11530,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -10975,9 +11550,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -13103,6 +13680,145 @@
                     "target": "com.amazonaws.rekognition#JobId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier for the label detection job. Use <code>JobId</code> to identify the job in\n    a subsequent call to <code>GetLabelDetection</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rekognition#StartMediaAnalysisJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#StartMediaAnalysisJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#StartMediaAnalysisJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidManifestException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidS3ObjectException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotReadyException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates a new media analysis job. Accepts a manifest file in an Amazon S3 bucket. The\n            output is a manifest file and a summary of the manifest stored in the Amazon S3 bucket.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "StartMediaAnalysisJob",
+                        "documentation": "Initiates a new media analysis job.",
+                        "input": {
+                            "JobName": "job-name",
+                            "OperationsConfig": {
+                                "DetectModerationLabels": {
+                                    "MinConfidence": 50,
+                                    "ProjectVersion": "arn:aws:rekognition:us-east-1:111122223333:project/my-project/version/1/1690556751958"
+                                }
+                            },
+                            "Input": {
+                                "S3Object": {
+                                    "Bucket": "input-bucket",
+                                    "Name": "input-manifest.json"
+                                }
+                            },
+                            "OutputConfig": {
+                                "S3Bucket": "output-bucket",
+                                "S3KeyPrefix": "output-location"
+                            }
+                        },
+                        "output": {
+                            "JobId": "861a0645d98ef88efb75477628c011c04942d9d5f58faf2703c393c8cf8c1537"
+                        }
+                    }
+                ],
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.rekognition#StartMediaAnalysisJobRequest": {
+            "type": "structure",
+            "members": {
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.rekognition#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Idempotency token used to prevent the accidental creation of duplicate versions. If\n            you use the same token with multiple <code>StartMediaAnalysisJobRequest</code> requests, the same\n            response is returned. Use <code>ClientRequestToken</code> to prevent the same request from being\n            processed more than once.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "JobName": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the job. Does not have to be unique.</p>"
+                    }
+                },
+                "OperationsConfig": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisOperationsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration options for the media analysis job to be created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Input": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Input data to be analyzed by the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputConfig": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisOutputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket location to store the results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.rekognition#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of customer managed AWS KMS key (name or ARN). The key \n        is used to encrypt images copied into the service. The key is also used \n        to encrypt results and manifest files written to the output Amazon S3 bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.rekognition#StartMediaAnalysisJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.rekognition#MediaAnalysisJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier for the created job.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
