@@ -13,11 +13,11 @@ type AccessControlList struct {
 
 	// Specifies whether the ACL grants the general public with read access
 	// permissions for the bucket.
-	AllowsPublicReadAccess bool
+	AllowsPublicReadAccess *bool
 
 	// Specifies whether the ACL grants the general public with write access
 	// permissions for the bucket.
-	AllowsPublicWriteAccess bool
+	AllowsPublicWriteAccess *bool
 
 	noSmithyDocumentSerde
 }
@@ -237,7 +237,7 @@ type BatchGetCustomDataIdentifierSummary struct {
 	// Specifies whether the custom data identifier was deleted. If you delete a
 	// custom data identifier, Amazon Macie doesn't delete it permanently. Instead, it
 	// soft deletes the identifier.
-	Deleted bool
+	Deleted *bool
 
 	// The custom description of the custom data identifier.
 	Description *string
@@ -260,17 +260,17 @@ type BlockPublicAccess struct {
 
 	// Specifies whether Amazon S3 blocks public access control lists (ACLs) for the
 	// bucket and objects in the bucket.
-	BlockPublicAcls bool
+	BlockPublicAcls *bool
 
 	// Specifies whether Amazon S3 blocks public bucket policies for the bucket.
-	BlockPublicPolicy bool
+	BlockPublicPolicy *bool
 
 	// Specifies whether Amazon S3 ignores public ACLs for the bucket and objects in
 	// the bucket.
-	IgnorePublicAcls bool
+	IgnorePublicAcls *bool
 
 	// Specifies whether Amazon S3 restricts public bucket policies for the bucket.
-	RestrictPublicBuckets bool
+	RestrictPublicBuckets *bool
 
 	noSmithyDocumentSerde
 }
@@ -281,20 +281,20 @@ type BucketCountByEffectivePermission struct {
 
 	// The total number of buckets that allow the general public to have read or write
 	// access to the bucket.
-	PubliclyAccessible int64
+	PubliclyAccessible *int64
 
 	// The total number of buckets that allow the general public to have read access
 	// to the bucket.
-	PubliclyReadable int64
+	PubliclyReadable *int64
 
 	// The total number of buckets that allow the general public to have write access
 	// to the bucket.
-	PubliclyWritable int64
+	PubliclyWritable *int64
 
 	// The total number of buckets that Amazon Macie wasn't able to evaluate
 	// permissions settings for. Macie can't determine whether these buckets are
 	// publicly accessible.
-	Unknown int64
+	Unknown *int64
 
 	noSmithyDocumentSerde
 }
@@ -310,22 +310,22 @@ type BucketCountByEncryptionType struct {
 	// encrypt new objects with an Amazon Web Services managed KMS key or a customer
 	// managed KMS key. By default, these buckets encrypt new objects automatically
 	// using SSE-KMS encryption.
-	KmsManaged int64
+	KmsManaged *int64
 
 	// The total number of buckets whose default encryption settings are configured to
 	// encrypt new objects with an Amazon S3 managed key. By default, these buckets
 	// encrypt new objects automatically using SSE-S3 encryption.
-	S3Managed int64
+	S3Managed *int64
 
 	// The total number of buckets that don't specify default server-side encryption
 	// behavior for new objects. Default encryption settings aren't configured for
 	// these buckets.
-	Unencrypted int64
+	Unencrypted *int64
 
 	// The total number of buckets that Amazon Macie doesn't have current encryption
 	// metadata for. Macie can't provide current data about the default encryption
 	// settings for these buckets.
-	Unknown int64
+	Unknown *int64
 
 	noSmithyDocumentSerde
 }
@@ -342,21 +342,21 @@ type BucketCountBySharedAccessType struct {
 	// or any combination of the following: an Amazon CloudFront OAI, a CloudFront OAC,
 	// or an Amazon Web Services account that isn't in the same Amazon Macie
 	// organization.
-	External int64
+	External *int64
 
 	// The total number of buckets that are shared with one or more Amazon Web
 	// Services accounts in the same Amazon Macie organization. These buckets aren't
 	// shared with Amazon CloudFront OAIs or OACs.
-	Internal int64
+	Internal *int64
 
 	// The total number of buckets that aren't shared with other Amazon Web Services
 	// accounts, Amazon CloudFront OAIs, or CloudFront OACs.
-	NotShared int64
+	NotShared *int64
 
 	// The total number of buckets that Amazon Macie wasn't able to evaluate shared
 	// access settings for. Macie can't determine whether these buckets are shared with
 	// other Amazon Web Services accounts, Amazon CloudFront OAIs, or CloudFront OACs.
-	Unknown int64
+	Unknown *int64
 
 	noSmithyDocumentSerde
 }
@@ -372,19 +372,19 @@ type BucketCountPolicyAllowsUnencryptedObjectUploads struct {
 	// server-side encryption header: the x-amz-server-side-encryption header with a
 	// value of AES256 or aws:kms, or the
 	// x-amz-server-side-encryption-customer-algorithm header with a value of AES256.
-	AllowsUnencryptedObjectUploads int64
+	AllowsUnencryptedObjectUploads *int64
 
 	// The total number of buckets whose bucket policies require server-side
 	// encryption of new objects. PutObject requests for these buckets must include a
 	// valid server-side encryption header: the x-amz-server-side-encryption header
 	// with a value of AES256 or aws:kms, or the
 	// x-amz-server-side-encryption-customer-algorithm header with a value of AES256.
-	DeniesUnencryptedObjectUploads int64
+	DeniesUnencryptedObjectUploads *int64
 
 	// The total number of buckets that Amazon Macie wasn't able to evaluate
 	// server-side encryption requirements for. Macie can't determine whether the
 	// bucket policies for these buckets require server-side encryption of new objects.
-	Unknown int64
+	Unknown *int64
 
 	noSmithyDocumentSerde
 }
@@ -398,16 +398,16 @@ type BucketCriteriaAdditionalProperties struct {
 	Eq []string
 
 	// The value for the property is greater than the specified value.
-	Gt int64
+	Gt *int64
 
 	// The value for the property is greater than or equal to the specified value.
-	Gte int64
+	Gte *int64
 
 	// The value for the property is less than the specified value.
-	Lt int64
+	Lt *int64
 
 	// The value for the property is less than or equal to the specified value.
-	Lte int64
+	Lte *int64
 
 	// The value for the property doesn't match (doesn't equal) the specified value.
 	// If you specify multiple values, Amazon Macie uses OR logic to join the values.
@@ -483,7 +483,7 @@ type BucketMetadata struct {
 	// The total number of objects that Amazon Macie can analyze in the bucket. These
 	// objects use a supported storage class and have a file name extension for a
 	// supported file or storage format.
-	ClassifiableObjectCount int64
+	ClassifiableObjectCount *int64
 
 	// The total storage size, in bytes, of the objects that Amazon Macie can analyze
 	// in the bucket. These objects use a supported storage class and have a file name
@@ -491,7 +491,7 @@ type BucketMetadata struct {
 	// the bucket, Macie calculates this value based on the size of the latest version
 	// of each applicable object in the bucket. This value doesn't reflect the storage
 	// size of all versions of each applicable object in the bucket.
-	ClassifiableSizeInBytes int64
+	ClassifiableSizeInBytes *int64
 
 	// The error code for an error that prevented Amazon Macie from retrieving and
 	// processing information about the bucket and the bucket's objects. If this value
@@ -522,7 +522,7 @@ type BucketMetadata struct {
 	LastUpdated *time.Time
 
 	// The total number of objects in the bucket.
-	ObjectCount int64
+	ObjectCount *int64
 
 	// The total number of objects in the bucket, grouped by server-side encryption
 	// type. This includes a grouping that reports the total number of objects that
@@ -544,7 +544,7 @@ type BucketMetadata struct {
 	// The sensitivity score for the bucket, ranging from -1 (classification error) to
 	// 100 (sensitive). This value is null if automated sensitive data discovery is
 	// currently disabled for your account.
-	SensitivityScore int32
+	SensitivityScore *int32
 
 	// The default server-side encryption settings for the bucket.
 	ServerSideEncryption *BucketServerSideEncryption
@@ -571,14 +571,14 @@ type BucketMetadata struct {
 	// the bucket, Amazon Macie calculates this value based on the size of the latest
 	// version of each object in the bucket. This value doesn't reflect the storage
 	// size of all versions of each object in the bucket.
-	SizeInBytes int64
+	SizeInBytes *int64
 
 	// The total storage size, in bytes, of the objects that are compressed (.gz,
 	// .gzip, .zip) files in the bucket. If versioning is enabled for the bucket,
 	// Amazon Macie calculates this value based on the size of the latest version of
 	// each applicable object in the bucket. This value doesn't reflect the storage
 	// size of all versions of each applicable object in the bucket.
-	SizeInBytesCompressed int64
+	SizeInBytesCompressed *int64
 
 	// An array that specifies the tags (keys and values) that are associated with the
 	// bucket.
@@ -595,7 +595,7 @@ type BucketMetadata struct {
 	UnclassifiableObjectSizeInBytes *ObjectLevelStatistics
 
 	// Specifies whether versioning is enabled for the bucket.
-	Versioning bool
+	Versioning *bool
 
 	noSmithyDocumentSerde
 }
@@ -619,11 +619,11 @@ type BucketPolicy struct {
 
 	// Specifies whether the bucket policy allows the general public to have read
 	// access to the bucket.
-	AllowsPublicReadAccess bool
+	AllowsPublicReadAccess *bool
 
 	// Specifies whether the bucket policy allows the general public to have write
 	// access to the bucket.
-	AllowsPublicWriteAccess bool
+	AllowsPublicWriteAccess *bool
 
 	noSmithyDocumentSerde
 }
@@ -727,13 +727,13 @@ type Cell struct {
 	// The column number of the column that contains the sensitive data. For a
 	// Microsoft Excel workbook, this value correlates to the alphabetical character(s)
 	// for a column identifier, for example: 1 for column A, 2 for column B, and so on.
-	Column int64
+	Column *int64
 
 	// The name of the column that contains the sensitive data, if available.
 	ColumnName *string
 
 	// The row number of the row that contains the sensitive data.
-	Row int64
+	Row *int64
 
 	noSmithyDocumentSerde
 }
@@ -791,7 +791,7 @@ type ClassificationResult struct {
 	// investigate additional occurrences of sensitive data in an object. You can do
 	// this by referring to the corresponding sensitive data discovery result for the
 	// finding (classificationDetails.detailedResultsLocation).
-	AdditionalOccurrences bool
+	AdditionalOccurrences *bool
 
 	// The custom data identifiers that detected the sensitive data and the number of
 	// occurrences of the data that they detected.
@@ -807,7 +807,7 @@ type ClassificationResult struct {
 	SensitiveData []SensitiveDataItem
 
 	// The total size, in bytes, of the data that the finding applies to.
-	SizeClassified int64
+	SizeClassified *int64
 
 	// The status of the finding.
 	Status *ClassificationResultStatus
@@ -957,16 +957,16 @@ type CriterionAdditionalProperties struct {
 	EqExactMatch []string
 
 	// The value for the property is greater than the specified value.
-	Gt int64
+	Gt *int64
 
 	// The value for the property is greater than or equal to the specified value.
-	Gte int64
+	Gte *int64
 
 	// The value for the property is less than the specified value.
-	Lt int64
+	Lt *int64
 
 	// The value for the property is less than or equal to the specified value.
-	Lte int64
+	Lte *int64
 
 	// The value for the property doesn't match (doesn't equal) the specified value.
 	// If you specify multiple values, Macie uses OR logic to join the values.
@@ -986,7 +986,7 @@ type CustomDataIdentifiers struct {
 
 	// The total number of occurrences of the data that was detected by the custom
 	// data identifiers and produced the finding.
-	TotalCount int64
+	TotalCount *int64
 
 	noSmithyDocumentSerde
 }
@@ -1022,7 +1022,7 @@ type CustomDetection struct {
 
 	// The total number of occurrences of the sensitive data that the custom data
 	// identifier detected.
-	Count int64
+	Count *int64
 
 	// The name of the custom data identifier.
 	Name *string
@@ -1046,7 +1046,7 @@ type DailySchedule struct {
 type DefaultDetection struct {
 
 	// The total number of occurrences of the type of sensitive data that was detected.
-	Count int64
+	Count *int64
 
 	// The location of 1-15 occurrences of the sensitive data that was detected. A
 	// finding includes location data for a maximum of 15 occurrences of sensitive
@@ -1086,7 +1086,7 @@ type Detection struct {
 	Arn *string
 
 	// The total number of occurrences of the sensitive data.
-	Count int64
+	Count *int64
 
 	// The unique identifier for the custom data identifier or managed data identifier
 	// that detected the sensitive data. For additional details about a specified
@@ -1101,7 +1101,7 @@ type Detection struct {
 
 	// Specifies whether occurrences of this type of sensitive data are excluded
 	// (true) or included (false) in the bucket's sensitivity score.
-	Suppressed bool
+	Suppressed *bool
 
 	// The type of data identifier that detected the sensitive data. Possible values
 	// are: CUSTOM, for a custom data identifier; and, MANAGED, for a managed data
@@ -1155,7 +1155,7 @@ type Finding struct {
 	AccountId *string
 
 	// Specifies whether the finding is archived (suppressed).
-	Archived bool
+	Archived *bool
 
 	// The category of the finding. Possible values are: CLASSIFICATION, for a
 	// sensitive data finding; and, POLICY, for a policy finding.
@@ -1167,7 +1167,7 @@ type Finding struct {
 
 	// The total number of occurrences of the finding. For sensitive data findings,
 	// this value is always 1. All sensitive data findings are considered unique.
-	Count int64
+	Count *int64
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie
 	// created the finding.
@@ -1195,7 +1195,7 @@ type Finding struct {
 
 	// Specifies whether the finding is a sample finding. A sample finding is a
 	// finding that uses example data to demonstrate what a finding might contain.
-	Sample bool
+	Sample *bool
 
 	// The version of the schema that was used to define the data structures in the
 	// finding.
@@ -1312,7 +1312,7 @@ type FindingStatisticsSortCriteria struct {
 type GroupCount struct {
 
 	// The total number of findings in the group of query results.
-	Count int64
+	Count *int64
 
 	// The name of the property that defines the group in the query results, as
 	// specified by the groupBy property in the query request.
@@ -1411,10 +1411,10 @@ type IpCountry struct {
 type IpGeoLocation struct {
 
 	// The latitude coordinate of the location, rounded to four decimal places.
-	Lat float64
+	Lat *float64
 
 	// The longitude coordinate of the location, rounded to four decimal places.
-	Lon float64
+	Lon *float64
 
 	noSmithyDocumentSerde
 }
@@ -1718,7 +1718,7 @@ type MatchingBucket struct {
 	// The total number of objects that Amazon Macie can analyze in the bucket. These
 	// objects use a supported storage class and have a file name extension for a
 	// supported file or storage format.
-	ClassifiableObjectCount int64
+	ClassifiableObjectCount *int64
 
 	// The total storage size, in bytes, of the objects that Amazon Macie can analyze
 	// in the bucket. These objects use a supported storage class and have a file name
@@ -1726,7 +1726,7 @@ type MatchingBucket struct {
 	// the bucket, Macie calculates this value based on the size of the latest version
 	// of each applicable object in the bucket. This value doesn't reflect the storage
 	// size of all versions of each applicable object in the bucket.
-	ClassifiableSizeInBytes int64
+	ClassifiableSizeInBytes *int64
 
 	// The error code for an error that prevented Amazon Macie from retrieving and
 	// processing information about the bucket and the bucket's objects. If this value
@@ -1753,7 +1753,7 @@ type MatchingBucket struct {
 	LastAutomatedDiscoveryTime *time.Time
 
 	// The total number of objects in the bucket.
-	ObjectCount int64
+	ObjectCount *int64
 
 	// The total number of objects in the bucket, grouped by server-side encryption
 	// type. This includes a grouping that reports the total number of objects that
@@ -1763,20 +1763,20 @@ type MatchingBucket struct {
 	// The current sensitivity score for the bucket, ranging from -1 (classification
 	// error) to 100 (sensitive). This value is null if automated sensitive data
 	// discovery is currently disabled for your account.
-	SensitivityScore int32
+	SensitivityScore *int32
 
 	// The total storage size, in bytes, of the bucket. If versioning is enabled for
 	// the bucket, Amazon Macie calculates this value based on the size of the latest
 	// version of each object in the bucket. This value doesn't reflect the storage
 	// size of all versions of each object in the bucket.
-	SizeInBytes int64
+	SizeInBytes *int64
 
 	// The total storage size, in bytes, of the objects that are compressed (.gz,
 	// .gzip, .zip) files in the bucket. If versioning is enabled for the bucket,
 	// Amazon Macie calculates this value based on the size of the latest version of
 	// each applicable object in the bucket. This value doesn't reflect the storage
 	// size of all versions of each applicable object in the bucket.
-	SizeInBytesCompressed int64
+	SizeInBytesCompressed *int64
 
 	// The total number of objects that Amazon Macie can't analyze in the bucket.
 	// These objects don't use a supported storage class or don't have a file name
@@ -1853,7 +1853,7 @@ type MonthlySchedule struct {
 	// during months that have the specified day. For example, if this value is 31 and
 	// a month has only 30 days, Macie doesn't run the job that month. To run the job
 	// every month, specify a value that's less than 29.
-	DayOfMonth int32
+	DayOfMonth *int32
 
 	noSmithyDocumentSerde
 }
@@ -1865,24 +1865,24 @@ type ObjectCountByEncryptionType struct {
 
 	// The total number of objects that are encrypted with a customer-provided key.
 	// The objects use customer-provided server-side encryption (SSE-C).
-	CustomerManaged int64
+	CustomerManaged *int64
 
 	// The total number of objects that are encrypted with an KMS key, either an
 	// Amazon Web Services managed key or a customer managed key. The objects use KMS
 	// encryption (SSE-KMS).
-	KmsManaged int64
+	KmsManaged *int64
 
 	// The total number of objects that are encrypted with an Amazon S3 managed key.
 	// The objects use Amazon S3 managed encryption (SSE-S3).
-	S3Managed int64
+	S3Managed *int64
 
 	// The total number of objects that use client-side encryption or aren't encrypted.
-	Unencrypted int64
+	Unencrypted *int64
 
 	// The total number of objects that Amazon Macie doesn't have current encryption
 	// metadata for. Macie can't provide current data about the encryption settings for
 	// these objects.
-	Unknown int64
+	Unknown *int64
 
 	noSmithyDocumentSerde
 }
@@ -1899,16 +1899,16 @@ type ObjectLevelStatistics struct {
 	// The total storage size (in bytes) or number of objects that Amazon Macie can't
 	// analyze because the objects don't have a file name extension for a supported
 	// file or storage format.
-	FileType int64
+	FileType *int64
 
 	// The total storage size (in bytes) or number of objects that Amazon Macie can't
 	// analyze because the objects use an unsupported storage class.
-	StorageClass int64
+	StorageClass *int64
 
 	// The total storage size (in bytes) or number of objects that Amazon Macie can't
 	// analyze because the objects use an unsupported storage class or don't have a
 	// file name extension for a supported file or storage format.
-	Total int64
+	Total *int64
 
 	noSmithyDocumentSerde
 }
@@ -1967,7 +1967,7 @@ type Page struct {
 	OffsetRange *Range
 
 	// The page number of the page that contains the sensitive data.
-	PageNumber int64
+	PageNumber *int64
 
 	noSmithyDocumentSerde
 }
@@ -1990,16 +1990,16 @@ type Range struct {
 
 	// The number of lines from the beginning of the file to the end of the sensitive
 	// data.
-	End int64
+	End *int64
 
 	// The number of lines from the beginning of the file to the beginning of the
 	// sensitive data.
-	Start int64
+	Start *int64
 
 	// The number of characters, with spaces and starting from 1, from the beginning
 	// of the first line that contains the sensitive data (start) to the beginning of
 	// the sensitive data.
-	StartColumn int64
+	StartColumn *int64
 
 	noSmithyDocumentSerde
 }
@@ -2024,7 +2024,7 @@ type Record struct {
 	// 0, for the record that contains the sensitive data. For a JSON Lines file, the
 	// line index, starting from 0, for the line that contains the sensitive data. This
 	// value is always 0 for JSON files.
-	RecordIndex int64
+	RecordIndex *int64
 
 	noSmithyDocumentSerde
 }
@@ -2036,14 +2036,14 @@ type ReplicationDetails struct {
 
 	// Specifies whether the bucket is configured to replicate one or more objects to
 	// any destination.
-	Replicated bool
+	Replicated *bool
 
 	// Specifies whether the bucket is configured to replicate one or more objects to
 	// a bucket for an Amazon Web Services account that isn't part of your Amazon Macie
 	// organization. An Amazon Macie organization is a set of Macie accounts that are
 	// centrally managed as a group of related accounts through Organizations or by
 	// Macie invitation.
-	ReplicatedExternally bool
+	ReplicatedExternally *bool
 
 	// An array of Amazon Web Services account IDs, one for each Amazon Web Services
 	// account that owns a bucket that the bucket is configured to replicate one or
@@ -2075,7 +2075,7 @@ type ResourceProfileArtifact struct {
 	ClassificationResultStatus *string
 
 	// Specifies whether Amazon Macie found sensitive data in the object.
-	Sensitive bool
+	Sensitive *bool
 
 	noSmithyDocumentSerde
 }
@@ -2101,47 +2101,47 @@ type ResourceStatistics struct {
 
 	// The total amount of data, in bytes, that Amazon Macie has analyzed in the
 	// bucket.
-	TotalBytesClassified int64
+	TotalBytesClassified *int64
 
 	// The total number of occurrences of sensitive data that Amazon Macie has found
 	// in the bucket's objects. This includes occurrences that are currently suppressed
 	// by the sensitivity scoring settings for the bucket (totalDetectionsSuppressed).
-	TotalDetections int64
+	TotalDetections *int64
 
 	// The total number of occurrences of sensitive data that are currently suppressed
 	// by the sensitivity scoring settings for the bucket. These represent occurrences
 	// of sensitive data that Amazon Macie found in the bucket's objects, but the
 	// occurrences were manually suppressed. By default, suppressed occurrences are
 	// excluded from the bucket's sensitivity score.
-	TotalDetectionsSuppressed int64
+	TotalDetectionsSuppressed *int64
 
 	// The total number of objects that Amazon Macie has analyzed in the bucket.
-	TotalItemsClassified int64
+	TotalItemsClassified *int64
 
 	// The total number of the bucket's objects that Amazon Macie has found sensitive
 	// data in.
-	TotalItemsSensitive int64
+	TotalItemsSensitive *int64
 
 	// The total number of objects that Amazon Macie wasn't able to analyze in the
 	// bucket due to an object-level issue or error. For example, the object is a
 	// malformed file. This value includes objects that Macie wasn't able to analyze
 	// for reasons reported by other statistics in the ResourceStatistics object.
-	TotalItemsSkipped int64
+	TotalItemsSkipped *int64
 
 	// The total number of objects that Amazon Macie wasn't able to analyze in the
 	// bucket because the objects are encrypted with a key that Macie can't access. The
 	// objects use server-side encryption with customer-provided keys (SSE-C).
-	TotalItemsSkippedInvalidEncryption int64
+	TotalItemsSkippedInvalidEncryption *int64
 
 	// The total number of objects that Amazon Macie wasn't able to analyze in the
 	// bucket because the objects are encrypted with KMS keys that were disabled, are
 	// scheduled for deletion, or were deleted.
-	TotalItemsSkippedInvalidKms int64
+	TotalItemsSkippedInvalidKms *int64
 
 	// The total number of objects that Amazon Macie wasn't able to analyze in the
 	// bucket due to the permissions settings for the objects or the permissions
 	// settings for the keys that were used to encrypt the objects.
-	TotalItemsSkippedPermissionDenied int64
+	TotalItemsSkippedPermissionDenied *int64
 
 	noSmithyDocumentSerde
 }
@@ -2413,13 +2413,13 @@ type S3Object struct {
 
 	// Specifies whether the object is publicly accessible due to the combination of
 	// permissions settings that apply to the object.
-	PublicAccess bool
+	PublicAccess *bool
 
 	// The type of server-side encryption that was used to encrypt the object.
 	ServerSideEncryption *ServerSideEncryption
 
 	// The total storage size, in bytes, of the object.
-	Size int64
+	Size *int64
 
 	// The storage class of the object.
 	StorageClass StorageClass
@@ -2594,7 +2594,7 @@ type SecurityHubConfiguration struct {
 	// false.
 	//
 	// This member is required.
-	PublishClassificationFindings bool
+	PublishClassificationFindings *bool
 
 	// Specifies whether to publish policy findings to Security Hub. If you set this
 	// value to true, Amazon Macie automatically publishes all new and updated policy
@@ -2602,7 +2602,7 @@ type SecurityHubConfiguration struct {
 	// true.
 	//
 	// This member is required.
-	PublishPolicyFindings bool
+	PublishPolicyFindings *bool
 
 	noSmithyDocumentSerde
 }
@@ -2625,7 +2625,7 @@ type SensitiveDataItem struct {
 	Detections []DefaultDetection
 
 	// The total number of occurrences of the sensitive data that was detected.
-	TotalCount int64
+	TotalCount *int64
 
 	noSmithyDocumentSerde
 }
@@ -2643,20 +2643,20 @@ type SensitivityAggregations struct {
 	// enabled for any of the buckets, this value is based on the size of the latest
 	// version of each applicable object in the buckets. This value doesn't reflect the
 	// storage size of all versions of all applicable objects in the buckets.
-	ClassifiableSizeInBytes int64
+	ClassifiableSizeInBytes *int64
 
 	// The total number of buckets that are publicly accessible due to a combination
 	// of permissions settings for each bucket.
-	PubliclyAccessibleCount int64
+	PubliclyAccessibleCount *int64
 
 	// The total number of buckets.
-	TotalCount int64
+	TotalCount *int64
 
 	// The total storage size, in bytes, of the buckets. If versioning is enabled for
 	// any of the buckets, this value is based on the size of the latest version of
 	// each object in the buckets. This value doesn't reflect the storage size of all
 	// versions of the objects in the buckets.
-	TotalSizeInBytes int64
+	TotalSizeInBytes *int64
 
 	noSmithyDocumentSerde
 }
@@ -2740,14 +2740,14 @@ type ServiceLimit struct {
 
 	// Specifies whether the account has met the quota that corresponds to the metric
 	// specified by the UsageByAccount.type field in the response.
-	IsServiceLimited bool
+	IsServiceLimited *bool
 
 	// The unit of measurement for the value specified by the value field.
 	Unit Unit
 
 	// The value for the metric specified by the UsageByAccount.type field in the
 	// response.
-	Value int64
+	Value *int64
 
 	noSmithyDocumentSerde
 }
@@ -2775,7 +2775,7 @@ type SessionContextAttributes struct {
 
 	// Specifies whether the credentials were authenticated with a multi-factor
 	// authentication (MFA) device.
-	MfaAuthenticated bool
+	MfaAuthenticated *bool
 
 	noSmithyDocumentSerde
 }
@@ -2816,7 +2816,7 @@ type Severity struct {
 
 	// The numerical representation of the finding's severity, ranging from 1 (least
 	// severe) to 3 (most severe).
-	Score int64
+	Score *int64
 
 	noSmithyDocumentSerde
 }
@@ -2832,7 +2832,7 @@ type SeverityLevel struct {
 	// severity (severity).
 	//
 	// This member is required.
-	OccurrencesThreshold int64
+	OccurrencesThreshold *int64
 
 	// The severity to assign to a finding: if the number of occurrences is greater
 	// than or equal to the specified threshold (occurrencesThreshold); and, if
@@ -2934,10 +2934,10 @@ type Statistics struct {
 
 	// The approximate number of objects that the job has yet to process during its
 	// current run.
-	ApproximateNumberOfObjectsToProcess float64
+	ApproximateNumberOfObjectsToProcess *float64
 
 	// The number of times that the job has run.
-	NumberOfRuns float64
+	NumberOfRuns *float64
 
 	noSmithyDocumentSerde
 }

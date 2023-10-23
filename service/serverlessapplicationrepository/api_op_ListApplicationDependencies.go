@@ -40,7 +40,7 @@ type ListApplicationDependenciesInput struct {
 	ApplicationId *string
 
 	// The total number of items to return.
-	MaxItems int32
+	MaxItems *int32
 
 	// A token to specify where to start paginating.
 	NextToken *string
@@ -177,8 +177,8 @@ func NewListApplicationDependenciesPaginator(client ListApplicationDependenciesA
 	}
 
 	options := ListApplicationDependenciesPaginatorOptions{}
-	if params.MaxItems != 0 {
-		options.Limit = params.MaxItems
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
 	}
 
 	for _, fn := range optFns {
@@ -208,7 +208,11 @@ func (p *ListApplicationDependenciesPaginator) NextPage(ctx context.Context, opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxItems = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
 
 	result, err := p.client.ListApplicationDependencies(ctx, &params, optFns...)
 	if err != nil {

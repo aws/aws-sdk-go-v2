@@ -41,7 +41,7 @@ type EventDestination struct {
 	// Indicates whether or not the event destination is enabled. If the event
 	// destination is enabled, then Amazon Pinpoint sends response data to the
 	// specified event destination.
-	Enabled bool
+	Enabled *bool
 
 	// An object that contains information about an event destination that sends data
 	// to Amazon Kinesis Data Firehose.
@@ -71,7 +71,7 @@ type EventDestinationDefinition struct {
 	// Indicates whether or not the event destination is enabled. If the event
 	// destination is enabled, then Amazon Pinpoint sends response data to the
 	// specified event destination.
-	Enabled bool
+	Enabled *bool
 
 	// An object that contains information about an event destination that sends data
 	// to Amazon Kinesis Data Firehose.

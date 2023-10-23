@@ -47,7 +47,7 @@ type UpdateBrokerInput struct {
 	// Enables automatic upgrades to new minor versions for brokers, as new versions
 	// are released and supported by Amazon MQ. Automatic upgrades occur during the
 	// scheduled maintenance window of the broker or after a manual broker reboot.
-	AutoMinorVersionUpgrade bool
+	AutoMinorVersionUpgrade *bool
 
 	// A list of information about the configuration.
 	Configuration *types.ConfigurationId
@@ -91,7 +91,7 @@ type UpdateBrokerOutput struct {
 	// The new boolean value that specifies whether broker engines automatically
 	// upgrade to new minor versions as new versions are released and supported by
 	// Amazon MQ.
-	AutoMinorVersionUpgrade bool
+	AutoMinorVersionUpgrade *bool
 
 	// Required. The unique ID that Amazon MQ generates for the broker.
 	BrokerId *string

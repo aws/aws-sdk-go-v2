@@ -45,7 +45,7 @@ type SearchSchemasInput struct {
 	// This member is required.
 	RegistryName *string
 
-	Limit int32
+	Limit *int32
 
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
@@ -178,8 +178,8 @@ func NewSearchSchemasPaginator(client SearchSchemasAPIClient, params *SearchSche
 	}
 
 	options := SearchSchemasPaginatorOptions{}
-	if params.Limit != 0 {
-		options.Limit = params.Limit
+	if params.Limit != nil {
+		options.Limit = *params.Limit
 	}
 
 	for _, fn := range optFns {
@@ -209,7 +209,11 @@ func (p *SearchSchemasPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.Limit = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
 
 	result, err := p.client.SearchSchemas(ctx, &params, optFns...)
 	if err != nil {

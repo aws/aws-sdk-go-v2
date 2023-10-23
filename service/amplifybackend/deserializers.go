@@ -2350,7 +2350,7 @@ func awsRestjson1_deserializeOpDocumentDeleteTokenOutput(v **DeleteTokenOutput, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsSuccess = jtv
+				sv.IsSuccess = ptr.Bool(jtv)
 			}
 
 		default:
@@ -6205,7 +6205,7 @@ func awsRestjson1_deserializeDocumentBackendAPIAppSyncAuthSettings(v **types.Bac
 					if err != nil {
 						return err
 					}
-					sv.ExpirationTime = f64
+					sv.ExpirationTime = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -6223,7 +6223,7 @@ func awsRestjson1_deserializeDocumentBackendAPIAppSyncAuthSettings(v **types.Bac
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.ExpirationTime = f64
+					sv.ExpirationTime = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -6830,7 +6830,7 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthIdentityPoolConfig(v **typ
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.UnauthenticatedLogin = jtv
+				sv.UnauthenticatedLogin = ptr.Bool(jtv)
 			}
 
 		default:
@@ -6991,7 +6991,7 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthPasswordPolicyConfig(v **t
 					if err != nil {
 						return err
 					}
-					sv.MinimumLength = f64
+					sv.MinimumLength = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -7009,7 +7009,7 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthPasswordPolicyConfig(v **t
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.MinimumLength = f64
+					sv.MinimumLength = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -7340,7 +7340,7 @@ func awsRestjson1_deserializeDocumentGetBackendStorageResourceConfig(v **types.G
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Imported = jtv
+				sv.Imported = ptr.Bool(jtv)
 			}
 
 		case "permissions":

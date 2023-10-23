@@ -86,9 +86,9 @@ func awsRestjson1_serializeOpDocumentCreateBrokerInput(v *CreateBrokerInput, val
 		ok.String(string(v.AuthenticationStrategy))
 	}
 
-	{
+	if v.AutoMinorVersionUpgrade != nil {
 		ok := object.Key("autoMinorVersionUpgrade")
-		ok.Boolean(v.AutoMinorVersionUpgrade)
+		ok.Boolean(*v.AutoMinorVersionUpgrade)
 	}
 
 	if v.BrokerName != nil {
@@ -166,9 +166,9 @@ func awsRestjson1_serializeOpDocumentCreateBrokerInput(v *CreateBrokerInput, val
 		}
 	}
 
-	{
+	if v.PubliclyAccessible != nil {
 		ok := object.Key("publiclyAccessible")
-		ok.Boolean(v.PubliclyAccessible)
+		ok.Boolean(*v.PubliclyAccessible)
 	}
 
 	if v.SecurityGroups != nil {
@@ -483,9 +483,9 @@ func awsRestjson1_serializeOpDocumentCreateUserInput(v *CreateUserInput, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.ConsoleAccess {
+	if v.ConsoleAccess != nil {
 		ok := object.Key("consoleAccess")
-		ok.Boolean(v.ConsoleAccess)
+		ok.Boolean(*v.ConsoleAccess)
 	}
 
 	if v.Groups != nil {
@@ -500,9 +500,9 @@ func awsRestjson1_serializeOpDocumentCreateUserInput(v *CreateUserInput, value s
 		ok.String(*v.Password)
 	}
 
-	if v.ReplicationUser {
+	if v.ReplicationUser != nil {
 		ok := object.Key("replicationUser")
-		ok.Boolean(v.ReplicationUser)
+		ok.Boolean(*v.ReplicationUser)
 	}
 
 	return nil
@@ -840,8 +840,8 @@ func awsRestjson1_serializeOpHttpBindingsDescribeBrokerEngineTypesInput(v *Descr
 		encoder.SetQuery("engineType").String(*v.EngineType)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -912,8 +912,8 @@ func awsRestjson1_serializeOpHttpBindingsDescribeBrokerInstanceOptionsInput(v *D
 		encoder.SetQuery("hostInstanceType").String(*v.HostInstanceType)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1193,8 +1193,8 @@ func awsRestjson1_serializeOpHttpBindingsListBrokersInput(v *ListBrokersInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1266,8 +1266,8 @@ func awsRestjson1_serializeOpHttpBindingsListConfigurationRevisionsInput(v *List
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1330,8 +1330,8 @@ func awsRestjson1_serializeOpHttpBindingsListConfigurationsInput(v *ListConfigur
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1468,8 +1468,8 @@ func awsRestjson1_serializeOpHttpBindingsListUsersInput(v *ListUsersInput, encod
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1717,9 +1717,9 @@ func awsRestjson1_serializeOpDocumentUpdateBrokerInput(v *UpdateBrokerInput, val
 		ok.String(string(v.AuthenticationStrategy))
 	}
 
-	if v.AutoMinorVersionUpgrade {
+	if v.AutoMinorVersionUpgrade != nil {
 		ok := object.Key("autoMinorVersionUpgrade")
-		ok.Boolean(v.AutoMinorVersionUpgrade)
+		ok.Boolean(*v.AutoMinorVersionUpgrade)
 	}
 
 	if v.Configuration != nil {
@@ -1957,9 +1957,9 @@ func awsRestjson1_serializeOpDocumentUpdateUserInput(v *UpdateUserInput, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.ConsoleAccess {
+	if v.ConsoleAccess != nil {
 		ok := object.Key("consoleAccess")
-		ok.Boolean(v.ConsoleAccess)
+		ok.Boolean(*v.ConsoleAccess)
 	}
 
 	if v.Groups != nil {
@@ -1974,9 +1974,9 @@ func awsRestjson1_serializeOpDocumentUpdateUserInput(v *UpdateUserInput, value s
 		ok.String(*v.Password)
 	}
 
-	if v.ReplicationUser {
+	if v.ReplicationUser != nil {
 		ok := object.Key("replicationUser")
-		ok.Boolean(v.ReplicationUser)
+		ok.Boolean(*v.ReplicationUser)
 	}
 
 	return nil
@@ -2026,9 +2026,9 @@ func awsRestjson1_serializeDocumentConfigurationId(v *types.ConfigurationId, val
 		ok.String(*v.Id)
 	}
 
-	if v.Revision != 0 {
+	if v.Revision != nil {
 		ok := object.Key("revision")
-		ok.Integer(v.Revision)
+		ok.Integer(*v.Revision)
 	}
 
 	return nil
@@ -2043,9 +2043,9 @@ func awsRestjson1_serializeDocumentEncryptionOptions(v *types.EncryptionOptions,
 		ok.String(*v.KmsKeyId)
 	}
 
-	{
+	if v.UseAwsOwnedKey != nil {
 		ok := object.Key("useAwsOwnedKey")
-		ok.Boolean(v.UseAwsOwnedKey)
+		ok.Boolean(*v.UseAwsOwnedKey)
 	}
 
 	return nil
@@ -2077,9 +2077,9 @@ func awsRestjson1_serializeDocumentLdapServerMetadataInput(v *types.LdapServerMe
 		ok.String(*v.RoleSearchMatching)
 	}
 
-	if v.RoleSearchSubtree {
+	if v.RoleSearchSubtree != nil {
 		ok := object.Key("roleSearchSubtree")
-		ok.Boolean(v.RoleSearchSubtree)
+		ok.Boolean(*v.RoleSearchSubtree)
 	}
 
 	if v.ServiceAccountPassword != nil {
@@ -2107,9 +2107,9 @@ func awsRestjson1_serializeDocumentLdapServerMetadataInput(v *types.LdapServerMe
 		ok.String(*v.UserSearchMatching)
 	}
 
-	if v.UserSearchSubtree {
+	if v.UserSearchSubtree != nil {
 		ok := object.Key("userSearchSubtree")
-		ok.Boolean(v.UserSearchSubtree)
+		ok.Boolean(*v.UserSearchSubtree)
 	}
 
 	return nil
@@ -2119,14 +2119,14 @@ func awsRestjson1_serializeDocumentLogs(v *types.Logs, value smithyjson.Value) e
 	object := value.Object()
 	defer object.Close()
 
-	if v.Audit {
+	if v.Audit != nil {
 		ok := object.Key("audit")
-		ok.Boolean(v.Audit)
+		ok.Boolean(*v.Audit)
 	}
 
-	if v.General {
+	if v.General != nil {
 		ok := object.Key("general")
-		ok.Boolean(v.General)
+		ok.Boolean(*v.General)
 	}
 
 	return nil
@@ -2136,9 +2136,9 @@ func awsRestjson1_serializeDocumentUser(v *types.User, value smithyjson.Value) e
 	object := value.Object()
 	defer object.Close()
 
-	if v.ConsoleAccess {
+	if v.ConsoleAccess != nil {
 		ok := object.Key("consoleAccess")
-		ok.Boolean(v.ConsoleAccess)
+		ok.Boolean(*v.ConsoleAccess)
 	}
 
 	if v.Groups != nil {
@@ -2153,9 +2153,9 @@ func awsRestjson1_serializeDocumentUser(v *types.User, value smithyjson.Value) e
 		ok.String(*v.Password)
 	}
 
-	if v.ReplicationUser {
+	if v.ReplicationUser != nil {
 		ok := object.Key("replicationUser")
-		ok.Boolean(v.ReplicationUser)
+		ok.Boolean(*v.ReplicationUser)
 	}
 
 	if v.Username != nil {

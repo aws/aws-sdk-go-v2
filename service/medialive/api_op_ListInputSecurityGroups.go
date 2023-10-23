@@ -36,7 +36,7 @@ func (c *Client) ListInputSecurityGroups(ctx context.Context, params *ListInputS
 type ListInputSecurityGroupsInput struct {
 
 	// Placeholder documentation for MaxResults
-	MaxResults int32
+	MaxResults *int32
 
 	// Placeholder documentation for __string
 	NextToken *string
@@ -167,8 +167,8 @@ func NewListInputSecurityGroupsPaginator(client ListInputSecurityGroupsAPIClient
 	}
 
 	options := ListInputSecurityGroupsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -198,7 +198,11 @@ func (p *ListInputSecurityGroupsPaginator) NextPage(ctx context.Context, optFns 
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListInputSecurityGroups(ctx, &params, optFns...)
 	if err != nil {

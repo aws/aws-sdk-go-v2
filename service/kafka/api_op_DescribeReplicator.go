@@ -52,7 +52,7 @@ type DescribeReplicatorOutput struct {
 	CurrentVersion *string
 
 	// Whether this resource is a replicator reference.
-	IsReplicatorReference bool
+	IsReplicatorReference *bool
 
 	// Kafka Clusters used in setting up sources / targets for replication.
 	KafkaClusters []types.KafkaClusterDescription

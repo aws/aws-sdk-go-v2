@@ -39,7 +39,7 @@ type ListSchemasInput struct {
 	// This member is required.
 	RegistryName *string
 
-	Limit int32
+	Limit *int32
 
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
@@ -176,8 +176,8 @@ func NewListSchemasPaginator(client ListSchemasAPIClient, params *ListSchemasInp
 	}
 
 	options := ListSchemasPaginatorOptions{}
-	if params.Limit != 0 {
-		options.Limit = params.Limit
+	if params.Limit != nil {
+		options.Limit = *params.Limit
 	}
 
 	for _, fn := range optFns {
@@ -207,7 +207,11 @@ func (p *ListSchemasPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.Limit = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
 
 	result, err := p.client.ListSchemas(ctx, &params, optFns...)
 	if err != nil {

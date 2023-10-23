@@ -38,7 +38,7 @@ type DescribeEndpointsInput struct {
 
 	// Optional. Max number of endpoints, up to twenty, that will be returned at one
 	// time.
-	MaxResults int32
+	MaxResults *int32
 
 	// Optional field, defaults to DEFAULT. Specify DEFAULT for this operation to
 	// return your endpoints if any exist, or to create an endpoint for you and return
@@ -174,8 +174,8 @@ func NewDescribeEndpointsPaginator(client DescribeEndpointsAPIClient, params *De
 	}
 
 	options := DescribeEndpointsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -205,7 +205,11 @@ func (p *DescribeEndpointsPaginator) NextPage(ctx context.Context, optFns ...fun
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeEndpoints(ctx, &params, optFns...)
 	if err != nil {

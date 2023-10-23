@@ -46,7 +46,7 @@ type ListBridgesInput struct {
 	// results.) The service might return fewer results than the MaxResults value. If
 	// MaxResults is not included in the request, the service defaults to pagination
 	// with a maximum of 10 results per page.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token that identifies which batch of results that you want to see. For
 	// example, you submit a ListBridges request with MaxResults set at 5. The service
@@ -187,8 +187,8 @@ func NewListBridgesPaginator(client ListBridgesAPIClient, params *ListBridgesInp
 	}
 
 	options := ListBridgesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -218,7 +218,11 @@ func (p *ListBridgesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListBridges(ctx, &params, optFns...)
 	if err != nil {

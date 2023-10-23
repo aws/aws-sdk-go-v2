@@ -64,7 +64,7 @@ type TestCustomDataIdentifierInput struct {
 	// that matches the pattern and the keyword is within the specified distance,
 	// Amazon Macie includes the result. The distance can be 1-300 characters. The
 	// default value is 50.
-	MaximumMatchDistance int32
+	MaximumMatchDistance *int32
 
 	noSmithyDocumentSerde
 }
@@ -73,7 +73,7 @@ type TestCustomDataIdentifierOutput struct {
 
 	// The number of occurrences of sample text that matched the criteria specified by
 	// the custom data identifier.
-	MatchCount int32
+	MatchCount *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

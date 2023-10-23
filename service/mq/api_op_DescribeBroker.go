@@ -54,7 +54,7 @@ type DescribeBrokerOutput struct {
 	// Enables automatic upgrades to new minor versions for brokers, as new versions
 	// are released and supported by Amazon MQ. Automatic upgrades occur during the
 	// scheduled maintenance window of the broker or after a manual broker reboot.
-	AutoMinorVersionUpgrade bool
+	AutoMinorVersionUpgrade *bool
 
 	// The broker's Amazon Resource Name (ARN).
 	BrokerArn *string
@@ -146,7 +146,7 @@ type DescribeBrokerOutput struct {
 
 	// Enables connections from applications outside of the VPC that hosts the
 	// broker's subnets.
-	PubliclyAccessible bool
+	PubliclyAccessible *bool
 
 	// The list of rules (1 minimum, 125 maximum) that authorize connections to
 	// brokers.

@@ -42,7 +42,7 @@ type UpdateResourceProfileInput struct {
 	// maximum score and apply the Sensitive label to the bucket; and, null (empty),
 	// assign a score that Amazon Macie calculates automatically after you submit the
 	// request.
-	SensitivityScoreOverride int32
+	SensitivityScoreOverride *int32
 
 	noSmithyDocumentSerde
 }

@@ -35,7 +35,7 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 type ListClustersInput struct {
 
 	// The number of objects that you want to return with this call.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token that identifies which batch of results you want to see.
 	NextToken *string
@@ -162,8 +162,8 @@ func NewListClustersPaginator(client ListClustersAPIClient, params *ListClusters
 	}
 
 	options := ListClustersPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -193,7 +193,11 @@ func (p *ListClustersPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListClusters(ctx, &params, optFns...)
 	if err != nil {

@@ -11,7 +11,7 @@ type DiscovererSummary struct {
 
 	// The Status if the discoverer will discover schemas from events sent from
 	// another account.
-	CrossAccount bool
+	CrossAccount *bool
 
 	// The ARN of the discoverer.
 	DiscovererArn *string
@@ -61,7 +61,7 @@ type SchemaSummary struct {
 	Tags map[string]string
 
 	// The number of versions available for the schema.
-	VersionCount int64
+	VersionCount *int64
 
 	noSmithyDocumentSerde
 }

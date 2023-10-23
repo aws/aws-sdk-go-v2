@@ -1376,7 +1376,7 @@ func awsRestjson1_deserializeDocumentEventDestination(v **types.EventDestination
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "KinesisFirehoseDestination":

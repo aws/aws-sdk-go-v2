@@ -688,9 +688,9 @@ func awsRestjson1_serializeDocumentEventDestinationDefinition(v *types.EventDest
 		}
 	}
 
-	if v.Enabled {
+	if v.Enabled != nil {
 		ok := object.Key("Enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	if v.KinesisFirehoseDestination != nil {

@@ -51,7 +51,7 @@ type UpdateFlowMediaStreamInput struct {
 	// The sample rate (in Hz) for the stream. If the media stream type is video or
 	// ancillary data, set this value to 90000. If the media stream type is audio, set
 	// this value to either 48000 or 96000.
-	ClockRate int32
+	ClockRate *int32
 
 	// Description
 	Description *string

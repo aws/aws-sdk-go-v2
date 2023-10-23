@@ -49,7 +49,7 @@ type ClaimDevicesByClaimCodeOutput struct {
 
 	// The total number of devices associated with the claim code that has been
 	// processed in the claim request.
-	Total int32
+	Total *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

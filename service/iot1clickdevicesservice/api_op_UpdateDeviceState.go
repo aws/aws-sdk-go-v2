@@ -40,7 +40,7 @@ type UpdateDeviceStateInput struct {
 	DeviceId *string
 
 	// If true, the device is enabled. If false, the device is disabled.
-	Enabled bool
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }

@@ -47,7 +47,7 @@ type UpdateUserInput struct {
 	Username *string
 
 	// Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-	ConsoleAccess bool
+	ConsoleAccess *bool
 
 	// The list of groups (20 maximum) to which the ActiveMQ user belongs. This value
 	// can contain only alphanumeric characters, dashes, periods, underscores, and
@@ -60,7 +60,7 @@ type UpdateUserInput struct {
 	Password *string
 
 	// Defines whether the user is intended for data replication.
-	ReplicationUser bool
+	ReplicationUser *bool
 
 	noSmithyDocumentSerde
 }

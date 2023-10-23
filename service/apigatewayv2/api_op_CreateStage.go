@@ -51,7 +51,7 @@ type CreateStageInput struct {
 
 	// Specifies whether updates to an API automatically trigger a new deployment. The
 	// default value is false.
-	AutoDeploy bool
+	AutoDeploy *bool
 
 	// The identifier of a client certificate for a Stage. Supported only for
 	// WebSocket APIs.
@@ -88,11 +88,11 @@ type CreateStageOutput struct {
 	// Specifies whether a stage is managed by API Gateway. If you created an API
 	// using quick create, the $default stage is managed by API Gateway. You can't
 	// modify the $default stage.
-	ApiGatewayManaged bool
+	ApiGatewayManaged *bool
 
 	// Specifies whether updates to an API automatically trigger a new deployment. The
 	// default value is false.
-	AutoDeploy bool
+	AutoDeploy *bool
 
 	// The identifier of a client certificate for a Stage. Supported only for
 	// WebSocket APIs.

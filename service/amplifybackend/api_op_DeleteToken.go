@@ -49,7 +49,7 @@ type DeleteTokenInput struct {
 type DeleteTokenOutput struct {
 
 	// Indicates whether the request succeeded or failed.
-	IsSuccess bool
+	IsSuccess *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -49,7 +49,7 @@ type ListOfferingsInput struct {
 	Duration *string
 
 	// Placeholder documentation for MaxResults
-	MaxResults int32
+	MaxResults *int32
 
 	// Filter by bitrate, 'MAX_10_MBPS', 'MAX_20_MBPS', or 'MAX_50_MBPS'
 	MaximumBitrate *string
@@ -195,8 +195,8 @@ func NewListOfferingsPaginator(client ListOfferingsAPIClient, params *ListOfferi
 	}
 
 	options := ListOfferingsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -226,7 +226,11 @@ func (p *ListOfferingsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListOfferings(ctx, &params, optFns...)
 	if err != nil {

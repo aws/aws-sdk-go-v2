@@ -1783,7 +1783,7 @@ func awsRestjson1_deserializeOpDocumentDescribePackagingGroupOutput(v **Describe
 				if err != nil {
 					return err
 				}
-				sv.ApproximateAssetCount = int32(i64)
+				sv.ApproximateAssetCount = ptr.Int32(int32(i64))
 			}
 
 		case "arn":
@@ -2833,7 +2833,7 @@ func awsRestjson1_deserializeOpDocumentUpdatePackagingGroupOutput(v **UpdatePack
 				if err != nil {
 					return err
 				}
-				sv.ApproximateAssetCount = int32(i64)
+				sv.ApproximateAssetCount = ptr.Int32(int32(i64))
 			}
 
 		case "arn":
@@ -3689,7 +3689,7 @@ func awsRestjson1_deserializeDocumentCmafPackage(v **types.CmafPackage, value in
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IncludeEncoderConfigurationInSegments = jtv
+				sv.IncludeEncoderConfigurationInSegments = ptr.Bool(jtv)
 			}
 
 		case "segmentDurationSeconds":
@@ -3702,7 +3702,7 @@ func awsRestjson1_deserializeDocumentCmafPackage(v **types.CmafPackage, value in
 				if err != nil {
 					return err
 				}
-				sv.SegmentDurationSeconds = int32(i64)
+				sv.SegmentDurationSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -3800,7 +3800,7 @@ func awsRestjson1_deserializeDocumentDashManifest(v **types.DashManifest, value 
 				if err != nil {
 					return err
 				}
-				sv.MinBufferTimeSeconds = int32(i64)
+				sv.MinBufferTimeSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "profile":
@@ -3873,7 +3873,7 @@ func awsRestjson1_deserializeDocumentDashPackage(v **types.DashPackage, value in
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IncludeEncoderConfigurationInSegments = jtv
+				sv.IncludeEncoderConfigurationInSegments = ptr.Bool(jtv)
 			}
 
 		case "includeIframeOnlyStream":
@@ -3882,7 +3882,7 @@ func awsRestjson1_deserializeDocumentDashPackage(v **types.DashPackage, value in
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IncludeIframeOnlyStream = jtv
+				sv.IncludeIframeOnlyStream = ptr.Bool(jtv)
 			}
 
 		case "periodTriggers":
@@ -3900,7 +3900,7 @@ func awsRestjson1_deserializeDocumentDashPackage(v **types.DashPackage, value in
 				if err != nil {
 					return err
 				}
-				sv.SegmentDurationSeconds = int32(i64)
+				sv.SegmentDurationSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "segmentTemplateFormat":
@@ -4199,7 +4199,7 @@ func awsRestjson1_deserializeDocumentHlsManifest(v **types.HlsManifest, value in
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IncludeIframeOnlyStream = jtv
+				sv.IncludeIframeOnlyStream = ptr.Bool(jtv)
 			}
 
 		case "manifestName":
@@ -4221,7 +4221,7 @@ func awsRestjson1_deserializeDocumentHlsManifest(v **types.HlsManifest, value in
 				if err != nil {
 					return err
 				}
-				sv.ProgramDateTimeIntervalSeconds = int32(i64)
+				sv.ProgramDateTimeIntervalSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "repeatExtXKey":
@@ -4230,7 +4230,7 @@ func awsRestjson1_deserializeDocumentHlsManifest(v **types.HlsManifest, value in
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.RepeatExtXKey = jtv
+				sv.RepeatExtXKey = ptr.Bool(jtv)
 			}
 
 		case "streamSelection":
@@ -4285,7 +4285,7 @@ func awsRestjson1_deserializeDocumentHlsPackage(v **types.HlsPackage, value inte
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IncludeDvbSubtitles = jtv
+				sv.IncludeDvbSubtitles = ptr.Bool(jtv)
 			}
 
 		case "segmentDurationSeconds":
@@ -4298,7 +4298,7 @@ func awsRestjson1_deserializeDocumentHlsPackage(v **types.HlsPackage, value inte
 				if err != nil {
 					return err
 				}
-				sv.SegmentDurationSeconds = int32(i64)
+				sv.SegmentDurationSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "useAudioRenditionGroup":
@@ -4307,7 +4307,7 @@ func awsRestjson1_deserializeDocumentHlsPackage(v **types.HlsPackage, value inte
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.UseAudioRenditionGroup = jtv
+				sv.UseAudioRenditionGroup = ptr.Bool(jtv)
 			}
 
 		default:
@@ -4482,7 +4482,7 @@ func awsRestjson1_deserializeDocumentMssPackage(v **types.MssPackage, value inte
 				if err != nil {
 					return err
 				}
-				sv.SegmentDurationSeconds = int32(i64)
+				sv.SegmentDurationSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -4658,7 +4658,7 @@ func awsRestjson1_deserializeDocumentPackagingGroup(v **types.PackagingGroup, va
 				if err != nil {
 					return err
 				}
-				sv.ApproximateAssetCount = int32(i64)
+				sv.ApproximateAssetCount = ptr.Int32(int32(i64))
 			}
 
 		case "arn":
@@ -4852,7 +4852,7 @@ func awsRestjson1_deserializeDocumentStreamSelection(v **types.StreamSelection, 
 				if err != nil {
 					return err
 				}
-				sv.MaxVideoBitsPerSecond = int32(i64)
+				sv.MaxVideoBitsPerSecond = ptr.Int32(int32(i64))
 			}
 
 		case "minVideoBitsPerSecond":
@@ -4865,7 +4865,7 @@ func awsRestjson1_deserializeDocumentStreamSelection(v **types.StreamSelection, 
 				if err != nil {
 					return err
 				}
-				sv.MinVideoBitsPerSecond = int32(i64)
+				sv.MinVideoBitsPerSecond = ptr.Int32(int32(i64))
 			}
 
 		case "streamOrder":

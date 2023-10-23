@@ -549,6 +549,9 @@ func validateAssertionRuleUpdate(v *types.AssertionRuleUpdate) error {
 	if v.SafetyRuleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SafetyRuleArn"))
 	}
+	if v.WaitPeriodMs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WaitPeriodMs"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -566,6 +569,9 @@ func validateGatingRuleUpdate(v *types.GatingRuleUpdate) error {
 	}
 	if v.SafetyRuleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SafetyRuleArn"))
+	}
+	if v.WaitPeriodMs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WaitPeriodMs"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -594,6 +600,9 @@ func validateNewAssertionRule(v *types.NewAssertionRule) error {
 		if err := validateRuleConfig(v.RuleConfig); err != nil {
 			invalidParams.AddNested("RuleConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.WaitPeriodMs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WaitPeriodMs"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -626,6 +635,9 @@ func validateNewGatingRule(v *types.NewGatingRule) error {
 	if v.TargetControls == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetControls"))
 	}
+	if v.WaitPeriodMs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WaitPeriodMs"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -638,6 +650,12 @@ func validateRuleConfig(v *types.RuleConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RuleConfig"}
+	if v.Inverted == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inverted"))
+	}
+	if v.Threshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Threshold"))
+	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}

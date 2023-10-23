@@ -49,7 +49,7 @@ type Api struct {
 	// Specifies whether an API is managed by API Gateway. You can't update or delete
 	// a managed API by using API Gateway. A managed API can be deleted only through
 	// the tooling or service that created it.
-	ApiGatewayManaged bool
+	ApiGatewayManaged *bool
 
 	// The API ID.
 	ApiId *string
@@ -73,11 +73,11 @@ type Api struct {
 	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
 	// clients use a custom domain name to invoke your API, disable the default
 	// endpoint.
-	DisableExecuteApiEndpoint bool
+	DisableExecuteApiEndpoint *bool
 
 	// Avoid validating models when creating a deployment. Supported only for
 	// WebSocket APIs.
-	DisableSchemaValidation bool
+	DisableSchemaValidation *bool
 
 	// The validation information during API import. This may include particular
 	// properties of your OpenAPI definition which are ignored during import. Supported
@@ -146,7 +146,7 @@ type Authorizer struct {
 	// 0, authorization caching is disabled. If it is greater than 0, API Gateway
 	// caches authorizer responses. The maximum value is 3600, or 1 hour. Supported
 	// only for HTTP API Lambda authorizers.
-	AuthorizerResultTtlInSeconds int32
+	AuthorizerResultTtlInSeconds *int32
 
 	// The authorizer type. Specify REQUEST for a Lambda function using incoming
 	// request parameters. Specify JWT to use JSON Web Tokens (supported only for HTTP
@@ -169,7 +169,7 @@ type Authorizer struct {
 	// enabled, the Lambda authorizer can return a boolean value instead of an IAM
 	// policy. Supported only for HTTP APIs. To learn more, see Working with AWS
 	// Lambda authorizers for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
-	EnableSimpleResponses bool
+	EnableSimpleResponses *bool
 
 	// The identity source for which authorization is requested. For a REQUEST
 	// authorizer, this is optional. The value is a set of one or more mapping
@@ -210,7 +210,7 @@ type Cors struct {
 
 	// Specifies whether credentials are included in the CORS request. Supported only
 	// for HTTP APIs.
-	AllowCredentials bool
+	AllowCredentials *bool
 
 	// Represents a collection of allowed headers. Supported only for HTTP APIs.
 	AllowHeaders []string
@@ -226,7 +226,7 @@ type Cors struct {
 
 	// The number of seconds that the browser should cache preflight request results.
 	// Supported only for HTTP APIs.
-	MaxAge int32
+	MaxAge *int32
 
 	noSmithyDocumentSerde
 }
@@ -236,7 +236,7 @@ type Cors struct {
 type Deployment struct {
 
 	// Specifies whether a deployment was automatically released.
-	AutoDeployed bool
+	AutoDeployed *bool
 
 	// The date and time when the Deployment resource was created.
 	CreatedDate *time.Time
@@ -331,7 +331,7 @@ type Integration struct {
 	// Specifies whether an integration is managed by API Gateway. If you created an
 	// API using using quick create, the resulting integration is managed by API
 	// Gateway. You can update a managed integration, but you can't delete it.
-	ApiGatewayManaged bool
+	ApiGatewayManaged *bool
 
 	// The ID of the VPC link for a private integration. Supported only for HTTP APIs.
 	ConnectionId *string
@@ -469,7 +469,7 @@ type Integration struct {
 	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and
 	// between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29
 	// seconds for WebSocket APIs and 30 seconds for HTTP APIs.
-	TimeoutInMillis int32
+	TimeoutInMillis *int32
 
 	// The TLS configuration for a private integration. If you specify a TLS
 	// configuration, private integration traffic uses the HTTPS protocol. Supported
@@ -613,7 +613,7 @@ type MutualTlsAuthenticationInput struct {
 type ParameterConstraints struct {
 
 	// Whether or not the parameter is required.
-	Required bool
+	Required *bool
 
 	noSmithyDocumentSerde
 }
@@ -629,11 +629,11 @@ type Route struct {
 	// Specifies whether a route is managed by API Gateway. If you created an API
 	// using quick create, the $default route is managed by API Gateway. You can't
 	// modify the $default route key.
-	ApiGatewayManaged bool
+	ApiGatewayManaged *bool
 
 	// Specifies whether an API key is required for this route. Supported only for
 	// WebSocket APIs.
-	ApiKeyRequired bool
+	ApiKeyRequired *bool
 
 	// A list of authorization scopes configured on a route. The scopes are used with
 	// a JWT authorizer to authorize the method invocation. The authorization works by
@@ -711,10 +711,10 @@ type RouteSettings struct {
 	// Specifies whether (true) or not (false) data trace logging is enabled for this
 	// route. This property affects the log entries pushed to Amazon CloudWatch Logs.
 	// Supported only for WebSocket APIs.
-	DataTraceEnabled bool
+	DataTraceEnabled *bool
 
 	// Specifies whether detailed metrics are enabled.
-	DetailedMetricsEnabled bool
+	DetailedMetricsEnabled *bool
 
 	// Specifies the logging level for this route: INFO, ERROR, or OFF. This property
 	// affects the log entries pushed to Amazon CloudWatch Logs. Supported only for
@@ -722,10 +722,10 @@ type RouteSettings struct {
 	LoggingLevel LoggingLevel
 
 	// Specifies the throttling burst limit.
-	ThrottlingBurstLimit int32
+	ThrottlingBurstLimit *int32
 
 	// Specifies the throttling rate limit.
-	ThrottlingRateLimit float64
+	ThrottlingRateLimit *float64
 
 	noSmithyDocumentSerde
 }
@@ -744,11 +744,11 @@ type Stage struct {
 	// Specifies whether a stage is managed by API Gateway. If you created an API
 	// using quick create, the $default stage is managed by API Gateway. You can't
 	// modify the $default stage.
-	ApiGatewayManaged bool
+	ApiGatewayManaged *bool
 
 	// Specifies whether updates to an API automatically trigger a new deployment. The
 	// default value is false.
-	AutoDeploy bool
+	AutoDeploy *bool
 
 	// The identifier of a client certificate for a Stage. Supported only for
 	// WebSocket APIs.

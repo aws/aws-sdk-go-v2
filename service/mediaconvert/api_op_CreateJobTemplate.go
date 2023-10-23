@@ -68,7 +68,7 @@ type CreateJobTemplateInput struct {
 	// begins processing the job with the highest value first. When more than one job
 	// has the same priority, the service begins processing the job that you submitted
 	// first. If you don't specify a priority, the service uses the default value 0.
-	Priority int32
+	Priority *int32
 
 	// Optional. The queue that jobs created from this template are assigned to. If
 	// you don't specify this, jobs will go to the default queue.

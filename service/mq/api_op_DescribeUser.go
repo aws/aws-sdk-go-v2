@@ -55,7 +55,7 @@ type DescribeUserOutput struct {
 	BrokerId *string
 
 	// Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-	ConsoleAccess bool
+	ConsoleAccess *bool
 
 	// The list of groups (20 maximum) to which the ActiveMQ user belongs. This value
 	// can contain only alphanumeric characters, dashes, periods, underscores, and
@@ -66,7 +66,7 @@ type DescribeUserOutput struct {
 	Pending *types.UserPendingChanges
 
 	// Describes whether the user is intended for data replication
-	ReplicationUser bool
+	ReplicationUser *bool
 
 	// Required. The username of the ActiveMQ user. This value can contain only
 	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).

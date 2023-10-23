@@ -43,7 +43,7 @@ type ListClustersV2Input struct {
 
 	// The maximum number of results to return in the response. If there are more
 	// results, the response includes a NextToken parameter.
-	MaxResults int32
+	MaxResults *int32
 
 	// The paginated results marker. When the result of the operation is truncated,
 	// the call returns NextToken in the response. To get the next batch, provide this
@@ -176,8 +176,8 @@ func NewListClustersV2Paginator(client ListClustersV2APIClient, params *ListClus
 	}
 
 	options := ListClustersV2PaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -207,7 +207,11 @@ func (p *ListClustersV2Paginator) NextPage(ctx context.Context, optFns ...func(*
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListClustersV2(ctx, &params, optFns...)
 	if err != nil {

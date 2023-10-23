@@ -1143,8 +1143,8 @@ func awsRestjson1_serializeOpHttpBindingsDeregisterGatewayInstanceInput(v *Dereg
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Force {
-		encoder.SetQuery("force").Boolean(v.Force)
+	if v.Force != nil {
+		encoder.SetQuery("force").Boolean(*v.Force)
 	}
 
 	if v.GatewayInstanceArn == nil || len(*v.GatewayInstanceArn) == 0 {
@@ -1696,8 +1696,8 @@ func awsRestjson1_serializeOpHttpBindingsListBridgesInput(v *ListBridgesInput, e
 		encoder.SetQuery("filterArn").String(*v.FilterArn)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1760,8 +1760,8 @@ func awsRestjson1_serializeOpHttpBindingsListEntitlementsInput(v *ListEntitlemen
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1824,8 +1824,8 @@ func awsRestjson1_serializeOpHttpBindingsListFlowsInput(v *ListFlowsInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1892,8 +1892,8 @@ func awsRestjson1_serializeOpHttpBindingsListGatewayInstancesInput(v *ListGatewa
 		encoder.SetQuery("filterArn").String(*v.FilterArn)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1956,8 +1956,8 @@ func awsRestjson1_serializeOpHttpBindingsListGatewaysInput(v *ListGatewaysInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2020,8 +2020,8 @@ func awsRestjson1_serializeOpHttpBindingsListOfferingsInput(v *ListOfferingsInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2084,8 +2084,8 @@ func awsRestjson1_serializeOpHttpBindingsListReservationsInput(v *ListReservatio
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3768,9 +3768,9 @@ func awsRestjson1_serializeOpDocumentUpdateFlowMediaStreamInput(v *UpdateFlowMed
 		}
 	}
 
-	if v.ClockRate != 0 {
+	if v.ClockRate != nil {
 		ok := object.Key("clockRate")
-		ok.Integer(v.ClockRate)
+		ok.Integer(*v.ClockRate)
 	}
 
 	if v.Description != nil {
@@ -3904,9 +3904,9 @@ func awsRestjson1_serializeOpDocumentUpdateFlowOutputInput(v *UpdateFlowOutputIn
 		}
 	}
 
-	if v.MaxLatency != 0 {
+	if v.MaxLatency != nil {
 		ok := object.Key("maxLatency")
-		ok.Integer(v.MaxLatency)
+		ok.Integer(*v.MaxLatency)
 	}
 
 	if v.MediaStreamOutputConfigurations != nil {
@@ -3916,14 +3916,14 @@ func awsRestjson1_serializeOpDocumentUpdateFlowOutputInput(v *UpdateFlowOutputIn
 		}
 	}
 
-	if v.MinLatency != 0 {
+	if v.MinLatency != nil {
 		ok := object.Key("minLatency")
-		ok.Integer(v.MinLatency)
+		ok.Integer(*v.MinLatency)
 	}
 
-	if v.Port != 0 {
+	if v.Port != nil {
 		ok := object.Key("port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -3936,9 +3936,9 @@ func awsRestjson1_serializeOpDocumentUpdateFlowOutputInput(v *UpdateFlowOutputIn
 		ok.String(*v.RemoteId)
 	}
 
-	if v.SenderControlPort != 0 {
+	if v.SenderControlPort != nil {
 		ok := object.Key("senderControlPort")
-		ok.Integer(v.SenderControlPort)
+		ok.Integer(*v.SenderControlPort)
 	}
 
 	if v.SenderIpAddress != nil {
@@ -3946,9 +3946,9 @@ func awsRestjson1_serializeOpDocumentUpdateFlowOutputInput(v *UpdateFlowOutputIn
 		ok.String(*v.SenderIpAddress)
 	}
 
-	if v.SmoothingLatency != 0 {
+	if v.SmoothingLatency != nil {
 		ok := object.Key("smoothingLatency")
-		ok.Integer(v.SmoothingLatency)
+		ok.Integer(*v.SmoothingLatency)
 	}
 
 	if v.StreamId != nil {
@@ -4079,24 +4079,24 @@ func awsRestjson1_serializeOpDocumentUpdateFlowSourceInput(v *UpdateFlowSourceIn
 		}
 	}
 
-	if v.IngestPort != 0 {
+	if v.IngestPort != nil {
 		ok := object.Key("ingestPort")
-		ok.Integer(v.IngestPort)
+		ok.Integer(*v.IngestPort)
 	}
 
-	if v.MaxBitrate != 0 {
+	if v.MaxBitrate != nil {
 		ok := object.Key("maxBitrate")
-		ok.Integer(v.MaxBitrate)
+		ok.Integer(*v.MaxBitrate)
 	}
 
-	if v.MaxLatency != 0 {
+	if v.MaxLatency != nil {
 		ok := object.Key("maxLatency")
-		ok.Integer(v.MaxLatency)
+		ok.Integer(*v.MaxLatency)
 	}
 
-	if v.MaxSyncBuffer != 0 {
+	if v.MaxSyncBuffer != nil {
 		ok := object.Key("maxSyncBuffer")
-		ok.Integer(v.MaxSyncBuffer)
+		ok.Integer(*v.MaxSyncBuffer)
 	}
 
 	if v.MediaStreamSourceConfigurations != nil {
@@ -4106,9 +4106,9 @@ func awsRestjson1_serializeOpDocumentUpdateFlowSourceInput(v *UpdateFlowSourceIn
 		}
 	}
 
-	if v.MinLatency != 0 {
+	if v.MinLatency != nil {
 		ok := object.Key("minLatency")
-		ok.Integer(v.MinLatency)
+		ok.Integer(*v.MinLatency)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -4116,9 +4116,9 @@ func awsRestjson1_serializeOpDocumentUpdateFlowSourceInput(v *UpdateFlowSourceIn
 		ok.String(string(v.Protocol))
 	}
 
-	if v.SenderControlPort != 0 {
+	if v.SenderControlPort != nil {
 		ok := object.Key("senderControlPort")
-		ok.Integer(v.SenderControlPort)
+		ok.Integer(*v.SenderControlPort)
 	}
 
 	if v.SenderIpAddress != nil {
@@ -4131,9 +4131,9 @@ func awsRestjson1_serializeOpDocumentUpdateFlowSourceInput(v *UpdateFlowSourceIn
 		ok.String(*v.SourceListenerAddress)
 	}
 
-	if v.SourceListenerPort != 0 {
+	if v.SourceListenerPort != nil {
 		ok := object.Key("sourceListenerPort")
-		ok.Integer(v.SourceListenerPort)
+		ok.Integer(*v.SourceListenerPort)
 	}
 
 	if v.StreamId != nil {
@@ -4463,9 +4463,9 @@ func awsRestjson1_serializeDocumentAddBridgeNetworkOutputRequest(v *types.AddBri
 		ok.String(*v.NetworkName)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -4473,9 +4473,9 @@ func awsRestjson1_serializeDocumentAddBridgeNetworkOutputRequest(v *types.AddBri
 		ok.String(string(v.Protocol))
 	}
 
-	{
+	if v.Ttl != nil {
 		ok := object.Key("ttl")
-		ok.Integer(v.Ttl)
+		ok.Integer(*v.Ttl)
 	}
 
 	return nil
@@ -4500,9 +4500,9 @@ func awsRestjson1_serializeDocumentAddBridgeNetworkSourceRequest(v *types.AddBri
 		ok.String(*v.NetworkName)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -4552,9 +4552,9 @@ func awsRestjson1_serializeDocumentAddEgressGatewayBridgeRequest(v *types.AddEgr
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxBitrate != nil {
 		ok := object.Key("maxBitrate")
-		ok.Integer(v.MaxBitrate)
+		ok.Integer(*v.MaxBitrate)
 	}
 
 	return nil
@@ -4564,14 +4564,14 @@ func awsRestjson1_serializeDocumentAddIngressGatewayBridgeRequest(v *types.AddIn
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxBitrate != nil {
 		ok := object.Key("maxBitrate")
-		ok.Integer(v.MaxBitrate)
+		ok.Integer(*v.MaxBitrate)
 	}
 
-	{
+	if v.MaxOutputs != nil {
 		ok := object.Key("maxOutputs")
-		ok.Integer(v.MaxOutputs)
+		ok.Integer(*v.MaxOutputs)
 	}
 
 	return nil
@@ -4605,9 +4605,9 @@ func awsRestjson1_serializeDocumentAddMediaStreamRequest(v *types.AddMediaStream
 		}
 	}
 
-	if v.ClockRate != 0 {
+	if v.ClockRate != nil {
 		ok := object.Key("clockRate")
-		ok.Integer(v.ClockRate)
+		ok.Integer(*v.ClockRate)
 	}
 
 	if v.Description != nil {
@@ -4615,9 +4615,9 @@ func awsRestjson1_serializeDocumentAddMediaStreamRequest(v *types.AddMediaStream
 		ok.String(*v.Description)
 	}
 
-	{
+	if v.MediaStreamId != nil {
 		ok := object.Key("mediaStreamId")
-		ok.Integer(v.MediaStreamId)
+		ok.Integer(*v.MediaStreamId)
 	}
 
 	if v.MediaStreamName != nil {
@@ -4666,9 +4666,9 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 		}
 	}
 
-	if v.MaxLatency != 0 {
+	if v.MaxLatency != nil {
 		ok := object.Key("maxLatency")
-		ok.Integer(v.MaxLatency)
+		ok.Integer(*v.MaxLatency)
 	}
 
 	if v.MediaStreamOutputConfigurations != nil {
@@ -4678,9 +4678,9 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 		}
 	}
 
-	if v.MinLatency != 0 {
+	if v.MinLatency != nil {
 		ok := object.Key("minLatency")
-		ok.Integer(v.MinLatency)
+		ok.Integer(*v.MinLatency)
 	}
 
 	if v.Name != nil {
@@ -4688,9 +4688,9 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 		ok.String(*v.Name)
 	}
 
-	if v.Port != 0 {
+	if v.Port != nil {
 		ok := object.Key("port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -4703,14 +4703,14 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 		ok.String(*v.RemoteId)
 	}
 
-	if v.SenderControlPort != 0 {
+	if v.SenderControlPort != nil {
 		ok := object.Key("senderControlPort")
-		ok.Integer(v.SenderControlPort)
+		ok.Integer(*v.SenderControlPort)
 	}
 
-	if v.SmoothingLatency != 0 {
+	if v.SmoothingLatency != nil {
 		ok := object.Key("smoothingLatency")
-		ok.Integer(v.SmoothingLatency)
+		ok.Integer(*v.SmoothingLatency)
 	}
 
 	if v.StreamId != nil {
@@ -4737,9 +4737,9 @@ func awsRestjson1_serializeDocumentDestinationConfigurationRequest(v *types.Dest
 		ok.String(*v.DestinationIp)
 	}
 
-	{
+	if v.DestinationPort != nil {
 		ok := object.Key("destinationPort")
-		ok.Integer(v.DestinationPort)
+		ok.Integer(*v.DestinationPort)
 	}
 
 	if v.Interface != nil {
@@ -4756,20 +4756,20 @@ func awsRestjson1_serializeDocumentEncodingParametersRequest(v *types.EncodingPa
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.CompressionFactor != nil {
 		ok := object.Key("compressionFactor")
 		switch {
-		case math.IsNaN(v.CompressionFactor):
+		case math.IsNaN(*v.CompressionFactor):
 			ok.String("NaN")
 
-		case math.IsInf(v.CompressionFactor, 1):
+		case math.IsInf(*v.CompressionFactor, 1):
 			ok.String("Infinity")
 
-		case math.IsInf(v.CompressionFactor, -1):
+		case math.IsInf(*v.CompressionFactor, -1):
 			ok.String("-Infinity")
 
 		default:
-			ok.Double(v.CompressionFactor)
+			ok.Double(*v.CompressionFactor)
 
 		}
 	}
@@ -4843,9 +4843,9 @@ func awsRestjson1_serializeDocumentFailoverConfig(v *types.FailoverConfig, value
 		ok.String(string(v.FailoverMode))
 	}
 
-	if v.RecoveryWindow != 0 {
+	if v.RecoveryWindow != nil {
 		ok := object.Key("recoveryWindow")
-		ok.Integer(v.RecoveryWindow)
+		ok.Integer(*v.RecoveryWindow)
 	}
 
 	if v.SourcePriority != nil {
@@ -4926,9 +4926,9 @@ func awsRestjson1_serializeDocumentGrantEntitlementRequest(v *types.GrantEntitle
 	object := value.Object()
 	defer object.Close()
 
-	if v.DataTransferSubscriberFeePercent != 0 {
+	if v.DataTransferSubscriberFeePercent != nil {
 		ok := object.Key("dataTransferSubscriberFeePercent")
-		ok.Integer(v.DataTransferSubscriberFeePercent)
+		ok.Integer(*v.DataTransferSubscriberFeePercent)
 	}
 
 	if v.Description != nil {
@@ -4967,9 +4967,9 @@ func awsRestjson1_serializeDocumentInputConfigurationRequest(v *types.InputConfi
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.InputPort != nil {
 		ok := object.Key("inputPort")
-		ok.Integer(v.InputPort)
+		ok.Integer(*v.InputPort)
 	}
 
 	if v.Interface != nil {
@@ -5115,24 +5115,24 @@ func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, v
 		}
 	}
 
-	if v.IngestPort != 0 {
+	if v.IngestPort != nil {
 		ok := object.Key("ingestPort")
-		ok.Integer(v.IngestPort)
+		ok.Integer(*v.IngestPort)
 	}
 
-	if v.MaxBitrate != 0 {
+	if v.MaxBitrate != nil {
 		ok := object.Key("maxBitrate")
-		ok.Integer(v.MaxBitrate)
+		ok.Integer(*v.MaxBitrate)
 	}
 
-	if v.MaxLatency != 0 {
+	if v.MaxLatency != nil {
 		ok := object.Key("maxLatency")
-		ok.Integer(v.MaxLatency)
+		ok.Integer(*v.MaxLatency)
 	}
 
-	if v.MaxSyncBuffer != 0 {
+	if v.MaxSyncBuffer != nil {
 		ok := object.Key("maxSyncBuffer")
-		ok.Integer(v.MaxSyncBuffer)
+		ok.Integer(*v.MaxSyncBuffer)
 	}
 
 	if v.MediaStreamSourceConfigurations != nil {
@@ -5142,9 +5142,9 @@ func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, v
 		}
 	}
 
-	if v.MinLatency != 0 {
+	if v.MinLatency != nil {
 		ok := object.Key("minLatency")
-		ok.Integer(v.MinLatency)
+		ok.Integer(*v.MinLatency)
 	}
 
 	if v.Name != nil {
@@ -5157,9 +5157,9 @@ func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, v
 		ok.String(string(v.Protocol))
 	}
 
-	if v.SenderControlPort != 0 {
+	if v.SenderControlPort != nil {
 		ok := object.Key("senderControlPort")
-		ok.Integer(v.SenderControlPort)
+		ok.Integer(*v.SenderControlPort)
 	}
 
 	if v.SenderIpAddress != nil {
@@ -5172,9 +5172,9 @@ func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, v
 		ok.String(*v.SourceListenerAddress)
 	}
 
-	if v.SourceListenerPort != 0 {
+	if v.SourceListenerPort != nil {
 		ok := object.Key("sourceListenerPort")
-		ok.Integer(v.SourceListenerPort)
+		ok.Integer(*v.SourceListenerPort)
 	}
 
 	if v.StreamId != nil {
@@ -5240,9 +5240,9 @@ func awsRestjson1_serializeDocumentUpdateBridgeNetworkOutputRequest(v *types.Upd
 		ok.String(*v.NetworkName)
 	}
 
-	if v.Port != 0 {
+	if v.Port != nil {
 		ok := object.Key("port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -5250,9 +5250,9 @@ func awsRestjson1_serializeDocumentUpdateBridgeNetworkOutputRequest(v *types.Upd
 		ok.String(string(v.Protocol))
 	}
 
-	if v.Ttl != 0 {
+	if v.Ttl != nil {
 		ok := object.Key("ttl")
-		ok.Integer(v.Ttl)
+		ok.Integer(*v.Ttl)
 	}
 
 	return nil
@@ -5272,9 +5272,9 @@ func awsRestjson1_serializeDocumentUpdateBridgeNetworkSourceRequest(v *types.Upd
 		ok.String(*v.NetworkName)
 	}
 
-	if v.Port != 0 {
+	if v.Port != nil {
 		ok := object.Key("port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -5289,9 +5289,9 @@ func awsRestjson1_serializeDocumentUpdateEgressGatewayBridgeRequest(v *types.Upd
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxBitrate != 0 {
+	if v.MaxBitrate != nil {
 		ok := object.Key("maxBitrate")
-		ok.Integer(v.MaxBitrate)
+		ok.Integer(*v.MaxBitrate)
 	}
 
 	return nil
@@ -5358,9 +5358,9 @@ func awsRestjson1_serializeDocumentUpdateFailoverConfig(v *types.UpdateFailoverC
 		ok.String(string(v.FailoverMode))
 	}
 
-	if v.RecoveryWindow != 0 {
+	if v.RecoveryWindow != nil {
 		ok := object.Key("recoveryWindow")
-		ok.Integer(v.RecoveryWindow)
+		ok.Integer(*v.RecoveryWindow)
 	}
 
 	if v.SourcePriority != nil {
@@ -5401,14 +5401,14 @@ func awsRestjson1_serializeDocumentUpdateIngressGatewayBridgeRequest(v *types.Up
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxBitrate != 0 {
+	if v.MaxBitrate != nil {
 		ok := object.Key("maxBitrate")
-		ok.Integer(v.MaxBitrate)
+		ok.Integer(*v.MaxBitrate)
 	}
 
-	if v.MaxOutputs != 0 {
+	if v.MaxOutputs != nil {
 		ok := object.Key("maxOutputs")
-		ok.Integer(v.MaxOutputs)
+		ok.Integer(*v.MaxOutputs)
 	}
 
 	return nil

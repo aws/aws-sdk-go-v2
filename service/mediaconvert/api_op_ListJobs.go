@@ -38,7 +38,7 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 type ListJobsInput struct {
 
 	// Optional. Number of jobs, up to twenty, that will be returned at one time.
-	MaxResults int32
+	MaxResults *int32
 
 	// Optional. Use this string, provided with the response to a previous request, to
 	// request the next batch of jobs.
@@ -177,8 +177,8 @@ func NewListJobsPaginator(client ListJobsAPIClient, params *ListJobsInput, optFn
 	}
 
 	options := ListJobsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -208,7 +208,11 @@ func (p *ListJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListJobs(ctx, &params, optFns...)
 	if err != nil {

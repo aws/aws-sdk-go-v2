@@ -540,6 +540,9 @@ func validateReservationPlanSettings(v *types.ReservationPlanSettings) error {
 	if len(v.RenewalType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RenewalType"))
 	}
+	if v.ReservedSlots == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReservedSlots"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

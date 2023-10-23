@@ -40,7 +40,7 @@ type GetInvitationsCountOutput struct {
 
 	// The total number of invitations that were received by the account, not
 	// including the currently accepted invitation.
-	InvitationsCount int64
+	InvitationsCount *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

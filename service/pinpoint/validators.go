@@ -3286,6 +3286,12 @@ func validateGPSCoordinates(v *types.GPSCoordinates) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GPSCoordinates"}
+	if v.Latitude == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Latitude"))
+	}
+	if v.Longitude == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Longitude"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3317,6 +3323,9 @@ func validateHoldoutActivity(v *types.HoldoutActivity) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HoldoutActivity"}
+	if v.Percentage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Percentage"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3716,6 +3725,9 @@ func validateMetricDimension(v *types.MetricDimension) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MetricDimension"}
 	if v.ComparisonOperator == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4300,6 +4312,9 @@ func validateWriteTreatmentResource(v *types.WriteTreatmentResource) error {
 		if err := validateSchedule(v.Schedule); err != nil {
 			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.SizePercent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SizePercent"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -36,7 +36,7 @@ func (c *Client) ListInvitations(ctx context.Context, params *ListInvitationsInp
 type ListInvitationsInput struct {
 
 	// The maximum number of items to include in each page of a paginated response.
-	MaxResults int32
+	MaxResults *int32
 
 	// The nextToken string that specifies which page of results to return in a
 	// paginated response.
@@ -166,8 +166,8 @@ func NewListInvitationsPaginator(client ListInvitationsAPIClient, params *ListIn
 	}
 
 	options := ListInvitationsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -197,7 +197,11 @@ func (p *ListInvitationsPaginator) NextPage(ctx context.Context, optFns ...func(
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListInvitations(ctx, &params, optFns...)
 	if err != nil {

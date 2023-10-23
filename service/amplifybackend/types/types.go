@@ -20,7 +20,7 @@ type BackendAPIAppSyncAuthSettings struct {
 
 	// The API key expiration time for API_KEY, if it was used as an authentication
 	// mechanism to access your data models.
-	ExpirationTime float64
+	ExpirationTime *float64
 
 	// The expiry time for the OpenID authentication mechanism.
 	OpenIDAuthTTL *string
@@ -212,7 +212,7 @@ type CreateBackendAuthIdentityPoolConfig struct {
 	// your Amplify app.
 	//
 	// This member is required.
-	UnauthenticatedLogin bool
+	UnauthenticatedLogin *bool
 
 	noSmithyDocumentSerde
 }
@@ -275,7 +275,7 @@ type CreateBackendAuthPasswordPolicyConfig struct {
 	// project.
 	//
 	// This member is required.
-	MinimumLength float64
+	MinimumLength *float64
 
 	// Additional constraints for the password used to access the backend of your
 	// Amplify project.
@@ -411,7 +411,7 @@ type GetBackendStorageResourceConfig struct {
 	// Returns True if the storage resource has been imported.
 	//
 	// This member is required.
-	Imported bool
+	Imported *bool
 
 	// The name of the storage service.
 	//
@@ -532,7 +532,7 @@ type UpdateBackendAuthIdentityPoolConfig struct {
 
 	// A boolean value that can be set to allow or disallow guest-level authorization
 	// into your Amplify app.
-	UnauthenticatedLogin bool
+	UnauthenticatedLogin *bool
 
 	noSmithyDocumentSerde
 }
@@ -586,7 +586,7 @@ type UpdateBackendAuthPasswordPolicyConfig struct {
 
 	// Describes the minimum length of the password required to sign in to the auth
 	// resource, configured as a part of your Amplify project.
-	MinimumLength float64
+	MinimumLength *float64
 
 	noSmithyDocumentSerde
 }

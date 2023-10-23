@@ -46,7 +46,7 @@ type ListPresetsInput struct {
 	ListBy types.PresetListBy
 
 	// Optional. Number of presets, up to twenty, that will be returned at one time
-	MaxResults int32
+	MaxResults *int32
 
 	// Use this string, provided with the response to a previous request, to request
 	// the next batch of presets.
@@ -178,8 +178,8 @@ func NewListPresetsPaginator(client ListPresetsAPIClient, params *ListPresetsInp
 	}
 
 	options := ListPresetsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -209,7 +209,11 @@ func (p *ListPresetsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListPresets(ctx, &params, optFns...)
 	if err != nil {

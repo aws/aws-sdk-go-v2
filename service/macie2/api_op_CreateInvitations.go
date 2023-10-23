@@ -44,7 +44,7 @@ type CreateInvitationsInput struct {
 	// false, Amazon Macie sends the invitation (as an email message) to the email
 	// address that you specified for the recipient's account when you associated the
 	// account with your account. The default value is false.
-	DisableEmailNotification bool
+	DisableEmailNotification *bool
 
 	// Custom text to include in the email message that contains the invitation. The
 	// text can contain as many as 80 alphanumeric characters.

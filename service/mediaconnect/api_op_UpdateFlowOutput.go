@@ -64,7 +64,7 @@ type UpdateFlowOutputInput struct {
 
 	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
 	// Zixi-based, and Fujitsu-based streams.
-	MaxLatency int32
+	MaxLatency *int32
 
 	// The media streams that are associated with the output, and the parameters for
 	// those associations.
@@ -75,10 +75,10 @@ type UpdateFlowOutputInput struct {
 	// represents the minimal potential latency of that connection. The latency of the
 	// stream is set to the highest number between the sender’s minimum latency and the
 	// receiver’s minimum latency.
-	MinLatency int32
+	MinLatency *int32
 
 	// The port to use when content is distributed to this output.
-	Port int32
+	Port *int32
 
 	// The protocol to use for the output.
 	Protocol types.Protocol
@@ -88,14 +88,14 @@ type UpdateFlowOutputInput struct {
 
 	// The port that the flow uses to send outbound requests to initiate connection
 	// with the sender.
-	SenderControlPort int32
+	SenderControlPort *int32
 
 	// The IP address that the flow communicates with to initiate connection with the
 	// sender.
 	SenderIpAddress *string
 
 	// The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
-	SmoothingLatency int32
+	SmoothingLatency *int32
 
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi and SRT caller-based streams.

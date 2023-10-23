@@ -36,7 +36,7 @@ func (c *Client) ListSensitivityInspectionTemplates(ctx context.Context, params 
 type ListSensitivityInspectionTemplatesInput struct {
 
 	// The maximum number of items to include in each page of a paginated response.
-	MaxResults int32
+	MaxResults *int32
 
 	// The nextToken string that specifies which page of results to return in a
 	// paginated response.
@@ -170,8 +170,8 @@ func NewListSensitivityInspectionTemplatesPaginator(client ListSensitivityInspec
 	}
 
 	options := ListSensitivityInspectionTemplatesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -201,7 +201,11 @@ func (p *ListSensitivityInspectionTemplatesPaginator) NextPage(ctx context.Conte
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListSensitivityInspectionTemplates(ctx, &params, optFns...)
 	if err != nil {

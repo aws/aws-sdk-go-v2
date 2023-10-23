@@ -80,7 +80,7 @@ type CreateCustomDataIdentifierInput struct {
 	// that matches the pattern and the keyword is within the specified distance,
 	// Amazon Macie includes the result. The distance can be 1-300 characters. The
 	// default value is 50.
-	MaximumMatchDistance int32
+	MaximumMatchDistance *int32
 
 	// The severity to assign to findings that the custom data identifier produces,
 	// based on the number of occurrences of text that match the custom data

@@ -42,7 +42,7 @@ type GetArchitectureRecommendationsInput struct {
 	RecoveryGroupName *string
 
 	// The number of objects that you want to return with this call.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token that identifies which batch of results you want to see.
 	NextToken *string
