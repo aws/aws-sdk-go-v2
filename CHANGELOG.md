@@ -1,3 +1,15 @@
+# Release (2023-10-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics`: [v1.15.0](service/marketplacecommerceanalytics/CHANGELOG.md#v1150-2023-10-23)
+  * **Feature**: The StartSupportDataExport operation has been deprecated as part of the Product Support Connection deprecation. As of December 2022, Product Support Connection is no longer supported.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.20.0](service/networkmanager/CHANGELOG.md#v1200-2023-10-23)
+  * **Feature**: This release adds API support for Tunnel-less Connect (NoEncap Protocol) for AWS Cloud WAN
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.8.0](service/redshiftserverless/CHANGELOG.md#v180-2023-10-23)
+  * **Feature**: This release adds support for customers to see the patch version and workgroup version in Amazon Redshift Serverless.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.32.0](service/rekognition/CHANGELOG.md#v1320-2023-10-23)
+  * **Feature**: Amazon Rekognition introduces StartMediaAnalysisJob, GetMediaAnalysisJob, and ListMediaAnalysisJobs operations to run a bulk analysis of images with a Detect Moderation model.
+
 # Release (2023-10-20)
 
 ## Module Highlights

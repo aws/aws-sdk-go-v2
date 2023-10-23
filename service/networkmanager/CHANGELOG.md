@@ -1,3 +1,7 @@
+# v1.20.0 (2023-10-23)
+
+* **Feature**: This release adds API support for Tunnel-less Connect (NoEncap Protocol) for AWS Cloud WAN
+
 # v1.19.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

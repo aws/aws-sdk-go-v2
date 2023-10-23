@@ -1,3 +1,7 @@
+# v1.8.0 (2023-10-23)
+
+* **Feature**: This release adds support for customers to see the patch version and workgroup version in Amazon Redshift Serverless.
+
 # v1.7.0 (2023-10-16)
 
 * **Feature**: Added support for managing credentials of serverless namespace admin using AWS Secrets Manager.
