@@ -2036,9 +2036,6 @@ func validateOpCreateConnectPeerInput(v *CreateConnectPeerInput) error {
 	if v.PeerAddress == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PeerAddress"))
 	}
-	if v.InsideCidrBlocks == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InsideCidrBlocks"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

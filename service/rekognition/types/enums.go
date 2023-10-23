@@ -499,6 +499,62 @@ func (LivenessSessionStatus) Values() []LivenessSessionStatus {
 	}
 }
 
+type MediaAnalysisJobFailureCode string
+
+// Enum values for MediaAnalysisJobFailureCode
+const (
+	MediaAnalysisJobFailureCodeInternalError       MediaAnalysisJobFailureCode = "INTERNAL_ERROR"
+	MediaAnalysisJobFailureCodeInvalidS3Object     MediaAnalysisJobFailureCode = "INVALID_S3_OBJECT"
+	MediaAnalysisJobFailureCodeInvalidManifest     MediaAnalysisJobFailureCode = "INVALID_MANIFEST"
+	MediaAnalysisJobFailureCodeInvalidOutputConfig MediaAnalysisJobFailureCode = "INVALID_OUTPUT_CONFIG"
+	MediaAnalysisJobFailureCodeInvalidKmsKey       MediaAnalysisJobFailureCode = "INVALID_KMS_KEY"
+	MediaAnalysisJobFailureCodeAccessDenied        MediaAnalysisJobFailureCode = "ACCESS_DENIED"
+	MediaAnalysisJobFailureCodeResourceNotFound    MediaAnalysisJobFailureCode = "RESOURCE_NOT_FOUND"
+	MediaAnalysisJobFailureCodeResourceNotReady    MediaAnalysisJobFailureCode = "RESOURCE_NOT_READY"
+	MediaAnalysisJobFailureCodeThrottled           MediaAnalysisJobFailureCode = "THROTTLED"
+)
+
+// Values returns all known values for MediaAnalysisJobFailureCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MediaAnalysisJobFailureCode) Values() []MediaAnalysisJobFailureCode {
+	return []MediaAnalysisJobFailureCode{
+		"INTERNAL_ERROR",
+		"INVALID_S3_OBJECT",
+		"INVALID_MANIFEST",
+		"INVALID_OUTPUT_CONFIG",
+		"INVALID_KMS_KEY",
+		"ACCESS_DENIED",
+		"RESOURCE_NOT_FOUND",
+		"RESOURCE_NOT_READY",
+		"THROTTLED",
+	}
+}
+
+type MediaAnalysisJobStatus string
+
+// Enum values for MediaAnalysisJobStatus
+const (
+	MediaAnalysisJobStatusCreated    MediaAnalysisJobStatus = "CREATED"
+	MediaAnalysisJobStatusQueued     MediaAnalysisJobStatus = "QUEUED"
+	MediaAnalysisJobStatusInProgress MediaAnalysisJobStatus = "IN_PROGRESS"
+	MediaAnalysisJobStatusSucceeded  MediaAnalysisJobStatus = "SUCCEEDED"
+	MediaAnalysisJobStatusFailed     MediaAnalysisJobStatus = "FAILED"
+)
+
+// Values returns all known values for MediaAnalysisJobStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MediaAnalysisJobStatus) Values() []MediaAnalysisJobStatus {
+	return []MediaAnalysisJobStatus{
+		"CREATED",
+		"QUEUED",
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type OrientationCorrection string
 
 // Enum values for OrientationCorrection

@@ -7607,6 +7607,15 @@ func awsAwsjson11_deserializeDocumentWorkgroup(v **types.Workgroup, value interf
 				sv.NamespaceName = ptr.String(jtv)
 			}
 
+		case "patchVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PatchVersion = ptr.String(jtv)
+			}
+
 		case "port":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7673,6 +7682,15 @@ func awsAwsjson11_deserializeDocumentWorkgroup(v **types.Workgroup, value interf
 					return fmt.Errorf("expected WorkgroupName to be of type string, got %T instead", value)
 				}
 				sv.WorkgroupName = ptr.String(jtv)
+			}
+
+		case "workgroupVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.WorkgroupVersion = ptr.String(jtv)
 			}
 
 		default:

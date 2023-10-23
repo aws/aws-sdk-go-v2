@@ -204,6 +204,9 @@ type ConnectPeer struct {
 	// The state of the Connect peer.
 	State ConnectPeerState
 
+	// The subnet ARN for the Connect peer.
+	SubnetArn *string
+
 	// The list of key-value tags associated with the Connect peer.
 	Tags []Tag
 
@@ -290,6 +293,9 @@ type ConnectPeerSummary struct {
 
 	// The Region where the edge is located.
 	EdgeLocation *string
+
+	// The subnet ARN for the Connect peer summary.
+	SubnetArn *string
 
 	// The list of key-value tags associated with the Connect peer summary.
 	Tags []Tag
@@ -1136,7 +1142,10 @@ type RouteTableIdentifier struct {
 	// The segment edge in a core network.
 	CoreNetworkSegmentEdge *CoreNetworkSegmentEdgeIdentifier
 
-	// The ARN of the transit gateway route table.
+	// The ARN of the transit gateway route table for the attachment request. For
+	// example, "TransitGatewayRouteTableArn":
+	// "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456"
+	// .
 	TransitGatewayRouteTableArn *string
 
 	noSmithyDocumentSerde

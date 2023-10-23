@@ -140,11 +140,44 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
+				Region: "ap-northeast-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ap-northeast-2",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ap-south-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ap-southeast-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-2",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "api-ap-northeast-1",
+			}: endpoints.Endpoint{
+				Hostname: "api.iottwinmaker.ap-northeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "api-ap-northeast-2",
+			}: endpoints.Endpoint{
+				Hostname: "api.iottwinmaker.ap-northeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "api-ap-south-1",
+			}: endpoints.Endpoint{
+				Hostname: "api.iottwinmaker.ap-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "api-ap-southeast-1",
 			}: endpoints.Endpoint{
@@ -191,6 +224,30 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "api.iottwinmaker.us-west-2.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-west-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "data-ap-northeast-1",
+			}: endpoints.Endpoint{
+				Hostname: "data.iottwinmaker.ap-northeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "data-ap-northeast-2",
+			}: endpoints.Endpoint{
+				Hostname: "data.iottwinmaker.ap-northeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "data-ap-south-1",
+			}: endpoints.Endpoint{
+				Hostname: "data.iottwinmaker.ap-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-1",
 				},
 			},
 			endpoints.EndpointKey{

@@ -1,0 +1,8 @@
+{
+    "id": "652ec564-3ef0-4a02-8e44-3f3fac2df30b",
+    "type": "feature",
+    "description": "Amazon Rekognition introduces StartMediaAnalysisJob, GetMediaAnalysisJob, and ListMediaAnalysisJobs operations to run a bulk analysis of images with a Detect Moderation model.",
+    "modules": [
+        "service/rekognition"
+    ]
+}

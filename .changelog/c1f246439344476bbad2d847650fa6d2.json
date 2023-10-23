@@ -1,0 +1,8 @@
+{
+    "id": "c1f24643-9344-476b-bad2-d847650fa6d2",
+    "type": "feature",
+    "description": "This release adds support for customers to see the patch version and workgroup version in Amazon Redshift Serverless.",
+    "modules": [
+        "service/redshiftserverless"
+    ]
+}

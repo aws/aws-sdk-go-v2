@@ -750,6 +750,26 @@ func (m *validateOpGetLabelDetection) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMediaAnalysisJob struct {
+}
+
+func (*validateOpGetMediaAnalysisJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMediaAnalysisJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMediaAnalysisJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMediaAnalysisJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPersonTracking struct {
 }
 
@@ -1170,6 +1190,26 @@ func (m *validateOpStartLabelDetection) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartMediaAnalysisJob struct {
+}
+
+func (*validateOpStartMediaAnalysisJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMediaAnalysisJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMediaAnalysisJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMediaAnalysisJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartPersonTracking struct {
 }
 
@@ -1538,6 +1578,10 @@ func addOpGetLabelDetectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLabelDetection{}, middleware.After)
 }
 
+func addOpGetMediaAnalysisJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMediaAnalysisJob{}, middleware.After)
+}
+
 func addOpGetPersonTrackingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPersonTracking{}, middleware.After)
 }
@@ -1620,6 +1664,10 @@ func addOpStartFaceSearchValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartLabelDetectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartLabelDetection{}, middleware.After)
+}
+
+func addOpStartMediaAnalysisJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMediaAnalysisJob{}, middleware.After)
 }
 
 func addOpStartPersonTrackingValidationMiddleware(stack *middleware.Stack) error {
@@ -1768,6 +1816,36 @@ func validateLivenessOutputConfig(v *types.LivenessOutputConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LivenessOutputConfig"}
+	if v.S3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaAnalysisInput(v *types.MediaAnalysisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaAnalysisInput"}
+	if v.S3Object == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaAnalysisOutputConfig(v *types.MediaAnalysisOutputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaAnalysisOutputConfig"}
 	if v.S3Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
 	}
@@ -2506,6 +2584,21 @@ func validateOpGetLabelDetectionInput(v *GetLabelDetectionInput) error {
 	}
 }
 
+func validateOpGetMediaAnalysisJobInput(v *GetMediaAnalysisJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMediaAnalysisJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetPersonTrackingInput(v *GetPersonTrackingInput) error {
 	if v == nil {
 		return nil
@@ -2858,6 +2951,35 @@ func validateOpStartLabelDetectionInput(v *StartLabelDetectionInput) error {
 	if v.NotificationChannel != nil {
 		if err := validateNotificationChannel(v.NotificationChannel); err != nil {
 			invalidParams.AddNested("NotificationChannel", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartMediaAnalysisJobInput(v *StartMediaAnalysisJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMediaAnalysisJobInput"}
+	if v.OperationsConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OperationsConfig"))
+	}
+	if v.Input == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Input"))
+	} else if v.Input != nil {
+		if err := validateMediaAnalysisInput(v.Input); err != nil {
+			invalidParams.AddNested("Input", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	} else if v.OutputConfig != nil {
+		if err := validateMediaAnalysisOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

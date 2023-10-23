@@ -14850,6 +14850,15 @@ func awsRestjson1_deserializeDocumentConnectPeer(v **types.ConnectPeer, value in
 				sv.State = types.ConnectPeerState(jtv)
 			}
 
+		case "SubnetArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubnetArn to be of type string, got %T instead", value)
+				}
+				sv.SubnetArn = ptr.String(jtv)
+			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
@@ -15232,6 +15241,15 @@ func awsRestjson1_deserializeDocumentConnectPeerSummary(v **types.ConnectPeerSum
 					return fmt.Errorf("expected ExternalRegionCode to be of type string, got %T instead", value)
 				}
 				sv.EdgeLocation = ptr.String(jtv)
+			}
+
+		case "SubnetArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubnetArn to be of type string, got %T instead", value)
+				}
+				sv.SubnetArn = ptr.String(jtv)
 			}
 
 		case "Tags":

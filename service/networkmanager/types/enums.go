@@ -651,7 +651,8 @@ type TunnelProtocol string
 
 // Enum values for TunnelProtocol
 const (
-	TunnelProtocolGre TunnelProtocol = "GRE"
+	TunnelProtocolGre     TunnelProtocol = "GRE"
+	TunnelProtocolNoEncap TunnelProtocol = "NO_ENCAP"
 )
 
 // Values returns all known values for TunnelProtocol. Note that this can be
@@ -660,6 +661,7 @@ const (
 func (TunnelProtocol) Values() []TunnelProtocol {
 	return []TunnelProtocol{
 		"GRE",
+		"NO_ENCAP",
 	}
 }
 

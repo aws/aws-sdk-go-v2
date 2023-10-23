@@ -426,6 +426,11 @@ type Workgroup struct {
 	// The namespace the workgroup is associated with.
 	NamespaceName *string
 
+	// The patch version of your Amazon Redshift Serverless workgroup. For more
+	// information about patch versions, see Cluster versions for Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html)
+	// .
+	PatchVersion *string
+
 	// The custom port to use when connecting to a workgroup. Valid port ranges are
 	// 5431-5455 and 8191-8215. The default is 5439.
 	Port *int32
@@ -451,6 +456,12 @@ type Workgroup struct {
 
 	// The name of the workgroup.
 	WorkgroupName *string
+
+	// The Amazon Redshift Serverless version of your workgroup. For more information
+	// about Amazon Redshift Serverless versions, see Cluster versions for Amazon
+	// Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html)
+	// .
+	WorkgroupVersion *string
 
 	noSmithyDocumentSerde
 }

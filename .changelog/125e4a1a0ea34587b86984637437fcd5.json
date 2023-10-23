@@ -1,0 +1,8 @@
+{
+    "id": "125e4a1a-0ea3-4587-b869-84637437fcd5",
+    "type": "feature",
+    "description": "This release adds API support for Tunnel-less Connect (NoEncap Protocol) for AWS Cloud WAN",
+    "modules": [
+        "service/networkmanager"
+    ]
+}

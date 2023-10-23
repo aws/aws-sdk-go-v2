@@ -222,6 +222,36 @@ func (e *InvalidImageFormatException) ErrorCode() string {
 }
 func (e *InvalidImageFormatException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Indicates that a provided manifest file is empty or larger than the allowed
+// limit.
+type InvalidManifestException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Code   *string
+	Logref *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidManifestException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidManifestException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidManifestException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidManifestException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidManifestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Pagination token in the request is not valid.
 type InvalidPaginationTokenException struct {
 	Message *string

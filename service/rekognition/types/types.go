@@ -1472,6 +1472,156 @@ type MatchedUser struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for Moderation Labels Detection.
+type MediaAnalysisDetectModerationLabelsConfig struct {
+
+	// Specifies the minimum confidence level for the moderation labels to return.
+	// Amazon Rekognition doesn't return any labels with a confidence level lower than
+	// this specified value.
+	MinConfidence *float32
+
+	// Specifies the custom moderation model to be used during the label detection
+	// job. If not provided the pre-trained model is used.
+	ProjectVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains input information for a media analysis job.
+type MediaAnalysisInput struct {
+
+	// Provides the S3 bucket name and object name. The region for the S3 bucket
+	// containing the S3 object must match the region you use for Amazon Rekognition
+	// operations. For Amazon Rekognition to process an S3 object, the user must have
+	// permission to access the S3 object. For more information, see How Amazon
+	// Rekognition works with IAM in the Amazon Rekognition Developer Guide.
+	//
+	// This member is required.
+	S3Object *S3Object
+
+	noSmithyDocumentSerde
+}
+
+// Description for a media analysis job.
+type MediaAnalysisJobDescription struct {
+
+	// The Unix date and time when the job was started.
+	//
+	// This member is required.
+	CreationTimestamp *time.Time
+
+	// Reference to the input manifest that was provided in the job creation request.
+	//
+	// This member is required.
+	Input *MediaAnalysisInput
+
+	// The identifier for a media analysis job.
+	//
+	// This member is required.
+	JobId *string
+
+	// Operation configurations that were provided during job creation.
+	//
+	// This member is required.
+	OperationsConfig *MediaAnalysisOperationsConfig
+
+	// Output configuration that was provided in the creation request.
+	//
+	// This member is required.
+	OutputConfig *MediaAnalysisOutputConfig
+
+	// The status of the media analysis job being retrieved.
+	//
+	// This member is required.
+	Status MediaAnalysisJobStatus
+
+	// The Unix date and time when the job finished.
+	CompletionTimestamp *time.Time
+
+	// Details about the error that resulted in failure of the job.
+	FailureDetails *MediaAnalysisJobFailureDetails
+
+	// The name of a media analysis job.
+	JobName *string
+
+	// KMS Key that was provided in the creation request.
+	KmsKeyId *string
+
+	// Provides statistics on input manifest and errors identified in the input
+	// manifest.
+	ManifestSummary *MediaAnalysisManifestSummary
+
+	// Output manifest that contains prediction results.
+	Results *MediaAnalysisResults
+
+	noSmithyDocumentSerde
+}
+
+// Details about the error that resulted in failure of the job.
+type MediaAnalysisJobFailureDetails struct {
+
+	// Error code for the failed job.
+	Code MediaAnalysisJobFailureCode
+
+	// Human readable error message.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary that provides statistics on input manifest and errors identified in the
+// input manifest.
+type MediaAnalysisManifestSummary struct {
+
+	// Provides the S3 bucket name and object name. The region for the S3 bucket
+	// containing the S3 object must match the region you use for Amazon Rekognition
+	// operations. For Amazon Rekognition to process an S3 object, the user must have
+	// permission to access the S3 object. For more information, see How Amazon
+	// Rekognition works with IAM in the Amazon Rekognition Developer Guide.
+	S3Object *S3Object
+
+	noSmithyDocumentSerde
+}
+
+// Configuration options for a media analysis job. Configuration is
+// operation-specific.
+type MediaAnalysisOperationsConfig struct {
+
+	// Contains configuration options for a DetectModerationLabels job.
+	DetectModerationLabels *MediaAnalysisDetectModerationLabelsConfig
+
+	noSmithyDocumentSerde
+}
+
+// Output configuration provided in the job creation request.
+type MediaAnalysisOutputConfig struct {
+
+	// Specifies the Amazon S3 bucket to contain the output of the media analysis job.
+	//
+	// This member is required.
+	S3Bucket *string
+
+	// Specifies the Amazon S3 key prefix that comes after the name of the bucket you
+	// have designated for storage.
+	S3KeyPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the results for a media analysis job created with
+// StartMediaAnalysisJob.
+type MediaAnalysisResults struct {
+
+	// Provides the S3 bucket name and object name. The region for the S3 bucket
+	// containing the S3 object must match the region you use for Amazon Rekognition
+	// operations. For Amazon Rekognition to process an S3 object, the user must have
+	// permission to access the S3 object. For more information, see How Amazon
+	// Rekognition works with IAM in the Amazon Rekognition Developer Guide.
+	S3Object *S3Object
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about a single type of inappropriate, unwanted, or
 // offensive content found in an image or video. Each type of moderated content has
 // a label within a hierarchical taxonomy. For more information, see Content

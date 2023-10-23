@@ -786,6 +786,11 @@ func awsRestjson1_serializeOpDocumentCreateConnectPeerInput(v *CreateConnectPeer
 		ok.String(*v.PeerAddress)
 	}
 
+	if v.SubnetArn != nil {
+		ok := object.Key("SubnetArn")
+		ok.String(*v.SubnetArn)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
