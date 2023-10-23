@@ -58,7 +58,7 @@ type DescribeInputDeviceThumbnailOutput struct {
 	Body io.ReadCloser
 
 	// The length of the content.
-	ContentLength int64
+	ContentLength *int64
 
 	// Specifies the media type of the thumbnail.
 	ContentType types.ContentType

@@ -55,7 +55,7 @@ type UpdateInAppTemplateInput struct {
 	// (overwrites) the latest existing version of the template. If you specify a value
 	// of true for this parameter, don't specify a value for the version parameter.
 	// Otherwise, an error will occur.
-	CreateNewVersion bool
+	CreateNewVersion *bool
 
 	// The unique identifier for the version of the message template to update,
 	// retrieve information about, or delete. To retrieve identifiers and other

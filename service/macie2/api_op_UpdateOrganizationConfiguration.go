@@ -38,7 +38,7 @@ type UpdateOrganizationConfigurationInput struct {
 	// account is added to the organization in Organizations.
 	//
 	// This member is required.
-	AutoEnable bool
+	AutoEnable *bool
 
 	noSmithyDocumentSerde
 }

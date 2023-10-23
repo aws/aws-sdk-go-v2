@@ -925,7 +925,7 @@ func awsRestjson1_deserializeOpDocumentCreateOriginEndpointOutput(v **CreateOrig
 				if err != nil {
 					return err
 				}
-				sv.StartoverWindowSeconds = int32(i64)
+				sv.StartoverWindowSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "tags":
@@ -943,7 +943,7 @@ func awsRestjson1_deserializeOpDocumentCreateOriginEndpointOutput(v **CreateOrig
 				if err != nil {
 					return err
 				}
-				sv.TimeDelaySeconds = int32(i64)
+				sv.TimeDelaySeconds = ptr.Int32(int32(i64))
 			}
 
 		case "url":
@@ -1858,7 +1858,7 @@ func awsRestjson1_deserializeOpDocumentDescribeOriginEndpointOutput(v **Describe
 				if err != nil {
 					return err
 				}
-				sv.StartoverWindowSeconds = int32(i64)
+				sv.StartoverWindowSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "tags":
@@ -1876,7 +1876,7 @@ func awsRestjson1_deserializeOpDocumentDescribeOriginEndpointOutput(v **Describe
 				if err != nil {
 					return err
 				}
-				sv.TimeDelaySeconds = int32(i64)
+				sv.TimeDelaySeconds = ptr.Int32(int32(i64))
 			}
 
 		case "url":
@@ -3616,7 +3616,7 @@ func awsRestjson1_deserializeOpDocumentUpdateOriginEndpointOutput(v **UpdateOrig
 				if err != nil {
 					return err
 				}
-				sv.StartoverWindowSeconds = int32(i64)
+				sv.StartoverWindowSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "tags":
@@ -3634,7 +3634,7 @@ func awsRestjson1_deserializeOpDocumentUpdateOriginEndpointOutput(v **UpdateOrig
 				if err != nil {
 					return err
 				}
-				sv.TimeDelaySeconds = int32(i64)
+				sv.TimeDelaySeconds = ptr.Int32(int32(i64))
 			}
 
 		case "url":
@@ -4376,7 +4376,7 @@ func awsRestjson1_deserializeDocumentCmafEncryption(v **types.CmafEncryption, va
 				if err != nil {
 					return err
 				}
-				sv.KeyRotationIntervalSeconds = int32(i64)
+				sv.KeyRotationIntervalSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "spekeKeyProvider":
@@ -4435,7 +4435,7 @@ func awsRestjson1_deserializeDocumentCmafPackage(v **types.CmafPackage, value in
 				if err != nil {
 					return err
 				}
-				sv.SegmentDurationSeconds = int32(i64)
+				sv.SegmentDurationSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "segmentPrefix":
@@ -4493,7 +4493,7 @@ func awsRestjson1_deserializeDocumentDashEncryption(v **types.DashEncryption, va
 				if err != nil {
 					return err
 				}
-				sv.KeyRotationIntervalSeconds = int32(i64)
+				sv.KeyRotationIntervalSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "spekeKeyProvider":
@@ -4557,7 +4557,7 @@ func awsRestjson1_deserializeDocumentDashPackage(v **types.DashPackage, value in
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IncludeIframeOnlyStream = jtv
+				sv.IncludeIframeOnlyStream = ptr.Bool(jtv)
 			}
 
 		case "manifestLayout":
@@ -4579,7 +4579,7 @@ func awsRestjson1_deserializeDocumentDashPackage(v **types.DashPackage, value in
 				if err != nil {
 					return err
 				}
-				sv.ManifestWindowSeconds = int32(i64)
+				sv.ManifestWindowSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "minBufferTimeSeconds":
@@ -4592,7 +4592,7 @@ func awsRestjson1_deserializeDocumentDashPackage(v **types.DashPackage, value in
 				if err != nil {
 					return err
 				}
-				sv.MinBufferTimeSeconds = int32(i64)
+				sv.MinBufferTimeSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "minUpdatePeriodSeconds":
@@ -4605,7 +4605,7 @@ func awsRestjson1_deserializeDocumentDashPackage(v **types.DashPackage, value in
 				if err != nil {
 					return err
 				}
-				sv.MinUpdatePeriodSeconds = int32(i64)
+				sv.MinUpdatePeriodSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "periodTriggers":
@@ -4632,7 +4632,7 @@ func awsRestjson1_deserializeDocumentDashPackage(v **types.DashPackage, value in
 				if err != nil {
 					return err
 				}
-				sv.SegmentDurationSeconds = int32(i64)
+				sv.SegmentDurationSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "segmentTemplateFormat":
@@ -4659,7 +4659,7 @@ func awsRestjson1_deserializeDocumentDashPackage(v **types.DashPackage, value in
 				if err != nil {
 					return err
 				}
-				sv.SuggestedPresentationDelaySeconds = int32(i64)
+				sv.SuggestedPresentationDelaySeconds = ptr.Int32(int32(i64))
 			}
 
 		case "utcTiming":
@@ -4976,7 +4976,7 @@ func awsRestjson1_deserializeDocumentHlsEncryption(v **types.HlsEncryption, valu
 				if err != nil {
 					return err
 				}
-				sv.KeyRotationIntervalSeconds = int32(i64)
+				sv.KeyRotationIntervalSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "repeatExtXKey":
@@ -4985,7 +4985,7 @@ func awsRestjson1_deserializeDocumentHlsEncryption(v **types.HlsEncryption, valu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.RepeatExtXKey = jtv
+				sv.RepeatExtXKey = ptr.Bool(jtv)
 			}
 
 		case "spekeKeyProvider":
@@ -5098,7 +5098,7 @@ func awsRestjson1_deserializeDocumentHlsManifest(v **types.HlsManifest, value in
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IncludeIframeOnlyStream = jtv
+				sv.IncludeIframeOnlyStream = ptr.Bool(jtv)
 			}
 
 		case "manifestName":
@@ -5129,7 +5129,7 @@ func awsRestjson1_deserializeDocumentHlsManifest(v **types.HlsManifest, value in
 				if err != nil {
 					return err
 				}
-				sv.PlaylistWindowSeconds = int32(i64)
+				sv.PlaylistWindowSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "programDateTimeIntervalSeconds":
@@ -5142,7 +5142,7 @@ func awsRestjson1_deserializeDocumentHlsManifest(v **types.HlsManifest, value in
 				if err != nil {
 					return err
 				}
-				sv.ProgramDateTimeIntervalSeconds = int32(i64)
+				sv.ProgramDateTimeIntervalSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "url":
@@ -5219,7 +5219,7 @@ func awsRestjson1_deserializeDocumentHlsPackage(v **types.HlsPackage, value inte
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IncludeDvbSubtitles = jtv
+				sv.IncludeDvbSubtitles = ptr.Bool(jtv)
 			}
 
 		case "includeIframeOnlyStream":
@@ -5228,7 +5228,7 @@ func awsRestjson1_deserializeDocumentHlsPackage(v **types.HlsPackage, value inte
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IncludeIframeOnlyStream = jtv
+				sv.IncludeIframeOnlyStream = ptr.Bool(jtv)
 			}
 
 		case "playlistType":
@@ -5250,7 +5250,7 @@ func awsRestjson1_deserializeDocumentHlsPackage(v **types.HlsPackage, value inte
 				if err != nil {
 					return err
 				}
-				sv.PlaylistWindowSeconds = int32(i64)
+				sv.PlaylistWindowSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "programDateTimeIntervalSeconds":
@@ -5263,7 +5263,7 @@ func awsRestjson1_deserializeDocumentHlsPackage(v **types.HlsPackage, value inte
 				if err != nil {
 					return err
 				}
-				sv.ProgramDateTimeIntervalSeconds = int32(i64)
+				sv.ProgramDateTimeIntervalSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "segmentDurationSeconds":
@@ -5276,7 +5276,7 @@ func awsRestjson1_deserializeDocumentHlsPackage(v **types.HlsPackage, value inte
 				if err != nil {
 					return err
 				}
-				sv.SegmentDurationSeconds = int32(i64)
+				sv.SegmentDurationSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "streamSelection":
@@ -5290,7 +5290,7 @@ func awsRestjson1_deserializeDocumentHlsPackage(v **types.HlsPackage, value inte
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.UseAudioRenditionGroup = jtv
+				sv.UseAudioRenditionGroup = ptr.Bool(jtv)
 			}
 
 		default:
@@ -5522,7 +5522,7 @@ func awsRestjson1_deserializeDocumentMssPackage(v **types.MssPackage, value inte
 				if err != nil {
 					return err
 				}
-				sv.ManifestWindowSeconds = int32(i64)
+				sv.ManifestWindowSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "segmentDurationSeconds":
@@ -5535,7 +5535,7 @@ func awsRestjson1_deserializeDocumentMssPackage(v **types.MssPackage, value inte
 				if err != nil {
 					return err
 				}
-				sv.SegmentDurationSeconds = int32(i64)
+				sv.SegmentDurationSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "streamSelection":
@@ -5712,7 +5712,7 @@ func awsRestjson1_deserializeDocumentOriginEndpoint(v **types.OriginEndpoint, va
 				if err != nil {
 					return err
 				}
-				sv.StartoverWindowSeconds = int32(i64)
+				sv.StartoverWindowSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "tags":
@@ -5730,7 +5730,7 @@ func awsRestjson1_deserializeDocumentOriginEndpoint(v **types.OriginEndpoint, va
 				if err != nil {
 					return err
 				}
-				sv.TimeDelaySeconds = int32(i64)
+				sv.TimeDelaySeconds = ptr.Int32(int32(i64))
 			}
 
 		case "url":
@@ -5963,7 +5963,7 @@ func awsRestjson1_deserializeDocumentStreamSelection(v **types.StreamSelection, 
 				if err != nil {
 					return err
 				}
-				sv.MaxVideoBitsPerSecond = int32(i64)
+				sv.MaxVideoBitsPerSecond = ptr.Int32(int32(i64))
 			}
 
 		case "minVideoBitsPerSecond":
@@ -5976,7 +5976,7 @@ func awsRestjson1_deserializeDocumentStreamSelection(v **types.StreamSelection, 
 				if err != nil {
 					return err
 				}
-				sv.MinVideoBitsPerSecond = int32(i64)
+				sv.MinVideoBitsPerSecond = ptr.Int32(int32(i64))
 			}
 
 		case "streamOrder":

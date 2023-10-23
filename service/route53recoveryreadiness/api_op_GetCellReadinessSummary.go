@@ -41,7 +41,7 @@ type GetCellReadinessSummaryInput struct {
 	CellName *string
 
 	// The number of objects that you want to return with this call.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token that identifies which batch of results you want to see.
 	NextToken *string
@@ -177,8 +177,8 @@ func NewGetCellReadinessSummaryPaginator(client GetCellReadinessSummaryAPIClient
 	}
 
 	options := GetCellReadinessSummaryPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -208,7 +208,11 @@ func (p *GetCellReadinessSummaryPaginator) NextPage(ctx context.Context, optFns 
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.GetCellReadinessSummary(ctx, &params, optFns...)
 	if err != nil {

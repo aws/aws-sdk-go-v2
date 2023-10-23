@@ -178,7 +178,7 @@ func awsRestjson1_deserializeOpDocumentCreateApiOutput(v **CreateApiOutput, valu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "apiId":
@@ -232,7 +232,7 @@ func awsRestjson1_deserializeOpDocumentCreateApiOutput(v **CreateApiOutput, valu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DisableExecuteApiEndpoint = jtv
+				sv.DisableExecuteApiEndpoint = ptr.Bool(jtv)
 			}
 
 		case "disableSchemaValidation":
@@ -241,7 +241,7 @@ func awsRestjson1_deserializeOpDocumentCreateApiOutput(v **CreateApiOutput, valu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DisableSchemaValidation = jtv
+				sv.DisableSchemaValidation = ptr.Bool(jtv)
 			}
 
 		case "importInfo":
@@ -670,7 +670,7 @@ func awsRestjson1_deserializeOpDocumentCreateAuthorizerOutput(v **CreateAuthoriz
 				if err != nil {
 					return err
 				}
-				sv.AuthorizerResultTtlInSeconds = int32(i64)
+				sv.AuthorizerResultTtlInSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "authorizerType":
@@ -697,7 +697,7 @@ func awsRestjson1_deserializeOpDocumentCreateAuthorizerOutput(v **CreateAuthoriz
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableSimpleResponses = jtv
+				sv.EnableSimpleResponses = ptr.Bool(jtv)
 			}
 
 		case "identitySource":
@@ -885,7 +885,7 @@ func awsRestjson1_deserializeOpDocumentCreateDeploymentOutput(v **CreateDeployme
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoDeployed = jtv
+				sv.AutoDeployed = ptr.Bool(jtv)
 			}
 
 		case "createdDate":
@@ -1281,7 +1281,7 @@ func awsRestjson1_deserializeOpDocumentCreateIntegrationOutput(v **CreateIntegra
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "connectionId":
@@ -1435,7 +1435,7 @@ func awsRestjson1_deserializeOpDocumentCreateIntegrationOutput(v **CreateIntegra
 				if err != nil {
 					return err
 				}
-				sv.TimeoutInMillis = int32(i64)
+				sv.TimeoutInMillis = ptr.Int32(int32(i64))
 			}
 
 		case "tlsConfig":
@@ -1993,7 +1993,7 @@ func awsRestjson1_deserializeOpDocumentCreateRouteOutput(v **CreateRouteOutput, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "apiKeyRequired":
@@ -2002,7 +2002,7 @@ func awsRestjson1_deserializeOpDocumentCreateRouteOutput(v **CreateRouteOutput, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiKeyRequired = jtv
+				sv.ApiKeyRequired = ptr.Bool(jtv)
 			}
 
 		case "authorizationScopes":
@@ -2442,7 +2442,7 @@ func awsRestjson1_deserializeOpDocumentCreateStageOutput(v **CreateStageOutput, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "autoDeploy":
@@ -2451,7 +2451,7 @@ func awsRestjson1_deserializeOpDocumentCreateStageOutput(v **CreateStageOutput, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoDeploy = jtv
+				sv.AutoDeploy = ptr.Bool(jtv)
 			}
 
 		case "clientCertificateId":
@@ -4508,7 +4508,7 @@ func awsRestjson1_deserializeOpDocumentGetApiOutput(v **GetApiOutput, value inte
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "apiId":
@@ -4562,7 +4562,7 @@ func awsRestjson1_deserializeOpDocumentGetApiOutput(v **GetApiOutput, value inte
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DisableExecuteApiEndpoint = jtv
+				sv.DisableExecuteApiEndpoint = ptr.Bool(jtv)
 			}
 
 		case "disableSchemaValidation":
@@ -4571,7 +4571,7 @@ func awsRestjson1_deserializeOpDocumentGetApiOutput(v **GetApiOutput, value inte
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DisableSchemaValidation = jtv
+				sv.DisableSchemaValidation = ptr.Bool(jtv)
 			}
 
 		case "importInfo":
@@ -5315,7 +5315,7 @@ func awsRestjson1_deserializeOpDocumentGetAuthorizerOutput(v **GetAuthorizerOutp
 				if err != nil {
 					return err
 				}
-				sv.AuthorizerResultTtlInSeconds = int32(i64)
+				sv.AuthorizerResultTtlInSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "authorizerType":
@@ -5342,7 +5342,7 @@ func awsRestjson1_deserializeOpDocumentGetAuthorizerOutput(v **GetAuthorizerOutp
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableSimpleResponses = jtv
+				sv.EnableSimpleResponses = ptr.Bool(jtv)
 			}
 
 		case "identitySource":
@@ -5686,7 +5686,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoDeployed = jtv
+				sv.AutoDeployed = ptr.Bool(jtv)
 			}
 
 		case "createdDate":
@@ -6391,7 +6391,7 @@ func awsRestjson1_deserializeOpDocumentGetIntegrationOutput(v **GetIntegrationOu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "connectionId":
@@ -6545,7 +6545,7 @@ func awsRestjson1_deserializeOpDocumentGetIntegrationOutput(v **GetIntegrationOu
 				if err != nil {
 					return err
 				}
-				sv.TimeoutInMillis = int32(i64)
+				sv.TimeoutInMillis = ptr.Int32(int32(i64))
 			}
 
 		case "tlsConfig":
@@ -7725,7 +7725,7 @@ func awsRestjson1_deserializeOpDocumentGetRouteOutput(v **GetRouteOutput, value 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "apiKeyRequired":
@@ -7734,7 +7734,7 @@ func awsRestjson1_deserializeOpDocumentGetRouteOutput(v **GetRouteOutput, value 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiKeyRequired = jtv
+				sv.ApiKeyRequired = ptr.Bool(jtv)
 			}
 
 		case "authorizationScopes":
@@ -8486,7 +8486,7 @@ func awsRestjson1_deserializeOpDocumentGetStageOutput(v **GetStageOutput, value 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "autoDeploy":
@@ -8495,7 +8495,7 @@ func awsRestjson1_deserializeOpDocumentGetStageOutput(v **GetStageOutput, value 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoDeploy = jtv
+				sv.AutoDeploy = ptr.Bool(jtv)
 			}
 
 		case "clientCertificateId":
@@ -9450,7 +9450,7 @@ func awsRestjson1_deserializeOpDocumentImportApiOutput(v **ImportApiOutput, valu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "apiId":
@@ -9504,7 +9504,7 @@ func awsRestjson1_deserializeOpDocumentImportApiOutput(v **ImportApiOutput, valu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DisableExecuteApiEndpoint = jtv
+				sv.DisableExecuteApiEndpoint = ptr.Bool(jtv)
 			}
 
 		case "disableSchemaValidation":
@@ -9513,7 +9513,7 @@ func awsRestjson1_deserializeOpDocumentImportApiOutput(v **ImportApiOutput, valu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DisableSchemaValidation = jtv
+				sv.DisableSchemaValidation = ptr.Bool(jtv)
 			}
 
 		case "importInfo":
@@ -9733,7 +9733,7 @@ func awsRestjson1_deserializeOpDocumentReimportApiOutput(v **ReimportApiOutput, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "apiId":
@@ -9787,7 +9787,7 @@ func awsRestjson1_deserializeOpDocumentReimportApiOutput(v **ReimportApiOutput, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DisableExecuteApiEndpoint = jtv
+				sv.DisableExecuteApiEndpoint = ptr.Bool(jtv)
 			}
 
 		case "disableSchemaValidation":
@@ -9796,7 +9796,7 @@ func awsRestjson1_deserializeOpDocumentReimportApiOutput(v **ReimportApiOutput, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DisableSchemaValidation = jtv
+				sv.DisableSchemaValidation = ptr.Bool(jtv)
 			}
 
 		case "importInfo":
@@ -10298,7 +10298,7 @@ func awsRestjson1_deserializeOpDocumentUpdateApiOutput(v **UpdateApiOutput, valu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "apiId":
@@ -10352,7 +10352,7 @@ func awsRestjson1_deserializeOpDocumentUpdateApiOutput(v **UpdateApiOutput, valu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DisableExecuteApiEndpoint = jtv
+				sv.DisableExecuteApiEndpoint = ptr.Bool(jtv)
 			}
 
 		case "disableSchemaValidation":
@@ -10361,7 +10361,7 @@ func awsRestjson1_deserializeOpDocumentUpdateApiOutput(v **UpdateApiOutput, valu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DisableSchemaValidation = jtv
+				sv.DisableSchemaValidation = ptr.Bool(jtv)
 			}
 
 		case "importInfo":
@@ -10790,7 +10790,7 @@ func awsRestjson1_deserializeOpDocumentUpdateAuthorizerOutput(v **UpdateAuthoriz
 				if err != nil {
 					return err
 				}
-				sv.AuthorizerResultTtlInSeconds = int32(i64)
+				sv.AuthorizerResultTtlInSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "authorizerType":
@@ -10817,7 +10817,7 @@ func awsRestjson1_deserializeOpDocumentUpdateAuthorizerOutput(v **UpdateAuthoriz
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableSimpleResponses = jtv
+				sv.EnableSimpleResponses = ptr.Bool(jtv)
 			}
 
 		case "identitySource":
@@ -11005,7 +11005,7 @@ func awsRestjson1_deserializeOpDocumentUpdateDeploymentOutput(v **UpdateDeployme
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoDeployed = jtv
+				sv.AutoDeployed = ptr.Bool(jtv)
 			}
 
 		case "createdDate":
@@ -11398,7 +11398,7 @@ func awsRestjson1_deserializeOpDocumentUpdateIntegrationOutput(v **UpdateIntegra
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "connectionId":
@@ -11552,7 +11552,7 @@ func awsRestjson1_deserializeOpDocumentUpdateIntegrationOutput(v **UpdateIntegra
 				if err != nil {
 					return err
 				}
-				sv.TimeoutInMillis = int32(i64)
+				sv.TimeoutInMillis = ptr.Int32(int32(i64))
 			}
 
 		case "tlsConfig":
@@ -12110,7 +12110,7 @@ func awsRestjson1_deserializeOpDocumentUpdateRouteOutput(v **UpdateRouteOutput, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "apiKeyRequired":
@@ -12119,7 +12119,7 @@ func awsRestjson1_deserializeOpDocumentUpdateRouteOutput(v **UpdateRouteOutput, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiKeyRequired = jtv
+				sv.ApiKeyRequired = ptr.Bool(jtv)
 			}
 
 		case "authorizationScopes":
@@ -12559,7 +12559,7 @@ func awsRestjson1_deserializeOpDocumentUpdateStageOutput(v **UpdateStageOutput, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "autoDeploy":
@@ -12568,7 +12568,7 @@ func awsRestjson1_deserializeOpDocumentUpdateStageOutput(v **UpdateStageOutput, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoDeploy = jtv
+				sv.AutoDeploy = ptr.Bool(jtv)
 			}
 
 		case "clientCertificateId":
@@ -13642,7 +13642,7 @@ func awsRestjson1_deserializeDocumentApi(v **types.Api, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "apiId":
@@ -13696,7 +13696,7 @@ func awsRestjson1_deserializeDocumentApi(v **types.Api, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DisableExecuteApiEndpoint = jtv
+				sv.DisableExecuteApiEndpoint = ptr.Bool(jtv)
 			}
 
 		case "disableSchemaValidation":
@@ -13705,7 +13705,7 @@ func awsRestjson1_deserializeDocumentApi(v **types.Api, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DisableSchemaValidation = jtv
+				sv.DisableSchemaValidation = ptr.Bool(jtv)
 			}
 
 		case "importInfo":
@@ -13930,7 +13930,7 @@ func awsRestjson1_deserializeDocumentAuthorizer(v **types.Authorizer, value inte
 				if err != nil {
 					return err
 				}
-				sv.AuthorizerResultTtlInSeconds = int32(i64)
+				sv.AuthorizerResultTtlInSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "authorizerType":
@@ -13957,7 +13957,7 @@ func awsRestjson1_deserializeDocumentAuthorizer(v **types.Authorizer, value inte
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableSimpleResponses = jtv
+				sv.EnableSimpleResponses = ptr.Bool(jtv)
 			}
 
 		case "identitySource":
@@ -14105,7 +14105,7 @@ func awsRestjson1_deserializeDocumentCors(v **types.Cors, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AllowCredentials = jtv
+				sv.AllowCredentials = ptr.Bool(jtv)
 			}
 
 		case "allowHeaders":
@@ -14138,7 +14138,7 @@ func awsRestjson1_deserializeDocumentCors(v **types.Cors, value interface{}) err
 				if err != nil {
 					return err
 				}
-				sv.MaxAge = int32(i64)
+				sv.MaxAge = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -14286,7 +14286,7 @@ func awsRestjson1_deserializeDocumentDeployment(v **types.Deployment, value inte
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoDeployed = jtv
+				sv.AutoDeployed = ptr.Bool(jtv)
 			}
 
 		case "createdDate":
@@ -14634,7 +14634,7 @@ func awsRestjson1_deserializeDocumentIntegration(v **types.Integration, value in
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "connectionId":
@@ -14788,7 +14788,7 @@ func awsRestjson1_deserializeDocumentIntegration(v **types.Integration, value in
 				if err != nil {
 					return err
 				}
-				sv.TimeoutInMillis = int32(i64)
+				sv.TimeoutInMillis = ptr.Int32(int32(i64))
 			}
 
 		case "tlsConfig":
@@ -15170,7 +15170,7 @@ func awsRestjson1_deserializeDocumentParameterConstraints(v **types.ParameterCon
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Required = jtv
+				sv.Required = ptr.Bool(jtv)
 			}
 
 		default:
@@ -15244,7 +15244,7 @@ func awsRestjson1_deserializeDocumentRoute(v **types.Route, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "apiKeyRequired":
@@ -15253,7 +15253,7 @@ func awsRestjson1_deserializeDocumentRoute(v **types.Route, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiKeyRequired = jtv
+				sv.ApiKeyRequired = ptr.Bool(jtv)
 			}
 
 		case "authorizationScopes":
@@ -15519,7 +15519,7 @@ func awsRestjson1_deserializeDocumentRouteSettings(v **types.RouteSettings, valu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DataTraceEnabled = jtv
+				sv.DataTraceEnabled = ptr.Bool(jtv)
 			}
 
 		case "detailedMetricsEnabled":
@@ -15528,7 +15528,7 @@ func awsRestjson1_deserializeDocumentRouteSettings(v **types.RouteSettings, valu
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DetailedMetricsEnabled = jtv
+				sv.DetailedMetricsEnabled = ptr.Bool(jtv)
 			}
 
 		case "loggingLevel":
@@ -15550,7 +15550,7 @@ func awsRestjson1_deserializeDocumentRouteSettings(v **types.RouteSettings, valu
 				if err != nil {
 					return err
 				}
-				sv.ThrottlingBurstLimit = int32(i64)
+				sv.ThrottlingBurstLimit = ptr.Int32(int32(i64))
 			}
 
 		case "throttlingRateLimit":
@@ -15561,7 +15561,7 @@ func awsRestjson1_deserializeDocumentRouteSettings(v **types.RouteSettings, valu
 					if err != nil {
 						return err
 					}
-					sv.ThrottlingRateLimit = f64
+					sv.ThrottlingRateLimit = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -15579,7 +15579,7 @@ func awsRestjson1_deserializeDocumentRouteSettings(v **types.RouteSettings, valu
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.ThrottlingRateLimit = f64
+					sv.ThrottlingRateLimit = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -15700,7 +15700,7 @@ func awsRestjson1_deserializeDocumentStage(v **types.Stage, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApiGatewayManaged = jtv
+				sv.ApiGatewayManaged = ptr.Bool(jtv)
 			}
 
 		case "autoDeploy":
@@ -15709,7 +15709,7 @@ func awsRestjson1_deserializeDocumentStage(v **types.Stage, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoDeploy = jtv
+				sv.AutoDeploy = ptr.Bool(jtv)
 			}
 
 		case "clientCertificateId":

@@ -40,7 +40,7 @@ type RemoveAllBackendsInput struct {
 	AppId *string
 
 	// Cleans up the Amplify Console app if this value is set to true.
-	CleanAmplifyApp bool
+	CleanAmplifyApp *bool
 
 	noSmithyDocumentSerde
 }

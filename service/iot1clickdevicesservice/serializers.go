@@ -526,8 +526,8 @@ func awsRestjson1_serializeOpHttpBindingsListDeviceEventsInput(v *ListDeviceEven
 		encoder.SetQuery("fromTimeStamp").String(smithytime.FormatDateTime(*v.FromTimeStamp))
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -598,8 +598,8 @@ func awsRestjson1_serializeOpHttpBindingsListDevicesInput(v *ListDevicesInput, e
 		encoder.SetQuery("deviceType").String(*v.DeviceType)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -980,9 +980,9 @@ func awsRestjson1_serializeOpDocumentUpdateDeviceStateInput(v *UpdateDeviceState
 	object := value.Object()
 	defer object.Close()
 
-	if v.Enabled {
+	if v.Enabled != nil {
 		ok := object.Key("enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	return nil

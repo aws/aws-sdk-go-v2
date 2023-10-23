@@ -56,12 +56,12 @@ type GetResourceProfileOutput struct {
 	// error) to 100 (sensitive). By default, this score is calculated automatically
 	// based on the amount of data that Amazon Macie has analyzed in the bucket and the
 	// amount of sensitive data that Macie has found in the bucket.
-	SensitivityScore int32
+	SensitivityScore *int32
 
 	// Specifies whether the bucket's current sensitivity score was set manually. If
 	// this value is true, the score was manually changed to 100. If this value is
 	// false, the score was calculated automatically by Amazon Macie.
-	SensitivityScoreOverridden bool
+	SensitivityScoreOverridden *bool
 
 	// The sensitive data discovery statistics for the bucket. The statistics capture
 	// the results of automated sensitive data discovery activities that Amazon Macie

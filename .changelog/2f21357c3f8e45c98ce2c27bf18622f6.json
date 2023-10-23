@@ -1,0 +1,25 @@
+{
+    "id": "2f21357c-3f8e-45c9-8ce2-c27bf18622f6",
+    "type": "feature",
+    "description": "**BREAKFIX**: Correct nullability representation of APIGateway-based services.",
+    "modules": [
+        "service/amplifybackend",
+        "service/apigatewayv2",
+        "service/greengrass",
+        "service/iot1clickdevicesservice",
+        "service/kafka",
+        "service/macie2",
+        "service/mediaconnect",
+        "service/mediaconvert",
+        "service/medialive",
+        "service/mediapackage",
+        "service/mediapackagevod",
+        "service/mq",
+        "service/pinpoint",
+        "service/pinpointsmsvoice",
+        "service/route53recoverycontrolconfig",
+        "service/route53recoveryreadiness",
+        "service/schemas",
+        "service/serverlessapplicationrepository"
+    ]
+}

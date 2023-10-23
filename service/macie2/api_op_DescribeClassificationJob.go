@@ -70,7 +70,7 @@ type DescribeClassificationJobOutput struct {
 	// configured the job to analyze only those objects that were created or changed
 	// after the job was created and before the job's first scheduled run, this value
 	// is false. This value is also false for a one-time job.
-	InitialRun bool
+	InitialRun *bool
 
 	// The Amazon Resource Name (ARN) of the job.
 	JobArn *string
@@ -151,7 +151,7 @@ type DescribeClassificationJobOutput struct {
 
 	// The sampling depth, as a percentage, that determines the percentage of eligible
 	// objects that the job analyzes.
-	SamplingPercentage int32
+	SamplingPercentage *int32
 
 	// The recurrence pattern for running the job. This value is null if the job is
 	// configured to run only once.

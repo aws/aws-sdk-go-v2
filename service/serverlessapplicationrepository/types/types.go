@@ -128,24 +128,24 @@ type ParameterDefinition struct {
 
 	// An integer value that determines the largest number of characters that you want
 	// to allow for String types.
-	MaxLength int32
+	MaxLength *int32
 
 	// A numeric value that determines the largest numeric value that you want to
 	// allow for Number types.
-	MaxValue int32
+	MaxValue *int32
 
 	// An integer value that determines the smallest number of characters that you
 	// want to allow for String types.
-	MinLength int32
+	MinLength *int32
 
 	// A numeric value that determines the smallest numeric value that you want to
 	// allow for Number types.
-	MinValue int32
+	MinValue *int32
 
 	// Whether to mask the parameter value whenever anyone makes a call that describes
 	// the stack. If you set the value to true, the parameter value is masked with
 	// asterisks (*****).
-	NoEcho bool
+	NoEcho *bool
 
 	// The type of the parameter.Valid values: String | Number | List<Number> |
 	// CommaDelimitedList String: A literal string.For example, users can specify
@@ -192,7 +192,7 @@ type RollbackConfiguration struct {
 	// This property corresponds to the content of the same name for the AWS
 	// CloudFormation RollbackConfiguration (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
 	// Data Type.
-	MonitoringTimeInMinutes int32
+	MonitoringTimeInMinutes *int32
 
 	// This property corresponds to the content of the same name for the AWS
 	// CloudFormation RollbackConfiguration (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
@@ -296,7 +296,7 @@ type Version struct {
 	// the region in which it is being retrieved.
 	//
 	// This member is required.
-	ResourcesSupported bool
+	ResourcesSupported *bool
 
 	// The semantic version of the application: https://semver.org/ (https://semver.org/)
 	//

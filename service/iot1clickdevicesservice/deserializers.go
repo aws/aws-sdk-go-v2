@@ -178,7 +178,7 @@ func awsRestjson1_deserializeOpDocumentClaimDevicesByClaimCodeOutput(v **ClaimDe
 				if err != nil {
 					return err
 				}
-				sv.Total = int32(i64)
+				sv.Total = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -2460,7 +2460,7 @@ func awsRestjson1_deserializeDocumentDeviceDescription(v **types.DeviceDescripti
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "remainingLife":
@@ -2471,7 +2471,7 @@ func awsRestjson1_deserializeDocumentDeviceDescription(v **types.DeviceDescripti
 					if err != nil {
 						return err
 					}
-					sv.RemainingLife = f64
+					sv.RemainingLife = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -2489,7 +2489,7 @@ func awsRestjson1_deserializeDocumentDeviceDescription(v **types.DeviceDescripti
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.RemainingLife = f64
+					sv.RemainingLife = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __doubleMin0Max100 to be a JSON Number, got %T instead", value)

@@ -1238,6 +1238,9 @@ func validateCloudWatchLogs(v *types.CloudWatchLogs) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLogs"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1252,6 +1255,9 @@ func validateConfigurationInfo(v *types.ConfigurationInfo) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ConfigurationInfo"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Revision == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Revision"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1285,6 +1291,12 @@ func validateConsumerGroupReplicationUpdate(v *types.ConsumerGroupReplicationUpd
 	}
 	if v.ConsumerGroupsToReplicate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConsumerGroupsToReplicate"))
+	}
+	if v.DetectAndCopyNewConsumerGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectAndCopyNewConsumerGroups"))
+	}
+	if v.SynchroniseConsumerGroupOffsets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SynchroniseConsumerGroupOffsets"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1330,6 +1342,9 @@ func validateFirehose(v *types.Firehose) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Firehose"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1342,6 +1357,9 @@ func validateJmxExporterInfo(v *types.JmxExporterInfo) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "JmxExporterInfo"}
+	if v.EnabledInBroker == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnabledInBroker"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1414,6 +1432,9 @@ func validateNodeExporterInfo(v *types.NodeExporterInfo) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NodeExporterInfo"}
+	if v.EnabledInBroker == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnabledInBroker"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1497,6 +1518,9 @@ func validateProvisionedRequest(v *types.ProvisionedRequest) error {
 			invalidParams.AddNested("LoggingInfo", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.NumberOfBrokerNodes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NumberOfBrokerNodes"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1544,6 +1568,9 @@ func validateS3(v *types.S3) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1590,6 +1617,15 @@ func validateTopicReplicationUpdate(v *types.TopicReplicationUpdate) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TopicReplicationUpdate"}
+	if v.CopyAccessControlListsForTopics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CopyAccessControlListsForTopics"))
+	}
+	if v.CopyTopicConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CopyTopicConfigurations"))
+	}
+	if v.DetectAndCopyNewTopics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectAndCopyNewTopics"))
+	}
 	if v.TopicsToExclude == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TopicsToExclude"))
 	}
@@ -1691,6 +1727,9 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 		if err := validateLoggingInfo(v.LoggingInfo); err != nil {
 			invalidParams.AddNested("LoggingInfo", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.NumberOfBrokerNodes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NumberOfBrokerNodes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1958,6 +1997,9 @@ func validateOpDescribeConfigurationRevisionInput(v *DescribeConfigurationRevisi
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeConfigurationRevisionInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Revision == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Revision"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2231,6 +2273,9 @@ func validateOpUpdateBrokerCountInput(v *UpdateBrokerCountInput) error {
 	}
 	if v.CurrentVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
+	}
+	if v.TargetNumberOfBrokerNodes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetNumberOfBrokerNodes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

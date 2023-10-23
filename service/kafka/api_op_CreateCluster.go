@@ -52,7 +52,7 @@ type CreateClusterInput struct {
 	// The number of broker nodes in the cluster.
 	//
 	// This member is required.
-	NumberOfBrokerNodes int32
+	NumberOfBrokerNodes *int32
 
 	// Includes all client authentication related information.
 	ClientAuthentication *types.ClientAuthentication

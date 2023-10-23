@@ -66,10 +66,10 @@ type StartMultiplexOutput struct {
 	Name *string
 
 	// The number of currently healthy pipelines.
-	PipelinesRunningCount int32
+	PipelinesRunningCount *int32
 
 	// The number of programs in the multiplex.
-	ProgramCount int32
+	ProgramCount *int32
 
 	// The current state of the multiplex.
 	State types.MultiplexState

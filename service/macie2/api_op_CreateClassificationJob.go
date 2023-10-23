@@ -80,7 +80,7 @@ type CreateClassificationJobInput struct {
 	// objects that are created or changed after you create the job and before the
 	// job's first scheduled run, set this value to false. If you configure the job to
 	// run only once, don't specify a value for this property.
-	InitialRun bool
+	InitialRun *bool
 
 	// An array of unique identifiers, one for each managed data identifier for the
 	// job to include (use) or exclude (not use) when it analyzes data. Inclusion or
@@ -120,7 +120,7 @@ type CreateClassificationJobInput struct {
 	// analyzes. If this value is less than 100, Amazon Macie selects the objects to
 	// analyze at random, up to the specified percentage, and analyzes all the data in
 	// those objects.
-	SamplingPercentage int32
+	SamplingPercentage *int32
 
 	// The recurrence pattern for running the job. To run the job only once, don't
 	// specify a value for this property and set the value for the jobType property to

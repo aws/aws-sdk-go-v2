@@ -54,7 +54,7 @@ type UpdateStorageInput struct {
 	StorageMode types.StorageMode
 
 	// size of the EBS volume to update.
-	VolumeSizeGB int32
+	VolumeSizeGB *int32
 
 	noSmithyDocumentSerde
 }

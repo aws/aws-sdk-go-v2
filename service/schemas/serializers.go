@@ -80,9 +80,9 @@ func awsRestjson1_serializeOpDocumentCreateDiscovererInput(v *CreateDiscovererIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.CrossAccount {
+	if v.CrossAccount != nil {
 		ok := object.Key("CrossAccount")
-		ok.Boolean(v.CrossAccount)
+		ok.Boolean(*v.CrossAccount)
 	}
 
 	if v.Description != nil {
@@ -1324,8 +1324,8 @@ func awsRestjson1_serializeOpHttpBindingsListDiscoverersInput(v *ListDiscoverers
 		encoder.SetQuery("discovererIdPrefix").String(*v.DiscovererIdPrefix)
 	}
 
-	if v.Limit != 0 {
-		encoder.SetQuery("limit").Integer(v.Limit)
+	if v.Limit != nil {
+		encoder.SetQuery("limit").Integer(*v.Limit)
 	}
 
 	if v.NextToken != nil {
@@ -1392,8 +1392,8 @@ func awsRestjson1_serializeOpHttpBindingsListRegistriesInput(v *ListRegistriesIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Limit != 0 {
-		encoder.SetQuery("limit").Integer(v.Limit)
+	if v.Limit != nil {
+		encoder.SetQuery("limit").Integer(*v.Limit)
 	}
 
 	if v.NextToken != nil {
@@ -1464,8 +1464,8 @@ func awsRestjson1_serializeOpHttpBindingsListSchemasInput(v *ListSchemasInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Limit != 0 {
-		encoder.SetQuery("limit").Integer(v.Limit)
+	if v.Limit != nil {
+		encoder.SetQuery("limit").Integer(*v.Limit)
 	}
 
 	if v.NextToken != nil {
@@ -1541,8 +1541,8 @@ func awsRestjson1_serializeOpHttpBindingsListSchemaVersionsInput(v *ListSchemaVe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Limit != 0 {
-		encoder.SetQuery("limit").Integer(v.Limit)
+	if v.Limit != nil {
+		encoder.SetQuery("limit").Integer(*v.Limit)
 	}
 
 	if v.NextToken != nil {
@@ -1867,8 +1867,8 @@ func awsRestjson1_serializeOpHttpBindingsSearchSchemasInput(v *SearchSchemasInpu
 		encoder.SetQuery("keywords").String(*v.Keywords)
 	}
 
-	if v.Limit != 0 {
-		encoder.SetQuery("limit").Integer(v.Limit)
+	if v.Limit != nil {
+		encoder.SetQuery("limit").Integer(*v.Limit)
 	}
 
 	if v.NextToken != nil {
@@ -2258,9 +2258,9 @@ func awsRestjson1_serializeOpDocumentUpdateDiscovererInput(v *UpdateDiscovererIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.CrossAccount {
+	if v.CrossAccount != nil {
 		ok := object.Key("CrossAccount")
-		ok.Boolean(v.CrossAccount)
+		ok.Boolean(*v.CrossAccount)
 	}
 
 	if v.Description != nil {

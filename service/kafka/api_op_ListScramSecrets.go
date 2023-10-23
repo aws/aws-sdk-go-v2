@@ -39,7 +39,7 @@ type ListScramSecretsInput struct {
 	ClusterArn *string
 
 	// The maxResults of the query.
-	MaxResults int32
+	MaxResults *int32
 
 	// The nextToken of the query.
 	NextToken *string
@@ -170,8 +170,8 @@ func NewListScramSecretsPaginator(client ListScramSecretsAPIClient, params *List
 	}
 
 	options := ListScramSecretsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -201,7 +201,11 @@ func (p *ListScramSecretsPaginator) NextPage(ctx context.Context, optFns ...func
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListScramSecrets(ctx, &params, optFns...)
 	if err != nil {

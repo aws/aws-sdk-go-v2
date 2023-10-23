@@ -36,7 +36,7 @@ type ListBrokersInput struct {
 
 	// The maximum number of brokers that Amazon MQ can return per page (20 by
 	// default). This value must be an integer from 5 to 100.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.
@@ -166,8 +166,8 @@ func NewListBrokersPaginator(client ListBrokersAPIClient, params *ListBrokersInp
 	}
 
 	options := ListBrokersPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -197,7 +197,11 @@ func (p *ListBrokersPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListBrokers(ctx, &params, optFns...)
 	if err != nil {

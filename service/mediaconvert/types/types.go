@@ -32,7 +32,7 @@ type AacSettings struct {
 	// 896000, 1024000. The value you set is also constrained by the values that you
 	// choose for Profile, Bitrate control mode, and Sample rate. Default values depend
 	// on Bitrate control mode and Profile.
-	Bitrate int32
+	Bitrate *int32
 
 	// AAC Profile.
 	CodecProfile AacCodecProfile
@@ -62,7 +62,7 @@ type AacSettings struct {
 	// mode 1.0 and Receiver Mix: 22050, 24000, 32000, 44100, 48000. * HEV1 Profile,
 	// Coding mode 2.0 and 5.1: 32000, 44100, 48000, 96000. * HEV2 Profile, Coding mode
 	// 2.0: 22050, 24000, 32000, 44100, 48000.
-	SampleRate int32
+	SampleRate *int32
 
 	// Use MPEG-2 AAC instead of MPEG-4 AAC audio for raw or MPEG-2 Transport Stream
 	// containers.
@@ -85,7 +85,7 @@ type Ac3Settings struct {
 	// 128000. Maximum: 384000. Valid bitrates for coding mode 2/0: Default: 192000.
 	// Minimum: 128000. Maximum: 384000. Valid bitrates for coding mode 3/2 with FLE:
 	// Default: 384000. Minimum: 384000. Maximum: 640000.
-	Bitrate int32
+	Bitrate *int32
 
 	// Specify the bitstream mode for the AC-3 stream that the encoder emits. For more
 	// information about the AC3 bitstream mode, see ATSC A/52-2012 (Annex E).
@@ -96,7 +96,7 @@ type Ac3Settings struct {
 
 	// Sets the dialnorm for the output. If blank and input audio is Dolby Digital,
 	// dialnorm will be passed through.
-	Dialnorm int32
+	Dialnorm *int32
 
 	// Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert
 	// uses when encoding the metadata in the Dolby Digital stream for the line
@@ -137,7 +137,7 @@ type Ac3Settings struct {
 	MetadataControl Ac3MetadataControl
 
 	// This value is always 48000. It represents the sample rate in Hz.
-	SampleRate int32
+	SampleRate *int32
 
 	noSmithyDocumentSerde
 }
@@ -181,14 +181,14 @@ type AiffSettings struct {
 
 	// Specify Bit depth, in bits per sample, to choose the encoding quality for this
 	// audio track.
-	BitDepth int32
+	BitDepth *int32
 
 	// Specify the number of channels in this output audio track. Valid values are 1
 	// and even numbers up to 64. For example, 1, 2, 4, 6, and so on, up to 64.
-	Channels int32
+	Channels *int32
 
 	// Sample rate in hz.
-	SampleRate int32
+	SampleRate *int32
 
 	noSmithyDocumentSerde
 }
@@ -204,13 +204,13 @@ type AiffSettings struct {
 type AllowedRenditionSize struct {
 
 	// Use Height to define the video resolution height, in pixels, for this rule.
-	Height int32
+	Height *int32
 
 	// Set to ENABLED to force a rendition to be included.
 	Required RequiredFlag
 
 	// Use Width to define the video resolution width, in pixels, for this rule.
-	Width int32
+	Width *int32
 
 	noSmithyDocumentSerde
 }
@@ -226,7 +226,7 @@ type AncillarySourceSettings struct {
 
 	// Specifies the 608 channel number in the ancillary data track from which to
 	// extract captions. Unused for passthrough.
-	SourceAncillaryChannelNumber int32
+	SourceAncillaryChannelNumber *int32
 
 	// By default, the service terminates any unterminated captions at the end of each
 	// input. If you want the caption to continue onto your next input, disable this
@@ -349,7 +349,7 @@ type AudioDescription struct {
 	// 0 and 255. The following are defined in ISO-IEC 13818-1: 0 = Undefined, 1 =
 	// Clean Effects, 2 = Hearing Impaired, 3 = Visually Impaired Commentary, 4-255 =
 	// Reserved.
-	AudioType int32
+	AudioType *int32
 
 	// When set to FOLLOW_INPUT, if the input contains an ISO 639 audio_type, then
 	// that value is passed through to the output. If the input contains no ISO 639
@@ -421,7 +421,7 @@ type AudioNormalizationSettings struct {
 
 	// Content measuring above this level will be corrected to the target level.
 	// Content measuring below this level will not be corrected.
-	CorrectionGateLevel int32
+	CorrectionGateLevel *int32
 
 	// If set to LOG, log each output's audio track loudness to a CSV file.
 	LoudnessLogging AudioNormalizationLoudnessLogging
@@ -435,13 +435,13 @@ type AudioNormalizationSettings struct {
 	// for you, based on the algorithm that you choose for Algorithm. If you choose
 	// algorithm 1770-1, the encoder will choose -24 LKFS; otherwise, the encoder will
 	// choose -23 LKFS.
-	TargetLkfs float64
+	TargetLkfs *float64
 
 	// Specify the True-peak limiter threshold in decibels relative to full scale
 	// (dBFS). The peak inter-audio sample loudness in your output will be limited to
 	// the value that you specify, without affecting the overall target LKFS. Enter a
 	// value from 0 to -8. Leave blank to use the default value 0.
-	TruePeakLimiterThreshold float64
+	TruePeakLimiterThreshold *float64
 
 	noSmithyDocumentSerde
 }
@@ -492,7 +492,7 @@ type AudioSelector struct {
 	LanguageCode LanguageCode
 
 	// Specifies a time delta in milliseconds to offset the audio from the input video.
-	Offset int32
+	Offset *int32
 
 	// Selects a specific PID from within an audio source (e.g. 257 selects PID 0x101).
 	Pids []int32
@@ -504,7 +504,7 @@ type AudioSelector struct {
 	// the program number from the dropdown list. If your input file has incorrect
 	// metadata, you can choose All channels instead of a program number to have the
 	// service ignore the program IDs and include all the programs in the track.
-	ProgramSelection int32
+	ProgramSelection *int32
 
 	// Use these settings to reorder the audio channels of one input to match those of
 	// another input. This allows you to combine the two files into a single output,
@@ -617,21 +617,21 @@ type AutomatedAbrSettings struct {
 	// or below this value, depending on the quality, complexity, and resolution of
 	// your content. Note that the instantaneous maximum bitrate may vary above the
 	// value that you specify.
-	MaxAbrBitrate int32
+	MaxAbrBitrate *int32
 
 	// Optional. The maximum number of renditions that MediaConvert will create in
 	// your automated ABR stack. The number of renditions is determined automatically,
 	// based on analysis of each job, but will never exceed this limit. When you set
 	// this to Auto in the console, which is equivalent to excluding it from your JSON
 	// job specification, MediaConvert defaults to a limit of 15.
-	MaxRenditions int32
+	MaxRenditions *int32
 
 	// Specify the minimum average bitrate for MediaConvert to use in your automated
 	// ABR stack. If you don't specify a value, MediaConvert uses 600,000 (600 kb/s) by
 	// default. The average bitrate of your lowest-quality rendition will be near this
 	// value. Note that the instantaneous minimum bitrate may vary below the value that
 	// you specify.
-	MinAbrBitrate int32
+	MinAbrBitrate *int32
 
 	// Optional. Use Automated ABR rules to specify restrictions for the rendition
 	// sizes MediaConvert will create in your ABR stack. You can use these rules if
@@ -671,7 +671,7 @@ type Av1QvbrSettings struct {
 	// the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality
 	// level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to
 	// .33.
-	QvbrQualityLevel int32
+	QvbrQualityLevel *int32
 
 	// Optional. Specify a value here to set the QVBR quality to a level that is
 	// between whole numbers. For example, if you want your QVBR quality level to be
@@ -679,7 +679,7 @@ type Av1QvbrSettings struct {
 	// MediaConvert rounds your QVBR quality level to the nearest third of a whole
 	// number. For example, if you set qvbrQualityLevel to 7 and you set
 	// qvbrQualityLevelFineTune to .25, your actual QVBR quality level is 7.33.
-	QvbrQualityLevelFineTune float64
+	QvbrQualityLevelFineTune *float64
 
 	noSmithyDocumentSerde
 }
@@ -730,7 +730,7 @@ type Av1Settings struct {
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
 	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
@@ -738,21 +738,21 @@ type Av1Settings struct {
 	// use 24000 for the value of FramerateNumerator. When you use the console for
 	// transcode jobs that use frame rate conversion, provide the value as a decimal
 	// number for Framerate. In this example, specify 23.976.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	// Specify the GOP length (keyframe interval) in frames. With AV1, MediaConvert
 	// doesn't support GOP length in seconds. This value must be greater than zero and
 	// preferably equal to 1 + ((numberBFrames + 1) * x), where x is an integer value.
-	GopSize float64
+	GopSize *float64
 
 	// Maximum bitrate in bits/second. For example, enter five megabits per second as
 	// 5000000. Required when Rate control mode is QVBR.
-	MaxBitrate int32
+	MaxBitrate *int32
 
 	// Specify from the number of B-frames, in the range of 0-15. For AV1 encoding, we
 	// recommend using 7 or 15. Choose a larger number for a lower bitrate and smaller
 	// file size; choose a smaller number for better video quality.
-	NumberBFramesBetweenReferenceFrames int32
+	NumberBFramesBetweenReferenceFrames *int32
 
 	// Settings for quality-defined variable bitrate encoding with the H.265 codec.
 	// Use these settings only when you set QVBR for Rate control mode.
@@ -766,7 +766,7 @@ type Av1Settings struct {
 	// 32. For progressive pictures, this value must be less than or equal to the
 	// number of macroblock rows. For interlaced pictures, this value must be less than
 	// or equal to half the number of macroblock rows.
-	Slices int32
+	Slices *int32
 
 	// Keep the default value, Enabled, to adjust quantization within each frame based
 	// on spatial variation of content complexity. When you enable this feature, the
@@ -846,7 +846,7 @@ type AvcIntraSettings struct {
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
 	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
@@ -854,7 +854,7 @@ type AvcIntraSettings struct {
 	// use 24000 for the value of FramerateNumerator. When you use the console for
 	// transcode jobs that use frame rate conversion, provide the value as a decimal
 	// number for Framerate. In this example, specify 23.976.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	// Choose the scan line type for the output. Keep the default value, Progressive
 	// to create a progressive output, regardless of the scan type of your input. Use
@@ -979,7 +979,7 @@ type BurninDestinationSettings struct {
 	// input captions to your output captions. If Style passthrough is set to disabled,
 	// leave blank to use a value of 0 and remove all backgrounds from your output
 	// captions.
-	BackgroundOpacity int32
+	BackgroundOpacity *int32
 
 	// Specify the font that you want the service to use for your burn in captions
 	// when your input captions specify a font that MediaConvert doesn't support. When
@@ -997,10 +997,10 @@ type BurninDestinationSettings struct {
 	FontColor BurninSubtitleFontColor
 
 	// Specify the opacity of the burned-in captions. 255 is opaque; 0 is transparent.
-	FontOpacity int32
+	FontOpacity *int32
 
 	// Specify the Font resolution in DPI (dots per inch).
-	FontResolution int32
+	FontResolution *int32
 
 	// Set Font script to Automatically determined, or leave blank, to automatically
 	// determine the font script in your input captions. Otherwise, set to Simplified
@@ -1010,7 +1010,7 @@ type BurninDestinationSettings struct {
 
 	// Specify the Font size in pixels. Must be a positive integer. Set to 0, or leave
 	// blank, for automatic font size.
-	FontSize int32
+	FontSize *int32
 
 	// Ignore this setting unless your Font color is set to Hex. Enter either six or
 	// eight hexidecimal digits, representing red, green, and blue, with two optional
@@ -1026,7 +1026,7 @@ type BurninDestinationSettings struct {
 	// Specify the Outline size of the caption text, in pixels. Leave Outline size
 	// blank and set Style passthrough to enabled to use the outline size data from
 	// your input captions, if present.
-	OutlineSize int32
+	OutlineSize *int32
 
 	// Specify the color of the shadow cast by the captions. Leave Shadow color blank
 	// and set Style passthrough to enabled to use the shadow color data from your
@@ -1038,17 +1038,17 @@ type BurninDestinationSettings struct {
 	// Shadow opacity blank to pass through the shadow style information in your input
 	// captions to your output captions. If Style passthrough is set to disabled, leave
 	// blank to use a value of 0 and remove all shadows from your output captions.
-	ShadowOpacity int32
+	ShadowOpacity *int32
 
 	// Specify the horizontal offset of the shadow, relative to the captions in
 	// pixels. A value of -2 would result in a shadow offset 2 pixels to the left.
-	ShadowXOffset int32
+	ShadowXOffset *int32
 
 	// Specify the vertical offset of the shadow relative to the captions in pixels. A
 	// value of -2 would result in a shadow offset 2 pixels above the text. Leave
 	// Shadow y-offset blank and set Style passthrough to enabled to use the shadow
 	// y-offset data from your input captions, if present.
-	ShadowYOffset int32
+	ShadowYOffset *int32
 
 	// Set Style passthrough to ENABLED to use the available style, color, and
 	// position information from your input captions. MediaConvert uses default
@@ -1070,13 +1070,13 @@ type BurninDestinationSettings struct {
 	// the output in pixels. A value of 10 would result in the captions starting 10
 	// pixels from the left of the output. If no explicit x_position is provided, the
 	// horizontal caption position will be determined by the alignment parameter.
-	XPosition int32
+	XPosition *int32
 
 	// Specify the vertical position of the captions, relative to the top of the
 	// output in pixels. A value of 10 would result in the captions starting 10 pixels
 	// from the top of the output. If no explicit y_position is provided, the caption
 	// will be positioned towards the bottom of the output.
-	YPosition int32
+	YPosition *int32
 
 	noSmithyDocumentSerde
 }
@@ -1278,12 +1278,12 @@ type CaptionSourceFramerate struct {
 	// Specify the denominator of the fraction that represents the frame rate for the
 	// setting Caption source frame rate. Use this setting along with the setting
 	// Framerate numerator.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// Specify the numerator of the fraction that represents the frame rate for the
 	// setting Caption source frame rate. Use this setting along with the setting
 	// Framerate denominator.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	noSmithyDocumentSerde
 }
@@ -1365,7 +1365,7 @@ type ClipLimits struct {
 	// an offset percentage to the maximum possible value. Leave blank to use the
 	// default value 100. When you specify a value for Maximum RGB tolerance, you must
 	// set Sample range conversion to Limited range clip.
-	MaximumRGBTolerance int32
+	MaximumRGBTolerance *int32
 
 	// Specify the Maximum YUV color sample limit. MediaConvert conforms any pixels in
 	// your input above the value that you specify to typical limited range bounds.
@@ -1373,7 +1373,7 @@ type ClipLimits struct {
 	// value that you enter applies to 10-bit ranges. For 8-bit ranges, MediaConvert
 	// automatically scales this value down. When you specify a value for Maximum YUV,
 	// you must set Sample range conversion to Limited range clip.
-	MaximumYUV int32
+	MaximumYUV *int32
 
 	// Specify the Minimum RGB color sample range tolerance for your output.
 	// MediaConvert corrects any YUV values that, when converted to RGB, would be
@@ -1381,7 +1381,7 @@ type ClipLimits struct {
 	// an offset percentage to the minimum possible value. Leave blank to use the
 	// default value 0. When you specify a value for Minimum RGB tolerance, you must
 	// set Sample range conversion to Limited range clip.
-	MinimumRGBTolerance int32
+	MinimumRGBTolerance *int32
 
 	// Specify the Minimum YUV color sample limit. MediaConvert conforms any pixels in
 	// your input below the value that you specify to typical limited range bounds.
@@ -1389,7 +1389,7 @@ type ClipLimits struct {
 	// value that you enter applies to 10-bit ranges. For 8-bit ranges, MediaConvert
 	// automatically scales this value down. When you specify a value for Minumum YUV,
 	// you must set Sample range conversion to Limited range clip.
-	MinimumYUV int32
+	MinimumYUV *int32
 
 	noSmithyDocumentSerde
 }
@@ -1499,7 +1499,7 @@ type CmafGroupSettings struct {
 	// Specify the length, in whole seconds, of the mp4 fragments. When you don't
 	// specify a value, MediaConvert defaults to 2. Related setting: Use Fragment
 	// length control to specify whether the encoder enforces this value strictly.
-	FragmentLength int32
+	FragmentLength *int32
 
 	// Specify whether MediaConvert generates images for trick play. Keep the default
 	// value, None, to not generate any images. Choose Thumbnail to generate tiled
@@ -1526,7 +1526,7 @@ type CmafGroupSettings struct {
 
 	// Minimum time of initially buffered media that is needed to ensure smooth
 	// playout.
-	MinBufferTime int32
+	MinBufferTime *int32
 
 	// Keep this setting at the default value of 0, unless you are troubleshooting a
 	// problem with how devices play back the end of your video asset. If you know that
@@ -1539,7 +1539,7 @@ type CmafGroupSettings struct {
 	// seconds and your final segment is .5 seconds without a minimum final segment
 	// length; when you set the minimum final segment length to 1, your final segment
 	// is 3.5 seconds.
-	MinFinalSegmentLength float64
+	MinFinalSegmentLength *float64
 
 	// Specify how the value for bandwidth is determined for each video Representation
 	// in your output MPD manifest. We recommend that you choose a MPD manifest
@@ -1578,7 +1578,7 @@ type CmafGroupSettings struct {
 	// to specify whether the encoder enforces this value strictly. Use Segment control
 	// to specify whether MediaConvert creates separate segment files or one content
 	// file that has metadata to mark the segment boundaries.
-	SegmentLength int32
+	SegmentLength *int32
 
 	// Specify how you want MediaConvert to determine the segment length. Choose Exact
 	// to have the encoder use the exact length that you specify with the setting
@@ -1640,25 +1640,25 @@ type CmafImageBasedTrickPlaySettings struct {
 	// maintain aspect ratio with thumbnail width. If following the aspect ratio would
 	// lead to a total tile height greater than 4096, then the job will be rejected.
 	// Must be divisible by 2.
-	ThumbnailHeight int32
+	ThumbnailHeight *int32
 
 	// Enter the interval, in seconds, that MediaConvert uses to generate thumbnails.
 	// If the interval you enter doesn't align with the output frame rate, MediaConvert
 	// automatically rounds the interval to align with the output frame rate. For
 	// example, if the output frame rate is 29.97 frames per second and you enter 5,
 	// MediaConvert uses a 150 frame interval to generate thumbnails.
-	ThumbnailInterval float64
+	ThumbnailInterval *float64
 
 	// Width of each thumbnail within each tile image, in pixels. Default is 312. Must
 	// be divisible by 8.
-	ThumbnailWidth int32
+	ThumbnailWidth *int32
 
 	// Number of thumbnails in each column of a tile image. Set a value between 2 and
 	// 2048. Must be divisible by 2.
-	TileHeight int32
+	TileHeight *int32
 
 	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
-	TileWidth int32
+	TileWidth *int32
 
 	noSmithyDocumentSerde
 }
@@ -1807,7 +1807,7 @@ type CmfcSettings struct {
 type ColorCorrector struct {
 
 	// Brightness level.
-	Brightness int32
+	Brightness *int32
 
 	// Specify YUV limits and RGB tolerances when you set Sample range conversion to
 	// Limited range clip.
@@ -1829,7 +1829,7 @@ type ColorCorrector struct {
 	ColorSpaceConversion ColorSpaceConversion
 
 	// Contrast level.
-	Contrast int32
+	Contrast *int32
 
 	// Use these settings when you convert to the HDR 10 color space. Specify the
 	// SMPTE ST 2086 Mastering Display Color Volume static metadata that you want
@@ -1858,7 +1858,7 @@ type ColorCorrector struct {
 	HdrToSdrToneMapper HDRToSDRToneMapper
 
 	// Hue in degrees.
-	Hue int32
+	Hue *int32
 
 	// Specify how MediaConvert limits the color sample range for this output. To
 	// create a limited range output from a full range input: Choose Limited range
@@ -1877,7 +1877,7 @@ type ColorCorrector struct {
 	SampleRangeConversion SampleRangeConversion
 
 	// Saturation level.
-	Saturation int32
+	Saturation *int32
 
 	// Specify the reference white level, in nits, for all of your SDR inputs. Use to
 	// correct brightness levels within HDR10 outputs. The following color metadata
@@ -1887,7 +1887,7 @@ type ColorCorrector struct {
 	// input video selector. For 1,000 nit peak brightness displays, we recommend that
 	// you set SDR reference white level to 203 (according to ITU-R BT.2408). Leave
 	// blank to use the default value of 100, or specify an integer from 100 to 1000.
-	SdrReferenceWhiteLevel int32
+	SdrReferenceWhiteLevel *int32
 
 	noSmithyDocumentSerde
 }
@@ -2031,7 +2031,7 @@ type DashIsoGroupSettings struct {
 	// When Emit Single File is checked, the fragmentation is internal to a single
 	// output file and it does not cause the creation of many output files as in other
 	// output types.
-	FragmentLength int32
+	FragmentLength *int32
 
 	// Supports HbbTV specification as indicated
 	HbbtvCompliance DashIsoHbbtvCompliance
@@ -2052,7 +2052,7 @@ type DashIsoGroupSettings struct {
 
 	// Minimum time of initially buffered media that is needed to ensure smooth
 	// playout.
-	MinBufferTime int32
+	MinBufferTime *int32
 
 	// Keep this setting at the default value of 0, unless you are troubleshooting a
 	// problem with how devices play back the end of your video asset. If you know that
@@ -2065,7 +2065,7 @@ type DashIsoGroupSettings struct {
 	// seconds and your final segment is .5 seconds without a minimum final segment
 	// length; when you set the minimum final segment length to 1, your final segment
 	// is 3.5 seconds.
-	MinFinalSegmentLength float64
+	MinFinalSegmentLength *float64
 
 	// Specify how the value for bandwidth is determined for each video Representation
 	// in your output MPD manifest. We recommend that you choose a MPD manifest
@@ -2104,7 +2104,7 @@ type DashIsoGroupSettings struct {
 	// to specify whether the encoder enforces this value strictly. Use Segment control
 	// to specify whether MediaConvert creates separate segment files or one content
 	// file that has metadata to mark the segment boundaries.
-	SegmentLength int32
+	SegmentLength *int32
 
 	// Specify how you want MediaConvert to determine the segment length. Choose Exact
 	// to have the encoder use the exact length that you specify with the setting
@@ -2145,25 +2145,25 @@ type DashIsoImageBasedTrickPlaySettings struct {
 	// maintain aspect ratio with thumbnail width. If following the aspect ratio would
 	// lead to a total tile height greater than 4096, then the job will be rejected.
 	// Must be divisible by 2.
-	ThumbnailHeight int32
+	ThumbnailHeight *int32
 
 	// Enter the interval, in seconds, that MediaConvert uses to generate thumbnails.
 	// If the interval you enter doesn't align with the output frame rate, MediaConvert
 	// automatically rounds the interval to align with the output frame rate. For
 	// example, if the output frame rate is 29.97 frames per second and you enter 5,
 	// MediaConvert uses a 150 frame interval to generate thumbnails.
-	ThumbnailInterval float64
+	ThumbnailInterval *float64
 
 	// Width of each thumbnail within each tile image, in pixels. Default is 312. Must
 	// be divisible by 8.
-	ThumbnailWidth int32
+	ThumbnailWidth *int32
 
 	// Number of thumbnails in each column of a tile image. Set a value between 2 and
 	// 2048. Must be divisible by 2.
-	TileHeight int32
+	TileHeight *int32
 
 	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
-	TileWidth int32
+	TileWidth *int32
 
 	noSmithyDocumentSerde
 }
@@ -2247,11 +2247,11 @@ type DolbyVisionLevel6Metadata struct {
 
 	// Maximum Content Light Level. Static HDR metadata that corresponds to the
 	// brightest pixel in the entire stream. Measured in nits.
-	MaxCll int32
+	MaxCll *int32
 
 	// Maximum Frame-Average Light Level. Static HDR metadata that corresponds to the
 	// highest frame-average brightness in the entire stream. Measured in nits.
-	MaxFall int32
+	MaxFall *int32
 
 	noSmithyDocumentSerde
 }
@@ -2261,7 +2261,7 @@ type DolbyVisionLevel6Metadata struct {
 type DvbNitSettings struct {
 
 	// The numeric value placed in the Network Information Table (NIT).
-	NetworkId int32
+	NetworkId *int32
 
 	// The network name text placed in the network_name_descriptor inside the Network
 	// Information Table. Maximum length is 256 characters.
@@ -2269,7 +2269,7 @@ type DvbNitSettings struct {
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
-	NitInterval int32
+	NitInterval *int32
 
 	noSmithyDocumentSerde
 }
@@ -2288,7 +2288,7 @@ type DvbSdtSettings struct {
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
-	SdtInterval int32
+	SdtInterval *int32
 
 	// The service name placed in the service_descriptor in the Service Description
 	// Table. Maximum length is 256 characters.
@@ -2337,7 +2337,7 @@ type DvbSubDestinationSettings struct {
 	// leave blank to use a value of 0 and remove all backgrounds from your output
 	// captions. Within your job settings, all of your DVB-Sub settings must be
 	// identical.
-	BackgroundOpacity int32
+	BackgroundOpacity *int32
 
 	// Specify how MediaConvert handles the display definition segment (DDS). To
 	// exclude the DDS from this set of captions: Keep the default, None. To include
@@ -2358,7 +2358,7 @@ type DvbSubDestinationSettings struct {
 	// you must set DDS handling to a value other than None. MediaConvert uses these
 	// values to determine whether to write page position data to the DDS or to the
 	// page composition segment. All burn-in and DVB-Sub font settings must match.
-	DdsXCoordinate int32
+	DdsXCoordinate *int32
 
 	// Use this setting, along with DDS x-coordinate, to specify the upper left corner
 	// of the display definition segment (DDS) display window. With this setting,
@@ -2369,7 +2369,7 @@ type DvbSubDestinationSettings struct {
 	// values to determine whether to write page position data to the DDS or to the
 	// page composition segment (PCS). All burn-in and DVB-Sub font settings must
 	// match.
-	DdsYCoordinate int32
+	DdsYCoordinate *int32
 
 	// Specify the font that you want the service to use for your burn in captions
 	// when your input captions specify a font that MediaConvert doesn't support. When
@@ -2389,11 +2389,11 @@ type DvbSubDestinationSettings struct {
 
 	// Specify the opacity of the burned-in captions. 255 is opaque; 0 is transparent.
 	// Within your job settings, all of your DVB-Sub settings must be identical.
-	FontOpacity int32
+	FontOpacity *int32
 
 	// Specify the Font resolution in DPI (dots per inch). Within your job settings,
 	// all of your DVB-Sub settings must be identical.
-	FontResolution int32
+	FontResolution *int32
 
 	// Set Font script to Automatically determined, or leave blank, to automatically
 	// determine the font script in your input captions. Otherwise, set to Simplified
@@ -2405,13 +2405,13 @@ type DvbSubDestinationSettings struct {
 	// Specify the Font size in pixels. Must be a positive integer. Set to 0, or leave
 	// blank, for automatic font size. Within your job settings, all of your DVB-Sub
 	// settings must be identical.
-	FontSize int32
+	FontSize *int32
 
 	// Specify the height, in pixels, of this set of DVB-Sub captions. The default
 	// value is 576 pixels. Related setting: When you use this setting, you must set
 	// DDS handling to a value other than None. All burn-in and DVB-Sub font settings
 	// must match.
-	Height int32
+	Height *int32
 
 	// Ignore this setting unless your Font color is set to Hex. Enter either six or
 	// eight hexidecimal digits, representing red, green, and blue, with two optional
@@ -2429,7 +2429,7 @@ type DvbSubDestinationSettings struct {
 	// blank and set Style passthrough to enabled to use the outline size data from
 	// your input captions, if present. Within your job settings, all of your DVB-Sub
 	// settings must be identical.
-	OutlineSize int32
+	OutlineSize *int32
 
 	// Specify the color of the shadow cast by the captions. Leave Shadow color blank
 	// and set Style passthrough to enabled to use the shadow color data from your
@@ -2443,19 +2443,19 @@ type DvbSubDestinationSettings struct {
 	// captions to your output captions. If Style passthrough is set to disabled, leave
 	// blank to use a value of 0 and remove all shadows from your output captions.
 	// Within your job settings, all of your DVB-Sub settings must be identical.
-	ShadowOpacity int32
+	ShadowOpacity *int32
 
 	// Specify the horizontal offset of the shadow, relative to the captions in
 	// pixels. A value of -2 would result in a shadow offset 2 pixels to the left.
 	// Within your job settings, all of your DVB-Sub settings must be identical.
-	ShadowXOffset int32
+	ShadowXOffset *int32
 
 	// Specify the vertical offset of the shadow relative to the captions in pixels. A
 	// value of -2 would result in a shadow offset 2 pixels above the text. Leave
 	// Shadow y-offset blank and set Style passthrough to enabled to use the shadow
 	// y-offset data from your input captions, if present. Within your job settings,
 	// all of your DVB-Sub settings must be identical.
-	ShadowYOffset int32
+	ShadowYOffset *int32
 
 	// Set Style passthrough to ENABLED to use the available style, color, and
 	// position information from your input captions. MediaConvert uses default
@@ -2483,21 +2483,21 @@ type DvbSubDestinationSettings struct {
 	// value is 720 pixels. Related setting: When you use this setting, you must set
 	// DDS handling to a value other than None. All burn-in and DVB-Sub font settings
 	// must match.
-	Width int32
+	Width *int32
 
 	// Specify the horizontal position of the captions, relative to the left side of
 	// the output in pixels. A value of 10 would result in the captions starting 10
 	// pixels from the left of the output. If no explicit x_position is provided, the
 	// horizontal caption position will be determined by the alignment parameter.
 	// Within your job settings, all of your DVB-Sub settings must be identical.
-	XPosition int32
+	XPosition *int32
 
 	// Specify the vertical position of the captions, relative to the top of the
 	// output in pixels. A value of 10 would result in the captions starting 10 pixels
 	// from the top of the output. If no explicit y_position is provided, the caption
 	// will be positioned towards the bottom of the output. Within your job settings,
 	// all of your DVB-Sub settings must be identical.
-	YPosition int32
+	YPosition *int32
 
 	noSmithyDocumentSerde
 }
@@ -2508,7 +2508,7 @@ type DvbSubSourceSettings struct {
 	// When using DVB-Sub with Burn-in, use this PID for the source content. Unused
 	// for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of
 	// selectors.
-	Pid int32
+	Pid *int32
 
 	noSmithyDocumentSerde
 }
@@ -2519,7 +2519,7 @@ type DvbTdtSettings struct {
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
-	TdtInterval int32
+	TdtInterval *int32
 
 	noSmithyDocumentSerde
 }
@@ -2532,7 +2532,7 @@ type Eac3AtmosSettings struct {
 	// supports 384k only with channel-based immersive (CBI) 7.1.4 and 5.1.4 inputs.
 	// For CBI 9.1.6 and other input types, MediaConvert automatically increases your
 	// output bitrate to 448k.
-	Bitrate int32
+	Bitrate *int32
 
 	// Specify the bitstream mode for the E-AC-3 stream that the encoder emits. For
 	// more information about the EAC3 bitstream mode, see ATSC A/52-2012 (Annex E).
@@ -2592,7 +2592,7 @@ type Eac3AtmosSettings struct {
 	// for Stereo downmix. Related setting: To have MediaConvert use this value, keep
 	// the default value, Custom for the setting Downmix control. Otherwise,
 	// MediaConvert ignores Left only/Right only center.
-	LoRoCenterMixLevel float64
+	LoRoCenterMixLevel *float64
 
 	// Specify a value for the following Dolby Atmos setting: Left only/Right only.
 	// MediaConvert uses this value for downmixing. Default value: -3 dB. Valid values:
@@ -2601,7 +2601,7 @@ type Eac3AtmosSettings struct {
 	// for Stereo downmix. Related setting: To have MediaConvert use this value, keep
 	// the default value, Custom for the setting Downmix control. Otherwise,
 	// MediaConvert ignores Left only/Right only surround.
-	LoRoSurroundMixLevel float64
+	LoRoSurroundMixLevel *float64
 
 	// Specify a value for the following Dolby Atmos setting: Left total/Right total
 	// center mix (Lt/Rt center). MediaConvert uses this value for downmixing. Default
@@ -2610,7 +2610,7 @@ type Eac3AtmosSettings struct {
 	// for Stereo downmix. Related setting: To have MediaConvert use this value, keep
 	// the default value, Custom for the setting Downmix control. Otherwise,
 	// MediaConvert ignores Left total/Right total center.
-	LtRtCenterMixLevel float64
+	LtRtCenterMixLevel *float64
 
 	// Specify a value for the following Dolby Atmos setting: Left total/Right total
 	// surround mix (Lt/Rt surround). MediaConvert uses this value for downmixing.
@@ -2619,18 +2619,18 @@ type Eac3AtmosSettings struct {
 	// on the value that you choose for Stereo downmix. Related setting: To have
 	// MediaConvert use this value, keep the default value, Custom for the setting
 	// Downmix control. Otherwise, the service ignores Left total/Right total surround.
-	LtRtSurroundMixLevel float64
+	LtRtSurroundMixLevel *float64
 
 	// Choose how the service meters the loudness of your audio.
 	MeteringMode Eac3AtmosMeteringMode
 
 	// This value is always 48000. It represents the sample rate in Hz.
-	SampleRate int32
+	SampleRate *int32
 
 	// Specify the percentage of audio content, from 0% to 100%, that must be speech
 	// in order for the encoder to use the measured speech loudness as the overall
 	// program loudness. Default value: 15%
-	SpeechThreshold int32
+	SpeechThreshold *int32
 
 	// Choose how the service does stereo downmixing. Default value: Not indicated
 	// Related setting: To have MediaConvert use this value, keep the default value,
@@ -2659,7 +2659,7 @@ type Eac3Settings struct {
 	// Maximum: 3024000. Valid bitrates for coding mode 2/0: Default: 192000. Minimum:
 	// 96000. Maximum: 3024000. Valid bitrates for coding mode 3/2: Default: 384000.
 	// Minimum: 192000. Maximum: 3024000.
-	Bitrate int32
+	Bitrate *int32
 
 	// Specify the bitstream mode for the E-AC-3 stream that the encoder emits. For
 	// more information about the EAC3 bitstream mode, see ATSC A/52-2012 (Annex E).
@@ -2673,7 +2673,7 @@ type Eac3Settings struct {
 
 	// Sets the dialnorm for the output. If blank and input audio is Dolby Digital
 	// Plus, dialnorm will be passed through.
-	Dialnorm int32
+	Dialnorm *int32
 
 	// Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert
 	// uses when encoding the metadata in the Dolby Digital stream for the line
@@ -2707,7 +2707,7 @@ type Eac3Settings struct {
 	// channel. This setting applies only if you keep the default value of 3/2 - L, R,
 	// C, Ls, Rs for the setting Coding mode. If you choose a different value for
 	// Coding mode, the service ignores Left only/Right only center.
-	LoRoCenterMixLevel float64
+	LoRoCenterMixLevel *float64
 
 	// Specify a value for the following Dolby Digital Plus setting: Left only/Right
 	// only. MediaConvert uses this value for downmixing. How the service uses this
@@ -2716,7 +2716,7 @@ type Eac3Settings struct {
 	// applies only if you keep the default value of 3/2 - L, R, C, Ls, Rs for the
 	// setting Coding mode. If you choose a different value for Coding mode, the
 	// service ignores Left only/Right only surround.
-	LoRoSurroundMixLevel float64
+	LoRoSurroundMixLevel *float64
 
 	// Specify a value for the following Dolby Digital Plus setting: Left total/Right
 	// total center mix. MediaConvert uses this value for downmixing. How the service
@@ -2725,7 +2725,7 @@ type Eac3Settings struct {
 	// channel. This setting applies only if you keep the default value of 3/2 - L, R,
 	// C, Ls, Rs for the setting Coding mode. If you choose a different value for
 	// Coding mode, the service ignores Left total/Right total center.
-	LtRtCenterMixLevel float64
+	LtRtCenterMixLevel *float64
 
 	// Specify a value for the following Dolby Digital Plus setting: Left total/Right
 	// total surround mix. MediaConvert uses this value for downmixing. How the service
@@ -2734,7 +2734,7 @@ type Eac3Settings struct {
 	// setting applies only if you keep the default value of 3/2 - L, R, C, Ls, Rs for
 	// the setting Coding mode. If you choose a different value for Coding mode, the
 	// service ignores Left total/Right total surround.
-	LtRtSurroundMixLevel float64
+	LtRtSurroundMixLevel *float64
 
 	// When set to FOLLOW_INPUT, encoder metadata will be sourced from the DD, DD+, or
 	// DolbyE decoder that supplied this audio data. If audio was not supplied from one
@@ -2752,7 +2752,7 @@ type Eac3Settings struct {
 	PhaseControl Eac3PhaseControl
 
 	// This value is always 48000. It represents the sample rate in Hz.
-	SampleRate int32
+	SampleRate *int32
 
 	// Choose how the service does stereo downmixing. This setting only applies if you
 	// keep the default value of 3/2 - L, R, C, Ls, Rs for the setting Coding mode. If
@@ -2782,7 +2782,7 @@ type EmbeddedDestinationSettings struct {
 	// channel in this output. If you have two channels, choose CC numbers that aren't
 	// in the same field. For example, choose 1 and 3. For more information, see
 	// https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
-	Destination608ChannelNumber int32
+	Destination608ChannelNumber *int32
 
 	// Ignore this setting unless your input captions are SCC format and you want both
 	// 608 and 708 captions embedded in your output stream. Optionally, specify the 708
@@ -2792,7 +2792,7 @@ type EmbeddedDestinationSettings struct {
 	// but don't specify a 708 service number, MediaConvert uses the number that you
 	// specify for CC channel number for the 708 service number. For more information,
 	// see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
-	Destination708ServiceNumber int32
+	Destination708ServiceNumber *int32
 
 	noSmithyDocumentSerde
 }
@@ -2808,11 +2808,11 @@ type EmbeddedSourceSettings struct {
 
 	// Specifies the 608/708 channel number within the video track from which to
 	// extract captions. Unused for passthrough.
-	Source608ChannelNumber int32
+	Source608ChannelNumber *int32
 
 	// Specifies the video track index used for extracting captions. The system only
 	// supports one input video track, so this should always be set to '1'.
-	Source608TrackNumber int32
+	Source608TrackNumber *int32
 
 	// By default, the service terminates any unterminated captions at the end of each
 	// input. If you want the caption to continue onto your next input, disable this
@@ -2856,7 +2856,7 @@ type EsamSettings struct {
 	// that the transcoder places and the splice points that they refer to. If the time
 	// between the start of the asset and the SCTE-35 message is less than this value,
 	// then the transcoder places the SCTE-35 marker at the beginning of the stream.
-	ResponseSignalPreroll int32
+	ResponseSignalPreroll *int32
 
 	// Specifies an ESAM SignalProcessingNotification XML as per
 	// OC-SP-ESAM-API-I03-131025. The transcoder uses the signal processing
@@ -2971,7 +2971,7 @@ type FileSourceSettings struct {
 	// MediaConvert snaps the captions to the nearest frame. For example, when your
 	// input video frame rate is 25 fps and you specify 1010ms for time delta,
 	// MediaConvert delays your captions by 1000 ms.
-	TimeDelta int32
+	TimeDelta *int32
 
 	// When you use the setting Time delta to adjust the sync between your sidecar
 	// captions and your video, use this setting to specify the units for the delta
@@ -2988,7 +2988,7 @@ type FlacSettings struct {
 
 	// Specify Bit depth (BitDepth), in bits per sample, to choose the encoding
 	// quality for this audio track.
-	BitDepth int32
+	BitDepth *int32
 
 	// Specify the number of channels in this output audio track. Choosing Mono on the
 	// console gives you 1 output channel; choosing Stereo gives you 2. In the API,
@@ -2996,7 +2996,7 @@ type FlacSettings struct {
 	Channels *int32
 
 	// Sample rate in hz.
-	SampleRate int32
+	SampleRate *int32
 
 	noSmithyDocumentSerde
 }
@@ -3015,10 +3015,10 @@ type FlacSettings struct {
 type ForceIncludeRenditionSize struct {
 
 	// Use Height to define the video resolution height, in pixels, for this rule.
-	Height int32
+	Height *int32
 
 	// Use Width to define the video resolution width, in pixels, for this rule.
-	Width int32
+	Width *int32
 
 	noSmithyDocumentSerde
 }
@@ -3031,7 +3031,7 @@ type FrameCaptureSettings struct {
 	// framerateNumerator = 1 and framerateDenominator = 3 (a rate of 1/3 frame per
 	// second) will capture the first frame, then 1 frame every 3s. Files will be named
 	// as filename.n.jpg where n is the 0-based sequence number of each Capture.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// Frame capture will encode the first frame of the output stream, then one frame
 	// every framerateDenominator/framerateNumerator seconds. For example, settings of
@@ -3039,13 +3039,13 @@ type FrameCaptureSettings struct {
 	// second) will capture the first frame, then 1 frame every 3s. Files will be named
 	// as filename.NNNNNNN.jpg where N is the 0-based frame sequence number zero padded
 	// to 7 decimal places.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	// Maximum number of captures (encoded jpg output files).
-	MaxCaptures int32
+	MaxCaptures *int32
 
 	// JPEG Quality - a higher value equals higher quality.
-	Quality int32
+	Quality *int32
 
 	noSmithyDocumentSerde
 }
@@ -3060,7 +3060,7 @@ type H264QvbrSettings struct {
 	// this output to the value that you choose. That is, the total size of the video
 	// element is less than or equal to the value you set multiplied by the number of
 	// seconds of encoded output.
-	MaxAverageBitrate int32
+	MaxAverageBitrate *int32
 
 	// Use this setting only when you set Rate control mode to QVBR. Specify the
 	// target quality level for this output. MediaConvert determines the right number
@@ -3074,7 +3074,7 @@ type H264QvbrSettings struct {
 	// the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality
 	// level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to
 	// .33.
-	QvbrQualityLevel int32
+	QvbrQualityLevel *int32
 
 	// Optional. Specify a value here to set the QVBR quality to a level that is
 	// between whole numbers. For example, if you want your QVBR quality level to be
@@ -3082,7 +3082,7 @@ type H264QvbrSettings struct {
 	// MediaConvert rounds your QVBR quality level to the nearest third of a whole
 	// number. For example, if you set qvbrQualityLevel to 7 and you set
 	// qvbrQualityLevelFineTune to .25, your actual QVBR quality level is 7.33.
-	QvbrQualityLevelFineTune float64
+	QvbrQualityLevelFineTune *float64
 
 	noSmithyDocumentSerde
 }
@@ -3114,7 +3114,7 @@ type H264Settings struct {
 	// Specify the average bitrate in bits per second. Required for VBR and CBR. For
 	// MS Smooth outputs, bitrates must be unique when rounded down to the nearest
 	// multiple of 1000.
-	Bitrate int32
+	Bitrate *int32
 
 	// Specify an H.264 level that is consistent with your output video settings. If
 	// you aren't sure what level to specify, choose Auto.
@@ -3191,7 +3191,7 @@ type H264Settings struct {
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
 	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
@@ -3199,7 +3199,7 @@ type H264Settings struct {
 	// use 24000 for the value of FramerateNumerator. When you use the console for
 	// transcode jobs that use frame rate conversion, provide the value as a decimal
 	// number for Framerate. In this example, specify 23.976.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	// Specify whether to allow B-frames to be referenced by other frame types. To use
 	// reference B-frames when your GOP structure has 1 or more B-frames: Leave blank
@@ -3214,7 +3214,7 @@ type H264Settings struct {
 	// this value for you based on characteristics of your input video. In the console,
 	// do this by keeping the default empty value. If you do explicitly specify a
 	// value, for segmented outputs, don't set this value to 0.
-	GopClosedCadence int32
+	GopClosedCadence *int32
 
 	// Use this setting only when you set GOP mode control to Specified, frames or
 	// Specified, seconds. Specify the GOP length using a whole number of frames or a
@@ -3224,7 +3224,7 @@ type H264Settings struct {
 	// set GOP mode control to Auto. If your output group specifies HLS, DASH, or CMAF,
 	// leave GOP size blank and set GOP mode control to Auto in each output in your
 	// output group.
-	GopSize float64
+	GopSize *float64
 
 	// Specify how the transcoder determines GOP size for this output. We recommend
 	// that you have the transcoder automatically choose this value for you based on
@@ -3241,14 +3241,14 @@ type H264Settings struct {
 	// percentage of the HRD buffer that's available at the end of each encoded video
 	// segment. For the best video quality: Set to 0 or leave blank to automatically
 	// determine the final buffer fill percentage.
-	HrdBufferFinalFillPercentage int32
+	HrdBufferFinalFillPercentage *int32
 
 	// Percentage of the buffer that should initially be filled (HRD buffer model).
-	HrdBufferInitialFillPercentage int32
+	HrdBufferInitialFillPercentage *int32
 
 	// Size of buffer (HRD buffer model) in bits. For example, enter five megabits as
 	// 5000000.
-	HrdBufferSize int32
+	HrdBufferSize *int32
 
 	// Choose the scan line type for the output. Keep the default value, Progressive
 	// to create a progressive output, regardless of the scan type of your input. Use
@@ -3264,7 +3264,7 @@ type H264Settings struct {
 
 	// Maximum bitrate in bits/second. For example, enter five megabits per second as
 	// 5000000. Required when Rate control mode is QVBR.
-	MaxBitrate int32
+	MaxBitrate *int32
 
 	// Use this setting only when you also enable Scene change detection. This setting
 	// determines how the encoder manages the spacing between I-frames that it inserts
@@ -3280,18 +3280,18 @@ type H264Settings struct {
 	// cadence-driven I-frames are farther from the scene-change I-frame than the value
 	// you set, then the encoder leaves all I-frames in place and the GOPs surrounding
 	// the scene change are smaller than the usual cadence GOPs.
-	MinIInterval int32
+	MinIInterval *int32
 
 	// Specify the number of B-frames between reference frames in this output. For the
 	// best video quality: Leave blank. MediaConvert automatically determines the
 	// number of B-frames to use based on the characteristics of your input video. To
 	// manually specify the number of B-frames between reference frames: Enter an
 	// integer from 0 to 7.
-	NumberBFramesBetweenReferenceFrames int32
+	NumberBFramesBetweenReferenceFrames *int32
 
 	// Number of reference frames to use. The encoder may use more than requested if
 	// using B-frames and/or interlaced encoding.
-	NumberReferenceFrames int32
+	NumberReferenceFrames *int32
 
 	// Optional. Specify how the service determines the pixel aspect ratio (PAR) for
 	// this output. The default behavior, Follow source, uses the PAR from your input
@@ -3305,14 +3305,14 @@ type H264Settings struct {
 	// pixel aspect ratio (PAR) that is different from your input video PAR, provide
 	// your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would
 	// specify the ratio 40:33. In this example, the value for parDenominator is 33.
-	ParDenominator int32
+	ParDenominator *int32
 
 	// Required when you set Pixel aspect ratio to SPECIFIED. On the console, this
 	// corresponds to any value other than Follow source. When you specify an output
 	// pixel aspect ratio (PAR) that is different from your input video PAR, provide
 	// your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would
 	// specify the ratio 40:33. In this example, the value for parNumerator is 40.
-	ParNumerator int32
+	ParNumerator *int32
 
 	// The Quality tuning level you choose represents a trade-off between the encoding
 	// speed of your job and the output video quality. For the fastest encoding speed
@@ -3358,7 +3358,7 @@ type H264Settings struct {
 	// Number of slices per picture. Must be less than or equal to the number of
 	// macroblock rows for progressive pictures, and less than or equal to half the
 	// number of macroblock rows for interlaced pictures.
-	Slices int32
+	Slices *int32
 
 	// Ignore this setting unless your input frame rate is 23.976 or 24 frames per
 	// second (fps). Enable slow PAL to create a 25 fps output. When you enable slow
@@ -3378,7 +3378,7 @@ type H264Settings struct {
 	// Choose a value from 17 to 128 to use planar interpolation. Increasing values
 	// from 17 to 128 result in increasing reduction of high-frequency data. The value
 	// 128 results in the softest video.
-	Softness int32
+	Softness *int32
 
 	// Only use this setting when you change the default value, Auto, for the setting
 	// H264AdaptiveQuantization. When you keep all defaults, excluding
@@ -3455,7 +3455,7 @@ type H265QvbrSettings struct {
 	// this output to the value that you choose. That is, the total size of the video
 	// element is less than or equal to the value you set multiplied by the number of
 	// seconds of encoded output.
-	MaxAverageBitrate int32
+	MaxAverageBitrate *int32
 
 	// Use this setting only when you set Rate control mode to QVBR. Specify the
 	// target quality level for this output. MediaConvert determines the right number
@@ -3469,7 +3469,7 @@ type H265QvbrSettings struct {
 	// the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality
 	// level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to
 	// .33.
-	QvbrQualityLevel int32
+	QvbrQualityLevel *int32
 
 	// Optional. Specify a value here to set the QVBR quality to a level that is
 	// between whole numbers. For example, if you want your QVBR quality level to be
@@ -3477,7 +3477,7 @@ type H265QvbrSettings struct {
 	// MediaConvert rounds your QVBR quality level to the nearest third of a whole
 	// number. For example, if you set qvbrQualityLevel to 7 and you set
 	// qvbrQualityLevelFineTune to .25, your actual QVBR quality level is 7.33.
-	QvbrQualityLevelFineTune float64
+	QvbrQualityLevelFineTune *float64
 
 	noSmithyDocumentSerde
 }
@@ -3511,7 +3511,7 @@ type H265Settings struct {
 	// Specify the average bitrate in bits per second. Required for VBR and CBR. For
 	// MS Smooth outputs, bitrates must be unique when rounded down to the nearest
 	// multiple of 1000.
-	Bitrate int32
+	Bitrate *int32
 
 	// H.265 Level.
 	CodecLevel H265CodecLevel
@@ -3572,7 +3572,7 @@ type H265Settings struct {
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
 	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
@@ -3580,7 +3580,7 @@ type H265Settings struct {
 	// use 24000 for the value of FramerateNumerator. When you use the console for
 	// transcode jobs that use frame rate conversion, provide the value as a decimal
 	// number for Framerate. In this example, specify 23.976.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	// Specify whether to allow B-frames to be referenced by other frame types. To use
 	// reference B-frames when your GOP structure has 1 or more B-frames: Leave blank
@@ -3595,7 +3595,7 @@ type H265Settings struct {
 	// this value for you based on characteristics of your input video. To enable this
 	// automatic behavior, do this by keeping the default empty value. If you do
 	// explicitly specify a value, for segmented outputs, don't set this value to 0.
-	GopClosedCadence int32
+	GopClosedCadence *int32
 
 	// Use this setting only when you set GOP mode control to Specified, frames or
 	// Specified, seconds. Specify the GOP length using a whole number of frames or a
@@ -3605,7 +3605,7 @@ type H265Settings struct {
 	// set GOP mode control to Auto. If your output group specifies HLS, DASH, or CMAF,
 	// leave GOP size blank and set GOP mode control to Auto in each output in your
 	// output group.
-	GopSize float64
+	GopSize *float64
 
 	// Specify how the transcoder determines GOP size for this output. We recommend
 	// that you have the transcoder automatically choose this value for you based on
@@ -3622,14 +3622,14 @@ type H265Settings struct {
 	// percentage of the HRD buffer that's available at the end of each encoded video
 	// segment. For the best video quality: Set to 0 or leave blank to automatically
 	// determine the final buffer fill percentage.
-	HrdBufferFinalFillPercentage int32
+	HrdBufferFinalFillPercentage *int32
 
 	// Percentage of the buffer that should initially be filled (HRD buffer model).
-	HrdBufferInitialFillPercentage int32
+	HrdBufferInitialFillPercentage *int32
 
 	// Size of buffer (HRD buffer model) in bits. For example, enter five megabits as
 	// 5000000.
-	HrdBufferSize int32
+	HrdBufferSize *int32
 
 	// Choose the scan line type for the output. Keep the default value, Progressive
 	// to create a progressive output, regardless of the scan type of your input. Use
@@ -3645,7 +3645,7 @@ type H265Settings struct {
 
 	// Maximum bitrate in bits/second. For example, enter five megabits per second as
 	// 5000000. Required when Rate control mode is QVBR.
-	MaxBitrate int32
+	MaxBitrate *int32
 
 	// Use this setting only when you also enable Scene change detection. This setting
 	// determines how the encoder manages the spacing between I-frames that it inserts
@@ -3661,18 +3661,18 @@ type H265Settings struct {
 	// cadence-driven I-frames are farther from the scene-change I-frame than the value
 	// you set, then the encoder leaves all I-frames in place and the GOPs surrounding
 	// the scene change are smaller than the usual cadence GOPs.
-	MinIInterval int32
+	MinIInterval *int32
 
 	// Specify the number of B-frames between reference frames in this output. For the
 	// best video quality: Leave blank. MediaConvert automatically determines the
 	// number of B-frames to use based on the characteristics of your input video. To
 	// manually specify the number of B-frames between reference frames: Enter an
 	// integer from 0 to 7.
-	NumberBFramesBetweenReferenceFrames int32
+	NumberBFramesBetweenReferenceFrames *int32
 
 	// Number of reference frames to use. The encoder may use more than requested if
 	// using B-frames and/or interlaced encoding.
-	NumberReferenceFrames int32
+	NumberReferenceFrames *int32
 
 	// Optional. Specify how the service determines the pixel aspect ratio (PAR) for
 	// this output. The default behavior, Follow source, uses the PAR from your input
@@ -3686,14 +3686,14 @@ type H265Settings struct {
 	// pixel aspect ratio (PAR) that is different from your input video PAR, provide
 	// your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would
 	// specify the ratio 40:33. In this example, the value for parDenominator is 33.
-	ParDenominator int32
+	ParDenominator *int32
 
 	// Required when you set Pixel aspect ratio to SPECIFIED. On the console, this
 	// corresponds to any value other than Follow source. When you specify an output
 	// pixel aspect ratio (PAR) that is different from your input video PAR, provide
 	// your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would
 	// specify the ratio 40:33. In this example, the value for parNumerator is 40.
-	ParNumerator int32
+	ParNumerator *int32
 
 	// Optional. Use Quality tuning level to choose how you want to trade off encoding
 	// speed for output video quality. The default behavior is faster, lower quality,
@@ -3736,7 +3736,7 @@ type H265Settings struct {
 	// Number of slices per picture. Must be less than or equal to the number of
 	// macroblock rows for progressive pictures, and less than or equal to half the
 	// number of macroblock rows for interlaced pictures.
-	Slices int32
+	Slices *int32
 
 	// Ignore this setting unless your input frame rate is 23.976 or 24 frames per
 	// second (fps). Enable slow PAL to create a 25 fps output. When you enable slow
@@ -3825,60 +3825,60 @@ type Hdr10Metadata struct {
 	// HDR Master Display Information must be provided by a color grader, using color
 	// grading tools. Range is 0 to 50,000, each increment represents 0.00002 in
 	// CIE1931 color coordinate. Note that this setting is not for color correction.
-	BluePrimaryX int32
+	BluePrimaryX *int32
 
 	// HDR Master Display Information must be provided by a color grader, using color
 	// grading tools. Range is 0 to 50,000, each increment represents 0.00002 in
 	// CIE1931 color coordinate. Note that this setting is not for color correction.
-	BluePrimaryY int32
+	BluePrimaryY *int32
 
 	// HDR Master Display Information must be provided by a color grader, using color
 	// grading tools. Range is 0 to 50,000, each increment represents 0.00002 in
 	// CIE1931 color coordinate. Note that this setting is not for color correction.
-	GreenPrimaryX int32
+	GreenPrimaryX *int32
 
 	// HDR Master Display Information must be provided by a color grader, using color
 	// grading tools. Range is 0 to 50,000, each increment represents 0.00002 in
 	// CIE1931 color coordinate. Note that this setting is not for color correction.
-	GreenPrimaryY int32
+	GreenPrimaryY *int32
 
 	// Maximum light level among all samples in the coded video sequence, in units of
 	// candelas per square meter. This setting doesn't have a default value; you must
 	// specify a value that is suitable for the content.
-	MaxContentLightLevel int32
+	MaxContentLightLevel *int32
 
 	// Maximum average light level of any frame in the coded video sequence, in units
 	// of candelas per square meter. This setting doesn't have a default value; you
 	// must specify a value that is suitable for the content.
-	MaxFrameAverageLightLevel int32
+	MaxFrameAverageLightLevel *int32
 
 	// Nominal maximum mastering display luminance in units of of 0.0001 candelas per
 	// square meter.
-	MaxLuminance int32
+	MaxLuminance *int32
 
 	// Nominal minimum mastering display luminance in units of of 0.0001 candelas per
 	// square meter
-	MinLuminance int32
+	MinLuminance *int32
 
 	// HDR Master Display Information must be provided by a color grader, using color
 	// grading tools. Range is 0 to 50,000, each increment represents 0.00002 in
 	// CIE1931 color coordinate. Note that this setting is not for color correction.
-	RedPrimaryX int32
+	RedPrimaryX *int32
 
 	// HDR Master Display Information must be provided by a color grader, using color
 	// grading tools. Range is 0 to 50,000, each increment represents 0.00002 in
 	// CIE1931 color coordinate. Note that this setting is not for color correction.
-	RedPrimaryY int32
+	RedPrimaryY *int32
 
 	// HDR Master Display Information must be provided by a color grader, using color
 	// grading tools. Range is 0 to 50,000, each increment represents 0.00002 in
 	// CIE1931 color coordinate. Note that this setting is not for color correction.
-	WhitePointX int32
+	WhitePointX *int32
 
 	// HDR Master Display Information must be provided by a color grader, using color
 	// grading tools. Range is 0 to 50,000, each increment represents 0.00002 in
 	// CIE1931 color coordinate. Note that this setting is not for color correction.
-	WhitePointY int32
+	WhitePointY *int32
 
 	noSmithyDocumentSerde
 }
@@ -3889,11 +3889,11 @@ type Hdr10Plus struct {
 	// Specify the HDR10+ mastering display normalized peak luminance, in nits. This
 	// is the normalized actual peak luminance of the mastering display, as defined by
 	// ST 2094-40.
-	MasteringMonitorNits int32
+	MasteringMonitorNits *int32
 
 	// Specify the HDR10+ target display nominal peak luminance, in nits. This is the
 	// nominal maximum luminance of the target display as defined by ST 2094-40.
-	TargetMonitorNits int32
+	TargetMonitorNits *int32
 
 	noSmithyDocumentSerde
 }
@@ -3924,7 +3924,7 @@ type HlsAdditionalManifest struct {
 type HlsCaptionLanguageMapping struct {
 
 	// Caption channel.
-	CaptionChannel int32
+	CaptionChannel *int32
 
 	// Specify the language for this captions channel, using the ISO 639-2 or ISO
 	// 639-3 three-letter language code
@@ -4081,11 +4081,11 @@ type HlsGroupSettings struct {
 	// seconds and your final segment is .5 seconds without a minimum final segment
 	// length; when you set the minimum final segment length to 1, your final segment
 	// is 3.5 seconds.
-	MinFinalSegmentLength float64
+	MinFinalSegmentLength *float64
 
 	// When set, Minimum Segment Size is enforced by looking ahead and back within the
 	// specified range for a nearby avail and extending the segment size if needed.
-	MinSegmentLength int32
+	MinSegmentLength *int32
 
 	// Indicates whether the .m3u8 manifest file should be generated for this HLS
 	// output group.
@@ -4098,7 +4098,7 @@ type HlsGroupSettings struct {
 	ProgramDateTime HlsProgramDateTime
 
 	// Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.
-	ProgramDateTimePeriod int32
+	ProgramDateTimePeriod *int32
 
 	// Specify whether MediaConvert generates HLS manifests while your job is running
 	// or when your job is complete. To generate HLS manifests while your job is
@@ -4121,7 +4121,7 @@ type HlsGroupSettings struct {
 	// to specify whether the encoder enforces this value strictly. Use Segment control
 	// to specify whether MediaConvert creates separate segment files or one content
 	// file that has metadata to mark the segment boundaries.
-	SegmentLength int32
+	SegmentLength *int32
 
 	// Specify how you want MediaConvert to determine the segment length. Choose Exact
 	// to have the encoder use the exact length that you specify with the setting
@@ -4132,7 +4132,7 @@ type HlsGroupSettings struct {
 	// Specify the number of segments to write to a subdirectory before starting a new
 	// one. You must also set Directory structure to Subdirectory per stream for this
 	// setting to have an effect.
-	SegmentsPerSubdirectory int32
+	SegmentsPerSubdirectory *int32
 
 	// Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of
 	// variant manifest.
@@ -4159,10 +4159,10 @@ type HlsGroupSettings struct {
 	// incrementally with each ID3 timestamp. To use the default interval of 10
 	// seconds: Leave blank. To include this metadata in your output: Set ID3 timestamp
 	// frame type to PRIV or TDRL, and set ID3 metadata to Passthrough.
-	TimedMetadataId3Period int32
+	TimedMetadataId3Period *int32
 
 	// Provides an extra millisecond delta offset to fine tune the timestamps.
-	TimestampDeltaMilliseconds int32
+	TimestampDeltaMilliseconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -4180,25 +4180,25 @@ type HlsImageBasedTrickPlaySettings struct {
 	// maintain aspect ratio with thumbnail width. If following the aspect ratio would
 	// lead to a total tile height greater than 4096, then the job will be rejected.
 	// Must be divisible by 2.
-	ThumbnailHeight int32
+	ThumbnailHeight *int32
 
 	// Enter the interval, in seconds, that MediaConvert uses to generate thumbnails.
 	// If the interval you enter doesn't align with the output frame rate, MediaConvert
 	// automatically rounds the interval to align with the output frame rate. For
 	// example, if the output frame rate is 29.97 frames per second and you enter 5,
 	// MediaConvert uses a 150 frame interval to generate thumbnails.
-	ThumbnailInterval float64
+	ThumbnailInterval *float64
 
 	// Width of each thumbnail within each tile image, in pixels. Default is 312. Must
 	// be divisible by 8.
-	ThumbnailWidth int32
+	ThumbnailWidth *int32
 
 	// Number of thumbnails in each column of a tile image. Set a value between 2 and
 	// 2048. Must be divisible by 2.
-	TileHeight int32
+	TileHeight *int32
 
 	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
-	TileWidth int32
+	TileWidth *int32
 
 	noSmithyDocumentSerde
 }
@@ -4287,7 +4287,7 @@ type HopDestination struct {
 	// Optional. When you set up a job to use queue hopping, you can specify a
 	// different relative priority for the job in the destination queue. If you don't
 	// specify, the relative priority will remain the same as in the previous queue.
-	Priority int32
+	Priority *int32
 
 	// Optional unless the job is submitted on the default queue. When you set up a
 	// job to use queue hopping, you can specify a destination queue. This queue cannot
@@ -4299,7 +4299,7 @@ type HopDestination struct {
 	// Required for setting up a job to use queue hopping. Minimum wait time in
 	// minutes until the job can hop to the destination queue. Valid range is 1 to 4320
 	// minutes, inclusive.
-	WaitMinutes int32
+	WaitMinutes *int32
 
 	noSmithyDocumentSerde
 }
@@ -4335,7 +4335,7 @@ type ImageInserter struct {
 	// peak brightness displays, we recommend that you set SDR reference white level to
 	// 203 (according to ITU-R BT.2408). Leave blank to use the default value of 100,
 	// or specify an integer from 100 to 1000.
-	SdrReferenceWhiteLevel int32
+	SdrReferenceWhiteLevel *int32
 
 	noSmithyDocumentSerde
 }
@@ -4460,7 +4460,7 @@ type Input struct {
 	// apply filtering: Enter a value from 1 to 5, where 1 is the least amount of
 	// filtering and 5 is the most. The value that you enter applies to the strength of
 	// the Deblock or Denoise filters, or to the strength of the Advanced input filter.
-	FilterStrength int32
+	FilterStrength *int32
 
 	// Enable the image inserter feature to include a graphic overlay on your video.
 	// Enable or disable this feature for each input individually. This setting is
@@ -4497,7 +4497,7 @@ type Input struct {
 	// stream. Note that Quad 4K is not currently supported. Default is the first
 	// program within the transport stream. If the program you specify doesn't exist,
 	// the transcoding service will use this default.
-	ProgramNumber int32
+	ProgramNumber *int32
 
 	// Set PSI control for transport stream inputs to specify which data the demux
 	// process to scans.
@@ -4679,7 +4679,7 @@ type InputTemplate struct {
 	// apply filtering: Enter a value from 1 to 5, where 1 is the least amount of
 	// filtering and 5 is the most. The value that you enter applies to the strength of
 	// the Deblock or Denoise filters, or to the strength of the Advanced input filter.
-	FilterStrength int32
+	FilterStrength *int32
 
 	// Enable the image inserter feature to include a graphic overlay on your video.
 	// Enable or disable this feature for each input individually. This setting is
@@ -4716,7 +4716,7 @@ type InputTemplate struct {
 	// stream. Note that Quad 4K is not currently supported. Default is the first
 	// program within the transport stream. If the program you specify doesn't exist,
 	// the transcoding service will use this default.
-	ProgramNumber int32
+	ProgramNumber *int32
 
 	// Set PSI control for transport stream inputs to specify which data the demux
 	// process to scans.
@@ -4762,7 +4762,7 @@ type InputVideoGenerator struct {
 	// Specify an integer value for Black video duration from 50 to 86400000 to
 	// generate a black video input for that many milliseconds. Required when you
 	// include Video generator.
-	Duration int32
+	Duration *int32
 
 	noSmithyDocumentSerde
 }
@@ -4773,26 +4773,26 @@ type InsertableImage struct {
 
 	// Specify the time, in milliseconds, for the image to remain on the output video.
 	// This duration includes fade-in time but not fade-out time.
-	Duration int32
+	Duration *int32
 
 	// Specify the length of time, in milliseconds, between the Start time that you
 	// specify for the image insertion and the time that the image appears at full
 	// opacity. Full opacity is the level that you specify for the opacity setting. If
 	// you don't specify a value for Fade-in, the image will appear abruptly at the
 	// overlay start time.
-	FadeIn int32
+	FadeIn *int32
 
 	// Specify the length of time, in milliseconds, between the end of the time that
 	// you have specified for the image overlay Duration and when the overlaid image
 	// has faded to total transparency. If you don't specify a value for Fade-out, the
 	// image will disappear abruptly at the end of the inserted image duration.
-	FadeOut int32
+	FadeOut *int32
 
 	// Specify the height of the inserted image in pixels. If you specify a value
 	// that's larger than the video resolution height, the service will crop your
 	// overlaid image to fit. To use the native height of the image, keep this setting
 	// blank.
-	Height int32
+	Height *int32
 
 	// Specify the HTTP, HTTPS, or Amazon S3 location of the image that you want to
 	// overlay on the video. Use a PNG or TGA file.
@@ -4800,19 +4800,19 @@ type InsertableImage struct {
 
 	// Specify the distance, in pixels, between the inserted image and the left edge
 	// of the video frame. Required for any image overlay that you specify.
-	ImageX int32
+	ImageX *int32
 
 	// Specify the distance, in pixels, between the overlaid image and the top edge of
 	// the video frame. Required for any image overlay that you specify.
-	ImageY int32
+	ImageY *int32
 
 	// Specify how overlapping inserted images appear. Images with higher values for
 	// Layer appear on top of images with lower values for Layer.
-	Layer int32
+	Layer *int32
 
 	// Use Opacity to specify how much of the underlying video shows through the
 	// inserted image. 0 is transparent and 100 is fully opaque. Default is 50.
-	Opacity int32
+	Opacity *int32
 
 	// Specify the timecode of the frame that you want the overlay to first appear on.
 	// This must be in timecode (HH:MM:SS:FF or HH:MM:SS;FF) format. Remember to take
@@ -4823,7 +4823,7 @@ type InsertableImage struct {
 	// that's larger than the video resolution width, the service will crop your
 	// overlaid image to fit. To use the native width of the image, keep this setting
 	// blank.
-	Width int32
+	Width *int32
 
 	noSmithyDocumentSerde
 }
@@ -4884,7 +4884,7 @@ type Job struct {
 	CurrentPhase JobPhase
 
 	// Error code for the job
-	ErrorCode int32
+	ErrorCode *int32
 
 	// Error message of Job
 	ErrorMessage *string
@@ -4904,7 +4904,7 @@ type Job struct {
 	// reliable for the following input containers: Quicktime, Transport Stream, MP4,
 	// and MXF. For some jobs, the service can't provide information about job
 	// progress. In those cases, jobPercentComplete returns a null value.
-	JobPercentComplete int32
+	JobPercentComplete *int32
 
 	// The job template that the job is created from, if it is created from a job
 	// template.
@@ -4918,7 +4918,7 @@ type Job struct {
 	OutputGroupDetails []OutputGroupDetail
 
 	// Relative priority on the job.
-	Priority int32
+	Priority *int32
 
 	// When you create a job, you can specify a queue to send it to. If you don't
 	// specify, the job will go to the default queue. For more about queues, see the
@@ -4931,7 +4931,7 @@ type Job struct {
 
 	// The number of times that the service automatically attempted to process your
 	// job after encountering an error.
-	RetryCount int32
+	RetryCount *int32
 
 	// Enable this setting when you run a test job to estimate how many reserved
 	// transcoding slots (RTS) you need. When this is enabled, MediaConvert runs your
@@ -4984,7 +4984,7 @@ type JobSettings struct {
 
 	// When specified, this offset (in milliseconds) is added to the input Ad Avail
 	// PTS time.
-	AdAvailOffset int32
+	AdAvailOffset *int32
 
 	// Settings for ad avail blanking. Video can be blanked or overlaid with an image,
 	// and audio muted during SCTE-35 triggered ad avails.
@@ -5095,7 +5095,7 @@ type JobTemplate struct {
 	LastUpdated *time.Time
 
 	// Relative priority on the job.
-	Priority int32
+	Priority *int32
 
 	// Optional. The queue that jobs created from this template are assigned to. If
 	// you don't specify this, jobs will go to the default queue.
@@ -5120,7 +5120,7 @@ type JobTemplateSettings struct {
 
 	// When specified, this offset (in milliseconds) is added to the input Ad Avail
 	// PTS time.
-	AdAvailOffset int32
+	AdAvailOffset *int32
 
 	// Settings for ad avail blanking. Video can be blanked or overlaid with an image,
 	// and audio muted during SCTE-35 triggered ad avails.
@@ -5218,10 +5218,10 @@ type KantarWatermarkSettings struct {
 	// Optional. Specify an offset, in whole seconds, from the start of your output
 	// and the beginning of the watermarking. When you don't specify an offset, Kantar
 	// defaults to zero.
-	FileOffset float64
+	FileOffset *float64
 
 	// Provide your Kantar license ID number. You should get this number from Kantar.
-	KantarLicenseId int32
+	KantarLicenseId *int32
 
 	// Provide the HTTPS endpoint to the Kantar server. You should get this endpoint
 	// from Kantar.
@@ -5272,7 +5272,7 @@ type M2tsScte35Esam struct {
 
 	// Packet Identifier (PID) of the SCTE-35 stream in the transport stream generated
 	// by ESAM.
-	Scte35EsamPid int32
+	Scte35EsamPid *int32
 
 	noSmithyDocumentSerde
 }
@@ -5306,7 +5306,7 @@ type M2tsSettings struct {
 	AudioDuration M2tsAudioDuration
 
 	// The number of audio frames to insert for each PES packet.
-	AudioFramesPerPes int32
+	AudioFramesPerPes *int32
 
 	// Specify the packet identifiers (PIDs) for any elementary audio streams you
 	// include in this output. Specify multiple PIDs as a JSON array. Default is the
@@ -5316,7 +5316,7 @@ type M2tsSettings struct {
 	// Specify the output bitrate of the transport stream in bits per second. Setting
 	// to 0 lets the muxer automatically determine the appropriate bitrate. Other
 	// common values are 3750000, 7500000, and 15000000.
-	Bitrate int32
+	Bitrate *int32
 
 	// Controls what buffer model to use for accurate interleaving. If set to
 	// MULTIPLEX, use multiplex buffer model. If set to NONE, this can lead to lower
@@ -5348,7 +5348,7 @@ type M2tsSettings struct {
 
 	// Specify the packet identifier (PID) for DVB teletext data you include in this
 	// output. Default is 499.
-	DvbTeletextPid int32
+	DvbTeletextPid *int32
 
 	// When set to VIDEO_AND_FIXED_INTERVALS, audio EBP markers will be added to
 	// partitions 3 and 4. The interval between these additional markers will be fixed,
@@ -5373,7 +5373,7 @@ type M2tsSettings struct {
 	ForceTsVideoEbpOrder M2tsForceTsVideoEbpOrder
 
 	// The length, in seconds, of each fragment. Only used with EBP markers.
-	FragmentTime float64
+	FragmentTime *float64
 
 	// To include key-length-value metadata in this output: Set KLV metadata insertion
 	// to Passthrough. MediaConvert reads KLV metadata present in your input and passes
@@ -5383,7 +5383,7 @@ type M2tsSettings struct {
 
 	// Specify the maximum time, in milliseconds, between Program Clock References
 	// (PCRs) inserted into the transport stream.
-	MaxPcrInterval int32
+	MaxPcrInterval *int32
 
 	// When set, enforces that Encoder Boundary Points do not come within the
 	// specified time interval of each other by looking ahead at input video. If
@@ -5392,7 +5392,7 @@ type M2tsSettings struct {
 	// lookahead value does not add latency to the system. The Live Event must be
 	// configured elsewhere to create sufficient latency to make the lookahead
 	// accurate.
-	MinEbpInterval int32
+	MinEbpInterval *int32
 
 	// If INSERT, Nielsen inaudible tones for media tracking will be detected in the
 	// input audio and an equivalent ID3 tag will be inserted in the output.
@@ -5401,11 +5401,11 @@ type M2tsSettings struct {
 	// Value in bits per second of extra null packets to insert into the transport
 	// stream. This can be used if a downstream encryption system requires periodic
 	// null packets.
-	NullPacketBitrate float64
+	NullPacketBitrate *float64
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
-	PatInterval int32
+	PatInterval *int32
 
 	// When set to PCR_EVERY_PES_PACKET, a Program Clock Reference value is inserted
 	// for every Packetized Elementary Stream (PES) header. This is effective only when
@@ -5415,29 +5415,29 @@ type M2tsSettings struct {
 	// Specify the packet identifier (PID) for the program clock reference (PCR) in
 	// this output. If you do not specify a value, the service will use the value for
 	// Video PID.
-	PcrPid int32
+	PcrPid *int32
 
 	// Specify the number of milliseconds between instances of the program map table
 	// (PMT) in the output transport stream.
-	PmtInterval int32
+	PmtInterval *int32
 
 	// Specify the packet identifier (PID) for the program map table (PMT) itself.
 	// Default is 480.
-	PmtPid int32
+	PmtPid *int32
 
 	// Specify the packet identifier (PID) of the private metadata stream. Default is
 	// 503.
-	PrivateMetadataPid int32
+	PrivateMetadataPid *int32
 
 	// Use Program number to specify the program number used in the program map table
 	// (PMT) for this output. Default is 1. Program numbers and program map tables are
 	// parts of MPEG-2 transport stream containers, used for organizing data.
-	ProgramNumber int32
+	ProgramNumber *int32
 
 	// Manually specify the initial PTS offset, in seconds, when you set PTS offset to
 	// Seconds. Enter an integer from 0 to 3600. Leave blank to keep the default value
 	// 2.
-	PtsOffset int32
+	PtsOffset *int32
 
 	// Specify the initial presentation timestamp (PTS) offset for your transport
 	// stream output. To let MediaConvert automatically determine the initial PTS
@@ -5460,7 +5460,7 @@ type M2tsSettings struct {
 
 	// Specify the packet identifier (PID) of the SCTE-35 stream in the transport
 	// stream.
-	Scte35Pid int32
+	Scte35Pid *int32
 
 	// For SCTE-35 markers from your input-- Choose Passthrough if you want SCTE-35
 	// markers that appear in your input to also appear in this output. Choose None if
@@ -5494,19 +5494,19 @@ type M2tsSettings struct {
 
 	// Specify the length, in seconds, of each segment. Required unless markers is set
 	// to none.
-	SegmentationTime float64
+	SegmentationTime *float64
 
 	// Packet Identifier (PID) of the ID3 metadata stream in the transport stream.
-	TimedMetadataPid int32
+	TimedMetadataPid *int32
 
 	// Specify the ID for the transport stream itself in the program map table for
 	// this output. Transport stream IDs and program map tables are parts of MPEG-2
 	// transport stream containers, used for organizing data.
-	TransportStreamId int32
+	TransportStreamId *int32
 
 	// Specify the packet identifier (PID) of the elementary video stream in the
 	// transport stream.
-	VideoPid int32
+	VideoPid *int32
 
 	noSmithyDocumentSerde
 }
@@ -5530,7 +5530,7 @@ type M3u8Settings struct {
 	AudioDuration M3u8AudioDuration
 
 	// The number of audio frames to insert for each PES packet.
-	AudioFramesPerPes int32
+	AudioFramesPerPes *int32
 
 	// Packet Identifier (PID) of the elementary audio stream(s) in the transport
 	// stream. Multiple values are accepted, and can be entered in ranges and/or by
@@ -5545,7 +5545,7 @@ type M3u8Settings struct {
 
 	// Specify the maximum time, in milliseconds, between Program Clock References
 	// (PCRs) inserted into the transport stream.
-	MaxPcrInterval int32
+	MaxPcrInterval *int32
 
 	// If INSERT, Nielsen inaudible tones for media tracking will be detected in the
 	// input audio and an equivalent ID3 tag will be inserted in the output.
@@ -5553,7 +5553,7 @@ type M3u8Settings struct {
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
-	PatInterval int32
+	PatInterval *int32
 
 	// When set to PCR_EVERY_PES_PACKET a Program Clock Reference value is inserted
 	// for every Packetized Elementary Stream (PES) header. This parameter is effective
@@ -5563,25 +5563,25 @@ type M3u8Settings struct {
 	// Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport
 	// stream. When no value is given, the encoder will assign the same value as the
 	// Video PID.
-	PcrPid int32
+	PcrPid *int32
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
-	PmtInterval int32
+	PmtInterval *int32
 
 	// Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream.
-	PmtPid int32
+	PmtPid *int32
 
 	// Packet Identifier (PID) of the private metadata stream in the transport stream.
-	PrivateMetadataPid int32
+	PrivateMetadataPid *int32
 
 	// The value of the program number field in the Program Map Table.
-	ProgramNumber int32
+	ProgramNumber *int32
 
 	// Manually specify the initial PTS offset, in seconds, when you set PTS offset to
 	// Seconds. Enter an integer from 0 to 3600. Leave blank to keep the default value
 	// 2.
-	PtsOffset int32
+	PtsOffset *int32
 
 	// Specify the initial presentation timestamp (PTS) offset for your transport
 	// stream output. To let MediaConvert automatically determine the initial PTS
@@ -5593,7 +5593,7 @@ type M3u8Settings struct {
 	PtsOffsetMode TsPtsOffset
 
 	// Packet Identifier (PID) of the SCTE-35 stream in the transport stream.
-	Scte35Pid int32
+	Scte35Pid *int32
 
 	// For SCTE-35 markers from your input-- Choose Passthrough if you want SCTE-35
 	// markers that appear in your input to also appear in this output. Choose None if
@@ -5611,13 +5611,13 @@ type M3u8Settings struct {
 	TimedMetadata TimedMetadata
 
 	// Packet Identifier (PID) of the ID3 metadata stream in the transport stream.
-	TimedMetadataPid int32
+	TimedMetadataPid *int32
 
 	// The value of the transport stream ID field in the Program Map Table.
-	TransportStreamId int32
+	TransportStreamId *int32
 
 	// Packet Identifier (PID) of the elementary video stream in the transport stream.
-	VideoPid int32
+	VideoPid *int32
 
 	noSmithyDocumentSerde
 }
@@ -5632,10 +5632,10 @@ type M3u8Settings struct {
 type MinBottomRenditionSize struct {
 
 	// Use Height to define the video resolution height, in pixels, for this rule.
-	Height int32
+	Height *int32
 
 	// Use Width to define the video resolution width, in pixels, for this rule.
-	Width int32
+	Width *int32
 
 	noSmithyDocumentSerde
 }
@@ -5650,10 +5650,10 @@ type MinBottomRenditionSize struct {
 type MinTopRenditionSize struct {
 
 	// Use Height to define the video resolution height, in pixels, for this rule.
-	Height int32
+	Height *int32
 
 	// Use Width to define the video resolution width, in pixels, for this rule.
-	Width int32
+	Width *int32
 
 	noSmithyDocumentSerde
 }
@@ -5721,11 +5721,11 @@ type MotionImageInsertionFramerate struct {
 
 	// The bottom of the fraction that expresses your overlay frame rate. For example,
 	// if your frame rate is 24 fps, set this value to 1.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// The top of the fraction that expresses your overlay frame rate. For example, if
 	// your frame rate is 24 fps, set this value to 24.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	noSmithyDocumentSerde
 }
@@ -5736,11 +5736,11 @@ type MotionImageInsertionOffset struct {
 
 	// Set the distance, in pixels, between the overlay and the left edge of the video
 	// frame.
-	ImageX int32
+	ImageX *int32
 
 	// Set the distance, in pixels, between the overlay and the top edge of the video
 	// frame.
-	ImageY int32
+	ImageY *int32
 
 	noSmithyDocumentSerde
 }
@@ -5780,15 +5780,15 @@ type MovSettings struct {
 type Mp2Settings struct {
 
 	// Specify the average bitrate in bits per second.
-	Bitrate int32
+	Bitrate *int32
 
 	// Set Channels to specify the number of channels in this output audio track.
 	// Choosing Mono in will give you 1 output channel; choosing Stereo will give you
 	// 2. In the API, valid values are 1 and 2.
-	Channels int32
+	Channels *int32
 
 	// Sample rate in hz.
-	SampleRate int32
+	SampleRate *int32
 
 	noSmithyDocumentSerde
 }
@@ -5798,23 +5798,23 @@ type Mp2Settings struct {
 type Mp3Settings struct {
 
 	// Specify the average bitrate in bits per second.
-	Bitrate int32
+	Bitrate *int32
 
 	// Specify the number of channels in this output audio track. Choosing Mono gives
 	// you 1 output channel; choosing Stereo gives you 2. In the API, valid values are
 	// 1 and 2.
-	Channels int32
+	Channels *int32
 
 	// Specify whether the service encodes this MP3 audio output with a constant
 	// bitrate (CBR) or a variable bitrate (VBR).
 	RateControlMode Mp3RateControlMode
 
 	// Sample rate in hz.
-	SampleRate int32
+	SampleRate *int32
 
 	// Required when you set Bitrate control mode to VBR. Specify the audio quality of
 	// this MP3 output from 0 (highest quality) to 9 (lowest quality).
-	VbrQuality int32
+	VbrQuality *int32
 
 	noSmithyDocumentSerde
 }
@@ -5850,7 +5850,7 @@ type Mp4Settings struct {
 	// of 1, you must also set CSLG atom to the value INCLUDE. Keep the default value 0
 	// to set your CTTS box version to 0. This can provide backward compatibility for
 	// some players and packagers.
-	CttsVersion int32
+	CttsVersion *int32
 
 	// Inserts a free-space box immediately after the moov box.
 	FreeSpaceBox Mp4FreeSpaceBox
@@ -5968,7 +5968,7 @@ type Mpeg2Settings struct {
 	// Specify the average bitrate in bits per second. Required for VBR and CBR. For
 	// MS Smooth outputs, bitrates must be unique when rounded down to the nearest
 	// multiple of 1000.
-	Bitrate int32
+	Bitrate *int32
 
 	// Use Level to set the MPEG-2 level for the video output.
 	CodecLevel Mpeg2CodecLevel
@@ -6010,7 +6010,7 @@ type Mpeg2Settings struct {
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
 	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
@@ -6018,7 +6018,7 @@ type Mpeg2Settings struct {
 	// use 24000 for the value of FramerateNumerator. When you use the console for
 	// transcode jobs that use frame rate conversion, provide the value as a decimal
 	// number for Framerate. In this example, specify 23.976.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	// Specify the relative frequency of open to closed GOPs in this output. For
 	// example, if you want to allow four open GOPs and then require a closed GOP, set
@@ -6026,13 +6026,13 @@ type Mpeg2Settings struct {
 	// the default value, 1, so that players starting mid-stream receive an IDR frame
 	// as quickly as possible. Don't set this value to 0; that would break output
 	// segmenting.
-	GopClosedCadence int32
+	GopClosedCadence *int32
 
 	// Specify the interval between keyframes, in seconds or frames, for this output.
 	// Default: 12 Related settings: When you specify the GOP size in seconds, set GOP
 	// mode control to Specified, seconds. The default value for GOP mode control is
 	// Frames.
-	GopSize float64
+	GopSize *float64
 
 	// Specify the units for GOP size. If you don't specify a value here, by default
 	// the encoder measures GOP size in frames.
@@ -6042,14 +6042,14 @@ type Mpeg2Settings struct {
 	// percentage of the HRD buffer that's available at the end of each encoded video
 	// segment. For the best video quality: Set to 0 or leave blank to automatically
 	// determine the final buffer fill percentage.
-	HrdBufferFinalFillPercentage int32
+	HrdBufferFinalFillPercentage *int32
 
 	// Percentage of the buffer that should initially be filled (HRD buffer model).
-	HrdBufferInitialFillPercentage int32
+	HrdBufferInitialFillPercentage *int32
 
 	// Size of buffer (HRD buffer model) in bits. For example, enter five megabits as
 	// 5000000.
-	HrdBufferSize int32
+	HrdBufferSize *int32
 
 	// Choose the scan line type for the output. Keep the default value, Progressive
 	// to create a progressive output, regardless of the scan type of your input. Use
@@ -6070,7 +6070,7 @@ type Mpeg2Settings struct {
 
 	// Maximum bitrate in bits/second. For example, enter five megabits per second as
 	// 5000000.
-	MaxBitrate int32
+	MaxBitrate *int32
 
 	// Use this setting only when you also enable Scene change detection. This setting
 	// determines how the encoder manages the spacing between I-frames that it inserts
@@ -6084,12 +6084,12 @@ type Mpeg2Settings struct {
 	// I-frame than the value you set, then the encoder leaves all I-frames in place
 	// and the GOPs surrounding the scene change are smaller than the usual cadence
 	// GOPs.
-	MinIInterval int32
+	MinIInterval *int32
 
 	// Specify the number of B-frames that MediaConvert puts between reference frames
 	// in this output. Valid values are whole numbers from 0 through 7. When you don't
 	// specify a value, MediaConvert defaults to 2.
-	NumberBFramesBetweenReferenceFrames int32
+	NumberBFramesBetweenReferenceFrames *int32
 
 	// Optional. Specify how the service determines the pixel aspect ratio (PAR) for
 	// this output. The default behavior, Follow source, uses the PAR from your input
@@ -6103,14 +6103,14 @@ type Mpeg2Settings struct {
 	// pixel aspect ratio (PAR) that is different from your input video PAR, provide
 	// your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would
 	// specify the ratio 40:33. In this example, the value for parDenominator is 33.
-	ParDenominator int32
+	ParDenominator *int32
 
 	// Required when you set Pixel aspect ratio to SPECIFIED. On the console, this
 	// corresponds to any value other than Follow source. When you specify an output
 	// pixel aspect ratio (PAR) that is different from your input video PAR, provide
 	// your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would
 	// specify the ratio 40:33. In this example, the value for parNumerator is 40.
-	ParNumerator int32
+	ParNumerator *int32
 
 	// Optional. Use Quality tuning level to choose how you want to trade off encoding
 	// speed for output video quality. The default behavior is faster, lower quality,
@@ -6156,7 +6156,7 @@ type Mpeg2Settings struct {
 	// 17 to 128 to use planar interpolation. Increasing values from 17 to 128 result
 	// in increasing reduction of high-frequency data. The value 128 results in the
 	// softest video.
-	Softness int32
+	Softness *int32
 
 	// Keep the default value, Enabled, to adjust quantization within each frame based
 	// on spatial variation of content complexity. When you enable this feature, the
@@ -6269,7 +6269,7 @@ type MsSmoothGroupSettings struct {
 	// Exact to have the encoder use the exact length that you specify with the setting
 	// Fragment length. This might result in extra I-frames. Choose Multiple of GOP to
 	// have the encoder round up the segment lengths to match the next GOP boundary.
-	FragmentLength int32
+	FragmentLength *int32
 
 	// Specify how you want MediaConvert to determine the fragment length. Choose
 	// Exact to have the encoder use the exact length that you specify with the setting
@@ -6330,7 +6330,7 @@ type MxfXavcProfileSettings struct {
 	// frame. This should be sufficient to prevent overflow unless you have multiple
 	// pages of teletext captions data. If you have a large amount of teletext data,
 	// specify a larger number.
-	MaxAncDataSize int32
+	MaxAncDataSize *int32
 
 	noSmithyDocumentSerde
 }
@@ -6355,7 +6355,7 @@ type NexGuardFileMarkerSettings struct {
 	// create two adaptive bitrate (ABR) stacks for each asset. Do this by setting up
 	// two output groups. For one output group, set the value of Payload ID to 0 in
 	// every output. For the other output group, set Payload ID to 1 in every output.
-	Payload int32
+	Payload *int32
 
 	// Enter one of the watermarking preset strings that Nagra provides you. Required
 	// when you include Nagra NexGuard File Marker watermarking in your job.
@@ -6376,7 +6376,7 @@ type NielsenConfiguration struct {
 
 	// Nielsen has discontinued the use of breakout code functionality. If you must
 	// include this property, set the value to zero.
-	BreakoutCode int32
+	BreakoutCode *int32
 
 	// Use Distributor ID to specify the distributor ID that is assigned to your
 	// organization by Nielsen.
@@ -6438,7 +6438,7 @@ type NielsenNonLinearWatermarkSettings struct {
 	// Nielsen non-linear watermarking. This ID should be unique to your Nielsen
 	// account but common to all of your output assets. Required for all Nielsen
 	// non-linear watermarking.
-	SourceId int32
+	SourceId *int32
 
 	// Required. Specify whether your source content already contains Nielsen
 	// non-linear watermarks. When you set this value to Watermarked, the service fails
@@ -6494,7 +6494,7 @@ type NoiseReducerFilterSettings struct {
 
 	// Relative strength of noise reducing filter. Higher values produce stronger
 	// filtering.
-	Strength int32
+	Strength *int32
 
 	noSmithyDocumentSerde
 }
@@ -6504,15 +6504,15 @@ type NoiseReducerSpatialFilterSettings struct {
 
 	// Specify strength of post noise reduction sharpening filter, with 0 disabling
 	// the filter and 3 enabling it at maximum strength.
-	PostFilterSharpenStrength int32
+	PostFilterSharpenStrength *int32
 
 	// The speed of the filter, from -2 (lower speed) to 3 (higher speed), with 0
 	// being the nominal value.
-	Speed int32
+	Speed *int32
 
 	// Relative strength of noise reducing filter. Higher values produce stronger
 	// filtering.
-	Strength int32
+	Strength *int32
 
 	noSmithyDocumentSerde
 }
@@ -6523,7 +6523,7 @@ type NoiseReducerTemporalFilterSettings struct {
 	// Use Aggressive mode for content that has complex motion. Higher values produce
 	// stronger temporal filtering. This filters highly complex scenes more
 	// aggressively and creates better VQ for low bitrate outputs.
-	AggressiveMode int32
+	AggressiveMode *int32
 
 	// When you set Noise reducer to Temporal, the bandwidth and sharpness of your
 	// output is reduced. You can optionally use Post temporal sharpening to apply
@@ -6544,14 +6544,14 @@ type NoiseReducerTemporalFilterSettings struct {
 	// The speed of the filter (higher number is faster). Low setting reduces bit rate
 	// at the cost of transcode time, high setting improves transcode time at the cost
 	// of bit rate.
-	Speed int32
+	Speed *int32
 
 	// Specify the strength of the noise reducing filter on this output. Higher values
 	// produce stronger filtering. We recommend the following value ranges, depending
 	// on the result that you want: * 0-2 for complexity reduction with minimal
 	// sharpness loss * 2-8 for complexity reduction with image preservation * 8-16 for
 	// a high level of complexity reduction
-	Strength int32
+	Strength *int32
 
 	noSmithyDocumentSerde
 }
@@ -6563,16 +6563,16 @@ type OpusSettings struct {
 	// Optional. Specify the average bitrate in bits per second. Valid values are
 	// multiples of 8000, from 32000 through 192000. The default value is 96000, which
 	// we recommend for quality and bandwidth.
-	Bitrate int32
+	Bitrate *int32
 
 	// Specify the number of channels in this output audio track. Choosing Mono on
 	// gives you 1 output channel; choosing Stereo gives you 2. In the API, valid
 	// values are 1 and 2.
-	Channels int32
+	Channels *int32
 
 	// Optional. Sample rate in hz. Valid values are 16000, 24000, and 48000. The
 	// default value is 48000.
-	SampleRate int32
+	SampleRate *int32
 
 	noSmithyDocumentSerde
 }
@@ -6644,7 +6644,7 @@ type OutputChannelMapping struct {
 type OutputDetail struct {
 
 	// Duration in milliseconds
-	DurationInMs int32
+	DurationInMs *int32
 
 	// Contains details about the output's video stream
 	VideoDetails *VideoDetail
@@ -6858,7 +6858,7 @@ type ProresSettings struct {
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
 	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
@@ -6866,7 +6866,7 @@ type ProresSettings struct {
 	// use 24000 for the value of FramerateNumerator. When you use the console for
 	// transcode jobs that use frame rate conversion, provide the value as a decimal
 	// number for Framerate. In this example, specify 23.976.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	// Choose the scan line type for the output. Keep the default value, Progressive
 	// to create a progressive output, regardless of the scan type of your input. Use
@@ -6892,14 +6892,14 @@ type ProresSettings struct {
 	// pixel aspect ratio (PAR) that is different from your input video PAR, provide
 	// your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would
 	// specify the ratio 40:33. In this example, the value for parDenominator is 33.
-	ParDenominator int32
+	ParDenominator *int32
 
 	// Required when you set Pixel aspect ratio to SPECIFIED. On the console, this
 	// corresponds to any value other than Follow source. When you specify an output
 	// pixel aspect ratio (PAR) that is different from your input video PAR, provide
 	// your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would
 	// specify the ratio 40:33. In this example, the value for parNumerator is 40.
-	ParNumerator int32
+	ParNumerator *int32
 
 	// Use this setting for interlaced outputs, when your output frame rate is half of
 	// your input frame rate. In this situation, choose Optimized interlacing to create
@@ -6965,7 +6965,7 @@ type Queue struct {
 	PricingPlan PricingPlan
 
 	// The estimated number of jobs with a PROGRESSING status.
-	ProgressingJobsCount int32
+	ProgressingJobsCount *int32
 
 	// Details about the pricing plan for your reserved queue. Required for reserved
 	// queues and not applicable to on-demand queues.
@@ -6977,7 +6977,7 @@ type Queue struct {
 	Status QueueStatus
 
 	// The estimated number of jobs with a SUBMITTED status.
-	SubmittedJobsCount int32
+	SubmittedJobsCount *int32
 
 	// Specifies whether this on-demand queue is system or custom. System queues are
 	// built in. You can't modify or delete system queues. You can create and modify
@@ -7008,18 +7008,18 @@ type QueueTransition struct {
 type Rectangle struct {
 
 	// Height of rectangle in pixels. Specify only even numbers.
-	Height int32
+	Height *int32
 
 	// Width of rectangle in pixels. Specify only even numbers.
-	Width int32
+	Width *int32
 
 	// The distance, in pixels, between the rectangle and the left edge of the video
 	// frame. Specify only even numbers.
-	X int32
+	X *int32
 
 	// The distance, in pixels, between the rectangle and the top edge of the video
 	// frame. Specify only even numbers.
-	Y int32
+	Y *int32
 
 	noSmithyDocumentSerde
 }
@@ -7048,14 +7048,14 @@ type RemixSettings struct {
 	// you are doing both input channel mapping and output channel mapping, the number
 	// of output channels in your input mapping must be the same as the number of input
 	// channels in your output mapping.
-	ChannelsIn int32
+	ChannelsIn *int32
 
 	// Specify the number of channels in this output after remixing. Valid values: 1,
 	// 2, 4, 6, 8... 64. (1 and even numbers to 64.) If you are doing both input
 	// channel mapping and output channel mapping, the number of output channels in
 	// your input mapping must be the same as the number of input channels in your
 	// output mapping.
-	ChannelsOut int32
+	ChannelsOut *int32
 
 	noSmithyDocumentSerde
 }
@@ -7085,7 +7085,7 @@ type ReservationPlan struct {
 	// your existing commitment with a new 12-month commitment for a larger number of
 	// RTS. The new commitment begins when you purchase the additional capacity. You
 	// can't decrease the number of RTS in your reserved queue.
-	ReservedSlots int32
+	ReservedSlots *int32
 
 	// Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED.
 	Status ReservationPlanStatus
@@ -7120,7 +7120,7 @@ type ReservationPlanSettings struct {
 	// capacity.
 	//
 	// This member is required.
-	ReservedSlots int32
+	ReservedSlots *int32
 
 	noSmithyDocumentSerde
 }
@@ -7358,7 +7358,7 @@ type TimecodeBurnin struct {
 
 	// Use Font size to set the font size of any burned-in timecode. Valid values are
 	// 10, 16, 32, 48.
-	FontSize int32
+	FontSize *int32
 
 	// Use Position under Timecode burn-in to specify the location the burned-in
 	// timecode on output video.
@@ -7456,7 +7456,7 @@ type TrackSourceSettings struct {
 	// example, use 1 to select the captions asset that is listed first in the CPL. To
 	// include more than one captions track in your job outputs, create multiple input
 	// captions selectors. Specify one track per selector.
-	TrackNumber int32
+	TrackNumber *int32
 
 	noSmithyDocumentSerde
 }
@@ -7505,7 +7505,7 @@ type Vc3Settings struct {
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
 	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
@@ -7513,7 +7513,7 @@ type Vc3Settings struct {
 	// use 24000 for the value of FramerateNumerator. When you use the console for
 	// transcode jobs that use frame rate conversion, provide the value as a decimal
 	// number for Framerate. In this example, specify 23.976.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	// Optional. Choose the scan line type for this output. If you don't specify a
 	// value, MediaConvert will create a progressive output.
@@ -7663,14 +7663,14 @@ type VideoDescription struct {
 
 	// Applies only if you set AFD Signaling to Fixed. Use Fixed to specify a four-bit
 	// AFD value which the service will write on all frames of this video output.
-	FixedAfd int32
+	FixedAfd *int32
 
 	// Use Height to define the video resolution height, in pixels, for this output.
 	// To use the same resolution as your input: Leave both Width and Height blank. To
 	// evenly scale from your input resolution: Leave Height blank and enter a value
 	// for Width. For example, if your input is 1920x1080 and you set Width to 1280,
 	// your output will be 1280x720.
-	Height int32
+	Height *int32
 
 	// Use Selection placement to define the video area in your output frame. The area
 	// outside of the rectangle that you specify here is black.
@@ -7696,7 +7696,7 @@ type VideoDescription struct {
 	// changes the width of the anti-alias filter kernel used for scaling. Sharpness
 	// only applies if your output resolution is different from your input resolution.
 	// 0 is the softest setting, 100 the sharpest, and 50 recommended for most content.
-	Sharpness int32
+	Sharpness *int32
 
 	// Applies only to H.264, H.265, MPEG2, and ProRes outputs. Only enable Timecode
 	// insertion when the input frame rate is identical to the output frame rate. To
@@ -7720,7 +7720,7 @@ type VideoDescription struct {
 	// evenly scale from your input resolution: Leave Width blank and enter a value for
 	// Height. For example, if your input is 1920x1080 and you set Height to 720, your
 	// output will be 1280x720.
-	Width int32
+	Width *int32
 
 	noSmithyDocumentSerde
 }
@@ -7729,10 +7729,10 @@ type VideoDescription struct {
 type VideoDetail struct {
 
 	// Height in pixels for the output
-	HeightInPx int32
+	HeightInPx *int32
 
 	// Width in pixels for the output
-	WidthInPx int32
+	WidthInPx *int32
 
 	noSmithyDocumentSerde
 }
@@ -7931,11 +7931,11 @@ type VideoSelector struct {
 	// an integer; the system automatically converts it to the hexidecimal value. For
 	// example, 257 selects PID 0x101. A PID, or packet identifier, is an identifier
 	// for a set of data in an MPEG-2 transport stream container.
-	Pid int32
+	Pid *int32
 
 	// Selects a specific program from within a multi-program transport stream. Note
 	// that Quad 4K is not currently supported.
-	ProgramNumber int32
+	ProgramNumber *int32
 
 	// Use Rotate to specify how the service rotates your video. You can choose
 	// automatic rotation or specify a rotation. You can specify a clockwise rotation
@@ -7968,17 +7968,17 @@ type VorbisSettings struct {
 	// Optional. Specify the number of channels in this output audio track. Choosing
 	// Mono on the console gives you 1 output channel; choosing Stereo gives you 2. In
 	// the API, valid values are 1 and 2. The default value is 2.
-	Channels int32
+	Channels *int32
 
 	// Optional. Specify the audio sample rate in Hz. Valid values are 22050, 32000,
 	// 44100, and 48000. The default value is 48000.
-	SampleRate int32
+	SampleRate *int32
 
 	// Optional. Specify the variable audio quality of this Vorbis output from -1
 	// (lowest quality, ~45 kbit/s) to 10 (highest quality, ~500 kbit/s). The default
 	// value is 4 (~128 kbit/s). Values 5 and 6 are approximately 160 and 192 kbit/s,
 	// respectively.
-	VbrQuality int32
+	VbrQuality *int32
 
 	noSmithyDocumentSerde
 }
@@ -7988,7 +7988,7 @@ type Vp8Settings struct {
 
 	// Target bitrate in bits/second. For example, enter five megabits per second as
 	// 5000000.
-	Bitrate int32
+	Bitrate *int32
 
 	// If you are using the console, use the Framerate setting to specify the frame
 	// rate for this output. If you want to keep the same frame rate as the input
@@ -8017,7 +8017,7 @@ type Vp8Settings struct {
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
 	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
@@ -8025,20 +8025,20 @@ type Vp8Settings struct {
 	// use 24000 for the value of FramerateNumerator. When you use the console for
 	// transcode jobs that use frame rate conversion, provide the value as a decimal
 	// number for Framerate. In this example, specify 23.976.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	// GOP Length (keyframe interval) in frames. Must be greater than zero.
-	GopSize float64
+	GopSize *float64
 
 	// Optional. Size of buffer (HRD buffer model) in bits. For example, enter five
 	// megabits as 5000000.
-	HrdBufferSize int32
+	HrdBufferSize *int32
 
 	// Ignore this setting unless you set qualityTuningLevel to MULTI_PASS. Optional.
 	// Specify the maximum bitrate in bits/second. For example, enter five megabits per
 	// second as 5000000. The default behavior uses twice the target bitrate as the
 	// maximum bitrate.
-	MaxBitrate int32
+	MaxBitrate *int32
 
 	// Optional. Specify how the service determines the pixel aspect ratio (PAR) for
 	// this output. The default behavior, Follow source, uses the PAR from your input
@@ -8052,14 +8052,14 @@ type Vp8Settings struct {
 	// pixel aspect ratio (PAR) that is different from your input video PAR, provide
 	// your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would
 	// specify the ratio 40:33. In this example, the value for parDenominator is 33.
-	ParDenominator int32
+	ParDenominator *int32
 
 	// Required when you set Pixel aspect ratio to SPECIFIED. On the console, this
 	// corresponds to any value other than Follow source. When you specify an output
 	// pixel aspect ratio (PAR) that is different from your input video PAR, provide
 	// your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would
 	// specify the ratio 40:33. In this example, the value for parNumerator is 40.
-	ParNumerator int32
+	ParNumerator *int32
 
 	// Optional. Use Quality tuning level to choose how you want to trade off encoding
 	// speed for output video quality. The default behavior is faster, lower quality,
@@ -8078,7 +8078,7 @@ type Vp9Settings struct {
 
 	// Target bitrate in bits/second. For example, enter five megabits per second as
 	// 5000000.
-	Bitrate int32
+	Bitrate *int32
 
 	// If you are using the console, use the Framerate setting to specify the frame
 	// rate for this output. If you want to keep the same frame rate as the input
@@ -8107,7 +8107,7 @@ type Vp9Settings struct {
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Framerate. In this example, specify 23.976.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
 	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
@@ -8115,20 +8115,20 @@ type Vp9Settings struct {
 	// use 24000 for the value of FramerateNumerator. When you use the console for
 	// transcode jobs that use frame rate conversion, provide the value as a decimal
 	// number for Framerate. In this example, specify 23.976.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	// GOP Length (keyframe interval) in frames. Must be greater than zero.
-	GopSize float64
+	GopSize *float64
 
 	// Size of buffer (HRD buffer model) in bits. For example, enter five megabits as
 	// 5000000.
-	HrdBufferSize int32
+	HrdBufferSize *int32
 
 	// Ignore this setting unless you set qualityTuningLevel to MULTI_PASS. Optional.
 	// Specify the maximum bitrate in bits/second. For example, enter five megabits per
 	// second as 5000000. The default behavior uses twice the target bitrate as the
 	// maximum bitrate.
-	MaxBitrate int32
+	MaxBitrate *int32
 
 	// Optional. Specify how the service determines the pixel aspect ratio for this
 	// output. The default behavior is to use the same pixel aspect ratio as your input
@@ -8140,14 +8140,14 @@ type Vp9Settings struct {
 	// pixel aspect ratio (PAR) that is different from your input video PAR, provide
 	// your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would
 	// specify the ratio 40:33. In this example, the value for parDenominator is 33.
-	ParDenominator int32
+	ParDenominator *int32
 
 	// Required when you set Pixel aspect ratio to SPECIFIED. On the console, this
 	// corresponds to any value other than Follow source. When you specify an output
 	// pixel aspect ratio (PAR) that is different from your input video PAR, provide
 	// your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would
 	// specify the ratio 40:33. In this example, the value for parNumerator is 40.
-	ParNumerator int32
+	ParNumerator *int32
 
 	// Optional. Use Quality tuning level to choose how you want to trade off encoding
 	// speed for output video quality. The default behavior is faster, lower quality,
@@ -8169,12 +8169,12 @@ type WarningGroup struct {
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/warning_codes.html
 	//
 	// This member is required.
-	Code int32
+	Code *int32
 
 	// The number of times this warning occurred in the job.
 	//
 	// This member is required.
-	Count int32
+	Count *int32
 
 	noSmithyDocumentSerde
 }
@@ -8184,11 +8184,11 @@ type WavSettings struct {
 
 	// Specify Bit depth, in bits per sample, to choose the encoding quality for this
 	// audio track.
-	BitDepth int32
+	BitDepth *int32
 
 	// Specify the number of channels in this output audio track. Valid values are 1
 	// and even numbers up to 64. For example, 1, 2, 4, 6, and so on, up to 64.
-	Channels int32
+	Channels *int32
 
 	// The service defaults to using RIFF for WAV outputs. If your output audio is
 	// likely to exceed 4 GB in file size, or if you otherwise need the extended
@@ -8196,7 +8196,7 @@ type WavSettings struct {
 	Format WavFormat
 
 	// Sample rate in Hz.
-	SampleRate int32
+	SampleRate *int32
 
 	noSmithyDocumentSerde
 }
@@ -8315,13 +8315,13 @@ type Xavc4kProfileSettings struct {
 	// Frequency of closed GOPs. In streaming applications, it is recommended that
 	// this be set to 1 so a decoder joining mid-stream will receive an IDR frame as
 	// quickly as possible. Setting this value to 0 will break output segmenting.
-	GopClosedCadence int32
+	GopClosedCadence *int32
 
 	// Specify the size of the buffer that MediaConvert uses in the HRD buffer model
 	// for this output. Specify this value in bits; for example, enter five megabits as
 	// 5000000. When you don't set this value, or you set it to zero, MediaConvert
 	// calculates the default by doubling the bitrate of this output point.
-	HrdBufferSize int32
+	HrdBufferSize *int32
 
 	// Optional. Use Quality tuning level to choose how you want to trade off encoding
 	// speed for output video quality. The default behavior is faster, lower quality,
@@ -8331,7 +8331,7 @@ type Xavc4kProfileSettings struct {
 	// Number of slices per picture. Must be less than or equal to the number of
 	// macroblock rows for progressive pictures, and less than or equal to half the
 	// number of macroblock rows for interlaced pictures.
-	Slices int32
+	Slices *int32
 
 	noSmithyDocumentSerde
 }
@@ -8379,13 +8379,13 @@ type XavcHdProfileSettings struct {
 	// Frequency of closed GOPs. In streaming applications, it is recommended that
 	// this be set to 1 so a decoder joining mid-stream will receive an IDR frame as
 	// quickly as possible. Setting this value to 0 will break output segmenting.
-	GopClosedCadence int32
+	GopClosedCadence *int32
 
 	// Specify the size of the buffer that MediaConvert uses in the HRD buffer model
 	// for this output. Specify this value in bits; for example, enter five megabits as
 	// 5000000. When you don't set this value, or you set it to zero, MediaConvert
 	// calculates the default by doubling the bitrate of this output point.
-	HrdBufferSize int32
+	HrdBufferSize *int32
 
 	// Choose the scan line type for the output. Keep the default value, Progressive
 	// to create a progressive output, regardless of the scan type of your input. Use
@@ -8407,7 +8407,7 @@ type XavcHdProfileSettings struct {
 	// Number of slices per picture. Must be less than or equal to the number of
 	// macroblock rows for progressive pictures, and less than or equal to half the
 	// number of macroblock rows for interlaced pictures.
-	Slices int32
+	Slices *int32
 
 	// Ignore this setting unless you set Frame rate (framerateNumerator divided by
 	// framerateDenominator) to 29.970. If your input framerate is 23.976, choose Hard.
@@ -8465,7 +8465,7 @@ type XavcSettings struct {
 	// example, use 1001 for the value of FramerateDenominator. When you use the
 	// console for transcode jobs that use frame rate conversion, provide the value as
 	// a decimal number for Frame rate. In this example, specify 23.976.
-	FramerateDenominator int32
+	FramerateDenominator *int32
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
 	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
@@ -8473,7 +8473,7 @@ type XavcSettings struct {
 	// use 24000 for the value of FramerateNumerator. When you use the console for
 	// transcode jobs that use frame rate conversion, provide the value as a decimal
 	// number for Framerate. In this example, specify 23.976.
-	FramerateNumerator int32
+	FramerateNumerator *int32
 
 	// Specify the XAVC profile for this output. For more information, see the Sony
 	// documentation at https://www.xavc-info.org/. Note that MediaConvert doesn't
@@ -8497,7 +8497,7 @@ type XavcSettings struct {
 	// H.264 specification. Choose a value from 17 to 128 to use planar interpolation.
 	// Increasing values from 17 to 128 result in increasing reduction of
 	// high-frequency data. The value 128 results in the softest video.
-	Softness int32
+	Softness *int32
 
 	// The best way to set up adaptive quantization is to keep the default value,
 	// Auto, for the setting Adaptive quantization. When you do so, MediaConvert

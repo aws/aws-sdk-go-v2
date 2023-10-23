@@ -59,7 +59,7 @@ type AssertionRule struct {
 	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
-	WaitPeriodMs int32
+	WaitPeriodMs *int32
 
 	// The Amazon Web Services account ID of the assertion rule owner.
 	Owner *string
@@ -88,7 +88,7 @@ type AssertionRuleUpdate struct {
 	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
-	WaitPeriodMs int32
+	WaitPeriodMs *int32
 
 	noSmithyDocumentSerde
 }
@@ -151,7 +151,7 @@ type ControlPanel struct {
 	// Amazon Route 53 Application Recovery Controller creates a control panel, and
 	// sets this flag for that control panel. If you create a control panel yourself,
 	// this flag is set to false.
-	DefaultControlPanel bool
+	DefaultControlPanel *bool
 
 	// The name of the control panel. You can use any non-white space character in the
 	// name.
@@ -161,7 +161,7 @@ type ControlPanel struct {
 	Owner *string
 
 	// The number of routing controls in the control panel.
-	RoutingControlCount int32
+	RoutingControlCount *int32
 
 	// The deployment status of control panel. Status can be one of the following:
 	// PENDING, DEPLOYED, PENDING_DELETION.
@@ -232,7 +232,7 @@ type GatingRule struct {
 	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
-	WaitPeriodMs int32
+	WaitPeriodMs *int32
 
 	// The Amazon Web Services account ID of the gating rule owner.
 	Owner *string
@@ -260,7 +260,7 @@ type GatingRuleUpdate struct {
 	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
-	WaitPeriodMs int32
+	WaitPeriodMs *int32
 
 	noSmithyDocumentSerde
 }
@@ -302,7 +302,7 @@ type NewAssertionRule struct {
 	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
-	WaitPeriodMs int32
+	WaitPeriodMs *int32
 
 	noSmithyDocumentSerde
 }
@@ -350,7 +350,7 @@ type NewGatingRule struct {
 	// The wait period is 5000 ms by default, but you can choose a custom value.
 	//
 	// This member is required.
-	WaitPeriodMs int32
+	WaitPeriodMs *int32
 
 	noSmithyDocumentSerde
 }
@@ -413,13 +413,13 @@ type RuleConfig struct {
 	// evaluated as false, and vice versa.
 	//
 	// This member is required.
-	Inverted bool
+	Inverted *bool
 
 	// The value of N, when you specify an ATLEAST rule type. That is, Threshold is
 	// the number of controls that must be set when you specify an ATLEAST type.
 	//
 	// This member is required.
-	Threshold int32
+	Threshold *int32
 
 	// A rule can be one of the following: ATLEAST, AND, or OR.
 	//

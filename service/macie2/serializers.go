@@ -366,9 +366,9 @@ func awsRestjson1_serializeOpDocumentCreateClassificationJobInput(v *CreateClass
 		ok.String(*v.Description)
 	}
 
-	if v.InitialRun {
+	if v.InitialRun != nil {
 		ok := object.Key("initialRun")
-		ok.Boolean(v.InitialRun)
+		ok.Boolean(*v.InitialRun)
 	}
 
 	if len(v.JobType) > 0 {
@@ -400,9 +400,9 @@ func awsRestjson1_serializeOpDocumentCreateClassificationJobInput(v *CreateClass
 		}
 	}
 
-	if v.SamplingPercentage != 0 {
+	if v.SamplingPercentage != nil {
 		ok := object.Key("samplingPercentage")
-		ok.Integer(v.SamplingPercentage)
+		ok.Integer(*v.SamplingPercentage)
 	}
 
 	if v.ScheduleFrequency != nil {
@@ -513,9 +513,9 @@ func awsRestjson1_serializeOpDocumentCreateCustomDataIdentifierInput(v *CreateCu
 		}
 	}
 
-	if v.MaximumMatchDistance != 0 {
+	if v.MaximumMatchDistance != nil {
 		ok := object.Key("maximumMatchDistance")
-		ok.Integer(v.MaximumMatchDistance)
+		ok.Integer(*v.MaximumMatchDistance)
 	}
 
 	if v.Name != nil {
@@ -639,9 +639,9 @@ func awsRestjson1_serializeOpDocumentCreateFindingsFilterInput(v *CreateFindings
 		ok.String(*v.Name)
 	}
 
-	if v.Position != 0 {
+	if v.Position != nil {
 		ok := object.Key("position")
-		ok.Integer(v.Position)
+		ok.Integer(*v.Position)
 	}
 
 	if v.Tags != nil {
@@ -728,9 +728,9 @@ func awsRestjson1_serializeOpDocumentCreateInvitationsInput(v *CreateInvitations
 		}
 	}
 
-	if v.DisableEmailNotification {
+	if v.DisableEmailNotification != nil {
 		ok := object.Key("disableEmailNotification")
-		ok.Boolean(v.DisableEmailNotification)
+		ok.Boolean(*v.DisableEmailNotification)
 	}
 
 	if v.Message != nil {
@@ -1394,9 +1394,9 @@ func awsRestjson1_serializeOpDocumentDescribeBucketsInput(v *DescribeBucketsInpu
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2683,9 +2683,9 @@ func awsRestjson1_serializeOpDocumentGetFindingStatisticsInput(v *GetFindingStat
 		ok.String(string(v.GroupBy))
 	}
 
-	if v.Size != 0 {
+	if v.Size != nil {
 		ok := object.Key("size")
-		ok.Integer(v.Size)
+		ok.Integer(*v.Size)
 	}
 
 	if v.SortCriteria != nil {
@@ -3300,9 +3300,9 @@ func awsRestjson1_serializeOpDocumentGetUsageStatisticsInput(v *GetUsageStatisti
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3438,8 +3438,8 @@ func awsRestjson1_serializeOpHttpBindingsListAllowListsInput(v *ListAllowListsIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3523,9 +3523,9 @@ func awsRestjson1_serializeOpDocumentListClassificationJobsInput(v *ListClassifi
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3674,9 +3674,9 @@ func awsRestjson1_serializeOpDocumentListCustomDataIdentifiersInput(v *ListCusto
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3761,9 +3761,9 @@ func awsRestjson1_serializeOpDocumentListFindingsInput(v *ListFindingsInput, val
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3834,8 +3834,8 @@ func awsRestjson1_serializeOpHttpBindingsListFindingsFiltersInput(v *ListFinding
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3898,8 +3898,8 @@ func awsRestjson1_serializeOpHttpBindingsListInvitationsInput(v *ListInvitations
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -4037,8 +4037,8 @@ func awsRestjson1_serializeOpHttpBindingsListMembersInput(v *ListMembersInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -4105,8 +4105,8 @@ func awsRestjson1_serializeOpHttpBindingsListOrganizationAdminAccountsInput(v *L
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -4233,8 +4233,8 @@ func awsRestjson1_serializeOpHttpBindingsListResourceProfileDetectionsInput(v *L
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -4301,8 +4301,8 @@ func awsRestjson1_serializeOpHttpBindingsListSensitivityInspectionTemplatesInput
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -4610,9 +4610,9 @@ func awsRestjson1_serializeOpDocumentSearchResourcesInput(v *SearchResourcesInpu
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -4801,9 +4801,9 @@ func awsRestjson1_serializeOpDocumentTestCustomDataIdentifierInput(v *TestCustom
 		}
 	}
 
-	if v.MaximumMatchDistance != 0 {
+	if v.MaximumMatchDistance != nil {
 		ok := object.Key("maximumMatchDistance")
-		ok.Integer(v.MaximumMatchDistance)
+		ok.Integer(*v.MaximumMatchDistance)
 	}
 
 	if v.Regex != nil {
@@ -5350,9 +5350,9 @@ func awsRestjson1_serializeOpDocumentUpdateFindingsFilterInput(v *UpdateFindings
 		ok.String(*v.Name)
 	}
 
-	if v.Position != 0 {
+	if v.Position != nil {
 		ok := object.Key("position")
-		ok.Integer(v.Position)
+		ok.Integer(*v.Position)
 	}
 
 	return nil
@@ -5593,9 +5593,9 @@ func awsRestjson1_serializeOpDocumentUpdateOrganizationConfigurationInput(v *Upd
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.AutoEnable != nil {
 		ok := object.Key("autoEnable")
-		ok.Boolean(v.AutoEnable)
+		ok.Boolean(*v.AutoEnable)
 	}
 
 	return nil
@@ -5676,9 +5676,9 @@ func awsRestjson1_serializeOpDocumentUpdateResourceProfileInput(v *UpdateResourc
 	object := value.Object()
 	defer object.Close()
 
-	if v.SensitivityScoreOverride != 0 {
+	if v.SensitivityScoreOverride != nil {
 		ok := object.Key("sensitivityScoreOverride")
-		ok.Integer(v.SensitivityScoreOverride)
+		ok.Integer(*v.SensitivityScoreOverride)
 	}
 
 	return nil
@@ -6172,24 +6172,24 @@ func awsRestjson1_serializeDocumentBucketCriteriaAdditionalProperties(v *types.B
 		}
 	}
 
-	if v.Gt != 0 {
+	if v.Gt != nil {
 		ok := object.Key("gt")
-		ok.Long(v.Gt)
+		ok.Long(*v.Gt)
 	}
 
-	if v.Gte != 0 {
+	if v.Gte != nil {
 		ok := object.Key("gte")
-		ok.Long(v.Gte)
+		ok.Long(*v.Gte)
 	}
 
-	if v.Lt != 0 {
+	if v.Lt != nil {
 		ok := object.Key("lt")
-		ok.Long(v.Lt)
+		ok.Long(*v.Lt)
 	}
 
-	if v.Lte != 0 {
+	if v.Lte != nil {
 		ok := object.Key("lte")
-		ok.Long(v.Lte)
+		ok.Long(*v.Lte)
 	}
 
 	if v.Neq != nil {
@@ -6305,24 +6305,24 @@ func awsRestjson1_serializeDocumentCriterionAdditionalProperties(v *types.Criter
 		}
 	}
 
-	if v.Gt != 0 {
+	if v.Gt != nil {
 		ok := object.Key("gt")
-		ok.Long(v.Gt)
+		ok.Long(*v.Gt)
 	}
 
-	if v.Gte != 0 {
+	if v.Gte != nil {
 		ok := object.Key("gte")
-		ok.Long(v.Gte)
+		ok.Long(*v.Gte)
 	}
 
-	if v.Lt != 0 {
+	if v.Lt != nil {
 		ok := object.Key("lt")
-		ok.Long(v.Lt)
+		ok.Long(*v.Lt)
 	}
 
-	if v.Lte != 0 {
+	if v.Lte != nil {
 		ok := object.Key("lte")
-		ok.Long(v.Lte)
+		ok.Long(*v.Lte)
 	}
 
 	if v.Neq != nil {
@@ -6502,9 +6502,9 @@ func awsRestjson1_serializeDocumentMonthlySchedule(v *types.MonthlySchedule, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.DayOfMonth != 0 {
+	if v.DayOfMonth != nil {
 		ok := object.Key("dayOfMonth")
-		ok.Integer(v.DayOfMonth)
+		ok.Integer(*v.DayOfMonth)
 	}
 
 	return nil
@@ -6825,14 +6825,14 @@ func awsRestjson1_serializeDocumentSecurityHubConfiguration(v *types.SecurityHub
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.PublishClassificationFindings != nil {
 		ok := object.Key("publishClassificationFindings")
-		ok.Boolean(v.PublishClassificationFindings)
+		ok.Boolean(*v.PublishClassificationFindings)
 	}
 
-	{
+	if v.PublishPolicyFindings != nil {
 		ok := object.Key("publishPolicyFindings")
-		ok.Boolean(v.PublishPolicyFindings)
+		ok.Boolean(*v.PublishPolicyFindings)
 	}
 
 	return nil
@@ -6884,9 +6884,9 @@ func awsRestjson1_serializeDocumentSeverityLevel(v *types.SeverityLevel, value s
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.OccurrencesThreshold != nil {
 		ok := object.Key("occurrencesThreshold")
-		ok.Long(v.OccurrencesThreshold)
+		ok.Long(*v.OccurrencesThreshold)
 	}
 
 	if len(v.Severity) > 0 {

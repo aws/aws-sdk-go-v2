@@ -3193,7 +3193,7 @@ func awsRestjson1_deserializeOpDocumentDescribeConfigurationRevisionOutput(v **D
 				if err != nil {
 					return err
 				}
-				sv.Revision = i64
+				sv.Revision = ptr.Int64(i64)
 			}
 
 		case "serverProperties":
@@ -3397,7 +3397,7 @@ func awsRestjson1_deserializeOpDocumentDescribeReplicatorOutput(v **DescribeRepl
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsReplicatorReference = jtv
+				sv.IsReplicatorReference = ptr.Bool(jtv)
 			}
 
 		case "kafkaClusters":
@@ -10260,7 +10260,7 @@ func awsRestjson1_deserializeDocumentBrokerEBSVolumeInfo(v **types.BrokerEBSVolu
 				if err != nil {
 					return err
 				}
-				sv.VolumeSizeGB = int32(i64)
+				sv.VolumeSizeGB = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -10431,7 +10431,7 @@ func awsRestjson1_deserializeDocumentBrokerNodeInfo(v **types.BrokerNodeInfo, va
 					if err != nil {
 						return err
 					}
-					sv.BrokerId = f64
+					sv.BrokerId = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -10449,7 +10449,7 @@ func awsRestjson1_deserializeDocumentBrokerNodeInfo(v **types.BrokerNodeInfo, va
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.BrokerId = f64
+					sv.BrokerId = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
@@ -10535,7 +10535,7 @@ func awsRestjson1_deserializeDocumentBrokerSoftwareInfo(v **types.BrokerSoftware
 				if err != nil {
 					return err
 				}
-				sv.ConfigurationRevision = i64
+				sv.ConfigurationRevision = ptr.Int64(i64)
 			}
 
 		case "kafkaVersion":
@@ -10710,7 +10710,7 @@ func awsRestjson1_deserializeDocumentCloudWatchLogs(v **types.CloudWatchLogs, va
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "logGroup":
@@ -10964,7 +10964,7 @@ func awsRestjson1_deserializeDocumentClusterInfo(v **types.ClusterInfo, value in
 				if err != nil {
 					return err
 				}
-				sv.NumberOfBrokerNodes = int32(i64)
+				sv.NumberOfBrokerNodes = ptr.Int32(int32(i64))
 			}
 
 		case "openMonitoring":
@@ -11721,7 +11721,7 @@ func awsRestjson1_deserializeDocumentConfigurationInfo(v **types.ConfigurationIn
 				if err != nil {
 					return err
 				}
-				sv.Revision = i64
+				sv.Revision = ptr.Int64(i64)
 			}
 
 		default:
@@ -11787,7 +11787,7 @@ func awsRestjson1_deserializeDocumentConfigurationRevision(v **types.Configurati
 				if err != nil {
 					return err
 				}
-				sv.Revision = i64
+				sv.Revision = ptr.Int64(i64)
 			}
 
 		default:
@@ -11927,7 +11927,7 @@ func awsRestjson1_deserializeDocumentConsumerGroupReplication(v **types.Consumer
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DetectAndCopyNewConsumerGroups = jtv
+				sv.DetectAndCopyNewConsumerGroups = ptr.Bool(jtv)
 			}
 
 		case "synchroniseConsumerGroupOffsets":
@@ -11936,7 +11936,7 @@ func awsRestjson1_deserializeDocumentConsumerGroupReplication(v **types.Consumer
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.SynchroniseConsumerGroupOffsets = jtv
+				sv.SynchroniseConsumerGroupOffsets = ptr.Bool(jtv)
 			}
 
 		default:
@@ -11985,7 +11985,7 @@ func awsRestjson1_deserializeDocumentEBSStorageInfo(v **types.EBSStorageInfo, va
 				if err != nil {
 					return err
 				}
-				sv.VolumeSize = int32(i64)
+				sv.VolumeSize = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -12115,7 +12115,7 @@ func awsRestjson1_deserializeDocumentEncryptionInTransit(v **types.EncryptionInT
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.InCluster = jtv
+				sv.InCluster = ptr.Bool(jtv)
 			}
 
 		default:
@@ -12213,7 +12213,7 @@ func awsRestjson1_deserializeDocumentFirehose(v **types.Firehose, value interfac
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:
@@ -12302,7 +12302,7 @@ func awsRestjson1_deserializeDocumentIam(v **types.Iam, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:
@@ -12391,7 +12391,7 @@ func awsRestjson1_deserializeDocumentJmxExporter(v **types.JmxExporter, value in
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnabledInBroker = jtv
+				sv.EnabledInBroker = ptr.Bool(jtv)
 			}
 
 		default:
@@ -12431,7 +12431,7 @@ func awsRestjson1_deserializeDocumentJmxExporterInfo(v **types.JmxExporterInfo, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnabledInBroker = jtv
+				sv.EnabledInBroker = ptr.Bool(jtv)
 			}
 
 		default:
@@ -12753,7 +12753,7 @@ func awsRestjson1_deserializeDocumentMutableClusterInfo(v **types.MutableCluster
 				if err != nil {
 					return err
 				}
-				sv.NumberOfBrokerNodes = int32(i64)
+				sv.NumberOfBrokerNodes = ptr.Int32(int32(i64))
 			}
 
 		case "openMonitoring":
@@ -12807,7 +12807,7 @@ func awsRestjson1_deserializeDocumentNodeExporter(v **types.NodeExporter, value 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnabledInBroker = jtv
+				sv.EnabledInBroker = ptr.Bool(jtv)
 			}
 
 		default:
@@ -12847,7 +12847,7 @@ func awsRestjson1_deserializeDocumentNodeExporterInfo(v **types.NodeExporterInfo
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnabledInBroker = jtv
+				sv.EnabledInBroker = ptr.Bool(jtv)
 			}
 
 		default:
@@ -13205,7 +13205,7 @@ func awsRestjson1_deserializeDocumentProvisioned(v **types.Provisioned, value in
 				if err != nil {
 					return err
 				}
-				sv.NumberOfBrokerNodes = int32(i64)
+				sv.NumberOfBrokerNodes = ptr.Int32(int32(i64))
 			}
 
 		case "openMonitoring":
@@ -13277,7 +13277,7 @@ func awsRestjson1_deserializeDocumentProvisionedThroughput(v **types.Provisioned
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "volumeThroughput":
@@ -13290,7 +13290,7 @@ func awsRestjson1_deserializeDocumentProvisionedThroughput(v **types.Provisioned
 				if err != nil {
 					return err
 				}
-				sv.VolumeThroughput = int32(i64)
+				sv.VolumeThroughput = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -13558,7 +13558,7 @@ func awsRestjson1_deserializeDocumentReplicatorSummary(v **types.ReplicatorSumma
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsReplicatorReference = jtv
+				sv.IsReplicatorReference = ptr.Bool(jtv)
 			}
 
 		case "kafkaClustersSummary":
@@ -13653,7 +13653,7 @@ func awsRestjson1_deserializeDocumentS3(v **types.S3, value interface{}) error {
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "prefix":
@@ -13743,7 +13743,7 @@ func awsRestjson1_deserializeDocumentScram(v **types.Scram, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:
@@ -14035,7 +14035,7 @@ func awsRestjson1_deserializeDocumentTls(v **types.Tls, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:
@@ -14124,7 +14124,7 @@ func awsRestjson1_deserializeDocumentTopicReplication(v **types.TopicReplication
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.CopyAccessControlListsForTopics = jtv
+				sv.CopyAccessControlListsForTopics = ptr.Bool(jtv)
 			}
 
 		case "copyTopicConfigurations":
@@ -14133,7 +14133,7 @@ func awsRestjson1_deserializeDocumentTopicReplication(v **types.TopicReplication
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.CopyTopicConfigurations = jtv
+				sv.CopyTopicConfigurations = ptr.Bool(jtv)
 			}
 
 		case "detectAndCopyNewTopics":
@@ -14142,7 +14142,7 @@ func awsRestjson1_deserializeDocumentTopicReplication(v **types.TopicReplication
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DetectAndCopyNewTopics = jtv
+				sv.DetectAndCopyNewTopics = ptr.Bool(jtv)
 			}
 
 		case "topicsToExclude":
@@ -14192,7 +14192,7 @@ func awsRestjson1_deserializeDocumentUnauthenticated(v **types.Unauthenticated, 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:
@@ -14729,7 +14729,7 @@ func awsRestjson1_deserializeDocumentVpcConnectivityIam(v **types.VpcConnectivit
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:
@@ -14810,7 +14810,7 @@ func awsRestjson1_deserializeDocumentVpcConnectivityScram(v **types.VpcConnectiv
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:
@@ -14850,7 +14850,7 @@ func awsRestjson1_deserializeDocumentVpcConnectivityTls(v **types.VpcConnectivit
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:
@@ -14915,7 +14915,7 @@ func awsRestjson1_deserializeDocumentZookeeperNodeInfo(v **types.ZookeeperNodeIn
 					if err != nil {
 						return err
 					}
-					sv.ZookeeperId = f64
+					sv.ZookeeperId = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -14933,7 +14933,7 @@ func awsRestjson1_deserializeDocumentZookeeperNodeInfo(v **types.ZookeeperNodeIn
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.ZookeeperId = f64
+					sv.ZookeeperId = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)

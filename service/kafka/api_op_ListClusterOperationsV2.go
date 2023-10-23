@@ -41,7 +41,7 @@ type ListClusterOperationsV2Input struct {
 	ClusterArn *string
 
 	// The maxResults of the query.
-	MaxResults int32
+	MaxResults *int32
 
 	// The nextToken of the query.
 	NextToken *string
@@ -176,8 +176,8 @@ func NewListClusterOperationsV2Paginator(client ListClusterOperationsV2APIClient
 	}
 
 	options := ListClusterOperationsV2PaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -207,7 +207,11 @@ func (p *ListClusterOperationsV2Paginator) NextPage(ctx context.Context, optFns 
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListClusterOperationsV2(ctx, &params, optFns...)
 	if err != nil {

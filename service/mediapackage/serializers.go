@@ -422,9 +422,9 @@ func awsRestjson1_serializeOpDocumentCreateOriginEndpointInput(v *CreateOriginEn
 		ok.String(string(v.Origination))
 	}
 
-	if v.StartoverWindowSeconds != 0 {
+	if v.StartoverWindowSeconds != nil {
 		ok := object.Key("startoverWindowSeconds")
-		ok.Integer(v.StartoverWindowSeconds)
+		ok.Integer(*v.StartoverWindowSeconds)
 	}
 
 	if v.Tags != nil {
@@ -434,9 +434,9 @@ func awsRestjson1_serializeOpDocumentCreateOriginEndpointInput(v *CreateOriginEn
 		}
 	}
 
-	if v.TimeDelaySeconds != 0 {
+	if v.TimeDelaySeconds != nil {
 		ok := object.Key("timeDelaySeconds")
-		ok.Integer(v.TimeDelaySeconds)
+		ok.Integer(*v.TimeDelaySeconds)
 	}
 
 	if v.Whitelist != nil {
@@ -827,8 +827,8 @@ func awsRestjson1_serializeOpHttpBindingsListChannelsInput(v *ListChannelsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -899,8 +899,8 @@ func awsRestjson1_serializeOpHttpBindingsListHarvestJobsInput(v *ListHarvestJobs
 		encoder.SetQuery("includeStatus").String(*v.IncludeStatus)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -967,8 +967,8 @@ func awsRestjson1_serializeOpHttpBindingsListOriginEndpointsInput(v *ListOriginE
 		encoder.SetQuery("channelId").String(*v.ChannelId)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1561,14 +1561,14 @@ func awsRestjson1_serializeOpDocumentUpdateOriginEndpointInput(v *UpdateOriginEn
 		ok.String(string(v.Origination))
 	}
 
-	if v.StartoverWindowSeconds != 0 {
+	if v.StartoverWindowSeconds != nil {
 		ok := object.Key("startoverWindowSeconds")
-		ok.Integer(v.StartoverWindowSeconds)
+		ok.Integer(*v.StartoverWindowSeconds)
 	}
 
-	if v.TimeDelaySeconds != 0 {
+	if v.TimeDelaySeconds != nil {
 		ok := object.Key("timeDelaySeconds")
-		ok.Integer(v.TimeDelaySeconds)
+		ok.Integer(*v.TimeDelaySeconds)
 	}
 
 	if v.Whitelist != nil {
@@ -1669,9 +1669,9 @@ func awsRestjson1_serializeDocumentCmafEncryption(v *types.CmafEncryption, value
 		ok.String(string(v.EncryptionMethod))
 	}
 
-	if v.KeyRotationIntervalSeconds != 0 {
+	if v.KeyRotationIntervalSeconds != nil {
 		ok := object.Key("keyRotationIntervalSeconds")
-		ok.Integer(v.KeyRotationIntervalSeconds)
+		ok.Integer(*v.KeyRotationIntervalSeconds)
 	}
 
 	if v.SpekeKeyProvider != nil {
@@ -1702,9 +1702,9 @@ func awsRestjson1_serializeDocumentCmafPackageCreateOrUpdateParameters(v *types.
 		}
 	}
 
-	if v.SegmentDurationSeconds != 0 {
+	if v.SegmentDurationSeconds != nil {
 		ok := object.Key("segmentDurationSeconds")
-		ok.Integer(v.SegmentDurationSeconds)
+		ok.Integer(*v.SegmentDurationSeconds)
 	}
 
 	if v.SegmentPrefix != nil {
@@ -1726,9 +1726,9 @@ func awsRestjson1_serializeDocumentDashEncryption(v *types.DashEncryption, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.KeyRotationIntervalSeconds != 0 {
+	if v.KeyRotationIntervalSeconds != nil {
 		ok := object.Key("keyRotationIntervalSeconds")
-		ok.Integer(v.KeyRotationIntervalSeconds)
+		ok.Integer(*v.KeyRotationIntervalSeconds)
 	}
 
 	if v.SpekeKeyProvider != nil {
@@ -1764,9 +1764,9 @@ func awsRestjson1_serializeDocumentDashPackage(v *types.DashPackage, value smith
 		}
 	}
 
-	if v.IncludeIframeOnlyStream {
+	if v.IncludeIframeOnlyStream != nil {
 		ok := object.Key("includeIframeOnlyStream")
-		ok.Boolean(v.IncludeIframeOnlyStream)
+		ok.Boolean(*v.IncludeIframeOnlyStream)
 	}
 
 	if len(v.ManifestLayout) > 0 {
@@ -1774,19 +1774,19 @@ func awsRestjson1_serializeDocumentDashPackage(v *types.DashPackage, value smith
 		ok.String(string(v.ManifestLayout))
 	}
 
-	if v.ManifestWindowSeconds != 0 {
+	if v.ManifestWindowSeconds != nil {
 		ok := object.Key("manifestWindowSeconds")
-		ok.Integer(v.ManifestWindowSeconds)
+		ok.Integer(*v.ManifestWindowSeconds)
 	}
 
-	if v.MinBufferTimeSeconds != 0 {
+	if v.MinBufferTimeSeconds != nil {
 		ok := object.Key("minBufferTimeSeconds")
-		ok.Integer(v.MinBufferTimeSeconds)
+		ok.Integer(*v.MinBufferTimeSeconds)
 	}
 
-	if v.MinUpdatePeriodSeconds != 0 {
+	if v.MinUpdatePeriodSeconds != nil {
 		ok := object.Key("minUpdatePeriodSeconds")
-		ok.Integer(v.MinUpdatePeriodSeconds)
+		ok.Integer(*v.MinUpdatePeriodSeconds)
 	}
 
 	if v.PeriodTriggers != nil {
@@ -1801,9 +1801,9 @@ func awsRestjson1_serializeDocumentDashPackage(v *types.DashPackage, value smith
 		ok.String(string(v.Profile))
 	}
 
-	if v.SegmentDurationSeconds != 0 {
+	if v.SegmentDurationSeconds != nil {
 		ok := object.Key("segmentDurationSeconds")
-		ok.Integer(v.SegmentDurationSeconds)
+		ok.Integer(*v.SegmentDurationSeconds)
 	}
 
 	if len(v.SegmentTemplateFormat) > 0 {
@@ -1818,9 +1818,9 @@ func awsRestjson1_serializeDocumentDashPackage(v *types.DashPackage, value smith
 		}
 	}
 
-	if v.SuggestedPresentationDelaySeconds != 0 {
+	if v.SuggestedPresentationDelaySeconds != nil {
 		ok := object.Key("suggestedPresentationDelaySeconds")
-		ok.Integer(v.SuggestedPresentationDelaySeconds)
+		ok.Integer(*v.SuggestedPresentationDelaySeconds)
 	}
 
 	if len(v.UtcTiming) > 0 {
@@ -1879,14 +1879,14 @@ func awsRestjson1_serializeDocumentHlsEncryption(v *types.HlsEncryption, value s
 		ok.String(string(v.EncryptionMethod))
 	}
 
-	if v.KeyRotationIntervalSeconds != 0 {
+	if v.KeyRotationIntervalSeconds != nil {
 		ok := object.Key("keyRotationIntervalSeconds")
-		ok.Integer(v.KeyRotationIntervalSeconds)
+		ok.Integer(*v.KeyRotationIntervalSeconds)
 	}
 
-	if v.RepeatExtXKey {
+	if v.RepeatExtXKey != nil {
 		ok := object.Key("repeatExtXKey")
-		ok.Boolean(v.RepeatExtXKey)
+		ok.Boolean(*v.RepeatExtXKey)
 	}
 
 	if v.SpekeKeyProvider != nil {
@@ -1925,9 +1925,9 @@ func awsRestjson1_serializeDocumentHlsManifestCreateOrUpdateParameters(v *types.
 		ok.String(*v.Id)
 	}
 
-	if v.IncludeIframeOnlyStream {
+	if v.IncludeIframeOnlyStream != nil {
 		ok := object.Key("includeIframeOnlyStream")
-		ok.Boolean(v.IncludeIframeOnlyStream)
+		ok.Boolean(*v.IncludeIframeOnlyStream)
 	}
 
 	if v.ManifestName != nil {
@@ -1940,14 +1940,14 @@ func awsRestjson1_serializeDocumentHlsManifestCreateOrUpdateParameters(v *types.
 		ok.String(string(v.PlaylistType))
 	}
 
-	if v.PlaylistWindowSeconds != 0 {
+	if v.PlaylistWindowSeconds != nil {
 		ok := object.Key("playlistWindowSeconds")
-		ok.Integer(v.PlaylistWindowSeconds)
+		ok.Integer(*v.PlaylistWindowSeconds)
 	}
 
-	if v.ProgramDateTimeIntervalSeconds != 0 {
+	if v.ProgramDateTimeIntervalSeconds != nil {
 		ok := object.Key("programDateTimeIntervalSeconds")
-		ok.Integer(v.ProgramDateTimeIntervalSeconds)
+		ok.Integer(*v.ProgramDateTimeIntervalSeconds)
 	}
 
 	return nil
@@ -1981,14 +1981,14 @@ func awsRestjson1_serializeDocumentHlsPackage(v *types.HlsPackage, value smithyj
 		}
 	}
 
-	if v.IncludeDvbSubtitles {
+	if v.IncludeDvbSubtitles != nil {
 		ok := object.Key("includeDvbSubtitles")
-		ok.Boolean(v.IncludeDvbSubtitles)
+		ok.Boolean(*v.IncludeDvbSubtitles)
 	}
 
-	if v.IncludeIframeOnlyStream {
+	if v.IncludeIframeOnlyStream != nil {
 		ok := object.Key("includeIframeOnlyStream")
-		ok.Boolean(v.IncludeIframeOnlyStream)
+		ok.Boolean(*v.IncludeIframeOnlyStream)
 	}
 
 	if len(v.PlaylistType) > 0 {
@@ -1996,19 +1996,19 @@ func awsRestjson1_serializeDocumentHlsPackage(v *types.HlsPackage, value smithyj
 		ok.String(string(v.PlaylistType))
 	}
 
-	if v.PlaylistWindowSeconds != 0 {
+	if v.PlaylistWindowSeconds != nil {
 		ok := object.Key("playlistWindowSeconds")
-		ok.Integer(v.PlaylistWindowSeconds)
+		ok.Integer(*v.PlaylistWindowSeconds)
 	}
 
-	if v.ProgramDateTimeIntervalSeconds != 0 {
+	if v.ProgramDateTimeIntervalSeconds != nil {
 		ok := object.Key("programDateTimeIntervalSeconds")
-		ok.Integer(v.ProgramDateTimeIntervalSeconds)
+		ok.Integer(*v.ProgramDateTimeIntervalSeconds)
 	}
 
-	if v.SegmentDurationSeconds != 0 {
+	if v.SegmentDurationSeconds != nil {
 		ok := object.Key("segmentDurationSeconds")
-		ok.Integer(v.SegmentDurationSeconds)
+		ok.Integer(*v.SegmentDurationSeconds)
 	}
 
 	if v.StreamSelection != nil {
@@ -2018,9 +2018,9 @@ func awsRestjson1_serializeDocumentHlsPackage(v *types.HlsPackage, value smithyj
 		}
 	}
 
-	if v.UseAudioRenditionGroup {
+	if v.UseAudioRenditionGroup != nil {
 		ok := object.Key("useAudioRenditionGroup")
-		ok.Boolean(v.UseAudioRenditionGroup)
+		ok.Boolean(*v.UseAudioRenditionGroup)
 	}
 
 	return nil
@@ -2063,14 +2063,14 @@ func awsRestjson1_serializeDocumentMssPackage(v *types.MssPackage, value smithyj
 		}
 	}
 
-	if v.ManifestWindowSeconds != 0 {
+	if v.ManifestWindowSeconds != nil {
 		ok := object.Key("manifestWindowSeconds")
-		ok.Integer(v.ManifestWindowSeconds)
+		ok.Integer(*v.ManifestWindowSeconds)
 	}
 
-	if v.SegmentDurationSeconds != 0 {
+	if v.SegmentDurationSeconds != nil {
 		ok := object.Key("segmentDurationSeconds")
-		ok.Integer(v.SegmentDurationSeconds)
+		ok.Integer(*v.SegmentDurationSeconds)
 	}
 
 	if v.StreamSelection != nil {
@@ -2150,14 +2150,14 @@ func awsRestjson1_serializeDocumentStreamSelection(v *types.StreamSelection, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxVideoBitsPerSecond != 0 {
+	if v.MaxVideoBitsPerSecond != nil {
 		ok := object.Key("maxVideoBitsPerSecond")
-		ok.Integer(v.MaxVideoBitsPerSecond)
+		ok.Integer(*v.MaxVideoBitsPerSecond)
 	}
 
-	if v.MinVideoBitsPerSecond != 0 {
+	if v.MinVideoBitsPerSecond != nil {
 		ok := object.Key("minVideoBitsPerSecond")
-		ok.Integer(v.MinVideoBitsPerSecond)
+		ok.Integer(*v.MinVideoBitsPerSecond)
 	}
 
 	if len(v.StreamOrder) > 0 {

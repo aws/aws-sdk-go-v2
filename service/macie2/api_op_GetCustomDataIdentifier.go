@@ -55,7 +55,7 @@ type GetCustomDataIdentifierOutput struct {
 	// Specifies whether the custom data identifier was deleted. If you delete a
 	// custom data identifier, Amazon Macie doesn't delete it permanently. Instead, it
 	// soft deletes the identifier.
-	Deleted bool
+	Deleted *bool
 
 	// The custom description of the custom data identifier.
 	Description *string
@@ -78,7 +78,7 @@ type GetCustomDataIdentifierOutput struct {
 	// text that matches the regex pattern. If a complete keyword precedes all the text
 	// that matches the pattern and the keyword is within the specified distance,
 	// Amazon Macie includes the result. Otherwise, Macie excludes the result.
-	MaximumMatchDistance int32
+	MaximumMatchDistance *int32
 
 	// The custom name of the custom data identifier.
 	Name *string

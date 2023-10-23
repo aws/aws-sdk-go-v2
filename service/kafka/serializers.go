@@ -311,9 +311,9 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		}
 	}
 
-	{
+	if v.NumberOfBrokerNodes != nil {
 		ok := object.Key("numberOfBrokerNodes")
-		ok.Integer(v.NumberOfBrokerNodes)
+		ok.Integer(*v.NumberOfBrokerNodes)
 	}
 
 	if v.OpenMonitoring != nil {
@@ -1458,8 +1458,11 @@ func awsRestjson1_serializeOpHttpBindingsDescribeConfigurationRevisionInput(v *D
 		}
 	}
 
-	{
-		if err := encoder.SetURI("Revision").Long(v.Revision); err != nil {
+	if v.Revision == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Revision must not be empty")}
+	}
+	if v.Revision != nil {
+		if err := encoder.SetURI("Revision").Long(*v.Revision); err != nil {
 			return err
 		}
 	}
@@ -1849,8 +1852,8 @@ func awsRestjson1_serializeOpHttpBindingsListClientVpcConnectionsInput(v *ListCl
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1922,8 +1925,8 @@ func awsRestjson1_serializeOpHttpBindingsListClusterOperationsInput(v *ListClust
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1995,8 +1998,8 @@ func awsRestjson1_serializeOpHttpBindingsListClusterOperationsV2Input(v *ListClu
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2063,8 +2066,8 @@ func awsRestjson1_serializeOpHttpBindingsListClustersInput(v *ListClustersInput,
 		encoder.SetQuery("clusterNameFilter").String(*v.ClusterNameFilter)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2135,8 +2138,8 @@ func awsRestjson1_serializeOpHttpBindingsListClustersV2Input(v *ListClustersV2In
 		encoder.SetQuery("clusterTypeFilter").String(*v.ClusterTypeFilter)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2208,8 +2211,8 @@ func awsRestjson1_serializeOpHttpBindingsListConfigurationRevisionsInput(v *List
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2272,8 +2275,8 @@ func awsRestjson1_serializeOpHttpBindingsListConfigurationsInput(v *ListConfigur
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2336,8 +2339,8 @@ func awsRestjson1_serializeOpHttpBindingsListKafkaVersionsInput(v *ListKafkaVers
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2409,8 +2412,8 @@ func awsRestjson1_serializeOpHttpBindingsListNodesInput(v *ListNodesInput, encod
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2473,8 +2476,8 @@ func awsRestjson1_serializeOpHttpBindingsListReplicatorsInput(v *ListReplicators
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2550,8 +2553,8 @@ func awsRestjson1_serializeOpHttpBindingsListScramSecretsInput(v *ListScramSecre
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2679,8 +2682,8 @@ func awsRestjson1_serializeOpHttpBindingsListVpcConnectionsInput(v *ListVpcConne
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3207,9 +3210,9 @@ func awsRestjson1_serializeOpDocumentUpdateBrokerCountInput(v *UpdateBrokerCount
 		ok.String(*v.CurrentVersion)
 	}
 
-	{
+	if v.TargetNumberOfBrokerNodes != nil {
 		ok := object.Key("targetNumberOfBrokerNodes")
-		ok.Integer(v.TargetNumberOfBrokerNodes)
+		ok.Integer(*v.TargetNumberOfBrokerNodes)
 	}
 
 	return nil
@@ -4204,9 +4207,9 @@ func awsRestjson1_serializeOpDocumentUpdateStorageInput(v *UpdateStorageInput, v
 		ok.String(string(v.StorageMode))
 	}
 
-	if v.VolumeSizeGB != 0 {
+	if v.VolumeSizeGB != nil {
 		ok := object.Key("volumeSizeGB")
-		ok.Integer(v.VolumeSizeGB)
+		ok.Integer(*v.VolumeSizeGB)
 	}
 
 	return nil
@@ -4336,9 +4339,9 @@ func awsRestjson1_serializeDocumentBrokerEBSVolumeInfo(v *types.BrokerEBSVolumeI
 		}
 	}
 
-	if v.VolumeSizeGB != 0 {
+	if v.VolumeSizeGB != nil {
 		ok := object.Key("volumeSizeGB")
-		ok.Integer(v.VolumeSizeGB)
+		ok.Integer(*v.VolumeSizeGB)
 	}
 
 	return nil
@@ -4456,9 +4459,9 @@ func awsRestjson1_serializeDocumentCloudWatchLogs(v *types.CloudWatchLogs, value
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.Enabled != nil {
 		ok := object.Key("enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	if v.LogGroup != nil {
@@ -4478,9 +4481,9 @@ func awsRestjson1_serializeDocumentConfigurationInfo(v *types.ConfigurationInfo,
 		ok.String(*v.Arn)
 	}
 
-	{
+	if v.Revision != nil {
 		ok := object.Key("revision")
-		ok.Long(v.Revision)
+		ok.Long(*v.Revision)
 	}
 
 	return nil
@@ -4525,14 +4528,14 @@ func awsRestjson1_serializeDocumentConsumerGroupReplication(v *types.ConsumerGro
 		}
 	}
 
-	if v.DetectAndCopyNewConsumerGroups {
+	if v.DetectAndCopyNewConsumerGroups != nil {
 		ok := object.Key("detectAndCopyNewConsumerGroups")
-		ok.Boolean(v.DetectAndCopyNewConsumerGroups)
+		ok.Boolean(*v.DetectAndCopyNewConsumerGroups)
 	}
 
-	if v.SynchroniseConsumerGroupOffsets {
+	if v.SynchroniseConsumerGroupOffsets != nil {
 		ok := object.Key("synchroniseConsumerGroupOffsets")
-		ok.Boolean(v.SynchroniseConsumerGroupOffsets)
+		ok.Boolean(*v.SynchroniseConsumerGroupOffsets)
 	}
 
 	return nil
@@ -4556,14 +4559,14 @@ func awsRestjson1_serializeDocumentConsumerGroupReplicationUpdate(v *types.Consu
 		}
 	}
 
-	{
+	if v.DetectAndCopyNewConsumerGroups != nil {
 		ok := object.Key("detectAndCopyNewConsumerGroups")
-		ok.Boolean(v.DetectAndCopyNewConsumerGroups)
+		ok.Boolean(*v.DetectAndCopyNewConsumerGroups)
 	}
 
-	{
+	if v.SynchroniseConsumerGroupOffsets != nil {
 		ok := object.Key("synchroniseConsumerGroupOffsets")
-		ok.Boolean(v.SynchroniseConsumerGroupOffsets)
+		ok.Boolean(*v.SynchroniseConsumerGroupOffsets)
 	}
 
 	return nil
@@ -4580,9 +4583,9 @@ func awsRestjson1_serializeDocumentEBSStorageInfo(v *types.EBSStorageInfo, value
 		}
 	}
 
-	if v.VolumeSize != 0 {
+	if v.VolumeSize != nil {
 		ok := object.Key("volumeSize")
-		ok.Integer(v.VolumeSize)
+		ok.Integer(*v.VolumeSize)
 	}
 
 	return nil
@@ -4630,9 +4633,9 @@ func awsRestjson1_serializeDocumentEncryptionInTransit(v *types.EncryptionInTran
 		ok.String(string(v.ClientBroker))
 	}
 
-	if v.InCluster {
+	if v.InCluster != nil {
 		ok := object.Key("inCluster")
-		ok.Boolean(v.InCluster)
+		ok.Boolean(*v.InCluster)
 	}
 
 	return nil
@@ -4647,9 +4650,9 @@ func awsRestjson1_serializeDocumentFirehose(v *types.Firehose, value smithyjson.
 		ok.String(*v.DeliveryStream)
 	}
 
-	{
+	if v.Enabled != nil {
 		ok := object.Key("enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	return nil
@@ -4659,9 +4662,9 @@ func awsRestjson1_serializeDocumentIam(v *types.Iam, value smithyjson.Value) err
 	object := value.Object()
 	defer object.Close()
 
-	if v.Enabled {
+	if v.Enabled != nil {
 		ok := object.Key("enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	return nil
@@ -4671,9 +4674,9 @@ func awsRestjson1_serializeDocumentJmxExporterInfo(v *types.JmxExporterInfo, val
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.EnabledInBroker != nil {
 		ok := object.Key("enabledInBroker")
-		ok.Boolean(v.EnabledInBroker)
+		ok.Boolean(*v.EnabledInBroker)
 	}
 
 	return nil
@@ -4739,9 +4742,9 @@ func awsRestjson1_serializeDocumentNodeExporterInfo(v *types.NodeExporterInfo, v
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.EnabledInBroker != nil {
 		ok := object.Key("enabledInBroker")
-		ok.Boolean(v.EnabledInBroker)
+		ok.Boolean(*v.EnabledInBroker)
 	}
 
 	return nil
@@ -4831,9 +4834,9 @@ func awsRestjson1_serializeDocumentProvisionedRequest(v *types.ProvisionedReques
 		}
 	}
 
-	{
+	if v.NumberOfBrokerNodes != nil {
 		ok := object.Key("numberOfBrokerNodes")
-		ok.Integer(v.NumberOfBrokerNodes)
+		ok.Integer(*v.NumberOfBrokerNodes)
 	}
 
 	if v.OpenMonitoring != nil {
@@ -4855,14 +4858,14 @@ func awsRestjson1_serializeDocumentProvisionedThroughput(v *types.ProvisionedThr
 	object := value.Object()
 	defer object.Close()
 
-	if v.Enabled {
+	if v.Enabled != nil {
 		ok := object.Key("enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
-	if v.VolumeThroughput != 0 {
+	if v.VolumeThroughput != nil {
 		ok := object.Key("volumeThroughput")
-		ok.Integer(v.VolumeThroughput)
+		ok.Integer(*v.VolumeThroughput)
 	}
 
 	return nil
@@ -4925,9 +4928,9 @@ func awsRestjson1_serializeDocumentS3(v *types.S3, value smithyjson.Value) error
 		ok.String(*v.Bucket)
 	}
 
-	{
+	if v.Enabled != nil {
 		ok := object.Key("enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	if v.Prefix != nil {
@@ -4963,9 +4966,9 @@ func awsRestjson1_serializeDocumentScram(v *types.Scram, value smithyjson.Value)
 	object := value.Object()
 	defer object.Close()
 
-	if v.Enabled {
+	if v.Enabled != nil {
 		ok := object.Key("enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	return nil
@@ -5045,9 +5048,9 @@ func awsRestjson1_serializeDocumentTls(v *types.Tls, value smithyjson.Value) err
 		}
 	}
 
-	if v.Enabled {
+	if v.Enabled != nil {
 		ok := object.Key("enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	return nil
@@ -5057,19 +5060,19 @@ func awsRestjson1_serializeDocumentTopicReplication(v *types.TopicReplication, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.CopyAccessControlListsForTopics {
+	if v.CopyAccessControlListsForTopics != nil {
 		ok := object.Key("copyAccessControlListsForTopics")
-		ok.Boolean(v.CopyAccessControlListsForTopics)
+		ok.Boolean(*v.CopyAccessControlListsForTopics)
 	}
 
-	if v.CopyTopicConfigurations {
+	if v.CopyTopicConfigurations != nil {
 		ok := object.Key("copyTopicConfigurations")
-		ok.Boolean(v.CopyTopicConfigurations)
+		ok.Boolean(*v.CopyTopicConfigurations)
 	}
 
-	if v.DetectAndCopyNewTopics {
+	if v.DetectAndCopyNewTopics != nil {
 		ok := object.Key("detectAndCopyNewTopics")
-		ok.Boolean(v.DetectAndCopyNewTopics)
+		ok.Boolean(*v.DetectAndCopyNewTopics)
 	}
 
 	if v.TopicsToExclude != nil {
@@ -5093,19 +5096,19 @@ func awsRestjson1_serializeDocumentTopicReplicationUpdate(v *types.TopicReplicat
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.CopyAccessControlListsForTopics != nil {
 		ok := object.Key("copyAccessControlListsForTopics")
-		ok.Boolean(v.CopyAccessControlListsForTopics)
+		ok.Boolean(*v.CopyAccessControlListsForTopics)
 	}
 
-	{
+	if v.CopyTopicConfigurations != nil {
 		ok := object.Key("copyTopicConfigurations")
-		ok.Boolean(v.CopyTopicConfigurations)
+		ok.Boolean(*v.CopyTopicConfigurations)
 	}
 
-	{
+	if v.DetectAndCopyNewTopics != nil {
 		ok := object.Key("detectAndCopyNewTopics")
-		ok.Boolean(v.DetectAndCopyNewTopics)
+		ok.Boolean(*v.DetectAndCopyNewTopics)
 	}
 
 	if v.TopicsToExclude != nil {
@@ -5129,9 +5132,9 @@ func awsRestjson1_serializeDocumentUnauthenticated(v *types.Unauthenticated, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.Enabled {
+	if v.Enabled != nil {
 		ok := object.Key("enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	return nil
@@ -5197,9 +5200,9 @@ func awsRestjson1_serializeDocumentVpcConnectivityIam(v *types.VpcConnectivityIa
 	object := value.Object()
 	defer object.Close()
 
-	if v.Enabled {
+	if v.Enabled != nil {
 		ok := object.Key("enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	return nil
@@ -5230,9 +5233,9 @@ func awsRestjson1_serializeDocumentVpcConnectivityScram(v *types.VpcConnectivity
 	object := value.Object()
 	defer object.Close()
 
-	if v.Enabled {
+	if v.Enabled != nil {
 		ok := object.Key("enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	return nil
@@ -5242,9 +5245,9 @@ func awsRestjson1_serializeDocumentVpcConnectivityTls(v *types.VpcConnectivityTl
 	object := value.Object()
 	defer object.Close()
 
-	if v.Enabled {
+	if v.Enabled != nil {
 		ok := object.Key("enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	return nil

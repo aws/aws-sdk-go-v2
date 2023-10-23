@@ -35,7 +35,7 @@ func (c *Client) ListAssets(ctx context.Context, params *ListAssetsInput, optFns
 type ListAssetsInput struct {
 
 	// Upper bound on number of records to return.
-	MaxResults int32
+	MaxResults *int32
 
 	// A token used to resume pagination from the end of a previous request.
 	NextToken *string
@@ -165,8 +165,8 @@ func NewListAssetsPaginator(client ListAssetsAPIClient, params *ListAssetsInput,
 	}
 
 	options := ListAssetsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -196,7 +196,11 @@ func (p *ListAssetsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListAssets(ctx, &params, optFns...)
 	if err != nil {

@@ -851,8 +851,8 @@ func awsRestjson1_serializeOpHttpBindingsListApplicationDependenciesInput(v *Lis
 		}
 	}
 
-	if v.MaxItems != 0 {
-		encoder.SetQuery("maxItems").Integer(v.MaxItems)
+	if v.MaxItems != nil {
+		encoder.SetQuery("maxItems").Integer(*v.MaxItems)
 	}
 
 	if v.NextToken != nil {
@@ -919,8 +919,8 @@ func awsRestjson1_serializeOpHttpBindingsListApplicationsInput(v *ListApplicatio
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxItems != 0 {
-		encoder.SetQuery("maxItems").Integer(v.MaxItems)
+	if v.MaxItems != nil {
+		encoder.SetQuery("maxItems").Integer(*v.MaxItems)
 	}
 
 	if v.NextToken != nil {
@@ -992,8 +992,8 @@ func awsRestjson1_serializeOpHttpBindingsListApplicationVersionsInput(v *ListApp
 		}
 	}
 
-	if v.MaxItems != 0 {
-		encoder.SetQuery("maxItems").Integer(v.MaxItems)
+	if v.MaxItems != nil {
+		encoder.SetQuery("maxItems").Integer(*v.MaxItems)
 	}
 
 	if v.NextToken != nil {
@@ -1413,9 +1413,9 @@ func awsRestjson1_serializeDocumentRollbackConfiguration(v *types.RollbackConfig
 	object := value.Object()
 	defer object.Close()
 
-	if v.MonitoringTimeInMinutes != 0 {
+	if v.MonitoringTimeInMinutes != nil {
 		ok := object.Key("monitoringTimeInMinutes")
-		ok.Integer(v.MonitoringTimeInMinutes)
+		ok.Integer(*v.MonitoringTimeInMinutes)
 	}
 
 	if v.RollbackTriggers != nil {

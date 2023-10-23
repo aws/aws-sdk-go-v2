@@ -54,7 +54,7 @@ type ExportApiInput struct {
 
 	// Specifies whether to include API Gateway extensions (https://docs.aws.amazon.com//apigateway/latest/developerguide/api-gateway-swagger-extensions.html)
 	// in the exported API definition. API Gateway extensions are included by default.
-	IncludeExtensions bool
+	IncludeExtensions *bool
 
 	// The name of the API stage to export. If you don't specify this property, a
 	// representation of the latest API configuration is exported.

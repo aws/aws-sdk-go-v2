@@ -62,17 +62,17 @@ type UpdateFlowSourceInput struct {
 	GatewayBridgeSource *types.UpdateGatewayBridgeSourceRequest
 
 	// The port that the flow will be listening on for incoming content.
-	IngestPort int32
+	IngestPort *int32
 
 	// The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.
-	MaxBitrate int32
+	MaxBitrate *int32
 
 	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
 	// Zixi-based, and Fujitsu-based streams.
-	MaxLatency int32
+	MaxLatency *int32
 
 	// The size of the buffer (in milliseconds) to use to sync incoming source data.
-	MaxSyncBuffer int32
+	MaxSyncBuffer *int32
 
 	// The media streams that are associated with the source, and the parameters for
 	// those associations.
@@ -83,14 +83,14 @@ type UpdateFlowSourceInput struct {
 	// represents the minimal potential latency of that connection. The latency of the
 	// stream is set to the highest number between the sender’s minimum latency and the
 	// receiver’s minimum latency.
-	MinLatency int32
+	MinLatency *int32
 
 	// The protocol that is used by the source.
 	Protocol types.Protocol
 
 	// The port that the flow uses to send outbound requests to initiate connection
 	// with the sender.
-	SenderControlPort int32
+	SenderControlPort *int32
 
 	// The IP address that the flow communicates with to initiate connection with the
 	// sender.
@@ -100,7 +100,7 @@ type UpdateFlowSourceInput struct {
 	SourceListenerAddress *string
 
 	// Source port for SRT-caller protocol.
-	SourceListenerPort int32
+	SourceListenerPort *int32
 
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi and SRT caller-based streams.

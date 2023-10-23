@@ -768,6 +768,9 @@ func validateCreateBackendAuthIdentityPoolConfig(v *types.CreateBackendAuthIdent
 	if v.IdentityPoolName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolName"))
 	}
+	if v.UnauthenticatedLogin == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UnauthenticatedLogin"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -819,6 +822,9 @@ func validateCreateBackendAuthPasswordPolicyConfig(v *types.CreateBackendAuthPas
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateBackendAuthPasswordPolicyConfig"}
+	if v.MinimumLength == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinimumLength"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

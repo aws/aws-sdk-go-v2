@@ -62,7 +62,7 @@ type CreateBrokerInput struct {
 	// to true by default, if no value is specified.
 	//
 	// This member is required.
-	AutoMinorVersionUpgrade bool
+	AutoMinorVersionUpgrade *bool
 
 	// Required. The broker's name. This value must be unique in your Amazon Web
 	// Services account, 1-50 characters long, must contain only letters, numbers,
@@ -103,7 +103,7 @@ type CreateBrokerInput struct {
 	// broker's subnets. Set to false by default, if no value is provided.
 	//
 	// This member is required.
-	PubliclyAccessible bool
+	PubliclyAccessible *bool
 
 	// The list of broker users (persons or applications) who can access queues and
 	// topics. For Amazon MQ for RabbitMQ brokers, one and only one administrative user

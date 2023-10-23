@@ -44,7 +44,7 @@ type DeregisterGatewayInstanceInput struct {
 
 	// Force the deregistration of an instance. Force will deregister an instance,
 	// even if there are bridges running on it.
-	Force bool
+	Force *bool
 
 	noSmithyDocumentSerde
 }

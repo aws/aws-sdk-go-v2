@@ -1278,8 +1278,14 @@ func validateAddBridgeNetworkOutputRequest(v *types.AddBridgeNetworkOutputReques
 	if v.NetworkName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkName"))
 	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if v.Ttl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ttl"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1301,6 +1307,9 @@ func validateAddBridgeNetworkSourceRequest(v *types.AddBridgeNetworkSourceReques
 	}
 	if v.NetworkName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkName"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
 	}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
@@ -1356,6 +1365,9 @@ func validateAddEgressGatewayBridgeRequest(v *types.AddEgressGatewayBridgeReques
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddEgressGatewayBridgeRequest"}
+	if v.MaxBitrate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxBitrate"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1368,6 +1380,12 @@ func validateAddIngressGatewayBridgeRequest(v *types.AddIngressGatewayBridgeRequ
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddIngressGatewayBridgeRequest"}
+	if v.MaxBitrate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxBitrate"))
+	}
+	if v.MaxOutputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxOutputs"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1398,6 +1416,9 @@ func validateAddMediaStreamRequest(v *types.AddMediaStreamRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddMediaStreamRequest"}
+	if v.MediaStreamId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaStreamId"))
+	}
 	if v.MediaStreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MediaStreamName"))
 	}
@@ -1444,6 +1465,9 @@ func validateDestinationConfigurationRequest(v *types.DestinationConfigurationRe
 	if v.DestinationIp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationIp"))
 	}
+	if v.DestinationPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPort"))
+	}
 	if v.Interface == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Interface"))
 	} else if v.Interface != nil {
@@ -1463,6 +1487,9 @@ func validateEncodingParametersRequest(v *types.EncodingParametersRequest) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EncodingParametersRequest"}
+	if v.CompressionFactor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CompressionFactor"))
+	}
 	if len(v.EncoderProfile) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EncoderProfile"))
 	}
@@ -1531,6 +1558,9 @@ func validateInputConfigurationRequest(v *types.InputConfigurationRequest) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InputConfigurationRequest"}
+	if v.InputPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputPort"))
+	}
 	if v.Interface == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Interface"))
 	} else if v.Interface != nil {

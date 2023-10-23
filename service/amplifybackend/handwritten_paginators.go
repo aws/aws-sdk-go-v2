@@ -3,6 +3,8 @@ package amplifybackend
 import (
 	"context"
 	"fmt"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
 // ListBackendJobsPaginatorOptions is the paginator options for ListBackendJobs
@@ -37,7 +39,7 @@ func NewListBackendJobsPaginator(client ListBackendJobsAPIClient, params *ListBa
 	}
 
 	options := ListBackendJobsPaginatorOptions{}
-	options.Limit = params.MaxResults
+	options.Limit = aws.ToInt32(params.MaxResults)
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -70,7 +72,7 @@ func (p *ListBackendJobsPaginator) NextPage(ctx context.Context, optFns ...func(
 	if p.options.Limit > 0 {
 		limit = p.options.Limit
 	}
-	params.MaxResults = limit
+	params.MaxResults = aws.Int32(limit)
 
 	result, err := p.client.ListBackendJobs(ctx, &params, optFns...)
 	if err != nil {

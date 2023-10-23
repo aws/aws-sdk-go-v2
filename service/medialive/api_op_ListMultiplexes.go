@@ -36,7 +36,7 @@ func (c *Client) ListMultiplexes(ctx context.Context, params *ListMultiplexesInp
 type ListMultiplexesInput struct {
 
 	// The maximum number of items to return.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token to retrieve the next page of results.
 	NextToken *string
@@ -165,8 +165,8 @@ func NewListMultiplexesPaginator(client ListMultiplexesAPIClient, params *ListMu
 	}
 
 	options := ListMultiplexesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -196,7 +196,11 @@ func (p *ListMultiplexesPaginator) NextPage(ctx context.Context, optFns ...func(
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListMultiplexes(ctx, &params, optFns...)
 	if err != nil {

@@ -41,7 +41,7 @@ type ListMultiplexProgramsInput struct {
 	MultiplexId *string
 
 	// The maximum number of items to return.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token to retrieve the next page of results.
 	NextToken *string
@@ -174,8 +174,8 @@ func NewListMultiplexProgramsPaginator(client ListMultiplexProgramsAPIClient, pa
 	}
 
 	options := ListMultiplexProgramsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -205,7 +205,11 @@ func (p *ListMultiplexProgramsPaginator) NextPage(ctx context.Context, optFns ..
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListMultiplexPrograms(ctx, &params, optFns...)
 	if err != nil {

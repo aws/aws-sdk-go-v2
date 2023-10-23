@@ -36,7 +36,7 @@ func (c *Client) ListRules(ctx context.Context, params *ListRulesInput, optFns .
 type ListRulesInput struct {
 
 	// The number of objects that you want to return with this call.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token that identifies which batch of results you want to see.
 	NextToken *string
@@ -166,8 +166,8 @@ func NewListRulesPaginator(client ListRulesAPIClient, params *ListRulesInput, op
 	}
 
 	options := ListRulesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -197,7 +197,11 @@ func (p *ListRulesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListRules(ctx, &params, optFns...)
 	if err != nil {

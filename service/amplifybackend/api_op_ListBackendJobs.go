@@ -49,7 +49,7 @@ type ListBackendJobsInput struct {
 	JobId *string
 
 	// The maximum number of results that you want in the response.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token for the next set of results.
 	NextToken *string

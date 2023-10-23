@@ -173,7 +173,7 @@ type UpdateIntegrationInput struct {
 	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and
 	// between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29
 	// seconds for WebSocket APIs and 30 seconds for HTTP APIs.
-	TimeoutInMillis int32
+	TimeoutInMillis *int32
 
 	// The TLS configuration for a private integration. If you specify a TLS
 	// configuration, private integration traffic uses the HTTPS protocol. Supported
@@ -188,7 +188,7 @@ type UpdateIntegrationOutput struct {
 	// Specifies whether an integration is managed by API Gateway. If you created an
 	// API using using quick create, the resulting integration is managed by API
 	// Gateway. You can update a managed integration, but you can't delete it.
-	ApiGatewayManaged bool
+	ApiGatewayManaged *bool
 
 	// The ID of the VPC link for a private integration. Supported only for HTTP APIs.
 	ConnectionId *string
@@ -326,7 +326,7 @@ type UpdateIntegrationOutput struct {
 	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and
 	// between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29
 	// seconds for WebSocket APIs and 30 seconds for HTTP APIs.
-	TimeoutInMillis int32
+	TimeoutInMillis *int32
 
 	// The TLS configuration for a private integration. If you specify a TLS
 	// configuration, private integration traffic uses the HTTPS protocol. Supported

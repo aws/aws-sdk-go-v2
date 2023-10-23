@@ -52,11 +52,11 @@ type GetRouteOutput struct {
 	// Specifies whether a route is managed by API Gateway. If you created an API
 	// using quick create, the $default route is managed by API Gateway. You can't
 	// modify the $default route key.
-	ApiGatewayManaged bool
+	ApiGatewayManaged *bool
 
 	// Specifies whether an API key is required for this route. Supported only for
 	// WebSocket APIs.
-	ApiKeyRequired bool
+	ApiKeyRequired *bool
 
 	// A list of authorization scopes configured on a route. The scopes are used with
 	// a JWT authorizer to authorize the method invocation. The authorization works by

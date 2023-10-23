@@ -42,7 +42,7 @@ type ListQueuesInput struct {
 	ListBy types.QueueListBy
 
 	// Optional. Number of queues, up to twenty, that will be returned at one time.
-	MaxResults int32
+	MaxResults *int32
 
 	// Use this string, provided with the response to a previous request, to request
 	// the next batch of queues.
@@ -174,8 +174,8 @@ func NewListQueuesPaginator(client ListQueuesAPIClient, params *ListQueuesInput,
 	}
 
 	options := ListQueuesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -205,7 +205,11 @@ func (p *ListQueuesPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListQueues(ctx, &params, optFns...)
 	if err != nil {

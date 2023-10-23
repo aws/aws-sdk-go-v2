@@ -36,7 +36,7 @@ func (c *Client) ListOrganizationAdminAccounts(ctx context.Context, params *List
 type ListOrganizationAdminAccountsInput struct {
 
 	// The maximum number of items to include in each page of a paginated response.
-	MaxResults int32
+	MaxResults *int32
 
 	// The nextToken string that specifies which page of results to return in a
 	// paginated response.
@@ -170,8 +170,8 @@ func NewListOrganizationAdminAccountsPaginator(client ListOrganizationAdminAccou
 	}
 
 	options := ListOrganizationAdminAccountsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -201,7 +201,11 @@ func (p *ListOrganizationAdminAccountsPaginator) NextPage(ctx context.Context, o
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListOrganizationAdminAccounts(ctx, &params, optFns...)
 	if err != nil {

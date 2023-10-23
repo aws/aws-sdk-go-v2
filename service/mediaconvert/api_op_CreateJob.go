@@ -83,7 +83,7 @@ type CreateJobInput struct {
 	// one job has the same priority, the service begins processing the job that you
 	// submitted first. If you don't specify a priority, the service uses the default
 	// value 0.
-	Priority int32
+	Priority *int32
 
 	// Optional. When you create a job, you can specify a queue to send it to. If you
 	// don't specify, the job will go to the default queue. For more about queues, see

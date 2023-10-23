@@ -4150,7 +4150,7 @@ func awsRestjson1_deserializeDocumentAssertionRule(v **types.AssertionRule, valu
 				if err != nil {
 					return err
 				}
-				sv.WaitPeriodMs = int32(i64)
+				sv.WaitPeriodMs = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -4369,7 +4369,7 @@ func awsRestjson1_deserializeDocumentControlPanel(v **types.ControlPanel, value 
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DefaultControlPanel = jtv
+				sv.DefaultControlPanel = ptr.Bool(jtv)
 			}
 
 		case "Name":
@@ -4400,7 +4400,7 @@ func awsRestjson1_deserializeDocumentControlPanel(v **types.ControlPanel, value 
 				if err != nil {
 					return err
 				}
-				sv.RoutingControlCount = int32(i64)
+				sv.RoutingControlCount = ptr.Int32(int32(i64))
 			}
 
 		case "Status":
@@ -4513,7 +4513,7 @@ func awsRestjson1_deserializeDocumentGatingRule(v **types.GatingRule, value inte
 				if err != nil {
 					return err
 				}
-				sv.WaitPeriodMs = int32(i64)
+				sv.WaitPeriodMs = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -4750,7 +4750,7 @@ func awsRestjson1_deserializeDocumentRuleConfig(v **types.RuleConfig, value inte
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Inverted = jtv
+				sv.Inverted = ptr.Bool(jtv)
 			}
 
 		case "Threshold":
@@ -4763,7 +4763,7 @@ func awsRestjson1_deserializeDocumentRuleConfig(v **types.RuleConfig, value inte
 				if err != nil {
 					return err
 				}
-				sv.Threshold = int32(i64)
+				sv.Threshold = ptr.Int32(int32(i64))
 			}
 
 		case "Type":

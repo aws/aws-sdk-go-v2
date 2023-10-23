@@ -93,7 +93,7 @@ type DescribeChannelOutput struct {
 	PipelineDetails []types.PipelineDetail
 
 	// The number of currently healthy pipelines.
-	PipelinesRunningCount int32
+	PipelinesRunningCount *int32
 
 	// The Amazon Resource Name (ARN) of the role assumed when running the Channel.
 	RoleArn *string

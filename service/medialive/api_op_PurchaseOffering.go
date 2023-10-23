@@ -38,7 +38,7 @@ type PurchaseOfferingInput struct {
 	// Number of resources
 	//
 	// This member is required.
-	Count int32
+	Count *int32
 
 	// Offering to purchase, e.g. '87654321'
 	//

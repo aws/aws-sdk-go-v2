@@ -1335,6 +1335,12 @@ func validateSecurityHubConfiguration(v *types.SecurityHubConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SecurityHubConfiguration"}
+	if v.PublishClassificationFindings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublishClassificationFindings"))
+	}
+	if v.PublishPolicyFindings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublishPolicyFindings"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1347,6 +1353,9 @@ func validateSeverityLevel(v *types.SeverityLevel) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SeverityLevel"}
+	if v.OccurrencesThreshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OccurrencesThreshold"))
+	}
 	if len(v.Severity) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Severity"))
 	}
@@ -2086,6 +2095,9 @@ func validateOpUpdateOrganizationConfigurationInput(v *UpdateOrganizationConfigu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateOrganizationConfigurationInput"}
+	if v.AutoEnable == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoEnable"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

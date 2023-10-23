@@ -58,7 +58,7 @@ type UpdateJobTemplateInput struct {
 	// begins processing the job with the highest value first. When more than one job
 	// has the same priority, the service begins processing the job that you submitted
 	// first. If you don't specify a priority, the service uses the default value 0.
-	Priority int32
+	Priority *int32
 
 	// The new queue for the job template, if you are changing it.
 	Queue *string

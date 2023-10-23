@@ -15002,7 +15002,7 @@ func awsRestjson1_deserializeDocumentBulkDeploymentMetrics(v **types.BulkDeploym
 				if err != nil {
 					return err
 				}
-				sv.InvalidInputRecords = int32(i64)
+				sv.InvalidInputRecords = ptr.Int32(int32(i64))
 			}
 
 		case "RecordsProcessed":
@@ -15015,7 +15015,7 @@ func awsRestjson1_deserializeDocumentBulkDeploymentMetrics(v **types.BulkDeploym
 				if err != nil {
 					return err
 				}
-				sv.RecordsProcessed = int32(i64)
+				sv.RecordsProcessed = ptr.Int32(int32(i64))
 			}
 
 		case "RetryAttempts":
@@ -15028,7 +15028,7 @@ func awsRestjson1_deserializeDocumentBulkDeploymentMetrics(v **types.BulkDeploym
 				if err != nil {
 					return err
 				}
-				sv.RetryAttempts = int32(i64)
+				sv.RetryAttempts = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -15266,7 +15266,7 @@ func awsRestjson1_deserializeDocumentConnectivityInfo(v **types.ConnectivityInfo
 				if err != nil {
 					return err
 				}
-				sv.PortNumber = int32(i64)
+				sv.PortNumber = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -15414,7 +15414,7 @@ func awsRestjson1_deserializeDocumentCore(v **types.Core, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.SyncShadow = jtv
+				sv.SyncShadow = ptr.Bool(jtv)
 			}
 
 		case "ThingArn":
@@ -15726,7 +15726,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.SyncShadow = jtv
+				sv.SyncShadow = ptr.Bool(jtv)
 			}
 
 		case "ThingArn":
@@ -15993,7 +15993,7 @@ func awsRestjson1_deserializeDocumentFunctionConfiguration(v **types.FunctionCon
 				if err != nil {
 					return err
 				}
-				sv.MemorySize = int32(i64)
+				sv.MemorySize = ptr.Int32(int32(i64))
 			}
 
 		case "Pinned":
@@ -16002,7 +16002,7 @@ func awsRestjson1_deserializeDocumentFunctionConfiguration(v **types.FunctionCon
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Pinned = jtv
+				sv.Pinned = ptr.Bool(jtv)
 			}
 
 		case "Timeout":
@@ -16015,7 +16015,7 @@ func awsRestjson1_deserializeDocumentFunctionConfiguration(v **types.FunctionCon
 				if err != nil {
 					return err
 				}
-				sv.Timeout = int32(i64)
+				sv.Timeout = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -16055,7 +16055,7 @@ func awsRestjson1_deserializeDocumentFunctionConfigurationEnvironment(v **types.
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AccessSysfs = jtv
+				sv.AccessSysfs = ptr.Bool(jtv)
 			}
 
 		case "Execution":
@@ -16281,7 +16281,7 @@ func awsRestjson1_deserializeDocumentFunctionRunAsConfig(v **types.FunctionRunAs
 				if err != nil {
 					return err
 				}
-				sv.Gid = int32(i64)
+				sv.Gid = ptr.Int32(int32(i64))
 			}
 
 		case "Uid":
@@ -16294,7 +16294,7 @@ func awsRestjson1_deserializeDocumentFunctionRunAsConfig(v **types.FunctionRunAs
 				if err != nil {
 					return err
 				}
-				sv.Uid = int32(i64)
+				sv.Uid = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -16477,7 +16477,7 @@ func awsRestjson1_deserializeDocumentGroupOwnerSetting(v **types.GroupOwnerSetti
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoAddGroupOwner = jtv
+				sv.AutoAddGroupOwner = ptr.Bool(jtv)
 			}
 
 		case "GroupOwner":
@@ -16795,7 +16795,7 @@ func awsRestjson1_deserializeDocumentLogger(v **types.Logger, value interface{})
 				if err != nil {
 					return err
 				}
-				sv.Space = int32(i64)
+				sv.Space = ptr.Int32(int32(i64))
 			}
 
 		case "Type":

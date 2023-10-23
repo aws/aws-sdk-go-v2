@@ -105,14 +105,14 @@ func awsRestjson1_serializeOpDocumentCreateApiInput(v *CreateApiInput, value smi
 		ok.String(*v.Description)
 	}
 
-	if v.DisableExecuteApiEndpoint {
+	if v.DisableExecuteApiEndpoint != nil {
 		ok := object.Key("disableExecuteApiEndpoint")
-		ok.Boolean(v.DisableExecuteApiEndpoint)
+		ok.Boolean(*v.DisableExecuteApiEndpoint)
 	}
 
-	if v.DisableSchemaValidation {
+	if v.DisableSchemaValidation != nil {
 		ok := object.Key("disableSchemaValidation")
-		ok.Boolean(v.DisableSchemaValidation)
+		ok.Boolean(*v.DisableSchemaValidation)
 	}
 
 	if v.Name != nil {
@@ -343,9 +343,9 @@ func awsRestjson1_serializeOpDocumentCreateAuthorizerInput(v *CreateAuthorizerIn
 		ok.String(*v.AuthorizerPayloadFormatVersion)
 	}
 
-	if v.AuthorizerResultTtlInSeconds != 0 {
+	if v.AuthorizerResultTtlInSeconds != nil {
 		ok := object.Key("authorizerResultTtlInSeconds")
-		ok.Integer(v.AuthorizerResultTtlInSeconds)
+		ok.Integer(*v.AuthorizerResultTtlInSeconds)
 	}
 
 	if len(v.AuthorizerType) > 0 {
@@ -358,9 +358,9 @@ func awsRestjson1_serializeOpDocumentCreateAuthorizerInput(v *CreateAuthorizerIn
 		ok.String(*v.AuthorizerUri)
 	}
 
-	if v.EnableSimpleResponses {
+	if v.EnableSimpleResponses != nil {
 		ok := object.Key("enableSimpleResponses")
-		ok.Boolean(v.EnableSimpleResponses)
+		ok.Boolean(*v.EnableSimpleResponses)
 	}
 
 	if v.IdentitySource != nil {
@@ -740,9 +740,9 @@ func awsRestjson1_serializeOpDocumentCreateIntegrationInput(v *CreateIntegration
 		ok.String(*v.TemplateSelectionExpression)
 	}
 
-	if v.TimeoutInMillis != 0 {
+	if v.TimeoutInMillis != nil {
 		ok := object.Key("timeoutInMillis")
-		ok.Integer(v.TimeoutInMillis)
+		ok.Integer(*v.TimeoutInMillis)
 	}
 
 	if v.TlsConfig != nil {
@@ -1059,9 +1059,9 @@ func awsRestjson1_serializeOpDocumentCreateRouteInput(v *CreateRouteInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.ApiKeyRequired {
+	if v.ApiKeyRequired != nil {
 		ok := object.Key("apiKeyRequired")
-		ok.Boolean(v.ApiKeyRequired)
+		ok.Boolean(*v.ApiKeyRequired)
 	}
 
 	if v.AuthorizationScopes != nil {
@@ -1326,9 +1326,9 @@ func awsRestjson1_serializeOpDocumentCreateStageInput(v *CreateStageInput, value
 		}
 	}
 
-	if v.AutoDeploy {
+	if v.AutoDeploy != nil {
 		ok := object.Key("autoDeploy")
-		ok.Boolean(v.AutoDeploy)
+		ok.Boolean(*v.AutoDeploy)
 	}
 
 	if v.ClientCertificateId != nil {
@@ -2728,8 +2728,8 @@ func awsRestjson1_serializeOpHttpBindingsExportApiInput(v *ExportApiInput, encod
 		encoder.SetQuery("exportVersion").String(*v.ExportVersion)
 	}
 
-	if v.IncludeExtensions {
-		encoder.SetQuery("includeExtensions").Boolean(v.IncludeExtensions)
+	if v.IncludeExtensions != nil {
+		encoder.SetQuery("includeExtensions").Boolean(*v.IncludeExtensions)
 	}
 
 	if v.OutputType != nil {
@@ -4705,8 +4705,8 @@ func awsRestjson1_serializeOpHttpBindingsImportApiInput(v *ImportApiInput, encod
 		encoder.SetQuery("basepath").String(*v.Basepath)
 	}
 
-	if v.FailOnWarnings {
-		encoder.SetQuery("failOnWarnings").Boolean(v.FailOnWarnings)
+	if v.FailOnWarnings != nil {
+		encoder.SetQuery("failOnWarnings").Boolean(*v.FailOnWarnings)
 	}
 
 	return nil
@@ -4801,8 +4801,8 @@ func awsRestjson1_serializeOpHttpBindingsReimportApiInput(v *ReimportApiInput, e
 		encoder.SetQuery("basepath").String(*v.Basepath)
 	}
 
-	if v.FailOnWarnings {
-		encoder.SetQuery("failOnWarnings").Boolean(v.FailOnWarnings)
+	if v.FailOnWarnings != nil {
+		encoder.SetQuery("failOnWarnings").Boolean(*v.FailOnWarnings)
 	}
 
 	return nil
@@ -5157,14 +5157,14 @@ func awsRestjson1_serializeOpDocumentUpdateApiInput(v *UpdateApiInput, value smi
 		ok.String(*v.Description)
 	}
 
-	if v.DisableExecuteApiEndpoint {
+	if v.DisableExecuteApiEndpoint != nil {
 		ok := object.Key("disableExecuteApiEndpoint")
-		ok.Boolean(v.DisableExecuteApiEndpoint)
+		ok.Boolean(*v.DisableExecuteApiEndpoint)
 	}
 
-	if v.DisableSchemaValidation {
+	if v.DisableSchemaValidation != nil {
 		ok := object.Key("disableSchemaValidation")
-		ok.Boolean(v.DisableSchemaValidation)
+		ok.Boolean(*v.DisableSchemaValidation)
 	}
 
 	if v.Name != nil {
@@ -5401,9 +5401,9 @@ func awsRestjson1_serializeOpDocumentUpdateAuthorizerInput(v *UpdateAuthorizerIn
 		ok.String(*v.AuthorizerPayloadFormatVersion)
 	}
 
-	if v.AuthorizerResultTtlInSeconds != 0 {
+	if v.AuthorizerResultTtlInSeconds != nil {
 		ok := object.Key("authorizerResultTtlInSeconds")
-		ok.Integer(v.AuthorizerResultTtlInSeconds)
+		ok.Integer(*v.AuthorizerResultTtlInSeconds)
 	}
 
 	if len(v.AuthorizerType) > 0 {
@@ -5416,9 +5416,9 @@ func awsRestjson1_serializeOpDocumentUpdateAuthorizerInput(v *UpdateAuthorizerIn
 		ok.String(*v.AuthorizerUri)
 	}
 
-	if v.EnableSimpleResponses {
+	if v.EnableSimpleResponses != nil {
 		ok := object.Key("enableSimpleResponses")
-		ok.Boolean(v.EnableSimpleResponses)
+		ok.Boolean(*v.EnableSimpleResponses)
 	}
 
 	if v.IdentitySource != nil {
@@ -5812,9 +5812,9 @@ func awsRestjson1_serializeOpDocumentUpdateIntegrationInput(v *UpdateIntegration
 		ok.String(*v.TemplateSelectionExpression)
 	}
 
-	if v.TimeoutInMillis != 0 {
+	if v.TimeoutInMillis != nil {
 		ok := object.Key("timeoutInMillis")
-		ok.Integer(v.TimeoutInMillis)
+		ok.Integer(*v.TimeoutInMillis)
 	}
 
 	if v.TlsConfig != nil {
@@ -6158,9 +6158,9 @@ func awsRestjson1_serializeOpDocumentUpdateRouteInput(v *UpdateRouteInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.ApiKeyRequired {
+	if v.ApiKeyRequired != nil {
 		ok := object.Key("apiKeyRequired")
-		ok.Boolean(v.ApiKeyRequired)
+		ok.Boolean(*v.ApiKeyRequired)
 	}
 
 	if v.AuthorizationScopes != nil {
@@ -6443,9 +6443,9 @@ func awsRestjson1_serializeOpDocumentUpdateStageInput(v *UpdateStageInput, value
 		}
 	}
 
-	if v.AutoDeploy {
+	if v.AutoDeploy != nil {
 		ok := object.Key("autoDeploy")
-		ok.Boolean(v.AutoDeploy)
+		ok.Boolean(*v.AutoDeploy)
 	}
 
 	if v.ClientCertificateId != nil {
@@ -6618,9 +6618,9 @@ func awsRestjson1_serializeDocumentCors(v *types.Cors, value smithyjson.Value) e
 	object := value.Object()
 	defer object.Close()
 
-	if v.AllowCredentials {
+	if v.AllowCredentials != nil {
 		ok := object.Key("allowCredentials")
-		ok.Boolean(v.AllowCredentials)
+		ok.Boolean(*v.AllowCredentials)
 	}
 
 	if v.AllowHeaders != nil {
@@ -6651,9 +6651,9 @@ func awsRestjson1_serializeDocumentCors(v *types.Cors, value smithyjson.Value) e
 		}
 	}
 
-	if v.MaxAge != 0 {
+	if v.MaxAge != nil {
 		ok := object.Key("maxAge")
-		ok.Integer(v.MaxAge)
+		ok.Integer(*v.MaxAge)
 	}
 
 	return nil
@@ -6824,9 +6824,9 @@ func awsRestjson1_serializeDocumentParameterConstraints(v *types.ParameterConstr
 	object := value.Object()
 	defer object.Close()
 
-	if v.Required {
+	if v.Required != nil {
 		ok := object.Key("required")
-		ok.Boolean(v.Required)
+		ok.Boolean(*v.Required)
 	}
 
 	return nil
@@ -6877,14 +6877,14 @@ func awsRestjson1_serializeDocumentRouteSettings(v *types.RouteSettings, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.DataTraceEnabled {
+	if v.DataTraceEnabled != nil {
 		ok := object.Key("dataTraceEnabled")
-		ok.Boolean(v.DataTraceEnabled)
+		ok.Boolean(*v.DataTraceEnabled)
 	}
 
-	if v.DetailedMetricsEnabled {
+	if v.DetailedMetricsEnabled != nil {
 		ok := object.Key("detailedMetricsEnabled")
-		ok.Boolean(v.DetailedMetricsEnabled)
+		ok.Boolean(*v.DetailedMetricsEnabled)
 	}
 
 	if len(v.LoggingLevel) > 0 {
@@ -6892,25 +6892,25 @@ func awsRestjson1_serializeDocumentRouteSettings(v *types.RouteSettings, value s
 		ok.String(string(v.LoggingLevel))
 	}
 
-	if v.ThrottlingBurstLimit != 0 {
+	if v.ThrottlingBurstLimit != nil {
 		ok := object.Key("throttlingBurstLimit")
-		ok.Integer(v.ThrottlingBurstLimit)
+		ok.Integer(*v.ThrottlingBurstLimit)
 	}
 
-	if v.ThrottlingRateLimit != 0 {
+	if v.ThrottlingRateLimit != nil {
 		ok := object.Key("throttlingRateLimit")
 		switch {
-		case math.IsNaN(v.ThrottlingRateLimit):
+		case math.IsNaN(*v.ThrottlingRateLimit):
 			ok.String("NaN")
 
-		case math.IsInf(v.ThrottlingRateLimit, 1):
+		case math.IsInf(*v.ThrottlingRateLimit, 1):
 			ok.String("Infinity")
 
-		case math.IsInf(v.ThrottlingRateLimit, -1):
+		case math.IsInf(*v.ThrottlingRateLimit, -1):
 			ok.String("-Infinity")
 
 		default:
-			ok.Double(v.ThrottlingRateLimit)
+			ok.Double(*v.ThrottlingRateLimit)
 
 		}
 	}

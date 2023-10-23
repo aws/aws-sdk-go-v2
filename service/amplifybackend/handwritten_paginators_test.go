@@ -2,8 +2,9 @@ package amplifybackend
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
 	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
@@ -18,7 +19,7 @@ type mockListBackendJobsClient struct {
 func (c *mockListBackendJobsClient) ListBackendJobs(ctx context.Context, input *ListBackendJobsInput, optFns ...func(*Options)) (*ListBackendJobsOutput, error) {
 	c.inputs = append(c.inputs, input)
 	requestCnt := len(c.inputs)
-	testCurRequest(len(c.outputs), requestCnt, c.limit, input.MaxResults, c.t)
+	testCurRequest(len(c.outputs), requestCnt, c.limit, aws.ToInt32(input.MaxResults), c.t)
 	return c.outputs[requestCnt-1], nil
 }
 

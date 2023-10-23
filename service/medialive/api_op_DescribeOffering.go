@@ -54,13 +54,13 @@ type DescribeOfferingOutput struct {
 	CurrencyCode *string
 
 	// Lease duration, e.g. '12'
-	Duration int32
+	Duration *int32
 
 	// Units for duration, e.g. 'MONTHS'
 	DurationUnits types.OfferingDurationUnits
 
 	// One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering
-	FixedPrice float64
+	FixedPrice *float64
 
 	// Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard
 	// VQ in US West (Oregon)'
@@ -79,7 +79,7 @@ type DescribeOfferingOutput struct {
 	ResourceSpecification *types.ReservationResourceSpecification
 
 	// Recurring usage charge for each reserved resource, e.g. '157.0'
-	UsagePrice float64
+	UsagePrice *float64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
