@@ -5756,6 +5756,9 @@ func validateEventBatchingCondition(v *types.EventBatchingCondition) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EventBatchingCondition"}
+	if v.BatchSize == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BatchSize"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -7154,6 +7157,9 @@ func validateSegment(v *types.Segment) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Segment"}
+	if v.TotalSegments == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TotalSegments"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

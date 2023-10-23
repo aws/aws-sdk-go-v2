@@ -1432,6 +1432,9 @@ func validateOpDeleteStackInstancesInput(v *DeleteStackInstancesInput) error {
 	if v.Regions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Regions"))
 	}
+	if v.RetainStacks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetainStacks"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

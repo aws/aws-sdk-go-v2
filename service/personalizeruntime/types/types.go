@@ -49,7 +49,7 @@ type Promotion struct {
 	Name *string
 
 	// The percentage of recommended items to apply the promotion to.
-	PercentPromotedItems int32
+	PercentPromotedItems *int32
 
 	noSmithyDocumentSerde
 }

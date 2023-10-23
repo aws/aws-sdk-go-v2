@@ -17135,7 +17135,7 @@ func awsRestxml_deserializeDocumentSelectionCriteria(v **types.SelectionCriteria
 				if err != nil {
 					return err
 				}
-				sv.MaxDepth = int32(i64)
+				sv.MaxDepth = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("MinStorageBytesPercentage", t.Name.Local):
@@ -17152,7 +17152,7 @@ func awsRestxml_deserializeDocumentSelectionCriteria(v **types.SelectionCriteria
 				if err != nil {
 					return err
 				}
-				sv.MinStorageBytesPercentage = f64
+				sv.MinStorageBytesPercentage = ptr.Float64(f64)
 			}
 
 		default:

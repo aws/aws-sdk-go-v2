@@ -295,9 +295,9 @@ func awsRestjson1_serializeDocumentPromotion(v *types.Promotion, value smithyjso
 		ok.String(*v.Name)
 	}
 
-	if v.PercentPromotedItems != 0 {
+	if v.PercentPromotedItems != nil {
 		ok := object.Key("percentPromotedItems")
-		ok.Integer(v.PercentPromotedItems)
+		ok.Integer(*v.PercentPromotedItems)
 	}
 
 	return nil

@@ -22321,7 +22321,7 @@ func awsAwsjson11_deserializeDocumentRetentionConfiguration(v **types.RetentionC
 				if err != nil {
 					return err
 				}
-				sv.RetentionPeriodInDays = int32(i64)
+				sv.RetentionPeriodInDays = ptr.Int32(int32(i64))
 			}
 
 		default:

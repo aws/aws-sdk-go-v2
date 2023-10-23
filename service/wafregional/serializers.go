@@ -5305,9 +5305,9 @@ func awsAwsjson11_serializeOpDocumentCreateRateBasedRuleInput(v *CreateRateBased
 		ok.String(string(v.RateKey))
 	}
 
-	{
+	if v.RateLimit != nil {
 		ok := object.Key("RateLimit")
-		ok.Long(v.RateLimit)
+		ok.Long(*v.RateLimit)
 	}
 
 	if v.Tags != nil {
@@ -5921,9 +5921,9 @@ func awsAwsjson11_serializeOpDocumentGetSampledRequestsInput(v *GetSampledReques
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxItems != nil {
 		ok := object.Key("MaxItems")
-		ok.Long(v.MaxItems)
+		ok.Long(*v.MaxItems)
 	}
 
 	if v.RuleId != nil {
@@ -6455,9 +6455,9 @@ func awsAwsjson11_serializeOpDocumentUpdateRateBasedRuleInput(v *UpdateRateBased
 		ok.String(*v.ChangeToken)
 	}
 
-	{
+	if v.RateLimit != nil {
 		ok := object.Key("RateLimit")
-		ok.Long(v.RateLimit)
+		ok.Long(*v.RateLimit)
 	}
 
 	if v.RuleId != nil {

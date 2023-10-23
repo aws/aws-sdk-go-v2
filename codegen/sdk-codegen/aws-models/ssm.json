@@ -127,14 +127,12 @@
                 "RegistrationLimit": {
                     "target": "com.amazonaws.ssm#RegistrationLimit",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of managed nodes that can be registered using this activation.</p>"
                     }
                 },
                 "RegistrationsCount": {
                     "target": "com.amazonaws.ssm#RegistrationsCount",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of managed nodes already registered with this activation.</p>"
                     }
                 },
@@ -2030,7 +2028,6 @@
                 "ScheduleOffset": {
                     "target": "com.amazonaws.ssm#ScheduleOffset",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association.</p>"
                     }
                 },
@@ -2243,7 +2240,6 @@
                 "ScheduleOffset": {
                     "target": "com.amazonaws.ssm#ScheduleOffset",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association.</p>"
                     }
                 },
@@ -3008,7 +3004,6 @@
                 "ScheduleOffset": {
                     "target": "com.amazonaws.ssm#ScheduleOffset",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association.</p>"
                     }
                 },
@@ -4565,7 +4560,6 @@
                 "TimeoutSeconds": {
                     "target": "com.amazonaws.ssm#TimeoutSeconds",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The <code>TimeoutSeconds</code> value specified for a command.</p>"
                     }
                 },
@@ -4845,7 +4839,6 @@
         "com.amazonaws.ssm#CommandMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -5634,7 +5627,6 @@
                 "RegistrationLimit": {
                     "target": "com.amazonaws.ssm#RegistrationLimit",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Specify the maximum number of managed nodes you want to register. The default value is\n    <code>1</code>.</p>"
                     }
                 },
@@ -5917,7 +5909,6 @@
                 "ScheduleOffset": {
                     "target": "com.amazonaws.ssm#ScheduleOffset",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association.</p>"
                     }
                 },
@@ -6059,7 +6050,6 @@
                 "ScheduleOffset": {
                     "target": "com.amazonaws.ssm#ScheduleOffset",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association. For example, if you\n   specified a cron schedule of <code>cron(0 0 ? * THU#2 *)</code>, you could specify an offset of 3\n   to run the association each Sunday after the second Thursday of the month. For more information\n   about cron schedules for associations, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html\">Reference: Cron\n    and rate expressions for Systems Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>\n         <note>\n            <p>To use offsets, you must specify the <code>ApplyOnlyAtCronInterval</code> parameter. This\n    option tells the system not to run an association immediately after you create it. </p>\n         </note>"
                     }
                 },
@@ -6280,14 +6270,12 @@
                 "ScheduleOffset": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowOffset",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of days to wait after the date and time specified by a cron expression before\n   running the maintenance window.</p>\n         <p>For example, the following cron expression schedules a maintenance window to run on the\n   third Tuesday of every month at 11:30 PM.</p>\n         <p>\n            <code>cron(30 23 ? * TUE#3 *)</code>\n         </p>\n         <p>If the schedule offset is <code>2</code>, the maintenance window won't run until two days\n   later.</p>"
                     }
                 },
                 "Duration": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowDurationHours",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration of the maintenance window in hours.</p>",
                         "smithy.api#required": {}
                     }
@@ -7783,7 +7771,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -7905,7 +7892,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -7988,7 +7974,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -8113,7 +8098,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -8208,7 +8192,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -8279,7 +8262,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#PatchBaselineMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of patches to return (per page).</p>"
                     }
                 },
@@ -8386,7 +8368,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#DocumentPermissionMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -8510,7 +8491,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#EffectiveInstanceAssociationMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -8590,7 +8570,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#PatchBaselineMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of patches to return (per page).</p>"
                     }
                 },
@@ -8667,7 +8646,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -8755,7 +8733,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResultsEC2Compatible",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results. The default value is 10 items.\n  </p>"
                     }
                 },
@@ -8870,7 +8847,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#PatchComplianceMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of patches to return (per page).</p>"
                     }
                 }
@@ -8918,7 +8894,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#PatchComplianceMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of managed nodes to return (per page).</p>"
                     }
                 }
@@ -9004,7 +8979,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#PatchComplianceMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of patches to return (per page).</p>"
                     }
                 }
@@ -9080,7 +9054,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 }
@@ -9161,7 +9134,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -9241,7 +9213,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -9318,7 +9289,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -9409,7 +9379,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowSearchMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -9489,7 +9458,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -9569,7 +9537,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -9670,7 +9637,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowSearchMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -9717,7 +9683,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -9873,7 +9838,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -9943,7 +9907,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#PatchBaselineMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of patch baselines to return (per page).</p>"
                     }
                 },
@@ -10134,7 +10097,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#PatchBaselineMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of patch groups to return (per page).</p>"
                     }
                 },
@@ -10224,7 +10186,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -10301,7 +10262,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#SessionMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -11081,7 +11041,6 @@
         "com.amazonaws.ssm#DocumentPermissionMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 200
@@ -11618,7 +11577,6 @@
         "com.amazonaws.ssm#EffectiveInstanceAssociationMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 5
@@ -12586,7 +12544,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 }
@@ -12647,7 +12604,6 @@
         "com.amazonaws.ssm#GetInventorySchemaMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 50,
                     "max": 200
@@ -12672,7 +12628,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#GetInventorySchemaMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -13147,7 +13102,6 @@
                 "ScheduleOffset": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowOffset",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of days to wait to run a maintenance window after the scheduled cron expression\n   date and time.</p>"
                     }
                 },
@@ -13160,7 +13114,6 @@
                 "Duration": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowDurationHours",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration of the maintenance window in hours.</p>"
                     }
                 },
@@ -13433,7 +13386,6 @@
         "com.amazonaws.ssm#GetOpsMetadataMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 10
@@ -13453,7 +13405,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#GetOpsMetadataMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -13568,7 +13519,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 }
@@ -13674,7 +13624,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -13805,7 +13754,6 @@
         "com.amazonaws.ssm#GetParametersByPathMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 10
@@ -13845,7 +13793,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#GetParametersByPathMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -16902,7 +16849,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -16975,7 +16921,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -17063,7 +17008,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#CommandMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>(Optional) The maximum number of items to return for this call. The call also returns a\n   token that you can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -17164,7 +17108,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#CommandMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>(Optional) The maximum number of items to return for this call. The call also returns a\n   token that you can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -17270,7 +17213,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 }
@@ -17346,7 +17288,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. Currently, you can specify null or 50.\n   The call also returns a token that you can specify in a subsequent call to get the next set of\n   results.</p>"
                     }
                 }
@@ -17433,7 +17374,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 }
@@ -17522,7 +17462,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -17604,7 +17543,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -17700,7 +17638,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 }
@@ -17938,7 +17875,6 @@
         "com.amazonaws.ssm#ListOpsMetadataMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -17957,7 +17893,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#ListOpsMetadataMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
@@ -18039,7 +17974,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 }
@@ -18115,7 +18049,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 }
@@ -18286,7 +18219,6 @@
         "com.amazonaws.ssm#MaintenanceWindowDurationHours": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 24
@@ -18713,7 +18645,6 @@
                 "Duration": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowDurationHours",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration of the maintenance window in hours.</p>"
                     }
                 },
@@ -18739,7 +18670,6 @@
                 "ScheduleOffset": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowOffset",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of days to wait to run a maintenance window after the scheduled cron expression\n   date and time.</p>"
                     }
                 },
@@ -18849,7 +18779,6 @@
         "com.amazonaws.ssm#MaintenanceWindowMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 10,
                     "max": 100
@@ -18869,7 +18798,6 @@
         "com.amazonaws.ssm#MaintenanceWindowOffset": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 6
@@ -18956,7 +18884,6 @@
                 "TimeoutSeconds": {
                     "target": "com.amazonaws.ssm#TimeoutSeconds",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>If this time is reached and the command hasn't already started running, it doesn't\n   run.</p>"
                     }
                 }
@@ -18977,7 +18904,6 @@
         "com.amazonaws.ssm#MaintenanceWindowSearchMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -19433,7 +19359,6 @@
         "com.amazonaws.ssm#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -19443,7 +19368,6 @@
         "com.amazonaws.ssm#MaxResultsEC2Compatible": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 5,
                     "max": 50
@@ -22656,7 +22580,6 @@
         "com.amazonaws.ssm#PatchBaselineMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -22840,7 +22763,6 @@
         "com.amazonaws.ssm#PatchComplianceMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 10,
                     "max": 100
@@ -24534,7 +24456,6 @@
         "com.amazonaws.ssm#RegistrationLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -24592,7 +24513,6 @@
         "com.amazonaws.ssm#RegistrationsCount": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -25873,7 +25793,6 @@
         "com.amazonaws.ssm#ScheduleOffset": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 6
@@ -26063,7 +25982,6 @@
                 "TimeoutSeconds": {
                     "target": "com.amazonaws.ssm#TimeoutSeconds",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>If this time is reached and the command hasn't already started running, it won't run.</p>"
                     }
                 },
@@ -26489,7 +26407,6 @@
         "com.amazonaws.ssm#SessionMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 200
@@ -27848,7 +27765,6 @@
         "com.amazonaws.ssm#TimeoutSeconds": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 30,
                     "max": 2592000
@@ -28274,7 +28190,6 @@
                 "ScheduleOffset": {
                     "target": "com.amazonaws.ssm#ScheduleOffset",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association. For example, if you\n   specified a cron schedule of <code>cron(0 0 ? * THU#2 *)</code>, you could specify an offset of 3\n   to run the association each Sunday after the second Thursday of the month. For more information\n   about cron schedules for associations, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html\">Reference: Cron\n    and rate expressions for Systems Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>\n         <note>\n            <p>To use offsets, you must specify the <code>ApplyOnlyAtCronInterval</code> parameter. This\n    option tells the system not to run an association immediately after you create it. </p>\n         </note>"
                     }
                 },
@@ -28689,14 +28604,12 @@
                 "ScheduleOffset": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowOffset",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of days to wait after the date and time specified by a cron expression before\n   running the maintenance window.</p>\n         <p>For example, the following cron expression schedules a maintenance window to run the third\n   Tuesday of every month at 11:30 PM.</p>\n         <p>\n            <code>cron(30 23 ? * TUE#3 *)</code>\n         </p>\n         <p>If the schedule offset is <code>2</code>, the maintenance window won't run until two days\n   later.</p>"
                     }
                 },
                 "Duration": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowDurationHours",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The duration of the maintenance window in hours.</p>"
                     }
                 },
@@ -28781,14 +28694,12 @@
                 "ScheduleOffset": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowOffset",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of days to wait to run a maintenance window after the scheduled cron expression\n   date and time.</p>"
                     }
                 },
                 "Duration": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowDurationHours",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration of the maintenance window in hours.</p>"
                     }
                 },

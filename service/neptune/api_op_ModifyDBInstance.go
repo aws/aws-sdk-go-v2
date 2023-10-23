@@ -50,7 +50,7 @@ type ModifyDBInstanceInput struct {
 	// Indicates that major version upgrades are allowed. Changing this parameter
 	// doesn't result in an outage and the change is asynchronously applied as soon as
 	// possible.
-	AllowMajorVersionUpgrade bool
+	AllowMajorVersionUpgrade *bool
 
 	// Specifies whether the modifications in this request and any pending
 	// modifications are asynchronously applied as soon as possible, regardless of the
@@ -58,7 +58,7 @@ type ModifyDBInstanceInput struct {
 	// to false , changes to the DB instance are applied during the next maintenance
 	// window. Some parameter changes can cause an outage and are applied on the next
 	// call to RebootDBInstance , or the next failure reboot. Default: false
-	ApplyImmediately bool
+	ApplyImmediately *bool
 
 	// Indicates that minor version upgrades are applied automatically to the DB
 	// instance during the maintenance window. Changing this parameter doesn't result

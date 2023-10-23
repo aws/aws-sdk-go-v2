@@ -61,6 +61,7 @@
                 "TicketId": {
                     "target": "com.amazonaws.gamelift#MatchmakingIdStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for a matchmaking ticket. The ticket must be in status <code>REQUIRES_ACCEPTANCE</code>; otherwise this\n            request will fail.</p>",
                         "smithy.api#required": {}
                     }
@@ -68,6 +69,7 @@
                 "PlayerIds": {
                     "target": "com.amazonaws.gamelift#StringList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for a player delivering the response. This parameter can include one or multiple player\n            IDs.</p>",
                         "smithy.api#required": {}
                     }
@@ -75,6 +77,7 @@
                 "AcceptanceType": {
                     "target": "com.amazonaws.gamelift#AcceptanceType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Player response to the proposed match.</p>",
                         "smithy.api#required": {}
                     }
@@ -197,6 +200,7 @@
                 "Cost": {
                     "target": "com.amazonaws.gamelift#NonNegativeLimitedLengthDouble",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cost to run your fleet per hour. Amazon GameLift uses the provided cost of your fleet to\n            balance usage in queues. For more information about queues, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html\">Setting\n                up queues</a> in the <i>Amazon GameLift Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
@@ -443,6 +447,7 @@
                 "CertificateType": {
                     "target": "com.amazonaws.gamelift#CertificateType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Indicates whether a TLS/SSL certificate is generated for a fleet. </p>\n         <p>Valid values include: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>GENERATED</b> - Generate a TLS/SSL certificate\n                    for this fleet.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DISABLED</b> - (default) Do not generate a\n                    TLS/SSL certificate for this fleet. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -521,6 +526,7 @@
                 "GameServerGroupName": {
                     "target": "com.amazonaws.gamelift#GameServerGroupNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the game server group where the game server is running. If you are not specifying a game server to claim, this value identifies\n            where you want Amazon GameLift FleetIQ to look for an available game server to claim. </p>",
                         "smithy.api#required": {}
                     }
@@ -807,6 +813,7 @@
                 "Name": {
                     "target": "com.amazonaws.gamelift#NonBlankAndLengthConstraintString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A descriptive label that is associated with an alias. Alias names do not need to be unique.</p>",
                         "smithy.api#required": {}
                     }
@@ -820,6 +827,7 @@
                 "RoutingStrategy": {
                     "target": "com.amazonaws.gamelift#RoutingStrategy",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The routing configuration, including routing type and fleet target, for the alias.\n        </p>",
                         "smithy.api#required": {}
                     }
@@ -992,6 +1000,7 @@
                 "Name": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A descriptive label that is associated with a fleet. Fleet names do not need to be unique.</p>",
                         "smithy.api#required": {}
                     }
@@ -1171,6 +1180,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to add locations to. You can use either the fleet ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -1178,6 +1188,7 @@
                 "Locations": {
                     "target": "com.amazonaws.gamelift#LocationConfigurationList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of locations to deploy additional instances to and manage as part of the fleet.\n            You can add any Amazon GameLift-supported Amazon Web Services Region as a remote location, in the form of an\n            Amazon Web Services Region code such as <code>us-west-2</code>. </p>",
                         "smithy.api#required": {}
                     }
@@ -1268,6 +1279,7 @@
                 "GameServerGroupName": {
                     "target": "com.amazonaws.gamelift#GameServerGroupName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An identifier for the new game server group. This value is used to generate unique ARN\n            identifiers for the Amazon EC2 Auto Scaling group and the Amazon GameLift FleetIQ game server group. The name\n            must be unique per Region per Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
@@ -1275,6 +1287,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.gamelift#IamRoleArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) for an IAM role that\n            allows Amazon GameLift to access your Amazon EC2 Auto Scaling groups.</p>",
                         "smithy.api#required": {}
                     }
@@ -1282,6 +1295,7 @@
                 "MinSize": {
                     "target": "com.amazonaws.gamelift#WholeNumber",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The minimum number of instances allowed in the Amazon EC2 Auto Scaling group. During\n            automatic scaling events, Amazon GameLift FleetIQ and Amazon EC2 do not scale down the group below this\n            minimum. In production, this value should be set to at least 1. After the Auto Scaling\n            group is created, update this value directly in the Auto Scaling group using the Amazon Web Services\n            console or APIs.</p>",
                         "smithy.api#required": {}
                     }
@@ -1289,6 +1303,7 @@
                 "MaxSize": {
                     "target": "com.amazonaws.gamelift#PositiveInteger",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The maximum number of instances allowed in the Amazon EC2 Auto Scaling group. During\n            automatic scaling events, Amazon GameLift FleetIQ and EC2 do not scale up the group above this maximum.\n            After the Auto Scaling group is created, update this value directly in the Auto Scaling\n            group using the Amazon Web Services console or APIs.</p>",
                         "smithy.api#required": {}
                     }
@@ -1296,6 +1311,7 @@
                 "LaunchTemplate": {
                     "target": "com.amazonaws.gamelift#LaunchTemplateSpecification",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon EC2 launch template that contains configuration settings and game server code to\n            be deployed to all instances in the game server group. You can specify the template\n            using either the template name or ID. For help with creating a launch template, see\n                <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html\">Creating a Launch\n                Template for an Auto Scaling Group</a> in the <i>Amazon Elastic Compute Cloud Auto Scaling\n                User Guide</i>. After the Auto Scaling group is created, update this value\n            directly in the Auto Scaling group using the Amazon Web Services console or APIs.</p>\n         <note>\n            <p>If you specify network interfaces in your launch template, you must explicitly set\n                the property <code>AssociatePublicIpAddress</code> to \"true\". If no network\n                interface is specified in the launch template, Amazon GameLift FleetIQ uses your account's default\n                VPC.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -1303,6 +1319,7 @@
                 "InstanceDefinitions": {
                     "target": "com.amazonaws.gamelift#InstanceDefinitions",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon EC2 instance types and sizes to use in the Auto Scaling group. The instance\n            definitions must specify at least two different instance types that are supported by\n            Amazon GameLift FleetIQ. For more information on instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">EC2 Instance Types</a> in the\n                <i>Amazon Elastic Compute Cloud User Guide</i>. You can optionally specify capacity\n            weighting for each instance type. If no weight value is specified for an instance type,\n            it is set to the default value \"1\". For more information about capacity weighting, see\n                <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html\"> Instance Weighting for\n                Amazon EC2 Auto Scaling</a> in the Amazon EC2 Auto Scaling User Guide.</p>",
                         "smithy.api#required": {}
                     }
@@ -1421,6 +1438,7 @@
                 "MaximumPlayerSessionCount": {
                     "target": "com.amazonaws.gamelift#WholeNumber",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The maximum number of players that can be connected simultaneously to the game session.</p>",
                         "smithy.api#required": {}
                     }
@@ -1524,6 +1542,7 @@
                 "Name": {
                     "target": "com.amazonaws.gamelift#GameSessionQueueName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A descriptive label that is associated with game session queue. Queue names must be unique within each Region.</p>",
                         "smithy.api#required": {}
                     }
@@ -1633,6 +1652,7 @@
                 "LocationName": {
                     "target": "com.amazonaws.gamelift#CustomInputLocationStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A descriptive name for the custom location.</p>",
                         "smithy.api#required": {}
                     }
@@ -1700,6 +1720,7 @@
                 "Name": {
                     "target": "com.amazonaws.gamelift#MatchmakingIdStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the matchmaking configuration. This name is used to identify the configuration associated with a matchmaking\n            request or ticket.</p>",
                         "smithy.api#required": {}
                     }
@@ -1719,6 +1740,7 @@
                 "RequestTimeoutSeconds": {
                     "target": "com.amazonaws.gamelift#MatchmakingRequestTimeoutInteger",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The maximum duration, in seconds, that a matchmaking ticket can remain in process\n            before timing out. Requests that fail due to timing out can be resubmitted as\n            needed.</p>",
                         "smithy.api#required": {}
                     }
@@ -1732,6 +1754,7 @@
                 "AcceptanceRequired": {
                     "target": "com.amazonaws.gamelift#BooleanModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A flag that determines whether a match that was created with this configuration must\n            be accepted by the matched players. To require acceptance, set to <code>TRUE</code>.\n            With this option enabled, matchmaking tickets use the status\n                <code>REQUIRES_ACCEPTANCE</code> to indicate when a completed potential match is\n            waiting for player acceptance. </p>",
                         "smithy.api#required": {}
                     }
@@ -1739,6 +1762,7 @@
                 "RuleSetName": {
                     "target": "com.amazonaws.gamelift#MatchmakingRuleSetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the matchmaking rule set to use with this configuration. You can use either the rule set name or ARN\n            value. A matchmaking configuration can only use rule sets that are defined in the same\n            Region.</p>",
                         "smithy.api#required": {}
                     }
@@ -1845,6 +1869,7 @@
                 "Name": {
                     "target": "com.amazonaws.gamelift#MatchmakingIdStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the matchmaking rule set. A matchmaking configuration identifies the rule set it uses by this name\n            value. Note that the rule set name is different from the optional <code>name</code>\n            field in the rule set body.</p>",
                         "smithy.api#required": {}
                     }
@@ -1852,6 +1877,7 @@
                 "RuleSetBody": {
                     "target": "com.amazonaws.gamelift#RuleSetBody",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A collection of matchmaking rules, formatted as a JSON string. Comments are not\n            allowed in JSON, but most elements support a description field.</p>",
                         "smithy.api#required": {}
                     }
@@ -1873,6 +1899,7 @@
                 "RuleSet": {
                     "target": "com.amazonaws.gamelift#MatchmakingRuleSet",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The newly created matchmaking rule set.</p>",
                         "smithy.api#required": {}
                     }
@@ -1923,6 +1950,7 @@
                 "GameSessionId": {
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the game session to add a player to.</p>",
                         "smithy.api#required": {}
                     }
@@ -1930,6 +1958,7 @@
                 "PlayerId": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for a player. Player IDs are developer-defined.</p>",
                         "smithy.api#required": {}
                     }
@@ -2000,6 +2029,7 @@
                 "GameSessionId": {
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the game session to add players to.</p>",
                         "smithy.api#required": {}
                     }
@@ -2007,6 +2037,7 @@
                 "PlayerIds": {
                     "target": "com.amazonaws.gamelift#PlayerIdList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>List of unique identifiers for the players to be added.</p>",
                         "smithy.api#required": {}
                     }
@@ -2149,6 +2180,7 @@
                 "GameLiftAwsAccountId": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the Amazon Web Services account that you use to manage your Amazon GameLift fleet. \n            You can find your Account ID in the Amazon Web Services Management Console under account settings.</p>",
                         "smithy.api#required": {}
                     }
@@ -2156,6 +2188,7 @@
                 "PeerVpcId": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The\n            VPC must be in the same Region as your fleet. To look up a VPC ID, use the \n            <a href=\"https://console.aws.amazon.com/vpc/\">VPC Dashboard</a> in the Amazon Web Services Management Console. \n            Learn more about VPC peering in <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html\">VPC Peering with Amazon GameLift Fleets</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2211,6 +2244,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet. You can use either the fleet ID or ARN value. This tells Amazon GameLift which GameLift\n            VPC to peer with. </p>",
                         "smithy.api#required": {}
                     }
@@ -2218,6 +2252,7 @@
                 "PeerVpcAwsAccountId": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the Amazon Web Services account with the VPC that you want to peer your\n            Amazon GameLift fleet with. You can find your Account ID in the Amazon Web Services Management Console under account\n            settings.</p>",
                         "smithy.api#required": {}
                     }
@@ -2225,6 +2260,7 @@
                 "PeerVpcId": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The\n            VPC must be in the same Region as your fleet. To look up a VPC ID, use the \n            <a href=\"https://console.aws.amazon.com/vpc/\">VPC Dashboard</a> in the Amazon Web Services Management Console. \n            Learn more about VPC peering in <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html\">VPC Peering with Amazon GameLift Fleets</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2305,6 +2341,7 @@
                 "AliasId": {
                     "target": "com.amazonaws.gamelift#AliasIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier of the alias that you want to delete. You can use either the alias\n            ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -2349,6 +2386,7 @@
                 "BuildId": {
                     "target": "com.amazonaws.gamelift#BuildIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the build to delete. You can use either the build ID or ARN value. </p>",
                         "smithy.api#required": {}
                     }
@@ -2396,6 +2434,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to be deleted. You can use either the fleet ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -2440,6 +2479,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to delete locations for. You can use either the fleet ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -2447,6 +2487,7 @@
                 "Locations": {
                     "target": "com.amazonaws.gamelift#LocationList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The list of fleet locations to delete. Specify locations in the form of an Amazon Web Services\n            Region code, such as <code>us-west-2</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2514,6 +2555,7 @@
                 "GameServerGroupName": {
                     "target": "com.amazonaws.gamelift#GameServerGroupNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the game server group. Use either the name or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -2578,6 +2620,7 @@
                 "Name": {
                     "target": "com.amazonaws.gamelift#GameSessionQueueNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A descriptive label that is associated with game session queue. Queue names must be unique within each Region. You can use either the queue ID or ARN value. </p>",
                         "smithy.api#required": {}
                     }
@@ -2626,6 +2669,7 @@
                 "LocationName": {
                     "target": "com.amazonaws.gamelift#CustomLocationNameOrArnModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The location name of the custom location to be deleted.</p>",
                         "smithy.api#required": {}
                     }
@@ -2677,6 +2721,7 @@
                 "Name": {
                     "target": "com.amazonaws.gamelift#MatchmakingConfigurationName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the matchmaking configuration. You can use either the configuration name or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -2728,6 +2773,7 @@
                 "Name": {
                     "target": "com.amazonaws.gamelift#MatchmakingRuleSetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the matchmaking rule set to be deleted. (Note: The rule set name is different from the optional \"name\"\n            field in the rule set body.) You can use either the rule set name or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -2776,6 +2822,7 @@
                 "Name": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique.</p>",
                         "smithy.api#required": {}
                     }
@@ -2783,6 +2830,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to be deleted. You can use either the fleet ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -2827,6 +2875,7 @@
                 "ScriptId": {
                     "target": "com.amazonaws.gamelift#ScriptIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the Realtime script to delete. You can use either the script ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -2868,6 +2917,7 @@
                 "GameLiftAwsAccountId": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the Amazon Web Services account that you use to manage your Amazon GameLift fleet. \n            You can find your Account ID in the Amazon Web Services Management Console under account settings.</p>",
                         "smithy.api#required": {}
                     }
@@ -2875,6 +2925,7 @@
                 "PeerVpcId": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The\n            VPC must be in the same Region as your fleet. To look up a VPC ID, use the \n            <a href=\"https://console.aws.amazon.com/vpc/\">VPC Dashboard</a> in the Amazon Web Services Management Console. \n            Learn more about VPC peering in <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html\">VPC Peering with Amazon GameLift Fleets</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2923,6 +2974,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet. This fleet specified must match the fleet referenced in the VPC peering\n            connection record. You can use either the fleet ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -2930,6 +2982,7 @@
                 "VpcPeeringConnectionId": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for a VPC peering connection.</p>",
                         "smithy.api#required": {}
                     }
@@ -2978,6 +3031,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet the compute resource is currently registered to.</p>",
                         "smithy.api#required": {}
                     }
@@ -2985,6 +3039,7 @@
                 "ComputeName": {
                     "target": "com.amazonaws.gamelift#ComputeNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the compute resource to remove from the specified Anywhere fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -3033,6 +3088,7 @@
                 "GameServerGroupName": {
                     "target": "com.amazonaws.gamelift#GameServerGroupNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the game server group where the game server is running.</p>",
                         "smithy.api#required": {}
                     }
@@ -3040,6 +3096,7 @@
                 "GameServerId": {
                     "target": "com.amazonaws.gamelift#GameServerId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A custom string that uniquely identifies the game server to deregister.</p>",
                         "smithy.api#required": {}
                     }
@@ -3081,6 +3138,7 @@
                 "AliasId": {
                     "target": "com.amazonaws.gamelift#AliasIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier for the fleet alias that you want to retrieve. You can use\n            either the alias ID or ARN value. </p>",
                         "smithy.api#required": {}
                     }
@@ -3136,6 +3194,7 @@
                 "BuildId": {
                     "target": "com.amazonaws.gamelift#BuildIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the build to retrieve properties for. You can use either the build ID or ARN value.\n        </p>",
                         "smithy.api#required": {}
                     }
@@ -3191,6 +3250,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet that the compute is registered to. You can use either the fleet ID or ARN\n            value.</p>",
                         "smithy.api#required": {}
                     }
@@ -3198,6 +3258,7 @@
                 "ComputeName": {
                     "target": "com.amazonaws.gamelift#ComputeNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier of the compute resource to retrieve properties for. For an\n            Anywhere fleet compute, use the registered compute name. For a managed EC2 fleet\n            instance, use the instance ID.</p>",
                         "smithy.api#required": {}
                     }
@@ -3475,6 +3536,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to get event logs for. You can use either the fleet ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -3568,6 +3630,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to retrieve remote locations for. You can use either the fleet ID or ARN\n            value.</p>",
                         "smithy.api#required": {}
                     }
@@ -3662,6 +3725,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to request location capacity for. You can use either the fleet ID or ARN\n            value.</p>",
                         "smithy.api#required": {}
                     }
@@ -3669,6 +3733,7 @@
                 "Location": {
                     "target": "com.amazonaws.gamelift#LocationStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The fleet location to retrieve capacity information for. Specify a location in the\n            form of an Amazon Web Services Region code, such as <code>us-west-2</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -3727,6 +3792,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to request location utilization for. You can use either the fleet ID or ARN\n            value.</p>",
                         "smithy.api#required": {}
                     }
@@ -3734,6 +3800,7 @@
                 "Location": {
                     "target": "com.amazonaws.gamelift#LocationStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The fleet location to retrieve utilization information for. Specify a location in the\n            form of an Amazon Web Services Region code, such as <code>us-west-2</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -3792,6 +3859,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to retrieve port settings for. You can use either the fleet ID or ARN\n            value.</p>",
                         "smithy.api#required": {}
                     }
@@ -3981,6 +4049,7 @@
                 "GameServerGroupName": {
                     "target": "com.amazonaws.gamelift#GameServerGroupNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the game server group. Use either the name or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -4010,6 +4079,7 @@
                 "GameServerGroupName": {
                     "target": "com.amazonaws.gamelift#GameServerGroupNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the game server group where the game server is running.</p>",
                         "smithy.api#required": {}
                     }
@@ -4017,6 +4087,7 @@
                 "GameServerId": {
                     "target": "com.amazonaws.gamelift#GameServerId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A custom string that uniquely identifies the game server information to be retrieved.</p>",
                         "smithy.api#required": {}
                     }
@@ -4064,6 +4135,7 @@
                 "GameServerGroupName": {
                     "target": "com.amazonaws.gamelift#GameServerGroupNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the game server group. Use either the name or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -4265,6 +4337,7 @@
                 "PlacementId": {
                     "target": "com.amazonaws.gamelift#IdStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for a game session placement to retrieve.</p>",
                         "smithy.api#required": {}
                     }
@@ -4515,6 +4588,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to retrieve instance information for. You can use either the fleet ID or ARN\n            value.</p>",
                         "smithy.api#required": {}
                     }
@@ -4678,6 +4752,7 @@
                 "TicketIds": {
                     "target": "com.amazonaws.gamelift#MatchmakingIdList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for a matchmaking ticket. You can include up to 10 ID values. </p>",
                         "smithy.api#required": {}
                     }
@@ -4765,6 +4840,7 @@
                 "RuleSets": {
                     "target": "com.amazonaws.gamelift#MatchmakingRuleSetList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A collection of requested matchmaking rule set objects. </p>",
                         "smithy.api#required": {}
                     }
@@ -4908,6 +4984,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to get the runtime configuration for. You can use either the fleet ID or ARN\n            value.</p>",
                         "smithy.api#required": {}
                     }
@@ -4972,6 +5049,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet for which to retrieve scaling policies. You can use either the fleet ID or ARN\n            value.</p>",
                         "smithy.api#required": {}
                     }
@@ -5057,6 +5135,7 @@
                 "ScriptId": {
                     "target": "com.amazonaws.gamelift#ScriptIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the Realtime script to retrieve properties for. You can use either the script ID or ARN\n            value.</p>",
                         "smithy.api#required": {}
                     }
@@ -5218,10 +5297,7 @@
             }
         },
         "com.amazonaws.gamelift#Double": {
-            "type": "double",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "double"
         },
         "com.amazonaws.gamelift#DoubleObject": {
             "type": "double"
@@ -7092,10 +7168,7 @@
             }
         },
         "com.amazonaws.gamelift#Float": {
-            "type": "float",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "float"
         },
         "com.amazonaws.gamelift#FreeText": {
             "type": "string"
@@ -7476,7 +7549,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -7519,7 +7591,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -7532,7 +7605,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -7546,7 +7618,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -7569,7 +7640,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -7604,7 +7674,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -7615,14 +7684,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -7636,14 +7707,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -7652,11 +7721,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -7667,14 +7736,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -7688,7 +7759,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -7708,7 +7778,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -7719,14 +7788,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -7737,9 +7808,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -8352,6 +8425,7 @@
                 "Key": {
                     "target": "com.amazonaws.gamelift#GamePropertyKey",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The game property identifier.</p>",
                         "smithy.api#required": {}
                     }
@@ -8359,6 +8433,7 @@
                 "Value": {
                     "target": "com.amazonaws.gamelift#GamePropertyValue",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The game property value.</p>",
                         "smithy.api#required": {}
                     }
@@ -8628,6 +8703,7 @@
                 "TargetTrackingConfiguration": {
                     "target": "com.amazonaws.gamelift#TargetTrackingConfiguration",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Settings for a target-based scaling policy applied to Auto Scaling group. These\n            settings are used to create a target-based policy that tracks the Amazon GameLift FleetIQ metric\n                <code>\"PercentUtilizedGameServers\"</code> and specifies a target value for the\n            metric. As player usage changes, the policy triggers to adjust the game server group\n            capacity so that the metric returns to the target value. </p>",
                         "smithy.api#required": {}
                     }
@@ -9985,6 +10061,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet that contains the compute resource you want to connect to. You can use either\n            the fleet ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -9992,6 +10069,7 @@
                 "ComputeName": {
                     "target": "com.amazonaws.gamelift#ComputeNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the compute resource that you want to connect to. You can use\n            either a registered compute name or an instance ID.</p>",
                         "smithy.api#required": {}
                     }
@@ -10071,6 +10149,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet that the compute is registered to.</p>",
                         "smithy.api#required": {}
                     }
@@ -10078,6 +10157,7 @@
                 "ComputeName": {
                     "target": "com.amazonaws.gamelift#ComputeNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the compute resource you are requesting the authentication token\n            for.</p>",
                         "smithy.api#required": {}
                     }
@@ -10163,6 +10243,7 @@
                 "GameSessionId": {
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the game session to get logs for. </p>",
                         "smithy.api#required": {}
                     }
@@ -10218,6 +10299,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet that contains the instance you want to access. You can request access to\n            instances in EC2 fleets with the following statuses: <code>ACTIVATING</code>,\n                <code>ACTIVE</code>, or <code>ERROR</code>. Use either a fleet ID or an ARN value. </p>\n         <note>\n            <p>You can access fleets in <code>ERROR</code> status for a short period of time before Amazon GameLift deletes them.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -10225,6 +10307,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.gamelift#InstanceId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the instance you want to access. You can access an instance in any status.</p>",
                         "smithy.api#required": {}
                     }
@@ -10413,6 +10496,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.gamelift#GameServerGroupInstanceType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An Amazon EC2 instance type designation.</p>",
                         "smithy.api#required": {}
                     }
@@ -10476,10 +10560,7 @@
             }
         },
         "com.amazonaws.gamelift#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "integer"
         },
         "com.amazonaws.gamelift#InternalServiceException": {
             "type": "structure",
@@ -10545,6 +10626,7 @@
                 "FromPort": {
                     "target": "com.amazonaws.gamelift#PortNumber",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A starting value for a range of allowed port numbers.</p>\n         <p>For fleets using Linux builds, only ports <code>22</code> and <code>1026-60000</code> are valid.</p>\n         <p>For fleets using Windows builds, only ports <code>1026-60000</code> are valid.</p>",
                         "smithy.api#required": {}
                     }
@@ -10552,6 +10634,7 @@
                 "ToPort": {
                     "target": "com.amazonaws.gamelift#PortNumber",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An ending value for a range of allowed port numbers. Port numbers are end-inclusive.\n            This value must be equal to or greater than <code>FromPort</code>.</p>\n         <p>For fleets using Linux builds, only ports <code>22</code> and <code>1026-60000</code> are valid.</p>\n         <p>For fleets using Windows builds, only ports <code>1026-60000</code> are valid.</p>",
                         "smithy.api#required": {}
                     }
@@ -10559,6 +10642,7 @@
                 "IpRange": {
                     "target": "com.amazonaws.gamelift#NonBlankString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A range of allowed IP addresses. This value must be expressed in CIDR notation.\n            Example: \"<code>000.000.000.000/[subnet mask]</code>\" or optionally the shortened\n            version \"<code>0.0.0.0/[subnet mask]</code>\".</p>",
                         "smithy.api#required": {}
                     }
@@ -10566,6 +10650,7 @@
                 "Protocol": {
                     "target": "com.amazonaws.gamelift#IpProtocol",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The network communication protocol used by the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -10901,6 +10986,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to retrieve compute resources for.</p>",
                         "smithy.api#required": {}
                     }
@@ -11136,6 +11222,7 @@
                 "GameServerGroupName": {
                     "target": "com.amazonaws.gamelift#GameServerGroupNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An identifier for the game server group to retrieve a list of game servers from. Use\n            either the name or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -11368,6 +11455,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.gamelift#AmazonResourceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) that uniquely identifies\n            the Amazon GameLift resource that you want to retrieve tags for. Amazon GameLift includes resource ARNs in\n            the data object for the resource. You can retrieve the ARN by calling a\n                <code>List</code> or <code>Describe</code> operation for the resource type. </p>",
                         "smithy.api#required": {}
                     }
@@ -11439,6 +11527,7 @@
                 "Location": {
                     "target": "com.amazonaws.gamelift#LocationStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An Amazon Web Services Region code, such as <code>us-west-2</code>. </p>",
                         "smithy.api#required": {}
                     }
@@ -11853,6 +11942,7 @@
                 "RuleSetBody": {
                     "target": "com.amazonaws.gamelift#RuleSetBody",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A collection of matchmaking rules, formatted as a JSON string. Comments are not\n            allowed in JSON, but most elements support a description field.</p>",
                         "smithy.api#required": {}
                     }
@@ -12339,7 +12429,6 @@
                 "LatencyInMilliseconds": {
                     "target": "com.amazonaws.gamelift#Float",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Amount of time that represents the time lag experienced by the player when connected\n            to the specified Region.</p>"
                     }
                 }
@@ -12676,6 +12765,7 @@
                 "Name": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique. A fleet can have only one scaling policy with the same name.</p>",
                         "smithy.api#required": {}
                     }
@@ -12683,6 +12773,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to apply this policy to. You can use either the fleet ID or ARN value. The fleet\n            cannot be in any of the following statuses: ERROR or DELETING.</p>",
                         "smithy.api#required": {}
                     }
@@ -12690,7 +12781,6 @@
                 "ScalingAdjustment": {
                     "target": "com.amazonaws.gamelift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Amount of adjustment to make, based on the scaling adjustment type.</p>"
                     }
                 },
@@ -12703,7 +12793,6 @@
                 "Threshold": {
                     "target": "com.amazonaws.gamelift#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Metric value used to trigger a scaling event.</p>"
                     }
                 },
@@ -12722,6 +12811,7 @@
                 "MetricName": {
                     "target": "com.amazonaws.gamelift#MetricName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. For\n            detailed descriptions of fleet metrics, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html\">Monitor Amazon GameLift\n                with Amazon CloudWatch</a>. </p>\n         <ul>\n            <li>\n               <p>\n                  <b>ActivatingGameSessions</b> -- Game sessions in\n                    the process of being created.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ActiveGameSessions</b> -- Game sessions that\n                    are currently running.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ActiveInstances</b> -- Fleet instances that\n                    are currently running at least one game session.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AvailableGameSessions</b> -- Additional game\n                    sessions that fleet could host simultaneously, given current capacity.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AvailablePlayerSessions</b> -- Empty player\n                    slots in currently active game sessions. This includes game sessions that are\n                    not currently accepting players. Reserved player slots are not\n                    included.</p>\n            </li>\n            <li>\n               <p>\n                  <b>CurrentPlayerSessions</b> -- Player slots in\n                    active game sessions that are being used by a player or are reserved for a\n                    player. </p>\n            </li>\n            <li>\n               <p>\n                  <b>IdleInstances</b> -- Active instances that are\n                    currently hosting zero game sessions. </p>\n            </li>\n            <li>\n               <p>\n                  <b>PercentAvailableGameSessions</b> -- Unused\n                    percentage of the total number of game sessions that a fleet could host\n                    simultaneously, given current capacity. Use this metric for a target-based\n                    scaling policy.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PercentIdleInstances</b> -- Percentage of the\n                    total number of active instances that are hosting zero game sessions.</p>\n            </li>\n            <li>\n               <p>\n                  <b>QueueDepth</b> -- Pending game session\n                    placement requests, in any queue, where the current fleet is the top-priority\n                    destination.</p>\n            </li>\n            <li>\n               <p>\n                  <b>WaitTime</b> -- Current wait time for pending\n                    game session placement requests, in any queue, where the current fleet is the\n                    top-priority destination. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -12815,6 +12905,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to register the compute to. You can use either the fleet ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -12822,6 +12913,7 @@
                 "ComputeName": {
                     "target": "com.amazonaws.gamelift#ComputeName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A descriptive label for the compute resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -12904,6 +12996,7 @@
                 "GameServerGroupName": {
                     "target": "com.amazonaws.gamelift#GameServerGroupNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the game server group where the game server is running.</p>",
                         "smithy.api#required": {}
                     }
@@ -12911,6 +13004,7 @@
                 "GameServerId": {
                     "target": "com.amazonaws.gamelift#GameServerId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A custom string that uniquely identifies the game server to register. Game server IDs are developer-defined and must be unique\n            across all game server groups in your Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
@@ -12918,6 +13012,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.gamelift#GameServerInstanceId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier for the instance where the game server is running. This ID is\n            available in the instance metadata. EC2 instance IDs \n            use a 17-character format, for example: <code>i-1234567890abcdef0</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -12985,6 +13080,7 @@
                 "BuildId": {
                     "target": "com.amazonaws.gamelift#BuildIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the build to get credentials for. You can use either the build ID or ARN value. </p>",
                         "smithy.api#required": {}
                     }
@@ -13049,6 +13145,7 @@
                 "AliasId": {
                     "target": "com.amazonaws.gamelift#AliasIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier of the alias that you want to retrieve a fleet ID for. You can\n            use either the alias ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -13130,6 +13227,7 @@
                 "GameServerGroupName": {
                     "target": "com.amazonaws.gamelift#GameServerGroupNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the game server group. Use either the name or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -13137,6 +13235,7 @@
                 "ResumeActions": {
                     "target": "com.amazonaws.gamelift#GameServerGroupActions",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The activity to resume for this game server group.</p>",
                         "smithy.api#required": {}
                     }
@@ -13332,7 +13431,6 @@
                 "ScalingAdjustment": {
                     "target": "com.amazonaws.gamelift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Amount of adjustment to make, based on the scaling adjustment type.</p>"
                     }
                 },
@@ -13351,7 +13449,6 @@
                 "Threshold": {
                     "target": "com.amazonaws.gamelift#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Metric value used to trigger a scaling event.</p>"
                     }
                 },
@@ -13637,6 +13734,7 @@
                 "LaunchPath": {
                     "target": "com.amazonaws.gamelift#LaunchPathStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The location of a game build executable or Realtime script. Game builds and Realtime\n            scripts are installed on instances at the root: </p>\n         <ul>\n            <li>\n               <p>Windows (custom game builds only): <code>C:\\game</code>. Example:\n                        \"<code>C:\\game\\MyGame\\server.exe</code>\" </p>\n            </li>\n            <li>\n               <p>Linux: <code>/local/game</code>. Examples:\n                        \"<code>/local/game/MyGame/server.exe</code>\" or\n                        \"<code>/local/game/MyRealtimeScript.js</code>\"</p>\n            </li>\n         </ul>\n         <note>\n            <p>Amazon GameLift doesn't support the use of setup scripts that launch the game executable.\n                For custom game builds, this parameter must indicate the executable that calls the\n                server SDK operations <code>initSDK()</code> and <code>ProcessReady()</code>.\n            </p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -13650,6 +13748,7 @@
                 "ConcurrentExecutions": {
                     "target": "com.amazonaws.gamelift#PositiveInteger",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The number of server processes using this configuration that run concurrently on each\n            instance.</p>",
                         "smithy.api#required": {}
                     }
@@ -13744,6 +13843,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to restart actions on. You can use either the fleet ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -13751,6 +13851,7 @@
                 "Actions": {
                     "target": "com.amazonaws.gamelift#FleetActionList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>List of actions to restart on the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -13818,6 +13919,7 @@
                 "PlacementId": {
                     "target": "com.amazonaws.gamelift#IdStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier to assign to the new game session placement. This value is\n            developer-defined. The value must be unique across all Regions and cannot be\n            reused.</p>",
                         "smithy.api#required": {}
                     }
@@ -13825,6 +13927,7 @@
                 "GameSessionQueueName": {
                     "target": "com.amazonaws.gamelift#GameSessionQueueNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Name of the queue to use to place the new game session. You can use either the queue\n            name or ARN value. </p>",
                         "smithy.api#required": {}
                     }
@@ -13838,6 +13941,7 @@
                 "MaximumPlayerSessionCount": {
                     "target": "com.amazonaws.gamelift#WholeNumber",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The maximum number of players that can be connected simultaneously to the game session.</p>",
                         "smithy.api#required": {}
                     }
@@ -13923,6 +14027,7 @@
                 "ConfigurationName": {
                     "target": "com.amazonaws.gamelift#MatchmakingConfigurationName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Name of the matchmaker to use for this request. You can use either the configuration\n            name or ARN value. The ARN of the matchmaker that was used with the original game\n            session is listed in the <code>GameSession</code> object, <code>MatchmakerData</code>\n            property.</p>",
                         "smithy.api#required": {}
                     }
@@ -13936,6 +14041,7 @@
                 "Players": {
                     "target": "com.amazonaws.gamelift#PlayerList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Match information on all players that are currently assigned to the game session. This\n            information is used by the matchmaker to find new players and add them to the existing\n            game.</p>\n         <p>You can include up to 199 <code>Players</code> in a <code>StartMatchBackfill</code>\n            request.</p>\n         <ul>\n            <li>\n               <p>PlayerID, PlayerAttributes, Team -- This information is maintained in the\n                        <code>GameSession</code> object, <code>MatchmakerData</code> property, for\n                    all players who are currently assigned to the game session. The matchmaker data\n                    is in JSON syntax, formatted as a string. For more details, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data\">\n                        Match Data</a>. </p>\n               <p>The backfill request must specify the team membership for every player. Do not\n                    specify team if you are not using backfill.</p>\n            </li>\n            <li>\n               <p>LatencyInMs -- If the matchmaker uses player latency, include a latency value,\n                    in milliseconds, for the Region that the game session is currently in. Do not\n                    include latency values for any other Region.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -13997,6 +14103,7 @@
                 "ConfigurationName": {
                     "target": "com.amazonaws.gamelift#MatchmakingConfigurationName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Name of the matchmaking configuration to use for this request. Matchmaking\n            configurations must exist in the same Region as this request. You can use either the\n            configuration name or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -14004,6 +14111,7 @@
                 "Players": {
                     "target": "com.amazonaws.gamelift#PlayerList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Information on each player to be matched. This information must include a player ID,\n            and may contain player attributes and latency data to be used in the matchmaking\n            process. After a successful match, <code>Player</code> objects contain the name of the\n            team the player is assigned to.</p>\n         <p>You can include up to 10 <code>Players</code> in a <code>StartMatchmaking</code>\n            request.</p>",
                         "smithy.api#required": {}
                     }
@@ -14062,6 +14170,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to stop actions on. You can use either the fleet ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -14069,6 +14178,7 @@
                 "Actions": {
                     "target": "com.amazonaws.gamelift#FleetActionList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>List of actions to suspend on the fleet. </p>",
                         "smithy.api#required": {}
                     }
@@ -14136,6 +14246,7 @@
                 "PlacementId": {
                     "target": "com.amazonaws.gamelift#IdStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for a game session placement to stop.</p>",
                         "smithy.api#required": {}
                     }
@@ -14191,6 +14302,7 @@
                 "TicketId": {
                     "target": "com.amazonaws.gamelift#MatchmakingIdStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for a matchmaking ticket.</p>",
                         "smithy.api#required": {}
                     }
@@ -14248,6 +14360,7 @@
                 "GameServerGroupName": {
                     "target": "com.amazonaws.gamelift#GameServerGroupNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the game server group. Use either the name or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -14255,6 +14368,7 @@
                 "SuspendActions": {
                     "target": "com.amazonaws.gamelift#GameServerGroupActions",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The activity to suspend for this game server group.</p>",
                         "smithy.api#required": {}
                     }
@@ -14284,6 +14398,7 @@
                 "Key": {
                     "target": "com.amazonaws.gamelift#TagKey",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The key for a developer-defined key value pair for tagging an Amazon Web Services resource. </p>",
                         "smithy.api#required": {}
                     }
@@ -14291,6 +14406,7 @@
                 "Value": {
                     "target": "com.amazonaws.gamelift#TagValue",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The value for a developer-defined key value pair for tagging an Amazon Web Services resource. </p>",
                         "smithy.api#required": {}
                     }
@@ -14365,6 +14481,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.gamelift#AmazonResourceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) that uniquely identifies\n            the Amazon GameLift resource that you want to assign tags to. Amazon GameLift includes resource ARNs in\n            the data object for the resource. You can retrieve the ARN by calling a\n                <code>List</code> or <code>Describe</code> operation for the resource type. </p>",
                         "smithy.api#required": {}
                     }
@@ -14372,6 +14489,7 @@
                 "Tags": {
                     "target": "com.amazonaws.gamelift#TagList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of one or more tags to assign to the specified Amazon GameLift resource. Tags are\n            developer-defined and structured as key-value pairs. The maximum tag limit may be lower\n            than stated. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">\n                Tagging Amazon Web Services Resources</a> for tagging limits.</p>",
                         "smithy.api#required": {}
                     }
@@ -14415,7 +14533,7 @@
                 "TargetValue": {
                     "target": "com.amazonaws.gamelift#Double",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Desired value to use with a target-based scaling policy. The value must be relevant\n            for whatever metric the scaling policy is using. For example, in a policy using the\n            metric PercentAvailableGameSessions, the target value should be the preferred size of\n            the fleet's buffer (the percent of capacity that should be idle and ready for new game\n            sessions).</p>",
                         "smithy.api#required": {}
                     }
@@ -14431,6 +14549,7 @@
                 "TargetValue": {
                     "target": "com.amazonaws.gamelift#NonNegativeDouble",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Desired value to use with a game server group target-based scaling policy. </p>",
                         "smithy.api#required": {}
                     }
@@ -14511,6 +14630,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.gamelift#AmazonResourceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) that uniquely identifies\n            the Amazon GameLift resource that you want to remove tags from. Amazon GameLift includes resource ARNs in\n            the data object for the resource. You can retrieve the ARN by calling a\n                <code>List</code> or <code>Describe</code> operation for the resource type. </p>",
                         "smithy.api#required": {}
                     }
@@ -14518,6 +14638,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.gamelift#TagKeyList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of one or more tag keys to remove from the specified Amazon GameLift resource. </p>",
                         "smithy.api#required": {}
                     }
@@ -14566,6 +14687,7 @@
                 "AliasId": {
                     "target": "com.amazonaws.gamelift#AliasIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the alias that you want to update. You can use either the\n            alias ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -14639,6 +14761,7 @@
                 "BuildId": {
                     "target": "com.amazonaws.gamelift#BuildIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the build to update. You can use either the build ID or ARN value. </p>",
                         "smithy.api#required": {}
                     }
@@ -14715,6 +14838,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to update attribute metadata for. You can use either the fleet ID or ARN\n            value.</p>",
                         "smithy.api#required": {}
                     }
@@ -14824,6 +14948,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to update capacity settings for. You can use either the fleet ID or ARN\n            value.</p>",
                         "smithy.api#required": {}
                     }
@@ -14924,6 +15049,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to update port settings for. You can use either the fleet ID or ARN\n            value.</p>",
                         "smithy.api#required": {}
                     }
@@ -15023,6 +15149,7 @@
                 "GameServerGroupName": {
                     "target": "com.amazonaws.gamelift#GameServerGroupNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the game server group. Use either the name or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -15076,6 +15203,7 @@
                 "GameServerGroupName": {
                     "target": "com.amazonaws.gamelift#GameServerGroupNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the game server group where the game server is running.</p>",
                         "smithy.api#required": {}
                     }
@@ -15083,6 +15211,7 @@
                 "GameServerId": {
                     "target": "com.amazonaws.gamelift#GameServerId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A custom string that uniquely identifies the game server to update.</p>",
                         "smithy.api#required": {}
                     }
@@ -15162,6 +15291,7 @@
                 "GameSessionId": {
                     "target": "com.amazonaws.gamelift#ArnStringModel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the game session to update. </p>",
                         "smithy.api#required": {}
                     }
@@ -15241,6 +15371,7 @@
                 "Name": {
                     "target": "com.amazonaws.gamelift#GameSessionQueueNameOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A descriptive label that is associated with game session queue. Queue names must be unique within each Region. You can use either the queue ID or ARN value. </p>",
                         "smithy.api#required": {}
                     }
@@ -15338,6 +15469,7 @@
                 "Name": {
                     "target": "com.amazonaws.gamelift#MatchmakingConfigurationName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the matchmaking configuration to update. You can use either the configuration name or ARN value. </p>",
                         "smithy.api#required": {}
                     }
@@ -15474,6 +15606,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the fleet to update runtime configuration for. You can use either the fleet ID or ARN\n            value.</p>",
                         "smithy.api#required": {}
                     }
@@ -15481,6 +15614,7 @@
                 "RuntimeConfiguration": {
                     "target": "com.amazonaws.gamelift#RuntimeConfiguration",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Instructions for launching server processes on each instance in the fleet. Server\n            processes run either a custom game build executable or a Realtime Servers script. The runtime\n            configuration lists the types of server processes to run on an instance, how to launch\n            them, and the number of processes to run concurrently.</p>",
                         "smithy.api#required": {}
                     }
@@ -15536,6 +15670,7 @@
                 "ScriptId": {
                     "target": "com.amazonaws.gamelift#ScriptIdOrArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the Realtime script to update. You can use either the script ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
@@ -15612,6 +15747,7 @@
                 "RuleSetBody": {
                     "target": "com.amazonaws.gamelift#RuleSetBody",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A collection of matchmaking rules to validate, formatted as a JSON string.</p>",
                         "smithy.api#required": {}
                     }

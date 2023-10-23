@@ -11364,7 +11364,7 @@ func awsAwsjson11_deserializeDocumentStatelessRuleGroup(v **types.StatelessRuleG
 				if err != nil {
 					return err
 				}
-				sv.Priority = int32(i64)
+				sv.Priority = ptr.Int32(int32(i64))
 			}
 
 		case "ResourceId":

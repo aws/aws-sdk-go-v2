@@ -5152,7 +5152,7 @@ func awsAwsjson11_deserializeDocumentAssessmentRun(v **types.AssessmentRun, valu
 				if err != nil {
 					return err
 				}
-				sv.DurationInSeconds = int32(i64)
+				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "findingCounts":
@@ -5955,7 +5955,7 @@ func awsAwsjson11_deserializeDocumentAssessmentTemplate(v **types.AssessmentTemp
 				if err != nil {
 					return err
 				}
-				sv.DurationInSeconds = int32(i64)
+				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "lastAssessmentRunArn":

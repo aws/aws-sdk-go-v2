@@ -42,7 +42,7 @@ type ModifyClusterSnapshotInput struct {
 
 	// A Boolean option to override an exception if the retention period has already
 	// passed.
-	Force bool
+	Force *bool
 
 	// The number of days that a manual snapshot is retained. If the value is -1, the
 	// manual snapshot is retained indefinitely. If the manual snapshot falls outside

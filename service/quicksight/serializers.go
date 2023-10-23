@@ -16211,9 +16211,9 @@ func awsRestjson1_serializeDocumentAuroraParameters(v *types.AuroraParameters, v
 		ok.String(*v.Host)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("Port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	return nil
@@ -16233,9 +16233,9 @@ func awsRestjson1_serializeDocumentAuroraPostgreSqlParameters(v *types.AuroraPos
 		ok.String(*v.Host)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("Port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	return nil
@@ -19391,9 +19391,9 @@ func awsRestjson1_serializeDocumentDatabricksParameters(v *types.DatabricksParam
 		ok.String(*v.Host)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("Port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	if v.SqlEndpointPath != nil {
@@ -21303,9 +21303,9 @@ func awsRestjson1_serializeDocumentExasolParameters(v *types.ExasolParameters, v
 		ok.String(*v.Host)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("Port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	return nil
@@ -24032,9 +24032,9 @@ func awsRestjson1_serializeDocumentGrowthRateComputation(v *types.GrowthRateComp
 		ok.String(*v.Name)
 	}
 
-	if v.PeriodSize != 0 {
+	if v.PeriodSize != nil {
 		ok := object.Key("PeriodSize")
-		ok.Integer(v.PeriodSize)
+		ok.Integer(*v.PeriodSize)
 	}
 
 	if v.Time != nil {
@@ -25977,9 +25977,9 @@ func awsRestjson1_serializeDocumentLookbackWindow(v *types.LookbackWindow, value
 		ok.String(*v.ColumnName)
 	}
 
-	{
+	if v.Size != nil {
 		ok := object.Key("Size")
-		ok.Long(v.Size)
+		ok.Long(*v.Size)
 	}
 
 	if len(v.SizeUnit) > 0 {
@@ -26063,9 +26063,9 @@ func awsRestjson1_serializeDocumentMariaDbParameters(v *types.MariaDbParameters,
 		ok.String(*v.Host)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("Port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	return nil
@@ -26256,9 +26256,9 @@ func awsRestjson1_serializeDocumentMySqlParameters(v *types.MySqlParameters, val
 		ok.String(*v.Host)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("Port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	return nil
@@ -26821,9 +26821,9 @@ func awsRestjson1_serializeDocumentOracleParameters(v *types.OracleParameters, v
 		ok.String(*v.Host)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("Port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	return nil
@@ -28560,9 +28560,9 @@ func awsRestjson1_serializeDocumentPostgreSqlParameters(v *types.PostgreSqlParam
 		ok.String(*v.Host)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("Port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	return nil
@@ -28621,9 +28621,9 @@ func awsRestjson1_serializeDocumentPrestoParameters(v *types.PrestoParameters, v
 		ok.String(*v.Host)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("Port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	return nil
@@ -31489,9 +31489,9 @@ func awsRestjson1_serializeDocumentSparkParameters(v *types.SparkParameters, val
 		ok.String(*v.Host)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("Port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	return nil
@@ -31511,9 +31511,9 @@ func awsRestjson1_serializeDocumentSqlServerParameters(v *types.SqlServerParamet
 		ok.String(*v.Host)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("Port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	return nil
@@ -31545,9 +31545,9 @@ func awsRestjson1_serializeDocumentStarburstParameters(v *types.StarburstParamet
 		ok.String(*v.Host)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("Port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	if len(v.ProductType) > 0 {
@@ -32746,9 +32746,9 @@ func awsRestjson1_serializeDocumentTeradataParameters(v *types.TeradataParameter
 		ok.String(*v.Host)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("Port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	return nil
@@ -33269,9 +33269,9 @@ func awsRestjson1_serializeDocumentTopBottomMoversComputation(v *types.TopBottom
 		ok.String(*v.ComputationId)
 	}
 
-	if v.MoverSize != 0 {
+	if v.MoverSize != nil {
 		ok := object.Key("MoverSize")
-		ok.Integer(v.MoverSize)
+		ok.Integer(*v.MoverSize)
 	}
 
 	if v.Name != nil {
@@ -33327,9 +33327,9 @@ func awsRestjson1_serializeDocumentTopBottomRankedComputation(v *types.TopBottom
 		ok.String(*v.Name)
 	}
 
-	if v.ResultSize != 0 {
+	if v.ResultSize != nil {
 		ok := object.Key("ResultSize")
-		ok.Integer(v.ResultSize)
+		ok.Integer(*v.ResultSize)
 	}
 
 	if len(v.Type) > 0 {
@@ -34376,9 +34376,9 @@ func awsRestjson1_serializeDocumentTrinoParameters(v *types.TrinoParameters, val
 		ok.String(*v.Host)
 	}
 
-	{
+	if v.Port != nil {
 		ok := object.Key("Port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	return nil
@@ -34388,9 +34388,9 @@ func awsRestjson1_serializeDocumentTwitterParameters(v *types.TwitterParameters,
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxRows != nil {
 		ok := object.Key("MaxRows")
-		ok.Integer(v.MaxRows)
+		ok.Integer(*v.MaxRows)
 	}
 
 	if v.Query != nil {

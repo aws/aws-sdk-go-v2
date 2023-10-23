@@ -45,7 +45,7 @@ type UpdateIPSetInput struct {
 	IpSetId *string
 
 	// The updated Boolean value that specifies whether the IPSet is active or not.
-	Activate bool
+	Activate *bool
 
 	// The updated URI of the file that contains the IPSet.
 	Location *string

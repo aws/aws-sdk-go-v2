@@ -1933,7 +1933,7 @@ type StatelessRuleGroup struct {
 
 	// The priority of the rule group. Network Firewall evaluates the stateless rule
 	// groups in a firewall policy starting from the lowest priority setting.
-	Priority int32
+	Priority *int32
 
 	// The resource ID of the rule group.
 	ResourceId *string

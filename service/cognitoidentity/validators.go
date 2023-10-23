@@ -839,6 +839,9 @@ func validateOpListIdentitiesInput(v *ListIdentitiesInput) error {
 	if v.IdentityPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
 	}
+	if v.MaxResults == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -851,6 +854,9 @@ func validateOpListIdentityPoolsInput(v *ListIdentityPoolsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListIdentityPoolsInput"}
+	if v.MaxResults == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

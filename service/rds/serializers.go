@@ -9488,14 +9488,14 @@ func awsAwsquery_serializeDocumentOptionSetting(v *types.OptionSetting, value qu
 		objectKey.String(*v.Description)
 	}
 
-	if v.IsCollection {
+	if v.IsCollection != nil {
 		objectKey := object.Key("IsCollection")
-		objectKey.Boolean(v.IsCollection)
+		objectKey.Boolean(*v.IsCollection)
 	}
 
-	if v.IsModifiable {
+	if v.IsModifiable != nil {
 		objectKey := object.Key("IsModifiable")
-		objectKey.Boolean(v.IsModifiable)
+		objectKey.Boolean(*v.IsModifiable)
 	}
 
 	if v.Name != nil {
@@ -9552,9 +9552,9 @@ func awsAwsquery_serializeDocumentParameter(v *types.Parameter, value query.Valu
 		objectKey.String(*v.Description)
 	}
 
-	if v.IsModifiable {
+	if v.IsModifiable != nil {
 		objectKey := object.Key("IsModifiable")
-		objectKey.Boolean(v.IsModifiable)
+		objectKey.Boolean(*v.IsModifiable)
 	}
 
 	if v.MinimumEngineVersion != nil {
@@ -11326,9 +11326,9 @@ func awsAwsquery_serializeOpDocumentCreateDBProxyInput(v *CreateDBProxyInput, va
 		objectKey.String(*v.DBProxyName)
 	}
 
-	if v.DebugLogging {
+	if v.DebugLogging != nil {
 		objectKey := object.Key("DebugLogging")
-		objectKey.Boolean(v.DebugLogging)
+		objectKey.Boolean(*v.DebugLogging)
 	}
 
 	if len(v.EngineFamily) > 0 {
@@ -11341,9 +11341,9 @@ func awsAwsquery_serializeOpDocumentCreateDBProxyInput(v *CreateDBProxyInput, va
 		objectKey.Integer(*v.IdleClientTimeout)
 	}
 
-	if v.RequireTLS {
+	if v.RequireTLS != nil {
 		objectKey := object.Key("RequireTLS")
-		objectKey.Boolean(v.RequireTLS)
+		objectKey.Boolean(*v.RequireTLS)
 	}
 
 	if v.RoleArn != nil {
@@ -11655,9 +11655,9 @@ func awsAwsquery_serializeOpDocumentDeleteDBClusterInput(v *DeleteDBClusterInput
 		objectKey.String(*v.FinalDBSnapshotIdentifier)
 	}
 
-	if v.SkipFinalSnapshot {
+	if v.SkipFinalSnapshot != nil {
 		objectKey := object.Key("SkipFinalSnapshot")
-		objectKey.Boolean(v.SkipFinalSnapshot)
+		objectKey.Boolean(*v.SkipFinalSnapshot)
 	}
 
 	return nil
@@ -11723,9 +11723,9 @@ func awsAwsquery_serializeOpDocumentDeleteDBInstanceInput(v *DeleteDBInstanceInp
 		objectKey.String(*v.FinalDBSnapshotIdentifier)
 	}
 
-	if v.SkipFinalSnapshot {
+	if v.SkipFinalSnapshot != nil {
 		objectKey := object.Key("SkipFinalSnapshot")
-		objectKey.Boolean(v.SkipFinalSnapshot)
+		objectKey.Boolean(*v.SkipFinalSnapshot)
 	}
 
 	return nil
@@ -12116,9 +12116,9 @@ func awsAwsquery_serializeOpDocumentDescribeDBClustersInput(v *DescribeDBCluster
 		}
 	}
 
-	if v.IncludeShared {
+	if v.IncludeShared != nil {
 		objectKey := object.Key("IncludeShared")
-		objectKey.Boolean(v.IncludeShared)
+		objectKey.Boolean(*v.IncludeShared)
 	}
 
 	if v.Marker != nil {
@@ -12172,14 +12172,14 @@ func awsAwsquery_serializeOpDocumentDescribeDBClusterSnapshotsInput(v *DescribeD
 		}
 	}
 
-	if v.IncludePublic {
+	if v.IncludePublic != nil {
 		objectKey := object.Key("IncludePublic")
-		objectKey.Boolean(v.IncludePublic)
+		objectKey.Boolean(*v.IncludePublic)
 	}
 
-	if v.IncludeShared {
+	if v.IncludeShared != nil {
 		objectKey := object.Key("IncludeShared")
-		objectKey.Boolean(v.IncludeShared)
+		objectKey.Boolean(*v.IncludeShared)
 	}
 
 	if v.Marker != nil {
@@ -12209,9 +12209,9 @@ func awsAwsquery_serializeOpDocumentDescribeDBEngineVersionsInput(v *DescribeDBE
 		objectKey.String(*v.DBParameterGroupFamily)
 	}
 
-	if v.DefaultOnly {
+	if v.DefaultOnly != nil {
 		objectKey := object.Key("DefaultOnly")
-		objectKey.Boolean(v.DefaultOnly)
+		objectKey.Boolean(*v.DefaultOnly)
 	}
 
 	if v.Engine != nil {
@@ -12336,9 +12336,9 @@ func awsAwsquery_serializeOpDocumentDescribeDBLogFilesInput(v *DescribeDBLogFile
 		objectKey.String(*v.DBInstanceIdentifier)
 	}
 
-	if v.FileLastWritten != 0 {
+	if v.FileLastWritten != nil {
 		objectKey := object.Key("FileLastWritten")
-		objectKey.Long(v.FileLastWritten)
+		objectKey.Long(*v.FileLastWritten)
 	}
 
 	if v.FilenameContains != nil {
@@ -12346,9 +12346,9 @@ func awsAwsquery_serializeOpDocumentDescribeDBLogFilesInput(v *DescribeDBLogFile
 		objectKey.String(*v.FilenameContains)
 	}
 
-	if v.FileSize != 0 {
+	if v.FileSize != nil {
 		objectKey := object.Key("FileSize")
-		objectKey.Long(v.FileSize)
+		objectKey.Long(*v.FileSize)
 	}
 
 	if v.Filters != nil {
@@ -12632,14 +12632,14 @@ func awsAwsquery_serializeOpDocumentDescribeDBSnapshotsInput(v *DescribeDBSnapsh
 		}
 	}
 
-	if v.IncludePublic {
+	if v.IncludePublic != nil {
 		objectKey := object.Key("IncludePublic")
-		objectKey.Boolean(v.IncludePublic)
+		objectKey.Boolean(*v.IncludePublic)
 	}
 
-	if v.IncludeShared {
+	if v.IncludeShared != nil {
 		objectKey := object.Key("IncludeShared")
-		objectKey.Boolean(v.IncludeShared)
+		objectKey.Boolean(*v.IncludeShared)
 	}
 
 	if v.Marker != nil {
@@ -13253,9 +13253,9 @@ func awsAwsquery_serializeOpDocumentDownloadDBLogFilePortionInput(v *DownloadDBL
 		objectKey.String(*v.Marker)
 	}
 
-	if v.NumberOfLines != 0 {
+	if v.NumberOfLines != nil {
 		objectKey := object.Key("NumberOfLines")
-		objectKey.Integer(v.NumberOfLines)
+		objectKey.Integer(*v.NumberOfLines)
 	}
 
 	return nil
@@ -13452,19 +13452,19 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 		objectKey.Integer(*v.AllocatedStorage)
 	}
 
-	if v.AllowEngineModeChange {
+	if v.AllowEngineModeChange != nil {
 		objectKey := object.Key("AllowEngineModeChange")
-		objectKey.Boolean(v.AllowEngineModeChange)
+		objectKey.Boolean(*v.AllowEngineModeChange)
 	}
 
-	if v.AllowMajorVersionUpgrade {
+	if v.AllowMajorVersionUpgrade != nil {
 		objectKey := object.Key("AllowMajorVersionUpgrade")
-		objectKey.Boolean(v.AllowMajorVersionUpgrade)
+		objectKey.Boolean(*v.AllowMajorVersionUpgrade)
 	}
 
-	if v.ApplyImmediately {
+	if v.ApplyImmediately != nil {
 		objectKey := object.Key("ApplyImmediately")
-		objectKey.Boolean(v.ApplyImmediately)
+		objectKey.Boolean(*v.ApplyImmediately)
 	}
 
 	if v.AutoMinorVersionUpgrade != nil {
@@ -13732,14 +13732,14 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 		objectKey.Integer(*v.AllocatedStorage)
 	}
 
-	if v.AllowMajorVersionUpgrade {
+	if v.AllowMajorVersionUpgrade != nil {
 		objectKey := object.Key("AllowMajorVersionUpgrade")
-		objectKey.Boolean(v.AllowMajorVersionUpgrade)
+		objectKey.Boolean(*v.AllowMajorVersionUpgrade)
 	}
 
-	if v.ApplyImmediately {
+	if v.ApplyImmediately != nil {
 		objectKey := object.Key("ApplyImmediately")
-		objectKey.Boolean(v.ApplyImmediately)
+		objectKey.Boolean(*v.ApplyImmediately)
 	}
 
 	if len(v.AutomationMode) > 0 {
@@ -14305,9 +14305,9 @@ func awsAwsquery_serializeOpDocumentModifyOptionGroupInput(v *ModifyOptionGroupI
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately {
+	if v.ApplyImmediately != nil {
 		objectKey := object.Key("ApplyImmediately")
-		objectKey.Boolean(v.ApplyImmediately)
+		objectKey.Boolean(*v.ApplyImmediately)
 	}
 
 	if v.OptionGroupName != nil {
@@ -14568,9 +14568,9 @@ func awsAwsquery_serializeOpDocumentResetDBClusterParameterGroupInput(v *ResetDB
 		}
 	}
 
-	if v.ResetAllParameters {
+	if v.ResetAllParameters != nil {
 		objectKey := object.Key("ResetAllParameters")
-		objectKey.Boolean(v.ResetAllParameters)
+		objectKey.Boolean(*v.ResetAllParameters)
 	}
 
 	return nil
@@ -14592,9 +14592,9 @@ func awsAwsquery_serializeOpDocumentResetDBParameterGroupInput(v *ResetDBParamet
 		}
 	}
 
-	if v.ResetAllParameters {
+	if v.ResetAllParameters != nil {
 		objectKey := object.Key("ResetAllParameters")
-		objectKey.Boolean(v.ResetAllParameters)
+		objectKey.Boolean(*v.ResetAllParameters)
 	}
 
 	return nil
@@ -15098,9 +15098,9 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 		}
 	}
 
-	if v.UseLatestRestorableTime {
+	if v.UseLatestRestorableTime != nil {
 		objectKey := object.Key("UseLatestRestorableTime")
-		objectKey.Boolean(v.UseLatestRestorableTime)
+		objectKey.Boolean(*v.UseLatestRestorableTime)
 	}
 
 	if v.VpcSecurityGroupIds != nil {
@@ -15814,9 +15814,9 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *Resto
 		objectKey.Boolean(*v.UseDefaultProcessorFeatures)
 	}
 
-	if v.UseLatestRestorableTime {
+	if v.UseLatestRestorableTime != nil {
 		objectKey := object.Key("UseLatestRestorableTime")
-		objectKey.Boolean(v.UseLatestRestorableTime)
+		objectKey.Boolean(*v.UseLatestRestorableTime)
 	}
 
 	if v.VpcSecurityGroupIds != nil {

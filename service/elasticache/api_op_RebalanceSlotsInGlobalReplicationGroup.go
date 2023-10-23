@@ -38,7 +38,7 @@ type RebalanceSlotsInGlobalReplicationGroupInput struct {
 	// If True , redistribution is applied immediately.
 	//
 	// This member is required.
-	ApplyImmediately bool
+	ApplyImmediately *bool
 
 	// The name of the Global datastore
 	//

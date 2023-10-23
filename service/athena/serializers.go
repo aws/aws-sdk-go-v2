@@ -3855,9 +3855,9 @@ func awsAwsjson11_serializeDocumentEngineConfiguration(v *types.EngineConfigurat
 		ok.Integer(*v.DefaultExecutorDpuSize)
 	}
 
-	{
+	if v.MaxConcurrentDpus != nil {
 		ok := object.Key("MaxConcurrentDpus")
-		ok.Integer(v.MaxConcurrentDpus)
+		ok.Integer(*v.MaxConcurrentDpus)
 	}
 
 	if v.SparkProperties != nil {

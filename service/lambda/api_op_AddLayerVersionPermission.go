@@ -66,7 +66,7 @@ type AddLayerVersionPermissionInput struct {
 	// The version number.
 	//
 	// This member is required.
-	VersionNumber int64
+	VersionNumber *int64
 
 	// With the principal set to * , grant permission to all accounts in the specified
 	// organization.

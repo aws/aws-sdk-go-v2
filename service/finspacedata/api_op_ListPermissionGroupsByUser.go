@@ -37,7 +37,7 @@ type ListPermissionGroupsByUserInput struct {
 	// The maximum number of results per page.
 	//
 	// This member is required.
-	MaxResults int32
+	MaxResults *int32
 
 	// The unique identifier for the user.
 	//

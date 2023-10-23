@@ -79,7 +79,7 @@ type Activity struct {
 	EndTime *time.Time
 
 	// A value between 0 and 100 that indicates the progress of the activity.
-	Progress int32
+	Progress *int32
 
 	// A friendly, more verbose description of the activity status.
 	StatusMessage *string

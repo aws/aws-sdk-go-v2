@@ -35,7 +35,7 @@ func (c *Client) GetEnabledStandards(ctx context.Context, params *GetEnabledStan
 type GetEnabledStandardsInput struct {
 
 	// The maximum number of results to return in the response.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the
 	// GetEnabledStandards operation, set the value of this parameter to NULL . For
@@ -171,8 +171,8 @@ func NewGetEnabledStandardsPaginator(client GetEnabledStandardsAPIClient, params
 	}
 
 	options := GetEnabledStandardsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -202,7 +202,11 @@ func (p *GetEnabledStandardsPaginator) NextPage(ctx context.Context, optFns ...f
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.GetEnabledStandards(ctx, &params, optFns...)
 	if err != nil {

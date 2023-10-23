@@ -35,6 +35,7 @@
                 "Message": {
                     "target": "com.amazonaws.lookoutvision#ExceptionString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 }
@@ -101,10 +102,7 @@
             }
         },
         "com.amazonaws.lookoutvision#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "type": "boolean"
         },
         "com.amazonaws.lookoutvision#ClientToken": {
             "type": "string",
@@ -178,12 +176,14 @@
                 "Message": {
                     "target": "com.amazonaws.lookoutvision#ExceptionString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 },
                 "ResourceId": {
                     "target": "com.amazonaws.lookoutvision#ExceptionString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -191,6 +191,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.lookoutvision#ResourceType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of the resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -266,6 +267,7 @@
                 "DatasetType": {
                     "target": "com.amazonaws.lookoutvision#DatasetType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of the dataset. Specify <code>train</code> for a training dataset.\n      Specify <code>test</code> for a test dataset.</p>",
                         "smithy.api#required": {}
                     }
@@ -371,6 +373,7 @@
                 "OutputConfig": {
                     "target": "com.amazonaws.lookoutvision#OutputConfig",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The location where Amazon Lookout for Vision saves the training results.</p>",
                         "smithy.api#required": {}
                     }
@@ -452,6 +455,7 @@
                 "ProjectName": {
                     "target": "com.amazonaws.lookoutvision#ProjectName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name for the project.</p>",
                         "smithy.api#required": {}
                     }
@@ -1319,6 +1323,7 @@
                 "Body": {
                     "target": "com.amazonaws.lookoutvision#Stream",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unencrypted image bytes that you want to analyze. </p>",
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {}
@@ -1327,6 +1332,7 @@
                 "ContentType": {
                     "target": "com.amazonaws.lookoutvision#ContentType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of the image passed in <code>Body</code>.\n         Valid values are <code>image/png</code> (PNG format images) and <code>image/jpeg</code> (JPG format images). </p>",
                         "smithy.api#httpHeader": "Content-Type",
                         "smithy.api#required": {}
@@ -1363,7 +1369,6 @@
                 "IsAnomalous": {
                     "target": "com.amazonaws.lookoutvision#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True if Amazon Lookout for Vision classifies the image as containing an anomaly, otherwise false.</p>"
                     }
                 },
@@ -1420,6 +1425,7 @@
                 "S3OutputLocation": {
                     "target": "com.amazonaws.lookoutvision#S3Location",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>\n         An S3 location in which Lookout for Vision stores the component artifacts. \n      </p>",
                         "smithy.api#required": {}
                     }
@@ -1427,6 +1433,7 @@
                 "ComponentName": {
                     "target": "com.amazonaws.lookoutvision#ComponentName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>\n   A name for the AWS IoT Greengrass component. \n</p>",
                         "smithy.api#required": {}
                     }
@@ -1514,6 +1521,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.lookoutvision#S3BucketName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon S3 bucket that contains the manifest.</p>",
                         "smithy.api#required": {}
                     }
@@ -1521,6 +1529,7 @@
                 "Key": {
                     "target": "com.amazonaws.lookoutvision#S3ObjectKey",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name and location of the manifest file withiin the bucket.</p>",
                         "smithy.api#required": {}
                     }
@@ -1545,13 +1554,13 @@
                 "Message": {
                     "target": "com.amazonaws.lookoutvision#ExceptionString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 },
                 "RetryAfterSeconds": {
                     "target": "com.amazonaws.lookoutvision#RetryAfterSeconds",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The period of time, in seconds, before the operation can be retried.</p>",
                         "smithy.api#httpHeader": "Retry-After"
                     }
@@ -2174,7 +2183,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2217,7 +2225,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -2230,7 +2239,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2244,7 +2252,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -2267,7 +2274,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2302,7 +2308,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2313,14 +2318,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2334,14 +2341,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -2350,11 +2355,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2365,14 +2370,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2386,7 +2393,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2406,7 +2412,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2417,14 +2422,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -2435,9 +2442,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -3042,6 +3051,7 @@
                 "Greengrass": {
                     "target": "com.amazonaws.lookoutvision#GreengrassConfiguration",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>\nConfiguration information for the AWS IoT Greengrass component in a model packaging job.\n</p>",
                         "smithy.api#required": {}
                     }
@@ -3383,6 +3393,7 @@
                 "S3Location": {
                     "target": "com.amazonaws.lookoutvision#S3Location",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The S3 location for the output.</p>",
                         "smithy.api#required": {}
                     }
@@ -3398,6 +3409,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.lookoutvision#S3BucketName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The bucket that contains the training output.</p>",
                         "smithy.api#required": {}
                     }
@@ -3405,6 +3417,7 @@
                 "Key": {
                     "target": "com.amazonaws.lookoutvision#S3ObjectKey",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The location of the training output in the bucket.</p>",
                         "smithy.api#required": {}
                     }
@@ -3546,12 +3559,14 @@
                 "Message": {
                     "target": "com.amazonaws.lookoutvision#ExceptionString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 },
                 "ResourceId": {
                     "target": "com.amazonaws.lookoutvision#ExceptionString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -3559,6 +3574,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.lookoutvision#ResourceType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of the resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -3606,10 +3622,7 @@
             }
         },
         "com.amazonaws.lookoutvision#RetryAfterSeconds": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "integer"
         },
         "com.amazonaws.lookoutvision#S3BucketName": {
             "type": "string",
@@ -3637,6 +3650,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.lookoutvision#S3BucketName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The S3 bucket that contains the training or model packaging job output. If you are training a model,\n         the bucket must in your AWS account. If you use an S3 bucket for a model packaging job,\n      the S3 bucket must be in the same AWS Region and AWS account in which you use AWS IoT Greengrass.</p>",
                         "smithy.api#required": {}
                     }
@@ -3678,6 +3692,7 @@
                 "Message": {
                     "target": "com.amazonaws.lookoutvision#ExceptionString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -3696,6 +3711,7 @@
                 "QuotaCode": {
                     "target": "com.amazonaws.lookoutvision#ExceptionString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The quota code. </p>",
                         "smithy.api#required": {}
                     }
@@ -3703,6 +3719,7 @@
                 "ServiceCode": {
                     "target": "com.amazonaws.lookoutvision#ExceptionString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The service code. </p>",
                         "smithy.api#required": {}
                     }
@@ -3808,6 +3825,7 @@
                 "ModelVersion": {
                     "target": "com.amazonaws.lookoutvision#ModelVersion",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>\nThe version of the model within the project that you want to package.\n</p>",
                         "smithy.api#required": {}
                     }
@@ -3821,6 +3839,7 @@
                 "Configuration": {
                     "target": "com.amazonaws.lookoutvision#ModelPackagingConfiguration",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The configuration for the model packaging job.\n</p>",
                         "smithy.api#required": {}
                     }
@@ -3880,6 +3899,7 @@
                 "MinInferenceUnits": {
                     "target": "com.amazonaws.lookoutvision#InferenceUnits",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The minimum number of inference units to use. A single\n         inference unit represents 1 hour of processing. \n         Use a higher number to increase the TPS throughput of your model. You are charged for the number\n         of inference units that you use.\n      </p>",
                         "smithy.api#required": {}
                     }
@@ -4013,6 +4033,7 @@
                 "Key": {
                     "target": "com.amazonaws.lookoutvision#TagKey",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The key of the tag that is attached to the specified model.</p>",
                         "smithy.api#required": {}
                     }
@@ -4020,6 +4041,7 @@
                 "Value": {
                     "target": "com.amazonaws.lookoutvision#TagValue",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The value of the tag that is attached to the specified model.</p>",
                         "smithy.api#required": {}
                     }
@@ -4126,6 +4148,7 @@
                 "Tags": {
                     "target": "com.amazonaws.lookoutvision#TagList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The key-value tags to assign to the model.</p>",
                         "smithy.api#required": {}
                     }
@@ -4169,6 +4192,7 @@
                 "Os": {
                     "target": "com.amazonaws.lookoutvision#TargetPlatformOs",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The target operating system for the model. Linux is the only operating system\n         that is currently supported.\n      </p>",
                         "smithy.api#required": {}
                     }
@@ -4176,6 +4200,7 @@
                 "Arch": {
                     "target": "com.amazonaws.lookoutvision#TargetPlatformArch",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The target architecture for the model. The currently supported architectures are\n         X86_64 (64-bit version of the x86 instruction set) and ARM_64 (ARMv8 64-bit CPU).\n      </p>",
                         "smithy.api#required": {}
                     }
@@ -4236,6 +4261,7 @@
                 "Message": {
                     "target": "com.amazonaws.lookoutvision#ExceptionString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -4254,7 +4280,6 @@
                 "RetryAfterSeconds": {
                     "target": "com.amazonaws.lookoutvision#RetryAfterSeconds",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The period of time, in seconds, before the operation can be retried. </p>",
                         "smithy.api#httpHeader": "Retry-After"
                     }
@@ -4317,6 +4342,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.lookoutvision#TagKeyList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of the keys of the tags that you want to remove.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
@@ -4393,6 +4419,7 @@
                 "Changes": {
                     "target": "com.amazonaws.lookoutvision#DatasetChanges",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The entries to add to the dataset.</p>",
                         "smithy.api#required": {}
                     }
@@ -4430,6 +4457,7 @@
                 "Message": {
                     "target": "com.amazonaws.lookoutvision#ExceptionString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 }

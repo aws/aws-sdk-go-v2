@@ -135,7 +135,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// A value that is set to true to restore the DB cluster to the latest restorable
 	// backup time, and false otherwise. Default: false Constraints: Cannot be
 	// specified if RestoreToTime parameter is provided.
-	UseLatestRestorableTime bool
+	UseLatestRestorableTime *bool
 
 	// A list of VPC security groups that the new DB cluster belongs to.
 	VpcSecurityGroupIds []string

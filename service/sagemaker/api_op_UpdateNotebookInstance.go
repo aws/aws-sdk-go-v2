@@ -71,25 +71,25 @@ type UpdateNotebookInstanceInput struct {
 	// notebook instance. This operation is idempotent. If you specify an accelerator
 	// type that is not associated with the notebook instance when you call this
 	// method, it does not throw an error.
-	DisassociateAcceleratorTypes bool
+	DisassociateAcceleratorTypes *bool
 
 	// A list of names or URLs of the default Git repositories to remove from this
 	// notebook instance. This operation is idempotent. If you specify a Git repository
 	// that is not associated with the notebook instance when you call this method, it
 	// does not throw an error.
-	DisassociateAdditionalCodeRepositories bool
+	DisassociateAdditionalCodeRepositories *bool
 
 	// The name or URL of the default Git repository to remove from this notebook
 	// instance. This operation is idempotent. If you specify a Git repository that is
 	// not associated with the notebook instance when you call this method, it does not
 	// throw an error.
-	DisassociateDefaultCodeRepository bool
+	DisassociateDefaultCodeRepository *bool
 
 	// Set to true to remove the notebook instance lifecycle configuration currently
 	// associated with the notebook instance. This operation is idempotent. If you
 	// specify a lifecycle configuration that is not associated with the notebook
 	// instance when you call this method, it does not throw an error.
-	DisassociateLifecycleConfig bool
+	DisassociateLifecycleConfig *bool
 
 	// Information on the IMDS configuration of the notebook instance
 	InstanceMetadataServiceConfiguration *types.InstanceMetadataServiceConfiguration

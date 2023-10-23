@@ -11657,7 +11657,7 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.IAMDatabaseAuthenticationEnabled = xtv
+				sv.IAMDatabaseAuthenticationEnabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("KmsKeyId", t.Name.Local):
@@ -11716,7 +11716,7 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.MultiAZ = xtv
+				sv.MultiAZ = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("PendingModifiedValues", t.Name.Local):
@@ -11845,7 +11845,7 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.StorageEncrypted = xtv
+				sv.StorageEncrypted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("VpcSecurityGroups", t.Name.Local):
@@ -12413,7 +12413,7 @@ func awsAwsquery_deserializeDocumentDBClusterMember(v **types.DBClusterMember, d
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.IsClusterWriter = xtv
+				sv.IsClusterWriter = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("PromotionTier", t.Name.Local):
@@ -13274,7 +13274,7 @@ func awsAwsquery_deserializeDocumentDBClusterSnapshot(v **types.DBClusterSnapsho
 				if err != nil {
 					return err
 				}
-				sv.AllocatedStorage = int32(i64)
+				sv.AllocatedStorage = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("AvailabilityZones", t.Name.Local):
@@ -13378,7 +13378,7 @@ func awsAwsquery_deserializeDocumentDBClusterSnapshot(v **types.DBClusterSnapsho
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.IAMDatabaseAuthenticationEnabled = xtv
+				sv.IAMDatabaseAuthenticationEnabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("KmsKeyId", t.Name.Local):
@@ -13434,7 +13434,7 @@ func awsAwsquery_deserializeDocumentDBClusterSnapshot(v **types.DBClusterSnapsho
 				if err != nil {
 					return err
 				}
-				sv.PercentProgress = int32(i64)
+				sv.PercentProgress = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("Port", t.Name.Local):
@@ -13451,7 +13451,7 @@ func awsAwsquery_deserializeDocumentDBClusterSnapshot(v **types.DBClusterSnapsho
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("SnapshotCreateTime", t.Name.Local):
@@ -13523,7 +13523,7 @@ func awsAwsquery_deserializeDocumentDBClusterSnapshot(v **types.DBClusterSnapsho
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.StorageEncrypted = xtv
+				sv.StorageEncrypted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("VpcId", t.Name.Local):
@@ -14021,7 +14021,7 @@ func awsAwsquery_deserializeDocumentDBEngineVersion(v **types.DBEngineVersion, d
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SupportsGlobalDatabases = xtv
+				sv.SupportsGlobalDatabases = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("SupportsLogExportsToCloudwatchLogs", t.Name.Local):
@@ -14037,7 +14037,7 @@ func awsAwsquery_deserializeDocumentDBEngineVersion(v **types.DBEngineVersion, d
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SupportsLogExportsToCloudwatchLogs = xtv
+				sv.SupportsLogExportsToCloudwatchLogs = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("SupportsReadReplica", t.Name.Local):
@@ -14053,7 +14053,7 @@ func awsAwsquery_deserializeDocumentDBEngineVersion(v **types.DBEngineVersion, d
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SupportsReadReplica = xtv
+				sv.SupportsReadReplica = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("ValidUpgradeTarget", t.Name.Local):
@@ -14180,7 +14180,7 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 				if err != nil {
 					return err
 				}
-				sv.AllocatedStorage = int32(i64)
+				sv.AllocatedStorage = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("AutoMinorVersionUpgrade", t.Name.Local):
@@ -14196,7 +14196,7 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AutoMinorVersionUpgrade = xtv
+				sv.AutoMinorVersionUpgrade = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("AvailabilityZone", t.Name.Local):
@@ -14226,7 +14226,7 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 				if err != nil {
 					return err
 				}
-				sv.BackupRetentionPeriod = int32(i64)
+				sv.BackupRetentionPeriod = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("CACertificateIdentifier", t.Name.Local):
@@ -14268,7 +14268,7 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.CopyTagsToSnapshot = xtv
+				sv.CopyTagsToSnapshot = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):
@@ -14337,7 +14337,7 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 				if err != nil {
 					return err
 				}
-				sv.DbInstancePort = int32(i64)
+				sv.DbInstancePort = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("DBInstanceStatus", t.Name.Local):
@@ -14483,7 +14483,7 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.IAMDatabaseAuthenticationEnabled = xtv
+				sv.IAMDatabaseAuthenticationEnabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("InstanceCreateTime", t.Name.Local):
@@ -14619,7 +14619,7 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.MultiAZ = xtv
+				sv.MultiAZ = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("OptionGroupMemberships", t.Name.Local):
@@ -14719,7 +14719,7 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.PubliclyAccessible = xtv
+				sv.PubliclyAccessible = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("ReadReplicaDBClusterIdentifiers", t.Name.Local):
@@ -14779,7 +14779,7 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.StorageEncrypted = xtv
+				sv.StorageEncrypted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("StorageType", t.Name.Local):
@@ -15055,7 +15055,7 @@ func awsAwsquery_deserializeDocumentDBInstanceStatusInfo(v **types.DBInstanceSta
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Normal = xtv
+				sv.Normal = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
@@ -16586,7 +16586,7 @@ func awsAwsquery_deserializeDocumentDoubleRange(v **types.DoubleRange, decoder s
 				if err != nil {
 					return err
 				}
-				sv.From = f64
+				sv.From = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("To", t.Name.Local):
@@ -16603,7 +16603,7 @@ func awsAwsquery_deserializeDocumentDoubleRange(v **types.DoubleRange, decoder s
 				if err != nil {
 					return err
 				}
-				sv.To = f64
+				sv.To = ptr.Float64(f64)
 			}
 
 		default:
@@ -16750,7 +16750,7 @@ func awsAwsquery_deserializeDocumentEndpoint(v **types.Endpoint, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -17278,7 +17278,7 @@ func awsAwsquery_deserializeDocumentEventSubscription(v **types.EventSubscriptio
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Enabled = xtv
+				sv.Enabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("EventCategoriesList", t.Name.Local):
@@ -17806,7 +17806,7 @@ func awsAwsquery_deserializeDocumentGlobalClusterMember(v **types.GlobalClusterM
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.IsWriter = xtv
+				sv.IsWriter = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("Readers", t.Name.Local):
@@ -19380,7 +19380,7 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.MultiAZCapable = xtv
+				sv.MultiAZCapable = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("ReadReplicaCapable", t.Name.Local):
@@ -19396,7 +19396,7 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.ReadReplicaCapable = xtv
+				sv.ReadReplicaCapable = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("StorageType", t.Name.Local):
@@ -19425,7 +19425,7 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SupportsEnhancedMonitoring = xtv
+				sv.SupportsEnhancedMonitoring = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("SupportsGlobalDatabases", t.Name.Local):
@@ -19441,7 +19441,7 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SupportsGlobalDatabases = xtv
+				sv.SupportsGlobalDatabases = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("SupportsIAMDatabaseAuthentication", t.Name.Local):
@@ -19457,7 +19457,7 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SupportsIAMDatabaseAuthentication = xtv
+				sv.SupportsIAMDatabaseAuthentication = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("SupportsIops", t.Name.Local):
@@ -19473,7 +19473,7 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SupportsIops = xtv
+				sv.SupportsIops = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("SupportsPerformanceInsights", t.Name.Local):
@@ -19489,7 +19489,7 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SupportsPerformanceInsights = xtv
+				sv.SupportsPerformanceInsights = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("SupportsStorageEncryption", t.Name.Local):
@@ -19505,7 +19505,7 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SupportsStorageEncryption = xtv
+				sv.SupportsStorageEncryption = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("Vpc", t.Name.Local):
@@ -19521,7 +19521,7 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Vpc = xtv
+				sv.Vpc = ptr.Bool(xtv)
 			}
 
 		default:
@@ -19706,7 +19706,7 @@ func awsAwsquery_deserializeDocumentParameter(v **types.Parameter, decoder smith
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.IsModifiable = xtv
+				sv.IsModifiable = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("MinimumEngineVersion", t.Name.Local):
@@ -20468,7 +20468,7 @@ func awsAwsquery_deserializeDocumentRange(v **types.Range, decoder smithyxml.Nod
 				if err != nil {
 					return err
 				}
-				sv.From = int32(i64)
+				sv.From = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("Step", t.Name.Local):
@@ -20502,7 +20502,7 @@ func awsAwsquery_deserializeDocumentRange(v **types.Range, decoder smithyxml.Nod
 				if err != nil {
 					return err
 				}
-				sv.To = int32(i64)
+				sv.To = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -22315,7 +22315,7 @@ func awsAwsquery_deserializeDocumentUpgradeTarget(v **types.UpgradeTarget, decod
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AutoUpgrade = xtv
+				sv.AutoUpgrade = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("Description", t.Name.Local):
@@ -22370,7 +22370,7 @@ func awsAwsquery_deserializeDocumentUpgradeTarget(v **types.UpgradeTarget, decod
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.IsMajorVersionUpgrade = xtv
+				sv.IsMajorVersionUpgrade = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("SupportsGlobalDatabases", t.Name.Local):

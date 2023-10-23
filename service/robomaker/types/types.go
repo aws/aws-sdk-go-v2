@@ -408,13 +408,13 @@ type PortMapping struct {
 	// The port number on the application.
 	//
 	// This member is required.
-	ApplicationPort int32
+	ApplicationPort *int32
 
 	// The port number on the simulation job instance to use as a remote connection
 	// point.
 	//
 	// This member is required.
-	JobPort int32
+	JobPort *int32
 
 	// A Boolean indicating whether to enable this port mapping on public IP.
 	EnableOnPublicIp bool

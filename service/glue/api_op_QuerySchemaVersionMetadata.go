@@ -36,7 +36,7 @@ type QuerySchemaVersionMetadataInput struct {
 
 	// Maximum number of results required per page. If the value is not supplied, this
 	// will be defaulted to 25 per page.
-	MaxResults int32
+	MaxResults *int32
 
 	// Search key-value pairs for metadata, if they are not provided all the metadata
 	// information will be fetched.

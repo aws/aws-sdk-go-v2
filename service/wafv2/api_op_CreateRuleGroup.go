@@ -52,7 +52,7 @@ type CreateRuleGroupInput struct {
 	// in the WAF Developer Guide.
 	//
 	// This member is required.
-	Capacity int64
+	Capacity *int64
 
 	// The name of the rule group. You cannot change the name of a rule group after
 	// you create it.

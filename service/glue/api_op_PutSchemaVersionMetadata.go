@@ -77,7 +77,7 @@ type PutSchemaVersionMetadataOutput struct {
 	SchemaVersionId *string
 
 	// The version number of the schema.
-	VersionNumber int64
+	VersionNumber *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

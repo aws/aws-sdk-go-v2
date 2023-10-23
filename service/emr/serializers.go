@@ -3055,9 +3055,9 @@ func awsAwsjson11_serializeDocumentAutoTerminationPolicy(v *types.AutoTerminatio
 	object := value.Object()
 	defer object.Close()
 
-	if v.IdleTimeout != 0 {
+	if v.IdleTimeout != nil {
 		ok := object.Key("IdleTimeout")
-		ok.Long(v.IdleTimeout)
+		ok.Long(*v.IdleTimeout)
 	}
 
 	return nil
@@ -3067,9 +3067,9 @@ func awsAwsjson11_serializeDocumentBlockPublicAccessConfiguration(v *types.Block
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.BlockPublicSecurityGroupRules != nil {
 		ok := object.Key("BlockPublicSecurityGroupRules")
-		ok.Boolean(v.BlockPublicSecurityGroupRules)
+		ok.Boolean(*v.BlockPublicSecurityGroupRules)
 	}
 
 	if v.Classification != nil {
@@ -3888,9 +3888,9 @@ func awsAwsjson11_serializeDocumentJobFlowInstancesConfig(v *types.JobFlowInstan
 		}
 	}
 
-	if v.KeepJobFlowAliveWhenNoSteps {
+	if v.KeepJobFlowAliveWhenNoSteps != nil {
 		ok := object.Key("KeepJobFlowAliveWhenNoSteps")
-		ok.Boolean(v.KeepJobFlowAliveWhenNoSteps)
+		ok.Boolean(*v.KeepJobFlowAliveWhenNoSteps)
 	}
 
 	if v.MasterInstanceType != nil {
@@ -3915,9 +3915,9 @@ func awsAwsjson11_serializeDocumentJobFlowInstancesConfig(v *types.JobFlowInstan
 		ok.String(*v.SlaveInstanceType)
 	}
 
-	if v.TerminationProtected {
+	if v.TerminationProtected != nil {
 		ok := object.Key("TerminationProtected")
-		ok.Boolean(v.TerminationProtected)
+		ok.Boolean(*v.TerminationProtected)
 	}
 
 	return nil
@@ -5744,9 +5744,9 @@ func awsAwsjson11_serializeOpDocumentRunJobFlowInput(v *RunJobFlowInput, value s
 		}
 	}
 
-	if v.VisibleToAllUsers {
+	if v.VisibleToAllUsers != nil {
 		ok := object.Key("VisibleToAllUsers")
-		ok.Boolean(v.VisibleToAllUsers)
+		ok.Boolean(*v.VisibleToAllUsers)
 	}
 
 	return nil
@@ -5763,9 +5763,9 @@ func awsAwsjson11_serializeOpDocumentSetTerminationProtectionInput(v *SetTermina
 		}
 	}
 
-	{
+	if v.TerminationProtected != nil {
 		ok := object.Key("TerminationProtected")
-		ok.Boolean(v.TerminationProtected)
+		ok.Boolean(*v.TerminationProtected)
 	}
 
 	return nil
@@ -5782,9 +5782,9 @@ func awsAwsjson11_serializeOpDocumentSetVisibleToAllUsersInput(v *SetVisibleToAl
 		}
 	}
 
-	{
+	if v.VisibleToAllUsers != nil {
 		ok := object.Key("VisibleToAllUsers")
-		ok.Boolean(v.VisibleToAllUsers)
+		ok.Boolean(*v.VisibleToAllUsers)
 	}
 
 	return nil

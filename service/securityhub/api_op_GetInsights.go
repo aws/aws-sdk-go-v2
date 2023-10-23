@@ -40,7 +40,7 @@ type GetInsightsInput struct {
 	InsightArns []string
 
 	// The maximum number of items to return in the response.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the GetInsights
 	// operation, set the value of this parameter to NULL . For subsequent calls to the
@@ -172,8 +172,8 @@ func NewGetInsightsPaginator(client GetInsightsAPIClient, params *GetInsightsInp
 	}
 
 	options := GetInsightsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -203,7 +203,11 @@ func (p *GetInsightsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.GetInsights(ctx, &params, optFns...)
 	if err != nil {

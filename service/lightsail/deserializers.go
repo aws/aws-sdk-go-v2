@@ -21224,7 +21224,7 @@ func awsAwsjson11_deserializeDocumentAlarm(v **types.Alarm, value interface{}) e
 				if err != nil {
 					return err
 				}
-				sv.Period = int32(i64)
+				sv.Period = ptr.Int32(int32(i64))
 			}
 
 		case "resourceType":

@@ -289,8 +289,8 @@ func awsRestjson1_serializeOpHttpBindingsListChunksInput(v *ListChunksInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -379,8 +379,8 @@ func awsRestjson1_serializeOpHttpBindingsListObjectsInput(v *ListObjectsInput, e
 		encoder.SetQuery("created-before").String(smithytime.FormatDateTime(*v.CreatedBefore))
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -599,8 +599,11 @@ func awsRestjson1_serializeOpHttpBindingsPutChunkInput(v *PutChunkInput, encoder
 		encoder.SetQuery("checksum-algorithm").String(string(v.ChecksumAlgorithm))
 	}
 
-	{
-		if err := encoder.SetURI("ChunkIndex").Long(v.ChunkIndex); err != nil {
+	if v.ChunkIndex == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChunkIndex must not be empty")}
+	}
+	if v.ChunkIndex != nil {
+		if err := encoder.SetURI("ChunkIndex").Long(*v.ChunkIndex); err != nil {
 			return err
 		}
 	}

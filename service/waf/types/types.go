@@ -751,7 +751,7 @@ type RateBasedRule struct {
 	// are also met, AWS WAF triggers the action that is specified for this rule.
 	//
 	// This member is required.
-	RateLimit int64
+	RateLimit *int64
 
 	// A unique identifier for a RateBasedRule . You use RuleId to get more
 	// information about a RateBasedRule (see GetRateBasedRule ), update a

@@ -142,6 +142,7 @@
                 "Name": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the API.</p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -150,6 +151,7 @@
                 "ProtocolType": {
                     "target": "com.amazonaws.apigatewayv2#ProtocolType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The API protocol.</p>",
                         "smithy.api#jsonName": "protocolType",
                         "smithy.api#required": {}
@@ -158,6 +160,7 @@
                 "RouteSelectionExpression": {
                     "target": "com.amazonaws.apigatewayv2#SelectionExpression",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The route selection expression for the API. For HTTP APIs, the routeSelectionExpression must be ${request.method} ${request.path}. If not provided, this will be the default for HTTP APIs. This property is required for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "routeSelectionExpression",
                         "smithy.api#required": {}
@@ -466,7 +469,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -509,7 +511,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -522,7 +525,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -536,7 +538,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -559,7 +560,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -594,7 +594,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -605,14 +604,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -626,14 +627,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -642,11 +641,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -657,14 +656,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -678,7 +679,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -698,7 +698,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -709,14 +708,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -727,9 +728,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1346,6 +1349,7 @@
                 "ApiId": {
                     "target": "com.amazonaws.apigatewayv2#Id",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The API identifier.</p>",
                         "smithy.api#jsonName": "apiId",
                         "smithy.api#required": {}
@@ -1368,6 +1372,7 @@
                 "Stage": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The API stage.</p>",
                         "smithy.api#jsonName": "stage",
                         "smithy.api#required": {}
@@ -1501,6 +1506,7 @@
                 "Name": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the authorizer.</p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -1750,6 +1756,7 @@
                 "ApiId": {
                     "target": "com.amazonaws.apigatewayv2#Id",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The API identifier.</p>",
                         "smithy.api#jsonName": "apiId",
                         "smithy.api#required": {}
@@ -1773,6 +1780,7 @@
                 "Stage": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The API stage.</p>",
                         "smithy.api#jsonName": "stage",
                         "smithy.api#required": {}
@@ -1868,6 +1876,7 @@
                 "Name": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the API.</p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -1876,6 +1885,7 @@
                 "ProtocolType": {
                     "target": "com.amazonaws.apigatewayv2#ProtocolType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The API protocol.</p>",
                         "smithy.api#jsonName": "protocolType",
                         "smithy.api#required": {}
@@ -2108,6 +2118,7 @@
                 "AuthorizerType": {
                     "target": "com.amazonaws.apigatewayv2#AuthorizerType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The authorizer type. Specify REQUEST for a Lambda function using incoming request parameters. Specify JWT to use JSON Web Tokens (supported only for HTTP APIs).</p>",
                         "smithy.api#jsonName": "authorizerType",
                         "smithy.api#required": {}
@@ -2130,6 +2141,7 @@
                 "IdentitySource": {
                     "target": "com.amazonaws.apigatewayv2#IdentitySourceList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identity source for which authorization is requested.</p> <p>For a REQUEST authorizer, this is optional. The value is a set of one or more mapping expressions of the specified request parameters. The identity source can be headers, query string parameters, stage variables, and context parameters. For example, if an Auth header and a Name query string parameter are defined as identity sources, this value is route.request.header.Auth, route.request.querystring.Name for WebSocket APIs. For HTTP APIs, use selection expressions prefixed with $, for example, $request.header.Auth, $request.querystring.Name. These parameters are used to perform runtime validation for Lambda-based authorizers by verifying all of the identity-related request parameters are present in the request, not null, and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function. Otherwise, it returns a 401 Unauthorized response without calling the Lambda function. For HTTP APIs, identity sources are also used as the cache key when caching is enabled. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html\">Working with AWS Lambda authorizers for HTTP APIs</a>.</p> <p>For JWT, a single entry that specifies where to extract the JSON Web Token (JWT) from inbound requests. Currently only header-based and query parameter-based selections are supported, for example $request.header.Authorization.</p>",
                         "smithy.api#jsonName": "identitySource",
                         "smithy.api#required": {}
@@ -2152,6 +2164,7 @@
                 "Name": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the authorizer.</p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -2400,6 +2413,7 @@
                 "DomainName": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And512",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The domain name.</p>",
                         "smithy.api#jsonName": "domainName",
                         "smithy.api#required": {}
@@ -2569,6 +2583,7 @@
                 "IntegrationType": {
                     "target": "com.amazonaws.apigatewayv2#IntegrationType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with a Lambda function or other AWS service action. This integration is also referred to as a Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. For HTTP API private integrations, use an HTTP_PROXY integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a \"loopback\" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "integrationType",
                         "smithy.api#required": {}
@@ -2703,6 +2718,7 @@
                 "IntegrationResponseKey": {
                     "target": "com.amazonaws.apigatewayv2#SelectionKey",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The integration response key.</p>",
                         "smithy.api#jsonName": "integrationResponseKey",
                         "smithy.api#required": {}
@@ -2992,6 +3008,7 @@
                 "Name": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the model. Must be alphanumeric.</p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -3000,6 +3017,7 @@
                 "Schema": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween0And32K",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The schema for the model. For application/json models, this should be JSON schema draft 4 model.</p>",
                         "smithy.api#jsonName": "schema",
                         "smithy.api#required": {}
@@ -3155,6 +3173,7 @@
                 "RouteKey": {
                     "target": "com.amazonaws.apigatewayv2#SelectionKey",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The route key for the route.</p>",
                         "smithy.api#jsonName": "routeKey",
                         "smithy.api#required": {}
@@ -3254,6 +3273,7 @@
                 "RouteResponseKey": {
                     "target": "com.amazonaws.apigatewayv2#SelectionKey",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The route response key.</p>",
                         "smithy.api#jsonName": "routeResponseKey",
                         "smithy.api#required": {}
@@ -3501,6 +3521,7 @@
                 "StageName": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stage.</p>",
                         "smithy.api#jsonName": "stageName",
                         "smithy.api#required": {}
@@ -3663,6 +3684,7 @@
                 "Name": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the VPC link.</p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -3678,6 +3700,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.apigatewayv2#SubnetIdList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of subnet IDs to include in the VPC link.</p>",
                         "smithy.api#jsonName": "subnetIds",
                         "smithy.api#required": {}
@@ -4650,6 +4673,7 @@
                 "DomainName": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And512",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DomainName resource.</p>",
                         "smithy.api#jsonName": "domainName",
                         "smithy.api#required": {}
@@ -4875,6 +4899,7 @@
                 "OutputType": {
                     "target": "com.amazonaws.apigatewayv2#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The output type of the exported definition file. Valid values are JSON and YAML.</p>",
                         "smithy.api#httpQuery": "outputType",
                         "smithy.api#required": {}
@@ -7530,6 +7555,7 @@
                 "Body": {
                     "target": "com.amazonaws.apigatewayv2#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The OpenAPI definition. Supported only for HTTP APIs.</p>",
                         "smithy.api#jsonName": "body",
                         "smithy.api#required": {}
@@ -7878,6 +7904,7 @@
                 "IntegrationResponseKey": {
                     "target": "com.amazonaws.apigatewayv2#SelectionKey",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The integration response key.</p>",
                         "smithy.api#jsonName": "integrationResponseKey",
                         "smithy.api#required": {}
@@ -8022,6 +8049,7 @@
                 "Name": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the model. Must be alphanumeric.</p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -8227,6 +8255,7 @@
                 "Body": {
                     "target": "com.amazonaws.apigatewayv2#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The OpenAPI definition. Supported only for HTTP APIs.</p>",
                         "smithy.api#jsonName": "body",
                         "smithy.api#required": {}
@@ -8502,6 +8531,7 @@
                 "RouteKey": {
                     "target": "com.amazonaws.apigatewayv2#SelectionKey",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The route key for the route.</p>",
                         "smithy.api#jsonName": "routeKey",
                         "smithy.api#required": {}
@@ -8584,6 +8614,7 @@
                 "RouteResponseKey": {
                     "target": "com.amazonaws.apigatewayv2#SelectionKey",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Represents the route response key of a route response.</p>",
                         "smithy.api#jsonName": "routeResponseKey",
                         "smithy.api#required": {}
@@ -8773,6 +8804,7 @@
                 "StageName": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stage.</p>",
                         "smithy.api#jsonName": "stageName",
                         "smithy.api#required": {}
@@ -9057,6 +9089,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.apigatewayv2#__listOf__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Tag keys to delete</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
@@ -9135,6 +9168,7 @@
                 "ApiId": {
                     "target": "com.amazonaws.apigatewayv2#Id",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The API identifier.</p>",
                         "smithy.api#jsonName": "apiId",
                         "smithy.api#required": {}
@@ -11181,6 +11215,7 @@
                 "Name": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And128",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the VPC link.</p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -11189,6 +11224,7 @@
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.apigatewayv2#SecurityGroupIdList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of security group IDs for the VPC link.</p>",
                         "smithy.api#jsonName": "securityGroupIds",
                         "smithy.api#required": {}
@@ -11197,6 +11233,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.apigatewayv2#SubnetIdList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of subnet IDs to include in the VPC link.</p>",
                         "smithy.api#jsonName": "subnetIds",
                         "smithy.api#required": {}
@@ -11212,6 +11249,7 @@
                 "VpcLinkId": {
                     "target": "com.amazonaws.apigatewayv2#Id",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the VPC link.</p>",
                         "smithy.api#jsonName": "vpcLinkId",
                         "smithy.api#required": {}

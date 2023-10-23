@@ -14,7 +14,7 @@ type IceServer struct {
 
 	// The period of time, in seconds, during which the username and password are
 	// valid.
-	Ttl int32
+	Ttl *int32
 
 	// An array of URIs, in the form specified in the
 	// I-D.petithuguenin-behave-turn-uris (https://tools.ietf.org/html/draft-petithuguenin-behave-turn-uris-03)

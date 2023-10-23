@@ -6976,7 +6976,7 @@ func awsAwsquery_deserializeDocumentCipher(v **types.Cipher, decoder smithyxml.N
 				if err != nil {
 					return err
 				}
-				sv.Priority = int32(i64)
+				sv.Priority = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -9691,7 +9691,7 @@ func awsAwsquery_deserializeDocumentRule(v **types.Rule, decoder smithyxml.NodeD
 				if err != nil {
 					return fmt.Errorf("expected IsDefault to be of type *bool, got %T instead", val)
 				}
-				sv.IsDefault = xtv
+				sv.IsDefault = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("Priority", t.Name.Local):

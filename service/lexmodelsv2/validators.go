@@ -4833,6 +4833,9 @@ func validateRelativeAggregationDuration(v *types.RelativeAggregationDuration) e
 	if len(v.TimeDimension) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TimeDimension"))
 	}
+	if v.TimeValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeValue"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

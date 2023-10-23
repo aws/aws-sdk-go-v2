@@ -51,6 +51,7 @@
                 "CellArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the cell.</p>",
                         "smithy.api#jsonName": "cellArn",
                         "smithy.api#required": {}
@@ -59,6 +60,7 @@
                 "CellName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cell.</p>",
                         "smithy.api#jsonName": "cellName",
                         "smithy.api#required": {}
@@ -67,6 +69,7 @@
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of cell ARNs.</p>",
                         "smithy.api#jsonName": "cells",
                         "smithy.api#required": {}
@@ -75,6 +78,7 @@
                 "ParentReadinessScopes": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.</p>",
                         "smithy.api#jsonName": "parentReadinessScopes",
                         "smithy.api#required": {}
@@ -148,6 +152,7 @@
                 "CellName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cell to create.</p>",
                         "smithy.api#jsonName": "cellName",
                         "smithy.api#required": {}
@@ -254,6 +259,7 @@
                 "CrossAccountAuthorization": {
                     "target": "com.amazonaws.route53recoveryreadiness#CrossAccountAuthorization",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cross-account authorization.</p>",
                         "smithy.api#jsonName": "crossAccountAuthorization",
                         "smithy.api#required": {}
@@ -319,6 +325,7 @@
                 "ReadinessCheckName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the readiness check to create.</p>",
                         "smithy.api#jsonName": "readinessCheckName",
                         "smithy.api#required": {}
@@ -327,6 +334,7 @@
                 "ResourceSetName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the resource set to check.</p>",
                         "smithy.api#jsonName": "resourceSetName",
                         "smithy.api#required": {}
@@ -425,6 +433,7 @@
                 "RecoveryGroupName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the recovery group to create.</p>",
                         "smithy.api#jsonName": "recoveryGroupName",
                         "smithy.api#required": {}
@@ -517,6 +526,7 @@
                 "ResourceSetName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the resource set to create.</p>",
                         "smithy.api#jsonName": "resourceSetName",
                         "smithy.api#required": {}
@@ -525,6 +535,7 @@
                 "ResourceSetType": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringPatternAWSAZaZ09AZaZ09",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>",
                         "smithy.api#jsonName": "resourceSetType",
                         "smithy.api#required": {}
@@ -533,6 +544,7 @@
                 "Resources": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfResource",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of resource objects in the resource set.</p>",
                         "smithy.api#jsonName": "resources",
                         "smithy.api#required": {}
@@ -2226,6 +2238,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The resource type that the readiness rule applies to.</p>",
                         "smithy.api#jsonName": "resourceType",
                         "smithy.api#required": {}
@@ -2234,6 +2247,7 @@
                 "RuleDescription": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The description of a readiness rule.</p>",
                         "smithy.api#jsonName": "ruleDescription",
                         "smithy.api#required": {}
@@ -2242,6 +2256,7 @@
                 "RuleId": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID for the readiness rule.</p>",
                         "smithy.api#jsonName": "ruleId",
                         "smithy.api#required": {}
@@ -2461,6 +2476,7 @@
                 "ReadinessCheckArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with a readiness check.</p>",
                         "smithy.api#jsonName": "readinessCheckArn",
                         "smithy.api#required": {}
@@ -2476,6 +2492,7 @@
                 "ResourceSet": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Name of the resource set to be checked.</p>",
                         "smithy.api#jsonName": "resourceSet",
                         "smithy.api#required": {}
@@ -2527,6 +2544,7 @@
                 "RecommendationText": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Text of the recommendations that are provided to make an application more recovery resilient.</p>",
                         "smithy.api#jsonName": "recommendationText",
                         "smithy.api#required": {}
@@ -2543,6 +2561,7 @@
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of a cell's Amazon Resource Names (ARNs).</p>",
                         "smithy.api#jsonName": "cells",
                         "smithy.api#required": {}
@@ -2551,6 +2570,7 @@
                 "RecoveryGroupArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the recovery group.</p>",
                         "smithy.api#jsonName": "recoveryGroupArn",
                         "smithy.api#required": {}
@@ -2559,6 +2579,7 @@
                 "RecoveryGroupName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the recovery group.</p>",
                         "smithy.api#jsonName": "recoveryGroupName",
                         "smithy.api#required": {}
@@ -2641,6 +2662,7 @@
                 "LastCheckedTimestamp": {
                     "target": "com.amazonaws.route53recoveryreadiness#ReadinessCheckTimestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The time (UTC) that the resource was last checked for readiness, in ISO-8601 format.</p>",
                         "smithy.api#jsonName": "lastCheckedTimestamp",
                         "smithy.api#required": {}
@@ -2649,6 +2671,7 @@
                 "Readiness": {
                     "target": "com.amazonaws.route53recoveryreadiness#Readiness",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The readiness of a resource.</p>",
                         "smithy.api#jsonName": "readiness",
                         "smithy.api#required": {}
@@ -2672,6 +2695,7 @@
                 "ResourceSetArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the resource set.</p>",
                         "smithy.api#jsonName": "resourceSetArn",
                         "smithy.api#required": {}
@@ -2680,6 +2704,7 @@
                 "ResourceSetName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the resource set.</p>",
                         "smithy.api#jsonName": "resourceSetName",
                         "smithy.api#required": {}
@@ -2688,6 +2713,7 @@
                 "ResourceSetType": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringPatternAWSAZaZ09AZaZ09",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>",
                         "smithy.api#jsonName": "resourceSetType",
                         "smithy.api#required": {}
@@ -2696,6 +2722,7 @@
                 "Resources": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfResource",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of resource objects.</p>",
                         "smithy.api#jsonName": "resources",
                         "smithy.api#required": {}
@@ -2869,7 +2896,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2912,7 +2938,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -2925,7 +2952,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2939,7 +2965,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -2962,7 +2987,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2997,7 +3021,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3008,14 +3031,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3029,14 +3054,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -3045,11 +3068,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3060,14 +3083,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3081,7 +3106,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3101,7 +3125,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3112,14 +3135,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -3130,9 +3155,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -3463,6 +3490,7 @@
                 "LastCheckedTimestamp": {
                     "target": "com.amazonaws.route53recoveryreadiness#ReadinessCheckTimestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The time the resource was last checked for readiness, in ISO-8601 format, UTC.</p>",
                         "smithy.api#jsonName": "lastCheckedTimestamp",
                         "smithy.api#required": {}
@@ -3471,6 +3499,7 @@
                 "Messages": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfMessage",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Details about the resource's readiness.</p>",
                         "smithy.api#jsonName": "messages",
                         "smithy.api#required": {}
@@ -3479,6 +3508,7 @@
                 "Readiness": {
                     "target": "com.amazonaws.route53recoveryreadiness#Readiness",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The readiness at rule level.</p>",
                         "smithy.api#jsonName": "readiness",
                         "smithy.api#required": {}
@@ -3487,6 +3517,7 @@
                 "RuleId": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the rule.</p>",
                         "smithy.api#jsonName": "ruleId",
                         "smithy.api#required": {}
@@ -3539,6 +3570,7 @@
                 "Tags": {
                     "target": "com.amazonaws.route53recoveryreadiness#Tags",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p></p>",
                         "smithy.api#jsonName": "tags",
                         "smithy.api#required": {}
@@ -3648,6 +3680,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The keys for tags you add to resources.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
@@ -3706,6 +3739,7 @@
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of cell Amazon Resource Names (ARNs), which completely replaces the previous list.</p>",
                         "smithy.api#jsonName": "cells",
                         "smithy.api#required": {}
@@ -3807,6 +3841,7 @@
                 "ResourceSetName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the resource set to be checked.</p>",
                         "smithy.api#jsonName": "resourceSetName",
                         "smithy.api#required": {}
@@ -3893,6 +3928,7 @@
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of cell Amazon Resource Names (ARNs). This list completely replaces the previous list.</p>",
                         "smithy.api#jsonName": "cells",
                         "smithy.api#required": {}
@@ -3996,6 +4032,7 @@
                 "ResourceSetType": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringPatternAWSAZaZ09AZaZ09",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>",
                         "smithy.api#jsonName": "resourceSetType",
                         "smithy.api#required": {}
@@ -4004,6 +4041,7 @@
                 "Resources": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfResource",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of resource objects.</p>",
                         "smithy.api#jsonName": "resources",
                         "smithy.api#required": {}

@@ -173,7 +173,7 @@ type ModifyCustomDBEngineVersionOutput struct {
 	SupportedTimezones []types.Timezone
 
 	// Indicates whether the engine version supports Babelfish for Aurora PostgreSQL.
-	SupportsBabelfish bool
+	SupportsBabelfish *bool
 
 	// Indicates whether the engine version supports rotating the server certificate
 	// without rebooting the DB instance.
@@ -181,7 +181,7 @@ type ModifyCustomDBEngineVersionOutput struct {
 
 	// Indicates whether you can use Aurora global databases with a specific DB engine
 	// version.
-	SupportsGlobalDatabases bool
+	SupportsGlobalDatabases *bool
 
 	// Indicates whether the DB engine version supports forwarding write operations
 	// from reader DB instances to the writer DB instance in the DB cluster. By
@@ -191,14 +191,14 @@ type ModifyCustomDBEngineVersionOutput struct {
 
 	// Indicates whether the engine version supports exporting the log types specified
 	// by ExportableLogTypes to CloudWatch Logs.
-	SupportsLogExportsToCloudwatchLogs bool
+	SupportsLogExportsToCloudwatchLogs *bool
 
 	// Indicates whether you can use Aurora parallel query with a specific DB engine
 	// version.
-	SupportsParallelQuery bool
+	SupportsParallelQuery *bool
 
 	// Indicates whether the database engine version supports read replicas.
-	SupportsReadReplica bool
+	SupportsReadReplica *bool
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
 	// in the Amazon RDS User Guide.

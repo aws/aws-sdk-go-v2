@@ -40,7 +40,7 @@ type ListSecurityControlDefinitionsInput struct {
 	// results also include a NextToken parameter that you can use in a subsequent API
 	// call to get the next 25 controls. This repeats until all controls for the
 	// standard are returned.
-	MaxResults int32
+	MaxResults *int32
 
 	// Optional pagination parameter.
 	NextToken *string
@@ -183,8 +183,8 @@ func NewListSecurityControlDefinitionsPaginator(client ListSecurityControlDefini
 	}
 
 	options := ListSecurityControlDefinitionsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -214,7 +214,11 @@ func (p *ListSecurityControlDefinitionsPaginator) NextPage(ctx context.Context, 
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListSecurityControlDefinitions(ctx, &params, optFns...)
 	if err != nil {

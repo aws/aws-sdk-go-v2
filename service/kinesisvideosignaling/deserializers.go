@@ -637,7 +637,7 @@ func awsRestjson1_deserializeDocumentIceServer(v **types.IceServer, value interf
 				if err != nil {
 					return err
 				}
-				sv.Ttl = int32(i64)
+				sv.Ttl = ptr.Int32(int32(i64))
 			}
 
 		case "Uris":

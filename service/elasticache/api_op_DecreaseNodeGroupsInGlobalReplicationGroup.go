@@ -38,7 +38,7 @@ type DecreaseNodeGroupsInGlobalReplicationGroupInput struct {
 	// present, the only permitted value for this parameter is true.
 	//
 	// This member is required.
-	ApplyImmediately bool
+	ApplyImmediately *bool
 
 	// The name of the Global datastore
 	//
@@ -49,7 +49,7 @@ type DecreaseNodeGroupsInGlobalReplicationGroupInput struct {
 	// shard configuration
 	//
 	// This member is required.
-	NodeGroupCount int32
+	NodeGroupCount *int32
 
 	// If the value of NodeGroupCount is less than the current number of node groups
 	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.

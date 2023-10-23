@@ -40,12 +40,12 @@ type CharacterOffsets struct {
 	// The beginning of the issue.
 	//
 	// This member is required.
-	BeginOffsetChar int32
+	BeginOffsetChar *int32
 
 	// The end of the issue.
 	//
 	// This member is required.
-	EndOffsetChar int32
+	EndOffsetChar *int32
 
 	noSmithyDocumentSerde
 }
@@ -68,12 +68,12 @@ type PointOfInterest struct {
 	// The beginning offset in milliseconds where the category rule was detected.
 	//
 	// This member is required.
-	BeginOffsetMillis int32
+	BeginOffsetMillis *int32
 
 	// The ending offset in milliseconds where the category rule was detected.
 	//
 	// This member is required.
-	EndOffsetMillis int32
+	EndOffsetMillis *int32
 
 	noSmithyDocumentSerde
 }
@@ -96,7 +96,7 @@ type Transcript struct {
 	// The beginning offset in the contact for this transcript.
 	//
 	// This member is required.
-	BeginOffsetMillis int32
+	BeginOffsetMillis *int32
 
 	// The content of the transcript.
 	//
@@ -106,7 +106,7 @@ type Transcript struct {
 	// The end offset in the contact for this transcript.
 	//
 	// This member is required.
-	EndOffsetMillis int32
+	EndOffsetMillis *int32
 
 	// The identifier of the transcript.
 	//

@@ -540,7 +540,7 @@ type KxSavedownStorageConfiguration struct {
 	// The size of temporary storage in gibibytes.
 	//
 	// This member is required.
-	Size int32
+	Size *int32
 
 	// The type of writeable storage space for temporarily storing your savedown data.
 	// The valid values are:
@@ -604,7 +604,7 @@ type NetworkACLEntry struct {
 	// processed in ascending order by rule number.
 	//
 	// This member is required.
-	RuleNumber int32
+	RuleNumber *int32
 
 	// Defines the ICMP protocol that consists of the ICMP type and code.
 	IcmpTypeCode *IcmpTypeCode

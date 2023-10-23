@@ -6233,7 +6233,7 @@ func awsAwsjson11_deserializeDocumentAutoTerminationPolicy(v **types.AutoTermina
 				if err != nil {
 					return err
 				}
-				sv.IdleTimeout = i64
+				sv.IdleTimeout = ptr.Int64(i64)
 			}
 
 		default:
@@ -6273,7 +6273,7 @@ func awsAwsjson11_deserializeDocumentBlockPublicAccessConfiguration(v **types.Bl
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.BlockPublicSecurityGroupRules = jtv
+				sv.BlockPublicSecurityGroupRules = ptr.Bool(jtv)
 			}
 
 		case "Classification":
@@ -6755,7 +6755,7 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoTerminate = jtv
+				sv.AutoTerminate = ptr.Bool(jtv)
 			}
 
 		case "ClusterArn":
@@ -6986,7 +6986,7 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.TerminationProtected = jtv
+				sv.TerminationProtected = ptr.Bool(jtv)
 			}
 
 		case "VisibleToAllUsers":
@@ -6995,7 +6995,7 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.VisibleToAllUsers = jtv
+				sv.VisibleToAllUsers = ptr.Bool(jtv)
 			}
 
 		default:
@@ -8930,7 +8930,7 @@ func awsAwsjson11_deserializeDocumentInstanceGroup(v **types.InstanceGroup, valu
 				if err != nil {
 					return err
 				}
-				sv.ConfigurationsVersion = i64
+				sv.ConfigurationsVersion = ptr.Int64(i64)
 			}
 
 		case "CustomAmiId":
@@ -8998,7 +8998,7 @@ func awsAwsjson11_deserializeDocumentInstanceGroup(v **types.InstanceGroup, valu
 				if err != nil {
 					return err
 				}
-				sv.LastSuccessfullyAppliedConfigurationsVersion = i64
+				sv.LastSuccessfullyAppliedConfigurationsVersion = ptr.Int64(i64)
 			}
 
 		case "Market":
@@ -10226,7 +10226,7 @@ func awsAwsjson11_deserializeDocumentJobFlowDetail(v **types.JobFlowDetail, valu
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.VisibleToAllUsers = jtv
+				sv.VisibleToAllUsers = ptr.Bool(jtv)
 			}
 
 		default:
@@ -10458,7 +10458,7 @@ func awsAwsjson11_deserializeDocumentJobFlowInstancesDetail(v **types.JobFlowIns
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.KeepJobFlowAliveWhenNoSteps = jtv
+				sv.KeepJobFlowAliveWhenNoSteps = ptr.Bool(jtv)
 			}
 
 		case "MasterInstanceId":
@@ -10521,7 +10521,7 @@ func awsAwsjson11_deserializeDocumentJobFlowInstancesDetail(v **types.JobFlowIns
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.TerminationProtected = jtv
+				sv.TerminationProtected = ptr.Bool(jtv)
 			}
 
 		default:
@@ -13678,7 +13678,7 @@ func awsAwsjson11_deserializeDocumentSupportedInstanceType(v **types.SupportedIn
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EbsOptimizedAvailable = jtv
+				sv.EbsOptimizedAvailable = ptr.Bool(jtv)
 			}
 
 		case "EbsOptimizedByDefault":
@@ -13687,7 +13687,7 @@ func awsAwsjson11_deserializeDocumentSupportedInstanceType(v **types.SupportedIn
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EbsOptimizedByDefault = jtv
+				sv.EbsOptimizedByDefault = ptr.Bool(jtv)
 			}
 
 		case "EbsStorageOnly":
@@ -13696,7 +13696,7 @@ func awsAwsjson11_deserializeDocumentSupportedInstanceType(v **types.SupportedIn
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EbsStorageOnly = jtv
+				sv.EbsStorageOnly = ptr.Bool(jtv)
 			}
 
 		case "InstanceFamilyId":
@@ -13714,7 +13714,7 @@ func awsAwsjson11_deserializeDocumentSupportedInstanceType(v **types.SupportedIn
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Is64BitsOnly = jtv
+				sv.Is64BitsOnly = ptr.Bool(jtv)
 			}
 
 		case "MemoryGB":
@@ -13725,7 +13725,7 @@ func awsAwsjson11_deserializeDocumentSupportedInstanceType(v **types.SupportedIn
 					if err != nil {
 						return err
 					}
-					sv.MemoryGB = float32(f64)
+					sv.MemoryGB = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -13743,7 +13743,7 @@ func awsAwsjson11_deserializeDocumentSupportedInstanceType(v **types.SupportedIn
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.MemoryGB = float32(f64)
+					sv.MemoryGB = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)

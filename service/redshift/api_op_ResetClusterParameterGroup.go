@@ -49,7 +49,7 @@ type ResetClusterParameterGroupInput struct {
 
 	// If true , all parameters in the specified parameter group will be reset to their
 	// default values. Default: true
-	ResetAllParameters bool
+	ResetAllParameters *bool
 
 	noSmithyDocumentSerde
 }

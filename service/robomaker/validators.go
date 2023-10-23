@@ -1261,6 +1261,12 @@ func validatePortMapping(v *types.PortMapping) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PortMapping"}
+	if v.JobPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobPort"))
+	}
+	if v.ApplicationPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationPort"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

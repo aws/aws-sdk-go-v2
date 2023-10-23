@@ -4729,6 +4729,9 @@ func validateAuroraParameters(v *types.AuroraParameters) error {
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
 	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
@@ -4746,6 +4749,9 @@ func validateAuroraPostgreSqlParameters(v *types.AuroraPostgreSqlParameters) err
 	invalidParams := smithy.InvalidParamsError{Context: "AuroraPostgreSqlParameters"}
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
 	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
@@ -6680,6 +6686,9 @@ func validateDatabricksParameters(v *types.DatabricksParameters) error {
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
 	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
 	if v.SqlEndpointPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SqlEndpointPath"))
 	}
@@ -7793,6 +7802,9 @@ func validateExasolParameters(v *types.ExasolParameters) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ExasolParameters"}
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10860,6 +10872,9 @@ func validateLookbackWindow(v *types.LookbackWindow) error {
 	if v.ColumnName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
 	}
+	if v.Size == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Size"))
+	}
 	if len(v.SizeUnit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SizeUnit"))
 	}
@@ -10930,6 +10945,9 @@ func validateMariaDbParameters(v *types.MariaDbParameters) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MariaDbParameters"}
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
 	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
@@ -11055,6 +11073,9 @@ func validateMySqlParameters(v *types.MySqlParameters) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MySqlParameters"}
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
 	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
@@ -11300,6 +11321,9 @@ func validateOracleParameters(v *types.OracleParameters) error {
 	invalidParams := smithy.InvalidParamsError{Context: "OracleParameters"}
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
 	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
@@ -12387,6 +12411,9 @@ func validatePostgreSqlParameters(v *types.PostgreSqlParameters) error {
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
 	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
@@ -12448,6 +12475,9 @@ func validatePrestoParameters(v *types.PrestoParameters) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PrestoParameters"}
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
 	}
 	if v.Catalog == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
@@ -14321,6 +14351,9 @@ func validateSparkParameters(v *types.SparkParameters) error {
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
 	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -14335,6 +14368,9 @@ func validateSqlServerParameters(v *types.SqlServerParameters) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SqlServerParameters"}
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
 	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
@@ -14353,6 +14389,9 @@ func validateStarburstParameters(v *types.StarburstParameters) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StarburstParameters"}
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
 	}
 	if v.Catalog == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
@@ -15119,6 +15158,9 @@ func validateTeradataParameters(v *types.TeradataParameters) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TeradataParameters"}
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
 	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
@@ -15904,6 +15946,9 @@ func validateTrinoParameters(v *types.TrinoParameters) error {
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
 	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
 	if v.Catalog == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
 	}
@@ -15921,6 +15966,9 @@ func validateTwitterParameters(v *types.TwitterParameters) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TwitterParameters"}
 	if v.Query == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Query"))
+	}
+	if v.MaxRows == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxRows"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

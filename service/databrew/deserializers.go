@@ -9281,7 +9281,7 @@ func awsRestjson1_deserializeDocumentFilesLimit(v **types.FilesLimit, value inte
 				if err != nil {
 					return err
 				}
-				sv.MaxFiles = int32(i64)
+				sv.MaxFiles = ptr.Int32(int32(i64))
 			}
 
 		case "Order":

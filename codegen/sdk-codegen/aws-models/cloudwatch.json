@@ -636,7 +636,6 @@
                 "Size": {
                     "target": "com.amazonaws.cloudwatch#Size",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the dashboard, in bytes.</p>"
                     }
                 }
@@ -837,6 +836,7 @@
                 "AlarmNames": {
                     "target": "com.amazonaws.cloudwatch#AlarmNames",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The alarms to be deleted. Do not enclose the alarm names in quote marks.</p>",
                         "smithy.api#required": {}
                     }
@@ -967,6 +967,7 @@
                 "DashboardNames": {
                     "target": "com.amazonaws.cloudwatch#DashboardNames",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The dashboards to be deleted. This parameter is required.</p>",
                         "smithy.api#required": {}
                     }
@@ -1009,6 +1010,7 @@
                 "RuleNames": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleNames",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of the rule names to delete. If you need to find out the names of your rules, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html\">DescribeInsightRules</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -1061,6 +1063,7 @@
                 "Name": {
                     "target": "com.amazonaws.cloudwatch#MetricStreamName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the metric stream to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -1248,6 +1251,7 @@
                 "MetricName": {
                     "target": "com.amazonaws.cloudwatch#MetricName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the metric.</p>",
                         "smithy.api#required": {}
                     }
@@ -1255,6 +1259,7 @@
                 "Namespace": {
                     "target": "com.amazonaws.cloudwatch#Namespace",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The namespace of the metric.</p>",
                         "smithy.api#required": {}
                     }
@@ -1560,6 +1565,7 @@
                 "Name": {
                     "target": "com.amazonaws.cloudwatch#DimensionName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the dimension. Dimension names must contain only ASCII characters, must include \n\t\t\tat least one non-whitespace character, and cannot start with a colon (<code>:</code>).\n\t\t\tASCII\n\t\t\tcontrol characters are not supported as part of dimension names.</p>",
                         "smithy.api#required": {}
                     }
@@ -1567,6 +1573,7 @@
                 "Value": {
                     "target": "com.amazonaws.cloudwatch#DimensionValue",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The value of the dimension. Dimension values must contain only ASCII characters and must include \n\t\t\tat least one non-whitespace character. ASCII\n\t\t\tcontrol characters are not supported as part of dimension values.</p>",
                         "smithy.api#required": {}
                     }
@@ -1582,6 +1589,7 @@
                 "Name": {
                     "target": "com.amazonaws.cloudwatch#DimensionName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The dimension name to be matched.</p>",
                         "smithy.api#required": {}
                     }
@@ -1657,6 +1665,7 @@
                 "AlarmNames": {
                     "target": "com.amazonaws.cloudwatch#AlarmNames",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The names of the alarms.</p>",
                         "smithy.api#required": {}
                     }
@@ -1692,6 +1701,7 @@
                 "RuleNames": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleNames",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of the rule names to disable. If you need to find out the names of your rules, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html\">DescribeInsightRules</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -1733,6 +1743,7 @@
                 "AlarmNames": {
                     "target": "com.amazonaws.cloudwatch#AlarmNames",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The names of the alarms.</p>",
                         "smithy.api#required": {}
                     }
@@ -1771,6 +1782,7 @@
                 "RuleNames": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleNames",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of the rule names to enable. If you need to find out the names of your rules, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html\">DescribeInsightRules</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -1890,6 +1902,7 @@
                 "DashboardName": {
                     "target": "com.amazonaws.cloudwatch#DashboardName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the dashboard to be described.</p>",
                         "smithy.api#required": {}
                     }
@@ -1954,6 +1967,7 @@
                 "RuleName": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the rule that you want to see data from.</p>",
                         "smithy.api#required": {}
                     }
@@ -1961,6 +1975,7 @@
                 "StartTime": {
                     "target": "com.amazonaws.cloudwatch#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The start time of the data to use in the report. When used in a raw HTTP Query API, it is formatted as \n\t\t\t<code>yyyy-MM-dd'T'HH:mm:ss</code>. For example, \n\t\t\t<code>2019-07-01T23:59:59</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -1968,6 +1983,7 @@
                 "EndTime": {
                     "target": "com.amazonaws.cloudwatch#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The end time of the data to use in the report. When used in a raw HTTP Query API, it is formatted as \n\t\t\t<code>yyyy-MM-dd'T'HH:mm:ss</code>. For example, \n\t\t\t<code>2019-07-01T23:59:59</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -1975,6 +1991,7 @@
                 "Period": {
                     "target": "com.amazonaws.cloudwatch#Period",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The period, in seconds, to use for the statistics in the <code>InsightRuleMetricDatapoint</code> results.</p>",
                         "smithy.api#required": {}
                     }
@@ -2074,6 +2091,7 @@
                 "MetricDataQueries": {
                     "target": "com.amazonaws.cloudwatch#MetricDataQueries",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The metric queries to be returned. A single <code>GetMetricData</code> call can \n\t\t\tinclude as many as 500 <code>MetricDataQuery</code>\n\t\tstructures. Each of these structures can specify either a metric to retrieve, a Metrics Insights query,\n\t\tor a math expression to perform on retrieved data. </p>",
                         "smithy.api#required": {}
                     }
@@ -2081,6 +2099,7 @@
                 "StartTime": {
                     "target": "com.amazonaws.cloudwatch#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The time stamp indicating the earliest data to be returned.</p>\n         <p>The value specified is inclusive; results include data points with the specified time stamp. </p>\n         <p>CloudWatch rounds the specified time stamp as follows:</p>\n         <ul>\n            <li>\n               <p>Start time less than 15 days ago - Round down to the nearest whole minute.\n\t\t\t\tFor example, 12:32:34 is rounded down to 12:32:00.</p>\n            </li>\n            <li>\n               <p>Start time between 15 and 63 days ago - Round down to the nearest 5-minute clock interval.\n\t\t\t\tFor example, 12:32:34 is rounded down to 12:30:00.</p>\n            </li>\n            <li>\n               <p>Start time greater than 63 days ago - Round down to the nearest 1-hour clock interval.\n\t\t\t\tFor example, 12:32:34 is rounded down to 12:00:00.</p>\n            </li>\n         </ul>\n         <p>If you set <code>Period</code> to 5, 10, or 30, the start time of your request is \n\t\t\trounded down to the nearest time that corresponds to even 5-, 10-, or 30-second divisions\n\t\t\tof a minute. For example, if you make a query at (HH:mm:ss) 01:05:23 for the previous \n\t\t\t10-second period, the start time of your request is rounded down and you receive data from 01:05:10 to \n\t\t\t01:05:20. If you make a query at 15:07:17 for the previous 5 minutes of data, using a \n\t\t\tperiod of 5 seconds, you receive data \n\t\t\ttimestamped between 15:02:15 and 15:07:15.\n\t\t</p>\n         <p>For better performance, specify <code>StartTime</code> and <code>EndTime</code>\n\t\tvalues that align with the value of the metric's <code>Period</code> and sync up with\n\t\tthe beginning and end of an hour. For example, if the <code>Period</code> of a metric\n\t\tis 5 minutes, specifying 12:05 or 12:30 as <code>StartTime</code> can get a faster response\n\t\t\tfrom CloudWatch than setting 12:07 or 12:29 as the <code>StartTime</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2088,6 +2107,7 @@
                 "EndTime": {
                     "target": "com.amazonaws.cloudwatch#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The time stamp indicating the latest data to be returned.</p>\n         <p>The value specified is exclusive; results include data points up to the specified time stamp.</p>\n         <p>For better performance, specify <code>StartTime</code> and <code>EndTime</code>\n\t\t\tvalues that align with the value of the metric's <code>Period</code> and sync up with\n\t\t\tthe beginning and end of an hour. For example, if the <code>Period</code> of a metric\n\t\t\tis 5 minutes, specifying 12:05 or 12:30 as <code>EndTime</code> can get a faster response\n\t\t\tfrom CloudWatch than setting 12:07 or 12:29 as the <code>EndTime</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2185,6 +2205,7 @@
                 "Namespace": {
                     "target": "com.amazonaws.cloudwatch#Namespace",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The namespace of the metric, with or without spaces.</p>",
                         "smithy.api#required": {}
                     }
@@ -2192,6 +2213,7 @@
                 "MetricName": {
                     "target": "com.amazonaws.cloudwatch#MetricName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the metric, with or without spaces.</p>",
                         "smithy.api#required": {}
                     }
@@ -2205,6 +2227,7 @@
                 "StartTime": {
                     "target": "com.amazonaws.cloudwatch#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The time stamp that determines the first data point to return. Start times are \n\t\t\tevaluated relative to the time that CloudWatch receives the request.</p>\n         <p>The value specified is inclusive; results include data points with the specified time stamp. \n\t    \tIn a raw HTTP query, the time stamp must be in ISO 8601 UTC format (for example, 2016-10-03T23:00:00Z).</p>\n         <p>CloudWatch rounds the specified time stamp as follows:</p>\n         <ul>\n            <li>\n               <p>Start time less than 15 days ago - Round down to the nearest whole minute.\n\t\t\t    For example, 12:32:34 is rounded down to 12:32:00.</p>\n            </li>\n            <li>\n               <p>Start time between 15 and 63 days ago - Round down to the nearest 5-minute clock interval.\n\t\t\t    For example, 12:32:34 is rounded down to 12:30:00.</p>\n            </li>\n            <li>\n               <p>Start time greater than 63 days ago - Round down to the nearest 1-hour clock interval.\n\t\t\t    For example, 12:32:34 is rounded down to 12:00:00.</p>\n            </li>\n         </ul>\n         <p>If you set <code>Period</code> to 5, 10, or 30, the start time of your request is \n\t\t\trounded down to the nearest time that corresponds to even 5-, 10-, or 30-second divisions\n\t\t\tof a minute. For example, if you make a query at (HH:mm:ss) 01:05:23 for the previous \n\t\t\t10-second period, the start time of your request is rounded down and you receive data from 01:05:10 to \n\t\t\t01:05:20. If you make a query at 15:07:17 for the previous 5 minutes of data, using a \n\t\t\tperiod of 5 seconds, you receive data \n\t\t\ttimestamped between 15:02:15 and 15:07:15.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
@@ -2212,6 +2235,7 @@
                 "EndTime": {
                     "target": "com.amazonaws.cloudwatch#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The time stamp that determines the last data point to return.</p>\n         <p>The value specified is exclusive; results include data points up to the specified time stamp.\n\t\t\tIn a raw HTTP query, the time stamp must be in ISO 8601 UTC format (for example, 2016-10-10T23:00:00Z).</p>",
                         "smithy.api#required": {}
                     }
@@ -2219,6 +2243,7 @@
                 "Period": {
                     "target": "com.amazonaws.cloudwatch#Period",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can\n\t\t\tbe as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected\n\t\t\tat intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics\n\t\tare those metrics stored by a <code>PutMetricData</code> call that includes a <code>StorageResolution</code> of 1 second.</p>\n         <p>If the <code>StartTime</code> parameter specifies a time stamp that is greater than\n\t\t    3 hours ago, you must specify the period as follows or no data points in that time range is returned:</p>\n         <ul>\n            <li>\n               <p>Start time between 3 hours and 15 days ago - Use a multiple of 60 seconds (1 minute).</p>\n            </li>\n            <li>\n               <p>Start time between 15 and 63 days ago - Use a multiple of 300 seconds (5 minutes).</p>\n            </li>\n            <li>\n               <p>Start time greater than 63 days ago - Use a multiple of 3600 seconds (1 hour).</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -2301,6 +2326,7 @@
                 "Name": {
                     "target": "com.amazonaws.cloudwatch#MetricStreamName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the metric stream to retrieve information about.</p>",
                         "smithy.api#required": {}
                     }
@@ -2408,6 +2434,7 @@
                 "MetricWidget": {
                     "target": "com.amazonaws.cloudwatch#MetricWidget",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A JSON string that defines the bitmap graph to be retrieved. The string includes the \n\t\t\tmetrics to include in the graph, statistics, annotations, title, axis limits, and so on. \n\t\t\tYou can include only one <code>MetricWidget</code> parameter in each <code>GetMetricWidgetImage</code> call.</p>\n         <p>For more information about the syntax of <code>MetricWidget</code> see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Metric-Widget-Structure.html\">GetMetricWidgetImage: Metric Widget Structure and Syntax</a>.</p>\n         <p>If any metric on the graph could not load all the requested data points, an orange triangle with an exclamation\n\t\t\tpoint appears next to the graph legend.</p>",
                         "smithy.api#required": {}
                     }
@@ -2616,7 +2643,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2659,7 +2685,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -2672,7 +2699,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2686,7 +2712,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -2709,7 +2734,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2744,7 +2768,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2755,14 +2778,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2776,14 +2801,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -2792,18 +2815,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -2812,7 +2834,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -2832,14 +2855,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2853,7 +2878,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2873,7 +2897,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2884,14 +2907,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -2902,9 +2927,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -3635,10 +3662,7 @@
             }
         },
         "com.amazonaws.cloudwatch#IncludeLinkedAccounts": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "type": "boolean"
         },
         "com.amazonaws.cloudwatch#IncludeLinkedAccountsMetrics": {
             "type": "boolean"
@@ -3649,6 +3673,7 @@
                 "Name": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the rule.</p>",
                         "smithy.api#required": {}
                     }
@@ -3656,6 +3681,7 @@
                 "State": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleState",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Indicates whether the rule is enabled or disabled.</p>",
                         "smithy.api#required": {}
                     }
@@ -3663,6 +3689,7 @@
                 "Schema": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleSchema",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>For rules that you create, this is always <code>{\"Name\": \"CloudWatchLogRule\", \"Version\": 1}</code>. For managed rules, \n\t\t\tthis is <code>{\"Name\": \"ServiceLogRule\", \"Version\": 1}</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -3670,6 +3697,7 @@
                 "Definition": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleDefinition",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The definition of the rule, as a JSON object. The definition contains the keywords used to define contributors, \n\t\t\tthe value to aggregate on if this rule returns a sum instead of a count, and the filters. For details on the valid syntax, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html\">Contributor Insights\n\t\t\t\tRule Syntax</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -3677,7 +3705,6 @@
                 "ManagedRule": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleIsManaged",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>\n\t\t\tAn optional built-in rule that Amazon Web Services manages.\n\t\t</p>"
                     }
                 }
@@ -3695,6 +3722,7 @@
                 "Keys": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleContributorKeys",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>One of the log entry field keywords that is used to define contributors for this rule.</p>",
                         "smithy.api#required": {}
                     }
@@ -3702,6 +3730,7 @@
                 "ApproximateAggregateValue": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleUnboundDouble",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An approximation of the aggregate value that comes from this contributor.</p>",
                         "smithy.api#required": {}
                     }
@@ -3709,6 +3738,7 @@
                 "Datapoints": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleContributorDatapoints",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of the data points where this contributor is present. Only the data points when this contributor appeared are included in the array.</p>",
                         "smithy.api#required": {}
                     }
@@ -3724,6 +3754,7 @@
                 "Timestamp": {
                     "target": "com.amazonaws.cloudwatch#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The timestamp of the data point.</p>",
                         "smithy.api#required": {}
                     }
@@ -3731,6 +3762,7 @@
                 "ApproximateValue": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleUnboundDouble",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The approximate value that this contributor added during this timestamp.</p>",
                         "smithy.api#required": {}
                     }
@@ -3781,10 +3813,7 @@
             }
         },
         "com.amazonaws.cloudwatch#InsightRuleIsManaged": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "type": "boolean"
         },
         "com.amazonaws.cloudwatch#InsightRuleMaxResults": {
             "type": "integer",
@@ -3801,6 +3830,7 @@
                 "Timestamp": {
                     "target": "com.amazonaws.cloudwatch#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The timestamp of the data point.</p>",
                         "smithy.api#required": {}
                     }
@@ -4181,6 +4211,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.cloudwatch#AmazonResourceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>\n\t\t\tThe ARN \n\t\t\tof an Amazon Web Services resource \n\t\t\tthat has managed Contributor Insights rules.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
@@ -4362,7 +4393,6 @@
                 "IncludeLinkedAccounts": {
                     "target": "com.amazonaws.cloudwatch#IncludeLinkedAccounts",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If you are using this operation in a monitoring account, \n\t\t\tspecify <code>true</code> to include metrics from source accounts in the returned data.</p>\n         <p>The default is <code>false</code>.</p>"
                     }
                 },
@@ -4432,6 +4462,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.cloudwatch#AmazonResourceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the CloudWatch resource that you want to view tags for.</p>\n         <p>The ARN format of an alarm is \n\t\t\t<code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>\n            </code>\n         </p>\n         <p>The ARN format of a Contributor Insights rule is \n\t\t\t<code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>\n            </code>\n         </p>\n         <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies\"> Resource\n\t\t\t\tTypes Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General\n\t\t\tReference</i>.</p>",
                         "smithy.api#required": {}
                     }
@@ -4461,6 +4492,7 @@
                 "TemplateName": {
                     "target": "com.amazonaws.cloudwatch#TemplateName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>\n\t\t\tThe template name \n\t\t\tfor the managed Contributor Insights rule, \n\t\t\tas returned \n\t\t\tby <code>ListManagedInsightRules</code>.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
@@ -4468,6 +4500,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.cloudwatch#AmazonResourceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>\n\t\t\tThe ARN\n\t\t\tof an Amazon Web Services resource\n\t\t\tthat has managed Contributor Insights rules.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
@@ -4521,6 +4554,7 @@
                 "RuleName": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>\n\t\t\tThe name\n\t\t\tof the Contributor Insights rule \n\t\t\tthat contains data \n\t\t\tfor the specified Amazon Web Services resource.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
@@ -4528,6 +4562,7 @@
                 "State": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleState",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>\n\t\t\tIndicates whether the rule is enabled or disabled.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
@@ -4821,6 +4856,7 @@
                 "Id": {
                     "target": "com.amazonaws.cloudwatch#MetricId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A short name used to tie this object to the results in the response. This name must be\n\t\t\tunique within a single call to <code>GetMetricData</code>. If you are performing math\n\t\t\texpressions on this set of data, this name represents that data and can serve as a\n\t\t\tvariable in the mathematical expression. The valid characters are letters, numbers, and\n\t\t\tunderscore. The first character must be a lowercase letter.</p>",
                         "smithy.api#required": {}
                     }
@@ -4928,6 +4964,7 @@
                 "MetricName": {
                     "target": "com.amazonaws.cloudwatch#MetricName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the metric.</p>",
                         "smithy.api#required": {}
                     }
@@ -5035,6 +5072,7 @@
                 "Metric": {
                     "target": "com.amazonaws.cloudwatch#Metric",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The metric to return, including the metric name, namespace, and dimensions.</p>",
                         "smithy.api#required": {}
                     }
@@ -5042,6 +5080,7 @@
                 "Period": {
                     "target": "com.amazonaws.cloudwatch#Period",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can\n\t\t\tbe as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected\n\t\t\tat intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics\n\t\t\tare those metrics stored by a <code>PutMetricData</code> call that includes a <code>StorageResolution</code> of 1 second.</p>\n         <p>If the <code>StartTime</code> parameter specifies a time stamp that is greater than\n\t\t\t\t3 hours ago, you must specify the period as follows or no data points in that time range is returned:</p>\n         <ul>\n            <li>\n               <p>Start time between 3 hours and 15 days ago - Use a multiple of 60 seconds (1 minute).</p>\n            </li>\n            <li>\n               <p>Start time between 15 and 63 days ago - Use a multiple of 300 seconds (5 minutes).</p>\n            </li>\n            <li>\n               <p>Start time greater than 63 days ago - Use a multiple of 3600 seconds (1 hour).</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -5049,6 +5088,7 @@
                 "Stat": {
                     "target": "com.amazonaws.cloudwatch#Stat",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The statistic to return. It can include any CloudWatch statistic or extended statistic.</p>",
                         "smithy.api#required": {}
                     }
@@ -5208,6 +5248,7 @@
                 "IncludeMetrics": {
                     "target": "com.amazonaws.cloudwatch#MetricStreamStatisticsIncludeMetrics",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of metric name and namespace pairs that stream the additional statistics listed\n\t\t\tin the value of the <code>AdditionalStatistics</code> parameter. There can be as many as \n\t\t\t100 pairs in the array.</p>\n         <p>All metrics that match the combination of metric name and namespace will be streamed\n\t\t\twith the additional statistics, no matter their dimensions.</p>",
                         "smithy.api#required": {}
                     }
@@ -5215,6 +5256,7 @@
                 "AdditionalStatistics": {
                     "target": "com.amazonaws.cloudwatch#MetricStreamStatisticsAdditionalStatistics",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The list of additional statistics that are to be streamed for the metrics listed\n\t\t\tin the <code>IncludeMetrics</code> array in this structure. This list can include as many as 20 statistics.</p>\n         <p>If the <code>OutputFormat</code> for the stream is <code>opentelemetry0.7</code>, the only \n\t\t\tvalid values are <code>p<i>??</i>\n            </code> percentile statistics such as <code>p90</code>, <code>p99</code> and so on.</p>\n         <p>If the <code>OutputFormat</code> for the stream is <code>json</code>,  \n\t\t\tthe valid values include the abbreviations for all of the statistics listed in \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html\">\n\t\t\t\tCloudWatch statistics definitions</a>. For example, this includes\n\t\t\t<code>tm98, </code>\n            <code>wm90</code>, <code>PR(:300)</code>, and so on.</p>",
                         "smithy.api#required": {}
                     }
@@ -5242,6 +5284,7 @@
                 "Namespace": {
                     "target": "com.amazonaws.cloudwatch#Namespace",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The namespace of the metric.</p>",
                         "smithy.api#required": {}
                     }
@@ -5249,6 +5292,7 @@
                 "MetricName": {
                     "target": "com.amazonaws.cloudwatch#MetricName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the metric.</p>",
                         "smithy.api#required": {}
                     }
@@ -5491,6 +5535,7 @@
                 "AlarmName": {
                     "target": "com.amazonaws.cloudwatch#AlarmName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name for the composite alarm. This name must be unique within the Region.</p>",
                         "smithy.api#required": {}
                     }
@@ -5498,6 +5543,7 @@
                 "AlarmRule": {
                     "target": "com.amazonaws.cloudwatch#AlarmRule",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An expression that specifies which other alarms are to be evaluated to determine this\n\t\t\tcomposite alarm's state. For each alarm that you reference, you\n\t\t\tdesignate a function that\n\t\t\tspecifies whether that alarm needs to be in ALARM state, OK state, or INSUFFICIENT_DATA state. You\n\t\t\tcan use operators (AND, OR and NOT) to combine multiple functions in a single expression. You can use parenthesis to logically group the \n\t\t\tfunctions in your expression.</p>\n         <p>You can use either alarm names or ARNs to reference the other alarms that are to be evaluated.</p>\n         <p>Functions can include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALARM(\"<i>alarm-name</i> or <i>alarm-ARN</i>\")</code> is TRUE if the named\n\t\t\talarm is in ALARM state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OK(\"<i>alarm-name</i> or <i>alarm-ARN</i>\")</code> is TRUE if the named\n\t\t\t\talarm is in OK state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_DATA(\"<i>alarm-name</i> or <i>alarm-ARN</i>\")</code> is TRUE if the named\n\t\t\t\talarm is in INSUFFICIENT_DATA state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRUE</code> always evaluates to TRUE.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FALSE</code> always evaluates to FALSE.</p>\n            </li>\n         </ul>\n         <p>TRUE and FALSE are useful for testing a complex <code>AlarmRule</code> structure, and \n\t\tfor testing your alarm actions.</p>\n         <p>Alarm names specified in <code>AlarmRule</code> can be surrounded with double-quotes (\"), but do not have to be.</p>\n         <p>The following\n\t\t\tare some examples of <code>AlarmRule</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALARM(CPUUtilizationTooHigh) AND ALARM(DiskReadOpsTooHigh)</code> specifies that the composite alarm goes into ALARM state only\n\t\t\t\tif both CPUUtilizationTooHigh and DiskReadOpsTooHigh alarms are in ALARM state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALARM(CPUUtilizationTooHigh) AND NOT ALARM(DeploymentInProgress)</code>\n\t\t\t\t\tspecifies that the alarm goes to ALARM state if CPUUtilizationTooHigh is in ALARM state\n\t\t\t\t\tand DeploymentInProgress is not in ALARM state. This example reduces\n\t\t\t\t\talarm noise during a known deployment window.</p>\n            </li>\n            <li>\n               <p>\n                  <code>(ALARM(CPUUtilizationTooHigh) OR ALARM(DiskReadOpsTooHigh)) AND OK(NetworkOutTooHigh)</code> goes into ALARM \n\t\t\t\tstate if CPUUtilizationTooHigh OR DiskReadOpsTooHigh is in ALARM state, and if NetworkOutTooHigh is in OK state. \n\t\t\t\tThis provides another example of using a composite alarm to prevent noise. This rule ensures that you are not notified with an \n\t\t\t\talarm action on high CPU or disk usage if a known network problem is also occurring.</p>\n            </li>\n         </ul>\n         <p>The <code>AlarmRule</code> can specify as many as 100\n\t\t\t\"children\" alarms. The <code>AlarmRule</code> expression can have as many as 500 elements. Elements\n\t\t\tare child alarms, TRUE or FALSE statements, and\n\t\t\tparentheses.</p>",
                         "smithy.api#required": {}
                     }
@@ -5569,6 +5615,7 @@
                 "DashboardName": {
                     "target": "com.amazonaws.cloudwatch#DashboardName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the dashboard. If a dashboard with this name already exists, this call modifies that dashboard, replacing\n\t\t\tits current contents. Otherwise, a new dashboard is created. The maximum length is 255, and valid characters are \n\t\t\tA-Z, a-z, 0-9, \"-\", and \"_\".  This parameter is required.</p>",
                         "smithy.api#required": {}
                     }
@@ -5576,6 +5623,7 @@
                 "DashboardBody": {
                     "target": "com.amazonaws.cloudwatch#DashboardBody",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The detailed information about the dashboard in JSON format, including the widgets to include and their location\n\t\t\ton the dashboard.  This parameter is required.</p>\n         <p>For more information about the syntax, \n\t\t\tsee  <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html\">Dashboard Body Structure and Syntax</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -5628,6 +5676,7 @@
                 "RuleName": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique name for the rule.</p>",
                         "smithy.api#required": {}
                     }
@@ -5641,6 +5690,7 @@
                 "RuleDefinition": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleDefinition",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The definition of the rule, as a JSON object. For details on the valid syntax, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html\">Contributor Insights\n\t\t\tRule Syntax</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -5689,6 +5739,7 @@
                 "ManagedRules": {
                     "target": "com.amazonaws.cloudwatch#ManagedRules",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>\n\t\t\tA list\n\t\t\tof <code>ManagedRules</code>\n\t\t\tto enable.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
@@ -5735,6 +5786,7 @@
                 "AlarmName": {
                     "target": "com.amazonaws.cloudwatch#AlarmName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name for the alarm. This name must be unique within the Region.</p>\n         <p>The name must contain only UTF-8\n\t\t\tcharacters, and can't contain ASCII control characters</p>",
                         "smithy.api#required": {}
                     }
@@ -5814,6 +5866,7 @@
                 "EvaluationPeriods": {
                     "target": "com.amazonaws.cloudwatch#EvaluationPeriods",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The number of periods over which data is compared to the specified threshold. If you are\n\t\t\tsetting an alarm that requires that a number of consecutive data points be breaching to\n\t\t\ttrigger the alarm, this value specifies that number. If you are setting an \"M out of N\"\n\t\t\talarm, this value is the N.</p>\n         <p>An alarm's total current evaluation period can\n\t\t\tbe no longer than one day, so this number multiplied by <code>Period</code> cannot be more than 86,400 seconds.</p>",
                         "smithy.api#required": {}
                     }
@@ -5833,6 +5886,7 @@
                 "ComparisonOperator": {
                     "target": "com.amazonaws.cloudwatch#ComparisonOperator",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p> The arithmetic operation to use when comparing the specified statistic and\n\t\t\tthreshold. The specified statistic value is used as the first operand.</p>\n         <p>The values <code>LessThanLowerOrGreaterThanUpperThreshold</code>, \n\t\t\t<code>LessThanLowerThreshold</code>, and <code>GreaterThanUpperThreshold</code>\n\t\tare used only for alarms based on anomaly detection models.</p>",
                         "smithy.api#required": {}
                     }
@@ -5904,6 +5958,7 @@
                 "Namespace": {
                     "target": "com.amazonaws.cloudwatch#Namespace",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The namespace for the metric data. You can use ASCII characters for the namespace, except for\n\t\tcontrol characters which are not supported.</p>\n         <p>To avoid conflicts\n\t\t\twith Amazon Web Services service namespaces, you should not specify a namespace that begins with <code>AWS/</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -5911,6 +5966,7 @@
                 "MetricData": {
                     "target": "com.amazonaws.cloudwatch#MetricData",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The data for the metric. The array can include no more than 1000 metrics per call.</p>",
                         "smithy.api#required": {}
                     }
@@ -5955,6 +6011,7 @@
                 "Name": {
                     "target": "com.amazonaws.cloudwatch#MetricStreamName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>If you are creating a new metric stream, this is the name for the new stream. The name\n\t\tmust be different than the names of other metric streams in this account and Region.</p>\n         <p>If you are updating a metric stream, specify the name of that stream here.</p>\n         <p>Valid characters are A-Z, a-z, 0-9, \"-\" and \"_\".</p>",
                         "smithy.api#required": {}
                     }
@@ -5974,6 +6031,7 @@
                 "FirehoseArn": {
                     "target": "com.amazonaws.cloudwatch#AmazonResourceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the Amazon Kinesis Data Firehose delivery stream to use for this metric stream.\n\t\t\tThis Amazon Kinesis Data Firehose delivery stream must already exist and must be in the\n\t\t\tsame account as the metric stream.</p>",
                         "smithy.api#required": {}
                     }
@@ -5981,6 +6039,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.cloudwatch#AmazonResourceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of an IAM role that this metric stream will use to access Amazon Kinesis Data\n\t\t\tFirehose resources. This IAM role must already exist and must be in the same account as\n\t\t\tthe metric stream. This IAM role must include the following permissions:</p>\n         <ul>\n            <li>\n               <p>firehose:PutRecord</p>\n            </li>\n            <li>\n               <p>firehose:PutRecordBatch</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -5988,6 +6047,7 @@
                 "OutputFormat": {
                     "target": "com.amazonaws.cloudwatch#MetricStreamOutputFormat",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The output format for the stream. Valid values are <code>json</code>\n\t\tand <code>opentelemetry0.7</code>. For more information about metric stream\n\t\toutput formats, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html\">\n\t\t\t\tMetric streams output formats</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -6035,6 +6095,7 @@
                 "StartTime": {
                     "target": "com.amazonaws.cloudwatch#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The start time of the range to exclude. The format is <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example, \n\t\t\t<code>2019-07-01T23:59:59</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -6042,6 +6103,7 @@
                 "EndTime": {
                     "target": "com.amazonaws.cloudwatch#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The end time of the range to exclude. The format is <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example, \n\t\t\t<code>2019-07-01T23:59:59</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -6178,6 +6240,7 @@
                 "AlarmName": {
                     "target": "com.amazonaws.cloudwatch#AlarmName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the alarm.</p>",
                         "smithy.api#required": {}
                     }
@@ -6185,6 +6248,7 @@
                 "StateValue": {
                     "target": "com.amazonaws.cloudwatch#StateValue",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The value of the state.</p>",
                         "smithy.api#required": {}
                     }
@@ -6192,6 +6256,7 @@
                 "StateReason": {
                     "target": "com.amazonaws.cloudwatch#StateReason",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The reason that this alarm is set to this specific state, in text format.</p>",
                         "smithy.api#required": {}
                     }
@@ -6240,10 +6305,7 @@
             }
         },
         "com.amazonaws.cloudwatch#Size": {
-            "type": "long",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "long"
         },
         "com.amazonaws.cloudwatch#StandardUnit": {
             "type": "enum",
@@ -6441,6 +6503,7 @@
                 "Names": {
                     "target": "com.amazonaws.cloudwatch#MetricStreamNames",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The array of the names of metric streams to start streaming.</p>\n         <p>This is an \"all or nothing\" operation. If you do not have \n\t\tpermission to access all of the metric streams that you list here, then none of the streams that you list\n\t\tin the operation will start streaming.</p>",
                         "smithy.api#required": {}
                     }
@@ -6542,6 +6605,7 @@
                 "SampleCount": {
                     "target": "com.amazonaws.cloudwatch#DatapointValue",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The number of samples used for the statistic set.</p>",
                         "smithy.api#required": {}
                     }
@@ -6549,6 +6613,7 @@
                 "Sum": {
                     "target": "com.amazonaws.cloudwatch#DatapointValue",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The sum of values for the sample set.</p>",
                         "smithy.api#required": {}
                     }
@@ -6556,6 +6621,7 @@
                 "Minimum": {
                     "target": "com.amazonaws.cloudwatch#DatapointValue",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The minimum value of the sample set.</p>",
                         "smithy.api#required": {}
                     }
@@ -6563,6 +6629,7 @@
                 "Maximum": {
                     "target": "com.amazonaws.cloudwatch#DatapointValue",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The maximum value of the sample set.</p>",
                         "smithy.api#required": {}
                     }
@@ -6642,6 +6709,7 @@
                 "Names": {
                     "target": "com.amazonaws.cloudwatch#MetricStreamNames",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The array of the names of metric streams to stop streaming.</p>\n         <p>This is an \"all or nothing\" operation. If you do not have \n\t\t\tpermission to access all of the metric streams that you list here, then none of the streams that you list\n\t\t\tin the operation will stop streaming.</p>",
                         "smithy.api#required": {}
                     }
@@ -6675,6 +6743,7 @@
                 "Key": {
                     "target": "com.amazonaws.cloudwatch#TagKey",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A string that you can use to assign a value. The combination of tag keys and values can help you organize and categorize your \n\t\tresources.</p>",
                         "smithy.api#required": {}
                     }
@@ -6682,6 +6751,7 @@
                 "Value": {
                     "target": "com.amazonaws.cloudwatch#TagValue",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The value for the specified tag key.</p>",
                         "smithy.api#required": {}
                     }
@@ -6744,6 +6814,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.cloudwatch#AmazonResourceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the CloudWatch resource that you're adding tags to.</p>\n         <p>The ARN format of an alarm is \n\t\t\t<code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>\n            </code>\n         </p>\n         <p>The ARN format of a Contributor Insights rule is \n\t\t\t<code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>\n            </code>\n         </p>\n         <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies\"> Resource\n\t\t\t\tTypes Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General\n\t\t\tReference</i>.</p>",
                         "smithy.api#required": {}
                     }
@@ -6751,6 +6822,7 @@
                 "Tags": {
                     "target": "com.amazonaws.cloudwatch#TagList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The list of key-value pairs to associate with the alarm.</p>",
                         "smithy.api#required": {}
                     }
@@ -6839,6 +6911,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.cloudwatch#AmazonResourceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the CloudWatch resource that you're removing tags from.</p>\n         <p>The ARN format of an alarm is \n\t\t\t<code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>\n            </code>\n         </p>\n         <p>The ARN format of a Contributor Insights rule is \n\t\t\t<code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>\n            </code>\n         </p>\n         <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies\"> Resource\n\t\t\t\tTypes Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General\n\t\t\tReference</i>.</p>",
                         "smithy.api#required": {}
                     }
@@ -6846,6 +6919,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.cloudwatch#TagKeyList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The list of tag keys to remove from the resource.</p>",
                         "smithy.api#required": {}
                     }

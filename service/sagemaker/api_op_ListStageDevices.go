@@ -46,7 +46,7 @@ type ListStageDevicesInput struct {
 	StageName *string
 
 	// Toggle for excluding devices deployed in other stages.
-	ExcludeDevicesDeployedInOtherStage bool
+	ExcludeDevicesDeployedInOtherStage *bool
 
 	// The maximum number of requests to select.
 	MaxResults *int32

@@ -45,7 +45,7 @@ type GetFindingsInput struct {
 	Filters *types.AwsSecurityFindingFilters
 
 	// The maximum number of findings to return.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the GetFindings
 	// operation, set the value of this parameter to NULL . For subsequent calls to the
@@ -180,8 +180,8 @@ func NewGetFindingsPaginator(client GetFindingsAPIClient, params *GetFindingsInp
 	}
 
 	options := GetFindingsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -211,7 +211,11 @@ func (p *GetFindingsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.GetFindings(ctx, &params, optFns...)
 	if err != nil {

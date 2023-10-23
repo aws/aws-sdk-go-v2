@@ -64,7 +64,7 @@ type GetContainerServiceMetricDataInput struct {
 	// metric data is available in 5-minute (300 seconds) granularity.
 	//
 	// This member is required.
-	Period int32
+	Period *int32
 
 	// The name of the container service for which to get metric data.
 	//

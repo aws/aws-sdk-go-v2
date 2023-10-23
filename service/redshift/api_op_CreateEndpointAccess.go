@@ -82,7 +82,7 @@ type CreateEndpointAccessOutput struct {
 	EndpointStatus *string
 
 	// The port number on which the cluster accepts incoming connections.
-	Port int32
+	Port *int32
 
 	// The Amazon Web Services account ID of the owner of the cluster.
 	ResourceOwner *string

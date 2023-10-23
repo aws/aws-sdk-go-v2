@@ -4702,7 +4702,7 @@ func awsAwsjson10_deserializeDocumentRetentionProperties(v **types.RetentionProp
 				if err != nil {
 					return err
 				}
-				sv.MagneticStoreRetentionPeriodInDays = i64
+				sv.MagneticStoreRetentionPeriodInDays = ptr.Int64(i64)
 			}
 
 		case "MemoryStoreRetentionPeriodInHours":
@@ -4715,7 +4715,7 @@ func awsAwsjson10_deserializeDocumentRetentionProperties(v **types.RetentionProp
 				if err != nil {
 					return err
 				}
-				sv.MemoryStoreRetentionPeriodInHours = i64
+				sv.MemoryStoreRetentionPeriodInHours = ptr.Int64(i64)
 			}
 
 		default:

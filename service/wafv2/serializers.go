@@ -4255,9 +4255,9 @@ func awsAwsjson11_serializeDocumentRateBasedStatement(v *types.RateBasedStatemen
 		}
 	}
 
-	{
+	if v.Limit != nil {
 		ok := object.Key("Limit")
-		ok.Long(v.Limit)
+		ok.Long(*v.Limit)
 	}
 
 	if v.ScopeDownStatement != nil {
@@ -5590,9 +5590,9 @@ func awsAwsjson11_serializeOpDocumentCreateRuleGroupInput(v *CreateRuleGroupInpu
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.Capacity != nil {
 		ok := object.Key("Capacity")
-		ok.Long(v.Capacity)
+		ok.Long(*v.Capacity)
 	}
 
 	if v.CustomResponseBodies != nil {
@@ -6147,9 +6147,9 @@ func awsAwsjson11_serializeOpDocumentGetSampledRequestsInput(v *GetSampledReques
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxItems != nil {
 		ok := object.Key("MaxItems")
-		ok.Long(v.MaxItems)
+		ok.Long(*v.MaxItems)
 	}
 
 	if v.RuleMetricName != nil {

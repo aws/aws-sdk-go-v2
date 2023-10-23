@@ -18602,7 +18602,7 @@ func awsAwsjson11_deserializeDocumentPasswordPolicyType(v **types.PasswordPolicy
 				if err != nil {
 					return err
 				}
-				sv.MinimumLength = int32(i64)
+				sv.MinimumLength = ptr.Int32(int32(i64))
 			}
 
 		case "RequireLowercase":
@@ -18969,7 +18969,7 @@ func awsAwsjson11_deserializeDocumentRecoveryOptionType(v **types.RecoveryOption
 				if err != nil {
 					return err
 				}
-				sv.Priority = int32(i64)
+				sv.Priority = ptr.Int32(int32(i64))
 			}
 
 		default:

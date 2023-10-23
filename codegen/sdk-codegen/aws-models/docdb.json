@@ -55,6 +55,7 @@
                 "SubscriptionName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Amazon DocumentDB event notification subscription that you\n            want to add a source identifier to.</p>",
                         "smithy.api#required": {}
                     }
@@ -62,6 +63,7 @@
                 "SourceIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the event source to be added:</p>\n         <ul>\n            <li>\n               <p>If the source type is an instance, a\n                    <code>DBInstanceIdentifier</code> must be provided.</p>\n            </li>\n            <li>\n               <p>If the source type is a security group, a\n                    <code>DBSecurityGroupName</code> must be provided.</p>\n            </li>\n            <li>\n               <p>If the source type is a parameter group, a\n                    <code>DBParameterGroupName</code> must be provided.</p>\n            </li>\n            <li>\n               <p>If the source type is a snapshot, a\n                    <code>DBSnapshotIdentifier</code> must be provided.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -112,6 +114,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon DocumentDB resource that the tags are added to. This value is an\n            Amazon Resource Name .</p>",
                         "smithy.api#required": {}
                     }
@@ -119,6 +122,7 @@
                 "Tags": {
                     "target": "com.amazonaws.docdb#TagList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The tags to be assigned to the Amazon DocumentDB resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -352,7 +356,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -395,7 +398,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -408,7 +412,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -422,7 +425,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -445,7 +447,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -480,7 +481,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -491,14 +491,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -512,14 +514,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -528,18 +528,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -548,7 +547,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -568,14 +568,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -589,7 +591,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -609,7 +610,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -620,14 +620,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -638,9 +640,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1388,6 +1392,7 @@
                 "ResourceIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that the pending\n            maintenance action applies to.</p>",
                         "smithy.api#required": {}
                     }
@@ -1395,6 +1400,7 @@
                 "ApplyAction": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The pending maintenance action to apply to this resource.</p>\n         <p>Valid values: <code>system-update</code>, <code>db-upgrade</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -1402,6 +1408,7 @@
                 "OptInType": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A value that specifies the type of opt-in request or undoes an\n            opt-in request. An opt-in request of type <code>immediate</code>\n            can't be undone.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>immediate</code> - Apply the maintenance action\n                    immediately.</p>\n            </li>\n            <li>\n               <p>\n                  <code>next-maintenance</code> - Apply the maintenance\n                    action during the next maintenance window for the resource.\n                    </p>\n            </li>\n            <li>\n               <p>\n                  <code>undo-opt-in</code> - Cancel any existing\n                    <code>next-maintenance</code> opt-in requests.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -1482,10 +1489,7 @@
             }
         },
         "com.amazonaws.docdb#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "type": "boolean"
         },
         "com.amazonaws.docdb#BooleanOptional": {
             "type": "boolean"
@@ -1629,6 +1633,7 @@
                 "SourceDBClusterParameterGroupIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier or Amazon Resource Name (ARN) for the source cluster parameter group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must specify a valid cluster parameter group.</p>\n            </li>\n            <li>\n               <p>If the source cluster parameter group is in the same Amazon Web Services Region as the copy, specify a valid parameter group identifier; for example, <code>my-db-cluster-param-group</code>, or a valid ARN.</p>\n            </li>\n            <li>\n               <p>If the source parameter group is in a different Amazon Web Services Region than the copy, specify a valid cluster parameter group ARN; for example, <code>arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -1636,6 +1641,7 @@
                 "TargetDBClusterParameterGroupIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier for the copied cluster parameter group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Cannot be null, empty, or blank.</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 255 letters, numbers, or hyphens.\n                    </p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.\n                    </p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster-param-group1</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -1643,6 +1649,7 @@
                 "TargetDBClusterParameterGroupDescription": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A description for the copied cluster parameter group.</p>",
                         "smithy.api#required": {}
                     }
@@ -1708,6 +1715,7 @@
                 "SourceDBClusterSnapshotIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster snapshot to copy. This parameter is\n            not case sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must specify a valid system snapshot in the\n                    <i>available</i> state.</p>\n            </li>\n            <li>\n               <p>If the source snapshot is in the same Amazon Web Services Region as the copy, specify a valid snapshot identifier.</p>\n            </li>\n            <li>\n               <p>If the source snapshot is in a different Amazon Web Services Region than the copy, specify a valid cluster snapshot ARN.</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster-snapshot1</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -1715,6 +1723,7 @@
                 "TargetDBClusterSnapshotIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the new cluster snapshot to create from the\n            source cluster snapshot. This parameter is not case sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.\n                    </p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.\n                    </p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster-snapshot2</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -1843,6 +1852,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier. This parameter is stored as a lowercase\n            string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.\n                    </p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.\n                    </p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -1868,6 +1878,7 @@
                 "Engine": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the database engine to be used for this cluster.</p>\n         <p>Valid values: <code>docdb</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -1982,6 +1993,7 @@
                 "DBClusterParameterGroupName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cluster parameter group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must not match the name of an existing\n                    <code>DBClusterParameterGroup</code>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>This value is stored as a lowercase string.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -1989,6 +2001,7 @@
                 "DBParameterGroupFamily": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster parameter group family name.</p>",
                         "smithy.api#required": {}
                     }
@@ -1996,6 +2009,7 @@
                 "Description": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The description for the cluster parameter group.</p>",
                         "smithy.api#required": {}
                     }
@@ -2069,6 +2083,7 @@
                 "DBClusterSnapshotIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster snapshot. This parameter is stored\n            as a lowercase string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.\n                    </p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster-snapshot1</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -2076,6 +2091,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster to create a snapshot for. This\n            parameter is not case sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing\n                    <code>DBCluster</code>.</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -2168,6 +2184,7 @@
                 "DBInstanceIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The instance identifier. This parameter is stored as a lowercase string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>\n         <p>Example: <code>mydbinstance</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -2175,6 +2192,7 @@
                 "DBInstanceClass": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The compute and memory capacity of the instance; for example,\n                <code>db.r5.large</code>. </p>",
                         "smithy.api#required": {}
                     }
@@ -2182,6 +2200,7 @@
                 "Engine": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the database engine to be used for this instance.</p>\n         <p>Valid value: <code>docdb</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -2213,6 +2232,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster that the instance will belong to.</p>",
                         "smithy.api#required": {}
                     }
@@ -2293,6 +2313,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name for the subnet group. This value is stored as a lowercase string.</p>\n         <p>Constraints: Must contain no more than 255 letters, numbers, periods, underscores,\n            spaces, or hyphens. Must not be default.</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -2300,6 +2321,7 @@
                 "DBSubnetGroupDescription": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The description for the subnet group.</p>",
                         "smithy.api#required": {}
                     }
@@ -2307,6 +2329,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.docdb#SubnetIdentifierList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon EC2 subnet IDs for the subnet group.</p>",
                         "smithy.api#required": {}
                     }
@@ -2375,6 +2398,7 @@
                 "SubscriptionName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the subscription.</p>\n         <p>Constraints: The name must be fewer than 255 characters.</p>",
                         "smithy.api#required": {}
                     }
@@ -2382,6 +2406,7 @@
                 "SnsTopicArn": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SNS topic created for event notification. Amazon SNS creates the ARN when you create a topic and subscribe to it.</p>",
                         "smithy.api#required": {}
                     }
@@ -2465,6 +2490,7 @@
                 "GlobalClusterIdentifier": {
                     "target": "com.amazonaws.docdb#GlobalClusterIdentifier",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier of the new global cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -2588,7 +2614,6 @@
                 "MultiAZ": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the cluster has instances in multiple Availability Zones.</p>"
                     }
                 },
@@ -2667,7 +2692,6 @@
                 "StorageEncrypted": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the cluster is encrypted.</p>"
                     }
                 },
@@ -2716,7 +2740,6 @@
                 "DeletionProtection": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is\n            enabled, the cluster cannot be deleted unless it is modified and\n                <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code>\n            protects clusters from being accidentally deleted.</p>"
                     }
                 }
@@ -2763,7 +2786,6 @@
                 "IsClusterWriter": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that is <code>true</code> if the cluster member is the primary instance for\n            the cluster and <code>false</code> otherwise.</p>"
                     }
                 },
@@ -3032,7 +3054,6 @@
                 "Port": {
                     "target": "com.amazonaws.docdb#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the port that the cluster was listening on at the time of the\n            snapshot.</p>"
                     }
                 },
@@ -3069,14 +3090,12 @@
                 "PercentProgress": {
                     "target": "com.amazonaws.docdb#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the percentage of the estimated data that has been transferred.</p>"
                     }
                 },
                 "StorageEncrypted": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the cluster snapshot is encrypted.</p>"
                     }
                 },
@@ -3264,7 +3283,6 @@
                 "SupportsLogExportsToCloudwatchLogs": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether the engine version supports exporting the log types\n            specified by <code>ExportableLogTypes</code> to CloudWatch Logs.</p>"
                     }
                 }
@@ -3351,7 +3369,6 @@
                 "BackupRetentionPeriod": {
                     "target": "com.amazonaws.docdb#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the number of days for which automatic snapshots are retained.</p>"
                     }
                 },
@@ -3400,14 +3417,12 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Does not apply. This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not perform minor version upgrades regardless of the value set.</p>"
                     }
                 },
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Not supported. Amazon DocumentDB does not currently support public endpoints. The value \n          of <code>PubliclyAccessible</code> is always <code>false</code>.</p>"
                     }
                 },
@@ -3426,7 +3441,6 @@
                 "StorageEncrypted": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether or not the instance is encrypted.</p>"
                     }
                 },
@@ -3553,7 +3567,6 @@
                 "Normal": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value that is <code>true</code> if the instance is operating normally, or\n                <code>false</code> if the instance is in an error state.</p>"
                     }
                 },
@@ -3896,6 +3909,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier for the cluster to be deleted. This parameter isn't case sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match an existing <code>DBClusterIdentifier</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -3903,7 +3917,6 @@
                 "SkipFinalSnapshot": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Determines whether a final cluster snapshot is created before the cluster is deleted. If <code>true</code> is specified, no cluster snapshot is created. If <code>false</code> is specified, a cluster snapshot is created before the DB cluster is deleted. </p>\n         <note>\n            <p>If <code>SkipFinalSnapshot</code> is <code>false</code>, you must specify a <code>FinalDBSnapshotIdentifier</code> parameter.</p>\n         </note>\n         <p>Default: <code>false</code>\n         </p>"
                     }
                 },
@@ -3945,6 +3958,7 @@
                 "DBClusterParameterGroupName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cluster parameter group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be the name of an existing cluster parameter group.</p>\n            </li>\n            <li>\n               <p>You can't delete a default cluster parameter group.</p>\n            </li>\n            <li>\n               <p>Cannot be associated with any clusters.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -3992,6 +4006,7 @@
                 "DBClusterSnapshotIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster snapshot to delete.</p>\n         <p>Constraints: Must be the name of an existing cluster snapshot in the <code>available</code> state.</p>",
                         "smithy.api#required": {}
                     }
@@ -4048,6 +4063,7 @@
                 "DBInstanceIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The instance identifier for the instance to be deleted. This parameter isn't\n            case sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the name of an existing instance.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -4098,6 +4114,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the database subnet group to delete.</p>\n         <note>\n            <p>You can't delete the default subnet group.</p>\n         </note>\n         <p>Constraints:</p>\n         <p>Must match the name of an existing <code>DBSubnetGroup</code>. Must not be default.</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -4134,6 +4151,7 @@
                 "SubscriptionName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Amazon DocumentDB event notification subscription that you want to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -4181,6 +4199,7 @@
                 "GlobalClusterIdentifier": {
                     "target": "com.amazonaws.docdb#GlobalClusterIdentifier",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier of the global cluster being deleted.</p>",
                         "smithy.api#required": {}
                     }
@@ -4342,6 +4361,7 @@
                 "DBClusterParameterGroupName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of a specific cluster parameter group to return parameter details for.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If provided, must match the name of an existing <code>DBClusterParameterGroup</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -4399,6 +4419,7 @@
                 "DBClusterSnapshotIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier for the cluster snapshot to describe the attributes for.</p>",
                         "smithy.api#required": {}
                     }
@@ -4485,14 +4506,12 @@
                 "IncludeShared": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set to <code>true</code> to include shared manual cluster snapshots from other Amazon Web Services accounts that this Amazon Web Services account has been given permission to copy or restore, and otherwise <code>false</code>. The default is <code>false</code>.</p>"
                     }
                 },
                 "IncludePublic": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set to <code>true</code> to include manual cluster snapshots that are public and can be copied or restored by any Amazon Web Services account, and otherwise <code>false</code>. The default is <code>false</code>.</p>"
                     }
                 }
@@ -4618,7 +4637,6 @@
                 "DefaultOnly": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates that only the default version of the specified engine or engine and major\n            version combination is returned.</p>"
                     }
                 },
@@ -4901,6 +4919,7 @@
                 "DBParameterGroupFamily": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cluster parameter group family to return the engine parameter\n            information for.</p>",
                         "smithy.api#required": {}
                     }
@@ -5189,6 +5208,7 @@
                 "Engine": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the engine to retrieve instance options for.</p>",
                         "smithy.api#required": {}
                     }
@@ -5309,7 +5329,6 @@
                 "Port": {
                     "target": "com.amazonaws.docdb#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the port that the database engine is listening on.</p>"
                     }
                 },
@@ -5510,7 +5529,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value indicating whether the subscription is enabled. A value of\n                <code>true</code> indicates that the subscription is enabled.</p>"
                     }
                 },
@@ -5657,6 +5675,7 @@
                 "Name": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the filter. Filter names are case sensitive.</p>",
                         "smithy.api#required": {}
                     }
@@ -5664,6 +5683,7 @@
                 "Values": {
                     "target": "com.amazonaws.docdb#FilterValueList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>One or more filter values. Filter values are case sensitive.</p>",
                         "smithy.api#required": {}
                     }
@@ -5813,7 +5833,6 @@
                 "IsWriter": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Specifies whether the Amazon DocumentDB cluster is the primary cluster (that is, has read-write capability) for the Amazon DocumentDB global cluster with which it is associated. </p>"
                     }
                 }
@@ -5954,10 +5973,7 @@
             }
         },
         "com.amazonaws.docdb#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "integer"
         },
         "com.amazonaws.docdb#IntegerOptional": {
             "type": "integer"
@@ -6235,6 +6251,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon DocumentDB resource with tags to be listed. This value is an Amazon Resource Name\n            (ARN).</p>",
                         "smithy.api#required": {}
                     }
@@ -6310,6 +6327,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier for the cluster that is being modified. This parameter is\n            not case sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing <code>DBCluster</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -6323,7 +6341,6 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that specifies whether the changes in this request and any pending changes are\n            asynchronously applied as soon as possible, regardless of the\n                <code>PreferredMaintenanceWindow</code> setting for the cluster. If this\n            parameter is set to <code>false</code>, changes to the cluster are applied during the\n            next maintenance window.</p>\n         <p>The <code>ApplyImmediately</code> parameter affects only the\n                <code>NewDBClusterIdentifier</code> and <code>MasterUserPassword</code> values. If\n            you set this parameter value to <code>false</code>, the changes to the\n                <code>NewDBClusterIdentifier</code> and <code>MasterUserPassword</code> values are\n            applied during the next maintenance window. All other changes are applied immediately,\n            regardless of the value of the <code>ApplyImmediately</code> parameter.</p>\n         <p>Default: <code>false</code>\n         </p>"
                     }
                 },
@@ -6384,7 +6401,6 @@
                 "AllowMajorVersionUpgrade": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether major version upgrades are allowed.</p>\n         <p>Constraints: You must allow major version upgrades when specifying a value for the\n             <code>EngineVersion</code> parameter that is a different major version than the DB\n             cluster's current version.</p>"
                     }
                 },
@@ -6426,6 +6442,7 @@
                 "DBClusterParameterGroupName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cluster parameter group to modify.</p>",
                         "smithy.api#required": {}
                     }
@@ -6433,6 +6450,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.docdb#ParametersList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of parameters in the cluster parameter group to modify.</p>",
                         "smithy.api#required": {}
                     }
@@ -6483,6 +6501,7 @@
                 "DBClusterSnapshotIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier for the cluster snapshot to modify the attributes for.</p>",
                         "smithy.api#required": {}
                     }
@@ -6490,6 +6509,7 @@
                 "AttributeName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cluster snapshot attribute to modify.</p>\n         <p>To manage authorization for other Amazon Web Services accounts to copy or restore a manual cluster\n            snapshot, set this value to <code>restore</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -6582,6 +6602,7 @@
                 "DBInstanceIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The instance identifier. This value is stored as a lowercase string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing <code>DBInstance</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -6595,7 +6616,6 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the modifications in this request and any pending modifications are\n            asynchronously applied as soon as possible, regardless of the\n                <code>PreferredMaintenanceWindow</code> setting for the instance. </p>\n         <p> If this parameter is set to <code>false</code>, changes to the instance are\n            applied during the next maintenance window. Some parameter changes can cause an outage\n            and are applied on the next reboot.</p>\n         <p>Default: <code>false</code>\n         </p>"
                     }
                 },
@@ -6699,6 +6719,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name for the subnet group. This value is stored as a lowercase string. You can't modify the default subnet group. </p>\n         <p>Constraints: Must match the name of an existing <code>DBSubnetGroup</code>. Must not be default.</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -6712,6 +6733,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.docdb#SubnetIdentifierList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon EC2 subnet IDs for the subnet group.</p>",
                         "smithy.api#required": {}
                     }
@@ -6771,6 +6793,7 @@
                 "SubscriptionName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Amazon DocumentDB event notification subscription.</p>",
                         "smithy.api#required": {}
                     }
@@ -6842,6 +6865,7 @@
                 "GlobalClusterIdentifier": {
                     "target": "com.amazonaws.docdb#GlobalClusterIdentifier",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier for the global cluster being modified. This parameter isn't case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing global cluster.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -6911,7 +6935,6 @@
                 "Vpc": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether an instance is in a virtual private cloud (VPC).</p>"
                     }
                 }
@@ -6998,7 +7021,6 @@
                 "IsModifiable": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Indicates whether (<code>true</code>) or not (<code>false</code>) the parameter can\n            be modified. Some parameters have security or operational implications that prevent them\n            from being changed. </p>"
                     }
                 },
@@ -7264,6 +7286,7 @@
                 "DBInstanceIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The instance identifier. This parameter is stored as a lowercase string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing <code>DBInstance</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -7320,6 +7343,7 @@
                 "GlobalClusterIdentifier": {
                     "target": "com.amazonaws.docdb#GlobalClusterIdentifier",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier to detach from the Amazon DocumentDB global cluster. </p>",
                         "smithy.api#required": {}
                     }
@@ -7327,6 +7351,7 @@
                 "DbClusterIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) identifying the cluster that was detached from the Amazon DocumentDB global cluster. </p>",
                         "smithy.api#required": {}
                     }
@@ -7374,6 +7399,7 @@
                 "SubscriptionName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Amazon DocumentDB event notification subscription that you want to remove a\n            source identifier from.</p>",
                         "smithy.api#required": {}
                     }
@@ -7381,6 +7407,7 @@
                 "SourceIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p> The source identifier to be removed from the subscription, such as the instance\n            identifier for an instance, or the name of a security group. </p>",
                         "smithy.api#required": {}
                     }
@@ -7431,6 +7458,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon DocumentDB resource that the tags are removed from. This value is an Amazon Resource\n            Name (ARN).</p>",
                         "smithy.api#required": {}
                     }
@@ -7438,6 +7466,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.docdb#KeyList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The tag key (name) of the tag to be removed.</p>",
                         "smithy.api#required": {}
                     }
@@ -7474,6 +7503,7 @@
                 "DBClusterParameterGroupName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cluster parameter group to reset.</p>",
                         "smithy.api#required": {}
                     }
@@ -7481,7 +7511,6 @@
                 "ResetAllParameters": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that is set to <code>true</code> to reset all parameters in the cluster\n            parameter group to their default values, and <code>false</code> otherwise. You can't use\n            this parameter if there is a list of parameter names specified for the\n                <code>Parameters</code> parameter.</p>"
                     }
                 },
@@ -7602,6 +7631,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cluster to create from the snapshot or cluster snapshot. This\n            parameter isn't case sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-snapshot-id</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -7609,6 +7639,7 @@
                 "SnapshotIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier for the snapshot or cluster snapshot to restore from.</p>\n         <p>You can use either the name or the Amazon Resource Name (ARN) to specify a cluster\n            snapshot. However, you can use only the ARN to specify a snapshot.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing snapshot.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -7616,6 +7647,7 @@
                 "Engine": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The database engine to use for the new cluster.</p>\n         <p>Default: The same as source.</p>\n         <p>Constraint: Must be compatible with the engine of the source.</p>",
                         "smithy.api#required": {}
                     }
@@ -7756,6 +7788,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the new cluster to be created.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -7769,6 +7802,7 @@
                 "SourceDBClusterIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the source cluster from which to restore.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing <code>DBCluster</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -7782,7 +7816,6 @@
                 "UseLatestRestorableTime": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that is set to <code>true</code> to restore the cluster to the latest\n            restorable backup time, and <code>false</code> otherwise. </p>\n         <p>Default: <code>false</code>\n         </p>\n         <p>Constraints: Cannot be specified if the <code>RestoreToTime</code> parameter is\n            provided.</p>"
                     }
                 },
@@ -8026,6 +8059,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster to restart. Example:\n                <code>docdb-2019-05-28-15-24-52</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -8075,6 +8109,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster to stop. Example:\n            <code>docdb-2019-05-28-15-24-52</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -8315,14 +8350,12 @@
                 "AutoUpgrade": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether the target version is applied to any source DB instances that have <code>AutoMinorVersionUpgrade</code> set to <code>true</code>.</p>"
                     }
                 },
                 "IsMajorVersionUpgrade": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether a database engine is upgraded to a major\n            version.</p>"
                     }
                 }

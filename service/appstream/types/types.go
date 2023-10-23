@@ -189,7 +189,7 @@ type Application struct {
 	DisplayName *string
 
 	// If there is a problem, the application can be disabled after image creation.
-	Enabled bool
+	Enabled *bool
 
 	// The S3 location of the application icon.
 	IconS3Location *S3Location
@@ -244,7 +244,7 @@ type ApplicationSettings struct {
 	// streaming sessions.
 	//
 	// This member is required.
-	Enabled bool
+	Enabled *bool
 
 	// The path prefix for the S3 bucket where users’ persistent application settings
 	// are stored. You can allow the same persistent application settings to be used
@@ -259,7 +259,7 @@ type ApplicationSettingsResponse struct {
 
 	// Specifies whether persistent application settings are enabled for users during
 	// their streaming sessions.
-	Enabled bool
+	Enabled *bool
 
 	// The S3 bucket where users’ persistent application settings are stored. When
 	// persistent application settings are enabled for the first time for an account in
@@ -675,7 +675,7 @@ type Image struct {
 	ImageBuilderName *string
 
 	// Indicates whether an image builder can be launched from this image.
-	ImageBuilderSupported bool
+	ImageBuilderSupported *bool
 
 	// Describes the errors that are returned when a new image can't be created.
 	ImageErrors []ResourceError
@@ -1161,7 +1161,7 @@ type User struct {
 	CreatedTime *time.Time
 
 	// Specifies whether the user in the user pool is enabled.
-	Enabled bool
+	Enabled *bool
 
 	// The first name, or given name, of the user.
 	FirstName *string
@@ -1222,7 +1222,7 @@ type UserStackAssociation struct {
 
 	// Specifies whether a welcome email is sent to a user after the user is created
 	// in the user pool.
-	SendEmailNotification bool
+	SendEmailNotification *bool
 
 	noSmithyDocumentSerde
 }

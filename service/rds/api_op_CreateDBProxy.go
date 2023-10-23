@@ -75,7 +75,7 @@ type CreateDBProxyInput struct {
 	// proxy. Thus, only enable this setting when needed for debugging, and only when
 	// you have security measures in place to safeguard any sensitive information that
 	// appears in the logs.
-	DebugLogging bool
+	DebugLogging *bool
 
 	// The number of seconds that a connection to the proxy can be inactive before the
 	// proxy disconnects it. You can set this value higher or lower than the connection
@@ -85,7 +85,7 @@ type CreateDBProxyInput struct {
 	// Specifies whether Transport Layer Security (TLS) encryption is required for
 	// connections to the proxy. By enabling this setting, you can enforce encrypted
 	// TLS connections to the proxy.
-	RequireTLS bool
+	RequireTLS *bool
 
 	// An optional set of key-value pairs to associate arbitrary data of your choosing
 	// with the proxy.

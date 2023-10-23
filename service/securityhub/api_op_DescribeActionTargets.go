@@ -38,7 +38,7 @@ type DescribeActionTargetsInput struct {
 	ActionTargetArns []string
 
 	// The maximum number of results to return.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the
 	// DescribeActionTargets operation, set the value of this parameter to NULL . For
@@ -173,8 +173,8 @@ func NewDescribeActionTargetsPaginator(client DescribeActionTargetsAPIClient, pa
 	}
 
 	options := DescribeActionTargetsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -204,7 +204,11 @@ func (p *DescribeActionTargetsPaginator) NextPage(ctx context.Context, optFns ..
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeActionTargets(ctx, &params, optFns...)
 	if err != nil {

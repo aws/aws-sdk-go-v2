@@ -50,7 +50,7 @@ type UpdateOrganizationConfigurationInput struct {
 	// value for either autoEnableOrganizationMembers or autoEnable .
 	//
 	// Deprecated: This field is deprecated, use AutoEnableOrganizationMembers instead
-	AutoEnable bool
+	AutoEnable *bool
 
 	// Indicates the auto-enablement configuration of GuardDuty for the member
 	// accounts in the organization. You must provide a value for either

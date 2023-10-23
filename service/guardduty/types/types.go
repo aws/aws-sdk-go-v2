@@ -12,11 +12,11 @@ type AccessControlList struct {
 
 	// A value that indicates whether public read access for the bucket is enabled
 	// through an Access Control List (ACL).
-	AllowsPublicReadAccess bool
+	AllowsPublicReadAccess *bool
 
 	// A value that indicates whether public write access for the bucket is enabled
 	// through an Access Control List (ACL).
-	AllowsPublicWriteAccess bool
+	AllowsPublicWriteAccess *bool
 
 	noSmithyDocumentSerde
 }
@@ -194,16 +194,16 @@ type AwsApiCallAction struct {
 type BlockPublicAccess struct {
 
 	// Indicates if S3 Block Public Access is set to BlockPublicAcls .
-	BlockPublicAcls bool
+	BlockPublicAcls *bool
 
 	// Indicates if S3 Block Public Access is set to BlockPublicPolicy .
-	BlockPublicPolicy bool
+	BlockPublicPolicy *bool
 
 	// Indicates if S3 Block Public Access is set to IgnorePublicAcls .
-	IgnorePublicAcls bool
+	IgnorePublicAcls *bool
 
 	// Indicates if S3 Block Public Access is set to RestrictPublicBuckets .
-	RestrictPublicBuckets bool
+	RestrictPublicBuckets *bool
 
 	noSmithyDocumentSerde
 }
@@ -229,11 +229,11 @@ type BucketPolicy struct {
 
 	// A value that indicates whether public read access for the bucket is enabled
 	// through a bucket policy.
-	AllowsPublicReadAccess bool
+	AllowsPublicReadAccess *bool
 
 	// A value that indicates whether public write access for the bucket is enabled
 	// through a bucket policy.
-	AllowsPublicWriteAccess bool
+	AllowsPublicWriteAccess *bool
 
 	noSmithyDocumentSerde
 }
@@ -274,43 +274,43 @@ type Condition struct {
 
 	// Represents a greater than condition to be applied to a single field when
 	// querying for findings.
-	GreaterThan int64
+	GreaterThan *int64
 
 	// Represents a greater than or equal condition to be applied to a single field
 	// when querying for findings.
-	GreaterThanOrEqual int64
+	GreaterThanOrEqual *int64
 
 	// Represents a greater than condition to be applied to a single field when
 	// querying for findings.
 	//
 	// Deprecated: This member has been deprecated.
-	Gt int32
+	Gt *int32
 
 	// Represents a greater than or equal condition to be applied to a single field
 	// when querying for findings.
 	//
 	// Deprecated: This member has been deprecated.
-	Gte int32
+	Gte *int32
 
 	// Represents a less than condition to be applied to a single field when querying
 	// for findings.
-	LessThan int64
+	LessThan *int64
 
 	// Represents a less than or equal condition to be applied to a single field when
 	// querying for findings.
-	LessThanOrEqual int64
+	LessThanOrEqual *int64
 
 	// Represents a less than condition to be applied to a single field when querying
 	// for findings.
 	//
 	// Deprecated: This member has been deprecated.
-	Lt int32
+	Lt *int32
 
 	// Represents a less than or equal condition to be applied to a single field when
 	// querying for findings.
 	//
 	// Deprecated: This member has been deprecated.
-	Lte int32
+	Lte *int32
 
 	// Represents the not equal condition to be applied to a single field when
 	// querying for findings.
@@ -377,10 +377,10 @@ type CoverageEksClusterDetails struct {
 	ClusterName *string
 
 	// Represents all the nodes within the EKS cluster in your account.
-	CompatibleNodes int64
+	CompatibleNodes *int64
 
 	// Represents the nodes within the EKS cluster that have a HEALTHY coverage status.
-	CoveredNodes int64
+	CoveredNodes *int64
 
 	// Indicates how the Amazon EKS add-on GuardDuty agent is managed for this EKS
 	// cluster. AUTO_MANAGED indicates GuardDuty deploys and manages updates for this
@@ -551,7 +551,7 @@ type DataSourceConfigurationsResult struct {
 type DataSourceFreeTrial struct {
 
 	// A value that specifies the number of days left to use each enabled data source.
-	FreeTrialDaysRemaining int32
+	FreeTrialDaysRemaining *int32
 
 	noSmithyDocumentSerde
 }
@@ -711,7 +711,7 @@ type DNSLogsConfigurationResult struct {
 type DnsRequestAction struct {
 
 	// Indicates whether the targeted port is blocked.
-	Blocked bool
+	Blocked *bool
 
 	// The domain information for the DNS query.
 	Domain *string
@@ -792,7 +792,7 @@ type EbsVolumesResult struct {
 type EcsClusterDetails struct {
 
 	// The number of services that are running on the cluster in an ACTIVE state.
-	ActiveServicesCount int32
+	ActiveServicesCount *int32
 
 	// The Amazon Resource Name (ARN) that identifies the cluster.
 	Arn *string
@@ -801,10 +801,10 @@ type EcsClusterDetails struct {
 	Name *string
 
 	// The number of container instances registered into the cluster.
-	RegisteredContainerInstancesCount int32
+	RegisteredContainerInstancesCount *int32
 
 	// The number of tasks in the cluster that are in the RUNNING state.
-	RunningTasksCount int32
+	RunningTasksCount *int32
 
 	// The status of the ECS cluster.
 	Status *string
@@ -896,11 +896,11 @@ type FilterCondition struct {
 
 	// Represents a greater than condition to be applied to a single field when
 	// querying for scan entries.
-	GreaterThan int64
+	GreaterThan *int64
 
 	// Represents a less than condition to be applied to a single field when querying
 	// for scan entries.
-	LessThan int64
+	LessThan *int64
 
 	noSmithyDocumentSerde
 }
@@ -975,7 +975,7 @@ type Finding struct {
 	// The severity of the finding.
 	//
 	// This member is required.
-	Severity float64
+	Severity *float64
 
 	// The type of finding.
 	//
@@ -988,7 +988,7 @@ type Finding struct {
 	UpdatedAt *string
 
 	// The confidence score for the finding.
-	Confidence float64
+	Confidence *float64
 
 	// The description of the finding.
 	Description *string
@@ -1039,7 +1039,7 @@ type FlowLogsConfigurationResult struct {
 type FreeTrialFeatureConfigurationResult struct {
 
 	// The number of the remaining free trial days for the feature.
-	FreeTrialDaysRemaining int32
+	FreeTrialDaysRemaining *int32
 
 	// The name of the feature for which the free trial is configured.
 	Name FreeTrialFeatureResult
@@ -1051,10 +1051,10 @@ type FreeTrialFeatureConfigurationResult struct {
 type GeoLocation struct {
 
 	// The latitude information of the remote IP address.
-	Lat float64
+	Lat *float64
 
 	// The longitude information of the remote IP address.
-	Lon float64
+	Lon *float64
 
 	noSmithyDocumentSerde
 }
@@ -1064,7 +1064,7 @@ type GeoLocation struct {
 type HighestSeverityThreatDetails struct {
 
 	// Total number of infected files with the highest severity threat detected.
-	Count int32
+	Count *int32
 
 	// Severity level of the highest severity threat detected.
 	Severity *string
@@ -1179,7 +1179,7 @@ type KubernetesApiCallAction struct {
 	SourceIps []string
 
 	// The resulting HTTP response code of the Kubernetes API call action.
-	StatusCode int32
+	StatusCode *int32
 
 	// The user agent of the caller of the Kubernetes API.
 	UserAgent *string
@@ -1196,7 +1196,7 @@ type KubernetesAuditLogsConfiguration struct {
 	// The status of Kubernetes audit logs as a data source.
 	//
 	// This member is required.
-	Enable bool
+	Enable *bool
 
 	noSmithyDocumentSerde
 }
@@ -1284,7 +1284,7 @@ type KubernetesWorkloadDetails struct {
 	Containers []Container
 
 	// Whether the hostNetwork flag is enabled for the pods included in the workload.
-	HostNetwork bool
+	HostNetwork *bool
 
 	// Kubernetes workload name.
 	Name *string
@@ -1344,7 +1344,7 @@ type LambdaDetails struct {
 type LineageObject struct {
 
 	// The effective user ID that was used to execute the process.
-	Euid int32
+	Euid *int32
 
 	// The absolute path of the process executable file.
 	ExecutablePath *string
@@ -1353,20 +1353,20 @@ type LineageObject struct {
 	Name *string
 
 	// The process ID of the child process.
-	NamespacePid int32
+	NamespacePid *int32
 
 	// The unique ID of the parent process. This ID is assigned to the parent process
 	// by GuardDuty.
 	ParentUuid *string
 
 	// The ID of the process.
-	Pid int32
+	Pid *int32
 
 	// The time when the process started. This is in UTC format.
 	StartTime *time.Time
 
 	// The user ID of the user that executed the process.
-	UserId int32
+	UserId *int32
 
 	// The unique ID assigned to the process by GuardDuty.
 	Uuid *string
@@ -1387,7 +1387,7 @@ type LocalIpDetails struct {
 type LocalPortDetails struct {
 
 	// The port number of the local connection.
-	Port int32
+	Port *int32
 
 	// The port name of the local connection.
 	PortName *string
@@ -1403,11 +1403,11 @@ type LoginAttribute struct {
 
 	// Represents the sum of failed (unsuccessful) login attempts made to establish a
 	// connection to the database instance.
-	FailedLoginAttempts int32
+	FailedLoginAttempts *int32
 
 	// Represents the sum of successful connections (a correct combination of login
 	// attributes) made to the database instance by the actor.
-	SuccessfulLoginAttempts int32
+	SuccessfulLoginAttempts *int32
 
 	// Indicates the user name which attempted to log in.
 	User *string
@@ -1595,7 +1595,7 @@ type MemberFeaturesConfigurationResult struct {
 type NetworkConnectionAction struct {
 
 	// Indicates whether EC2 blocked the network connection to your instance.
-	Blocked bool
+	Blocked *bool
 
 	// The network connection direction.
 	ConnectionDirection *string
@@ -1768,7 +1768,7 @@ type OrganizationEbsVolumes struct {
 
 	// Whether scanning EBS volumes should be auto-enabled for new members joining the
 	// organization.
-	AutoEnable bool
+	AutoEnable *bool
 
 	noSmithyDocumentSerde
 }
@@ -1779,7 +1779,7 @@ type OrganizationEbsVolumesResult struct {
 
 	// An object that contains the status of whether scanning EBS volumes should be
 	// auto-enabled for new members joining the organization.
-	AutoEnable bool
+	AutoEnable *bool
 
 	noSmithyDocumentSerde
 }
@@ -1845,7 +1845,7 @@ type OrganizationKubernetesAuditLogsConfiguration struct {
 	// enabled automatically as a data source for the organization.
 	//
 	// This member is required.
-	AutoEnable bool
+	AutoEnable *bool
 
 	noSmithyDocumentSerde
 }
@@ -1858,7 +1858,7 @@ type OrganizationKubernetesAuditLogsConfigurationResult struct {
 	// members joining the organization.
 	//
 	// This member is required.
-	AutoEnable bool
+	AutoEnable *bool
 
 	noSmithyDocumentSerde
 }
@@ -1916,7 +1916,7 @@ type OrganizationS3LogsConfiguration struct {
 	// automatically as a data source for the organization.
 	//
 	// This member is required.
-	AutoEnable bool
+	AutoEnable *bool
 
 	noSmithyDocumentSerde
 }
@@ -1929,7 +1929,7 @@ type OrganizationS3LogsConfigurationResult struct {
 	// new members of the organization.
 	//
 	// This member is required.
-	AutoEnable bool
+	AutoEnable *bool
 
 	noSmithyDocumentSerde
 }
@@ -1981,7 +1981,7 @@ type PortProbeAction struct {
 
 	// Indicates whether EC2 blocked the port probe to the instance, such as with an
 	// ACL.
-	Blocked bool
+	Blocked *bool
 
 	// A list of objects related to port probe details.
 	PortProbeDetails []PortProbeDetail
@@ -2020,7 +2020,7 @@ type PrivateIpAddressDetails struct {
 type ProcessDetails struct {
 
 	// The effective user ID of the user that executed the process.
-	Euid int32
+	Euid *int32
 
 	// The absolute path of the process executable file.
 	ExecutablePath *string
@@ -2035,14 +2035,14 @@ type ProcessDetails struct {
 	Name *string
 
 	// The ID of the child process.
-	NamespacePid int32
+	NamespacePid *int32
 
 	// The unique ID of the parent process. This ID is assigned to the parent process
 	// by GuardDuty.
 	ParentUuid *string
 
 	// The ID of the process.
-	Pid int32
+	Pid *int32
 
 	// The present working directory of the process.
 	Pwd *string
@@ -2054,7 +2054,7 @@ type ProcessDetails struct {
 	User *string
 
 	// The unique ID of the user that executed the process.
-	UserId int32
+	UserId *int32
 
 	// The unique ID assigned to the process by GuardDuty.
 	Uuid *string
@@ -2161,7 +2161,7 @@ type RemoteAccountDetails struct {
 	// related to your GuardDuty environment. If this value is True the API caller is
 	// affiliated to your account in some way. If it is False the API caller is from
 	// outside your environment.
-	Affiliated bool
+	Affiliated *bool
 
 	noSmithyDocumentSerde
 }
@@ -2191,7 +2191,7 @@ type RemoteIpDetails struct {
 type RemotePortDetails struct {
 
 	// The port number of the remote connection.
-	Port int32
+	Port *int32
 
 	// The port name of the remote connection.
 	PortName *string
@@ -2272,7 +2272,7 @@ type RuntimeContext struct {
 	// Specifies a particular protocol within the address family. Usually there is a
 	// single protocol in address families. For example, the address family AF_INET
 	// only has the IP protocol.
-	IanaProtocolNumber int32
+	IanaProtocolNumber *int32
 
 	// The value of the LD_PRELOAD environment variable.
 	LdPreloadValue *string
@@ -2377,7 +2377,7 @@ type S3LogsConfiguration struct {
 	// The status of S3 data event logs as a data source.
 	//
 	// This member is required.
-	Enable bool
+	Enable *bool
 
 	noSmithyDocumentSerde
 }
@@ -2415,7 +2415,7 @@ type Scan struct {
 	FailureReason *string
 
 	// Represents the number of files that were scanned.
-	FileCount int64
+	FileCount *int64
 
 	// Represents the resources that were scanned in the scan entry.
 	ResourceDetails *ResourceDetails
@@ -2439,7 +2439,7 @@ type Scan struct {
 	ScanType ScanType
 
 	// Represents total bytes that were scanned.
-	TotalBytes int64
+	TotalBytes *int64
 
 	// Specifies the reason why the scan was initiated.
 	TriggerDetails *TriggerDetails
@@ -2498,7 +2498,7 @@ type ScanDetections struct {
 type ScanEc2InstanceWithFindings struct {
 
 	// Describes the configuration for scanning EBS volumes as data source.
-	EbsVolumes bool
+	EbsVolumes *bool
 
 	noSmithyDocumentSerde
 }
@@ -2535,13 +2535,13 @@ type ScanFilePath struct {
 type ScannedItemCount struct {
 
 	// Number of files scanned.
-	Files int32
+	Files *int32
 
 	// Total GB of files scanned for malware.
-	TotalGb int32
+	TotalGb *int32
 
 	// Total number of scanned volumes.
-	Volumes int32
+	Volumes *int32
 
 	noSmithyDocumentSerde
 }
@@ -2578,7 +2578,7 @@ type ScanThreatName struct {
 	FilePaths []ScanFilePath
 
 	// Total number of files infected with given threat.
-	ItemCount int32
+	ItemCount *int32
 
 	// The name of the identified threat.
 	Name *string
@@ -2593,7 +2593,7 @@ type ScanThreatName struct {
 type SecurityContext struct {
 
 	// Whether the container is privileged.
-	Privileged bool
+	Privileged *bool
 
 	noSmithyDocumentSerde
 }
@@ -2620,10 +2620,10 @@ type Service struct {
 	AdditionalInfo *ServiceAdditionalInfo
 
 	// Indicates whether this finding is archived.
-	Archived bool
+	Archived *bool
 
 	// The total count of the occurrences of this finding type.
-	Count int32
+	Count *int32
 
 	// The detector ID for the GuardDuty service.
 	DetectorId *string
@@ -2702,17 +2702,17 @@ type Tag struct {
 type ThreatDetectedByName struct {
 
 	// Total number of infected files identified.
-	ItemCount int32
+	ItemCount *int32
 
 	// Flag to determine if the finding contains every single infected file-path
 	// and/or every threat.
-	Shortened bool
+	Shortened *bool
 
 	// List of identified threats with details, organized by threat name.
 	ThreatNames []ScanThreatName
 
 	// Total number of unique threats by name identified, as part of the malware scan.
-	UniqueThreatNameCount int32
+	UniqueThreatNameCount *int32
 
 	noSmithyDocumentSerde
 }
@@ -2735,7 +2735,7 @@ type ThreatIntelligenceDetail struct {
 type ThreatsDetectedItemCount struct {
 
 	// Total number of infected files.
-	Files int32
+	Files *int32
 
 	noSmithyDocumentSerde
 }
@@ -2915,7 +2915,7 @@ type VolumeDetail struct {
 	VolumeArn *string
 
 	// EBS volume size in GB.
-	VolumeSizeInGB int32
+	VolumeSizeInGB *int32
 
 	// The EBS volume type.
 	VolumeType *string

@@ -3076,6 +3076,9 @@ func validateOpPutRetentionConfigurationInput(v *PutRetentionConfigurationInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutRetentionConfigurationInput"}
+	if v.RetentionPeriodInDays == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetentionPeriodInDays"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

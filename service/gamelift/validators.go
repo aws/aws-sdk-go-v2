@@ -2331,6 +2331,9 @@ func validateTargetConfiguration(v *types.TargetConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TargetConfiguration"}
+	if v.TargetValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetValue"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

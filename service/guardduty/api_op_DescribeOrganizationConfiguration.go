@@ -46,7 +46,7 @@ type DescribeOrganizationConfigurationInput struct {
 
 	// You can use this parameter to indicate the maximum number of items that you
 	// want in the response.
-	MaxResults int32
+	MaxResults *int32
 
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the list action. For subsequent calls to
@@ -63,14 +63,14 @@ type DescribeOrganizationConfigurationOutput struct {
 	// associated with the delegated administrator account for your organization.
 	//
 	// This member is required.
-	MemberAccountLimitReached bool
+	MemberAccountLimitReached *bool
 
 	// Indicates whether GuardDuty is automatically enabled for accounts added to the
 	// organization. Even though this is still supported, we recommend using
 	// AutoEnableOrganizationMembers to achieve the similar results.
 	//
 	// Deprecated: This field is deprecated, use AutoEnableOrganizationMembers instead
-	AutoEnable bool
+	AutoEnable *bool
 
 	// Indicates the auto-enablement configuration of GuardDuty for the member
 	// accounts in the organization.
@@ -216,8 +216,8 @@ func NewDescribeOrganizationConfigurationPaginator(client DescribeOrganizationCo
 	}
 
 	options := DescribeOrganizationConfigurationPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -247,7 +247,11 @@ func (p *DescribeOrganizationConfigurationPaginator) NextPage(ctx context.Contex
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeOrganizationConfiguration(ctx, &params, optFns...)
 	if err != nil {

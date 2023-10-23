@@ -53,7 +53,7 @@ type CreateModelPackageInput struct {
 	// Whether to certify the model package for listing on Amazon Web Services
 	// Marketplace. This parameter is optional for unversioned models, and does not
 	// apply to versioned models.
-	CertifyForMarketplace bool
+	CertifyForMarketplace *bool
 
 	// A unique token that guarantees that the call to this API is idempotent.
 	ClientToken *string

@@ -423,7 +423,7 @@ type EngineConfiguration struct {
 	// The maximum number of DPUs that can run concurrently.
 	//
 	// This member is required.
-	MaxConcurrentDpus int32
+	MaxConcurrentDpus *int32
 
 	// Contains additional notebook engine MAP parameter mappings in the form of
 	// key-value pairs. To specify an Athena notebook that the Jupyter server will

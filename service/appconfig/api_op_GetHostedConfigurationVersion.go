@@ -46,7 +46,7 @@ type GetHostedConfigurationVersionInput struct {
 	// The version.
 	//
 	// This member is required.
-	VersionNumber int32
+	VersionNumber *int32
 
 	noSmithyDocumentSerde
 }

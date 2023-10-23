@@ -43,7 +43,7 @@ type ListUserImportJobsInput struct {
 	// The maximum number of import jobs you want the request to return.
 	//
 	// This member is required.
-	MaxResults int32
+	MaxResults *int32
 
 	// The user pool ID for the user pool that the users are being imported into.
 	//

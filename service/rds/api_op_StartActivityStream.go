@@ -74,7 +74,7 @@ type StartActivityStreamOutput struct {
 
 	// Indicates whether or not the database activity stream will start as soon as
 	// possible, regardless of the maintenance window for the database.
-	ApplyImmediately bool
+	ApplyImmediately *bool
 
 	// Indicates whether engine-native audit fields are included in the database
 	// activity stream.

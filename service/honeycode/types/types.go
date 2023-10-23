@@ -324,7 +324,7 @@ type ResultSet struct {
 type SourceDataColumnProperties struct {
 
 	// The index of the column in the input file.
-	ColumnIndex int32
+	ColumnIndex *int32
 
 	noSmithyDocumentSerde
 }

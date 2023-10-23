@@ -41,7 +41,7 @@ type UpdateNumberOfDomainControllersInput struct {
 	// The number of domain controllers desired in the directory.
 	//
 	// This member is required.
-	DesiredNumber int32
+	DesiredNumber *int32
 
 	// Identifier of the directory to which the domain controllers will be added or
 	// removed.

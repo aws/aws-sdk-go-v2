@@ -3220,7 +3220,6 @@
         "com.amazonaws.directoryservice#DesiredNumberOfDomainControllers": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 2
                 }
@@ -3557,7 +3556,6 @@
                 "DesiredNumberOfDomainControllers": {
                     "target": "com.amazonaws.directoryservice#DesiredNumberOfDomainControllers",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The desired number of domain controllers in the directory if the directory is Microsoft\n      AD.</p>"
                     }
                 },
@@ -4022,7 +4020,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -4065,7 +4062,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -4078,7 +4076,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -4092,7 +4089,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -4115,7 +4111,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -4150,7 +4145,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4161,14 +4155,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -4182,14 +4178,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -4198,11 +4192,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4213,14 +4207,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -4234,7 +4230,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -4254,7 +4249,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4265,14 +4259,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -4283,9 +4279,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -6979,7 +6977,6 @@
         "com.amazonaws.directoryservice#PortNumber": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1025,
                     "max": 65535
@@ -7046,14 +7043,12 @@
                 "RadiusPort": {
                     "target": "com.amazonaws.directoryservice#PortNumber",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port that your RADIUS server is using for communications. Your self-managed\n         network must allow inbound traffic over this port from the Directory Service servers.</p>"
                     }
                 },
                 "RadiusTimeout": {
                     "target": "com.amazonaws.directoryservice#RadiusTimeout",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time, in seconds, to wait for the RADIUS server to respond.</p>"
                     }
                 },
@@ -7131,7 +7126,6 @@
         "com.amazonaws.directoryservice#RadiusTimeout": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 20
@@ -7171,7 +7165,6 @@
                 "DesiredNumberOfDomainControllers": {
                     "target": "com.amazonaws.directoryservice#DesiredNumberOfDomainControllers",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The desired number of domain controllers in the specified Region for the specified\n      directory.</p>"
                     }
                 },
@@ -9376,7 +9369,6 @@
                 "DesiredNumber": {
                     "target": "com.amazonaws.directoryservice#DesiredNumberOfDomainControllers",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of domain controllers desired in the directory.</p>",
                         "smithy.api#required": {}
                     }

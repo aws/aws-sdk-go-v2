@@ -35,6 +35,7 @@
                 "Message": {
                     "target": "com.amazonaws.connectcontactlens#Message",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 }
@@ -109,7 +110,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -152,7 +152,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -165,7 +166,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -179,7 +179,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -202,7 +201,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -237,7 +235,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -248,14 +245,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -269,14 +268,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -285,11 +282,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -300,14 +297,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -321,7 +320,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -341,7 +339,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -352,14 +349,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -370,9 +369,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -794,6 +795,7 @@
                 "MatchedCategories": {
                     "target": "com.amazonaws.connectcontactlens#MatchedCategories",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The category rules that have been matched in the analyzed segment.</p>",
                         "smithy.api#required": {}
                     }
@@ -801,6 +803,7 @@
                 "MatchedDetails": {
                     "target": "com.amazonaws.connectcontactlens#MatchedDetails",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The category rule that was matched and when it occurred in the transcript.</p>",
                         "smithy.api#required": {}
                     }
@@ -816,6 +819,7 @@
                 "PointsOfInterest": {
                     "target": "com.amazonaws.connectcontactlens#PointsOfInterest",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The section of audio where the category rule was detected.</p>",
                         "smithy.api#required": {}
                     }
@@ -838,7 +842,6 @@
         "com.amazonaws.connectcontactlens#CharacterOffset": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -850,7 +853,7 @@
                 "BeginOffsetChar": {
                     "target": "com.amazonaws.connectcontactlens#CharacterOffset",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The beginning of the issue.</p>",
                         "smithy.api#required": {}
                     }
@@ -858,7 +861,7 @@
                 "EndOffsetChar": {
                     "target": "com.amazonaws.connectcontactlens#CharacterOffset",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The end of the issue.</p>",
                         "smithy.api#required": {}
                     }
@@ -920,6 +923,7 @@
                 "CharacterOffsets": {
                     "target": "com.amazonaws.connectcontactlens#CharacterOffsets",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The offset for when the issue was detected in the segment.</p>",
                         "smithy.api#required": {}
                     }
@@ -986,6 +990,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connectcontactlens#InstanceId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
                         "smithy.api#required": {}
                     }
@@ -993,6 +998,7 @@
                 "ContactId": {
                     "target": "com.amazonaws.connectcontactlens#ContactId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the contact.</p>",
                         "smithy.api#required": {}
                     }
@@ -1000,7 +1006,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connectcontactlens#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximimum number of results to return per page.</p>"
                     }
                 },
@@ -1021,6 +1026,7 @@
                 "Segments": {
                     "target": "com.amazonaws.connectcontactlens#RealtimeContactAnalysisSegments",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An analyzed transcript or category.</p>",
                         "smithy.api#required": {}
                     }
@@ -1066,7 +1072,6 @@
         "com.amazonaws.connectcontactlens#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -1089,7 +1094,6 @@
         "com.amazonaws.connectcontactlens#OffsetMillis": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -1121,7 +1125,7 @@
                 "BeginOffsetMillis": {
                     "target": "com.amazonaws.connectcontactlens#OffsetMillis",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The beginning offset in milliseconds where the category rule was detected.</p>",
                         "smithy.api#required": {}
                     }
@@ -1129,7 +1133,7 @@
                 "EndOffsetMillis": {
                     "target": "com.amazonaws.connectcontactlens#OffsetMillis",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ending offset in milliseconds where the category rule was detected.</p>",
                         "smithy.api#required": {}
                     }
@@ -1225,6 +1229,7 @@
                 "Message": {
                     "target": "com.amazonaws.connectcontactlens#Message",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 }
@@ -1241,6 +1246,7 @@
                 "Id": {
                     "target": "com.amazonaws.connectcontactlens#TranscriptId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the transcript.</p>",
                         "smithy.api#required": {}
                     }
@@ -1248,6 +1254,7 @@
                 "ParticipantId": {
                     "target": "com.amazonaws.connectcontactlens#ParticipantId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the participant.</p>",
                         "smithy.api#required": {}
                     }
@@ -1255,6 +1262,7 @@
                 "ParticipantRole": {
                     "target": "com.amazonaws.connectcontactlens#ParticipantRole",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The role of participant. For example, is it a customer, agent, or system.</p>",
                         "smithy.api#required": {}
                     }
@@ -1262,6 +1270,7 @@
                 "Content": {
                     "target": "com.amazonaws.connectcontactlens#TranscriptContent",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The content of the transcript.</p>",
                         "smithy.api#required": {}
                     }
@@ -1269,7 +1278,7 @@
                 "BeginOffsetMillis": {
                     "target": "com.amazonaws.connectcontactlens#OffsetMillis",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The beginning offset in the contact for this transcript.</p>",
                         "smithy.api#required": {}
                     }
@@ -1277,7 +1286,7 @@
                 "EndOffsetMillis": {
                     "target": "com.amazonaws.connectcontactlens#OffsetMillis",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The end offset in the contact for this transcript.</p>",
                         "smithy.api#required": {}
                     }
@@ -1285,6 +1294,7 @@
                 "Sentiment": {
                     "target": "com.amazonaws.connectcontactlens#SentimentValue",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The sentiment of the detected for this piece of transcript.</p>",
                         "smithy.api#required": {}
                     }

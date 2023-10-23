@@ -13003,7 +13003,7 @@ func awsRestjson1_deserializeDocumentDuration(v **types.Duration, value interfac
 				if err != nil {
 					return err
 				}
-				sv.Value = i64
+				sv.Value = ptr.Int64(i64)
 			}
 
 		default:

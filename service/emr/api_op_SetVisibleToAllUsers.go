@@ -58,7 +58,7 @@ type SetVisibleToAllUsersInput struct {
 	// perform Amazon EMR actions on the cluster.
 	//
 	// This member is required.
-	VisibleToAllUsers bool
+	VisibleToAllUsers *bool
 
 	noSmithyDocumentSerde
 }

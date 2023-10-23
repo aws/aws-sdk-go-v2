@@ -2974,9 +2974,9 @@ func awsAwsjson10_serializeDocumentStatelessRule(v *types.StatelessRule, value s
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.Priority != nil {
 		ok := object.Key("Priority")
-		ok.Integer(v.Priority)
+		ok.Integer(*v.Priority)
 	}
 
 	if v.RuleDefinition != nil {
@@ -2993,9 +2993,9 @@ func awsAwsjson10_serializeDocumentStatelessRuleGroupReference(v *types.Stateles
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.Priority != nil {
 		ok := object.Key("Priority")
-		ok.Integer(v.Priority)
+		ok.Integer(*v.Priority)
 	}
 
 	if v.ResourceArn != nil {

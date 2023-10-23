@@ -41,7 +41,7 @@ type DescribeDBEngineVersionsInput struct {
 
 	// Specifies whether to return only the default version of the specified engine or
 	// the engine and major version combination.
-	DefaultOnly bool
+	DefaultOnly *bool
 
 	// The database engine to return version details for. Valid Values:
 	//   - aurora-mysql

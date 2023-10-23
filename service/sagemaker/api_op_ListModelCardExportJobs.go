@@ -53,7 +53,7 @@ type ListModelCardExportJobsInput struct {
 	ModelCardExportJobNameContains *string
 
 	// List export jobs for the model card with the specified version.
-	ModelCardVersion int32
+	ModelCardVersion *int32
 
 	// If the response to a previous ListModelCardExportJobs request was truncated,
 	// the response includes a NextToken . To retrieve the next set of model card

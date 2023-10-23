@@ -738,9 +738,9 @@ func awsRestjson1_serializeDocumentCreateRule(v *types.CreateRule, value smithyj
 		ok.String(*v.CronExpression)
 	}
 
-	if v.Interval != 0 {
+	if v.Interval != nil {
 		ok := object.Key("Interval")
-		ok.Integer(v.Interval)
+		ok.Integer(*v.Interval)
 	}
 
 	if len(v.IntervalUnit) > 0 {
@@ -806,9 +806,9 @@ func awsRestjson1_serializeDocumentCrossRegionCopyDeprecateRule(v *types.CrossRe
 	object := value.Object()
 	defer object.Close()
 
-	if v.Interval != 0 {
+	if v.Interval != nil {
 		ok := object.Key("Interval")
-		ok.Integer(v.Interval)
+		ok.Integer(*v.Interval)
 	}
 
 	if len(v.IntervalUnit) > 0 {
@@ -823,9 +823,9 @@ func awsRestjson1_serializeDocumentCrossRegionCopyRetainRule(v *types.CrossRegio
 	object := value.Object()
 	defer object.Close()
 
-	if v.Interval != 0 {
+	if v.Interval != nil {
 		ok := object.Key("Interval")
-		ok.Integer(v.Interval)
+		ok.Integer(*v.Interval)
 	}
 
 	if len(v.IntervalUnit) > 0 {
@@ -899,14 +899,14 @@ func awsRestjson1_serializeDocumentDeprecateRule(v *types.DeprecateRule, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.Count != 0 {
+	if v.Count != nil {
 		ok := object.Key("Count")
-		ok.Integer(v.Count)
+		ok.Integer(*v.Count)
 	}
 
-	if v.Interval != 0 {
+	if v.Interval != nil {
 		ok := object.Key("Interval")
-		ok.Integer(v.Interval)
+		ok.Integer(*v.Interval)
 	}
 
 	if len(v.IntervalUnit) > 0 {
@@ -1001,14 +1001,14 @@ func awsRestjson1_serializeDocumentFastRestoreRule(v *types.FastRestoreRule, val
 		}
 	}
 
-	if v.Count != 0 {
+	if v.Count != nil {
 		ok := object.Key("Count")
-		ok.Integer(v.Count)
+		ok.Integer(*v.Count)
 	}
 
-	if v.Interval != 0 {
+	if v.Interval != nil {
 		ok := object.Key("Interval")
-		ok.Integer(v.Interval)
+		ok.Integer(*v.Interval)
 	}
 
 	if len(v.IntervalUnit) > 0 {
@@ -1130,14 +1130,14 @@ func awsRestjson1_serializeDocumentRetainRule(v *types.RetainRule, value smithyj
 	object := value.Object()
 	defer object.Close()
 
-	if v.Count != 0 {
+	if v.Count != nil {
 		ok := object.Key("Count")
-		ok.Integer(v.Count)
+		ok.Integer(*v.Count)
 	}
 
-	if v.Interval != 0 {
+	if v.Interval != nil {
 		ok := object.Key("Interval")
-		ok.Integer(v.Interval)
+		ok.Integer(*v.Interval)
 	}
 
 	if len(v.IntervalUnit) > 0 {
@@ -1152,14 +1152,14 @@ func awsRestjson1_serializeDocumentRetentionArchiveTier(v *types.RetentionArchiv
 	object := value.Object()
 	defer object.Close()
 
-	if v.Count != 0 {
+	if v.Count != nil {
 		ok := object.Key("Count")
-		ok.Integer(v.Count)
+		ok.Integer(*v.Count)
 	}
 
-	if v.Interval != 0 {
+	if v.Interval != nil {
 		ok := object.Key("Interval")
-		ok.Integer(v.Interval)
+		ok.Integer(*v.Interval)
 	}
 
 	if len(v.IntervalUnit) > 0 {
@@ -1181,9 +1181,9 @@ func awsRestjson1_serializeDocumentSchedule(v *types.Schedule, value smithyjson.
 		}
 	}
 
-	if v.CopyTags {
+	if v.CopyTags != nil {
 		ok := object.Key("CopyTags")
-		ok.Boolean(v.CopyTags)
+		ok.Boolean(*v.CopyTags)
 	}
 
 	if v.CreateRule != nil {
@@ -1274,9 +1274,9 @@ func awsRestjson1_serializeDocumentShareRule(v *types.ShareRule, value smithyjso
 		}
 	}
 
-	if v.UnshareInterval != 0 {
+	if v.UnshareInterval != nil {
 		ok := object.Key("UnshareInterval")
-		ok.Integer(v.UnshareInterval)
+		ok.Integer(*v.UnshareInterval)
 	}
 
 	if len(v.UnshareIntervalUnit) > 0 {

@@ -522,6 +522,9 @@ func validateSamplingRule(v *types.SamplingRule) error {
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	}
 	if v.ServiceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
@@ -536,6 +539,9 @@ func validateSamplingRule(v *types.SamplingRule) error {
 	}
 	if v.URLPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("URLPath"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

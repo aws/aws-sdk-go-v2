@@ -4709,6 +4709,9 @@ func validateOpCreateMaintenanceWindowInput(v *CreateMaintenanceWindowInput) err
 	if v.Schedule == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Schedule"))
 	}
+	if v.Duration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Duration"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))

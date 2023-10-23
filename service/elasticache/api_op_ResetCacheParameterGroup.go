@@ -52,7 +52,7 @@ type ResetCacheParameterGroupInput struct {
 	// If true , all parameters in the cache parameter group are reset to their default
 	// values. If false , only the parameters listed by ParameterNameValues are reset
 	// to their default values. Valid values: true | false
-	ResetAllParameters bool
+	ResetAllParameters *bool
 
 	noSmithyDocumentSerde
 }

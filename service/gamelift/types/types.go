@@ -1818,7 +1818,7 @@ type PlayerLatency struct {
 
 	// Amount of time that represents the time lag experienced by the player when
 	// connected to the specified Region.
-	LatencyInMilliseconds float32
+	LatencyInMilliseconds *float32
 
 	// A unique identifier for a player associated with the latency data.
 	PlayerId *string
@@ -2123,7 +2123,7 @@ type ScalingPolicy struct {
 	PolicyType PolicyType
 
 	// Amount of adjustment to make, based on the scaling adjustment type.
-	ScalingAdjustment int32
+	ScalingAdjustment *int32
 
 	// The type of adjustment to make to a fleet's instance count.
 	//   - ChangeInCapacity -- add (or subtract) the scaling adjustment value from the
@@ -2155,7 +2155,7 @@ type ScalingPolicy struct {
 	TargetConfiguration *TargetConfiguration
 
 	// Metric value used to trigger a scaling event.
-	Threshold float64
+	Threshold *float64
 
 	// The current status of the fleet's scaling policies in a requested fleet
 	// location. The status PENDING_UPDATE indicates that an update was requested for
@@ -2274,7 +2274,7 @@ type TargetConfiguration struct {
 	// idle and ready for new game sessions).
 	//
 	// This member is required.
-	TargetValue float64
+	TargetValue *float64
 
 	noSmithyDocumentSerde
 }

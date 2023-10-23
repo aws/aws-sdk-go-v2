@@ -3829,9 +3829,9 @@ func awsRestjson1_serializeDocumentSentimentConfiguration(v *types.SentimentConf
 		ok.String(string(v.SentimentType))
 	}
 
-	{
+	if v.TimePeriod != nil {
 		ok := object.Key("TimePeriod")
-		ok.Integer(v.TimePeriod)
+		ok.Integer(*v.TimePeriod)
 	}
 
 	return nil

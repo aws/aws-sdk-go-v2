@@ -35,7 +35,7 @@ func (c *Client) ListEnabledProductsForImport(ctx context.Context, params *ListE
 type ListEnabledProductsForImportInput struct {
 
 	// The maximum number of items to return in the response.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the
 	// ListEnabledProductsForImport operation, set the value of this parameter to NULL
@@ -170,8 +170,8 @@ func NewListEnabledProductsForImportPaginator(client ListEnabledProductsForImpor
 	}
 
 	options := ListEnabledProductsForImportPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -201,7 +201,11 @@ func (p *ListEnabledProductsForImportPaginator) NextPage(ctx context.Context, op
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListEnabledProductsForImport(ctx, &params, optFns...)
 	if err != nil {

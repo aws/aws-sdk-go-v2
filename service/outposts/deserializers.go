@@ -5131,7 +5131,7 @@ func awsRestjson1_deserializeDocumentLineItem(v **types.LineItem, value interfac
 				if err != nil {
 					return err
 				}
-				sv.Quantity = int32(i64)
+				sv.Quantity = ptr.Int32(int32(i64))
 			}
 
 		case "ShipmentInformation":

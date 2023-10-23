@@ -2095,7 +2095,7 @@ type MediaConcurrency struct {
 	// 1. Maximum value of 10.
 	//
 	// This member is required.
-	Concurrency int32
+	Concurrency *int32
 
 	// Defines the cross-channel routing behavior for each channel that is enabled for
 	// this Routing Profile. For example, this allows you to offer an agent a different
@@ -2968,7 +2968,7 @@ type RoutingProfileQueueConfigSummary struct {
 	// .
 	//
 	// This member is required.
-	Priority int32
+	Priority *int32
 
 	// The Amazon Resource Name (ARN) of the queue.
 	//

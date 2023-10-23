@@ -92,7 +92,7 @@ type EnableLoggingOutput struct {
 	LogExports []string
 
 	// true if logging is on, false if logging is off.
-	LoggingEnabled bool
+	LoggingEnabled *bool
 
 	// The prefix applied to the log file names.
 	S3KeyPrefix *string

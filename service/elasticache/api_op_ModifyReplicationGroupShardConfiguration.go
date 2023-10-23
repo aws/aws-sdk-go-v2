@@ -40,13 +40,13 @@ type ModifyReplicationGroupShardConfigurationInput struct {
 	// present, the only permitted value for this parameter is true . Value: true
 	//
 	// This member is required.
-	ApplyImmediately bool
+	ApplyImmediately *bool
 
 	// The number of node groups (shards) that results from the modification of the
 	// shard configuration.
 	//
 	// This member is required.
-	NodeGroupCount int32
+	NodeGroupCount *int32
 
 	// The name of the Redis (cluster mode enabled) cluster (replication group) on
 	// which the shards are to be configured.

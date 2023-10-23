@@ -35,7 +35,7 @@ func (c *Client) ListProfileNotifications(ctx context.Context, params *ListProfi
 type ListProfileNotificationsInput struct {
 
 	// The maximum number of results to return for this request.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token to use to retrieve the next set of results.
 	NextToken *string
@@ -169,8 +169,8 @@ func NewListProfileNotificationsPaginator(client ListProfileNotificationsAPIClie
 	}
 
 	options := ListProfileNotificationsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -200,7 +200,11 @@ func (p *ListProfileNotificationsPaginator) NextPage(ctx context.Context, optFns
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListProfileNotifications(ctx, &params, optFns...)
 	if err != nil {

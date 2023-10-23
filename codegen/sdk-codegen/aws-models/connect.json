@@ -3392,7 +3392,6 @@
         "com.amazonaws.connect#Concurrency": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 10
@@ -8161,7 +8160,7 @@
                 "ViewVersion": {
                     "target": "com.amazonaws.connect#ViewVersion",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The version number of the view.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
@@ -12451,7 +12450,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 },
@@ -12564,7 +12562,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 }
@@ -12777,7 +12774,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 }
@@ -12904,7 +12900,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 }
@@ -15080,7 +15075,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult1000",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -15218,7 +15212,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult25",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -15306,7 +15299,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult25",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -15496,7 +15488,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult1000",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -15601,7 +15592,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult1000",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -15786,7 +15776,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 },
@@ -15881,7 +15870,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -15970,7 +15958,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -16069,7 +16056,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult1000",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -16160,7 +16146,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult7",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -16259,7 +16244,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult10",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -16333,7 +16317,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult10",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -16428,7 +16411,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -16519,7 +16501,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult25",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -16610,7 +16591,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult25",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page. If no value is specified, the default is 10.\n   </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -16715,7 +16695,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult1000",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -16847,7 +16826,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult1000",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 },
@@ -16961,7 +16939,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult1000",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -17060,7 +17037,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -17158,7 +17134,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult1000",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -17249,7 +17224,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult1000",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -17355,7 +17329,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -17446,7 +17419,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult1000",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -17544,7 +17516,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult200",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -17643,7 +17614,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult2",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -17742,7 +17712,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult1000",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -17841,7 +17810,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult1000",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -17932,7 +17900,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult1000",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -18087,7 +18054,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>\n         <important>\n            <p>It is not expected that you set this.</p>\n         </important>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -18185,7 +18151,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult10",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -18265,7 +18230,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult10",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -18375,7 +18339,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -18467,7 +18430,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult1000",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -18558,7 +18520,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult1000",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -18797,7 +18758,6 @@
         "com.amazonaws.connect#MaxResult10": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 10
@@ -18807,7 +18767,6 @@
         "com.amazonaws.connect#MaxResult100": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -18817,7 +18776,6 @@
         "com.amazonaws.connect#MaxResult1000": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -18827,7 +18785,6 @@
         "com.amazonaws.connect#MaxResult2": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 2
@@ -18837,7 +18794,6 @@
         "com.amazonaws.connect#MaxResult200": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 200
@@ -18847,7 +18803,6 @@
         "com.amazonaws.connect#MaxResult25": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 25
@@ -18857,7 +18812,6 @@
         "com.amazonaws.connect#MaxResult7": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 7
@@ -18906,7 +18860,6 @@
                 "Concurrency": {
                     "target": "com.amazonaws.connect#Concurrency",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of contacts an agent can have on a channel simultaneously.</p>\n         <p>Valid Range for <code>VOICE</code>: Minimum value of 1. Maximum value of 1.</p>\n         <p>Valid Range for <code>CHAT</code>: Minimum value of 1. Maximum value of 10.</p>\n         <p>Valid Range for <code>TASK</code>: Minimum value of 1. Maximum value of 10.</p>",
                         "smithy.api#required": {}
                     }
@@ -21391,7 +21344,6 @@
         "com.amazonaws.connect#Priority": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 99
@@ -23016,7 +22968,6 @@
                 "Priority": {
                     "target": "com.amazonaws.connect#Priority",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The order in which contacts are to be handled for the queue. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html\">Queues: priority and\n    delay</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -23073,7 +23024,6 @@
                 "Priority": {
                     "target": "com.amazonaws.connect#Priority",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The order in which contacts are to be handled for the queue. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html\">Queues: priority and\n    delay</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -23606,7 +23556,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult10",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 },
@@ -23700,7 +23649,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 },
@@ -23806,7 +23754,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 },
@@ -23912,7 +23859,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 },
@@ -24018,7 +23964,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 },
@@ -24133,7 +24078,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 },
@@ -24227,7 +24171,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 },
@@ -24333,7 +24276,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 },
@@ -24438,7 +24380,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 },
@@ -24533,7 +24474,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 },

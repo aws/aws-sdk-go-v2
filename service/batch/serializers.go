@@ -4008,9 +4008,9 @@ func awsRestjson1_serializeDocumentUpdatePolicy(v *types.UpdatePolicy, value smi
 	object := value.Object()
 	defer object.Close()
 
-	if v.JobExecutionTimeoutMinutes != 0 {
+	if v.JobExecutionTimeoutMinutes != nil {
 		ok := object.Key("jobExecutionTimeoutMinutes")
-		ok.Long(v.JobExecutionTimeoutMinutes)
+		ok.Long(*v.JobExecutionTimeoutMinutes)
 	}
 
 	if v.TerminateJobsOnUpdate != nil {

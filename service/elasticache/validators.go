@@ -1242,6 +1242,9 @@ func validateConfigureShard(v *types.ConfigureShard) error {
 	if v.NodeGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeGroupId"))
 	}
+	if v.NewReplicaCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewReplicaCount"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1617,6 +1620,12 @@ func validateOpDecreaseNodeGroupsInGlobalReplicationGroupInput(v *DecreaseNodeGr
 	if v.GlobalReplicationGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalReplicationGroupId"))
 	}
+	if v.NodeGroupCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeGroupCount"))
+	}
+	if v.ApplyImmediately == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1636,6 +1645,9 @@ func validateOpDecreaseReplicaCountInput(v *DecreaseReplicaCountInput) error {
 		if err := validateReplicaConfigurationList(v.ReplicaConfiguration); err != nil {
 			invalidParams.AddNested("ReplicaConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ApplyImmediately == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1711,6 +1723,9 @@ func validateOpDeleteGlobalReplicationGroupInput(v *DeleteGlobalReplicationGroup
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteGlobalReplicationGroupInput"}
 	if v.GlobalReplicationGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalReplicationGroupId"))
+	}
+	if v.RetainPrimaryReplicationGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetainPrimaryReplicationGroup"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1876,10 +1891,16 @@ func validateOpIncreaseNodeGroupsInGlobalReplicationGroupInput(v *IncreaseNodeGr
 	if v.GlobalReplicationGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalReplicationGroupId"))
 	}
+	if v.NodeGroupCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeGroupCount"))
+	}
 	if v.RegionalConfigurations != nil {
 		if err := validateRegionalConfigurationList(v.RegionalConfigurations); err != nil {
 			invalidParams.AddNested("RegionalConfigurations", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ApplyImmediately == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1900,6 +1921,9 @@ func validateOpIncreaseReplicaCountInput(v *IncreaseReplicaCountInput) error {
 		if err := validateReplicaConfigurationList(v.ReplicaConfiguration); err != nil {
 			invalidParams.AddNested("ReplicaConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ApplyImmediately == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1979,6 +2003,9 @@ func validateOpModifyGlobalReplicationGroupInput(v *ModifyGlobalReplicationGroup
 	if v.GlobalReplicationGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalReplicationGroupId"))
 	}
+	if v.ApplyImmediately == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2008,6 +2035,12 @@ func validateOpModifyReplicationGroupShardConfigurationInput(v *ModifyReplicatio
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyReplicationGroupShardConfigurationInput"}
 	if v.ReplicationGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupId"))
+	}
+	if v.NodeGroupCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeGroupCount"))
+	}
+	if v.ApplyImmediately == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2068,6 +2101,9 @@ func validateOpRebalanceSlotsInGlobalReplicationGroupInput(v *RebalanceSlotsInGl
 	invalidParams := smithy.InvalidParamsError{Context: "RebalanceSlotsInGlobalReplicationGroupInput"}
 	if v.GlobalReplicationGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalReplicationGroupId"))
+	}
+	if v.ApplyImmediately == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

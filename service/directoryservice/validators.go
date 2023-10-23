@@ -2649,6 +2649,9 @@ func validateOpUpdateNumberOfDomainControllersInput(v *UpdateNumberOfDomainContr
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
+	if v.DesiredNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DesiredNumber"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

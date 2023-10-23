@@ -55,7 +55,7 @@ type ModifyUsageLimitOutput struct {
 
 	// The limit amount. If time-based, this amount is in minutes. If data-based, this
 	// amount is in terabytes (TB).
-	Amount int64
+	Amount *int64
 
 	// The action that Amazon Redshift takes when the limit is reached. Possible
 	// values are:

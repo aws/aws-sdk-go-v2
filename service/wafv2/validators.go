@@ -2364,6 +2364,9 @@ func validateRateBasedStatement(v *types.RateBasedStatement) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RateBasedStatement"}
+	if v.Limit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Limit"))
+	}
 	if len(v.AggregateKeyType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AggregateKeyType"))
 	}
@@ -3480,6 +3483,9 @@ func validateOpCreateRuleGroupInput(v *CreateRuleGroupInput) error {
 	if len(v.Scope) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
 	}
+	if v.Capacity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Capacity"))
+	}
 	if v.Rules != nil {
 		if err := validateRules(v.Rules); err != nil {
 			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
@@ -3975,6 +3981,9 @@ func validateOpGetSampledRequestsInput(v *GetSampledRequestsInput) error {
 		if err := validateTimeWindow(v.TimeWindow); err != nil {
 			invalidParams.AddNested("TimeWindow", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.MaxItems == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxItems"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

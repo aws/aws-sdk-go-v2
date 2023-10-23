@@ -47,7 +47,7 @@ type DeleteHostedConfigurationVersionInput struct {
 	// The versions number to delete.
 	//
 	// This member is required.
-	VersionNumber int32
+	VersionNumber *int32
 
 	noSmithyDocumentSerde
 }

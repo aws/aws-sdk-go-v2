@@ -99,7 +99,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -142,7 +141,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -155,7 +155,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -169,7 +168,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -192,7 +190,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -227,7 +224,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -238,14 +234,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -259,14 +257,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -275,11 +271,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -290,14 +286,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -311,7 +309,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -331,7 +328,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -342,14 +338,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -360,9 +358,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1069,7 +1069,6 @@
                 "Value": {
                     "target": "com.amazonaws.sagemakeredge#Value",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Returns the value of the metric.</p>"
                     }
                 },
@@ -1148,6 +1147,7 @@
                 "DeviceName": {
                     "target": "com.amazonaws.sagemakeredge#DeviceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique name of the device you want to get the configuration of active deployments from.</p>",
                         "smithy.api#required": {}
                     }
@@ -1155,6 +1155,7 @@
                 "DeviceFleetName": {
                     "target": "com.amazonaws.sagemakeredge#DeviceFleetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet that the device belongs to.</p>",
                         "smithy.api#required": {}
                     }
@@ -1206,6 +1207,7 @@
                 "DeviceName": {
                     "target": "com.amazonaws.sagemakeredge#DeviceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique name of the device you want to get the registration status from.</p>",
                         "smithy.api#required": {}
                     }
@@ -1213,6 +1215,7 @@
                 "DeviceFleetName": {
                     "target": "com.amazonaws.sagemakeredge#DeviceFleetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet that the device belongs to.</p>",
                         "smithy.api#required": {}
                     }
@@ -1385,6 +1388,7 @@
                 "AgentVersion": {
                     "target": "com.amazonaws.sagemakeredge#Version",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Returns the version of the agent.</p>",
                         "smithy.api#required": {}
                     }
@@ -1392,6 +1396,7 @@
                 "DeviceName": {
                     "target": "com.amazonaws.sagemakeredge#DeviceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique name of the device.</p>",
                         "smithy.api#required": {}
                     }
@@ -1399,6 +1404,7 @@
                 "DeviceFleetName": {
                     "target": "com.amazonaws.sagemakeredge#DeviceFleetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet that the device belongs to.</p>",
                         "smithy.api#required": {}
                     }
@@ -1421,10 +1427,7 @@
             "type": "timestamp"
         },
         "com.amazonaws.sagemakeredge#Value": {
-            "type": "double",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "double"
         },
         "com.amazonaws.sagemakeredge#Version": {
             "type": "string",

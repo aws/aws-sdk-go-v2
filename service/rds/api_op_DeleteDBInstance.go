@@ -87,7 +87,7 @@ type DeleteDBInstanceInput struct {
 	// RDS can delete the instance only if you enable this parameter. If you delete a
 	// read replica or an RDS Custom instance, you must enable this setting. This
 	// setting is required for RDS Custom.
-	SkipFinalSnapshot bool
+	SkipFinalSnapshot *bool
 
 	noSmithyDocumentSerde
 }

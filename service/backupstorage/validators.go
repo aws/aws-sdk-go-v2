@@ -347,6 +347,9 @@ func validateOpPutChunkInput(v *PutChunkInput) error {
 	if v.UploadId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
 	}
+	if v.ChunkIndex == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChunkIndex"))
+	}
 	if v.Data == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Data"))
 	}

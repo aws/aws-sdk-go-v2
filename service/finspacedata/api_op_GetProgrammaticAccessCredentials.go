@@ -44,7 +44,7 @@ type GetProgrammaticAccessCredentialsInput struct {
 	EnvironmentId *string
 
 	// The time duration in which the credentials remain valid.
-	DurationInMinutes int64
+	DurationInMinutes *int64
 
 	noSmithyDocumentSerde
 }
@@ -56,7 +56,7 @@ type GetProgrammaticAccessCredentialsOutput struct {
 	Credentials *types.Credentials
 
 	// Returns the duration in which the credentials will remain valid.
-	DurationInMinutes int64
+	DurationInMinutes *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

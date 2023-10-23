@@ -74,7 +74,7 @@ type DescribeDBClusterSnapshotsInput struct {
 	// can be copied or restored by any Amazon Web Services account. By default, the
 	// public snapshots are not included. You can share a manual DB cluster snapshot as
 	// public by using the ModifyDBClusterSnapshotAttribute API action.
-	IncludePublic bool
+	IncludePublic *bool
 
 	// Specifies whether to include shared manual DB cluster snapshots from other
 	// Amazon Web Services accounts that this Amazon Web Services account has been
@@ -82,7 +82,7 @@ type DescribeDBClusterSnapshotsInput struct {
 	// included. You can give an Amazon Web Services account permission to restore a
 	// manual DB cluster snapshot from another Amazon Web Services account by the
 	// ModifyDBClusterSnapshotAttribute API action.
-	IncludeShared bool
+	IncludeShared *bool
 
 	// An optional pagination token provided by a previous DescribeDBClusterSnapshots
 	// request. If this parameter is specified, the response includes only records

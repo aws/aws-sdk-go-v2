@@ -184,7 +184,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -227,7 +226,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -240,7 +240,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -254,7 +253,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -277,7 +275,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -312,7 +309,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -323,14 +319,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -344,14 +342,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -360,11 +356,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -375,14 +371,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -396,7 +394,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -416,7 +413,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -427,14 +423,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -445,9 +443,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -3466,7 +3466,6 @@
                 "durationInMinutes": {
                     "target": "com.amazonaws.finspacedata#SessionDuration",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The time duration in which the credentials remain valid. </p>",
                         "smithy.api#httpQuery": "durationInMinutes"
                     }
@@ -3497,7 +3496,6 @@
                 "durationInMinutes": {
                     "target": "com.amazonaws.finspacedata#SessionDuration",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Returns the duration in which the credentials will remain valid.</p>"
                     }
                 }
@@ -3860,7 +3858,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.finspacedata#ResultLimit",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -3960,7 +3957,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.finspacedata#ResultLimit",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -4044,7 +4040,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.finspacedata#ResultLimit",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -4168,7 +4163,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.finspacedata#ResultLimit",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results per page.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#required": {}
@@ -4212,7 +4206,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.finspacedata#ResultLimit",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results per page.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#required": {}
@@ -4335,7 +4328,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.finspacedata#ResultLimit",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results per page.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#required": {}
@@ -4379,7 +4371,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.finspacedata#ResultLimit",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results per page.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#required": {}
@@ -4742,7 +4733,6 @@
         "com.amazonaws.finspacedata#ResultLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4858,7 +4848,6 @@
         "com.amazonaws.finspacedata#SessionDuration": {
             "type": "long",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 60

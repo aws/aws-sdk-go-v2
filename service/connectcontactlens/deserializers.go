@@ -515,7 +515,7 @@ func awsRestjson1_deserializeDocumentCharacterOffsets(v **types.CharacterOffsets
 				if err != nil {
 					return err
 				}
-				sv.BeginOffsetChar = int32(i64)
+				sv.BeginOffsetChar = ptr.Int32(int32(i64))
 			}
 
 		case "EndOffsetChar":
@@ -528,7 +528,7 @@ func awsRestjson1_deserializeDocumentCharacterOffsets(v **types.CharacterOffsets
 				if err != nil {
 					return err
 				}
-				sv.EndOffsetChar = int32(i64)
+				sv.EndOffsetChar = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -793,7 +793,7 @@ func awsRestjson1_deserializeDocumentPointOfInterest(v **types.PointOfInterest, 
 				if err != nil {
 					return err
 				}
-				sv.BeginOffsetMillis = int32(i64)
+				sv.BeginOffsetMillis = ptr.Int32(int32(i64))
 			}
 
 		case "EndOffsetMillis":
@@ -806,7 +806,7 @@ func awsRestjson1_deserializeDocumentPointOfInterest(v **types.PointOfInterest, 
 				if err != nil {
 					return err
 				}
-				sv.EndOffsetMillis = int32(i64)
+				sv.EndOffsetMillis = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -1039,7 +1039,7 @@ func awsRestjson1_deserializeDocumentTranscript(v **types.Transcript, value inte
 				if err != nil {
 					return err
 				}
-				sv.BeginOffsetMillis = int32(i64)
+				sv.BeginOffsetMillis = ptr.Int32(int32(i64))
 			}
 
 		case "Content":
@@ -1061,7 +1061,7 @@ func awsRestjson1_deserializeDocumentTranscript(v **types.Transcript, value inte
 				if err != nil {
 					return err
 				}
-				sv.EndOffsetMillis = int32(i64)
+				sv.EndOffsetMillis = ptr.Int32(int32(i64))
 			}
 
 		case "Id":

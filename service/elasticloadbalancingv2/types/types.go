@@ -213,7 +213,7 @@ type Cipher struct {
 	Name *string
 
 	// The priority of the cipher.
-	Priority int32
+	Priority *int32
 
 	noSmithyDocumentSerde
 }
@@ -675,7 +675,7 @@ type Rule struct {
 	Conditions []RuleCondition
 
 	// Indicates whether this is the default rule.
-	IsDefault bool
+	IsDefault *bool
 
 	// The priority.
 	Priority *string

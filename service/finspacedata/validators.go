@@ -1072,6 +1072,9 @@ func validateOpListPermissionGroupsByUserInput(v *ListPermissionGroupsByUserInpu
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
+	if v.MaxResults == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1084,6 +1087,9 @@ func validateOpListPermissionGroupsInput(v *ListPermissionGroupsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListPermissionGroupsInput"}
+	if v.MaxResults == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1099,6 +1105,9 @@ func validateOpListUsersByPermissionGroupInput(v *ListUsersByPermissionGroupInpu
 	if v.PermissionGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PermissionGroupId"))
 	}
+	if v.MaxResults == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1111,6 +1120,9 @@ func validateOpListUsersInput(v *ListUsersInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListUsersInput"}
+	if v.MaxResults == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

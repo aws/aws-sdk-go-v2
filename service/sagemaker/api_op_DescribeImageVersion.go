@@ -68,7 +68,7 @@ type DescribeImageVersionOutput struct {
 	FailureReason *string
 
 	// Indicates Horovod compatibility.
-	Horovod bool
+	Horovod *bool
 
 	// The ARN of the image the version is based on.
 	ImageArn *string

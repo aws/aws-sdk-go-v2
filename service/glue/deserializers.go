@@ -35806,7 +35806,7 @@ func awsAwsjson11_deserializeDocumentEventBatchingCondition(v **types.EventBatch
 				if err != nil {
 					return err
 				}
-				sv.BatchSize = int32(i64)
+				sv.BatchSize = ptr.Int32(int32(i64))
 			}
 
 		case "BatchWindow":
@@ -46936,7 +46936,7 @@ func awsAwsjson11_deserializeDocumentSchemaVersionErrorItem(v **types.SchemaVers
 				if err != nil {
 					return err
 				}
-				sv.VersionNumber = i64
+				sv.VersionNumber = ptr.Int64(i64)
 			}
 
 		default:
@@ -47084,7 +47084,7 @@ func awsAwsjson11_deserializeDocumentSchemaVersionListItem(v **types.SchemaVersi
 				if err != nil {
 					return err
 				}
-				sv.VersionNumber = i64
+				sv.VersionNumber = ptr.Int64(i64)
 			}
 
 		default:
@@ -53438,7 +53438,7 @@ func awsAwsjson11_deserializeOpDocumentCreateSchemaOutput(v **CreateSchemaOutput
 				if err != nil {
 					return err
 				}
-				sv.LatestSchemaVersion = i64
+				sv.LatestSchemaVersion = ptr.Int64(i64)
 			}
 
 		case "NextSchemaVersion":
@@ -53451,7 +53451,7 @@ func awsAwsjson11_deserializeOpDocumentCreateSchemaOutput(v **CreateSchemaOutput
 				if err != nil {
 					return err
 				}
-				sv.NextSchemaVersion = i64
+				sv.NextSchemaVersion = ptr.Int64(i64)
 			}
 
 		case "RegistryArn":
@@ -53491,7 +53491,7 @@ func awsAwsjson11_deserializeOpDocumentCreateSchemaOutput(v **CreateSchemaOutput
 				if err != nil {
 					return err
 				}
-				sv.SchemaCheckpoint = i64
+				sv.SchemaCheckpoint = ptr.Int64(i64)
 			}
 
 		case "SchemaName":
@@ -57394,7 +57394,7 @@ func awsAwsjson11_deserializeOpDocumentGetSchemaOutput(v **GetSchemaOutput, valu
 				if err != nil {
 					return err
 				}
-				sv.LatestSchemaVersion = i64
+				sv.LatestSchemaVersion = ptr.Int64(i64)
 			}
 
 		case "NextSchemaVersion":
@@ -57407,7 +57407,7 @@ func awsAwsjson11_deserializeOpDocumentGetSchemaOutput(v **GetSchemaOutput, valu
 				if err != nil {
 					return err
 				}
-				sv.NextSchemaVersion = i64
+				sv.NextSchemaVersion = ptr.Int64(i64)
 			}
 
 		case "RegistryArn":
@@ -57447,7 +57447,7 @@ func awsAwsjson11_deserializeOpDocumentGetSchemaOutput(v **GetSchemaOutput, valu
 				if err != nil {
 					return err
 				}
-				sv.SchemaCheckpoint = i64
+				sv.SchemaCheckpoint = ptr.Int64(i64)
 			}
 
 		case "SchemaName":
@@ -57572,7 +57572,7 @@ func awsAwsjson11_deserializeOpDocumentGetSchemaVersionOutput(v **GetSchemaVersi
 				if err != nil {
 					return err
 				}
-				sv.VersionNumber = i64
+				sv.VersionNumber = ptr.Int64(i64)
 			}
 
 		default:
@@ -59452,7 +59452,7 @@ func awsAwsjson11_deserializeOpDocumentPutSchemaVersionMetadataOutput(v **PutSch
 				if err != nil {
 					return err
 				}
-				sv.VersionNumber = i64
+				sv.VersionNumber = ptr.Int64(i64)
 			}
 
 		default:
@@ -59599,7 +59599,7 @@ func awsAwsjson11_deserializeOpDocumentRegisterSchemaVersionOutput(v **RegisterS
 				if err != nil {
 					return err
 				}
-				sv.VersionNumber = i64
+				sv.VersionNumber = ptr.Int64(i64)
 			}
 
 		default:
@@ -59706,7 +59706,7 @@ func awsAwsjson11_deserializeOpDocumentRemoveSchemaVersionMetadataOutput(v **Rem
 				if err != nil {
 					return err
 				}
-				sv.VersionNumber = i64
+				sv.VersionNumber = ptr.Int64(i64)
 			}
 
 		default:

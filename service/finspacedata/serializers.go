@@ -1447,8 +1447,8 @@ func awsRestjson1_serializeOpHttpBindingsGetProgrammaticAccessCredentialsInput(v
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DurationInMinutes != 0 {
-		encoder.SetQuery("durationInMinutes").Long(v.DurationInMinutes)
+	if v.DurationInMinutes != nil {
+		encoder.SetQuery("durationInMinutes").Long(*v.DurationInMinutes)
 	}
 
 	if v.EnvironmentId != nil {
@@ -1861,8 +1861,8 @@ func awsRestjson1_serializeOpHttpBindingsListPermissionGroupsInput(v *ListPermis
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	{
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1925,8 +1925,8 @@ func awsRestjson1_serializeOpHttpBindingsListPermissionGroupsByUserInput(v *List
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	{
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1998,8 +1998,8 @@ func awsRestjson1_serializeOpHttpBindingsListUsersInput(v *ListUsersInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	{
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2062,8 +2062,8 @@ func awsRestjson1_serializeOpHttpBindingsListUsersByPermissionGroupInput(v *List
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	{
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {

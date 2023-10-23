@@ -66,7 +66,7 @@ type CreateLensVersionInput struct {
 	LensVersion *string
 
 	// Set to true if this new major lens version.
-	IsMajorVersion bool
+	IsMajorVersion *bool
 
 	noSmithyDocumentSerde
 }

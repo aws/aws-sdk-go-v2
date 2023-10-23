@@ -100,7 +100,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -143,7 +142,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -156,7 +156,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -170,7 +169,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -193,7 +191,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -228,7 +225,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -239,14 +235,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -260,14 +258,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -276,18 +272,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -296,7 +291,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws"
                                                                     ]
                                                                 }
                                                             ],
@@ -312,7 +308,6 @@
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -321,7 +316,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -341,14 +337,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -362,7 +360,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -382,7 +379,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -393,14 +389,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -411,9 +409,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1304,6 +1304,7 @@
                 "InputLocation": {
                     "target": "com.amazonaws.sagemakerruntime#InputLocationHeader",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon S3 URI where the inference request payload is stored.</p>",
                         "smithy.api#httpHeader": "X-Amzn-SageMaker-InputLocation",
                         "smithy.api#required": {}
@@ -1370,6 +1371,7 @@
                 "Body": {
                     "target": "com.amazonaws.sagemakerruntime#BodyBlob",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Provides input data, in the format specified in the <code>ContentType</code>\n    request header. Amazon SageMaker passes all of the data in the body to the model. </p>\n         <p>For information about the format of the request body, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html\">Common Data\n        Formats-Inference</a>.</p>",
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {}
@@ -1442,6 +1444,7 @@
                 "Body": {
                     "target": "com.amazonaws.sagemakerruntime#BodyBlob",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Includes the inference provided by the model. </p>\n         <p>For information about the format of the response body, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html\">Common Data\n            Formats-Inference</a>.</p>\n         <p>If the explainer is activated, the body includes the explanations provided by the\n            model. For more information, see the <b>Response section</b>\n            under <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response\">Invoke the Endpoint</a> in the Developer Guide.</p>",
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {}
@@ -1524,6 +1527,7 @@
                 "Body": {
                     "target": "com.amazonaws.sagemakerruntime#BodyBlob",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Provides input data, in the format specified in the <code>ContentType</code>\n    request header. Amazon SageMaker passes all of the data in the body to the model. </p>\n         <p>For information about the format of the request body, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html\">Common Data\n        Formats-Inference</a>.</p>",
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {}

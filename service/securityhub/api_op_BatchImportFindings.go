@@ -81,12 +81,12 @@ type BatchImportFindingsOutput struct {
 	// The number of findings that failed to import.
 	//
 	// This member is required.
-	FailedCount int32
+	FailedCount *int32
 
 	// The number of findings that were successfully imported.
 	//
 	// This member is required.
-	SuccessCount int32
+	SuccessCount *int32
 
 	// The list of findings that failed to import.
 	FailedFindings []types.ImportFindingsError

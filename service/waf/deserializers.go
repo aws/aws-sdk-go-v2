@@ -11514,7 +11514,7 @@ func awsAwsjson11_deserializeDocumentRateBasedRule(v **types.RateBasedRule, valu
 				if err != nil {
 					return err
 				}
-				sv.RateLimit = i64
+				sv.RateLimit = ptr.Int64(i64)
 			}
 
 		case "RuleId":

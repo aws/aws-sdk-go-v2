@@ -35,6 +35,7 @@
                 "Code": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The error code.</p>",
                         "smithy.api#required": {}
                     }
@@ -42,6 +43,7 @@
                 "Message": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The message string of the error output.</p>",
                         "smithy.api#required": {}
                     }
@@ -84,6 +86,7 @@
                 "Code": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The error code.</p>",
                         "smithy.api#required": {}
                     }
@@ -91,6 +94,7 @@
                 "Message": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The message string of the error output.</p>",
                         "smithy.api#required": {}
                     }
@@ -150,6 +154,7 @@
                 "SourceArn": {
                     "target": "com.amazonaws.schemas#__stringMin20Max1600",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the event bus.</p>",
                         "smithy.api#required": {}
                     }
@@ -359,6 +364,7 @@
                 "Content": {
                     "target": "com.amazonaws.schemas#__stringMin1Max100000",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The source of the schema definition.</p>",
                         "smithy.api#required": {}
                     }
@@ -395,6 +401,7 @@
                 "Type": {
                     "target": "com.amazonaws.schemas#Type",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of schema.</p>",
                         "smithy.api#required": {}
                     }
@@ -1347,6 +1354,7 @@
                 "Type": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#httpQuery": "type",
                         "smithy.api#required": {}
                     }
@@ -1385,6 +1393,7 @@
                 "Code": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The error code.</p>",
                         "smithy.api#required": {}
                     }
@@ -1392,6 +1401,7 @@
                 "Message": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The message string of the error output.</p>",
                         "smithy.api#required": {}
                     }
@@ -1532,6 +1542,7 @@
                 "Events": {
                     "target": "com.amazonaws.schemas#__listOfGetDiscoveredSchemaVersionItemInput",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of strings where each string is a JSON event. These are the events that were used to generate the schema. The array includes a single type of event and has a maximum size of 10 events.</p>",
                         "smithy.api#required": {}
                     }
@@ -1539,6 +1550,7 @@
                 "Type": {
                     "target": "com.amazonaws.schemas#Type",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of event.</p>",
                         "smithy.api#required": {}
                     }
@@ -1649,6 +1661,7 @@
                 "Code": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The error code.</p>",
                         "smithy.api#required": {}
                     }
@@ -1656,6 +1669,7 @@
                 "Message": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The message string of the error output.</p>",
                         "smithy.api#required": {}
                     }
@@ -1672,6 +1686,7 @@
                 "Code": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The error code.</p>",
                         "smithy.api#required": {}
                     }
@@ -1679,6 +1694,7 @@
                 "Message": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The message string of the error output.</p>",
                         "smithy.api#required": {}
                     }
@@ -2142,6 +2158,7 @@
                 "Code": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The error code.</p>",
                         "smithy.api#required": {}
                     }
@@ -2149,6 +2166,7 @@
                 "Message": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The message string of the error output.</p>",
                         "smithy.api#required": {}
                     }
@@ -2165,6 +2183,7 @@
                 "Code": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The error code.</p>",
                         "smithy.api#required": {}
                     }
@@ -2172,6 +2191,7 @@
                 "Message": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The message string of the error output.</p>",
                         "smithy.api#required": {}
                     }
@@ -2339,6 +2359,7 @@
                 "Policy": {
                     "target": "com.amazonaws.schemas#SynthesizedJson__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The resource-based policy.</p>",
                         "smithy.api#required": {}
                     }
@@ -2572,6 +2593,7 @@
                 "Keywords": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifying this limits the results to only schemas that include the provided keywords.</p>",
                         "smithy.api#httpQuery": "keywords",
                         "smithy.api#required": {}
@@ -2629,6 +2651,7 @@
                 "Code": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The error code.</p>",
                         "smithy.api#required": {}
                     }
@@ -2636,6 +2659,7 @@
                 "Message": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The message string of the error output.</p>",
                         "smithy.api#required": {}
                     }
@@ -2843,6 +2867,7 @@
                 "Tags": {
                     "target": "com.amazonaws.schemas#Tags",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Tags associated with the resource.</p>",
                         "smithy.api#jsonName": "tags",
                         "smithy.api#required": {}
@@ -2872,6 +2897,7 @@
                 "Code": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The error code.</p>",
                         "smithy.api#required": {}
                     }
@@ -2879,6 +2905,7 @@
                 "Message": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The message string of the error output.</p>",
                         "smithy.api#required": {}
                     }
@@ -2912,6 +2939,7 @@
                 "Code": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The error code.</p>",
                         "smithy.api#required": {}
                     }
@@ -2919,6 +2947,7 @@
                 "Message": {
                     "target": "com.amazonaws.schemas#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The message string of the error output.</p>",
                         "smithy.api#required": {}
                     }
@@ -2974,6 +3003,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.schemas#__listOf__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Keys of key-value pairs.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
@@ -3594,7 +3624,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3637,7 +3666,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -3650,7 +3680,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3664,7 +3693,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -3687,7 +3715,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3722,7 +3749,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3733,14 +3759,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3754,14 +3782,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -3770,11 +3796,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3785,14 +3811,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3806,7 +3834,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3826,7 +3853,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3837,14 +3863,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -3855,9 +3883,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],

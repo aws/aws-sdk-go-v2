@@ -54,7 +54,7 @@ type UpdateStackInput struct {
 	// Deletes the storage connectors currently enabled for the stack.
 	//
 	// Deprecated: This member has been deprecated.
-	DeleteStorageConnectors bool
+	DeleteStorageConnectors *bool
 
 	// The description to display.
 	Description *string

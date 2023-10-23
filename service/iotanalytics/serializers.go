@@ -3702,9 +3702,9 @@ func awsRestjson1_serializeDocumentResourceConfiguration(v *types.ResourceConfig
 		ok.String(string(v.ComputeType))
 	}
 
-	{
+	if v.VolumeSizeInGB != nil {
 		ok := object.Key("volumeSizeInGB")
-		ok.Integer(v.VolumeSizeInGB)
+		ok.Integer(*v.VolumeSizeInGB)
 	}
 
 	return nil

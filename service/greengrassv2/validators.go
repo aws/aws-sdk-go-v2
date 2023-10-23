@@ -678,6 +678,9 @@ func validateIoTJobAbortCriteria(v *types.IoTJobAbortCriteria) error {
 	if len(v.Action) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
+	if v.MinNumberOfExecutedThings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinNumberOfExecutedThings"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -724,6 +727,12 @@ func validateIoTJobExponentialRolloutRate(v *types.IoTJobExponentialRolloutRate)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IoTJobExponentialRolloutRate"}
+	if v.BaseRatePerMinute == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseRatePerMinute"))
+	}
+	if v.IncrementFactor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IncrementFactor"))
+	}
 	if v.RateIncreaseCriteria == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RateIncreaseCriteria"))
 	}

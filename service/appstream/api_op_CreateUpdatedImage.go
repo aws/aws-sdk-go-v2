@@ -55,7 +55,7 @@ type CreateUpdatedImageInput struct {
 	// available. If this value is set to false , AppStream 2.0 initiates the process
 	// of creating a new updated image without displaying whether image updates are
 	// available.
-	DryRun bool
+	DryRun *bool
 
 	// The description to display for the new image.
 	NewImageDescription *string
@@ -78,7 +78,7 @@ type CreateUpdatedImageInput struct {
 type CreateUpdatedImageOutput struct {
 
 	// Indicates whether a new image can be created.
-	CanUpdateImage bool
+	CanUpdateImage *bool
 
 	// Describes an image.
 	Image *types.Image

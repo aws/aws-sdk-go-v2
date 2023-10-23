@@ -3235,9 +3235,9 @@ func awsAwsjson11_serializeOpDocumentGetCostCategoriesInput(v *GetCostCategories
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextPageToken != nil {
@@ -3324,9 +3324,9 @@ func awsAwsjson11_serializeOpDocumentGetDimensionValuesInput(v *GetDimensionValu
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextPageToken != nil {
@@ -3767,9 +3767,9 @@ func awsAwsjson11_serializeOpDocumentGetTagsInput(v *GetTagsInput, value smithyj
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextPageToken != nil {

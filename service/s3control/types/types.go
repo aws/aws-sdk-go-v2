@@ -2020,11 +2020,11 @@ type SelectionCriteria struct {
 	Delimiter *string
 
 	// The max depth of the selection criteria
-	MaxDepth int32
+	MaxDepth *int32
 
 	// The minimum number of storage bytes percentage whose metrics will be selected.
 	// You must choose a value greater than or equal to 1.0 .
-	MinStorageBytesPercentage float64
+	MinStorageBytesPercentage *float64
 
 	noSmithyDocumentSerde
 }

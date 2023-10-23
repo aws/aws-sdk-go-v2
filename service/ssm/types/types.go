@@ -49,10 +49,10 @@ type Activation struct {
 
 	// The maximum number of managed nodes that can be registered using this
 	// activation.
-	RegistrationLimit int32
+	RegistrationLimit *int32
 
 	// The number of managed nodes already registered with this activation.
-	RegistrationsCount int32
+	RegistrationsCount *int32
 
 	// Tags assigned to the activation.
 	Tags []Tag
@@ -1056,7 +1056,7 @@ type Command struct {
 	Targets []Target
 
 	// The TimeoutSeconds value specified for a command.
-	TimeoutSeconds int32
+	TimeoutSeconds *int32
 
 	// The CloudWatch alarm that was invoked by the command.
 	TriggeredAlarms []AlarmStateInformation
@@ -2922,7 +2922,7 @@ type MaintenanceWindowIdentity struct {
 	Description *string
 
 	// The duration of the maintenance window in hours.
-	Duration int32
+	Duration *int32
 
 	// Indicates whether the maintenance window is enabled.
 	Enabled bool

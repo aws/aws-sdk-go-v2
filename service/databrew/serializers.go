@@ -4202,9 +4202,9 @@ func awsRestjson1_serializeDocumentFilesLimit(v *types.FilesLimit, value smithyj
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxFiles != nil {
 		ok := object.Key("MaxFiles")
-		ok.Integer(v.MaxFiles)
+		ok.Integer(*v.MaxFiles)
 	}
 
 	if len(v.Order) > 0 {

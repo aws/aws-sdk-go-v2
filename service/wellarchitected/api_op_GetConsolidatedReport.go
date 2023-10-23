@@ -42,10 +42,10 @@ type GetConsolidatedReportInput struct {
 	Format types.ReportFormat
 
 	// Set to true to have shared resources included in the report.
-	IncludeSharedResources bool
+	IncludeSharedResources *bool
 
 	// The maximum number of results to return for this request.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token to use to retrieve the next set of results.
 	NextToken *string
@@ -183,8 +183,8 @@ func NewGetConsolidatedReportPaginator(client GetConsolidatedReportAPIClient, pa
 	}
 
 	options := GetConsolidatedReportPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -214,7 +214,11 @@ func (p *GetConsolidatedReportPaginator) NextPage(ctx context.Context, optFns ..
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.GetConsolidatedReport(ctx, &params, optFns...)
 	if err != nil {

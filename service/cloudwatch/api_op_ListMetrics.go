@@ -54,7 +54,7 @@ type ListMetricsInput struct {
 
 	// If you are using this operation in a monitoring account, specify true to
 	// include metrics from source accounts in the returned data. The default is false .
-	IncludeLinkedAccounts bool
+	IncludeLinkedAccounts *bool
 
 	// The name of the metric to filter against. Only the metrics with names that
 	// match exactly will be returned.

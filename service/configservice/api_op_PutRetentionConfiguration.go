@@ -43,7 +43,7 @@ type PutRetentionConfigurationInput struct {
 	// applicable to the configuration item history.
 	//
 	// This member is required.
-	RetentionPeriodInDays int32
+	RetentionPeriodInDays *int32
 
 	noSmithyDocumentSerde
 }

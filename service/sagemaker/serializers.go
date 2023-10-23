@@ -16915,9 +16915,9 @@ func awsAwsjson11_serializeDocumentAlgorithmSpecification(v *types.AlgorithmSpec
 		}
 	}
 
-	if v.EnableSageMakerMetricsTimeSeries {
+	if v.EnableSageMakerMetricsTimeSeries != nil {
 		ok := object.Key("EnableSageMakerMetricsTimeSeries")
-		ok.Boolean(v.EnableSageMakerMetricsTimeSeries)
+		ok.Boolean(*v.EnableSageMakerMetricsTimeSeries)
 	}
 
 	if v.MetricDefinitions != nil {
@@ -17585,9 +17585,9 @@ func awsAwsjson11_serializeDocumentAutoMLSecurityConfig(v *types.AutoMLSecurityC
 	object := value.Object()
 	defer object.Close()
 
-	if v.EnableInterContainerTrafficEncryption {
+	if v.EnableInterContainerTrafficEncryption != nil {
 		ok := object.Key("EnableInterContainerTrafficEncryption")
-		ok.Boolean(v.EnableInterContainerTrafficEncryption)
+		ok.Boolean(*v.EnableInterContainerTrafficEncryption)
 	}
 
 	if v.VolumeKmsKeyId != nil {
@@ -17670,9 +17670,9 @@ func awsAwsjson11_serializeDocumentBatchDataCaptureConfig(v *types.BatchDataCapt
 		ok.String(*v.DestinationS3Uri)
 	}
 
-	if v.GenerateInferenceId {
+	if v.GenerateInferenceId != nil {
 		ok := object.Key("GenerateInferenceId")
-		ok.Boolean(v.GenerateInferenceId)
+		ok.Boolean(*v.GenerateInferenceId)
 	}
 
 	if v.KmsKeyId != nil {
@@ -18099,9 +18099,9 @@ func awsAwsjson11_serializeDocumentChannelSpecification(v *types.ChannelSpecific
 		ok.String(*v.Description)
 	}
 
-	if v.IsRequired {
+	if v.IsRequired != nil {
 		ok := object.Key("IsRequired")
-		ok.Boolean(v.IsRequired)
+		ok.Boolean(*v.IsRequired)
 	}
 
 	if v.Name != nil {
@@ -18816,9 +18816,9 @@ func awsAwsjson11_serializeDocumentDataCaptureConfig(v *types.DataCaptureConfig,
 		ok.String(*v.DestinationS3Uri)
 	}
 
-	if v.EnableCapture {
+	if v.EnableCapture != nil {
 		ok := object.Key("EnableCapture")
-		ok.Boolean(v.EnableCapture)
+		ok.Boolean(*v.EnableCapture)
 	}
 
 	if v.InitialSamplingPercentage != nil {
@@ -19092,9 +19092,9 @@ func awsAwsjson11_serializeDocumentDebugRuleConfiguration(v *types.DebugRuleConf
 		ok.String(*v.S3OutputPath)
 	}
 
-	if v.VolumeSizeInGB != 0 {
+	if v.VolumeSizeInGB != nil {
 		ok := object.Key("VolumeSizeInGB")
-		ok.Integer(v.VolumeSizeInGB)
+		ok.Integer(*v.VolumeSizeInGB)
 	}
 
 	return nil
@@ -19335,9 +19335,9 @@ func awsAwsjson11_serializeDocumentDeviceSelectionConfig(v *types.DeviceSelectio
 		ok.String(string(v.DeviceSubsetType))
 	}
 
-	if v.Percentage != 0 {
+	if v.Percentage != nil {
 		ok := object.Key("Percentage")
-		ok.Integer(v.Percentage)
+		ok.Integer(*v.Percentage)
 	}
 
 	return nil
@@ -20471,14 +20471,14 @@ func awsAwsjson11_serializeDocumentHyperParameterSpecification(v *types.HyperPar
 		ok.String(*v.Description)
 	}
 
-	if v.IsRequired {
+	if v.IsRequired != nil {
 		ok := object.Key("IsRequired")
-		ok.Boolean(v.IsRequired)
+		ok.Boolean(*v.IsRequired)
 	}
 
-	if v.IsTunable {
+	if v.IsTunable != nil {
 		ok := object.Key("IsTunable")
-		ok.Boolean(v.IsTunable)
+		ok.Boolean(*v.IsTunable)
 	}
 
 	if v.Name != nil {
@@ -20537,19 +20537,19 @@ func awsAwsjson11_serializeDocumentHyperParameterTrainingJobDefinition(v *types.
 		ok.String(*v.DefinitionName)
 	}
 
-	if v.EnableInterContainerTrafficEncryption {
+	if v.EnableInterContainerTrafficEncryption != nil {
 		ok := object.Key("EnableInterContainerTrafficEncryption")
-		ok.Boolean(v.EnableInterContainerTrafficEncryption)
+		ok.Boolean(*v.EnableInterContainerTrafficEncryption)
 	}
 
-	if v.EnableManagedSpotTraining {
+	if v.EnableManagedSpotTraining != nil {
 		ok := object.Key("EnableManagedSpotTraining")
-		ok.Boolean(v.EnableManagedSpotTraining)
+		ok.Boolean(*v.EnableManagedSpotTraining)
 	}
 
-	if v.EnableNetworkIsolation {
+	if v.EnableNetworkIsolation != nil {
 		ok := object.Key("EnableNetworkIsolation")
-		ok.Boolean(v.EnableNetworkIsolation)
+		ok.Boolean(*v.EnableNetworkIsolation)
 	}
 
 	if v.Environment != nil {
@@ -20665,9 +20665,9 @@ func awsAwsjson11_serializeDocumentHyperParameterTuningInstanceConfig(v *types.H
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.InstanceCount != nil {
 		ok := object.Key("InstanceCount")
-		ok.Integer(v.InstanceCount)
+		ok.Integer(*v.InstanceCount)
 	}
 
 	if len(v.InstanceType) > 0 {
@@ -20675,9 +20675,9 @@ func awsAwsjson11_serializeDocumentHyperParameterTuningInstanceConfig(v *types.H
 		ok.String(string(v.InstanceType))
 	}
 
-	{
+	if v.VolumeSizeInGB != nil {
 		ok := object.Key("VolumeSizeInGB")
-		ok.Integer(v.VolumeSizeInGB)
+		ok.Integer(*v.VolumeSizeInGB)
 	}
 
 	return nil
@@ -20832,9 +20832,9 @@ func awsAwsjson11_serializeDocumentHyperParameterTuningResourceConfig(v *types.H
 		}
 	}
 
-	if v.InstanceCount != 0 {
+	if v.InstanceCount != nil {
 		ok := object.Key("InstanceCount")
-		ok.Integer(v.InstanceCount)
+		ok.Integer(*v.InstanceCount)
 	}
 
 	if len(v.InstanceType) > 0 {
@@ -20847,9 +20847,9 @@ func awsAwsjson11_serializeDocumentHyperParameterTuningResourceConfig(v *types.H
 		ok.String(*v.VolumeKmsKeyId)
 	}
 
-	if v.VolumeSizeInGB != 0 {
+	if v.VolumeSizeInGB != nil {
 		ok := object.Key("VolumeSizeInGB")
-		ok.Integer(v.VolumeSizeInGB)
+		ok.Integer(*v.VolumeSizeInGB)
 	}
 
 	return nil
@@ -21084,9 +21084,9 @@ func awsAwsjson11_serializeDocumentInstanceGroup(v *types.InstanceGroup, value s
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.InstanceCount != nil {
 		ok := object.Key("InstanceCount")
-		ok.Integer(v.InstanceCount)
+		ok.Integer(*v.InstanceCount)
 	}
 
 	if v.InstanceGroupName != nil {
@@ -21795,9 +21795,9 @@ func awsAwsjson11_serializeDocumentModelDeployConfig(v *types.ModelDeployConfig,
 	object := value.Object()
 	defer object.Close()
 
-	if v.AutoGenerateEndpointName {
+	if v.AutoGenerateEndpointName != nil {
 		ok := object.Key("AutoGenerateEndpointName")
-		ok.Boolean(v.AutoGenerateEndpointName)
+		ok.Boolean(*v.AutoGenerateEndpointName)
 	}
 
 	if v.EndpointName != nil {
@@ -21912,9 +21912,9 @@ func awsAwsjson11_serializeDocumentModelLatencyThreshold(v *types.ModelLatencyTh
 		ok.String(*v.Percentile)
 	}
 
-	if v.ValueInMilliseconds != 0 {
+	if v.ValueInMilliseconds != nil {
 		ok := object.Key("ValueInMilliseconds")
-		ok.Integer(v.ValueInMilliseconds)
+		ok.Integer(*v.ValueInMilliseconds)
 	}
 
 	return nil
@@ -22452,9 +22452,9 @@ func awsAwsjson11_serializeDocumentMonitoringCsvDatasetFormat(v *types.Monitorin
 	object := value.Object()
 	defer object.Close()
 
-	if v.Header {
+	if v.Header != nil {
 		ok := object.Key("Header")
-		ok.Boolean(v.Header)
+		ok.Boolean(*v.Header)
 	}
 
 	return nil
@@ -22617,9 +22617,9 @@ func awsAwsjson11_serializeDocumentMonitoringJsonDatasetFormat(v *types.Monitori
 	object := value.Object()
 	defer object.Close()
 
-	if v.Line {
+	if v.Line != nil {
 		ok := object.Key("Line")
-		ok.Boolean(v.Line)
+		ok.Boolean(*v.Line)
 	}
 
 	return nil
@@ -22629,14 +22629,14 @@ func awsAwsjson11_serializeDocumentMonitoringNetworkConfig(v *types.MonitoringNe
 	object := value.Object()
 	defer object.Close()
 
-	if v.EnableInterContainerTrafficEncryption {
+	if v.EnableInterContainerTrafficEncryption != nil {
 		ok := object.Key("EnableInterContainerTrafficEncryption")
-		ok.Boolean(v.EnableInterContainerTrafficEncryption)
+		ok.Boolean(*v.EnableInterContainerTrafficEncryption)
 	}
 
-	if v.EnableNetworkIsolation {
+	if v.EnableNetworkIsolation != nil {
 		ok := object.Key("EnableNetworkIsolation")
-		ok.Boolean(v.EnableNetworkIsolation)
+		ok.Boolean(*v.EnableNetworkIsolation)
 	}
 
 	if v.VpcConfig != nil {
@@ -22785,9 +22785,9 @@ func awsAwsjson11_serializeDocumentMonitoringStoppingCondition(v *types.Monitori
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxRuntimeInSeconds != nil {
 		ok := object.Key("MaxRuntimeInSeconds")
-		ok.Integer(v.MaxRuntimeInSeconds)
+		ok.Integer(*v.MaxRuntimeInSeconds)
 	}
 
 	return nil
@@ -22884,14 +22884,14 @@ func awsAwsjson11_serializeDocumentNetworkConfig(v *types.NetworkConfig, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.EnableInterContainerTrafficEncryption {
+	if v.EnableInterContainerTrafficEncryption != nil {
 		ok := object.Key("EnableInterContainerTrafficEncryption")
-		ok.Boolean(v.EnableInterContainerTrafficEncryption)
+		ok.Boolean(*v.EnableInterContainerTrafficEncryption)
 	}
 
-	if v.EnableNetworkIsolation {
+	if v.EnableNetworkIsolation != nil {
 		ok := object.Key("EnableNetworkIsolation")
-		ok.Boolean(v.EnableNetworkIsolation)
+		ok.Boolean(*v.EnableNetworkIsolation)
 	}
 
 	if v.VpcConfig != nil {
@@ -22963,9 +22963,9 @@ func awsAwsjson11_serializeDocumentOfflineStoreConfig(v *types.OfflineStoreConfi
 		}
 	}
 
-	if v.DisableGlueTableCreation {
+	if v.DisableGlueTableCreation != nil {
 		ok := object.Key("DisableGlueTableCreation")
-		ok.Boolean(v.DisableGlueTableCreation)
+		ok.Boolean(*v.DisableGlueTableCreation)
 	}
 
 	if v.S3StorageConfig != nil {
@@ -23048,9 +23048,9 @@ func awsAwsjson11_serializeDocumentOnlineStoreConfig(v *types.OnlineStoreConfig,
 	object := value.Object()
 	defer object.Close()
 
-	if v.EnableOnlineStore {
+	if v.EnableOnlineStore != nil {
 		ok := object.Key("EnableOnlineStore")
-		ok.Boolean(v.EnableOnlineStore)
+		ok.Boolean(*v.EnableOnlineStore)
 	}
 
 	if v.SecurityConfig != nil {
@@ -23191,9 +23191,9 @@ func awsAwsjson11_serializeDocumentParallelismConfiguration(v *types.Parallelism
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxParallelExecutionSteps != nil {
 		ok := object.Key("MaxParallelExecutionSteps")
-		ok.Integer(v.MaxParallelExecutionSteps)
+		ok.Integer(*v.MaxParallelExecutionSteps)
 	}
 
 	return nil
@@ -23439,9 +23439,9 @@ func awsAwsjson11_serializeDocumentProcessingInput(v *types.ProcessingInput, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.AppManaged {
+	if v.AppManaged != nil {
 		ok := object.Key("AppManaged")
-		ok.Boolean(v.AppManaged)
+		ok.Boolean(*v.AppManaged)
 	}
 
 	if v.DatasetDefinition != nil {
@@ -23483,9 +23483,9 @@ func awsAwsjson11_serializeDocumentProcessingOutput(v *types.ProcessingOutput, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.AppManaged {
+	if v.AppManaged != nil {
 		ok := object.Key("AppManaged")
-		ok.Boolean(v.AppManaged)
+		ok.Boolean(*v.AppManaged)
 	}
 
 	if v.FeatureStoreOutput != nil {
@@ -23619,9 +23619,9 @@ func awsAwsjson11_serializeDocumentProcessingStoppingCondition(v *types.Processi
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxRuntimeInSeconds != nil {
 		ok := object.Key("MaxRuntimeInSeconds")
-		ok.Integer(v.MaxRuntimeInSeconds)
+		ok.Integer(*v.MaxRuntimeInSeconds)
 	}
 
 	return nil
@@ -23784,9 +23784,9 @@ func awsAwsjson11_serializeDocumentProfilerConfig(v *types.ProfilerConfig, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.DisableProfiler {
+	if v.DisableProfiler != nil {
 		ok := object.Key("DisableProfiler")
-		ok.Boolean(v.DisableProfiler)
+		ok.Boolean(*v.DisableProfiler)
 	}
 
 	if v.ProfilingIntervalInMilliseconds != nil {
@@ -23813,9 +23813,9 @@ func awsAwsjson11_serializeDocumentProfilerConfigForUpdate(v *types.ProfilerConf
 	object := value.Object()
 	defer object.Close()
 
-	if v.DisableProfiler {
+	if v.DisableProfiler != nil {
 		ok := object.Key("DisableProfiler")
-		ok.Boolean(v.DisableProfiler)
+		ok.Boolean(*v.DisableProfiler)
 	}
 
 	if v.ProfilingIntervalInMilliseconds != nil {
@@ -23874,9 +23874,9 @@ func awsAwsjson11_serializeDocumentProfilerRuleConfiguration(v *types.ProfilerRu
 		ok.String(*v.S3OutputPath)
 	}
 
-	if v.VolumeSizeInGB != 0 {
+	if v.VolumeSizeInGB != nil {
 		ok := object.Key("VolumeSizeInGB")
-		ok.Integer(v.VolumeSizeInGB)
+		ok.Integer(*v.VolumeSizeInGB)
 	}
 
 	return nil
@@ -24290,9 +24290,9 @@ func awsAwsjson11_serializeDocumentRecommendationJobStoppingConditions(v *types.
 		ok.String(string(v.FlatInvocations))
 	}
 
-	if v.MaxInvocations != 0 {
+	if v.MaxInvocations != nil {
 		ok := object.Key("MaxInvocations")
-		ok.Integer(v.MaxInvocations)
+		ok.Integer(*v.MaxInvocations)
 	}
 
 	if v.ModelLatencyThresholds != nil {
@@ -24461,9 +24461,9 @@ func awsAwsjson11_serializeDocumentResourceConfig(v *types.ResourceConfig, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.InstanceCount != 0 {
+	if v.InstanceCount != nil {
 		ok := object.Key("InstanceCount")
-		ok.Integer(v.InstanceCount)
+		ok.Integer(*v.InstanceCount)
 	}
 
 	if v.InstanceGroups != nil {
@@ -24488,9 +24488,9 @@ func awsAwsjson11_serializeDocumentResourceConfig(v *types.ResourceConfig, value
 		ok.String(*v.VolumeKmsKeyId)
 	}
 
-	{
+	if v.VolumeSizeInGB != nil {
 		ok := object.Key("VolumeSizeInGB")
-		ok.Integer(v.VolumeSizeInGB)
+		ok.Integer(*v.VolumeSizeInGB)
 	}
 
 	return nil
@@ -24517,9 +24517,9 @@ func awsAwsjson11_serializeDocumentResourceLimits(v *types.ResourceLimits, value
 		ok.Integer(*v.MaxNumberOfTrainingJobs)
 	}
 
-	{
+	if v.MaxParallelTrainingJobs != nil {
 		ok := object.Key("MaxParallelTrainingJobs")
-		ok.Integer(v.MaxParallelTrainingJobs)
+		ok.Integer(*v.MaxParallelTrainingJobs)
 	}
 
 	if v.MaxRuntimeInSeconds != nil {
@@ -24584,9 +24584,9 @@ func awsAwsjson11_serializeDocumentRetryStrategy(v *types.RetryStrategy, value s
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaximumRetryAttempts != nil {
 		ok := object.Key("MaximumRetryAttempts")
-		ok.Integer(v.MaximumRetryAttempts)
+		ok.Integer(*v.MaximumRetryAttempts)
 	}
 
 	return nil
@@ -24825,14 +24825,14 @@ func awsAwsjson11_serializeDocumentScalingPolicyObjective(v *types.ScalingPolicy
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxInvocationsPerMinute != 0 {
+	if v.MaxInvocationsPerMinute != nil {
 		ok := object.Key("MaxInvocationsPerMinute")
-		ok.Integer(v.MaxInvocationsPerMinute)
+		ok.Integer(*v.MaxInvocationsPerMinute)
 	}
 
-	if v.MinInvocationsPerMinute != 0 {
+	if v.MinInvocationsPerMinute != nil {
 		ok := object.Key("MinInvocationsPerMinute")
-		ok.Integer(v.MinInvocationsPerMinute)
+		ok.Integer(*v.MinInvocationsPerMinute)
 	}
 
 	return nil
@@ -25032,9 +25032,9 @@ func awsAwsjson11_serializeDocumentShadowModelVariantConfig(v *types.ShadowModel
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.SamplingPercentage != nil {
 		ok := object.Key("SamplingPercentage")
-		ok.Integer(v.SamplingPercentage)
+		ok.Integer(*v.SamplingPercentage)
 	}
 
 	if v.ShadowModelVariantName != nil {
@@ -25084,9 +25084,9 @@ func awsAwsjson11_serializeDocumentShuffleConfig(v *types.ShuffleConfig, value s
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.Seed != nil {
 		ok := object.Key("Seed")
-		ok.Long(v.Seed)
+		ok.Long(*v.Seed)
 	}
 
 	return nil
@@ -25197,9 +25197,9 @@ func awsAwsjson11_serializeDocumentStoppingCondition(v *types.StoppingCondition,
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxRuntimeInSeconds != 0 {
+	if v.MaxRuntimeInSeconds != nil {
 		ok := object.Key("MaxRuntimeInSeconds")
-		ok.Integer(v.MaxRuntimeInSeconds)
+		ok.Integer(*v.MaxRuntimeInSeconds)
 	}
 
 	if v.MaxWaitTimeInSeconds != nil {
@@ -25258,9 +25258,9 @@ func awsAwsjson11_serializeDocumentTabularJobConfig(v *types.TabularJobConfig, v
 		ok.String(*v.FeatureSpecificationS3Uri)
 	}
 
-	if v.GenerateCandidateDefinitionsOnly {
+	if v.GenerateCandidateDefinitionsOnly != nil {
 		ok := object.Key("GenerateCandidateDefinitionsOnly")
-		ok.Boolean(v.GenerateCandidateDefinitionsOnly)
+		ok.Boolean(*v.GenerateCandidateDefinitionsOnly)
 	}
 
 	if len(v.Mode) > 0 {
@@ -25757,9 +25757,9 @@ func awsAwsjson11_serializeDocumentTrainingSpecification(v *types.TrainingSpecif
 		}
 	}
 
-	if v.SupportsDistributedTraining {
+	if v.SupportsDistributedTraining != nil {
 		ok := object.Key("SupportsDistributedTraining")
-		ok.Boolean(v.SupportsDistributedTraining)
+		ok.Boolean(*v.SupportsDistributedTraining)
 	}
 
 	if v.TrainingChannels != nil {
@@ -26149,19 +26149,19 @@ func awsAwsjson11_serializeDocumentUSD(v *types.USD, value smithyjson.Value) err
 	object := value.Object()
 	defer object.Close()
 
-	if v.Cents != 0 {
+	if v.Cents != nil {
 		ok := object.Key("Cents")
-		ok.Integer(v.Cents)
+		ok.Integer(*v.Cents)
 	}
 
-	if v.Dollars != 0 {
+	if v.Dollars != nil {
 		ok := object.Key("Dollars")
-		ok.Integer(v.Dollars)
+		ok.Integer(*v.Dollars)
 	}
 
-	if v.TenthFractionsOfACent != 0 {
+	if v.TenthFractionsOfACent != nil {
 		ok := object.Key("TenthFractionsOfACent")
-		ok.Integer(v.TenthFractionsOfACent)
+		ok.Integer(*v.TenthFractionsOfACent)
 	}
 
 	return nil
@@ -26510,9 +26510,9 @@ func awsAwsjson11_serializeOpDocumentCreateAlgorithmInput(v *CreateAlgorithmInpu
 		ok.String(*v.AlgorithmName)
 	}
 
-	if v.CertifyForMarketplace {
+	if v.CertifyForMarketplace != nil {
 		ok := object.Key("CertifyForMarketplace")
-		ok.Boolean(v.CertifyForMarketplace)
+		ok.Boolean(*v.CertifyForMarketplace)
 	}
 
 	if v.InferenceSpecification != nil {
@@ -26686,9 +26686,9 @@ func awsAwsjson11_serializeOpDocumentCreateAutoMLJobInput(v *CreateAutoMLJobInpu
 		}
 	}
 
-	if v.GenerateCandidateDefinitionsOnly {
+	if v.GenerateCandidateDefinitionsOnly != nil {
 		ok := object.Key("GenerateCandidateDefinitionsOnly")
-		ok.Boolean(v.GenerateCandidateDefinitionsOnly)
+		ok.Boolean(*v.GenerateCandidateDefinitionsOnly)
 	}
 
 	if v.InputDataConfig != nil {
@@ -27639,9 +27639,9 @@ func awsAwsjson11_serializeOpDocumentCreateImageVersionInput(v *CreateImageVersi
 		ok.String(*v.ClientToken)
 	}
 
-	if v.Horovod {
+	if v.Horovod != nil {
 		ok := object.Key("Horovod")
-		ok.Boolean(v.Horovod)
+		ok.Boolean(*v.Horovod)
 	}
 
 	if v.ImageName != nil {
@@ -27965,9 +27965,9 @@ func awsAwsjson11_serializeOpDocumentCreateModelCardExportJobInput(v *CreateMode
 		ok.String(*v.ModelCardName)
 	}
 
-	if v.ModelCardVersion != 0 {
+	if v.ModelCardVersion != nil {
 		ok := object.Key("ModelCardVersion")
-		ok.Integer(v.ModelCardVersion)
+		ok.Integer(*v.ModelCardVersion)
 	}
 
 	if v.OutputConfig != nil {
@@ -28100,9 +28100,9 @@ func awsAwsjson11_serializeOpDocumentCreateModelInput(v *CreateModelInput, value
 		}
 	}
 
-	if v.EnableNetworkIsolation {
+	if v.EnableNetworkIsolation != nil {
 		ok := object.Key("EnableNetworkIsolation")
-		ok.Boolean(v.EnableNetworkIsolation)
+		ok.Boolean(*v.EnableNetworkIsolation)
 	}
 
 	if v.ExecutionRoleArn != nil {
@@ -28181,9 +28181,9 @@ func awsAwsjson11_serializeOpDocumentCreateModelPackageInput(v *CreateModelPacka
 		}
 	}
 
-	if v.CertifyForMarketplace {
+	if v.CertifyForMarketplace != nil {
 		ok := object.Key("CertifyForMarketplace")
-		ok.Boolean(v.CertifyForMarketplace)
+		ok.Boolean(*v.CertifyForMarketplace)
 	}
 
 	if v.ClientToken != nil {
@@ -28822,19 +28822,19 @@ func awsAwsjson11_serializeOpDocumentCreateTrainingJobInput(v *CreateTrainingJob
 		}
 	}
 
-	if v.EnableInterContainerTrafficEncryption {
+	if v.EnableInterContainerTrafficEncryption != nil {
 		ok := object.Key("EnableInterContainerTrafficEncryption")
-		ok.Boolean(v.EnableInterContainerTrafficEncryption)
+		ok.Boolean(*v.EnableInterContainerTrafficEncryption)
 	}
 
-	if v.EnableManagedSpotTraining {
+	if v.EnableManagedSpotTraining != nil {
 		ok := object.Key("EnableManagedSpotTraining")
-		ok.Boolean(v.EnableManagedSpotTraining)
+		ok.Boolean(*v.EnableManagedSpotTraining)
 	}
 
-	if v.EnableNetworkIsolation {
+	if v.EnableNetworkIsolation != nil {
 		ok := object.Key("EnableNetworkIsolation")
-		ok.Boolean(v.EnableNetworkIsolation)
+		ok.Boolean(*v.EnableNetworkIsolation)
 	}
 
 	if v.Environment != nil {
@@ -30129,9 +30129,9 @@ func awsAwsjson11_serializeOpDocumentDescribeEdgeDeploymentPlanInput(v *Describe
 		ok.String(*v.EdgeDeploymentPlanName)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -30414,9 +30414,9 @@ func awsAwsjson11_serializeOpDocumentDescribeModelCardInput(v *DescribeModelCard
 		ok.String(*v.ModelCardName)
 	}
 
-	if v.ModelCardVersion != 0 {
+	if v.ModelCardVersion != nil {
 		ok := object.Key("ModelCardVersion")
-		ok.Integer(v.ModelCardVersion)
+		ok.Integer(*v.ModelCardVersion)
 	}
 
 	return nil
@@ -32709,9 +32709,9 @@ func awsAwsjson11_serializeOpDocumentListModelCardExportJobsInput(v *ListModelCa
 		ok.String(*v.ModelCardName)
 	}
 
-	if v.ModelCardVersion != 0 {
+	if v.ModelCardVersion != nil {
 		ok := object.Key("ModelCardVersion")
-		ok.Integer(v.ModelCardVersion)
+		ok.Integer(*v.ModelCardVersion)
 	}
 
 	if v.NextToken != nil {
@@ -33762,9 +33762,9 @@ func awsAwsjson11_serializeOpDocumentListStageDevicesInput(v *ListStageDevicesIn
 		ok.String(*v.EdgeDeploymentPlanName)
 	}
 
-	if v.ExcludeDevicesDeployedInOtherStage {
+	if v.ExcludeDevicesDeployedInOtherStage != nil {
 		ok := object.Key("ExcludeDevicesDeployedInOtherStage")
-		ok.Boolean(v.ExcludeDevicesDeployedInOtherStage)
+		ok.Boolean(*v.ExcludeDevicesDeployedInOtherStage)
 	}
 
 	if v.MaxResults != nil {
@@ -34275,9 +34275,9 @@ func awsAwsjson11_serializeOpDocumentQueryLineageInput(v *QueryLineageInput, val
 		}
 	}
 
-	if v.IncludeEdges {
+	if v.IncludeEdges != nil {
 		ok := object.Key("IncludeEdges")
-		ok.Boolean(v.IncludeEdges)
+		ok.Boolean(*v.IncludeEdges)
 	}
 
 	if v.MaxDepth != nil {
@@ -35034,14 +35034,14 @@ func awsAwsjson11_serializeOpDocumentUpdateEndpointInput(v *UpdateEndpointInput,
 		}
 	}
 
-	if v.RetainAllVariantProperties {
+	if v.RetainAllVariantProperties != nil {
 		ok := object.Key("RetainAllVariantProperties")
-		ok.Boolean(v.RetainAllVariantProperties)
+		ok.Boolean(*v.RetainAllVariantProperties)
 	}
 
-	if v.RetainDeploymentConfig {
+	if v.RetainDeploymentConfig != nil {
 		ok := object.Key("RetainDeploymentConfig")
-		ok.Boolean(v.RetainDeploymentConfig)
+		ok.Boolean(*v.RetainDeploymentConfig)
 	}
 
 	return nil
@@ -35236,9 +35236,9 @@ func awsAwsjson11_serializeOpDocumentUpdateImageVersionInput(v *UpdateImageVersi
 		}
 	}
 
-	if v.Horovod {
+	if v.Horovod != nil {
 		ok := object.Key("Horovod")
-		ok.Boolean(v.Horovod)
+		ok.Boolean(*v.Horovod)
 	}
 
 	if v.ImageName != nil {
@@ -35463,24 +35463,24 @@ func awsAwsjson11_serializeOpDocumentUpdateNotebookInstanceInput(v *UpdateNotebo
 		ok.String(*v.DefaultCodeRepository)
 	}
 
-	if v.DisassociateAcceleratorTypes {
+	if v.DisassociateAcceleratorTypes != nil {
 		ok := object.Key("DisassociateAcceleratorTypes")
-		ok.Boolean(v.DisassociateAcceleratorTypes)
+		ok.Boolean(*v.DisassociateAcceleratorTypes)
 	}
 
-	if v.DisassociateAdditionalCodeRepositories {
+	if v.DisassociateAdditionalCodeRepositories != nil {
 		ok := object.Key("DisassociateAdditionalCodeRepositories")
-		ok.Boolean(v.DisassociateAdditionalCodeRepositories)
+		ok.Boolean(*v.DisassociateAdditionalCodeRepositories)
 	}
 
-	if v.DisassociateDefaultCodeRepository {
+	if v.DisassociateDefaultCodeRepository != nil {
 		ok := object.Key("DisassociateDefaultCodeRepository")
-		ok.Boolean(v.DisassociateDefaultCodeRepository)
+		ok.Boolean(*v.DisassociateDefaultCodeRepository)
 	}
 
-	if v.DisassociateLifecycleConfig {
+	if v.DisassociateLifecycleConfig != nil {
 		ok := object.Key("DisassociateLifecycleConfig")
-		ok.Boolean(v.DisassociateLifecycleConfig)
+		ok.Boolean(*v.DisassociateLifecycleConfig)
 	}
 
 	if v.InstanceMetadataServiceConfiguration != nil {

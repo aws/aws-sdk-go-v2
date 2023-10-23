@@ -12441,7 +12441,7 @@ func awsRestjson1_deserializeDocumentPortMapping(v **types.PortMapping, value in
 				if err != nil {
 					return err
 				}
-				sv.ApplicationPort = int32(i64)
+				sv.ApplicationPort = ptr.Int32(int32(i64))
 			}
 
 		case "enableOnPublicIp":
@@ -12463,7 +12463,7 @@ func awsRestjson1_deserializeDocumentPortMapping(v **types.PortMapping, value in
 				if err != nil {
 					return err
 				}
-				sv.JobPort = int32(i64)
+				sv.JobPort = ptr.Int32(int32(i64))
 			}
 
 		default:

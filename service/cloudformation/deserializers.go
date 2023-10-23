@@ -16147,7 +16147,7 @@ func awsAwsquery_deserializeDocumentStackSetDriftDetectionDetails(v **types.Stac
 				if err != nil {
 					return err
 				}
-				sv.DriftedStackInstancesCount = int32(i64)
+				sv.DriftedStackInstancesCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("DriftStatus", t.Name.Local):
@@ -16177,7 +16177,7 @@ func awsAwsquery_deserializeDocumentStackSetDriftDetectionDetails(v **types.Stac
 				if err != nil {
 					return err
 				}
-				sv.FailedStackInstancesCount = int32(i64)
+				sv.FailedStackInstancesCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("InProgressStackInstancesCount", t.Name.Local):
@@ -16194,7 +16194,7 @@ func awsAwsquery_deserializeDocumentStackSetDriftDetectionDetails(v **types.Stac
 				if err != nil {
 					return err
 				}
-				sv.InProgressStackInstancesCount = int32(i64)
+				sv.InProgressStackInstancesCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("InSyncStackInstancesCount", t.Name.Local):
@@ -16211,7 +16211,7 @@ func awsAwsquery_deserializeDocumentStackSetDriftDetectionDetails(v **types.Stac
 				if err != nil {
 					return err
 				}
-				sv.InSyncStackInstancesCount = int32(i64)
+				sv.InSyncStackInstancesCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("LastDriftCheckTimestamp", t.Name.Local):
@@ -16245,7 +16245,7 @@ func awsAwsquery_deserializeDocumentStackSetDriftDetectionDetails(v **types.Stac
 				if err != nil {
 					return err
 				}
-				sv.TotalStackInstancesCount = int32(i64)
+				sv.TotalStackInstancesCount = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -16895,7 +16895,7 @@ func awsAwsquery_deserializeDocumentStackSetOperationStatusDetails(v **types.Sta
 				if err != nil {
 					return err
 				}
-				sv.FailedStackInstancesCount = int32(i64)
+				sv.FailedStackInstancesCount = ptr.Int32(int32(i64))
 			}
 
 		default:

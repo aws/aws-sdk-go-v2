@@ -41,7 +41,7 @@ type DecreaseReplicaCountInput struct {
 	// ApplyImmediately=False is not currently supported.
 	//
 	// This member is required.
-	ApplyImmediately bool
+	ApplyImmediately *bool
 
 	// The id of the replication group from which you want to remove replica nodes.
 	//

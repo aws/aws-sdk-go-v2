@@ -8891,7 +8891,7 @@ func awsRestjson1_deserializeDocumentKxSavedownStorageConfiguration(v **types.Kx
 				if err != nil {
 					return err
 				}
-				sv.Size = int32(i64)
+				sv.Size = ptr.Int32(int32(i64))
 			}
 
 		case "type":
@@ -9179,7 +9179,7 @@ func awsRestjson1_deserializeDocumentNetworkACLEntry(v **types.NetworkACLEntry, 
 				if err != nil {
 					return err
 				}
-				sv.RuleNumber = int32(i64)
+				sv.RuleNumber = ptr.Int32(int32(i64))
 			}
 
 		default:

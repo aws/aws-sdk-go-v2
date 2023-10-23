@@ -990,6 +990,9 @@ func validateKxSavedownStorageConfiguration(v *types.KxSavedownStorageConfigurat
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
+	if v.Size == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Size"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1019,6 +1022,9 @@ func validateNetworkACLEntry(v *types.NetworkACLEntry) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NetworkACLEntry"}
+	if v.RuleNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleNumber"))
+	}
 	if v.Protocol == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
 	}

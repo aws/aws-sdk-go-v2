@@ -71,7 +71,7 @@ type GetBucketMetricDataInput struct {
 	// 86400 seconds, which is the number of seconds in a day.
 	//
 	// This member is required.
-	Period int32
+	Period *int32
 
 	// The timestamp indicating the earliest data to be returned.
 	//

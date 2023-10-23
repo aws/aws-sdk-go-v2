@@ -78,7 +78,7 @@ type GetRelationalDatabaseMetricDataInput struct {
 	// database metric data is available in 1-minute (60 seconds) granularity.
 	//
 	// This member is required.
-	Period int32
+	Period *int32
 
 	// The name of your database from which to get metric data.
 	//

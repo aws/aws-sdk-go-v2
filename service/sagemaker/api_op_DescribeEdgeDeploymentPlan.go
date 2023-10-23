@@ -41,7 +41,7 @@ type DescribeEdgeDeploymentPlanInput struct {
 	EdgeDeploymentPlanName *string
 
 	// The maximum number of results to select (50 by default).
-	MaxResults int32
+	MaxResults *int32
 
 	// If the edge deployment plan has enough stages to require tokening, then this is
 	// the response from the last list of stages returned.
@@ -81,13 +81,13 @@ type DescribeEdgeDeploymentPlanOutput struct {
 	CreationTime *time.Time
 
 	// The number of edge devices that failed the deployment.
-	EdgeDeploymentFailed int32
+	EdgeDeploymentFailed *int32
 
 	// The number of edge devices yet to pick up deployment, or in progress.
-	EdgeDeploymentPending int32
+	EdgeDeploymentPending *int32
 
 	// The number of edge devices with the successful deployment.
-	EdgeDeploymentSuccess int32
+	EdgeDeploymentSuccess *int32
 
 	// The time when the edge deployment plan was last updated.
 	LastModifiedTime *time.Time

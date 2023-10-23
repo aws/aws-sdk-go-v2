@@ -36,7 +36,7 @@ type ListAutomationRulesInput struct {
 
 	// The maximum number of rules to return in the response. This currently ranges
 	// from 1 to 100.
-	MaxResults int32
+	MaxResults *int32
 
 	// A token to specify where to start paginating the response. This is the NextToken
 	// from a previously truncated response. On your first call to the

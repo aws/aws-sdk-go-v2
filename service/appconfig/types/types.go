@@ -196,7 +196,7 @@ type DeploymentStrategy struct {
 
 	// The percentage of targets that received a deployed configuration during each
 	// interval.
-	GrowthFactor float32
+	GrowthFactor *float32
 
 	// The algorithm used to define how percentage grew over time.
 	GrowthType GrowthType
@@ -237,13 +237,13 @@ type DeploymentSummary struct {
 
 	// The percentage of targets to receive a deployed configuration during each
 	// interval.
-	GrowthFactor float32
+	GrowthFactor *float32
 
 	// The algorithm used to define how percentage grows over time.
 	GrowthType GrowthType
 
 	// The percentage of targets for which the deployment is available.
-	PercentageComplete float32
+	PercentageComplete *float32
 
 	// Time the deployment started.
 	StartedAt *time.Time

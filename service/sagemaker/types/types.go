@@ -119,7 +119,7 @@ type AgentVersion struct {
 	// The number of Edge Manager agents.
 	//
 	// This member is required.
-	AgentCount int64
+	AgentCount *int64
 
 	// Version of the agent.
 	//
@@ -205,7 +205,7 @@ type AlgorithmSpecification struct {
 	//   - MXNet (version >= 1.6)
 	//   - PyTorch (version >= 1.3)
 	//   - You specify at least one MetricDefinition (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_MetricDefinition.html)
-	EnableSageMakerMetricsTimeSeries bool
+	EnableSageMakerMetricsTimeSeries *bool
 
 	// A list of metric definition objects. Each object specifies the metric name and
 	// regular expressions used to parse algorithm logs. SageMaker publishes each
@@ -1694,7 +1694,7 @@ type AutoMLS3DataSource struct {
 type AutoMLSecurityConfig struct {
 
 	// Whether to use traffic encryption between the container layers.
-	EnableInterContainerTrafficEncryption bool
+	EnableInterContainerTrafficEncryption *bool
 
 	// The key used to encrypt stored data.
 	VolumeKmsKeyId *string
@@ -1775,7 +1775,7 @@ type BatchDataCaptureConfig struct {
 	DestinationS3Uri *string
 
 	// Flag that indicates whether to append inference id to the output.
-	GenerateInferenceId bool
+	GenerateInferenceId *bool
 
 	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
 	// key that SageMaker uses to encrypt data on the storage volume attached to the ML
@@ -2244,7 +2244,7 @@ type ChannelSpecification struct {
 	Description *string
 
 	// Indicates whether the channel is required by the algorithm.
-	IsRequired bool
+	IsRequired *bool
 
 	// The allowed compression types, if data compression is used.
 	SupportedCompressionTypes []CompressionType
@@ -2295,12 +2295,12 @@ type ClarifyCheckStepMetadata struct {
 	// BaselineUsedForDriftCheckStatistics . If it is set to False , the previous
 	// baseline of the configured check type must also be available. These can be
 	// accessed through the BaselineUsedForDriftCheckConstraints property.
-	RegisterNewBaseline bool
+	RegisterNewBaseline *bool
 
 	// This flag indicates if the drift check against the previous baseline will be
 	// skipped or not. If it is set to False , the previous baseline of the configured
 	// check type must be available.
-	SkipCheck bool
+	SkipCheck *bool
 
 	// The Amazon S3 URI of the violation report if violations are detected.
 	ViolationReport *string
@@ -2944,7 +2944,7 @@ type DataCaptureConfig struct {
 	CaptureContentTypeHeader *CaptureContentTypeHeader
 
 	// Whether data capture should be enabled or disabled (defaults to enabled).
-	EnableCapture bool
+	EnableCapture *bool
 
 	// The Amazon Resource Name (ARN) of an Key Management Service key that SageMaker
 	// uses to encrypt the captured data at rest using Amazon S3 server-side
@@ -2980,7 +2980,7 @@ type DataCaptureConfigSummary struct {
 	// Whether data capture is enabled or disabled.
 	//
 	// This member is required.
-	EnableCapture bool
+	EnableCapture *bool
 
 	// The KMS key being used to encrypt the data in Amazon S3.
 	//
@@ -3223,7 +3223,7 @@ type DebugRuleConfiguration struct {
 	S3OutputPath *string
 
 	// The size, in GB, of the ML storage volume attached to the processing instance.
-	VolumeSizeInGB int32
+	VolumeSizeInGB *int32
 
 	noSmithyDocumentSerde
 }
@@ -3514,7 +3514,7 @@ type DeviceSelectionConfig struct {
 	DeviceNames []string
 
 	// Percentage of devices in the fleet to deploy to the current stage.
-	Percentage int32
+	Percentage *int32
 
 	noSmithyDocumentSerde
 }
@@ -3525,12 +3525,12 @@ type DeviceStats struct {
 	// The number of devices connected with a heartbeat.
 	//
 	// This member is required.
-	ConnectedDeviceCount int64
+	ConnectedDeviceCount *int64
 
 	// The number of registered devices.
 	//
 	// This member is required.
-	RegisteredDeviceCount int64
+	RegisteredDeviceCount *int64
 
 	noSmithyDocumentSerde
 }
@@ -3737,16 +3737,16 @@ type DriftCheckModelQuality struct {
 type DynamicScalingConfiguration struct {
 
 	// The recommended maximum capacity to specify for your autoscaling policy.
-	MaxCapacity int32
+	MaxCapacity *int32
 
 	// The recommended minimum capacity to specify for your autoscaling policy.
-	MinCapacity int32
+	MinCapacity *int32
 
 	// The recommended scale in cooldown time for your autoscaling policy.
-	ScaleInCooldown int32
+	ScaleInCooldown *int32
 
 	// The recommended scale out cooldown time for your autoscaling policy.
-	ScaleOutCooldown int32
+	ScaleOutCooldown *int32
 
 	// An object of the scaling policies for each metric.
 	ScalingPolicies []ScalingPolicy
@@ -3812,12 +3812,12 @@ type EdgeDeploymentPlanSummary struct {
 	// The number of edge devices that failed the deployment.
 	//
 	// This member is required.
-	EdgeDeploymentFailed int32
+	EdgeDeploymentFailed *int32
 
 	// The number of edge devices yet to pick up the deployment, or in progress.
 	//
 	// This member is required.
-	EdgeDeploymentPending int32
+	EdgeDeploymentPending *int32
 
 	// The ARN of the edge deployment plan.
 	//
@@ -3832,7 +3832,7 @@ type EdgeDeploymentPlanSummary struct {
 	// The number of edge devices with the successful deployment.
 	//
 	// This member is required.
-	EdgeDeploymentSuccess int32
+	EdgeDeploymentSuccess *int32
 
 	// The time when the edge deployment plan was created.
 	CreationTime *time.Time
@@ -3849,18 +3849,18 @@ type EdgeDeploymentStatus struct {
 	// The number of edge devices that failed the deployment in current stage.
 	//
 	// This member is required.
-	EdgeDeploymentFailedInStage int32
+	EdgeDeploymentFailedInStage *int32
 
 	// The number of edge devices yet to pick up the deployment in current stage, or
 	// in progress.
 	//
 	// This member is required.
-	EdgeDeploymentPendingInStage int32
+	EdgeDeploymentPendingInStage *int32
 
 	// The number of edge devices with the successful deployment in the current stage.
 	//
 	// This member is required.
-	EdgeDeploymentSuccessInStage int32
+	EdgeDeploymentSuccessInStage *int32
 
 	// The general status of the current stage.
 	//
@@ -3905,12 +3905,12 @@ type EdgeModelStat struct {
 	// currently running.
 	//
 	// This member is required.
-	ActiveDeviceCount int64
+	ActiveDeviceCount *int64
 
 	// The number of devices that have this model version and have a heart beat.
 	//
 	// This member is required.
-	ConnectedDeviceCount int64
+	ConnectedDeviceCount *int64
 
 	// The name of the model.
 	//
@@ -3925,12 +3925,12 @@ type EdgeModelStat struct {
 	// The number of devices that have this model version and do not have a heart beat.
 	//
 	// This member is required.
-	OfflineDeviceCount int64
+	OfflineDeviceCount *int64
 
 	// The number of devices with this model version and are producing sample data.
 	//
 	// This member is required.
-	SamplingDeviceCount int64
+	SamplingDeviceCount *int64
 
 	noSmithyDocumentSerde
 }
@@ -4846,7 +4846,7 @@ type FinalAutoMLJobObjectiveMetric struct {
 	// The value of the metric with the best result.
 	//
 	// This member is required.
-	Value float32
+	Value *float32
 
 	// The name of the standard metric. For a description of the standard metrics, see
 	// Autopilot candidate metrics (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics)
@@ -4877,7 +4877,7 @@ type FinalHyperParameterTuningJobObjectiveMetric struct {
 	// The value of the objective metric.
 	//
 	// This member is required.
-	Value float32
+	Value *float32
 
 	// Select if you want to minimize or maximize the objective metric during
 	// hyperparameter tuning.
@@ -6002,10 +6002,10 @@ type HyperParameterSpecification struct {
 	Description *string
 
 	// Indicates whether this hyperparameter is required.
-	IsRequired bool
+	IsRequired *bool
 
 	// Indicates whether this hyperparameter is tunable in a hyperparameter tuning job.
-	IsTunable bool
+	IsTunable *bool
 
 	// The allowed range for this hyperparameter.
 	Range *ParameterRange
@@ -6055,11 +6055,11 @@ type HyperParameterTrainingJobDefinition struct {
 	// training, but training might take longer. How long it takes depends on the
 	// amount of communication between compute instances, especially if you use a deep
 	// learning algorithm in distributed training.
-	EnableInterContainerTrafficEncryption bool
+	EnableInterContainerTrafficEncryption *bool
 
 	// A Boolean indicating whether managed spot training is enabled ( True ) or not (
 	// False ).
-	EnableManagedSpotTraining bool
+	EnableManagedSpotTraining *bool
 
 	// Isolates the training container. No inbound or outbound network calls can be
 	// made, except for calls between peers within a training cluster for distributed
@@ -6067,7 +6067,7 @@ type HyperParameterTrainingJobDefinition struct {
 	// use a VPC, SageMaker downloads and uploads customer data and model artifacts
 	// through the specified VPC, but the training container does not have network
 	// access.
-	EnableNetworkIsolation bool
+	EnableNetworkIsolation *bool
 
 	// An environment variable that you can pass into the SageMaker CreateTrainingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
 	// API. You can use an existing environment variable from the training container (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html#sagemaker-CreateTrainingJob-request-Environment)
@@ -6215,7 +6215,7 @@ type HyperParameterTuningInstanceConfig struct {
 	// for more information.
 	//
 	// This member is required.
-	InstanceCount int32
+	InstanceCount *int32
 
 	// The instance type used for processing of hyperparameter optimization jobs.
 	// Choose from general purpose (no GPUs) instance types: ml.m5.xlarge,
@@ -6231,7 +6231,7 @@ type HyperParameterTuningInstanceConfig struct {
 	// optimization (optional).
 	//
 	// This member is required.
-	VolumeSizeInGB int32
+	VolumeSizeInGB *int32
 
 	noSmithyDocumentSerde
 }
@@ -6248,7 +6248,7 @@ type HyperParameterTuningJobCompletionDetails struct {
 	// The number of training jobs launched by a tuning job that are not improving (1%
 	// or less) as measured by model performance evaluated against an objective
 	// function.
-	NumberOfTrainingJobsObjectiveNotImproving int32
+	NumberOfTrainingJobsObjectiveNotImproving *int32
 
 	noSmithyDocumentSerde
 }
@@ -6315,7 +6315,7 @@ type HyperParameterTuningJobConfig struct {
 type HyperParameterTuningJobConsumedResources struct {
 
 	// The wall clock runtime in seconds used by your hyperparameter tuning job.
-	RuntimeInSeconds int32
+	RuntimeInSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -6567,7 +6567,7 @@ type HyperParameterTuningResourceConfig struct {
 	// The number of compute instances of type InstanceType to use. For distributed
 	// training (https://docs.aws.amazon.com/sagemaker/latest/dg/data-parallel-use-api.html)
 	// , select a value greater than 1.
-	InstanceCount int32
+	InstanceCount *int32
 
 	// The instance type used to run hyperparameter optimization tuning jobs. See
 	// descriptions of instance types (https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks-available-instance-types.html)
@@ -6598,7 +6598,7 @@ type HyperParameterTuningResourceConfig struct {
 	// instance storage and their sizes, see instance store volumes (http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/)
 	// . SageMaker supports only the General Purpose SSD (gp2) (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html)
 	// storage volume type.
-	VolumeSizeInGB int32
+	VolumeSizeInGB *int32
 
 	noSmithyDocumentSerde
 }
@@ -6855,12 +6855,12 @@ type InferenceMetrics struct {
 	// The expected maximum number of requests per minute for the instance.
 	//
 	// This member is required.
-	MaxInvocations int32
+	MaxInvocations *int32
 
 	// The expected model latency at maximum invocations per minute for the instance.
 	//
 	// This member is required.
-	ModelLatency int32
+	ModelLatency *int32
 
 	noSmithyDocumentSerde
 }
@@ -7157,7 +7157,7 @@ type InstanceGroup struct {
 	// Specifies the number of instances of the instance group.
 	//
 	// This member is required.
-	InstanceCount int32
+	InstanceCount *int32
 
 	// Specifies the name of the instance group.
 	//
@@ -7324,19 +7324,19 @@ type KernelSpec struct {
 type LabelCounters struct {
 
 	// The total number of objects that could not be labeled due to an error.
-	FailedNonRetryableError int32
+	FailedNonRetryableError *int32
 
 	// The total number of objects labeled by a human worker.
-	HumanLabeled int32
+	HumanLabeled *int32
 
 	// The total number of objects labeled by automated data labeling.
-	MachineLabeled int32
+	MachineLabeled *int32
 
 	// The total number of objects labeled.
-	TotalLabeled int32
+	TotalLabeled *int32
 
 	// The total number of objects not yet labeled.
-	Unlabeled int32
+	Unlabeled *int32
 
 	noSmithyDocumentSerde
 }
@@ -7345,13 +7345,13 @@ type LabelCounters struct {
 type LabelCountersForWorkteam struct {
 
 	// The total number of data objects labeled by a human worker.
-	HumanLabeled int32
+	HumanLabeled *int32
 
 	// The total number of data objects that need to be labeled by a human worker.
-	PendingHuman int32
+	PendingHuman *int32
 
 	// The total number of tasks in the labeling job.
-	Total int32
+	Total *int32
 
 	noSmithyDocumentSerde
 }
@@ -7751,7 +7751,7 @@ type MetricData struct {
 	Timestamp *time.Time
 
 	// The value of the metric.
-	Value float32
+	Value *float32
 
 	noSmithyDocumentSerde
 }
@@ -7771,7 +7771,7 @@ type MetricDatum struct {
 	StandardMetricName AutoMLMetricExtendedEnum
 
 	// The value of the metric.
-	Value float32
+	Value *float32
 
 	noSmithyDocumentSerde
 }
@@ -7863,7 +7863,7 @@ type Model struct {
 
 	// Isolates the model container. No inbound or outbound network calls can be made
 	// to or from the model container.
-	EnableNetworkIsolation bool
+	EnableNetworkIsolation *bool
 
 	// The Amazon Resource Name (ARN) of the IAM role that you specified for the model.
 	ExecutionRoleArn *string
@@ -7998,7 +7998,7 @@ type ModelCard struct {
 	ModelCardStatus ModelCardStatus
 
 	// The version of the model card.
-	ModelCardVersion int32
+	ModelCardVersion *int32
 
 	// The unique name (ID) of the model.
 	ModelId *string
@@ -8063,7 +8063,7 @@ type ModelCardExportJobSummary struct {
 	// The version of the model card that the export job exports.
 	//
 	// This member is required.
-	ModelCardVersion int32
+	ModelCardVersion *int32
 
 	// The completion status of the model card export job.
 	//
@@ -8162,7 +8162,7 @@ type ModelCardVersionSummary struct {
 	// A version of the model card.
 	//
 	// This member is required.
-	ModelCardVersion int32
+	ModelCardVersion *int32
 
 	// The time date and time that the model card version was last modified.
 	LastModifiedTime *time.Time
@@ -8238,7 +8238,7 @@ type ModelDashboardEndpoint struct {
 type ModelDashboardIndicatorAction struct {
 
 	// Indicates whether the alert action is turned on.
-	Enabled bool
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -8293,7 +8293,7 @@ type ModelDashboardModelCard struct {
 	ModelCardStatus ModelCardStatus
 
 	// The model card version.
-	ModelCardVersion int32
+	ModelCardVersion *int32
 
 	// For models created in SageMaker, this is the model ARN. For models created
 	// outside of SageMaker, this is a user-customized string.
@@ -8383,7 +8383,7 @@ type ModelDeployConfig struct {
 	// Autopilot model deployment; set to False otherwise. The default value is False .
 	// If you set AutoGenerateEndpointName to True , do not specify the EndpointName ;
 	// otherwise a 400 error is thrown.
-	AutoGenerateEndpointName bool
+	AutoGenerateEndpointName *bool
 
 	// Specifies the endpoint name to use for a one-click Autopilot model deployment
 	// if the endpoint name is not generated automatically. Specify the EndpointName
@@ -8496,7 +8496,7 @@ type ModelLatencyThreshold struct {
 	Percentile *string
 
 	// The model latency percentile value in milliseconds.
-	ValueInMilliseconds int32
+	ValueInMilliseconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -8592,7 +8592,7 @@ type ModelPackage struct {
 	// Services Marketplace, see List Your Algorithm or Model Package on Amazon Web
 	// Services Marketplace (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-mkt-list.html)
 	// .
-	CertifyForMarketplace bool
+	CertifyForMarketplace *bool
 
 	// Information about the user who created or modified an experiment, trial, trial
 	// component, lineage group, or project.
@@ -9268,7 +9268,7 @@ type MonitoringConstraintsResource struct {
 type MonitoringCsvDatasetFormat struct {
 
 	// Indicates if the CSV data has a header.
-	Header bool
+	Header *bool
 
 	noSmithyDocumentSerde
 }
@@ -9433,7 +9433,7 @@ type MonitoringJobDefinitionSummary struct {
 type MonitoringJsonDatasetFormat struct {
 
 	// Indicates if the file should be read as a JSON object per line.
-	Line bool
+	Line *bool
 
 	noSmithyDocumentSerde
 }
@@ -9444,11 +9444,11 @@ type MonitoringNetworkConfig struct {
 	// Whether to encrypt all communications between the instances used for the
 	// monitoring jobs. Choose True to encrypt communications. Encryption provides
 	// greater security for distributed jobs, but the processing might take longer.
-	EnableInterContainerTrafficEncryption bool
+	EnableInterContainerTrafficEncryption *bool
 
 	// Whether to allow inbound and outbound network calls to and from the containers
 	// used for the monitoring job.
-	EnableNetworkIsolation bool
+	EnableNetworkIsolation *bool
 
 	// Specifies a VPC that your training jobs and hosted models have access to.
 	// Control access to and from your training and model containers by configuring the
@@ -9651,7 +9651,7 @@ type MonitoringStoppingCondition struct {
 	// hourly schedules, this can be up to 1800 seconds.
 	//
 	// This member is required.
-	MaxRuntimeInSeconds int32
+	MaxRuntimeInSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -9729,11 +9729,11 @@ type NetworkConfig struct {
 	// Whether to encrypt all communications between distributed processing jobs.
 	// Choose True to encrypt communications. Encryption provides greater security for
 	// distributed processing jobs, but the processing might take longer.
-	EnableInterContainerTrafficEncryption bool
+	EnableInterContainerTrafficEncryption *bool
 
 	// Whether to allow inbound and outbound network calls to and from the containers
 	// used for the processing job.
-	EnableNetworkIsolation bool
+	EnableNetworkIsolation *bool
 
 	// Specifies a VPC that your training jobs and hosted models have access to.
 	// Control access to and from your training and model containers by configuring the
@@ -9864,15 +9864,15 @@ type ObjectiveStatusCounters struct {
 	// The number of training jobs whose final objective metric was not evaluated and
 	// used in the hyperparameter tuning process. This typically occurs when the
 	// training job failed or did not emit an objective metric.
-	Failed int32
+	Failed *int32
 
 	// The number of training jobs that are in progress and pending evaluation of
 	// their final objective metric.
-	Pending int32
+	Pending *int32
 
 	// The number of training jobs whose final objective metric was evaluated by the
 	// hyperparameter tuning job and used in the hyperparameter tuning process.
-	Succeeded int32
+	Succeeded *int32
 
 	noSmithyDocumentSerde
 }
@@ -9896,7 +9896,7 @@ type OfflineStoreConfig struct {
 	// table when configuring an OfflineStore . If set to False , Feature Store will
 	// name the OfflineStore Glue table following Athena's naming recommendations (https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html)
 	// . The default value is False .
-	DisableGlueTableCreation bool
+	DisableGlueTableCreation *bool
 
 	// Format for the offline store table. Supported formats are Glue (Default) and
 	// Apache Iceberg (https://iceberg.apache.org/) .
@@ -10019,7 +10019,7 @@ type OnlineStoreConfig struct {
 	// Turn OnlineStore off by specifying False for the EnableOnlineStore flag. Turn
 	// OnlineStore on by specifying True for the EnableOnlineStore flag. The default
 	// value is False .
-	EnableOnlineStore bool
+	EnableOnlineStore *bool
 
 	// Use to specify KMS Key ID ( KMSKeyId ) for at-rest encryption of your
 	// OnlineStore .
@@ -10253,7 +10253,7 @@ type ParallelismConfiguration struct {
 	// The max number of steps that can be executed in parallel.
 	//
 	// This member is required.
-	MaxParallelExecutionSteps int32
+	MaxParallelExecutionSteps *int32
 
 	noSmithyDocumentSerde
 }
@@ -10577,7 +10577,7 @@ type PipelineExecutionStep struct {
 	// The current attempt of the execution step. For more information, see Retry
 	// Policy for SageMaker Pipelines steps (https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-retry-policy.html)
 	// .
-	AttemptCount int32
+	AttemptCount *int32
 
 	// If this pipeline execution step was cached, details on the cache hit.
 	CacheHitResult *CacheHitResult
@@ -10838,7 +10838,7 @@ type ProcessingInput struct {
 	// When True , input operations such as data download are managed natively by the
 	// processing job application. When False (default), input operations are managed
 	// by Amazon SageMaker.
-	AppManaged bool
+	AppManaged *bool
 
 	// Configuration for a Dataset Definition input.
 	DatasetDefinition *DatasetDefinition
@@ -11001,7 +11001,7 @@ type ProcessingOutput struct {
 	// When True , output operations such as data upload are managed natively by the
 	// processing job application. When False (default), output operations are managed
 	// by Amazon SageMaker.
-	AppManaged bool
+	AppManaged *bool
 
 	// Configuration for processing job outputs in Amazon SageMaker Feature Store.
 	// This processing output type is only supported when AppManaged is specified.
@@ -11126,7 +11126,7 @@ type ProcessingStoppingCondition struct {
 	// Specifies the maximum runtime in seconds.
 	//
 	// This member is required.
-	MaxRuntimeInSeconds int32
+	MaxRuntimeInSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -11351,7 +11351,7 @@ type ProfilerConfig struct {
 
 	// Configuration to turn off Amazon SageMaker Debugger's system monitoring and
 	// profiling functionality. To turn it off, set to True .
-	DisableProfiler bool
+	DisableProfiler *bool
 
 	// A time interval for capturing system metrics in milliseconds. Available values
 	// are 100, 200, 500, 1000 (1 second), 5000 (5 seconds), and 60000 (1 minute)
@@ -11380,7 +11380,7 @@ type ProfilerConfigForUpdate struct {
 
 	// To turn off Amazon SageMaker Debugger monitoring and profiling while a training
 	// job is in progress, set to True .
-	DisableProfiler bool
+	DisableProfiler *bool
 
 	// A time interval for capturing system metrics in milliseconds. Available values
 	// are 100, 200, 500, 1000 (1 second), 5000 (5 seconds), and 60000 (1 minute)
@@ -11431,7 +11431,7 @@ type ProfilerRuleConfiguration struct {
 	S3OutputPath *string
 
 	// The size, in GB, of the ML storage volume attached to the processing instance.
-	VolumeSizeInGB int32
+	VolumeSizeInGB *int32
 
 	noSmithyDocumentSerde
 }
@@ -11732,12 +11732,12 @@ type QualityCheckStepMetadata struct {
 	// baseline of the configured check type must also be available. These can be
 	// accessed through the BaselineUsedForDriftCheckConstraints and
 	// BaselineUsedForDriftCheckStatistics properties.
-	RegisterNewBaseline bool
+	RegisterNewBaseline *bool
 
 	// This flag indicates if the drift check against the previous baseline will be
 	// skipped or not. If it is set to False , the previous baseline of the configured
 	// check type must be available.
-	SkipCheck bool
+	SkipCheck *bool
 
 	// The Amazon S3 URI of violation report if violations are detected.
 	ViolationReport *string
@@ -12028,7 +12028,7 @@ type RecommendationJobStoppingConditions struct {
 	FlatInvocations FlatInvocations
 
 	// The maximum number of requests per minute expected for the endpoint.
-	MaxInvocations int32
+	MaxInvocations *int32
 
 	// The interval of time taken by a model to respond as viewed from SageMaker. The
 	// interval includes the local communication time taken to send the request and to
@@ -12063,22 +12063,22 @@ type RecommendationMetrics struct {
 	// Defines the cost per hour for the instance.
 	//
 	// This member is required.
-	CostPerHour float32
+	CostPerHour *float32
 
 	// Defines the cost per inference for the instance .
 	//
 	// This member is required.
-	CostPerInference float32
+	CostPerInference *float32
 
 	// The expected maximum number of requests per minute for the instance.
 	//
 	// This member is required.
-	MaxInvocations int32
+	MaxInvocations *int32
 
 	// The expected model latency at maximum invocation per minute for the instance.
 	//
 	// This member is required.
-	ModelLatency int32
+	ModelLatency *int32
 
 	// The expected CPU utilization at maximum invocations per minute for the
 	// instance. NaN indicates that the value is not available.
@@ -12275,11 +12275,11 @@ type ResourceConfig struct {
 	// .
 	//
 	// This member is required.
-	VolumeSizeInGB int32
+	VolumeSizeInGB *int32
 
 	// The number of ML compute instances to use. For distributed training, provide a
 	// value greater than 1.
-	InstanceCount int32
+	InstanceCount *int32
 
 	// The configuration of a heterogeneous cluster in JSON format.
 	InstanceGroups []InstanceGroup
@@ -12342,7 +12342,7 @@ type ResourceLimits struct {
 	// can launch.
 	//
 	// This member is required.
-	MaxParallelTrainingJobs int32
+	MaxParallelTrainingJobs *int32
 
 	// The maximum number of training jobs that a hyperparameter tuning job can launch.
 	MaxNumberOfTrainingJobs *int32
@@ -12398,7 +12398,7 @@ type RetryStrategy struct {
 	// SecondaryStatus is changed to STARTING .
 	//
 	// This member is required.
-	MaximumRetryAttempts int32
+	MaximumRetryAttempts *int32
 
 	noSmithyDocumentSerde
 }
@@ -12681,13 +12681,13 @@ type ScalingPolicyMetric struct {
 	// ProductionVariant. 1/numberOfInstances is sent as the value on each request,
 	// where numberOfInstances is the number of active instances for the
 	// ProductionVariant behind the endpoint at the time of the request.
-	InvocationsPerInstance int32
+	InvocationsPerInstance *int32
 
 	// The interval of time taken by a model to respond as viewed from SageMaker. This
 	// interval includes the local communication times taken to send the request and to
 	// fetch the response from the container of a model and the time taken to complete
 	// the inference in the container.
-	ModelLatency int32
+	ModelLatency *int32
 
 	noSmithyDocumentSerde
 }
@@ -12696,10 +12696,10 @@ type ScalingPolicyMetric struct {
 type ScalingPolicyObjective struct {
 
 	// The maximum number of expected requests to your endpoint per minute.
-	MaxInvocationsPerMinute int32
+	MaxInvocationsPerMinute *int32
 
 	// The minimum number of expected requests to your endpoint per minute.
-	MinInvocationsPerMinute int32
+	MinInvocationsPerMinute *int32
 
 	noSmithyDocumentSerde
 }
@@ -13056,7 +13056,7 @@ type ShadowModelVariantConfig struct {
 	// production variant to the shadow variant.
 	//
 	// This member is required.
-	SamplingPercentage int32
+	SamplingPercentage *int32
 
 	// The name of the shadow variant.
 	//
@@ -13105,7 +13105,7 @@ type ShuffleConfig struct {
 	// Determines the shuffling order in ShuffleConfig value.
 	//
 	// This member is required.
-	Seed int64
+	Seed *int64
 
 	noSmithyDocumentSerde
 }
@@ -13235,7 +13235,7 @@ type StoppingCondition struct {
 	// The default value is 1 day. The maximum value is 28 days. The maximum time that
 	// a TrainingJob can run in total, including any time spent publishing metrics or
 	// archiving and uploading models after it has been stopped, is 30 days.
-	MaxRuntimeInSeconds int32
+	MaxRuntimeInSeconds *int32
 
 	// The maximum length of time, in seconds, that a managed Spot training job has to
 	// complete. It is the amount of time spent waiting for Spot capacity plus the
@@ -13344,7 +13344,7 @@ type TabularJobConfig struct {
 	// Generates possible candidates without training the models. A model candidate is
 	// a combination of data preprocessors, algorithms, and algorithm parameter
 	// settings.
-	GenerateCandidateDefinitionsOnly bool
+	GenerateCandidateDefinitionsOnly *bool
 
 	// The method that Autopilot uses to train the data. You can either specify the
 	// mode manually or let Autopilot choose for you based on the dataset size by
@@ -13469,7 +13469,7 @@ type TargetTrackingScalingPolicyConfiguration struct {
 
 	// The recommended target value to specify for the metric when creating a scaling
 	// policy.
-	TargetValue float64
+	TargetValue *float64
 
 	noSmithyDocumentSerde
 }
@@ -13772,18 +13772,18 @@ type TrainingJob struct {
 	// training, but training might take longer. How long it takes depends on the
 	// amount of communication between compute instances, especially if you use a deep
 	// learning algorithm in distributed training.
-	EnableInterContainerTrafficEncryption bool
+	EnableInterContainerTrafficEncryption *bool
 
 	// When true, enables managed spot training using Amazon EC2 Spot instances to run
 	// training jobs instead of on-demand instances. For more information, see Managed
 	// Spot Training (https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html)
 	// .
-	EnableManagedSpotTraining bool
+	EnableManagedSpotTraining *bool
 
 	// If the TrainingJob was created with network isolation, the value is set to true
 	// . If network isolation is enabled, nodes can't communicate beyond the VPC they
 	// run in.
-	EnableNetworkIsolation bool
+	EnableNetworkIsolation *bool
 
 	// The environment variables to set in the Docker container.
 	Environment map[string]string
@@ -14005,22 +14005,22 @@ type TrainingJobDefinition struct {
 type TrainingJobStatusCounters struct {
 
 	// The number of completed training jobs launched by the hyperparameter tuning job.
-	Completed int32
+	Completed *int32
 
 	// The number of in-progress training jobs launched by a hyperparameter tuning job.
-	InProgress int32
+	InProgress *int32
 
 	// The number of training jobs that failed and can't be retried. A failed training
 	// job can't be retried if it failed because a client error occurred.
-	NonRetryableError int32
+	NonRetryableError *int32
 
 	// The number of training jobs that failed, but can be retried. A failed training
 	// job can be retried only if it failed because an internal service error occurred.
-	RetryableError int32
+	RetryableError *int32
 
 	// The number of training jobs launched by a hyperparameter tuning job that were
 	// manually stopped.
-	Stopped int32
+	Stopped *int32
 
 	noSmithyDocumentSerde
 }
@@ -14122,7 +14122,7 @@ type TrainingSpecification struct {
 
 	// Indicates whether the algorithm supports distributed training. If set to false,
 	// buyers can't request more than one instance during training.
-	SupportsDistributedTraining bool
+	SupportsDistributedTraining *bool
 
 	// An MD5 hash of the training algorithm that identifies the Docker image used for
 	// training.
@@ -15000,13 +15000,13 @@ type UiTemplateInfo struct {
 type USD struct {
 
 	// The fractional portion, in cents, of the amount.
-	Cents int32
+	Cents *int32
 
 	// The whole number of dollars in the amount.
-	Dollars int32
+	Dollars *int32
 
 	// Fractions of a cent, in tenths.
-	TenthFractionsOfACent int32
+	TenthFractionsOfACent *int32
 
 	noSmithyDocumentSerde
 }

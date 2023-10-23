@@ -102,7 +102,7 @@ type GetCostCategoriesInput struct {
 	// isn't specified with the SortBy value, the request returns 1000 results as the
 	// default value for this parameter. For GetCostCategories , MaxResults has an
 	// upper quota of 1000.
-	MaxResults int32
+	MaxResults *int32
 
 	// If the number of objects that are still available for retrieval exceeds the
 	// quota, Amazon Web Services returns a NextPageToken value in the response. To

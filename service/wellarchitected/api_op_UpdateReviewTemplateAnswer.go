@@ -59,7 +59,7 @@ type UpdateReviewTemplateAnswerInput struct {
 	ChoiceUpdates map[string]types.ChoiceUpdate
 
 	// Defines whether this question is applicable to a lens review.
-	IsApplicable bool
+	IsApplicable *bool
 
 	// The notes associated with the workload. For a review template, these are the
 	// notes that will be associated with the workload when the template is applied.

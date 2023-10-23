@@ -1250,7 +1250,7 @@ type ResourceConfiguration struct {
 	// used to execute the containerAction (min: 1, max: 50).
 	//
 	// This member is required.
-	VolumeSizeInGB int32
+	VolumeSizeInGB *int32
 
 	noSmithyDocumentSerde
 }

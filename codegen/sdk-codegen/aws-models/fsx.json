@@ -227,7 +227,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -270,7 +269,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -283,7 +283,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -297,7 +296,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -320,7 +318,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -355,7 +352,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -366,14 +362,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -387,14 +385,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -403,11 +399,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -418,14 +414,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -439,7 +437,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -459,7 +456,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -470,14 +466,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -488,9 +486,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1195,6 +1195,7 @@
                 "ActiveDirectoryId": {
                     "target": "com.amazonaws.fsx#DirectoryId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The directory ID of the directory that an error pertains to.</p>",
                         "smithy.api#required": {}
                     }
@@ -1552,6 +1553,7 @@
                 "FileSystemId": {
                     "target": "com.amazonaws.fsx#FileSystemId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the file system with which you want to associate one or more DNS aliases.</p>",
                         "smithy.api#required": {}
                     }
@@ -1559,6 +1561,7 @@
                 "Aliases": {
                     "target": "com.amazonaws.fsx#AlternateDNSNames",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of one or more DNS alias names to associate with the file system. \n            The alias name has to comply with the following formatting requirements:</p>\n         <ul>\n            <li>\n               <p>Formatted as a fully-qualified domain name (FQDN), <i>\n                     <code>hostname.domain</code>\n                  </i>, \n                    for example, <code>accounting.corp.example.com</code>.</p>\n            </li>\n            <li>\n               <p>Can contain alphanumeric characters and the hyphen (-).</p>\n            </li>\n            <li>\n               <p>Cannot start or end with a hyphen.</p>\n            </li>\n            <li>\n               <p>Can start with a numeric.</p>\n            </li>\n         </ul>\n         <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: \n            as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>",
                         "smithy.api#required": {}
                     }
@@ -1647,6 +1650,7 @@
                 "Type": {
                     "target": "com.amazonaws.fsx#AutocommitPeriodType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Defines the type of time for the autocommit period of a file in an FSx for ONTAP SnapLock volume. \n        Setting this value to <code>NONE</code> disables autocommit. The default value is <code>NONE</code>. </p>",
                         "smithy.api#required": {}
                     }
@@ -1728,6 +1732,7 @@
                 "BackupId": {
                     "target": "com.amazonaws.fsx#BackupId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the backup.</p>",
                         "smithy.api#required": {}
                     }
@@ -1735,6 +1740,7 @@
                 "Lifecycle": {
                     "target": "com.amazonaws.fsx#BackupLifecycle",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The lifecycle status of the backup.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The backup is fully available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx hasn't started creating the backup.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code> - Amazon FSx is creating the backup.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is transferring the backup to Amazon S3.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COPYING</code> - Amazon FSx is copying the backup.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - Amazon FSx deleted the backup and it's no longer\n                    available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Amazon FSx couldn't finish the backup.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -1748,6 +1754,7 @@
                 "Type": {
                     "target": "com.amazonaws.fsx#BackupType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of the file-system backup.</p>",
                         "smithy.api#required": {}
                     }
@@ -1758,6 +1765,7 @@
                 "CreationTime": {
                     "target": "com.amazonaws.fsx#CreationTime",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The time when a particular backup was created.</p>",
                         "smithy.api#required": {}
                     }
@@ -1783,6 +1791,7 @@
                 "FileSystem": {
                     "target": "com.amazonaws.fsx#FileSystem",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The metadata of the file system associated with the backup. This metadata is persisted\n            even if the file system is deleted.</p>",
                         "smithy.api#required": {}
                     }
@@ -2054,6 +2063,7 @@
                 "TaskId": {
                     "target": "com.amazonaws.fsx#TaskId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the data repository task to cancel.</p>",
                         "smithy.api#required": {}
                     }
@@ -2110,6 +2120,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.fsx#Flag",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Set <code>Enabled</code> to <code>True</code> to generate a <code>CompletionReport</code> when the task completes. \n            If set to <code>true</code>, then you need to provide a report <code>Scope</code>, <code>Path</code>, and <code>Format</code>. \n            Set <code>Enabled</code> to <code>False</code> if you do not want a <code>CompletionReport</code> generated when the task completes.</p>",
                         "smithy.api#required": {}
                     }
@@ -2246,6 +2257,7 @@
                 "SourceBackupId": {
                     "target": "com.amazonaws.fsx#SourceBackupId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the source backup. Specifies the ID of the backup that's being copied.</p>",
                         "smithy.api#required": {}
                     }
@@ -2414,6 +2426,7 @@
                 "FileSystemId": {
                     "target": "com.amazonaws.fsx#FileSystemId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -2426,6 +2439,7 @@
                 "DataRepositoryPath": {
                     "target": "com.amazonaws.fsx#ArchivePath",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The path to the Amazon S3 data repository that will be linked to the file\n            system. The path can be an S3 bucket or prefix in the format\n            <code>s3://myBucket/myPrefix/</code>. This path specifies where in the S3\n            data repository files will be imported from or exported to.</p>",
                         "smithy.api#required": {}
                     }
@@ -2518,6 +2532,7 @@
                 "Type": {
                     "target": "com.amazonaws.fsx#DataRepositoryTaskType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the type of data repository task to create.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EXPORT_TO_REPOSITORY</code> tasks export from your\n                Amazon FSx for Lustre file system to a linked data repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMPORT_METADATA_FROM_REPOSITORY</code> tasks import metadata\n                changes from a linked S3 bucket to your Amazon FSx for Lustre file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RELEASE_DATA_FROM_FILESYSTEM</code> tasks release files in\n                your Amazon FSx for Lustre file system that have been exported to a linked\n                S3 bucket and that meet your specified release criteria.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTO_RELEASE_DATA</code> tasks automatically release files from\n                an Amazon File Cache resource.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -2531,12 +2546,14 @@
                 "FileSystemId": {
                     "target": "com.amazonaws.fsx#FileSystemId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 },
                 "Report": {
                     "target": "com.amazonaws.fsx#CompletionReport",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Defines whether or not Amazon FSx provides a CompletionReport once the task has completed. \n            A CompletionReport provides a detailed  report on the files that Amazon FSx processed that meet the criteria specified by the \n            <code>Scope</code> parameter. For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html\">Working with Task Completion Reports</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2635,6 +2652,7 @@
                 "PerUnitStorageThroughput": {
                     "target": "com.amazonaws.fsx#PerUnitStorageThroughput",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Provisions the amount of read and write throughput for each 1 tebibyte (TiB)\n            of cache storage capacity, in MB/s/TiB. The only supported\n            value is <code>1000</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2642,6 +2660,7 @@
                 "DeploymentType": {
                     "target": "com.amazonaws.fsx#FileCacheLustreDeploymentType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the cache deployment type, which must be <code>CACHE_1</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2652,6 +2671,7 @@
                 "MetadataConfiguration": {
                     "target": "com.amazonaws.fsx#FileCacheLustreMetadataConfiguration",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The configuration for a Lustre MDT (Metadata Target) storage volume.</p>",
                         "smithy.api#required": {}
                     }
@@ -2674,6 +2694,7 @@
                 "FileCacheType": {
                     "target": "com.amazonaws.fsx#FileCacheType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of cache that you're creating, which\n            must be <code>LUSTRE</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2681,6 +2702,7 @@
                 "FileCacheTypeVersion": {
                     "target": "com.amazonaws.fsx#FileSystemTypeVersion",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Sets the Lustre version for the cache that you're creating,\n            which must be <code>2.12</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2688,6 +2710,7 @@
                 "StorageCapacity": {
                     "target": "com.amazonaws.fsx#StorageCapacity",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The storage capacity of the cache in gibibytes (GiB). Valid values\n            are 1200 GiB, 2400 GiB, and increments of 2400 GiB.</p>",
                         "smithy.api#required": {}
                     }
@@ -2695,6 +2718,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.fsx#SubnetIds",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -2841,6 +2865,7 @@
                 "BackupId": {
                     "target": "com.amazonaws.fsx#BackupId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -2854,6 +2879,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.fsx#SubnetIds",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> \n            file system deployment types, provide exactly two subnet IDs, one for the preferred file server \n            and one for the standby file server. You specify one of these subnets as the preferred subnet \n            using the <code>WindowsConfiguration > PreferredSubnetID</code> property.</p>\n         <p>Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> file system deployment\n            types, Lustre file systems, and OpenZFS file systems provide exactly one subnet ID. The\n            file server is launched in that subnet's Availability Zone.</p>",
                         "smithy.api#required": {}
                     }
@@ -3028,6 +3054,7 @@
                 "DeploymentType": {
                     "target": "com.amazonaws.fsx#OntapDeploymentType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the FSx for ONTAP file system deployment type to use in creating\n            the file system.  </p>\n         <ul>\n            <li>\n               <p>\n                  <code>MULTI_AZ_1</code> - (Default) A high availability file system configured\n                    for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ)\n                    unavailability.  </p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_AZ_1</code> - A file system configured for Single-AZ\n                    redundancy.</p>\n            </li>\n         </ul>\n         <p>For information about the use cases for Multi-AZ and Single-AZ deployments, refer to\n                <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-AZ.html\">Choosing a file system deployment type</a>. </p>",
                         "smithy.api#required": {}
                     }
@@ -3065,6 +3092,7 @@
                 "ThroughputCapacity": {
                     "target": "com.amazonaws.fsx#MegabytesPerSecond",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Sets the throughput capacity for the file system that you're creating. Valid values\n            are 128, 256, 512, 1024, 2048, and 4096 MBps.</p>",
                         "smithy.api#required": {}
                     }
@@ -3101,6 +3129,7 @@
                 "DeploymentType": {
                     "target": "com.amazonaws.fsx#OpenZFSDeploymentType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the file system deployment type. Single AZ deployment types are configured\n            for redundancy within a single Availability Zone in an Amazon Web Services Region .\n            Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MULTI_AZ_1</code>- Creates file systems with high availability that are configured\n                for Multi-AZ redundancy to tolerate temporary unavailability in Availability Zones (AZs).\n                <code>Multi_AZ_1</code> is available only in the US East (N. Virginia), US East (Ohio), US West (Oregon),\n                Asia Pacific (Singapore), Asia Pacific (Tokyo), and Europe (Ireland) Amazon Web Services Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_AZ_1</code>- Creates file systems with throughput capacities of 64 - 4,096 MB/s.\n                <code>Single_AZ_1</code> is available in all Amazon Web Services Regions where Amazon FSx \n                for OpenZFS is available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_AZ_2</code>- Creates file systems with throughput capacities of 160 - 10,240 MB/s\n                using an NVMe L2ARC cache. <code>Single_AZ_2</code> is available only in the US East (N. Virginia),\n                US East (Ohio), US West (Oregon), Asia Pacific (Singapore), Asia Pacific (Tokyo), and Europe (Ireland)\n                Amazon Web Services Regions.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/availability-durability.html#available-aws-regions\">Deployment type availability</a>\n            and <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#zfs-fs-performance\">File system performance</a>\n            in the <i>Amazon FSx for OpenZFS User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
@@ -3108,6 +3137,7 @@
                 "ThroughputCapacity": {
                     "target": "com.amazonaws.fsx#MegabytesPerSecond",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the throughput of an Amazon FSx for OpenZFS file system, measured in megabytes per second (MBps). Valid values depend on the DeploymentType you choose, as follows:</p>\n         <ul>\n            <li>\n               <p>For <code>MULTI_AZ_1</code> and <code>SINGLE_AZ_2</code>, valid values are 160, 320, 640,\n                1280, 2560, 3840, 5120, 7680, or 10240 MBps.</p>\n            </li>\n            <li>\n               <p>For <code>SINGLE_AZ_1</code>, valid values are 64, 128, 256, 512, 1024, 2048, 3072, or 4096 MBps.</p>\n            </li>\n         </ul>\n         <p>You pay for additional throughput capacity that you provision.</p>",
                         "smithy.api#required": {}
                     }
@@ -3160,6 +3190,7 @@
                 "FileSystemType": {
                     "target": "com.amazonaws.fsx#FileSystemType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of Amazon FSx file system to create. Valid values are\n                <code>WINDOWS</code>, <code>LUSTRE</code>, <code>ONTAP</code>, and\n                <code>OPENZFS</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -3167,6 +3198,7 @@
                 "StorageCapacity": {
                     "target": "com.amazonaws.fsx#StorageCapacity",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Sets the storage capacity of the file system that you're creating, in gibibytes (GiB).</p>\n         <p>\n            <b>FSx for Lustre file systems</b> - The amount of\n            storage capacity that you can configure depends on the value that you set for\n                <code>StorageType</code> and the Lustre <code>DeploymentType</code>, as\n            follows:</p>\n         <ul>\n            <li>\n               <p>For <code>SCRATCH_2</code>, <code>PERSISTENT_2</code> and <code>PERSISTENT_1</code> deployment types \n                using SSD storage type, the valid values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.</p>\n            </li>\n            <li>\n               <p>For <code>PERSISTENT_1</code> HDD file systems, valid values are increments of 6000 GiB for \n                12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file systems.</p>\n            </li>\n            <li>\n               <p>For <code>SCRATCH_1</code> deployment type, valid values are \n                1200 GiB, 2400 GiB, and increments of 3600 GiB.</p>\n            </li>\n         </ul>\n         <p>\n            <b>FSx for ONTAP file systems</b> - The amount of storage capacity \n            that you can configure is from 1024 GiB up to 196,608 GiB (192 TiB).</p>\n         <p>\n            <b>FSx for OpenZFS file systems</b> - The amount of storage capacity that \n            you can configure is from 64 GiB up to 524,288 GiB (512 TiB).</p>\n         <p>\n            <b>FSx for Windows File Server file systems</b> - The amount\n            of storage capacity that you can configure depends on the value that you set for\n                <code>StorageType</code> as follows:</p>\n         <ul>\n            <li>\n               <p>For SSD storage, valid values are 32 GiB-65,536 GiB (64 TiB).</p>\n            </li>\n            <li>\n               <p>For HDD storage, valid values are 2000 GiB-65,536 GiB (64 TiB).</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -3180,6 +3212,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.fsx#SubnetIds",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the IDs of the subnets that the file system will be accessible from. For\n            Windows and ONTAP <code>MULTI_AZ_1</code> deployment types,provide exactly two subnet\n            IDs, one for the preferred file server and one for the standby file server. You specify\n            one of these subnets as the preferred subnet using the <code>WindowsConfiguration >\n                PreferredSubnetID</code> or <code>OntapConfiguration > PreferredSubnetID</code>\n            properties. For more information about Multi-AZ file system configuration, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html\">\n                Availability and durability: Single-AZ and Multi-AZ file systems</a> in the\n                <i>Amazon FSx for Windows User Guide</i> and <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html\">\n                Availability and durability</a> in the <i>Amazon FSx for ONTAP User\n                Guide</i>.</p>\n         <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> and all Lustre \n            deployment types, provide exactly one subnet ID.\n           The file server is launched in that subnet's Availability Zone.</p>",
                         "smithy.api#required": {}
                     }
@@ -3271,6 +3304,7 @@
                 "ThroughputCapacity": {
                     "target": "com.amazonaws.fsx#MegabytesPerSecond",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Sets the throughput capacity of an Amazon FSx file system, measured in megabytes per second (MB/s), in 2 to\n            the <i>n</i>th increments, between 2^3 (8) and 2^11 (2048).</p>",
                         "smithy.api#required": {}
                     }
@@ -3340,6 +3374,7 @@
                 "SizeInMegabytes": {
                     "target": "com.amazonaws.fsx#VolumeCapacity",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the size of the volume, in megabytes (MB), that you are creating.</p>",
                         "smithy.api#required": {}
                     }
@@ -3353,6 +3388,7 @@
                 "StorageVirtualMachineId": {
                     "target": "com.amazonaws.fsx#StorageVirtualMachineId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the ONTAP SVM in which to create the volume.</p>",
                         "smithy.api#required": {}
                     }
@@ -3395,12 +3431,14 @@
                 "SnapshotARN": {
                     "target": "com.amazonaws.fsx#ResourceARN",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 },
                 "CopyStrategy": {
                     "target": "com.amazonaws.fsx#OpenZFSCopyStrategy",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The strategy used when copying data from the snapshot to the new volume. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CLONE</code> - The new volume references the data in the origin\n                    snapshot. Cloning a snapshot is faster than copying data from the snapshot to a\n                    new volume and doesn't consume disk throughput. However, the origin snapshot\n                    can't be deleted if there is a volume using its copied data. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FULL_COPY</code> - Copies all data from the snapshot to the new volume.\n                </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -3416,6 +3454,7 @@
                 "ParentVolumeId": {
                     "target": "com.amazonaws.fsx#VolumeId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the volume to use as the parent volume of the volume that you are creating.</p>",
                         "smithy.api#required": {}
                     }
@@ -3509,6 +3548,7 @@
                 "SnaplockType": {
                     "target": "com.amazonaws.fsx#SnaplockType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the retention mode of an FSx for ONTAP SnapLock volume.  After it is set, it can't be changed. \n        You can choose one of the following retention modes: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLIANCE</code>: Files transitioned to write once, read many (WORM) on a Compliance volume can't be deleted \n                until their retention periods expire. This retention mode is used to address government or industry-specific mandates or to protect \n                against ransomware attacks. For more information, \n                see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-compliance.html\">SnapLock Compliance</a>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ENTERPRISE</code>: Files transitioned to WORM on an Enterprise volume can be deleted by authorized users \n            before their retention periods expire using privileged delete. This retention mode is used to advance an organization's data integrity \n            and internal compliance or to test retention settings before using SnapLock Compliance. For more information, see \n                <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html\">SnapLock Enterprise</a>. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -3563,6 +3603,7 @@
                 "Name": {
                     "target": "com.amazonaws.fsx#SnapshotName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the snapshot. </p>",
                         "smithy.api#required": {}
                     }
@@ -3570,6 +3611,7 @@
                 "VolumeId": {
                     "target": "com.amazonaws.fsx#VolumeId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the volume that you are taking a snapshot of.</p>",
                         "smithy.api#required": {}
                     }
@@ -3649,12 +3691,14 @@
                 "FileSystemId": {
                     "target": "com.amazonaws.fsx#FileSystemId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.fsx#StorageVirtualMachineName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the SVM.</p>",
                         "smithy.api#required": {}
                     }
@@ -3699,6 +3743,7 @@
                 "NetBiosName": {
                     "target": "com.amazonaws.fsx#NetBiosAlias",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The NetBIOS name of the Active Directory computer object that will be created for your SVM.</p>",
                         "smithy.api#required": {}
                     }
@@ -3793,6 +3838,7 @@
                 "BackupId": {
                     "target": "com.amazonaws.fsx#BackupId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -3805,6 +3851,7 @@
                 "Name": {
                     "target": "com.amazonaws.fsx#VolumeName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the new volume you're creating.</p>",
                         "smithy.api#required": {}
                     }
@@ -3849,6 +3896,7 @@
                 "VolumeType": {
                     "target": "com.amazonaws.fsx#VolumeType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the type of volume to create; <code>ONTAP</code> and <code>OPENZFS</code> are\n            the only valid volume types.</p>",
                         "smithy.api#required": {}
                     }
@@ -3856,6 +3904,7 @@
                 "Name": {
                     "target": "com.amazonaws.fsx#VolumeName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the name of the volume that you're creating.</p>",
                         "smithy.api#required": {}
                     }
@@ -4173,6 +4222,7 @@
                 "TaskId": {
                     "target": "com.amazonaws.fsx#TaskId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The system-generated, unique 17-digit ID of the data repository task.</p>",
                         "smithy.api#required": {}
                     }
@@ -4180,6 +4230,7 @@
                 "Lifecycle": {
                     "target": "com.amazonaws.fsx#DataRepositoryTaskLifecycle",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The lifecycle status of the data repository task, as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> - The task has not started.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXECUTING</code> - The task is in process.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> -  The task was not able to be completed. For example, there may be files the task failed to process. \n                The <a>DataRepositoryTaskFailureDetails</a> property provides more information about task failures.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code> - The task has completed successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELED</code> - The task was canceled and it did not complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELING</code> - The task is in process of being canceled.</p>\n            </li>\n         </ul>\n         <note>\n            <p>You cannot delete an FSx for Lustre file system if there are data \n                repository tasks for the file system in the <code>PENDING</code> or <code>EXECUTING</code> states.\n                Please retry when the data repository task is finished (with a status of <code>CANCELED</code>, <code>SUCCEEDED</code>, or <code>FAILED</code>). \n                You can use the DescribeDataRepositoryTask action to monitor the task status. Contact the FSx team if you need to delete your file system immediately.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -4187,6 +4238,7 @@
                 "Type": {
                     "target": "com.amazonaws.fsx#DataRepositoryTaskType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of data repository task.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EXPORT_TO_REPOSITORY</code> tasks export from your\n                Amazon FSx for Lustre file system to a linked data repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMPORT_METADATA_FROM_REPOSITORY</code> tasks import metadata\n                changes from a linked S3 bucket to your Amazon FSx for Lustre file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RELEASE_DATA_FROM_FILESYSTEM</code> tasks release files in\n                your Amazon FSx for Lustre file system that have been exported to a\n                linked S3 bucket and that meet your specified release criteria.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTO_RELEASE_DATA</code> tasks automatically release files from\n                an Amazon File Cache resource.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -4194,6 +4246,7 @@
                 "CreationTime": {
                     "target": "com.amazonaws.fsx#CreationTime",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -4592,6 +4645,7 @@
                 "BackupId": {
                     "target": "com.amazonaws.fsx#BackupId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the backup that you want to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -4669,6 +4723,7 @@
                 "AssociationId": {
                     "target": "com.amazonaws.fsx#DataRepositoryAssociationId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the data repository association that you want to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -4752,6 +4807,7 @@
                 "FileCacheId": {
                     "target": "com.amazonaws.fsx#FileCacheId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the cache that's being deleted.</p>",
                         "smithy.api#required": {}
                     }
@@ -4939,6 +4995,7 @@
                 "FileSystemId": {
                     "target": "com.amazonaws.fsx#FileSystemId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the file system that you want to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -5100,6 +5157,7 @@
                 "SnapshotId": {
                     "target": "com.amazonaws.fsx#SnapshotId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the snapshot that you want to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -5167,6 +5225,7 @@
                 "StorageVirtualMachineId": {
                     "target": "com.amazonaws.fsx#StorageVirtualMachineId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the SVM that you want to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -5288,6 +5347,7 @@
                 "VolumeId": {
                     "target": "com.amazonaws.fsx#VolumeId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the volume that you are deleting.</p>",
                         "smithy.api#required": {}
                     }
@@ -5681,6 +5741,7 @@
                 "FileSystemId": {
                     "target": "com.amazonaws.fsx#FileSystemId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the file system to return the associated DNS aliases for\n            (String).</p>",
                         "smithy.api#required": {}
                     }
@@ -6081,6 +6142,7 @@
                 "FileSystemId": {
                     "target": "com.amazonaws.fsx#FileSystemId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the file system from which to disassociate the DNS aliases.</p>",
                         "smithy.api#required": {}
                     }
@@ -6088,6 +6150,7 @@
                 "Aliases": {
                     "target": "com.amazonaws.fsx#AlternateDNSNames",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of one or more DNS alias names to disassociate, or remove, from the file system.</p>",
                         "smithy.api#required": {}
                     }
@@ -6437,6 +6500,7 @@
                 "FileCachePath": {
                     "target": "com.amazonaws.fsx#Namespace",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A path on the cache that points to a high-level directory (such\n            as <code>/ns1/</code>) or subdirectory (such as <code>/ns1/subdir/</code>)\n            that will be mapped 1-1 with <code>DataRepositoryPath</code>.\n            The leading forward slash in the name is required. Two data repository\n            associations cannot have overlapping cache paths. For example, if\n            a data repository is associated with cache path <code>/ns1/</code>,\n            then you cannot link another data repository with cache\n            path <code>/ns1/ns2</code>.</p>\n         <p>This path specifies where in your cache files will be exported\n            from. This cache directory can be linked to only one data repository,\n            and no data repository other can be linked to the directory.</p>\n         <note>\n            <p>The cache path can only be set to root (/) on an NFS DRA when\n                <code>DataRepositorySubdirectories</code> is specified. If you\n                specify root (/) as the cache path, you can create only one DRA\n                on the cache.</p>\n            <p>The cache path cannot be set to root (/) for an S3 DRA.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -6444,6 +6508,7 @@
                 "DataRepositoryPath": {
                     "target": "com.amazonaws.fsx#ArchivePath",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The path to the S3 or NFS data repository that links to the\n            cache. You must provide one of the following paths:</p>\n         <ul>\n            <li>\n               <p>The path can be an NFS data repository that links to\n                the cache. The path can be in one of two formats:</p>\n               <ul>\n                  <li>\n                     <p>If you are not using the <code>DataRepositorySubdirectories</code>\n                        parameter, the path is to an NFS Export directory (or one of its subdirectories)\n                        in the format <code>nsf://nfs-domain-name/exportpath</code>. You can therefore\n                        link a single NFS Export to a single data repository association.</p>\n                  </li>\n                  <li>\n                     <p>If you are using the <code>DataRepositorySubdirectories</code>\n                        parameter, the path is the domain name of the NFS file system in the format\n                        <code>nfs://filer-domain-name</code>, which indicates the root of the\n                        subdirectories specified with the <code>DataRepositorySubdirectories</code>\n                        parameter.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The path can be an S3 bucket or prefix\n                in the format <code>s3://myBucket/myPrefix/</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -6594,6 +6659,7 @@
                 "StorageCapacity": {
                     "target": "com.amazonaws.fsx#MetadataStorageCapacity",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The storage capacity of the Lustre MDT (Metadata Target) storage\n            volume in gibibytes (GiB). The only supported value is <code>2400</code> GiB.</p>",
                         "smithy.api#required": {}
                     }
@@ -6609,6 +6675,7 @@
                 "Version": {
                     "target": "com.amazonaws.fsx#NfsVersion",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The version of the NFS (Network File System) protocol of the\n            NFS data repository. The only supported value is <code>NFS3</code>,\n            which indicates that the data repository must support the NFSv3 protocol.</p>",
                         "smithy.api#required": {}
                     }
@@ -7171,6 +7238,7 @@
                 "Parameter": {
                     "target": "com.amazonaws.fsx#Parameter",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A parameter that is incompatible with the earlier request.</p>",
                         "smithy.api#required": {}
                     }
@@ -7499,6 +7567,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.fsx#ResourceARN",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the Amazon FSx resource that will have its tags listed.</p>",
                         "smithy.api#required": {}
                     }
@@ -7687,6 +7756,7 @@
                 "Level": {
                     "target": "com.amazonaws.fsx#LustreAccessAuditLogLevel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The data repository events that are logged by Amazon FSx.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WARN_ONLY</code> - only warning events are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR_ONLY</code> - only error events are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WARN_ERROR</code> - both warning events and error events\n                    are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> - logging of data repository events\n                    is turned off.</p>\n            </li>\n         </ul>\n         <p>Note that Amazon File Cache uses a default setting of <code>WARN_ERROR</code>,\n            which can't be changed.</p>",
                         "smithy.api#required": {}
                     }
@@ -7708,6 +7778,7 @@
                 "Level": {
                     "target": "com.amazonaws.fsx#LustreAccessAuditLogLevel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Sets which data repository events are logged by Amazon FSx.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WARN_ONLY</code> - only warning events are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR_ONLY</code> - only error events are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WARN_ERROR</code> - both warning events and error events\n                    are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> - logging of data repository events\n                    is turned off.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -7855,6 +7926,7 @@
                 "Version": {
                     "target": "com.amazonaws.fsx#NfsVersion",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The version of the NFS (Network File System) protocol of the\n            NFS data repository. Currently, the only supported value is\n            <code>NFS3</code>, which indicates that the data repository must\n            support the NFSv3 protocol.</p>",
                         "smithy.api#required": {}
                     }
@@ -7948,6 +8020,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.fsx#ResourceARN",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the non-Amazon FSx resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -8164,6 +8237,7 @@
                 "Clients": {
                     "target": "com.amazonaws.fsx#OpenZFSClients",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A value that specifies who can mount the file system. You can provide a wildcard\n            character (<code>*</code>), an IP address (<code>0.0.0.0</code>), or a CIDR address\n                (<code>192.0.2.0/24</code>). By default, Amazon FSx uses the wildcard\n            character when specifying the client. </p>",
                         "smithy.api#required": {}
                     }
@@ -8171,6 +8245,7 @@
                 "Options": {
                     "target": "com.amazonaws.fsx#OpenZFSNfsExportOptions",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The options to use when mounting the file system. For a list of options that you can\n            use with Network File System (NFS), see the <a href=\"https://linux.die.net/man/5/exports\">exports(5) - Linux man page</a>. When\n            choosing your options, consider the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>crossmnt</code> is used by default. If you don't specify\n                    <code>crossmnt</code> when changing the client configuration, you won't be\n                    able to see or access snapshots in your file system's snapshot directory.</p>\n            </li>\n            <li>\n               <p>\n                  <code>sync</code> is used by default. If you instead specify\n                        <code>async</code>, the system acknowledges writes before writing to disk.\n                    If the system crashes before the writes are finished, you lose the unwritten\n                    data. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -8389,6 +8464,7 @@
                 "ClientConfigurations": {
                     "target": "com.amazonaws.fsx#OpenZFSClientConfigurations",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of configuration objects that contain the client and options for mounting the\n            OpenZFS file system. </p>",
                         "smithy.api#required": {}
                     }
@@ -8484,6 +8560,7 @@
                 "Type": {
                     "target": "com.amazonaws.fsx#OpenZFSQuotaType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A value that specifies whether the quota applies to a user or group.</p>",
                         "smithy.api#required": {}
                     }
@@ -8491,6 +8568,7 @@
                 "Id": {
                     "target": "com.amazonaws.fsx#IntegerNoMax",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the user or group.</p>",
                         "smithy.api#required": {}
                     }
@@ -8498,6 +8576,7 @@
                 "StorageCapacityQuotaGiB": {
                     "target": "com.amazonaws.fsx#IntegerNoMax",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The amount of storage that the user or group can use in gibibytes (GiB).</p>",
                         "smithy.api#required": {}
                     }
@@ -8723,6 +8802,7 @@
                 "FileSystemId": {
                     "target": "com.amazonaws.fsx#FileSystemId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -8805,6 +8885,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.fsx#ResourceARN",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that doesn't support\n            tagging.</p>",
                         "smithy.api#required": {}
                     }
@@ -8824,6 +8905,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.fsx#ResourceARN",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The resource ARN of the resource that can't be found.</p>",
                         "smithy.api#required": {}
                     }
@@ -8919,6 +9001,7 @@
                 "VolumeId": {
                     "target": "com.amazonaws.fsx#VolumeId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the volume that you are restoring.</p>",
                         "smithy.api#required": {}
                     }
@@ -8926,6 +9009,7 @@
                 "SnapshotId": {
                     "target": "com.amazonaws.fsx#SnapshotId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the source snapshot. Specifies the snapshot that you are restoring\n            from.</p>",
                         "smithy.api#required": {}
                     }
@@ -8973,6 +9057,7 @@
                 "Type": {
                     "target": "com.amazonaws.fsx#RetentionPeriodType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Defines the type of time for the retention period of an FSx for ONTAP SnapLock volume. \n            Set it to \n            one of the valid types. If you set it to <code>INFINITE</code>, the files are retained forever. If you set it to \n            <code>UNSPECIFIED</code>, the files are retained until you set an explicit retention period. </p>",
                         "smithy.api#required": {}
                     }
@@ -9183,6 +9268,7 @@
                 "DomainName": {
                     "target": "com.amazonaws.fsx#ActiveDirectoryFullyQualifiedName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The fully qualified domain name of the self-managed AD directory, such as\n                <code>corp.example.com</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -9202,6 +9288,7 @@
                 "UserName": {
                     "target": "com.amazonaws.fsx#DirectoryUserName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The user name for the service account on your self-managed AD domain that Amazon FSx\n            will use to join to your AD domain. This account must have the permission to join\n            computers to the domain in the organizational unit provided in\n                <code>OrganizationalUnitDistinguishedName</code>, or in the default location of your\n            AD domain.</p>",
                         "smithy.api#required": {}
                     }
@@ -9209,6 +9296,7 @@
                 "Password": {
                     "target": "com.amazonaws.fsx#DirectoryPassword",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The password for the service account on your self-managed AD domain that Amazon FSx\n            will use to join to your AD domain.</p>",
                         "smithy.api#required": {}
                     }
@@ -9216,6 +9304,7 @@
                 "DnsIps": {
                     "target": "com.amazonaws.fsx#DnsIps",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of up to three IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory. </p>",
                         "smithy.api#required": {}
                     }
@@ -9343,6 +9432,7 @@
                 "Limit": {
                     "target": "com.amazonaws.fsx#ServiceLimit",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Enumeration of the service limit that was exceeded. </p>",
                         "smithy.api#required": {}
                     }
@@ -9406,6 +9496,7 @@
                 "DefaultRetention": {
                     "target": "com.amazonaws.fsx#RetentionPeriod",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The retention period assigned to a write once, read many (WORM) file by default if an explicit retention period is not set for an \n            FSx for ONTAP SnapLock volume. The default retention period must be greater than or equal to \n        the minimum retention period and less than or equal to the maximum retention period. </p>",
                         "smithy.api#required": {}
                     }
@@ -9413,6 +9504,7 @@
                 "MinimumRetention": {
                     "target": "com.amazonaws.fsx#RetentionPeriod",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The shortest retention period that can be assigned to a WORM file on an FSx for ONTAP SnapLock volume. </p>",
                         "smithy.api#required": {}
                     }
@@ -9420,6 +9512,7 @@
                 "MaximumRetention": {
                     "target": "com.amazonaws.fsx#RetentionPeriod",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The longest retention period that can be assigned to a WORM file on \n            an FSx for ONTAP SnapLock volume. </p>",
                         "smithy.api#required": {}
                     }
@@ -9721,6 +9814,7 @@
                 "FileSystemId": {
                     "target": "com.amazonaws.fsx#FileSystemId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#required": {}
                     }
                 }
@@ -10207,6 +10301,7 @@
                 "Key": {
                     "target": "com.amazonaws.fsx#TagKey",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A value that specifies the <code>TagKey</code>, the name of the tag. Tag keys must\n            be unique for the resource to which they are attached.</p>",
                         "smithy.api#required": {}
                     }
@@ -10214,6 +10309,7 @@
                 "Value": {
                     "target": "com.amazonaws.fsx#TagValue",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A value that specifies the <code>TagValue</code>, the value assigned to the\n            corresponding tag key. Tag values can be null and don't have to be unique in a tag set.\n            For example, you can have a key-value pair in a tag set of <code>finances : April</code>\n            and also of <code>payroll : April</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -10298,6 +10394,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.fsx#ResourceARN",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon FSx resource that you want to\n            tag.</p>",
                         "smithy.api#required": {}
                     }
@@ -10305,6 +10402,7 @@
                 "Tags": {
                     "target": "com.amazonaws.fsx#Tags",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of tags for the resource. If a tag with a given key already exists, the\n            value is replaced by the one specified in this parameter.</p>",
                         "smithy.api#required": {}
                     }
@@ -10502,6 +10600,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.fsx#ResourceARN",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the Amazon FSx resource to untag.</p>",
                         "smithy.api#required": {}
                     }
@@ -10509,6 +10608,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.fsx#TagKeys",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of keys of tags on the resource to untag. In case the tag key doesn't exist,\n            the call will still succeed to be idempotent.</p>",
                         "smithy.api#required": {}
                     }
@@ -10563,6 +10663,7 @@
                 "AssociationId": {
                     "target": "com.amazonaws.fsx#DataRepositoryAssociationId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the data repository association that you are updating.</p>",
                         "smithy.api#required": {}
                     }
@@ -10657,6 +10758,7 @@
                 "FileCacheId": {
                     "target": "com.amazonaws.fsx#FileCacheId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the cache that you are updating.</p>",
                         "smithy.api#required": {}
                     }
@@ -10880,6 +10982,7 @@
                 "FileSystemId": {
                     "target": "com.amazonaws.fsx#FileSystemId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the file system that you are updating.</p>",
                         "smithy.api#required": {}
                     }
@@ -11169,6 +11272,7 @@
                 "Name": {
                     "target": "com.amazonaws.fsx#SnapshotName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the snapshot to update.</p>",
                         "smithy.api#required": {}
                     }
@@ -11176,6 +11280,7 @@
                 "SnapshotId": {
                     "target": "com.amazonaws.fsx#SnapshotId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the snapshot that you want to update, in the format\n                <code>fsvolsnap-0123456789abcdef0</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -11246,6 +11351,7 @@
                 "StorageVirtualMachineId": {
                     "target": "com.amazonaws.fsx#StorageVirtualMachineId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the SVM that you want to update, in the format <code>svm-0123456789abcdef0</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -11330,6 +11436,7 @@
                 "VolumeId": {
                     "target": "com.amazonaws.fsx#VolumeId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the volume that you want to update, in the format\n                <code>fsvol-0123456789abcdef0</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -11711,6 +11818,7 @@
                 "FileAccessAuditLogLevel": {
                     "target": "com.amazonaws.fsx#WindowsAccessAuditLogLevel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Sets which attempt type is logged by Amazon FSx for file and folder accesses.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCESS_ONLY</code> - only successful attempts to access files\n                    or folders are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILURE_ONLY</code> - only failed attempts to access files\n                    or folders are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS_AND_FAILURE</code> - both successful attempts and\n                    failed attempts to access files or folders are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> - access auditing of files and folders is turned off.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -11718,6 +11826,7 @@
                 "FileShareAccessAuditLogLevel": {
                     "target": "com.amazonaws.fsx#WindowsAccessAuditLogLevel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Sets which attempt type is logged by Amazon FSx for file share accesses.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCESS_ONLY</code> - only successful attempts to access file\n                    shares are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILURE_ONLY</code> - only failed attempts to access file\n                    shares are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS_AND_FAILURE</code> - both successful attempts and\n                    failed attempts to access file shares are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> - access auditing of file shares is turned off.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -11739,6 +11848,7 @@
                 "FileAccessAuditLogLevel": {
                     "target": "com.amazonaws.fsx#WindowsAccessAuditLogLevel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Sets which attempt type is logged by Amazon FSx for file and folder accesses.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCESS_ONLY</code> - only successful attempts to access files\n                    or folders are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILURE_ONLY</code> - only failed attempts to access files\n                    or folders are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS_AND_FAILURE</code> - both successful attempts and\n                    failed attempts to access files or folders are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> - access auditing of files and folders is turned off.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -11746,6 +11856,7 @@
                 "FileShareAccessAuditLogLevel": {
                     "target": "com.amazonaws.fsx#WindowsAccessAuditLogLevel",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Sets which attempt type is logged by Amazon FSx for file share accesses.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCESS_ONLY</code> - only successful attempts to access file\n                    shares are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILURE_ONLY</code> - only failed attempts to access file\n                    shares are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS_AND_FAILURE</code> - both successful attempts and\n                    failed attempts to access file shares are logged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> - access auditing of file shares is turned off.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }

@@ -1225,6 +1225,9 @@ func validateStatelessRule(v *types.StatelessRule) error {
 			invalidParams.AddNested("RuleDefinition", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1239,6 +1242,9 @@ func validateStatelessRuleGroupReference(v *types.StatelessRuleGroupReference) e
 	invalidParams := smithy.InvalidParamsError{Context: "StatelessRuleGroupReference"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

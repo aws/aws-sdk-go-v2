@@ -55,7 +55,7 @@ type AuthorizeEndpointAccessOutput struct {
 
 	// Indicates whether all VPCs in the grantee account are allowed access to the
 	// cluster.
-	AllowedAllVPCs bool
+	AllowedAllVPCs *bool
 
 	// The VPCs allowed access to the cluster.
 	AllowedVPCs []string
@@ -70,7 +70,7 @@ type AuthorizeEndpointAccessOutput struct {
 	ClusterStatus *string
 
 	// The number of Redshift-managed VPC endpoints created for the authorization.
-	EndpointCount int32
+	EndpointCount *int32
 
 	// The Amazon Web Services account ID of the grantee of the cluster.
 	Grantee *string

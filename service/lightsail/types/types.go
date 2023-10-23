@@ -261,7 +261,7 @@ type Alarm struct {
 	NotificationTriggers []AlarmState
 
 	// The period, in seconds, over which the statistic is applied.
-	Period int32
+	Period *int32
 
 	// The Lightsail resource type (e.g., Alarm ).
 	ResourceType ResourceType

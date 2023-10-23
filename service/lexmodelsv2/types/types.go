@@ -3350,7 +3350,7 @@ type RelativeAggregationDuration struct {
 	//   - Weeks - 1/2
 	//
 	// This member is required.
-	TimeValue int32
+	TimeValue *int32
 
 	noSmithyDocumentSerde
 }

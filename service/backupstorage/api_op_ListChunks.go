@@ -45,7 +45,7 @@ type ListChunksInput struct {
 	StorageJobId *string
 
 	// Maximum number of chunks
-	MaxResults int32
+	MaxResults *int32
 
 	// Pagination token
 	NextToken *string
@@ -177,8 +177,8 @@ func NewListChunksPaginator(client ListChunksAPIClient, params *ListChunksInput,
 	}
 
 	options := ListChunksPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -208,7 +208,11 @@ func (p *ListChunksPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListChunks(ctx, &params, optFns...)
 	if err != nil {

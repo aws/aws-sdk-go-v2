@@ -140,7 +140,7 @@ type DetectAnomalyResult struct {
 
 	// True if Amazon Lookout for Vision classifies the image as containing an
 	// anomaly, otherwise false.
-	IsAnomalous bool
+	IsAnomalous *bool
 
 	// The source of the image that was analyzed. direct means that the images was
 	// supplied from the local computer. No other values are supported.

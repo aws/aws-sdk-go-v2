@@ -56,12 +56,12 @@ type DescribeDBClusterSnapshotsInput struct {
 	// Set to true to include manual cluster snapshots that are public and can be
 	// copied or restored by any Amazon Web Services account, and otherwise false . The
 	// default is false .
-	IncludePublic bool
+	IncludePublic *bool
 
 	// Set to true to include shared manual cluster snapshots from other Amazon Web
 	// Services accounts that this Amazon Web Services account has been given
 	// permission to copy or restore, and otherwise false . The default is false .
-	IncludeShared bool
+	IncludeShared *bool
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

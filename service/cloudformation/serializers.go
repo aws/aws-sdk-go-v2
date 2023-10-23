@@ -5642,9 +5642,9 @@ func awsAwsquery_serializeOpDocumentDeleteStackInstancesInput(v *DeleteStackInst
 		}
 	}
 
-	{
+	if v.RetainStacks != nil {
 		objectKey := object.Key("RetainStacks")
-		objectKey.Boolean(v.RetainStacks)
+		objectKey.Boolean(*v.RetainStacks)
 	}
 
 	if v.StackSetName != nil {

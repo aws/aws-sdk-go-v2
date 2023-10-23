@@ -8611,9 +8611,9 @@ func awsAwsjson11_serializeOpDocumentPutRetentionConfigurationInput(v *PutRetent
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.RetentionPeriodInDays != nil {
 		ok := object.Key("RetentionPeriodInDays")
-		ok.Integer(v.RetentionPeriodInDays)
+		ok.Integer(*v.RetentionPeriodInDays)
 	}
 
 	return nil

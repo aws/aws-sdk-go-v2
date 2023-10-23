@@ -13217,7 +13217,7 @@ func awsRestjson1_deserializeDocumentRange(v **types.Range, value interface{}) e
 				if err != nil {
 					return err
 				}
-				sv.Value = int32(i64)
+				sv.Value = ptr.Int32(int32(i64))
 			}
 
 		default:

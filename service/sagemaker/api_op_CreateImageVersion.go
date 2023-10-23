@@ -59,7 +59,7 @@ type CreateImageVersionInput struct {
 	Aliases []string
 
 	// Indicates Horovod compatibility.
-	Horovod bool
+	Horovod *bool
 
 	// Indicates SageMaker job type compatibility.
 	//   - TRAINING : The image version is compatible with SageMaker training jobs.

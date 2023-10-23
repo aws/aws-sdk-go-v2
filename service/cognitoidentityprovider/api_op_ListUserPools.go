@@ -45,7 +45,7 @@ type ListUserPoolsInput struct {
 	// user pools.
 	//
 	// This member is required.
-	MaxResults int32
+	MaxResults *int32
 
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
@@ -179,8 +179,8 @@ func NewListUserPoolsPaginator(client ListUserPoolsAPIClient, params *ListUserPo
 	}
 
 	options := ListUserPoolsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -210,7 +210,11 @@ func (p *ListUserPoolsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListUserPools(ctx, &params, optFns...)
 	if err != nil {

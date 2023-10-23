@@ -6302,20 +6302,20 @@ func awsAwsjson11_serializeDocumentPlayerLatency(v *types.PlayerLatency, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.LatencyInMilliseconds != 0 {
+	if v.LatencyInMilliseconds != nil {
 		ok := object.Key("LatencyInMilliseconds")
 		switch {
-		case math.IsNaN(float64(v.LatencyInMilliseconds)):
+		case math.IsNaN(float64(*v.LatencyInMilliseconds)):
 			ok.String("NaN")
 
-		case math.IsInf(float64(v.LatencyInMilliseconds), 1):
+		case math.IsInf(float64(*v.LatencyInMilliseconds), 1):
 			ok.String("Infinity")
 
-		case math.IsInf(float64(v.LatencyInMilliseconds), -1):
+		case math.IsInf(float64(*v.LatencyInMilliseconds), -1):
 			ok.String("-Infinity")
 
 		default:
-			ok.Float(v.LatencyInMilliseconds)
+			ok.Float(*v.LatencyInMilliseconds)
 
 		}
 	}
@@ -6613,20 +6613,20 @@ func awsAwsjson11_serializeDocumentTargetConfiguration(v *types.TargetConfigurat
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.TargetValue != nil {
 		ok := object.Key("TargetValue")
 		switch {
-		case math.IsNaN(v.TargetValue):
+		case math.IsNaN(*v.TargetValue):
 			ok.String("NaN")
 
-		case math.IsInf(v.TargetValue, 1):
+		case math.IsInf(*v.TargetValue, 1):
 			ok.String("Infinity")
 
-		case math.IsInf(v.TargetValue, -1):
+		case math.IsInf(*v.TargetValue, -1):
 			ok.String("-Infinity")
 
 		default:
-			ok.Double(v.TargetValue)
+			ok.Double(*v.TargetValue)
 
 		}
 	}
@@ -8541,9 +8541,9 @@ func awsAwsjson11_serializeOpDocumentPutScalingPolicyInput(v *PutScalingPolicyIn
 		ok.String(string(v.PolicyType))
 	}
 
-	if v.ScalingAdjustment != 0 {
+	if v.ScalingAdjustment != nil {
 		ok := object.Key("ScalingAdjustment")
-		ok.Integer(v.ScalingAdjustment)
+		ok.Integer(*v.ScalingAdjustment)
 	}
 
 	if len(v.ScalingAdjustmentType) > 0 {
@@ -8558,20 +8558,20 @@ func awsAwsjson11_serializeOpDocumentPutScalingPolicyInput(v *PutScalingPolicyIn
 		}
 	}
 
-	if v.Threshold != 0 {
+	if v.Threshold != nil {
 		ok := object.Key("Threshold")
 		switch {
-		case math.IsNaN(v.Threshold):
+		case math.IsNaN(*v.Threshold):
 			ok.String("NaN")
 
-		case math.IsInf(v.Threshold, 1):
+		case math.IsInf(*v.Threshold, 1):
 			ok.String("Infinity")
 
-		case math.IsInf(v.Threshold, -1):
+		case math.IsInf(*v.Threshold, -1):
 			ok.String("-Infinity")
 
 		default:
-			ok.Double(v.Threshold)
+			ok.Double(*v.Threshold)
 
 		}
 	}

@@ -41,7 +41,7 @@ type DescribeDBEngineVersionsInput struct {
 
 	// Indicates that only the default version of the specified engine or engine and
 	// major version combination is returned.
-	DefaultOnly bool
+	DefaultOnly *bool
 
 	// The database engine to return.
 	Engine *string

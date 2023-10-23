@@ -42,7 +42,7 @@ type GetLayerVersionPolicyInput struct {
 	// The version number.
 	//
 	// This member is required.
-	VersionNumber int64
+	VersionNumber *int64
 
 	noSmithyDocumentSerde
 }

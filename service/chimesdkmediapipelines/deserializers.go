@@ -9521,7 +9521,7 @@ func awsRestjson1_deserializeDocumentSentimentConfiguration(v **types.SentimentC
 				if err != nil {
 					return err
 				}
-				sv.TimePeriod = int32(i64)
+				sv.TimePeriod = ptr.Int32(int32(i64))
 			}
 
 		default:

@@ -100,7 +100,7 @@ type GetTagsInput struct {
 	// number of objects that are returned for this request. If MaxResults isn't
 	// specified with SortBy, the request returns 1000 results as the default value for
 	// this parameter. For GetTags , MaxResults has an upper quota of 1000.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
 	// token when the response from a previous call has more results than the maximum

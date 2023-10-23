@@ -3477,7 +3477,7 @@ func awsRestjson1_deserializeOpHttpBindingsInternalServerException(v *types.Inte
 		if err != nil {
 			return err
 		}
-		v.RetryAfterSeconds = int32(vv)
+		v.RetryAfterSeconds = ptr.Int32(int32(vv))
 	}
 
 	return nil
@@ -3493,7 +3493,7 @@ func awsRestjson1_deserializeOpHttpBindingsThrottlingException(v *types.Throttli
 		if err != nil {
 			return err
 		}
-		v.RetryAfterSeconds = int32(vv)
+		v.RetryAfterSeconds = ptr.Int32(int32(vv))
 	}
 
 	return nil
@@ -4346,7 +4346,7 @@ func awsRestjson1_deserializeDocumentDetectAnomalyResult(v **types.DetectAnomaly
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsAnomalous = jtv
+				sv.IsAnomalous = ptr.Bool(jtv)
 			}
 
 		case "Source":
@@ -4593,7 +4593,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				if err != nil {
 					return err
 				}
-				sv.RetryAfterSeconds = int32(i64)
+				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -6102,7 +6102,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				if err != nil {
 					return err
 				}
-				sv.RetryAfterSeconds = int32(i64)
+				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "ServiceCode":

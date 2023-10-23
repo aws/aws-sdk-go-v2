@@ -53,7 +53,7 @@ type UpdateDetectorInput struct {
 	DataSources *types.DataSourceConfigurations
 
 	// Specifies whether the detector is enabled or not enabled.
-	Enable bool
+	Enable *bool
 
 	// Provides the features that will be updated for the detector.
 	Features []types.DetectorFeatureConfiguration

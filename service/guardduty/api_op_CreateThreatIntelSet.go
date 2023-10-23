@@ -40,7 +40,7 @@ type CreateThreatIntelSetInput struct {
 	// ThreatIntelSet.
 	//
 	// This member is required.
-	Activate bool
+	Activate *bool
 
 	// The unique ID of the detector of the GuardDuty account that you want to create
 	// a threatIntelSet for.

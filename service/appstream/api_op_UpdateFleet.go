@@ -54,7 +54,7 @@ type UpdateFleetInput struct {
 	// Deletes the VPC association for the specified fleet.
 	//
 	// Deprecated: This member has been deprecated.
-	DeleteVpcConfig bool
+	DeleteVpcConfig *bool
 
 	// The description to display.
 	Description *string

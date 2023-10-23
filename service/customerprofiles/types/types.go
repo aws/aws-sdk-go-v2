@@ -1199,7 +1199,7 @@ type Range struct {
 	// The amount of time of the specified unit.
 	//
 	// This member is required.
-	Value int32
+	Value *int32
 
 	noSmithyDocumentSerde
 }

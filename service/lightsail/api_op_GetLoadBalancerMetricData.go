@@ -115,7 +115,7 @@ type GetLoadBalancerMetricDataInput struct {
 	// The granularity, in seconds, of the returned data points.
 	//
 	// This member is required.
-	Period int32
+	Period *int32
 
 	// The start time of the period.
 	//

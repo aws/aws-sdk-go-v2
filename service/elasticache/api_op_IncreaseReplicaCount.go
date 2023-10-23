@@ -41,7 +41,7 @@ type IncreaseReplicaCountInput struct {
 	// ApplyImmediately=False is not currently supported.
 	//
 	// This member is required.
-	ApplyImmediately bool
+	ApplyImmediately *bool
 
 	// The id of the replication group to which you want to add replica nodes.
 	//

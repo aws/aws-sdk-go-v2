@@ -1255,7 +1255,6 @@
         "com.amazonaws.greengrassv2#DefaultMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -2776,7 +2775,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2819,7 +2817,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -2832,7 +2831,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2846,7 +2844,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -2869,7 +2866,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2904,7 +2900,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2915,14 +2910,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2936,14 +2933,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -2952,11 +2947,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -3005,14 +3000,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3026,7 +3023,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3046,7 +3042,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3057,14 +3052,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3129,9 +3126,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -3907,7 +3906,6 @@
                 "minNumberOfExecutedThings": {
                     "target": "com.amazonaws.greengrassv2#IoTJobMinimumNumberOfExecutedThings",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum number of things that receive the configuration before the job can\n      cancel.</p>",
                         "smithy.api#required": {}
                     }
@@ -3978,7 +3976,6 @@
                 "maximumPerMinute": {
                     "target": "com.amazonaws.greengrassv2#IoTJobMaxExecutionsPerMin",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of devices that receive a pending job notification, per minute.</p>"
                     }
                 }
@@ -3993,7 +3990,6 @@
                 "baseRatePerMinute": {
                     "target": "com.amazonaws.greengrassv2#IoTJobRolloutBaseRatePerMinute",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum number of devices that receive a pending job notification, per minute, when\n      the job starts. This parameter defines the initial rollout rate of the job.</p>",
                         "smithy.api#required": {}
                     }
@@ -4001,7 +3997,6 @@
                 "incrementFactor": {
                     "target": "com.amazonaws.greengrassv2#IoTJobRolloutIncrementFactor",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The exponential factor to increase the rollout rate for the job.</p>\n         <p>This parameter supports up to one digit after the decimal (for example, you can specify\n        <code>1.5</code>, but not <code>1.55</code>).</p>",
                         "smithy.api#required": {}
                     }
@@ -4036,7 +4031,6 @@
         "com.amazonaws.greengrassv2#IoTJobMaxExecutionsPerMin": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -4046,7 +4040,6 @@
         "com.amazonaws.greengrassv2#IoTJobMinimumNumberOfExecutedThings": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -4055,7 +4048,6 @@
         "com.amazonaws.greengrassv2#IoTJobNumberOfThings": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -4067,14 +4059,12 @@
                 "numberOfNotifiedThings": {
                     "target": "com.amazonaws.greengrassv2#IoTJobNumberOfThings",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of devices to receive the job notification before the rollout rate\n      increases.</p>"
                     }
                 },
                 "numberOfSucceededThings": {
                     "target": "com.amazonaws.greengrassv2#IoTJobNumberOfThings",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of devices to successfully run the configuration job before the rollout rate\n      increases.</p>"
                     }
                 }
@@ -4086,7 +4076,6 @@
         "com.amazonaws.greengrassv2#IoTJobRolloutBaseRatePerMinute": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -4096,7 +4085,6 @@
         "com.amazonaws.greengrassv2#IoTJobRolloutIncrementFactor": {
             "type": "double",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 5
@@ -4570,7 +4558,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -4661,7 +4648,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -4751,7 +4737,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -4845,7 +4830,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -4946,7 +4930,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -5037,7 +5020,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -5128,7 +5110,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }

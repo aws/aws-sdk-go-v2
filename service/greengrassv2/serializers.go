@@ -2567,9 +2567,9 @@ func awsRestjson1_serializeDocumentIoTJobAbortCriteria(v *types.IoTJobAbortCrite
 		ok.String(string(v.FailureType))
 	}
 
-	{
+	if v.MinNumberOfExecutedThings != nil {
 		ok := object.Key("minNumberOfExecutedThings")
-		ok.Integer(v.MinNumberOfExecutedThings)
+		ok.Integer(*v.MinNumberOfExecutedThings)
 	}
 
 	{
@@ -2629,25 +2629,25 @@ func awsRestjson1_serializeDocumentIoTJobExponentialRolloutRate(v *types.IoTJobE
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.BaseRatePerMinute != nil {
 		ok := object.Key("baseRatePerMinute")
-		ok.Integer(v.BaseRatePerMinute)
+		ok.Integer(*v.BaseRatePerMinute)
 	}
 
-	{
+	if v.IncrementFactor != nil {
 		ok := object.Key("incrementFactor")
 		switch {
-		case math.IsNaN(v.IncrementFactor):
+		case math.IsNaN(*v.IncrementFactor):
 			ok.String("NaN")
 
-		case math.IsInf(v.IncrementFactor, 1):
+		case math.IsInf(*v.IncrementFactor, 1):
 			ok.String("Infinity")
 
-		case math.IsInf(v.IncrementFactor, -1):
+		case math.IsInf(*v.IncrementFactor, -1):
 			ok.String("-Infinity")
 
 		default:
-			ok.Double(v.IncrementFactor)
+			ok.Double(*v.IncrementFactor)
 
 		}
 	}

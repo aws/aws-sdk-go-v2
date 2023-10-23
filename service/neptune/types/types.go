@@ -177,7 +177,7 @@ type DBCluster struct {
 
 	// True if mapping of Amazon Identity and Access Management (IAM) accounts to
 	// database accounts is enabled, and otherwise false.
-	IAMDatabaseAuthenticationEnabled bool
+	IAMDatabaseAuthenticationEnabled *bool
 
 	// If StorageEncrypted is true, the Amazon KMS key identifier for the encrypted DB
 	// cluster.
@@ -191,7 +191,7 @@ type DBCluster struct {
 	MasterUsername *string
 
 	// Specifies whether the DB cluster has instances in multiple Availability Zones.
-	MultiAZ bool
+	MultiAZ *bool
 
 	// This data type is used as a response element in the ModifyDBCluster operation
 	// and contains changes that will be applied during the next maintenance window.
@@ -238,7 +238,7 @@ type DBCluster struct {
 	Status *string
 
 	// Specifies whether the DB cluster is encrypted.
-	StorageEncrypted bool
+	StorageEncrypted *bool
 
 	// Provides a list of VPC security groups that the DB cluster belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership
@@ -311,7 +311,7 @@ type DBClusterMember struct {
 
 	// Value that is true if the cluster member is the primary instance for the DB
 	// cluster and false otherwise.
-	IsClusterWriter bool
+	IsClusterWriter *bool
 
 	// A value that specifies the order in which a Read Replica is promoted to the
 	// primary instance after a failure of the existing primary instance.
@@ -385,7 +385,7 @@ type DBClusterRole struct {
 type DBClusterSnapshot struct {
 
 	// Specifies the allocated storage size in gibibytes (GiB).
-	AllocatedStorage int32
+	AllocatedStorage *int32
 
 	// Provides the list of EC2 Availability Zones that instances in the DB cluster
 	// snapshot can be restored in.
@@ -423,7 +423,7 @@ type DBClusterSnapshot struct {
 
 	// True if mapping of Amazon Identity and Access Management (IAM) accounts to
 	// database accounts is enabled, and otherwise false.
-	IAMDatabaseAuthenticationEnabled bool
+	IAMDatabaseAuthenticationEnabled *bool
 
 	// If StorageEncrypted is true, the Amazon KMS key identifier for the encrypted DB
 	// cluster snapshot.
@@ -436,11 +436,11 @@ type DBClusterSnapshot struct {
 	MasterUsername *string
 
 	// Specifies the percentage of the estimated data that has been transferred.
-	PercentProgress int32
+	PercentProgress *int32
 
 	// Specifies the port that the DB cluster was listening on at the time of the
 	// snapshot.
-	Port int32
+	Port *int32
 
 	// Provides the time when the snapshot was taken, in Universal Coordinated Time
 	// (UTC).
@@ -458,7 +458,7 @@ type DBClusterSnapshot struct {
 	Status *string
 
 	// Specifies whether the DB cluster snapshot is encrypted.
-	StorageEncrypted bool
+	StorageEncrypted *bool
 
 	// Provides the VPC ID associated with the DB cluster snapshot.
 	VpcId *string
@@ -539,14 +539,14 @@ type DBEngineVersion struct {
 
 	// A value that indicates whether you can use Aurora global databases with a
 	// specific DB engine version.
-	SupportsGlobalDatabases bool
+	SupportsGlobalDatabases *bool
 
 	// A value that indicates whether the engine version supports exporting the log
 	// types specified by ExportableLogTypes to CloudWatch Logs.
-	SupportsLogExportsToCloudwatchLogs bool
+	SupportsLogExportsToCloudwatchLogs *bool
 
 	// Indicates whether the database engine version supports read replicas.
-	SupportsReadReplica bool
+	SupportsReadReplica *bool
 
 	// A list of engine versions that this database engine version can be upgraded to.
 	ValidUpgradeTarget []UpgradeTarget
@@ -559,16 +559,16 @@ type DBEngineVersion struct {
 type DBInstance struct {
 
 	// Not supported by Neptune.
-	AllocatedStorage int32
+	AllocatedStorage *int32
 
 	// Indicates that minor version patches are applied automatically.
-	AutoMinorVersionUpgrade bool
+	AutoMinorVersionUpgrade *bool
 
 	// Specifies the name of the Availability Zone the DB instance is located in.
 	AvailabilityZone *string
 
 	// Specifies the number of days for which automatic DB snapshots are retained.
-	BackupRetentionPeriod int32
+	BackupRetentionPeriod *int32
 
 	// The identifier of the CA certificate for this DB instance.
 	CACertificateIdentifier *string
@@ -578,7 +578,7 @@ type DBInstance struct {
 
 	// Specifies whether tags are copied from the DB instance to snapshots of the DB
 	// instance.
-	CopyTagsToSnapshot bool
+	CopyTagsToSnapshot *bool
 
 	// If the DB instance is a member of a DB cluster, contains the name of the DB
 	// cluster that the DB instance is a member of.
@@ -613,7 +613,7 @@ type DBInstance struct {
 
 	// Specifies the port that the DB instance listens on. If the DB instance is part
 	// of a DB cluster, this can be a different port than the DB cluster port.
-	DbInstancePort int32
+	DbInstancePort *int32
 
 	// The Amazon Region-unique, immutable identifier for the DB instance. This
 	// identifier is found in Amazon CloudTrail log entries whenever the Amazon KMS key
@@ -648,7 +648,7 @@ type DBInstance struct {
 
 	// True if Amazon Identity and Access Management (IAM) authentication is enabled,
 	// and otherwise false.
-	IAMDatabaseAuthenticationEnabled bool
+	IAMDatabaseAuthenticationEnabled *bool
 
 	// Provides the date and time the DB instance was created.
 	InstanceCreateTime *time.Time
@@ -678,7 +678,7 @@ type DBInstance struct {
 	MonitoringRoleArn *string
 
 	// Specifies if the DB instance is a Multi-AZ deployment.
-	MultiAZ bool
+	MultiAZ *bool
 
 	// (Not supported by Neptune)
 	OptionGroupMemberships []OptionGroupMembership
@@ -709,7 +709,7 @@ type DBInstance struct {
 	// This flag should no longer be used.
 	//
 	// Deprecated: This member has been deprecated.
-	PubliclyAccessible bool
+	PubliclyAccessible *bool
 
 	// Contains one or more identifiers of DB clusters that are Read Replicas of this
 	// DB instance.
@@ -732,7 +732,7 @@ type DBInstance struct {
 	StatusInfos []DBInstanceStatusInfo
 
 	// Not supported: The encryption for DB instances is managed by the DB cluster.
-	StorageEncrypted bool
+	StorageEncrypted *bool
 
 	// Specifies the storage type associated with DB instance.
 	StorageType *string
@@ -759,7 +759,7 @@ type DBInstanceStatusInfo struct {
 
 	// Boolean value that is true if the instance is operating normally, or false if
 	// the instance is in an error state.
-	Normal bool
+	Normal *bool
 
 	// Status of the DB instance. For a StatusType of read replica, the values can be
 	// replicating, error, stopped, or terminated.
@@ -869,10 +869,10 @@ type DomainMembership struct {
 type DoubleRange struct {
 
 	// The minimum value in the range.
-	From float64
+	From *float64
 
 	// The maximum value in the range.
-	To float64
+	To *float64
 
 	noSmithyDocumentSerde
 }
@@ -888,7 +888,7 @@ type Endpoint struct {
 	HostedZoneId *string
 
 	// Specifies the port that the database engine is listening on.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -961,7 +961,7 @@ type EventSubscription struct {
 
 	// A Boolean value indicating if the subscription is enabled. True indicates the
 	// subscription is enabled.
-	Enabled bool
+	Enabled *bool
 
 	// A list of event categories for the event notification subscription.
 	EventCategoriesList []string
@@ -1057,7 +1057,7 @@ type GlobalClusterMember struct {
 	// Specifies whether the Neptune cluster is the primary cluster (that is, has
 	// read-write capability) for the Neptune global database with which it is
 	// associated.
-	IsWriter bool
+	IsWriter *bool
 
 	// The Amazon Resource Name (ARN) for each read-only secondary cluster associated
 	// with the Neptune global database.
@@ -1116,36 +1116,36 @@ type OrderableDBInstanceOption struct {
 	MinStorageSize *int32
 
 	// Indicates whether a DB instance is Multi-AZ capable.
-	MultiAZCapable bool
+	MultiAZCapable *bool
 
 	// Indicates whether a DB instance can have a Read Replica.
-	ReadReplicaCapable bool
+	ReadReplicaCapable *bool
 
 	// Indicates the storage type for a DB instance.
 	StorageType *string
 
 	// Indicates whether a DB instance supports Enhanced Monitoring at intervals from
 	// 1 to 60 seconds.
-	SupportsEnhancedMonitoring bool
+	SupportsEnhancedMonitoring *bool
 
 	// A value that indicates whether you can use Neptune global databases with a
 	// specific combination of other DB engine attributes.
-	SupportsGlobalDatabases bool
+	SupportsGlobalDatabases *bool
 
 	// Indicates whether a DB instance supports IAM database authentication.
-	SupportsIAMDatabaseAuthentication bool
+	SupportsIAMDatabaseAuthentication *bool
 
 	// Indicates whether a DB instance supports provisioned IOPS.
-	SupportsIops bool
+	SupportsIops *bool
 
 	// (Not supported by Neptune)
-	SupportsPerformanceInsights bool
+	SupportsPerformanceInsights *bool
 
 	// Indicates whether a DB instance supports encrypted storage.
-	SupportsStorageEncryption bool
+	SupportsStorageEncryption *bool
 
 	// Indicates whether a DB instance is in a VPC.
-	Vpc bool
+	Vpc *bool
 
 	noSmithyDocumentSerde
 }
@@ -1171,7 +1171,7 @@ type Parameter struct {
 	// Indicates whether ( true ) or not ( false ) the parameter can be modified. Some
 	// parameters have security or operational implications that prevent them from
 	// being changed.
-	IsModifiable bool
+	IsModifiable *bool
 
 	// The earliest engine version to which the parameter can apply.
 	MinimumEngineVersion *string
@@ -1294,7 +1294,7 @@ type PendingModifiedValues struct {
 type Range struct {
 
 	// The minimum value in the range.
-	From int32
+	From *int32
 
 	// The step value for the range. For example, if you have a range of 5,000 to
 	// 10,000, with a step value of 1,000, the valid values start at 5,000 and step up
@@ -1303,7 +1303,7 @@ type Range struct {
 	Step *int32
 
 	// The maximum value in the range.
-	To int32
+	To *int32
 
 	noSmithyDocumentSerde
 }
@@ -1405,7 +1405,7 @@ type UpgradeTarget struct {
 
 	// A value that indicates whether the target version is applied to any source DB
 	// instances that have AutoMinorVersionUpgrade set to true.
-	AutoUpgrade bool
+	AutoUpgrade *bool
 
 	// The version of the database engine that a DB instance can be upgraded to.
 	Description *string
@@ -1417,7 +1417,7 @@ type UpgradeTarget struct {
 	EngineVersion *string
 
 	// A value that indicates whether a database engine is upgraded to a major version.
-	IsMajorVersionUpgrade bool
+	IsMajorVersionUpgrade *bool
 
 	// A value that indicates whether you can use Neptune global databases with the
 	// target engine version.

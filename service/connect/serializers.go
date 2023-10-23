@@ -5267,8 +5267,11 @@ func awsRestjson1_serializeOpHttpBindingsDeleteViewVersionInput(v *DeleteViewVer
 		}
 	}
 
-	{
-		if err := encoder.SetURI("ViewVersion").Integer(v.ViewVersion); err != nil {
+	if v.ViewVersion == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ViewVersion must not be empty")}
+	}
+	if v.ViewVersion != nil {
+		if err := encoder.SetURI("ViewVersion").Integer(*v.ViewVersion); err != nil {
 			return err
 		}
 	}
@@ -9192,8 +9195,8 @@ func awsRestjson1_serializeOpHttpBindingsListContactFlowsInput(v *ListContactFlo
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -9372,9 +9375,9 @@ func awsRestjson1_serializeOpDocumentListDefaultVocabulariesInput(v *ListDefault
 		ok.String(string(v.LanguageCode))
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -9602,8 +9605,8 @@ func awsRestjson1_serializeOpHttpBindingsListHoursOfOperationsInput(v *ListHours
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -10112,8 +10115,8 @@ func awsRestjson1_serializeOpHttpBindingsListPhoneNumbersInput(v *ListPhoneNumbe
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -10456,8 +10459,8 @@ func awsRestjson1_serializeOpHttpBindingsListQueuesInput(v *ListQueuesInput, enc
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -10923,8 +10926,8 @@ func awsRestjson1_serializeOpHttpBindingsListSecurityProfileApplicationsInput(v 
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11301,8 +11304,8 @@ func awsRestjson1_serializeOpHttpBindingsListTrafficDistributionGroupsInput(v *L
 		encoder.SetQuery("instanceId").String(*v.InstanceId)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -13195,9 +13198,9 @@ func awsRestjson1_serializeOpDocumentSearchVocabulariesInput(v *SearchVocabulari
 		ok.String(string(v.LanguageCode))
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NameStartsWith != nil {
@@ -20354,9 +20357,9 @@ func awsRestjson1_serializeDocumentMediaConcurrency(v *types.MediaConcurrency, v
 		ok.String(string(v.Channel))
 	}
 
-	{
+	if v.Concurrency != nil {
 		ok := object.Key("Concurrency")
-		ok.Integer(v.Concurrency)
+		ok.Integer(*v.Concurrency)
 	}
 
 	if v.CrossChannelBehavior != nil {

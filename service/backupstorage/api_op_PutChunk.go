@@ -53,7 +53,7 @@ type PutChunkInput struct {
 	// Describes this chunk's position relative to the other chunks
 	//
 	// This member is required.
-	ChunkIndex int64
+	ChunkIndex *int64
 
 	// Data to be uploaded
 	//

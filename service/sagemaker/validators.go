@@ -8202,6 +8202,12 @@ func validateHyperParameterTuningInstanceConfig(v *types.HyperParameterTuningIns
 	if len(v.InstanceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
 	}
+	if v.InstanceCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceCount"))
+	}
+	if v.VolumeSizeInGB == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeSizeInGB"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -8445,6 +8451,9 @@ func validateInstanceGroup(v *types.InstanceGroup) error {
 	invalidParams := smithy.InvalidParamsError{Context: "InstanceGroup"}
 	if len(v.InstanceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if v.InstanceCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceCount"))
 	}
 	if v.InstanceGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroupName"))
@@ -9575,6 +9584,9 @@ func validateMonitoringStoppingCondition(v *types.MonitoringStoppingCondition) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MonitoringStoppingCondition"}
+	if v.MaxRuntimeInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxRuntimeInSeconds"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -9806,6 +9818,9 @@ func validateParallelismConfiguration(v *types.ParallelismConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ParallelismConfiguration"}
+	if v.MaxParallelExecutionSteps == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxParallelExecutionSteps"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -10127,6 +10142,9 @@ func validateProcessingStoppingCondition(v *types.ProcessingStoppingCondition) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProcessingStoppingCondition"}
+	if v.MaxRuntimeInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxRuntimeInSeconds"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -10393,6 +10411,9 @@ func validateResourceConfig(v *types.ResourceConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceConfig"}
+	if v.VolumeSizeInGB == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeSizeInGB"))
+	}
 	if v.InstanceGroups != nil {
 		if err := validateInstanceGroups(v.InstanceGroups); err != nil {
 			invalidParams.AddNested("InstanceGroups", err.(smithy.InvalidParamsError))
@@ -10425,6 +10446,9 @@ func validateResourceLimits(v *types.ResourceLimits) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceLimits"}
+	if v.MaxParallelTrainingJobs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxParallelTrainingJobs"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -10437,6 +10461,9 @@ func validateRetryStrategy(v *types.RetryStrategy) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RetryStrategy"}
+	if v.MaximumRetryAttempts == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaximumRetryAttempts"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -10727,6 +10754,9 @@ func validateShadowModelVariantConfig(v *types.ShadowModelVariantConfig) error {
 	if v.ShadowModelVariantName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ShadowModelVariantName"))
 	}
+	if v.SamplingPercentage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SamplingPercentage"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -10756,6 +10786,9 @@ func validateShuffleConfig(v *types.ShuffleConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ShuffleConfig"}
+	if v.Seed == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Seed"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

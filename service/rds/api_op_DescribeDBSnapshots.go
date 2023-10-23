@@ -70,7 +70,7 @@ type DescribeDBSnapshotsInput struct {
 	// public snapshots are not included. You can share a manual DB snapshot as public
 	// by using the ModifyDBSnapshotAttribute API. This setting doesn't apply to RDS
 	// Custom.
-	IncludePublic bool
+	IncludePublic *bool
 
 	// Specifies whether to include shared manual DB cluster snapshots from other
 	// Amazon Web Services accounts that this Amazon Web Services account has been
@@ -78,7 +78,7 @@ type DescribeDBSnapshotsInput struct {
 	// included. You can give an Amazon Web Services account permission to restore a
 	// manual DB snapshot from another Amazon Web Services account by using the
 	// ModifyDBSnapshotAttribute API action. This setting doesn't apply to RDS Custom.
-	IncludeShared bool
+	IncludeShared *bool
 
 	// An optional pagination token provided by a previous DescribeDBSnapshots
 	// request. If this parameter is specified, the response includes only records

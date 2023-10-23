@@ -21365,7 +21365,7 @@ func awsAwsjson11_deserializeDocumentActivation(v **types.Activation, value inte
 				if err != nil {
 					return err
 				}
-				sv.RegistrationLimit = int32(i64)
+				sv.RegistrationLimit = ptr.Int32(int32(i64))
 			}
 
 		case "RegistrationsCount":
@@ -21378,7 +21378,7 @@ func awsAwsjson11_deserializeDocumentActivation(v **types.Activation, value inte
 				if err != nil {
 					return err
 				}
-				sv.RegistrationsCount = int32(i64)
+				sv.RegistrationsCount = ptr.Int32(int32(i64))
 			}
 
 		case "Tags":
@@ -24608,7 +24608,7 @@ func awsAwsjson11_deserializeDocumentCommand(v **types.Command, value interface{
 				if err != nil {
 					return err
 				}
-				sv.TimeoutSeconds = int32(i64)
+				sv.TimeoutSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "TriggeredAlarms":
@@ -32229,7 +32229,7 @@ func awsAwsjson11_deserializeDocumentMaintenanceWindowIdentity(v **types.Mainten
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case "Enabled":
@@ -45403,7 +45403,7 @@ func awsAwsjson11_deserializeOpDocumentGetMaintenanceWindowOutput(v **GetMainten
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case "Enabled":
@@ -48179,7 +48179,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateMaintenanceWindowOutput(v **UpdateM
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case "Enabled":

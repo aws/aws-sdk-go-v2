@@ -733,6 +733,12 @@ func validateRetentionProperties(v *types.RetentionProperties) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RetentionProperties"}
+	if v.MemoryStoreRetentionPeriodInHours == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryStoreRetentionPeriodInHours"))
+	}
+	if v.MagneticStoreRetentionPeriodInDays == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MagneticStoreRetentionPeriodInDays"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

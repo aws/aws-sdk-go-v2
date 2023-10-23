@@ -9632,7 +9632,7 @@ func awsAwsjson11_deserializeDocumentEngineConfiguration(v **types.EngineConfigu
 				if err != nil {
 					return err
 				}
-				sv.MaxConcurrentDpus = int32(i64)
+				sv.MaxConcurrentDpus = ptr.Int32(int32(i64))
 			}
 
 		case "SparkProperties":

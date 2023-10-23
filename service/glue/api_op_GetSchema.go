@@ -63,10 +63,10 @@ type GetSchemaOutput struct {
 	Description *string
 
 	// The latest version of the schema associated with the returned schema definition.
-	LatestSchemaVersion int64
+	LatestSchemaVersion *int64
 
 	// The next version of the schema associated with the returned schema definition.
-	NextSchemaVersion int64
+	NextSchemaVersion *int64
 
 	// The Amazon Resource Name (ARN) of the registry.
 	RegistryArn *string
@@ -79,7 +79,7 @@ type GetSchemaOutput struct {
 
 	// The version number of the checkpoint (the last time the compatibility mode was
 	// changed).
-	SchemaCheckpoint int64
+	SchemaCheckpoint *int64
 
 	// The name of the schema.
 	SchemaName *string

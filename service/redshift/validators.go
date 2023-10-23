@@ -2822,6 +2822,9 @@ func validateOpCreateUsageLimitInput(v *CreateUsageLimitInput) error {
 	if len(v.LimitType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LimitType"))
 	}
+	if v.Amount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Amount"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3598,6 +3601,9 @@ func validateOpModifySnapshotCopyRetentionPeriodInput(v *ModifySnapshotCopyReten
 	invalidParams := smithy.InvalidParamsError{Context: "ModifySnapshotCopyRetentionPeriodInput"}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if v.RetentionPeriod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetentionPeriod"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

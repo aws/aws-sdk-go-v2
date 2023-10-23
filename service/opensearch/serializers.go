@@ -3566,9 +3566,9 @@ func awsRestjson1_serializeOpDocumentPurchaseReservedInstanceOfferingInput(v *Pu
 	object := value.Object()
 	defer object.Close()
 
-	if v.InstanceCount != 0 {
+	if v.InstanceCount != nil {
 		ok := object.Key("InstanceCount")
-		ok.Integer(v.InstanceCount)
+		ok.Integer(*v.InstanceCount)
 	}
 
 	if v.ReservationName != nil {
@@ -4971,9 +4971,9 @@ func awsRestjson1_serializeDocumentDuration(v *types.Duration, value smithyjson.
 		ok.String(string(v.Unit))
 	}
 
-	if v.Value != 0 {
+	if v.Value != nil {
 		ok := object.Key("Value")
-		ok.Long(v.Value)
+		ok.Long(*v.Value)
 	}
 
 	return nil

@@ -1248,7 +1248,7 @@ type StatelessRule struct {
 	// for example use 100, 200, and so on.
 	//
 	// This member is required.
-	Priority int32
+	Priority *int32
 
 	// Defines the stateless 5-tuple packet inspection criteria and the action to take
 	// on a packet that matches the criteria.
@@ -1269,7 +1269,7 @@ type StatelessRuleGroupReference struct {
 	// You must ensure that the priority settings are unique within each policy.
 	//
 	// This member is required.
-	Priority int32
+	Priority *int32
 
 	// The Amazon Resource Name (ARN) of the stateless rule group.
 	//

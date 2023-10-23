@@ -8032,9 +8032,9 @@ func awsAwsquery_serializeDocumentParameter(v *types.Parameter, value query.Valu
 		objectKey.String(*v.Description)
 	}
 
-	if v.IsModifiable {
+	if v.IsModifiable != nil {
 		objectKey := object.Key("IsModifiable")
-		objectKey.Boolean(v.IsModifiable)
+		objectKey.Boolean(*v.IsModifiable)
 	}
 
 	if v.MinimumEngineVersion != nil {
@@ -8529,9 +8529,9 @@ func awsAwsquery_serializeOpDocumentBatchModifyClusterSnapshotsInput(v *BatchMod
 	object := value.Object()
 	_ = object
 
-	if v.Force {
+	if v.Force != nil {
 		objectKey := object.Key("Force")
-		objectKey.Boolean(v.Force)
+		objectKey.Boolean(*v.Force)
 	}
 
 	if v.ManualSnapshotRetentionPeriod != nil {
@@ -9222,9 +9222,9 @@ func awsAwsquery_serializeOpDocumentCreateUsageLimitInput(v *CreateUsageLimitInp
 	object := value.Object()
 	_ = object
 
-	{
+	if v.Amount != nil {
 		objectKey := object.Key("Amount")
-		objectKey.Long(v.Amount)
+		objectKey.Long(*v.Amount)
 	}
 
 	if len(v.BreachAction) > 0 {
@@ -9310,9 +9310,9 @@ func awsAwsquery_serializeOpDocumentDeleteClusterInput(v *DeleteClusterInput, va
 		objectKey.Integer(*v.FinalClusterSnapshotRetentionPeriod)
 	}
 
-	if v.SkipFinalClusterSnapshot {
+	if v.SkipFinalClusterSnapshot != nil {
 		objectKey := object.Key("SkipFinalClusterSnapshot")
-		objectKey.Boolean(v.SkipFinalClusterSnapshot)
+		objectKey.Boolean(*v.SkipFinalClusterSnapshot)
 	}
 
 	return nil
@@ -11195,9 +11195,9 @@ func awsAwsquery_serializeOpDocumentModifyClusterSnapshotInput(v *ModifyClusterS
 	object := value.Object()
 	_ = object
 
-	if v.Force {
+	if v.Force != nil {
 		objectKey := object.Key("Force")
-		objectKey.Boolean(v.Force)
+		objectKey.Boolean(*v.Force)
 	}
 
 	if v.ManualSnapshotRetentionPeriod != nil {
@@ -11404,14 +11404,14 @@ func awsAwsquery_serializeOpDocumentModifySnapshotCopyRetentionPeriodInput(v *Mo
 		objectKey.String(*v.ClusterIdentifier)
 	}
 
-	if v.Manual {
+	if v.Manual != nil {
 		objectKey := object.Key("Manual")
-		objectKey.Boolean(v.Manual)
+		objectKey.Boolean(*v.Manual)
 	}
 
-	{
+	if v.RetentionPeriod != nil {
 		objectKey := object.Key("RetentionPeriod")
-		objectKey.Integer(v.RetentionPeriod)
+		objectKey.Integer(*v.RetentionPeriod)
 	}
 
 	return nil
@@ -11527,9 +11527,9 @@ func awsAwsquery_serializeOpDocumentResetClusterParameterGroupInput(v *ResetClus
 		}
 	}
 
-	if v.ResetAllParameters {
+	if v.ResetAllParameters != nil {
 		objectKey := object.Key("ResetAllParameters")
-		objectKey.Boolean(v.ResetAllParameters)
+		objectKey.Boolean(*v.ResetAllParameters)
 	}
 
 	return nil
@@ -11870,9 +11870,9 @@ func awsAwsquery_serializeOpDocumentRevokeEndpointAccessInput(v *RevokeEndpointA
 		objectKey.String(*v.ClusterIdentifier)
 	}
 
-	if v.Force {
+	if v.Force != nil {
 		objectKey := object.Key("Force")
-		objectKey.Boolean(v.Force)
+		objectKey.Boolean(*v.Force)
 	}
 
 	if v.VpcIds != nil {

@@ -7227,7 +7227,7 @@ func awsRestjson1_deserializeDocumentIoTJobAbortCriteria(v **types.IoTJobAbortCr
 				if err != nil {
 					return err
 				}
-				sv.MinNumberOfExecutedThings = int32(i64)
+				sv.MinNumberOfExecutedThings = ptr.Int32(int32(i64))
 			}
 
 		case "thresholdPercentage":
@@ -7388,7 +7388,7 @@ func awsRestjson1_deserializeDocumentIoTJobExponentialRolloutRate(v **types.IoTJ
 				if err != nil {
 					return err
 				}
-				sv.BaseRatePerMinute = int32(i64)
+				sv.BaseRatePerMinute = ptr.Int32(int32(i64))
 			}
 
 		case "incrementFactor":
@@ -7399,7 +7399,7 @@ func awsRestjson1_deserializeDocumentIoTJobExponentialRolloutRate(v **types.IoTJ
 					if err != nil {
 						return err
 					}
-					sv.IncrementFactor = f64
+					sv.IncrementFactor = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -7417,7 +7417,7 @@ func awsRestjson1_deserializeDocumentIoTJobExponentialRolloutRate(v **types.IoTJ
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.IncrementFactor = f64
+					sv.IncrementFactor = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected IoTJobRolloutIncrementFactor to be a JSON Number, got %T instead", value)
