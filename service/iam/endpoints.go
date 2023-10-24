@@ -572,11 +572,17 @@ func (r *resolver) ResolveEndpoint(
 							Headers: http.Header{},
 							Properties: func() smithy.Properties {
 								var out smithy.Properties
-								out.Set("authSchemes", []interface{}{
-									map[string]interface{}{
-										"name":          "sigv4",
-										"signingName":   "iam",
-										"signingRegion": "us-isof-south-1",
+								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+									{
+										SchemeID: "aws.auth#sigv4",
+										SignerProperties: func() smithy.Properties {
+											var sp smithy.Properties
+											smithyhttp.SetSigV4SigningName(&sp, "iam")
+											smithyhttp.SetSigV4ASigningName(&sp, "iam")
+
+											smithyhttp.SetSigV4SigningRegion(&sp, "us-isof-south-1")
+											return sp
+										}(),
 									},
 								})
 								return out

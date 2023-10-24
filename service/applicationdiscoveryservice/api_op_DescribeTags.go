@@ -4,6 +4,7 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
