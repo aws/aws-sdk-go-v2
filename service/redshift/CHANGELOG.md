@@ -1,3 +1,7 @@
+# v1.31.0 (2023-10-24)
+
+* **Feature**: **BREAKFIX**: Correct nullability and default value representation of various input fields across a large number of services. Calling code that references one or more of the affected fields will need to update usage accordingly. See [2162](https://github.com/aws/aws-sdk-go-v2/issues/2162).
+
 # v1.30.0 (2023-10-16)
 
 * **Feature**: Added support for managing credentials of provisioned cluster admin using AWS Secrets Manager.

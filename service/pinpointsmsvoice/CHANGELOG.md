@@ -1,3 +1,7 @@
+# v1.14.0 (2023-10-24)
+
+* **Feature**: **BREAKFIX**: Correct nullability representation of APIGateway-based services.
+
 # v1.13.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

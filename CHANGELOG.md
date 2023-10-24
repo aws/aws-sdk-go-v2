@@ -1,3 +1,26 @@
+# Release (2023-10-24)
+
+## General Highlights
+* **Feature**: **BREAKFIX**: Correct nullability and default value representation of various input fields across a large number of services. Calling code that references one or more of the affected fields will need to update usage accordingly. See [2162](https://github.com/aws/aws-sdk-go-v2/issues/2162).
+* **Feature**: **BREAKFIX**: Correct nullability representation of APIGateway-based services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.18.0](service/codepipeline/CHANGELOG.md#v1180-2023-10-24)
+  * **Feature**: Add ability to trigger pipelines from git tags, define variables at pipeline level and new pipeline type V2.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.127.0](service/ec2/CHANGELOG.md#v11270-2023-10-24)
+  * **Feature**: This release updates the documentation for InstanceInterruptionBehavior and HibernationOptionsRequest to more accurately describe the behavior of these two parameters when using Spot hibernation.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.30.0](service/eks/CHANGELOG.md#v1300-2023-10-24)
+  * **Feature**: Added support for Cluster Subnet and Security Group mutability.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.23.0](service/iam/CHANGELOG.md#v1230-2023-10-24)
+  * **Feature**: Add the partitional endpoint for IAM in iso-f.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubconfig`: [v1.16.0](service/migrationhubconfig/CHANGELOG.md#v1160-2023-10-24)
+  * **Feature**: This release introduces DeleteHomeRegionControl API that customers can use to delete the Migration Hub Home Region configuration
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy`: [v1.12.0](service/migrationhubstrategy/CHANGELOG.md#v1120-2023-10-24)
+  * **Feature**: This release introduces multi-data-source feature in Migration Hub Strategy Recommendations. This feature now supports vCenter as a data source to fetch inventory in addition to ADS and Import from file workflow that is currently supported with MHSR collector.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.6.0](service/opensearchserverless/CHANGELOG.md#v160-2023-10-24)
+  * **Feature**: This release includes the following new APIs: CreateLifecyclePolicy, UpdateLifecyclePolicy, BatchGetLifecyclePolicy, DeleteLifecyclePolicy, ListLifecyclePolicies and BatchGetEffectiveLifecyclePolicy to support the data lifecycle management feature.
+
 # Release (2023-10-23)
 
 ## Module Highlights

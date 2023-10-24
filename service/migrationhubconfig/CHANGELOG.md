@@ -1,3 +1,7 @@
+# v1.16.0 (2023-10-24)
+
+* **Feature**: This release introduces DeleteHomeRegionControl API that customers can use to delete the Migration Hub Home Region configuration
+
 # v1.15.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

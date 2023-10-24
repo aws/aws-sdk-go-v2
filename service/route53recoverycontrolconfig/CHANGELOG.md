@@ -1,3 +1,7 @@
+# v1.15.0 (2023-10-24)
+
+* **Feature**: **BREAKFIX**: Correct nullability representation of APIGateway-based services.
+
 # v1.14.0 (2023-10-17)
 
 * **Feature**: Adds permissions for GetResourcePolicy to support returning details about AWS Resource Access Manager resource policies for shared resources.

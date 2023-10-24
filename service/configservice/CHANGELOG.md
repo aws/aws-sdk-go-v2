@@ -1,3 +1,7 @@
+# v1.38.0 (2023-10-24)
+
+* **Feature**: **BREAKFIX**: Correct nullability and default value representation of various input fields across a large number of services. Calling code that references one or more of the affected fields will need to update usage accordingly. See [2162](https://github.com/aws/aws-sdk-go-v2/issues/2162).
+
 # v1.37.0 (2023-10-12)
 
 * **Feature**: Add enums for resource types supported by Config

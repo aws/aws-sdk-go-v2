@@ -1,8 +1,0 @@
-{
-    "id": "9b4eae28-e343-4e70-95cc-588c2461d3c7",
-    "type": "feature",
-    "description": "This release includes the following new APIs: CreateLifecyclePolicy, UpdateLifecyclePolicy, BatchGetLifecyclePolicy, DeleteLifecyclePolicy, ListLifecyclePolicies and BatchGetEffectiveLifecyclePolicy to support the data lifecycle management feature.",
-    "modules": [
-        "service/opensearchserverless"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.30.0 (2023-10-24)
+
+* **Feature**: Added support for Cluster Subnet and Security Group mutability.
+
 # v1.29.7 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

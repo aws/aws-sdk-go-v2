@@ -1,3 +1,7 @@
+# v1.6.0 (2023-10-24)
+
+* **Feature**: This release includes the following new APIs: CreateLifecyclePolicy, UpdateLifecyclePolicy, BatchGetLifecyclePolicy, DeleteLifecyclePolicy, ListLifecyclePolicies and BatchGetEffectiveLifecyclePolicy to support the data lifecycle management feature.
+
 # v1.5.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

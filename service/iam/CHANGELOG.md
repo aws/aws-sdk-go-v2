@@ -1,3 +1,7 @@
+# v1.23.0 (2023-10-24)
+
+* **Feature**: Add the partitional endpoint for IAM in iso-f.
+
 # v1.22.7 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

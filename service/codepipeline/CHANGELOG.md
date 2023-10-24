@@ -1,3 +1,7 @@
+# v1.18.0 (2023-10-24)
+
+* **Feature**: Add ability to trigger pipelines from git tags, define variables at pipeline level and new pipeline type V2.
+
 # v1.17.0 (2023-10-17)
 
 * **Feature**: Add retryMode ALL_ACTIONS to RetryStageExecution API that retries a failed stage starting from first action in the stage
