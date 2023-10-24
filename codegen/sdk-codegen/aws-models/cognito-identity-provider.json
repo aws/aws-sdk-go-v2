@@ -413,7 +413,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -456,7 +455,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -469,7 +469,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -483,7 +482,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -506,7 +504,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -541,7 +538,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -552,14 +548,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -573,14 +571,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -589,11 +585,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -604,14 +600,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -625,7 +623,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -645,7 +642,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -656,14 +652,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -674,9 +672,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -10326,7 +10326,6 @@
         "com.amazonaws.cognitoidentityprovider#ListResourceServersLimitType": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -10346,7 +10345,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.cognitoidentityprovider#ListResourceServersLimitType",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of resource servers to return.</p>"
                     }
                 },
@@ -10482,7 +10480,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.cognitoidentityprovider#PoolQueryLimitType",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of import jobs you want the request to return.</p>",
                         "smithy.api#required": {}
                     }
@@ -10568,7 +10565,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.cognitoidentityprovider#QueryLimit",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results you want the request to return when listing the user\n            pool clients.</p>"
                     }
                 },
@@ -10649,7 +10645,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.cognitoidentityprovider#PoolQueryLimitType",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results you want the request to return when listing the user\n            pools.</p>",
                         "smithy.api#required": {}
                     }
@@ -11302,7 +11297,6 @@
         "com.amazonaws.cognitoidentityprovider#PasswordPolicyMinLengthType": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 6,
                     "max": 99
@@ -11315,7 +11309,6 @@
                 "MinimumLength": {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordPolicyMinLengthType",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum length of the password in the policy that you have set. This value can't\n            be less than 6.</p>"
                     }
                 },
@@ -11389,7 +11382,6 @@
         "com.amazonaws.cognitoidentityprovider#PoolQueryLimitType": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 60
@@ -11449,7 +11441,6 @@
         "com.amazonaws.cognitoidentityprovider#PriorityType": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 2
@@ -11558,7 +11549,6 @@
         "com.amazonaws.cognitoidentityprovider#QueryLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 60
@@ -11615,7 +11605,6 @@
                 "Priority": {
                     "target": "com.amazonaws.cognitoidentityprovider#PriorityType",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>A positive integer specifying priority of a method with 1 being the highest\n            priority.</p>",
                         "smithy.api#required": {}
                     }

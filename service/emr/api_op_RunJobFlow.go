@@ -236,7 +236,7 @@ type RunJobFlowInput struct {
 	// principals. For more information, see Understanding the Amazon EMR cluster
 	// VisibleToAllUsers setting (https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_IAM_emr-with-IAM.html#security_set_visible_to_all_users)
 	// in the Amazon EMR Management Guide.
-	VisibleToAllUsers bool
+	VisibleToAllUsers *bool
 
 	noSmithyDocumentSerde
 }

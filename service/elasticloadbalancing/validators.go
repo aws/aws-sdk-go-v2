@@ -669,6 +669,18 @@ func validateHealthCheck(v *types.HealthCheck) error {
 	if v.Target == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Target"))
 	}
+	if v.Interval == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Interval"))
+	}
+	if v.Timeout == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Timeout"))
+	}
+	if v.UnhealthyThreshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UnhealthyThreshold"))
+	}
+	if v.HealthyThreshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HealthyThreshold"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -683,6 +695,9 @@ func validateListener(v *types.Listener) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Listener"}
 	if v.Protocol == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if v.InstancePort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstancePort"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

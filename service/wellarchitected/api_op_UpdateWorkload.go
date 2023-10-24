@@ -103,7 +103,7 @@ type UpdateWorkloadInput struct {
 	// owner field is required. If a Review owner is not added to the workload within
 	// 60 days of acknowledgement, access to the workload is restricted until an owner
 	// is added.
-	IsReviewOwnerUpdateAcknowledged bool
+	IsReviewOwnerUpdateAcknowledged *bool
 
 	// The list of non-Amazon Web Services Regions associated with the workload.
 	NonAwsRegions []string

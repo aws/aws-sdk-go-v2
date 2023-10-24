@@ -955,6 +955,9 @@ func validateOpCreateAssessmentTemplateInput(v *CreateAssessmentTemplateInput) e
 	if v.AssessmentTemplateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssessmentTemplateName"))
 	}
+	if v.DurationInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DurationInSeconds"))
+	}
 	if v.RulesPackageArns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RulesPackageArns"))
 	}

@@ -72,7 +72,7 @@ type DescribePublishingDestinationOutput struct {
 	// publish findings to the destination.
 	//
 	// This member is required.
-	PublishingFailureStartTimestamp int64
+	PublishingFailureStartTimestamp *int64
 
 	// The status of the publishing destination.
 	//

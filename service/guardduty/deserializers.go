@@ -2470,7 +2470,7 @@ func awsRestjson1_deserializeOpDocumentDescribeOrganizationConfigurationOutput(v
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoEnable = jtv
+				sv.AutoEnable = ptr.Bool(jtv)
 			}
 
 		case "autoEnableOrganizationMembers":
@@ -2498,7 +2498,7 @@ func awsRestjson1_deserializeOpDocumentDescribeOrganizationConfigurationOutput(v
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.MemberAccountLimitReached = jtv
+				sv.MemberAccountLimitReached = ptr.Bool(jtv)
 			}
 
 		case "nextToken":
@@ -2688,7 +2688,7 @@ func awsRestjson1_deserializeOpDocumentDescribePublishingDestinationOutput(v **D
 				if err != nil {
 					return err
 				}
-				sv.PublishingFailureStartTimestamp = i64
+				sv.PublishingFailureStartTimestamp = ptr.Int64(i64)
 			}
 
 		case "status":
@@ -3886,7 +3886,7 @@ func awsRestjson1_deserializeOpDocumentGetFilterOutput(v **GetFilterOutput, valu
 				if err != nil {
 					return err
 				}
-				sv.Rank = int32(i64)
+				sv.Rank = ptr.Int32(int32(i64))
 			}
 
 		case "tags":
@@ -4349,7 +4349,7 @@ func awsRestjson1_deserializeOpDocumentGetInvitationsCountOutput(v **GetInvitati
 				if err != nil {
 					return err
 				}
-				sv.InvitationsCount = int32(i64)
+				sv.InvitationsCount = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -9358,7 +9358,7 @@ func awsRestjson1_deserializeDocumentAccessControlList(v **types.AccessControlLi
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AllowsPublicReadAccess = jtv
+				sv.AllowsPublicReadAccess = ptr.Bool(jtv)
 			}
 
 		case "allowsPublicWriteAccess":
@@ -9367,7 +9367,7 @@ func awsRestjson1_deserializeDocumentAccessControlList(v **types.AccessControlLi
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AllowsPublicWriteAccess = jtv
+				sv.AllowsPublicWriteAccess = ptr.Bool(jtv)
 			}
 
 		default:
@@ -10093,7 +10093,7 @@ func awsRestjson1_deserializeDocumentBlockPublicAccess(v **types.BlockPublicAcce
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.BlockPublicAcls = jtv
+				sv.BlockPublicAcls = ptr.Bool(jtv)
 			}
 
 		case "blockPublicPolicy":
@@ -10102,7 +10102,7 @@ func awsRestjson1_deserializeDocumentBlockPublicAccess(v **types.BlockPublicAcce
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.BlockPublicPolicy = jtv
+				sv.BlockPublicPolicy = ptr.Bool(jtv)
 			}
 
 		case "ignorePublicAcls":
@@ -10111,7 +10111,7 @@ func awsRestjson1_deserializeDocumentBlockPublicAccess(v **types.BlockPublicAcce
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IgnorePublicAcls = jtv
+				sv.IgnorePublicAcls = ptr.Bool(jtv)
 			}
 
 		case "restrictPublicBuckets":
@@ -10120,7 +10120,7 @@ func awsRestjson1_deserializeDocumentBlockPublicAccess(v **types.BlockPublicAcce
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.RestrictPublicBuckets = jtv
+				sv.RestrictPublicBuckets = ptr.Bool(jtv)
 			}
 
 		default:
@@ -10206,7 +10206,7 @@ func awsRestjson1_deserializeDocumentBucketPolicy(v **types.BucketPolicy, value 
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AllowsPublicReadAccess = jtv
+				sv.AllowsPublicReadAccess = ptr.Bool(jtv)
 			}
 
 		case "allowsPublicWriteAccess":
@@ -10215,7 +10215,7 @@ func awsRestjson1_deserializeDocumentBucketPolicy(v **types.BucketPolicy, value 
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AllowsPublicWriteAccess = jtv
+				sv.AllowsPublicWriteAccess = ptr.Bool(jtv)
 			}
 
 		default:
@@ -10349,7 +10349,7 @@ func awsRestjson1_deserializeDocumentCondition(v **types.Condition, value interf
 				if err != nil {
 					return err
 				}
-				sv.GreaterThan = i64
+				sv.GreaterThan = ptr.Int64(i64)
 			}
 
 		case "greaterThanOrEqual":
@@ -10362,7 +10362,7 @@ func awsRestjson1_deserializeDocumentCondition(v **types.Condition, value interf
 				if err != nil {
 					return err
 				}
-				sv.GreaterThanOrEqual = i64
+				sv.GreaterThanOrEqual = ptr.Int64(i64)
 			}
 
 		case "gt":
@@ -10375,7 +10375,7 @@ func awsRestjson1_deserializeDocumentCondition(v **types.Condition, value interf
 				if err != nil {
 					return err
 				}
-				sv.Gt = int32(i64)
+				sv.Gt = ptr.Int32(int32(i64))
 			}
 
 		case "gte":
@@ -10388,7 +10388,7 @@ func awsRestjson1_deserializeDocumentCondition(v **types.Condition, value interf
 				if err != nil {
 					return err
 				}
-				sv.Gte = int32(i64)
+				sv.Gte = ptr.Int32(int32(i64))
 			}
 
 		case "lessThan":
@@ -10401,7 +10401,7 @@ func awsRestjson1_deserializeDocumentCondition(v **types.Condition, value interf
 				if err != nil {
 					return err
 				}
-				sv.LessThan = i64
+				sv.LessThan = ptr.Int64(i64)
 			}
 
 		case "lessThanOrEqual":
@@ -10414,7 +10414,7 @@ func awsRestjson1_deserializeDocumentCondition(v **types.Condition, value interf
 				if err != nil {
 					return err
 				}
-				sv.LessThanOrEqual = i64
+				sv.LessThanOrEqual = ptr.Int64(i64)
 			}
 
 		case "lt":
@@ -10427,7 +10427,7 @@ func awsRestjson1_deserializeDocumentCondition(v **types.Condition, value interf
 				if err != nil {
 					return err
 				}
-				sv.Lt = int32(i64)
+				sv.Lt = ptr.Int32(int32(i64))
 			}
 
 		case "lte":
@@ -10440,7 +10440,7 @@ func awsRestjson1_deserializeDocumentCondition(v **types.Condition, value interf
 				if err != nil {
 					return err
 				}
-				sv.Lte = int32(i64)
+				sv.Lte = ptr.Int32(int32(i64))
 			}
 
 		case "neq":
@@ -10846,7 +10846,7 @@ func awsRestjson1_deserializeDocumentCoverageEksClusterDetails(v **types.Coverag
 				if err != nil {
 					return err
 				}
-				sv.CompatibleNodes = i64
+				sv.CompatibleNodes = ptr.Int64(i64)
 			}
 
 		case "coveredNodes":
@@ -10859,7 +10859,7 @@ func awsRestjson1_deserializeDocumentCoverageEksClusterDetails(v **types.Coverag
 				if err != nil {
 					return err
 				}
-				sv.CoveredNodes = i64
+				sv.CoveredNodes = ptr.Int64(i64)
 			}
 
 		case "managementType":
@@ -11225,7 +11225,7 @@ func awsRestjson1_deserializeDocumentDataSourceFreeTrial(v **types.DataSourceFre
 				if err != nil {
 					return err
 				}
-				sv.FreeTrialDaysRemaining = int32(i64)
+				sv.FreeTrialDaysRemaining = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -11795,7 +11795,7 @@ func awsRestjson1_deserializeDocumentDnsRequestAction(v **types.DnsRequestAction
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Blocked = jtv
+				sv.Blocked = ptr.Bool(jtv)
 			}
 
 		case "domain":
@@ -12096,7 +12096,7 @@ func awsRestjson1_deserializeDocumentEcsClusterDetails(v **types.EcsClusterDetai
 				if err != nil {
 					return err
 				}
-				sv.ActiveServicesCount = int32(i64)
+				sv.ActiveServicesCount = ptr.Int32(int32(i64))
 			}
 
 		case "arn":
@@ -12127,7 +12127,7 @@ func awsRestjson1_deserializeDocumentEcsClusterDetails(v **types.EcsClusterDetai
 				if err != nil {
 					return err
 				}
-				sv.RegisteredContainerInstancesCount = int32(i64)
+				sv.RegisteredContainerInstancesCount = ptr.Int32(int32(i64))
 			}
 
 		case "runningTasksCount":
@@ -12140,7 +12140,7 @@ func awsRestjson1_deserializeDocumentEcsClusterDetails(v **types.EcsClusterDetai
 				if err != nil {
 					return err
 				}
-				sv.RunningTasksCount = int32(i64)
+				sv.RunningTasksCount = ptr.Int32(int32(i64))
 			}
 
 		case "status":
@@ -12608,7 +12608,7 @@ func awsRestjson1_deserializeDocumentFinding(v **types.Finding, value interface{
 					if err != nil {
 						return err
 					}
-					sv.Confidence = f64
+					sv.Confidence = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -12626,7 +12626,7 @@ func awsRestjson1_deserializeDocumentFinding(v **types.Finding, value interface{
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Confidence = f64
+					sv.Confidence = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
@@ -12706,7 +12706,7 @@ func awsRestjson1_deserializeDocumentFinding(v **types.Finding, value interface{
 					if err != nil {
 						return err
 					}
-					sv.Severity = f64
+					sv.Severity = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -12724,7 +12724,7 @@ func awsRestjson1_deserializeDocumentFinding(v **types.Finding, value interface{
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Severity = f64
+					sv.Severity = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
@@ -13018,7 +13018,7 @@ func awsRestjson1_deserializeDocumentFreeTrialFeatureConfigurationResult(v **typ
 				if err != nil {
 					return err
 				}
-				sv.FreeTrialDaysRemaining = int32(i64)
+				sv.FreeTrialDaysRemaining = ptr.Int32(int32(i64))
 			}
 
 		case "name":
@@ -13103,7 +13103,7 @@ func awsRestjson1_deserializeDocumentGeoLocation(v **types.GeoLocation, value in
 					if err != nil {
 						return err
 					}
-					sv.Lat = f64
+					sv.Lat = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -13121,7 +13121,7 @@ func awsRestjson1_deserializeDocumentGeoLocation(v **types.GeoLocation, value in
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Lat = f64
+					sv.Lat = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
@@ -13137,7 +13137,7 @@ func awsRestjson1_deserializeDocumentGeoLocation(v **types.GeoLocation, value in
 					if err != nil {
 						return err
 					}
-					sv.Lon = f64
+					sv.Lon = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -13155,7 +13155,7 @@ func awsRestjson1_deserializeDocumentGeoLocation(v **types.GeoLocation, value in
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Lon = f64
+					sv.Lon = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
@@ -13240,7 +13240,7 @@ func awsRestjson1_deserializeDocumentHighestSeverityThreatDetails(v **types.High
 				if err != nil {
 					return err
 				}
-				sv.Count = int32(i64)
+				sv.Count = ptr.Int32(int32(i64))
 			}
 
 		case "severity":
@@ -13773,7 +13773,7 @@ func awsRestjson1_deserializeDocumentKubernetesApiCallAction(v **types.Kubernete
 				if err != nil {
 					return err
 				}
-				sv.StatusCode = int32(i64)
+				sv.StatusCode = ptr.Int32(int32(i64))
 			}
 
 		case "userAgent":
@@ -14048,7 +14048,7 @@ func awsRestjson1_deserializeDocumentKubernetesWorkloadDetails(v **types.Kuberne
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.HostNetwork = jtv
+				sv.HostNetwork = ptr.Bool(jtv)
 			}
 
 		case "name":
@@ -14278,7 +14278,7 @@ func awsRestjson1_deserializeDocumentLineageObject(v **types.LineageObject, valu
 				if err != nil {
 					return err
 				}
-				sv.Euid = int32(i64)
+				sv.Euid = ptr.Int32(int32(i64))
 			}
 
 		case "executablePath":
@@ -14309,7 +14309,7 @@ func awsRestjson1_deserializeDocumentLineageObject(v **types.LineageObject, valu
 				if err != nil {
 					return err
 				}
-				sv.NamespacePid = int32(i64)
+				sv.NamespacePid = ptr.Int32(int32(i64))
 			}
 
 		case "parentUuid":
@@ -14331,7 +14331,7 @@ func awsRestjson1_deserializeDocumentLineageObject(v **types.LineageObject, valu
 				if err != nil {
 					return err
 				}
-				sv.Pid = int32(i64)
+				sv.Pid = ptr.Int32(int32(i64))
 			}
 
 		case "startTime":
@@ -14360,7 +14360,7 @@ func awsRestjson1_deserializeDocumentLineageObject(v **types.LineageObject, valu
 				if err != nil {
 					return err
 				}
-				sv.UserId = int32(i64)
+				sv.UserId = ptr.Int32(int32(i64))
 			}
 
 		case "uuid":
@@ -14453,7 +14453,7 @@ func awsRestjson1_deserializeDocumentLocalPortDetails(v **types.LocalPortDetails
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case "portName":
@@ -14515,7 +14515,7 @@ func awsRestjson1_deserializeDocumentLoginAttribute(v **types.LoginAttribute, va
 				if err != nil {
 					return err
 				}
-				sv.FailedLoginAttempts = int32(i64)
+				sv.FailedLoginAttempts = ptr.Int32(int32(i64))
 			}
 
 		case "successfulLoginAttempts":
@@ -14528,7 +14528,7 @@ func awsRestjson1_deserializeDocumentLoginAttribute(v **types.LoginAttribute, va
 				if err != nil {
 					return err
 				}
-				sv.SuccessfulLoginAttempts = int32(i64)
+				sv.SuccessfulLoginAttempts = ptr.Int32(int32(i64))
 			}
 
 		case "user":
@@ -15289,7 +15289,7 @@ func awsRestjson1_deserializeDocumentNetworkConnectionAction(v **types.NetworkCo
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Blocked = jtv
+				sv.Blocked = ptr.Bool(jtv)
 			}
 
 		case "connectionDirection":
@@ -15742,7 +15742,7 @@ func awsRestjson1_deserializeDocumentOrganizationEbsVolumesResult(v **types.Orga
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoEnable = jtv
+				sv.AutoEnable = ptr.Bool(jtv)
 			}
 
 		default:
@@ -15870,7 +15870,7 @@ func awsRestjson1_deserializeDocumentOrganizationKubernetesAuditLogsConfiguratio
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoEnable = jtv
+				sv.AutoEnable = ptr.Bool(jtv)
 			}
 
 		default:
@@ -15982,7 +15982,7 @@ func awsRestjson1_deserializeDocumentOrganizationS3LogsConfigurationResult(v **t
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.AutoEnable = jtv
+				sv.AutoEnable = ptr.Bool(jtv)
 			}
 
 		default:
@@ -16139,7 +16139,7 @@ func awsRestjson1_deserializeDocumentPortProbeAction(v **types.PortProbeAction, 
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Blocked = jtv
+				sv.Blocked = ptr.Bool(jtv)
 			}
 
 		case "portProbeDetails":
@@ -16351,7 +16351,7 @@ func awsRestjson1_deserializeDocumentProcessDetails(v **types.ProcessDetails, va
 				if err != nil {
 					return err
 				}
-				sv.Euid = int32(i64)
+				sv.Euid = ptr.Int32(int32(i64))
 			}
 
 		case "executablePath":
@@ -16396,7 +16396,7 @@ func awsRestjson1_deserializeDocumentProcessDetails(v **types.ProcessDetails, va
 				if err != nil {
 					return err
 				}
-				sv.NamespacePid = int32(i64)
+				sv.NamespacePid = ptr.Int32(int32(i64))
 			}
 
 		case "parentUuid":
@@ -16418,7 +16418,7 @@ func awsRestjson1_deserializeDocumentProcessDetails(v **types.ProcessDetails, va
 				if err != nil {
 					return err
 				}
-				sv.Pid = int32(i64)
+				sv.Pid = ptr.Int32(int32(i64))
 			}
 
 		case "pwd":
@@ -16465,7 +16465,7 @@ func awsRestjson1_deserializeDocumentProcessDetails(v **types.ProcessDetails, va
 				if err != nil {
 					return err
 				}
-				sv.UserId = int32(i64)
+				sv.UserId = ptr.Int32(int32(i64))
 			}
 
 		case "uuid":
@@ -16849,7 +16849,7 @@ func awsRestjson1_deserializeDocumentRemoteAccountDetails(v **types.RemoteAccoun
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Affiliated = jtv
+				sv.Affiliated = ptr.Bool(jtv)
 			}
 
 		default:
@@ -16953,7 +16953,7 @@ func awsRestjson1_deserializeDocumentRemotePortDetails(v **types.RemotePortDetai
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case "portName":
@@ -17164,7 +17164,7 @@ func awsRestjson1_deserializeDocumentRuntimeContext(v **types.RuntimeContext, va
 				if err != nil {
 					return err
 				}
-				sv.IanaProtocolNumber = int32(i64)
+				sv.IanaProtocolNumber = ptr.Int32(int32(i64))
 			}
 
 		case "ldPreloadValue":
@@ -17597,7 +17597,7 @@ func awsRestjson1_deserializeDocumentScan(v **types.Scan, value interface{}) err
 				if err != nil {
 					return err
 				}
-				sv.FileCount = i64
+				sv.FileCount = ptr.Int64(i64)
 			}
 
 		case "resourceDetails":
@@ -17679,7 +17679,7 @@ func awsRestjson1_deserializeDocumentScan(v **types.Scan, value interface{}) err
 				if err != nil {
 					return err
 				}
-				sv.TotalBytes = i64
+				sv.TotalBytes = ptr.Int64(i64)
 			}
 
 		case "triggerDetails":
@@ -18002,7 +18002,7 @@ func awsRestjson1_deserializeDocumentScannedItemCount(v **types.ScannedItemCount
 				if err != nil {
 					return err
 				}
-				sv.Files = int32(i64)
+				sv.Files = ptr.Int32(int32(i64))
 			}
 
 		case "totalGb":
@@ -18015,7 +18015,7 @@ func awsRestjson1_deserializeDocumentScannedItemCount(v **types.ScannedItemCount
 				if err != nil {
 					return err
 				}
-				sv.TotalGb = int32(i64)
+				sv.TotalGb = ptr.Int32(int32(i64))
 			}
 
 		case "volumes":
@@ -18028,7 +18028,7 @@ func awsRestjson1_deserializeDocumentScannedItemCount(v **types.ScannedItemCount
 				if err != nil {
 					return err
 				}
-				sv.Volumes = int32(i64)
+				sv.Volumes = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -18192,7 +18192,7 @@ func awsRestjson1_deserializeDocumentScanThreatName(v **types.ScanThreatName, va
 				if err != nil {
 					return err
 				}
-				sv.ItemCount = int32(i64)
+				sv.ItemCount = ptr.Int32(int32(i64))
 			}
 
 		case "name":
@@ -18284,7 +18284,7 @@ func awsRestjson1_deserializeDocumentSecurityContext(v **types.SecurityContext, 
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Privileged = jtv
+				sv.Privileged = ptr.Bool(jtv)
 			}
 
 		default:
@@ -18417,7 +18417,7 @@ func awsRestjson1_deserializeDocumentService(v **types.Service, value interface{
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Archived = jtv
+				sv.Archived = ptr.Bool(jtv)
 			}
 
 		case "count":
@@ -18430,7 +18430,7 @@ func awsRestjson1_deserializeDocumentService(v **types.Service, value interface{
 				if err != nil {
 					return err
 				}
-				sv.Count = int32(i64)
+				sv.Count = ptr.Int32(int32(i64))
 			}
 
 		case "detectorId":
@@ -18864,7 +18864,7 @@ func awsRestjson1_deserializeDocumentThreatDetectedByName(v **types.ThreatDetect
 				if err != nil {
 					return err
 				}
-				sv.ItemCount = int32(i64)
+				sv.ItemCount = ptr.Int32(int32(i64))
 			}
 
 		case "shortened":
@@ -18873,7 +18873,7 @@ func awsRestjson1_deserializeDocumentThreatDetectedByName(v **types.ThreatDetect
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Shortened = jtv
+				sv.Shortened = ptr.Bool(jtv)
 			}
 
 		case "threatNames":
@@ -18891,7 +18891,7 @@ func awsRestjson1_deserializeDocumentThreatDetectedByName(v **types.ThreatDetect
 				if err != nil {
 					return err
 				}
-				sv.UniqueThreatNameCount = int32(i64)
+				sv.UniqueThreatNameCount = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -19086,7 +19086,7 @@ func awsRestjson1_deserializeDocumentThreatsDetectedItemCount(v **types.ThreatsD
 				if err != nil {
 					return err
 				}
-				sv.Files = int32(i64)
+				sv.Files = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -19809,7 +19809,7 @@ func awsRestjson1_deserializeDocumentVolumeDetail(v **types.VolumeDetail, value 
 				if err != nil {
 					return err
 				}
-				sv.VolumeSizeInGB = int32(i64)
+				sv.VolumeSizeInGB = ptr.Int32(int32(i64))
 			}
 
 		case "volumeType":

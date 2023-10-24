@@ -143,7 +143,7 @@ type PutScalingPolicyInput struct {
 	PolicyType types.PolicyType
 
 	// Amount of adjustment to make, based on the scaling adjustment type.
-	ScalingAdjustment int32
+	ScalingAdjustment *int32
 
 	// The type of adjustment to make to a fleet's instance count:
 	//   - ChangeInCapacity -- add (or subtract) the scaling adjustment value from the
@@ -160,7 +160,7 @@ type PutScalingPolicyInput struct {
 	TargetConfiguration *types.TargetConfiguration
 
 	// Metric value used to trigger a scaling event.
-	Threshold float64
+	Threshold *float64
 
 	noSmithyDocumentSerde
 }

@@ -424,7 +424,6 @@
                 "period": {
                     "target": "com.amazonaws.lightsail#MetricPeriod",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The period, in seconds, over which the statistic is applied.</p>"
                     }
                 },
@@ -9072,7 +9071,6 @@
                 "period": {
                     "target": "com.amazonaws.lightsail#MetricPeriod",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The granularity, in seconds, of the returned data points.</p>\n         <note>\n            <p>Bucket storage metrics are reported once per day. Therefore, you should specify a period\n        of 86400 seconds, which is the number of seconds in a day.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -9869,7 +9867,6 @@
                 "period": {
                     "target": "com.amazonaws.lightsail#MetricPeriod",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The granularity, in seconds, of the returned data points.</p>\n         <p>All container service metric data is available in 5-minute (300 seconds)\n      granularity.</p>",
                         "smithy.api#httpQuery": "period",
                         "smithy.api#required": {}
@@ -10575,7 +10572,6 @@
                 "period": {
                     "target": "com.amazonaws.lightsail#MetricPeriod",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The granularity, in seconds, for the metric data points that will be returned.</p>",
                         "smithy.api#required": {}
                     }
@@ -11088,7 +11084,6 @@
                 "period": {
                     "target": "com.amazonaws.lightsail#MetricPeriod",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The granularity, in seconds, of the returned data points.</p>\n         <p>The <code>StatusCheckFailed</code>, <code>StatusCheckFailed_Instance</code>, and\n        <code>StatusCheckFailed_System</code> instance metric data is available in 1-minute (60\n      seconds) granularity. All other instance metric data is available in 5-minute (300 seconds)\n      granularity.</p>",
                         "smithy.api#required": {}
                     }
@@ -11779,7 +11774,6 @@
                 "period": {
                     "target": "com.amazonaws.lightsail#MetricPeriod",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The granularity, in seconds, of the returned data points.</p>",
                         "smithy.api#required": {}
                     }
@@ -12985,7 +12979,6 @@
                 "period": {
                     "target": "com.amazonaws.lightsail#MetricPeriod",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The granularity, in seconds, of the returned data points.</p>\n         <p>All relational database metric data is available in 1-minute (60 seconds)\n      granularity.</p>",
                         "smithy.api#required": {}
                     }
@@ -15640,7 +15633,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -15683,7 +15675,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -15696,7 +15689,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -15710,7 +15702,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -15733,7 +15724,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -15768,7 +15758,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -15779,14 +15768,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -15800,14 +15791,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -15816,11 +15805,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -15831,14 +15820,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -15852,7 +15843,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -15872,7 +15862,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -15883,14 +15872,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -15901,9 +15892,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -17516,7 +17509,6 @@
         "com.amazonaws.lightsail#MetricPeriod": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 60,
                     "max": 86400

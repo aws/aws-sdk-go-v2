@@ -4792,7 +4792,7 @@ func awsAwsquery_deserializeDocumentBackendServerDescription(v **types.BackendSe
 				if err != nil {
 					return err
 				}
-				sv.InstancePort = int32(i64)
+				sv.InstancePort = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("PolicyNames", t.Name.Local):
@@ -5387,7 +5387,7 @@ func awsAwsquery_deserializeDocumentHealthCheck(v **types.HealthCheck, decoder s
 				if err != nil {
 					return err
 				}
-				sv.HealthyThreshold = int32(i64)
+				sv.HealthyThreshold = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("Interval", t.Name.Local):
@@ -5404,7 +5404,7 @@ func awsAwsquery_deserializeDocumentHealthCheck(v **types.HealthCheck, decoder s
 				if err != nil {
 					return err
 				}
-				sv.Interval = int32(i64)
+				sv.Interval = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("Target", t.Name.Local):
@@ -5434,7 +5434,7 @@ func awsAwsquery_deserializeDocumentHealthCheck(v **types.HealthCheck, decoder s
 				if err != nil {
 					return err
 				}
-				sv.Timeout = int32(i64)
+				sv.Timeout = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("UnhealthyThreshold", t.Name.Local):
@@ -5451,7 +5451,7 @@ func awsAwsquery_deserializeDocumentHealthCheck(v **types.HealthCheck, decoder s
 				if err != nil {
 					return err
 				}
-				sv.UnhealthyThreshold = int32(i64)
+				sv.UnhealthyThreshold = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -6286,7 +6286,7 @@ func awsAwsquery_deserializeDocumentListener(v **types.Listener, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.InstancePort = int32(i64)
+				sv.InstancePort = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("InstanceProtocol", t.Name.Local):

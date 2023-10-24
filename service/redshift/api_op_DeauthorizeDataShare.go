@@ -54,7 +54,7 @@ type DeauthorizeDataShareOutput struct {
 
 	// A value that specifies whether the datashare can be shared to a publicly
 	// accessible cluster.
-	AllowPubliclyAccessibleConsumers bool
+	AllowPubliclyAccessibleConsumers *bool
 
 	// An Amazon Resource Name (ARN) that references the datashare that is owned by a
 	// specific namespace of the producer cluster. A datashare ARN is in the

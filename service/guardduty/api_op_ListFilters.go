@@ -40,7 +40,7 @@ type ListFiltersInput struct {
 
 	// You can use this parameter to indicate the maximum number of items that you
 	// want in the response. The default value is 50. The maximum value is 50.
-	MaxResults int32
+	MaxResults *int32
 
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the list action. For subsequent calls to
@@ -177,8 +177,8 @@ func NewListFiltersPaginator(client ListFiltersAPIClient, params *ListFiltersInp
 	}
 
 	options := ListFiltersPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -208,7 +208,11 @@ func (p *ListFiltersPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListFilters(ctx, &params, optFns...)
 	if err != nil {

@@ -45,7 +45,7 @@ type ListSecurityProfileApplicationsInput struct {
 	SecurityProfileId *string
 
 	// The maximum number of results to return per page.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token for the next set of results. The next set of results can be retrieved
 	// by using the token value returned in the previous response when making the next
@@ -184,8 +184,8 @@ func NewListSecurityProfileApplicationsPaginator(client ListSecurityProfileAppli
 	}
 
 	options := ListSecurityProfileApplicationsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -215,7 +215,11 @@ func (p *ListSecurityProfileApplicationsPaginator) NextPage(ctx context.Context,
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListSecurityProfileApplications(ctx, &params, optFns...)
 	if err != nil {

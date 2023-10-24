@@ -46,7 +46,7 @@ type Answer struct {
 	ImprovementPlanUrl *string
 
 	// Defines whether this question is applicable to a lens review.
-	IsApplicable bool
+	IsApplicable *bool
 
 	// The notes associated with the workload. For a review template, these are the
 	// notes that will be associated with the workload when the template is applied.
@@ -88,7 +88,7 @@ type AnswerSummary struct {
 	Choices []Choice
 
 	// Defines whether this question is applicable to a lens review.
-	IsApplicable bool
+	IsApplicable *bool
 
 	// The ID used to identify a pillar, for example, security . A pillar is identified
 	// by its PillarReviewSummary$PillarId .
@@ -143,7 +143,7 @@ type CheckDetail struct {
 	Description *string
 
 	// Count of flagged resources associated to the check.
-	FlaggedResources int32
+	FlaggedResources *int32
 
 	// Trusted Advisor check ID.
 	Id *string
@@ -330,7 +330,7 @@ type ConsolidatedReportMetric struct {
 	Lenses []LensMetric
 
 	// The total number of lenses applied to the workload.
-	LensesAppliedCount int32
+	LensesAppliedCount *int32
 
 	// The metric type of a metric in the consolidated report. Currently only WORKLOAD
 	// metric types are supported.
@@ -647,7 +647,7 @@ type Milestone struct {
 	MilestoneName *string
 
 	// The milestone number. A workload can have a maximum of 100 milestones.
-	MilestoneNumber int32
+	MilestoneNumber *int32
 
 	// The date and time recorded.
 	RecordedAt *time.Time
@@ -666,7 +666,7 @@ type MilestoneSummary struct {
 	MilestoneName *string
 
 	// The milestone number. A workload can have a maximum of 100 milestones.
-	MilestoneNumber int32
+	MilestoneNumber *int32
 
 	// The date and time recorded.
 	RecordedAt *time.Time
@@ -832,10 +832,10 @@ type ProfileNotificationSummary struct {
 type ProfileQuestion struct {
 
 	// The maximum number of selected choices.
-	MaxSelectedChoices int32
+	MaxSelectedChoices *int32
 
 	// The minimum number of selected choices.
-	MinSelectedChoices int32
+	MinSelectedChoices *int32
 
 	// The question choices.
 	QuestionChoices []ProfileChoice
@@ -950,10 +950,10 @@ type ProfileTemplateChoice struct {
 type ProfileTemplateQuestion struct {
 
 	// The maximum number of choices selected.
-	MaxSelectedChoices int32
+	MaxSelectedChoices *int32
 
 	// The minimum number of choices selected.
-	MinSelectedChoices int32
+	MinSelectedChoices *int32
 
 	// The question choices.
 	QuestionChoices []ProfileTemplateChoice
@@ -1070,7 +1070,7 @@ type ReviewTemplateAnswer struct {
 	ImprovementPlanUrl *string
 
 	// Defines whether this question is applicable to a lens review.
-	IsApplicable bool
+	IsApplicable *bool
 
 	// The notes associated with the workload. For a review template, these are the
 	// notes that will be associated with the workload when the template is applied.
@@ -1112,7 +1112,7 @@ type ReviewTemplateAnswerSummary struct {
 	Choices []Choice
 
 	// Defines whether this question is applicable to a lens review.
-	IsApplicable bool
+	IsApplicable *bool
 
 	// The ID used to identify a pillar, for example, security . A pillar is identified
 	// by its PillarReviewSummary$PillarId .
@@ -1421,7 +1421,7 @@ type Workload struct {
 	// owner field is required. If a Review owner is not added to the workload within
 	// 60 days of acknowledgement, access to the workload is restricted until an owner
 	// is added.
-	IsReviewOwnerUpdateAcknowledged bool
+	IsReviewOwnerUpdateAcknowledged *bool
 
 	// The list of lenses associated with the workload. Each lens is identified by its
 	// LensSummary$LensAlias . If a review template that specifies lenses is applied to

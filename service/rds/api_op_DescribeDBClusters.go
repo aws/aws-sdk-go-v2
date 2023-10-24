@@ -69,7 +69,7 @@ type DescribeDBClustersInput struct {
 
 	// Specifies whether the output includes information about clusters shared from
 	// other Amazon Web Services accounts.
-	IncludeShared bool
+	IncludeShared *bool
 
 	// An optional pagination token provided by a previous DescribeDBClusters request.
 	// If this parameter is specified, the response includes only records beyond the

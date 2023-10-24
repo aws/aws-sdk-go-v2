@@ -57,7 +57,7 @@ type DeleteDBClusterInput struct {
 	// specified, a cluster snapshot is created before the DB cluster is deleted. If
 	// SkipFinalSnapshot is false , you must specify a FinalDBSnapshotIdentifier
 	// parameter. Default: false
-	SkipFinalSnapshot bool
+	SkipFinalSnapshot *bool
 
 	noSmithyDocumentSerde
 }

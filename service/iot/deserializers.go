@@ -45673,7 +45673,7 @@ func awsRestjson1_deserializeDocumentExponentialRolloutRate(v **types.Exponentia
 					if err != nil {
 						return err
 					}
-					sv.IncrementFactor = f64
+					sv.IncrementFactor = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -45691,7 +45691,7 @@ func awsRestjson1_deserializeDocumentExponentialRolloutRate(v **types.Exponentia
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.IncrementFactor = f64
+					sv.IncrementFactor = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected IncrementFactor to be a JSON Number, got %T instead", value)

@@ -35,6 +35,7 @@
                 "EndpointType": {
                     "target": "com.amazonaws.appstream#AccessEndpointType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of interface endpoint.</p>",
                         "smithy.api#required": {}
                     }
@@ -145,6 +146,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the app block.</p>",
                         "smithy.api#required": {}
                     }
@@ -152,6 +154,7 @@
                 "Arn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the app block.</p>",
                         "smithy.api#required": {}
                     }
@@ -221,6 +224,7 @@
                 "Arn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the app block builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -228,6 +232,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the app block builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -247,6 +252,7 @@
                 "Platform": {
                     "target": "com.amazonaws.appstream#AppBlockBuilderPlatformType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The platform of the app block builder.</p>\n         <p>\n            <code>WINDOWS_SERVER_2019</code> is the only valid value.</p>",
                         "smithy.api#required": {}
                     }
@@ -254,6 +260,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The instance type of the app block builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -273,6 +280,7 @@
                 "VpcConfig": {
                     "target": "com.amazonaws.appstream#VpcConfig",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The VPC configuration for the app block builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -280,6 +288,7 @@
                 "State": {
                     "target": "com.amazonaws.appstream#AppBlockBuilderState",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The state of the app block builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -319,6 +328,7 @@
                 "AppBlockArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the app block.</p>",
                         "smithy.api#required": {}
                     }
@@ -326,6 +336,7 @@
                 "AppBlockBuilderName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the app block builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -529,7 +540,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If there is a problem, the application can be disabled after image creation.</p>"
                     }
                 },
@@ -627,6 +637,7 @@
                 "FleetName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet associated with the application.</p>",
                         "smithy.api#required": {}
                     }
@@ -634,6 +645,7 @@
                 "ApplicationArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the application associated with the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -661,7 +673,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Enables or disables persistent application settings for users during their streaming sessions. </p>",
                         "smithy.api#required": {}
                     }
@@ -683,7 +695,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether persistent application settings are enabled for users during their streaming sessions.</p>"
                     }
                 },
@@ -766,6 +777,7 @@
                 "AppBlockArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the app block.</p>",
                         "smithy.api#required": {}
                     }
@@ -773,6 +785,7 @@
                 "AppBlockBuilderName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the app block builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -831,6 +844,7 @@
                 "FleetName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -838,6 +852,7 @@
                 "ApplicationArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the application.</p>",
                         "smithy.api#required": {}
                     }
@@ -893,6 +908,7 @@
                 "StackName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -900,6 +916,7 @@
                 "EntitlementName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the entitlement.</p>",
                         "smithy.api#required": {}
                     }
@@ -907,6 +924,7 @@
                 "ApplicationIdentifier": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the application.</p>",
                         "smithy.api#required": {}
                     }
@@ -961,6 +979,7 @@
                 "FleetName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet. </p>",
                         "smithy.api#required": {}
                     }
@@ -968,6 +987,7 @@
                 "StackName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -1057,6 +1077,7 @@
                 "UserStackAssociations": {
                     "target": "com.amazonaws.appstream#UserStackAssociationList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The list of UserStackAssociation objects.</p>",
                         "smithy.api#required": {}
                     }
@@ -1106,6 +1127,7 @@
                 "UserStackAssociations": {
                     "target": "com.amazonaws.appstream#UserStackAssociationList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The list of UserStackAssociation objects.</p>",
                         "smithy.api#required": {}
                     }
@@ -1130,10 +1152,7 @@
             }
         },
         "com.amazonaws.appstream#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "type": "boolean"
         },
         "com.amazonaws.appstream#BooleanObject": {
             "type": "boolean"
@@ -1187,6 +1206,7 @@
                 "DesiredInstances": {
                     "target": "com.amazonaws.appstream#Integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The desired number of streaming instances.</p>",
                         "smithy.api#required": {}
                     }
@@ -1202,6 +1222,7 @@
                 "Desired": {
                     "target": "com.amazonaws.appstream#Integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The desired number of streaming instances.</p>",
                         "smithy.api#required": {}
                     }
@@ -1280,6 +1301,7 @@
                 "SourceImageName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the image to copy.</p>",
                         "smithy.api#required": {}
                     }
@@ -1287,6 +1309,7 @@
                 "DestinationImageName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name that the image will have when it is copied to the destination.</p>",
                         "smithy.api#required": {}
                     }
@@ -1294,6 +1317,7 @@
                 "DestinationRegion": {
                     "target": "com.amazonaws.appstream#RegionName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The destination region to which the image will be copied. This parameter is required, even if you are copying an image within the same region.</p>",
                         "smithy.api#required": {}
                     }
@@ -1399,6 +1423,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique name for the app block builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -1424,6 +1449,7 @@
                 "Platform": {
                     "target": "com.amazonaws.appstream#AppBlockBuilderPlatformType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The platform of the app block builder.</p>\n         <p>\n            <code>WINDOWS_SERVER_2019</code> is the only valid value.</p>",
                         "smithy.api#required": {}
                     }
@@ -1431,6 +1457,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The instance type to use when launching the app block builder. The following instance\n            types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -1438,6 +1465,7 @@
                 "VpcConfig": {
                     "target": "com.amazonaws.appstream#VpcConfig",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The VPC configuration for the app block builder.</p>\n         <p>App block builders require that you specify at least two subnets in different availability\n            zones.</p>",
                         "smithy.api#required": {}
                     }
@@ -1502,6 +1530,7 @@
                 "AppBlockBuilderName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the app block builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -1543,6 +1572,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the app block.</p>",
                         "smithy.api#required": {}
                     }
@@ -1562,6 +1592,7 @@
                 "SourceS3Location": {
                     "target": "com.amazonaws.appstream#S3Location",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The source S3 location of the app block.</p>",
                         "smithy.api#required": {}
                     }
@@ -1644,6 +1675,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the application. This name is visible to users when display name is not specified.</p>",
                         "smithy.api#required": {}
                     }
@@ -1663,6 +1695,7 @@
                 "IconS3Location": {
                     "target": "com.amazonaws.appstream#S3Location",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The location in S3 of the application icon.</p>",
                         "smithy.api#required": {}
                     }
@@ -1670,6 +1703,7 @@
                 "LaunchPath": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The launch path of the application.</p>",
                         "smithy.api#required": {}
                     }
@@ -1689,6 +1723,7 @@
                 "Platforms": {
                     "target": "com.amazonaws.appstream#Platforms",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The platforms the application supports. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets.</p>",
                         "smithy.api#required": {}
                     }
@@ -1696,6 +1731,7 @@
                 "InstanceFamilies": {
                     "target": "com.amazonaws.appstream#StringList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The instance families the application supports. Valid values are GENERAL_PURPOSE and GRAPHICS_G4.</p>",
                         "smithy.api#required": {}
                     }
@@ -1703,6 +1739,7 @@
                 "AppBlockArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The app block ARN to which the application should be associated</p>",
                         "smithy.api#required": {}
                     }
@@ -1767,6 +1804,7 @@
                 "DirectoryName": {
                     "target": "com.amazonaws.appstream#DirectoryName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The fully qualified name of the directory (for example, corp.example.com).</p>",
                         "smithy.api#required": {}
                     }
@@ -1774,6 +1812,7 @@
                 "OrganizationalUnitDistinguishedNames": {
                     "target": "com.amazonaws.appstream#OrganizationalUnitDistinguishedNamesList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The distinguished names of the organizational units for computer accounts.</p>",
                         "smithy.api#required": {}
                     }
@@ -1841,6 +1880,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the entitlement.</p>",
                         "smithy.api#required": {}
                     }
@@ -1848,6 +1888,7 @@
                 "StackName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack with which the entitlement is associated.</p>",
                         "smithy.api#required": {}
                     }
@@ -1861,6 +1902,7 @@
                 "AppVisibility": {
                     "target": "com.amazonaws.appstream#AppVisibility",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies whether all or selected apps are entitled.</p>",
                         "smithy.api#required": {}
                     }
@@ -1868,6 +1910,7 @@
                 "Attributes": {
                     "target": "com.amazonaws.appstream#EntitlementAttributeList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The attributes of the entitlement.</p>",
                         "smithy.api#required": {}
                     }
@@ -1944,6 +1987,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique name for the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -1963,6 +2007,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>\n         <p>The following instance types are available for Elastic fleets:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -2141,6 +2186,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique name for the image builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -2160,6 +2206,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The instance type to use when launching the image builder. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -2263,6 +2310,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the image builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -2339,6 +2387,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -2460,6 +2509,7 @@
                 "StackName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -2467,6 +2517,7 @@
                 "FleetName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -2474,6 +2525,7 @@
                 "UserId": {
                     "target": "com.amazonaws.appstream#StreamingUrlUserId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the user.</p>",
                         "smithy.api#required": {}
                     }
@@ -2562,6 +2614,7 @@
                 "existingImageName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the image to update.</p>",
                         "smithy.api#required": {}
                     }
@@ -2569,6 +2622,7 @@
                 "newImageName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the new image. The name must be unique within the AWS account and Region.</p>",
                         "smithy.api#required": {}
                     }
@@ -2594,7 +2648,6 @@
                 "dryRun": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether to display the status of image update availability before AppStream 2.0 initiates the process of creating a new updated image. If this value is set to <code>true</code>, AppStream 2.0 displays whether image updates are available. If this value is set to <code>false</code>, AppStream 2.0 initiates the process of creating a new updated image without displaying whether image updates are available.</p>"
                     }
                 }
@@ -2612,7 +2665,6 @@
                 "canUpdateImage": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a new image can be created.</p>"
                     }
                 }
@@ -2706,6 +2758,7 @@
                 "UserName": {
                     "target": "com.amazonaws.appstream#Username",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The email address of the user.</p>\n         <note>\n            <p>Users' email addresses are case-sensitive. During login, if they specify an email address that doesn't use the same capitalization as the email address specified when their user pool account was created, a \"user does not exist\" error message displays.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -2731,6 +2784,7 @@
                 "AuthenticationType": {
                     "target": "com.amazonaws.appstream#AuthenticationType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The authentication type for the user. You must specify USERPOOL. </p>",
                         "smithy.api#required": {}
                     }
@@ -2802,6 +2856,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the app block builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -2824,6 +2879,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the app block.</p>",
                         "smithy.api#required": {}
                     }
@@ -2872,6 +2928,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the application.</p>",
                         "smithy.api#required": {}
                     }
@@ -2914,6 +2971,7 @@
                 "DirectoryName": {
                     "target": "com.amazonaws.appstream#DirectoryName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the directory configuration.</p>",
                         "smithy.api#required": {}
                     }
@@ -2962,6 +3020,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the entitlement.</p>",
                         "smithy.api#required": {}
                     }
@@ -2969,6 +3028,7 @@
                 "StackName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack with which the entitlement is associated.</p>",
                         "smithy.api#required": {}
                     }
@@ -3014,6 +3074,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -3085,6 +3146,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the image builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -3134,6 +3196,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the private image.</p>",
                         "smithy.api#required": {}
                     }
@@ -3141,6 +3204,7 @@
                 "SharedAccountId": {
                     "target": "com.amazonaws.appstream#AwsAccountId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The 12-digit identifier of the AWS account for which to delete image permissions.</p>",
                         "smithy.api#required": {}
                     }
@@ -3163,6 +3227,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the image.</p>",
                         "smithy.api#required": {}
                     }
@@ -3218,6 +3283,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -3291,6 +3357,7 @@
                 "UserName": {
                     "target": "com.amazonaws.appstream#Username",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The email address of the user.</p>\n         <note>\n            <p>Users' email addresses are case-sensitive.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -3298,6 +3365,7 @@
                 "AuthenticationType": {
                     "target": "com.amazonaws.appstream#AuthenticationType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The authentication type for the user. You must specify USERPOOL.</p>",
                         "smithy.api#required": {}
                     }
@@ -3764,6 +3832,7 @@
                 "StackName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack with which the entitlement is associated.</p>",
                         "smithy.api#required": {}
                     }
@@ -4025,6 +4094,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the private image for which to describe permissions. The image must be one that you own. </p>",
                         "smithy.api#required": {}
                     }
@@ -4193,6 +4263,7 @@
                 "StackName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack. This value is case-sensitive.</p>",
                         "smithy.api#required": {}
                     }
@@ -4200,6 +4271,7 @@
                 "FleetName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet. This value is case-sensitive.</p>",
                         "smithy.api#required": {}
                     }
@@ -4477,6 +4549,7 @@
                 "AuthenticationType": {
                     "target": "com.amazonaws.appstream#AuthenticationType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The authentication type for the users in the user pool to describe. You must specify USERPOOL.</p>",
                         "smithy.api#required": {}
                     }
@@ -4533,6 +4606,7 @@
                 "DirectoryName": {
                     "target": "com.amazonaws.appstream#DirectoryName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The fully qualified name of the directory (for example, corp.example.com).</p>",
                         "smithy.api#required": {}
                     }
@@ -4604,6 +4678,7 @@
                 "UserName": {
                     "target": "com.amazonaws.appstream#Username",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The email address of the user.</p>\n         <note>\n            <p>Users' email addresses are case-sensitive.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -4611,6 +4686,7 @@
                 "AuthenticationType": {
                     "target": "com.amazonaws.appstream#AuthenticationType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The authentication type for the user. You must specify USERPOOL.</p>",
                         "smithy.api#required": {}
                     }
@@ -4659,6 +4735,7 @@
                 "AppBlockArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the app block.</p>",
                         "smithy.api#required": {}
                     }
@@ -4666,6 +4743,7 @@
                 "AppBlockBuilderName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the app block builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -4711,6 +4789,7 @@
                 "FleetName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -4718,6 +4797,7 @@
                 "ApplicationArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the application.</p>",
                         "smithy.api#required": {}
                     }
@@ -4763,6 +4843,7 @@
                 "StackName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack with which the entitlement is associated.</p>",
                         "smithy.api#required": {}
                     }
@@ -4770,6 +4851,7 @@
                 "EntitlementName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the entitlement.</p>",
                         "smithy.api#required": {}
                     }
@@ -4777,6 +4859,7 @@
                 "ApplicationIdentifier": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the application to remove from the entitlement.</p>",
                         "smithy.api#required": {}
                     }
@@ -4825,6 +4908,7 @@
                 "FleetName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -4832,6 +4916,7 @@
                 "StackName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -4948,6 +5033,7 @@
                 "UserName": {
                     "target": "com.amazonaws.appstream#Username",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The email address of the user.</p>\n         <note>\n            <p>Users' email addresses are case-sensitive. During login, if they specify an email address that doesn't use the same capitalization as the email address specified when their user pool account was created, a \"user does not exist\" error message displays. </p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -4955,6 +5041,7 @@
                 "AuthenticationType": {
                     "target": "com.amazonaws.appstream#AuthenticationType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The authentication type for the user. You must specify USERPOOL.</p>",
                         "smithy.api#required": {}
                     }
@@ -4977,6 +5064,7 @@
                 "ApplicationIdentifier": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the application.</p>",
                         "smithy.api#required": {}
                     }
@@ -4998,6 +5086,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the entitlement.</p>",
                         "smithy.api#required": {}
                     }
@@ -5005,6 +5094,7 @@
                 "StackName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack with which the entitlement is associated.</p>",
                         "smithy.api#required": {}
                     }
@@ -5018,6 +5108,7 @@
                 "AppVisibility": {
                     "target": "com.amazonaws.appstream#AppVisibility",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies whether all or selected apps are entitled.</p>",
                         "smithy.api#required": {}
                     }
@@ -5025,6 +5116,7 @@
                 "Attributes": {
                     "target": "com.amazonaws.appstream#EntitlementAttributeList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The attributes of the entitlement.</p>",
                         "smithy.api#required": {}
                     }
@@ -5065,6 +5157,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A supported AWS IAM SAML <code>PrincipalTag</code> attribute that is matched to the\n            associated value when a user identity federates into an Amazon AppStream 2.0 SAML\n            application.</p>\n         <p>The following are valid values:</p>\n         <ul>\n            <li>\n               <p>roles</p>\n            </li>\n            <li>\n               <p>department </p>\n            </li>\n            <li>\n               <p>organization </p>\n            </li>\n            <li>\n               <p>groups </p>\n            </li>\n            <li>\n               <p>title </p>\n            </li>\n            <li>\n               <p>costCenter </p>\n            </li>\n            <li>\n               <p>userType</p>\n            </li>\n         </ul>\n         <p> </p>",
                         "smithy.api#required": {}
                     }
@@ -5072,6 +5165,7 @@
                 "Value": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A value that is matched to a supported SAML attribute name when a user identity\n            federates into an Amazon AppStream 2.0 SAML application. </p>",
                         "smithy.api#required": {}
                     }
@@ -5161,6 +5255,7 @@
                 "SessionId": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the streaming session.</p>",
                         "smithy.api#required": {}
                     }
@@ -5192,6 +5287,7 @@
                 "Arn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -5199,6 +5295,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -5230,6 +5327,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -5243,6 +5341,7 @@
                 "ComputeCapacityStatus": {
                     "target": "com.amazonaws.appstream#ComputeCapacityStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The capacity status for the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -5262,6 +5361,7 @@
                 "State": {
                     "target": "com.amazonaws.appstream#FleetState",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The current state for the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -5674,6 +5774,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the image.</p>",
                         "smithy.api#required": {}
                     }
@@ -5711,7 +5812,6 @@
                 "ImageBuilderSupported": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether an image builder can be launched from this image.</p>"
                     }
                 },
@@ -5786,6 +5886,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the image builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -6236,6 +6337,7 @@
                 "StackName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -6289,6 +6391,7 @@
                 "FleetName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -6353,6 +6456,7 @@
                 "StackName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack with which the entitlement is associated.</p>",
                         "smithy.api#required": {}
                     }
@@ -6360,6 +6464,7 @@
                 "EntitlementName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the entitlement.</p>",
                         "smithy.api#required": {}
                     }
@@ -6424,6 +6529,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -6859,7 +6965,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -6902,7 +7007,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -6915,7 +7021,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -6929,7 +7034,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -6952,7 +7056,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -6987,7 +7090,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -6998,14 +7100,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -7019,14 +7123,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -7035,11 +7137,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -7050,14 +7152,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -7071,7 +7175,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -7091,7 +7194,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -7102,14 +7204,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -7170,9 +7274,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -7887,6 +7993,7 @@
                 "S3Bucket": {
                     "target": "com.amazonaws.appstream#S3Bucket",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The S3 bucket of the S3 object.</p>",
                         "smithy.api#required": {}
                     }
@@ -7908,6 +8015,7 @@
                 "ScriptS3Location": {
                     "target": "com.amazonaws.appstream#S3Location",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The S3 object location for the script.</p>",
                         "smithy.api#required": {}
                     }
@@ -7915,6 +8023,7 @@
                 "ExecutablePath": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The run path for the script.</p>",
                         "smithy.api#required": {}
                     }
@@ -7928,6 +8037,7 @@
                 "TimeoutInSeconds": {
                     "target": "com.amazonaws.appstream#Integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The run timeout, in seconds, for the script.</p>",
                         "smithy.api#required": {}
                     }
@@ -7956,6 +8066,7 @@
                 "AccountName": {
                     "target": "com.amazonaws.appstream#AccountName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The user name of the account. This account must have the following privileges: create computer objects, \n            join computers to the domain, and change/reset the password on descendant computer objects for the \n            organizational units specified.</p>",
                         "smithy.api#required": {}
                     }
@@ -7963,6 +8074,7 @@
                 "AccountPassword": {
                     "target": "com.amazonaws.appstream#AccountPassword",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The password for the account.</p>",
                         "smithy.api#required": {}
                     }
@@ -7978,6 +8090,7 @@
                 "Id": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the streaming session.</p>",
                         "smithy.api#required": {}
                     }
@@ -7985,6 +8098,7 @@
                 "UserId": {
                     "target": "com.amazonaws.appstream#UserId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the user for whom the session was created.</p>",
                         "smithy.api#required": {}
                     }
@@ -7992,6 +8106,7 @@
                 "StackName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack for the streaming session.</p>",
                         "smithy.api#required": {}
                     }
@@ -7999,6 +8114,7 @@
                 "FleetName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet for the streaming session.</p>",
                         "smithy.api#required": {}
                     }
@@ -8006,6 +8122,7 @@
                 "State": {
                     "target": "com.amazonaws.appstream#SessionState",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The current state of the streaming session.</p>",
                         "smithy.api#required": {}
                     }
@@ -8112,6 +8229,7 @@
                 "sharedAccountId": {
                     "target": "com.amazonaws.appstream#AwsAccountId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The 12-digit identifier of the AWS account with which the image is shared.</p>",
                         "smithy.api#required": {}
                     }
@@ -8119,6 +8237,7 @@
                 "imagePermissions": {
                     "target": "com.amazonaws.appstream#ImagePermissions",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Describes the permissions for a shared image.</p>",
                         "smithy.api#required": {}
                     }
@@ -8146,6 +8265,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -8406,6 +8526,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the app block builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -8470,6 +8591,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -8521,6 +8643,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the image builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -8579,6 +8702,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the app block builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -8625,6 +8749,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the fleet.</p>",
                         "smithy.api#required": {}
                     }
@@ -8670,6 +8795,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the image builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -8699,6 +8825,7 @@
                 "ConnectorType": {
                     "target": "com.amazonaws.appstream#StorageConnectorType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of storage connector.</p>",
                         "smithy.api#required": {}
                     }
@@ -8870,6 +8997,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -8877,6 +9005,7 @@
                 "Tags": {
                     "target": "com.amazonaws.appstream#Tags",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The tags to associate. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>\n         <p>If you do not specify a value, the value is set to an empty string.</p>\n         <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n         <p>_ . : / = + \\ - @</p>",
                         "smithy.api#required": {}
                     }
@@ -8944,6 +9073,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -8951,6 +9081,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.appstream#TagKeyList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The tag keys for the tags to disassociate.</p>",
                         "smithy.api#required": {}
                     }
@@ -9017,6 +9148,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique name for the app block builder.</p>",
                         "smithy.api#required": {}
                     }
@@ -9120,6 +9252,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the application. This name is visible to users when display name is not specified.</p>",
                         "smithy.api#required": {}
                     }
@@ -9223,6 +9356,7 @@
                 "DirectoryName": {
                     "target": "com.amazonaws.appstream#DirectoryName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Directory Config object.</p>",
                         "smithy.api#required": {}
                     }
@@ -9296,6 +9430,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the entitlement.</p>",
                         "smithy.api#required": {}
                     }
@@ -9303,6 +9438,7 @@
                 "StackName": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack with which the entitlement is associated.</p>",
                         "smithy.api#required": {}
                     }
@@ -9445,7 +9581,6 @@
                 "DeleteVpcConfig": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#deprecated": {},
                         "smithy.api#documentation": "<p>Deletes the VPC association for the specified fleet.</p>"
                     }
@@ -9570,6 +9705,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#Name",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the private image.</p>",
                         "smithy.api#required": {}
                     }
@@ -9577,6 +9713,7 @@
                 "SharedAccountId": {
                     "target": "com.amazonaws.appstream#AwsAccountId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The 12-digit identifier of the AWS account for which you want add or update image permissions.</p>",
                         "smithy.api#required": {}
                     }
@@ -9584,6 +9721,7 @@
                 "ImagePermissions": {
                     "target": "com.amazonaws.appstream#ImagePermissions",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The permissions for the image.</p>",
                         "smithy.api#required": {}
                     }
@@ -9659,6 +9797,7 @@
                 "Name": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -9672,7 +9811,6 @@
                 "DeleteStorageConnectors": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#deprecated": {},
                         "smithy.api#documentation": "<p>Deletes the storage connectors currently enabled for the stack.</p>"
                     }
@@ -9850,7 +9988,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the user in the user pool is enabled.</p>"
                     }
                 },
@@ -9881,6 +10018,7 @@
                 "AuthenticationType": {
                     "target": "com.amazonaws.appstream#AuthenticationType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The authentication type for the user.</p>",
                         "smithy.api#required": {}
                     }
@@ -9922,6 +10060,7 @@
                 "Action": {
                     "target": "com.amazonaws.appstream#Action",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The action that is enabled or disabled.</p>",
                         "smithy.api#required": {}
                     }
@@ -9929,6 +10068,7 @@
                 "Permission": {
                     "target": "com.amazonaws.appstream#Permission",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Indicates whether the action is enabled or disabled.</p>",
                         "smithy.api#required": {}
                     }
@@ -9955,6 +10095,7 @@
                 "StackName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack that is associated with the user.</p>",
                         "smithy.api#required": {}
                     }
@@ -9962,6 +10103,7 @@
                 "UserName": {
                     "target": "com.amazonaws.appstream#Username",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The email address of the user who is associated with the stack.</p>\n         <note>\n            <p>Users' email addresses are case-sensitive.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -9969,6 +10111,7 @@
                 "AuthenticationType": {
                     "target": "com.amazonaws.appstream#AuthenticationType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The authentication type for the user.</p>",
                         "smithy.api#required": {}
                     }
@@ -9976,7 +10119,6 @@
                 "SendEmailNotification": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a welcome email is sent to a user after the user is created in the user pool.</p>"
                     }
                 }

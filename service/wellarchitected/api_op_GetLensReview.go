@@ -53,7 +53,7 @@ type GetLensReviewInput struct {
 	WorkloadId *string
 
 	// The milestone number. A workload can have a maximum of 100 milestones.
-	MilestoneNumber int32
+	MilestoneNumber *int32
 
 	noSmithyDocumentSerde
 }
@@ -65,7 +65,7 @@ type GetLensReviewOutput struct {
 	LensReview *types.LensReview
 
 	// The milestone number. A workload can have a maximum of 100 milestones.
-	MilestoneNumber int32
+	MilestoneNumber *int32
 
 	// The ID assigned to the workload. This ID is unique within an Amazon Web
 	// Services Region.

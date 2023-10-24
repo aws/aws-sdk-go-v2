@@ -44,7 +44,7 @@ type CreateDetectorInput struct {
 	// A Boolean value that specifies whether the detector is to be enabled.
 	//
 	// This member is required.
-	Enable bool
+	Enable *bool
 
 	// The idempotency token for the create request.
 	ClientToken *string

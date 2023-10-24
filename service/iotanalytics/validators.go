@@ -1624,6 +1624,9 @@ func validateResourceConfiguration(v *types.ResourceConfiguration) error {
 	if len(v.ComputeType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputeType"))
 	}
+	if v.VolumeSizeInGB == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeSizeInGB"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

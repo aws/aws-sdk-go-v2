@@ -2463,6 +2463,9 @@ func validateOpCreateRateBasedRuleInput(v *CreateRateBasedRuleInput) error {
 	if len(v.RateKey) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RateKey"))
 	}
+	if v.RateLimit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RateLimit"))
+	}
 	if v.ChangeToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
@@ -3133,6 +3136,9 @@ func validateOpGetSampledRequestsInput(v *GetSampledRequestsInput) error {
 			invalidParams.AddNested("TimeWindow", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MaxItems == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxItems"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3414,6 +3420,9 @@ func validateOpUpdateRateBasedRuleInput(v *UpdateRateBasedRuleInput) error {
 		if err := validateRuleUpdates(v.Updates); err != nil {
 			invalidParams.AddNested("Updates", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.RateLimit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RateLimit"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

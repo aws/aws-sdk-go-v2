@@ -74,7 +74,7 @@ type DescribeModelCardExportJobOutput struct {
 	// The version of the model card that the model export job exports.
 	//
 	// This member is required.
-	ModelCardVersion int32
+	ModelCardVersion *int32
 
 	// The export output details for the model card.
 	//

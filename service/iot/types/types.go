@@ -1580,7 +1580,7 @@ type ExponentialRolloutRate struct {
 	// but not 1.55).
 	//
 	// This member is required.
-	IncrementFactor float64
+	IncrementFactor *float64
 
 	// The criteria to initiate the increase in rate of rollout for a job.
 	//
@@ -3736,7 +3736,7 @@ type TaskStatisticsForAuditCheck struct {
 type TermsAggregation struct {
 
 	// The number of buckets to return in the response. Default to 10.
-	MaxBuckets int32
+	MaxBuckets *int32
 
 	noSmithyDocumentSerde
 }

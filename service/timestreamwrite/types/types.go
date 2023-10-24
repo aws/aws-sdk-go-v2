@@ -569,12 +569,12 @@ type RetentionProperties struct {
 	// The duration for which data must be stored in the magnetic store.
 	//
 	// This member is required.
-	MagneticStoreRetentionPeriodInDays int64
+	MagneticStoreRetentionPeriodInDays *int64
 
 	// The duration for which data must be stored in the memory store.
 	//
 	// This member is required.
-	MemoryStoreRetentionPeriodInHours int64
+	MemoryStoreRetentionPeriodInHours *int64
 
 	noSmithyDocumentSerde
 }

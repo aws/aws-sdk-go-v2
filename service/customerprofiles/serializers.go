@@ -5641,9 +5641,9 @@ func awsRestjson1_serializeDocumentRange(v *types.Range, value smithyjson.Value)
 		ok.String(string(v.Unit))
 	}
 
-	{
+	if v.Value != nil {
 		ok := object.Key("Value")
-		ok.Integer(v.Value)
+		ok.Integer(*v.Value)
 	}
 
 	return nil

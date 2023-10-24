@@ -55,7 +55,7 @@ type ResetDBClusterParameterGroupInput struct {
 	// group to their default values, and false otherwise. You can't use this
 	// parameter if there is a list of parameter names specified for the Parameters
 	// parameter.
-	ResetAllParameters bool
+	ResetAllParameters *bool
 
 	noSmithyDocumentSerde
 }

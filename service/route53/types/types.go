@@ -32,7 +32,7 @@ type AccountLimit struct {
 	// .
 	//
 	// This member is required.
-	Value int64
+	Value *int64
 
 	noSmithyDocumentSerde
 }
@@ -981,7 +981,7 @@ type HostedZoneLimit struct {
 	// The current value for the limit that is specified by Type .
 	//
 	// This member is required.
-	Value int64
+	Value *int64
 
 	noSmithyDocumentSerde
 }
@@ -1566,7 +1566,7 @@ type ReusableDelegationSetLimit struct {
 	// The current value for the MAX_ZONES_BY_REUSABLE_DELEGATION_SET limit.
 	//
 	// This member is required.
-	Value int64
+	Value *int64
 
 	noSmithyDocumentSerde
 }

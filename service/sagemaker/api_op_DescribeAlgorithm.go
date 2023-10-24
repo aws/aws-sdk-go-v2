@@ -80,7 +80,7 @@ type DescribeAlgorithmOutput struct {
 
 	// Whether the algorithm is certified to be listed in Amazon Web Services
 	// Marketplace.
-	CertifyForMarketplace bool
+	CertifyForMarketplace *bool
 
 	// Details about inference jobs that the algorithm runs.
 	InferenceSpecification *types.InferenceSpecification

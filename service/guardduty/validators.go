@@ -1608,6 +1608,9 @@ func validateKubernetesAuditLogsConfiguration(v *types.KubernetesAuditLogsConfig
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "KubernetesAuditLogsConfiguration"}
+	if v.Enable == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enable"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1678,6 +1681,9 @@ func validateOrganizationKubernetesAuditLogsConfiguration(v *types.OrganizationK
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OrganizationKubernetesAuditLogsConfiguration"}
+	if v.AutoEnable == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoEnable"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1709,6 +1715,9 @@ func validateOrganizationS3LogsConfiguration(v *types.OrganizationS3LogsConfigur
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OrganizationS3LogsConfiguration"}
+	if v.AutoEnable == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoEnable"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1721,6 +1730,9 @@ func validateS3LogsConfiguration(v *types.S3LogsConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3LogsConfiguration"}
+	if v.Enable == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enable"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1867,6 +1879,9 @@ func validateOpCreateDetectorInput(v *CreateDetectorInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDetectorInput"}
+	if v.Enable == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enable"))
+	}
 	if v.DataSources != nil {
 		if err := validateDataSourceConfigurations(v.DataSources); err != nil {
 			invalidParams.AddNested("DataSources", err.(smithy.InvalidParamsError))
@@ -1916,6 +1931,9 @@ func validateOpCreateIPSetInput(v *CreateIPSetInput) error {
 	}
 	if v.Location == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	}
+	if v.Activate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Activate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1998,6 +2016,9 @@ func validateOpCreateThreatIntelSetInput(v *CreateThreatIntelSetInput) error {
 	}
 	if v.Location == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	}
+	if v.Activate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Activate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

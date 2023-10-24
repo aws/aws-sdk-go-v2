@@ -2292,14 +2292,14 @@ func awsAwsjson11_serializeDocumentDurationRange(v *types.DurationRange, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxSeconds != 0 {
+	if v.MaxSeconds != nil {
 		ok := object.Key("maxSeconds")
-		ok.Integer(v.MaxSeconds)
+		ok.Integer(*v.MaxSeconds)
 	}
 
-	if v.MinSeconds != 0 {
+	if v.MinSeconds != nil {
 		ok := object.Key("minSeconds")
-		ok.Integer(v.MinSeconds)
+		ok.Integer(*v.MinSeconds)
 	}
 
 	return nil
@@ -2565,9 +2565,9 @@ func awsAwsjson11_serializeOpDocumentCreateAssessmentTemplateInput(v *CreateAsse
 		ok.String(*v.AssessmentTemplateName)
 	}
 
-	{
+	if v.DurationInSeconds != nil {
 		ok := object.Key("durationInSeconds")
-		ok.Integer(v.DurationInSeconds)
+		ok.Integer(*v.DurationInSeconds)
 	}
 
 	if v.RulesPackageArns != nil {

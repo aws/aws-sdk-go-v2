@@ -42,7 +42,7 @@ type DescribeOrganizationConfigurationOutput struct {
 	// Whether to automatically enable Security Hub for new accounts in the
 	// organization. If set to true , then Security Hub is enabled for new accounts. If
 	// set to false, then new accounts are not added automatically.
-	AutoEnable bool
+	AutoEnable *bool
 
 	// Whether to automatically enable Security Hub default standards (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html)
 	// for new member accounts in the organization. The default value of this parameter
@@ -53,7 +53,7 @@ type DescribeOrganizationConfigurationOutput struct {
 
 	// Whether the maximum number of allowed member accounts are already associated
 	// with the Security Hub administrator account.
-	MemberAccountLimitReached bool
+	MemberAccountLimitReached *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

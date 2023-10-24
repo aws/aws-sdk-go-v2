@@ -4094,6 +4094,9 @@ func validateOpGetBucketMetricDataInput(v *GetBucketMetricDataInput) error {
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
+	if v.Period == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Period"))
+	}
 	if v.Statistics == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
 	}
@@ -4171,6 +4174,9 @@ func validateOpGetContainerServiceMetricDataInput(v *GetContainerServiceMetricDa
 	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if v.Period == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Period"))
 	}
 	if v.Statistics == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
@@ -4250,6 +4256,9 @@ func validateOpGetDistributionMetricDataInput(v *GetDistributionMetricDataInput)
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
+	if v.Period == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Period"))
+	}
 	if len(v.Unit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
 	}
@@ -4318,6 +4327,9 @@ func validateOpGetInstanceMetricDataInput(v *GetInstanceMetricDataInput) error {
 	}
 	if len(v.MetricName) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.Period == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Period"))
 	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
@@ -4423,6 +4435,9 @@ func validateOpGetLoadBalancerMetricDataInput(v *GetLoadBalancerMetricDataInput)
 	}
 	if len(v.MetricName) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.Period == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Period"))
 	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
@@ -4576,6 +4591,9 @@ func validateOpGetRelationalDatabaseMetricDataInput(v *GetRelationalDatabaseMetr
 	}
 	if len(v.MetricName) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.Period == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Period"))
 	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))

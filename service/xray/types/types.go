@@ -720,7 +720,7 @@ type SamplingRule struct {
 	// The priority of the sampling rule.
 	//
 	// This member is required.
-	Priority int32
+	Priority *int32
 
 	// A fixed number of matching requests to instrument per second, prior to applying
 	// the fixed rate. The reservoir is not used directly by services, but applies to
@@ -752,7 +752,7 @@ type SamplingRule struct {
 	// The version of the sampling rule format ( 1 ).
 	//
 	// This member is required.
-	Version int32
+	Version *int32
 
 	// Matches attributes derived from the request.
 	Attributes map[string]string

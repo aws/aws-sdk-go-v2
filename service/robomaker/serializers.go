@@ -5251,9 +5251,9 @@ func awsRestjson1_serializeDocumentPortMapping(v *types.PortMapping, value smith
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.ApplicationPort != nil {
 		ok := object.Key("applicationPort")
-		ok.Integer(v.ApplicationPort)
+		ok.Integer(*v.ApplicationPort)
 	}
 
 	if v.EnableOnPublicIp {
@@ -5261,9 +5261,9 @@ func awsRestjson1_serializeDocumentPortMapping(v *types.PortMapping, value smith
 		ok.Boolean(v.EnableOnPublicIp)
 	}
 
-	{
+	if v.JobPort != nil {
 		ok := object.Key("jobPort")
-		ok.Integer(v.JobPort)
+		ok.Integer(*v.JobPort)
 	}
 
 	return nil

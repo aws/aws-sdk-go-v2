@@ -47,7 +47,7 @@ type ModifyDBClusterInput struct {
 	// allowed. Constraints: You must set the allow-major-version-upgrade flag when
 	// providing an EngineVersion parameter that uses a different major version than
 	// the DB cluster's current version.
-	AllowMajorVersionUpgrade bool
+	AllowMajorVersionUpgrade *bool
 
 	// A value that specifies whether the modifications in this request and any
 	// pending modifications are asynchronously applied as soon as possible, regardless
@@ -58,7 +58,7 @@ type ModifyDBClusterInput struct {
 	// to false, then changes to NewDBClusterIdentifier values are applied during the
 	// next maintenance window. All other changes are applied immediately, regardless
 	// of the value of the ApplyImmediately parameter. Default: false
-	ApplyImmediately bool
+	ApplyImmediately *bool
 
 	// The number of days for which automated backups are retained. You must specify a
 	// minimum value of 1. Default: 1 Constraints:

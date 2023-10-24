@@ -44,10 +44,10 @@ type DescribeDBLogFilesInput struct {
 
 	// Filters the available log files for files written since the specified date, in
 	// POSIX timestamp format with milliseconds.
-	FileLastWritten int64
+	FileLastWritten *int64
 
 	// Filters the available log files for files larger than the specified size.
-	FileSize int64
+	FileSize *int64
 
 	// Filters the available log files for log file names that contain the specified
 	// string.

@@ -5826,7 +5826,6 @@
                 "Value": {
                     "target": "com.amazonaws.opensearch#DurationValue",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Integer to specify the value of a maintenance schedule duration.</p>"
                     }
                 },
@@ -5844,7 +5843,6 @@
         "com.amazonaws.opensearch#DurationValue": {
             "type": "long",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#documentation": "<p>Integer that specifies the value of a maintenance schedule duration.</p>",
                 "smithy.api#range": {
                     "min": 1,
@@ -6641,7 +6639,6 @@
         "com.amazonaws.opensearch#InstanceCount": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#documentation": "<p>Number of instances in an OpenSearch Service cluster.</p>",
                 "smithy.api#range": {
                     "min": 1
@@ -9477,7 +9474,6 @@
                 "InstanceCount": {
                     "target": "com.amazonaws.opensearch#InstanceCount",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of OpenSearch instances to reserve.</p>"
                     }
                 }

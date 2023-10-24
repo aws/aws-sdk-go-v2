@@ -2806,6 +2806,9 @@ func validateRecoveryOptionType(v *types.RecoveryOptionType) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RecoveryOptionType"}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	}
 	if len(v.Name) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -4282,6 +4285,9 @@ func validateOpListUserImportJobsInput(v *ListUserImportJobsInput) error {
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
+	if v.MaxResults == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4309,6 +4315,9 @@ func validateOpListUserPoolsInput(v *ListUserPoolsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListUserPoolsInput"}
+	if v.MaxResults == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

@@ -9535,7 +9535,7 @@ func awsRestjson1_deserializeDocumentResourceConfiguration(v **types.ResourceCon
 				if err != nil {
 					return err
 				}
-				sv.VolumeSizeInGB = int32(i64)
+				sv.VolumeSizeInGB = ptr.Int32(int32(i64))
 			}
 
 		default:

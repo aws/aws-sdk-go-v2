@@ -53,7 +53,7 @@ type GetSampledRequestsInput struct {
 	// returns information about all of them.
 	//
 	// This member is required.
-	MaxItems int64
+	MaxItems *int64
 
 	// RuleId is one of three values:
 	//   - The RuleId of the Rule or the RuleGroupId of the RuleGroup for which you

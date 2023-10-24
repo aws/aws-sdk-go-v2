@@ -43,7 +43,7 @@ type DescribeModelCardInput struct {
 
 	// The version of the model card to describe. If a version is not provided, then
 	// the latest version of the model card is described.
-	ModelCardVersion int32
+	ModelCardVersion *int32
 
 	noSmithyDocumentSerde
 }
@@ -90,7 +90,7 @@ type DescribeModelCardOutput struct {
 	// The version of the model card.
 	//
 	// This member is required.
-	ModelCardVersion int32
+	ModelCardVersion *int32
 
 	// Information about the user who created or modified an experiment, trial, trial
 	// component, lineage group, project, or model card.

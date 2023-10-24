@@ -5332,6 +5332,9 @@ func validateExponentialRolloutRate(v *types.ExponentialRolloutRate) error {
 	if v.BaseRatePerMinute == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BaseRatePerMinute"))
 	}
+	if v.IncrementFactor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IncrementFactor"))
+	}
 	if v.RateIncreaseCriteria == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RateIncreaseCriteria"))
 	}

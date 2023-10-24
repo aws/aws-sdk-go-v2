@@ -35,6 +35,7 @@
                 "Name": {
                     "target": "com.amazonaws.dlm#ActionName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A descriptive name for the action.</p>",
                         "smithy.api#required": {}
                     }
@@ -42,6 +43,7 @@
                 "CrossRegionCopy": {
                     "target": "com.amazonaws.dlm#CrossRegionCopyActionList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The rule for copying shared snapshots across Regions.</p>",
                         "smithy.api#required": {}
                     }
@@ -79,6 +81,7 @@
                 "RetentionArchiveTier": {
                     "target": "com.amazonaws.dlm#RetentionArchiveTier",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Information about retention period in the Amazon EBS Snapshots Archive. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/snapshot-archive.html\">Archive Amazon \n\t\t\t\tEBS snapshots</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -94,6 +97,7 @@
                 "RetainRule": {
                     "target": "com.amazonaws.dlm#ArchiveRetainRule",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Information about the retention period for the snapshot archiving rule.</p>",
                         "smithy.api#required": {}
                     }
@@ -146,10 +150,7 @@
             }
         },
         "com.amazonaws.dlm#CopyTags": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "type": "boolean"
         },
         "com.amazonaws.dlm#CopyTagsNullable": {
             "type": "boolean"
@@ -157,7 +158,6 @@
         "com.amazonaws.dlm#Count": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -198,6 +198,7 @@
                 "ExecutionRoleArn": {
                     "target": "com.amazonaws.dlm#ExecutionRoleArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by\n\t\t\tthe lifecycle policy.</p>",
                         "smithy.api#required": {}
                     }
@@ -205,6 +206,7 @@
                 "Description": {
                     "target": "com.amazonaws.dlm#PolicyDescription",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A description of the lifecycle policy. The characters ^[0-9A-Za-z _-]+$ are\n\t\t\tsupported.</p>",
                         "smithy.api#required": {}
                     }
@@ -212,6 +214,7 @@
                 "State": {
                     "target": "com.amazonaws.dlm#SettablePolicyStateValues",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The desired activation state of the lifecycle policy after creation.</p>",
                         "smithy.api#required": {}
                     }
@@ -219,6 +222,7 @@
                 "PolicyDetails": {
                     "target": "com.amazonaws.dlm#PolicyDetails",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The configuration details of the lifecycle policy.</p>",
                         "smithy.api#required": {}
                     }
@@ -260,7 +264,6 @@
                 "Interval": {
                     "target": "com.amazonaws.dlm#Interval",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12, and 24.</p>"
                     }
                 },
@@ -303,6 +306,7 @@
                 "Target": {
                     "target": "com.amazonaws.dlm#Target",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The target Region.</p>",
                         "smithy.api#required": {}
                     }
@@ -310,6 +314,7 @@
                 "EncryptionConfiguration": {
                     "target": "com.amazonaws.dlm#EncryptionConfiguration",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The encryption settings for the copied snapshot.</p>",
                         "smithy.api#required": {}
                     }
@@ -340,7 +345,6 @@
                 "Interval": {
                     "target": "com.amazonaws.dlm#Interval",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The period after which to deprecate the cross-Region AMI copies. The period must be less than or \n\t\t\tequal to the cross-Region AMI copy retention period, and it can't be greater than 10 years. This is \n\t\t\tequivalent to 120 months, 520 weeks, or 3650 days.</p>"
                     }
                 },
@@ -361,7 +365,6 @@
                 "Interval": {
                     "target": "com.amazonaws.dlm#Interval",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time to retain a cross-Region snapshot or AMI copy. The maximum is 100 years. \n\t\t\tThis is equivalent to 1200 months, 5200 weeks, or 36500 days.</p>"
                     }
                 },
@@ -394,6 +397,7 @@
                 "Encrypted": {
                     "target": "com.amazonaws.dlm#Encrypted",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled,\n\t\t\tenable encryption using this parameter. Copies of encrypted snapshots are encrypted,\n\t\t\teven if this parameter is false or if encryption by default is not enabled.</p>",
                         "smithy.api#required": {}
                     }
@@ -496,14 +500,12 @@
                 "Count": {
                     "target": "com.amazonaws.dlm#Count",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>If the schedule has a count-based retention rule, this parameter specifies the number of oldest \n\t\t\tAMIs to deprecate. The count must be less than or equal to the schedule's retention count, and it \n\t\t\tcan't be greater than 1000.</p>"
                     }
                 },
                 "Interval": {
                     "target": "com.amazonaws.dlm#Interval",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>If the schedule has an age-based retention rule, this parameter specifies the period after which \n\t\t\tto deprecate AMIs created by the schedule. The period must be less than or equal to the schedule's \n\t\t\tretention period, and it can't be greater than 10 years. This is equivalent to 120 months, 520 \n\t\t\tweeks, or 3650 days.</p>"
                     }
                 },
@@ -537,6 +539,7 @@
                 "Encrypted": {
                     "target": "com.amazonaws.dlm#Encrypted",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>To encrypt a copy of an unencrypted snapshot when encryption by default is not enabled, enable \n\t\t\tencryption using this parameter. Copies of encrypted snapshots are encrypted, even if this \n\t\t\tparameter is false or when encryption by default is not enabled.</p>",
                         "smithy.api#required": {}
                     }
@@ -564,6 +567,7 @@
                 "EventType": {
                     "target": "com.amazonaws.dlm#EventTypeValues",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of event. Currently, only snapshot sharing events are supported.</p>",
                         "smithy.api#required": {}
                     }
@@ -571,6 +575,7 @@
                 "SnapshotOwner": {
                     "target": "com.amazonaws.dlm#SnapshotOwnerList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The IDs of the Amazon Web Services accounts that can trigger policy by sharing snapshots with your account. \n\t\t\tThe policy only runs if one of the specified Amazon Web Services accounts shares a snapshot with your account.</p>",
                         "smithy.api#required": {}
                     }
@@ -578,6 +583,7 @@
                 "DescriptionRegex": {
                     "target": "com.amazonaws.dlm#DescriptionRegex",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The snapshot description that can trigger the policy. The description pattern is specified using \n\t\t\ta regular expression. The policy runs only if a snapshot with a description that matches the \n\t\t\tspecified pattern is shared with your account.</p>\n         <p>For example, specifying <code>^.*Created for policy: policy-1234567890abcdef0.*$</code>  \n\t\t\tconfigures the policy to run only if snapshots created by policy <code>policy-1234567890abcdef0</code> \n\t\t\tare shared with your account.</p>",
                         "smithy.api#required": {}
                     }
@@ -593,6 +599,7 @@
                 "Type": {
                     "target": "com.amazonaws.dlm#EventSourceValues",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The source of the event. Currently only managed CloudWatch Events rules are supported.</p>",
                         "smithy.api#required": {}
                     }
@@ -661,14 +668,12 @@
                 "Count": {
                     "target": "com.amazonaws.dlm#Count",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of snapshots to be enabled with fast snapshot restore.</p>"
                     }
                 },
                 "Interval": {
                     "target": "com.amazonaws.dlm#Interval",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time to enable fast snapshot restore. The maximum is 100 years. This is\n\t\t\tequivalent to 1200 months, 5200 weeks, or 36500 days.</p>"
                     }
                 },
@@ -681,6 +686,7 @@
                 "AvailabilityZones": {
                     "target": "com.amazonaws.dlm#AvailabilityZoneList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Availability Zones in which to enable fast snapshot restore.</p>",
                         "smithy.api#required": {}
                     }
@@ -878,7 +884,6 @@
         "com.amazonaws.dlm#Interval": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -1377,14 +1382,12 @@
                 "Count": {
                     "target": "com.amazonaws.dlm#StandardTierRetainRuleCount",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of snapshots to retain for each volume, up to a maximum of 1000. For example if you want to \n\t\t\tretain a maximum of three snapshots, specify <code>3</code>. When the fourth snapshot is created, the \n\t\t\toldest retained snapshot is deleted, or it is moved to the archive tier if you have specified an \n\t\t\t<a>ArchiveRule</a>.</p>"
                     }
                 },
                 "Interval": {
                     "target": "com.amazonaws.dlm#StandardTierRetainRuleInterval",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time to retain each snapshot. The maximum is 100 years. This is\n\t\t\tequivalent to 1200 months, 5200 weeks, or 36500 days.</p>"
                     }
                 },
@@ -1405,14 +1408,12 @@
                 "Count": {
                     "target": "com.amazonaws.dlm#Count",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of snapshots to retain in the archive storage tier for each volume. \n\t\t\tThe count must ensure that each snapshot remains in the archive tier for at least \n\t\t90 days. For example, if the schedule creates snapshots every 30 days, you must specify a \n\t\tcount of 3 or more to ensure that each snapshot is archived for at least 90 days.</p>"
                     }
                 },
                 "Interval": {
                     "target": "com.amazonaws.dlm#Interval",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the period of time to retain snapshots in the archive tier. After this period \n\t\t\texpires, the snapshot is permanently deleted.</p>"
                     }
                 },
@@ -1468,7 +1469,6 @@
                 "CopyTags": {
                     "target": "com.amazonaws.dlm#CopyTags",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Copy all user-defined tags on a source volume to snapshots of the volume created by\n\t\t\tthis policy.</p>"
                     }
                 },
@@ -1576,6 +1576,7 @@
                 "TargetAccounts": {
                     "target": "com.amazonaws.dlm#ShareTargetAccountList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The IDs of the Amazon Web Services accounts with which to share the snapshots.</p>",
                         "smithy.api#required": {}
                     }
@@ -1583,7 +1584,6 @@
                 "UnshareInterval": {
                     "target": "com.amazonaws.dlm#Interval",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The period after which snapshots that are shared with other Amazon Web Services accounts are automatically unshared.</p>"
                     }
                 },
@@ -1636,7 +1636,6 @@
         "com.amazonaws.dlm#StandardTierRetainRuleCount": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 1000
@@ -1646,7 +1645,6 @@
         "com.amazonaws.dlm#StandardTierRetainRuleInterval": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -1678,6 +1676,7 @@
                 "Key": {
                     "target": "com.amazonaws.dlm#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The tag key.</p>",
                         "smithy.api#required": {}
                     }
@@ -1685,6 +1684,7 @@
                 "Value": {
                     "target": "com.amazonaws.dlm#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The tag value.</p>",
                         "smithy.api#required": {}
                     }
@@ -1783,6 +1783,7 @@
                 "Tags": {
                     "target": "com.amazonaws.dlm#TagMap",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>One or more tags.</p>",
                         "smithy.api#required": {}
                     }
@@ -1947,6 +1948,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.dlm#TagKeyList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The tag keys.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
@@ -2139,7 +2141,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2182,7 +2183,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -2195,7 +2197,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2209,7 +2210,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -2232,7 +2232,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2267,7 +2266,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2278,14 +2276,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2299,14 +2299,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -2315,18 +2313,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -2335,7 +2332,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -2355,14 +2353,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2376,7 +2376,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2396,7 +2395,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2407,14 +2405,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -2425,9 +2425,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],

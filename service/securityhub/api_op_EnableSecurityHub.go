@@ -64,7 +64,7 @@ type EnableSecurityHubInput struct {
 	// automatically enabled. If you do not provide a value for EnableDefaultStandards
 	// , it is set to true . To not enable the automatically enabled standards, set
 	// EnableDefaultStandards to false .
-	EnableDefaultStandards bool
+	EnableDefaultStandards *bool
 
 	// The tags to add to the hub resource when you enable Security Hub.
 	Tags map[string]string

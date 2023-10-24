@@ -1663,9 +1663,9 @@ func awsRestjson1_serializeDocumentSourceDataColumnProperties(v *types.SourceDat
 	object := value.Object()
 	defer object.Close()
 
-	if v.ColumnIndex != 0 {
+	if v.ColumnIndex != nil {
 		ok := object.Key("columnIndex")
-		ok.Integer(v.ColumnIndex)
+		ok.Integer(*v.ColumnIndex)
 	}
 
 	return nil

@@ -372,9 +372,9 @@ func awsRestjson1_serializeOpDocumentCreateLensVersionInput(v *CreateLensVersion
 		ok.String(*v.ClientRequestToken)
 	}
 
-	if v.IsMajorVersion {
+	if v.IsMajorVersion != nil {
 		ok := object.Key("IsMajorVersion")
-		ok.Boolean(v.IsMajorVersion)
+		ok.Boolean(*v.IsMajorVersion)
 	}
 
 	if v.LensVersion != nil {
@@ -2053,8 +2053,8 @@ func awsRestjson1_serializeOpHttpBindingsGetAnswerInput(v *GetAnswerInput, encod
 		}
 	}
 
-	if v.MilestoneNumber != 0 {
-		encoder.SetQuery("MilestoneNumber").Integer(v.MilestoneNumber)
+	if v.MilestoneNumber != nil {
+		encoder.SetQuery("MilestoneNumber").Integer(*v.MilestoneNumber)
 	}
 
 	if v.QuestionId == nil || len(*v.QuestionId) == 0 {
@@ -2135,12 +2135,12 @@ func awsRestjson1_serializeOpHttpBindingsGetConsolidatedReportInput(v *GetConsol
 		encoder.SetQuery("Format").String(string(v.Format))
 	}
 
-	if v.IncludeSharedResources {
-		encoder.SetQuery("IncludeSharedResources").Boolean(v.IncludeSharedResources)
+	if v.IncludeSharedResources != nil {
+		encoder.SetQuery("IncludeSharedResources").Boolean(*v.IncludeSharedResources)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2281,8 +2281,8 @@ func awsRestjson1_serializeOpHttpBindingsGetLensReviewInput(v *GetLensReviewInpu
 		}
 	}
 
-	if v.MilestoneNumber != 0 {
-		encoder.SetQuery("MilestoneNumber").Integer(v.MilestoneNumber)
+	if v.MilestoneNumber != nil {
+		encoder.SetQuery("MilestoneNumber").Integer(*v.MilestoneNumber)
 	}
 
 	if v.WorkloadId == nil || len(*v.WorkloadId) == 0 {
@@ -2359,8 +2359,8 @@ func awsRestjson1_serializeOpHttpBindingsGetLensReviewReportInput(v *GetLensRevi
 		}
 	}
 
-	if v.MilestoneNumber != 0 {
-		encoder.SetQuery("MilestoneNumber").Integer(v.MilestoneNumber)
+	if v.MilestoneNumber != nil {
+		encoder.SetQuery("MilestoneNumber").Integer(*v.MilestoneNumber)
 	}
 
 	if v.WorkloadId == nil || len(*v.WorkloadId) == 0 {
@@ -2501,8 +2501,11 @@ func awsRestjson1_serializeOpHttpBindingsGetMilestoneInput(v *GetMilestoneInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	{
-		if err := encoder.SetURI("MilestoneNumber").Integer(v.MilestoneNumber); err != nil {
+	if v.MilestoneNumber == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MilestoneNumber must not be empty")}
+	}
+	if v.MilestoneNumber != nil {
+		if err := encoder.SetURI("MilestoneNumber").Integer(*v.MilestoneNumber); err != nil {
 			return err
 		}
 	}
@@ -3081,12 +3084,12 @@ func awsRestjson1_serializeOpHttpBindingsListAnswersInput(v *ListAnswersInput, e
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
-	if v.MilestoneNumber != 0 {
-		encoder.SetQuery("MilestoneNumber").Integer(v.MilestoneNumber)
+	if v.MilestoneNumber != nil {
+		encoder.SetQuery("MilestoneNumber").Integer(*v.MilestoneNumber)
 	}
 
 	if v.NextToken != nil {
@@ -3203,9 +3206,9 @@ func awsRestjson1_serializeOpDocumentListCheckDetailsInput(v *ListCheckDetailsIn
 		ok.String(*v.LensArn)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3316,9 +3319,9 @@ func awsRestjson1_serializeOpDocumentListCheckSummariesInput(v *ListCheckSummari
 		ok.String(*v.LensArn)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3404,8 +3407,8 @@ func awsRestjson1_serializeOpHttpBindingsListLensesInput(v *ListLensesInput, enc
 		encoder.SetQuery("LensType").String(string(v.LensType))
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3477,12 +3480,12 @@ func awsRestjson1_serializeOpHttpBindingsListLensReviewImprovementsInput(v *List
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
-	if v.MilestoneNumber != 0 {
-		encoder.SetQuery("MilestoneNumber").Integer(v.MilestoneNumber)
+	if v.MilestoneNumber != nil {
+		encoder.SetQuery("MilestoneNumber").Integer(*v.MilestoneNumber)
 	}
 
 	if v.NextToken != nil {
@@ -3562,12 +3565,12 @@ func awsRestjson1_serializeOpHttpBindingsListLensReviewsInput(v *ListLensReviews
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
-	if v.MilestoneNumber != 0 {
-		encoder.SetQuery("MilestoneNumber").Integer(v.MilestoneNumber)
+	if v.MilestoneNumber != nil {
+		encoder.SetQuery("MilestoneNumber").Integer(*v.MilestoneNumber)
 	}
 
 	if v.NextToken != nil {
@@ -3648,8 +3651,8 @@ func awsRestjson1_serializeOpHttpBindingsListLensSharesInput(v *ListLensSharesIn
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3747,9 +3750,9 @@ func awsRestjson1_serializeOpDocumentListMilestonesInput(v *ListMilestonesInput,
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3827,9 +3830,9 @@ func awsRestjson1_serializeOpDocumentListNotificationsInput(v *ListNotifications
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3903,8 +3906,8 @@ func awsRestjson1_serializeOpHttpBindingsListProfileNotificationsInput(v *ListPr
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3971,8 +3974,8 @@ func awsRestjson1_serializeOpHttpBindingsListProfilesInput(v *ListProfilesInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -4043,8 +4046,8 @@ func awsRestjson1_serializeOpHttpBindingsListProfileSharesInput(v *ListProfileSh
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -4133,8 +4136,8 @@ func awsRestjson1_serializeOpHttpBindingsListReviewTemplateAnswersInput(v *ListR
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -4210,8 +4213,8 @@ func awsRestjson1_serializeOpHttpBindingsListReviewTemplatesInput(v *ListReviewT
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -4278,8 +4281,8 @@ func awsRestjson1_serializeOpHttpBindingsListShareInvitationsInput(v *ListShareI
 		encoder.SetQuery("LensNamePrefix").String(*v.LensNamePrefix)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -4423,8 +4426,8 @@ func awsRestjson1_serializeOpHttpBindingsListTemplateSharesInput(v *ListTemplate
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -4518,9 +4521,9 @@ func awsRestjson1_serializeOpDocumentListWorkloadsInput(v *ListWorkloadsInput, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -4589,8 +4592,8 @@ func awsRestjson1_serializeOpHttpBindingsListWorkloadSharesInput(v *ListWorkload
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -4883,9 +4886,9 @@ func awsRestjson1_serializeOpDocumentUpdateAnswerInput(v *UpdateAnswerInput, val
 		}
 	}
 
-	if v.IsApplicable {
+	if v.IsApplicable != nil {
 		ok := object.Key("IsApplicable")
-		ok.Boolean(v.IsApplicable)
+		ok.Boolean(*v.IsApplicable)
 	}
 
 	if v.Notes != nil {
@@ -5404,9 +5407,9 @@ func awsRestjson1_serializeOpDocumentUpdateReviewTemplateAnswerInput(v *UpdateRe
 		}
 	}
 
-	if v.IsApplicable {
+	if v.IsApplicable != nil {
 		ok := object.Key("IsApplicable")
-		ok.Boolean(v.IsApplicable)
+		ok.Boolean(*v.IsApplicable)
 	}
 
 	if v.Notes != nil {
@@ -5759,9 +5762,9 @@ func awsRestjson1_serializeOpDocumentUpdateWorkloadInput(v *UpdateWorkloadInput,
 		ok.String(*v.IndustryType)
 	}
 
-	if v.IsReviewOwnerUpdateAcknowledged {
+	if v.IsReviewOwnerUpdateAcknowledged != nil {
 		ok := object.Key("IsReviewOwnerUpdateAcknowledged")
-		ok.Boolean(v.IsReviewOwnerUpdateAcknowledged)
+		ok.Boolean(*v.IsReviewOwnerUpdateAcknowledged)
 	}
 
 	if v.NonAwsRegions != nil {

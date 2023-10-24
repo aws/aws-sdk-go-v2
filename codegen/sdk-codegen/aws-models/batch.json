@@ -165,7 +165,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -208,7 +207,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -221,7 +221,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -235,7 +234,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -258,7 +256,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -293,7 +290,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -304,14 +300,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -325,14 +323,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -341,18 +337,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -361,7 +356,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws"
                                                                     ]
                                                                 }
                                                             ],
@@ -377,7 +373,6 @@
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -386,7 +381,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -406,14 +402,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -427,7 +425,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -447,7 +444,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -458,14 +454,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -476,9 +474,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1540,6 +1540,7 @@
                 "jobId": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Batch job ID of the job to cancel.</p>",
                         "smithy.api#required": {}
                     }
@@ -1547,6 +1548,7 @@
                 "reason": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A message to attach to the job that explains the reason for canceling it. This message is returned by future\n    <a>DescribeJobs</a> operations on the job. This message is also recorded in the Batch activity\n   logs.</p>",
                         "smithy.api#required": {}
                     }
@@ -1583,6 +1585,7 @@
                 "computeEnvironmentName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the compute environment. It can be up to 128 characters long. It can contain uppercase and\n lowercase letters, numbers, hyphens (-), and underscores (_).</p>",
                         "smithy.api#required": {}
                     }
@@ -1590,6 +1593,7 @@
                 "computeEnvironmentArn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the compute environment.</p>",
                         "smithy.api#required": {}
                     }
@@ -1689,6 +1693,7 @@
                 "order": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The order of the compute environment. Compute environments are tried in ascending order. For\n   example, if two compute environments are associated with a job queue, the compute environment\n   with a lower <code>order</code> integer value is tried for job placement first.</p>",
                         "smithy.api#required": {}
                     }
@@ -1696,6 +1701,7 @@
                 "computeEnvironment": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the compute environment.</p>",
                         "smithy.api#required": {}
                     }
@@ -1717,6 +1723,7 @@
                 "type": {
                     "target": "com.amazonaws.batch#CRType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of compute environment: <code>EC2</code>, <code>SPOT</code>, <code>FARGATE</code>,\n   or <code>FARGATE_SPOT</code>. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html\">Compute environments</a> in the\n    <i>Batch User Guide</i>.</p>\n         <p> If you choose <code>SPOT</code>, you must also specify an Amazon EC2 Spot Fleet role with the\n    <code>spotIamFleetRole</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html\">Amazon EC2 spot fleet role</a> in the\n    <i>Batch User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
@@ -1736,6 +1743,7 @@
                 "maxvCpus": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The maximum number of\n   vCPUs that a\n   compute environment can\n   support.</p>\n         <note>\n            <p>With <code>BEST_FIT_PROGRESSIVE</code>, <code>SPOT_CAPACITY_OPTIMIZED</code> and <code>SPOT_PRICE_CAPACITY_OPTIMIZED</code>\n    allocation strategies using On-Demand or Spot Instances, and the <code>BEST_FIT</code> strategy\n    using Spot Instances, Batch might need to exceed <code>maxvCpus</code> to meet your capacity\n    requirements. In this event, Batch never exceeds <code>maxvCpus</code> by more than a single\n    instance. For example, no more than a single instance from among those specified in your compute\n    environment is allocated.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -1764,6 +1772,7 @@
                 "subnets": {
                     "target": "com.amazonaws.batch#StringList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The VPC subnets where the compute resources are launched. These subnets must be within the\n   same VPC. Fargate compute resources can contain up to 16 subnets. For more information, see\n    <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">VPCs and subnets</a>\n   in the <i>Amazon VPC User Guide</i>.</p>\n         <note>\n            <p>Batch on Amazon EC2 and Batch on Amazon EKS support Local Zones. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-local-zones\"> Local\n     Zones</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>, <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/local-zones.html\">Amazon EKS and Amazon Web Services Local\n     Zones</a> in the <i>Amazon EKS User Guide</i> and <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-regions-zones.html#clusters-local-zones\"> Amazon ECS\n     clusters in Local Zones, Wavelength Zones, and Amazon Web Services Outposts</a> in the <i>Amazon ECS\n     Developer Guide</i>.</p>\n            <p>Batch on Fargate doesn't currently support Local Zones.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -2396,6 +2405,7 @@
                 "computeEnvironmentName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name for your compute environment. It can be up to 128 characters long. It can contain uppercase and\n lowercase letters, numbers, hyphens (-), and underscores (_).</p>",
                         "smithy.api#required": {}
                     }
@@ -2403,6 +2413,7 @@
                 "type": {
                     "target": "com.amazonaws.batch#CEType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of the compute environment: <code>MANAGED</code> or <code>UNMANAGED</code>. For more information, see\n    <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html\">Compute Environments</a> in the\n    <i>Batch User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2521,6 +2532,7 @@
                 "jobQueueName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the job queue. It can be up to 128 letters long. It can contain uppercase and lowercase letters,\n   numbers, hyphens (-), and underscores (_).</p>",
                         "smithy.api#required": {}
                     }
@@ -2540,6 +2552,7 @@
                 "priority": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The priority of the job queue. Job queues with a higher priority (or a higher integer value for the\n    <code>priority</code> parameter) are evaluated first when associated with the same compute environment. Priority is\n   determined in descending order. For example, a job queue with a priority value of <code>10</code> is given scheduling\n   preference over a job queue with a priority value of <code>1</code>. All of the compute environments must be either\n   EC2 (<code>EC2</code> or <code>SPOT</code>) or Fargate (<code>FARGATE</code> or <code>FARGATE_SPOT</code>); EC2 and\n   Fargate compute environments can't be mixed.</p>",
                         "smithy.api#required": {}
                     }
@@ -2547,6 +2560,7 @@
                 "computeEnvironmentOrder": {
                     "target": "com.amazonaws.batch#ComputeEnvironmentOrders",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler\n   uses this parameter to determine which compute environment runs a specific job. Compute environments must be in\n   the <code>VALID</code> state before you can associate them with a job queue. You can associate up to three compute\n   environments with a job queue. All of the compute environments must be either EC2 (<code>EC2</code> or\n    <code>SPOT</code>) or Fargate (<code>FARGATE</code> or <code>FARGATE_SPOT</code>); EC2 and Fargate compute\n   environments can't be mixed.</p>\n         <note>\n            <p>All compute environments that are associated with a job queue must share the same architecture. Batch doesn't\n    support mixing compute environment architecture types in a single job queue.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -2569,6 +2583,7 @@
                 "jobQueueName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the job queue.</p>",
                         "smithy.api#required": {}
                     }
@@ -2576,6 +2591,7 @@
                 "jobQueueArn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the job queue.</p>",
                         "smithy.api#required": {}
                     }
@@ -2616,6 +2632,7 @@
                 "name": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the scheduling policy. It can be up to 128 letters long. It can contain uppercase and lowercase\n   letters, numbers, hyphens (-), and underscores (_).</p>",
                         "smithy.api#required": {}
                     }
@@ -2644,6 +2661,7 @@
                 "name": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the scheduling policy.</p>",
                         "smithy.api#required": {}
                     }
@@ -2651,6 +2669,7 @@
                 "arn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the scheduling policy. The format is\n     <code>aws:<i>Partition</i>:batch:<i>Region</i>:<i>Account</i>:scheduling-policy/<i>Name</i>\n            </code>.\n   For example,\n   <code>aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2701,6 +2720,7 @@
                 "computeEnvironment": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the compute environment to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -2759,6 +2779,7 @@
                 "jobQueue": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The short name or full Amazon Resource Name (ARN) of the queue to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -2807,6 +2828,7 @@
                 "arn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the scheduling policy to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -2865,6 +2887,7 @@
                 "jobDefinition": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name and revision (<code>name:revision</code>) or full Amazon Resource Name (ARN) of the job definition to deregister.</p>",
                         "smithy.api#required": {}
                     }
@@ -3317,6 +3340,7 @@
                 "jobs": {
                     "target": "com.amazonaws.batch#StringList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of up to 100 job IDs.</p>",
                         "smithy.api#required": {}
                     }
@@ -3372,6 +3396,7 @@
                 "arns": {
                     "target": "com.amazonaws.batch#StringList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of up to 100 scheduling policy Amazon Resource Name (ARN) entries.</p>",
                         "smithy.api#required": {}
                     }
@@ -3402,6 +3427,7 @@
                 "hostPath": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The path for the device on the host container instance.</p>",
                         "smithy.api#required": {}
                     }
@@ -3518,6 +3544,7 @@
                 "fileSystemId": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon EFS file system ID to use.</p>",
                         "smithy.api#required": {}
                     }
@@ -3557,6 +3584,7 @@
                 "imageType": {
                     "target": "com.amazonaws.batch#ImageType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The image type to match with the instance type to select an AMI. The supported values are\n   different for <code>ECS</code> and <code>EKS</code> resources.</p>\n         <dl>\n            <dt>ECS</dt>\n            <dd>\n               <p>If the <code>imageIdOverride</code> parameter isn't specified, then a recent <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami\">Amazon ECS-optimized Amazon Linux 2 AMI</a> (<code>ECS_AL2</code>) is used. If a new image type is\n      specified in an update, but neither an <code>imageId</code> nor a <code>imageIdOverride</code>\n      parameter is specified, then the latest Amazon ECS optimized AMI for that image type that's\n      supported by Batch is used.</p>\n               <dl>\n                  <dt>ECS_AL2</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami\">Amazon Linux\n         2</a>: Default for all non-GPU instance families.</p>\n                  </dd>\n                  <dt>ECS_AL2_NVIDIA</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami\">Amazon Linux 2\n          (GPU)</a>: Default for all GPU instance families (for example <code>P4</code> and\n          <code>G4</code>) and can be used for all non Amazon Web Services Graviton-based instance types.</p>\n                  </dd>\n                  <dt>ECS_AL1</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami\">Amazon Linux</a>. Amazon Linux has\n         reached the end-of-life of standard support. For more information, see <a href=\"http://aws.amazon.com/amazon-linux-ami/\">Amazon Linux AMI</a>.</p>\n                  </dd>\n               </dl>\n            </dd>\n            <dt>EKS</dt>\n            <dd>\n               <p>If the <code>imageIdOverride</code> parameter isn't specified, then a recent <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html\">Amazon EKS-optimized Amazon Linux\n       AMI</a> (<code>EKS_AL2</code>) is used. If a new image type is specified in an update,\n      but neither an <code>imageId</code> nor a <code>imageIdOverride</code> parameter is specified,\n      then the latest Amazon EKS optimized AMI for that image type that Batch supports is used.</p>\n               <dl>\n                  <dt>EKS_AL2</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html\">Amazon\n          Linux 2</a>: Default for all non-GPU instance families.</p>\n                  </dd>\n                  <dt>EKS_AL2_NVIDIA</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html\">Amazon\n          Linux 2 (accelerated)</a>: Default for all GPU instance families (for example,\n          <code>P4</code> and <code>G4</code>) and can be used for all non Amazon Web Services Graviton-based\n         instance types.</p>\n                  </dd>\n               </dl>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
@@ -3666,6 +3694,7 @@
                 "eksClusterArn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon EKS cluster. An example is\n     <code>arn:<i>aws</i>:eks:<i>us-east-1</i>:<i>123456789012</i>:cluster/<i>ClusterForBatch</i>\n            </code>.\n  </p>",
                         "smithy.api#required": {}
                     }
@@ -3673,6 +3702,7 @@
                 "kubernetesNamespace": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The namespace of the Amazon EKS cluster. Batch manages pods in this namespace. The value\n   can't left empty or null. It must be fewer than 64 characters long, can't be set to\n    <code>default</code>, can't start with \"<code>kube-</code>,\" and must match this regular\n   expression: <code>^[a-z0-9]([-a-z0-9]*[a-z0-9])?$</code>. For more information, see <a href=\"https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/\">Namespaces</a> in the Kubernetes documentation.</p>",
                         "smithy.api#required": {}
                     }
@@ -3694,6 +3724,7 @@
                 "image": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Docker image used to start the container.</p>",
                         "smithy.api#required": {}
                     }
@@ -3831,6 +3862,7 @@
                 "name": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the environment variable.</p>",
                         "smithy.api#required": {}
                     }
@@ -4232,6 +4264,7 @@
                 "secretName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the secret. The name must be allowed as a DNS subdomain name. For more\n   information, see <a href=\"https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-subdomain-names\">DNS subdomain names</a> in the <i>Kubernetes documentation</i>.</p>",
                         "smithy.api#required": {}
                     }
@@ -4253,6 +4286,7 @@
                 "name": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the volume. The name must be allowed as a DNS subdomain name. For more\n   information, see <a href=\"https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-subdomain-names\">DNS subdomain names</a> in the <i>Kubernetes documentation</i>.</p>",
                         "smithy.api#required": {}
                     }
@@ -4298,6 +4332,7 @@
                 "sizeInGiB": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The total amount, in GiB, of ephemeral storage to set for the task. The minimum supported\n   value is <code>21</code> GiB and the maximum supported value is <code>200</code> GiB.</p>",
                         "smithy.api#required": {}
                     }
@@ -4331,6 +4366,7 @@
                 "action": {
                     "target": "com.amazonaws.batch#RetryAction",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the action to take if all of the specified conditions\n   (<code>onStatusReason</code>, <code>onReason</code>, and <code>onExitCode</code>) are met. The\n   values aren't case sensitive.</p>",
                         "smithy.api#required": {}
                     }
@@ -4488,6 +4524,7 @@
                 "jobDefinitionName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the job definition.</p>",
                         "smithy.api#required": {}
                     }
@@ -4495,6 +4532,7 @@
                 "jobDefinitionArn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the job definition.</p>",
                         "smithy.api#required": {}
                     }
@@ -4502,6 +4540,7 @@
                 "revision": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The revision of the job definition.</p>",
                         "smithy.api#required": {}
                     }
@@ -4515,6 +4554,7 @@
                 "type": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of job definition. It's either <code>container</code> or <code>multinode</code>. If\n   the job is run on Fargate resources, then <code>multinode</code> isn't supported. For more\n   information about multi-node parallel jobs, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/multi-node-job-def.html\">Creating a multi-node parallel job definition</a> in\n   the <i>Batch User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
@@ -4651,6 +4691,7 @@
                 "jobName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The job name.</p>",
                         "smithy.api#required": {}
                     }
@@ -4658,6 +4699,7 @@
                 "jobId": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The job ID.</p>",
                         "smithy.api#required": {}
                     }
@@ -4665,6 +4707,7 @@
                 "jobQueue": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the job queue that the job is associated with.</p>",
                         "smithy.api#required": {}
                     }
@@ -4672,6 +4715,7 @@
                 "status": {
                     "target": "com.amazonaws.batch#JobStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The current status for the job.</p>\n         <note>\n            <p>If your jobs don't progress to <code>STARTING</code>, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable\">Jobs stuck in RUNNABLE\n     status</a> in the troubleshooting section of the\n    <i>Batch User Guide</i>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -4715,6 +4759,7 @@
                 "startedAt": {
                     "target": "com.amazonaws.batch#Long",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Unix timestamp (in milliseconds) for when the job was started. More specifically, it's\n   when the job transitioned from the <code>STARTING</code> state to the <code>RUNNING</code> state.\n   This parameter isn't provided for child jobs of array jobs or multi-node parallel jobs.</p>",
                         "smithy.api#required": {}
                     }
@@ -4734,6 +4779,7 @@
                 "jobDefinition": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the job definition that this job uses.</p>",
                         "smithy.api#required": {}
                     }
@@ -4830,7 +4876,6 @@
         "com.amazonaws.batch#JobExecutionTimeoutMinutes": {
             "type": "long",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 360
@@ -4843,6 +4888,7 @@
                 "jobQueueName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The job queue name.</p>",
                         "smithy.api#required": {}
                     }
@@ -4850,6 +4896,7 @@
                 "jobQueueArn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the job queue.</p>",
                         "smithy.api#required": {}
                     }
@@ -4857,6 +4904,7 @@
                 "state": {
                     "target": "com.amazonaws.batch#JQState",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Describes the ability of the queue to accept new jobs. If the job queue state is\n    <code>ENABLED</code>, it can accept jobs. If the job queue state is <code>DISABLED</code>, new\n   jobs can't be added to the queue, but jobs already in the queue can finish.</p>",
                         "smithy.api#required": {}
                     }
@@ -4882,6 +4930,7 @@
                 "priority": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The priority of the job queue. Job queues with a higher priority (or a higher integer value\n   for the <code>priority</code> parameter) are evaluated first when associated with the same\n   compute environment. Priority is determined in descending order. For example, a job queue with a\n   priority value of <code>10</code> is given scheduling preference over a job queue with a priority\n   value of <code>1</code>. All of the compute environments must be either EC2 (<code>EC2</code> or\n    <code>SPOT</code>) or Fargate (<code>FARGATE</code> or <code>FARGATE_SPOT</code>). EC2 and\n   Fargate compute environments can't be mixed.</p>",
                         "smithy.api#required": {}
                     }
@@ -4889,6 +4938,7 @@
                 "computeEnvironmentOrder": {
                     "target": "com.amazonaws.batch#ComputeEnvironmentOrders",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The compute environments that are attached to the job queue and the order that job placement\n   is preferred. Compute environments are selected for job placement in ascending order.</p>",
                         "smithy.api#required": {}
                     }
@@ -4969,6 +5019,7 @@
                 "jobId": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The job ID.</p>",
                         "smithy.api#required": {}
                     }
@@ -4976,6 +5027,7 @@
                 "jobName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The job name.</p>",
                         "smithy.api#required": {}
                     }
@@ -5289,6 +5341,7 @@
                 "jobSummaryList": {
                     "target": "com.amazonaws.batch#JobSummaryList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of job summaries that match the request.</p>",
                         "smithy.api#required": {}
                     }
@@ -5454,6 +5507,7 @@
                 "logDriver": {
                     "target": "com.amazonaws.batch#LogDriver",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The log driver to use for the container. The valid values that are listed for this parameter\n   are log drivers that the Amazon ECS container agent can communicate with by default.</p>\n         <p>The supported log drivers are <code>awslogs</code>, <code>fluentd</code>, <code>gelf</code>,\n    <code>json-file</code>, <code>journald</code>, <code>logentries</code>, <code>syslog</code>, and\n    <code>splunk</code>.</p>\n         <note>\n            <p>Jobs that are running on Fargate resources are restricted to the <code>awslogs</code> and\n     <code>splunk</code> log drivers.</p>\n         </note>\n         <dl>\n            <dt>awslogs</dt>\n            <dd>\n               <p>Specifies the Amazon CloudWatch Logs logging driver. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/using_awslogs.html\">Using the awslogs log driver</a>\n      in the <i>Batch User Guide</i> and <a href=\"https://docs.docker.com/config/containers/logging/awslogs/\">Amazon CloudWatch Logs logging\n       driver</a> in the Docker documentation.</p>\n            </dd>\n            <dt>fluentd</dt>\n            <dd>\n               <p>Specifies the Fluentd logging driver. For more information including usage and options,\n      see <a href=\"https://docs.docker.com/config/containers/logging/fluentd/\">Fluentd logging\n       driver</a> in the <i>Docker documentation</i>.</p>\n            </dd>\n            <dt>gelf</dt>\n            <dd>\n               <p>Specifies the Graylog Extended Format (GELF) logging driver. For more information\n      including usage and options, see <a href=\"https://docs.docker.com/config/containers/logging/gelf/\">Graylog Extended Format logging\n       driver</a> in the <i>Docker documentation</i>.</p>\n            </dd>\n            <dt>journald</dt>\n            <dd>\n               <p>Specifies the journald logging driver. For more information including usage and options,\n      see <a href=\"https://docs.docker.com/config/containers/logging/journald/\">Journald logging\n       driver</a> in the <i>Docker documentation</i>.</p>\n            </dd>\n            <dt>json-file</dt>\n            <dd>\n               <p>Specifies the JSON file logging driver. For more information including usage and options,\n      see <a href=\"https://docs.docker.com/config/containers/logging/json-file/\">JSON File\n       logging driver</a> in the <i>Docker documentation</i>.</p>\n            </dd>\n            <dt>splunk</dt>\n            <dd>\n               <p>Specifies the Splunk logging driver. For more information including usage and options,\n      see <a href=\"https://docs.docker.com/config/containers/logging/splunk/\">Splunk logging\n       driver</a> in the <i>Docker documentation</i>.</p>\n            </dd>\n            <dt>syslog</dt>\n            <dd>\n               <p>Specifies the syslog logging driver. For more information including usage and options,\n      see <a href=\"https://docs.docker.com/config/containers/logging/syslog/\">Syslog logging\n       driver</a> in the <i>Docker documentation</i>.</p>\n            </dd>\n         </dl>\n         <note>\n            <p>If you have a custom driver that's not listed earlier that you want to work with the Amazon ECS\n    container agent, you can fork the Amazon ECS container agent project that's <a href=\"https://github.com/aws/amazon-ecs-agent\">available on GitHub</a> and customize it to\n    work with that driver. We encourage you to submit pull requests for changes that you want to\n    have included. However, Amazon Web Services doesn't currently support running modified copies of this\n    software.</p>\n         </note>\n         <p>This parameter requires version 1.18 of the Docker Remote API or greater on your\n container instance. To check the Docker Remote API version on your container instance, log in to your\n container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -5658,6 +5712,7 @@
                 "numNodes": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The number of nodes that are associated with a multi-node parallel job.</p>",
                         "smithy.api#required": {}
                     }
@@ -5665,6 +5720,7 @@
                 "mainNode": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies the node index for the main node of a multi-node parallel job. This node index\n   value must be fewer than the number of nodes.</p>",
                         "smithy.api#required": {}
                     }
@@ -5672,6 +5728,7 @@
                 "nodeRangeProperties": {
                     "target": "com.amazonaws.batch#NodeRangeProperties",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of node ranges and their properties that are associated with a multi-node parallel\n   job.</p>",
                         "smithy.api#required": {}
                     }
@@ -5713,6 +5770,7 @@
                 "targetNodes": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The range of nodes, using node index values, that's used to override. A range of\n    <code>0:3</code> indicates nodes with index values of <code>0</code> through <code>3</code>. If\n   the starting range value is omitted (<code>:n</code>), then <code>0</code> is used to start the\n   range. If the ending range value is omitted (<code>n:</code>), then the highest possible node\n   index is used to end the range.</p>",
                         "smithy.api#required": {}
                     }
@@ -5746,6 +5804,7 @@
                 "targetNodes": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The range of nodes, using node index values. A range of <code>0:3</code> indicates nodes\n   with index values of <code>0</code> through <code>3</code>. If the starting range value is\n   omitted (<code>:n</code>), then <code>0</code> is used to start the range. If the ending range\n   value is omitted (<code>n:</code>), then the highest possible node index is used to end the\n   range. Your accumulative node ranges must account for all nodes (<code>0:n</code>). You can nest\n   node ranges (for example, <code>0:10</code> and <code>4:5</code>). In this case, the\n    <code>4:5</code> range properties override the <code>0:10</code> properties.</p>",
                         "smithy.api#required": {}
                     }
@@ -5882,6 +5941,7 @@
                 "jobDefinitionName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the job definition to register. It can be up to 128 letters long. It can contain uppercase and\n   lowercase letters, numbers, hyphens (-), and underscores (_).</p>",
                         "smithy.api#required": {}
                     }
@@ -5889,6 +5949,7 @@
                 "type": {
                     "target": "com.amazonaws.batch#JobDefinitionType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of job definition. For more information about multi-node parallel jobs, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/multi-node-job-def.html\">Creating a multi-node parallel job definition</a> in the\n    <i>Batch User Guide</i>.</p>\n         <note>\n            <p>If the job is run on Fargate resources, then <code>multinode</code> isn't supported.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -5965,6 +6026,7 @@
                 "jobDefinitionName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the job definition.</p>",
                         "smithy.api#required": {}
                     }
@@ -5972,6 +6034,7 @@
                 "jobDefinitionArn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the job definition.</p>",
                         "smithy.api#required": {}
                     }
@@ -5979,6 +6042,7 @@
                 "revision": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The revision of the job definition.</p>",
                         "smithy.api#required": {}
                     }
@@ -5994,6 +6058,7 @@
                 "value": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The quantity of the specified resource to reserve for the container. The values vary based\n   on the <code>type</code> specified.</p>\n         <dl>\n            <dt>type=\"GPU\"</dt>\n            <dd>\n               <p>The number of physical GPUs to reserve for the container. Make sure that the number of\n      GPUs reserved for all containers in a job doesn't exceed the number of available GPUs on the\n      compute resource that the job is launched on.</p>\n               <note>\n                  <p>GPUs aren't available for jobs that are running on Fargate resources.</p>\n               </note>\n            </dd>\n            <dt>type=\"MEMORY\"</dt>\n            <dd>\n               <p>The memory hard limit (in MiB) present to the container. This parameter is supported for\n      jobs that are running on EC2 resources. If your container attempts to exceed the memory\n      specified, the container is terminated. This parameter maps to <code>Memory</code> in the\n      <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the\n       <code>--memory</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. You\n      must specify at least 4 MiB of memory for a job. This is required but can be specified in\n      several places for multi-node parallel (MNP) jobs. It must be specified for each node at least\n      once. This parameter maps to <code>Memory</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a>\n      section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--memory</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p>\n               <note>\n                  <p>If you're trying to maximize your resource utilization by providing your jobs as much\n       memory as possible for a particular instance type, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html\">Memory management</a> in the\n        <i>Batch User Guide</i>.</p>\n               </note>\n               <p>For jobs that are running on Fargate resources, then <code>value</code> is the hard\n      limit (in MiB), and must match one of the supported values and the <code>VCPU</code> values\n      must be one of the values supported for that memory value.</p>\n               <dl>\n                  <dt>value = 512</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.25</p>\n                  </dd>\n                  <dt>value = 1024</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.25 or 0.5</p>\n                  </dd>\n                  <dt>value = 2048</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.25, 0.5, or 1</p>\n                  </dd>\n                  <dt>value = 3072</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.5, or 1</p>\n                  </dd>\n                  <dt>value = 4096</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.5, 1, or 2</p>\n                  </dd>\n                  <dt>value = 5120, 6144, or 7168</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 1 or 2</p>\n                  </dd>\n                  <dt>value = 8192</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 1, 2, or 4</p>\n                  </dd>\n                  <dt>value = 9216, 10240, 11264, 12288, 13312, 14336, or 15360</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 2 or 4</p>\n                  </dd>\n                  <dt>value = 16384</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 2, 4, or 8</p>\n                  </dd>\n                  <dt>value = 17408, 18432, 19456, 21504, 22528, 23552, 25600, 26624, 27648, 29696, or 30720</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 4</p>\n                  </dd>\n                  <dt>value = 20480, 24576, or 28672</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 4 or 8</p>\n                  </dd>\n                  <dt>value = 36864, 45056, 53248, or 61440</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 8</p>\n                  </dd>\n                  <dt>value = 32768, 40960, 49152, or 57344</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 8 or 16</p>\n                  </dd>\n                  <dt>value = 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 16</p>\n                  </dd>\n               </dl>\n            </dd>\n            <dt>type=\"VCPU\"</dt>\n            <dd>\n               <p>The number of vCPUs reserved for the container. This parameter maps to\n       <code>CpuShares</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the\n      <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--cpu-shares</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. Each vCPU is equivalent to 1,024 CPU shares.\n      For EC2 resources, you must specify at least one vCPU. This is required but can be specified\n      in several places; it must be specified for each node at least once.</p>\n               <p>The default for the Fargate On-Demand vCPU resource count quota is 6 vCPUs. For more\n      information about Fargate quotas, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ecs-service.html#service-quotas-fargate\">Fargate quotas</a>\n      in the <i>Amazon Web Services General Reference</i>.</p>\n               <p>For jobs that are running on Fargate resources, then <code>value</code> must match one\n      of the supported values and the <code>MEMORY</code> values must be one of the values supported\n      for that <code>VCPU</code> value. The supported values are 0.25, 0.5, 1, 2, 4, 8, and\n      16</p>\n               <dl>\n                  <dt>value = 0.25</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 512, 1024, or 2048</p>\n                  </dd>\n                  <dt>value = 0.5</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 1024, 2048, 3072, or 4096</p>\n                  </dd>\n                  <dt>value = 1</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 2048, 3072, 4096, 5120, 6144, 7168, or 8192</p>\n                  </dd>\n                  <dt>value = 2</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 4096, 5120, 6144, 7168, 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, or 16384</p>\n                  </dd>\n                  <dt>value = 4</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, 16384, 17408, 18432, 19456,\n     20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672, 29696, or 30720</p>\n                  </dd>\n                  <dt>value = 8</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 16384, 20480, 24576, 28672, 32768, 36864, 40960, 45056, 49152, 53248, 57344, or 61440\n</p>\n                  </dd>\n                  <dt>value = 16</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 32768, 40960, 49152, 57344, 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880\n</p>\n                  </dd>\n               </dl>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
@@ -6001,6 +6066,7 @@
                 "type": {
                     "target": "com.amazonaws.batch#ResourceType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of resource to assign to a container. The supported resources include\n    <code>GPU</code>, <code>MEMORY</code>, and <code>VCPU</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -6102,6 +6168,7 @@
                 "name": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the scheduling policy.</p>",
                         "smithy.api#required": {}
                     }
@@ -6109,6 +6176,7 @@
                 "arn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the scheduling policy. An example is\n     <code>arn:<i>aws</i>:batch:<i>us-east-1</i>:<i>123456789012</i>:scheduling-policy/<i>HighPriority</i>\n            </code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -6142,6 +6210,7 @@
                 "arn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the scheduling policy.</p>",
                         "smithy.api#required": {}
                     }
@@ -6163,6 +6232,7 @@
                 "name": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the secret.</p>",
                         "smithy.api#required": {}
                     }
@@ -6170,6 +6240,7 @@
                 "valueFrom": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The secret to expose to the container. The supported values are either the full Amazon Resource Name (ARN) of\n   the Secrets Manager secret or the full ARN of the parameter in the Amazon Web Services Systems Manager Parameter Store.</p>\n         <note>\n            <p>If the Amazon Web Services Systems Manager Parameter Store parameter exists in the same Region as the job you're\n    launching, then you can use either the full Amazon Resource Name (ARN) or name of the parameter. If the parameter\n    exists in a different Region, then the full ARN must be specified.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -6204,6 +6275,7 @@
                 "shareIdentifier": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A fair share identifier or fair share identifier prefix. If the string ends with an asterisk\n   (*), this entry specifies the weight factor to use for fair share identifiers that start with\n   that prefix. The list of fair share identifiers in a fair share policy can't overlap. For\n   example, you can't have one that specifies a <code>shareIdentifier</code> of <code>UserA*</code>\n   and another that specifies a <code>shareIdentifier</code> of <code>UserA-1</code>.</p>\n         <p>There can be no more than 500 fair share identifiers active in a job queue.</p>\n         <p>The string is limited to 255 alphanumeric characters, and can be followed by an asterisk\n   (*).</p>",
                         "smithy.api#required": {}
                     }
@@ -6280,6 +6352,7 @@
                 "jobName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the job. It can be up to 128 letters long. The first character must be alphanumeric, can contain\n   uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).</p>",
                         "smithy.api#required": {}
                     }
@@ -6287,6 +6360,7 @@
                 "jobQueue": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The job queue where the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue.</p>",
                         "smithy.api#required": {}
                     }
@@ -6318,6 +6392,7 @@
                 "jobDefinition": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The job definition used by this job. This value can be one of <code>definition-name</code>,\n    <code>definition-name:revision</code>, or the Amazon Resource Name (ARN) for the job definition, with or without the revision\n     (<code>arn:aws:batch:<i>region</i>:<i>account</i>:job-definition/<i>definition-name</i>:<i>revision</i>\n            </code>,\n   or\n     <code>arn:aws:batch:<i>region</i>:<i>account</i>:job-definition/<i>definition-name</i>\n            </code>).</p>\n         <p>If the revision is not specified, then the latest active revision is used.</p>",
                         "smithy.api#required": {}
                     }
@@ -6388,6 +6463,7 @@
                 "jobName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the job.</p>",
                         "smithy.api#required": {}
                     }
@@ -6395,6 +6471,7 @@
                 "jobId": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier for the job.</p>",
                         "smithy.api#required": {}
                     }
@@ -6477,6 +6554,7 @@
                 "tags": {
                     "target": "com.amazonaws.batch#TagrisTagsMap",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The tags that you apply to the resource to help you categorize and organize your resources. Each tag consists of\n   a key and an optional value. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> in <i>Amazon Web Services General\n    Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
@@ -6569,6 +6647,7 @@
                 "jobId": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Batch job ID of the job to terminate.</p>",
                         "smithy.api#required": {}
                     }
@@ -6576,6 +6655,7 @@
                 "reason": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A message to attach to the job that explains the reason for canceling it. This message is returned by future\n    <a>DescribeJobs</a> operations on the job. This message is also recorded in the Batch activity\n   logs.</p>",
                         "smithy.api#required": {}
                     }
@@ -6599,6 +6679,7 @@
                 "containerPath": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The absolute file path in the container where the <code>tmpfs</code> volume is\n   mounted.</p>",
                         "smithy.api#required": {}
                     }
@@ -6606,6 +6687,7 @@
                 "size": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The size (in MiB) of the <code>tmpfs</code> volume.</p>",
                         "smithy.api#required": {}
                     }
@@ -6633,6 +6715,7 @@
                 "hardLimit": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The hard limit for the <code>ulimit</code> type.</p>",
                         "smithy.api#required": {}
                     }
@@ -6640,6 +6723,7 @@
                 "name": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The <code>type</code> of the <code>ulimit</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -6647,6 +6731,7 @@
                 "softLimit": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The soft limit for the <code>ulimit</code> type.</p>",
                         "smithy.api#required": {}
                     }
@@ -6714,6 +6799,7 @@
                 "tagKeys": {
                     "target": "com.amazonaws.batch#TagKeysList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The keys of the tags to be removed.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
@@ -6777,6 +6863,7 @@
                 "computeEnvironment": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or full Amazon Resource Name (ARN) of the compute environment to update.</p>",
                         "smithy.api#required": {}
                     }
@@ -6882,6 +6969,7 @@
                 "jobQueue": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or the Amazon Resource Name (ARN) of the job queue.</p>",
                         "smithy.api#required": {}
                     }
@@ -6948,7 +7036,6 @@
                 "jobExecutionTimeoutMinutes": {
                     "target": "com.amazonaws.batch#JobExecutionTimeoutMinutes",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the job timeout (in minutes) when the compute environment infrastructure is\n   updated. The default value is 30.</p>"
                     }
                 }
@@ -6988,6 +7075,7 @@
                 "arn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the scheduling policy to update.</p>",
                         "smithy.api#required": {}
                     }

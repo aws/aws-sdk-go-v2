@@ -112,7 +112,7 @@ type UpdateMaintenanceWindowOutput struct {
 	Description *string
 
 	// The duration of the maintenance window in hours.
-	Duration int32
+	Duration *int32
 
 	// Whether the maintenance window is enabled.
 	Enabled bool

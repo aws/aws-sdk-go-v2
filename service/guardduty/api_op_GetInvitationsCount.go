@@ -39,7 +39,7 @@ type GetInvitationsCountInput struct {
 type GetInvitationsCountOutput struct {
 
 	// The number of received invitations.
-	InvitationsCount int32
+	InvitationsCount *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

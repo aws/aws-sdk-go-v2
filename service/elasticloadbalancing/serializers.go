@@ -1981,14 +1981,14 @@ func awsAwsquery_serializeDocumentHealthCheck(v *types.HealthCheck, value query.
 	object := value.Object()
 	_ = object
 
-	{
+	if v.HealthyThreshold != nil {
 		objectKey := object.Key("HealthyThreshold")
-		objectKey.Integer(v.HealthyThreshold)
+		objectKey.Integer(*v.HealthyThreshold)
 	}
 
-	{
+	if v.Interval != nil {
 		objectKey := object.Key("Interval")
-		objectKey.Integer(v.Interval)
+		objectKey.Integer(*v.Interval)
 	}
 
 	if v.Target != nil {
@@ -1996,14 +1996,14 @@ func awsAwsquery_serializeDocumentHealthCheck(v *types.HealthCheck, value query.
 		objectKey.String(*v.Target)
 	}
 
-	{
+	if v.Timeout != nil {
 		objectKey := object.Key("Timeout")
-		objectKey.Integer(v.Timeout)
+		objectKey.Integer(*v.Timeout)
 	}
 
-	{
+	if v.UnhealthyThreshold != nil {
 		objectKey := object.Key("UnhealthyThreshold")
-		objectKey.Integer(v.UnhealthyThreshold)
+		objectKey.Integer(*v.UnhealthyThreshold)
 	}
 
 	return nil
@@ -2037,9 +2037,9 @@ func awsAwsquery_serializeDocumentListener(v *types.Listener, value query.Value)
 	object := value.Object()
 	_ = object
 
-	{
+	if v.InstancePort != nil {
 		objectKey := object.Key("InstancePort")
-		objectKey.Integer(v.InstancePort)
+		objectKey.Integer(*v.InstancePort)
 	}
 
 	if v.InstanceProtocol != nil {

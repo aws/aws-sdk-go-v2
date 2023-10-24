@@ -2193,9 +2193,9 @@ func awsRestjson1_serializeDocumentLineItemRequest(v *types.LineItemRequest, val
 		ok.String(*v.CatalogItemId)
 	}
 
-	if v.Quantity != 0 {
+	if v.Quantity != nil {
 		ok := object.Key("Quantity")
-		ok.Integer(v.Quantity)
+		ok.Integer(*v.Quantity)
 	}
 
 	return nil

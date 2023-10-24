@@ -85,7 +85,7 @@ type DescribeDeviceOutput struct {
 	LatestHeartbeat *time.Time
 
 	// The maximum number of models.
-	MaxModels int32
+	MaxModels *int32
 
 	// Models on the device.
 	Models []types.EdgeModel

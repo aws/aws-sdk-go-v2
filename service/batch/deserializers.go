@@ -9341,7 +9341,7 @@ func awsRestjson1_deserializeDocumentUpdatePolicy(v **types.UpdatePolicy, value 
 				if err != nil {
 					return err
 				}
-				sv.JobExecutionTimeoutMinutes = i64
+				sv.JobExecutionTimeoutMinutes = ptr.Int64(i64)
 			}
 
 		case "terminateJobsOnUpdate":

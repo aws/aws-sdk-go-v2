@@ -272,7 +272,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoverycluster#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of routing controls objects that you want to return with this call. The default value is 500.</p>"
                     }
                 }
@@ -305,7 +304,6 @@
         "com.amazonaws.route53recoverycluster#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }

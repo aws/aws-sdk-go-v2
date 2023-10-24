@@ -149,7 +149,7 @@ type CreateTrainingJobInput struct {
 	// learning algorithm in distributed training. For more information, see Protect
 	// Communications Between ML Compute Instances in a Distributed Training Job (https://docs.aws.amazon.com/sagemaker/latest/dg/train-encrypt.html)
 	// .
-	EnableInterContainerTrafficEncryption bool
+	EnableInterContainerTrafficEncryption *bool
 
 	// To train models using managed spot training, choose True . Managed spot training
 	// provides a fully managed and scalable infrastructure for training machine
@@ -159,7 +159,7 @@ type CreateTrainingJobInput struct {
 	// as a starting point to train models incrementally. Amazon SageMaker provides
 	// metrics and logs in CloudWatch. They can be used to see when managed spot
 	// training jobs are running, interrupted, resumed, or completed.
-	EnableManagedSpotTraining bool
+	EnableManagedSpotTraining *bool
 
 	// Isolates the training container. No inbound or outbound network calls can be
 	// made, except for calls between peers within a training cluster for distributed
@@ -167,7 +167,7 @@ type CreateTrainingJobInput struct {
 	// to use a VPC, SageMaker downloads and uploads customer data and model artifacts
 	// through the specified VPC, but the training container does not have network
 	// access.
-	EnableNetworkIsolation bool
+	EnableNetworkIsolation *bool
 
 	// The environment variables to set in the Docker container.
 	Environment map[string]string

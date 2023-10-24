@@ -68,7 +68,7 @@ type InternalServerException struct {
 
 	ErrorCodeOverride *string
 
-	RetryAfterSeconds int32
+	RetryAfterSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -161,7 +161,7 @@ type ThrottlingException struct {
 
 	QuotaCode         *string
 	ServiceCode       *string
-	RetryAfterSeconds int32
+	RetryAfterSeconds *int32
 
 	noSmithyDocumentSerde
 }

@@ -2643,9 +2643,9 @@ func awsRestjson1_serializeDocumentSamplingRule(v *types.SamplingRule, value smi
 		ok.String(*v.HTTPMethod)
 	}
 
-	{
+	if v.Priority != nil {
 		ok := object.Key("Priority")
-		ok.Integer(v.Priority)
+		ok.Integer(*v.Priority)
 	}
 
 	{
@@ -2683,9 +2683,9 @@ func awsRestjson1_serializeDocumentSamplingRule(v *types.SamplingRule, value smi
 		ok.String(*v.URLPath)
 	}
 
-	{
+	if v.Version != nil {
 		ok := object.Key("Version")
-		ok.Integer(v.Version)
+		ok.Integer(*v.Version)
 	}
 
 	return nil

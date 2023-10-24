@@ -113,7 +113,7 @@ type AutoTerminationPolicy struct {
 	// Specifies the amount of idle time in seconds after which the cluster
 	// automatically terminates. You can specify a minimum of 60 seconds and a maximum
 	// of 604800 seconds (seven days).
-	IdleTimeout int64
+	IdleTimeout *int64
 
 	noSmithyDocumentSerde
 }
@@ -131,7 +131,7 @@ type BlockPublicAccessConfiguration struct {
 	// true .
 	//
 	// This member is required.
-	BlockPublicSecurityGroupRules bool
+	BlockPublicSecurityGroupRules *bool
 
 	// The classification within a configuration.
 	Classification *string
@@ -281,7 +281,7 @@ type Cluster struct {
 	AutoScalingRole *string
 
 	// Specifies whether the cluster should terminate after completing all steps.
-	AutoTerminate bool
+	AutoTerminate *bool
 
 	// The Amazon Resource Name of the cluster.
 	ClusterArn *string
@@ -406,7 +406,7 @@ type Cluster struct {
 	// Indicates whether Amazon EMR will lock the cluster to prevent the Amazon EC2
 	// instances from being terminated by an API call or user intervention, or in the
 	// event of a cluster error.
-	TerminationProtected bool
+	TerminationProtected *bool
 
 	// Indicates whether the cluster is visible to IAM principals in the Amazon Web
 	// Services account associated with the cluster. When true , IAM principals in the
@@ -417,7 +417,7 @@ type Cluster struct {
 	// principals. The default value is true if a value is not provided when creating
 	// a cluster using the Amazon EMR API RunJobFlow command, the CLI create-cluster (https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html)
 	// command, or the Amazon Web Services Management Console.
-	VisibleToAllUsers bool
+	VisibleToAllUsers *bool
 
 	noSmithyDocumentSerde
 }
@@ -1158,7 +1158,7 @@ type InstanceGroup struct {
 
 	// The version number of the requested configuration specification for this
 	// instance group.
-	ConfigurationsVersion int64
+	ConfigurationsVersion *int64
 
 	// The custom AMI ID to use for the provisioned instance group.
 	CustomAmiId *string
@@ -1186,7 +1186,7 @@ type InstanceGroup struct {
 
 	// The version number of a configuration specification that was successfully
 	// applied for an instance group last time.
-	LastSuccessfullyAppliedConfigurationsVersion int64
+	LastSuccessfullyAppliedConfigurationsVersion *int64
 
 	// The marketplace to provision instances for this group. Valid values are
 	// ON_DEMAND or SPOT.
@@ -1630,7 +1630,7 @@ type JobFlowDetail struct {
 	// default value is true if a value is not provided when creating a cluster using
 	// the Amazon EMR API RunJobFlow command, the CLI create-cluster (https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html)
 	// command, or the Amazon Web Services Management Console.
-	VisibleToAllUsers bool
+	VisibleToAllUsers *bool
 
 	noSmithyDocumentSerde
 }
@@ -1727,7 +1727,7 @@ type JobFlowInstancesConfig struct {
 	// steps. Defaults to true . For more information about configuring cluster
 	// termination, see Control Cluster Termination (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html)
 	// in the EMR Management Guide.
-	KeepJobFlowAliveWhenNoSteps bool
+	KeepJobFlowAliveWhenNoSteps *bool
 
 	// The Amazon EC2 instance type of the master node.
 	MasterInstanceType *string
@@ -1745,7 +1745,7 @@ type JobFlowInstancesConfig struct {
 	// Specifies whether to lock the cluster to prevent the Amazon EC2 instances from
 	// being terminated by API call, user intervention, or in the event of a job-flow
 	// error.
-	TerminationProtected bool
+	TerminationProtected *bool
 
 	noSmithyDocumentSerde
 }
@@ -1787,7 +1787,7 @@ type JobFlowInstancesDetail struct {
 
 	// Specifies whether the cluster should remain available after completing all
 	// steps.
-	KeepJobFlowAliveWhenNoSteps bool
+	KeepJobFlowAliveWhenNoSteps *bool
 
 	// The Amazon EC2 instance identifier of the master node.
 	MasterInstanceId *string
@@ -1810,7 +1810,7 @@ type JobFlowInstancesDetail struct {
 	// Specifies whether the Amazon EC2 instances in the cluster are protected from
 	// termination by API calls, user intervention, or in the event of a job-flow
 	// error.
-	TerminationProtected bool
+	TerminationProtected *bool
 
 	noSmithyDocumentSerde
 }
@@ -2801,25 +2801,25 @@ type SupportedInstanceType struct {
 	Architecture *string
 
 	// Indicates whether the SupportedInstanceType supports Amazon EBS optimization.
-	EbsOptimizedAvailable bool
+	EbsOptimizedAvailable *bool
 
 	// Indicates whether the SupportedInstanceType uses Amazon EBS optimization by
 	// default.
-	EbsOptimizedByDefault bool
+	EbsOptimizedByDefault *bool
 
 	// Indicates whether the SupportedInstanceType only supports Amazon EBS.
-	EbsStorageOnly bool
+	EbsStorageOnly *bool
 
 	// The Amazon EC2 family and generation for the SupportedInstanceType .
 	InstanceFamilyId *string
 
 	// Indicates whether the SupportedInstanceType only supports 64-bit architecture.
-	Is64BitsOnly bool
+	Is64BitsOnly *bool
 
 	// The amount of memory that is available to Amazon EMR from the
 	// SupportedInstanceType . The kernel and hypervisor software consume some memory,
 	// so this value might be lower than the overall memory for the instance type.
-	MemoryGB float32
+	MemoryGB *float32
 
 	// Number of disks for the SupportedInstanceType . This value is 0 for Amazon
 	// EBS-only instance types.

@@ -921,7 +921,7 @@ type PasswordPolicyType struct {
 
 	// The minimum length of the password in the policy that you have set. This value
 	// can't be less than 6.
-	MinimumLength int32
+	MinimumLength *int32
 
 	// In the password policy that you have set, refers to whether you have required
 	// users to use at least one lowercase letter in their password.
@@ -995,7 +995,7 @@ type RecoveryOptionType struct {
 	// priority.
 	//
 	// This member is required.
-	Priority int32
+	Priority *int32
 
 	noSmithyDocumentSerde
 }

@@ -1675,17 +1675,17 @@ type StackSetDriftDetectionDetails struct {
 	// parameter configuration of the stack set. A stack instance is considered to have
 	// drifted if one or more of the resources in the associated stack don't match
 	// their expected configuration.
-	DriftedStackInstancesCount int32
+	DriftedStackInstancesCount *int32
 
 	// The number of stack instances for which the drift detection operation failed.
-	FailedStackInstancesCount int32
+	FailedStackInstancesCount *int32
 
 	// The number of stack instances that are currently being checked for drift.
-	InProgressStackInstancesCount int32
+	InProgressStackInstancesCount *int32
 
 	// The number of stack instances which match the expected template and parameter
 	// configuration of the stack set.
-	InSyncStackInstancesCount int32
+	InSyncStackInstancesCount *int32
 
 	// Most recent time when CloudFormation performed a drift detection operation on
 	// the stack set. This value will be NULL for any stack set on which drift
@@ -1698,7 +1698,7 @@ type StackSetDriftDetectionDetails struct {
 	//   - Stack instances that have drifted from the stack set configuration.
 	//   - Stack instances where the drift detection operation has failed.
 	//   - Stack instances currently being checked for drift.
-	TotalStackInstancesCount int32
+	TotalStackInstancesCount *int32
 
 	noSmithyDocumentSerde
 }
@@ -1890,7 +1890,7 @@ type StackSetOperationResultSummary struct {
 type StackSetOperationStatusDetails struct {
 
 	// The number of stack instances for which the StackSet operation failed.
-	FailedStackInstancesCount int32
+	FailedStackInstancesCount *int32
 
 	noSmithyDocumentSerde
 }

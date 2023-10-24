@@ -47,7 +47,7 @@ type RemoveLayerVersionPermissionInput struct {
 	// The version number.
 	//
 	// This member is required.
-	VersionNumber int64
+	VersionNumber *int64
 
 	// Only update the policy if the revision ID matches the ID specified. Use this
 	// option to avoid modifying a policy that has changed since you last read it.

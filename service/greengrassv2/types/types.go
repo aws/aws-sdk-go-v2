@@ -649,7 +649,7 @@ type IoTJobAbortCriteria struct {
 	// cancel.
 	//
 	// This member is required.
-	MinNumberOfExecutedThings int32
+	MinNumberOfExecutedThings *int32
 
 	// The minimum percentage of failureType failures that occur before the job can
 	// cancel. This parameter supports up to two digits after the decimal (for example,
@@ -685,14 +685,14 @@ type IoTJobExponentialRolloutRate struct {
 	// the job.
 	//
 	// This member is required.
-	BaseRatePerMinute int32
+	BaseRatePerMinute *int32
 
 	// The exponential factor to increase the rollout rate for the job. This parameter
 	// supports up to one digit after the decimal (for example, you can specify 1.5 ,
 	// but not 1.55 ).
 	//
 	// This member is required.
-	IncrementFactor float64
+	IncrementFactor *float64
 
 	// The criteria to increase the rollout rate for the job.
 	//

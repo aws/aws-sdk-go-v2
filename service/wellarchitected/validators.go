@@ -2067,6 +2067,9 @@ func validateOpGetMilestoneInput(v *GetMilestoneInput) error {
 	if v.WorkloadId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkloadId"))
 	}
+	if v.MilestoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MilestoneNumber"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

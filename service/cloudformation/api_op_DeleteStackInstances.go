@@ -46,7 +46,7 @@ type DeleteStackInstancesInput struct {
 	// .
 	//
 	// This member is required.
-	RetainStacks bool
+	RetainStacks *bool
 
 	// The name or unique ID of the stack set that you want to delete stack instances
 	// for.

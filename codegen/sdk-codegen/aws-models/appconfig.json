@@ -1940,7 +1940,6 @@
                 "GrowthFactor": {
                     "target": "com.amazonaws.appconfig#GrowthFactor",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The percentage of targets to receive a deployed configuration during each\n         interval.</p>",
                         "smithy.api#required": {}
                     }
@@ -2718,7 +2717,7 @@
                 "VersionNumber": {
                     "target": "com.amazonaws.appconfig#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The versions number to delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
@@ -2803,7 +2802,6 @@
                 "GrowthFactor": {
                     "target": "com.amazonaws.appconfig#Percentage",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of targets to receive a deployed configuration during each\n         interval.</p>"
                     }
                 },
@@ -2829,7 +2827,6 @@
                 "PercentageComplete": {
                     "target": "com.amazonaws.appconfig#Percentage",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of targets for which the deployment is available.</p>"
                     }
                 },
@@ -3057,7 +3054,6 @@
                 "GrowthFactor": {
                     "target": "com.amazonaws.appconfig#Percentage",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of targets that received a deployed configuration during each\n         interval.</p>"
                     }
                 },
@@ -3126,7 +3122,6 @@
                 "GrowthFactor": {
                     "target": "com.amazonaws.appconfig#Percentage",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of targets to receive a deployed configuration during each\n         interval.</p>"
                     }
                 },
@@ -3146,7 +3141,6 @@
                 "PercentageComplete": {
                     "target": "com.amazonaws.appconfig#Percentage",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of targets for which the deployment is available.</p>"
                     }
                 },
@@ -4079,7 +4073,7 @@
                 "VersionNumber": {
                     "target": "com.amazonaws.appconfig#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The version.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
@@ -4093,7 +4087,6 @@
         "com.amazonaws.appconfig#GrowthFactor": {
             "type": "float",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1.0,
                     "max": 100.0
@@ -4411,7 +4404,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.appconfig#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>",
                         "smithy.api#httpQuery": "max_results"
                     }
@@ -4495,7 +4487,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.appconfig#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>",
                         "smithy.api#httpQuery": "max_results"
                     }
@@ -4575,7 +4566,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.appconfig#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>",
                         "smithy.api#httpQuery": "max_results"
                     }
@@ -4648,7 +4638,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.appconfig#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items that may be returned for this call. If there are items that\n         have not yet been returned, the response will include a non-null <code>NextToken</code>\n         that you can provide in a subsequent call to get the next set of results.</p>",
                         "smithy.api#httpQuery": "max_results"
                     }
@@ -4732,7 +4721,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.appconfig#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>",
                         "smithy.api#httpQuery": "max_results"
                     }
@@ -4808,7 +4796,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.appconfig#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>",
                         "smithy.api#httpQuery": "max_results"
                     }
@@ -4862,7 +4849,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.appconfig#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>",
                         "smithy.api#httpQuery": "max_results"
                     }
@@ -4962,7 +4948,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.appconfig#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>",
                         "smithy.api#httpQuery": "max_results"
                     }
@@ -5056,7 +5041,6 @@
         "com.amazonaws.appconfig#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -5206,7 +5190,6 @@
         "com.amazonaws.appconfig#Percentage": {
             "type": "float",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1.0,
                     "max": 100.0
@@ -5957,7 +5940,6 @@
                 "GrowthFactor": {
                     "target": "com.amazonaws.appconfig#GrowthFactor",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The percentage of targets to receive a deployed configuration during each\n         interval.</p>"
                     }
                 },

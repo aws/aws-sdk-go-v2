@@ -3034,7 +3034,7 @@ func awsRestjson1_deserializeOpDocumentGetProgrammaticAccessCredentialsOutput(v 
 				if err != nil {
 					return err
 				}
-				sv.DurationInMinutes = i64
+				sv.DurationInMinutes = ptr.Int64(i64)
 			}
 
 		default:

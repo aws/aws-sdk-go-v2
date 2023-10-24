@@ -1259,8 +1259,11 @@ func awsRestjson1_serializeOpHttpBindingsDeleteHostedConfigurationVersionInput(v
 		}
 	}
 
-	{
-		if err := encoder.SetURI("VersionNumber").Integer(v.VersionNumber); err != nil {
+	if v.VersionNumber == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionNumber must not be empty")}
+	}
+	if v.VersionNumber != nil {
+		if err := encoder.SetURI("VersionNumber").Integer(*v.VersionNumber); err != nil {
 			return err
 		}
 	}
@@ -1925,8 +1928,11 @@ func awsRestjson1_serializeOpHttpBindingsGetHostedConfigurationVersionInput(v *G
 		}
 	}
 
-	{
-		if err := encoder.SetURI("VersionNumber").Integer(v.VersionNumber); err != nil {
+	if v.VersionNumber == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionNumber must not be empty")}
+	}
+	if v.VersionNumber != nil {
+		if err := encoder.SetURI("VersionNumber").Integer(*v.VersionNumber); err != nil {
 			return err
 		}
 	}

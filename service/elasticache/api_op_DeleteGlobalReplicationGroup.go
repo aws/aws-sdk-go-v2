@@ -55,7 +55,7 @@ type DeleteGlobalReplicationGroupInput struct {
 	// The primary replication group is retained as a standalone replication group.
 	//
 	// This member is required.
-	RetainPrimaryReplicationGroup bool
+	RetainPrimaryReplicationGroup *bool
 
 	noSmithyDocumentSerde
 }

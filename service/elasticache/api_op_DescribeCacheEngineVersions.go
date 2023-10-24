@@ -46,7 +46,7 @@ type DescribeCacheEngineVersionsInput struct {
 
 	// If true , specifies that only the default version of the specified engine or
 	// engine and major version combination is to be returned.
-	DefaultOnly bool
+	DefaultOnly *bool
 
 	// The cache engine to return. Valid values: memcached | redis
 	Engine *string

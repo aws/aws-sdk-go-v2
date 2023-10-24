@@ -392,7 +392,7 @@ type FilesLimit struct {
 	// The number of Amazon S3 files to select.
 	//
 	// This member is required.
-	MaxFiles int32
+	MaxFiles *int32
 
 	// A criteria to use for Amazon S3 files sorting before their selection. By
 	// default uses DESCENDING order, i.e. most recent files are selected first.

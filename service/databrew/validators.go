@@ -1240,6 +1240,9 @@ func validateFilesLimit(v *types.FilesLimit) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FilesLimit"}
+	if v.MaxFiles == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxFiles"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

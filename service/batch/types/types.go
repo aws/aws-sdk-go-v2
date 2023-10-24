@@ -2915,7 +2915,7 @@ type UpdatePolicy struct {
 
 	// Specifies the job timeout (in minutes) when the compute environment
 	// infrastructure is updated. The default value is 30.
-	JobExecutionTimeoutMinutes int64
+	JobExecutionTimeoutMinutes *int64
 
 	// Specifies whether jobs are automatically terminated when the computer
 	// environment infrastructure is updated. The default value is false .

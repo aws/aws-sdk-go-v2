@@ -56,14 +56,14 @@ type DescribeDBClusterSnapshotsInput struct {
 	// or restored by any Amazon account, and otherwise false. The default is false .
 	// The default is false. You can share a manual DB cluster snapshot as public by
 	// using the ModifyDBClusterSnapshotAttribute API action.
-	IncludePublic bool
+	IncludePublic *bool
 
 	// True to include shared manual DB cluster snapshots from other Amazon accounts
 	// that this Amazon account has been given permission to copy or restore, and
 	// otherwise false. The default is false . You can give an Amazon account
 	// permission to restore a manual DB cluster snapshot from another Amazon account
 	// by the ModifyDBClusterSnapshotAttribute API action.
-	IncludeShared bool
+	IncludeShared *bool
 
 	// An optional pagination token provided by a previous DescribeDBClusterSnapshots
 	// request. If this parameter is specified, the response includes only records

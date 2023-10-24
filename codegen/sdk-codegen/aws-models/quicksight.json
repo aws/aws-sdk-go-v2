@@ -2408,7 +2408,6 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -2438,7 +2437,6 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port that Amazon Aurora PostgreSQL is listening on.</p>",
                         "smithy.api#required": {}
                     }
@@ -11449,7 +11447,6 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port for the Databricks data source.</p>",
                         "smithy.api#required": {}
                     }
@@ -16830,7 +16827,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -16992,7 +16988,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -19632,7 +19627,6 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port for the Exasol data source.</p>",
                         "smithy.api#required": {}
                     }
@@ -21538,7 +21532,6 @@
                 "CustomSeasonalityValue": {
                     "target": "com.amazonaws.quicksight#ForecastComputationCustomSeasonalityValue",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The custom seasonality value setup of a forecast computation.</p>"
                     }
                 }
@@ -21550,7 +21543,6 @@
         "com.amazonaws.quicksight#ForecastComputationCustomSeasonalityValue": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 180
@@ -23673,7 +23665,6 @@
                 "PeriodSize": {
                     "target": "com.amazonaws.quicksight#GrowthRatePeriodSize",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The period size setup of a growth rate computation.</p>"
                     }
                 }
@@ -23685,7 +23676,6 @@
         "com.amazonaws.quicksight#GrowthRatePeriodSize": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 2,
                     "max": 52
@@ -24890,7 +24880,6 @@
         "com.amazonaws.quicksight#IngestionMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -26777,7 +26766,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -26882,7 +26870,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -26987,7 +26974,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -27163,7 +27149,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -27265,7 +27250,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -27370,7 +27354,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -27475,7 +27458,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -27594,7 +27576,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -27705,7 +27686,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -27819,7 +27799,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return from this request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -27949,7 +27928,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -28119,7 +28097,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -28207,7 +28184,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -28326,7 +28302,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#IngestionMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -28440,7 +28415,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -28720,7 +28694,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-result"
                     }
@@ -28836,7 +28809,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -28944,7 +28916,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-result"
                     }
@@ -29057,7 +29028,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-result"
                     }
@@ -29176,7 +29146,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -29287,7 +29256,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -29505,7 +29473,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -29632,7 +29599,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return from this request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -29746,7 +29712,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return from this request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -29861,7 +29826,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -30089,7 +30053,6 @@
                 "Size": {
                     "target": "com.amazonaws.quicksight#PositiveLong",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The lookback window column size.</p>",
                         "smithy.api#required": {}
                     }
@@ -30231,7 +30194,6 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -30251,7 +30213,6 @@
         "com.amazonaws.quicksight#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -30543,7 +30504,6 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -31711,7 +31671,6 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port.</p>",
                         "smithy.api#required": {}
                     }
@@ -33805,7 +33764,6 @@
         "com.amazonaws.quicksight#Port": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 65535
@@ -33815,7 +33773,6 @@
         "com.amazonaws.quicksight#PositiveInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -33824,7 +33781,6 @@
         "com.amazonaws.quicksight#PositiveLong": {
             "type": "long",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -33843,7 +33799,6 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -33951,7 +33906,6 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -38225,7 +38179,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
                     }
                 }
@@ -38338,7 +38291,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>"
                     }
                 }
@@ -38451,7 +38403,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>"
                     }
                 }
@@ -38564,7 +38515,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>"
                     }
                 }
@@ -38683,7 +38633,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>"
                     }
                 }
@@ -38796,7 +38745,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return from this request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -40843,7 +40791,6 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -40907,7 +40854,6 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -40952,7 +40898,6 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port for the Starburst data source.</p>",
                         "smithy.api#required": {}
                     }
@@ -43212,7 +43157,6 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -44247,7 +44191,6 @@
                 "MoverSize": {
                     "target": "com.amazonaws.quicksight#TopBottomMoversComputationMoverSize",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The mover size setup of the top and bottom movers computation.</p>"
                     }
                 },
@@ -44272,7 +44215,6 @@
         "com.amazonaws.quicksight#TopBottomMoversComputationMoverSize": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 20
@@ -44310,7 +44252,6 @@
                 "ResultSize": {
                     "target": "com.amazonaws.quicksight#TopBottomRankedComputationResultSize",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The result size of a top and bottom ranked computation.</p>"
                     }
                 },
@@ -44329,7 +44270,6 @@
         "com.amazonaws.quicksight#TopBottomRankedComputationResultSize": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 20
@@ -45662,7 +45602,6 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port for the Trino data source.</p>",
                         "smithy.api#required": {}
                     }
@@ -45692,7 +45631,6 @@
                 "MaxRows": {
                     "target": "com.amazonaws.quicksight#PositiveInteger",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of rows to query Twitter.</p>",
                         "smithy.api#required": {}
                     }
@@ -49649,7 +49587,6 @@
                 "StartFromRow": {
                     "target": "com.amazonaws.quicksight#PositiveInteger",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>A row number to start reading data from.</p>"
                     }
                 },

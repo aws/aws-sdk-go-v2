@@ -336,7 +336,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -379,7 +378,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -392,7 +392,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -406,7 +405,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -429,7 +427,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -464,7 +461,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -475,14 +471,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -496,14 +494,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -512,11 +508,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -527,14 +523,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -548,7 +546,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -568,7 +565,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -579,14 +575,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -597,9 +595,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -2173,7 +2173,6 @@
                 "RateLimit": {
                     "target": "com.amazonaws.wafregional#RateLimit",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of requests, which have an identical value in the field that is\n         specified by <code>RateKey</code>, allowed in a five-minute period. If the number of\n         requests exceeds the <code>RateLimit</code> and the other predicates specified in the rule\n         are also met, AWS WAF triggers the action that is specified for this rule.</p>",
                         "smithy.api#required": {}
                     }
@@ -6598,7 +6597,6 @@
         "com.amazonaws.wafregional#GetSampledRequestsMaxItems": {
             "type": "long",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 500
@@ -6632,7 +6630,6 @@
                 "MaxItems": {
                     "target": "com.amazonaws.wafregional#GetSampledRequestsMaxItems",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of requests that you want AWS WAF to return from among the first 5,000 requests that your AWS resource received\n\t\t\tduring the time range. If your resource received fewer requests than the value of <code>MaxItems</code>, <code>GetSampledRequests</code> \n\t\t\treturns information about all of them. </p>",
                         "smithy.api#required": {}
                     }
@@ -9065,7 +9062,6 @@
                 "RateLimit": {
                     "target": "com.amazonaws.wafregional#RateLimit",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of requests, which have an identical value in the field specified\n         by the <code>RateKey</code>, allowed in a five-minute period. If the number of requests\n         exceeds the <code>RateLimit</code> and the other predicates specified in the rule are also\n         met, AWS WAF triggers the action that is specified for this rule.</p>",
                         "smithy.api#required": {}
                     }
@@ -9089,7 +9085,6 @@
         "com.amazonaws.wafregional#RateLimit": {
             "type": "long",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 100,
                     "max": 2000000000
@@ -10581,7 +10576,6 @@
                 "RateLimit": {
                     "target": "com.amazonaws.wafregional#RateLimit",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of requests, which have an identical value in the field specified by the <code>RateKey</code>, allowed in a\n         five-minute period. If the number of requests exceeds the <code>RateLimit</code> and the other\n         predicates specified in the rule are also met,\n         AWS WAF triggers the action that is specified for this rule.</p>",
                         "smithy.api#required": {}
                     }

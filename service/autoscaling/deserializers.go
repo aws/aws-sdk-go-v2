@@ -7605,7 +7605,7 @@ func awsAwsquery_deserializeDocumentActivity(v **types.Activity, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.Progress = int32(i64)
+				sv.Progress = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("StartTime", t.Name.Local):

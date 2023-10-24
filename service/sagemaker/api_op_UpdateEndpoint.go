@@ -74,11 +74,11 @@ type UpdateEndpointInput struct {
 	// true . To use the variant properties specified in a new EndpointConfig call
 	// when updating an endpoint, set RetainAllVariantProperties to false . The default
 	// is false .
-	RetainAllVariantProperties bool
+	RetainAllVariantProperties *bool
 
 	// Specifies whether to reuse the last deployment configuration. The default value
 	// is false (the configuration is not reused).
-	RetainDeploymentConfig bool
+	RetainDeploymentConfig *bool
 
 	noSmithyDocumentSerde
 }

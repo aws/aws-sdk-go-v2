@@ -105,7 +105,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -148,7 +147,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -161,7 +161,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -175,7 +174,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -198,7 +196,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -233,7 +230,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -244,14 +240,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -265,14 +263,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -281,11 +277,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -296,14 +292,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -317,7 +315,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -337,7 +334,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -348,14 +344,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -366,9 +364,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -842,6 +842,7 @@
                 "CreationTime": {
                     "target": "com.amazonaws.sagemakera2iruntime#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The creation time when Amazon Augmented AI created the human loop.</p>",
                         "smithy.api#required": {}
                     }
@@ -861,6 +862,7 @@
                 "HumanLoopStatus": {
                     "target": "com.amazonaws.sagemakera2iruntime#HumanLoopStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The status of the human loop. </p>",
                         "smithy.api#required": {}
                     }
@@ -868,6 +870,7 @@
                 "HumanLoopName": {
                     "target": "com.amazonaws.sagemakera2iruntime#HumanLoopName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the human loop. The name must be lowercase, unique within the Region in your\n      account, and can have up to 63 characters. Valid characters: a-z, 0-9, and - (hyphen).</p>",
                         "smithy.api#required": {}
                     }
@@ -875,6 +878,7 @@
                 "HumanLoopArn": {
                     "target": "com.amazonaws.sagemakera2iruntime#HumanLoopArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the human loop.</p>",
                         "smithy.api#required": {}
                     }
@@ -882,6 +886,7 @@
                 "FlowDefinitionArn": {
                     "target": "com.amazonaws.sagemakera2iruntime#FlowDefinitionArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the flow definition.</p>",
                         "smithy.api#required": {}
                     }
@@ -932,6 +937,7 @@
                 "ContentClassifiers": {
                     "target": "com.amazonaws.sagemakera2iruntime#ContentClassifiers",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Declares that your content is free of personally identifiable information or adult content.</p>\n         <p>Amazon SageMaker can restrict the Amazon Mechanical Turk workers who can view your task based on this information.</p>",
                         "smithy.api#required": {}
                     }
@@ -947,6 +953,7 @@
                 "InputContent": {
                     "target": "com.amazonaws.sagemakera2iruntime#InputContent",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Serialized input from the human loop. The input must be a string representation of a file in JSON format.</p>",
                         "smithy.api#required": {}
                     }
@@ -972,6 +979,7 @@
                 "OutputS3Uri": {
                     "target": "com.amazonaws.sagemakera2iruntime#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The location of the Amazon S3 object where Amazon Augmented AI stores your human loop output.</p>",
                         "smithy.api#required": {}
                     }
@@ -1139,6 +1147,7 @@
                 "FlowDefinitionArn": {
                     "target": "com.amazonaws.sagemakera2iruntime#FlowDefinitionArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a flow definition.</p>",
                         "smithy.api#httpQuery": "FlowDefinitionArn",
                         "smithy.api#required": {}
@@ -1161,7 +1170,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.sagemakera2iruntime#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The total number of items to return. If the total number of available items is more than\n      the value specified in <code>MaxResults</code>, then a <code>NextToken</code> is returned in\n      the output. You can use this token to display the next page of results. </p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
@@ -1177,6 +1185,7 @@
                 "HumanLoopSummaries": {
                     "target": "com.amazonaws.sagemakera2iruntime#HumanLoopSummaries",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of objects that contain information about the human loops.</p>",
                         "smithy.api#required": {}
                     }
@@ -1195,7 +1204,6 @@
         "com.amazonaws.sagemakera2iruntime#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -1295,6 +1303,7 @@
                 "HumanLoopName": {
                     "target": "com.amazonaws.sagemakera2iruntime#HumanLoopName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the human loop.</p>",
                         "smithy.api#required": {}
                     }
@@ -1302,6 +1311,7 @@
                 "FlowDefinitionArn": {
                     "target": "com.amazonaws.sagemakera2iruntime#FlowDefinitionArn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the flow definition associated with this human\n      loop.</p>",
                         "smithy.api#required": {}
                     }
@@ -1309,6 +1319,7 @@
                 "HumanLoopInput": {
                     "target": "com.amazonaws.sagemakera2iruntime#HumanLoopInput",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An object that contains information about the human loop.</p>",
                         "smithy.api#required": {}
                     }
@@ -1375,6 +1386,7 @@
                 "HumanLoopName": {
                     "target": "com.amazonaws.sagemakera2iruntime#HumanLoopName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the human loop that you want to stop.</p>",
                         "smithy.api#required": {}
                     }

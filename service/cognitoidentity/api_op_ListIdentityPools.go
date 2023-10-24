@@ -39,7 +39,7 @@ type ListIdentityPoolsInput struct {
 	// The maximum number of identities to return.
 	//
 	// This member is required.
-	MaxResults int32
+	MaxResults *int32
 
 	// A pagination token.
 	NextToken *string
@@ -171,8 +171,8 @@ func NewListIdentityPoolsPaginator(client ListIdentityPoolsAPIClient, params *Li
 	}
 
 	options := ListIdentityPoolsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -202,7 +202,11 @@ func (p *ListIdentityPoolsPaginator) NextPage(ctx context.Context, optFns ...fun
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListIdentityPools(ctx, &params, optFns...)
 	if err != nil {

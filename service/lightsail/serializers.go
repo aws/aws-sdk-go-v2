@@ -11188,9 +11188,9 @@ func awsAwsjson11_serializeOpDocumentGetBucketMetricDataInput(v *GetBucketMetric
 		ok.String(string(v.MetricName))
 	}
 
-	{
+	if v.Period != nil {
 		ok := object.Key("period")
-		ok.Integer(v.Period)
+		ok.Integer(*v.Period)
 	}
 
 	if v.StartTime != nil {
@@ -11394,9 +11394,9 @@ func awsAwsjson11_serializeOpDocumentGetContainerServiceMetricDataInput(v *GetCo
 		ok.String(string(v.MetricName))
 	}
 
-	{
+	if v.Period != nil {
 		ok := object.Key("period")
-		ok.Integer(v.Period)
+		ok.Integer(*v.Period)
 	}
 
 	if v.ServiceName != nil {
@@ -11546,9 +11546,9 @@ func awsAwsjson11_serializeOpDocumentGetDistributionMetricDataInput(v *GetDistri
 		ok.String(string(v.MetricName))
 	}
 
-	{
+	if v.Period != nil {
 		ok := object.Key("period")
-		ok.Integer(v.Period)
+		ok.Integer(*v.Period)
 	}
 
 	if v.StartTime != nil {
@@ -11672,9 +11672,9 @@ func awsAwsjson11_serializeOpDocumentGetInstanceMetricDataInput(v *GetInstanceMe
 		ok.String(string(v.MetricName))
 	}
 
-	{
+	if v.Period != nil {
 		ok := object.Key("period")
-		ok.Integer(v.Period)
+		ok.Integer(*v.Period)
 	}
 
 	if v.StartTime != nil {
@@ -11817,9 +11817,9 @@ func awsAwsjson11_serializeOpDocumentGetLoadBalancerMetricDataInput(v *GetLoadBa
 		ok.String(string(v.MetricName))
 	}
 
-	{
+	if v.Period != nil {
 		ok := object.Key("period")
-		ok.Integer(v.Period)
+		ok.Integer(*v.Period)
 	}
 
 	if v.StartTime != nil {
@@ -12079,9 +12079,9 @@ func awsAwsjson11_serializeOpDocumentGetRelationalDatabaseMetricDataInput(v *Get
 		ok.String(string(v.MetricName))
 	}
 
-	{
+	if v.Period != nil {
 		ok := object.Key("period")
-		ok.Integer(v.Period)
+		ok.Integer(*v.Period)
 	}
 
 	if v.RelationalDatabaseName != nil {

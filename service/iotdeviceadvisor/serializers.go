@@ -505,8 +505,8 @@ func awsRestjson1_serializeOpHttpBindingsListSuiteDefinitionsInput(v *ListSuiteD
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -569,8 +569,8 @@ func awsRestjson1_serializeOpHttpBindingsListSuiteRunsInput(v *ListSuiteRunsInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1142,14 +1142,14 @@ func awsRestjson1_serializeDocumentSuiteDefinitionConfiguration(v *types.SuiteDe
 		}
 	}
 
-	if v.IntendedForQualification {
+	if v.IntendedForQualification != nil {
 		ok := object.Key("intendedForQualification")
-		ok.Boolean(v.IntendedForQualification)
+		ok.Boolean(*v.IntendedForQualification)
 	}
 
-	if v.IsLongDurationTest {
+	if v.IsLongDurationTest != nil {
 		ok := object.Key("isLongDurationTest")
-		ok.Boolean(v.IsLongDurationTest)
+		ok.Boolean(*v.IsLongDurationTest)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -1174,9 +1174,9 @@ func awsRestjson1_serializeDocumentSuiteRunConfiguration(v *types.SuiteRunConfig
 	object := value.Object()
 	defer object.Close()
 
-	if v.ParallelRun {
+	if v.ParallelRun != nil {
 		ok := object.Key("parallelRun")
-		ok.Boolean(v.ParallelRun)
+		ok.Boolean(*v.ParallelRun)
 	}
 
 	if v.PrimaryDevice != nil {

@@ -62,7 +62,7 @@ type ListCheckDetailsInput struct {
 	WorkloadId *string
 
 	// The maximum number of results to return for this request.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token to use to retrieve the next set of results.
 	NextToken *string
@@ -194,8 +194,8 @@ func NewListCheckDetailsPaginator(client ListCheckDetailsAPIClient, params *List
 	}
 
 	options := ListCheckDetailsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -225,7 +225,11 @@ func (p *ListCheckDetailsPaginator) NextPage(ctx context.Context, optFns ...func
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListCheckDetails(ctx, &params, optFns...)
 	if err != nil {

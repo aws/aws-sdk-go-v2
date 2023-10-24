@@ -55,7 +55,7 @@ type CreateAssessmentTemplateInput struct {
 	// The duration of the assessment run in seconds.
 	//
 	// This member is required.
-	DurationInSeconds int32
+	DurationInSeconds *int32
 
 	// The ARNs that specify the rules packages that you want to attach to the
 	// assessment template.

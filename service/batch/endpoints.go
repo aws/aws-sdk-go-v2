@@ -410,8 +410,8 @@ func (r *resolver) ResolveEndpoint(
 				}
 			}
 			if _UseFIPS == true {
-				if true == _PartitionResult.SupportsFIPS {
-					if "aws" == _PartitionResult.Name {
+				if _PartitionResult.SupportsFIPS == true {
+					if _PartitionResult.Name == "aws" {
 						uriString := func() string {
 							var out strings.Builder
 							out.WriteString("https://fips.batch.")
@@ -430,7 +430,7 @@ func (r *resolver) ResolveEndpoint(
 							Headers: http.Header{},
 						}, nil
 					}
-					if "aws-us-gov" == _PartitionResult.Name {
+					if _PartitionResult.Name == "aws-us-gov" {
 						uriString := func() string {
 							var out strings.Builder
 							out.WriteString("https://batch.")

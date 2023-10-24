@@ -46,7 +46,7 @@ type ListCoverageInput struct {
 	FilterCriteria *types.CoverageFilterCriteria
 
 	// The maximum number of results to return in the response.
-	MaxResults int32
+	MaxResults *int32
 
 	// A token to use for paginating results that are returned in the response. Set
 	// the value of this parameter to null for the first request to a list action. For
@@ -185,8 +185,8 @@ func NewListCoveragePaginator(client ListCoverageAPIClient, params *ListCoverage
 	}
 
 	options := ListCoveragePaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -216,7 +216,11 @@ func (p *ListCoveragePaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListCoverage(ctx, &params, optFns...)
 	if err != nil {

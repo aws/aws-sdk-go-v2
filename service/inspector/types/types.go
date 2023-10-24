@@ -110,7 +110,7 @@ type AssessmentRun struct {
 	// The duration of the assessment run.
 	//
 	// This member is required.
-	DurationInSeconds int32
+	DurationInSeconds *int32
 
 	// Provides a total count of generated findings per severity.
 	//
@@ -358,7 +358,7 @@ type AssessmentTemplate struct {
 	// value is 3600 seconds (one hour). The maximum value is 86400 seconds (one day).
 	//
 	// This member is required.
-	DurationInSeconds int32
+	DurationInSeconds *int32
 
 	// The name of the assessment template.
 	//
@@ -460,10 +460,10 @@ type DurationRange struct {
 
 	// The maximum value of the duration range. Must be less than or equal to 604800
 	// seconds (1 week).
-	MaxSeconds int32
+	MaxSeconds *int32
 
 	// The minimum value of the duration range. Must be greater than zero.
-	MinSeconds int32
+	MinSeconds *int32
 
 	noSmithyDocumentSerde
 }

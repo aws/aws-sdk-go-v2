@@ -14444,9 +14444,9 @@ func awsAwsjson11_serializeDocumentEventBatchingCondition(v *types.EventBatching
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.BatchSize != nil {
 		ok := object.Key("BatchSize")
-		ok.Integer(v.BatchSize)
+		ok.Integer(*v.BatchSize)
 	}
 
 	if v.BatchWindow != nil {
@@ -18077,9 +18077,9 @@ func awsAwsjson11_serializeDocumentSchemaVersionNumber(v *types.SchemaVersionNum
 		ok.Boolean(v.LatestVersion)
 	}
 
-	if v.VersionNumber != 0 {
+	if v.VersionNumber != nil {
 		ok := object.Key("VersionNumber")
-		ok.Long(v.VersionNumber)
+		ok.Long(*v.VersionNumber)
 	}
 
 	return nil
@@ -18118,9 +18118,9 @@ func awsAwsjson11_serializeDocumentSegment(v *types.Segment, value smithyjson.Va
 		ok.Integer(v.SegmentNumber)
 	}
 
-	{
+	if v.TotalSegments != nil {
 		ok := object.Key("TotalSegments")
-		ok.Integer(v.TotalSegments)
+		ok.Integer(*v.TotalSegments)
 	}
 
 	return nil
@@ -23518,9 +23518,9 @@ func awsAwsjson11_serializeOpDocumentQuerySchemaVersionMetadataInput(v *QuerySch
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.MetadataList != nil {

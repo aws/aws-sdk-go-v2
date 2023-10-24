@@ -4298,7 +4298,7 @@ func awsRestjson1_deserializeDocumentSourceDataColumnProperties(v **types.Source
 				if err != nil {
 					return err
 				}
-				sv.ColumnIndex = int32(i64)
+				sv.ColumnIndex = ptr.Int32(int32(i64))
 			}
 
 		default:

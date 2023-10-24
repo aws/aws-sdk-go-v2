@@ -1949,6 +1949,9 @@ func validateOpCreateAutomationRuleInput(v *CreateAutomationRuleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAutomationRuleInput"}
+	if v.RuleOrder == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleOrder"))
+	}
 	if v.RuleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleName"))
 	}
@@ -2425,6 +2428,9 @@ func validateOpUpdateOrganizationConfigurationInput(v *UpdateOrganizationConfigu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateOrganizationConfigurationInput"}
+	if v.AutoEnable == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoEnable"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

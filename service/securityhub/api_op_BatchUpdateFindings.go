@@ -66,13 +66,13 @@ type BatchUpdateFindingsInput struct {
 	// was intended to identify. Confidence is scored on a 0-100 basis using a ratio
 	// scale, where 0 means zero percent confidence and 100 means 100 percent
 	// confidence.
-	Confidence int32
+	Confidence *int32
 
 	// The updated value for the level of importance assigned to the resources
 	// associated with the findings. A score of 0 means that the underlying resources
 	// have no criticality, and a score of 100 is reserved for the most critical
 	// resources.
-	Criticality int32
+	Criticality *int32
 
 	// The updated note.
 	Note *types.NoteUpdate

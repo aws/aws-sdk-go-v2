@@ -36969,7 +36969,7 @@ func awsRestjson1_deserializeDocumentAuroraParameters(v **types.AuroraParameters
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -37031,7 +37031,7 @@ func awsRestjson1_deserializeDocumentAuroraPostgreSqlParameters(v **types.Aurora
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -43882,7 +43882,7 @@ func awsRestjson1_deserializeDocumentDatabricksParameters(v **types.DatabricksPa
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case "SqlEndpointPath":
@@ -48643,7 +48643,7 @@ func awsRestjson1_deserializeDocumentExasolParameters(v **types.ExasolParameters
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -54647,7 +54647,7 @@ func awsRestjson1_deserializeDocumentGrowthRateComputation(v **types.GrowthRateC
 				if err != nil {
 					return err
 				}
-				sv.PeriodSize = int32(i64)
+				sv.PeriodSize = ptr.Int32(int32(i64))
 			}
 
 		case "Time":
@@ -59069,7 +59069,7 @@ func awsRestjson1_deserializeDocumentLookbackWindow(v **types.LookbackWindow, va
 				if err != nil {
 					return err
 				}
-				sv.Size = i64
+				sv.Size = ptr.Int64(i64)
 			}
 
 		case "SizeUnit":
@@ -59312,7 +59312,7 @@ func awsRestjson1_deserializeDocumentMariaDbParameters(v **types.MariaDbParamete
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -59794,7 +59794,7 @@ func awsRestjson1_deserializeDocumentMySqlParameters(v **types.MySqlParameters, 
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -61226,7 +61226,7 @@ func awsRestjson1_deserializeDocumentOracleParameters(v **types.OracleParameters
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -64709,7 +64709,7 @@ func awsRestjson1_deserializeDocumentPostgreSqlParameters(v **types.PostgreSqlPa
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -64904,7 +64904,7 @@ func awsRestjson1_deserializeDocumentPrestoParameters(v **types.PrestoParameters
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -71785,7 +71785,7 @@ func awsRestjson1_deserializeDocumentSparkParameters(v **types.SparkParameters, 
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -71847,7 +71847,7 @@ func awsRestjson1_deserializeDocumentSqlServerParameters(v **types.SqlServerPara
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -71949,7 +71949,7 @@ func awsRestjson1_deserializeDocumentStarburstParameters(v **types.StarburstPara
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case "ProductType":
@@ -75003,7 +75003,7 @@ func awsRestjson1_deserializeDocumentTeradataParameters(v **types.TeradataParame
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -76791,7 +76791,7 @@ func awsRestjson1_deserializeDocumentTopBottomMoversComputation(v **types.TopBot
 				if err != nil {
 					return err
 				}
-				sv.MoverSize = int32(i64)
+				sv.MoverSize = ptr.Int32(int32(i64))
 			}
 
 		case "Name":
@@ -76895,7 +76895,7 @@ func awsRestjson1_deserializeDocumentTopBottomRankedComputation(v **types.TopBot
 				if err != nil {
 					return err
 				}
-				sv.ResultSize = int32(i64)
+				sv.ResultSize = ptr.Int32(int32(i64))
 			}
 
 		case "Type":
@@ -79155,7 +79155,7 @@ func awsRestjson1_deserializeDocumentTrinoParameters(v **types.TrinoParameters, 
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -79199,7 +79199,7 @@ func awsRestjson1_deserializeDocumentTwitterParameters(v **types.TwitterParamete
 				if err != nil {
 					return err
 				}
-				sv.MaxRows = int32(i64)
+				sv.MaxRows = ptr.Int32(int32(i64))
 			}
 
 		case "Query":

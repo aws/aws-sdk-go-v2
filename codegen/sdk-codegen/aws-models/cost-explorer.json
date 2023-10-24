@@ -205,7 +205,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -248,7 +247,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -261,7 +261,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -275,7 +274,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -400,7 +398,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -435,7 +432,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -446,14 +442,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -467,14 +465,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -483,11 +479,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -498,14 +494,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -519,7 +517,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -539,7 +536,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -550,14 +546,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -568,9 +566,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1476,7 +1476,6 @@
         "com.amazonaws.costexplorer#CostAllocationTagsMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -1585,7 +1584,6 @@
         "com.amazonaws.costexplorer#CostCategoryMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4014,7 +4012,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>This field is only used when the <code>SortBy</code> value is provided in the\n      request.</p>\n         <p>The maximum number of objects that are returned for this request. If\n        <code>MaxResults</code> isn't specified with the <code>SortBy</code> value, the request\n      returns 1000 results as the default value for this parameter.</p>\n         <p>For <code>GetCostCategories</code>, MaxResults has an upper quota of 1000.</p>"
                     }
                 },
@@ -4220,7 +4217,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>This field is only used when SortBy is provided in the request. The maximum number of\n      objects that are returned for this request. If MaxResults isn't specified with SortBy, the\n      request returns 1000 results as the default value for this parameter.</p>\n         <p>For <code>GetDimensionValues</code>, MaxResults has an upper limit of 1000.</p>"
                     }
                 },
@@ -4342,7 +4338,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of objects that you returned for this request. If more objects are\n      available, in the response, Amazon Web Services provides a NextPageToken value that you can use\n      in a subsequent call to get the next batch of objects.</p>"
                     }
                 }
@@ -4561,7 +4556,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of objects that you returned for this request. If more objects are\n      available, in the response, Amazon Web Services provides a NextPageToken value that you can use\n      in a subsequent call to get the next batch of objects.</p>"
                     }
                 }
@@ -4818,7 +4812,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of items to be returned in a response. The default is <code>20</code>, with a\n      minimum value of <code>1</code>.</p>"
                     }
                 },
@@ -5040,7 +5033,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#MaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of items to be returned in a response. The default is <code>20</code>, with a\n      minimum value of <code>1</code>.</p>"
                     }
                 },
@@ -5205,7 +5197,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>This field is only used when SortBy is provided in the request. The maximum number of\n      objects that are returned for this request. If MaxResults isn't specified with SortBy, the\n      request returns 1000 results as the default value for this parameter.</p>\n         <p>For <code>GetTags</code>, MaxResults has an upper quota of 1000.</p>"
                     }
                 },
@@ -5614,7 +5605,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#CostAllocationTagsMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of objects that are returned for this request. By default, the request\n      returns 100 results. </p>"
                     }
                 }
@@ -5683,7 +5673,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#CostCategoryMaxResults",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of entries a paginated response contains. </p>"
                     }
                 }
@@ -5922,7 +5911,6 @@
         "com.amazonaws.costexplorer#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }

@@ -73,10 +73,10 @@ type AccountQuota struct {
 	AccountQuotaName *string
 
 	// The maximum allowed value for the quota.
-	Max int64
+	Max *int64
 
 	// The amount currently used toward the quota maximum.
-	Used int64
+	Used *int64
 
 	noSmithyDocumentSerde
 }
@@ -372,7 +372,7 @@ type ConnectionPoolConfigurationInfo struct {
 	// The number of seconds for a proxy to wait for a connection to become available
 	// in the connection pool. Only applies when the proxy has opened its maximum
 	// number of connections and all connections are busy with client sessions.
-	ConnectionBorrowTimeout int32
+	ConnectionBorrowTimeout *int32
 
 	// One or more SQL statements for the proxy to run when opening each new database
 	// connection. Typically used with SET statements to make sure that each
@@ -385,7 +385,7 @@ type ConnectionPoolConfigurationInfo struct {
 	// The maximum size of the connection pool for each target in a target group. The
 	// value is expressed as a percentage of the max_connections setting for the RDS
 	// DB instance or Aurora DB cluster used by the target group.
-	MaxConnectionsPercent int32
+	MaxConnectionsPercent *int32
 
 	// Controls how actively the proxy closes idle database connections in the
 	// connection pool. The value is expressed as a percentage of the max_connections
@@ -393,7 +393,7 @@ type ConnectionPoolConfigurationInfo struct {
 	// With a high value, the proxy leaves a high percentage of idle database
 	// connections open. A low value causes the proxy to close more idle connections
 	// and return them to the database.
-	MaxIdleConnectionsPercent int32
+	MaxIdleConnectionsPercent *int32
 
 	// Each item in the list represents a class of SQL operations that normally cause
 	// all later statements in a session using a proxy to be pinned to the same
@@ -465,7 +465,7 @@ type DBCluster struct {
 
 	// Indicates whether minor version patches are applied automatically. This setting
 	// is only for non-Aurora Multi-AZ DB clusters.
-	AutoMinorVersionUpgrade bool
+	AutoMinorVersionUpgrade *bool
 
 	// The time when a stopped DB cluster is restarted automatically.
 	AutomaticRestartTime *time.Time
@@ -745,7 +745,7 @@ type DBCluster struct {
 	Status *string
 
 	// Indicates whether the DB cluster is encrypted.
-	StorageEncrypted bool
+	StorageEncrypted *bool
 
 	// The storage type associated with the DB cluster.
 	StorageType *string
@@ -769,7 +769,7 @@ type DBClusterAutomatedBackup struct {
 	// allocated storage size in gibibytes (GiB). For Aurora, AllocatedStorage always
 	// returns 1, because Aurora DB cluster storage size isn't fixed, but instead
 	// automatically adjusts as needed.
-	AllocatedStorage int32
+	AllocatedStorage *int32
 
 	// The Availability Zones where instances in the DB cluster can be created. For
 	// information on Amazon Web Services Regions and Availability Zones, see Regions
@@ -812,7 +812,7 @@ type DBClusterAutomatedBackup struct {
 
 	// Indicates whether mapping of Amazon Web Services Identity and Access Management
 	// (IAM) accounts to database accounts is enabled.
-	IAMDatabaseAuthenticationEnabled bool
+	IAMDatabaseAuthenticationEnabled *bool
 
 	// The IOPS (I/O operations per second) value for the automated backup. This
 	// setting is only for non-Aurora Multi-AZ DB clusters.
@@ -831,7 +831,7 @@ type DBClusterAutomatedBackup struct {
 
 	// The port number that the automated backup used for connections. Default:
 	// Inherits from the source DB cluster Valid Values: 1150-65535
-	Port int32
+	Port *int32
 
 	// The Amazon Web Services Region associated with the automated backup.
 	Region *string
@@ -844,7 +844,7 @@ type DBClusterAutomatedBackup struct {
 	Status *string
 
 	// Indicates whether the source DB cluster is encrypted.
-	StorageEncrypted bool
+	StorageEncrypted *bool
 
 	// The storage type associated with the DB cluster. This setting is only for
 	// non-Aurora Multi-AZ DB clusters.
@@ -955,7 +955,7 @@ type DBClusterMember struct {
 
 	// Indicates whether the cluster member is the primary DB instance for the DB
 	// cluster.
-	IsClusterWriter bool
+	IsClusterWriter *bool
 
 	// A value that specifies the order in which an Aurora Replica is promoted to the
 	// primary instance after a failure of the existing primary instance. For more
@@ -1030,7 +1030,7 @@ type DBClusterRole struct {
 type DBClusterSnapshot struct {
 
 	// The allocated storage size of the DB cluster snapshot in gibibytes (GiB).
-	AllocatedStorage int32
+	AllocatedStorage *int32
 
 	// The list of Availability Zones (AZs) where instances in the DB cluster snapshot
 	// can be restored.
@@ -1067,7 +1067,7 @@ type DBClusterSnapshot struct {
 
 	// Indicates whether mapping of Amazon Web Services Identity and Access Management
 	// (IAM) accounts to database accounts is enabled.
-	IAMDatabaseAuthenticationEnabled bool
+	IAMDatabaseAuthenticationEnabled *bool
 
 	// If StorageEncrypted is true, the Amazon Web Services KMS key identifier for the
 	// encrypted DB cluster snapshot. The Amazon Web Services KMS key identifier is the
@@ -1081,10 +1081,10 @@ type DBClusterSnapshot struct {
 	MasterUsername *string
 
 	// The percentage of the estimated data that has been transferred.
-	PercentProgress int32
+	PercentProgress *int32
 
 	// The port that the DB cluster was listening on at the time of the snapshot.
-	Port int32
+	Port *int32
 
 	// The time when the snapshot was taken, in Universal Coordinated Time (UTC).
 	SnapshotCreateTime *time.Time
@@ -1104,7 +1104,7 @@ type DBClusterSnapshot struct {
 	Status *string
 
 	// Indicates whether the DB cluster snapshot is encrypted.
-	StorageEncrypted bool
+	StorageEncrypted *bool
 
 	// The storage type associated with the DB cluster snapshot. This setting is only
 	// for Aurora DB clusters.
@@ -1257,7 +1257,7 @@ type DBEngineVersion struct {
 	SupportedTimezones []Timezone
 
 	// Indicates whether the engine version supports Babelfish for Aurora PostgreSQL.
-	SupportsBabelfish bool
+	SupportsBabelfish *bool
 
 	// Indicates whether the engine version supports rotating the server certificate
 	// without rebooting the DB instance.
@@ -1265,7 +1265,7 @@ type DBEngineVersion struct {
 
 	// Indicates whether you can use Aurora global databases with a specific DB engine
 	// version.
-	SupportsGlobalDatabases bool
+	SupportsGlobalDatabases *bool
 
 	// Indicates whether the DB engine version supports forwarding write operations
 	// from reader DB instances to the writer DB instance in the DB cluster. By
@@ -1275,14 +1275,14 @@ type DBEngineVersion struct {
 
 	// Indicates whether the engine version supports exporting the log types specified
 	// by ExportableLogTypes to CloudWatch Logs.
-	SupportsLogExportsToCloudwatchLogs bool
+	SupportsLogExportsToCloudwatchLogs *bool
 
 	// Indicates whether you can use Aurora parallel query with a specific DB engine
 	// version.
-	SupportsParallelQuery bool
+	SupportsParallelQuery *bool
 
 	// Indicates whether the database engine version supports read replicas.
-	SupportsReadReplica bool
+	SupportsReadReplica *bool
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
 	// in the Amazon RDS User Guide.
@@ -1327,14 +1327,14 @@ type DBInstance struct {
 	ActivityStreamStatus ActivityStreamStatus
 
 	// The amount of storage in gibibytes (GiB) allocated for the DB instance.
-	AllocatedStorage int32
+	AllocatedStorage *int32
 
 	// The Amazon Web Services Identity and Access Management (IAM) roles associated
 	// with the DB instance.
 	AssociatedRoles []DBInstanceRole
 
 	// Indicates whether minor version patches are applied automatically.
-	AutoMinorVersionUpgrade bool
+	AutoMinorVersionUpgrade *bool
 
 	// The time when a stopped DB instance is restarted automatically.
 	AutomaticRestartTime *time.Time
@@ -1353,7 +1353,7 @@ type DBInstance struct {
 	AwsBackupRecoveryPointArn *string
 
 	// The number of days for which automatic DB snapshots are retained.
-	BackupRetentionPeriod int32
+	BackupRetentionPeriod *int32
 
 	// The location where automated backups and manual snapshots are stored: Amazon
 	// Web Services Outposts or the Amazon Web Services Region.
@@ -1378,7 +1378,7 @@ type DBInstance struct {
 	// to snapshots is managed by the DB cluster. Setting this value for an Aurora DB
 	// instance has no effect on the DB cluster setting. For more information, see
 	// DBCluster .
-	CopyTagsToSnapshot bool
+	CopyTagsToSnapshot *bool
 
 	// The instance profile associated with the underlying Amazon EC2 instance of an
 	// RDS Custom DB instance. The instance profile must meet the following
@@ -1451,7 +1451,7 @@ type DBInstance struct {
 
 	// The port that the DB instance listens on. If the DB instance is part of a DB
 	// cluster, this can be a different port than the DB cluster port.
-	DbInstancePort int32
+	DbInstancePort *int32
 
 	// The Amazon Web Services Region-unique, immutable identifier for the DB
 	// instance. This identifier is found in Amazon Web Services CloudTrail log entries
@@ -1459,13 +1459,13 @@ type DBInstance struct {
 	DbiResourceId *string
 
 	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
-	DedicatedLogVolume bool
+	DedicatedLogVolume *bool
 
 	// Indicates whether the DB instance has deletion protection enabled. The database
 	// can't be deleted when deletion protection is enabled. For more information, see
 	// Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html)
 	// .
-	DeletionProtection bool
+	DeletionProtection *bool
 
 	// The Active Directory Domain membership records associated with the DB instance.
 	DomainMemberships []DomainMembership
@@ -1496,7 +1496,7 @@ type DBInstance struct {
 	// authentication (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.html)
 	// in the Amazon RDS User Guide and IAM database authentication in Aurora (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.Aurora_Fea_Regions_DB-eng.Feature.IAMdbauth.html)
 	// in the Amazon Aurora User Guide.
-	IAMDatabaseAuthenticationEnabled bool
+	IAMDatabaseAuthenticationEnabled *bool
 
 	// The date and time when the DB instance was created.
 	InstanceCreateTime *time.Time
@@ -1551,7 +1551,7 @@ type DBInstance struct {
 
 	// Indicates whether the DB instance is a Multi-AZ deployment. This setting
 	// doesn't apply to RDS Custom DB instances.
-	MultiAZ bool
+	MultiAZ *bool
 
 	// The name of the NCHAR character set for the Oracle DB instance. This character
 	// set specifies the Unicode encoding for data stored in table columns of type
@@ -1620,7 +1620,7 @@ type DBInstance struct {
 	// doesn't permit it. When the DB instance isn't publicly accessible, it is an
 	// internal DB instance with a DNS name that resolves to a private IP address. For
 	// more information, see CreateDBInstance .
-	PubliclyAccessible bool
+	PubliclyAccessible *bool
 
 	// The identifiers of Aurora DB clusters to which the RDS DB instance is
 	// replicated as a read replica. For example, when you create an Aurora read
@@ -1659,7 +1659,7 @@ type DBInstance struct {
 	StatusInfos []DBInstanceStatusInfo
 
 	// Indicates whether the DB instance is encrypted.
-	StorageEncrypted bool
+	StorageEncrypted *bool
 
 	// The storage throughput for the DB instance. This setting applies only to the gp3
 	// storage type.
@@ -1693,7 +1693,7 @@ type DBInstance struct {
 type DBInstanceAutomatedBackup struct {
 
 	// The allocated storage size for the the automated backup in gibibytes (GiB).
-	AllocatedStorage int32
+	AllocatedStorage *int32
 
 	// The Availability Zone that the automated backup was created in. For information
 	// on Amazon Web Services Regions and Availability Zones, see Regions and
@@ -1734,7 +1734,7 @@ type DBInstanceAutomatedBackup struct {
 	DedicatedLogVolume *bool
 
 	// Indicates whether the automated backup is encrypted.
-	Encrypted bool
+	Encrypted *bool
 
 	// The name of the database engine for this automated backup.
 	Engine *string
@@ -1744,7 +1744,7 @@ type DBInstanceAutomatedBackup struct {
 
 	// True if mapping of Amazon Web Services Identity and Access Management (IAM)
 	// accounts to database accounts is enabled, and otherwise false.
-	IAMDatabaseAuthenticationEnabled bool
+	IAMDatabaseAuthenticationEnabled *bool
 
 	// The date and time when the DB instance was created.
 	InstanceCreateTime *time.Time
@@ -1769,7 +1769,7 @@ type DBInstanceAutomatedBackup struct {
 
 	// The port number that the automated backup used for connections. Default:
 	// Inherits from the source DB instance Valid Values: 1150-65535
-	Port int32
+	Port *int32
 
 	// The Amazon Web Services Region associated with the automated backup.
 	Region *string
@@ -1851,7 +1851,7 @@ type DBInstanceStatusInfo struct {
 
 	// A Boolean value that is true if the instance is operating normally, or false if
 	// the instance is in an error state.
-	Normal bool
+	Normal *bool
 
 	// The status of the DB instance. For a StatusType of read replica, the values can
 	// be replicating, replication stop point set, replication stop point reached,
@@ -1928,7 +1928,7 @@ type DBProxy struct {
 	// proxy. Thus, only enable this setting when needed for debugging, and only when
 	// you have security measures in place to safeguard any sensitive information that
 	// appears in the logs.
-	DebugLogging bool
+	DebugLogging *bool
 
 	// The endpoint that you can use to connect to the DB proxy. You include the
 	// endpoint value in the connection string for a database client application.
@@ -1945,11 +1945,11 @@ type DBProxy struct {
 	// proxy drops the client connection. The proxy keeps the underlying database
 	// connection open and puts it back into the connection pool for reuse by later
 	// connection requests. Default: 1800 (30 minutes) Constraints: 1 to 28,800
-	IdleClientTimeout int32
+	IdleClientTimeout *int32
 
 	// Indicates whether Transport Layer Security (TLS) encryption is required for
 	// connections to the proxy.
-	RequireTLS bool
+	RequireTLS *bool
 
 	// The Amazon Resource Name (ARN) for the IAM role that the proxy uses to access
 	// Amazon Secrets Manager.
@@ -2005,7 +2005,7 @@ type DBProxyEndpoint struct {
 	// proxy. Default DB proxy endpoints always have read/write capability. Other
 	// endpoints that you associate with the DB proxy can be either read/write or
 	// read-only.
-	IsDefault bool
+	IsDefault *bool
 
 	// The current status of this DB proxy endpoint. A status of available means the
 	// endpoint is ready to handle requests. Other values indicate that you must wait
@@ -2039,7 +2039,7 @@ type DBProxyTarget struct {
 
 	// The port that the RDS Proxy uses to connect to the target RDS DB instance or
 	// Aurora DB cluster.
-	Port int32
+	Port *int32
 
 	// The identifier representing the target. It can be the instance identifier for
 	// an RDS DB instance, or the cluster identifier for an Aurora DB cluster.
@@ -2085,7 +2085,7 @@ type DBProxyTargetGroup struct {
 	// Indicates whether this target group is the first one used for connection
 	// requests by the associated proxy. Because each proxy is currently associated
 	// with a single target group, currently this setting is always true .
-	IsDefault bool
+	IsDefault *bool
 
 	// The current status of this target group. A status of available means the target
 	// group is correctly associated with a database. Other values indicate that you
@@ -2157,7 +2157,7 @@ type DBSecurityGroupMembership struct {
 type DBSnapshot struct {
 
 	// Specifies the allocated storage size in gibibytes (GiB).
-	AllocatedStorage int32
+	AllocatedStorage *int32
 
 	// Specifies the name of the Availability Zone the DB instance was located in at
 	// the time of the DB snapshot.
@@ -2183,10 +2183,10 @@ type DBSnapshot struct {
 	DbiResourceId *string
 
 	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
-	DedicatedLogVolume bool
+	DedicatedLogVolume *bool
 
 	// Indicates whether the DB snapshot is encrypted.
-	Encrypted bool
+	Encrypted *bool
 
 	// Specifies the name of the database engine.
 	Engine *string
@@ -2196,7 +2196,7 @@ type DBSnapshot struct {
 
 	// Indicates whether mapping of Amazon Web Services Identity and Access Management
 	// (IAM) accounts to database accounts is enabled.
-	IAMDatabaseAuthenticationEnabled bool
+	IAMDatabaseAuthenticationEnabled *bool
 
 	// Specifies the time in Coordinated Universal Time (UTC) when the DB instance,
 	// from which the snapshot was taken, was created.
@@ -2225,11 +2225,11 @@ type DBSnapshot struct {
 	OriginalSnapshotCreateTime *time.Time
 
 	// The percentage of the estimated data that has been transferred.
-	PercentProgress int32
+	PercentProgress *int32
 
 	// Specifies the port that the database engine was listening on at the time of the
 	// snapshot.
-	Port int32
+	Port *int32
 
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance when the DB snapshot was created.
@@ -2367,13 +2367,13 @@ type DBSubnetGroup struct {
 type DescribeDBLogFilesDetails struct {
 
 	// A POSIX timestamp when the last log entry was written.
-	LastWritten int64
+	LastWritten *int64
 
 	// The name of the log file for the specified DB instance.
 	LogFileName *string
 
 	// The size, in bytes, of the log file for the specified DB instance.
-	Size int64
+	Size *int64
 
 	noSmithyDocumentSerde
 }
@@ -2413,10 +2413,10 @@ type DomainMembership struct {
 type DoubleRange struct {
 
 	// The minimum value in the range.
-	From float64
+	From *float64
 
 	// The maximum value in the range.
-	To float64
+	To *float64
 
 	noSmithyDocumentSerde
 }
@@ -2462,7 +2462,7 @@ type Endpoint struct {
 	HostedZoneId *string
 
 	// Specifies the port that the database engine is listening on.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -2537,7 +2537,7 @@ type EventSubscription struct {
 
 	// A Boolean value indicating if the subscription is enabled. True indicates the
 	// subscription is enabled.
-	Enabled bool
+	Enabled *bool
 
 	// A list of event categories for the RDS event notification subscription.
 	EventCategoriesList []string
@@ -2600,7 +2600,7 @@ type ExportTask struct {
 	KmsKeyId *string
 
 	// The progress of the snapshot or cluster export task as a percentage.
-	PercentProgress int32
+	PercentProgress *int32
 
 	// The Amazon S3 bucket where the snapshot or cluster is exported to.
 	S3Bucket *string
@@ -2633,7 +2633,7 @@ type ExportTask struct {
 	TaskStartTime *time.Time
 
 	// The total amount of data exported, in gigabytes.
-	TotalExtractedDataInGB int32
+	TotalExtractedDataInGB *int32
 
 	// A warning about the snapshot or cluster export task.
 	WarningMessage *string
@@ -2653,7 +2653,7 @@ type FailoverState struct {
 	// Indicates whether the operation is a global switchover or a global failover. If
 	// data loss is allowed, then the operation is a global failover. Otherwise, it's a
 	// switchover.
-	IsDataLossAllowed bool
+	IsDataLossAllowed *bool
 
 	// The current status of the global cluster. Possible values are as follows:
 	//   - pending  The service received a request to switch over or fail over the
@@ -2757,7 +2757,7 @@ type GlobalClusterMember struct {
 
 	// Indicates whether the Aurora DB cluster is the primary cluster (that is, has
 	// read-write capability) for the global cluster with which it is associated.
-	IsWriter bool
+	IsWriter *bool
 
 	// The Amazon Resource Name (ARN) for each read-only secondary cluster associated
 	// with the global cluster.
@@ -2846,10 +2846,10 @@ type Option struct {
 	OptionVersion *string
 
 	// Indicates whether this option is permanent.
-	Permanent bool
+	Permanent *bool
 
 	// Indicates whether this option is persistent.
-	Persistent bool
+	Persistent *bool
 
 	// If required, the port configured for this option to use.
 	Port *int32
@@ -2892,7 +2892,7 @@ type OptionGroup struct {
 	// Indicates whether this option group can be applied to both VPC and non-VPC
 	// instances. The value true indicates the option group can be applied to both VPC
 	// and non-VPC instances.
-	AllowsVpcAndNonVpcInstanceMemberships bool
+	AllowsVpcAndNonVpcInstanceMemberships *bool
 
 	// Indicates when the option group was copied.
 	CopyTimestamp *time.Time
@@ -2985,28 +2985,28 @@ type OptionGroupOption struct {
 
 	// Permanent options can never be removed from an option group. An option group
 	// containing a permanent option can't be removed from a DB instance.
-	Permanent bool
+	Permanent *bool
 
 	// Persistent options can't be removed from an option group while DB instances are
 	// associated with the option group. If you disassociate all DB instances from the
 	// option group, your can remove the persistent option from the option group.
-	Persistent bool
+	Persistent *bool
 
 	// Indicates whether the option requires a port.
-	PortRequired bool
+	PortRequired *bool
 
 	// If true, you must enable the Auto Minor Version Upgrade setting for your DB
 	// instance before you can use this option. You can enable Auto Minor Version
 	// Upgrade when you first create your DB instance, or by modifying your DB instance
 	// later.
-	RequiresAutoMinorEngineVersionUpgrade bool
+	RequiresAutoMinorEngineVersionUpgrade *bool
 
 	// If true, you can change the option to an earlier version of the option. This
 	// only applies to options that have different versions available.
 	SupportsOptionVersionDowngrade *bool
 
 	// If true, you can only use this option with a DB instance that is in a VPC.
-	VpcOnly bool
+	VpcOnly *bool
 
 	noSmithyDocumentSerde
 }
@@ -3027,11 +3027,11 @@ type OptionGroupOptionSetting struct {
 
 	// Indicates whether this option group option can be changed from the default
 	// value.
-	IsModifiable bool
+	IsModifiable *bool
 
 	// Indicates whether a value must be specified for this option setting of the
 	// option group option.
-	IsRequired bool
+	IsRequired *bool
 
 	// The minimum DB engine version required for the corresponding allowed value for
 	// this option setting.
@@ -3068,10 +3068,10 @@ type OptionSetting struct {
 	Description *string
 
 	// Indicates whether the option setting is part of a collection.
-	IsCollection bool
+	IsCollection *bool
 
 	// Indicates whether the option setting can be modified from the default.
-	IsModifiable bool
+	IsModifiable *bool
 
 	// The name of the option that has settings that you can set.
 	Name *string
@@ -3087,7 +3087,7 @@ type OptionSetting struct {
 type OptionVersion struct {
 
 	// Indicates whether the version is the default version of the option.
-	IsDefault bool
+	IsDefault *bool
 
 	// The version of the option.
 	Version *string
@@ -3152,15 +3152,15 @@ type OrderableDBInstanceOption struct {
 	MinStorageThroughputPerIops *float64
 
 	// Indicates whether a DB instance is Multi-AZ capable.
-	MultiAZCapable bool
+	MultiAZCapable *bool
 
 	// Indicates whether a DB instance supports RDS on Outposts. For more information
 	// about RDS on Outposts, see Amazon RDS on Amazon Web Services Outposts (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html)
 	// in the Amazon RDS User Guide.
-	OutpostCapable bool
+	OutpostCapable *bool
 
 	// Indicates whether a DB instance can have a read replica.
-	ReadReplicaCapable bool
+	ReadReplicaCapable *bool
 
 	// The storage type for a DB instance.
 	StorageType *string
@@ -3184,43 +3184,43 @@ type OrderableDBInstanceOption struct {
 	// more information on Multi-AZ DB clusters, see Multi-AZ deployments with two
 	// readable standby DB instances (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 	// in the Amazon RDS User Guide.
-	SupportsClusters bool
+	SupportsClusters *bool
 
 	// Indicates whether a DB instance supports using a dedicated log volume (DLV).
-	SupportsDedicatedLogVolume bool
+	SupportsDedicatedLogVolume *bool
 
 	// Indicates whether a DB instance supports Enhanced Monitoring at intervals from
 	// 1 to 60 seconds.
-	SupportsEnhancedMonitoring bool
+	SupportsEnhancedMonitoring *bool
 
 	// Indicates whether you can use Aurora global databases with a specific
 	// combination of other DB engine attributes.
-	SupportsGlobalDatabases bool
+	SupportsGlobalDatabases *bool
 
 	// Indicates whether a DB instance supports IAM database authentication.
-	SupportsIAMDatabaseAuthentication bool
+	SupportsIAMDatabaseAuthentication *bool
 
 	// Indicates whether a DB instance supports provisioned IOPS.
-	SupportsIops bool
+	SupportsIops *bool
 
 	// Indicates whether a DB instance supports Kerberos Authentication.
 	SupportsKerberosAuthentication *bool
 
 	// Indicates whether a DB instance supports Performance Insights.
-	SupportsPerformanceInsights bool
+	SupportsPerformanceInsights *bool
 
 	// Indicates whether Amazon RDS can automatically scale storage for DB instances
 	// that use the specified DB instance class.
 	SupportsStorageAutoscaling *bool
 
 	// Indicates whether a DB instance supports encrypted storage.
-	SupportsStorageEncryption bool
+	SupportsStorageEncryption *bool
 
 	// Indicates whether a DB instance supports storage throughput.
-	SupportsStorageThroughput bool
+	SupportsStorageThroughput *bool
 
 	// Indicates whether a DB instance is in a VPC.
-	Vpc bool
+	Vpc *bool
 
 	noSmithyDocumentSerde
 }
@@ -3259,7 +3259,7 @@ type Parameter struct {
 	// Indicates whether ( true ) or not ( false ) the parameter can be modified. Some
 	// parameters have security or operational implications that prevent them from
 	// being changed.
-	IsModifiable bool
+	IsModifiable *bool
 
 	// The earliest engine version to which the parameter can apply.
 	MinimumEngineVersion *string
@@ -3456,7 +3456,7 @@ type ProcessorFeature struct {
 type Range struct {
 
 	// The minimum value in the range.
-	From int32
+	From *int32
 
 	// The step value for the range. For example, if you have a range of 5,000 to
 	// 10,000, with a step value of 1,000, the valid values start at 5,000 and step up
@@ -3465,7 +3465,7 @@ type Range struct {
 	Step *int32
 
 	// The maximum value in the range.
-	To int32
+	To *int32
 
 	noSmithyDocumentSerde
 }
@@ -3475,7 +3475,7 @@ type Range struct {
 type RecurringCharge struct {
 
 	// The amount of the recurring charge.
-	RecurringChargeAmount float64
+	RecurringChargeAmount *float64
 
 	// The frequency of the recurring charge.
 	RecurringChargeFrequency *string
@@ -3494,13 +3494,13 @@ type ReservedDBInstance struct {
 	DBInstanceClass *string
 
 	// The number of reserved DB instances.
-	DBInstanceCount int32
+	DBInstanceCount *int32
 
 	// The duration of the reservation in seconds.
-	Duration int32
+	Duration *int32
 
 	// The fixed price charged for this reserved DB instance.
-	FixedPrice float64
+	FixedPrice *float64
 
 	// The unique identifier for the lease associated with the reserved DB instance.
 	// Amazon Web Services Support might request the lease ID for an issue related to a
@@ -3508,7 +3508,7 @@ type ReservedDBInstance struct {
 	LeaseId *string
 
 	// Indicates whether the reservation applies to Multi-AZ deployments.
-	MultiAZ bool
+	MultiAZ *bool
 
 	// The offering type of this reserved DB instance.
 	OfferingType *string
@@ -3535,7 +3535,7 @@ type ReservedDBInstance struct {
 	State *string
 
 	// The hourly price charged for this reserved DB instance.
-	UsagePrice float64
+	UsagePrice *float64
 
 	noSmithyDocumentSerde
 }
@@ -3551,13 +3551,13 @@ type ReservedDBInstancesOffering struct {
 	DBInstanceClass *string
 
 	// The duration of the offering in seconds.
-	Duration int32
+	Duration *int32
 
 	// The fixed price charged for this offering.
-	FixedPrice float64
+	FixedPrice *float64
 
 	// Indicates whether the offering applies to Multi-AZ deployments.
-	MultiAZ bool
+	MultiAZ *bool
 
 	// The offering type.
 	OfferingType *string
@@ -3572,7 +3572,7 @@ type ReservedDBInstancesOffering struct {
 	ReservedDBInstancesOfferingId *string
 
 	// The hourly price charged for this offering.
-	UsagePrice float64
+	UsagePrice *float64
 
 	noSmithyDocumentSerde
 }
@@ -3741,7 +3741,7 @@ type SourceRegion struct {
 
 	// Indicates whether the source Amazon Web Services Region supports replicating
 	// automated backups to the current Amazon Web Services Region.
-	SupportsDBInstanceAutomatedBackupsReplication bool
+	SupportsDBInstanceAutomatedBackupsReplication *bool
 
 	noSmithyDocumentSerde
 }
@@ -3851,7 +3851,7 @@ type UpgradeTarget struct {
 
 	// Indicates whether the target version is applied to any source DB instances that
 	// have AutoMinorVersionUpgrade set to true.
-	AutoUpgrade bool
+	AutoUpgrade *bool
 
 	// The version of the database engine that a DB instance can be upgraded to.
 	Description *string
@@ -3864,7 +3864,7 @@ type UpgradeTarget struct {
 
 	// Indicates whether upgrading to the target version requires upgrading the major
 	// version of the database engine.
-	IsMajorVersionUpgrade bool
+	IsMajorVersionUpgrade *bool
 
 	// A list of the supported DB engine modes for the target engine version.
 	SupportedEngineModes []string
@@ -3963,7 +3963,7 @@ type ValidDBInstanceModificationsMessage struct {
 	Storage []ValidStorageOptions
 
 	// Indicates whether a DB instance supports using a dedicated log volume (DLV).
-	SupportsDedicatedLogVolume bool
+	SupportsDedicatedLogVolume *bool
 
 	// Valid processor features for your DB instance.
 	ValidProcessorFeatures []AvailableProcessorFeature
@@ -4000,7 +4000,7 @@ type ValidStorageOptions struct {
 
 	// Indicates whether or not Amazon RDS can automatically scale storage for DB
 	// instances that use the new instance class.
-	SupportsStorageAutoscaling bool
+	SupportsStorageAutoscaling *bool
 
 	noSmithyDocumentSerde
 }

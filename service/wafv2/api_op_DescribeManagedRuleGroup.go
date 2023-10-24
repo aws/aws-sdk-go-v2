@@ -83,7 +83,7 @@ type DescribeManagedRuleGroupOutput struct {
 	// web ACL WCU usage when they use a rule group. For more information, see WAF web
 	// ACL capacity units (WCU) (https://docs.aws.amazon.com/waf/latest/developerguide/aws-waf-capacity-units.html)
 	// in the WAF Developer Guide.
-	Capacity int64
+	Capacity *int64
 
 	// The labels that one or more rules in this rule group match against in label
 	// match statements. These labels are defined in a LabelMatchStatement

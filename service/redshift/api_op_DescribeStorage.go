@@ -38,10 +38,10 @@ type DescribeStorageInput struct {
 type DescribeStorageOutput struct {
 
 	// The total amount of storage currently used for snapshots.
-	TotalBackupSizeInMegaBytes float64
+	TotalBackupSizeInMegaBytes *float64
 
 	// The total amount of storage currently provisioned.
-	TotalProvisionedStorageInMegaBytes float64
+	TotalProvisionedStorageInMegaBytes *float64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

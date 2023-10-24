@@ -43,7 +43,7 @@ type RevokeEndpointAccessInput struct {
 
 	// Indicates whether to force the revoke action. If true, the Redshift-managed VPC
 	// endpoints associated with the endpoint authorization are also deleted.
-	Force bool
+	Force *bool
 
 	// The virtual private cloud (VPC) identifiers for which access is to be revoked.
 	VpcIds []string
@@ -57,7 +57,7 @@ type RevokeEndpointAccessOutput struct {
 
 	// Indicates whether all VPCs in the grantee account are allowed access to the
 	// cluster.
-	AllowedAllVPCs bool
+	AllowedAllVPCs *bool
 
 	// The VPCs allowed access to the cluster.
 	AllowedVPCs []string
@@ -72,7 +72,7 @@ type RevokeEndpointAccessOutput struct {
 	ClusterStatus *string
 
 	// The number of Redshift-managed VPC endpoints created for the authorization.
-	EndpointCount int32
+	EndpointCount *int32
 
 	// The Amazon Web Services account ID of the grantee of the cluster.
 	Grantee *string

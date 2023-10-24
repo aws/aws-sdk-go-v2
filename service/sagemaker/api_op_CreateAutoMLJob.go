@@ -83,7 +83,7 @@ type CreateAutoMLJobInput struct {
 
 	// Generates possible candidates without training the models. A candidate is a
 	// combination of data preprocessors, algorithms, and algorithm parameter settings.
-	GenerateCandidateDefinitionsOnly bool
+	GenerateCandidateDefinitionsOnly *bool
 
 	// Specifies how to generate the endpoint name for an automatic one-click
 	// Autopilot model deployment.

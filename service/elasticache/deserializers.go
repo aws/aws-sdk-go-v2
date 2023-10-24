@@ -11321,7 +11321,7 @@ func awsAwsquery_deserializeDocumentCacheCluster(v **types.CacheCluster, decoder
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AutoMinorVersionUpgrade = xtv
+				sv.AutoMinorVersionUpgrade = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("CacheClusterCreateTime", t.Name.Local):
@@ -11582,7 +11582,7 @@ func awsAwsquery_deserializeDocumentCacheCluster(v **types.CacheCluster, decoder
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.ReplicationGroupLogDeliveryEnabled = xtv
+				sv.ReplicationGroupLogDeliveryEnabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("SecurityGroups", t.Name.Local):
@@ -12377,7 +12377,7 @@ func awsAwsquery_deserializeDocumentCacheNodeTypeSpecificParameter(v **types.Cac
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.IsModifiable = xtv
+				sv.IsModifiable = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("MinimumEngineVersion", t.Name.Local):
@@ -12946,7 +12946,7 @@ func awsAwsquery_deserializeDocumentCacheParameterGroup(v **types.CacheParameter
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.IsGlobal = xtv
+				sv.IsGlobal = ptr.Bool(xtv)
 			}
 
 		default:
@@ -14663,7 +14663,7 @@ func awsAwsquery_deserializeDocumentEndpoint(v **types.Endpoint, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -18250,7 +18250,7 @@ func awsAwsquery_deserializeDocumentParameter(v **types.Parameter, decoder smith
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.IsModifiable = xtv
+				sv.IsModifiable = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("MinimumEngineVersion", t.Name.Local):
@@ -18861,7 +18861,7 @@ func awsAwsquery_deserializeDocumentRecurringCharge(v **types.RecurringCharge, d
 				if err != nil {
 					return err
 				}
-				sv.RecurringChargeAmount = f64
+				sv.RecurringChargeAmount = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("RecurringChargeFrequency", t.Name.Local):
@@ -19069,7 +19069,7 @@ func awsAwsquery_deserializeDocumentReplicationGroup(v **types.ReplicationGroup,
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AutoMinorVersionUpgrade = xtv
+				sv.AutoMinorVersionUpgrade = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("CacheNodeType", t.Name.Local):
@@ -19884,7 +19884,7 @@ func awsAwsquery_deserializeDocumentReservedCacheNode(v **types.ReservedCacheNod
 				if err != nil {
 					return err
 				}
-				sv.CacheNodeCount = int32(i64)
+				sv.CacheNodeCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("CacheNodeType", t.Name.Local):
@@ -19914,7 +19914,7 @@ func awsAwsquery_deserializeDocumentReservedCacheNode(v **types.ReservedCacheNod
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("FixedPrice", t.Name.Local):
@@ -19931,7 +19931,7 @@ func awsAwsquery_deserializeDocumentReservedCacheNode(v **types.ReservedCacheNod
 				if err != nil {
 					return err
 				}
-				sv.FixedPrice = f64
+				sv.FixedPrice = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("OfferingType", t.Name.Local):
@@ -20049,7 +20049,7 @@ func awsAwsquery_deserializeDocumentReservedCacheNode(v **types.ReservedCacheNod
 				if err != nil {
 					return err
 				}
-				sv.UsagePrice = f64
+				sv.UsagePrice = ptr.Float64(f64)
 			}
 
 		default:
@@ -20330,7 +20330,7 @@ func awsAwsquery_deserializeDocumentReservedCacheNodesOffering(v **types.Reserve
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("FixedPrice", t.Name.Local):
@@ -20347,7 +20347,7 @@ func awsAwsquery_deserializeDocumentReservedCacheNodesOffering(v **types.Reserve
 				if err != nil {
 					return err
 				}
-				sv.FixedPrice = f64
+				sv.FixedPrice = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("OfferingType", t.Name.Local):
@@ -20409,7 +20409,7 @@ func awsAwsquery_deserializeDocumentReservedCacheNodesOffering(v **types.Reserve
 				if err != nil {
 					return err
 				}
-				sv.UsagePrice = f64
+				sv.UsagePrice = ptr.Float64(f64)
 			}
 
 		default:
@@ -21124,7 +21124,7 @@ func awsAwsquery_deserializeDocumentSlotMigration(v **types.SlotMigration, decod
 				if err != nil {
 					return err
 				}
-				sv.ProgressPercentage = f64
+				sv.ProgressPercentage = ptr.Float64(f64)
 			}
 
 		default:
@@ -21202,7 +21202,7 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AutoMinorVersionUpgrade = xtv
+				sv.AutoMinorVersionUpgrade = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("CacheClusterCreateTime", t.Name.Local):

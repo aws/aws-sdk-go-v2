@@ -63,11 +63,11 @@ type ModifySnapshotCopyRetentionPeriodInput struct {
 	// an integer between 1 and 3,653 for manual snapshots.
 	//
 	// This member is required.
-	RetentionPeriod int32
+	RetentionPeriod *int32
 
 	// Indicates whether to apply the snapshot retention period to newly copied manual
 	// snapshots instead of automated snapshots.
-	Manual bool
+	Manual *bool
 
 	noSmithyDocumentSerde
 }

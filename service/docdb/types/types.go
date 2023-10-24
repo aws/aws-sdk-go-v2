@@ -108,7 +108,7 @@ type DBCluster struct {
 	// enabled, the cluster cannot be deleted unless it is modified and
 	// DeletionProtection is disabled. DeletionProtection protects clusters from being
 	// accidentally deleted.
-	DeletionProtection bool
+	DeletionProtection *bool
 
 	// The earliest time to which a database can be restored with point-in-time
 	// restore.
@@ -141,7 +141,7 @@ type DBCluster struct {
 	MasterUsername *string
 
 	// Specifies whether the cluster has instances in multiple Availability Zones.
-	MultiAZ bool
+	MultiAZ *bool
 
 	// Specifies the progress of the operation as a percentage.
 	PercentProgress *string
@@ -181,7 +181,7 @@ type DBCluster struct {
 	Status *string
 
 	// Specifies whether the cluster is encrypted.
-	StorageEncrypted bool
+	StorageEncrypted *bool
 
 	// Provides a list of virtual private cloud (VPC) security groups that the cluster
 	// belongs to.
@@ -202,7 +202,7 @@ type DBClusterMember struct {
 
 	// A value that is true if the cluster member is the primary instance for the
 	// cluster and false otherwise.
-	IsClusterWriter bool
+	IsClusterWriter *bool
 
 	// A value that specifies the order in which an Amazon DocumentDB replica is
 	// promoted to the primary instance after a failure of the existing primary
@@ -287,11 +287,11 @@ type DBClusterSnapshot struct {
 	MasterUsername *string
 
 	// Specifies the percentage of the estimated data that has been transferred.
-	PercentProgress int32
+	PercentProgress *int32
 
 	// Specifies the port that the cluster was listening on at the time of the
 	// snapshot.
-	Port int32
+	Port *int32
 
 	// Provides the time when the snapshot was taken, in UTC.
 	SnapshotCreateTime *time.Time
@@ -307,7 +307,7 @@ type DBClusterSnapshot struct {
 	Status *string
 
 	// Specifies whether the cluster snapshot is encrypted.
-	StorageEncrypted bool
+	StorageEncrypted *bool
 
 	// Provides the virtual private cloud (VPC) ID that is associated with the cluster
 	// snapshot.
@@ -373,7 +373,7 @@ type DBEngineVersion struct {
 
 	// A value that indicates whether the engine version supports exporting the log
 	// types specified by ExportableLogTypes to CloudWatch Logs.
-	SupportsLogExportsToCloudwatchLogs bool
+	SupportsLogExportsToCloudwatchLogs *bool
 
 	// A list of engine versions that this database engine version can be upgraded to.
 	ValidUpgradeTarget []UpgradeTarget
@@ -386,13 +386,13 @@ type DBInstance struct {
 
 	// Does not apply. This parameter does not apply to Amazon DocumentDB. Amazon
 	// DocumentDB does not perform minor version upgrades regardless of the value set.
-	AutoMinorVersionUpgrade bool
+	AutoMinorVersionUpgrade *bool
 
 	// Specifies the name of the Availability Zone that the instance is located in.
 	AvailabilityZone *string
 
 	// Specifies the number of days for which automatic snapshots are retained.
-	BackupRetentionPeriod int32
+	BackupRetentionPeriod *int32
 
 	// The identifier of the CA certificate for this DB instance.
 	CACertificateIdentifier *string
@@ -469,14 +469,14 @@ type DBInstance struct {
 
 	// Not supported. Amazon DocumentDB does not currently support public endpoints.
 	// The value of PubliclyAccessible is always false .
-	PubliclyAccessible bool
+	PubliclyAccessible *bool
 
 	// The status of a read replica. If the instance is not a read replica, this is
 	// blank.
 	StatusInfos []DBInstanceStatusInfo
 
 	// Specifies whether or not the instance is encrypted.
-	StorageEncrypted bool
+	StorageEncrypted *bool
 
 	// Provides a list of VPC security group elements that the instance belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership
@@ -493,7 +493,7 @@ type DBInstanceStatusInfo struct {
 
 	// A Boolean value that is true if the instance is operating normally, or false if
 	// the instance is in an error state.
-	Normal bool
+	Normal *bool
 
 	// Status of the instance. For a StatusType of read replica, the values can be
 	// replicating , error, stopped , or terminated .
@@ -540,7 +540,7 @@ type Endpoint struct {
 	HostedZoneId *string
 
 	// Specifies the port that the database engine is listening on.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -612,7 +612,7 @@ type EventSubscription struct {
 
 	// A Boolean value indicating whether the subscription is enabled. A value of true
 	// indicates that the subscription is enabled.
-	Enabled bool
+	Enabled *bool
 
 	// A list of event categories for the Amazon DocumentDB event notification
 	// subscription.
@@ -713,7 +713,7 @@ type GlobalClusterMember struct {
 	// Specifies whether the Amazon DocumentDB cluster is the primary cluster (that
 	// is, has read-write capability) for the Amazon DocumentDB global cluster with
 	// which it is associated.
-	IsWriter bool
+	IsWriter *bool
 
 	// The Amazon Resource Name (ARN) for each read-only secondary cluster associated
 	// with the Aurora global cluster.
@@ -741,7 +741,7 @@ type OrderableDBInstanceOption struct {
 	LicenseModel *string
 
 	// Indicates whether an instance is in a virtual private cloud (VPC).
-	Vpc bool
+	Vpc *bool
 
 	noSmithyDocumentSerde
 }
@@ -767,7 +767,7 @@ type Parameter struct {
 	// Indicates whether ( true ) or not ( false ) the parameter can be modified. Some
 	// parameters have security or operational implications that prevent them from
 	// being changed.
-	IsModifiable bool
+	IsModifiable *bool
 
 	// The earliest engine version to which the parameter can apply.
 	MinimumEngineVersion *string
@@ -940,7 +940,7 @@ type UpgradeTarget struct {
 
 	// A value that indicates whether the target version is applied to any source DB
 	// instances that have AutoMinorVersionUpgrade set to true .
-	AutoUpgrade bool
+	AutoUpgrade *bool
 
 	// The version of the database engine that an instance can be upgraded to.
 	Description *string
@@ -952,7 +952,7 @@ type UpgradeTarget struct {
 	EngineVersion *string
 
 	// A value that indicates whether a database engine is upgraded to a major version.
-	IsMajorVersionUpgrade bool
+	IsMajorVersionUpgrade *bool
 
 	noSmithyDocumentSerde
 }

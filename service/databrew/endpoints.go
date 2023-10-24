@@ -410,7 +410,7 @@ func (r *resolver) ResolveEndpoint(
 				}
 			}
 			if _UseFIPS == true {
-				if true == _PartitionResult.SupportsFIPS {
+				if _PartitionResult.SupportsFIPS == true {
 					if _Region == "us-gov-west-1" {
 						uriString := "https://databrew.us-gov-west-1.amazonaws.com"
 

@@ -70,6 +70,7 @@
                 "ReservedNodeId": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A string representing the node identifier of the DC1 Reserved Node to be\n            exchanged.</p>",
                         "smithy.api#required": {}
                     }
@@ -77,6 +78,7 @@
                 "TargetReservedNodeOfferingId": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier of the DC2 Reserved Node offering to be used for the exchange.\n            You can obtain the value for the parameter by calling <a>GetReservedNodeExchangeOfferings</a>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -332,6 +334,7 @@
                 "DataShareArn": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare that the consumer is to use with the account or the namespace.</p>",
                         "smithy.api#required": {}
                     }
@@ -631,6 +634,7 @@
                 "ClusterSecurityGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the security group to which the ingress rule is added.</p>",
                         "smithy.api#required": {}
                     }
@@ -693,6 +697,7 @@
                 "DataShareArn": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare that producers are to authorize\n            sharing for.</p>",
                         "smithy.api#required": {}
                     }
@@ -700,6 +705,7 @@
                 "ConsumerIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the data consumer that is authorized to access the datashare. This identifier is an Amazon Web Services account ID or a keyword, such as ADX.</p>",
                         "smithy.api#required": {}
                     }
@@ -753,6 +759,7 @@
                 "Account": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID to grant access to.</p>",
                         "smithy.api#required": {}
                     }
@@ -827,6 +834,7 @@
                 "AccountWithRestoreAccess": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account authorized to restore the specified\n            snapshot.</p>\n         <p>To share a snapshot with Amazon Web Services Support, specify amazon-redshift-support.</p>",
                         "smithy.api#required": {}
                     }
@@ -900,6 +908,7 @@
                 "Identifiers": {
                     "target": "com.amazonaws.redshift#DeleteClusterSnapshotMessageList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of identifiers for the snapshots that you want to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -989,6 +998,7 @@
                 "SnapshotIdentifierList": {
                     "target": "com.amazonaws.redshift#SnapshotIdentifierList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of snapshot identifiers you want to modify.</p>",
                         "smithy.api#required": {}
                     }
@@ -1002,7 +1012,6 @@
                 "Force": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A boolean value indicating whether to override an exception if the retention period\n            has passed. </p>"
                     }
                 }
@@ -1050,10 +1059,7 @@
             }
         },
         "com.amazonaws.redshift#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "type": "boolean"
         },
         "com.amazonaws.redshift#BooleanOptional": {
             "type": "boolean"
@@ -1107,6 +1113,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier for the cluster that you want to cancel a resize operation\n            for.</p>",
                         "smithy.api#required": {}
                     }
@@ -1205,14 +1212,12 @@
                 "AutomatedSnapshotRetentionPeriod": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of days that automatic cluster snapshots are retained.</p>"
                     }
                 },
                 "ManualSnapshotRetentionPeriod": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The default number of days to retain a manual snapshot. If the value is -1, the\n            snapshot is retained indefinitely. This setting doesn't change the retention period\n            of existing snapshots.</p>\n         <p>The value must be either -1 or an integer between 1 and 3,653.</p>"
                     }
                 },
@@ -1273,28 +1278,24 @@
                 "AllowVersionUpgrade": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A boolean value that, if <code>true</code>, indicates that major version upgrades\n            will be applied automatically to the cluster during the maintenance window. </p>"
                     }
                 },
                 "NumberOfNodes": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of compute nodes in the cluster.</p>"
                     }
                 },
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A boolean value that, if <code>true</code>, indicates that the cluster can be\n            accessed from a public network.</p>"
                     }
                 },
                 "Encrypted": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A boolean value that, if <code>true</code>, indicates that data in the cluster is\n            encrypted at rest.</p>"
                     }
                 },
@@ -1361,7 +1362,6 @@
                 "EnhancedVpcRouting": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>An option that specifies whether to create the cluster with enhanced VPC routing\n            enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a\n            VPC. For more information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html\">Enhanced VPC Routing</a> in\n            the Amazon Redshift Cluster Management Guide.</p>\n         <p>If this option is <code>true</code>, enhanced VPC routing is enabled. </p>\n         <p>Default: false</p>"
                     }
                 },
@@ -2173,14 +2173,12 @@
                 "RetentionPeriod": {
                     "target": "com.amazonaws.redshift#Long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of days that automated snapshots are retained in the destination region\n            after they are copied from a source region.</p>"
                     }
                 },
                 "ManualSnapshotRetentionPeriod": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of days that automated snapshots are retained in the destination region\n            after they are copied from a source region. If the value is -1, the manual snapshot is\n            retained indefinitely. </p>\n         <p>The value must be either -1 or an integer between 1 and 3,653.</p>"
                     }
                 },
@@ -2483,6 +2481,7 @@
                 "SourceSnapshotIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier for the source snapshot.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be the identifier for a valid automated snapshot whose state is\n                        <code>available</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -2496,6 +2495,7 @@
                 "TargetSnapshotIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier given to the new manual snapshot.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Cannot be null, empty, or blank.</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n               <p>Must be unique for the Amazon Web Services account that is making the request.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -2569,6 +2569,7 @@
                 "AuthenticationProfileName": {
                     "target": "com.amazonaws.redshift#AuthenticationProfileNameString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the authentication profile to be created.</p>",
                         "smithy.api#required": {}
                     }
@@ -2576,6 +2577,7 @@
                 "AuthenticationProfileContent": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The content of the authentication profile in JSON format. \n            The maximum length of the JSON string is determined by a quota for your account.</p>",
                         "smithy.api#required": {}
                     }
@@ -2697,6 +2699,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the cluster. You use this identifier to refer to the\n            cluster for any subsequent cluster operations such as deleting or modifying. The\n            identifier also appears in the Amazon Redshift console.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>Alphabetic characters must be lowercase.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n               <p>Must be unique for all clusters within an Amazon Web Services account.</p>\n            </li>\n         </ul>\n         <p>Example: <code>myexamplecluster</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -2710,6 +2713,7 @@
                 "NodeType": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The node type to be provisioned for the cluster. For information about node types,\n            go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes\"> Working with\n                Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>\n         <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> |\n                <code>dc1.large</code> | <code>dc1.8xlarge</code> | \n                <code>dc2.large</code> | <code>dc2.8xlarge</code> | \n                <code>ra3.xlplus</code> |  <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -2717,6 +2721,7 @@
                 "MasterUsername": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The user name associated with the admin user account for the cluster that is being\n            created.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 - 128 alphanumeric characters or hyphens. The user name can't be\n                        <code>PUBLIC</code>.</p>\n            </li>\n            <li>\n               <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Must not contain a colon (:) or a slash (/).</p>\n            </li>\n            <li>\n               <p>Cannot be a reserved word. A list of reserved words can be found in <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved\n                        Words</a> in the Amazon Redshift Database Developer Guide. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -2945,6 +2950,7 @@
                 "ParameterGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cluster parameter group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 255 alphanumeric characters or hyphens</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n               <p>Must be unique withing your Amazon Web Services account.</p>\n            </li>\n         </ul>\n         <note>\n            <p>This value is stored as a lower-case string.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -2952,6 +2958,7 @@
                 "ParameterGroupFamily": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Redshift engine version to which the cluster parameter group applies. The\n            cluster engine version determines the set of parameters.</p>\n         <p>To get a list of valid parameter group family names, you can call <a>DescribeClusterParameterGroups</a>. By default, Amazon Redshift returns a list of\n            all the parameter groups that are owned by your Amazon Web Services account, including the default\n            parameter groups for each Amazon Redshift engine version. The parameter group family names\n            associated with the default parameter groups provide you the valid values. For example,\n            a valid family name is \"redshift-1.0\". </p>",
                         "smithy.api#required": {}
                     }
@@ -2959,6 +2966,7 @@
                 "Description": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A description of the parameter group.</p>",
                         "smithy.api#required": {}
                     }
@@ -3029,6 +3037,7 @@
                 "ClusterSecurityGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name for the security group. Amazon Redshift stores the value as a lowercase\n            string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain no more than 255 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>Must not be \"Default\".</p>\n            </li>\n            <li>\n               <p>Must be unique for all security groups that are created by your Amazon Web Services account.</p>\n            </li>\n         </ul>\n         <p>Example: <code>examplesecuritygroup</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -3036,6 +3045,7 @@
                 "Description": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A description for the security group.</p>",
                         "smithy.api#required": {}
                     }
@@ -3104,6 +3114,7 @@
                 "SnapshotIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the snapshot that you are requesting. This identifier must\n            be unique for all snapshots within the Amazon Web Services account.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Cannot be null, empty, or blank</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 255 alphanumeric characters or hyphens</p>\n            </li>\n            <li>\n               <p>First character must be a letter</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-snapshot-id</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -3111,6 +3122,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier for which you want a snapshot.</p>",
                         "smithy.api#required": {}
                     }
@@ -3188,6 +3200,7 @@
                 "ClusterSubnetGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name for the subnet group. Amazon Redshift stores the value as a lowercase\n            string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain no more than 255 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>Must not be \"Default\".</p>\n            </li>\n            <li>\n               <p>Must be unique for all subnet groups that are created by your Amazon Web Services account.</p>\n            </li>\n         </ul>\n         <p>Example: <code>examplesubnetgroup</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -3195,6 +3208,7 @@
                 "Description": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A description for the subnet group.</p>",
                         "smithy.api#required": {}
                     }
@@ -3202,6 +3216,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.redshift#SubnetIdentifierList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a single\n            request.</p>",
                         "smithy.api#required": {}
                     }
@@ -3258,6 +3273,7 @@
                 "CustomDomainName": {
                     "target": "com.amazonaws.redshift#CustomDomainNameString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The custom domain name for a custom domain association.</p>",
                         "smithy.api#required": {}
                     }
@@ -3265,6 +3281,7 @@
                 "CustomDomainCertificateArn": {
                     "target": "com.amazonaws.redshift#CustomDomainCertificateArnString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The certificate Amazon Resource Name (ARN) for the custom domain name association.</p>",
                         "smithy.api#required": {}
                     }
@@ -3272,6 +3289,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier that the custom domain is associated with.</p>",
                         "smithy.api#required": {}
                     }
@@ -3375,6 +3393,7 @@
                 "EndpointName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Redshift-managed VPC endpoint name.</p>\n         <p>An endpoint name must contain 1-30 characters.\n          Valid characters are A-Z, a-z, 0-9, and hyphen(-).\n          The first character must be a letter.\n          The name can't contain two consecutive hyphens or end with a hyphen.</p>",
                         "smithy.api#required": {}
                     }
@@ -3382,6 +3401,7 @@
                 "SubnetGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The subnet group from which Amazon Redshift chooses the subnet to deploy the endpoint.</p>",
                         "smithy.api#required": {}
                     }
@@ -3450,6 +3470,7 @@
                 "SubscriptionName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the event subscription to be created.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Cannot be null, empty, or blank.</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -3457,6 +3478,7 @@
                 "SnsTopicArn": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon SNS topic used to transmit the event\n            notifications. The ARN is created by Amazon SNS when you create a topic and subscribe to\n            it.</p>",
                         "smithy.api#required": {}
                     }
@@ -3546,6 +3568,7 @@
                 "HsmClientCertificateIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier to be assigned to the new HSM client certificate that the cluster\n            will use to connect to the HSM to use the database encryption keys.</p>",
                         "smithy.api#required": {}
                     }
@@ -3605,6 +3628,7 @@
                 "HsmConfigurationIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier to be assigned to the new Amazon Redshift HSM configuration.</p>",
                         "smithy.api#required": {}
                     }
@@ -3612,6 +3636,7 @@
                 "Description": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A text description of the HSM configuration to be created.</p>",
                         "smithy.api#required": {}
                     }
@@ -3619,6 +3644,7 @@
                 "HsmIpAddress": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The IP address that the Amazon Redshift cluster must use to access the HSM.</p>",
                         "smithy.api#required": {}
                     }
@@ -3626,6 +3652,7 @@
                 "HsmPartitionName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the partition in the HSM where the Amazon Redshift clusters will store their\n            database encryption keys.</p>",
                         "smithy.api#required": {}
                     }
@@ -3633,6 +3660,7 @@
                 "HsmPartitionPassword": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The password required to access the HSM partition.</p>",
                         "smithy.api#required": {}
                     }
@@ -3640,6 +3668,7 @@
                 "HsmServerPublicCertificate": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The HSMs public certificate file. When using Cloud HSM, the file name is\n            server.pem.</p>",
                         "smithy.api#required": {}
                     }
@@ -3705,6 +3734,7 @@
                 "ScheduledActionName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the scheduled action. The name must be unique within an account. \n            For more information about this parameter, see <a>ScheduledAction</a>. </p>",
                         "smithy.api#required": {}
                     }
@@ -3712,6 +3742,7 @@
                 "TargetAction": {
                     "target": "com.amazonaws.redshift#ScheduledActionType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A JSON format string of the Amazon Redshift API operation with input parameters. \n            For more information about this parameter, see <a>ScheduledAction</a>. </p>",
                         "smithy.api#required": {}
                     }
@@ -3719,6 +3750,7 @@
                 "Schedule": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The schedule in <code>at( )</code> or <code>cron( )</code> format. \n            For more information about this parameter, see <a>ScheduledAction</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -3726,6 +3758,7 @@
                 "IamRole": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The IAM role to assume to run the target action. \n            For more information about this parameter, see <a>ScheduledAction</a>. </p>",
                         "smithy.api#required": {}
                     }
@@ -3797,6 +3830,7 @@
                 "SnapshotCopyGrantName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the snapshot copy grant. This name must be unique in the region for the\n            Amazon Web Services account.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>Alphabetic characters must be lowercase.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n               <p>Must be unique for all clusters within an Amazon Web Services account.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -3938,6 +3972,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) to which you want to add the tag or tags. For\n            example, <code>arn:aws:redshift:us-east-2:123456789:cluster:t1</code>. </p>",
                         "smithy.api#required": {}
                     }
@@ -3945,6 +3980,7 @@
                 "Tags": {
                     "target": "com.amazonaws.redshift#TagList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>One or more name/value pairs to add as tags to the specified resource. Each tag\n            name is passed in with the parameter <code>Key</code> and the corresponding value is\n            passed in with the parameter <code>Value</code>. The <code>Key</code> and\n                <code>Value</code> parameters are separated by a comma (,). Separate multiple tags\n            with a space. For example, <code>--tags \"Key\"=\"owner\",\"Value\"=\"admin\"\n                \"Key\"=\"environment\",\"Value\"=\"test\" \"Key\"=\"version\",\"Value\"=\"1.0\"</code>. </p>",
                         "smithy.api#required": {}
                     }
@@ -3996,6 +4032,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster that you want to limit usage.</p>",
                         "smithy.api#required": {}
                     }
@@ -4003,6 +4040,7 @@
                 "FeatureType": {
                     "target": "com.amazonaws.redshift#UsageLimitFeatureType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Redshift feature that you want to limit.</p>",
                         "smithy.api#required": {}
                     }
@@ -4010,6 +4048,7 @@
                 "LimitType": {
                     "target": "com.amazonaws.redshift#UsageLimitLimitType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of limit. Depending on the feature type, this can be based on a time duration or data size.\n            If <code>FeatureType</code> is <code>spectrum</code>, then <code>LimitType</code> must be <code>data-scanned</code>.\n            If <code>FeatureType</code> is <code>concurrency-scaling</code>, then <code>LimitType</code> must be <code>time</code>.\n            If <code>FeatureType</code> is <code>cross-region-datasharing</code>, then <code>LimitType</code> must be <code>data-scanned</code>.\n           </p>",
                         "smithy.api#required": {}
                     }
@@ -4017,7 +4056,7 @@
                 "Amount": {
                     "target": "com.amazonaws.redshift#Long",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The limit amount. If time-based, this amount is in minutes. If data-based, this amount is in terabytes (TB).\n            The value must be a positive number.\n            </p>",
                         "smithy.api#required": {}
                     }
@@ -4125,14 +4164,12 @@
                 "TotalBackupSizeInMegaBytes": {
                     "target": "com.amazonaws.redshift#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total amount of storage currently used for snapshots.</p>"
                     }
                 },
                 "TotalProvisionedStorageInMegaBytes": {
                     "target": "com.amazonaws.redshift#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total amount of storage currently provisioned.</p>"
                     }
                 }
@@ -4159,7 +4196,6 @@
                 "AllowPubliclyAccessibleConsumers": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that specifies whether the datashare can be shared to a publicly accessible  cluster.</p>"
                     }
                 },
@@ -4338,14 +4374,12 @@
                 "TotalDataInMegaBytes": {
                     "target": "com.amazonaws.redshift#Long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Describes the total amount of data to be transfered in megabytes.</p>"
                     }
                 },
                 "DataTransferredInMegaBytes": {
                     "target": "com.amazonaws.redshift#Long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Describes the total amount of data that has been transfered in MB's.</p>"
                     }
                 },
@@ -4398,6 +4432,7 @@
                 "DataShareArn": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare to remove authorization from.</p>",
                         "smithy.api#required": {}
                     }
@@ -4405,6 +4440,7 @@
                 "ConsumerIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the data consumer that is to have authorization removed from the datashare. \n            This identifier is an Amazon Web Services account ID or a keyword, such as ADX.</p>",
                         "smithy.api#required": {}
                     }
@@ -4501,6 +4537,7 @@
                 "AuthenticationProfileName": {
                     "target": "com.amazonaws.redshift#AuthenticationProfileNameString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the authentication profile to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -4559,6 +4596,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster to be deleted.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain lowercase characters.</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -4566,7 +4604,6 @@
                 "SkipFinalClusterSnapshot": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether a final snapshot of the cluster is created before Amazon Redshift\n            deletes the cluster. If <code>true</code>, a final cluster snapshot is not created. If\n                <code>false</code>, a final cluster snapshot is created before the cluster is\n            deleted. </p>\n         <note>\n            <p>The <i>FinalClusterSnapshotIdentifier</i> parameter must be\n                specified if <i>SkipFinalClusterSnapshot</i> is\n                <code>false</code>.</p>\n         </note>\n         <p>Default: <code>false</code>\n         </p>"
                     }
                 },
@@ -4614,6 +4651,7 @@
                 "ParameterGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the parameter group to be deleted.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be the name of an existing cluster parameter group.</p>\n            </li>\n            <li>\n               <p>Cannot delete a default cluster parameter group.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -4661,6 +4699,7 @@
                 "ClusterSecurityGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cluster security group to be deleted.</p>",
                         "smithy.api#required": {}
                     }
@@ -4697,6 +4736,7 @@
                 "SnapshotIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier of the manual snapshot to be deleted.</p>\n         <p>Constraints: Must be the name of an existing snapshot that is in the\n                <code>available</code>, <code>failed</code>, or <code>cancelled</code>\n            state.</p>",
                         "smithy.api#required": {}
                     }
@@ -4761,6 +4801,7 @@
                 "ClusterSubnetGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cluster subnet group name to be deleted.</p>",
                         "smithy.api#required": {}
                     }
@@ -4800,6 +4841,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster to delete a custom domain association for.</p>",
                         "smithy.api#required": {}
                     }
@@ -4844,6 +4886,7 @@
                 "EndpointName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Redshift-managed VPC endpoint to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -4879,6 +4922,7 @@
                 "SubscriptionName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Amazon Redshift event notification subscription to be deleted.</p>",
                         "smithy.api#required": {}
                     }
@@ -4915,6 +4959,7 @@
                 "HsmClientCertificateIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the HSM client certificate to be deleted.</p>",
                         "smithy.api#required": {}
                     }
@@ -4951,6 +4996,7 @@
                 "HsmConfigurationIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the Amazon Redshift HSM configuration to be deleted.</p>",
                         "smithy.api#required": {}
                     }
@@ -5010,6 +5056,7 @@
                 "ScheduledActionName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the scheduled action to delete. </p>",
                         "smithy.api#required": {}
                     }
@@ -5045,6 +5092,7 @@
                 "SnapshotCopyGrantName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the snapshot copy grant to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -5081,6 +5129,7 @@
                 "ScheduleIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier of the snapshot schedule to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -5116,6 +5165,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) from which you want to remove the tag or tags. For\n            example, <code>arn:aws:redshift:us-east-2:123456789:cluster:t1</code>. </p>",
                         "smithy.api#required": {}
                     }
@@ -5123,6 +5173,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.redshift#TagKeyList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The tag key that you want to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -5159,6 +5210,7 @@
                 "UsageLimitId": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the usage limit to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -5422,6 +5474,7 @@
                 "ParameterGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of a cluster parameter group for which to return details.</p>",
                         "smithy.api#required": {}
                     }
@@ -6297,6 +6350,7 @@
                 "ParameterGroupFamily": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cluster parameter group family.</p>",
                         "smithy.api#required": {}
                     }
@@ -6781,6 +6835,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster from which to get the logging status.</p>\n         <p>Example: <code>examplecluster</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -6832,6 +6887,7 @@
                 "ActionType": {
                     "target": "com.amazonaws.redshift#ActionType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The action type to evaluate for possible node configurations.\n            Specify \"restore-cluster\" to get configuration combinations based on an existing snapshot. \n            Specify \"recommend-node-config\" to get configuration recommendations based on an existing cluster or snapshot. \n            Specify \"resize-cluster\" to get configuration combinations for elastic resize based on an existing cluster.\n        </p>",
                         "smithy.api#required": {}
                     }
@@ -6961,6 +7017,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.redshift#PartnerIntegrationAccountId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -6968,6 +7025,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#PartnerIntegrationClusterIdentifier",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier of the cluster whose partner integration is being described.</p>",
                         "smithy.api#required": {}
                     }
@@ -7219,6 +7277,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier of a cluster whose resize progress you are requesting. This\n            parameter is case-sensitive.</p>\n         <p>By default, resize operations for all clusters defined for an Amazon Web Services account are\n            returned.</p>",
                         "smithy.api#required": {}
                     }
@@ -7702,6 +7761,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster on which logging is to be stopped.</p>\n         <p>Example: <code>examplecluster</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -7744,6 +7804,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier of the source cluster that you want to disable copying of\n            snapshots to a destination region.</p>\n         <p>Constraints: Must be the valid name of an existing cluster that has cross-region\n            snapshot copy enabled.</p>",
                         "smithy.api#required": {}
                     }
@@ -7791,6 +7852,7 @@
                 "DataShareArn": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare to remove association for. </p>",
                         "smithy.api#required": {}
                     }
@@ -7819,10 +7881,7 @@
             }
         },
         "com.amazonaws.redshift#Double": {
-            "type": "double",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "double"
         },
         "com.amazonaws.redshift#DoubleOptional": {
             "type": "double"
@@ -7935,6 +7994,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster on which logging is to be started.</p>\n         <p>Example: <code>examplecluster</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -8022,6 +8082,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier of the source cluster to copy snapshots from.</p>\n         <p>Constraints: Must be the valid name of an existing cluster that does not already\n            have cross-region snapshot copy enabled.</p>",
                         "smithy.api#required": {}
                     }
@@ -8029,6 +8090,7 @@
                 "DestinationRegion": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The destination Amazon Web Services Region that you want to copy snapshots to.</p>\n         <p>Constraints: Must be the name of a valid Amazon Web Services Region. For more information, see\n                <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region\">Regions and Endpoints</a> in the Amazon Web Services General Reference.\n        </p>",
                         "smithy.api#required": {}
                     }
@@ -8080,7 +8142,6 @@
                 "Port": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port that the database engine is listening on.</p>"
                     }
                 },
@@ -8137,7 +8198,6 @@
                 "Port": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port number on which the cluster accepts incoming connections.</p>"
                     }
                 },
@@ -8243,7 +8303,6 @@
                 "AllowedAllVPCs": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether all VPCs in the grantee account are allowed access to the cluster.</p>"
                     }
                 },
@@ -8256,7 +8315,6 @@
                 "EndpointCount": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of Redshift-managed VPC endpoints created for the authorization.</p>"
                     }
                 }
@@ -8603,7 +8661,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A boolean value indicating whether the subscription is enabled; <code>true</code>\n            indicates that the subscription is enabled.</p>"
                     }
                 },
@@ -8715,6 +8772,7 @@
                 "DbUser": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of a database user. If a user name matching <code>DbUser</code> exists in\n            the database, the temporary user credentials have the same permissions as the existing\n            user. If <code>DbUser</code> doesn't exist in the database and <code>Autocreate</code>\n            is <code>True</code>, a new user is created using the value for <code>DbUser</code> with\n            PUBLIC permissions. If a database user matching the value for <code>DbUser</code>\n            doesn't exist and <code>Autocreate</code> is <code>False</code>, then the command\n            succeeds but the connection attempt will fail because the user doesn't exist in the\n            database.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html\">CREATE USER</a> in the Amazon\n            Redshift Database Developer Guide. </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 64 alphanumeric characters or hyphens. The user name can't be\n                        <code>PUBLIC</code>.</p>\n            </li>\n            <li>\n               <p>Must contain uppercase or lowercase letters, numbers, underscore, plus sign, period\n                    (dot), at symbol (@), or hyphen.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Must not contain a colon ( : ) or slash ( / ). </p>\n            </li>\n            <li>\n               <p>Cannot be a reserved word. A list of reserved words can be found in <a href=\"http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words</a> in the Amazon\n                    Redshift Database Developer Guide.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -8863,6 +8921,7 @@
                 "ActionType": {
                     "target": "com.amazonaws.redshift#ReservedNodeExchangeActionType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The action type of the reserved-node configuration. The action type can be an exchange initiated from either a snapshot or a resize.</p>",
                         "smithy.api#required": {}
                     }
@@ -8960,6 +9019,7 @@
                 "ReservedNodeId": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A string representing the node identifier for the DC1 Reserved Node to be\n            exchanged.</p>",
                         "smithy.api#required": {}
                     }
@@ -9385,10 +9445,7 @@
             }
         },
         "com.amazonaws.redshift#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "integer"
         },
         "com.amazonaws.redshift#IntegerOptional": {
             "type": "integer"
@@ -9949,7 +10006,6 @@
                 "LoggingEnabled": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>\n            <code>true</code> if logging is on, <code>false</code> if logging is off.</p>"
                     }
                 },
@@ -10001,10 +10057,7 @@
             }
         },
         "com.amazonaws.redshift#Long": {
-            "type": "long",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "long"
         },
         "com.amazonaws.redshift#LongOptional": {
             "type": "long"
@@ -10081,6 +10134,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster to be modified.</p>",
                         "smithy.api#required": {}
                     }
@@ -10139,6 +10193,7 @@
                 "AuthenticationProfileName": {
                     "target": "com.amazonaws.redshift#AuthenticationProfileNameString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the authentication profile to replace.</p>",
                         "smithy.api#required": {}
                     }
@@ -10146,6 +10201,7 @@
                 "AuthenticationProfileContent": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The new content of the authentication profile in JSON format.\n            The maximum length of the JSON string is determined by a quota for your account.</p>",
                         "smithy.api#required": {}
                     }
@@ -10281,6 +10337,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier of a cluster whose database revision you want to modify. </p>\n         <p>Example: <code>examplecluster</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -10288,6 +10345,7 @@
                 "RevisionTarget": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the database revision. You can retrieve this value from the\n            response to the <a>DescribeClusterDbRevisions</a> request.</p>",
                         "smithy.api#required": {}
                     }
@@ -10334,6 +10392,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier of the cluster for which you want to associate or\n            disassociate IAM roles.</p>",
                         "smithy.api#required": {}
                     }
@@ -10399,6 +10458,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -10455,6 +10515,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier of the cluster to be modified.</p>\n         <p>Example: <code>examplecluster</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -10647,6 +10708,7 @@
                 "ParameterGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the parameter group to be modified.</p>",
                         "smithy.api#required": {}
                     }
@@ -10654,6 +10716,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.redshift#ParametersList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of parameters to be modified. A maximum of 20 parameters can be modified\n            in a single request.</p>\n         <p>For each parameter to be modified, you must supply at least the parameter name and\n            parameter value; other name-value pairs of the parameter are optional.</p>\n         <p>For the workload management (WLM) configuration, you must supply all the name-value\n            pairs in the wlm_json_configuration parameter.</p>",
                         "smithy.api#required": {}
                     }
@@ -10704,6 +10767,7 @@
                 "SnapshotIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the snapshot whose setting you want to modify.</p>",
                         "smithy.api#required": {}
                     }
@@ -10717,7 +10781,6 @@
                 "Force": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean option to override an exception if the retention period has already\n            passed.</p>"
                     }
                 }
@@ -10766,6 +10829,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for the cluster whose snapshot schedule you want to modify.\n        </p>",
                         "smithy.api#required": {}
                     }
@@ -10825,6 +10889,7 @@
                 "ClusterSubnetGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the subnet group to be modified.</p>",
                         "smithy.api#required": {}
                     }
@@ -10838,6 +10903,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.redshift#SubnetIdentifierList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a single\n            request.</p>",
                         "smithy.api#required": {}
                     }
@@ -10900,6 +10966,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster to change a custom domain association for.</p>",
                         "smithy.api#required": {}
                     }
@@ -10979,6 +11046,7 @@
                 "EndpointName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The endpoint to be modified.</p>",
                         "smithy.api#required": {}
                     }
@@ -11041,6 +11109,7 @@
                 "SubscriptionName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the modified Amazon Redshift event notification subscription.</p>",
                         "smithy.api#required": {}
                     }
@@ -11133,6 +11202,7 @@
                 "ScheduledActionName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the scheduled action to modify. </p>",
                         "smithy.api#required": {}
                     }
@@ -11219,6 +11289,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier of the cluster for which you want to change the retention\n            period for either automated or manual snapshots that are copied to a destination Amazon Web Services Region.</p>\n         <p>Constraints: Must be the valid name of an existing cluster that has cross-region\n            snapshot copy enabled.</p>",
                         "smithy.api#required": {}
                     }
@@ -11226,7 +11297,7 @@
                 "RetentionPeriod": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The number of days to retain automated snapshots in the destination Amazon Web Services Region\n            after they are copied from the source Amazon Web Services Region.</p>\n         <p>By default, this only changes the retention period of copied automated snapshots. </p>\n         <p>If you decrease the retention period for automated snapshots that are copied to a\n            destination Amazon Web Services Region, Amazon Redshift deletes any existing automated snapshots that were\n            copied to the destination Amazon Web Services Region and that fall outside of the new retention\n            period.</p>\n         <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p>\n         <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will\n            have the new retention period. </p>\n         <p>If you specify the value of -1 newly copied manual snapshots are retained\n            indefinitely.</p>\n         <p>Constraints: The number of days must be either -1 or an integer between 1 and 3,653\n            for manual snapshots.</p>",
                         "smithy.api#required": {}
                     }
@@ -11234,7 +11305,6 @@
                 "Manual": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether to apply the snapshot retention period to newly copied manual\n            snapshots instead of automated snapshots.</p>"
                     }
                 }
@@ -11284,6 +11354,7 @@
                 "ScheduleIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique alphanumeric identifier of the schedule to modify.</p>",
                         "smithy.api#required": {}
                     }
@@ -11291,6 +11362,7 @@
                 "ScheduleDefinitions": {
                     "target": "com.amazonaws.redshift#ScheduleDefinitionList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An updated list of schedule definitions. A schedule definition is made up of schedule\n            expressions, for example, \"cron(30 12 *)\" or \"rate(12 hours)\".</p>",
                         "smithy.api#required": {}
                     }
@@ -11329,6 +11401,7 @@
                 "UsageLimitId": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the usage limit to modify.</p>",
                         "smithy.api#required": {}
                     }
@@ -11403,7 +11476,6 @@
                 "NumberOfNodes": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of nodes.</p>"
                     }
                 },
@@ -11709,7 +11781,6 @@
                 "IsModifiable": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If <code>true</code>, the parameter can be modified. Some parameters have security\n            or operational implications that prevent them from being changed. </p>"
                     }
                 },
@@ -11848,6 +11919,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.redshift#PartnerIntegrationAccountId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -11855,6 +11927,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#PartnerIntegrationClusterIdentifier",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier of the cluster that receives data from the partner.</p>",
                         "smithy.api#required": {}
                     }
@@ -11862,6 +11935,7 @@
                 "DatabaseName": {
                     "target": "com.amazonaws.redshift#PartnerIntegrationDatabaseName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the database that receives data from the partner.</p>",
                         "smithy.api#required": {}
                     }
@@ -11869,6 +11943,7 @@
                 "PartnerName": {
                     "target": "com.amazonaws.redshift#PartnerIntegrationPartnerName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the partner that is authorized to send data.</p>",
                         "smithy.api#required": {}
                     }
@@ -11984,6 +12059,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster to be paused.</p>",
                         "smithy.api#required": {}
                     }
@@ -12116,6 +12192,7 @@
                 "ReservedNodeOfferingId": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier of the reserved node offering you want to purchase.</p>",
                         "smithy.api#required": {}
                     }
@@ -12169,6 +12246,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier.</p>",
                         "smithy.api#required": {}
                     }
@@ -12196,7 +12274,6 @@
                 "RecurringChargeAmount": {
                     "target": "com.amazonaws.redshift#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount charged per the period of time specified by the recurring charge\n            frequency.</p>"
                     }
                 },
@@ -12653,7 +12730,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -12696,7 +12772,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -12709,7 +12786,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -12723,7 +12799,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -12746,7 +12821,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -12781,7 +12855,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -12792,14 +12865,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -12813,14 +12888,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -12829,18 +12902,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -12849,7 +12921,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -12869,14 +12942,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -12890,7 +12965,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -12910,7 +12984,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -12921,14 +12994,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -12939,9 +13014,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -13666,6 +13743,7 @@
                 "DataShareArn": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare to reject.</p>",
                         "smithy.api#required": {}
                     }
@@ -13705,21 +13783,18 @@
                 "Duration": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration of the node reservation in seconds.</p>"
                     }
                 },
                 "FixedPrice": {
                     "target": "com.amazonaws.redshift#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The fixed cost Amazon Redshift charges you for this reserved node.</p>"
                     }
                 },
                 "UsagePrice": {
                     "target": "com.amazonaws.redshift#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The hourly rate Amazon Redshift charges you for this reserved node.</p>"
                     }
                 },
@@ -13732,7 +13807,6 @@
                 "NodeCount": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of reserved compute nodes.</p>"
                     }
                 },
@@ -13808,7 +13882,6 @@
                 "TargetReservedNodeCount": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The target reserved-node count.</p>"
                     }
                 },
@@ -13899,7 +13972,6 @@
                 "SourceReservedNodeCount": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The source reserved-node count in the cluster.</p>"
                     }
                 },
@@ -13918,7 +13990,6 @@
                 "TargetReservedNodeCount": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The count of target reserved nodes in the cluster.</p>"
                     }
                 }
@@ -14021,21 +14092,18 @@
                 "Duration": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration, in seconds, for which the offering will reserve the node.</p>"
                     }
                 },
                 "FixedPrice": {
                     "target": "com.amazonaws.redshift#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The upfront fixed charge you will pay to purchase the specific reserved node\n            offering.</p>"
                     }
                 },
                 "UsagePrice": {
                     "target": "com.amazonaws.redshift#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The rate you are charged for each hour the cluster that is using the offering is\n            running.</p>"
                     }
                 },
@@ -14196,6 +14264,7 @@
                 "ParameterGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cluster parameter group to be reset.</p>",
                         "smithy.api#required": {}
                     }
@@ -14203,7 +14272,6 @@
                 "ResetAllParameters": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If <code>true</code>, all parameters in the specified parameter group will be reset\n            to their default values. </p>\n         <p>Default: <code>true</code>\n         </p>"
                     }
                 },
@@ -14284,6 +14352,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier for the cluster to resize.</p>",
                         "smithy.api#required": {}
                     }
@@ -14352,7 +14421,6 @@
                 "AllowCancelResize": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A boolean value indicating if the resize operation can be cancelled.</p>"
                     }
                 }
@@ -14624,6 +14692,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster that will be created from restoring the\n            snapshot.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>Alphabetic characters must be lowercase.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n               <p>Must be unique for all clusters within an Amazon Web Services account.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -14861,35 +14930,30 @@
                 "CurrentRestoreRateInMegaBytesPerSecond": {
                     "target": "com.amazonaws.redshift#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of megabytes per second being transferred from the backup storage.\n            Returns the average rate for a completed backup.\n            This field is only updated when you restore to DC2 and DS2 node types. </p>"
                     }
                 },
                 "SnapshotSizeInMegaBytes": {
                     "target": "com.amazonaws.redshift#Long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the set of snapshot data used to restore the cluster.\n            This field is only updated when you restore to DC2 and DS2 node types. </p>"
                     }
                 },
                 "ProgressInMegaBytes": {
                     "target": "com.amazonaws.redshift#Long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of megabytes that have been transferred from snapshot storage.\n            This field is only updated when you restore to DC2 and DS2 node types. </p>"
                     }
                 },
                 "ElapsedTimeInSeconds": {
                     "target": "com.amazonaws.redshift#Long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time an in-progress restore has been running, or the amount of time\n            it took a completed restore to finish.\n            This field is only updated when you restore to DC2 and DS2 node types. </p>"
                     }
                 },
                 "EstimatedTimeToCompletionInSeconds": {
                     "target": "com.amazonaws.redshift#Long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The estimate of the time remaining before the restore will complete. Returns 0 for\n            a completed restore.\n            This field is only updated when you restore to DC2 and DS2 node types. </p>"
                     }
                 }
@@ -14939,6 +15003,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the Amazon Redshift cluster to restore the table to.</p>",
                         "smithy.api#required": {}
                     }
@@ -14946,6 +15011,7 @@
                 "SnapshotIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the snapshot to restore the table from. This snapshot must have\n            been created from the Amazon Redshift cluster specified by the\n                <code>ClusterIdentifier</code> parameter.</p>",
                         "smithy.api#required": {}
                     }
@@ -14953,6 +15019,7 @@
                 "SourceDatabaseName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the source database that contains the table to restore from.</p>",
                         "smithy.api#required": {}
                     }
@@ -14966,6 +15033,7 @@
                 "SourceTableName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the source table to restore from.</p>",
                         "smithy.api#required": {}
                     }
@@ -14985,6 +15053,7 @@
                 "NewTableName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the table to create as a result of the current request.</p>",
                         "smithy.api#required": {}
                     }
@@ -15041,6 +15110,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster to be resumed.</p>",
                         "smithy.api#required": {}
                     }
@@ -15125,6 +15195,7 @@
                 "ClusterSecurityGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the security Group from which to revoke the ingress rule.</p>",
                         "smithy.api#required": {}
                     }
@@ -15223,7 +15294,6 @@
                 "Force": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether to force the revoke action. \n           If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.</p>"
                     }
                 }
@@ -15282,6 +15352,7 @@
                 "AccountWithRestoreAccess": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account that can no longer restore the specified\n            snapshot.</p>",
                         "smithy.api#required": {}
                     }
@@ -15332,6 +15403,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier of the cluster that you want to rotate the encryption keys\n            for.</p>\n         <p>Constraints: Must be the name of valid cluster that has encryption\n            enabled.</p>",
                         "smithy.api#required": {}
                     }
@@ -15538,6 +15610,7 @@
                 "Name": {
                     "target": "com.amazonaws.redshift#ScheduledActionFilterName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of element to filter. </p>",
                         "smithy.api#required": {}
                     }
@@ -15545,6 +15618,7 @@
                 "Values": {
                     "target": "com.amazonaws.redshift#ValueStringList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>List of values. Compare if the value (of type defined by <code>Name</code>) equals an item in the list of scheduled actions. </p>",
                         "smithy.api#required": {}
                     }
@@ -15780,7 +15854,6 @@
                 "Port": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port that the cluster is listening on.</p>"
                     }
                 },
@@ -15829,7 +15902,6 @@
                 "NumberOfNodes": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of nodes in the cluster.</p>"
                     }
                 },
@@ -15848,7 +15920,6 @@
                 "Encrypted": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If <code>true</code>, the data in the snapshot is encrypted at rest.</p>"
                     }
                 },
@@ -15861,7 +15932,6 @@
                 "EncryptedWithHSM": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A boolean that indicates whether the snapshot data is encrypted using the HSM keys\n            of the source cluster. <code>true</code> indicates that the data is encrypted using HSM\n            keys.</p>"
                     }
                 },
@@ -15880,42 +15950,36 @@
                 "TotalBackupSizeInMegaBytes": {
                     "target": "com.amazonaws.redshift#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the complete set of backup data that would be used to restore the\n            cluster.</p>"
                     }
                 },
                 "ActualIncrementalBackupSizeInMegaBytes": {
                     "target": "com.amazonaws.redshift#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the incremental backup.</p>"
                     }
                 },
                 "BackupProgressInMegaBytes": {
                     "target": "com.amazonaws.redshift#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of megabytes that have been transferred to the snapshot\n            backup.</p>"
                     }
                 },
                 "CurrentBackupRateInMegaBytesPerSecond": {
                     "target": "com.amazonaws.redshift#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of megabytes per second being transferred to the snapshot backup.\n            Returns <code>0</code> for a completed backup. </p>"
                     }
                 },
                 "EstimatedSecondsToCompletion": {
                     "target": "com.amazonaws.redshift#Long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The estimate of the time remaining before the snapshot backup will complete.\n            Returns <code>0</code> for a completed backup. </p>"
                     }
                 },
                 "ElapsedTimeInSeconds": {
                     "target": "com.amazonaws.redshift#Long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time an in-progress snapshot backup has been running, or the amount\n            of time it took a completed backup to finish.</p>"
                     }
                 },
@@ -15940,7 +16004,6 @@
                 "EnhancedVpcRouting": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>An option that specifies whether to create the cluster with enhanced VPC routing\n            enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a\n            VPC. For more information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html\">Enhanced VPC Routing</a> in\n            the Amazon Redshift Cluster Management Guide.</p>\n         <p>If this option is <code>true</code>, enhanced VPC routing is enabled. </p>\n         <p>Default: false</p>"
                     }
                 },
@@ -16370,6 +16433,7 @@
                 "Attribute": {
                     "target": "com.amazonaws.redshift#SnapshotAttributeToSortBy",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The category for sorting the snapshots.</p>",
                         "smithy.api#required": {}
                     }
@@ -17130,6 +17194,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.redshift#PartnerIntegrationAccountId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -17137,6 +17202,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#PartnerIntegrationClusterIdentifier",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier of the cluster whose partner integration status is being updated.</p>",
                         "smithy.api#required": {}
                     }
@@ -17144,6 +17210,7 @@
                 "DatabaseName": {
                     "target": "com.amazonaws.redshift#PartnerIntegrationDatabaseName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the database whose partner integration status is being updated.</p>",
                         "smithy.api#required": {}
                     }
@@ -17151,6 +17218,7 @@
                 "PartnerName": {
                     "target": "com.amazonaws.redshift#PartnerIntegrationPartnerName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the partner whose integration status is being updated.</p>",
                         "smithy.api#required": {}
                     }
@@ -17158,6 +17226,7 @@
                 "Status": {
                     "target": "com.amazonaws.redshift#PartnerIntegrationStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The value of the updated status.</p>",
                         "smithy.api#required": {}
                     }
@@ -17229,7 +17298,6 @@
                 "Amount": {
                     "target": "com.amazonaws.redshift#Long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The limit amount. If time-based, this amount is in minutes. If data-based, this amount is in terabytes (TB).</p>"
                     }
                 },

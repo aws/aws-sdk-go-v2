@@ -3066,7 +3066,7 @@ type EventBatchingCondition struct {
 	// EventBridge event trigger fires.
 	//
 	// This member is required.
-	BatchSize int32
+	BatchSize *int32
 
 	// Window of time in seconds after which EventBridge event trigger fires. Window
 	// starts when first event is received.
@@ -6539,7 +6539,7 @@ type SchemaVersionErrorItem struct {
 	ErrorDetails *ErrorDetails
 
 	// The version number of the schema.
-	VersionNumber int64
+	VersionNumber *int64
 
 	noSmithyDocumentSerde
 }
@@ -6560,7 +6560,7 @@ type SchemaVersionListItem struct {
 	Status SchemaVersionStatus
 
 	// The version number of the schema.
-	VersionNumber int64
+	VersionNumber *int64
 
 	noSmithyDocumentSerde
 }
@@ -6572,7 +6572,7 @@ type SchemaVersionNumber struct {
 	LatestVersion bool
 
 	// The version number of the schema.
-	VersionNumber int64
+	VersionNumber *int64
 
 	noSmithyDocumentSerde
 }
@@ -6605,7 +6605,7 @@ type Segment struct {
 	// The total number of segments.
 	//
 	// This member is required.
-	TotalSegments int32
+	TotalSegments *int32
 
 	noSmithyDocumentSerde
 }

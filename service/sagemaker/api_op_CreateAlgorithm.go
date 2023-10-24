@@ -61,7 +61,7 @@ type CreateAlgorithmInput struct {
 
 	// Whether to certify the algorithm so that it can be listed in Amazon Web
 	// Services Marketplace.
-	CertifyForMarketplace bool
+	CertifyForMarketplace *bool
 
 	// Specifies details about inference jobs that the algorithm runs, including the
 	// following:

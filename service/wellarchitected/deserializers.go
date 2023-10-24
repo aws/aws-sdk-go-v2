@@ -736,7 +736,7 @@ func awsRestjson1_deserializeOpDocumentCreateMilestoneOutput(v **CreateMilestone
 				if err != nil {
 					return err
 				}
-				sv.MilestoneNumber = int32(i64)
+				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
 
 		case "WorkloadId":
@@ -3194,7 +3194,7 @@ func awsRestjson1_deserializeOpDocumentGetAnswerOutput(v **GetAnswerOutput, valu
 				if err != nil {
 					return err
 				}
-				sv.MilestoneNumber = int32(i64)
+				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
 
 		case "WorkloadId":
@@ -3711,7 +3711,7 @@ func awsRestjson1_deserializeOpDocumentGetLensReviewOutput(v **GetLensReviewOutp
 				if err != nil {
 					return err
 				}
-				sv.MilestoneNumber = int32(i64)
+				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
 
 		case "WorkloadId":
@@ -3892,7 +3892,7 @@ func awsRestjson1_deserializeOpDocumentGetLensReviewReportOutput(v **GetLensRevi
 				if err != nil {
 					return err
 				}
-				sv.MilestoneNumber = int32(i64)
+				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
 
 		case "WorkloadId":
@@ -5622,7 +5622,7 @@ func awsRestjson1_deserializeOpDocumentListAnswersOutput(v **ListAnswersOutput, 
 				if err != nil {
 					return err
 				}
-				sv.MilestoneNumber = int32(i64)
+				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
 
 		case "NextToken":
@@ -6331,7 +6331,7 @@ func awsRestjson1_deserializeOpDocumentListLensReviewImprovementsOutput(v **List
 				if err != nil {
 					return err
 				}
-				sv.MilestoneNumber = int32(i64)
+				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
 
 		case "NextToken":
@@ -6521,7 +6521,7 @@ func awsRestjson1_deserializeOpDocumentListLensReviewsOutput(v **ListLensReviews
 				if err != nil {
 					return err
 				}
-				sv.MilestoneNumber = int32(i64)
+				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
 
 		case "NextToken":
@@ -11335,7 +11335,7 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 				if !ok {
 					return fmt.Errorf("expected IsApplicable to be of type *bool, got %T instead", value)
 				}
-				sv.IsApplicable = jtv
+				sv.IsApplicable = ptr.Bool(jtv)
 			}
 
 		case "Notes":
@@ -11487,7 +11487,7 @@ func awsRestjson1_deserializeDocumentAnswerSummary(v **types.AnswerSummary, valu
 				if !ok {
 					return fmt.Errorf("expected IsApplicable to be of type *bool, got %T instead", value)
 				}
-				sv.IsApplicable = jtv
+				sv.IsApplicable = ptr.Bool(jtv)
 			}
 
 		case "PillarId":
@@ -11700,7 +11700,7 @@ func awsRestjson1_deserializeDocumentCheckDetail(v **types.CheckDetail, value in
 				if err != nil {
 					return err
 				}
-				sv.FlaggedResources = int32(i64)
+				sv.FlaggedResources = ptr.Int32(int32(i64))
 			}
 
 		case "Id":
@@ -12537,7 +12537,7 @@ func awsRestjson1_deserializeDocumentConsolidatedReportMetric(v **types.Consolid
 				if err != nil {
 					return err
 				}
-				sv.LensesAppliedCount = int32(i64)
+				sv.LensesAppliedCount = ptr.Int32(int32(i64))
 			}
 
 		case "MetricType":
@@ -13712,7 +13712,7 @@ func awsRestjson1_deserializeDocumentMilestone(v **types.Milestone, value interf
 				if err != nil {
 					return err
 				}
-				sv.MilestoneNumber = int32(i64)
+				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
 
 		case "RecordedAt":
@@ -13820,7 +13820,7 @@ func awsRestjson1_deserializeDocumentMilestoneSummary(v **types.MilestoneSummary
 				if err != nil {
 					return err
 				}
-				sv.MilestoneNumber = int32(i64)
+				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
 
 		case "RecordedAt":
@@ -14560,7 +14560,7 @@ func awsRestjson1_deserializeDocumentProfileQuestion(v **types.ProfileQuestion, 
 				if err != nil {
 					return err
 				}
-				sv.MaxSelectedChoices = int32(i64)
+				sv.MaxSelectedChoices = ptr.Int32(int32(i64))
 			}
 
 		case "MinSelectedChoices":
@@ -14573,7 +14573,7 @@ func awsRestjson1_deserializeDocumentProfileQuestion(v **types.ProfileQuestion, 
 				if err != nil {
 					return err
 				}
-				sv.MinSelectedChoices = int32(i64)
+				sv.MinSelectedChoices = ptr.Int32(int32(i64))
 			}
 
 		case "QuestionChoices":
@@ -15100,7 +15100,7 @@ func awsRestjson1_deserializeDocumentProfileTemplateQuestion(v **types.ProfileTe
 				if err != nil {
 					return err
 				}
-				sv.MaxSelectedChoices = int32(i64)
+				sv.MaxSelectedChoices = ptr.Int32(int32(i64))
 			}
 
 		case "MinSelectedChoices":
@@ -15113,7 +15113,7 @@ func awsRestjson1_deserializeDocumentProfileTemplateQuestion(v **types.ProfileTe
 				if err != nil {
 					return err
 				}
-				sv.MinSelectedChoices = int32(i64)
+				sv.MinSelectedChoices = ptr.Int32(int32(i64))
 			}
 
 		case "QuestionChoices":
@@ -15668,7 +15668,7 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswer(v **types.ReviewTempla
 				if !ok {
 					return fmt.Errorf("expected IsApplicable to be of type *bool, got %T instead", value)
 				}
-				sv.IsApplicable = jtv
+				sv.IsApplicable = ptr.Bool(jtv)
 			}
 
 		case "Notes":
@@ -15820,7 +15820,7 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswerSummary(v **types.Revie
 				if !ok {
 					return fmt.Errorf("expected IsApplicable to be of type *bool, got %T instead", value)
 				}
-				sv.IsApplicable = jtv
+				sv.IsApplicable = ptr.Bool(jtv)
 			}
 
 		case "PillarId":
@@ -17268,7 +17268,7 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				if !ok {
 					return fmt.Errorf("expected IsReviewOwnerUpdateAcknowledged to be of type *bool, got %T instead", value)
 				}
-				sv.IsReviewOwnerUpdateAcknowledged = jtv
+				sv.IsReviewOwnerUpdateAcknowledged = ptr.Bool(jtv)
 			}
 
 		case "Lenses":

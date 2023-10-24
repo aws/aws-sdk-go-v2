@@ -20,7 +20,7 @@ type BatchPutMetricsError struct {
 	Code PutMetricsErrorCode
 
 	// An index that corresponds to the metric in the request.
-	MetricIndex int32
+	MetricIndex *int32
 
 	noSmithyDocumentSerde
 }
@@ -41,7 +41,7 @@ type RawMetricData struct {
 	// The metric value.
 	//
 	// This member is required.
-	Value float64
+	Value *float64
 
 	// The metric step (epoch).
 	Step *int32

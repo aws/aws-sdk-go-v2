@@ -1547,6 +1547,9 @@ func validateOpAddLayerVersionPermissionInput(v *AddLayerVersionPermissionInput)
 	if v.LayerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
 	}
+	if v.VersionNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
+	}
 	if v.StatementId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StatementId"))
 	}
@@ -1822,6 +1825,9 @@ func validateOpDeleteLayerVersionInput(v *DeleteLayerVersionInput) error {
 	if v.LayerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
 	}
+	if v.VersionNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2008,6 +2014,9 @@ func validateOpGetLayerVersionInput(v *GetLayerVersionInput) error {
 	if v.LayerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
 	}
+	if v.VersionNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2022,6 +2031,9 @@ func validateOpGetLayerVersionPolicyInput(v *GetLayerVersionPolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetLayerVersionPolicyInput"}
 	if v.LayerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
+	}
+	if v.VersionNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2376,6 +2388,9 @@ func validateOpRemoveLayerVersionPermissionInput(v *RemoveLayerVersionPermission
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveLayerVersionPermissionInput"}
 	if v.LayerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
+	}
+	if v.VersionNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
 	}
 	if v.StatementId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StatementId"))

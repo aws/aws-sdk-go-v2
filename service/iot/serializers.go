@@ -21429,20 +21429,20 @@ func awsRestjson1_serializeDocumentExponentialRolloutRate(v *types.ExponentialRo
 		ok.Integer(*v.BaseRatePerMinute)
 	}
 
-	{
+	if v.IncrementFactor != nil {
 		ok := object.Key("incrementFactor")
 		switch {
-		case math.IsNaN(v.IncrementFactor):
+		case math.IsNaN(*v.IncrementFactor):
 			ok.String("NaN")
 
-		case math.IsInf(v.IncrementFactor, 1):
+		case math.IsInf(*v.IncrementFactor, 1):
 			ok.String("Infinity")
 
-		case math.IsInf(v.IncrementFactor, -1):
+		case math.IsInf(*v.IncrementFactor, -1):
 			ok.String("-Infinity")
 
 		default:
-			ok.Double(v.IncrementFactor)
+			ok.Double(*v.IncrementFactor)
 
 		}
 	}
@@ -23260,9 +23260,9 @@ func awsRestjson1_serializeDocumentTermsAggregation(v *types.TermsAggregation, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxBuckets != 0 {
+	if v.MaxBuckets != nil {
 		ok := object.Key("maxBuckets")
-		ok.Integer(v.MaxBuckets)
+		ok.Integer(*v.MaxBuckets)
 	}
 
 	return nil

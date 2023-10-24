@@ -1511,6 +1511,9 @@ func validateApplicationSettings(v *types.ApplicationSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ApplicationSettings"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

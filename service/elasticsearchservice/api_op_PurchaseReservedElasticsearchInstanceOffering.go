@@ -45,7 +45,7 @@ type PurchaseReservedElasticsearchInstanceOfferingInput struct {
 	ReservedElasticsearchInstanceOfferingId *string
 
 	// The number of Elasticsearch instances to reserve.
-	InstanceCount int32
+	InstanceCount *int32
 
 	noSmithyDocumentSerde
 }

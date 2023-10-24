@@ -62,7 +62,7 @@ type AppCookieStickinessPolicy struct {
 type BackendServerDescription struct {
 
 	// The port on which the EC2 instance is listening.
-	InstancePort int32
+	InstancePort *int32
 
 	// The names of the policies enabled for the EC2 instance.
 	PolicyNames []string
@@ -115,13 +115,13 @@ type HealthCheck struct {
 	// instance to the Healthy state.
 	//
 	// This member is required.
-	HealthyThreshold int32
+	HealthyThreshold *int32
 
 	// The approximate interval, in seconds, between health checks of an individual
 	// instance.
 	//
 	// This member is required.
-	Interval int32
+	Interval *int32
 
 	// The instance being checked. The protocol is either TCP, HTTP, HTTPS, or SSL.
 	// The range of valid ports is one (1) through 65535. TCP is the default, specified
@@ -143,13 +143,13 @@ type HealthCheck struct {
 	// check. This value must be less than the Interval value.
 	//
 	// This member is required.
-	Timeout int32
+	Timeout *int32
 
 	// The number of consecutive health check failures required before moving the
 	// instance to the Unhealthy state.
 	//
 	// This member is required.
-	UnhealthyThreshold int32
+	UnhealthyThreshold *int32
 
 	noSmithyDocumentSerde
 }
@@ -239,7 +239,7 @@ type Listener struct {
 	// The port on which the instance is listening.
 	//
 	// This member is required.
-	InstancePort int32
+	InstancePort *int32
 
 	// The port on which the load balancer is listening. On EC2-VPC, you can specify
 	// any port from the range 1-65535. On EC2-Classic, you can specify any port from

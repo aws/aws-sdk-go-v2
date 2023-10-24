@@ -59,7 +59,7 @@ type CreateMaintenanceWindowInput struct {
 	// The duration of the maintenance window in hours.
 	//
 	// This member is required.
-	Duration int32
+	Duration *int32
 
 	// The name of the maintenance window.
 	//

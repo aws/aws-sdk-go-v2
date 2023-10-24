@@ -3315,7 +3315,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3358,7 +3357,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -3371,7 +3371,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3385,7 +3384,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -3408,7 +3406,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3443,7 +3440,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3454,14 +3450,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3475,14 +3473,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -3491,11 +3487,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3506,14 +3502,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3527,7 +3525,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3547,7 +3544,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3558,14 +3554,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -3576,9 +3574,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -4417,7 +4417,6 @@
         "com.amazonaws.networkfirewall#Priority": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 65535
@@ -5242,7 +5241,6 @@
                 "Priority": {
                     "target": "com.amazonaws.networkfirewall#Priority",
                     "traits": {
-                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>An integer setting that indicates the order in which to run the stateful rule groups in\n      a single <a>FirewallPolicy</a>. This setting only applies to firewall policies\n      that specify the <code>STRICT_ORDER</code> rule order in the stateful engine options settings.</p>\n         <p>Network Firewall evalutes each stateful rule group\n         against a packet starting with the group that has the lowest priority setting. You must ensure\n         that the priority settings are unique within each policy.</p>\n         <p>You can change the priority settings of your rule groups at any time. To make it easier to\n         insert rule groups later, number them so there's a wide range in between, for example use 100,\n         200, and so on. </p>"
                     }
                 },
@@ -5421,7 +5419,6 @@
                 "Priority": {
                     "target": "com.amazonaws.networkfirewall#Priority",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Indicates the order in which to run this rule relative to all of the\n         rules that are defined for a stateless rule group. Network Firewall evaluates the rules in a\n         rule group starting with the lowest priority setting. You must ensure that the priority\n         settings are unique for the rule group. </p>\n         <p>Each stateless rule group uses exactly one <code>StatelessRulesAndCustomActions</code>\n         object, and each <code>StatelessRulesAndCustomActions</code> contains exactly one\n            <code>StatelessRules</code> object. To ensure unique priority settings for your rule\n         groups, set unique priorities for the stateless rules that you define inside any single\n            <code>StatelessRules</code> object.</p>\n         <p>You can change the priority settings of your rules at any time. To make it easier to\n         insert rules later, number them so there's a wide range in between, for example use 100,\n         200, and so on. </p>",
                         "smithy.api#required": {}
                     }
@@ -5444,7 +5441,6 @@
                 "Priority": {
                     "target": "com.amazonaws.networkfirewall#Priority",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>An integer setting that indicates the order in which to run the stateless rule groups in\n         a single <a>FirewallPolicy</a>. Network Firewall applies each stateless rule group\n         to a packet starting with the group that has the lowest priority setting. You must ensure\n         that the priority settings are unique within each policy.</p>",
                         "smithy.api#required": {}
                     }

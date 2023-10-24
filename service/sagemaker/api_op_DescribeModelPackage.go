@@ -86,7 +86,7 @@ type DescribeModelPackageOutput struct {
 
 	// Whether the model package is certified for listing on Amazon Web Services
 	// Marketplace.
-	CertifyForMarketplace bool
+	CertifyForMarketplace *bool
 
 	// Information about the user who created or modified an experiment, trial, trial
 	// component, lineage group, project, or model card.

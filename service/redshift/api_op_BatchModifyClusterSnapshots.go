@@ -41,7 +41,7 @@ type BatchModifyClusterSnapshotsInput struct {
 
 	// A boolean value indicating whether to override an exception if the retention
 	// period has passed.
-	Force bool
+	Force *bool
 
 	// The number of days that a manual snapshot is retained. If you specify the value
 	// -1, the manual snapshot is retained indefinitely. The number must be either -1

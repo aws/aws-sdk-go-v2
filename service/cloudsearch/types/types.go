@@ -292,13 +292,13 @@ type DomainStatus struct {
 	Processing *bool
 
 	// The number of search instances that are available to process search requests.
-	SearchInstanceCount int32
+	SearchInstanceCount *int32
 
 	// The instance type that is being used to process search requests.
 	SearchInstanceType *string
 
 	// The number of partitions across which the search index is spread.
-	SearchPartitionCount int32
+	SearchPartitionCount *int32
 
 	// The service endpoint for requesting search results from a search domain.
 	SearchService *ServiceEndpoint
@@ -583,10 +583,10 @@ type LatLonOptions struct {
 type Limits struct {
 
 	// This member is required.
-	MaximumPartitionCount int32
+	MaximumPartitionCount *int32
 
 	// This member is required.
-	MaximumReplicationCount int32
+	MaximumReplicationCount *int32
 
 	noSmithyDocumentSerde
 }

@@ -57,14 +57,14 @@ type ModifyDBClusterInput struct {
 	// Constraints:
 	//   - You must allow engine mode changes when specifying a different value for
 	//   the EngineMode parameter from the DB cluster's current engine mode.
-	AllowEngineModeChange bool
+	AllowEngineModeChange *bool
 
 	// Specifies whether major version upgrades are allowed. Valid for Cluster Type:
 	// Aurora DB clusters and Multi-AZ DB clusters Constraints:
 	//   - You must allow major version upgrades when specifying a value for the
 	//   EngineVersion parameter that is a different major version than the DB
 	//   cluster's current version.
-	AllowMajorVersionUpgrade bool
+	AllowMajorVersionUpgrade *bool
 
 	// Specifies whether the modifications in this request and any pending
 	// modifications are asynchronously applied as soon as possible, regardless of the
@@ -75,7 +75,7 @@ type ModifyDBClusterInput struct {
 	// protection and changing the master password, are applied immediately—regardless
 	// of when you choose to apply them. By default, this parameter is disabled. Valid
 	// for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
-	ApplyImmediately bool
+	ApplyImmediately *bool
 
 	// Specifies whether minor engine upgrades are applied automatically to the DB
 	// cluster during the maintenance window. By default, minor engine upgrades are

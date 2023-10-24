@@ -563,7 +563,7 @@ type Duration struct {
 	// Integer to specify the value of a maintenance schedule duration. See the
 	// Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
 	// for more information.
-	Value int64
+	Value *int64
 
 	noSmithyDocumentSerde
 }

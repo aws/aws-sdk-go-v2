@@ -67,10 +67,10 @@ type SuiteDefinitionConfiguration struct {
 	Devices []DeviceUnderTest
 
 	// Gets the tests intended for qualification in a suite.
-	IntendedForQualification bool
+	IntendedForQualification *bool
 
 	// Verifies if the test suite is a long duration test.
-	IsLongDurationTest bool
+	IsLongDurationTest *bool
 
 	// Sets the MQTT protocol that is configured in the suite definition.
 	Protocol Protocol
@@ -88,10 +88,10 @@ type SuiteDefinitionInformation struct {
 	DefaultDevices []DeviceUnderTest
 
 	// Specifies if the test suite is intended for qualification.
-	IntendedForQualification bool
+	IntendedForQualification *bool
 
 	// Verifies if the test suite is a long duration test.
-	IsLongDurationTest bool
+	IsLongDurationTest *bool
 
 	// Gets the MQTT protocol that is configured in the suite definition.
 	Protocol Protocol
@@ -115,7 +115,7 @@ type SuiteRunConfiguration struct {
 	PrimaryDevice *DeviceUnderTest
 
 	// TRUE if multiple test suites run in parallel.
-	ParallelRun bool
+	ParallelRun *bool
 
 	// Sets test case list.
 	SelectedTestList []string
@@ -135,10 +135,10 @@ type SuiteRunInformation struct {
 	EndAt *time.Time
 
 	// Number of test cases that failed in the suite run.
-	Failed int32
+	Failed *int32
 
 	// Number of test cases that passed in the suite run.
-	Passed int32
+	Passed *int32
 
 	// Date (in Unix epoch time) when the suite run was started.
 	StartedAt *time.Time

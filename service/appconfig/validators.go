@@ -1265,6 +1265,9 @@ func validateOpDeleteHostedConfigurationVersionInput(v *DeleteHostedConfiguratio
 	if v.ConfigurationProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationProfileId"))
 	}
+	if v.VersionNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1423,6 +1426,9 @@ func validateOpGetHostedConfigurationVersionInput(v *GetHostedConfigurationVersi
 	}
 	if v.ConfigurationProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationProfileId"))
+	}
+	if v.VersionNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -49,7 +49,7 @@ type ListStandardsControlAssociationsInput struct {
 	// 25 associations. This repeats until all associations for the specified control
 	// are returned. The number of results is limited by the number of supported
 	// Security Hub standards that you've enabled in the calling account.
-	MaxResults int32
+	MaxResults *int32
 
 	// Optional pagination parameter.
 	NextToken *string
@@ -193,8 +193,8 @@ func NewListStandardsControlAssociationsPaginator(client ListStandardsControlAss
 	}
 
 	options := ListStandardsControlAssociationsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -224,7 +224,11 @@ func (p *ListStandardsControlAssociationsPaginator) NextPage(ctx context.Context
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListStandardsControlAssociations(ctx, &params, optFns...)
 	if err != nil {

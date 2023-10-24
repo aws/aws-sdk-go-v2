@@ -993,7 +993,7 @@ type Duration struct {
 	Unit TimeUnit
 
 	// Integer to specify the value of a maintenance schedule duration.
-	Value int64
+	Value *int64
 
 	noSmithyDocumentSerde
 }

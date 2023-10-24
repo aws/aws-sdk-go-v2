@@ -622,6 +622,7 @@
                 "Mode": {
                     "target": "com.amazonaws.mediaconvert#AccelerationMode",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "Specify the conditions when the service will run your job with accelerated transcoding.",
                         "smithy.api#jsonName": "mode",
                         "smithy.api#required": {}
@@ -988,6 +989,7 @@
                 "Arn": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "The ARN of the ACM certificate that you want to associate with your MediaConvert resource.",
                         "smithy.api#jsonName": "arn",
                         "smithy.api#required": {}
@@ -5260,6 +5262,7 @@
                 "Role": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "Required. The IAM role you use for creating this job. For details about permissions, see the User Guide topic at the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.",
                         "smithy.api#jsonName": "role",
                         "smithy.api#required": {}
@@ -5268,6 +5271,7 @@
                 "Settings": {
                     "target": "com.amazonaws.mediaconvert#JobSettings",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "JobSettings contains all the transcode settings for a job.",
                         "smithy.api#jsonName": "settings",
                         "smithy.api#required": {}
@@ -5392,6 +5396,7 @@
                 "Name": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "The name of the job template you are creating.",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -5414,6 +5419,7 @@
                 "Settings": {
                     "target": "com.amazonaws.mediaconvert#JobTemplateSettings",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it.",
                         "smithy.api#jsonName": "settings",
                         "smithy.api#required": {}
@@ -5510,6 +5516,7 @@
                 "Name": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "The name of the preset you are creating.",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -5518,6 +5525,7 @@
                 "Settings": {
                     "target": "com.amazonaws.mediaconvert#PresetSettings",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "Settings for preset",
                         "smithy.api#jsonName": "settings",
                         "smithy.api#required": {}
@@ -5600,6 +5608,7 @@
                 "Name": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "The name of the queue that you are creating.",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -13584,6 +13593,7 @@
                 "Role": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "The IAM role you use for creating this job. For details about permissions, see the User Guide topic at the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html",
                         "smithy.api#jsonName": "role",
                         "smithy.api#required": {}
@@ -13592,6 +13602,7 @@
                 "Settings": {
                     "target": "com.amazonaws.mediaconvert#JobSettings",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "JobSettings contains all the transcode settings for a job.",
                         "smithy.api#jsonName": "settings",
                         "smithy.api#required": {}
@@ -13877,6 +13888,7 @@
                 "Name": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "A name you create for each job template. Each name must be unique within your account.",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -13899,6 +13911,7 @@
                 "Settings": {
                     "target": "com.amazonaws.mediaconvert#JobTemplateSettings",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it.",
                         "smithy.api#jsonName": "settings",
                         "smithy.api#required": {}
@@ -16827,7 +16840,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -16870,7 +16882,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -16883,7 +16896,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -16897,7 +16909,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -16920,7 +16931,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -16955,7 +16965,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -16966,14 +16975,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -16987,14 +16998,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -17003,18 +17012,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -17023,7 +17031,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -17043,14 +17052,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -17064,7 +17075,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -17084,7 +17094,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -17095,14 +17104,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -17132,9 +17143,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -20431,6 +20444,7 @@
                 "Name": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "A name you create for each preset. Each name must be unique within your account.",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -20439,6 +20453,7 @@
                 "Settings": {
                     "target": "com.amazonaws.mediaconvert#PresetSettings",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "Settings for preset",
                         "smithy.api#jsonName": "settings",
                         "smithy.api#required": {}
@@ -20908,6 +20923,7 @@
                 "Policy": {
                     "target": "com.amazonaws.mediaconvert#Policy",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html",
                         "smithy.api#jsonName": "policy",
                         "smithy.api#required": {}
@@ -20967,6 +20983,7 @@
                 "Name": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "A name that you create for each queue. Each name must be unique within your account.",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -21249,6 +21266,7 @@
                 "Commitment": {
                     "target": "com.amazonaws.mediaconvert#Commitment",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "The length of the term of your reserved queue pricing plan commitment.",
                         "smithy.api#jsonName": "commitment",
                         "smithy.api#required": {}
@@ -21257,6 +21275,7 @@
                 "RenewalType": {
                     "target": "com.amazonaws.mediaconvert#RenewalType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "Specifies whether the term of your reserved queue pricing plan is automatically extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term. When your term is auto renewed, you extend your commitment by 12 months from the auto renew date. You can cancel this commitment.",
                         "smithy.api#jsonName": "renewalType",
                         "smithy.api#required": {}
@@ -21265,6 +21284,7 @@
                 "ReservedSlots": {
                     "target": "com.amazonaws.mediaconvert#__integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. You can't decrease the number of RTS in your reserved queue. You can increase the number of RTS by extending your existing commitment with a new 12-month commitment for the larger number. The new commitment begins when you purchase the additional capacity. You can't cancel your commitment or revert to your original commitment after you increase the capacity.",
                         "smithy.api#jsonName": "reservedSlots",
                         "smithy.api#required": {}
@@ -21960,6 +21980,7 @@
                 "Arn": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "The Amazon Resource Name (ARN) of the resource that you want to tag. To get the ARN, send a GET request with the resource name.",
                         "smithy.api#jsonName": "arn",
                         "smithy.api#required": {}
@@ -21968,6 +21989,7 @@
                 "Tags": {
                     "target": "com.amazonaws.mediaconvert#__mapOf__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.",
                         "smithy.api#jsonName": "tags",
                         "smithy.api#required": {}
@@ -23981,6 +24003,7 @@
                 "Code": {
                     "target": "com.amazonaws.mediaconvert#__integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "Warning code that identifies a specific warning in the job. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/warning_codes.html",
                         "smithy.api#jsonName": "code",
                         "smithy.api#required": {}
@@ -23989,6 +24012,7 @@
                 "Count": {
                     "target": "com.amazonaws.mediaconvert#__integer",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "The number of times this warning occurred in the job.",
                         "smithy.api#jsonName": "count",
                         "smithy.api#required": {}

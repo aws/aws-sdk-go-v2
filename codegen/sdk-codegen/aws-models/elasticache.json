@@ -156,6 +156,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which the tags are to be added, for\n            example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code> or\n                <code>arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot</code>.\n            ElastiCache resources are <i>cluster</i> and\n            <i>snapshot</i>.</p>\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)\n                and Amazon Service Namespaces</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -163,6 +164,7 @@
                 "Tags": {
                     "target": "com.amazonaws.elasticache#TagList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must\n            be accompanied by a tag value, although null is accepted.</p>",
                         "smithy.api#required": {}
                     }
@@ -466,7 +468,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -509,7 +510,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -522,7 +524,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -536,7 +537,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -559,7 +559,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -594,7 +593,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -605,14 +603,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -626,14 +626,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -642,18 +640,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -662,7 +659,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -682,14 +680,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -703,7 +703,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -723,7 +722,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -734,14 +732,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -752,9 +752,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1626,6 +1628,7 @@
                 "CacheSecurityGroupName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cache security group that allows network ingress.</p>",
                         "smithy.api#required": {}
                     }
@@ -1633,6 +1636,7 @@
                 "EC2SecurityGroupName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon EC2 security group to be authorized for ingress to the cache security\n            group.</p>",
                         "smithy.api#required": {}
                     }
@@ -1640,6 +1644,7 @@
                 "EC2SecurityGroupOwnerId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon account number of the Amazon EC2 security group owner. Note that this is\n            not the same thing as an Amazon access key ID - you must provide a valid Amazon account\n            number for this parameter.</p>",
                         "smithy.api#required": {}
                     }
@@ -1754,6 +1759,7 @@
                 "ServiceUpdateName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique ID of the service update</p>",
                         "smithy.api#required": {}
                     }
@@ -1801,6 +1807,7 @@
                 "ServiceUpdateName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique ID of the service update</p>",
                         "smithy.api#required": {}
                     }
@@ -1811,10 +1818,7 @@
             }
         },
         "com.amazonaws.elasticache#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticache#BooleanOptional": {
             "type": "boolean"
@@ -1930,7 +1934,6 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> If you are running Redis engine version 6.0 or later, set this parameter to yes if\n            you want to opt-in to the next auto minor version upgrade campaign. This parameter is\n            disabled for previous versions.  </p>"
                     }
                 },
@@ -1991,7 +1994,6 @@
                 "ReplicationGroupLogDeliveryEnabled": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A boolean value indicating whether log delivery is enabled for the replication\n            group.</p>"
                     }
                 },
@@ -2278,7 +2280,6 @@
                 "IsModifiable": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether (<code>true</code>) or not (<code>false</code>) the parameter can be\n            modified. Some parameters have security or operational implications that prevent them\n            from being changed.</p>"
                     }
                 },
@@ -2432,7 +2433,6 @@
                 "IsGlobal": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the parameter group is associated with a Global datastore</p>"
                     }
                 },
@@ -3019,6 +3019,7 @@
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the replication group to which data is being migrated.</p>",
                         "smithy.api#required": {}
                     }
@@ -3026,7 +3027,6 @@
                 "Force": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Forces the migration to stop without ensuring that data is in sync. It is recommended\n            to use this option only to abort the migration and not recommended when application\n            wants to continue migration to ElastiCache.</p>"
                     }
                 }
@@ -3052,6 +3052,7 @@
                 "NodeGroupId": {
                     "target": "com.amazonaws.elasticache#AllowedNodeGroupId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The 4-digit id for the node group you are configuring. For Redis (cluster mode\n            disabled) replication groups, the node group id is always 0001. To find a Redis (cluster\n            mode enabled)'s node group's (shard's) id, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/shard-find-id.html\">Finding a Shard's\n                Id</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -3059,7 +3060,7 @@
                 "NewReplicaCount": {
                     "target": "com.amazonaws.elasticache#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The number of replicas you want in this node group at the end of this operation.\n            The maximum value for <code>NewReplicaCount</code> is 5. The minimum value depends upon\n            the type of Redis replication group you are working with.</p>\n         <p>The minimum number of replicas in a shard or replication group is:</p>\n         <ul>\n            <li>\n               <p>Redis (cluster mode disabled)</p>\n               <ul>\n                  <li>\n                     <p>If Multi-AZ: 1</p>\n                  </li>\n                  <li>\n                     <p>If Multi-AZ: 0</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Redis (cluster mode enabled): 0 (though you will not be able to failover to\n                    a replica if your primary node fails)</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -3163,6 +3164,7 @@
                 "SourceSnapshotName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of an existing snapshot from which to make a copy.</p>",
                         "smithy.api#required": {}
                     }
@@ -3170,6 +3172,7 @@
                 "TargetSnapshotName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A name for the snapshot copy. ElastiCache does not permit overwriting a snapshot,\n            therefore this name must be unique within its context - ElastiCache or an Amazon S3\n            bucket if exporting.</p>",
                         "smithy.api#required": {}
                     }
@@ -3309,6 +3312,7 @@
                 "CacheClusterId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The node group (shard) identifier. This parameter is stored as a lowercase\n            string.</p>\n         <p>\n            <b>Constraints:</b>\n         </p>\n         <ul>\n            <li>\n               <p>A name must contain from 1 to 50 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -3560,6 +3564,7 @@
                 "CacheParameterGroupName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A user-specified name for the cache parameter group.</p>",
                         "smithy.api#required": {}
                     }
@@ -3567,6 +3572,7 @@
                 "CacheParameterGroupFamily": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cache parameter group family that the cache parameter group can be\n            used with.</p>\n         <p>Valid values are: <code>memcached1.4</code> | <code>memcached1.5</code> |\n                <code>memcached1.6</code> | <code>redis2.6</code> | <code>redis2.8</code> |\n                <code>redis3.2</code> | <code>redis4.0</code> | <code>redis5.0</code> |\n                <code>redis6.x</code> | <code>redis7</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -3574,6 +3580,7 @@
                 "Description": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A user-specified description for the cache parameter group.</p>",
                         "smithy.api#required": {}
                     }
@@ -3646,6 +3653,7 @@
                 "CacheSecurityGroupName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A name for the cache security group. This value is stored as a lowercase\n            string.</p>\n         <p>Constraints: Must contain no more than 255 alphanumeric characters. Cannot be the word\n            \"Default\".</p>\n         <p>Example: <code>mysecuritygroup</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -3653,6 +3661,7 @@
                 "Description": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A description for the cache security group.</p>",
                         "smithy.api#required": {}
                     }
@@ -3760,6 +3769,7 @@
                 "CacheSubnetGroupName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A name for the cache subnet group. This value is stored as a lowercase string.</p>\n         <p>Constraints: Must contain no more than 255 alphanumeric characters or hyphens.</p>\n         <p>Example: <code>mysubnetgroup</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -3767,6 +3777,7 @@
                 "CacheSubnetGroupDescription": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A description for the cache subnet group.</p>",
                         "smithy.api#required": {}
                     }
@@ -3774,6 +3785,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.elasticache#SubnetIdentifierList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of VPC subnet IDs for the cache subnet group.</p>",
                         "smithy.api#required": {}
                     }
@@ -3836,6 +3848,7 @@
                 "GlobalReplicationGroupIdSuffix": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The suffix name of a Global datastore. Amazon ElastiCache automatically applies a\n            prefix to the Global datastore ID when it is created. Each Amazon Region has its own\n            prefix. For instance, a Global datastore ID created in the US-West-1 region will begin\n            with \"dsdfu\" along with the suffix name you provide. The suffix, combined with the\n            auto-generated prefix, guarantees uniqueness of the Global datastore name across\n            multiple regions. </p>\n         <p>For a full list of Amazon Regions and their respective Global datastore iD prefixes,\n            see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html\">Using the Amazon CLI with Global datastores </a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -3849,6 +3862,7 @@
                 "PrimaryReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the primary cluster that accepts writes and will replicate updates to the\n            secondary cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -3977,6 +3991,7 @@
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The replication group identifier. This parameter is stored as a lowercase\n            string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>A name must contain from 1 to 40 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -3984,6 +3999,7 @@
                 "ReplicationGroupDescription": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A user-created description for the replication group.</p>",
                         "smithy.api#required": {}
                     }
@@ -4322,6 +4338,7 @@
                 "SnapshotName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A name for the snapshot being created.</p>",
                         "smithy.api#required": {}
                     }
@@ -4434,6 +4451,7 @@
                 "UserGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the user group.</p>",
                         "smithy.api#required": {}
                     }
@@ -4441,6 +4459,7 @@
                 "Engine": {
                     "target": "com.amazonaws.elasticache#EngineType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The current supported value is Redis. </p>",
                         "smithy.api#required": {}
                     }
@@ -4468,6 +4487,7 @@
                 "UserId": {
                     "target": "com.amazonaws.elasticache#UserId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the user.</p>",
                         "smithy.api#required": {}
                     }
@@ -4475,6 +4495,7 @@
                 "UserName": {
                     "target": "com.amazonaws.elasticache#UserName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The username of the user.</p>",
                         "smithy.api#required": {}
                     }
@@ -4482,6 +4503,7 @@
                 "Engine": {
                     "target": "com.amazonaws.elasticache#EngineType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The current supported value is Redis. </p>",
                         "smithy.api#required": {}
                     }
@@ -4495,6 +4517,7 @@
                 "AccessString": {
                     "target": "com.amazonaws.elasticache#AccessString",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Access permissions string used for this user.</p>",
                         "smithy.api#required": {}
                     }
@@ -4597,6 +4620,7 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
@@ -4604,7 +4628,7 @@
                 "NodeGroupCount": {
                     "target": "com.amazonaws.elasticache#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The number of node groups (shards) that results from the modification of the shard\n            configuration</p>",
                         "smithy.api#required": {}
                     }
@@ -4624,7 +4648,7 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Indicates that the shard reconfiguration process begins immediately. At present, the\n            only permitted value for this parameter is true. </p>",
                         "smithy.api#required": {}
                     }
@@ -4701,6 +4725,7 @@
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The id of the replication group from which you want to remove replica\n            nodes.</p>",
                         "smithy.api#required": {}
                     }
@@ -4726,7 +4751,7 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>If <code>True</code>, the number of replica nodes is decreased immediately.\n                <code>ApplyImmediately=False</code> is not currently supported.</p>",
                         "smithy.api#required": {}
                     }
@@ -4858,6 +4883,7 @@
                 "CacheClusterId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier for the cluster to be deleted. This parameter is not case\n            sensitive.</p>",
                         "smithy.api#required": {}
                     }
@@ -4926,6 +4952,7 @@
                 "CacheParameterGroupName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cache parameter group to delete.</p>\n         <note>\n            <p>The specified cache security group must not be associated with any\n                clusters.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -4977,6 +5004,7 @@
                 "CacheSecurityGroupName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cache security group to delete.</p>\n         <note>\n            <p>You cannot delete the default security group.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -5022,6 +5050,7 @@
                 "CacheSubnetGroupName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cache subnet group to delete.</p>\n         <p>Constraints: Must contain no more than 255 alphanumeric characters or hyphens.</p>",
                         "smithy.api#required": {}
                     }
@@ -5061,6 +5090,7 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
@@ -5068,7 +5098,7 @@
                 "RetainPrimaryReplicationGroup": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The primary replication group is retained as a standalone replication group. </p>",
                         "smithy.api#required": {}
                     }
@@ -5149,6 +5179,7 @@
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier for the cluster to be deleted. This parameter is not case\n            sensitive.</p>",
                         "smithy.api#required": {}
                     }
@@ -5253,6 +5284,7 @@
                 "SnapshotName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the snapshot to be deleted.</p>",
                         "smithy.api#required": {}
                     }
@@ -5335,6 +5367,7 @@
                 "UserGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the user group.</p>",
                         "smithy.api#required": {}
                     }
@@ -5350,6 +5383,7 @@
                 "UserId": {
                     "target": "com.amazonaws.elasticache#UserId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the user.</p>",
                         "smithy.api#required": {}
                     }
@@ -5756,7 +5790,6 @@
                 "DefaultOnly": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If <code>true</code>, specifies that only the default version of the specified engine\n            or engine and major version combination is to be returned.</p>"
                     }
                 }
@@ -6274,6 +6307,7 @@
                 "CacheParameterGroupName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of a specific cache parameter group to return details for.</p>",
                         "smithy.api#required": {}
                     }
@@ -7104,6 +7138,7 @@
                 "CacheParameterGroupFamily": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cache parameter group family.</p>\n         <p>Valid values are: <code>memcached1.4</code> | <code>memcached1.5</code> |\n                <code>memcached1.6</code> | <code>redis2.6</code> | <code>redis2.8</code> |\n                <code>redis3.2</code> | <code>redis4.0</code> | <code>redis5.0</code> |\n                <code>redis6.x</code> | <code>redis6.2</code> | <code>redis7</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -8490,6 +8525,7 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
@@ -8497,6 +8533,7 @@
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the secondary cluster you wish to remove from the Global datastore</p>",
                         "smithy.api#required": {}
                     }
@@ -8504,6 +8541,7 @@
                 "ReplicationGroupRegion": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon region of secondary cluster you wish to remove from the Global\n            datastore</p>",
                         "smithy.api#required": {}
                     }
@@ -8525,10 +8563,7 @@
             }
         },
         "com.amazonaws.elasticache#Double": {
-            "type": "double",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "double"
         },
         "com.amazonaws.elasticache#DuplicateUserNameFault": {
             "type": "structure",
@@ -8594,7 +8629,6 @@
                 "Port": {
                     "target": "com.amazonaws.elasticache#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port number that the cache engine is listening on.</p>"
                     }
                 }
@@ -8738,6 +8772,7 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
@@ -8745,6 +8780,7 @@
                 "PrimaryRegion": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon region of the primary cluster of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
@@ -8752,6 +8788,7 @@
                 "PrimaryReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the primary replication group</p>",
                         "smithy.api#required": {}
                     }
@@ -8778,6 +8815,7 @@
                 "Name": {
                     "target": "com.amazonaws.elasticache#FilterName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The property being filtered. For example, UserId.</p>",
                         "smithy.api#required": {}
                     }
@@ -8785,6 +8823,7 @@
                 "Values": {
                     "target": "com.amazonaws.elasticache#FilterValueList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The property values to filter on. For example, \"user-123\".</p>",
                         "smithy.api#required": {}
                     }
@@ -9086,6 +9125,7 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
@@ -9093,7 +9133,7 @@
                 "NodeGroupCount": {
                     "target": "com.amazonaws.elasticache#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Total number of node groups you want</p>",
                         "smithy.api#required": {}
                     }
@@ -9107,7 +9147,7 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Indicates that the process begins immediately. At present, the only permitted value\n            for this parameter is true.</p>",
                         "smithy.api#required": {}
                     }
@@ -9184,6 +9224,7 @@
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The id of the replication group to which you want to add replica nodes.</p>",
                         "smithy.api#required": {}
                     }
@@ -9203,7 +9244,7 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>If <code>True</code>, the number of replica nodes is increased immediately.\n                <code>ApplyImmediately=False</code> is not currently supported.</p>",
                         "smithy.api#required": {}
                     }
@@ -9265,10 +9306,7 @@
             }
         },
         "com.amazonaws.elasticache#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "integer"
         },
         "com.amazonaws.elasticache#IntegerOptional": {
             "type": "integer"
@@ -9696,6 +9734,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which you want the list of tags,\n            for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code> or\n                <code>arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot</code>.</p>\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)\n                and Amazon Web\n                    Services Service Namespaces</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -9964,6 +10003,7 @@
                 "CacheClusterId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier. This value is stored as a lowercase string.</p>",
                         "smithy.api#required": {}
                     }
@@ -10031,7 +10071,6 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If <code>true</code>, this parameter causes the modifications in this request and any\n            pending modifications to be applied, asynchronously and as soon as possible, regardless\n            of the <code>PreferredMaintenanceWindow</code> setting for the cluster.</p>\n         <p>If <code>false</code>, changes to the cluster are applied on the next maintenance\n            reboot, or the next failure reboot, whichever occurs first.</p>\n         <important>\n            <p>If you perform a <code>ModifyCacheCluster</code> before a pending modification is\n                applied, the pending modification is replaced by the newer modification.</p>\n         </important>\n         <p>Valid values: <code>true</code> | <code>false</code>\n         </p>\n         <p>Default: <code>false</code>\n         </p>"
                     }
                 },
@@ -10163,6 +10202,7 @@
                 "CacheParameterGroupName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cache parameter group to modify.</p>",
                         "smithy.api#required": {}
                     }
@@ -10170,6 +10210,7 @@
                 "ParameterNameValues": {
                     "target": "com.amazonaws.elasticache#ParameterNameValueList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of parameter names and values for the parameter update. You must supply at\n            least one parameter name and value; subsequent arguments are optional. A maximum of 20\n            parameters may be modified per request.</p>",
                         "smithy.api#required": {}
                     }
@@ -10266,6 +10307,7 @@
                 "CacheSubnetGroupName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name for the cache subnet group. This value is stored as a lowercase\n            string.</p>\n         <p>Constraints: Must contain no more than 255 alphanumeric characters or hyphens.</p>\n         <p>Example: <code>mysubnetgroup</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -10328,6 +10370,7 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
@@ -10335,7 +10378,7 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>This parameter causes the modifications in this request and any pending modifications\n            to be applied, asynchronously and as soon as possible. Modifications to Global\n            Replication Groups cannot be requested to be applied in PreferredMaintenceWindow.\n        </p>",
                         "smithy.api#required": {}
                     }
@@ -10524,6 +10567,7 @@
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the replication group to modify.</p>",
                         "smithy.api#required": {}
                     }
@@ -10604,7 +10648,6 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If <code>true</code>, this parameter causes the modifications in this request and any\n            pending modifications to be applied, asynchronously and as soon as possible, regardless\n            of the <code>PreferredMaintenanceWindow</code> setting for the replication group.</p>\n         <p>If <code>false</code>, changes to the nodes in the replication group are applied on\n            the next maintenance reboot, or the next failure reboot, whichever occurs first.</p>\n         <p>Valid values: <code>true</code> | <code>false</code>\n         </p>\n         <p>Default: <code>false</code>\n         </p>"
                     }
                 },
@@ -10765,6 +10808,7 @@
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Redis (cluster mode enabled) cluster (replication group) on which the\n            shards are to be configured.</p>",
                         "smithy.api#required": {}
                     }
@@ -10772,7 +10816,7 @@
                 "NodeGroupCount": {
                     "target": "com.amazonaws.elasticache#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The number of node groups (shards) that results from the modification of the shard\n            configuration.</p>",
                         "smithy.api#required": {}
                     }
@@ -10780,7 +10824,7 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Indicates that the shard reconfiguration process begins immediately. At present, the\n            only permitted value for this parameter is <code>true</code>.</p>\n         <p>Value: true</p>",
                         "smithy.api#required": {}
                     }
@@ -10893,6 +10937,7 @@
                 "UserGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the user group.</p>",
                         "smithy.api#required": {}
                     }
@@ -10920,6 +10965,7 @@
                 "UserId": {
                     "target": "com.amazonaws.elasticache#UserId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the user.</p>",
                         "smithy.api#required": {}
                     }
@@ -11584,7 +11630,6 @@
                 "IsModifiable": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether (<code>true</code>) or not (<code>false</code>) the parameter can be\n            modified. Some parameters have security or operational implications that prevent them\n            from being changed.</p>"
                     }
                 },
@@ -11871,6 +11916,7 @@
                 "ReservedCacheNodesOfferingId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the reserved cache node offering to purchase.</p>\n         <p>Example: <code>438012d3-4052-4cc7-b2e3-8d3372e0e706</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -11939,6 +11985,7 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
@@ -11946,7 +11993,7 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>If <code>True</code>, redistribution is applied immediately.</p>",
                         "smithy.api#required": {}
                     }
@@ -12033,6 +12080,7 @@
                 "CacheClusterId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier. This parameter is stored as a lowercase string.</p>",
                         "smithy.api#required": {}
                     }
@@ -12040,6 +12088,7 @@
                 "CacheNodeIdsToReboot": {
                     "target": "com.amazonaws.elasticache#CacheNodeIdsList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of cache node IDs to reboot. A node ID is a numeric identifier (0001, 0002,\n            etc.). To reboot an entire cluster, specify all of the cache node IDs.</p>",
                         "smithy.api#required": {}
                     }
@@ -12067,7 +12116,6 @@
                 "RecurringChargeAmount": {
                     "target": "com.amazonaws.elasticache#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The monetary amount of the recurring charge.</p>"
                     }
                 },
@@ -12097,6 +12145,7 @@
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the secondary cluster</p>",
                         "smithy.api#required": {}
                     }
@@ -12104,6 +12153,7 @@
                 "ReplicationGroupRegion": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon region where the cluster is stored</p>",
                         "smithy.api#required": {}
                     }
@@ -12111,6 +12161,7 @@
                 "ReshardingConfiguration": {
                     "target": "com.amazonaws.elasticache#ReshardingConfigurationList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of <code>PreferredAvailabilityZones</code> objects that specifies the\n            configuration of a node group in the resharded cluster. </p>",
                         "smithy.api#required": {}
                     }
@@ -12229,6 +12280,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which you want the tags removed,\n            for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code> or\n                <code>arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot</code>.</p>\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)\n                and Amazon Service Namespaces</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -12236,6 +12288,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.elasticache#KeyList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of <code>TagKeys</code> identifying the tags you want removed from the named\n            resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -12417,7 +12470,6 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If you are running Redis engine version 6.0 or later, set this parameter to yes if you\n            want to opt-in to the next auto minor version upgrade campaign. This parameter is\n            disabled for previous versions. </p>"
                     }
                 },
@@ -12661,28 +12713,24 @@
                 "Duration": {
                     "target": "com.amazonaws.elasticache#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration of the reservation in seconds.</p>"
                     }
                 },
                 "FixedPrice": {
                     "target": "com.amazonaws.elasticache#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The fixed price charged for this reserved cache node.</p>"
                     }
                 },
                 "UsagePrice": {
                     "target": "com.amazonaws.elasticache#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The hourly price charged for this reserved cache node.</p>"
                     }
                 },
                 "CacheNodeCount": {
                     "target": "com.amazonaws.elasticache#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of cache nodes that have been reserved.</p>"
                     }
                 },
@@ -12820,21 +12868,18 @@
                 "Duration": {
                     "target": "com.amazonaws.elasticache#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration of the offering. in seconds.</p>"
                     }
                 },
                 "FixedPrice": {
                     "target": "com.amazonaws.elasticache#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The fixed price charged for this offering.</p>"
                     }
                 },
                 "UsagePrice": {
                     "target": "com.amazonaws.elasticache#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The hourly price charged for this offering.</p>"
                     }
                 },
@@ -12956,6 +13001,7 @@
                 "CacheParameterGroupName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cache parameter group to reset.</p>",
                         "smithy.api#required": {}
                     }
@@ -12963,7 +13009,6 @@
                 "ResetAllParameters": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If <code>true</code>, all parameters in the cache parameter group are reset to their\n            default values. If <code>false</code>, only the parameters listed by\n                <code>ParameterNameValues</code> are reset to their default values.</p>\n         <p>Valid values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
@@ -13068,6 +13113,7 @@
                 "CacheSecurityGroupName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the cache security group to revoke ingress from.</p>",
                         "smithy.api#required": {}
                     }
@@ -13075,6 +13121,7 @@
                 "EC2SecurityGroupName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Amazon EC2 security group to revoke access from.</p>",
                         "smithy.api#required": {}
                     }
@@ -13082,6 +13129,7 @@
                 "EC2SecurityGroupOwnerId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon account number of the Amazon EC2 security group owner. Note that this is\n            not the same thing as an Amazon access key ID - you must provide a valid Amazon account\n            number for this parameter.</p>",
                         "smithy.api#required": {}
                     }
@@ -13385,7 +13433,6 @@
                 "ProgressPercentage": {
                     "target": "com.amazonaws.elasticache#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of the slot migration that is complete.</p>"
                     }
                 }
@@ -13514,7 +13561,6 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> If you are running Redis engine version 6.0 or later, set this parameter to yes if\n            you want to opt-in to the next auto minor version upgrade campaign. This parameter is\n            disabled for previous versions.  </p>"
                     }
                 },
@@ -13736,6 +13782,7 @@
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the replication group to which data should be migrated.</p>",
                         "smithy.api#required": {}
                     }
@@ -13743,6 +13790,7 @@
                 "CustomerNodeEndpointList": {
                     "target": "com.amazonaws.elasticache#CustomerNodeEndpointList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>List of endpoints from which data should be migrated. For Redis (cluster mode\n            disabled), list should have only one element.</p>",
                         "smithy.api#required": {}
                     }
@@ -13991,6 +14039,7 @@
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the replication group (console: cluster) whose automatic failover is being\n            tested by this operation.</p>",
                         "smithy.api#required": {}
                     }
@@ -13998,6 +14047,7 @@
                 "NodeGroupId": {
                     "target": "com.amazonaws.elasticache#AllowedNodeGroupId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the node group (called shard in the console) in this replication group on\n            which automatic failover is to be tested. You may test automatic failover on up to 5\n            node groups in any rolling 24-hour period.</p>",
                         "smithy.api#required": {}
                     }
@@ -14067,6 +14117,7 @@
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p> The ID of the replication group to which data is to be migrated. </p>",
                         "smithy.api#required": {}
                     }
@@ -14074,6 +14125,7 @@
                 "CustomerNodeEndpointList": {
                     "target": "com.amazonaws.elasticache#CustomerNodeEndpointList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p> List of endpoints from which data should be migrated. List should have only one\n            element. </p>",
                         "smithy.api#required": {}
                     }

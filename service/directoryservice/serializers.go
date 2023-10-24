@@ -3891,9 +3891,9 @@ func awsAwsjson11_serializeDocumentRadiusSettings(v *types.RadiusSettings, value
 		ok.String(*v.DisplayLabel)
 	}
 
-	if v.RadiusPort != 0 {
+	if v.RadiusPort != nil {
 		ok := object.Key("RadiusPort")
-		ok.Integer(v.RadiusPort)
+		ok.Integer(*v.RadiusPort)
 	}
 
 	if v.RadiusRetries != 0 {
@@ -3908,9 +3908,9 @@ func awsAwsjson11_serializeDocumentRadiusSettings(v *types.RadiusSettings, value
 		}
 	}
 
-	if v.RadiusTimeout != 0 {
+	if v.RadiusTimeout != nil {
 		ok := object.Key("RadiusTimeout")
-		ok.Integer(v.RadiusTimeout)
+		ok.Integer(*v.RadiusTimeout)
 	}
 
 	if v.SharedSecret != nil {
@@ -5454,9 +5454,9 @@ func awsAwsjson11_serializeOpDocumentUpdateNumberOfDomainControllersInput(v *Upd
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.DesiredNumber != nil {
 		ok := object.Key("DesiredNumber")
-		ok.Integer(v.DesiredNumber)
+		ok.Integer(*v.DesiredNumber)
 	}
 
 	if v.DirectoryId != nil {

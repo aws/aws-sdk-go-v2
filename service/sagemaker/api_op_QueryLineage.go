@@ -54,7 +54,7 @@ type QueryLineageInput struct {
 	// the Associations (https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking-entities.html)
 	// and lineage entities on the path. Set to False to only return lineage entities
 	// that match your query.
-	IncludeEdges bool
+	IncludeEdges *bool
 
 	// The maximum depth in lineage relationships from the StartArns that are
 	// traversed. Depth is a measure of the number of Associations from the StartArn

@@ -1926,7 +1926,7 @@ type ManagedRuleSetVersion struct {
 	// web ACL WCU usage when they use a rule group. For more information, see WAF web
 	// ACL capacity units (WCU) (https://docs.aws.amazon.com/waf/latest/developerguide/aws-waf-capacity-units.html)
 	// in the WAF Developer Guide.
-	Capacity int64
+	Capacity *int64
 
 	// The time that this version is set to expire. Times are in Coordinated Universal
 	// Time (UTC) format. UTC format includes the special designator, Z. For example,
@@ -2195,7 +2195,7 @@ type RateBasedStatement struct {
 	//   then this is the limit on requests for any single method, city pair.
 	//
 	// This member is required.
-	Limit int64
+	Limit *int64
 
 	// Specifies the aggregate keys to use in a rate-base rule.
 	CustomKeys []RateBasedStatementCustomKey
@@ -3090,7 +3090,7 @@ type RuleGroup struct {
 	// in the WAF Developer Guide.
 	//
 	// This member is required.
-	Capacity int64
+	Capacity *int64
 
 	// A unique identifier for the rule group. This ID is returned in the responses to
 	// create and list commands. You provide it to operations like update and delete.

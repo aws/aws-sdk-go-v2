@@ -27,7 +27,7 @@ func TestInteg_00_ListUserPools(t *testing.T) {
 
 	client := cognitoidentityprovider.NewFromConfig(cfg)
 	params := &cognitoidentityprovider.ListUserPoolsInput{
-		MaxResults: 10,
+		MaxResults: aws.Int32(10),
 	}
 	_, err = client.ListUserPools(ctx, params)
 	if err != nil {

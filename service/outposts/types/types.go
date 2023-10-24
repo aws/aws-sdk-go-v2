@@ -204,7 +204,7 @@ type LineItem struct {
 	PreviousOrderId *string
 
 	// The quantity of the line item.
-	Quantity int32
+	Quantity *int32
 
 	// Information about a line item shipment.
 	ShipmentInformation *ShipmentInformation
@@ -234,7 +234,7 @@ type LineItemRequest struct {
 	CatalogItemId *string
 
 	// The quantity of a line item request.
-	Quantity int32
+	Quantity *int32
 
 	noSmithyDocumentSerde
 }

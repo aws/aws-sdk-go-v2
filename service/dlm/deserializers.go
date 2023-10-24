@@ -1369,7 +1369,7 @@ func awsRestjson1_deserializeDocumentCreateRule(v **types.CreateRule, value inte
 				if err != nil {
 					return err
 				}
-				sv.Interval = int32(i64)
+				sv.Interval = ptr.Int32(int32(i64))
 			}
 
 		case "IntervalUnit":
@@ -1520,7 +1520,7 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyDeprecateRule(v **types.Cros
 				if err != nil {
 					return err
 				}
-				sv.Interval = int32(i64)
+				sv.Interval = ptr.Int32(int32(i64))
 			}
 
 		case "IntervalUnit":
@@ -1573,7 +1573,7 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyRetainRule(v **types.CrossRe
 				if err != nil {
 					return err
 				}
-				sv.Interval = int32(i64)
+				sv.Interval = ptr.Int32(int32(i64))
 			}
 
 		case "IntervalUnit":
@@ -1746,7 +1746,7 @@ func awsRestjson1_deserializeDocumentDeprecateRule(v **types.DeprecateRule, valu
 				if err != nil {
 					return err
 				}
-				sv.Count = int32(i64)
+				sv.Count = ptr.Int32(int32(i64))
 			}
 
 		case "Interval":
@@ -1759,7 +1759,7 @@ func awsRestjson1_deserializeDocumentDeprecateRule(v **types.DeprecateRule, valu
 				if err != nil {
 					return err
 				}
-				sv.Interval = int32(i64)
+				sv.Interval = ptr.Int32(int32(i64))
 			}
 
 		case "IntervalUnit":
@@ -1999,7 +1999,7 @@ func awsRestjson1_deserializeDocumentFastRestoreRule(v **types.FastRestoreRule, 
 				if err != nil {
 					return err
 				}
-				sv.Count = int32(i64)
+				sv.Count = ptr.Int32(int32(i64))
 			}
 
 		case "Interval":
@@ -2012,7 +2012,7 @@ func awsRestjson1_deserializeDocumentFastRestoreRule(v **types.FastRestoreRule, 
 				if err != nil {
 					return err
 				}
-				sv.Interval = int32(i64)
+				sv.Interval = ptr.Int32(int32(i64))
 			}
 
 		case "IntervalUnit":
@@ -2794,7 +2794,7 @@ func awsRestjson1_deserializeDocumentRetainRule(v **types.RetainRule, value inte
 				if err != nil {
 					return err
 				}
-				sv.Count = int32(i64)
+				sv.Count = ptr.Int32(int32(i64))
 			}
 
 		case "Interval":
@@ -2807,7 +2807,7 @@ func awsRestjson1_deserializeDocumentRetainRule(v **types.RetainRule, value inte
 				if err != nil {
 					return err
 				}
-				sv.Interval = int32(i64)
+				sv.Interval = ptr.Int32(int32(i64))
 			}
 
 		case "IntervalUnit":
@@ -2860,7 +2860,7 @@ func awsRestjson1_deserializeDocumentRetentionArchiveTier(v **types.RetentionArc
 				if err != nil {
 					return err
 				}
-				sv.Count = int32(i64)
+				sv.Count = ptr.Int32(int32(i64))
 			}
 
 		case "Interval":
@@ -2873,7 +2873,7 @@ func awsRestjson1_deserializeDocumentRetentionArchiveTier(v **types.RetentionArc
 				if err != nil {
 					return err
 				}
-				sv.Interval = int32(i64)
+				sv.Interval = ptr.Int32(int32(i64))
 			}
 
 		case "IntervalUnit":
@@ -2927,7 +2927,7 @@ func awsRestjson1_deserializeDocumentSchedule(v **types.Schedule, value interfac
 				if !ok {
 					return fmt.Errorf("expected CopyTags to be of type *bool, got %T instead", value)
 				}
-				sv.CopyTags = jtv
+				sv.CopyTags = ptr.Bool(jtv)
 			}
 
 		case "CreateRule":
@@ -3059,7 +3059,7 @@ func awsRestjson1_deserializeDocumentShareRule(v **types.ShareRule, value interf
 				if err != nil {
 					return err
 				}
-				sv.UnshareInterval = int32(i64)
+				sv.UnshareInterval = ptr.Int32(int32(i64))
 			}
 
 		case "UnshareIntervalUnit":

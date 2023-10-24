@@ -12111,9 +12111,9 @@ func awsRestjson1_serializeDocumentRelativeAggregationDuration(v *types.Relative
 		ok.String(string(v.TimeDimension))
 	}
 
-	{
+	if v.TimeValue != nil {
 		ok := object.Key("timeValue")
-		ok.Integer(v.TimeValue)
+		ok.Integer(*v.TimeValue)
 	}
 
 	return nil

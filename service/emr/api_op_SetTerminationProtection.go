@@ -58,7 +58,7 @@ type SetTerminationProtectionInput struct {
 	// intervention, or job-flow error.
 	//
 	// This member is required.
-	TerminationProtected bool
+	TerminationProtected *bool
 
 	noSmithyDocumentSerde
 }

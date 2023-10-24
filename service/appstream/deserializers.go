@@ -10060,7 +10060,7 @@ func awsAwsjson11_deserializeDocumentApplication(v **types.Application, value in
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "IconS3Location":
@@ -10282,7 +10282,7 @@ func awsAwsjson11_deserializeDocumentApplicationSettingsResponse(v **types.Appli
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "S3BucketName":
@@ -11634,7 +11634,7 @@ func awsAwsjson11_deserializeDocumentImage(v **types.Image, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ImageBuilderSupported = jtv
+				sv.ImageBuilderSupported = ptr.Bool(jtv)
 			}
 
 		case "ImageErrors":
@@ -14019,7 +14019,7 @@ func awsAwsjson11_deserializeDocumentUser(v **types.User, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "FirstName":
@@ -14221,7 +14221,7 @@ func awsAwsjson11_deserializeDocumentUserStackAssociation(v **types.UserStackAss
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.SendEmailNotification = jtv
+				sv.SendEmailNotification = ptr.Bool(jtv)
 			}
 
 		case "StackName":
@@ -15144,7 +15144,7 @@ func awsAwsjson11_deserializeOpDocumentCreateUpdatedImageOutput(v **CreateUpdate
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.CanUpdateImage = jtv
+				sv.CanUpdateImage = ptr.Bool(jtv)
 			}
 
 		case "image":

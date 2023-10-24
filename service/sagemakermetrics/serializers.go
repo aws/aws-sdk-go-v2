@@ -117,20 +117,20 @@ func awsRestjson1_serializeDocumentRawMetricData(v *types.RawMetricData, value s
 		ok.Double(smithytime.FormatEpochSeconds(*v.Timestamp))
 	}
 
-	{
+	if v.Value != nil {
 		ok := object.Key("Value")
 		switch {
-		case math.IsNaN(v.Value):
+		case math.IsNaN(*v.Value):
 			ok.String("NaN")
 
-		case math.IsInf(v.Value, 1):
+		case math.IsInf(*v.Value, 1):
 			ok.String("Infinity")
 
-		case math.IsInf(v.Value, -1):
+		case math.IsInf(*v.Value, -1):
 			ok.String("-Infinity")
 
 		default:
-			ok.Double(v.Value)
+			ok.Double(*v.Value)
 
 		}
 	}

@@ -1,6 +1,7 @@
 {
     "id": "2f21357c-3f8e-45c9-8ce2-c27bf18622f6",
     "type": "feature",
+    "collapse": true,
     "description": "**BREAKFIX**: Correct nullability representation of APIGateway-based services.",
     "modules": [
         "service/amplifybackend",

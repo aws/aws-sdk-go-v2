@@ -38,7 +38,7 @@ type IncreaseNodeGroupsInGlobalReplicationGroupInput struct {
 	// value for this parameter is true.
 	//
 	// This member is required.
-	ApplyImmediately bool
+	ApplyImmediately *bool
 
 	// The name of the Global datastore
 	//
@@ -48,7 +48,7 @@ type IncreaseNodeGroupsInGlobalReplicationGroupInput struct {
 	// Total number of node groups you want
 	//
 	// This member is required.
-	NodeGroupCount int32
+	NodeGroupCount *int32
 
 	// Describes the replication group IDs, the Amazon regions where they are stored
 	// and the shard configuration for each that comprise the Global datastore

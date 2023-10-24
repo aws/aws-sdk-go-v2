@@ -64,7 +64,7 @@ type CacheCluster struct {
 	//  If you are running Redis engine version 6.0 or later, set this parameter to
 	// yes if you want to opt-in to the next auto minor version upgrade campaign. This
 	// parameter is disabled for previous versions.
-	AutoMinorVersionUpgrade bool
+	AutoMinorVersionUpgrade *bool
 
 	// The date and time when the cluster was created.
 	CacheClusterCreateTime *time.Time
@@ -212,7 +212,7 @@ type CacheCluster struct {
 
 	// A boolean value indicating whether log delivery is enabled for the replication
 	// group.
-	ReplicationGroupLogDeliveryEnabled bool
+	ReplicationGroupLogDeliveryEnabled *bool
 
 	// A list of VPC Security Groups associated with the cluster.
 	SecurityGroups []SecurityGroupMembership
@@ -372,7 +372,7 @@ type CacheNodeTypeSpecificParameter struct {
 	// Indicates whether ( true ) or not ( false ) the parameter can be modified. Some
 	// parameters have security or operational implications that prevent them from
 	// being changed.
-	IsModifiable bool
+	IsModifiable *bool
 
 	// The earliest cache engine version to which the parameter can apply.
 	MinimumEngineVersion *string
@@ -447,7 +447,7 @@ type CacheParameterGroup struct {
 	Description *string
 
 	// Indicates whether the parameter group is associated with a Global datastore
-	IsGlobal bool
+	IsGlobal *bool
 
 	noSmithyDocumentSerde
 }
@@ -560,7 +560,7 @@ type ConfigureShard struct {
 	//   a replica if your primary node fails)
 	//
 	// This member is required.
-	NewReplicaCount int32
+	NewReplicaCount *int32
 
 	// The 4-digit id for the node group you are configuring. For Redis (cluster mode
 	// disabled) replication groups, the node group id is always 0001. To find a Redis
@@ -632,7 +632,7 @@ type Endpoint struct {
 	Address *string
 
 	// The port number that the cache engine is listening on.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -1065,7 +1065,7 @@ type Parameter struct {
 	// Indicates whether ( true ) or not ( false ) the parameter can be modified. Some
 	// parameters have security or operational implications that prevent them from
 	// being changed.
-	IsModifiable bool
+	IsModifiable *bool
 
 	// The earliest cache engine version to which the parameter can apply.
 	MinimumEngineVersion *string
@@ -1171,7 +1171,7 @@ type ProcessedUpdateAction struct {
 type RecurringCharge struct {
 
 	// The monetary amount of the recurring charge.
-	RecurringChargeAmount float64
+	RecurringChargeAmount *float64
 
 	// The frequency of the recurring charge.
 	RecurringChargeFrequency *string
@@ -1224,7 +1224,7 @@ type ReplicationGroup struct {
 	// If you are running Redis engine version 6.0 or later, set this parameter to yes
 	// if you want to opt-in to the next auto minor version upgrade campaign. This
 	// parameter is disabled for previous versions.
-	AutoMinorVersionUpgrade bool
+	AutoMinorVersionUpgrade *bool
 
 	// Indicates the status of automatic failover for this Redis replication group.
 	AutomaticFailover AutomaticFailoverStatus
@@ -1384,7 +1384,7 @@ type ReplicationGroupPendingModifiedValues struct {
 type ReservedCacheNode struct {
 
 	// The number of cache nodes that have been reserved.
-	CacheNodeCount int32
+	CacheNodeCount *int32
 
 	// The cache node type for the reserved cache nodes. The following node types are
 	// supported by ElastiCache. Generally speaking, the current generation types
@@ -1438,10 +1438,10 @@ type ReservedCacheNode struct {
 	CacheNodeType *string
 
 	// The duration of the reservation in seconds.
-	Duration int32
+	Duration *int32
 
 	// The fixed price charged for this reserved cache node.
-	FixedPrice float64
+	FixedPrice *float64
 
 	// The offering type of this reserved cache node.
 	OfferingType *string
@@ -1469,7 +1469,7 @@ type ReservedCacheNode struct {
 	State *string
 
 	// The hourly price charged for this reserved cache node.
-	UsagePrice float64
+	UsagePrice *float64
 
 	noSmithyDocumentSerde
 }
@@ -1529,10 +1529,10 @@ type ReservedCacheNodesOffering struct {
 	CacheNodeType *string
 
 	// The duration of the offering. in seconds.
-	Duration int32
+	Duration *int32
 
 	// The fixed price charged for this offering.
-	FixedPrice float64
+	FixedPrice *float64
 
 	// The offering type.
 	OfferingType *string
@@ -1547,7 +1547,7 @@ type ReservedCacheNodesOffering struct {
 	ReservedCacheNodesOfferingId *string
 
 	// The hourly price charged for this offering.
-	UsagePrice float64
+	UsagePrice *float64
 
 	noSmithyDocumentSerde
 }
@@ -1640,7 +1640,7 @@ type ServiceUpdate struct {
 type SlotMigration struct {
 
 	// The percentage of the slot migration that is complete.
-	ProgressPercentage float64
+	ProgressPercentage *float64
 
 	noSmithyDocumentSerde
 }
@@ -1655,7 +1655,7 @@ type Snapshot struct {
 	//  If you are running Redis engine version 6.0 or later, set this parameter to
 	// yes if you want to opt-in to the next auto minor version upgrade campaign. This
 	// parameter is disabled for previous versions.
-	AutoMinorVersionUpgrade bool
+	AutoMinorVersionUpgrade *bool
 
 	// Indicates the status of automatic failover for the source Redis replication
 	// group.

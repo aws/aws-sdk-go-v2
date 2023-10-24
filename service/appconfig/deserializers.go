@@ -616,7 +616,7 @@ func awsRestjson1_deserializeOpDocumentCreateDeploymentStrategyOutput(v **Create
 					if err != nil {
 						return err
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -634,7 +634,7 @@ func awsRestjson1_deserializeOpDocumentCreateDeploymentStrategyOutput(v **Create
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)
@@ -2978,7 +2978,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 					if err != nil {
 						return err
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -2996,7 +2996,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)
@@ -3039,7 +3039,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 					if err != nil {
 						return err
 					}
-					sv.PercentageComplete = float32(f64)
+					sv.PercentageComplete = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -3057,7 +3057,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.PercentageComplete = float32(f64)
+					sv.PercentageComplete = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)
@@ -3287,7 +3287,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentStrategyOutput(v **GetDeploy
 					if err != nil {
 						return err
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -3305,7 +3305,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentStrategyOutput(v **GetDeploy
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)
@@ -5853,7 +5853,7 @@ func awsRestjson1_deserializeOpDocumentStartDeploymentOutput(v **StartDeployment
 					if err != nil {
 						return err
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -5871,7 +5871,7 @@ func awsRestjson1_deserializeOpDocumentStartDeploymentOutput(v **StartDeployment
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)
@@ -5914,7 +5914,7 @@ func awsRestjson1_deserializeOpDocumentStartDeploymentOutput(v **StartDeployment
 					if err != nil {
 						return err
 					}
-					sv.PercentageComplete = float32(f64)
+					sv.PercentageComplete = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -5932,7 +5932,7 @@ func awsRestjson1_deserializeOpDocumentStartDeploymentOutput(v **StartDeployment
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.PercentageComplete = float32(f64)
+					sv.PercentageComplete = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)
@@ -6261,7 +6261,7 @@ func awsRestjson1_deserializeOpDocumentStopDeploymentOutput(v **StopDeploymentOu
 					if err != nil {
 						return err
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -6279,7 +6279,7 @@ func awsRestjson1_deserializeOpDocumentStopDeploymentOutput(v **StopDeploymentOu
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)
@@ -6322,7 +6322,7 @@ func awsRestjson1_deserializeOpDocumentStopDeploymentOutput(v **StopDeploymentOu
 					if err != nil {
 						return err
 					}
-					sv.PercentageComplete = float32(f64)
+					sv.PercentageComplete = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -6340,7 +6340,7 @@ func awsRestjson1_deserializeOpDocumentStopDeploymentOutput(v **StopDeploymentOu
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.PercentageComplete = float32(f64)
+					sv.PercentageComplete = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)
@@ -7169,7 +7169,7 @@ func awsRestjson1_deserializeOpDocumentUpdateDeploymentStrategyOutput(v **Update
 					if err != nil {
 						return err
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -7187,7 +7187,7 @@ func awsRestjson1_deserializeOpDocumentUpdateDeploymentStrategyOutput(v **Update
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)
@@ -9073,7 +9073,7 @@ func awsRestjson1_deserializeDocumentDeploymentStrategy(v **types.DeploymentStra
 					if err != nil {
 						return err
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -9091,7 +9091,7 @@ func awsRestjson1_deserializeDocumentDeploymentStrategy(v **types.DeploymentStra
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)
@@ -9278,7 +9278,7 @@ func awsRestjson1_deserializeDocumentDeploymentSummary(v **types.DeploymentSumma
 					if err != nil {
 						return err
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -9296,7 +9296,7 @@ func awsRestjson1_deserializeDocumentDeploymentSummary(v **types.DeploymentSumma
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.GrowthFactor = float32(f64)
+					sv.GrowthFactor = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)
@@ -9321,7 +9321,7 @@ func awsRestjson1_deserializeDocumentDeploymentSummary(v **types.DeploymentSumma
 					if err != nil {
 						return err
 					}
-					sv.PercentageComplete = float32(f64)
+					sv.PercentageComplete = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -9339,7 +9339,7 @@ func awsRestjson1_deserializeDocumentDeploymentSummary(v **types.DeploymentSumma
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.PercentageComplete = float32(f64)
+					sv.PercentageComplete = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)

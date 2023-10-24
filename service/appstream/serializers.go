@@ -4195,9 +4195,9 @@ func awsAwsjson11_serializeDocumentApplicationSettings(v *types.ApplicationSetti
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.Enabled != nil {
 		ok := object.Key("Enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	if v.SettingsGroup != nil {
@@ -4617,9 +4617,9 @@ func awsAwsjson11_serializeDocumentUserStackAssociation(v *types.UserStackAssoci
 		ok.String(string(v.AuthenticationType))
 	}
 
-	if v.SendEmailNotification {
+	if v.SendEmailNotification != nil {
 		ok := object.Key("SendEmailNotification")
-		ok.Boolean(v.SendEmailNotification)
+		ok.Boolean(*v.SendEmailNotification)
 	}
 
 	if v.StackName != nil {
@@ -5412,9 +5412,9 @@ func awsAwsjson11_serializeOpDocumentCreateUpdatedImageInput(v *CreateUpdatedIma
 	object := value.Object()
 	defer object.Close()
 
-	if v.DryRun {
+	if v.DryRun != nil {
 		ok := object.Key("dryRun")
-		ok.Boolean(v.DryRun)
+		ok.Boolean(*v.DryRun)
 	}
 
 	if v.ExistingImageName != nil {
@@ -6563,9 +6563,9 @@ func awsAwsjson11_serializeOpDocumentUpdateFleetInput(v *UpdateFleetInput, value
 		}
 	}
 
-	if v.DeleteVpcConfig {
+	if v.DeleteVpcConfig != nil {
 		ok := object.Key("DeleteVpcConfig")
-		ok.Boolean(v.DeleteVpcConfig)
+		ok.Boolean(*v.DeleteVpcConfig)
 	}
 
 	if v.Description != nil {
@@ -6718,9 +6718,9 @@ func awsAwsjson11_serializeOpDocumentUpdateStackInput(v *UpdateStackInput, value
 		}
 	}
 
-	if v.DeleteStorageConnectors {
+	if v.DeleteStorageConnectors != nil {
 		ok := object.Key("DeleteStorageConnectors")
-		ok.Boolean(v.DeleteStorageConnectors)
+		ok.Boolean(*v.DeleteStorageConnectors)
 	}
 
 	if v.Description != nil {

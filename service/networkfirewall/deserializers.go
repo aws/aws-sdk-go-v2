@@ -8595,7 +8595,7 @@ func awsAwsjson10_deserializeDocumentStatelessRule(v **types.StatelessRule, valu
 				if err != nil {
 					return err
 				}
-				sv.Priority = int32(i64)
+				sv.Priority = ptr.Int32(int32(i64))
 			}
 
 		case "RuleDefinition":
@@ -8644,7 +8644,7 @@ func awsAwsjson10_deserializeDocumentStatelessRuleGroupReference(v **types.State
 				if err != nil {
 					return err
 				}
-				sv.Priority = int32(i64)
+				sv.Priority = ptr.Int32(int32(i64))
 			}
 
 		case "ResourceArn":

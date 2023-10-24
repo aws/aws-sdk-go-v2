@@ -46,7 +46,7 @@ type PurchaseReservedInstanceOfferingInput struct {
 	ReservedInstanceOfferingId *string
 
 	// The number of OpenSearch instances to reserve.
-	InstanceCount int32
+	InstanceCount *int32
 
 	noSmithyDocumentSerde
 }

@@ -49,7 +49,7 @@ type GetSampledRequestsInput struct {
 	// GetSampledRequests returns information about all of them.
 	//
 	// This member is required.
-	MaxItems int64
+	MaxItems *int64
 
 	// The metric name assigned to the Rule or RuleGroup dimension for which you want
 	// a sample of requests.

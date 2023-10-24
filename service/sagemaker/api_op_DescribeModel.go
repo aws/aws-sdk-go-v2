@@ -73,7 +73,7 @@ type DescribeModelOutput struct {
 
 	// If True , no inbound or outbound network calls can be made to or from the model
 	// container.
-	EnableNetworkIsolation bool
+	EnableNetworkIsolation *bool
 
 	// Specifies details of how containers in a multi-container endpoint are called.
 	InferenceExecutionConfig *types.InferenceExecutionConfig

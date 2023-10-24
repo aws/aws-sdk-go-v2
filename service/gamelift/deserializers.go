@@ -18355,7 +18355,7 @@ func awsAwsjson11_deserializeDocumentPlayerLatency(v **types.PlayerLatency, valu
 					if err != nil {
 						return err
 					}
-					sv.LatencyInMilliseconds = float32(f64)
+					sv.LatencyInMilliseconds = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -18373,7 +18373,7 @@ func awsAwsjson11_deserializeDocumentPlayerLatency(v **types.PlayerLatency, valu
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.LatencyInMilliseconds = float32(f64)
+					sv.LatencyInMilliseconds = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
@@ -19223,7 +19223,7 @@ func awsAwsjson11_deserializeDocumentScalingPolicy(v **types.ScalingPolicy, valu
 				if err != nil {
 					return err
 				}
-				sv.ScalingAdjustment = int32(i64)
+				sv.ScalingAdjustment = ptr.Int32(int32(i64))
 			}
 
 		case "ScalingAdjustmentType":
@@ -19257,7 +19257,7 @@ func awsAwsjson11_deserializeDocumentScalingPolicy(v **types.ScalingPolicy, valu
 					if err != nil {
 						return err
 					}
-					sv.Threshold = f64
+					sv.Threshold = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -19275,7 +19275,7 @@ func awsAwsjson11_deserializeDocumentScalingPolicy(v **types.ScalingPolicy, valu
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Threshold = f64
+					sv.Threshold = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
@@ -19755,7 +19755,7 @@ func awsAwsjson11_deserializeDocumentTargetConfiguration(v **types.TargetConfigu
 					if err != nil {
 						return err
 					}
-					sv.TargetValue = f64
+					sv.TargetValue = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -19773,7 +19773,7 @@ func awsAwsjson11_deserializeDocumentTargetConfiguration(v **types.TargetConfigu
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.TargetValue = f64
+					sv.TargetValue = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)

@@ -8408,7 +8408,7 @@ func awsRestxml_serializeDocumentSelectionCriteria(v *types.SelectionCriteria, v
 		el := value.MemberElement(root)
 		el.String(*v.Delimiter)
 	}
-	if v.MaxDepth != 0 {
+	if v.MaxDepth != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -8417,9 +8417,9 @@ func awsRestxml_serializeDocumentSelectionCriteria(v *types.SelectionCriteria, v
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(v.MaxDepth)
+		el.Integer(*v.MaxDepth)
 	}
-	if v.MinStorageBytesPercentage != 0 {
+	if v.MinStorageBytesPercentage != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -8429,17 +8429,17 @@ func awsRestxml_serializeDocumentSelectionCriteria(v *types.SelectionCriteria, v
 		}
 		el := value.MemberElement(root)
 		switch {
-		case math.IsNaN(v.MinStorageBytesPercentage):
+		case math.IsNaN(*v.MinStorageBytesPercentage):
 			el.String("NaN")
 
-		case math.IsInf(v.MinStorageBytesPercentage, 1):
+		case math.IsInf(*v.MinStorageBytesPercentage, 1):
 			el.String("Infinity")
 
-		case math.IsInf(v.MinStorageBytesPercentage, -1):
+		case math.IsInf(*v.MinStorageBytesPercentage, -1):
 			el.String("-Infinity")
 
 		default:
-			el.Double(v.MinStorageBytesPercentage)
+			el.Double(*v.MinStorageBytesPercentage)
 
 		}
 	}

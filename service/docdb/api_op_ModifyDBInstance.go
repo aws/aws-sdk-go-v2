@@ -50,7 +50,7 @@ type ModifyDBInstanceInput struct {
 	// false , changes to the instance are applied during the next maintenance window.
 	// Some parameter changes can cause an outage and are applied on the next reboot.
 	// Default: false
-	ApplyImmediately bool
+	ApplyImmediately *bool
 
 	// This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not
 	// perform minor version upgrades regardless of the value set.

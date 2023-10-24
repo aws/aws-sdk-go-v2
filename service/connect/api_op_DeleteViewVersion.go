@@ -47,7 +47,7 @@ type DeleteViewVersionInput struct {
 	// The version number of the view.
 	//
 	// This member is required.
-	ViewVersion int32
+	ViewVersion *int32
 
 	noSmithyDocumentSerde
 }

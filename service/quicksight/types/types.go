@@ -1070,7 +1070,7 @@ type AuroraParameters struct {
 	// Port.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -1091,7 +1091,7 @@ type AuroraPostgreSqlParameters struct {
 	// The port that Amazon Aurora PostgreSQL is listening on.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -3138,7 +3138,7 @@ type DatabricksParameters struct {
 	// The port for the Databricks data source.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	// The HTTP path of the Databricks data source.
 	//
@@ -4721,7 +4721,7 @@ type ExasolParameters struct {
 	// The port for the Exasol data source.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -6440,7 +6440,7 @@ type GrowthRateComputation struct {
 	Name *string
 
 	// The period size setup of a growth rate computation.
-	PeriodSize int32
+	PeriodSize *int32
 
 	// The time field that is used in a computation.
 	Time *DimensionField
@@ -7661,7 +7661,7 @@ type LookbackWindow struct {
 	// The lookback window column size.
 	//
 	// This member is required.
-	Size int64
+	Size *int64
 
 	// The size unit that is used for the lookback window column. Valid values for
 	// this structure are HOUR , DAY , and WEEK .
@@ -7729,7 +7729,7 @@ type MariaDbParameters struct {
 	// Port.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -7863,7 +7863,7 @@ type MySqlParameters struct {
 	// Port.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -8291,7 +8291,7 @@ type OracleParameters struct {
 	// The port.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -9305,7 +9305,7 @@ type PostgreSqlParameters struct {
 	// Port.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -9347,7 +9347,7 @@ type PrestoParameters struct {
 	// Port.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -11371,7 +11371,7 @@ type SparkParameters struct {
 	// Port.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -11392,7 +11392,7 @@ type SqlServerParameters struct {
 	// Port.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -11423,7 +11423,7 @@ type StarburstParameters struct {
 	// The port for the Starburst data source.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	// The product type for the Starburst data source.
 	ProductType StarburstProductType
@@ -12276,7 +12276,7 @@ type TeradataParameters struct {
 	// Port.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -12747,7 +12747,7 @@ type TopBottomMoversComputation struct {
 	Category *DimensionField
 
 	// The mover size setup of the top and bottom movers computation.
-	MoverSize int32
+	MoverSize *int32
 
 	// The name of a computation.
 	Name *string
@@ -12786,7 +12786,7 @@ type TopBottomRankedComputation struct {
 	Name *string
 
 	// The result size of a top and bottom ranked computation.
-	ResultSize int32
+	ResultSize *int32
 
 	// The value field that is used in a computation.
 	Value *MeasureField
@@ -13522,7 +13522,7 @@ type TrinoParameters struct {
 	// The port for the Trino data source.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -13533,7 +13533,7 @@ type TwitterParameters struct {
 	// Maximum number of rows to query Twitter.
 	//
 	// This member is required.
-	MaxRows int32
+	MaxRows *int32
 
 	// Twitter query string.
 	//

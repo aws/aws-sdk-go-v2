@@ -13844,7 +13844,7 @@ func awsRestxml_deserializeDocumentAccountLimit(v **types.AccountLimit, decoder 
 				if err != nil {
 					return err
 				}
-				sv.Value = i64
+				sv.Value = ptr.Int64(i64)
 			}
 
 		default:
@@ -17296,7 +17296,7 @@ func awsRestxml_deserializeDocumentHostedZoneLimit(v **types.HostedZoneLimit, de
 				if err != nil {
 					return err
 				}
-				sv.Value = i64
+				sv.Value = ptr.Int64(i64)
 			}
 
 		default:
@@ -20805,7 +20805,7 @@ func awsRestxml_deserializeDocumentReusableDelegationSetLimit(v **types.Reusable
 				if err != nil {
 					return err
 				}
-				sv.Value = i64
+				sv.Value = ptr.Int64(i64)
 			}
 
 		default:

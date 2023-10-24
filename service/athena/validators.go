@@ -1524,6 +1524,9 @@ func validateEngineConfiguration(v *types.EngineConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EngineConfiguration"}
+	if v.MaxConcurrentDpus == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxConcurrentDpus"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

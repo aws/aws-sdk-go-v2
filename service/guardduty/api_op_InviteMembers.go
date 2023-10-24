@@ -68,7 +68,7 @@ type InviteMembersInput struct {
 
 	// A Boolean value that specifies whether you want to disable email notification
 	// to the accounts that you are inviting to GuardDuty as members.
-	DisableEmailNotification bool
+	DisableEmailNotification *bool
 
 	// The invitation message that you want to send to the accounts that you're
 	// inviting to GuardDuty as members.

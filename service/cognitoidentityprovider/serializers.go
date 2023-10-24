@@ -6518,9 +6518,9 @@ func awsAwsjson11_serializeDocumentPasswordPolicyType(v *types.PasswordPolicyTyp
 	object := value.Object()
 	defer object.Close()
 
-	if v.MinimumLength != 0 {
+	if v.MinimumLength != nil {
 		ok := object.Key("MinimumLength")
-		ok.Integer(v.MinimumLength)
+		ok.Integer(*v.MinimumLength)
 	}
 
 	if v.RequireLowercase {
@@ -6606,9 +6606,9 @@ func awsAwsjson11_serializeDocumentRecoveryOptionType(v *types.RecoveryOptionTyp
 		ok.String(string(v.Name))
 	}
 
-	{
+	if v.Priority != nil {
 		ok := object.Key("Priority")
-		ok.Integer(v.Priority)
+		ok.Integer(*v.Priority)
 	}
 
 	return nil
@@ -8957,9 +8957,9 @@ func awsAwsjson11_serializeOpDocumentListResourceServersInput(v *ListResourceSer
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -8991,9 +8991,9 @@ func awsAwsjson11_serializeOpDocumentListUserImportJobsInput(v *ListUserImportJo
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.PaginationToken != nil {
@@ -9013,9 +9013,9 @@ func awsAwsjson11_serializeOpDocumentListUserPoolClientsInput(v *ListUserPoolCli
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -9035,9 +9035,9 @@ func awsAwsjson11_serializeOpDocumentListUserPoolsInput(v *ListUserPoolsInput, v
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {

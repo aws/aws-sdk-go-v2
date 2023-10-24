@@ -78,7 +78,7 @@ type CancelExportTaskOutput struct {
 	KmsKeyId *string
 
 	// The progress of the snapshot or cluster export task as a percentage.
-	PercentProgress int32
+	PercentProgress *int32
 
 	// The Amazon S3 bucket where the snapshot or cluster is exported to.
 	S3Bucket *string
@@ -111,7 +111,7 @@ type CancelExportTaskOutput struct {
 	TaskStartTime *time.Time
 
 	// The total amount of data exported, in gigabytes.
-	TotalExtractedDataInGB int32
+	TotalExtractedDataInGB *int32
 
 	// A warning about the snapshot or cluster export task.
 	WarningMessage *string

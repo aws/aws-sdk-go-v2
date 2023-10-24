@@ -88,7 +88,7 @@ type GetDistributionMetricDataInput struct {
 	// The granularity, in seconds, for the metric data points that will be returned.
 	//
 	// This member is required.
-	Period int32
+	Period *int32
 
 	// The start of the time interval for which to get metric data. Constraints:
 	//   - Specified in Coordinated Universal Time (UTC).

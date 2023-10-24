@@ -325,7 +325,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// default, the DB instance isn't restored from the latest backup time.
 	// Constraints:
 	//   - Can't be specified if the RestoreTime parameter is provided.
-	UseLatestRestorableTime bool
+	UseLatestRestorableTime *bool
 
 	// A list of EC2 VPC security groups to associate with this DB instance. Default:
 	// The default EC2 VPC security group for the DB subnet group's VPC.

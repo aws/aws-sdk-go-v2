@@ -10994,9 +10994,9 @@ func awsAwsjson11_serializeOpDocumentCreateMaintenanceWindowInput(v *CreateMaint
 		ok.String(*v.Description)
 	}
 
-	{
+	if v.Duration != nil {
 		ok := object.Key("Duration")
-		ok.Integer(v.Duration)
+		ok.Integer(*v.Duration)
 	}
 
 	if v.EndDate != nil {

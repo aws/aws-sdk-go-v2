@@ -58,7 +58,7 @@ type ModifyCacheClusterInput struct {
 	// failure reboot, whichever occurs first. If you perform a ModifyCacheCluster
 	// before a pending modification is applied, the pending modification is replaced
 	// by the newer modification. Valid values: true | false Default: false
-	ApplyImmediately bool
+	ApplyImmediately *bool
 
 	// Reserved parameter. The password used to access a password protected server.
 	// This parameter must be specified with the auth-token-update parameter. Password

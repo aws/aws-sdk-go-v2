@@ -27999,7 +27999,7 @@ func awsRestjson1_deserializeDocumentRelativeAggregationDuration(v **types.Relat
 				if err != nil {
 					return err
 				}
-				sv.TimeValue = int32(i64)
+				sv.TimeValue = ptr.Int32(int32(i64))
 			}
 
 		default:

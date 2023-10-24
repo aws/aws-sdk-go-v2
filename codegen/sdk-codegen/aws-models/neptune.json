@@ -61,6 +61,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB cluster to associate the IAM role with.</p>",
                         "smithy.api#required": {}
                     }
@@ -68,6 +69,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with the Neptune DB cluster,\n      for example <code>arn:aws:iam::123456789012:role/NeptuneAccessRole</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -109,6 +111,7 @@
                 "SubscriptionName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the event notification subscription you want to add a source identifier\n      to.</p>",
                         "smithy.api#required": {}
                     }
@@ -116,6 +119,7 @@
                 "SourceIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the event source to be added.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If the source type is a DB instance, then a <code>DBInstanceIdentifier</code> must be\n          supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB security group, a <code>DBSecurityGroupName</code> must be\n          supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB parameter group, a <code>DBParameterGroupName</code> must\n          be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB snapshot, a <code>DBSnapshotIdentifier</code> must be\n          supplied.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -165,6 +169,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Neptune resource that the tags are added to. This value is an Amazon Resource\n      Name (ARN). For information about creating an ARN, see <a href=\"https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing\"> Constructing an\n      Amazon Resource Name (ARN)</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -172,6 +177,7 @@
                 "Tags": {
                     "target": "com.amazonaws.neptune#TagList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The tags to be assigned to the Amazon Neptune resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -452,7 +458,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -495,7 +500,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -508,7 +514,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -522,7 +527,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -545,7 +549,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -580,7 +583,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -591,14 +593,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -612,14 +616,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -628,18 +630,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -648,7 +649,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -668,14 +670,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -689,7 +693,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -709,7 +712,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -720,14 +722,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -738,9 +742,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1482,6 +1488,7 @@
                 "ResourceIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that the pending maintenance action applies\n      to. For information about creating an ARN, see <a href=\"https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing\"> Constructing an\n      Amazon Resource Name (ARN)</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -1489,6 +1496,7 @@
                 "ApplyAction": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The pending maintenance action to apply to this resource.</p>\n         <p>Valid values: <code>system-update</code>, <code>db-upgrade</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -1496,6 +1504,7 @@
                 "OptInType": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A value that specifies the type of opt-in request, or undoes an opt-in request. An opt-in\n      request of type <code>immediate</code> can't be undone.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>immediate</code> - Apply the maintenance action immediately.</p>\n            </li>\n            <li>\n               <p>\n                  <code>next-maintenance</code> - Apply the maintenance action during the next\n          maintenance window for the resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>undo-opt-in</code> - Cancel any existing <code>next-maintenance</code> opt-in\n          requests.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -1578,10 +1587,7 @@
             }
         },
         "com.amazonaws.neptune#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "type": "boolean"
         },
         "com.amazonaws.neptune#BooleanOptional": {
             "type": "boolean"
@@ -1725,6 +1731,7 @@
                 "SourceDBClusterParameterGroupIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group.\n      For information about creating an ARN, see <a href=\"https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing\"> Constructing an\n      Amazon Resource Name (ARN)</a>.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must specify a valid DB cluster parameter group.</p>\n            </li>\n            <li>\n               <p>If the source DB cluster parameter group is in the same Amazon Region as the copy,\n          specify a valid DB parameter group identifier, for example\n          <code>my-db-cluster-param-group</code>, or a valid ARN.</p>\n            </li>\n            <li>\n               <p>If the source DB parameter group is in a different Amazon Region than the copy, specify a\n          valid DB cluster parameter group ARN, for example\n          <code>arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -1732,6 +1739,7 @@
                 "TargetDBClusterParameterGroupIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier for the copied DB cluster parameter group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Cannot be null, empty, or blank</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 255 letters, numbers, or hyphens</p>\n            </li>\n            <li>\n               <p>First character must be a letter</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster-param-group1</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -1739,6 +1747,7 @@
                 "TargetDBClusterParameterGroupDescription": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A description for the copied DB cluster parameter group.</p>",
                         "smithy.api#required": {}
                     }
@@ -1803,6 +1812,7 @@
                 "SourceDBClusterSnapshotIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the DB cluster snapshot to copy. This parameter is not\n      case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must specify a valid system snapshot in the \"available\" state.</p>\n            </li>\n            <li>\n               <p>Specify a valid DB snapshot identifier.</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster-snapshot1</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -1810,6 +1820,7 @@
                 "TargetDBClusterSnapshotIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the new DB cluster snapshot to create from the source DB cluster\n      snapshot. This parameter is not case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster-snapshot2</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -1883,6 +1894,7 @@
                 "SourceDBParameterGroupIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier or ARN for the source DB parameter group. For information about creating\n      an ARN, see <a href=\"https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing\"> Constructing an\n      Amazon Resource Name (ARN)</a>.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must specify a valid DB parameter group.</p>\n            </li>\n            <li>\n               <p>Must specify a valid DB parameter group identifier, for example\n        <code>my-db-param-group</code>, or a valid ARN.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -1890,6 +1902,7 @@
                 "TargetDBParameterGroupIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier for the copied DB parameter group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Cannot be null, empty, or blank.</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 255 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-db-parameter-group</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -1897,6 +1910,7 @@
                 "TargetDBParameterGroupDescription": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A description for the copied DB parameter group.</p>",
                         "smithy.api#required": {}
                     }
@@ -2026,6 +2040,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is\n      stored as a lowercase string.</p>",
                         "smithy.api#required": {}
                     }
@@ -2033,6 +2048,7 @@
                 "DBClusterEndpointIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier to use for the new endpoint. This parameter is stored as a lowercase string.</p>",
                         "smithy.api#required": {}
                     }
@@ -2040,6 +2056,7 @@
                 "EndpointType": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2172,6 +2189,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The DB cluster identifier. This parameter is stored as a lowercase string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster1</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -2197,6 +2215,7 @@
                 "Engine": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the database engine to be used for this DB cluster.</p>\n         <p>Valid Values: <code>neptune</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -2331,6 +2350,7 @@
                 "DBClusterParameterGroupName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB cluster parameter group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the name of an existing DBClusterParameterGroup.</p>\n            </li>\n         </ul>\n         <note>\n            <p>This value is stored as a lowercase string.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -2338,6 +2358,7 @@
                 "DBParameterGroupFamily": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The DB cluster parameter group family name. A DB cluster parameter group can be associated\n      with one and only one DB cluster parameter group family, and can be applied only to a DB\n      cluster running a database engine and engine version compatible with that DB cluster parameter\n      group family.</p>",
                         "smithy.api#required": {}
                     }
@@ -2345,6 +2366,7 @@
                 "Description": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The description for the DB cluster parameter group.</p>",
                         "smithy.api#required": {}
                     }
@@ -2417,6 +2439,7 @@
                 "DBClusterSnapshotIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the DB cluster snapshot. This parameter is stored as a lowercase\n      string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster1-snapshot1</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -2424,6 +2447,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the DB cluster to create a snapshot for. This parameter is not\n      case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing DBCluster.</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster1</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -2530,6 +2554,7 @@
                 "DBInstanceIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The DB instance identifier. This parameter is stored as a lowercase string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>\n         <p>Example: <code>mydbinstance</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -2543,6 +2568,7 @@
                 "DBInstanceClass": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The compute and memory capacity of the DB instance, for example, <code>db.m4.large</code>.\n      Not all DB instance classes are available in all Amazon Regions.</p>",
                         "smithy.api#required": {}
                     }
@@ -2550,6 +2576,7 @@
                 "Engine": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the database engine to be used for this instance.</p>\n         <p>Valid Values: <code>neptune</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -2678,6 +2705,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the DB cluster that the instance will belong to.</p>\n         <p>For information on creating a DB cluster, see <a>CreateDBCluster</a>.</p>\n         <p>Type: String</p>",
                         "smithy.api#required": {}
                     }
@@ -2826,6 +2854,7 @@
                 "DBParameterGroupName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB parameter group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 255 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n         </ul>\n         <note>\n            <p>This value is stored as a lowercase string.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -2833,6 +2862,7 @@
                 "DBParameterGroupFamily": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The DB parameter group family name. A DB parameter group can be associated with one and\n      only one DB parameter group family, and can be applied only to a DB instance running a\n      database engine and engine version compatible with that DB parameter group family.</p>",
                         "smithy.api#required": {}
                     }
@@ -2840,6 +2870,7 @@
                 "Description": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The description for the DB parameter group.</p>",
                         "smithy.api#required": {}
                     }
@@ -2901,6 +2932,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name for the DB subnet group. This value is stored as a lowercase string.</p>\n         <p>Constraints: Must contain no more than 255 letters, numbers, periods, underscores, spaces,\n      or hyphens. Must not be default.</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -2908,6 +2940,7 @@
                 "DBSubnetGroupDescription": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The description for the DB subnet group.</p>",
                         "smithy.api#required": {}
                     }
@@ -2915,6 +2948,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.neptune#SubnetIdentifierList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The EC2 Subnet IDs for the DB subnet group.</p>",
                         "smithy.api#required": {}
                     }
@@ -2982,6 +3016,7 @@
                 "SubscriptionName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the subscription.</p>\n         <p>Constraints: The name must be less than 255 characters.</p>",
                         "smithy.api#required": {}
                     }
@@ -2989,6 +3024,7 @@
                 "SnsTopicArn": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SNS topic created for event notification. The ARN is\n      created by Amazon SNS when you create a topic and subscribe to it.</p>",
                         "smithy.api#required": {}
                     }
@@ -3071,6 +3107,7 @@
                 "GlobalClusterIdentifier": {
                     "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier of the new global database cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -3205,7 +3242,6 @@
                 "MultiAZ": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the DB cluster has instances in multiple Availability Zones.</p>"
                     }
                 },
@@ -3290,7 +3326,6 @@
                 "StorageEncrypted": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the DB cluster is encrypted.</p>"
                     }
                 },
@@ -3321,7 +3356,6 @@
                 "IAMDatabaseAuthenticationEnabled": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True if mapping of Amazon Identity and Access Management (IAM) accounts to database accounts\n      is enabled, and otherwise false.</p>"
                     }
                 },
@@ -3585,7 +3619,6 @@
                 "IsClusterWriter": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Value that is <code>true</code> if the cluster member is the primary instance for the DB\n      cluster and <code>false</code> otherwise.</p>"
                     }
                 },
@@ -3944,7 +3977,6 @@
                 "AllocatedStorage": {
                     "target": "com.amazonaws.neptune#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the allocated storage size in gibibytes (GiB).</p>"
                     }
                 },
@@ -3957,7 +3989,6 @@
                 "Port": {
                     "target": "com.amazonaws.neptune#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the port that the DB cluster was listening on at the time of the\n      snapshot.</p>"
                     }
                 },
@@ -4000,14 +4031,12 @@
                 "PercentProgress": {
                     "target": "com.amazonaws.neptune#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the percentage of the estimated data that has been transferred.</p>"
                     }
                 },
                 "StorageEncrypted": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the DB cluster snapshot is encrypted.</p>"
                     }
                 },
@@ -4032,7 +4061,6 @@
                 "IAMDatabaseAuthenticationEnabled": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True if mapping of Amazon Identity and Access Management (IAM) accounts to database accounts\n      is enabled, and otherwise false.</p>"
                     }
                 }
@@ -4225,21 +4253,18 @@
                 "SupportsLogExportsToCloudwatchLogs": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether the engine version supports exporting the log types\n      specified by ExportableLogTypes to CloudWatch Logs.</p>"
                     }
                 },
                 "SupportsReadReplica": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the database engine version supports read replicas.</p>"
                     }
                 },
                 "SupportsGlobalDatabases": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether you can use Aurora global databases with a specific DB engine version.</p>"
                     }
                 }
@@ -4325,7 +4350,6 @@
                 "AllocatedStorage": {
                     "target": "com.amazonaws.neptune#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Not supported by Neptune.</p>"
                     }
                 },
@@ -4344,7 +4368,6 @@
                 "BackupRetentionPeriod": {
                     "target": "com.amazonaws.neptune#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the number of days for which automatic DB snapshots are retained.</p>"
                     }
                 },
@@ -4399,7 +4422,6 @@
                 "MultiAZ": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies if the DB instance is a Multi-AZ deployment.</p>"
                     }
                 },
@@ -4412,7 +4434,6 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates that minor version patches are applied automatically.</p>"
                     }
                 },
@@ -4467,7 +4488,6 @@
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#deprecated": {},
                         "smithy.api#documentation": "<p>This flag should no longer be used.</p>"
                     }
@@ -4493,7 +4513,6 @@
                 "DbInstancePort": {
                     "target": "com.amazonaws.neptune#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the port that the DB instance listens on. If the DB instance is part of a DB\n      cluster, this can be a different port than the DB cluster port.</p>"
                     }
                 },
@@ -4506,7 +4525,6 @@
                 "StorageEncrypted": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Not supported: The encryption for DB instances is managed by the DB cluster.</p>"
                     }
                 },
@@ -4537,7 +4555,6 @@
                 "CopyTagsToSnapshot": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether tags are copied from the DB instance to snapshots of the DB\n      instance.</p>"
                     }
                 },
@@ -4580,7 +4597,6 @@
                 "IAMDatabaseAuthenticationEnabled": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True if Amazon Identity and Access Management (IAM) authentication is enabled, and otherwise\n      false.</p>"
                     }
                 },
@@ -4694,7 +4710,6 @@
                 "Normal": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Boolean value that is true if the instance is operating normally, or false if the instance\n      is in an error state.</p>"
                     }
                 },
@@ -5251,6 +5266,7 @@
                 "DBClusterEndpointIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier associated with the custom endpoint. This parameter is stored as a lowercase string.</p>",
                         "smithy.api#required": {}
                     }
@@ -5335,6 +5351,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The DB cluster identifier for the DB cluster to be deleted. This parameter isn't\n      case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match an existing DBClusterIdentifier.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -5342,7 +5359,6 @@
                 "SkipFinalSnapshot": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Determines whether a final DB cluster snapshot is created before the DB cluster is\n      deleted. If <code>true</code> is specified, no DB cluster snapshot is created. If\n      <code>false</code> is specified, a DB cluster snapshot is created before the DB cluster is\n      deleted.</p>\n         <note>\n            <p>You must specify a <code>FinalDBSnapshotIdentifier</code> parameter if\n        <code>SkipFinalSnapshot</code> is <code>false</code>.</p>\n         </note>\n         <p>Default: <code>false</code>\n         </p>"
                     }
                 },
@@ -5383,6 +5399,7 @@
                 "DBClusterParameterGroupName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB cluster parameter group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be the name of an existing DB cluster parameter group.</p>\n            </li>\n            <li>\n               <p>You can't delete a default DB cluster parameter group.</p>\n            </li>\n            <li>\n               <p>Cannot be associated with any DB clusters.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -5429,6 +5446,7 @@
                 "DBClusterSnapshotIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the DB cluster snapshot to delete.</p>\n         <p>Constraints: Must be the name of an existing DB cluster snapshot in the\n      <code>available</code> state.</p>",
                         "smithy.api#required": {}
                     }
@@ -5484,6 +5502,7 @@
                 "DBInstanceIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The DB instance identifier for the DB instance to be deleted. This parameter isn't\n      case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the name of an existing DB instance.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -5491,7 +5510,6 @@
                 "SkipFinalSnapshot": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Determines whether a final DB snapshot is created before the DB instance is deleted. If\n      <code>true</code> is specified, no DBSnapshot is created. If <code>false</code> is specified,\n      a DB snapshot is created before the DB instance is deleted.</p>\n         <p>Note that when a DB instance is in a failure state and has a status of 'failed',\n      'incompatible-restore', or 'incompatible-network', it can only be deleted when the\n      SkipFinalSnapshot parameter is set to \"true\".</p>\n         <p>Specify <code>true</code> when deleting a Read Replica.</p>\n         <note>\n            <p>The FinalDBSnapshotIdentifier parameter must be specified if SkipFinalSnapshot is\n        <code>false</code>.</p>\n         </note>\n         <p>Default: <code>false</code>\n         </p>"
                     }
                 },
@@ -5543,6 +5561,7 @@
                 "DBParameterGroupName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB parameter group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be the name of an existing DB parameter group</p>\n            </li>\n            <li>\n               <p>You can't delete a default DB parameter group</p>\n            </li>\n            <li>\n               <p>Cannot be associated with any DB instances</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -5581,6 +5600,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the database subnet group to delete.</p>\n         <note>\n            <p>You can't delete the default subnet group.</p>\n         </note>\n         <p>Constraints:</p>\n         <p>Constraints: Must match the name of an existing DBSubnetGroup. Must not be default.</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -5616,6 +5636,7 @@
                 "SubscriptionName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the event notification subscription you want to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -5662,6 +5683,7 @@
                 "GlobalClusterIdentifier": {
                     "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The cluster identifier of the global database cluster being deleted.</p>",
                         "smithy.api#required": {}
                     }
@@ -5827,6 +5849,7 @@
                 "DBClusterParameterGroupName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of a specific DB cluster parameter group to return parameter details for.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If supplied, must match the name of an existing DBClusterParameterGroup.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -5883,6 +5906,7 @@
                 "DBClusterSnapshotIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier for the DB cluster snapshot to describe the attributes for.</p>",
                         "smithy.api#required": {}
                     }
@@ -5968,14 +5992,12 @@
                 "IncludeShared": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True to include shared manual DB cluster snapshots from other Amazon accounts that this Amazon\n      account has been given permission to copy or restore, and otherwise false. The default is\n      <code>false</code>.</p>\n         <p>You can give an Amazon account permission to restore a manual DB cluster snapshot from\n      another Amazon account by the <a>ModifyDBClusterSnapshotAttribute</a> API\n      action.</p>"
                     }
                 },
                 "IncludePublic": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True to include manual DB cluster snapshots that are public and can be copied or restored\n      by any Amazon account, and otherwise false. The default is <code>false</code>. The default is\n      false.</p>\n         <p>You can share a manual DB cluster snapshot as public by using the <a>ModifyDBClusterSnapshotAttribute</a> API action.</p>"
                     }
                 }
@@ -6099,7 +6121,6 @@
                 "DefaultOnly": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates that only the default version of the specified engine or engine and major\n      version combination is returned.</p>"
                     }
                 },
@@ -6390,6 +6411,7 @@
                 "DBParameterGroupName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of a specific DB parameter group to return details for.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If supplied, must match the name of an existing DBParameterGroup.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -6496,6 +6518,7 @@
                 "DBParameterGroupFamily": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB cluster parameter group family to return engine parameter information\n      for.</p>",
                         "smithy.api#required": {}
                     }
@@ -6558,6 +6581,7 @@
                 "DBParameterGroupFamily": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB parameter group family.</p>",
                         "smithy.api#required": {}
                     }
@@ -6836,6 +6860,7 @@
                 "Engine": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the engine to retrieve DB instance options for.</p>",
                         "smithy.api#required": {}
                     }
@@ -6968,6 +6993,7 @@
                 "DBInstanceIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The customer identifier or the ARN of your DB instance.</p>",
                         "smithy.api#required": {}
                     }
@@ -7050,10 +7076,7 @@
             }
         },
         "com.amazonaws.neptune#Double": {
-            "type": "double",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "double"
         },
         "com.amazonaws.neptune#DoubleOptional": {
             "type": "double"
@@ -7064,14 +7087,12 @@
                 "From": {
                     "target": "com.amazonaws.neptune#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum value in the range.</p>"
                     }
                 },
                 "To": {
                     "target": "com.amazonaws.neptune#Double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum value in the range.</p>"
                     }
                 }
@@ -7101,7 +7122,6 @@
                 "Port": {
                     "target": "com.amazonaws.neptune#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the port that the database engine is listening on.</p>"
                     }
                 },
@@ -7301,7 +7321,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value indicating if the subscription is enabled. True indicates the subscription\n      is enabled.</p>"
                     }
                 },
@@ -7474,6 +7493,7 @@
                 "GlobalClusterIdentifier": {
                     "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Identifier of the Neptune global database that should be failed over.\n      The identifier is the unique key assigned by the user when the Neptune \n      global database was created. In other words, it's the name of the global\n      database that you want to fail over.</p>\n         <p>Constraints: Must match the identifier of an existing Neptune global\n      database.</p>",
                         "smithy.api#required": {}
                     }
@@ -7481,6 +7501,7 @@
                 "TargetDbClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secondary Neptune DB cluster\n      that you want to promote to primary for the global database.</p>",
                         "smithy.api#required": {}
                     }
@@ -7507,6 +7528,7 @@
                 "Name": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>This parameter is not currently supported.</p>",
                         "smithy.api#required": {}
                     }
@@ -7514,6 +7536,7 @@
                 "Values": {
                     "target": "com.amazonaws.neptune#FilterValueList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>This parameter is not currently supported.</p>",
                         "smithy.api#required": {}
                     }
@@ -7660,7 +7683,6 @@
                 "IsWriter": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>\n    Specifies whether the Neptune cluster is the primary cluster\n    (that is, has read-write capability) for the Neptune global\n    database with which it is associated.\n  </p>"
                     }
                 }
@@ -7819,10 +7841,7 @@
             }
         },
         "com.amazonaws.neptune#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "integer"
         },
         "com.amazonaws.neptune#IntegerOptional": {
             "type": "integer"
@@ -8162,6 +8181,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Neptune resource with tags to be listed. This value is an Amazon Resource Name\n      (ARN). For information about creating an ARN, see <a href=\"https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing\"> Constructing an\n      Amazon Resource Name (ARN)</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -8265,6 +8285,7 @@
                 "DBClusterEndpointIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the endpoint to modify. This parameter is stored as a lowercase string.</p>",
                         "smithy.api#required": {}
                     }
@@ -8367,6 +8388,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The DB cluster identifier for the cluster being modified. This parameter is not\n      case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing DBCluster.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -8380,7 +8402,6 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that specifies whether the modifications in this request and any pending\n      modifications are asynchronously applied as soon as possible, regardless of the\n      <code>PreferredMaintenanceWindow</code> setting for the DB cluster. If this parameter is set\n      to <code>false</code>, changes to the DB cluster are applied during the next maintenance\n      window.</p>\n         <p>The <code>ApplyImmediately</code> parameter only affects <code>NewDBClusterIdentifier</code>\n      values. If you set the <code>ApplyImmediately</code> parameter value to false, then changes to\n      <code>NewDBClusterIdentifier</code> values are applied during the next maintenance window.\n      All other changes are applied immediately, regardless of the value of the\n      <code>ApplyImmediately</code> parameter.</p>\n         <p>Default: <code>false</code>\n         </p>"
                     }
                 },
@@ -8453,7 +8474,6 @@
                 "AllowMajorVersionUpgrade": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether upgrades between different major versions are allowed.</p>\n         <p>Constraints: You must set the allow-major-version-upgrade flag when providing an\n      <code>EngineVersion</code> parameter that uses a different major version than the DB cluster's current\n      version.</p>"
                     }
                 },
@@ -8509,6 +8529,7 @@
                 "DBClusterParameterGroupName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB cluster parameter group to modify.</p>",
                         "smithy.api#required": {}
                     }
@@ -8516,6 +8537,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.neptune#ParametersList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of parameters in the DB cluster parameter group to modify.</p>",
                         "smithy.api#required": {}
                     }
@@ -8565,6 +8587,7 @@
                 "DBClusterSnapshotIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier for the DB cluster snapshot to modify the attributes for.</p>",
                         "smithy.api#required": {}
                     }
@@ -8572,6 +8595,7 @@
                 "AttributeName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB cluster snapshot attribute to modify.</p>\n         <p>To manage authorization for other Amazon accounts to copy or restore a manual DB cluster\n      snapshot, set this value to <code>restore</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -8672,6 +8696,7 @@
                 "DBInstanceIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The DB instance identifier. This value is stored as a lowercase string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing DBInstance.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -8709,7 +8734,6 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the modifications in this request and any pending modifications are\n      asynchronously applied as soon as possible, regardless of the\n      <code>PreferredMaintenanceWindow</code> setting for the DB instance.</p>\n         <p> If this parameter is set to <code>false</code>, changes to the DB instance are applied\n      during the next maintenance window. Some parameter changes can cause an outage and are applied\n      on the next call to <a>RebootDBInstance</a>, or the next\n      failure reboot.</p>\n         <p>Default: <code>false</code>\n         </p>"
                     }
                 },
@@ -8758,7 +8782,6 @@
                 "AllowMajorVersionUpgrade": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates that major version upgrades are allowed. Changing this parameter doesn't result\n      in an outage and the change is asynchronously applied as soon as possible.</p>"
                     }
                 },
@@ -8937,6 +8960,7 @@
                 "DBParameterGroupName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB parameter group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If supplied, must match the name of an existing DBParameterGroup.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -8944,6 +8968,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.neptune#ParametersList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of parameter names, values, and the apply method for the parameter update. At\n      least one parameter name, value, and apply method must be supplied; subsequent arguments are\n      optional. A maximum of 20 parameters can be modified in a single request.</p>\n         <p>Valid Values (for the application method): <code>immediate | pending-reboot</code>\n         </p>\n         <note>\n            <p>You can use the immediate value with dynamic parameters only. You can use the\n        pending-reboot value for both dynamic and static parameters, and changes are applied when\n        you reboot the DB instance without failover.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -8988,6 +9013,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name for the DB subnet group. This value is stored as a lowercase string. You can't\n      modify the default subnet group.</p>\n         <p>Constraints: Must match the name of an existing DBSubnetGroup. Must not be default.</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -9001,6 +9027,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.neptune#SubnetIdentifierList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The EC2 subnet IDs for the DB subnet group.</p>",
                         "smithy.api#required": {}
                     }
@@ -9059,6 +9086,7 @@
                 "SubscriptionName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the event notification subscription.</p>",
                         "smithy.api#required": {}
                     }
@@ -9129,6 +9157,7 @@
                 "GlobalClusterIdentifier": {
                     "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The DB cluster identifier for the global cluster being modified. This parameter\n      is not case-sensitive.</p>\n         <p>Constraints: Must match the identifier of an existing global database cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -9258,28 +9287,24 @@
                 "MultiAZCapable": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a DB instance is Multi-AZ capable.</p>"
                     }
                 },
                 "ReadReplicaCapable": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a DB instance can have a Read Replica.</p>"
                     }
                 },
                 "Vpc": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a DB instance is in a VPC.</p>"
                     }
                 },
                 "SupportsStorageEncryption": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a DB instance supports encrypted storage.</p>"
                     }
                 },
@@ -9292,28 +9317,24 @@
                 "SupportsIops": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a DB instance supports provisioned IOPS.</p>"
                     }
                 },
                 "SupportsEnhancedMonitoring": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a DB instance supports Enhanced Monitoring at intervals from 1 to 60\n      seconds.</p>"
                     }
                 },
                 "SupportsIAMDatabaseAuthentication": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a DB instance supports IAM database authentication.</p>"
                     }
                 },
                 "SupportsPerformanceInsights": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>\n            <i>(Not supported by Neptune)</i>\n         </p>"
                     }
                 },
@@ -9356,7 +9377,6 @@
                 "SupportsGlobalDatabases": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether you can use Neptune global databases with a specific combination of other DB engine attributes.</p>"
                     }
                 }
@@ -9442,7 +9462,6 @@
                 "IsModifiable": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Indicates whether (<code>true</code>) or not (<code>false</code>) the parameter can be\n      modified. Some parameters have security or operational implications that prevent them from\n      being changed.</p>"
                     }
                 },
@@ -9692,6 +9711,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Not supported.</p>",
                         "smithy.api#required": {}
                     }
@@ -9738,14 +9758,12 @@
                 "From": {
                     "target": "com.amazonaws.neptune#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum value in the range.</p>"
                     }
                 },
                 "To": {
                     "target": "com.amazonaws.neptune#Integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum value in the range.</p>"
                     }
                 },
@@ -9828,6 +9846,7 @@
                 "DBInstanceIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The DB instance identifier. This parameter is stored as a lowercase string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing DBInstance.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -9883,6 +9902,7 @@
                 "GlobalClusterIdentifier": {
                     "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the Neptune global database from which to detach the\n      specified Neptune DB cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -9890,6 +9910,7 @@
                 "DbClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) identifying the cluster to be detached\n      from the Neptune global database cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -9939,6 +9960,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB cluster to disassociate the IAM role from.</p>",
                         "smithy.api#required": {}
                     }
@@ -9946,6 +9968,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB cluster, for\n      example <code>arn:aws:iam::123456789012:role/NeptuneAccessRole</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -9987,6 +10010,7 @@
                 "SubscriptionName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the event notification subscription you want to remove a source identifier\n      from.</p>",
                         "smithy.api#required": {}
                     }
@@ -9994,6 +10018,7 @@
                 "SourceIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p> The source identifier to be removed from the subscription, such as the <b>DB instance identifier</b> for a DB instance or the name of a security\n      group.</p>",
                         "smithy.api#required": {}
                     }
@@ -10043,6 +10068,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Neptune resource that the tags are removed from. This value is an Amazon\n      Resource Name (ARN). For information about creating an ARN, see <a href=\"https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing\"> Constructing an\n      Amazon Resource Name (ARN)</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -10050,6 +10076,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.neptune#KeyList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The tag key (name) of the tag to be removed.</p>",
                         "smithy.api#required": {}
                     }
@@ -10085,6 +10112,7 @@
                 "DBClusterParameterGroupName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB cluster parameter group to reset.</p>",
                         "smithy.api#required": {}
                     }
@@ -10092,7 +10120,6 @@
                 "ResetAllParameters": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that is set to <code>true</code> to reset all parameters in the DB cluster\n      parameter group to their default values, and <code>false</code> otherwise. You can't use this\n      parameter if there is a list of parameter names specified for the <code>Parameters</code>\n      parameter.</p>"
                     }
                 },
@@ -10133,6 +10160,7 @@
                 "DBParameterGroupName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB parameter group.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the name of an existing DBParameterGroup.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -10140,7 +10168,6 @@
                 "ResetAllParameters": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether (<code>true</code>) or not (<code>false</code>) to reset all parameters\n      in the DB parameter group to default values.</p>\n         <p>Default: <code>true</code>\n         </p>"
                     }
                 },
@@ -10269,6 +10296,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB cluster to create from the DB snapshot or DB cluster snapshot. This\n      parameter isn't case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens</p>\n            </li>\n            <li>\n               <p>First character must be a letter</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-snapshot-id</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -10276,6 +10304,7 @@
                 "SnapshotIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier for the DB snapshot or DB cluster snapshot to restore from.</p>\n         <p>You can use either the name or the Amazon Resource Name (ARN) to specify a DB cluster\n      snapshot. However, you can use only the ARN to specify a DB snapshot.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing Snapshot.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -10283,6 +10312,7 @@
                 "Engine": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The database engine to use for the new DB cluster.</p>\n         <p>Default: The same as source</p>\n         <p>Constraint: Must be compatible with the engine of the source</p>",
                         "smithy.api#required": {}
                     }
@@ -10455,6 +10485,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the new DB cluster to be created.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens</p>\n            </li>\n            <li>\n               <p>First character must be a letter</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -10468,6 +10499,7 @@
                 "SourceDBClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the source DB cluster from which to restore.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing DBCluster.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -10481,7 +10513,6 @@
                 "UseLatestRestorableTime": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that is set to <code>true</code> to restore the DB cluster to the latest\n      restorable backup time, and <code>false</code> otherwise.</p>\n         <p>Default: <code>false</code>\n         </p>\n         <p>Constraints: Cannot be specified if <code>RestoreToTime</code> parameter is\n      provided.</p>"
                     }
                 },
@@ -10803,6 +10834,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The DB cluster identifier of the Neptune DB cluster to be started.\n      This parameter is stored as a lowercase string.</p>",
                         "smithy.api#required": {}
                     }
@@ -10852,6 +10884,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The DB cluster identifier of the Neptune DB cluster to be stopped.\n      This parameter is stored as a lowercase string.</p>",
                         "smithy.api#required": {}
                     }
@@ -11147,14 +11180,12 @@
                 "AutoUpgrade": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether the target version is applied to any source DB instances\n      that have AutoMinorVersionUpgrade set to true.</p>"
                     }
                 },
                 "IsMajorVersionUpgrade": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether a database engine is upgraded to a major version.</p>"
                     }
                 },

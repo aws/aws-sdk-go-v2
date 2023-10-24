@@ -118,14 +118,14 @@ type Cluster struct {
 
 	// A boolean value that, if true , indicates that major version upgrades will be
 	// applied automatically to the cluster during the maintenance window.
-	AllowVersionUpgrade bool
+	AllowVersionUpgrade *bool
 
 	// This field is retired. Amazon Redshift automatically determines whether to use
 	// AQUA (Advanced Query Accelerator).
 	AquaConfiguration *AquaConfiguration
 
 	// The number of days that automatic cluster snapshots are retained.
-	AutomatedSnapshotRetentionPeriod int32
+	AutomatedSnapshotRetentionPeriod *int32
 
 	// The name of the Availability Zone in which the cluster is located.
 	AvailabilityZone *string
@@ -240,7 +240,7 @@ type Cluster struct {
 
 	// A boolean value that, if true , indicates that data in the cluster is encrypted
 	// at rest.
-	Encrypted bool
+	Encrypted *bool
 
 	// The connection endpoint.
 	Endpoint *Endpoint
@@ -250,7 +250,7 @@ type Cluster struct {
 	// must be in a VPC. For more information, see Enhanced VPC Routing (https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
 	// in the Amazon Redshift Cluster Management Guide. If this option is true ,
 	// enhanced VPC routing is enabled. Default: false
-	EnhancedVpcRouting bool
+	EnhancedVpcRouting *bool
 
 	// The date and time when the next snapshot is expected to be taken for clusters
 	// with a valid snapshot schedule and backups enabled.
@@ -282,7 +282,7 @@ type Cluster struct {
 	// snapshot is retained indefinitely. This setting doesn't change the retention
 	// period of existing snapshots. The value must be either -1 or an integer between
 	// 1 and 3,653.
-	ManualSnapshotRetentionPeriod int32
+	ManualSnapshotRetentionPeriod *int32
 
 	// The Amazon Resource Name (ARN) for the cluster's admin user credentials secret.
 	MasterPasswordSecretArn *string
@@ -305,7 +305,7 @@ type Cluster struct {
 	NodeType *string
 
 	// The number of compute nodes in the cluster.
-	NumberOfNodes int32
+	NumberOfNodes *int32
 
 	// Cluster operations that are waiting to be started.
 	PendingActions []string
@@ -320,7 +320,7 @@ type Cluster struct {
 
 	// A boolean value that, if true , indicates that the cluster can be accessed from
 	// a public network.
-	PubliclyAccessible bool
+	PubliclyAccessible *bool
 
 	// The status of the reserved-node exchange request. Statuses include in-progress
 	// and requested.
@@ -535,11 +535,11 @@ type ClusterSnapshotCopyStatus struct {
 	// region after they are copied from a source region. If the value is -1, the
 	// manual snapshot is retained indefinitely. The value must be either -1 or an
 	// integer between 1 and 3,653.
-	ManualSnapshotRetentionPeriod int32
+	ManualSnapshotRetentionPeriod *int32
 
 	// The number of days that automated snapshots are retained in the destination
 	// region after they are copied from a source region.
-	RetentionPeriod int64
+	RetentionPeriod *int64
 
 	// The name of the snapshot copy grant.
 	SnapshotCopyGrantName *string
@@ -592,7 +592,7 @@ type DataShare struct {
 
 	// A value that specifies whether the datashare can be shared to a publicly
 	// accessible cluster.
-	AllowPubliclyAccessibleConsumers bool
+	AllowPubliclyAccessibleConsumers *bool
 
 	// An Amazon Resource Name (ARN) that references the datashare that is owned by a
 	// specific namespace of the producer cluster. A datashare ARN is in the
@@ -644,7 +644,7 @@ type DataTransferProgress struct {
 	CurrentRateInMegaBytesPerSecond *float64
 
 	// Describes the total amount of data that has been transfered in MB's.
-	DataTransferredInMegaBytes int64
+	DataTransferredInMegaBytes *int64
 
 	// Describes the number of seconds that have elapsed during the data transfer.
 	ElapsedTimeInSeconds *int64
@@ -657,7 +657,7 @@ type DataTransferProgress struct {
 	Status *string
 
 	// Describes the total amount of data to be transfered in megabytes.
-	TotalDataInMegaBytes int64
+	TotalDataInMegaBytes *int64
 
 	noSmithyDocumentSerde
 }
@@ -753,7 +753,7 @@ type Endpoint struct {
 	Address *string
 
 	// The port that the database engine is listening on.
-	Port int32
+	Port *int32
 
 	// Describes a connection endpoint.
 	VpcEndpoints []VpcEndpoint
@@ -780,7 +780,7 @@ type EndpointAccess struct {
 	EndpointStatus *string
 
 	// The port number on which the cluster accepts incoming connections.
-	Port int32
+	Port *int32
 
 	// The Amazon Web Services account ID of the owner of the cluster.
 	ResourceOwner *string
@@ -804,7 +804,7 @@ type EndpointAuthorization struct {
 
 	// Indicates whether all VPCs in the grantee account are allowed access to the
 	// cluster.
-	AllowedAllVPCs bool
+	AllowedAllVPCs *bool
 
 	// The VPCs allowed access to the cluster.
 	AllowedVPCs []string
@@ -819,7 +819,7 @@ type EndpointAuthorization struct {
 	ClusterStatus *string
 
 	// The number of Redshift-managed VPC endpoints created for the authorization.
-	EndpointCount int32
+	EndpointCount *int32
 
 	// The Amazon Web Services account ID of the grantee of the cluster.
 	Grantee *string
@@ -904,7 +904,7 @@ type EventSubscription struct {
 
 	// A boolean value indicating whether the subscription is enabled; true indicates
 	// that the subscription is enabled.
-	Enabled bool
+	Enabled *bool
 
 	// The list of Amazon Redshift event categories specified in the event
 	// notification subscription. Values: Configuration, Management, Monitoring,
@@ -1070,7 +1070,7 @@ type NodeConfigurationOption struct {
 	NodeType *string
 
 	// The number of nodes.
-	NumberOfNodes int32
+	NumberOfNodes *int32
 
 	noSmithyDocumentSerde
 }
@@ -1134,7 +1134,7 @@ type Parameter struct {
 
 	// If true , the parameter can be modified. Some parameters have security or
 	// operational implications that prevent them from being changed.
-	IsModifiable bool
+	IsModifiable *bool
 
 	// The earliest engine version to which the parameter can apply.
 	MinimumEngineVersion *string
@@ -1240,7 +1240,7 @@ type RecurringCharge struct {
 
 	// The amount charged per the period of time specified by the recurring charge
 	// frequency.
-	RecurringChargeAmount float64
+	RecurringChargeAmount *float64
 
 	// The frequency at which the recurring charge amount is applied.
 	RecurringChargeFrequency *string
@@ -1256,13 +1256,13 @@ type ReservedNode struct {
 	CurrencyCode *string
 
 	// The duration of the node reservation in seconds.
-	Duration int32
+	Duration *int32
 
 	// The fixed cost Amazon Redshift charges you for this reserved node.
-	FixedPrice float64
+	FixedPrice *float64
 
 	// The number of reserved compute nodes.
-	NodeCount int32
+	NodeCount *int32
 
 	// The node type of the reserved node.
 	NodeType *string
@@ -1298,7 +1298,7 @@ type ReservedNode struct {
 	State *string
 
 	// The hourly rate Amazon Redshift charges you for this reserved node.
-	UsagePrice float64
+	UsagePrice *float64
 
 	noSmithyDocumentSerde
 }
@@ -1312,7 +1312,7 @@ type ReservedNodeConfigurationOption struct {
 	SourceReservedNode *ReservedNode
 
 	// The target reserved-node count.
-	TargetReservedNodeCount int32
+	TargetReservedNodeCount *int32
 
 	// Describes a reserved node offering.
 	TargetReservedNodeOffering *ReservedNodeOffering
@@ -1332,7 +1332,7 @@ type ReservedNodeExchangeStatus struct {
 	ReservedNodeExchangeRequestId *string
 
 	// The source reserved-node count in the cluster.
-	SourceReservedNodeCount int32
+	SourceReservedNodeCount *int32
 
 	// The identifier of the source reserved node.
 	SourceReservedNodeId *string
@@ -1345,7 +1345,7 @@ type ReservedNodeExchangeStatus struct {
 	Status ReservedNodeExchangeStatusType
 
 	// The count of target reserved nodes in the cluster.
-	TargetReservedNodeCount int32
+	TargetReservedNodeCount *int32
 
 	// The identifier of the target reserved node offering.
 	TargetReservedNodeOfferingId *string
@@ -1363,11 +1363,11 @@ type ReservedNodeOffering struct {
 	CurrencyCode *string
 
 	// The duration, in seconds, for which the offering will reserve the node.
-	Duration int32
+	Duration *int32
 
 	// The upfront fixed charge you will pay to purchase the specific reserved node
 	// offering.
-	FixedPrice float64
+	FixedPrice *float64
 
 	// The node type offered by the reserved node offering.
 	NodeType *string
@@ -1389,7 +1389,7 @@ type ReservedNodeOffering struct {
 
 	// The rate you are charged for each hour the cluster that is using the offering
 	// is running.
-	UsagePrice float64
+	UsagePrice *float64
 
 	noSmithyDocumentSerde
 }
@@ -1432,7 +1432,7 @@ type ResizeClusterMessage struct {
 type ResizeInfo struct {
 
 	// A boolean value indicating if the resize operation can be cancelled.
-	AllowCancelResize bool
+	AllowCancelResize *bool
 
 	// Returns the value ClassicResize .
 	ResizeType *string
@@ -1447,25 +1447,25 @@ type RestoreStatus struct {
 	// The number of megabytes per second being transferred from the backup storage.
 	// Returns the average rate for a completed backup. This field is only updated when
 	// you restore to DC2 and DS2 node types.
-	CurrentRestoreRateInMegaBytesPerSecond float64
+	CurrentRestoreRateInMegaBytesPerSecond *float64
 
 	// The amount of time an in-progress restore has been running, or the amount of
 	// time it took a completed restore to finish. This field is only updated when you
 	// restore to DC2 and DS2 node types.
-	ElapsedTimeInSeconds int64
+	ElapsedTimeInSeconds *int64
 
 	// The estimate of the time remaining before the restore will complete. Returns 0
 	// for a completed restore. This field is only updated when you restore to DC2 and
 	// DS2 node types.
-	EstimatedTimeToCompletionInSeconds int64
+	EstimatedTimeToCompletionInSeconds *int64
 
 	// The number of megabytes that have been transferred from snapshot storage. This
 	// field is only updated when you restore to DC2 and DS2 node types.
-	ProgressInMegaBytes int64
+	ProgressInMegaBytes *int64
 
 	// The size of the set of snapshot data used to restore the cluster. This field is
 	// only updated when you restore to DC2 and DS2 node types.
-	SnapshotSizeInMegaBytes int64
+	SnapshotSizeInMegaBytes *int64
 
 	// The status of the restore action. Returns starting, restoring, completed, or
 	// failed.
@@ -1596,13 +1596,13 @@ type Snapshot struct {
 	AccountsWithRestoreAccess []AccountWithRestoreAccess
 
 	// The size of the incremental backup.
-	ActualIncrementalBackupSizeInMegaBytes float64
+	ActualIncrementalBackupSizeInMegaBytes *float64
 
 	// The Availability Zone in which the cluster was created.
 	AvailabilityZone *string
 
 	// The number of megabytes that have been transferred to the snapshot backup.
-	BackupProgressInMegaBytes float64
+	BackupProgressInMegaBytes *float64
 
 	// The time (UTC) when the cluster was originally created.
 	ClusterCreateTime *time.Time
@@ -1615,22 +1615,22 @@ type Snapshot struct {
 
 	// The number of megabytes per second being transferred to the snapshot backup.
 	// Returns 0 for a completed backup.
-	CurrentBackupRateInMegaBytesPerSecond float64
+	CurrentBackupRateInMegaBytesPerSecond *float64
 
 	// The name of the database that was created when the cluster was created.
 	DBName *string
 
 	// The amount of time an in-progress snapshot backup has been running, or the
 	// amount of time it took a completed backup to finish.
-	ElapsedTimeInSeconds int64
+	ElapsedTimeInSeconds *int64
 
 	// If true , the data in the snapshot is encrypted at rest.
-	Encrypted bool
+	Encrypted *bool
 
 	// A boolean that indicates whether the snapshot data is encrypted using the HSM
 	// keys of the source cluster. true indicates that the data is encrypted using HSM
 	// keys.
-	EncryptedWithHSM bool
+	EncryptedWithHSM *bool
 
 	// The cluster version of the cluster used to create the snapshot. For example,
 	// 1.0.15503.
@@ -1641,11 +1641,11 @@ type Snapshot struct {
 	// must be in a VPC. For more information, see Enhanced VPC Routing (https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
 	// in the Amazon Redshift Cluster Management Guide. If this option is true ,
 	// enhanced VPC routing is enabled. Default: false
-	EnhancedVpcRouting bool
+	EnhancedVpcRouting *bool
 
 	// The estimate of the time remaining before the snapshot backup will complete.
 	// Returns 0 for a completed backup.
-	EstimatedSecondsToCompletion int64
+	EstimatedSecondsToCompletion *int64
 
 	// The Key Management Service (KMS) key ID of the encryption key that was used to
 	// encrypt data in the cluster from which the snapshot was taken.
@@ -1676,7 +1676,7 @@ type Snapshot struct {
 	NodeType *string
 
 	// The number of nodes in the cluster.
-	NumberOfNodes int32
+	NumberOfNodes *int32
 
 	// For manual snapshots, the Amazon Web Services account used to create or copy
 	// the snapshot. For automatic snapshots, the owner of the cluster. The owner can
@@ -1684,7 +1684,7 @@ type Snapshot struct {
 	OwnerAccount *string
 
 	// The port that the cluster is listening on.
-	Port int32
+	Port *int32
 
 	// The list of node types that this cluster snapshot is able to restore into.
 	RestorableNodeTypes []string
@@ -1718,7 +1718,7 @@ type Snapshot struct {
 
 	// The size of the complete set of backup data that would be used to restore the
 	// cluster.
-	TotalBackupSizeInMegaBytes float64
+	TotalBackupSizeInMegaBytes *float64
 
 	// The VPC identifier of the cluster if the snapshot is from a cluster in a VPC.
 	// Otherwise, this field is not in the output.
@@ -1954,7 +1954,7 @@ type UsageLimit struct {
 
 	// The limit amount. If time-based, this amount is in minutes. If data-based, this
 	// amount is in terabytes (TB).
-	Amount int64
+	Amount *int64
 
 	// The action that Amazon Redshift takes when the limit is reached. Possible
 	// values are:

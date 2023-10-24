@@ -35,7 +35,7 @@ func (c *Client) ListReviewTemplates(ctx context.Context, params *ListReviewTemp
 type ListReviewTemplatesInput struct {
 
 	// The maximum number of results to return for this request.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token to use to retrieve the next set of results.
 	NextToken *string
@@ -164,8 +164,8 @@ func NewListReviewTemplatesPaginator(client ListReviewTemplatesAPIClient, params
 	}
 
 	options := ListReviewTemplatesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -195,7 +195,11 @@ func (p *ListReviewTemplatesPaginator) NextPage(ctx context.Context, optFns ...f
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListReviewTemplates(ctx, &params, optFns...)
 	if err != nil {

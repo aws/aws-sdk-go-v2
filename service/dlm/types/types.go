@@ -63,7 +63,7 @@ type CreateRule struct {
 
 	// The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12,
 	// and 24.
-	Interval int32
+	Interval *int32
 
 	// The interval unit.
 	IntervalUnit IntervalUnitValues
@@ -118,7 +118,7 @@ type CrossRegionCopyDeprecateRule struct {
 	// must be less than or equal to the cross-Region AMI copy retention period, and it
 	// can't be greater than 10 years. This is equivalent to 120 months, 520 weeks, or
 	// 3650 days.
-	Interval int32
+	Interval *int32
 
 	// The unit of time in which to measure the Interval. For example, to deprecate a
 	// cross-Region AMI copy after 3 months, specify Interval=3 and IntervalUnit=MONTHS
@@ -135,7 +135,7 @@ type CrossRegionCopyRetainRule struct {
 
 	// The amount of time to retain a cross-Region snapshot or AMI copy. The maximum
 	// is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.
-	Interval int32
+	Interval *int32
 
 	// The unit of time for time-based retention. For example, to retain a
 	// cross-Region copy for 3 months, specify Interval=3 and IntervalUnit=MONTHS .
@@ -195,13 +195,13 @@ type DeprecateRule struct {
 	// If the schedule has a count-based retention rule, this parameter specifies the
 	// number of oldest AMIs to deprecate. The count must be less than or equal to the
 	// schedule's retention count, and it can't be greater than 1000.
-	Count int32
+	Count *int32
 
 	// If the schedule has an age-based retention rule, this parameter specifies the
 	// period after which to deprecate AMIs created by the schedule. The period must be
 	// less than or equal to the schedule's retention period, and it can't be greater
 	// than 10 years. This is equivalent to 120 months, 520 weeks, or 3650 days.
-	Interval int32
+	Interval *int32
 
 	// The unit of time in which to measure the Interval.
 	IntervalUnit RetentionIntervalUnitValues
@@ -284,11 +284,11 @@ type FastRestoreRule struct {
 	AvailabilityZones []string
 
 	// The number of snapshots to be enabled with fast snapshot restore.
-	Count int32
+	Count *int32
 
 	// The amount of time to enable fast snapshot restore. The maximum is 100 years.
 	// This is equivalent to 1200 months, 5200 weeks, or 36500 days.
-	Interval int32
+	Interval *int32
 
 	// The unit of time for enabling fast snapshot restore.
 	IntervalUnit RetentionIntervalUnitValues
@@ -468,11 +468,11 @@ type RetainRule struct {
 	// example if you want to retain a maximum of three snapshots, specify 3 . When the
 	// fourth snapshot is created, the oldest retained snapshot is deleted, or it is
 	// moved to the archive tier if you have specified an ArchiveRule .
-	Count int32
+	Count *int32
 
 	// The amount of time to retain each snapshot. The maximum is 100 years. This is
 	// equivalent to 1200 months, 5200 weeks, or 36500 days.
-	Interval int32
+	Interval *int32
 
 	// The unit of time for time-based retention. For example, to retain snapshots for
 	// 3 months, specify Interval=3 and IntervalUnit=MONTHS . Once the snapshot has
@@ -498,11 +498,11 @@ type RetentionArchiveTier struct {
 	// at least 90 days. For example, if the schedule creates snapshots every 30 days,
 	// you must specify a count of 3 or more to ensure that each snapshot is archived
 	// for at least 90 days.
-	Count int32
+	Count *int32
 
 	// Specifies the period of time to retain snapshots in the archive tier. After
 	// this period expires, the snapshot is permanently deleted.
-	Interval int32
+	Interval *int32
 
 	// The unit of time in which to measure the Interval. For example, to retain a
 	// snapshots in the archive tier for 6 months, specify Interval=6 and
@@ -527,7 +527,7 @@ type Schedule struct {
 
 	// Copy all user-defined tags on a source volume to snapshots of the volume
 	// created by this policy.
-	CopyTags bool
+	CopyTags *bool
 
 	// The creation rule.
 	CreateRule *CreateRule
@@ -579,7 +579,7 @@ type ShareRule struct {
 
 	// The period after which snapshots that are shared with other Amazon Web Services
 	// accounts are automatically unshared.
-	UnshareInterval int32
+	UnshareInterval *int32
 
 	// The unit of time for the automatic unsharing interval.
 	UnshareIntervalUnit RetentionIntervalUnitValues

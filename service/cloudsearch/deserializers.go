@@ -4650,7 +4650,7 @@ func awsAwsquery_deserializeDocumentDomainStatus(v **types.DomainStatus, decoder
 				if err != nil {
 					return err
 				}
-				sv.SearchInstanceCount = int32(i64)
+				sv.SearchInstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("SearchInstanceType", t.Name.Local):
@@ -4680,7 +4680,7 @@ func awsAwsquery_deserializeDocumentDomainStatus(v **types.DomainStatus, decoder
 				if err != nil {
 					return err
 				}
-				sv.SearchPartitionCount = int32(i64)
+				sv.SearchPartitionCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("SearchService", t.Name.Local):
@@ -6109,7 +6109,7 @@ func awsAwsquery_deserializeDocumentLimits(v **types.Limits, decoder smithyxml.N
 				if err != nil {
 					return err
 				}
-				sv.MaximumPartitionCount = int32(i64)
+				sv.MaximumPartitionCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("MaximumReplicationCount", t.Name.Local):
@@ -6126,7 +6126,7 @@ func awsAwsquery_deserializeDocumentLimits(v **types.Limits, decoder smithyxml.N
 				if err != nil {
 					return err
 				}
-				sv.MaximumReplicationCount = int32(i64)
+				sv.MaximumReplicationCount = ptr.Int32(int32(i64))
 			}
 
 		default:

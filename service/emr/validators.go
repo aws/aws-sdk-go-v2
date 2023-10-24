@@ -1121,6 +1121,9 @@ func validateBlockPublicAccessConfiguration(v *types.BlockPublicAccessConfigurat
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BlockPublicAccessConfiguration"}
+	if v.BlockPublicSecurityGroupRules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlockPublicSecurityGroupRules"))
+	}
 	if v.PermittedPublicSecurityGroupRuleRanges != nil {
 		if err := validatePortRanges(v.PermittedPublicSecurityGroupRuleRanges); err != nil {
 			invalidParams.AddNested("PermittedPublicSecurityGroupRuleRanges", err.(smithy.InvalidParamsError))
@@ -2616,6 +2619,9 @@ func validateOpSetTerminationProtectionInput(v *SetTerminationProtectionInput) e
 	if v.JobFlowIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobFlowIds"))
 	}
+	if v.TerminationProtected == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TerminationProtected"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2630,6 +2636,9 @@ func validateOpSetVisibleToAllUsersInput(v *SetVisibleToAllUsersInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SetVisibleToAllUsersInput"}
 	if v.JobFlowIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobFlowIds"))
+	}
+	if v.VisibleToAllUsers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VisibleToAllUsers"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

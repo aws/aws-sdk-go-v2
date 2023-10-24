@@ -2746,7 +2746,7 @@ func awsRestjson1_deserializeDocumentSuiteDefinitionConfiguration(v **types.Suit
 				if !ok {
 					return fmt.Errorf("expected IntendedForQualificationBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.IntendedForQualification = jtv
+				sv.IntendedForQualification = ptr.Bool(jtv)
 			}
 
 		case "isLongDurationTest":
@@ -2755,7 +2755,7 @@ func awsRestjson1_deserializeDocumentSuiteDefinitionConfiguration(v **types.Suit
 				if !ok {
 					return fmt.Errorf("expected IsLongDurationTestBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsLongDurationTest = jtv
+				sv.IsLongDurationTest = ptr.Bool(jtv)
 			}
 
 		case "protocol":
@@ -2843,7 +2843,7 @@ func awsRestjson1_deserializeDocumentSuiteDefinitionInformation(v **types.SuiteD
 				if !ok {
 					return fmt.Errorf("expected IntendedForQualificationBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.IntendedForQualification = jtv
+				sv.IntendedForQualification = ptr.Bool(jtv)
 			}
 
 		case "isLongDurationTest":
@@ -2852,7 +2852,7 @@ func awsRestjson1_deserializeDocumentSuiteDefinitionInformation(v **types.SuiteD
 				if !ok {
 					return fmt.Errorf("expected IsLongDurationTestBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsLongDurationTest = jtv
+				sv.IsLongDurationTest = ptr.Bool(jtv)
 			}
 
 		case "protocol":
@@ -2953,7 +2953,7 @@ func awsRestjson1_deserializeDocumentSuiteRunConfiguration(v **types.SuiteRunCon
 				if !ok {
 					return fmt.Errorf("expected ParallelRun to be of type *bool, got %T instead", value)
 				}
-				sv.ParallelRun = jtv
+				sv.ParallelRun = ptr.Bool(jtv)
 			}
 
 		case "primaryDevice":
@@ -3039,7 +3039,7 @@ func awsRestjson1_deserializeDocumentSuiteRunInformation(v **types.SuiteRunInfor
 				if err != nil {
 					return err
 				}
-				sv.Failed = int32(i64)
+				sv.Failed = ptr.Int32(int32(i64))
 			}
 
 		case "passed":
@@ -3052,7 +3052,7 @@ func awsRestjson1_deserializeDocumentSuiteRunInformation(v **types.SuiteRunInfor
 				if err != nil {
 					return err
 				}
-				sv.Passed = int32(i64)
+				sv.Passed = ptr.Int32(int32(i64))
 			}
 
 		case "startedAt":

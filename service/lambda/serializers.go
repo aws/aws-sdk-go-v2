@@ -93,8 +93,11 @@ func awsRestjson1_serializeOpHttpBindingsAddLayerVersionPermissionInput(v *AddLa
 		encoder.SetQuery("RevisionId").String(*v.RevisionId)
 	}
 
-	{
-		if err := encoder.SetURI("VersionNumber").Long(v.VersionNumber); err != nil {
+	if v.VersionNumber == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionNumber must not be empty")}
+	}
+	if v.VersionNumber != nil {
+		if err := encoder.SetURI("VersionNumber").Long(*v.VersionNumber); err != nil {
 			return err
 		}
 	}
@@ -1578,8 +1581,11 @@ func awsRestjson1_serializeOpHttpBindingsDeleteLayerVersionInput(v *DeleteLayerV
 		}
 	}
 
-	{
-		if err := encoder.SetURI("VersionNumber").Long(v.VersionNumber); err != nil {
+	if v.VersionNumber == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionNumber must not be empty")}
+	}
+	if v.VersionNumber != nil {
+		if err := encoder.SetURI("VersionNumber").Long(*v.VersionNumber); err != nil {
 			return err
 		}
 	}
@@ -2380,8 +2386,11 @@ func awsRestjson1_serializeOpHttpBindingsGetLayerVersionInput(v *GetLayerVersion
 		}
 	}
 
-	{
-		if err := encoder.SetURI("VersionNumber").Long(v.VersionNumber); err != nil {
+	if v.VersionNumber == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionNumber must not be empty")}
+	}
+	if v.VersionNumber != nil {
+		if err := encoder.SetURI("VersionNumber").Long(*v.VersionNumber); err != nil {
 			return err
 		}
 	}
@@ -2511,8 +2520,11 @@ func awsRestjson1_serializeOpHttpBindingsGetLayerVersionPolicyInput(v *GetLayerV
 		}
 	}
 
-	{
-		if err := encoder.SetURI("VersionNumber").Long(v.VersionNumber); err != nil {
+	if v.VersionNumber == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionNumber must not be empty")}
+	}
+	if v.VersionNumber != nil {
+		if err := encoder.SetURI("VersionNumber").Long(*v.VersionNumber); err != nil {
 			return err
 		}
 	}
@@ -4620,8 +4632,11 @@ func awsRestjson1_serializeOpHttpBindingsRemoveLayerVersionPermissionInput(v *Re
 		}
 	}
 
-	{
-		if err := encoder.SetURI("VersionNumber").Long(v.VersionNumber); err != nil {
+	if v.VersionNumber == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionNumber must not be empty")}
+	}
+	if v.VersionNumber != nil {
+		if err := encoder.SetURI("VersionNumber").Long(*v.VersionNumber); err != nil {
 			return err
 		}
 	}

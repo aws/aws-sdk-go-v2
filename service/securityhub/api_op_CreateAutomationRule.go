@@ -63,7 +63,7 @@ type CreateAutomationRuleInput struct {
 	// this parameter first.
 	//
 	// This member is required.
-	RuleOrder int32
+	RuleOrder *int32
 
 	// Specifies whether a rule is the last to be applied with respect to a finding
 	// that matches the rule criteria. This is useful when a finding matches the
@@ -71,7 +71,7 @@ type CreateAutomationRuleInput struct {
 	// terminal, Security Hub applies the rule action to a finding that matches the
 	// rule criteria and doesn't evaluate other rules for the finding. By default, a
 	// rule isn't terminal.
-	IsTerminal bool
+	IsTerminal *bool
 
 	// Whether the rule is active after it is created. If this parameter is equal to
 	// ENABLED , Security Hub starts applying the rule to findings and finding updates

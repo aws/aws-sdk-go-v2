@@ -12,6 +12,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 	smithyio "github.com/aws/smithy-go/io"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 )
@@ -201,7 +202,7 @@ func awsRestjson1_deserializeDocumentBatchPutMetricsError(v **types.BatchPutMetr
 				if err != nil {
 					return err
 				}
-				sv.MetricIndex = int32(i64)
+				sv.MetricIndex = ptr.Int32(int32(i64))
 			}
 
 		default:

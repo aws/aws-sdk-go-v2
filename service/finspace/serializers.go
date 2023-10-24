@@ -3378,9 +3378,9 @@ func awsRestjson1_serializeDocumentKxSavedownStorageConfiguration(v *types.KxSav
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.Size != nil {
 		ok := object.Key("size")
-		ok.Integer(v.Size)
+		ok.Integer(*v.Size)
 	}
 
 	if len(v.Type) > 0 {
@@ -3437,9 +3437,9 @@ func awsRestjson1_serializeDocumentNetworkACLEntry(v *types.NetworkACLEntry, val
 		ok.String(string(v.RuleAction))
 	}
 
-	{
+	if v.RuleNumber != nil {
 		ok := object.Key("ruleNumber")
-		ok.Integer(v.RuleNumber)
+		ok.Integer(*v.RuleNumber)
 	}
 
 	return nil

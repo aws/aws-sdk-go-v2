@@ -105,7 +105,7 @@ type StopDeploymentOutput struct {
 
 	// The percentage of targets to receive a deployed configuration during each
 	// interval.
-	GrowthFactor float32
+	GrowthFactor *float32
 
 	// The algorithm used to define how percentage grew over time.
 	GrowthType types.GrowthType
@@ -121,7 +121,7 @@ type StopDeploymentOutput struct {
 	KmsKeyIdentifier *string
 
 	// The percentage of targets for which the deployment is available.
-	PercentageComplete float32
+	PercentageComplete *float32
 
 	// The time the deployment started.
 	StartedAt *time.Time

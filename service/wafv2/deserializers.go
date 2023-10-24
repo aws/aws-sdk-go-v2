@@ -11438,7 +11438,7 @@ func awsAwsjson11_deserializeDocumentManagedRuleSetVersion(v **types.ManagedRule
 				if err != nil {
 					return err
 				}
-				sv.Capacity = i64
+				sv.Capacity = ptr.Int64(i64)
 			}
 
 		case "ExpiryTimestamp":
@@ -11987,7 +11987,7 @@ func awsAwsjson11_deserializeDocumentRateBasedStatement(v **types.RateBasedState
 				if err != nil {
 					return err
 				}
-				sv.Limit = i64
+				sv.Limit = ptr.Int64(i64)
 			}
 
 		case "ScopeDownStatement":
@@ -14003,7 +14003,7 @@ func awsAwsjson11_deserializeDocumentRuleGroup(v **types.RuleGroup, value interf
 				if err != nil {
 					return err
 				}
-				sv.Capacity = i64
+				sv.Capacity = ptr.Int64(i64)
 			}
 
 		case "ConsumedLabels":
@@ -16959,7 +16959,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeManagedRuleGroupOutput(v **Descri
 				if err != nil {
 					return err
 				}
-				sv.Capacity = i64
+				sv.Capacity = ptr.Int64(i64)
 			}
 
 		case "ConsumedLabels":

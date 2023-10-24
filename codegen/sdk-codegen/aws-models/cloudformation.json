@@ -405,6 +405,7 @@
                 "TypeConfigurationIdentifiers": {
                     "target": "com.amazonaws.cloudformation#TypeConfigurationIdentifiers",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The list of identifiers for the desired extension configurations.</p>",
                         "smithy.api#required": {}
                     }
@@ -512,6 +513,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<note>\n            <p>If you don't pass a parameter to <code>StackName</code>, the API returns a response that describes\n       all resources in the account.</p>\n            <p>The IAM policy below can be added to\n       IAM policies when you want to limit resource-level permissions and\n       avoid returning a response when no parameter is sent in the request:</p>\n            <p>\n               <code>{ \"Version\": \"2012-10-17\", \"Statement\": [{ \"Effect\": \"Deny\", \"Action\":\n       \"cloudformation:DescribeStacks\", \"NotResource\":\n       \"arn:aws:cloudformation:*:*:stack/*/*\" }] }</code>\n            </p>\n         </note>\n         <p>The name or the unique stack ID that's associated with the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -1328,7 +1330,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1371,7 +1372,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -1384,7 +1386,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1398,7 +1399,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -1421,7 +1421,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -1456,7 +1455,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1467,14 +1465,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1488,14 +1488,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -1504,18 +1502,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -1524,7 +1521,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -1544,14 +1542,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1565,7 +1565,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -1585,7 +1584,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1596,14 +1594,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -1614,9 +1614,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -2348,6 +2350,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or the unique ID of the stack that you want to continue rolling back.</p>\n         <note>\n            <p>Don't specify the name of a nested stack (a stack that was created by using the\n     <code>AWS::CloudFormation::Stack</code> resource). Instead, use this operation on the parent stack (the stack that\n    contains the <code>AWS::CloudFormation::Stack</code> resource).</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -2413,6 +2416,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or the unique ID of the stack for which you are creating a change set. CloudFormation generates the\n   change set by comparing this stack's information with the information that you submit, such as a modified template or\n   different parameter input values.</p>",
                         "smithy.api#required": {}
                     }
@@ -2480,6 +2484,7 @@
                 "ChangeSetName": {
                     "target": "com.amazonaws.cloudformation#ChangeSetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the change set. The name must be unique among all change sets that are associated with the specified\n   stack.</p>\n         <p>A change set name can contain only alphanumeric, case sensitive characters, and hyphens. It must start with an\n   alphabetical character and can't exceed 128 characters.</p>",
                         "smithy.api#required": {}
                     }
@@ -2579,6 +2584,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name that's associated with the stack. The name must be unique in the Region in which you are creating the\n   stack.</p>\n         <note>\n            <p>A stack name can contain only alphanumeric characters (case sensitive) and hyphens. It must start with an\n    alphabetical character and can't be longer than 128 characters.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -2729,6 +2735,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or unique ID of the stack set that you want to create stack instances from.</p>",
                         "smithy.api#required": {}
                     }
@@ -2748,6 +2755,7 @@
                 "Regions": {
                     "target": "com.amazonaws.cloudformation#RegionList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The names of one or more Amazon Web Services Regions where you want to create stack instances using the specified\n    Amazon Web Services accounts.</p>",
                         "smithy.api#required": {}
                     }
@@ -2840,6 +2848,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name to associate with the stack set. The name must be unique in the Region where you create your stack\n   set.</p>\n         <note>\n            <p>A stack name can contain only alphanumeric characters (case-sensitive) and hyphens. It must start with an\n    alphabetic character and can't be longer than 128 characters.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -3079,6 +3088,7 @@
                 "ChangeSetName": {
                     "target": "com.amazonaws.cloudformation#ChangeSetNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the change set that you want to delete.</p>",
                         "smithy.api#required": {}
                     }
@@ -3126,6 +3136,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or the unique stack ID that's associated with the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -3189,6 +3200,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or unique ID of the stack set that you want to delete stack instances for.</p>",
                         "smithy.api#required": {}
                     }
@@ -3208,6 +3220,7 @@
                 "Regions": {
                     "target": "com.amazonaws.cloudformation#RegionList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Web Services Regions where you want to delete stack set instances.</p>",
                         "smithy.api#required": {}
                     }
@@ -3221,7 +3234,7 @@
                 "RetainStacks": {
                     "target": "com.amazonaws.cloudformation#RetainStacks",
                     "traits": {
-                        "smithy.api#default": false,
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Removes the stack instances from the specified stack set, but doesn't delete the stacks. You can't reassociate a\n   retained stack or add an existing, saved stack to a new stack set.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options\">Stack set operation\n    options</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -3284,6 +3297,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or unique ID of the stack set that you're deleting. You can obtain this value by running <a>ListStackSets</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -3548,6 +3562,7 @@
                 "ChangeSetName": {
                     "target": "com.amazonaws.cloudformation#ChangeSetNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the change set that you want to describe.</p>",
                         "smithy.api#required": {}
                     }
@@ -3631,6 +3646,7 @@
                 "ChangeSetName": {
                     "target": "com.amazonaws.cloudformation#ChangeSetNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the change set that you want to describe.</p>",
                         "smithy.api#required": {}
                     }
@@ -3912,6 +3928,7 @@
                 "StackDriftDetectionId": {
                     "target": "com.amazonaws.cloudformation#StackDriftDetectionId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the drift detection results of this operation.</p>\n         <p>CloudFormation generates new results, with a new drift detection ID, each time this operation is run. However, the number\n   of drift results CloudFormation retains for any given stack, and for how long, may vary.</p>",
                         "smithy.api#required": {}
                     }
@@ -3927,6 +3944,7 @@
                 "StackId": {
                     "target": "com.amazonaws.cloudformation#StackId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -3934,6 +3952,7 @@
                 "StackDriftDetectionId": {
                     "target": "com.amazonaws.cloudformation#StackDriftDetectionId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the drift detection results of this operation.</p>\n         <p>CloudFormation generates new results, with a new drift detection ID, each time this operation is run. However, the number\n   of reports CloudFormation retains for any given stack, and for how long, may vary.</p>",
                         "smithy.api#required": {}
                     }
@@ -3947,6 +3966,7 @@
                 "DetectionStatus": {
                     "target": "com.amazonaws.cloudformation#StackDriftDetectionStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The status of the stack drift detection operation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DETECTION_COMPLETE</code>: The stack drift detection operation has successfully completed for all\n     resources in the stack that support drift detection. (Resources that don't currently support stack detection remain\n     unchecked.)</p>\n               <p>If you specified logical resource IDs for CloudFormation to use as a filter for the stack drift detection operation,\n     only the resources with those logical IDs are checked for drift.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DETECTION_FAILED</code>: The stack drift detection operation has failed for at least one resource in the\n     stack. Results will be available for resources on which CloudFormation successfully completed drift detection.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DETECTION_IN_PROGRESS</code>: The stack drift detection operation is currently in progress.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -3966,6 +3986,7 @@
                 "Timestamp": {
                     "target": "com.amazonaws.cloudformation#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Time at which the stack drift detection operation was initiated.</p>",
                         "smithy.api#required": {}
                     }
@@ -4060,6 +4081,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or the unique stack ID of the stack set that you want to get stack instance information for.</p>",
                         "smithy.api#required": {}
                     }
@@ -4067,6 +4089,7 @@
                 "StackInstanceAccount": {
                     "target": "com.amazonaws.cloudformation#Account",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of an Amazon Web Services account that's associated with this stack instance.</p>",
                         "smithy.api#required": {}
                     }
@@ -4074,6 +4097,7 @@
                 "StackInstanceRegion": {
                     "target": "com.amazonaws.cloudformation#Region",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of a Region that's associated with this stack instance.</p>",
                         "smithy.api#required": {}
                     }
@@ -4138,6 +4162,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack for which you want drift information.</p>",
                         "smithy.api#required": {}
                     }
@@ -4171,6 +4196,7 @@
                 "StackResourceDrifts": {
                     "target": "com.amazonaws.cloudformation#StackResourceDrifts",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Drift information for the resources that have been checked for drift in the specified stack. This includes\n   actual and expected configuration values for resources where CloudFormation detects drift.</p>\n         <p>For a given stack, there will be one <code>StackResourceDrift</code> for each stack resource that has been\n   checked for drift. Resources that haven't yet been checked for drift aren't included. Resources that do not currently\n   support drift detection aren't checked, and so not included. For a list of resources that support drift detection,\n   see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html\">Resources that Support Drift Detection</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -4192,6 +4218,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or the unique stack ID that's associated with the stack, which aren't always interchangeable:</p>\n         <ul>\n            <li>\n               <p>Running stacks: You can specify either the stack's name or its unique stack ID.</p>\n            </li>\n            <li>\n               <p>Deleted stacks: You must specify the unique stack ID.</p>\n            </li>\n         </ul>\n         <p>Default: There is no default value.</p>",
                         "smithy.api#required": {}
                     }
@@ -4199,6 +4226,7 @@
                 "LogicalResourceId": {
                     "target": "com.amazonaws.cloudformation#LogicalResourceId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The logical name of the resource as specified in the template.</p>\n         <p>Default: There is no default value.</p>",
                         "smithy.api#required": {}
                     }
@@ -4301,6 +4329,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or unique ID of the stack set whose description you want.</p>",
                         "smithy.api#required": {}
                     }
@@ -4342,6 +4371,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or the unique stack ID of the stack set for the stack operation.</p>",
                         "smithy.api#required": {}
                     }
@@ -4349,6 +4379,7 @@
                 "OperationId": {
                     "target": "com.amazonaws.cloudformation#ClientRequestToken",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique ID of the stack set operation.</p>",
                         "smithy.api#required": {}
                     }
@@ -5100,6 +5131,7 @@
                 "RegistrationToken": {
                     "target": "com.amazonaws.cloudformation#RegistrationToken",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier for this registration request.</p>\n         <p>This registration token is generated by CloudFormation when you initiate a registration request using\n    <a>RegisterType</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -5168,6 +5200,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack for which you want to detect drift.</p>",
                         "smithy.api#required": {}
                     }
@@ -5189,6 +5222,7 @@
                 "StackDriftDetectionId": {
                     "target": "com.amazonaws.cloudformation#StackDriftDetectionId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the drift detection results of this operation.</p>\n         <p>CloudFormation generates new results, with a new drift detection ID, each time this operation is run. However, the number\n   of drift results CloudFormation retains for any given stack, and for how long, may vary.</p>",
                         "smithy.api#required": {}
                     }
@@ -5216,6 +5250,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack to which the resource belongs.</p>",
                         "smithy.api#required": {}
                     }
@@ -5223,6 +5258,7 @@
                 "LogicalResourceId": {
                     "target": "com.amazonaws.cloudformation#LogicalResourceId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The logical name of the resource for which to return drift information.</p>",
                         "smithy.api#required": {}
                     }
@@ -5238,6 +5274,7 @@
                 "StackResourceDrift": {
                     "target": "com.amazonaws.cloudformation#StackResourceDrift",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Information about whether the resource's actual configuration has drifted from its expected template\n   configuration, including actual and expected property values and any differences detected.</p>",
                         "smithy.api#required": {}
                     }
@@ -5276,6 +5313,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack set on which to perform the drift detection operation.</p>",
                         "smithy.api#required": {}
                     }
@@ -5347,7 +5385,6 @@
         "com.amazonaws.cloudformation#DriftedStackInstancesCount": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -5480,6 +5517,7 @@
                 "ChangeSetName": {
                     "target": "com.amazonaws.cloudformation#ChangeSetNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the change set that you want use to update the specified stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -5614,7 +5652,6 @@
         "com.amazonaws.cloudformation#FailedStackInstancesCount": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -5655,6 +5692,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or unique stack ID that's associated with the stack whose policy you want to get.</p>",
                         "smithy.api#required": {}
                     }
@@ -6193,6 +6231,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the stack set. The name must be unique in the Region where you create your stack set.</p>",
                         "smithy.api#required": {}
                     }
@@ -6262,7 +6301,6 @@
         "com.amazonaws.cloudformation#InProgressStackInstancesCount": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -6271,7 +6309,6 @@
         "com.amazonaws.cloudformation#InSyncStackInstancesCount": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -6409,6 +6446,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or the Amazon Resource Name (ARN) of the stack for which you want to list change sets.</p>",
                         "smithy.api#required": {}
                     }
@@ -6520,6 +6558,7 @@
                 "ExportName": {
                     "target": "com.amazonaws.cloudformation#ExportName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the exported output value. CloudFormation returns the stack names that are importing this\n   value.</p>",
                         "smithy.api#required": {}
                     }
@@ -6584,6 +6623,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or unique ID of the stack set that you want to list drifted resources\n      for.</p>",
                         "smithy.api#required": {}
                     }
@@ -6609,6 +6649,7 @@
                 "StackInstanceAccount": {
                     "target": "com.amazonaws.cloudformation#Account",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Amazon Web Services account that you want to list resource drifts for.</p>",
                         "smithy.api#required": {}
                     }
@@ -6616,6 +6657,7 @@
                 "StackInstanceRegion": {
                     "target": "com.amazonaws.cloudformation#Region",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Region where you want to list resource drifts.</p>",
                         "smithy.api#required": {}
                     }
@@ -6623,6 +6665,7 @@
                 "OperationId": {
                     "target": "com.amazonaws.cloudformation#ClientRequestToken",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique ID of the drift operation.</p>",
                         "smithy.api#required": {}
                     }
@@ -6687,6 +6730,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or unique ID of the stack set that you want to list stack instances for.</p>",
                         "smithy.api#required": {}
                     }
@@ -6775,6 +6819,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or the unique stack ID that is associated with the stack, which aren't always interchangeable:</p>\n         <ul>\n            <li>\n               <p>Running stacks: You can specify either the stack's name or its unique stack ID.</p>\n            </li>\n            <li>\n               <p>Deleted stacks: You must specify the unique stack ID.</p>\n            </li>\n         </ul>\n         <p>Default: There is no default value.</p>",
                         "smithy.api#required": {}
                     }
@@ -6844,6 +6889,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or unique ID of the stack set that you want to get operation results for.</p>",
                         "smithy.api#required": {}
                     }
@@ -6851,6 +6897,7 @@
                 "OperationId": {
                     "target": "com.amazonaws.cloudformation#ClientRequestToken",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the stack set operation.</p>",
                         "smithy.api#required": {}
                     }
@@ -6933,6 +6980,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or unique ID of the stack set that you want to get operation summaries for.</p>",
                         "smithy.api#required": {}
                     }
@@ -7399,6 +7447,7 @@
                 "LogRoleArn": {
                     "target": "com.amazonaws.cloudformation#RoleARN2",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that CloudFormation should assume when sending log entries\n   to CloudWatch Logs.</p>",
                         "smithy.api#required": {}
                     }
@@ -7406,6 +7455,7 @@
                 "LogGroupName": {
                     "target": "com.amazonaws.cloudformation#LogGroupName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon CloudWatch Logs group to which CloudFormation sends error logging information when invoking\n   the extension's handlers.</p>",
                         "smithy.api#required": {}
                     }
@@ -7994,6 +8044,7 @@
                 "Key": {
                     "target": "com.amazonaws.cloudformation#Key",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The resource context key.</p>",
                         "smithy.api#required": {}
                     }
@@ -8001,6 +8052,7 @@
                 "Value": {
                     "target": "com.amazonaws.cloudformation#Value",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The resource context value.</p>",
                         "smithy.api#required": {}
                     }
@@ -8029,6 +8081,7 @@
                 "PropertyPath": {
                     "target": "com.amazonaws.cloudformation#PropertyPath",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The fully-qualified path to the resource property.</p>",
                         "smithy.api#required": {}
                     }
@@ -8036,6 +8089,7 @@
                 "ExpectedValue": {
                     "target": "com.amazonaws.cloudformation#PropertyValue",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The expected property value of the resource property, as defined in the stack template and any values specified\n   as template parameters.</p>",
                         "smithy.api#required": {}
                     }
@@ -8043,6 +8097,7 @@
                 "ActualValue": {
                     "target": "com.amazonaws.cloudformation#PropertyValue",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The actual property value of the resource property.</p>",
                         "smithy.api#required": {}
                     }
@@ -8050,6 +8105,7 @@
                 "DifferenceType": {
                     "target": "com.amazonaws.cloudformation#DifferenceType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of property difference.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ADD</code>: A value has been added to a resource property that's an array or list data type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REMOVE</code>: The property has been removed from the current resource configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_EQUAL</code>: The current property value differs from its expected value (as defined in the stack\n     template and any values specified as template parameters).</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -8250,6 +8306,7 @@
                 "BearerToken": {
                     "target": "com.amazonaws.cloudformation#ClientToken",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Reserved for use by the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html\">CloudFormation\n   CLI</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -8257,6 +8314,7 @@
                 "OperationStatus": {
                     "target": "com.amazonaws.cloudformation#OperationStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Reserved for use by the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html\">CloudFormation\n   CLI</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -8414,6 +8472,7 @@
                 "TypeName": {
                     "target": "com.amazonaws.cloudformation#TypeName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the extension being registered.</p>\n         <p>We suggest that extension names adhere to the following patterns:</p>\n         <ul>\n            <li>\n               <p>For resource types,\n      <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p>\n            </li>\n            <li>\n               <p>For modules,\n      <i>company_or_organization</i>::<i>service</i>::<i>type</i>::MODULE.</p>\n            </li>\n            <li>\n               <p>For hooks,\n     <i>MyCompany</i>::<i>Testing</i>::<i>MyTestHook</i>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The following organization namespaces are reserved and can't be used in your extension names:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>Alexa</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AMZN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Amazon</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Custom</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Dev</code>\n                  </p>\n               </li>\n            </ul>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -8421,6 +8480,7 @@
                 "SchemaHandlerPackage": {
                     "target": "com.amazonaws.cloudformation#S3Url",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A URL to the S3 bucket containing the extension project package that contains the necessary files for the\n   extension you want to register.</p>\n         <p>For information about generating a schema handler package for the extension you want to register, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html\">submit</a> in the\n     <i>CloudFormation CLI User Guide</i>.</p>\n         <note>\n            <p>The user registering the extension must be able to access the package in the S3 bucket. That's, the user needs\n    to have <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a> permissions for\n    the schema handler package. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html\">Actions, Resources, and Condition Keys for Amazon S3</a>\n    in the <i>Identity and Access Management User Guide</i>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
@@ -9046,6 +9106,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.cloudformation#ResourceType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of resource to import into your stack, such as <code>AWS::S3::Bucket</code>. For a list of supported\n   resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html\">Resources that support import\n    operations</a> in the CloudFormation User Guide.</p>",
                         "smithy.api#required": {}
                     }
@@ -9053,6 +9114,7 @@
                 "LogicalResourceId": {
                     "target": "com.amazonaws.cloudformation#LogicalResourceId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The logical ID of the target resource as specified in the template.</p>",
                         "smithy.api#required": {}
                     }
@@ -9060,6 +9122,7 @@
                 "ResourceIdentifier": {
                     "target": "com.amazonaws.cloudformation#ResourceIdentifierProperties",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A key-value pair that identifies the target resource. The key is an identifier property (for example,\n    <code>BucketName</code> for <code>AWS::S3::Bucket</code> resources) and the value is the actual property value (for\n   example, <code>MyS3Bucket</code>).</p>",
                         "smithy.api#required": {}
                     }
@@ -9118,10 +9181,7 @@
             }
         },
         "com.amazonaws.cloudformation#RetainStacks": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "type": "boolean"
         },
         "com.amazonaws.cloudformation#RetainStacksNullable": {
             "type": "boolean"
@@ -9191,6 +9251,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name that's associated with the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -9238,6 +9299,7 @@
                 "Arn": {
                     "target": "com.amazonaws.cloudformation#Arn",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rollback trigger.</p>\n         <p>If a specified trigger is missing, the entire stack operation fails and is rolled back.</p>",
                         "smithy.api#required": {}
                     }
@@ -9245,6 +9307,7 @@
                 "Type": {
                     "target": "com.amazonaws.cloudformation#Type",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The resource type of the rollback trigger. Specify either <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html\">AWS::CloudWatch::Alarm</a> or <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-compositealarm.html\">AWS::CloudWatch::CompositeAlarm</a> resource types.</p>",
                         "smithy.api#required": {}
                     }
@@ -9309,6 +9372,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or unique stack ID that you want to associate a policy with.</p>",
                         "smithy.api#required": {}
                     }
@@ -9363,6 +9427,7 @@
                 "Configuration": {
                     "target": "com.amazonaws.cloudformation#TypeConfiguration",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The configuration data for the extension, in this account and Region.</p>\n         <p>The configuration data must be formatted as JSON, and validate against the schema returned in the\n    <code>ConfigurationSchema</code> response element of <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>. For more information, see\n    <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration\">Defining\n    account-level configuration data for an extension</a> in the <i>CloudFormation CLI User\n    Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
@@ -9482,6 +9547,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The stack name or unique stack ID that includes the resource that you want to signal.</p>",
                         "smithy.api#required": {}
                     }
@@ -9489,6 +9555,7 @@
                 "LogicalResourceId": {
                     "target": "com.amazonaws.cloudformation#LogicalResourceId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The logical ID of the resource that you want to signal. The logical ID is the name of the resource that given in\n   the template.</p>",
                         "smithy.api#required": {}
                     }
@@ -9496,6 +9563,7 @@
                 "UniqueId": {
                     "target": "com.amazonaws.cloudformation#ResourceSignalUniqueId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique ID of the signal. When you signal Amazon EC2 instances or Auto Scaling groups, specify the\n   instance ID that you are signaling as the unique ID. If you send multiple signals to a single resource (such as\n   signaling a wait condition), each signal requires a different unique ID.</p>",
                         "smithy.api#required": {}
                     }
@@ -9503,6 +9571,7 @@
                 "Status": {
                     "target": "com.amazonaws.cloudformation#ResourceSignalStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The status of the signal, which is either success or failure. A failure signal causes CloudFormation to\n   immediately fail the stack creation or update.</p>",
                         "smithy.api#required": {}
                     }
@@ -9525,6 +9594,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name associated with the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -9550,6 +9620,7 @@
                 "CreationTime": {
                     "target": "com.amazonaws.cloudformation#CreationTime",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The time at which the stack was created.</p>",
                         "smithy.api#required": {}
                     }
@@ -9575,6 +9646,7 @@
                 "StackStatus": {
                     "target": "com.amazonaws.cloudformation#StackStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Current status of the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -9703,6 +9775,7 @@
                 "StackDriftStatus": {
                     "target": "com.amazonaws.cloudformation#StackDriftStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Status of the stack's actual configuration compared to its expected template configuration.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DRIFTED</code>: The stack differs from its expected template configuration. A stack is considered to\n     have drifted if one or more of its resources have drifted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_CHECKED</code>: CloudFormation hasn't checked if the stack differs from its expected template\n     configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_SYNC</code>: The stack's actual configuration matches its expected template configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN</code>: This value is reserved for future use.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -9724,6 +9797,7 @@
                 "StackDriftStatus": {
                     "target": "com.amazonaws.cloudformation#StackDriftStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Status of the stack's actual configuration compared to its expected template configuration.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DRIFTED</code>: The stack differs from its expected template configuration. A stack is considered to\n     have drifted if one or more of its resources have drifted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_CHECKED</code>: CloudFormation hasn't checked if the stack differs from its expected template\n     configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_SYNC</code>: The stack's actual configuration matches its expected template configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN</code>: This value is reserved for future use.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -9774,6 +9848,7 @@
                 "StackId": {
                     "target": "com.amazonaws.cloudformation#StackId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique ID name of the instance of the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -9781,6 +9856,7 @@
                 "EventId": {
                     "target": "com.amazonaws.cloudformation#EventId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique ID of this event.</p>",
                         "smithy.api#required": {}
                     }
@@ -9788,6 +9864,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name associated with a stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -9813,6 +9890,7 @@
                 "Timestamp": {
                     "target": "com.amazonaws.cloudformation#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Time the status was updated.</p>",
                         "smithy.api#required": {}
                     }
@@ -10136,6 +10214,7 @@
                 "StackId": {
                     "target": "com.amazonaws.cloudformation#StackId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the stack instance.</p>",
                         "smithy.api#required": {}
                     }
@@ -10143,6 +10222,7 @@
                 "LogicalResourceId": {
                     "target": "com.amazonaws.cloudformation#LogicalResourceId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The logical name of the resource specified in the template.</p>",
                         "smithy.api#required": {}
                     }
@@ -10162,6 +10242,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.cloudformation#ResourceType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Type of resource. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services Resource Types Reference</a> in the CloudFormation User\n   Guide.</p>",
                         "smithy.api#required": {}
                     }
@@ -10175,6 +10256,7 @@
                 "StackResourceDriftStatus": {
                     "target": "com.amazonaws.cloudformation#StackResourceDriftStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The drift status of the resource in a stack instance.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETED</code>: The resource differs from its expected template\n     configuration in that the resource has been deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFIED</code>: One or more resource properties differ from their expected\n     template values.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_SYNC</code>: The resource's actual configuration matches its expected\n     template configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_CHECKED</code>: CloudFormation doesn't currently return this value.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -10182,6 +10264,7 @@
                 "Timestamp": {
                     "target": "com.amazonaws.cloudformation#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Time at which the stack instance drift detection operation was initiated.</p>",
                         "smithy.api#required": {}
                     }
@@ -10377,6 +10460,7 @@
                 "LogicalResourceId": {
                     "target": "com.amazonaws.cloudformation#LogicalResourceId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The logical name of the resource specified in the template.</p>",
                         "smithy.api#required": {}
                     }
@@ -10390,6 +10474,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.cloudformation#ResourceType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Type of resource. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services Resource Types\n    Reference</a> in the CloudFormation User Guide.</p>",
                         "smithy.api#required": {}
                     }
@@ -10397,6 +10482,7 @@
                 "Timestamp": {
                     "target": "com.amazonaws.cloudformation#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Time the status was updated.</p>",
                         "smithy.api#required": {}
                     }
@@ -10404,6 +10490,7 @@
                 "ResourceStatus": {
                     "target": "com.amazonaws.cloudformation#ResourceStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Current status of the resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -10455,6 +10542,7 @@
                 "LogicalResourceId": {
                     "target": "com.amazonaws.cloudformation#LogicalResourceId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The logical name of the resource specified in the template.</p>",
                         "smithy.api#required": {}
                     }
@@ -10468,6 +10556,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.cloudformation#ResourceType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Type of resource. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services Resource Types\n    Reference</a> in the CloudFormation User Guide.</p>",
                         "smithy.api#required": {}
                     }
@@ -10475,6 +10564,7 @@
                 "LastUpdatedTimestamp": {
                     "target": "com.amazonaws.cloudformation#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Time the status was updated.</p>",
                         "smithy.api#required": {}
                     }
@@ -10482,6 +10572,7 @@
                 "ResourceStatus": {
                     "target": "com.amazonaws.cloudformation#ResourceStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Current status of the resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -10527,6 +10618,7 @@
                 "StackId": {
                     "target": "com.amazonaws.cloudformation#StackId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -10534,6 +10626,7 @@
                 "LogicalResourceId": {
                     "target": "com.amazonaws.cloudformation#LogicalResourceId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The logical name of the resource specified in the template.</p>",
                         "smithy.api#required": {}
                     }
@@ -10553,6 +10646,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.cloudformation#ResourceType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of the resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -10578,6 +10672,7 @@
                 "StackResourceDriftStatus": {
                     "target": "com.amazonaws.cloudformation#StackResourceDriftStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Status of the resource's actual configuration compared to its expected configuration.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETED</code>: The resource differs from its expected template configuration because the resource has\n     been deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFIED</code>: One or more resource properties differ from their expected values (as defined in the\n     stack template and any values specified as template parameters).</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_SYNC</code>: The resource's actual configuration matches its expected template configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_CHECKED</code>: CloudFormation does not currently return this value.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -10585,6 +10680,7 @@
                 "Timestamp": {
                     "target": "com.amazonaws.cloudformation#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Time at which CloudFormation performed drift detection on the stack resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -10606,6 +10702,7 @@
                 "StackResourceDriftStatus": {
                     "target": "com.amazonaws.cloudformation#StackResourceDriftStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Status of the resource's actual configuration compared to its expected configuration</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETED</code>: The resource differs from its expected configuration in that it has been deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFIED</code>: The resource differs from its expected configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_CHECKED</code>: CloudFormation has not checked if the resource differs from its expected\n     configuration.</p>\n               <p>Any resources that do not currently support drift detection have a status of <code>NOT_CHECKED</code>. For\n     more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html\">Resources that Support Drift\n      Detection</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_SYNC</code>: The resource's actual configuration matches its expected configuration.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -10627,6 +10724,7 @@
                 "StackResourceDriftStatus": {
                     "target": "com.amazonaws.cloudformation#StackResourceDriftStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Status of the resource's actual configuration compared to its expected configuration.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETED</code>: The resource differs from its expected configuration in that it has been deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFIED</code>: The resource differs from its expected configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_CHECKED</code>: CloudFormation hasn't checked if the resource differs from its expected configuration.</p>\n               <p>Any resources that don't currently support drift detection have a status of <code>NOT_CHECKED</code>. For more\n     information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html\">Resources that Support Drift\n      Detection</a>. If you performed an <a>ContinueUpdateRollback</a> operation on a stack, any\n     resources included in <code>ResourcesToSkip</code> will also have a status of <code>NOT_CHECKED</code>. For more\n     information about skipping resources during rollback operations, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html\">Continue Rolling\n      Back an Update</a> in the CloudFormation User Guide.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_SYNC</code>: The resource's actual configuration matches its expected configuration.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -10701,6 +10799,7 @@
                 "LogicalResourceId": {
                     "target": "com.amazonaws.cloudformation#LogicalResourceId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The logical name of the resource specified in the template.</p>",
                         "smithy.api#required": {}
                     }
@@ -10714,6 +10813,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.cloudformation#ResourceType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Type of resource. (For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services Resource Types\n    Reference</a> in the CloudFormation User Guide.)</p>",
                         "smithy.api#required": {}
                     }
@@ -10721,6 +10821,7 @@
                 "LastUpdatedTimestamp": {
                     "target": "com.amazonaws.cloudformation#Timestamp",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Time the status was updated.</p>",
                         "smithy.api#required": {}
                     }
@@ -10728,6 +10829,7 @@
                 "ResourceStatus": {
                     "target": "com.amazonaws.cloudformation#ResourceStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Current status of the resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -10898,35 +11000,30 @@
                 "TotalStackInstancesCount": {
                     "target": "com.amazonaws.cloudformation#TotalStackInstancesCount",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of stack instances belonging to this stack set.</p>\n         <p>The total number of stack instances is equal to the total of:</p>\n         <ul>\n            <li>\n               <p>Stack instances that match the stack set configuration.</p>\n            </li>\n            <li>\n               <p>Stack instances that have drifted from the stack set configuration.</p>\n            </li>\n            <li>\n               <p>Stack instances where the drift detection operation has failed.</p>\n            </li>\n            <li>\n               <p>Stack instances currently being checked for drift.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DriftedStackInstancesCount": {
                     "target": "com.amazonaws.cloudformation#DriftedStackInstancesCount",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of stack instances that have drifted from the expected template and parameter configuration of the\n   stack set. A stack instance is considered to have drifted if one or more of the resources in the associated stack\n   don't match their expected configuration.</p>"
                     }
                 },
                 "InSyncStackInstancesCount": {
                     "target": "com.amazonaws.cloudformation#InSyncStackInstancesCount",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of stack instances which match the expected template and parameter configuration of the stack\n   set.</p>"
                     }
                 },
                 "InProgressStackInstancesCount": {
                     "target": "com.amazonaws.cloudformation#InProgressStackInstancesCount",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of stack instances that are currently being checked for drift.</p>"
                     }
                 },
                 "FailedStackInstancesCount": {
                     "target": "com.amazonaws.cloudformation#FailedStackInstancesCount",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of stack instances for which the drift detection operation failed.</p>"
                     }
                 }
@@ -11336,7 +11433,6 @@
                 "FailedStackInstancesCount": {
                     "target": "com.amazonaws.cloudformation#FailedStackInstancesCount",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of stack instances for which the StackSet operation failed.</p>"
                     }
                 }
@@ -11665,6 +11761,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name associated with the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -11678,6 +11775,7 @@
                 "CreationTime": {
                     "target": "com.amazonaws.cloudformation#CreationTime",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The time the stack was created.</p>",
                         "smithy.api#required": {}
                     }
@@ -11697,6 +11795,7 @@
                 "StackStatus": {
                     "target": "com.amazonaws.cloudformation#StackStatus",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The current status of the stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -11797,6 +11896,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or unique ID of the stack set that you want to stop the operation for.</p>",
                         "smithy.api#required": {}
                     }
@@ -11804,6 +11904,7 @@
                 "OperationId": {
                     "target": "com.amazonaws.cloudformation#ClientRequestToken",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the stack operation.</p>",
                         "smithy.api#required": {}
                     }
@@ -11847,6 +11948,7 @@
                 "Key": {
                     "target": "com.amazonaws.cloudformation#TagKey",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>\n            <i>Required</i>. A string used to identify this tag. You can specify a maximum of 128 characters for a\n   tag key. Tags owned by Amazon Web Services (Amazon Web Services) have the reserved prefix: <code>aws:</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -11854,6 +11956,7 @@
                 "Value": {
                     "target": "com.amazonaws.cloudformation#TagValue",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>\n            <i>Required</i>. A string containing the value for this tag. You can specify a maximum of 256\n   characters for a tag value.</p>",
                         "smithy.api#required": {}
                     }
@@ -12119,7 +12222,6 @@
         "com.amazonaws.cloudformation#TotalStackInstancesCount": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -12618,6 +12720,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or unique stack ID of the stack to update.</p>",
                         "smithy.api#required": {}
                     }
@@ -12768,6 +12871,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or unique ID of the stack set associated with the stack instances.</p>",
                         "smithy.api#required": {}
                     }
@@ -12787,6 +12891,7 @@
                 "Regions": {
                     "target": "com.amazonaws.cloudformation#RegionList",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The names of one or more Amazon Web Services Regions in which you want to update parameter values for stack\n   instances. The overridden parameter values will be applied to all stack instances in the specified accounts and\n    Amazon Web Services Regions.</p>",
                         "smithy.api#required": {}
                     }
@@ -12888,6 +12993,7 @@
                 "StackSetName": {
                     "target": "com.amazonaws.cloudformation#StackSetName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or unique ID of the stack set that you want to update.</p>",
                         "smithy.api#required": {}
                     }
@@ -13038,6 +13144,7 @@
                 "EnableTerminationProtection": {
                     "target": "com.amazonaws.cloudformation#EnableTerminationProtection",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Whether to enable termination protection on the specified stack.</p>",
                         "smithy.api#required": {}
                     }
@@ -13045,6 +13152,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackNameOrId",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or unique ID of the stack for which you want to set termination protection.</p>",
                         "smithy.api#required": {}
                     }

@@ -58,7 +58,7 @@ type ModifyDBInstanceInput struct {
 	//   - Major version upgrades must be allowed when specifying a value for the
 	//   EngineVersion parameter that's a different major version than the DB
 	//   instance's current version.
-	AllowMajorVersionUpgrade bool
+	AllowMajorVersionUpgrade *bool
 
 	// Specifies whether the modifications in this request and any pending
 	// modifications are asynchronously applied as soon as possible, regardless of the
@@ -70,7 +70,7 @@ type ModifyDBInstanceInput struct {
 	// in the Amazon RDS User Guide to see the impact of enabling or disabling
 	// ApplyImmediately for each modified parameter and to determine when the changes
 	// are applied.
-	ApplyImmediately bool
+	ApplyImmediately *bool
 
 	// Specifies whether minor version upgrades are applied automatically to the DB
 	// instance during the maintenance window. An outage occurs when all the following

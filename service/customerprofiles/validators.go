@@ -1617,6 +1617,9 @@ func validateRange(v *types.Range) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Range"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
 	if len(v.Unit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
 	}

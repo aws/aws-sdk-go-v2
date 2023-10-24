@@ -42,7 +42,7 @@ type CompleteMigrationInput struct {
 	// Forces the migration to stop without ensuring that data is in sync. It is
 	// recommended to use this option only to abort the migration and not recommended
 	// when application wants to continue migration to ElastiCache.
-	Force bool
+	Force *bool
 
 	noSmithyDocumentSerde
 }

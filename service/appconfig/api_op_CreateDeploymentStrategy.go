@@ -109,7 +109,7 @@ type CreateDeploymentStrategyOutput struct {
 
 	// The percentage of targets that received a deployed configuration during each
 	// interval.
-	GrowthFactor float32
+	GrowthFactor *float32
 
 	// The algorithm used to define how percentage grew over time.
 	GrowthType types.GrowthType

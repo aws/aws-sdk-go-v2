@@ -116,7 +116,7 @@ type DescribeAutoMLJobOutput struct {
 
 	// Indicates whether the output for an AutoML job generates candidate definitions
 	// only.
-	GenerateCandidateDefinitionsOnly bool
+	GenerateCandidateDefinitionsOnly *bool
 
 	// Indicates whether the model was deployed automatically to an endpoint and the
 	// name of that endpoint if deployed automatically.

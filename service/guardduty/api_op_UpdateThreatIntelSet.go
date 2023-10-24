@@ -46,7 +46,7 @@ type UpdateThreatIntelSetInput struct {
 
 	// The updated Boolean value that specifies whether the ThreateIntelSet is active
 	// or not.
-	Activate bool
+	Activate *bool
 
 	// The updated URI of the file that contains the ThreateIntelSet.
 	Location *string

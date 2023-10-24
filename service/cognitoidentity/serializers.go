@@ -1774,9 +1774,9 @@ func awsAwsjson11_serializeOpDocumentListIdentitiesInput(v *ListIdentitiesInput,
 		ok.String(*v.IdentityPoolId)
 	}
 
-	{
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1791,9 +1791,9 @@ func awsAwsjson11_serializeOpDocumentListIdentityPoolsInput(v *ListIdentityPools
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1835,9 +1835,9 @@ func awsAwsjson11_serializeOpDocumentLookupDeveloperIdentityInput(v *LookupDevel
 		ok.String(*v.IdentityPoolId)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {

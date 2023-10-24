@@ -220,7 +220,7 @@ type DirectoryDescription struct {
 
 	// The desired number of domain controllers in the directory if the directory is
 	// Microsoft AD.
-	DesiredNumberOfDomainControllers int32
+	DesiredNumberOfDomainControllers *int32
 
 	// The directory identifier.
 	DirectoryId *string
@@ -547,7 +547,7 @@ type RadiusSettings struct {
 	// The port that your RADIUS server is using for communications. Your self-managed
 	// network must allow inbound traffic over this port from the Directory Service
 	// servers.
-	RadiusPort int32
+	RadiusPort *int32
 
 	// The maximum number of times that communication with the RADIUS server is
 	// attempted.
@@ -559,7 +559,7 @@ type RadiusSettings struct {
 	RadiusServers []string
 
 	// The amount of time, in seconds, to wait for the RADIUS server to respond.
-	RadiusTimeout int32
+	RadiusTimeout *int32
 
 	// Required for enabling RADIUS on the directory.
 	SharedSecret *string
@@ -575,7 +575,7 @@ type RegionDescription struct {
 
 	// The desired number of domain controllers in the specified Region for the
 	// specified directory.
-	DesiredNumberOfDomainControllers int32
+	DesiredNumberOfDomainControllers *int32
 
 	// The identifier of the directory.
 	DirectoryId *string

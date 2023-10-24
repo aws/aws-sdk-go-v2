@@ -21227,7 +21227,7 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowVersionUpgrade = xtv
+				sv.AllowVersionUpgrade = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("AquaConfiguration", t.Name.Local):
@@ -21250,7 +21250,7 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 				if err != nil {
 					return err
 				}
-				sv.AutomatedSnapshotRetentionPeriod = int32(i64)
+				sv.AutomatedSnapshotRetentionPeriod = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("AvailabilityZone", t.Name.Local):
@@ -21537,7 +21537,7 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Encrypted = xtv
+				sv.Encrypted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("Endpoint", t.Name.Local):
@@ -21559,7 +21559,7 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EnhancedVpcRouting = xtv
+				sv.EnhancedVpcRouting = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("ExpectedNextSnapshotScheduleTime", t.Name.Local):
@@ -21644,7 +21644,7 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 				if err != nil {
 					return err
 				}
-				sv.ManualSnapshotRetentionPeriod = int32(i64)
+				sv.ManualSnapshotRetentionPeriod = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("MasterPasswordSecretArn", t.Name.Local):
@@ -21743,7 +21743,7 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 				if err != nil {
 					return err
 				}
-				sv.NumberOfNodes = int32(i64)
+				sv.NumberOfNodes = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("PendingActions", t.Name.Local):
@@ -21784,7 +21784,7 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.PubliclyAccessible = xtv
+				sv.PubliclyAccessible = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("ReservedNodeExchangeStatus", t.Name.Local):
@@ -23669,7 +23669,7 @@ func awsAwsquery_deserializeDocumentClusterSnapshotCopyStatus(v **types.ClusterS
 				if err != nil {
 					return err
 				}
-				sv.ManualSnapshotRetentionPeriod = int32(i64)
+				sv.ManualSnapshotRetentionPeriod = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("RetentionPeriod", t.Name.Local):
@@ -23686,7 +23686,7 @@ func awsAwsquery_deserializeDocumentClusterSnapshotCopyStatus(v **types.ClusterS
 				if err != nil {
 					return err
 				}
-				sv.RetentionPeriod = i64
+				sv.RetentionPeriod = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("SnapshotCopyGrantName", t.Name.Local):
@@ -24503,7 +24503,7 @@ func awsAwsquery_deserializeDocumentDataShare(v **types.DataShare, decoder smith
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowPubliclyAccessibleConsumers = xtv
+				sv.AllowPubliclyAccessibleConsumers = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("DataShareArn", t.Name.Local):
@@ -24863,7 +24863,7 @@ func awsAwsquery_deserializeDocumentDataTransferProgress(v **types.DataTransferP
 				if err != nil {
 					return err
 				}
-				sv.DataTransferredInMegaBytes = i64
+				sv.DataTransferredInMegaBytes = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("ElapsedTimeInSeconds", t.Name.Local):
@@ -24927,7 +24927,7 @@ func awsAwsquery_deserializeDocumentDataTransferProgress(v **types.DataTransferP
 				if err != nil {
 					return err
 				}
-				sv.TotalDataInMegaBytes = i64
+				sv.TotalDataInMegaBytes = ptr.Int64(i64)
 			}
 
 		default:
@@ -25589,7 +25589,7 @@ func awsAwsquery_deserializeDocumentEndpoint(v **types.Endpoint, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("VpcEndpoints", t.Name.Local):
@@ -25717,7 +25717,7 @@ func awsAwsquery_deserializeDocumentEndpointAccess(v **types.EndpointAccess, dec
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("ResourceOwner", t.Name.Local):
@@ -25924,7 +25924,7 @@ func awsAwsquery_deserializeDocumentEndpointAuthorization(v **types.EndpointAuth
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowedAllVPCs = xtv
+				sv.AllowedAllVPCs = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("AllowedVPCs", t.Name.Local):
@@ -25990,7 +25990,7 @@ func awsAwsquery_deserializeDocumentEndpointAuthorization(v **types.EndpointAuth
 				if err != nil {
 					return err
 				}
-				sv.EndpointCount = int32(i64)
+				sv.EndpointCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("Grantee", t.Name.Local):
@@ -27013,7 +27013,7 @@ func awsAwsquery_deserializeDocumentEventSubscription(v **types.EventSubscriptio
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Enabled = xtv
+				sv.Enabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("EventCategoriesList", t.Name.Local):
@@ -30375,7 +30375,7 @@ func awsAwsquery_deserializeDocumentNodeConfigurationOption(v **types.NodeConfig
 				if err != nil {
 					return err
 				}
-				sv.NumberOfNodes = int32(i64)
+				sv.NumberOfNodes = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -30794,7 +30794,7 @@ func awsAwsquery_deserializeDocumentParameter(v **types.Parameter, decoder smith
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.IsModifiable = xtv
+				sv.IsModifiable = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("MinimumEngineVersion", t.Name.Local):
@@ -31596,7 +31596,7 @@ func awsAwsquery_deserializeDocumentRecurringCharge(v **types.RecurringCharge, d
 				if err != nil {
 					return err
 				}
-				sv.RecurringChargeAmount = f64
+				sv.RecurringChargeAmount = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("RecurringChargeFrequency", t.Name.Local):
@@ -31743,7 +31743,7 @@ func awsAwsquery_deserializeDocumentReservedNode(v **types.ReservedNode, decoder
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("FixedPrice", t.Name.Local):
@@ -31760,7 +31760,7 @@ func awsAwsquery_deserializeDocumentReservedNode(v **types.ReservedNode, decoder
 				if err != nil {
 					return err
 				}
-				sv.FixedPrice = f64
+				sv.FixedPrice = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("NodeCount", t.Name.Local):
@@ -31777,7 +31777,7 @@ func awsAwsquery_deserializeDocumentReservedNode(v **types.ReservedNode, decoder
 				if err != nil {
 					return err
 				}
-				sv.NodeCount = int32(i64)
+				sv.NodeCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("NodeType", t.Name.Local):
@@ -31895,7 +31895,7 @@ func awsAwsquery_deserializeDocumentReservedNode(v **types.ReservedNode, decoder
 				if err != nil {
 					return err
 				}
-				sv.UsagePrice = f64
+				sv.UsagePrice = ptr.Float64(f64)
 			}
 
 		default:
@@ -32052,7 +32052,7 @@ func awsAwsquery_deserializeDocumentReservedNodeConfigurationOption(v **types.Re
 				if err != nil {
 					return err
 				}
-				sv.TargetReservedNodeCount = int32(i64)
+				sv.TargetReservedNodeCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("TargetReservedNodeOffering", t.Name.Local):
@@ -32258,7 +32258,7 @@ func awsAwsquery_deserializeDocumentReservedNodeExchangeStatus(v **types.Reserve
 				if err != nil {
 					return err
 				}
-				sv.SourceReservedNodeCount = int32(i64)
+				sv.SourceReservedNodeCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("SourceReservedNodeId", t.Name.Local):
@@ -32314,7 +32314,7 @@ func awsAwsquery_deserializeDocumentReservedNodeExchangeStatus(v **types.Reserve
 				if err != nil {
 					return err
 				}
-				sv.TargetReservedNodeCount = int32(i64)
+				sv.TargetReservedNodeCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("TargetReservedNodeOfferingId", t.Name.Local):
@@ -32591,7 +32591,7 @@ func awsAwsquery_deserializeDocumentReservedNodeOffering(v **types.ReservedNodeO
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("FixedPrice", t.Name.Local):
@@ -32608,7 +32608,7 @@ func awsAwsquery_deserializeDocumentReservedNodeOffering(v **types.ReservedNodeO
 				if err != nil {
 					return err
 				}
-				sv.FixedPrice = f64
+				sv.FixedPrice = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("NodeType", t.Name.Local):
@@ -32683,7 +32683,7 @@ func awsAwsquery_deserializeDocumentReservedNodeOffering(v **types.ReservedNodeO
 				if err != nil {
 					return err
 				}
-				sv.UsagePrice = f64
+				sv.UsagePrice = ptr.Float64(f64)
 			}
 
 		default:
@@ -33035,7 +33035,7 @@ func awsAwsquery_deserializeDocumentResizeInfo(v **types.ResizeInfo, decoder smi
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowCancelResize = xtv
+				sv.AllowCancelResize = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("ResizeType", t.Name.Local):
@@ -33279,7 +33279,7 @@ func awsAwsquery_deserializeDocumentRestoreStatus(v **types.RestoreStatus, decod
 				if err != nil {
 					return err
 				}
-				sv.CurrentRestoreRateInMegaBytesPerSecond = f64
+				sv.CurrentRestoreRateInMegaBytesPerSecond = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("ElapsedTimeInSeconds", t.Name.Local):
@@ -33296,7 +33296,7 @@ func awsAwsquery_deserializeDocumentRestoreStatus(v **types.RestoreStatus, decod
 				if err != nil {
 					return err
 				}
-				sv.ElapsedTimeInSeconds = i64
+				sv.ElapsedTimeInSeconds = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("EstimatedTimeToCompletionInSeconds", t.Name.Local):
@@ -33313,7 +33313,7 @@ func awsAwsquery_deserializeDocumentRestoreStatus(v **types.RestoreStatus, decod
 				if err != nil {
 					return err
 				}
-				sv.EstimatedTimeToCompletionInSeconds = i64
+				sv.EstimatedTimeToCompletionInSeconds = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("ProgressInMegaBytes", t.Name.Local):
@@ -33330,7 +33330,7 @@ func awsAwsquery_deserializeDocumentRestoreStatus(v **types.RestoreStatus, decod
 				if err != nil {
 					return err
 				}
-				sv.ProgressInMegaBytes = i64
+				sv.ProgressInMegaBytes = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("SnapshotSizeInMegaBytes", t.Name.Local):
@@ -33347,7 +33347,7 @@ func awsAwsquery_deserializeDocumentRestoreStatus(v **types.RestoreStatus, decod
 				if err != nil {
 					return err
 				}
-				sv.SnapshotSizeInMegaBytes = i64
+				sv.SnapshotSizeInMegaBytes = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
@@ -34385,7 +34385,7 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.ActualIncrementalBackupSizeInMegaBytes = f64
+				sv.ActualIncrementalBackupSizeInMegaBytes = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("AvailabilityZone", t.Name.Local):
@@ -34415,7 +34415,7 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.BackupProgressInMegaBytes = f64
+				sv.BackupProgressInMegaBytes = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("ClusterCreateTime", t.Name.Local):
@@ -34475,7 +34475,7 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.CurrentBackupRateInMegaBytesPerSecond = f64
+				sv.CurrentBackupRateInMegaBytesPerSecond = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("DBName", t.Name.Local):
@@ -34505,7 +34505,7 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.ElapsedTimeInSeconds = i64
+				sv.ElapsedTimeInSeconds = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("Encrypted", t.Name.Local):
@@ -34521,7 +34521,7 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Encrypted = xtv
+				sv.Encrypted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("EncryptedWithHSM", t.Name.Local):
@@ -34537,7 +34537,7 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EncryptedWithHSM = xtv
+				sv.EncryptedWithHSM = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("EngineFullVersion", t.Name.Local):
@@ -34566,7 +34566,7 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EnhancedVpcRouting = xtv
+				sv.EnhancedVpcRouting = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("EstimatedSecondsToCompletion", t.Name.Local):
@@ -34583,7 +34583,7 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.EstimatedSecondsToCompletion = i64
+				sv.EstimatedSecondsToCompletion = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("KmsKeyId", t.Name.Local):
@@ -34712,7 +34712,7 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.NumberOfNodes = int32(i64)
+				sv.NumberOfNodes = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("OwnerAccount", t.Name.Local):
@@ -34742,7 +34742,7 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("RestorableNodeTypes", t.Name.Local):
@@ -34857,7 +34857,7 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.TotalBackupSizeInMegaBytes = f64
+				sv.TotalBackupSizeInMegaBytes = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("VpcId", t.Name.Local):
@@ -37988,7 +37988,7 @@ func awsAwsquery_deserializeDocumentUsageLimit(v **types.UsageLimit, decoder smi
 				if err != nil {
 					return err
 				}
-				sv.Amount = i64
+				sv.Amount = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("BreachAction", t.Name.Local):
@@ -38740,7 +38740,7 @@ func awsAwsquery_deserializeOpDocumentAssociateDataShareConsumerOutput(v **Assoc
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowPubliclyAccessibleConsumers = xtv
+				sv.AllowPubliclyAccessibleConsumers = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("DataShareArn", t.Name.Local):
@@ -38879,7 +38879,7 @@ func awsAwsquery_deserializeOpDocumentAuthorizeDataShareOutput(v **AuthorizeData
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowPubliclyAccessibleConsumers = xtv
+				sv.AllowPubliclyAccessibleConsumers = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("DataShareArn", t.Name.Local):
@@ -38976,7 +38976,7 @@ func awsAwsquery_deserializeOpDocumentAuthorizeEndpointAccessOutput(v **Authoriz
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowedAllVPCs = xtv
+				sv.AllowedAllVPCs = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("AllowedVPCs", t.Name.Local):
@@ -39042,7 +39042,7 @@ func awsAwsquery_deserializeOpDocumentAuthorizeEndpointAccessOutput(v **Authoriz
 				if err != nil {
 					return err
 				}
-				sv.EndpointCount = int32(i64)
+				sv.EndpointCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("Grantee", t.Name.Local):
@@ -39994,7 +39994,7 @@ func awsAwsquery_deserializeOpDocumentCreateEndpointAccessOutput(v **CreateEndpo
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("ResourceOwner", t.Name.Local):
@@ -40503,7 +40503,7 @@ func awsAwsquery_deserializeOpDocumentCreateUsageLimitOutput(v **CreateUsageLimi
 				if err != nil {
 					return err
 				}
-				sv.Amount = i64
+				sv.Amount = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("BreachAction", t.Name.Local):
@@ -40639,7 +40639,7 @@ func awsAwsquery_deserializeOpDocumentDeauthorizeDataShareOutput(v **Deauthorize
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowPubliclyAccessibleConsumers = xtv
+				sv.AllowPubliclyAccessibleConsumers = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("DataShareArn", t.Name.Local):
@@ -40939,7 +40939,7 @@ func awsAwsquery_deserializeOpDocumentDeleteEndpointAccessOutput(v **DeleteEndpo
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("ResourceOwner", t.Name.Local):
@@ -42383,7 +42383,7 @@ func awsAwsquery_deserializeOpDocumentDescribeLoggingStatusOutput(v **DescribeLo
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.LoggingEnabled = xtv
+				sv.LoggingEnabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("S3KeyPrefix", t.Name.Local):
@@ -43182,7 +43182,7 @@ func awsAwsquery_deserializeOpDocumentDescribeStorageOutput(v **DescribeStorageO
 				if err != nil {
 					return err
 				}
-				sv.TotalBackupSizeInMegaBytes = f64
+				sv.TotalBackupSizeInMegaBytes = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("TotalProvisionedStorageInMegaBytes", t.Name.Local):
@@ -43199,7 +43199,7 @@ func awsAwsquery_deserializeOpDocumentDescribeStorageOutput(v **DescribeStorageO
 				if err != nil {
 					return err
 				}
-				sv.TotalProvisionedStorageInMegaBytes = f64
+				sv.TotalProvisionedStorageInMegaBytes = ptr.Float64(f64)
 			}
 
 		default:
@@ -43495,7 +43495,7 @@ func awsAwsquery_deserializeOpDocumentDisableLoggingOutput(v **DisableLoggingOut
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.LoggingEnabled = xtv
+				sv.LoggingEnabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("S3KeyPrefix", t.Name.Local):
@@ -43602,7 +43602,7 @@ func awsAwsquery_deserializeOpDocumentDisassociateDataShareConsumerOutput(v **Di
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowPubliclyAccessibleConsumers = xtv
+				sv.AllowPubliclyAccessibleConsumers = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("DataShareArn", t.Name.Local):
@@ -43778,7 +43778,7 @@ func awsAwsquery_deserializeOpDocumentEnableLoggingOutput(v **EnableLoggingOutpu
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.LoggingEnabled = xtv
+				sv.LoggingEnabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("S3KeyPrefix", t.Name.Local):
@@ -44746,7 +44746,7 @@ func awsAwsquery_deserializeOpDocumentModifyEndpointAccessOutput(v **ModifyEndpo
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("ResourceOwner", t.Name.Local):
@@ -45171,7 +45171,7 @@ func awsAwsquery_deserializeOpDocumentModifyUsageLimitOutput(v **ModifyUsageLimi
 				if err != nil {
 					return err
 				}
-				sv.Amount = i64
+				sv.Amount = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("BreachAction", t.Name.Local):
@@ -45433,7 +45433,7 @@ func awsAwsquery_deserializeOpDocumentRejectDataShareOutput(v **RejectDataShareO
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowPubliclyAccessibleConsumers = xtv
+				sv.AllowPubliclyAccessibleConsumers = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("DataShareArn", t.Name.Local):
@@ -45802,7 +45802,7 @@ func awsAwsquery_deserializeOpDocumentRevokeEndpointAccessOutput(v **RevokeEndpo
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowedAllVPCs = xtv
+				sv.AllowedAllVPCs = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("AllowedVPCs", t.Name.Local):
@@ -45868,7 +45868,7 @@ func awsAwsquery_deserializeOpDocumentRevokeEndpointAccessOutput(v **RevokeEndpo
 				if err != nil {
 					return err
 				}
-				sv.EndpointCount = int32(i64)
+				sv.EndpointCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("Grantee", t.Name.Local):

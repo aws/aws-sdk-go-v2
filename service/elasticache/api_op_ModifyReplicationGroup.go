@@ -52,7 +52,7 @@ type ModifyReplicationGroupInput struct {
 	// If false , changes to the nodes in the replication group are applied on the next
 	// maintenance reboot, or the next failure reboot, whichever occurs first. Valid
 	// values: true | false Default: false
-	ApplyImmediately bool
+	ApplyImmediately *bool
 
 	// Reserved parameter. The password used to access a password protected server.
 	// This parameter must be specified with the auth-token-update-strategy

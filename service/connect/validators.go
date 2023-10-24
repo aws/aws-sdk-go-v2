@@ -5711,6 +5711,9 @@ func validateMediaConcurrency(v *types.MediaConcurrency) error {
 	if len(v.Channel) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Channel"))
 	}
+	if v.Concurrency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Concurrency"))
+	}
 	if v.CrossChannelBehavior != nil {
 		if err := validateCrossChannelBehavior(v.CrossChannelBehavior); err != nil {
 			invalidParams.AddNested("CrossChannelBehavior", err.(smithy.InvalidParamsError))
@@ -7411,6 +7414,9 @@ func validateOpDeleteViewVersionInput(v *DeleteViewVersionInput) error {
 	}
 	if v.ViewId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ViewId"))
+	}
+	if v.ViewVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ViewVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

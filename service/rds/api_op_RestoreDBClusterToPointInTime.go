@@ -258,7 +258,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// time. By default, the DB cluster isn't restored to the latest restorable backup
 	// time. Constraints: Can't be specified if RestoreToTime parameter is provided.
 	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
-	UseLatestRestorableTime bool
+	UseLatestRestorableTime *bool
 
 	// A list of VPC security groups that the new DB cluster belongs to. Valid for:
 	// Aurora DB clusters and Multi-AZ DB clusters

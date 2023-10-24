@@ -123,7 +123,7 @@ type EdgeMetric struct {
 	Timestamp *time.Time
 
 	// Returns the value of the metric.
-	Value float64
+	Value *float64
 
 	noSmithyDocumentSerde
 }

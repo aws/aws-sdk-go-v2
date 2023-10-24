@@ -37,7 +37,7 @@ func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optF
 type ListMembersInput struct {
 
 	// The maximum number of items to return in the response.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the ListMembers
 	// operation, set the value of this parameter to NULL . For subsequent calls to the
@@ -51,7 +51,7 @@ type ListMembersInput struct {
 	// relationship status with the administrator account is set to ENABLED . If
 	// OnlyAssociated is set to FALSE , the response includes all existing member
 	// accounts.
-	OnlyAssociated bool
+	OnlyAssociated *bool
 
 	noSmithyDocumentSerde
 }
@@ -175,8 +175,8 @@ func NewListMembersPaginator(client ListMembersAPIClient, params *ListMembersInp
 	}
 
 	options := ListMembersPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -206,7 +206,11 @@ func (p *ListMembersPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListMembers(ctx, &params, optFns...)
 	if err != nil {

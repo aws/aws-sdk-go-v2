@@ -71,7 +71,7 @@ type RegisterSchemaVersionOutput struct {
 
 	// The version of this schema (for sync flow only, in case this is the first
 	// version).
-	VersionNumber int64
+	VersionNumber *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

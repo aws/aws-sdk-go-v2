@@ -36,7 +36,7 @@ func (c *Client) DescribeStandards(ctx context.Context, params *DescribeStandard
 type DescribeStandardsInput struct {
 
 	// The maximum number of standards to return.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the
 	// DescribeStandards operation, set the value of this parameter to NULL . For
@@ -167,8 +167,8 @@ func NewDescribeStandardsPaginator(client DescribeStandardsAPIClient, params *De
 	}
 
 	options := DescribeStandardsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -198,7 +198,11 @@ func (p *DescribeStandardsPaginator) NextPage(ctx context.Context, optFns ...fun
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeStandards(ctx, &params, optFns...)
 	if err != nil {

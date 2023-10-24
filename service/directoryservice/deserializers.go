@@ -10949,7 +10949,7 @@ func awsAwsjson11_deserializeDocumentDirectoryDescription(v **types.DirectoryDes
 				if err != nil {
 					return err
 				}
-				sv.DesiredNumberOfDomainControllers = int32(i64)
+				sv.DesiredNumberOfDomainControllers = ptr.Int32(int32(i64))
 			}
 
 		case "DirectoryId":
@@ -13243,7 +13243,7 @@ func awsAwsjson11_deserializeDocumentRadiusSettings(v **types.RadiusSettings, va
 				if err != nil {
 					return err
 				}
-				sv.RadiusPort = int32(i64)
+				sv.RadiusPort = ptr.Int32(int32(i64))
 			}
 
 		case "RadiusRetries":
@@ -13274,7 +13274,7 @@ func awsAwsjson11_deserializeDocumentRadiusSettings(v **types.RadiusSettings, va
 				if err != nil {
 					return err
 				}
-				sv.RadiusTimeout = int32(i64)
+				sv.RadiusTimeout = ptr.Int32(int32(i64))
 			}
 
 		case "SharedSecret":
@@ -13336,7 +13336,7 @@ func awsAwsjson11_deserializeDocumentRegionDescription(v **types.RegionDescripti
 				if err != nil {
 					return err
 				}
-				sv.DesiredNumberOfDomainControllers = int32(i64)
+				sv.DesiredNumberOfDomainControllers = ptr.Int32(int32(i64))
 			}
 
 		case "DirectoryId":

@@ -181,18 +181,18 @@ type DescribeTrainingJobOutput struct {
 	// training, but training might take longer. How long it takes depends on the
 	// amount of communication between compute instances, especially if you use a deep
 	// learning algorithms in distributed training.
-	EnableInterContainerTrafficEncryption bool
+	EnableInterContainerTrafficEncryption *bool
 
 	// A Boolean indicating whether managed spot training is enabled ( True ) or not (
 	// False ).
-	EnableManagedSpotTraining bool
+	EnableManagedSpotTraining *bool
 
 	// If you want to allow inbound or outbound network calls, except for calls
 	// between peers within a training cluster for distributed training, choose True .
 	// If you enable network isolation for training jobs that are configured to use a
 	// VPC, SageMaker downloads and uploads customer data and model artifacts through
 	// the specified VPC, but the training container does not have network access.
-	EnableNetworkIsolation bool
+	EnableNetworkIsolation *bool
 
 	// The environment variables to set in the Docker container.
 	Environment map[string]string

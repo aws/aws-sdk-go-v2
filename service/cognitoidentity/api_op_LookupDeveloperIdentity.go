@@ -61,7 +61,7 @@ type LookupDeveloperIdentityInput struct {
 	IdentityId *string
 
 	// The maximum number of identities to return.
-	MaxResults int32
+	MaxResults *int32
 
 	// A pagination token. The first call you make will have NextToken set to null.
 	// After that the service will return NextToken values as needed. For example,

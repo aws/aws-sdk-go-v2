@@ -35,6 +35,7 @@
                 "ApplicationId": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the nested application.</p>",
                         "smithy.api#jsonName": "applicationId",
                         "smithy.api#required": {}
@@ -43,6 +44,7 @@
                 "SemanticVersion": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The semantic version of the nested application.</p>",
                         "smithy.api#jsonName": "semanticVersion",
                         "smithy.api#required": {}
@@ -59,6 +61,7 @@
                 "Actions": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__listOf__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>For the list of actions supported for this operation, see <a href=\"https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions\">Application \n Permissions</a>.</p>",
                         "smithy.api#jsonName": "actions",
                         "smithy.api#required": {}
@@ -74,6 +77,7 @@
                 "Principals": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__listOf__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of AWS account IDs, or * to make the application public.</p>",
                         "smithy.api#jsonName": "principals",
                         "smithy.api#required": {}
@@ -97,6 +101,7 @@
                 "ApplicationId": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The application Amazon Resource Name (ARN).</p>",
                         "smithy.api#jsonName": "applicationId",
                         "smithy.api#required": {}
@@ -105,6 +110,7 @@
                 "Author": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the author publishing the app.</p><p>Minimum length=1. Maximum length=127.</p><p>Pattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";</p>",
                         "smithy.api#jsonName": "author",
                         "smithy.api#required": {}
@@ -120,6 +126,7 @@
                 "Description": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>",
                         "smithy.api#jsonName": "description",
                         "smithy.api#required": {}
@@ -142,6 +149,7 @@
                 "Name": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the application.</p><p>Minimum length=1. Maximum length=140</p><p>Pattern: \"[a-zA-Z0-9\\\\-]+\";</p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -279,6 +287,7 @@
                 "Author": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the author publishing the app.</p><p>Minimum length=1. Maximum length=127.</p><p>Pattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";</p>",
                         "smithy.api#jsonName": "author",
                         "smithy.api#required": {}
@@ -287,6 +296,7 @@
                 "Description": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>",
                         "smithy.api#jsonName": "description",
                         "smithy.api#required": {}
@@ -323,6 +333,7 @@
                 "Name": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the application that you want to publish.</p><p>Minimum length=1. Maximum length=140</p><p>Pattern: \"[a-zA-Z0-9\\\\-]+\";</p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -753,6 +764,7 @@
                 "StackName": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href=\"https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet\">CreateChangeSet</a>\n </i> API.</p>",
                         "smithy.api#jsonName": "stackName",
                         "smithy.api#required": {}
@@ -1735,6 +1747,7 @@
                 "Name": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the parameter.</p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -1750,6 +1763,7 @@
                 "ReferencedByResources": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__listOf__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of AWS SAM resources that use this parameter.</p>",
                         "smithy.api#jsonName": "referencedByResources",
                         "smithy.api#required": {}
@@ -1773,6 +1787,7 @@
                 "Name": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation\n uses the default value that is specified in your template.</p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
@@ -1781,6 +1796,7 @@
                 "Value": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The input value associated with the parameter.</p>",
                         "smithy.api#jsonName": "value",
                         "smithy.api#required": {}
@@ -1839,6 +1855,7 @@
                 "Statements": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__listOfApplicationPolicyStatement",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of policy statements applied to the application.</p>",
                         "smithy.api#jsonName": "statements",
                         "smithy.api#required": {}
@@ -1892,6 +1909,7 @@
                 "Arn": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href=\"https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger\">RollbackTrigger</a>\n </i> Data Type.</p>",
                         "smithy.api#jsonName": "arn",
                         "smithy.api#required": {}
@@ -1900,6 +1918,7 @@
                 "Type": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href=\"https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger\">RollbackTrigger</a>\n </i> Data Type.</p>",
                         "smithy.api#jsonName": "type",
                         "smithy.api#required": {}
@@ -2014,7 +2033,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2057,7 +2075,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -2070,7 +2089,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2084,7 +2102,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -2107,7 +2124,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2142,7 +2158,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2153,14 +2168,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2174,14 +2191,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -2190,18 +2205,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -2210,7 +2224,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -2230,14 +2245,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2251,7 +2268,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2271,7 +2287,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2282,14 +2297,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -2300,9 +2317,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -2916,6 +2935,7 @@
                 "Key": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href=\"https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag\">Tag</a>\n </i> Data Type.</p>",
                         "smithy.api#jsonName": "key",
                         "smithy.api#required": {}
@@ -2924,6 +2944,7 @@
                 "Value": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href=\"https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag\">\n Tag</a>\n </i>\n Data Type.</p>",
                         "smithy.api#jsonName": "value",
                         "smithy.api#required": {}
@@ -3006,6 +3027,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The AWS Organization ID to unshare the application from.</p>",
                         "smithy.api#jsonName": "organizationId",
                         "smithy.api#required": {}
@@ -3216,6 +3238,7 @@
                 "ApplicationId": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The application Amazon Resource Name (ARN).</p>",
                         "smithy.api#jsonName": "applicationId",
                         "smithy.api#required": {}
@@ -3224,6 +3247,7 @@
                 "CreationTime": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The date and time this resource was created.</p>",
                         "smithy.api#jsonName": "creationTime",
                         "smithy.api#required": {}
@@ -3232,6 +3256,7 @@
                 "ParameterDefinitions": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__listOfParameterDefinition",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An array of parameter types supported by the application.</p>",
                         "smithy.api#jsonName": "parameterDefinitions",
                         "smithy.api#required": {}
@@ -3240,6 +3265,7 @@
                 "RequiredCapabilities": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__listOfCapability",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of values that you must specify before you can deploy certain applications.\n Some applications might include resources that can affect permissions in your AWS\n account, for example, by creating new AWS Identity and Access Management (IAM) users.\n For those applications, you must explicitly acknowledge their capabilities by\n specifying this parameter.</p><p>The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM,\n CAPABILITY_RESOURCE_POLICY, and CAPABILITY_AUTO_EXPAND.</p><p>The following resources require you to specify CAPABILITY_IAM or\n CAPABILITY_NAMED_IAM:\n <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html\">AWS::IAM::Group</a>,\n <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html\">AWS::IAM::InstanceProfile</a>,\n <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html\">AWS::IAM::Policy</a>, and\n <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html\">AWS::IAM::Role</a>.\n If the application contains IAM resources, you can specify either CAPABILITY_IAM\n or CAPABILITY_NAMED_IAM. If the application contains IAM resources\n with custom names, you must specify CAPABILITY_NAMED_IAM.</p><p>The following resources require you to specify CAPABILITY_RESOURCE_POLICY:\n <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html\">AWS::Lambda::Permission</a>,\n <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html\">AWS::IAM:Policy</a>,\n <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html\">AWS::ApplicationAutoScaling::ScalingPolicy</a>,\n <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html\">AWS::S3::BucketPolicy</a>,\n <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html\">AWS::SQS::QueuePolicy</a>, and\n <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html\">AWS::SNS::TopicPolicy</a>.</p><p>Applications that contain one or more nested applications require you to specify\n CAPABILITY_AUTO_EXPAND.</p><p>If your application template contains any of the above resources, we recommend that you review\n all permissions associated with the application before deploying. If you don't specify\n this parameter for an application that requires capabilities, the call will fail.</p>",
                         "smithy.api#jsonName": "requiredCapabilities",
                         "smithy.api#required": {}
@@ -3248,6 +3274,7 @@
                 "ResourcesSupported": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__boolean",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Whether all of the AWS resources contained in this application are supported in the region\n in which it is being retrieved.</p>",
                         "smithy.api#jsonName": "resourcesSupported",
                         "smithy.api#required": {}
@@ -3256,6 +3283,7 @@
                 "SemanticVersion": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The semantic version of the application:</p><p>\n <a href=\"https://semver.org/\">https://semver.org/</a>\n </p>",
                         "smithy.api#jsonName": "semanticVersion",
                         "smithy.api#required": {}
@@ -3278,6 +3306,7 @@
                 "TemplateUrl": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A link to the packaged AWS SAM template of your application.</p>",
                         "smithy.api#jsonName": "templateUrl",
                         "smithy.api#required": {}
@@ -3294,6 +3323,7 @@
                 "ApplicationId": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The application Amazon Resource Name (ARN).</p>",
                         "smithy.api#jsonName": "applicationId",
                         "smithy.api#required": {}
@@ -3302,6 +3332,7 @@
                 "CreationTime": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The date and time this resource was created.</p>",
                         "smithy.api#jsonName": "creationTime",
                         "smithy.api#required": {}
@@ -3310,6 +3341,7 @@
                 "SemanticVersion": {
                     "target": "com.amazonaws.serverlessapplicationrepository#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The semantic version of the application:</p><p>\n <a href=\"https://semver.org/\">https://semver.org/</a>\n </p>",
                         "smithy.api#jsonName": "semanticVersion",
                         "smithy.api#required": {}

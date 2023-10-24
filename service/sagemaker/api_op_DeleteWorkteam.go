@@ -47,7 +47,7 @@ type DeleteWorkteamOutput struct {
 	// .
 	//
 	// This member is required.
-	Success bool
+	Success *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

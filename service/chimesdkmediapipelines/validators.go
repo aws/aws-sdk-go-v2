@@ -1568,6 +1568,9 @@ func validateSentimentConfiguration(v *types.SentimentConfiguration) error {
 	if len(v.SentimentType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SentimentType"))
 	}
+	if v.TimePeriod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimePeriod"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

@@ -212,7 +212,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -255,7 +254,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -268,7 +268,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -282,7 +281,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -305,7 +303,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -340,7 +337,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -351,14 +347,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -372,14 +370,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -388,11 +384,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -403,14 +399,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -424,7 +422,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -444,7 +441,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -455,14 +451,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -473,9 +471,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1265,6 +1265,7 @@
                 "AppId": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The app ID.</p>",
                         "smithy.api#jsonName": "appId",
                         "smithy.api#required": {}
@@ -1273,6 +1274,7 @@
                 "BackendEnvironmentName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the backend environment.</p>",
                         "smithy.api#jsonName": "backendEnvironmentName",
                         "smithy.api#required": {}
@@ -1331,6 +1333,7 @@
                 "Authenticated": {
                     "target": "com.amazonaws.amplifybackend#ListOfAuthenticatedElement",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Lists all authenticated user read, write, and delete permissions for your S3 bucket.</p>",
                         "smithy.api#jsonName": "authenticated",
                         "smithy.api#required": {}
@@ -1418,6 +1421,7 @@
                 "TargetEnvironmentName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the destination backend environment to be created.</p>",
                         "smithy.api#jsonName": "targetEnvironmentName",
                         "smithy.api#required": {}
@@ -1555,6 +1559,7 @@
                 "BackendEnvironmentName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the backend environment.</p>",
                         "smithy.api#jsonName": "backendEnvironmentName",
                         "smithy.api#required": {}
@@ -1563,6 +1568,7 @@
                 "ResourceConfig": {
                     "target": "com.amazonaws.amplifybackend#BackendAPIResourceConfig",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The resource configuration for this request.</p>",
                         "smithy.api#jsonName": "resourceConfig",
                         "smithy.api#required": {}
@@ -1571,6 +1577,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of this resource.</p>",
                         "smithy.api#jsonName": "resourceName",
                         "smithy.api#required": {}
@@ -1669,6 +1676,7 @@
                 "DeliveryMethod": {
                     "target": "com.amazonaws.amplifybackend#DeliveryMethod",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p><b>(DEPRECATED)</b> Describes which mode to use (either SMS or email) to deliver messages to app users who want to recover their password.</p>",
                         "smithy.api#jsonName": "deliveryMethod",
                         "smithy.api#required": {}
@@ -1699,6 +1707,7 @@
                 "IdentityPoolName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Name of the Amazon Cognito identity pool used for authorization.</p>",
                         "smithy.api#jsonName": "identityPoolName",
                         "smithy.api#required": {}
@@ -1707,6 +1716,7 @@
                 "UnauthenticatedLogin": {
                     "target": "com.amazonaws.amplifybackend#__boolean",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Set to true or false based on whether you want to enable guest authorization to your Amplify app.</p>",
                         "smithy.api#jsonName": "unauthenticatedLogin",
                         "smithy.api#required": {}
@@ -1723,6 +1733,7 @@
                 "MFAMode": {
                     "target": "com.amazonaws.amplifybackend#MFAMode",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in your Amplify project.</p>",
                         "smithy.api#required": {}
                     }
@@ -1752,6 +1763,7 @@
                 "OAuthGrantType": {
                     "target": "com.amazonaws.amplifybackend#OAuthGrantType",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The OAuth grant type that you use to allow app users to authenticate from your Amplify app.</p>",
                         "smithy.api#jsonName": "oAuthGrantType",
                         "smithy.api#required": {}
@@ -1760,6 +1772,7 @@
                 "OAuthScopes": {
                     "target": "com.amazonaws.amplifybackend#ListOfOAuthScopesElement",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>List of OAuth-related flows used to allow your app users to authenticate from your Amplify app.</p>",
                         "smithy.api#jsonName": "oAuthScopes",
                         "smithy.api#required": {}
@@ -1768,6 +1781,7 @@
                 "RedirectSignInURIs": {
                     "target": "com.amazonaws.amplifybackend#ListOf__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The redirected URI for signing in to your Amplify app.</p>",
                         "smithy.api#jsonName": "redirectSignInURIs",
                         "smithy.api#required": {}
@@ -1776,6 +1790,7 @@
                 "RedirectSignOutURIs": {
                     "target": "com.amazonaws.amplifybackend#ListOf__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Redirect URLs that OAuth uses when a user signs out of an Amplify app.</p>",
                         "smithy.api#jsonName": "redirectSignOutURIs",
                         "smithy.api#required": {}
@@ -1806,6 +1821,7 @@
                 "MinimumLength": {
                     "target": "com.amazonaws.amplifybackend#__double",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The minimum length of the password used to access the backend of your Amplify project.</p>",
                         "smithy.api#jsonName": "minimumLength",
                         "smithy.api#required": {}
@@ -1830,6 +1846,7 @@
                 "BackendEnvironmentName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the backend environment.</p>",
                         "smithy.api#jsonName": "backendEnvironmentName",
                         "smithy.api#required": {}
@@ -1838,6 +1855,7 @@
                 "ResourceConfig": {
                     "target": "com.amazonaws.amplifybackend#CreateBackendAuthResourceConfig",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The resource configuration for this request object.</p>",
                         "smithy.api#jsonName": "resourceConfig",
                         "smithy.api#required": {}
@@ -1846,6 +1864,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of this resource.</p>",
                         "smithy.api#jsonName": "resourceName",
                         "smithy.api#required": {}
@@ -1863,6 +1882,7 @@
                 "AuthResources": {
                     "target": "com.amazonaws.amplifybackend#AuthResources",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Defines whether you want to configure only authentication or both authentication and authorization settings.</p>",
                         "smithy.api#jsonName": "authResources",
                         "smithy.api#required": {}
@@ -1878,6 +1898,7 @@
                 "Service": {
                     "target": "com.amazonaws.amplifybackend#Service",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Defines the service name to use when configuring an authentication resource in your Amplify project.</p>",
                         "smithy.api#jsonName": "service",
                         "smithy.api#required": {}
@@ -1886,6 +1907,7 @@
                 "UserPoolConfigs": {
                     "target": "com.amazonaws.amplifybackend#CreateBackendAuthUserPoolConfig",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Describes authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.</p>",
                         "smithy.api#jsonName": "userPoolConfigs",
                         "smithy.api#required": {}
@@ -1980,6 +2002,7 @@
                 "RequiredSignUpAttributes": {
                     "target": "com.amazonaws.amplifybackend#ListOfRequiredSignUpAttributesElement",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The required attributes to sign up new users in the user pool.</p>",
                         "smithy.api#jsonName": "requiredSignUpAttributes",
                         "smithy.api#required": {}
@@ -1988,6 +2011,7 @@
                 "SignInMethod": {
                     "target": "com.amazonaws.amplifybackend#SignInMethod",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Describes the sign-in methods that your Amplify app users use to log in using the Amazon Cognito user pool, configured as a part of your Amplify project.</p>",
                         "smithy.api#jsonName": "signInMethod",
                         "smithy.api#required": {}
@@ -1996,6 +2020,7 @@
                 "UserPoolName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Cognito user pool name.</p>",
                         "smithy.api#jsonName": "userPoolName",
                         "smithy.api#required": {}
@@ -2019,6 +2044,7 @@
                 "DeliveryMethod": {
                     "target": "com.amazonaws.amplifybackend#DeliveryMethod",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of verification message to send.</p>",
                         "smithy.api#jsonName": "deliveryMethod",
                         "smithy.api#required": {}
@@ -2140,6 +2166,7 @@
                 "AppId": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The app ID.</p>",
                         "smithy.api#jsonName": "appId",
                         "smithy.api#required": {}
@@ -2148,6 +2175,7 @@
                 "AppName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the app.</p>",
                         "smithy.api#jsonName": "appName",
                         "smithy.api#required": {}
@@ -2156,6 +2184,7 @@
                 "BackendEnvironmentName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the backend environment.</p>",
                         "smithy.api#jsonName": "backendEnvironmentName",
                         "smithy.api#required": {}
@@ -2276,6 +2305,7 @@
                 "BackendEnvironmentName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the backend environment.</p>",
                         "smithy.api#jsonName": "backendEnvironmentName",
                         "smithy.api#required": {}
@@ -2284,6 +2314,7 @@
                 "ResourceConfig": {
                     "target": "com.amazonaws.amplifybackend#CreateBackendStorageResourceConfig",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The resource configuration for creating backend storage.</p>",
                         "smithy.api#jsonName": "resourceConfig",
                         "smithy.api#required": {}
@@ -2292,6 +2323,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the storage resource.</p>",
                         "smithy.api#jsonName": "resourceName",
                         "smithy.api#required": {}
@@ -2316,6 +2348,7 @@
                 "Permissions": {
                     "target": "com.amazonaws.amplifybackend#BackendStoragePermissions",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The authorization configuration for the storage S3 bucket.</p>",
                         "smithy.api#jsonName": "permissions",
                         "smithy.api#required": {}
@@ -2324,6 +2357,7 @@
                 "ServiceName": {
                     "target": "com.amazonaws.amplifybackend#ServiceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the storage service.</p>",
                         "smithy.api#jsonName": "serviceName",
                         "smithy.api#required": {}
@@ -2544,6 +2578,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of this resource.</p>",
                         "smithy.api#jsonName": "resourceName",
                         "smithy.api#required": {}
@@ -2658,6 +2693,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of this resource.</p>",
                         "smithy.api#jsonName": "resourceName",
                         "smithy.api#required": {}
@@ -2846,6 +2882,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the storage resource.</p>",
                         "smithy.api#jsonName": "resourceName",
                         "smithy.api#required": {}
@@ -2854,6 +2891,7 @@
                 "ServiceName": {
                     "target": "com.amazonaws.amplifybackend#ServiceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the storage service.</p>",
                         "smithy.api#jsonName": "serviceName",
                         "smithy.api#required": {}
@@ -3084,6 +3122,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of this resource.</p>",
                         "smithy.api#jsonName": "resourceName",
                         "smithy.api#required": {}
@@ -3260,6 +3299,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of this resource.</p>",
                         "smithy.api#jsonName": "resourceName",
                         "smithy.api#required": {}
@@ -3329,6 +3369,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of this resource.</p>",
                         "smithy.api#jsonName": "resourceName",
                         "smithy.api#required": {}
@@ -3436,6 +3477,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of this resource.</p>",
                         "smithy.api#jsonName": "resourceName",
                         "smithy.api#required": {}
@@ -3751,6 +3793,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the storage resource.</p>",
                         "smithy.api#jsonName": "resourceName",
                         "smithy.api#required": {}
@@ -3775,6 +3818,7 @@
                 "Imported": {
                     "target": "com.amazonaws.amplifybackend#__boolean",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Returns True if the storage resource has been imported.</p>",
                         "smithy.api#jsonName": "imported",
                         "smithy.api#required": {}
@@ -3790,6 +3834,7 @@
                 "ServiceName": {
                     "target": "com.amazonaws.amplifybackend#ServiceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the storage service.</p>",
                         "smithy.api#jsonName": "serviceName",
                         "smithy.api#required": {}
@@ -3987,6 +4032,7 @@
                 "NativeClientId": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the Amazon Cognito native client.</p>",
                         "smithy.api#jsonName": "nativeClientId",
                         "smithy.api#required": {}
@@ -3995,6 +4041,7 @@
                 "UserPoolId": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the Amazon Cognito user pool.</p>",
                         "smithy.api#jsonName": "userPoolId",
                         "smithy.api#required": {}
@@ -4003,6 +4050,7 @@
                 "WebClientId": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the Amazon Cognito web client.</p>",
                         "smithy.api#jsonName": "webClientId",
                         "smithy.api#required": {}
@@ -4124,6 +4172,7 @@
                 "ServiceName": {
                     "target": "com.amazonaws.amplifybackend#ServiceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the storage service.</p>",
                         "smithy.api#jsonName": "serviceName",
                         "smithy.api#required": {}
@@ -5152,6 +5201,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of this resource.</p>",
                         "smithy.api#jsonName": "resourceName",
                         "smithy.api#required": {}
@@ -5403,6 +5453,7 @@
                 "ResourceConfig": {
                     "target": "com.amazonaws.amplifybackend#UpdateBackendAuthResourceConfig",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The resource configuration for this request object.</p>",
                         "smithy.api#jsonName": "resourceConfig",
                         "smithy.api#required": {}
@@ -5411,6 +5462,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of this resource.</p>",
                         "smithy.api#jsonName": "resourceName",
                         "smithy.api#required": {}
@@ -5428,6 +5480,7 @@
                 "AuthResources": {
                     "target": "com.amazonaws.amplifybackend#AuthResources",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Defines the service name to use when configuring an authentication resource in your Amplify project.</p>",
                         "smithy.api#jsonName": "authResources",
                         "smithy.api#required": {}
@@ -5443,6 +5496,7 @@
                 "Service": {
                     "target": "com.amazonaws.amplifybackend#Service",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Defines the service name to use when configuring an authentication resource in your Amplify project.</p>",
                         "smithy.api#jsonName": "service",
                         "smithy.api#required": {}
@@ -5451,6 +5505,7 @@
                 "UserPoolConfigs": {
                     "target": "com.amazonaws.amplifybackend#UpdateBackendAuthUserPoolConfig",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.</p>",
                         "smithy.api#jsonName": "userPoolConfigs",
                         "smithy.api#required": {}
@@ -5560,6 +5615,7 @@
                 "DeliveryMethod": {
                     "target": "com.amazonaws.amplifybackend#DeliveryMethod",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The type of verification message to send.</p>",
                         "smithy.api#jsonName": "deliveryMethod",
                         "smithy.api#required": {}
@@ -5870,6 +5926,7 @@
                 "ResourceConfig": {
                     "target": "com.amazonaws.amplifybackend#UpdateBackendStorageResourceConfig",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The resource configuration for updating backend storage.</p>",
                         "smithy.api#jsonName": "resourceConfig",
                         "smithy.api#required": {}
@@ -5878,6 +5935,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the storage resource.</p>",
                         "smithy.api#jsonName": "resourceName",
                         "smithy.api#required": {}
@@ -5895,6 +5953,7 @@
                 "Permissions": {
                     "target": "com.amazonaws.amplifybackend#BackendStoragePermissions",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The authorization configuration for the storage S3 bucket.</p>",
                         "smithy.api#jsonName": "permissions",
                         "smithy.api#required": {}
@@ -5903,6 +5962,7 @@
                 "ServiceName": {
                     "target": "com.amazonaws.amplifybackend#ServiceName",
                     "traits": {
+                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the storage service.</p>",
                         "smithy.api#jsonName": "serviceName",
                         "smithy.api#required": {}

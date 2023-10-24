@@ -41,7 +41,7 @@ type UpdateOrganizationConfigurationInput struct {
 	// to true .
 	//
 	// This member is required.
-	AutoEnable bool
+	AutoEnable *bool
 
 	// Whether to automatically enable Security Hub default standards (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html)
 	// for new member accounts in the organization. By default, this parameter is equal

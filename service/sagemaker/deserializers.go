@@ -33137,7 +33137,7 @@ func awsAwsjson11_deserializeDocumentAgentVersion(v **types.AgentVersion, value 
 				if err != nil {
 					return err
 				}
-				sv.AgentCount = i64
+				sv.AgentCount = ptr.Int64(i64)
 			}
 
 		case "Version":
@@ -33349,7 +33349,7 @@ func awsAwsjson11_deserializeDocumentAlgorithmSpecification(v **types.AlgorithmS
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableSageMakerMetricsTimeSeries = jtv
+				sv.EnableSageMakerMetricsTimeSeries = ptr.Bool(jtv)
 			}
 
 		case "MetricDefinitions":
@@ -36492,7 +36492,7 @@ func awsAwsjson11_deserializeDocumentAutoMLSecurityConfig(v **types.AutoMLSecuri
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableInterContainerTrafficEncryption = jtv
+				sv.EnableInterContainerTrafficEncryption = ptr.Bool(jtv)
 			}
 
 		case "VolumeKmsKeyId":
@@ -36714,7 +36714,7 @@ func awsAwsjson11_deserializeDocumentBatchDataCaptureConfig(v **types.BatchDataC
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.GenerateInferenceId = jtv
+				sv.GenerateInferenceId = ptr.Bool(jtv)
 			}
 
 		case "KmsKeyId":
@@ -38086,7 +38086,7 @@ func awsAwsjson11_deserializeDocumentChannelSpecification(v **types.ChannelSpeci
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsRequired = jtv
+				sv.IsRequired = ptr.Bool(jtv)
 			}
 
 		case "Name":
@@ -38314,7 +38314,7 @@ func awsAwsjson11_deserializeDocumentClarifyCheckStepMetadata(v **types.ClarifyC
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.RegisterNewBaseline = jtv
+				sv.RegisterNewBaseline = ptr.Bool(jtv)
 			}
 
 		case "SkipCheck":
@@ -38323,7 +38323,7 @@ func awsAwsjson11_deserializeDocumentClarifyCheckStepMetadata(v **types.ClarifyC
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.SkipCheck = jtv
+				sv.SkipCheck = ptr.Bool(jtv)
 			}
 
 		case "ViolationReport":
@@ -40516,7 +40516,7 @@ func awsAwsjson11_deserializeDocumentDataCaptureConfig(v **types.DataCaptureConf
 				if !ok {
 					return fmt.Errorf("expected EnableCapture to be of type *bool, got %T instead", value)
 				}
-				sv.EnableCapture = jtv
+				sv.EnableCapture = ptr.Bool(jtv)
 			}
 
 		case "InitialSamplingPercentage":
@@ -40609,7 +40609,7 @@ func awsAwsjson11_deserializeDocumentDataCaptureConfigSummary(v **types.DataCapt
 				if !ok {
 					return fmt.Errorf("expected EnableCapture to be of type *bool, got %T instead", value)
 				}
-				sv.EnableCapture = jtv
+				sv.EnableCapture = ptr.Bool(jtv)
 			}
 
 		case "KmsKeyId":
@@ -41160,7 +41160,7 @@ func awsAwsjson11_deserializeDocumentDebugRuleConfiguration(v **types.DebugRuleC
 				if err != nil {
 					return err
 				}
-				sv.VolumeSizeInGB = int32(i64)
+				sv.VolumeSizeInGB = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -42074,7 +42074,7 @@ func awsAwsjson11_deserializeDocumentDeviceSelectionConfig(v **types.DeviceSelec
 				if err != nil {
 					return err
 				}
-				sv.Percentage = int32(i64)
+				sv.Percentage = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -42118,7 +42118,7 @@ func awsAwsjson11_deserializeDocumentDeviceStats(v **types.DeviceStats, value in
 				if err != nil {
 					return err
 				}
-				sv.ConnectedDeviceCount = i64
+				sv.ConnectedDeviceCount = ptr.Int64(i64)
 			}
 
 		case "RegisteredDeviceCount":
@@ -42131,7 +42131,7 @@ func awsAwsjson11_deserializeDocumentDeviceStats(v **types.DeviceStats, value in
 				if err != nil {
 					return err
 				}
-				sv.RegisteredDeviceCount = i64
+				sv.RegisteredDeviceCount = ptr.Int64(i64)
 			}
 
 		default:
@@ -42819,7 +42819,7 @@ func awsAwsjson11_deserializeDocumentDynamicScalingConfiguration(v **types.Dynam
 				if err != nil {
 					return err
 				}
-				sv.MaxCapacity = int32(i64)
+				sv.MaxCapacity = ptr.Int32(int32(i64))
 			}
 
 		case "MinCapacity":
@@ -42832,7 +42832,7 @@ func awsAwsjson11_deserializeDocumentDynamicScalingConfiguration(v **types.Dynam
 				if err != nil {
 					return err
 				}
-				sv.MinCapacity = int32(i64)
+				sv.MinCapacity = ptr.Int32(int32(i64))
 			}
 
 		case "ScaleInCooldown":
@@ -42845,7 +42845,7 @@ func awsAwsjson11_deserializeDocumentDynamicScalingConfiguration(v **types.Dynam
 				if err != nil {
 					return err
 				}
-				sv.ScaleInCooldown = int32(i64)
+				sv.ScaleInCooldown = ptr.Int32(int32(i64))
 			}
 
 		case "ScaleOutCooldown":
@@ -42858,7 +42858,7 @@ func awsAwsjson11_deserializeDocumentDynamicScalingConfiguration(v **types.Dynam
 				if err != nil {
 					return err
 				}
-				sv.ScaleOutCooldown = int32(i64)
+				sv.ScaleOutCooldown = ptr.Int32(int32(i64))
 			}
 
 		case "ScalingPolicies":
@@ -43147,7 +43147,7 @@ func awsAwsjson11_deserializeDocumentEdgeDeploymentPlanSummary(v **types.EdgeDep
 				if err != nil {
 					return err
 				}
-				sv.EdgeDeploymentFailed = int32(i64)
+				sv.EdgeDeploymentFailed = ptr.Int32(int32(i64))
 			}
 
 		case "EdgeDeploymentPending":
@@ -43160,7 +43160,7 @@ func awsAwsjson11_deserializeDocumentEdgeDeploymentPlanSummary(v **types.EdgeDep
 				if err != nil {
 					return err
 				}
-				sv.EdgeDeploymentPending = int32(i64)
+				sv.EdgeDeploymentPending = ptr.Int32(int32(i64))
 			}
 
 		case "EdgeDeploymentPlanArn":
@@ -43191,7 +43191,7 @@ func awsAwsjson11_deserializeDocumentEdgeDeploymentPlanSummary(v **types.EdgeDep
 				if err != nil {
 					return err
 				}
-				sv.EdgeDeploymentSuccess = int32(i64)
+				sv.EdgeDeploymentSuccess = ptr.Int32(int32(i64))
 			}
 
 		case "LastModifiedTime":
@@ -43251,7 +43251,7 @@ func awsAwsjson11_deserializeDocumentEdgeDeploymentStatus(v **types.EdgeDeployme
 				if err != nil {
 					return err
 				}
-				sv.EdgeDeploymentFailedInStage = int32(i64)
+				sv.EdgeDeploymentFailedInStage = ptr.Int32(int32(i64))
 			}
 
 		case "EdgeDeploymentPendingInStage":
@@ -43264,7 +43264,7 @@ func awsAwsjson11_deserializeDocumentEdgeDeploymentStatus(v **types.EdgeDeployme
 				if err != nil {
 					return err
 				}
-				sv.EdgeDeploymentPendingInStage = int32(i64)
+				sv.EdgeDeploymentPendingInStage = ptr.Int32(int32(i64))
 			}
 
 		case "EdgeDeploymentStageStartTime":
@@ -43302,7 +43302,7 @@ func awsAwsjson11_deserializeDocumentEdgeDeploymentStatus(v **types.EdgeDeployme
 				if err != nil {
 					return err
 				}
-				sv.EdgeDeploymentSuccessInStage = int32(i64)
+				sv.EdgeDeploymentSuccessInStage = ptr.Int32(int32(i64))
 			}
 
 		case "StageStatus":
@@ -43470,7 +43470,7 @@ func awsAwsjson11_deserializeDocumentEdgeModelStat(v **types.EdgeModelStat, valu
 				if err != nil {
 					return err
 				}
-				sv.ActiveDeviceCount = i64
+				sv.ActiveDeviceCount = ptr.Int64(i64)
 			}
 
 		case "ConnectedDeviceCount":
@@ -43483,7 +43483,7 @@ func awsAwsjson11_deserializeDocumentEdgeModelStat(v **types.EdgeModelStat, valu
 				if err != nil {
 					return err
 				}
-				sv.ConnectedDeviceCount = i64
+				sv.ConnectedDeviceCount = ptr.Int64(i64)
 			}
 
 		case "ModelName":
@@ -43514,7 +43514,7 @@ func awsAwsjson11_deserializeDocumentEdgeModelStat(v **types.EdgeModelStat, valu
 				if err != nil {
 					return err
 				}
-				sv.OfflineDeviceCount = i64
+				sv.OfflineDeviceCount = ptr.Int64(i64)
 			}
 
 		case "SamplingDeviceCount":
@@ -43527,7 +43527,7 @@ func awsAwsjson11_deserializeDocumentEdgeModelStat(v **types.EdgeModelStat, valu
 				if err != nil {
 					return err
 				}
-				sv.SamplingDeviceCount = i64
+				sv.SamplingDeviceCount = ptr.Int64(i64)
 			}
 
 		default:
@@ -46467,7 +46467,7 @@ func awsAwsjson11_deserializeDocumentFinalAutoMLJobObjectiveMetric(v **types.Fin
 					if err != nil {
 						return err
 					}
-					sv.Value = float32(f64)
+					sv.Value = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -46485,7 +46485,7 @@ func awsAwsjson11_deserializeDocumentFinalAutoMLJobObjectiveMetric(v **types.Fin
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Value = float32(f64)
+					sv.Value = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected MetricValue to be a JSON Number, got %T instead", value)
@@ -46550,7 +46550,7 @@ func awsAwsjson11_deserializeDocumentFinalHyperParameterTuningJobObjectiveMetric
 					if err != nil {
 						return err
 					}
-					sv.Value = float32(f64)
+					sv.Value = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -46568,7 +46568,7 @@ func awsAwsjson11_deserializeDocumentFinalHyperParameterTuningJobObjectiveMetric
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Value = float32(f64)
+					sv.Value = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected MetricValue to be a JSON Number, got %T instead", value)
@@ -48269,7 +48269,7 @@ func awsAwsjson11_deserializeDocumentHyperParameterSpecification(v **types.Hyper
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsRequired = jtv
+				sv.IsRequired = ptr.Bool(jtv)
 			}
 
 		case "IsTunable":
@@ -48278,7 +48278,7 @@ func awsAwsjson11_deserializeDocumentHyperParameterSpecification(v **types.Hyper
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsTunable = jtv
+				sv.IsTunable = ptr.Bool(jtv)
 			}
 
 		case "Name":
@@ -48394,7 +48394,7 @@ func awsAwsjson11_deserializeDocumentHyperParameterTrainingJobDefinition(v **typ
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableInterContainerTrafficEncryption = jtv
+				sv.EnableInterContainerTrafficEncryption = ptr.Bool(jtv)
 			}
 
 		case "EnableManagedSpotTraining":
@@ -48403,7 +48403,7 @@ func awsAwsjson11_deserializeDocumentHyperParameterTrainingJobDefinition(v **typ
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableManagedSpotTraining = jtv
+				sv.EnableManagedSpotTraining = ptr.Bool(jtv)
 			}
 
 		case "EnableNetworkIsolation":
@@ -48412,7 +48412,7 @@ func awsAwsjson11_deserializeDocumentHyperParameterTrainingJobDefinition(v **typ
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableNetworkIsolation = jtv
+				sv.EnableNetworkIsolation = ptr.Bool(jtv)
 			}
 
 		case "Environment":
@@ -48776,7 +48776,7 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningInstanceConfig(v **type
 				if err != nil {
 					return err
 				}
-				sv.InstanceCount = int32(i64)
+				sv.InstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case "InstanceType":
@@ -48798,7 +48798,7 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningInstanceConfig(v **type
 				if err != nil {
 					return err
 				}
-				sv.VolumeSizeInGB = int32(i64)
+				sv.VolumeSizeInGB = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -48892,7 +48892,7 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningJobCompletionDetails(v 
 				if err != nil {
 					return err
 				}
-				sv.NumberOfTrainingJobsObjectiveNotImproving = int32(i64)
+				sv.NumberOfTrainingJobsObjectiveNotImproving = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -49023,7 +49023,7 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningJobConsumedResources(v 
 				if err != nil {
 					return err
 				}
-				sv.RuntimeInSeconds = int32(i64)
+				sv.RuntimeInSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -49579,7 +49579,7 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningResourceConfig(v **type
 				if err != nil {
 					return err
 				}
-				sv.InstanceCount = int32(i64)
+				sv.InstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case "InstanceType":
@@ -49610,7 +49610,7 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningResourceConfig(v **type
 				if err != nil {
 					return err
 				}
-				sv.VolumeSizeInGB = int32(i64)
+				sv.VolumeSizeInGB = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -50511,7 +50511,7 @@ func awsAwsjson11_deserializeDocumentInferenceMetrics(v **types.InferenceMetrics
 				if err != nil {
 					return err
 				}
-				sv.MaxInvocations = int32(i64)
+				sv.MaxInvocations = ptr.Int32(int32(i64))
 			}
 
 		case "ModelLatency":
@@ -50524,7 +50524,7 @@ func awsAwsjson11_deserializeDocumentInferenceMetrics(v **types.InferenceMetrics
 				if err != nil {
 					return err
 				}
-				sv.ModelLatency = int32(i64)
+				sv.ModelLatency = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -51182,7 +51182,7 @@ func awsAwsjson11_deserializeDocumentInstanceGroup(v **types.InstanceGroup, valu
 				if err != nil {
 					return err
 				}
-				sv.InstanceCount = int32(i64)
+				sv.InstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case "InstanceGroupName":
@@ -51796,7 +51796,7 @@ func awsAwsjson11_deserializeDocumentLabelCounters(v **types.LabelCounters, valu
 				if err != nil {
 					return err
 				}
-				sv.FailedNonRetryableError = int32(i64)
+				sv.FailedNonRetryableError = ptr.Int32(int32(i64))
 			}
 
 		case "HumanLabeled":
@@ -51809,7 +51809,7 @@ func awsAwsjson11_deserializeDocumentLabelCounters(v **types.LabelCounters, valu
 				if err != nil {
 					return err
 				}
-				sv.HumanLabeled = int32(i64)
+				sv.HumanLabeled = ptr.Int32(int32(i64))
 			}
 
 		case "MachineLabeled":
@@ -51822,7 +51822,7 @@ func awsAwsjson11_deserializeDocumentLabelCounters(v **types.LabelCounters, valu
 				if err != nil {
 					return err
 				}
-				sv.MachineLabeled = int32(i64)
+				sv.MachineLabeled = ptr.Int32(int32(i64))
 			}
 
 		case "TotalLabeled":
@@ -51835,7 +51835,7 @@ func awsAwsjson11_deserializeDocumentLabelCounters(v **types.LabelCounters, valu
 				if err != nil {
 					return err
 				}
-				sv.TotalLabeled = int32(i64)
+				sv.TotalLabeled = ptr.Int32(int32(i64))
 			}
 
 		case "Unlabeled":
@@ -51848,7 +51848,7 @@ func awsAwsjson11_deserializeDocumentLabelCounters(v **types.LabelCounters, valu
 				if err != nil {
 					return err
 				}
-				sv.Unlabeled = int32(i64)
+				sv.Unlabeled = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -51892,7 +51892,7 @@ func awsAwsjson11_deserializeDocumentLabelCountersForWorkteam(v **types.LabelCou
 				if err != nil {
 					return err
 				}
-				sv.HumanLabeled = int32(i64)
+				sv.HumanLabeled = ptr.Int32(int32(i64))
 			}
 
 		case "PendingHuman":
@@ -51905,7 +51905,7 @@ func awsAwsjson11_deserializeDocumentLabelCountersForWorkteam(v **types.LabelCou
 				if err != nil {
 					return err
 				}
-				sv.PendingHuman = int32(i64)
+				sv.PendingHuman = ptr.Int32(int32(i64))
 			}
 
 		case "Total":
@@ -51918,7 +51918,7 @@ func awsAwsjson11_deserializeDocumentLabelCountersForWorkteam(v **types.LabelCou
 				if err != nil {
 					return err
 				}
-				sv.Total = int32(i64)
+				sv.Total = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -53179,7 +53179,7 @@ func awsAwsjson11_deserializeDocumentMetricData(v **types.MetricData, value inte
 					if err != nil {
 						return err
 					}
-					sv.Value = float32(f64)
+					sv.Value = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -53197,7 +53197,7 @@ func awsAwsjson11_deserializeDocumentMetricData(v **types.MetricData, value inte
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Value = float32(f64)
+					sv.Value = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
@@ -53305,7 +53305,7 @@ func awsAwsjson11_deserializeDocumentMetricDatum(v **types.MetricDatum, value in
 					if err != nil {
 						return err
 					}
-					sv.Value = float32(f64)
+					sv.Value = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -53323,7 +53323,7 @@ func awsAwsjson11_deserializeDocumentMetricDatum(v **types.MetricDatum, value in
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Value = float32(f64)
+					sv.Value = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
@@ -53585,7 +53585,7 @@ func awsAwsjson11_deserializeDocumentModel(v **types.Model, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableNetworkIsolation = jtv
+				sv.EnableNetworkIsolation = ptr.Bool(jtv)
 			}
 
 		case "ExecutionRoleArn":
@@ -53939,7 +53939,7 @@ func awsAwsjson11_deserializeDocumentModelCard(v **types.ModelCard, value interf
 				if err != nil {
 					return err
 				}
-				sv.ModelCardVersion = int32(i64)
+				sv.ModelCardVersion = ptr.Int32(int32(i64))
 			}
 
 		case "ModelId":
@@ -54119,7 +54119,7 @@ func awsAwsjson11_deserializeDocumentModelCardExportJobSummary(v **types.ModelCa
 				if err != nil {
 					return err
 				}
-				sv.ModelCardVersion = int32(i64)
+				sv.ModelCardVersion = ptr.Int32(int32(i64))
 			}
 
 		case "Status":
@@ -54469,7 +54469,7 @@ func awsAwsjson11_deserializeDocumentModelCardVersionSummary(v **types.ModelCard
 				if err != nil {
 					return err
 				}
-				sv.ModelCardVersion = int32(i64)
+				sv.ModelCardVersion = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -54778,7 +54778,7 @@ func awsAwsjson11_deserializeDocumentModelDashboardIndicatorAction(v **types.Mod
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:
@@ -54947,7 +54947,7 @@ func awsAwsjson11_deserializeDocumentModelDashboardModelCard(v **types.ModelDash
 				if err != nil {
 					return err
 				}
-				sv.ModelCardVersion = int32(i64)
+				sv.ModelCardVersion = ptr.Int32(int32(i64))
 			}
 
 		case "ModelId":
@@ -55258,7 +55258,7 @@ func awsAwsjson11_deserializeDocumentModelDeployConfig(v **types.ModelDeployConf
 				if !ok {
 					return fmt.Errorf("expected AutoGenerateEndpointName to be of type *bool, got %T instead", value)
 				}
-				sv.AutoGenerateEndpointName = jtv
+				sv.AutoGenerateEndpointName = ptr.Bool(jtv)
 			}
 
 		case "EndpointName":
@@ -55625,7 +55625,7 @@ func awsAwsjson11_deserializeDocumentModelLatencyThreshold(v **types.ModelLatenc
 				if err != nil {
 					return err
 				}
-				sv.ValueInMilliseconds = int32(i64)
+				sv.ValueInMilliseconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -55874,7 +55874,7 @@ func awsAwsjson11_deserializeDocumentModelPackage(v **types.ModelPackage, value 
 				if !ok {
 					return fmt.Errorf("expected CertifyForMarketplace to be of type *bool, got %T instead", value)
 				}
-				sv.CertifyForMarketplace = jtv
+				sv.CertifyForMarketplace = ptr.Bool(jtv)
 			}
 
 		case "CreatedBy":
@@ -57964,7 +57964,7 @@ func awsAwsjson11_deserializeDocumentMonitoringCsvDatasetFormat(v **types.Monito
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Header = jtv
+				sv.Header = ptr.Bool(jtv)
 			}
 
 		default:
@@ -58565,7 +58565,7 @@ func awsAwsjson11_deserializeDocumentMonitoringJsonDatasetFormat(v **types.Monit
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Line = jtv
+				sv.Line = ptr.Bool(jtv)
 			}
 
 		default:
@@ -58605,7 +58605,7 @@ func awsAwsjson11_deserializeDocumentMonitoringNetworkConfig(v **types.Monitorin
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableInterContainerTrafficEncryption = jtv
+				sv.EnableInterContainerTrafficEncryption = ptr.Bool(jtv)
 			}
 
 		case "EnableNetworkIsolation":
@@ -58614,7 +58614,7 @@ func awsAwsjson11_deserializeDocumentMonitoringNetworkConfig(v **types.Monitorin
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableNetworkIsolation = jtv
+				sv.EnableNetworkIsolation = ptr.Bool(jtv)
 			}
 
 		case "VpcConfig":
@@ -59319,7 +59319,7 @@ func awsAwsjson11_deserializeDocumentMonitoringStoppingCondition(v **types.Monit
 				if err != nil {
 					return err
 				}
-				sv.MaxRuntimeInSeconds = int32(i64)
+				sv.MaxRuntimeInSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -59512,7 +59512,7 @@ func awsAwsjson11_deserializeDocumentNetworkConfig(v **types.NetworkConfig, valu
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableInterContainerTrafficEncryption = jtv
+				sv.EnableInterContainerTrafficEncryption = ptr.Bool(jtv)
 			}
 
 		case "EnableNetworkIsolation":
@@ -59521,7 +59521,7 @@ func awsAwsjson11_deserializeDocumentNetworkConfig(v **types.NetworkConfig, valu
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableNetworkIsolation = jtv
+				sv.EnableNetworkIsolation = ptr.Bool(jtv)
 			}
 
 		case "VpcConfig":
@@ -60000,7 +60000,7 @@ func awsAwsjson11_deserializeDocumentObjectiveStatusCounters(v **types.Objective
 				if err != nil {
 					return err
 				}
-				sv.Failed = int32(i64)
+				sv.Failed = ptr.Int32(int32(i64))
 			}
 
 		case "Pending":
@@ -60013,7 +60013,7 @@ func awsAwsjson11_deserializeDocumentObjectiveStatusCounters(v **types.Objective
 				if err != nil {
 					return err
 				}
-				sv.Pending = int32(i64)
+				sv.Pending = ptr.Int32(int32(i64))
 			}
 
 		case "Succeeded":
@@ -60026,7 +60026,7 @@ func awsAwsjson11_deserializeDocumentObjectiveStatusCounters(v **types.Objective
 				if err != nil {
 					return err
 				}
-				sv.Succeeded = int32(i64)
+				sv.Succeeded = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -60071,7 +60071,7 @@ func awsAwsjson11_deserializeDocumentOfflineStoreConfig(v **types.OfflineStoreCo
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DisableGlueTableCreation = jtv
+				sv.DisableGlueTableCreation = ptr.Bool(jtv)
 			}
 
 		case "S3StorageConfig":
@@ -60304,7 +60304,7 @@ func awsAwsjson11_deserializeDocumentOnlineStoreConfig(v **types.OnlineStoreConf
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableOnlineStore = jtv
+				sv.EnableOnlineStore = ptr.Bool(jtv)
 			}
 
 		case "SecurityConfig":
@@ -60620,7 +60620,7 @@ func awsAwsjson11_deserializeDocumentParallelismConfiguration(v **types.Parallel
 				if err != nil {
 					return err
 				}
-				sv.MaxParallelExecutionSteps = int32(i64)
+				sv.MaxParallelExecutionSteps = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -61713,7 +61713,7 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionStep(v **types.PipelineExe
 				if err != nil {
 					return err
 				}
-				sv.AttemptCount = int32(i64)
+				sv.AttemptCount = ptr.Int32(int32(i64))
 			}
 
 		case "CacheHitResult":
@@ -62504,7 +62504,7 @@ func awsAwsjson11_deserializeDocumentProcessingInput(v **types.ProcessingInput, 
 				if !ok {
 					return fmt.Errorf("expected AppManaged to be of type *bool, got %T instead", value)
 				}
-				sv.AppManaged = jtv
+				sv.AppManaged = ptr.Bool(jtv)
 			}
 
 		case "DatasetDefinition":
@@ -63016,7 +63016,7 @@ func awsAwsjson11_deserializeDocumentProcessingOutput(v **types.ProcessingOutput
 				if !ok {
 					return fmt.Errorf("expected AppManaged to be of type *bool, got %T instead", value)
 				}
-				sv.AppManaged = jtv
+				sv.AppManaged = ptr.Bool(jtv)
 			}
 
 		case "FeatureStoreOutput":
@@ -63337,7 +63337,7 @@ func awsAwsjson11_deserializeDocumentProcessingStoppingCondition(v **types.Proce
 				if err != nil {
 					return err
 				}
-				sv.MaxRuntimeInSeconds = int32(i64)
+				sv.MaxRuntimeInSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -64025,7 +64025,7 @@ func awsAwsjson11_deserializeDocumentProfilerConfig(v **types.ProfilerConfig, va
 				if !ok {
 					return fmt.Errorf("expected DisableProfiler to be of type *bool, got %T instead", value)
 				}
-				sv.DisableProfiler = jtv
+				sv.DisableProfiler = ptr.Bool(jtv)
 			}
 
 		case "ProfilingIntervalInMilliseconds":
@@ -64146,7 +64146,7 @@ func awsAwsjson11_deserializeDocumentProfilerRuleConfiguration(v **types.Profile
 				if err != nil {
 					return err
 				}
-				sv.VolumeSizeInGB = int32(i64)
+				sv.VolumeSizeInGB = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -64888,7 +64888,7 @@ func awsAwsjson11_deserializeDocumentQualityCheckStepMetadata(v **types.QualityC
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.RegisterNewBaseline = jtv
+				sv.RegisterNewBaseline = ptr.Bool(jtv)
 			}
 
 		case "SkipCheck":
@@ -64897,7 +64897,7 @@ func awsAwsjson11_deserializeDocumentQualityCheckStepMetadata(v **types.QualityC
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.SkipCheck = jtv
+				sv.SkipCheck = ptr.Bool(jtv)
 			}
 
 		case "ViolationReport":
@@ -65540,7 +65540,7 @@ func awsAwsjson11_deserializeDocumentRecommendationJobStoppingConditions(v **typ
 				if err != nil {
 					return err
 				}
-				sv.MaxInvocations = int32(i64)
+				sv.MaxInvocations = ptr.Int32(int32(i64))
 			}
 
 		case "ModelLatencyThresholds":
@@ -65808,7 +65808,7 @@ func awsAwsjson11_deserializeDocumentRecommendationMetrics(v **types.Recommendat
 					if err != nil {
 						return err
 					}
-					sv.CostPerHour = float32(f64)
+					sv.CostPerHour = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -65826,7 +65826,7 @@ func awsAwsjson11_deserializeDocumentRecommendationMetrics(v **types.Recommendat
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.CostPerHour = float32(f64)
+					sv.CostPerHour = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
@@ -65842,7 +65842,7 @@ func awsAwsjson11_deserializeDocumentRecommendationMetrics(v **types.Recommendat
 					if err != nil {
 						return err
 					}
-					sv.CostPerInference = float32(f64)
+					sv.CostPerInference = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -65860,7 +65860,7 @@ func awsAwsjson11_deserializeDocumentRecommendationMetrics(v **types.Recommendat
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.CostPerInference = float32(f64)
+					sv.CostPerInference = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
@@ -65912,7 +65912,7 @@ func awsAwsjson11_deserializeDocumentRecommendationMetrics(v **types.Recommendat
 				if err != nil {
 					return err
 				}
-				sv.MaxInvocations = int32(i64)
+				sv.MaxInvocations = ptr.Int32(int32(i64))
 			}
 
 		case "MemoryUtilization":
@@ -65959,7 +65959,7 @@ func awsAwsjson11_deserializeDocumentRecommendationMetrics(v **types.Recommendat
 				if err != nil {
 					return err
 				}
-				sv.ModelLatency = int32(i64)
+				sv.ModelLatency = ptr.Int32(int32(i64))
 			}
 
 		case "ModelSetupTime":
@@ -66449,7 +66449,7 @@ func awsAwsjson11_deserializeDocumentResourceConfig(v **types.ResourceConfig, va
 				if err != nil {
 					return err
 				}
-				sv.InstanceCount = int32(i64)
+				sv.InstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case "InstanceGroups":
@@ -66498,7 +66498,7 @@ func awsAwsjson11_deserializeDocumentResourceConfig(v **types.ResourceConfig, va
 				if err != nil {
 					return err
 				}
-				sv.VolumeSizeInGB = int32(i64)
+				sv.VolumeSizeInGB = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -66635,7 +66635,7 @@ func awsAwsjson11_deserializeDocumentResourceLimits(v **types.ResourceLimits, va
 				if err != nil {
 					return err
 				}
-				sv.MaxParallelTrainingJobs = int32(i64)
+				sv.MaxParallelTrainingJobs = ptr.Int32(int32(i64))
 			}
 
 		case "MaxRuntimeInSeconds":
@@ -66835,7 +66835,7 @@ func awsAwsjson11_deserializeDocumentRetryStrategy(v **types.RetryStrategy, valu
 				if err != nil {
 					return err
 				}
-				sv.MaximumRetryAttempts = int32(i64)
+				sv.MaximumRetryAttempts = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -67427,7 +67427,7 @@ func awsAwsjson11_deserializeDocumentScalingPolicyMetric(v **types.ScalingPolicy
 				if err != nil {
 					return err
 				}
-				sv.InvocationsPerInstance = int32(i64)
+				sv.InvocationsPerInstance = ptr.Int32(int32(i64))
 			}
 
 		case "ModelLatency":
@@ -67440,7 +67440,7 @@ func awsAwsjson11_deserializeDocumentScalingPolicyMetric(v **types.ScalingPolicy
 				if err != nil {
 					return err
 				}
-				sv.ModelLatency = int32(i64)
+				sv.ModelLatency = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -67484,7 +67484,7 @@ func awsAwsjson11_deserializeDocumentScalingPolicyObjective(v **types.ScalingPol
 				if err != nil {
 					return err
 				}
-				sv.MaxInvocationsPerMinute = int32(i64)
+				sv.MaxInvocationsPerMinute = ptr.Int32(int32(i64))
 			}
 
 		case "MinInvocationsPerMinute":
@@ -67497,7 +67497,7 @@ func awsAwsjson11_deserializeDocumentScalingPolicyObjective(v **types.ScalingPol
 				if err != nil {
 					return err
 				}
-				sv.MinInvocationsPerMinute = int32(i64)
+				sv.MinInvocationsPerMinute = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -68206,7 +68206,7 @@ func awsAwsjson11_deserializeDocumentShadowModelVariantConfig(v **types.ShadowMo
 				if err != nil {
 					return err
 				}
-				sv.SamplingPercentage = int32(i64)
+				sv.SamplingPercentage = ptr.Int32(int32(i64))
 			}
 
 		case "ShadowModelVariantName":
@@ -68351,7 +68351,7 @@ func awsAwsjson11_deserializeDocumentShuffleConfig(v **types.ShuffleConfig, valu
 				if err != nil {
 					return err
 				}
-				sv.Seed = i64
+				sv.Seed = ptr.Int64(i64)
 			}
 
 		default:
@@ -68785,7 +68785,7 @@ func awsAwsjson11_deserializeDocumentStoppingCondition(v **types.StoppingConditi
 				if err != nil {
 					return err
 				}
-				sv.MaxRuntimeInSeconds = int32(i64)
+				sv.MaxRuntimeInSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "MaxWaitTimeInSeconds":
@@ -69127,7 +69127,7 @@ func awsAwsjson11_deserializeDocumentTabularJobConfig(v **types.TabularJobConfig
 				if !ok {
 					return fmt.Errorf("expected GenerateCandidateDefinitionsOnly to be of type *bool, got %T instead", value)
 				}
-				sv.GenerateCandidateDefinitionsOnly = jtv
+				sv.GenerateCandidateDefinitionsOnly = ptr.Bool(jtv)
 			}
 
 		case "Mode":
@@ -69391,7 +69391,7 @@ func awsAwsjson11_deserializeDocumentTargetTrackingScalingPolicyConfiguration(v 
 					if err != nil {
 						return err
 					}
-					sv.TargetValue = f64
+					sv.TargetValue = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -69409,7 +69409,7 @@ func awsAwsjson11_deserializeDocumentTargetTrackingScalingPolicyConfiguration(v 
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.TargetValue = f64
+					sv.TargetValue = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
@@ -70234,7 +70234,7 @@ func awsAwsjson11_deserializeDocumentTrainingJob(v **types.TrainingJob, value in
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableInterContainerTrafficEncryption = jtv
+				sv.EnableInterContainerTrafficEncryption = ptr.Bool(jtv)
 			}
 
 		case "EnableManagedSpotTraining":
@@ -70243,7 +70243,7 @@ func awsAwsjson11_deserializeDocumentTrainingJob(v **types.TrainingJob, value in
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableManagedSpotTraining = jtv
+				sv.EnableManagedSpotTraining = ptr.Bool(jtv)
 			}
 
 		case "EnableNetworkIsolation":
@@ -70252,7 +70252,7 @@ func awsAwsjson11_deserializeDocumentTrainingJob(v **types.TrainingJob, value in
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableNetworkIsolation = jtv
+				sv.EnableNetworkIsolation = ptr.Bool(jtv)
 			}
 
 		case "Environment":
@@ -70569,7 +70569,7 @@ func awsAwsjson11_deserializeDocumentTrainingJobStatusCounters(v **types.Trainin
 				if err != nil {
 					return err
 				}
-				sv.Completed = int32(i64)
+				sv.Completed = ptr.Int32(int32(i64))
 			}
 
 		case "InProgress":
@@ -70582,7 +70582,7 @@ func awsAwsjson11_deserializeDocumentTrainingJobStatusCounters(v **types.Trainin
 				if err != nil {
 					return err
 				}
-				sv.InProgress = int32(i64)
+				sv.InProgress = ptr.Int32(int32(i64))
 			}
 
 		case "NonRetryableError":
@@ -70595,7 +70595,7 @@ func awsAwsjson11_deserializeDocumentTrainingJobStatusCounters(v **types.Trainin
 				if err != nil {
 					return err
 				}
-				sv.NonRetryableError = int32(i64)
+				sv.NonRetryableError = ptr.Int32(int32(i64))
 			}
 
 		case "RetryableError":
@@ -70608,7 +70608,7 @@ func awsAwsjson11_deserializeDocumentTrainingJobStatusCounters(v **types.Trainin
 				if err != nil {
 					return err
 				}
-				sv.RetryableError = int32(i64)
+				sv.RetryableError = ptr.Int32(int32(i64))
 			}
 
 		case "Stopped":
@@ -70621,7 +70621,7 @@ func awsAwsjson11_deserializeDocumentTrainingJobStatusCounters(v **types.Trainin
 				if err != nil {
 					return err
 				}
-				sv.Stopped = int32(i64)
+				sv.Stopped = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -70911,7 +70911,7 @@ func awsAwsjson11_deserializeDocumentTrainingSpecification(v **types.TrainingSpe
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.SupportsDistributedTraining = jtv
+				sv.SupportsDistributedTraining = ptr.Bool(jtv)
 			}
 
 		case "TrainingChannels":
@@ -73548,7 +73548,7 @@ func awsAwsjson11_deserializeDocumentUSD(v **types.USD, value interface{}) error
 				if err != nil {
 					return err
 				}
-				sv.Cents = int32(i64)
+				sv.Cents = ptr.Int32(int32(i64))
 			}
 
 		case "Dollars":
@@ -73561,7 +73561,7 @@ func awsAwsjson11_deserializeDocumentUSD(v **types.USD, value interface{}) error
 				if err != nil {
 					return err
 				}
-				sv.Dollars = int32(i64)
+				sv.Dollars = ptr.Int32(int32(i64))
 			}
 
 		case "TenthFractionsOfACent":
@@ -73574,7 +73574,7 @@ func awsAwsjson11_deserializeDocumentUSD(v **types.USD, value interface{}) error
 				if err != nil {
 					return err
 				}
-				sv.TenthFractionsOfACent = int32(i64)
+				sv.TenthFractionsOfACent = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -77443,7 +77443,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteWorkteamOutput(v **DeleteWorkteamOu
 				if !ok {
 					return fmt.Errorf("expected Success to be of type *bool, got %T instead", value)
 				}
-				sv.Success = jtv
+				sv.Success = ptr.Bool(jtv)
 			}
 
 		default:
@@ -77666,7 +77666,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeAlgorithmOutput(v **DescribeAlgor
 				if !ok {
 					return fmt.Errorf("expected CertifyForMarketplace to be of type *bool, got %T instead", value)
 				}
-				sv.CertifyForMarketplace = jtv
+				sv.CertifyForMarketplace = ptr.Bool(jtv)
 			}
 
 		case "CreationTime":
@@ -78209,7 +78209,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeAutoMLJobOutput(v **DescribeAutoM
 				if !ok {
 					return fmt.Errorf("expected GenerateCandidateDefinitionsOnly to be of type *bool, got %T instead", value)
 				}
-				sv.GenerateCandidateDefinitionsOnly = jtv
+				sv.GenerateCandidateDefinitionsOnly = ptr.Bool(jtv)
 			}
 
 		case "InputDataConfig":
@@ -79218,7 +79218,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeDeviceOutput(v **DescribeDeviceOu
 				if err != nil {
 					return err
 				}
-				sv.MaxModels = int32(i64)
+				sv.MaxModels = ptr.Int32(int32(i64))
 			}
 
 		case "Models":
@@ -79535,7 +79535,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeEdgeDeploymentPlanOutput(v **Desc
 				if err != nil {
 					return err
 				}
-				sv.EdgeDeploymentFailed = int32(i64)
+				sv.EdgeDeploymentFailed = ptr.Int32(int32(i64))
 			}
 
 		case "EdgeDeploymentPending":
@@ -79548,7 +79548,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeEdgeDeploymentPlanOutput(v **Desc
 				if err != nil {
 					return err
 				}
-				sv.EdgeDeploymentPending = int32(i64)
+				sv.EdgeDeploymentPending = ptr.Int32(int32(i64))
 			}
 
 		case "EdgeDeploymentPlanArn":
@@ -79579,7 +79579,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeEdgeDeploymentPlanOutput(v **Desc
 				if err != nil {
 					return err
 				}
-				sv.EdgeDeploymentSuccess = int32(i64)
+				sv.EdgeDeploymentSuccess = ptr.Int32(int32(i64))
 			}
 
 		case "LastModifiedTime":
@@ -81308,7 +81308,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeImageVersionOutput(v **DescribeIm
 				if !ok {
 					return fmt.Errorf("expected Horovod to be of type *bool, got %T instead", value)
 				}
-				sv.Horovod = jtv
+				sv.Horovod = ptr.Bool(jtv)
 			}
 
 		case "ImageArn":
@@ -82266,7 +82266,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeModelCardExportJobOutput(v **Desc
 				if err != nil {
 					return err
 				}
-				sv.ModelCardVersion = int32(i64)
+				sv.ModelCardVersion = ptr.Int32(int32(i64))
 			}
 
 		case "OutputConfig":
@@ -82411,7 +82411,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeModelCardOutput(v **DescribeModel
 				if err != nil {
 					return err
 				}
-				sv.ModelCardVersion = int32(i64)
+				sv.ModelCardVersion = ptr.Int32(int32(i64))
 			}
 
 		case "SecurityConfig":
@@ -82591,7 +82591,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeModelOutput(v **DescribeModelOutp
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableNetworkIsolation = jtv
+				sv.EnableNetworkIsolation = ptr.Bool(jtv)
 			}
 
 		case "ExecutionRoleArn":
@@ -82775,7 +82775,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeModelPackageOutput(v **DescribeMo
 				if !ok {
 					return fmt.Errorf("expected CertifyForMarketplace to be of type *bool, got %T instead", value)
 				}
-				sv.CertifyForMarketplace = jtv
+				sv.CertifyForMarketplace = ptr.Bool(jtv)
 			}
 
 		case "CreatedBy":
@@ -84577,7 +84577,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTrainingJobOutput(v **DescribeTra
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableInterContainerTrafficEncryption = jtv
+				sv.EnableInterContainerTrafficEncryption = ptr.Bool(jtv)
 			}
 
 		case "EnableManagedSpotTraining":
@@ -84586,7 +84586,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTrainingJobOutput(v **DescribeTra
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableManagedSpotTraining = jtv
+				sv.EnableManagedSpotTraining = ptr.Bool(jtv)
 			}
 
 		case "EnableNetworkIsolation":
@@ -84595,7 +84595,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTrainingJobOutput(v **DescribeTra
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableNetworkIsolation = jtv
+				sv.EnableNetworkIsolation = ptr.Bool(jtv)
 			}
 
 		case "Environment":

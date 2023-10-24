@@ -1313,7 +1313,7 @@ type SentimentConfiguration struct {
 	// Specifies the analysis interval.
 	//
 	// This member is required.
-	TimePeriod int32
+	TimePeriod *int32
 
 	noSmithyDocumentSerde
 }
