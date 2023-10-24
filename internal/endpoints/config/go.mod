@@ -17,3 +17,5 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.23.2 // indirect
 	github.com/aws/smithy-go v1.15.0 // indirect
 )
+
+replace github.com/aws/aws-sdk-go-v2/config => ../../../../config/
