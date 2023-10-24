@@ -425,10 +425,10 @@ func TestNewEnvConfig(t *testing.T) {
 		},
 		38: {
 			Env: map[string]string{
-				"AWS_ENDPOINT_URL": "http://localhost:5567",
+				"AWS_ENDPOINT_URL": "https://example.com",
 			},
 			Config: EnvConfig{
-				BaseEndpoint: "http://localhost:5567",
+				BaseEndpoint: "https://example.com",
 			},
 		},
 		39: {
