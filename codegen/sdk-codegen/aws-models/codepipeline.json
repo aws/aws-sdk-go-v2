@@ -4018,6 +4018,94 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.codepipeline#GitConfiguration": {
+            "type": "structure",
+            "members": {
+                "sourceActionName": {
+                    "target": "com.amazonaws.codepipeline#ActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the pipeline source action where the trigger configuration, such as Git\n            tags, is specified. The trigger configuration will start the pipeline upon the specified\n            change only.</p>\n         <note>\n            <p>You can only specify one trigger configuration per source action.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "push": {
+                    "target": "com.amazonaws.codepipeline#GitPushFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field where the repository event that will start the pipeline, such as pushing\n            Git tags, is specified with details.</p>\n         <note>\n            <p>Git tags is the only supported event type.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A type of trigger configuration for Git-based source actions.</p>\n         <note>\n            <p>You can specify the Git configuration trigger type for all third-party\n                Git-based source actions that are supported by the\n                    <code>CodeStarSourceConnection</code> action type.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.codepipeline#GitPushFilter": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.codepipeline#GitTagFilterCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field that contains the details for the Git tags trigger\n            configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The event criteria that specify when a specified repository event will start the pipeline for the specified trigger configuration, such as the lists of Git tags to include and exclude.</p>"
+            }
+        },
+        "com.amazonaws.codepipeline#GitPushFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codepipeline#GitPushFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#GitTagFilterCriteria": {
+            "type": "structure",
+            "members": {
+                "includes": {
+                    "target": "com.amazonaws.codepipeline#GitTagPatternList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of patterns of Git tags that, when pushed, are to be included as criteria\n            that starts the pipeline.</p>"
+                    }
+                },
+                "excludes": {
+                    "target": "com.amazonaws.codepipeline#GitTagPatternList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of patterns of Git tags that, when pushed, are to be excluded from\n            starting the pipeline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Git tags specified as filter criteria for whether a Git tag repository event\n            will start the pipeline.</p>"
+            }
+        },
+        "com.amazonaws.codepipeline#GitTagNamePattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#GitTagPatternList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codepipeline#GitTagNamePattern"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8
+                }
+            }
+        },
         "com.amazonaws.codepipeline#InputArtifact": {
             "type": "structure",
             "members": {
@@ -5282,6 +5370,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The version number of the pipeline. A new pipeline always has a version number of\n            1. This number is incremented when a pipeline is updated.</p>"
                     }
+                },
+                "pipelineType": {
+                    "target": "com.amazonaws.codepipeline#PipelineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>CodePipeline provides the following pipeline types, which differ in characteristics and\n            price, so that you can tailor your pipeline features and cost to the needs of your\n            applications.</p>\n         <ul>\n            <li>\n               <p>V1 type pipelines have a JSON structure that contains standard pipeline,\n                    stage, and action-level parameters.</p>\n            </li>\n            <li>\n               <p>V2 type pipelines have the same structure as a V1 type, along with additional\n                    parameters for release safety and trigger configuration.</p>\n            </li>\n         </ul>\n         <important>\n            <p>Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when\n                creating or updating a pipeline will result in the pipeline having the V2 type of\n                pipeline and the associated costs.</p>\n         </important>\n         <p>For information about pricing for CodePipeline, see <a href=\"https://aws.amazon.com/codepipeline/pricing/\">Pricing</a>.</p>\n         <p>\n            For information about which type of pipeline to choose, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html\">What type of pipeline is right for me?</a>.</p>"
+                    }
+                },
+                "triggers": {
+                    "target": "com.amazonaws.codepipeline#PipelineTriggerDeclarationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trigger configuration specifying a type of event, such as Git tags, that starts the pipeline.</p>\n         <note>\n            <p>When a trigger configuration is specified, default change detection for\n                repository and branch commits is disabled.</p>\n         </note>"
+                    }
+                },
+                "variables": {
+                    "target": "com.amazonaws.codepipeline#PipelineVariableDeclarationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that defines the pipeline variables for a pipeline resource. Variable names can\n            have alphanumeric and underscore characters, and the values must match\n                <code>[A-Za-z0-9@\\-_]+</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5325,6 +5431,15 @@
                     "target": "com.amazonaws.codepipeline#ArtifactRevisionList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of <code>ArtifactRevision</code> objects included in a pipeline\n            execution.</p>"
+                    }
+                },
+                "trigger": {
+                    "target": "com.amazonaws.codepipeline#ExecutionTrigger"
+                },
+                "variables": {
+                    "target": "com.amazonaws.codepipeline#ResolvedPipelineVariableList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of pipeline variables used for the pipeline execution.</p>"
                     }
                 }
             },
@@ -5570,6 +5685,12 @@
                         "smithy.api#documentation": "<p>The version number of the pipeline.</p>"
                     }
                 },
+                "pipelineType": {
+                    "target": "com.amazonaws.codepipeline#PipelineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>CodePipeline provides the following pipeline types, which differ in characteristics and\n            price, so that you can tailor your pipeline features and cost to the needs of your\n            applications.</p>\n         <ul>\n            <li>\n               <p>V1 type pipelines have a JSON structure that contains standard pipeline,\n                    stage, and action-level parameters.</p>\n            </li>\n            <li>\n               <p>V2 type pipelines have the same structure as a V1 type, along with additional\n                    parameters for release safety and trigger configuration.</p>\n            </li>\n         </ul>\n         <important>\n            <p>Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when\n                creating or updating a pipeline will result in the pipeline having the V2 type of\n                pipeline and the associated costs.</p>\n         </important>\n         <p>For information about pricing for CodePipeline, see <a href=\"https://aws.amazon.com/codepipeline/pricing/\">Pricing</a>.</p>\n         <p>\n            For information about which type of pipeline to choose, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html\">What type of pipeline is right for me?</a>.</p>"
+                    }
+                },
                 "created": {
                     "target": "com.amazonaws.codepipeline#Timestamp",
                     "traits": {
@@ -5585,6 +5706,171 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Returns a summary of a pipeline.</p>"
+            }
+        },
+        "com.amazonaws.codepipeline#PipelineTriggerDeclaration": {
+            "type": "structure",
+            "members": {
+                "providerType": {
+                    "target": "com.amazonaws.codepipeline#PipelineTriggerProviderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source provider for the event, such as connections configured for a repository\n            with Git tags, for the specified trigger configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "gitConfiguration": {
+                    "target": "com.amazonaws.codepipeline#GitConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the filter criteria and the source stage for the repository event that\n            starts the pipeline, such as Git tags.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents information about the specified trigger configuration, such as the\n            filter criteria and the source stage for the action that contains the trigger.</p>\n         <note>\n            <p>This is only supported for the <code>CodeStarSourceConnection</code> action\n                type.</p>\n         </note>\n         <note>\n            <p>When a trigger configuration is specified, default change detection for\n                repository and branch commits is disabled.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.codepipeline#PipelineTriggerDeclarationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codepipeline#PipelineTriggerDeclaration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#PipelineTriggerProviderType": {
+            "type": "enum",
+            "members": {
+                "CodeStarSourceConnection": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CodeStarSourceConnection"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#PipelineType": {
+            "type": "enum",
+            "members": {
+                "V1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "V1"
+                    }
+                },
+                "V2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "V2"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#PipelineVariable": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.codepipeline#PipelineVariableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a pipeline-level variable.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.codepipeline#PipelineVariableValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of a pipeline-level variable.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A pipeline-level variable used for a pipeline execution.</p>"
+            }
+        },
+        "com.amazonaws.codepipeline#PipelineVariableDeclaration": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.codepipeline#PipelineVariableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a pipeline-level variable.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "defaultValue": {
+                    "target": "com.amazonaws.codepipeline#PipelineVariableValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of a pipeline-level variable.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.codepipeline#PipelineVariableDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of a pipeline-level variable. It's used to add additional context about the variable, and not being used at time when pipeline executes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A variable declared at the pipeline level.</p>"
+            }
+        },
+        "com.amazonaws.codepipeline#PipelineVariableDeclarationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codepipeline#PipelineVariableDeclaration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#PipelineVariableDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.codepipeline#PipelineVariableList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codepipeline#PipelineVariable"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#PipelineVariableName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9@\\-_]+$"
+            }
+        },
+        "com.amazonaws.codepipeline#PipelineVariableValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": ".*"
             }
         },
         "com.amazonaws.codepipeline#PipelineVersion": {
@@ -6333,6 +6619,32 @@
                 "target": "com.amazonaws.codepipeline#String"
             }
         },
+        "com.amazonaws.codepipeline#ResolvedPipelineVariable": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.codepipeline#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a pipeline-level variable.</p>"
+                    }
+                },
+                "resolvedValue": {
+                    "target": "com.amazonaws.codepipeline#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resolved value of a pipeline-level variable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A pipeline-level variable used for a pipeline execution.</p>"
+            }
+        },
+        "com.amazonaws.codepipeline#ResolvedPipelineVariableList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codepipeline#ResolvedPipelineVariable"
+            }
+        },
         "com.amazonaws.codepipeline#ResourceArn": {
             "type": "string",
             "traits": {
@@ -6866,6 +7178,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "variables": {
+                    "target": "com.amazonaws.codepipeline#PipelineVariableList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that overrides pipeline variables for a pipeline execution that's being started. Variable names must match <code>[A-Za-z0-9@\\-_]+</code>, \n            and the values can be anything except an empty string.</p>"
+                    }
+                },
                 "clientRequestToken": {
                     "target": "com.amazonaws.codepipeline#ClientRequestToken",
                     "traits": {
@@ -7325,6 +7643,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "PutActionRevision"
+                    }
+                },
+                "WebhookV2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WebhookV2"
                     }
                 }
             }

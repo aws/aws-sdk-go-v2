@@ -36,6 +36,9 @@
                     "target": "com.amazonaws.migrationhubstrategy#GetServerStrategies"
                 },
                 {
+                    "target": "com.amazonaws.migrationhubstrategy#ListAnalyzableServers"
+                },
+                {
                     "target": "com.amazonaws.migrationhubstrategy#ListApplicationComponents"
                 },
                 {
@@ -123,7 +126,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -166,7 +168,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -179,7 +182,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -193,7 +195,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -216,7 +217,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -251,7 +251,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -262,14 +261,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -283,14 +284,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -299,11 +298,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -314,14 +313,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -335,7 +336,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -355,7 +355,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -366,14 +365,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -384,9 +385,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -846,6 +849,44 @@
                         "name": "BINARY_ANALYSIS"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#AnalyzableServerSummary": {
+            "type": "structure",
+            "members": {
+                "hostname": {
+                    "target": "com.amazonaws.migrationhubstrategy#String",
+                    "traits": {
+                        "smithy.api#documentation": "The host name of the analyzable server."
+                    }
+                },
+                "ipAddress": {
+                    "target": "com.amazonaws.migrationhubstrategy#String",
+                    "traits": {
+                        "smithy.api#documentation": "The ip address of the analyzable server."
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.migrationhubstrategy#String",
+                    "traits": {
+                        "smithy.api#documentation": "The data source of the analyzable server."
+                    }
+                },
+                "vmId": {
+                    "target": "com.amazonaws.migrationhubstrategy#String",
+                    "traits": {
+                        "smithy.api#documentation": "The virtual machine id of the analyzable server."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Summary information about an analyzable server."
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#AnalyzableServerSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhubstrategy#AnalyzableServerSummary"
             }
         },
         "com.amazonaws.migrationhubstrategy#AnalyzerNameUnion": {
@@ -1387,6 +1428,25 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> Application preferences that you specify. </p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#AssessmentDataSourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "StrategyRecommendationsApplicationDataCollector",
+                        "name": "SR_COLLECTOR"
+                    },
+                    {
+                        "value": "ManualImport",
+                        "name": "MANUAL_IMPORT"
+                    },
+                    {
+                        "value": "ApplicationDiscoveryService",
+                        "name": "ADS"
+                    }
+                ]
             }
         },
         "com.amazonaws.migrationhubstrategy#AssessmentStatus": {
@@ -1934,6 +1994,10 @@
                     {
                         "value": "Import",
                         "name": "IMPORT"
+                    },
+                    {
+                        "value": "StrategyRecommendationsApplicationDataCollector",
+                        "name": "MHSR_COLLECTOR"
                     }
                 ]
             }
@@ -3058,6 +3122,111 @@
                 "smithy.api#documentation": "<p> The server experienced an internal error. Try again. </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#ListAnalyzableServers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhubstrategy#ListAnalyzableServersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhubstrategy#ListAnalyzableServersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhubstrategy#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhubstrategy#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhubstrategy#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhubstrategy#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Retrieves a list of all the servers fetched from customer vCenter using Strategy Recommendation Collector.",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke ListAnalyzableServers",
+                        "input": {
+                            "maxResults": 100,
+                            "sort": "ASC"
+                        },
+                        "output": {
+                            "analyzableServers": [
+                                {
+                                    "hostname": "Ubuntu 1",
+                                    "ipAddress": "1.1.1.1",
+                                    "source": "Application Discover Service",
+                                    "vmId": "vm-1"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/list-analyzable-servers",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "analyzableServers"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#ListAnalyzableServersRequest": {
+            "type": "structure",
+            "members": {
+                "sort": {
+                    "target": "com.amazonaws.migrationhubstrategy#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies whether to sort by ascending (ASC) or descending (DESC) order."
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhubstrategy#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "The token from a previous call that you use to retrieve the next set of results. For example, if a previous call to this action returned 100 items, but you set maxResults to 10. You'll receive a set of 10 results along with a token. You then use the returned token to retrieve the next set of 10."
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.migrationhubstrategy#MaxResult",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of items to include in the response. The maximum value is 100."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents input for ListAnalyzableServers operation.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#ListAnalyzableServersResponse": {
+            "type": "structure",
+            "members": {
+                "analyzableServers": {
+                    "target": "com.amazonaws.migrationhubstrategy#AnalyzableServerSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "The list of analyzable servers with summary information about each server."
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhubstrategy#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "The token you use to retrieve the next set of results, or null if there are no more results."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents output for ListAnalyzableServers operation.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.migrationhubstrategy#ListAntipatternSeveritySummary": {
@@ -4772,6 +4941,12 @@
                     "target": "com.amazonaws.migrationhubstrategy#AssessmentTargets",
                     "traits": {
                         "smithy.api#documentation": "<p>List of criteria for assessment.</p>"
+                    }
+                },
+                "assessmentDataSourceType": {
+                    "target": "com.amazonaws.migrationhubstrategy#AssessmentDataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "The data source type of an assessment to be started."
                     }
                 }
             }
