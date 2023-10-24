@@ -423,6 +423,22 @@ func TestNewEnvConfig(t *testing.T) {
 			Config:  EnvConfig{},
 			WantErr: true,
 		},
+		38: {
+			Env: map[string]string{
+				"AWS_ENDPOINT_URL": "http://localhost:5567",
+			},
+			Config: EnvConfig{
+				BaseEndpoint: "http://localhost:5567",
+			},
+		},
+		39: {
+			Env: map[string]string{
+				"AWS_IGNORE_CONFIGURED_ENDPOINT_URLS": "true",
+			},
+			Config: EnvConfig{
+				IgnoreConfiguredEndpoints: ptr.Bool(true),
+			},
+		},
 	}
 
 	for i, c := range cases {

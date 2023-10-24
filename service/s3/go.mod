@@ -5,7 +5,9 @@ go 1.15
 require (
 	github.com/aws/aws-sdk-go-v2 v1.21.2
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.14
+	github.com/aws/aws-sdk-go-v2/config v1.19.1
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.43
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/config v1.0.0-preview
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.37
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.1.6
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.9.15

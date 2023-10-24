@@ -3,6 +3,7 @@ package software.amazon.smithy.aws.go.codegen;
 
 import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
 
+import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
@@ -24,6 +25,7 @@ import java.util.function.Consumer;
 public class AwsEndpointResolverInitializerGenerator implements GoIntegration {
 
     public static final String RESOLVE_ENDPOINT_RESOLVER_V2 = "resolve" + EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME;
+    public static final String RESOLVE_BASE_ENDPOINT = "resolveBaseEndpoint";
 
     @Override
     public void writeAdditionalFiles(
@@ -34,8 +36,49 @@ public class AwsEndpointResolverInitializerGenerator implements GoIntegration {
     ) {
 
         writerFactory.accept("endpoints.go", settings.getModuleName(), writer -> {
-            writer.write("$W", generateResolveMethod());
+            writer.write(
+                """
+                $W
+
+                $W
+
+                """
+                ,
+                generateResolveMethod(),
+                generateConfigResolverMethod(
+                    settings.getService(model).expectTrait(ServiceTrait.class).getSdkId())
+                );
         });
+    }
+
+    private GoWriter.Writable generateConfigResolverMethod(String sdkId) {
+        return goTemplate(
+            """
+                func $resolveMethodName:L(cfg $awsConfig:T, o *Options) {
+                    if cfg.BaseEndpoint != nil {
+                        o.BaseEndpoint = cfg.BaseEndpoint
+                    }
+                    var configSources []$config:T
+                    for _, c := range cfg.ConfigSources {
+                        if cs, ok := c.($config:T); ok {
+                            configSources = append(configSources, cs)
+                        }
+                    }
+                    value, found, err := $resolveServiceEndpoint:T(context.Background(), "$sdkId:L", configSources)
+                    if found && err == nil {
+                        o.BaseEndpoint = &value
+                    }
+                }
+            """,
+            MapUtils.of(
+                "resolveMethodName", RESOLVE_BASE_ENDPOINT,
+                "awsConfig", SymbolUtils.createValueSymbolBuilder("Config", AwsGoDependency.AWS_CORE).build(),
+                "config", SymbolUtils.createValueSymbolBuilder("Config", AwsGoDependency.CONFIG).build(),
+                "resolveServiceEndpoint", SymbolUtils.createValueSymbolBuilder(
+                                        "ResolveServiceBaseEndpoint", AwsGoDependency.INTERNAL_ENDPOINTS_CONFIG).build(),
+                "sdkId", sdkId
+            )
+        );
     }
 
 

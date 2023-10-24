@@ -652,7 +652,15 @@ func TestNewSharedConfig(t *testing.T) {
 				AppID:   "12345",
 			},
 		},
-	}
+		"endpoint config test": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "endpoint_config",
+			Expected: SharedConfig{
+				Profile:                   "endpoint_config",
+				BaseEndpoint:              "http://localhost:5567",
+				IgnoreConfiguredEndpoints: ptr.Bool(true),
+			},
+		}}
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {

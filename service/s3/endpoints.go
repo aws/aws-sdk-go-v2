@@ -8,7 +8,9 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
+	internalepconfig "github.com/aws/aws-sdk-go-v2/internal/endpoints/config"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/s3/internal/endpoints"
 	smithy "github.com/aws/smithy-go"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
@@ -201,6 +203,22 @@ func finalizeClientEndpointResolverOptions(options *Options) {
 func resolveEndpointResolverV2(options *Options) {
 	if options.EndpointResolverV2 == nil {
 		options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
+	}
+}
+
+func resolveBaseEndpoint(cfg aws.Config, o *Options) {
+	if cfg.BaseEndpoint != nil {
+		o.BaseEndpoint = cfg.BaseEndpoint
+	}
+	var configSources []config.Config
+	for _, c := range cfg.ConfigSources {
+		if cs, ok := c.(config.Config); ok {
+			configSources = append(configSources, cs)
+		}
+	}
+	value, found, err := internalepconfig.ResolveServiceBaseEndpoint(context.Background(), "S3", configSources)
+	if found && err == nil {
+		o.BaseEndpoint = &value
 	}
 }
 
