@@ -6,13 +6,13 @@ import (
 )
 
 // ServiceBaseEndpointProvider is needed to search for all providers
-// that provide a configured service endpoint.
+// that provide a configured service endpoint
 type ServiceBaseEndpointProvider interface {
 	GetServiceBaseEndpoint(ctx context.Context, sdkID string) (string, bool, error)
 }
 
 // ResolveServiceBaseEndpoint is used to retrieve service endpoints from configured sources
-// while allowing for configured endpoints to be disabled.
+// while allowing for configured endpoints to be disabled
 func ResolveServiceBaseEndpoint(ctx context.Context, sdkID string, configs []config.Config) (value string, found bool, err error) {
 	if val, found, _ := config.GetIgnoreConfiguredEndpoints(ctx, configs); found && val {
 		return "", false, nil
