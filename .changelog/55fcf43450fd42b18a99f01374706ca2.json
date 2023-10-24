@@ -1,0 +1,8 @@
+{
+    "id": "55fcf434-50fd-42b1-8a99-f01374706ca2",
+    "type": "feature",
+    "description": "This release introduces DeleteHomeRegionControl API that customers can use to delete the Migration Hub Home Region configuration",
+    "modules": [
+        "service/migrationhubconfig"
+    ]
+}

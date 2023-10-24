@@ -35,6 +35,24 @@ type AnalysisStatusUnionMemberSrcCodeOrDbAnalysisStatus struct {
 
 func (*AnalysisStatusUnionMemberSrcCodeOrDbAnalysisStatus) isAnalysisStatusUnion() {}
 
+// Summary information about an analyzable server.
+type AnalyzableServerSummary struct {
+
+	// The host name of the analyzable server.
+	Hostname *string
+
+	// The ip address of the analyzable server.
+	IpAddress *string
+
+	// The data source of the analyzable server.
+	Source *string
+
+	// The virtual machine id of the analyzable server.
+	VmId *string
+
+	noSmithyDocumentSerde
+}
+
 // The combination of the existing analyzers.
 //
 // The following types satisfy this interface:

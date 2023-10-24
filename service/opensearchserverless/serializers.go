@@ -70,6 +70,116 @@ func (m *awsAwsjson10_serializeOpBatchGetCollection) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpBatchGetEffectiveLifecyclePolicy struct {
+}
+
+func (*awsAwsjson10_serializeOpBatchGetEffectiveLifecyclePolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpBatchGetEffectiveLifecyclePolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchGetEffectiveLifecyclePolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("OpenSearchServerless.BatchGetEffectiveLifecyclePolicy")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentBatchGetEffectiveLifecyclePolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpBatchGetLifecyclePolicy struct {
+}
+
+func (*awsAwsjson10_serializeOpBatchGetLifecyclePolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpBatchGetLifecyclePolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchGetLifecyclePolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("OpenSearchServerless.BatchGetLifecyclePolicy")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentBatchGetLifecyclePolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpBatchGetVpcEndpoint struct {
 }
 
@@ -220,6 +330,61 @@ func (m *awsAwsjson10_serializeOpCreateCollection) HandleSerialize(ctx context.C
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentCreateCollectionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpCreateLifecyclePolicy struct {
+}
+
+func (*awsAwsjson10_serializeOpCreateLifecyclePolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpCreateLifecyclePolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLifecyclePolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("OpenSearchServerless.CreateLifecyclePolicy")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentCreateLifecyclePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -495,6 +660,61 @@ func (m *awsAwsjson10_serializeOpDeleteCollection) HandleSerialize(ctx context.C
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentDeleteCollectionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDeleteLifecyclePolicy struct {
+}
+
+func (*awsAwsjson10_serializeOpDeleteLifecyclePolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDeleteLifecyclePolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteLifecyclePolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("OpenSearchServerless.DeleteLifecyclePolicy")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDeleteLifecyclePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1060,6 +1280,61 @@ func (m *awsAwsjson10_serializeOpListCollections) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpListLifecyclePolicies struct {
+}
+
+func (*awsAwsjson10_serializeOpListLifecyclePolicies) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpListLifecyclePolicies) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListLifecyclePoliciesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("OpenSearchServerless.ListLifecyclePolicies")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListLifecyclePoliciesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpListSecurityConfigs struct {
 }
 
@@ -1555,6 +1830,61 @@ func (m *awsAwsjson10_serializeOpUpdateCollection) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpUpdateLifecyclePolicy struct {
+}
+
+func (*awsAwsjson10_serializeOpUpdateLifecyclePolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpUpdateLifecyclePolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateLifecyclePolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("OpenSearchServerless.UpdateLifecyclePolicy")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateLifecyclePolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpUpdateSecurityConfig struct {
 }
 
@@ -1775,6 +2105,77 @@ func awsAwsjson10_serializeDocumentCollectionNames(v []string, value smithyjson.
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentLifecyclePolicyIdentifier(v *types.LifecyclePolicyIdentifier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentLifecyclePolicyIdentifiers(v []types.LifecyclePolicyIdentifier, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentLifecyclePolicyIdentifier(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentLifecyclePolicyResourceIdentifier(v *types.LifecyclePolicyResourceIdentifier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Resource != nil {
+		ok := object.Key("resource")
+		ok.String(*v.Resource)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentLifecyclePolicyResourceIdentifiers(v []types.LifecyclePolicyResourceIdentifier, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentLifecyclePolicyResourceIdentifier(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentLifecycleResourceFilter(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentResourceFilter(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1920,6 +2321,34 @@ func awsAwsjson10_serializeOpDocumentBatchGetCollectionInput(v *BatchGetCollecti
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentBatchGetEffectiveLifecyclePolicyInput(v *BatchGetEffectiveLifecyclePolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ResourceIdentifiers != nil {
+		ok := object.Key("resourceIdentifiers")
+		if err := awsAwsjson10_serializeDocumentLifecyclePolicyResourceIdentifiers(v.ResourceIdentifiers, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentBatchGetLifecyclePolicyInput(v *BatchGetLifecyclePolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Identifiers != nil {
+		ok := object.Key("identifiers")
+		if err := awsAwsjson10_serializeDocumentLifecyclePolicyIdentifiers(v.Identifiers, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentBatchGetVpcEndpointInput(v *BatchGetVpcEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1990,6 +2419,38 @@ func awsAwsjson10_serializeOpDocumentCreateCollectionInput(v *CreateCollectionIn
 		if err := awsAwsjson10_serializeDocumentTags(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentCreateLifecyclePolicyInput(v *CreateLifecyclePolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Policy != nil {
+		ok := object.Key("policy")
+		ok.String(*v.Policy)
 	}
 
 	if len(v.Type) > 0 {
@@ -2136,6 +2597,28 @@ func awsAwsjson10_serializeOpDocumentDeleteCollectionInput(v *DeleteCollectionIn
 	if v.Id != nil {
 		ok := object.Key("id")
 		ok.String(*v.Id)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDeleteLifecyclePolicyInput(v *DeleteLifecyclePolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
 	}
 
 	return nil
@@ -2305,6 +2788,35 @@ func awsAwsjson10_serializeOpDocumentListCollectionsInput(v *ListCollectionsInpu
 	if v.NextToken != nil {
 		ok := object.Key("nextToken")
 		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentListLifecyclePoliciesInput(v *ListLifecyclePoliciesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.Resources != nil {
+		ok := object.Key("resources")
+		if err := awsAwsjson10_serializeDocumentLifecycleResourceFilter(v.Resources, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
 	}
 
 	return nil
@@ -2503,6 +3015,43 @@ func awsAwsjson10_serializeOpDocumentUpdateCollectionInput(v *UpdateCollectionIn
 	if v.Id != nil {
 		ok := object.Key("id")
 		ok.String(*v.Id)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentUpdateLifecyclePolicyInput(v *UpdateLifecyclePolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Policy != nil {
+		ok := object.Key("policy")
+		ok.String(*v.Policy)
+	}
+
+	if v.PolicyVersion != nil {
+		ok := object.Key("policyVersion")
+		ok.String(*v.PolicyVersion)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
 	}
 
 	return nil

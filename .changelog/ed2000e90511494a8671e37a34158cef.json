@@ -1,0 +1,8 @@
+{
+    "id": "ed2000e9-0511-494a-8671-e37a34158cef",
+    "type": "feature",
+    "description": "Add ability to trigger pipelines from git tags, define variables at pipeline level and new pipeline type V2.",
+    "modules": [
+        "service/codepipeline"
+    ]
+}

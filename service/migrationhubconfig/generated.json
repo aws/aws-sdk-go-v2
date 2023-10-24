@@ -10,6 +10,7 @@
         "api_client.go",
         "api_client_test.go",
         "api_op_CreateHomeRegionControl.go",
+        "api_op_DeleteHomeRegionControl.go",
         "api_op_DescribeHomeRegionControls.go",
         "api_op_GetHomeRegion.go",
         "deserializers.go",

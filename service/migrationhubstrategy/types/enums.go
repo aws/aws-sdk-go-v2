@@ -177,6 +177,26 @@ func (AppUnitErrorCategory) Values() []AppUnitErrorCategory {
 	}
 }
 
+type AssessmentDataSourceType string
+
+// Enum values for AssessmentDataSourceType
+const (
+	AssessmentDataSourceTypeSrCollector  AssessmentDataSourceType = "StrategyRecommendationsApplicationDataCollector"
+	AssessmentDataSourceTypeManualImport AssessmentDataSourceType = "ManualImport"
+	AssessmentDataSourceTypeAds          AssessmentDataSourceType = "ApplicationDiscoveryService"
+)
+
+// Values returns all known values for AssessmentDataSourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssessmentDataSourceType) Values() []AssessmentDataSourceType {
+	return []AssessmentDataSourceType{
+		"StrategyRecommendationsApplicationDataCollector",
+		"ManualImport",
+		"ApplicationDiscoveryService",
+	}
+}
+
 type AssessmentStatus string
 
 // Enum values for AssessmentStatus
@@ -322,9 +342,10 @@ type DataSourceType string
 
 // Enum values for DataSourceType
 const (
-	DataSourceTypeAds    DataSourceType = "ApplicationDiscoveryService"
-	DataSourceTypeMpa    DataSourceType = "MPA"
-	DataSourceTypeImport DataSourceType = "Import"
+	DataSourceTypeAds           DataSourceType = "ApplicationDiscoveryService"
+	DataSourceTypeMpa           DataSourceType = "MPA"
+	DataSourceTypeImport        DataSourceType = "Import"
+	DataSourceTypeMhsrCollector DataSourceType = "StrategyRecommendationsApplicationDataCollector"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -335,6 +356,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"ApplicationDiscoveryService",
 		"MPA",
 		"Import",
+		"StrategyRecommendationsApplicationDataCollector",
 	}
 }
 

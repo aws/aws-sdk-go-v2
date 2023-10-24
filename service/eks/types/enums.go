@@ -122,12 +122,25 @@ type ClusterIssueCode string
 
 // Enum values for ClusterIssueCode
 const (
-	ClusterIssueCodeAccessDenied          ClusterIssueCode = "AccessDenied"
-	ClusterIssueCodeClusterUnreachable    ClusterIssueCode = "ClusterUnreachable"
-	ClusterIssueCodeConfigurationConflict ClusterIssueCode = "ConfigurationConflict"
-	ClusterIssueCodeInternalFailure       ClusterIssueCode = "InternalFailure"
-	ClusterIssueCodeResourceLimitExceeded ClusterIssueCode = "ResourceLimitExceeded"
-	ClusterIssueCodeResourceNotFound      ClusterIssueCode = "ResourceNotFound"
+	ClusterIssueCodeAccessDenied                ClusterIssueCode = "AccessDenied"
+	ClusterIssueCodeClusterUnreachable          ClusterIssueCode = "ClusterUnreachable"
+	ClusterIssueCodeConfigurationConflict       ClusterIssueCode = "ConfigurationConflict"
+	ClusterIssueCodeInternalFailure             ClusterIssueCode = "InternalFailure"
+	ClusterIssueCodeResourceLimitExceeded       ClusterIssueCode = "ResourceLimitExceeded"
+	ClusterIssueCodeResourceNotFound            ClusterIssueCode = "ResourceNotFound"
+	ClusterIssueCodeIamRoleNotFound             ClusterIssueCode = "IamRoleNotFound"
+	ClusterIssueCodeVpcNotFound                 ClusterIssueCode = "VpcNotFound"
+	ClusterIssueCodeInsufficientFreeAddresses   ClusterIssueCode = "InsufficientFreeAddresses"
+	ClusterIssueCodeEc2ServiceNotSubscribed     ClusterIssueCode = "Ec2ServiceNotSubscribed"
+	ClusterIssueCodeEc2SubnetNotFound           ClusterIssueCode = "Ec2SubnetNotFound"
+	ClusterIssueCodeEc2SecurityGroupNotFound    ClusterIssueCode = "Ec2SecurityGroupNotFound"
+	ClusterIssueCodeKmsGrantRevoked             ClusterIssueCode = "KmsGrantRevoked"
+	ClusterIssueCodeKmsKeyNotFound              ClusterIssueCode = "KmsKeyNotFound"
+	ClusterIssueCodeKmsKeyMarkedForDeletion     ClusterIssueCode = "KmsKeyMarkedForDeletion"
+	ClusterIssueCodeKmsKeyDisabled              ClusterIssueCode = "KmsKeyDisabled"
+	ClusterIssueCodeStsRegionalEndpointDisabled ClusterIssueCode = "StsRegionalEndpointDisabled"
+	ClusterIssueCodeUnsupportedVersion          ClusterIssueCode = "UnsupportedVersion"
+	ClusterIssueCodeOther                       ClusterIssueCode = "Other"
 )
 
 // Values returns all known values for ClusterIssueCode. Note that this can be
@@ -141,6 +154,19 @@ func (ClusterIssueCode) Values() []ClusterIssueCode {
 		"InternalFailure",
 		"ResourceLimitExceeded",
 		"ResourceNotFound",
+		"IamRoleNotFound",
+		"VpcNotFound",
+		"InsufficientFreeAddresses",
+		"Ec2ServiceNotSubscribed",
+		"Ec2SubnetNotFound",
+		"Ec2SecurityGroupNotFound",
+		"KmsGrantRevoked",
+		"KmsKeyNotFound",
+		"KmsKeyMarkedForDeletion",
+		"KmsKeyDisabled",
+		"StsRegionalEndpointDisabled",
+		"UnsupportedVersion",
+		"Other",
 	}
 }
 
@@ -511,6 +537,9 @@ const (
 	UpdateParamTypeResolveConflicts         UpdateParamType = "ResolveConflicts"
 	UpdateParamTypeMaxUnavailable           UpdateParamType = "MaxUnavailable"
 	UpdateParamTypeMaxUnavailablePercentage UpdateParamType = "MaxUnavailablePercentage"
+	UpdateParamTypeConfigurationValues      UpdateParamType = "ConfigurationValues"
+	UpdateParamTypeSecurityGroups           UpdateParamType = "SecurityGroups"
+	UpdateParamTypeSubnets                  UpdateParamType = "Subnets"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -541,6 +570,9 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"ResolveConflicts",
 		"MaxUnavailable",
 		"MaxUnavailablePercentage",
+		"ConfigurationValues",
+		"SecurityGroups",
+		"Subnets",
 	}
 }
 
@@ -578,6 +610,7 @@ const (
 	UpdateTypeDisassociateIdentityProviderConfig UpdateType = "DisassociateIdentityProviderConfig"
 	UpdateTypeAssociateEncryptionConfig          UpdateType = "AssociateEncryptionConfig"
 	UpdateTypeAddonUpdate                        UpdateType = "AddonUpdate"
+	UpdateTypeVpcConfigUpdate                    UpdateType = "VpcConfigUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -593,5 +626,6 @@ func (UpdateType) Values() []UpdateType {
 		"DisassociateIdentityProviderConfig",
 		"AssociateEncryptionConfig",
 		"AddonUpdate",
+		"VpcConfigUpdate",
 	}
 }

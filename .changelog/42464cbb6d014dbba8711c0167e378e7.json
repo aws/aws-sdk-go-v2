@@ -1,0 +1,8 @@
+{
+    "id": "42464cbb-6d01-4dbb-a871-1c0167e378e7",
+    "type": "feature",
+    "description": "This release introduces multi-data-source feature in Migration Hub Strategy Recommendations. This feature now supports vCenter as a data source to fetch inventory in addition to ADS and Import from file workflow that is currently supported with MHSR collector.",
+    "modules": [
+        "service/migrationhubstrategy"
+    ]
+}

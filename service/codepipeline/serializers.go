@@ -2808,6 +2808,84 @@ func awsAwsjson11_serializeDocumentFailureDetails(v *types.FailureDetails, value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentGitConfiguration(v *types.GitConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Push != nil {
+		ok := object.Key("push")
+		if err := awsAwsjson11_serializeDocumentGitPushFilterList(v.Push, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceActionName != nil {
+		ok := object.Key("sourceActionName")
+		ok.String(*v.SourceActionName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGitPushFilter(v *types.GitPushFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsAwsjson11_serializeDocumentGitTagFilterCriteria(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGitPushFilterList(v []types.GitPushFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentGitPushFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGitTagFilterCriteria(v *types.GitTagFilterCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Excludes != nil {
+		ok := object.Key("excludes")
+		if err := awsAwsjson11_serializeDocumentGitTagPatternList(v.Excludes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Includes != nil {
+		ok := object.Key("includes")
+		if err := awsAwsjson11_serializeDocumentGitTagPatternList(v.Includes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGitTagPatternList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInputArtifact(v *types.InputArtifact, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2925,6 +3003,11 @@ func awsAwsjson11_serializeDocumentPipelineDeclaration(v *types.PipelineDeclarat
 		ok.String(*v.Name)
 	}
 
+	if len(v.PipelineType) > 0 {
+		ok := object.Key("pipelineType")
+		ok.String(string(v.PipelineType))
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
@@ -2933,6 +3016,20 @@ func awsAwsjson11_serializeDocumentPipelineDeclaration(v *types.PipelineDeclarat
 	if v.Stages != nil {
 		ok := object.Key("stages")
 		if err := awsAwsjson11_serializeDocumentPipelineStageDeclarationList(v.Stages, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Triggers != nil {
+		ok := object.Key("triggers")
+		if err := awsAwsjson11_serializeDocumentPipelineTriggerDeclarationList(v.Triggers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Variables != nil {
+		ok := object.Key("variables")
+		if err := awsAwsjson11_serializeDocumentPipelineVariableDeclarationList(v.Variables, ok); err != nil {
 			return err
 		}
 	}
@@ -2952,6 +3049,103 @@ func awsAwsjson11_serializeDocumentPipelineStageDeclarationList(v []types.StageD
 	for i := range v {
 		av := array.Value()
 		if err := awsAwsjson11_serializeDocumentStageDeclaration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPipelineTriggerDeclaration(v *types.PipelineTriggerDeclaration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GitConfiguration != nil {
+		ok := object.Key("gitConfiguration")
+		if err := awsAwsjson11_serializeDocumentGitConfiguration(v.GitConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ProviderType) > 0 {
+		ok := object.Key("providerType")
+		ok.String(string(v.ProviderType))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPipelineTriggerDeclarationList(v []types.PipelineTriggerDeclaration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentPipelineTriggerDeclaration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPipelineVariable(v *types.PipelineVariable, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPipelineVariableDeclaration(v *types.PipelineVariableDeclaration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultValue != nil {
+		ok := object.Key("defaultValue")
+		ok.String(*v.DefaultValue)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPipelineVariableDeclarationList(v []types.PipelineVariableDeclaration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentPipelineVariableDeclaration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPipelineVariableList(v []types.PipelineVariable, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentPipelineVariable(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3924,6 +4118,13 @@ func awsAwsjson11_serializeOpDocumentStartPipelineExecutionInput(v *StartPipelin
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.Variables != nil {
+		ok := object.Key("variables")
+		if err := awsAwsjson11_serializeDocumentPipelineVariableList(v.Variables, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

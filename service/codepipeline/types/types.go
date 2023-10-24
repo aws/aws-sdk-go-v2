@@ -929,6 +929,53 @@ type FailureDetails struct {
 	noSmithyDocumentSerde
 }
 
+// A type of trigger configuration for Git-based source actions. You can specify
+// the Git configuration trigger type for all third-party Git-based source actions
+// that are supported by the CodeStarSourceConnection action type.
+type GitConfiguration struct {
+
+	// The name of the pipeline source action where the trigger configuration, such as
+	// Git tags, is specified. The trigger configuration will start the pipeline upon
+	// the specified change only. You can only specify one trigger configuration per
+	// source action.
+	//
+	// This member is required.
+	SourceActionName *string
+
+	// The field where the repository event that will start the pipeline, such as
+	// pushing Git tags, is specified with details. Git tags is the only supported
+	// event type.
+	Push []GitPushFilter
+
+	noSmithyDocumentSerde
+}
+
+// The event criteria that specify when a specified repository event will start
+// the pipeline for the specified trigger configuration, such as the lists of Git
+// tags to include and exclude.
+type GitPushFilter struct {
+
+	// The field that contains the details for the Git tags trigger configuration.
+	Tags *GitTagFilterCriteria
+
+	noSmithyDocumentSerde
+}
+
+// The Git tags specified as filter criteria for whether a Git tag repository
+// event will start the pipeline.
+type GitTagFilterCriteria struct {
+
+	// The list of patterns of Git tags that, when pushed, are to be excluded from
+	// starting the pipeline.
+	Excludes []string
+
+	// The list of patterns of Git tags that, when pushed, are to be included as
+	// criteria that starts the pipeline.
+	Includes []string
+
+	noSmithyDocumentSerde
+}
+
 // Represents information about an artifact to be worked on, such as a test or
 // build artifact.
 type InputArtifact struct {
@@ -1160,6 +1207,32 @@ type PipelineDeclaration struct {
 	// cross-region action in your pipeline, you must use artifactStores .
 	ArtifactStores map[string]ArtifactStore
 
+	// CodePipeline provides the following pipeline types, which differ in
+	// characteristics and price, so that you can tailor your pipeline features and
+	// cost to the needs of your applications.
+	//   - V1 type pipelines have a JSON structure that contains standard pipeline,
+	//   stage, and action-level parameters.
+	//   - V2 type pipelines have the same structure as a V1 type, along with
+	//   additional parameters for release safety and trigger configuration.
+	// Including V2 parameters, such as triggers on Git tags, in the pipeline JSON
+	// when creating or updating a pipeline will result in the pipeline having the V2
+	// type of pipeline and the associated costs. For information about pricing for
+	// CodePipeline, see Pricing (https://aws.amazon.com/codepipeline/pricing/) . For
+	// information about which type of pipeline to choose, see What type of pipeline
+	// is right for me? (https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html)
+	// .
+	PipelineType PipelineType
+
+	// The trigger configuration specifying a type of event, such as Git tags, that
+	// starts the pipeline. When a trigger configuration is specified, default change
+	// detection for repository and branch commits is disabled.
+	Triggers []PipelineTriggerDeclaration
+
+	// A list that defines the pipeline variables for a pipeline resource. Variable
+	// names can have alphanumeric and underscore characters, and the values must match
+	// [A-Za-z0-9@\-_]+ .
+	Variables []PipelineVariableDeclaration
+
 	// The version number of the pipeline. A new pipeline always has a version number
 	// of 1. This number is incremented when a pipeline is updated.
 	Version *int32
@@ -1203,6 +1276,12 @@ type PipelineExecution struct {
 
 	// A summary that contains a description of the pipeline execution status.
 	StatusSummary *string
+
+	// The interaction or event that started a pipeline execution.
+	Trigger *ExecutionTrigger
+
+	// A list of pipeline variables used for the pipeline execution.
+	Variables []ResolvedPipelineVariable
 
 	noSmithyDocumentSerde
 }
@@ -1283,11 +1362,95 @@ type PipelineSummary struct {
 	// The name of the pipeline.
 	Name *string
 
+	// CodePipeline provides the following pipeline types, which differ in
+	// characteristics and price, so that you can tailor your pipeline features and
+	// cost to the needs of your applications.
+	//   - V1 type pipelines have a JSON structure that contains standard pipeline,
+	//   stage, and action-level parameters.
+	//   - V2 type pipelines have the same structure as a V1 type, along with
+	//   additional parameters for release safety and trigger configuration.
+	// Including V2 parameters, such as triggers on Git tags, in the pipeline JSON
+	// when creating or updating a pipeline will result in the pipeline having the V2
+	// type of pipeline and the associated costs. For information about pricing for
+	// CodePipeline, see Pricing (https://aws.amazon.com/codepipeline/pricing/) . For
+	// information about which type of pipeline to choose, see What type of pipeline
+	// is right for me? (https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html)
+	// .
+	PipelineType PipelineType
+
 	// The date and time of the last update to the pipeline, in timestamp format.
 	Updated *time.Time
 
 	// The version number of the pipeline.
 	Version *int32
+
+	noSmithyDocumentSerde
+}
+
+// Represents information about the specified trigger configuration, such as the
+// filter criteria and the source stage for the action that contains the trigger.
+// This is only supported for the CodeStarSourceConnection action type. When a
+// trigger configuration is specified, default change detection for repository and
+// branch commits is disabled.
+type PipelineTriggerDeclaration struct {
+
+	// Provides the filter criteria and the source stage for the repository event that
+	// starts the pipeline, such as Git tags.
+	//
+	// This member is required.
+	GitConfiguration *GitConfiguration
+
+	// The source provider for the event, such as connections configured for a
+	// repository with Git tags, for the specified trigger configuration.
+	//
+	// This member is required.
+	ProviderType PipelineTriggerProviderType
+
+	noSmithyDocumentSerde
+}
+
+// A pipeline-level variable used for a pipeline execution.
+type PipelineVariable struct {
+
+	// The name of a pipeline-level variable.
+	//
+	// This member is required.
+	Name *string
+
+	// The value of a pipeline-level variable.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A variable declared at the pipeline level.
+type PipelineVariableDeclaration struct {
+
+	// The name of a pipeline-level variable.
+	//
+	// This member is required.
+	Name *string
+
+	// The value of a pipeline-level variable.
+	DefaultValue *string
+
+	// The description of a pipeline-level variable. It's used to add additional
+	// context about the variable, and not being used at time when pipeline executes.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// A pipeline-level variable used for a pipeline execution.
+type ResolvedPipelineVariable struct {
+
+	// The name of a pipeline-level variable.
+	Name *string
+
+	// The resolved value of a pipeline-level variable.
+	ResolvedValue *string
 
 	noSmithyDocumentSerde
 }

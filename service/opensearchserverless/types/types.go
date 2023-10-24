@@ -61,7 +61,7 @@ type AccessPolicySummary struct {
 	// The version of the policy.
 	PolicyVersion *string
 
-	// The type of access policy. Currently the only available type is data .
+	// The type of access policy. Currently, the only available type is data .
 	Type AccessPolicyType
 
 	noSmithyDocumentSerde
@@ -157,7 +157,7 @@ type CollectionErrorDetail struct {
 	noSmithyDocumentSerde
 }
 
-// List of filter keys that you can use for LIST, UPDATE, and DELETE requests to
+// A list of filter keys that you can use for LIST, UPDATE, and DELETE requests to
 // OpenSearch Serverless collections.
 type CollectionFilters struct {
 
@@ -266,6 +266,164 @@ type DeleteVpcEndpointDetail struct {
 
 	// The current status of the endpoint deletion process.
 	Status VpcEndpointStatus
+
+	noSmithyDocumentSerde
+}
+
+// Error information for an OpenSearch Serverless request.
+type EffectiveLifecyclePolicyDetail struct {
+
+	// The minimum number of index retention days set. That is an optional param that
+	// will return as true if the minimum number of days or hours is not set to a
+	// index resource.
+	NoMinRetentionPeriod *bool
+
+	// The name of the lifecycle policy.
+	PolicyName *string
+
+	// The name of the OpenSearch Serverless index resource.
+	Resource *string
+
+	// The type of OpenSearch Serverless resource. Currently, the only supported
+	// resource is index .
+	ResourceType ResourceType
+
+	// The minimum number of index retention in days or hours. This is an optional
+	// parameter that will return only if it’s set.
+	RetentionPeriod *string
+
+	// The type of lifecycle policy.
+	Type LifecyclePolicyType
+
+	noSmithyDocumentSerde
+}
+
+// Error information for an OpenSearch Serverless request.
+type EffectiveLifecyclePolicyErrorDetail struct {
+
+	// The error code for the request.
+	ErrorCode *string
+
+	// A description of the error. For example, The specified Index resource is not
+	// found .
+	ErrorMessage *string
+
+	// The name of OpenSearch Serverless index resource.
+	Resource *string
+
+	// The type of lifecycle policy.
+	Type LifecyclePolicyType
+
+	noSmithyDocumentSerde
+}
+
+// Details about an OpenSearch Serverless lifecycle policy.
+type LifecyclePolicyDetail struct {
+
+	// The date the lifecycle policy was created.
+	CreatedDate *int64
+
+	// The description of the lifecycle policy.
+	Description *string
+
+	// The timestamp of when the lifecycle policy was last modified.
+	LastModifiedDate *int64
+
+	// The name of the lifecycle policy.
+	Name *string
+
+	// The JSON policy document without any whitespaces.
+	Policy document.Interface
+
+	// The version of the lifecycle policy.
+	PolicyVersion *string
+
+	// The type of lifecycle policy.
+	Type LifecyclePolicyType
+
+	noSmithyDocumentSerde
+}
+
+// Error information for an OpenSearch Serverless request.
+type LifecyclePolicyErrorDetail struct {
+
+	// The error code for the request. For example, NOT_FOUND .
+	ErrorCode *string
+
+	// A description of the error. For example, The specified Lifecycle Policy is not
+	// found .
+	ErrorMessage *string
+
+	// The name of the lifecycle policy.
+	Name *string
+
+	// The type of lifecycle policy.
+	Type LifecyclePolicyType
+
+	noSmithyDocumentSerde
+}
+
+// The unique identifiers of policy types and policy names.
+type LifecyclePolicyIdentifier struct {
+
+	// The name of the lifecycle policy.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of lifecycle policy.
+	//
+	// This member is required.
+	Type LifecyclePolicyType
+
+	noSmithyDocumentSerde
+}
+
+// The unique identifiers of policy types and resource names.
+type LifecyclePolicyResourceIdentifier struct {
+
+	// The name of the OpenSearch Serverless ilndex resource.
+	//
+	// This member is required.
+	Resource *string
+
+	// The type of lifecycle policy.
+	//
+	// This member is required.
+	Type LifecyclePolicyType
+
+	noSmithyDocumentSerde
+}
+
+// Statistics for an OpenSearch Serverless lifecycle policy.
+type LifecyclePolicyStats struct {
+
+	// The number of retention lifecycle policies in the current account.
+	RetentionPolicyCount *int64
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the lifecycle policy.
+type LifecyclePolicySummary struct {
+
+	// The Epoch time when the lifecycle policy was created.
+	CreatedDate *int64
+
+	// The description of the lifecycle policy.
+	Description *string
+
+	// The date and time when the lifecycle policy was last modified.
+	LastModifiedDate *int64
+
+	// The name of the lifecycle policy.
+	Name *string
+
+	// The version of the lifecycle policy.
+	PolicyVersion *string
+
+	// The type of lifecycle policy.
+	Type LifecyclePolicyType
 
 	noSmithyDocumentSerde
 }

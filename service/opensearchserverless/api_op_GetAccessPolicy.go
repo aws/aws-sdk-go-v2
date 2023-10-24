@@ -41,7 +41,7 @@ type GetAccessPolicyInput struct {
 	// This member is required.
 	Name *string
 
-	// Tye type of policy. Currently the only supported value is data .
+	// Tye type of policy. Currently, the only supported value is data .
 	//
 	// This member is required.
 	Type types.AccessPolicyType

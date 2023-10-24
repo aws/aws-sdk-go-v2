@@ -1,0 +1,8 @@
+{
+    "id": "9dcc4720-0ba8-47e2-8c07-6dd45e9f031b",
+    "type": "feature",
+    "description": "Added support for Cluster Subnet and Security Group mutability.",
+    "modules": [
+        "service/eks"
+    ]
+}

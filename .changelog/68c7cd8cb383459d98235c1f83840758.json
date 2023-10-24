@@ -1,0 +1,8 @@
+{
+    "id": "68c7cd8c-b383-459d-9823-5c1f83840758",
+    "type": "feature",
+    "description": "Add the partitional endpoint for IAM in iso-f.",
+    "modules": [
+        "service/iam"
+    ]
+}

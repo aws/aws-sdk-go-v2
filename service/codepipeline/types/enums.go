@@ -273,6 +273,40 @@ func (PipelineExecutionStatus) Values() []PipelineExecutionStatus {
 	}
 }
 
+type PipelineTriggerProviderType string
+
+// Enum values for PipelineTriggerProviderType
+const (
+	PipelineTriggerProviderTypeCodeStarSourceConnection PipelineTriggerProviderType = "CodeStarSourceConnection"
+)
+
+// Values returns all known values for PipelineTriggerProviderType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PipelineTriggerProviderType) Values() []PipelineTriggerProviderType {
+	return []PipelineTriggerProviderType{
+		"CodeStarSourceConnection",
+	}
+}
+
+type PipelineType string
+
+// Enum values for PipelineType
+const (
+	PipelineTypeV1 PipelineType = "V1"
+	PipelineTypeV2 PipelineType = "V2"
+)
+
+// Values returns all known values for PipelineType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PipelineType) Values() []PipelineType {
+	return []PipelineType{
+		"V1",
+		"V2",
+	}
+}
+
 type StageExecutionStatus string
 
 // Enum values for StageExecutionStatus
@@ -345,6 +379,7 @@ const (
 	TriggerTypeWebhook                TriggerType = "Webhook"
 	TriggerTypeCloudWatchEvent        TriggerType = "CloudWatchEvent"
 	TriggerTypePutActionRevision      TriggerType = "PutActionRevision"
+	TriggerTypeWebhookV2              TriggerType = "WebhookV2"
 )
 
 // Values returns all known values for TriggerType. Note that this can be expanded
@@ -358,6 +393,7 @@ func (TriggerType) Values() []TriggerType {
 		"Webhook",
 		"CloudWatchEvent",
 		"PutActionRevision",
+		"WebhookV2",
 	}
 }
 

@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchGetEffectiveLifecyclePolicy struct {
+}
+
+func (*validateOpBatchGetEffectiveLifecyclePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetEffectiveLifecyclePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetEffectiveLifecyclePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetEffectiveLifecyclePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetLifecyclePolicy struct {
+}
+
+func (*validateOpBatchGetLifecyclePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetLifecyclePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetLifecyclePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetLifecyclePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetVpcEndpoint struct {
 }
 
@@ -65,6 +105,26 @@ func (m *validateOpCreateCollection) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateCollectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateLifecyclePolicy struct {
+}
+
+func (*validateOpCreateLifecyclePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLifecyclePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLifecyclePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLifecyclePolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -165,6 +225,26 @@ func (m *validateOpDeleteCollection) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCollectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLifecyclePolicy struct {
+}
+
+func (*validateOpDeleteLifecyclePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLifecyclePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLifecyclePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLifecyclePolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +390,26 @@ func (m *validateOpListAccessPolicies) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListLifecyclePolicies struct {
+}
+
+func (*validateOpListLifecyclePolicies) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListLifecyclePolicies) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListLifecyclePoliciesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListLifecyclePoliciesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListSecurityConfigs struct {
 }
 
@@ -450,6 +550,26 @@ func (m *validateOpUpdateCollection) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLifecyclePolicy struct {
+}
+
+func (*validateOpUpdateLifecyclePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLifecyclePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLifecyclePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLifecyclePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSecurityConfig struct {
 }
 
@@ -510,6 +630,14 @@ func (m *validateOpUpdateVpcEndpoint) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchGetEffectiveLifecyclePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetEffectiveLifecyclePolicy{}, middleware.After)
+}
+
+func addOpBatchGetLifecyclePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetLifecyclePolicy{}, middleware.After)
+}
+
 func addOpBatchGetVpcEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetVpcEndpoint{}, middleware.After)
 }
@@ -520,6 +648,10 @@ func addOpCreateAccessPolicyValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpCreateCollectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCollection{}, middleware.After)
+}
+
+func addOpCreateLifecyclePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLifecyclePolicy{}, middleware.After)
 }
 
 func addOpCreateSecurityConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -540,6 +672,10 @@ func addOpDeleteAccessPolicyValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpDeleteCollectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCollection{}, middleware.After)
+}
+
+func addOpDeleteLifecyclePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLifecyclePolicy{}, middleware.After)
 }
 
 func addOpDeleteSecurityConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -570,6 +706,10 @@ func addOpListAccessPoliciesValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpListAccessPolicies{}, middleware.After)
 }
 
+func addOpListLifecyclePoliciesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListLifecyclePolicies{}, middleware.After)
+}
+
 func addOpListSecurityConfigsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListSecurityConfigs{}, middleware.After)
 }
@@ -598,6 +738,10 @@ func addOpUpdateCollectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCollection{}, middleware.After)
 }
 
+func addOpUpdateLifecyclePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLifecyclePolicy{}, middleware.After)
+}
+
 func addOpUpdateSecurityConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSecurityConfig{}, middleware.After)
 }
@@ -608,6 +752,76 @@ func addOpUpdateSecurityPolicyValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpUpdateVpcEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateVpcEndpoint{}, middleware.After)
+}
+
+func validateLifecyclePolicyIdentifier(v *types.LifecyclePolicyIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LifecyclePolicyIdentifier"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLifecyclePolicyIdentifiers(v []types.LifecyclePolicyIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LifecyclePolicyIdentifiers"}
+	for i := range v {
+		if err := validateLifecyclePolicyIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLifecyclePolicyResourceIdentifier(v *types.LifecyclePolicyResourceIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LifecyclePolicyResourceIdentifier"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Resource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLifecyclePolicyResourceIdentifiers(v []types.LifecyclePolicyResourceIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LifecyclePolicyResourceIdentifiers"}
+	for i := range v {
+		if err := validateLifecyclePolicyResourceIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateSamlConfigOptions(v *types.SamlConfigOptions) error {
@@ -651,6 +865,44 @@ func validateTags(v []types.Tag) error {
 	for i := range v {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetEffectiveLifecyclePolicyInput(v *BatchGetEffectiveLifecyclePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetEffectiveLifecyclePolicyInput"}
+	if v.ResourceIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifiers"))
+	} else if v.ResourceIdentifiers != nil {
+		if err := validateLifecyclePolicyResourceIdentifiers(v.ResourceIdentifiers); err != nil {
+			invalidParams.AddNested("ResourceIdentifiers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetLifecyclePolicyInput(v *BatchGetLifecyclePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetLifecyclePolicyInput"}
+	if v.Identifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifiers"))
+	} else if v.Identifiers != nil {
+		if err := validateLifecyclePolicyIdentifiers(v.Identifiers); err != nil {
+			invalidParams.AddNested("Identifiers", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -708,6 +960,27 @@ func validateOpCreateCollectionInput(v *CreateCollectionInput) error {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLifecyclePolicyInput(v *CreateLifecyclePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLifecyclePolicyInput"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -806,6 +1079,24 @@ func validateOpDeleteCollectionInput(v *DeleteCollectionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteCollectionInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLifecyclePolicyInput(v *DeleteLifecyclePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLifecyclePolicyInput"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -918,6 +1209,21 @@ func validateOpListAccessPoliciesInput(v *ListAccessPoliciesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListAccessPoliciesInput"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListLifecyclePoliciesInput(v *ListLifecyclePoliciesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListLifecyclePoliciesInput"}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
@@ -1041,6 +1347,27 @@ func validateOpUpdateCollectionInput(v *UpdateCollectionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCollectionInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLifecyclePolicyInput(v *UpdateLifecyclePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLifecyclePolicyInput"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.PolicyVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

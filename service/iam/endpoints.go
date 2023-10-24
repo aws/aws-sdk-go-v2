@@ -579,6 +579,34 @@ func (r *resolver) ResolveEndpoint(
 					}
 				}
 			}
+			if _PartitionResult.Name == "aws-iso-f" {
+				if _UseFIPS == false {
+					if _UseDualStack == false {
+						uriString := "https://iam.us-isof-south-1.csp.hci.ic.gov"
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								out.Set("authSchemes", []interface{}{
+									map[string]interface{}{
+										"name":          "sigv4",
+										"signingName":   "iam",
+										"signingRegion": "us-isof-south-1",
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+				}
+			}
 			if _UseFIPS == true {
 				if _UseDualStack == true {
 					if true == _PartitionResult.SupportsFIPS {
@@ -607,7 +635,7 @@ func (r *resolver) ResolveEndpoint(
 				}
 			}
 			if _UseFIPS == true {
-				if true == _PartitionResult.SupportsFIPS {
+				if _PartitionResult.SupportsFIPS == true {
 					uriString := func() string {
 						var out strings.Builder
 						out.WriteString("https://iam-fips.")

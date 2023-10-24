@@ -30,6 +30,26 @@ func (m *validateOpCreateHomeRegionControl) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteHomeRegionControl struct {
+}
+
+func (*validateOpDeleteHomeRegionControl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteHomeRegionControl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteHomeRegionControlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteHomeRegionControlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeHomeRegionControls struct {
 }
 
@@ -52,6 +72,10 @@ func (m *validateOpDescribeHomeRegionControls) HandleInitialize(ctx context.Cont
 
 func addOpCreateHomeRegionControlValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateHomeRegionControl{}, middleware.After)
+}
+
+func addOpDeleteHomeRegionControlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteHomeRegionControl{}, middleware.After)
 }
 
 func addOpDescribeHomeRegionControlsValidationMiddleware(stack *middleware.Stack) error {
@@ -87,6 +111,21 @@ func validateOpCreateHomeRegionControlInput(v *CreateHomeRegionControlInput) err
 		if err := validateTarget(v.Target); err != nil {
 			invalidParams.AddNested("Target", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteHomeRegionControlInput(v *DeleteHomeRegionControlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteHomeRegionControlInput"}
+	if v.ControlId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ControlId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

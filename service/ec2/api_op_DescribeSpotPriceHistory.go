@@ -65,8 +65,8 @@ type DescribeSpotPriceHistoryInput struct {
 	//   - spot-price - The Spot price. The value must match exactly (or use wildcards;
 	//   greater than or less than comparison is not supported).
 	//   - timestamp - The time stamp of the Spot price history, in UTC format (for
-	//   example, YYYY-MM-DDTHH:MM:SSZ). You can use wildcards (* and ?). Greater than or
-	//   less than comparison is not supported.
+	//   example, ddd MMM dd HH:mm:ss UTC YYYY). You can use wildcards ( * and ? ).
+	//   Greater than or less than comparison is not supported.
 	Filters []types.Filter
 
 	// Filters the results by the specified instance types.

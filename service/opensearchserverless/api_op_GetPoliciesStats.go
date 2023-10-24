@@ -42,6 +42,9 @@ type GetPoliciesStatsOutput struct {
 	// Information about the data access policies in your account.
 	AccessPolicyStats *types.AccessPolicyStats
 
+	// Information about the lifecycle policies in your account.
+	LifecyclePolicyStats *types.LifecyclePolicyStats
+
 	// Information about the security configurations in your account.
 	SecurityConfigStats *types.SecurityConfigStats
 

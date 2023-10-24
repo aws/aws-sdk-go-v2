@@ -10,6 +10,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,6 +43,11 @@ type StartPipelineExecutionInput struct {
 
 	// The system-generated unique ID used to identify a unique execution request.
 	ClientRequestToken *string
+
+	// A list that overrides pipeline variables for a pipeline execution that's being
+	// started. Variable names must match [A-Za-z0-9@\-_]+ , and the values can be
+	// anything except an empty string.
+	Variables []types.PipelineVariable
 
 	noSmithyDocumentSerde
 }

@@ -4651,7 +4651,14 @@ type HibernationOptions struct {
 // in the Amazon EC2 User Guide.
 type HibernationOptionsRequest struct {
 
-	// Set to true to enable your instance for hibernation. Default: false
+	// Set to true to enable your instance for hibernation. For Spot Instances, if you
+	// set Configured to true , either omit the InstanceInterruptionBehavior parameter
+	// (for SpotMarketOptions (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotMarketOptions.html)
+	// ), or set it to hibernate . When Configured is true:
+	//   - If you omit InstanceInterruptionBehavior , it defaults to hibernate .
+	//   - If you set InstanceInterruptionBehavior to a value other than hibernate ,
+	//   you'll get an error.
+	// Default: false
 	Configured *bool
 
 	noSmithyDocumentSerde
@@ -14172,7 +14179,15 @@ type SpotMarketOptions struct {
 	// Deprecated.
 	BlockDurationMinutes *int32
 
-	// The behavior when a Spot Instance is interrupted. The default is terminate .
+	// The behavior when a Spot Instance is interrupted. If Configured (for
+	// HibernationOptions (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html)
+	// ) is set to true , the InstanceInterruptionBehavior parameter is automatically
+	// set to hibernate . If you set it to stop or terminate , you'll get an error. If
+	// Configured (for HibernationOptions (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html)
+	// ) is set to false or null , the InstanceInterruptionBehavior parameter is
+	// automatically set to terminate . You can also set it to stop or hibernate . For
+	// more information, see Interruption behavior (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/interruption-behavior.html)
+	// in the Amazon EC2 User Guide.
 	InstanceInterruptionBehavior InstanceInterruptionBehavior
 
 	// The maximum hourly price that you're willing to pay for a Spot Instance. We do

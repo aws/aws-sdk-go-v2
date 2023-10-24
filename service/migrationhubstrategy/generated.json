@@ -19,6 +19,7 @@
         "api_op_GetRecommendationReportDetails.go",
         "api_op_GetServerDetails.go",
         "api_op_GetServerStrategies.go",
+        "api_op_ListAnalyzableServers.go",
         "api_op_ListApplicationComponents.go",
         "api_op_ListCollectors.go",
         "api_op_ListImportFileTask.go",

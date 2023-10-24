@@ -633,6 +633,91 @@ func awsRestjson1_serializeOpHttpBindingsGetServerStrategiesInput(v *GetServerSt
 	return nil
 }
 
+type awsRestjson1_serializeOpListAnalyzableServers struct {
+}
+
+func (*awsRestjson1_serializeOpListAnalyzableServers) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListAnalyzableServers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAnalyzableServersInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/list-analyzable-servers")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListAnalyzableServersInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListAnalyzableServersInput(v *ListAnalyzableServersInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListAnalyzableServersInput(v *ListAnalyzableServersInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if len(v.Sort) > 0 {
+		ok := object.Key("sort")
+		ok.String(string(v.Sort))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListApplicationComponents struct {
 }
 
@@ -1127,6 +1212,11 @@ func awsRestjson1_serializeOpHttpBindingsStartAssessmentInput(v *StartAssessment
 func awsRestjson1_serializeOpDocumentStartAssessmentInput(v *StartAssessmentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.AssessmentDataSourceType) > 0 {
+		ok := object.Key("assessmentDataSourceType")
+		ok.String(string(v.AssessmentDataSourceType))
+	}
 
 	if v.AssessmentTargets != nil {
 		ok := object.Key("assessmentTargets")

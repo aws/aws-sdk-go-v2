@@ -8478,6 +8478,198 @@ func awsAwsjson11_deserializeDocumentExecutorConfiguration(v **types.ExecutorCon
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentGitConfiguration(v **types.GitConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GitConfiguration
+	if *v == nil {
+		sv = &types.GitConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "push":
+			if err := awsAwsjson11_deserializeDocumentGitPushFilterList(&sv.Push, value); err != nil {
+				return err
+			}
+
+		case "sourceActionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActionName to be of type string, got %T instead", value)
+				}
+				sv.SourceActionName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGitPushFilter(v **types.GitPushFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GitPushFilter
+	if *v == nil {
+		sv = &types.GitPushFilter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "tags":
+			if err := awsAwsjson11_deserializeDocumentGitTagFilterCriteria(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGitPushFilterList(v *[]types.GitPushFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GitPushFilter
+	if *v == nil {
+		cv = []types.GitPushFilter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GitPushFilter
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentGitPushFilter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGitTagFilterCriteria(v **types.GitTagFilterCriteria, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GitTagFilterCriteria
+	if *v == nil {
+		sv = &types.GitTagFilterCriteria{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "excludes":
+			if err := awsAwsjson11_deserializeDocumentGitTagPatternList(&sv.Excludes, value); err != nil {
+				return err
+			}
+
+		case "includes":
+			if err := awsAwsjson11_deserializeDocumentGitTagPatternList(&sv.Includes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGitTagPatternList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected GitTagNamePattern to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInputArtifact(v **types.InputArtifact, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9891,6 +10083,15 @@ func awsAwsjson11_deserializeDocumentPipelineDeclaration(v **types.PipelineDecla
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "pipelineType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineType to be of type string, got %T instead", value)
+				}
+				sv.PipelineType = types.PipelineType(jtv)
+			}
+
 		case "roleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9902,6 +10103,16 @@ func awsAwsjson11_deserializeDocumentPipelineDeclaration(v **types.PipelineDecla
 
 		case "stages":
 			if err := awsAwsjson11_deserializeDocumentPipelineStageDeclarationList(&sv.Stages, value); err != nil {
+				return err
+			}
+
+		case "triggers":
+			if err := awsAwsjson11_deserializeDocumentPipelineTriggerDeclarationList(&sv.Triggers, value); err != nil {
+				return err
+			}
+
+		case "variables":
+			if err := awsAwsjson11_deserializeDocumentPipelineVariableDeclarationList(&sv.Variables, value); err != nil {
 				return err
 			}
 
@@ -10001,6 +10212,16 @@ func awsAwsjson11_deserializeDocumentPipelineExecution(v **types.PipelineExecuti
 					return fmt.Errorf("expected PipelineExecutionStatusSummary to be of type string, got %T instead", value)
 				}
 				sv.StatusSummary = ptr.String(jtv)
+			}
+
+		case "trigger":
+			if err := awsAwsjson11_deserializeDocumentExecutionTrigger(&sv.Trigger, value); err != nil {
+				return err
+			}
+
+		case "variables":
+			if err := awsAwsjson11_deserializeDocumentResolvedPipelineVariableList(&sv.Variables, value); err != nil {
+				return err
 			}
 
 		default:
@@ -10505,6 +10726,15 @@ func awsAwsjson11_deserializeDocumentPipelineSummary(v **types.PipelineSummary, 
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "pipelineType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineType to be of type string, got %T instead", value)
+				}
+				sv.PipelineType = types.PipelineType(jtv)
+			}
+
 		case "updated":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10540,6 +10770,177 @@ func awsAwsjson11_deserializeDocumentPipelineSummary(v **types.PipelineSummary, 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPipelineTriggerDeclaration(v **types.PipelineTriggerDeclaration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PipelineTriggerDeclaration
+	if *v == nil {
+		sv = &types.PipelineTriggerDeclaration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "gitConfiguration":
+			if err := awsAwsjson11_deserializeDocumentGitConfiguration(&sv.GitConfiguration, value); err != nil {
+				return err
+			}
+
+		case "providerType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineTriggerProviderType to be of type string, got %T instead", value)
+				}
+				sv.ProviderType = types.PipelineTriggerProviderType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPipelineTriggerDeclarationList(v *[]types.PipelineTriggerDeclaration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PipelineTriggerDeclaration
+	if *v == nil {
+		cv = []types.PipelineTriggerDeclaration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PipelineTriggerDeclaration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentPipelineTriggerDeclaration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPipelineVariableDeclaration(v **types.PipelineVariableDeclaration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PipelineVariableDeclaration
+	if *v == nil {
+		sv = &types.PipelineVariableDeclaration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "defaultValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineVariableValue to be of type string, got %T instead", value)
+				}
+				sv.DefaultValue = ptr.String(jtv)
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineVariableDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineVariableName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPipelineVariableDeclarationList(v *[]types.PipelineVariableDeclaration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PipelineVariableDeclaration
+	if *v == nil {
+		cv = []types.PipelineVariableDeclaration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PipelineVariableDeclaration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentPipelineVariableDeclaration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -10728,6 +11129,89 @@ func awsAwsjson11_deserializeDocumentResolvedActionConfigurationMap(v *map[strin
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentResolvedPipelineVariable(v **types.ResolvedPipelineVariable, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResolvedPipelineVariable
+	if *v == nil {
+		sv = &types.ResolvedPipelineVariable{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "resolvedValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ResolvedValue = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentResolvedPipelineVariableList(v *[]types.ResolvedPipelineVariable, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ResolvedPipelineVariable
+	if *v == nil {
+		cv = []types.ResolvedPipelineVariable{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ResolvedPipelineVariable
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentResolvedPipelineVariable(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

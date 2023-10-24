@@ -1250,6 +1250,21 @@ func validateFailureDetails(v *types.FailureDetails) error {
 	}
 }
 
+func validateGitConfiguration(v *types.GitConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GitConfiguration"}
+	if v.SourceActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceActionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInputArtifact(v *types.InputArtifact) error {
 	if v == nil {
 		return nil
@@ -1357,6 +1372,16 @@ func validatePipelineDeclaration(v *types.PipelineDeclaration) error {
 			invalidParams.AddNested("Stages", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Triggers != nil {
+		if err := validatePipelineTriggerDeclarationList(v.Triggers); err != nil {
+			invalidParams.AddNested("Triggers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Variables != nil {
+		if err := validatePipelineVariableDeclarationList(v.Variables); err != nil {
+			invalidParams.AddNested("Variables", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1371,6 +1396,112 @@ func validatePipelineStageDeclarationList(v []types.StageDeclaration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PipelineStageDeclarationList"}
 	for i := range v {
 		if err := validateStageDeclaration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePipelineTriggerDeclaration(v *types.PipelineTriggerDeclaration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PipelineTriggerDeclaration"}
+	if len(v.ProviderType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderType"))
+	}
+	if v.GitConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GitConfiguration"))
+	} else if v.GitConfiguration != nil {
+		if err := validateGitConfiguration(v.GitConfiguration); err != nil {
+			invalidParams.AddNested("GitConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePipelineTriggerDeclarationList(v []types.PipelineTriggerDeclaration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PipelineTriggerDeclarationList"}
+	for i := range v {
+		if err := validatePipelineTriggerDeclaration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePipelineVariable(v *types.PipelineVariable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PipelineVariable"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePipelineVariableDeclaration(v *types.PipelineVariableDeclaration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PipelineVariableDeclaration"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePipelineVariableDeclarationList(v []types.PipelineVariableDeclaration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PipelineVariableDeclarationList"}
+	for i := range v {
+		if err := validatePipelineVariableDeclaration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePipelineVariableList(v []types.PipelineVariable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PipelineVariableList"}
+	for i := range v {
+		if err := validatePipelineVariable(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2139,6 +2270,11 @@ func validateOpStartPipelineExecutionInput(v *StartPipelineExecutionInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "StartPipelineExecutionInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Variables != nil {
+		if err := validatePipelineVariableList(v.Variables); err != nil {
+			invalidParams.AddNested("Variables", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

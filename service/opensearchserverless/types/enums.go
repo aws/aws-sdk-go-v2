@@ -68,6 +68,40 @@ func (CollectionType) Values() []CollectionType {
 	}
 }
 
+type LifecyclePolicyType string
+
+// Enum values for LifecyclePolicyType
+const (
+	// retention policy type
+	LifecyclePolicyTypeRetention LifecyclePolicyType = "retention"
+)
+
+// Values returns all known values for LifecyclePolicyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LifecyclePolicyType) Values() []LifecyclePolicyType {
+	return []LifecyclePolicyType{
+		"retention",
+	}
+}
+
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	// index resource type
+	ResourceTypeIndex ResourceType = "index"
+)
+
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"index",
+	}
+}
+
 type SecurityConfigType string
 
 // Enum values for SecurityConfigType

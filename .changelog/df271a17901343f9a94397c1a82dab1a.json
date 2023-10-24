@@ -1,0 +1,8 @@
+{
+    "id": "df271a17-9013-43f9-a943-97c1a82dab1a",
+    "type": "feature",
+    "description": "This release updates the documentation for InstanceInterruptionBehavior and HibernationOptionsRequest to more accurately describe the behavior of these two parameters when using Spot hibernation.",
+    "modules": [
+        "service/ec2"
+    ]
+}
