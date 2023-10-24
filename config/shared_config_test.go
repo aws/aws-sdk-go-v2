@@ -657,7 +657,7 @@ func TestNewSharedConfig(t *testing.T) {
 			Profile:         "endpoint_config",
 			Expected: SharedConfig{
 				Profile:                   "endpoint_config",
-				BaseEndpoint:              "http://localhost:5567",
+				BaseEndpoint:              "https://example.com",
 				IgnoreConfiguredEndpoints: ptr.Bool(true),
 			},
 		}}
