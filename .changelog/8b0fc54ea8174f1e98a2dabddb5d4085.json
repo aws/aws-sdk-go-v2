@@ -1,8 +1,0 @@
-{
-    "id": "8b0fc54e-a817-4f1e-98a2-dabddb5d4085",
-    "type": "feature",
-    "description": "Increase maximum length of CommentBody to 3000, and increase maximum length of StringValue to 1500",
-    "modules": [
-        "service/connectcases"
-    ]
-}

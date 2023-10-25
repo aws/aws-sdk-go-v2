@@ -48,7 +48,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/glue v1.64.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.19.2
-	github.com/aws/aws-sdk-go-v2/service/iam v1.23.0
+	github.com/aws/aws-sdk-go-v2/service/iam v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/iot v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.20.0

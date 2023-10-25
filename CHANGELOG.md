@@ -1,3 +1,13 @@
+# Release (2023-10-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.8.0](service/connectcases/CHANGELOG.md#v180-2023-10-25)
+  * **Feature**: Increase maximum length of CommentBody to 3000, and increase maximum length of StringValue to 1500
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.20.0](service/groundstation/CHANGELOG.md#v1200-2023-10-25)
+  * **Feature**: This release will allow KMS alias names to be used when creating Mission Profiles
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.24.0](service/iam/CHANGELOG.md#v1240-2023-10-25)
+  * **Feature**: Updates to GetAccessKeyLastUsed action to replace NoSuchEntity error with AccessDeniedException error.
+
 # Release (2023-10-24)
 
 ## General Highlights

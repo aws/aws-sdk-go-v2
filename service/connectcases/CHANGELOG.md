@@ -1,3 +1,7 @@
+# v1.8.0 (2023-10-25)
+
+* **Feature**: Increase maximum length of CommentBody to 3000, and increase maximum length of StringValue to 1500
+
 # v1.7.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

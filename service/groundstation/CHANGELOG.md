@@ -1,3 +1,7 @@
+# v1.20.0 (2023-10-25)
+
+* **Feature**: This release will allow KMS alias names to be used when creating Mission Profiles
+
 # v1.19.7 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

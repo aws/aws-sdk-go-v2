@@ -1,8 +1,0 @@
-{
-    "id": "ef943186-d89e-4d8b-b33b-22be6a2413da",
-    "type": "feature",
-    "description": "Updates to GetAccessKeyLastUsed action to replace NoSuchEntity error with AccessDeniedException error.",
-    "modules": [
-        "service/iam"
-    ]
-}

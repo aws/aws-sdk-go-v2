@@ -1,8 +1,0 @@
-{
-    "id": "df281a13-acc9-459b-a4c8-37d908a8ef71",
-    "type": "feature",
-    "description": "This release will allow KMS alias names to be used when creating Mission Profiles",
-    "modules": [
-        "service/groundstation"
-    ]
-}

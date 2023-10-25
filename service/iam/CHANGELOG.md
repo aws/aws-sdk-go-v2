@@ -1,3 +1,7 @@
+# v1.24.0 (2023-10-25)
+
+* **Feature**: Updates to GetAccessKeyLastUsed action to replace NoSuchEntity error with AccessDeniedException error.
+
 # v1.23.0 (2023-10-24)
 
 * **Feature**: Add the partitional endpoint for IAM in iso-f.
