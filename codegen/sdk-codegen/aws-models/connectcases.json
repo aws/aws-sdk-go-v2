@@ -118,7 +118,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -137,7 +136,6 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -165,13 +163,14 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -184,7 +183,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -198,7 +196,6 @@
                                                     "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -221,7 +218,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -256,11 +252,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -271,16 +265,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -294,14 +291,12 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -310,15 +305,14 @@
                                                                                 },
                                                                                 "supportsFIPS"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        true
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -329,16 +323,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -352,7 +349,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -372,11 +368,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -387,20 +381,22 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "DualStack is enabled but this partition does not support DualStack",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -411,18 +407,22 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
                                     "error": "Invalid Configuration: Missing Region",
                                     "type": "error"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
@@ -1125,7 +1125,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1000
+                    "max": 3000
                 }
             }
         },
@@ -1296,7 +1296,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a case in the specified Cases domain. Case system and custom fields are taken\n      as an array id/value pairs with a declared data types.</p>\n         <note>\n            <p>The following fields are required when creating a case:</p>\n      \n            <ul>\n               <li>\n                  <p>\n                     <code>customer_id</code> - You must provide the full customer profile ARN in this\n            format: <code>arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles\n              domain name/profiles/profile ID</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>title</code>\n                  </p>\n               </li>\n            </ul>\n\n         </note>",
+                "smithy.api#documentation": "<p>Creates a case in the specified Cases domain. Case system and custom fields are taken\n      as an array id/value pairs with a declared data types.</p>\n          <p>The following fields are required when creating a case:</p>\n      \n         <ul>\n            <li>\n               <p>\n                  <code>customer_id</code> - You must provide the full customer profile ARN in this\n            format: <code>arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>title</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/cases",
                     "method": "POST"
@@ -1844,7 +1844,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a Cases domain.</p>\n    \n    \n         <note>\n            <p>After deleting your domain you must disassociate the deleted domain from your Amazon Connect instance with another API call before being able to use Cases again with this\n          Amazon Connect instance. See <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteIntegrationAssociation.html\">DeleteIntegrationAssociation</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes a Cases domain.</p>\n    \n\n         <note>\n            <p>After deleting your domain you must disassociate the deleted domain from your Amazon Connect instance with another API call before being able to use Cases again with this\n          Amazon Connect instance. See <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteIntegrationAssociation.html\">DeleteIntegrationAssociation</a>.</p>\n         </note>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}",
                     "method": "DELETE"
@@ -1988,7 +1988,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An empty value. You cannot set <code>EmptyFieldValue</code> on a field that is required on a case template.</p>\n         <p>This structure will never have any data members. It signifies an empty value on a case field.</p>"
+                "smithy.api#documentation": "<p>An empty value. You cannot set <code>EmptyFieldValue</code> on a field that is required on\n      a case template.</p>\n         <p>This structure will never have any data members. It signifies an empty value on a case\n      field.</p>"
             }
         },
         "com.amazonaws.connectcases#EventBridgeConfiguration": {
@@ -2468,7 +2468,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>String value type.</p>",
                         "smithy.api#length": {
-                            "max": 500
+                            "max": 1500
                         }
                     }
                 },
@@ -3827,7 +3827,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>API for adding case event publishing configuration</p>",
+                "smithy.api#documentation": "<p>Adds case event publishing configuration. For a complete list of\n      fields you can add to the event message, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html\">Create case fields</a> in the\n      <i>Amazon Connect Administrator Guide</i>\n         </p>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/case-event-configuration",
                     "method": "PUT"
@@ -4961,7 +4961,7 @@
                 "content": {
                     "target": "com.amazonaws.connectcases#LayoutContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about which fields will be present in the layout, the order of the fields, and\n      a read-only attribute of the field. </p>"
+                        "smithy.api#documentation": "<p>Information about which fields will be present in the layout, the order of the fields.</p>"
                     }
                 }
             }
