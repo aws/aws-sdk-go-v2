@@ -49,7 +49,7 @@ type UpdateLayoutInput struct {
 	LayoutId *string
 
 	// Information about which fields will be present in the layout, the order of the
-	// fields, and a read-only attribute of the field.
+	// fields.
 	Content types.LayoutContent
 
 	// The name of the layout. It must be unique per domain.

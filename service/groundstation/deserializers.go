@@ -8079,6 +8079,18 @@ loop:
 			uv = &types.KmsKeyMemberKmsAliasArn{Value: mv}
 			break loop
 
+		case "kmsAliasName":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KeyAliasName to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.KmsKeyMemberKmsAliasName{Value: mv}
+			break loop
+
 		case "kmsKeyArn":
 			var mv string
 			if value != nil {

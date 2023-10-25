@@ -768,6 +768,7 @@ type IntegerRange struct {
 // The following types satisfy this interface:
 //
 //	KmsKeyMemberKmsAliasArn
+//	KmsKeyMemberKmsAliasName
 //	KmsKeyMemberKmsKeyArn
 type KmsKey interface {
 	isKmsKey()
@@ -781,6 +782,15 @@ type KmsKeyMemberKmsAliasArn struct {
 }
 
 func (*KmsKeyMemberKmsAliasArn) isKmsKey() {}
+
+// KMS Alias Name.
+type KmsKeyMemberKmsAliasName struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*KmsKeyMemberKmsAliasName) isKmsKey() {}
 
 // KMS Key Arn.
 type KmsKeyMemberKmsKeyArn struct {

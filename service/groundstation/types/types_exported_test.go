@@ -125,6 +125,9 @@ func ExampleKmsKey_outputUsage() {
 	case *types.KmsKeyMemberKmsAliasArn:
 		_ = v.Value // Value is string
 
+	case *types.KmsKeyMemberKmsAliasName:
+		_ = v.Value // Value is string
+
 	case *types.KmsKeyMemberKmsKeyArn:
 		_ = v.Value // Value is string
 
@@ -137,5 +140,6 @@ func ExampleKmsKey_outputUsage() {
 	}
 }
 
+var _ *string
 var _ *string
 var _ *string

@@ -3394,6 +3394,10 @@ func awsRestjson1_serializeDocumentKmsKey(v types.KmsKey, value smithyjson.Value
 		av := object.Key("kmsAliasArn")
 		av.String(uv.Value)
 
+	case *types.KmsKeyMemberKmsAliasName:
+		av := object.Key("kmsAliasName")
+		av.String(uv.Value)
+
 	case *types.KmsKeyMemberKmsKeyArn:
 		av := object.Key("kmsKeyArn")
 		av.String(uv.Value)
