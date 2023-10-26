@@ -296,7 +296,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -339,7 +338,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -352,7 +352,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -366,7 +365,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -389,7 +387,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -424,7 +421,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -435,14 +431,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -456,14 +454,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -472,11 +468,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -525,14 +521,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -546,7 +544,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -566,7 +563,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -577,14 +573,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -595,9 +593,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1482,6 +1482,9 @@
                     "target": "com.amazonaws.sns#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.sns#ReplayLimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.sns#SubscriptionLimitExceededException"
                 }
             ],
@@ -1791,7 +1794,7 @@
                 "Attributes": {
                     "target": "com.amazonaws.sns#TopicAttributesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of attributes with their corresponding values.</p>\n         <p>The following lists the names, descriptions, and values of the special request\n            parameters that the <code>CreateTopic</code> action uses:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries\n                    failed deliveries to HTTP/S endpoints.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DisplayName</code> – The display name to use for a topic with SMS\n                    subscriptions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FifoTopic</code> – Set to true to create a FIFO topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Policy</code> – The policy that defines who can access your\n                    topic. By default, only the topic owner can publish or subscribe to the\n                    topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SignatureVersion</code> – The signature version corresponds to\n                    the hashing algorithm used while creating the signature of the notifications,\n                    subscription confirmations, or unsubscribe confirmation messages sent by Amazon SNS.\n                    By default, <code>SignatureVersion</code> is set to <code>1</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TracingConfig</code> – Tracing mode of an Amazon SNS topic. By default\n                        <code>TracingConfig</code> is set to <code>PassThrough</code>, and the topic\n                    passes through the tracing header it receives from an Amazon SNS publisher to its\n                    subscriptions. If set to <code>Active</code>, Amazon SNS will vend X-Ray segment data\n                    to topic owner account if the sampled flag in the tracing header is true. This\n                    is only supported on standard topics.</p>\n            </li>\n         </ul>\n         <p>The following attribute applies only to <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html\">server-side\n            encryption</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KmsMasterKeyId</code> – The ID of an Amazon Web Services managed customer master\n                    key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms\">Key\n                        Terms</a>. For more examples, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">KeyId</a> in the <i>Key Management Service API Reference</i>. </p>\n            </li>\n         </ul>\n         <p>The following attributes apply only to <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html\">FIFO topics</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FifoTopic</code> – When this is set to <code>true</code>, a FIFO\n                topic is created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ContentBasedDeduplication</code> – Enables content-based deduplication for\n                    FIFO topics.</p>\n               <ul>\n                  <li>\n                     <p>By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>.\n                            If you create a FIFO topic and this attribute is <code>false</code>, you must\n                            specify a value for the <code>MessageDeduplicationId</code> parameter for the\n                            <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Publish.html\">Publish</a> action. </p>\n                  </li>\n                  <li>\n                     <p>When you set <code>ContentBasedDeduplication</code> to <code>true</code>, \n                            Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using \n                            the body of the message (but not the attributes of the message).</p>\n                     <p>(Optional) To override the generated value, you can specify a value\n                            for the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code>\n                            action.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A map of attributes with their corresponding values.</p>\n         <p>The following lists the names, descriptions, and values of the special request\n            parameters that the <code>CreateTopic</code> action uses:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries\n                    failed deliveries to HTTP/S endpoints.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DisplayName</code> – The display name to use for a topic with SMS\n                    subscriptions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FifoTopic</code> – Set to true to create a FIFO topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Policy</code> – The policy that defines who can access your\n                    topic. By default, only the topic owner can publish or subscribe to the\n                    topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SignatureVersion</code> – The signature version corresponds to\n                    the hashing algorithm used while creating the signature of the notifications,\n                    subscription confirmations, or unsubscribe confirmation messages sent by Amazon SNS.\n                    By default, <code>SignatureVersion</code> is set to <code>1</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TracingConfig</code> – Tracing mode of an Amazon SNS topic. By default\n                        <code>TracingConfig</code> is set to <code>PassThrough</code>, and the topic\n                    passes through the tracing header it receives from an Amazon SNS publisher to its\n                    subscriptions. If set to <code>Active</code>, Amazon SNS will vend X-Ray segment data\n                    to topic owner account if the sampled flag in the tracing header is true. This\n                    is only supported on standard topics.</p>\n            </li>\n         </ul>\n         <p>The following attribute applies only to <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html\">server-side\n            encryption</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KmsMasterKeyId</code> – The ID of an Amazon Web Services managed customer master\n                    key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms\">Key\n                        Terms</a>. For more examples, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">KeyId</a> in the <i>Key Management Service API Reference</i>. </p>\n            </li>\n         </ul>\n         <p>The following attributes apply only to <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html\">FIFO topics</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ArchivePolicy</code> – Adds or updates an inline policy document\n                    to archive messages stored in the specified Amazon SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BeginningArchiveTime</code> – The earliest starting point at\n                    which a message in the topic’s archive can be replayed from. This point in time\n                    is based on the configured message retention period set by the topic’s message\n                    archiving policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ContentBasedDeduplication</code> – Enables content-based deduplication for\n                    FIFO topics.</p>\n               <ul>\n                  <li>\n                     <p>By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>.\n                            If you create a FIFO topic and this attribute is <code>false</code>, you must\n                            specify a value for the <code>MessageDeduplicationId</code> parameter for the\n                            <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Publish.html\">Publish</a> action. </p>\n                  </li>\n                  <li>\n                     <p>When you set <code>ContentBasedDeduplication</code> to <code>true</code>, \n                            Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using \n                            the body of the message (but not the attributes of the message).</p>\n                     <p>(Optional) To override the generated value, you can specify a value\n                            for the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code>\n                            action.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "Tags": {
@@ -1985,6 +1988,9 @@
                 },
                 {
                     "target": "com.amazonaws.sns#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.sns#InvalidStateException"
                 },
                 {
                     "target": "com.amazonaws.sns#NotFoundException"
@@ -2571,6 +2577,23 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.sns#InvalidStateException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.sns#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidState",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>Indicates that the specified state is not a valid state for an event source.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.sns#Iso2CountryCode": {
             "type": "string",
             "traits": {
@@ -2611,7 +2634,7 @@
                     "code": "KMSDisabled",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The request was rejected because the specified customer master key (CMK) isn't\n            enabled.</p>",
+                "smithy.api#documentation": "<p>The request was rejected because the specified Amazon Web Services KMS key isn't\n            enabled.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -2628,7 +2651,7 @@
                     "code": "KMSInvalidState",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The request was rejected because the state of the specified resource isn't valid for\n            this request. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">How Key State Affects Use of a\n                Customer Master Key</a> in the <i>Key Management Service Developer\n                Guide</i>.</p>",
+                "smithy.api#documentation": "<p>The request was rejected because the state of the specified resource isn't valid for\n            this request. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of Amazon Web Services KMS keys</a> in the <i>Key Management Service Developer\n                Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4164,6 +4187,23 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.sns#ReplayLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.sns#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReplayLimitExceeded",
+                    "httpResponseCode": 403
+                },
+                "smithy.api#documentation": "<p>Indicates that the request parameter has exceeded the maximum number of concurrent message replays.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
         "com.amazonaws.sns#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -4424,6 +4464,9 @@
                 },
                 {
                     "target": "com.amazonaws.sns#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sns#ReplayLimitExceededException"
                 }
             ],
             "traits": {
@@ -4565,11 +4608,14 @@
                     "target": "com.amazonaws.sns#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.sns#ReplayLimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.sns#SubscriptionLimitExceededException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is HTTP/S or email, or\n            if the endpoint and the topic are not in the same Amazon Web Services account, the endpoint owner must\n            run the <code>ConfirmSubscription</code> action to confirm the subscription.</p>\n         <p>You call the <code>ConfirmSubscription</code> action with the token from the\n            subscription response. Confirmation tokens are valid for three days.</p>\n         <p>This action is throttled at 100 transactions per second (TPS).</p>"
+                "smithy.api#documentation": "<p>Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is HTTP/S or email, or\n            if the endpoint and the topic are not in the same Amazon Web Services account, the endpoint owner must\n            run the <code>ConfirmSubscription</code> action to confirm the subscription.</p>\n         <p>You call the <code>ConfirmSubscription</code> action with the token from the\n            subscription response. Confirmation tokens are valid for two days.</p>\n         <p>This action is throttled at 100 transactions per second (TPS).</p>"
             }
         },
         "com.amazonaws.sns#SubscribeInput": {
@@ -4598,7 +4644,7 @@
                 "Attributes": {
                     "target": "com.amazonaws.sns#SubscriptionAttributesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of attributes with their corresponding values.</p>\n         <p>The following lists the names, descriptions, and values of the special request\n            parameters that the <code>Subscribe</code> action uses:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries\n                    failed deliveries to HTTP/S endpoints.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FilterPolicy</code> – The simple JSON object that lets your\n                    subscriber receive only a subset of messages, rather than receiving every\n                    message published to the topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FilterPolicyScope</code> – This attribute lets you choose the\n                    filtering scope by using one of the following string value types:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>MessageAttributes</code> (default) – The filter is\n                            applied on the message attributes.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>MessageBody</code> – The filter is applied on the message\n                            body.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>RawMessageDelivery</code> – When set to <code>true</code>,\n                    enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the\n                    need for the endpoints to process JSON formatting, which is otherwise created\n                    for Amazon SNS metadata.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. \n    Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable)\n    or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held \n    in the dead-letter queue for further analysis or reprocessing.</p>\n            </li>\n         </ul>\n         <p>The following attribute applies only to Amazon Kinesis Data Firehose delivery stream subscriptions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SubscriptionRoleArn</code> – The ARN of the IAM role that has the following:</p>\n               <ul>\n                  <li>\n                     <p>Permission to write to the Kinesis Data Firehose delivery stream</p>\n                  </li>\n                  <li>\n                     <p>Amazon SNS listed as a trusted entity</p>\n                  </li>\n               </ul>\n               <p>Specifying a valid ARN for this attribute is required for Kinesis Data Firehose delivery stream subscriptions. \n                For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html\">Fanout \n                    to Kinesis Data Firehose delivery streams</a> in the <i>Amazon SNS Developer Guide</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A map of attributes with their corresponding values.</p>\n         <p>The following lists the names, descriptions, and values of the special request\n            parameters that the <code>Subscribe</code> action uses:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries\n                    failed deliveries to HTTP/S endpoints.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FilterPolicy</code> – The simple JSON object that lets your\n                    subscriber receive only a subset of messages, rather than receiving every\n                    message published to the topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FilterPolicyScope</code> – This attribute lets you choose the\n                    filtering scope by using one of the following string value types:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>MessageAttributes</code> (default) – The filter is\n                            applied on the message attributes.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>MessageBody</code> – The filter is applied on the message\n                            body.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>RawMessageDelivery</code> – When set to <code>true</code>,\n                    enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the\n                    need for the endpoints to process JSON formatting, which is otherwise created\n                    for Amazon SNS metadata.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. \n    Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable)\n    or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held \n    in the dead-letter queue for further analysis or reprocessing.</p>\n            </li>\n         </ul>\n         <p>The following attribute applies only to Amazon Kinesis Data Firehose delivery stream subscriptions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SubscriptionRoleArn</code> – The ARN of the IAM role that has the following:</p>\n               <ul>\n                  <li>\n                     <p>Permission to write to the Kinesis Data Firehose delivery stream</p>\n                  </li>\n                  <li>\n                     <p>Amazon SNS listed as a trusted entity</p>\n                  </li>\n               </ul>\n               <p>Specifying a valid ARN for this attribute is required for Kinesis Data Firehose delivery stream subscriptions. \n                For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html\">Fanout \n                    to Kinesis Data Firehose delivery streams</a> in the <i>Amazon SNS Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>The following attributes apply only to <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html\">FIFO topics</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ReplayPolicy</code> – Adds or updates an inline policy document\n                    for a subscription to replay messages stored in the specified Amazon SNS\n                    topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ReplayStatus</code> – Retrieves the status of the subscription\n                    message replay, which can be one of the following:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Completed</code> – The replay has successfully\n                            redelivered all messages, and is now delivering newly published\n                            messages. If an ending point was specified in the\n                                <code>ReplayPolicy</code> then the subscription will no longer\n                            receive newly published messages.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>In progress</code> – The replay is currently replaying\n                            the selected messages.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Failed</code> – The replay was unable to complete.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Pending</code> – The default state while the replay\n                            initiates.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "ReturnSubscriptionArn": {

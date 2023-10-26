@@ -936,6 +936,81 @@
                                                     ],
                                                     "rules": [
                                                         {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://aos.{Region}.api.aws",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-cn",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://aos.{Region}.api.amazonwebservices.com.cn",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://aos.{Region}.api.aws",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
                                                             "conditions": [],
                                                             "endpoint": {
                                                                 "url": "https://es.{Region}.{PartitionResult#dualStackDnsSuffix}",
@@ -1334,7 +1409,7 @@
                             "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://es.us-east-1.api.aws"
+                                    "url": "https://aos.us-east-1.api.aws"
                                 }
                             },
                             "params": {
@@ -1399,7 +1474,7 @@
                             "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://es.cn-north-1.api.amazonwebservices.com.cn"
+                                    "url": "https://aos.cn-north-1.api.amazonwebservices.com.cn"
                                 }
                             },
                             "params": {
@@ -1477,7 +1552,7 @@
                             "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://es.us-gov-east-1.api.aws"
+                                    "url": "https://aos.us-gov-east-1.api.aws"
                                 }
                             },
                             "params": {
@@ -2828,6 +2903,12 @@
                     "target": "com.amazonaws.opensearch#PolicyDocument",
                     "traits": {
                         "smithy.api#documentation": "<p>Identity and Access Management (IAM) policy document specifying the access policies for the\n   new domain.</p>"
+                    }
+                },
+                "IPAddressType": {
+                    "target": "com.amazonaws.opensearch#IPAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of IP addresses supported by the endpoint for the domain.</p>"
                     }
                 },
                 "SnapshotOptions": {
@@ -5044,6 +5125,12 @@
                         "smithy.api#documentation": "<p>Specifies the access policies for the domain.</p>"
                     }
                 },
+                "IPAddressType": {
+                    "target": "com.amazonaws.opensearch#IPAddressTypeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of IP addresses supported by the endpoint for the domain.</p>"
+                    }
+                },
                 "SnapshotOptions": {
                     "target": "com.amazonaws.opensearch#SnapshotOptionsStatus",
                     "traits": {
@@ -5275,7 +5362,7 @@
                 "MaintenanceId": {
                     "target": "com.amazonaws.opensearch#RequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Id of the requested action.</p>"
+                        "smithy.api#documentation": "<p>The ID of the requested action.</p>"
                     }
                 },
                 "DomainName": {
@@ -5293,7 +5380,7 @@
                 "NodeId": {
                     "target": "com.amazonaws.opensearch#NodeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Id of the data node.</p>"
+                        "smithy.api#documentation": "<p>The ID of the data node.</p>"
                     }
                 },
                 "Status": {
@@ -5305,19 +5392,19 @@
                 "StatusMessage": {
                     "target": "com.amazonaws.opensearch#MaintenanceStatusMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status message of the action.</p>"
+                        "smithy.api#documentation": "<p>The status message for the action.</p>"
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.opensearch#UpdateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains time at which action created.</p>"
+                        "smithy.api#documentation": "<p>The time at which the action was created.</p>"
                     }
                 },
                 "UpdatedAt": {
                     "target": "com.amazonaws.opensearch#UpdateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains time at which action updated.</p>"
+                        "smithy.api#documentation": "<p>The time at which the action was updated.</p>"
                     }
                 }
             },
@@ -5594,6 +5681,9 @@
                         "smithy.api#documentation": "<p>Domain-specific endpoint used to submit index, search, and data upload requests to the\n   domain.</p>"
                     }
                 },
+                "EndpointV2": {
+                    "target": "com.amazonaws.opensearch#ServiceUrl"
+                },
                 "Endpoints": {
                     "target": "com.amazonaws.opensearch#EndpointsMap",
                     "traits": {
@@ -5635,6 +5725,12 @@
                     "target": "com.amazonaws.opensearch#PolicyDocument",
                     "traits": {
                         "smithy.api#documentation": "<p>Identity and Access Management (IAM) policy document specifying the access policies for the\n   domain.</p>"
+                    }
+                },
+                "IPAddressType": {
+                    "target": "com.amazonaws.opensearch#IPAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of IP addresses supported by the endpoint for the domain.</p>"
                     }
                 },
                 "SnapshotOptions": {
@@ -6163,7 +6259,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get the status of the maintenance action.</p>",
+                "smithy.api#documentation": "<p>The status of the maintenance action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenance",
@@ -6185,7 +6281,7 @@
                 "MaintenanceId": {
                     "target": "com.amazonaws.opensearch#RequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The request id of the maintenance action.</p>",
+                        "smithy.api#documentation": "<p>The request ID of the maintenance action.</p>",
                         "smithy.api#httpQuery": "maintenanceId",
                         "smithy.api#required": {}
                     }
@@ -6202,42 +6298,42 @@
                 "Status": {
                     "target": "com.amazonaws.opensearch#MaintenanceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains status of the maintenance action.</p>"
+                        "smithy.api#documentation": "<p>The status of the maintenance action.</p>"
                     }
                 },
                 "StatusMessage": {
                     "target": "com.amazonaws.opensearch#MaintenanceStatusMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains status message of the maintenance action.</p>"
+                        "smithy.api#documentation": "<p>The status message of the maintenance action.</p>"
                     }
                 },
                 "NodeId": {
                     "target": "com.amazonaws.opensearch#NodeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains node id of maintenance action.</p>"
+                        "smithy.api#documentation": "<p>The node ID of the maintenance action.</p>"
                     }
                 },
                 "Action": {
                     "target": "com.amazonaws.opensearch#MaintenanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains action name.</p>"
+                        "smithy.api#documentation": "<p>The action name.</p>"
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.opensearch#UpdateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains time at which action created.</p>"
+                        "smithy.api#documentation": "<p>The time at which the action was created.</p>"
                     }
                 },
                 "UpdatedAt": {
                     "target": "com.amazonaws.opensearch#UpdateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains time at which action updated.</p>"
+                        "smithy.api#documentation": "<p>The time at which the action was updated.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a <code>GetDomainMaintenanceStatus</code> request. Contains information about the requested action. </p>",
+                "smithy.api#documentation": "<p>The result of a <code>GetDomainMaintenanceStatus</code> request that information about the requested action.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -6507,6 +6603,44 @@
             "traits": {
                 "smithy.api#documentation": "<p>Container for the response returned by the <code>GetUpgradeStatus</code> operation.</p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.opensearch#IPAddressType": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
+                    }
+                },
+                "DUALSTACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dualstack"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.opensearch#IPAddressTypeStatus": {
+            "type": "structure",
+            "members": {
+                "Options": {
+                    "target": "com.amazonaws.opensearch#IPAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address options for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.opensearch#OptionStatus",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The IP address type status for the domain.</p>"
             }
         },
         "com.amazonaws.opensearch#IdentityPoolId": {
@@ -6933,7 +7067,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get the list of the maintenance action.</p>",
+                "smithy.api#documentation": "<p>A list of maintenance actions for the domain.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenances",
@@ -6982,7 +7116,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListDomainMaintenances</code> operation returns a\n   <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent\n   <code>ListDomainMaintenances</code> operations, which returns results in the next page.</p>",
+                        "smithy.api#documentation": "<p>If your initial <code>ListDomainMaintenances</code> operation returns a\n   <code>nextToken</code>, include the returned <code>nextToken</code> in subsequent\n   <code>ListDomainMaintenances</code> operations, which returns results in the next page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -6998,7 +7132,7 @@
                 "DomainMaintenances": {
                     "target": "com.amazonaws.opensearch#DomainMaintenanceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of the submitted maintenance actions.</p>"
+                        "smithy.api#documentation": "<p>A list of the submitted maintenance actions.</p>"
                     }
                 },
                 "NextToken": {
@@ -7009,7 +7143,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a <code>ListDomainMaintenances</code> request. Contains information about the requested actions. </p>",
+                "smithy.api#documentation": "<p>The result of a <code>ListDomainMaintenances</code> request that contains information about the requested actions. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -10540,7 +10674,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the node maintenance (Node restart, Node reboot, Opensearch/Elasticsearch process restart,\n   Dashboard/kibana restart) on the data node.</p>",
+                "smithy.api#documentation": "<p>Starts the node maintenance process on the data node. These processes can include a node reboot, an Opensearch or Elasticsearch process restart,\n   or a Dashboard or Kibana restart.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenance",
@@ -10569,7 +10703,7 @@
                 "NodeId": {
                     "target": "com.amazonaws.opensearch#NodeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Id of the data node.</p>"
+                        "smithy.api#documentation": "<p>The ID of the data node.</p>"
                     }
                 }
             },
@@ -10584,12 +10718,12 @@
                 "MaintenanceId": {
                     "target": "com.amazonaws.opensearch#RequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains request id of requested action.</p>"
+                        "smithy.api#documentation": "<p>The request ID of requested action.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a <code>StartDomainMaintenance</code> request. Contains information about the requested action. </p>",
+                "smithy.api#documentation": "<p>The result of a <code>StartDomainMaintenance</code> request that information about the requested action. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -10959,6 +11093,12 @@
                     "target": "com.amazonaws.opensearch#PolicyDocument",
                     "traits": {
                         "smithy.api#documentation": "<p>Identity and Access Management (IAM) access policy as a JSON-formatted string.</p>"
+                    }
+                },
+                "IPAddressType": {
+                    "target": "com.amazonaws.opensearch#IPAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of IP addresses supported by the endpoint for the domain.</p>"
                     }
                 },
                 "LogPublishingOptions": {

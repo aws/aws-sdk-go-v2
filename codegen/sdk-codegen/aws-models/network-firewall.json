@@ -434,6 +434,26 @@
                 "target": "com.amazonaws.networkfirewall#TlsCertificateData"
             }
         },
+        "com.amazonaws.networkfirewall#CheckCertificateRevocationStatusActions": {
+            "type": "structure",
+            "members": {
+                "RevokedStatusAction": {
+                    "target": "com.amazonaws.networkfirewall#RevocationCheckAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures how Network Firewall processes traffic when it determines that the certificate presented by the server in the SSL/TLS connection has a revoked status.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>PASS</b> - Allow the connection to continue, and pass subsequent packets to the stateful engine for inspection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DROP</b> - Network Firewall fails closed and drops all subsequent traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <b>REJECT</b> - Network Firewall sends a TCP reject packet back to your client so that the client can immediately establish a new session. Network Firewall then fails closed and drops all subsequent traffic. <code>REJECT</code> is available only for TCP traffic.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "UnknownStatusAction": {
+                    "target": "com.amazonaws.networkfirewall#RevocationCheckAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures how Network Firewall processes traffic when it determines that the certificate presented by the server in the SSL/TLS connection has an unknown status, or a status that cannot be determined for any other reason, including when the service is unable to connect to the OCSP and CRL endpoints for the certificate.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>PASS</b> - Allow the connection to continue, and pass subsequent packets to the stateful engine for inspection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DROP</b> - Network Firewall fails closed and drops all subsequent traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <b>REJECT</b> - Network Firewall sends a TCP reject packet back to your client so that the client can immediately establish a new session. Network Firewall then fails closed and drops all subsequent traffic. <code>REJECT</code> is available only for TCP traffic. </p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the actions to take on the SSL/TLS connection if the certificate presented by the server in the connection has a revoked or unknown status.</p>"
+            }
+        },
         "com.amazonaws.networkfirewall#CollectionMember_String": {
             "type": "string"
         },
@@ -834,7 +854,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Network Firewall TLS inspection configuration. A TLS inspection configuration contains the Certificate Manager certificate references that Network Firewall uses to decrypt and re-encrypt inbound traffic.</p>\n         <p>After you create a TLS inspection configuration, you associate it with a new firewall policy.</p>\n         <p>To update the settings for a TLS inspection configuration, use <a>UpdateTLSInspectionConfiguration</a>.</p>\n         <p>To manage a TLS inspection configuration's tags, use the standard Amazon Web Services resource tagging operations, <a>ListTagsForResource</a>, <a>TagResource</a>, and <a>UntagResource</a>.</p>\n         <p>To retrieve information about TLS inspection configurations, use <a>ListTLSInspectionConfigurations</a> and <a>DescribeTLSInspectionConfiguration</a>.</p>\n         <p>\n              For more information about TLS inspection configurations, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html\">Decrypting SSL/TLS traffic with TLS\ninspection configurations</a> in the <i>Network Firewall Developer Guide</i>.\n            </p>"
+                "smithy.api#documentation": "<p>Creates an Network Firewall TLS inspection configuration. A TLS inspection configuration contains the Certificate Manager certificate associations that Network Firewall uses to decrypt and re-encrypt traffic traveling through your firewall.</p>\n         <p>After you create a TLS inspection configuration, you can associate it with a new firewall policy.</p>\n         <p>To update the settings for a TLS inspection configuration, use <a>UpdateTLSInspectionConfiguration</a>.</p>\n         <p>To manage a TLS inspection configuration's tags, use the standard Amazon Web Services resource tagging operations, <a>ListTagsForResource</a>, <a>TagResource</a>, and <a>UntagResource</a>.</p>\n         <p>To retrieve information about TLS inspection configurations, use <a>ListTLSInspectionConfigurations</a> and <a>DescribeTLSInspectionConfiguration</a>.</p>\n         <p>\n              For more information about TLS inspection configurations, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html\">Inspecting SSL/TLS traffic with TLS\ninspection configurations</a> in the <i>Network Firewall Developer Guide</i>.\n            </p>"
             }
         },
         "com.amazonaws.networkfirewall#CreateTLSInspectionConfigurationRequest": {
@@ -850,7 +870,7 @@
                 "TLSInspectionConfiguration": {
                     "target": "com.amazonaws.networkfirewall#TLSInspectionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>\n         <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>\n         <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect inbound traffic. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html\">Decrypting SSL/TLS traffic with TLS\ninspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>\n         <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>\n         <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html\">Inspecting SSL/TLS traffic with TLS\ninspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1749,7 +1769,7 @@
                 "TLSInspectionConfiguration": {
                     "target": "com.amazonaws.networkfirewall#TLSInspectionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>\n         <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>\n         <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect inbound traffic. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html\">Decrypting SSL/TLS traffic with TLS\ninspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>\n         <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>\n         <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html\">Inspecting SSL/TLS traffic with TLS\ninspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>"
                     }
                 },
                 "TLSInspectionConfigurationResponse": {
@@ -2518,7 +2538,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Your request is valid, but Network Firewall couldn’t perform the operation because of a\n         system problem. Retry your request. </p>",
+                "smithy.api#documentation": "<p>Your request is valid, but Network Firewall couldn't perform the operation because of a\n         system problem. Retry your request. </p>",
                 "smithy.api#error": "server"
             }
         },
@@ -4628,6 +4648,35 @@
                     "traits": {
                         "smithy.api#enumValue": "DELETING"
                     }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#RevocationCheckAction": {
+            "type": "enum",
+            "members": {
+                "PASS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASS"
+                    }
+                },
+                "DROP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DROP"
+                    }
+                },
+                "REJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECT"
+                    }
                 }
             }
         },
@@ -4983,12 +5032,12 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.networkfirewall#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Certificate Manager SSL/TLS server certificate.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Certificate Manager SSL/TLS server certificate that's used for inbound SSL/TLS inspection.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Any Certificate Manager Secure Sockets Layer/Transport Layer Security (SSL/TLS) server certificate that's associated with a <a>ServerCertificateConfiguration</a> used in a <a>TLSInspectionConfiguration</a>. You must request or import a SSL/TLS certificate into ACM for each domain Network Firewall needs to decrypt and inspect. Network Firewall uses the SSL/TLS certificates to decrypt specified inbound SSL/TLS traffic going to your firewall. For information about working with certificates in Certificate Manager, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html\">Request a public certificate </a> or <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates</a> in the <i>Certificate Manager User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Any Certificate Manager (ACM) Secure Sockets Layer/Transport Layer Security (SSL/TLS) server certificate that's associated with a <a>ServerCertificateConfiguration</a>. Used in a <a>TLSInspectionConfiguration</a> for inspection of inbound traffic to your firewall. You must request or import a SSL/TLS certificate into ACM for each domain Network Firewall needs to decrypt and inspect. Network Firewall uses the SSL/TLS certificates to decrypt specified inbound SSL/TLS traffic going to your firewall. For information about working with certificates in Certificate Manager, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html\">Request a public certificate </a> or <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates</a> in the <i>Certificate Manager User Guide</i>.</p>"
             }
         },
         "com.amazonaws.networkfirewall#ServerCertificateConfiguration": {
@@ -4997,18 +5046,30 @@
                 "ServerCertificates": {
                     "target": "com.amazonaws.networkfirewall#ServerCertificates",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of a server certificate configuration's Certificate Manager SSL/TLS certificates.</p>"
+                        "smithy.api#documentation": "<p>The list of a server certificate configuration's Certificate Manager certificates, used for inbound SSL/TLS inspection.</p>"
                     }
                 },
                 "Scopes": {
                     "target": "com.amazonaws.networkfirewall#ServerCertificateScopes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of a server certificate configuration's scopes.</p>"
+                        "smithy.api#documentation": "<p>A list of scopes.</p>"
+                    }
+                },
+                "CertificateAuthorityArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the imported certificate authority (CA) certificate configured in Certificate Manager (ACM) to use for outbound SSL/TLS inspection.</p>\n         <p>The following limitations apply:</p>\n         <ul>\n            <li>\n               <p>You can use CA certificates that you imported into ACM, but you can't generate CA certificates with ACM.</p>\n            </li>\n            <li>\n               <p>You can't use certificates issued by Private Certificate Authority.</p>\n            </li>\n         </ul>\n         <p>For more information about the certificate requirements for outbound inspection, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html\">Requirements for using SSL/TLS certificates with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>. </p>\n         <p>For information about working with certificates in ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates</a> in the <i>Certificate Manager User Guide</i>.</p>"
+                    }
+                },
+                "CheckCertificateRevocationStatus": {
+                    "target": "com.amazonaws.networkfirewall#CheckCertificateRevocationStatusActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When enabled, Network Firewall checks if the server certificate presented by the server in the SSL/TLS connection has a revoked or unkown status. If the certificate has an unknown or revoked status, you must specify the actions that Network Firewall takes on outbound traffic. To use this option, you must specify a <code>CertificateAuthorityArn</code> in <a>ServerCertificateConfiguration</a>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures the associated Certificate Manager Secure Sockets Layer/Transport Layer Security (SSL/TLS) server certificates and scope settings Network Firewall uses to decrypt traffic in a <a>TLSInspectionConfiguration</a>. For information about working with SSL/TLS certificates for TLS inspection, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html\"> Requirements for using SSL/TLS server certficiates with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>\n         <note>\n            <p>If a server certificate that's associated with your <a>TLSInspectionConfiguration</a> is revoked, deleted, or expired it can result in client-side TLS errors.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Configures the Certificate Manager certificates and scope that Network Firewall uses to decrypt and re-encrypt traffic using a <a>TLSInspectionConfiguration</a>. You can configure <code>ServerCertificates</code> for inbound SSL/TLS inspection, a <code>CertificateAuthorityArn</code> for outbound SSL/TLS inspection, or both. For information about working with certificates for TLS inspection, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html\"> Requirements for using SSL/TLS server certficiates with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>\n         <note>\n            <p>If a server certificate that's associated with your <a>TLSInspectionConfiguration</a> is revoked, deleted, or expired it can result in client-side TLS errors.</p>\n         </note>"
             }
         },
         "com.amazonaws.networkfirewall#ServerCertificateConfigurations": {
@@ -5675,7 +5736,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>\n         <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>\n         <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect inbound traffic. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html\">Decrypting SSL/TLS traffic with TLS\ninspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>\n         <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>\n         <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html\">Inspecting SSL/TLS traffic with TLS\ninspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.networkfirewall#TLSInspectionConfigurationMetadata": {
@@ -5763,6 +5824,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the certificates associated with the TLS inspection configuration.</p>"
                     }
+                },
+                "CertificateAuthority": {
+                    "target": "com.amazonaws.networkfirewall#TlsCertificateData"
                 }
             },
             "traits": {
@@ -6851,7 +6915,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the TLS inspection configuration settings for the specified TLS inspection configuration. You use a TLS inspection configuration by\n        reference in one or more firewall policies. When you modify a TLS inspection configuration, you modify all\n        firewall policies that use the TLS inspection configuration. </p>\n         <p>To update a TLS inspection configuration, first call <a>DescribeTLSInspectionConfiguration</a> to retrieve the\n        current <a>TLSInspectionConfiguration</a> object, update the object as needed, and then provide\n        the updated object to this call. </p>"
+                "smithy.api#documentation": "<p>Updates the TLS inspection configuration settings for the specified TLS inspection configuration. You use a TLS inspection configuration by\n        referencing it in one or more firewall policies. When you modify a TLS inspection configuration, you modify all\n        firewall policies that use the TLS inspection configuration. </p>\n         <p>To update a TLS inspection configuration, first call <a>DescribeTLSInspectionConfiguration</a> to retrieve the\n        current <a>TLSInspectionConfiguration</a> object, update the object as needed, and then provide\n        the updated object to this call. </p>"
             }
         },
         "com.amazonaws.networkfirewall#UpdateTLSInspectionConfigurationRequest": {
@@ -6872,7 +6936,7 @@
                 "TLSInspectionConfiguration": {
                     "target": "com.amazonaws.networkfirewall#TLSInspectionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>\n         <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>\n         <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect inbound traffic. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html\">Decrypting SSL/TLS traffic with TLS\ninspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>\n         <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>\n         <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html\">Inspecting SSL/TLS traffic with TLS\ninspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },

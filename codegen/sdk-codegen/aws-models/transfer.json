@@ -1,33 +1,5 @@
 {
     "smithy": "2.0",
-    "metadata": {
-        "suppressions": [
-            {
-                "id": "HttpMethodSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpResponseCodeSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "PaginatedTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpHeaderTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpUriConflict",
-                "namespace": "*"
-            },
-            {
-                "id": "Service",
-                "namespace": "*"
-            }
-        ]
-    },
     "shapes": {
         "com.amazonaws.transfer#AccessDeniedException": {
             "type": "structure",
@@ -865,7 +837,7 @@
                     }
                 },
                 "LoggingRole": {
-                    "target": "com.amazonaws.transfer#Role",
+                    "target": "com.amazonaws.transfer#NullableRole",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFSevents. When set, you can view user activity in\n      your CloudWatch logs.</p>"
                     }
@@ -1017,7 +989,7 @@
                 "SshPublicKeyBody": {
                     "target": "com.amazonaws.transfer#SshPublicKeyBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The public portion of the Secure Shell (SSH) key used to authenticate the user to the\n      server.</p>\n         <p>The three standard SSH public key format elements are <code><key type></code>,\n        <code><body base64></code>, and  an optional <code><comment></code>, with spaces\n      between each element.</p>\n         <p>Transfer Family accepts RSA, ECDSA, and ED25519 keys.</p>\n         <ul>\n            <li>\n               <p>For RSA keys, the key type  is <code>ssh-rsa</code>.</p>\n            </li>\n            <li>\n               <p>For ED25519 keys, the key type is <code>ssh-ed25519</code>.</p>\n            </li>\n            <li>\n               <p>For ECDSA keys, the key type is either <code>ecdsa-sha2-nistp256</code>,\n            <code>ecdsa-sha2-nistp384</code>, or <code>ecdsa-sha2-nistp521</code>, depending on the\n          size of the key you generated.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The public portion of the Secure Shell (SSH) key used to authenticate the user to the\n      server.</p>\n         <p>The three standard SSH public key format elements are <code>&lt;key type&gt;</code>,\n        <code>&lt;body base64&gt;</code>, and  an optional <code>&lt;comment&gt;</code>, with spaces\n      between each element.</p>\n         <p>Transfer Family accepts RSA, ECDSA, and ED25519 keys.</p>\n         <ul>\n            <li>\n               <p>For RSA keys, the key type  is <code>ssh-rsa</code>.</p>\n            </li>\n            <li>\n               <p>For ED25519 keys, the key type is <code>ssh-ed25519</code>.</p>\n            </li>\n            <li>\n               <p>For ECDSA keys, the key type is either <code>ecdsa-sha2-nistp256</code>,\n            <code>ecdsa-sha2-nistp384</code>, or <code>ecdsa-sha2-nistp521</code>, depending on the\n          size of the key you generated.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Tags": {
@@ -1758,7 +1730,8 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the access that is assigned to the specific file transfer protocol-enabled\n      server, as identified by its <code>ServerId</code> property and its\n      <code>ExternalId</code>.</p>\n         <p>The response from this call returns the properties of the access that is associated with\n      the <code>ServerId</code> value that was specified.</p>"
+                "smithy.api#documentation": "<p>Describes the access that is assigned to the specific file transfer protocol-enabled\n      server, as identified by its <code>ServerId</code> property and its\n      <code>ExternalId</code>.</p>\n         <p>The response from this call returns the properties of the access that is associated with\n      the <code>ServerId</code> value that was specified.</p>",
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#DescribeAccessRequest": {
@@ -1828,7 +1801,8 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the agreement that's identified by the <code>AgreementId</code>.</p>"
+                "smithy.api#documentation": "<p>Describes the agreement that's identified by the <code>AgreementId</code>.</p>",
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#DescribeAgreementRequest": {
@@ -1891,7 +1865,8 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the certificate that's identified by the <code>CertificateId</code>.</p>"
+                "smithy.api#documentation": "<p>Describes the certificate that's identified by the <code>CertificateId</code>.</p>",
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#DescribeCertificateRequest": {
@@ -1947,7 +1922,8 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the connector that's identified by the <code>ConnectorId.</code>\n         </p>"
+                "smithy.api#documentation": "<p>Describes the connector that's identified by the <code>ConnectorId.</code>\n         </p>",
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#DescribeConnectorRequest": {
@@ -2003,7 +1979,8 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>You can use <code>DescribeExecution</code> to check the details of the execution of the specified workflow.</p>\n         <note>\n            <p>This API call only returns details for in-progress workflows.</p>\n            <p>\n        If you provide an ID for an execution that is not in progress, or if the execution doesn't match the specified workflow ID, you receive a\n        <code>ResourceNotFound</code> exception.</p>\n         </note>"
+                "smithy.api#documentation": "<p>You can use <code>DescribeExecution</code> to check the details of the execution of the specified workflow.</p>\n         <note>\n            <p>This API call only returns details for in-progress workflows.</p>\n            <p>\n        If you provide an ID for an execution that is not in progress, or if the execution doesn't match the specified workflow ID, you receive a\n        <code>ResourceNotFound</code> exception.</p>\n         </note>",
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#DescribeExecutionRequest": {
@@ -2073,7 +2050,8 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details of the host key that's specified by the <code>HostKeyId</code> and <code>ServerId</code>.</p>"
+                "smithy.api#documentation": "<p>Returns the details of the host key that's specified by the <code>HostKeyId</code> and <code>ServerId</code>.</p>",
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#DescribeHostKeyRequest": {
@@ -2136,7 +2114,8 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details of the profile that's specified by the <code>ProfileId</code>.</p>"
+                "smithy.api#documentation": "<p>Returns the details of the profile that's specified by the <code>ProfileId</code>.</p>",
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#DescribeProfileRequest": {
@@ -2192,7 +2171,8 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the security policy that is attached to your file transfer protocol-enabled\n      server. The response contains a description of the security policy's properties. For more\n      information about security policies, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html\">Working with security\n        policies</a>.</p>"
+                "smithy.api#documentation": "<p>Describes the security policy that is attached to your file transfer protocol-enabled\n      server. The response contains a description of the security policy's properties. For more\n      information about security policies, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html\">Working with security\n        policies</a>.</p>",
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#DescribeSecurityPolicyRequest": {
@@ -2249,6 +2229,7 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Describes a file transfer protocol-enabled server that you specify by passing the\n        <code>ServerId</code> parameter.</p>\n         <p>The response contains a description of a server's properties. When you set\n        <code>EndpointType</code> to VPC, the response will contain the\n      <code>EndpointDetails</code>.</p>",
+                "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
                     "ServerOffline": {
                         "acceptors": [
@@ -2273,6 +2254,7 @@
                                 }
                             }
                         ],
+                        "maxDelay": 3600,
                         "minDelay": 30
                     },
                     "ServerOnline": {
@@ -2298,6 +2280,7 @@
                                 }
                             }
                         ],
+                        "maxDelay": 3600,
                         "minDelay": 30
                     }
                 }
@@ -2356,7 +2339,8 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the user assigned to the specific file transfer protocol-enabled server, as\n      identified by its <code>ServerId</code> property.</p>\n         <p>The response from this call returns the properties of the user associated with the\n        <code>ServerId</code> value that was specified.</p>"
+                "smithy.api#documentation": "<p>Describes the user assigned to the specific file transfer protocol-enabled server, as\n      identified by its <code>ServerId</code> property.</p>\n         <p>The response from this call returns the properties of the user associated with the\n        <code>ServerId</code> value that was specified.</p>",
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#DescribeUserRequest": {
@@ -2426,7 +2410,8 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified workflow.</p>"
+                "smithy.api#documentation": "<p>Describes the specified workflow.</p>",
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#DescribeWorkflowRequest": {
@@ -2978,7 +2963,7 @@
                     }
                 },
                 "LoggingRole": {
-                    "target": "com.amazonaws.transfer#Role",
+                    "target": "com.amazonaws.transfer#NullableRole",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFSevents. When set, you can view user activity in\n      your CloudWatch logs.</p>"
                     }
@@ -4125,7 +4110,8 @@
                     "outputToken": "NextToken",
                     "items": "Accesses",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#ListAccessesRequest": {
@@ -4215,7 +4201,8 @@
                     "outputToken": "NextToken",
                     "items": "Agreements",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#ListAgreementsRequest": {
@@ -4298,7 +4285,8 @@
                     "outputToken": "NextToken",
                     "items": "Certificates",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#ListCertificatesRequest": {
@@ -4374,7 +4362,8 @@
                     "outputToken": "NextToken",
                     "items": "Connectors",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#ListConnectorsRequest": {
@@ -4450,7 +4439,8 @@
                     "outputToken": "NextToken",
                     "items": "Executions",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#ListExecutionsRequest": {
@@ -4534,7 +4524,8 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of host keys for the server that's specified by the <code>ServerId</code>\n      parameter.</p>"
+                "smithy.api#documentation": "<p>Returns a list of host keys for the server that's specified by the <code>ServerId</code>\n      parameter.</p>",
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#ListHostKeysRequest": {
@@ -4624,7 +4615,8 @@
                     "outputToken": "NextToken",
                     "items": "Profiles",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#ListProfilesRequest": {
@@ -4703,7 +4695,8 @@
                     "outputToken": "NextToken",
                     "items": "SecurityPolicyNames",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#ListSecurityPoliciesRequest": {
@@ -4776,7 +4769,8 @@
                     "outputToken": "NextToken",
                     "items": "Servers",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#ListServersRequest": {
@@ -4849,7 +4843,8 @@
                     "outputToken": "NextToken",
                     "items": "Tags",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#ListTagsForResourceRequest": {
@@ -4937,7 +4932,8 @@
                     "outputToken": "NextToken",
                     "items": "Users",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#ListUsersRequest": {
@@ -5024,7 +5020,8 @@
                     "outputToken": "NextToken",
                     "items": "Workflows",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.transfer#ListWorkflowsRequest": {
@@ -6379,13 +6376,13 @@
                 "UserSecretId": {
                     "target": "com.amazonaws.transfer#SecretId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the secret (in Amazon Web Services Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier can be either the Amazon Resource Name (ARN) or the name of the secret.</p>"
+                        "smithy.api#documentation": "<p>The identifier for the secret (in Amazon Web Services Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier must be the Amazon Resource Name (ARN) of the secret.</p>"
                     }
                 },
                 "TrustedHostKeys": {
                     "target": "com.amazonaws.transfer#SftpConnectorTrustedHostKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The public portion of the host key, or keys, that are used to identify the external server to which you are connecting.\n      You can use the <code>ssh-keyscan</code> command against the SFTP server to retrieve the necessary key.</p>\n         <p>The three standard SSH public key format elements are <code><key type></code>,\n        <code><body base64></code>, and an optional <code><comment></code>, with spaces\n      between each element. Specify only the  <code><key type></code> and <code><body\n        base64></code>: do not enter the <code><comment></code> portion of the key.</p>\n         <p>For the trusted host key, Transfer Family accepts RSA and ECDSA keys.</p>\n         <ul>\n            <li>\n               <p>For RSA keys, the <code><key type></code> string is <code>ssh-rsa</code>.</p>\n            </li>\n            <li>\n               <p>For ECDSA keys, the <code><key type></code> string is either\n            <code>ecdsa-sha2-nistp256</code>, <code>ecdsa-sha2-nistp384</code>, or\n            <code>ecdsa-sha2-nistp521</code>, depending on the size of the key you generated.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The public portion of the host key, or keys, that are used to identify the external server to which you are connecting.\n      You can use the <code>ssh-keyscan</code> command against the SFTP server to retrieve the necessary key.</p>\n         <p>The three standard SSH public key format elements are <code>&lt;key type&gt;</code>,\n        <code>&lt;body base64&gt;</code>, and an optional <code>&lt;comment&gt;</code>, with spaces\n      between each element. Specify only the  <code>&lt;key type&gt;</code> and <code>&lt;body\n        base64&gt;</code>: do not enter the <code>&lt;comment&gt;</code> portion of the key.</p>\n         <p>For the trusted host key, Transfer Family accepts RSA and ECDSA keys.</p>\n         <ul>\n            <li>\n               <p>For RSA keys, the <code>&lt;key type&gt;</code> string is <code>ssh-rsa</code>.</p>\n            </li>\n            <li>\n               <p>For ECDSA keys, the <code>&lt;key type&gt;</code> string is either\n            <code>ecdsa-sha2-nistp256</code>, <code>ecdsa-sha2-nistp384</code>, or\n            <code>ecdsa-sha2-nistp521</code>, depending on the size of the key you generated.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -7379,7 +7376,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -7422,7 +7418,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -7435,7 +7432,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -7449,7 +7445,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -7472,7 +7467,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -7507,7 +7501,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -7518,14 +7511,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -7539,14 +7534,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -7555,11 +7548,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -7570,14 +7563,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -7591,7 +7586,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -7611,7 +7605,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -7622,14 +7615,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -7640,9 +7635,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
