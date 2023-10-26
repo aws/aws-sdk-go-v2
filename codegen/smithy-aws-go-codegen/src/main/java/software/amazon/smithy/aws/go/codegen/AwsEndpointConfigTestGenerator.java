@@ -145,7 +145,7 @@ endpoint_url = http://config-global.dev
 services = testing-$urlSdkId:L
 
 [services testing-$urlSdkId:L]
-$configSdkId:L = 
+$configSdkId:L =
     endpoint_url = http://config-$urlSdkId:L.dev
 `,
                         ExpectURL:            $awsString:T("http://config-$urlSdkId:L.dev"),
@@ -161,7 +161,7 @@ endpoint_url = http://config-global.dev
 services = testing-$urlSdkId:L
 
 [services testing-$urlSdkId:L]
-$configSdkId:L = 
+$configSdkId:L =
     endpoint_url = http://config-$urlSdkId:L.dev
 `,
                         ClientEndpoint:       $awsString:T("https://client-$urlSdkId:L.dev"),
