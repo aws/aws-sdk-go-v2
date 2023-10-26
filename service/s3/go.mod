@@ -20,6 +20,10 @@ require (
 
 replace github.com/aws/aws-sdk-go-v2 => ../../
 
+replace github.com/aws/aws-sdk-go-v2/config => ../../config
+
+replace github.com/aws/aws-sdk-go-v2/internal/ini => ../../internal/ini/
+
 replace github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream => ../../aws/protocol/eventstream/
 
 replace github.com/aws/aws-sdk-go-v2/internal/configsources => ../../internal/configsources/
