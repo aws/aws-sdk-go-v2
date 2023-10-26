@@ -254,7 +254,7 @@ type EnvConfig struct {
 	RetryMode aws.RetryMode
 
 	// aws sdk app ID that can be added to user agent header string
-	AppID                     string
+	AppID string
 
 	// Flag used to disable configured endpoints.
 	IgnoreConfiguredEndpoints *bool

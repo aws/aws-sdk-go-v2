@@ -178,6 +178,7 @@ $configSdkId:L =
             """
                 for name, c := range cases {
                     t.Run(name, func(t $testing:P) {
+                        $clearEnv:T()
                         for k, v := range c.Env {
                             t.Setenv(k, v)
                         }
@@ -208,6 +209,7 @@ $configSdkId:L =
             """,
             this.commonCodegenArgs,
             MapUtils.of(
+                "clearEnv", SymbolUtils.createValueSymbolBuilder("Clearenv", SmithyGoDependency.OS).build(),
                 "writeFile", SymbolUtils.createValueSymbolBuilder("WriteFile", SmithyGoDependency.OS).build(),
                 "joinFile", SymbolUtils.createValueSymbolBuilder("Join", SmithyGoDependency.PATH_FILEPATH).build(),
                 "fileMode", SymbolUtils.createValueSymbolBuilder("FileMode", SmithyGoDependency.OS).build(),
