@@ -40,7 +40,7 @@ public class AwsEndpointConfigTestGenerator implements GoIntegration {
             "testing", SymbolUtils.createPointableSymbolBuilder("T", SmithyGoDependency.TESTING).build(),
             "awsString", SymbolUtils.createValueSymbolBuilder("String", AwsGoDependency.AWS_CORE).build()
         );
-        
+
         writerFactory.accept("endpoints_config_test.go", settings.getModuleName(), writer -> {
             writer.write("$W", generate());
         });
@@ -85,7 +85,7 @@ endpoint_url = http://config-global.dev
 services = testing-$urlSdkId:L
 
 [services testing-$urlSdkId:L]
-$configSdkId:L = 
+$configSdkId:L =
     endpoint_url = http://config-$urlSdkId:L.dev
 `,
                         ExpectURL:            nil,
@@ -109,7 +109,7 @@ endpoint_url = http://config-global.dev
 services = testing-$urlSdkId:L
 
 [services testing-$urlSdkId:L]
-$configSdkId:L = 
+$configSdkId:L =
     endpoint_url = http://config-$urlSdkId:L.dev
 `,
                         ExpectURL:            $awsString:T("https://env-$urlSdkId:L.dev"),
@@ -125,7 +125,7 @@ services = testing-$urlSdkId:L
 ignore_configured_endpoint_urls = true
 
 [services testing-$urlSdkId:L]
-$configSdkId:L = 
+$configSdkId:L =
     endpoint_url = http://config-$urlSdkId:L.dev
 `,
                         ExpectURL:            nil,
@@ -194,13 +194,13 @@ $configSdkId:L =
                         if err != nil {
                             t.Fatalf("error loading default config: %v", err)
                         }
-            
+
                         client := NewFromConfig(awsConfig, func (o *Options) {
                             if c.ClientEndpoint != nil {
                                 o.BaseEndpoint = c.ClientEndpoint
                             }
                         })
-            
+
                         if e, a := c.ExpectURL, client.options.BaseEndpoint; !$deepEqual:T(e, a) {
                             t.Errorf("expect endpoint %v , got %v", e, a)
                         }
