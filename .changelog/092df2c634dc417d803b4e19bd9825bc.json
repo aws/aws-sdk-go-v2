@@ -1,0 +1,8 @@
+{
+    "id": "092df2c6-34dc-417d-803b-4e19bd9825bc",
+    "type": "feature",
+    "description": "Amazon Sagemaker Autopilot now supports Text Generation jobs.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

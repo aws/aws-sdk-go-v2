@@ -332,6 +332,9 @@ func awsAwsquery_deserializeOpErrorConfirmSubscription(response *smithyhttp.Resp
 	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ReplayLimitExceeded", errorCode):
+		return awsAwsquery_deserializeErrorReplayLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("SubscriptionLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionLimitExceededException(response, errorBody)
 
@@ -1183,6 +1186,9 @@ func awsAwsquery_deserializeOpErrorDeleteTopic(response *smithyhttp.Response, me
 
 	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("InvalidState", errorCode):
+		return awsAwsquery_deserializeErrorInvalidStateException(response, errorBody)
 
 	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
@@ -4033,6 +4039,9 @@ func awsAwsquery_deserializeOpErrorSetSubscriptionAttributes(response *smithyhtt
 	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ReplayLimitExceeded", errorCode):
+		return awsAwsquery_deserializeErrorReplayLimitExceededException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -4240,6 +4249,9 @@ func awsAwsquery_deserializeOpErrorSubscribe(response *smithyhttp.Response, meta
 
 	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ReplayLimitExceeded", errorCode):
+		return awsAwsquery_deserializeErrorReplayLimitExceededException(response, errorBody)
 
 	case strings.EqualFold("SubscriptionLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionLimitExceededException(response, errorBody)
@@ -5242,6 +5254,50 @@ func awsAwsquery_deserializeErrorInvalidSecurityException(response *smithyhttp.R
 	return output
 }
 
+func awsAwsquery_deserializeErrorInvalidStateException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.InvalidStateException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentInvalidStateException(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsAwsquery_deserializeErrorKMSAccessDeniedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.KMSAccessDeniedException{}
 	var buff [1024]byte
@@ -5626,6 +5682,50 @@ func awsAwsquery_deserializeErrorPlatformApplicationDisabledException(response *
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentPlatformApplicationDisabledException(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorReplayLimitExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ReplayLimitExceededException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentReplayLimitExceededException(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6924,6 +7024,55 @@ func awsAwsquery_deserializeDocumentInvalidSecurityException(v **types.InvalidSe
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentInvalidStateException(v **types.InvalidStateException, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.InvalidStateException
+	if *v == nil {
+		sv = &types.InvalidStateException{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentKMSAccessDeniedException(v **types.KMSAccessDeniedException, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8136,6 +8285,55 @@ func awsAwsquery_deserializeDocumentPublishBatchResultEntryListUnwrapped(v *[]ty
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentReplayLimitExceededException(v **types.ReplayLimitExceededException, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ReplayLimitExceededException
+	if *v == nil {
+		sv = &types.ReplayLimitExceededException{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)

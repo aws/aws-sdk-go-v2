@@ -1,0 +1,8 @@
+{
+    "id": "d40b6227-b2f7-4ad1-89aa-a4b3be8f4e0c",
+    "type": "feature",
+    "description": "Message Archiving and Replay is now supported in Amazon SNS for FIFO topics.",
+    "modules": [
+        "service/sns"
+    ]
+}

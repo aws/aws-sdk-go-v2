@@ -332,6 +332,24 @@ func (InboundConnectionStatusCode) Values() []InboundConnectionStatusCode {
 	}
 }
 
+type IPAddressType string
+
+// Enum values for IPAddressType
+const (
+	IPAddressTypeIpv4      IPAddressType = "ipv4"
+	IPAddressTypeDualstack IPAddressType = "dualstack"
+)
+
+// Values returns all known values for IPAddressType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IPAddressType) Values() []IPAddressType {
+	return []IPAddressType{
+		"ipv4",
+		"dualstack",
+	}
+}
+
 type LogType string
 
 // Enum values for LogType

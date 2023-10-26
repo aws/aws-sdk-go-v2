@@ -159,8 +159,8 @@ type ServerOfflineWaiterOptions struct {
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, ServerOfflineWaiter will use default max delay of 120 seconds. Note
-	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	// set to zero, ServerOfflineWaiter will use default max delay of 3600 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -188,7 +188,7 @@ type ServerOfflineWaiter struct {
 func NewServerOfflineWaiter(client DescribeServerAPIClient, optFns ...func(*ServerOfflineWaiterOptions)) *ServerOfflineWaiter {
 	options := ServerOfflineWaiterOptions{}
 	options.MinDelay = 30 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 3600 * time.Second
 	options.Retryable = serverOfflineStateRetryable
 
 	for _, fn := range optFns {
@@ -223,7 +223,7 @@ func (w *ServerOfflineWaiter) WaitForOutput(ctx context.Context, params *Describ
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 3600 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {
@@ -336,7 +336,7 @@ type ServerOnlineWaiterOptions struct {
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, ServerOnlineWaiter will use default max delay of 120 seconds. Note
+	// set to zero, ServerOnlineWaiter will use default max delay of 3600 seconds. Note
 	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
@@ -365,7 +365,7 @@ type ServerOnlineWaiter struct {
 func NewServerOnlineWaiter(client DescribeServerAPIClient, optFns ...func(*ServerOnlineWaiterOptions)) *ServerOnlineWaiter {
 	options := ServerOnlineWaiterOptions{}
 	options.MinDelay = 30 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 3600 * time.Second
 	options.Retryable = serverOnlineStateRetryable
 
 	for _, fn := range optFns {
@@ -399,7 +399,7 @@ func (w *ServerOnlineWaiter) WaitForOutput(ctx context.Context, params *Describe
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 3600 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {

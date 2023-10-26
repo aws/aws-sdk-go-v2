@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get the list of the maintenance action.
+// A list of maintenance actions for the domain.
 func (c *Client) ListDomainMaintenances(ctx context.Context, params *ListDomainMaintenancesInput, optFns ...func(*Options)) (*ListDomainMaintenancesOutput, error) {
 	if params == nil {
 		params = &ListDomainMaintenancesInput{}
@@ -47,9 +47,9 @@ type ListDomainMaintenancesInput struct {
 	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// If your initial ListDomainMaintenances operation returns a nextToken , you can
-	// include the returned nextToken in subsequent ListDomainMaintenances operations,
-	// which returns results in the next page.
+	// If your initial ListDomainMaintenances operation returns a nextToken , include
+	// the returned nextToken in subsequent ListDomainMaintenances operations, which
+	// returns results in the next page.
 	NextToken *string
 
 	// The status of the action.
@@ -58,11 +58,11 @@ type ListDomainMaintenancesInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a ListDomainMaintenances request. Contains information about the
-// requested actions.
+// The result of a ListDomainMaintenances request that contains information about
+// the requested actions.
 type ListDomainMaintenancesOutput struct {
 
-	// List of the submitted maintenance actions.
+	// A list of the submitted maintenance actions.
 	DomainMaintenances []types.DomainMaintenanceDetails
 
 	// When nextToken is returned, there are more results available. The value of

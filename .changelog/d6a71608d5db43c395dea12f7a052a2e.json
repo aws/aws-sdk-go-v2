@@ -1,0 +1,8 @@
+{
+    "id": "d6a71608-d5db-43c3-95de-a12f7a052a2e",
+    "type": "feature",
+    "description": "Network Firewall now supports inspection of outbound SSL/TLS traffic.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

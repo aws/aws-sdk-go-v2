@@ -784,6 +784,32 @@ func (e *ClusterSubnetQuotaExceededFault) ErrorCode() string {
 }
 func (e *ClusterSubnetQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// There is a conflict while updating the resource policy.
+type ConflictPolicyUpdateFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictPolicyUpdateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictPolicyUpdateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictPolicyUpdateFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictPolicyUpdateFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictPolicyUpdateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Cross-region snapshot copy was temporarily disabled. Try your request again.
 type CopyToRegionDisabledFault struct {
 	Message *string
@@ -1425,6 +1451,32 @@ func (e *InsufficientS3BucketPolicyFault) ErrorCode() string {
 }
 func (e *InsufficientS3BucketPolicyFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The integration can't be found.
+type IntegrationNotFoundFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IntegrationNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IntegrationNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IntegrationNotFoundFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "IntegrationNotFoundFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *IntegrationNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The authentication profile request is not valid. The profile name can't be null
 // or empty. The authentication profile API operation must be available in the
 // Amazon Web Services Region.
@@ -1860,6 +1912,32 @@ func (e *InvalidNamespaceFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNamespaceFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The resource policy isn't valid.
+type InvalidPolicyFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidPolicyFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidPolicyFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidPolicyFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidPolicyFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidPolicyFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the Reserved Node being exchanged is not in an active state.
 type InvalidReservedNodeStateFault struct {

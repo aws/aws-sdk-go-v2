@@ -110,6 +110,26 @@ func (m *validateOpGetResourcePermission) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListApplications struct {
+}
+
+func (*validateOpListApplications) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListApplications) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListApplicationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListApplicationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListOperations struct {
 }
 
@@ -288,6 +308,10 @@ func addOpGetOperationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetResourcePermissionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourcePermission{}, middleware.After)
+}
+
+func addOpListApplicationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListApplications{}, middleware.After)
 }
 
 func addOpListOperationsValidationMiddleware(stack *middleware.Stack) error {
@@ -494,6 +518,23 @@ func validateOpGetResourcePermissionInput(v *GetResourcePermissionInput) error {
 	}
 }
 
+func validateOpListApplicationsInput(v *ListApplicationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListApplicationsInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListOperationsInput(v *ListOperationsInput) error {
 	if v == nil {
 		return nil
@@ -564,9 +605,7 @@ func validateOpRegisterApplicationInput(v *RegisterApplicationInput) error {
 	if v.Instances == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Instances"))
 	}
-	if v.Credentials == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Credentials"))
-	} else if v.Credentials != nil {
+	if v.Credentials != nil {
 		if err := validateApplicationCredentialList(v.Credentials); err != nil {
 			invalidParams.AddNested("Credentials", err.(smithy.InvalidParamsError))
 		}

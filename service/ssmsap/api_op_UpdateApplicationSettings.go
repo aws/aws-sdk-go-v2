@@ -49,6 +49,10 @@ type UpdateApplicationSettingsInput struct {
 	// The credentials to be removed.
 	CredentialsToRemove []types.ApplicationCredential
 
+	// The Amazon Resource Name of the SAP HANA database that replaces the current SAP
+	// HANA connection with the SAP_ABAP application.
+	DatabaseArn *string
+
 	noSmithyDocumentSerde
 }
 

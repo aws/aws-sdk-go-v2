@@ -537,6 +537,11 @@ func awsRestjson1_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, val
 		ok.String(*v.EngineVersion)
 	}
 
+	if len(v.IPAddressType) > 0 {
+		ok := object.Key("IPAddressType")
+		ok.String(string(v.IPAddressType))
+	}
+
 	if v.LogPublishingOptions != nil {
 		ok := object.Key("LogPublishingOptions")
 		if err := awsRestjson1_serializeDocumentLogPublishingOptions(v.LogPublishingOptions, ok); err != nil {
@@ -4146,6 +4151,11 @@ func awsRestjson1_serializeOpDocumentUpdateDomainConfigInput(v *UpdateDomainConf
 		if err := awsRestjson1_serializeDocumentEncryptionAtRestOptions(v.EncryptionAtRestOptions, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.IPAddressType) > 0 {
+		ok := object.Key("IPAddressType")
+		ok.String(string(v.IPAddressType))
 	}
 
 	if v.LogPublishingOptions != nil {

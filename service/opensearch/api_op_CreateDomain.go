@@ -101,6 +101,9 @@ type CreateDomainInput struct {
 	// .
 	EngineVersion *string
 
+	// The type of IP addresses supported by the endpoint for the domain.
+	IPAddressType types.IPAddressType
+
 	// Key-value pairs to configure log publishing.
 	LogPublishingOptions map[string]types.LogPublishingOption
 

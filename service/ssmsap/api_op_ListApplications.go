@@ -34,6 +34,9 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 
 type ListApplicationsInput struct {
 
+	// The filter of name, value, and operator.
+	Filters []types.Filter
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
@@ -108,6 +111,9 @@ func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addListApplicationsResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addOpListApplicationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListApplications(options.Region), middleware.Before); err != nil {

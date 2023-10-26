@@ -34,7 +34,7 @@ func (e *InsufficientCapacityException) ErrorCode() string {
 }
 func (e *InsufficientCapacityException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Your request is valid, but Network Firewall couldn’t perform the operation
+// Your request is valid, but Network Firewall couldn't perform the operation
 // because of a system problem. Retry your request.
 type InternalServerError struct {
 	Message *string

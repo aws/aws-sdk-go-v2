@@ -723,6 +723,13 @@ const (
 	AutoMLMetricExtendedEnumMase                        AutoMLMetricExtendedEnum = "MASE"
 	AutoMLMetricExtendedEnumWape                        AutoMLMetricExtendedEnum = "WAPE"
 	AutoMLMetricExtendedEnumAverageWeightedQuantileLoss AutoMLMetricExtendedEnum = "AverageWeightedQuantileLoss"
+	AutoMLMetricExtendedEnumRouge1                      AutoMLMetricExtendedEnum = "Rouge1"
+	AutoMLMetricExtendedEnumRouge2                      AutoMLMetricExtendedEnum = "Rouge2"
+	AutoMLMetricExtendedEnumRougel                      AutoMLMetricExtendedEnum = "RougeL"
+	AutoMLMetricExtendedEnumRougelSum                   AutoMLMetricExtendedEnum = "RougeLSum"
+	AutoMLMetricExtendedEnumPerplexity                  AutoMLMetricExtendedEnum = "Perplexity"
+	AutoMLMetricExtendedEnumValidationLoss              AutoMLMetricExtendedEnum = "ValidationLoss"
+	AutoMLMetricExtendedEnumTrainingLoss                AutoMLMetricExtendedEnum = "TrainingLoss"
 )
 
 // Values returns all known values for AutoMLMetricExtendedEnum. Note that this
@@ -749,6 +756,13 @@ func (AutoMLMetricExtendedEnum) Values() []AutoMLMetricExtendedEnum {
 		"MASE",
 		"WAPE",
 		"AverageWeightedQuantileLoss",
+		"Rouge1",
+		"Rouge2",
+		"RougeL",
+		"RougeLSum",
+		"Perplexity",
+		"ValidationLoss",
+		"TrainingLoss",
 	}
 }
 
@@ -780,6 +794,7 @@ const (
 	AutoMLProblemTypeConfigNameTextClassification    AutoMLProblemTypeConfigName = "TextClassification"
 	AutoMLProblemTypeConfigNameTabular               AutoMLProblemTypeConfigName = "Tabular"
 	AutoMLProblemTypeConfigNameTimeseriesForecasting AutoMLProblemTypeConfigName = "TimeSeriesForecasting"
+	AutoMLProblemTypeConfigNameTextGeneration        AutoMLProblemTypeConfigName = "TextGeneration"
 )
 
 // Values returns all known values for AutoMLProblemTypeConfigName. Note that this
@@ -791,6 +806,7 @@ func (AutoMLProblemTypeConfigName) Values() []AutoMLProblemTypeConfigName {
 		"TextClassification",
 		"Tabular",
 		"TimeSeriesForecasting",
+		"TextGeneration",
 	}
 }
 

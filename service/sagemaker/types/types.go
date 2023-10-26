@@ -1390,6 +1390,9 @@ type AutoMLJobChannel struct {
 	//   - For time-series forecasting: text/csv;header=present or
 	//   x-application/vnd.amazon+parquet . The default value is
 	//   text/csv;header=present .
+	//   - For text generation (LLMs fine-tuning): text/csv;header=present or
+	//   x-application/vnd.amazon+parquet . The default value is
+	//   text/csv;header=present .
 	ContentType *string
 
 	// The data source for an AutoML channel (Required).
@@ -1411,8 +1414,9 @@ type AutoMLJobCompletionCriteria struct {
 	MaxAutoMLJobRuntimeInSeconds *int32
 
 	// The maximum number of times a training job is allowed to run. For text and
-	// image classification, as well as time-series forecasting problem types, the
-	// supported value is 1. For tabular problem types, the maximum value is 750.
+	// image classification, time-series forecasting, as well as text generation (LLMs
+	// fine-tuning) problem types, the supported value is 1. For tabular problem types,
+	// the maximum value is 750.
 	MaxCandidates *int32
 
 	// The maximum time, in seconds, that each training job executed inside
@@ -1464,22 +1468,48 @@ type AutoMLJobConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a metric to minimize or maximize as the objective of a job.
+// Specifies a metric to minimize or maximize as the objective of an AutoML job.
 type AutoMLJobObjective struct {
 
 	// The name of the objective metric used to measure the predictive quality of a
 	// machine learning system. During training, the model's parameters are updated
 	// iteratively to optimize its performance based on the feedback provided by the
-	// objective metric when evaluating the model on the validation dataset. For the
-	// list of all available metrics supported by Autopilot, see Autopilot metrics (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics)
-	// . If you do not specify a metric explicitly, the default behavior is to
-	// automatically use:
+	// objective metric when evaluating the model on the validation dataset. The list
+	// of available metrics supported by Autopilot and the default metric applied when
+	// you do not specify a metric name explicitly depend on the problem type.
 	//   - For tabular problem types:
+	//   - List of available metrics:
+	//   - Regression: InferenceLatency , MAE , MSE , R2 , RMSE
+	//   - Binary classification: Accuracy , AUC , BalancedAccuracy , F1 ,
+	//   InferenceLatency , LogLoss , Precision , Recall
+	//   - Multiclass classification: Accuracy , BalancedAccuracy , F1macro ,
+	//   InferenceLatency , LogLoss , PrecisionMacro , RecallMacro For a description of
+	//   each metric, see Autopilot metrics for classification and regression (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics)
+	//   .
+	//   - Default objective metrics:
 	//   - Regression: MSE .
 	//   - Binary classification: F1 .
 	//   - Multiclass classification: Accuracy .
-	//   - For image or text classification problem types: Accuracy
-	//   - For time-series forecasting problem types: AverageWeightedQuantileLoss
+	//   - For image or text classification problem types:
+	//   - List of available metrics: Accuracy For a description of each metric, see
+	//   Autopilot metrics for text and image classification (https://docs.aws.amazon.com/sagemaker/latest/dg/text-classification-data-format-and-metric.html)
+	//   .
+	//   - Default objective metrics: Accuracy
+	//   - For time-series forecasting problem types:
+	//   - List of available metrics: RMSE , wQL , Average wQL , MASE , MAPE , WAPE For
+	//   a description of each metric, see Autopilot metrics for time-series
+	//   forecasting (https://docs.aws.amazon.com/sagemaker/latest/dg/timeseries-objective-metric.html)
+	//   .
+	//   - Default objective metrics: AverageWeightedQuantileLoss
+	//   - For text generation problem types (LLMs fine-tuning): Fine-tuning language
+	//   models in Autopilot does not require setting the AutoMLJobObjective field.
+	//   Autopilot fine-tunes LLMs without requiring multiple candidates to be trained
+	//   and evaluated. Instead, using your dataset, Autopilot directly fine-tunes your
+	//   target model to enhance a default objective metric, the cross-entropy loss.
+	//   After fine-tuning a language model, you can evaluate the quality of its
+	//   generated text using different metrics. For a list of the available metrics, see
+	//   Metrics for fine-tuning LLMs in Autopilot (https://docs.aws.amazon.com/sagemaker/latest/dg/llms-finetuning-models.html)
+	//   .
 	//
 	// This member is required.
 	MetricName AutoMLMetricEnum
@@ -1572,6 +1602,7 @@ type AutoMLPartialFailureReason struct {
 //	AutoMLProblemTypeConfigMemberImageClassificationJobConfig
 //	AutoMLProblemTypeConfigMemberTabularJobConfig
 //	AutoMLProblemTypeConfigMemberTextClassificationJobConfig
+//	AutoMLProblemTypeConfigMemberTextGenerationJobConfig
 //	AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig
 type AutoMLProblemTypeConfig interface {
 	isAutoMLProblemTypeConfig()
@@ -1587,7 +1618,7 @@ type AutoMLProblemTypeConfigMemberImageClassificationJobConfig struct {
 
 func (*AutoMLProblemTypeConfigMemberImageClassificationJobConfig) isAutoMLProblemTypeConfig() {}
 
-// Settings used to configure an AutoML job V2 for a tabular problem type
+// Settings used to configure an AutoML job V2 for the tabular problem type
 // (regression, classification).
 type AutoMLProblemTypeConfigMemberTabularJobConfig struct {
 	Value TabularJobConfig
@@ -1607,7 +1638,20 @@ type AutoMLProblemTypeConfigMemberTextClassificationJobConfig struct {
 
 func (*AutoMLProblemTypeConfigMemberTextClassificationJobConfig) isAutoMLProblemTypeConfig() {}
 
-// Settings used to configure an AutoML job V2 for a time-series forecasting
+// Settings used to configure an AutoML job V2 for the text generation (LLMs
+// fine-tuning) problem type. The text generation models that support fine-tuning
+// in Autopilot are currently accessible exclusively in regions supported by
+// Canvas. Refer to the documentation of Canvas for the full list of its supported
+// Regions (https://docs.aws.amazon.com/sagemaker/latest/dg/canvas.html) .
+type AutoMLProblemTypeConfigMemberTextGenerationJobConfig struct {
+	Value TextGenerationJobConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*AutoMLProblemTypeConfigMemberTextGenerationJobConfig) isAutoMLProblemTypeConfig() {}
+
+// Settings used to configure an AutoML job V2 for the time-series forecasting
 // problem type.
 type AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig struct {
 	Value TimeSeriesForecastingJobConfig
@@ -1617,16 +1661,17 @@ type AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig struct {
 
 func (*AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig) isAutoMLProblemTypeConfig() {}
 
-// The resolved attributes specific to the problem type of an AutoML job V2.
+// Stores resolved attributes specific to the problem type of an AutoML job V2.
 //
 // The following types satisfy this interface:
 //
 //	AutoMLProblemTypeResolvedAttributesMemberTabularResolvedAttributes
+//	AutoMLProblemTypeResolvedAttributesMemberTextGenerationResolvedAttributes
 type AutoMLProblemTypeResolvedAttributes interface {
 	isAutoMLProblemTypeResolvedAttributes()
 }
 
-// Defines the resolved attributes for the TABULAR problem type.
+// The resolved attributes for the tabular problem type.
 type AutoMLProblemTypeResolvedAttributesMemberTabularResolvedAttributes struct {
 	Value TabularResolvedAttributes
 
@@ -1636,10 +1681,20 @@ type AutoMLProblemTypeResolvedAttributesMemberTabularResolvedAttributes struct {
 func (*AutoMLProblemTypeResolvedAttributesMemberTabularResolvedAttributes) isAutoMLProblemTypeResolvedAttributes() {
 }
 
+// The resolved attributes for the text generation problem type.
+type AutoMLProblemTypeResolvedAttributesMemberTextGenerationResolvedAttributes struct {
+	Value TextGenerationResolvedAttributes
+
+	noSmithyDocumentSerde
+}
+
+func (*AutoMLProblemTypeResolvedAttributesMemberTextGenerationResolvedAttributes) isAutoMLProblemTypeResolvedAttributes() {
+}
+
 // The resolved attributes used to configure an AutoML job V2.
 type AutoMLResolvedAttributes struct {
 
-	// Specifies a metric to minimize or maximize as the objective of a job.
+	// Specifies a metric to minimize or maximize as the objective of an AutoML job.
 	AutoMLJobObjective *AutoMLJobObjective
 
 	// Defines the resolved attributes specific to a problem type.
@@ -6122,7 +6177,10 @@ type HyperParameterTrainingJobDefinition struct {
 	// Defines the objective metric for a hyperparameter tuning job. Hyperparameter
 	// tuning uses the value of this metric to evaluate the training jobs it launches,
 	// and returns the training job that results in either the highest or lowest value
-	// for this metric, depending on the value you specify for the Type parameter.
+	// for this metric, depending on the value you specify for the Type parameter. If
+	// you want to define a custom objective metric, see Define metrics and
+	// environment variables (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html)
+	// .
 	TuningObjective *HyperParameterTuningJobObjective
 
 	// The VpcConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html)
@@ -6323,7 +6381,10 @@ type HyperParameterTuningJobConsumedResources struct {
 // Defines the objective metric for a hyperparameter tuning job. Hyperparameter
 // tuning uses the value of this metric to evaluate the training jobs it launches,
 // and returns the training job that results in either the highest or lowest value
-// for this metric, depending on the value you specify for the Type parameter.
+// for this metric, depending on the value you specify for the Type parameter. If
+// you want to define a custom objective metric, see Define metrics and
+// environment variables (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html)
+// .
 type HyperParameterTuningJobObjective struct {
 
 	// The name of the metric to use for the objective metric.
@@ -6681,8 +6742,8 @@ type Image struct {
 	noSmithyDocumentSerde
 }
 
-// Stores the configuration information for the image classification problem of an
-// AutoML job V2.
+// The collection of settings used by an AutoML job V2 for the image
+// classification problem type.
 type ImageClassificationJobConfig struct {
 
 	// How long a job is allowed to run, or how many candidates a job is allowed to
@@ -12207,7 +12268,7 @@ type RepositoryAuthConfig struct {
 // The resolved attributes.
 type ResolvedAttributes struct {
 
-	// Specifies a metric to minimize or maximize as the objective of a job.
+	// Specifies a metric to minimize or maximize as the objective of an AutoML job.
 	AutoMLJobObjective *AutoMLJobObjective
 
 	// How long a job is allowed to run, or how many candidates a job is allowed to
@@ -13305,7 +13366,7 @@ type SuggestionQuery struct {
 	noSmithyDocumentSerde
 }
 
-// The collection of settings used by an AutoML job V2 for the TABULAR problem
+// The collection of settings used by an AutoML job V2 for the tabular problem
 // type.
 type TabularJobConfig struct {
 
@@ -13386,7 +13447,7 @@ type TabularJobConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The resolved attributes specific to the TABULAR problem type.
+// The resolved attributes specific to the tabular problem type.
 type TabularResolvedAttributes struct {
 
 	// The type of supervised learning problem available for the model candidates of
@@ -13500,8 +13561,8 @@ type TensorBoardOutputConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Stores the configuration information for the text classification problem of an
-// AutoML job V2.
+// The collection of settings used by an AutoML job V2 for the text classification
+// problem type.
 type TextClassificationJobConfig struct {
 
 	// The name of the column used to provide the sentences to be classified. It
@@ -13519,6 +13580,35 @@ type TextClassificationJobConfig struct {
 	// How long a job is allowed to run, or how many candidates a job is allowed to
 	// generate.
 	CompletionCriteria *AutoMLJobCompletionCriteria
+
+	noSmithyDocumentSerde
+}
+
+// The collection of settings used by an AutoML job V2 for the text generation
+// problem type. The text generation models that support fine-tuning in Autopilot
+// are currently accessible exclusively in regions supported by Canvas. Refer to
+// the documentation of Canvas for the full list of its supported Regions (https://docs.aws.amazon.com/sagemaker/latest/dg/canvas.html)
+// .
+type TextGenerationJobConfig struct {
+
+	// The name of the base model to fine-tune. Autopilot supports fine-tuning a
+	// variety of large language models. For information on the list of supported
+	// models, see Text generation models supporting fine-tuning in Autopilot (https://docs.aws.amazon.com/sagemaker/src/AWSIronmanApiDoc/build/server-root/sagemaker/latest/dg/llms-finetuning-models.html#llms-finetuning-supported-llms)
+	// . If no BaseModelName is provided, the default model used is Falcon-7B-Instruct.
+	BaseModelName *string
+
+	// How long a job is allowed to run, or how many candidates a job is allowed to
+	// generate.
+	CompletionCriteria *AutoMLJobCompletionCriteria
+
+	noSmithyDocumentSerde
+}
+
+// The resolved attributes specific to the text generation problem type.
+type TextGenerationResolvedAttributes struct {
+
+	// The name of the base model to fine-tune.
+	BaseModelName *string
 
 	noSmithyDocumentSerde
 }

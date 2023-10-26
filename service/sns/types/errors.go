@@ -327,6 +327,32 @@ func (e *InvalidSecurityException) ErrorCode() string {
 }
 func (e *InvalidSecurityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Indicates that the specified state is not a valid state for an event source.
+type InvalidStateException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidStateException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidStateException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidStateException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidState"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The ciphertext references a key that doesn't exist or that you don't have
 // access to.
 type KMSAccessDeniedException struct {
@@ -354,8 +380,8 @@ func (e *KMSAccessDeniedException) ErrorCode() string {
 }
 func (e *KMSAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the specified customer master key (CMK) isn't
-// enabled.
+// The request was rejected because the specified Amazon Web Services KMS key
+// isn't enabled.
 type KMSDisabledException struct {
 	Message *string
 
@@ -382,8 +408,8 @@ func (e *KMSDisabledException) ErrorCode() string {
 func (e *KMSDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the state of the specified resource isn't
-// valid for this request. For more information, see How Key State Affects Use of
-// a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// valid for this request. For more information, see Key states of Amazon Web
+// Services KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the Key Management Service Developer Guide.
 type KMSInvalidStateException struct {
 	Message *string
@@ -572,6 +598,33 @@ func (e *PlatformApplicationDisabledException) ErrorCode() string {
 func (e *PlatformApplicationDisabledException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// Indicates that the request parameter has exceeded the maximum number of
+// concurrent message replays.
+type ReplayLimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ReplayLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ReplayLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ReplayLimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ReplayLimitExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ReplayLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Can’t perform the action on the specified resource. Make sure that the resource
 // exists.

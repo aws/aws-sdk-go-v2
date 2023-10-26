@@ -11889,6 +11889,11 @@ func awsRestjson1_deserializeDocumentDomainConfig(v **types.DomainConfig, value 
 				return err
 			}
 
+		case "IPAddressType":
+			if err := awsRestjson1_deserializeDocumentIPAddressTypeStatus(&sv.IPAddressType, value); err != nil {
+				return err
+			}
+
 		case "LogPublishingOptions":
 			if err := awsRestjson1_deserializeDocumentLogPublishingOptionsStatus(&sv.LogPublishingOptions, value); err != nil {
 				return err
@@ -12736,6 +12741,15 @@ func awsRestjson1_deserializeDocumentDomainStatus(v **types.DomainStatus, value 
 				return err
 			}
 
+		case "EndpointV2":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServiceUrl to be of type string, got %T instead", value)
+				}
+				sv.EndpointV2 = ptr.String(jtv)
+			}
+
 		case "EngineVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12743,6 +12757,15 @@ func awsRestjson1_deserializeDocumentDomainStatus(v **types.DomainStatus, value 
 					return fmt.Errorf("expected VersionString to be of type string, got %T instead", value)
 				}
 				sv.EngineVersion = ptr.String(jtv)
+			}
+
+		case "IPAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IPAddressType to be of type string, got %T instead", value)
+				}
+				sv.IPAddressType = types.IPAddressType(jtv)
 			}
 
 		case "LogPublishingOptions":
@@ -13903,6 +13926,51 @@ func awsRestjson1_deserializeDocumentInvalidTypeException(v **types.InvalidTypeE
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIPAddressTypeStatus(v **types.IPAddressTypeStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IPAddressTypeStatus
+	if *v == nil {
+		sv = &types.IPAddressTypeStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Options":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IPAddressType to be of type string, got %T instead", value)
+				}
+				sv.Options = types.IPAddressType(jtv)
+			}
+
+		case "Status":
+			if err := awsRestjson1_deserializeDocumentOptionStatus(&sv.Status, value); err != nil {
+				return err
 			}
 
 		default:

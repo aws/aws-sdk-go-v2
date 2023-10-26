@@ -639,6 +639,9 @@ type DomainConfig struct {
 	// The OpenSearch or Elasticsearch version that the domain is running.
 	EngineVersion *VersionStatus
 
+	// The type of IP addresses supported by the endpoint for the domain.
+	IPAddressType *IPAddressTypeStatus
+
 	// Key-value pairs to configure log publishing.
 	LogPublishingOptions *LogPublishingOptionsStatus
 
@@ -733,25 +736,25 @@ type DomainMaintenanceDetails struct {
 	// The name of the action.
 	Action MaintenanceType
 
-	// Contains time at which action created.
+	// The time at which the action was created.
 	CreatedAt *time.Time
 
 	// The name of the domain.
 	DomainName *string
 
-	// Id of the requested action.
+	// The ID of the requested action.
 	MaintenanceId *string
 
-	// Id of the data node.
+	// The ID of the data node.
 	NodeId *string
 
 	// The status of the action.
 	Status MaintenanceStatus
 
-	// The status message of the action.
+	// The status message for the action.
 	StatusMessage *string
 
-	// Contains time at which action updated.
+	// The time at which the action was updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -893,6 +896,11 @@ type DomainStatus struct {
 	// to the domain.
 	Endpoint *string
 
+	// The domain endpoint to which index and search requests are submitted. For
+	// example, search-imdb-movies-oopcnjfn6ugo.eu-west-1.es.amazonaws.com or
+	// doc-imdb-movies-oopcnjfn6u.eu-west-1.es.amazonaws.com .
+	EndpointV2 *string
+
 	// The key-value pair that exists if the OpenSearch Service domain uses VPC
 	// endpoints.. Example key, value :
 	// 'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com' .
@@ -901,6 +909,9 @@ type DomainStatus struct {
 	// Version of OpenSearch or Elasticsearch that the domain is running, in the
 	// format Elasticsearch_X.Y or OpenSearch_X.Y .
 	EngineVersion *string
+
+	// The type of IP addresses supported by the endpoint for the domain.
+	IPAddressType IPAddressType
 
 	// Log publishing options for the domain.
 	LogPublishingOptions map[string]LogPublishingOption
@@ -1203,6 +1214,22 @@ type InstanceTypeDetails struct {
 
 	// Whether UltraWarm is supported for the instance type.
 	WarmEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// The IP address type status for the domain.
+type IPAddressTypeStatus struct {
+
+	// The IP address options for the domain.
+	//
+	// This member is required.
+	Options IPAddressType
+
+	// Provides the current status of an entity.
+	//
+	// This member is required.
+	Status *OptionStatus
 
 	noSmithyDocumentSerde
 }

@@ -20,6 +20,9 @@ func ExampleAutoMLProblemTypeConfig_outputUsage() {
 	case *types.AutoMLProblemTypeConfigMemberTextClassificationJobConfig:
 		_ = v.Value // Value is types.TextClassificationJobConfig
 
+	case *types.AutoMLProblemTypeConfigMemberTextGenerationJobConfig:
+		_ = v.Value // Value is types.TextGenerationJobConfig
+
 	case *types.AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig:
 		_ = v.Value // Value is types.TimeSeriesForecastingJobConfig
 
@@ -32,6 +35,7 @@ func ExampleAutoMLProblemTypeConfig_outputUsage() {
 	}
 }
 
+var _ *types.TextGenerationJobConfig
 var _ *types.TextClassificationJobConfig
 var _ *types.TimeSeriesForecastingJobConfig
 var _ *types.ImageClassificationJobConfig
@@ -44,6 +48,9 @@ func ExampleAutoMLProblemTypeResolvedAttributes_outputUsage() {
 	case *types.AutoMLProblemTypeResolvedAttributesMemberTabularResolvedAttributes:
 		_ = v.Value // Value is types.TabularResolvedAttributes
 
+	case *types.AutoMLProblemTypeResolvedAttributesMemberTextGenerationResolvedAttributes:
+		_ = v.Value // Value is types.TextGenerationResolvedAttributes
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -53,6 +60,7 @@ func ExampleAutoMLProblemTypeResolvedAttributes_outputUsage() {
 	}
 }
 
+var _ *types.TextGenerationResolvedAttributes
 var _ *types.TabularResolvedAttributes
 
 func ExampleCollectionConfig_outputUsage() {

@@ -17,7 +17,7 @@ import (
 	"time"
 )
 
-// Get the status of the maintenance action.
+// The status of the maintenance action.
 func (c *Client) GetDomainMaintenanceStatus(ctx context.Context, params *GetDomainMaintenanceStatusInput, optFns ...func(*Options)) (*GetDomainMaintenanceStatusOutput, error) {
 	if params == nil {
 		params = &GetDomainMaintenanceStatusInput{}
@@ -41,7 +41,7 @@ type GetDomainMaintenanceStatusInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The request id of the maintenance action.
+	// The request ID of the maintenance action.
 	//
 	// This member is required.
 	MaintenanceId *string
@@ -49,26 +49,26 @@ type GetDomainMaintenanceStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a GetDomainMaintenanceStatus request. Contains information about
-// the requested action.
+// The result of a GetDomainMaintenanceStatus request that information about the
+// requested action.
 type GetDomainMaintenanceStatusOutput struct {
 
-	// Contains action name.
+	// The action name.
 	Action types.MaintenanceType
 
-	// Contains time at which action created.
+	// The time at which the action was created.
 	CreatedAt *time.Time
 
-	// Contains node id of maintenance action.
+	// The node ID of the maintenance action.
 	NodeId *string
 
-	// Contains status of the maintenance action.
+	// The status of the maintenance action.
 	Status types.MaintenanceStatus
 
-	// Contains status message of the maintenance action.
+	// The status message of the maintenance action.
 	StatusMessage *string
 
-	// Contains time at which action updated.
+	// The time at which the action was updated.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

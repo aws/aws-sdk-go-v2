@@ -96,6 +96,39 @@ type CapacityUsageSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the actions to take on the SSL/TLS connection if the certificate
+// presented by the server in the connection has a revoked or unknown status.
+type CheckCertificateRevocationStatusActions struct {
+
+	// Configures how Network Firewall processes traffic when it determines that the
+	// certificate presented by the server in the SSL/TLS connection has a revoked
+	// status.
+	//   - PASS - Allow the connection to continue, and pass subsequent packets to the
+	//   stateful engine for inspection.
+	//   - DROP - Network Firewall fails closed and drops all subsequent traffic.
+	//   - REJECT - Network Firewall sends a TCP reject packet back to your client so
+	//   that the client can immediately establish a new session. Network Firewall then
+	//   fails closed and drops all subsequent traffic. REJECT is available only for
+	//   TCP traffic.
+	RevokedStatusAction RevocationCheckAction
+
+	// Configures how Network Firewall processes traffic when it determines that the
+	// certificate presented by the server in the SSL/TLS connection has an unknown
+	// status, or a status that cannot be determined for any other reason, including
+	// when the service is unable to connect to the OCSP and CRL endpoints for the
+	// certificate.
+	//   - PASS - Allow the connection to continue, and pass subsequent packets to the
+	//   stateful engine for inspection.
+	//   - DROP - Network Firewall fails closed and drops all subsequent traffic.
+	//   - REJECT - Network Firewall sends a TCP reject packet back to your client so
+	//   that the client can immediately establish a new session. Network Firewall then
+	//   fails closed and drops all subsequent traffic. REJECT is available only for
+	//   TCP traffic.
+	UnknownStatusAction RevocationCheckAction
+
+	noSmithyDocumentSerde
+}
+
 // Summarizes the CIDR blocks used by the IP set references in a firewall. Network
 // Firewall calculates the number of CIDRs by taking an aggregated count of all
 // CIDRs used by the IP sets you are referencing.
@@ -1017,11 +1050,12 @@ type RuleVariables struct {
 	noSmithyDocumentSerde
 }
 
-// Any Certificate Manager Secure Sockets Layer/Transport Layer Security (SSL/TLS)
-// server certificate that's associated with a ServerCertificateConfiguration used
-// in a TLSInspectionConfiguration . You must request or import a SSL/TLS
-// certificate into ACM for each domain Network Firewall needs to decrypt and
-// inspect. Network Firewall uses the SSL/TLS certificates to decrypt specified
+// Any Certificate Manager (ACM) Secure Sockets Layer/Transport Layer Security
+// (SSL/TLS) server certificate that's associated with a
+// ServerCertificateConfiguration . Used in a TLSInspectionConfiguration for
+// inspection of inbound traffic to your firewall. You must request or import a
+// SSL/TLS certificate into ACM for each domain Network Firewall needs to decrypt
+// and inspect. Network Firewall uses the SSL/TLS certificates to decrypt specified
 // inbound SSL/TLS traffic going to your firewall. For information about working
 // with certificates in Certificate Manager, see Request a public certificate  (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html)
 // or Importing certificates (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
@@ -1029,27 +1063,50 @@ type RuleVariables struct {
 type ServerCertificate struct {
 
 	// The Amazon Resource Name (ARN) of the Certificate Manager SSL/TLS server
-	// certificate.
+	// certificate that's used for inbound SSL/TLS inspection.
 	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
 
-// Configures the associated Certificate Manager Secure Sockets Layer/Transport
-// Layer Security (SSL/TLS) server certificates and scope settings Network Firewall
-// uses to decrypt traffic in a TLSInspectionConfiguration . For information about
-// working with SSL/TLS certificates for TLS inspection, see Requirements for
-// using SSL/TLS server certficiates with TLS inspection configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html)
+// Configures the Certificate Manager certificates and scope that Network Firewall
+// uses to decrypt and re-encrypt traffic using a TLSInspectionConfiguration . You
+// can configure ServerCertificates for inbound SSL/TLS inspection, a
+// CertificateAuthorityArn for outbound SSL/TLS inspection, or both. For
+// information about working with certificates for TLS inspection, see
+// Requirements for using SSL/TLS server certficiates with TLS inspection
+// configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html)
 // in the Network Firewall Developer Guide. If a server certificate that's
 // associated with your TLSInspectionConfiguration is revoked, deleted, or expired
 // it can result in client-side TLS errors.
 type ServerCertificateConfiguration struct {
 
-	// A list of a server certificate configuration's scopes.
+	// The Amazon Resource Name (ARN) of the imported certificate authority (CA)
+	// certificate configured in Certificate Manager (ACM) to use for outbound SSL/TLS
+	// inspection. The following limitations apply:
+	//   - You can use CA certificates that you imported into ACM, but you can't
+	//   generate CA certificates with ACM.
+	//   - You can't use certificates issued by Private Certificate Authority.
+	// For more information about the certificate requirements for outbound
+	// inspection, see Requirements for using SSL/TLS certificates with TLS inspection
+	// configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html)
+	// in the Network Firewall Developer Guide. For information about working with
+	// certificates in ACM, see Importing certificates (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
+	// in the Certificate Manager User Guide.
+	CertificateAuthorityArn *string
+
+	// When enabled, Network Firewall checks if the server certificate presented by
+	// the server in the SSL/TLS connection has a revoked or unkown status. If the
+	// certificate has an unknown or revoked status, you must specify the actions that
+	// Network Firewall takes on outbound traffic. To use this option, you must specify
+	// a CertificateAuthorityArn in ServerCertificateConfiguration .
+	CheckCertificateRevocationStatus *CheckCertificateRevocationStatusActions
+
+	// A list of scopes.
 	Scopes []ServerCertificateScope
 
-	// The list of a server certificate configuration's Certificate Manager SSL/TLS
-	// certificates.
+	// The list of a server certificate configuration's Certificate Manager
+	// certificates, used for inbound SSL/TLS inspection.
 	ServerCertificates []ServerCertificate
 
 	noSmithyDocumentSerde
@@ -1417,10 +1474,11 @@ type TlsCertificateData struct {
 // before sending it to its destination. To use a TLS inspection configuration, you
 // add it to a new Network Firewall firewall policy, then you apply the firewall
 // policy to a firewall. Network Firewall acts as a proxy service to decrypt and
-// inspect inbound traffic. You can reference a TLS inspection configuration from
-// more than one firewall policy, and you can use a firewall policy in more than
-// one firewall. For more information about using TLS inspection configurations,
-// see Decrypting SSL/TLS traffic with TLS inspection configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html)
+// inspect the traffic traveling through your firewalls. You can reference a TLS
+// inspection configuration from more than one firewall policy, and you can use a
+// firewall policy in more than one firewall. For more information about using TLS
+// inspection configurations, see Inspecting SSL/TLS traffic with TLS inspection
+// configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html)
 // in the Network Firewall Developer Guide.
 type TLSInspectionConfiguration struct {
 
@@ -1469,6 +1527,9 @@ type TLSInspectionConfigurationResponse struct {
 	//
 	// This member is required.
 	TLSInspectionConfigurationName *string
+
+	// Contains metadata about an Certificate Manager certificate.
+	CertificateAuthority *TlsCertificateData
 
 	// A list of the certificates associated with the TLS inspection configuration.
 	Certificates []TlsCertificateData

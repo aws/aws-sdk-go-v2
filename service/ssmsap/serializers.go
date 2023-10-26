@@ -651,6 +651,13 @@ func awsRestjson1_serializeOpDocumentListApplicationsInput(v *ListApplicationsIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsRestjson1_serializeDocumentFilterList(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)
@@ -1165,6 +1172,11 @@ func awsRestjson1_serializeOpDocumentRegisterApplicationInput(v *RegisterApplica
 		}
 	}
 
+	if v.DatabaseArn != nil {
+		ok := object.Key("DatabaseArn")
+		ok.String(*v.DatabaseArn)
+	}
+
 	if v.Instances != nil {
 		ok := object.Key("Instances")
 		if err := awsRestjson1_serializeDocumentInstanceList(v.Instances, ok); err != nil {
@@ -1519,6 +1531,11 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationSettingsInput(v *UpdateApp
 		if err := awsRestjson1_serializeDocumentApplicationCredentialList(v.CredentialsToRemove, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.DatabaseArn != nil {
+		ok := object.Key("DatabaseArn")
+		ok.String(*v.DatabaseArn)
 	}
 
 	return nil

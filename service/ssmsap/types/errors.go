@@ -85,6 +85,32 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request is not authorized.
+type UnauthorizedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnauthorizedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnauthorizedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnauthorizedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "UnauthorizedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The input fails to satisfy the constraints specified by an AWS service.
 type ValidationException struct {
 	Message *string

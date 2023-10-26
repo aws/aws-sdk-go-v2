@@ -36309,6 +36309,16 @@ loop:
 			uv = &types.AutoMLProblemTypeConfigMemberTextClassificationJobConfig{Value: mv}
 			break loop
 
+		case "TextGenerationJobConfig":
+			var mv types.TextGenerationJobConfig
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentTextGenerationJobConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AutoMLProblemTypeConfigMemberTextGenerationJobConfig{Value: mv}
+			break loop
+
 		case "TimeSeriesForecastingJobConfig":
 			var mv types.TimeSeriesForecastingJobConfig
 			destAddr := &mv
@@ -36357,6 +36367,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.AutoMLProblemTypeResolvedAttributesMemberTabularResolvedAttributes{Value: mv}
+			break loop
+
+		case "TextGenerationResolvedAttributes":
+			var mv types.TextGenerationResolvedAttributes
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentTextGenerationResolvedAttributes(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AutoMLProblemTypeResolvedAttributesMemberTextGenerationResolvedAttributes{Value: mv}
 			break loop
 
 		default:
@@ -69590,6 +69610,91 @@ func awsAwsjson11_deserializeDocumentTextClassificationJobConfig(v **types.TextC
 					return fmt.Errorf("expected TargetLabelColumn to be of type string, got %T instead", value)
 				}
 				sv.TargetLabelColumn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTextGenerationJobConfig(v **types.TextGenerationJobConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TextGenerationJobConfig
+	if *v == nil {
+		sv = &types.TextGenerationJobConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BaseModelName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BaseModelName to be of type string, got %T instead", value)
+				}
+				sv.BaseModelName = ptr.String(jtv)
+			}
+
+		case "CompletionCriteria":
+			if err := awsAwsjson11_deserializeDocumentAutoMLJobCompletionCriteria(&sv.CompletionCriteria, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTextGenerationResolvedAttributes(v **types.TextGenerationResolvedAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TextGenerationResolvedAttributes
+	if *v == nil {
+		sv = &types.TextGenerationResolvedAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BaseModelName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BaseModelName to be of type string, got %T instead", value)
+				}
+				sv.BaseModelName = ptr.String(jtv)
 			}
 
 		default:

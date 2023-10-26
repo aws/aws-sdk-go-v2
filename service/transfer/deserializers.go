@@ -8694,7 +8694,7 @@ func awsAwsjson11_deserializeDocumentDescribedServer(v **types.DescribedServer, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Role to be of type string, got %T instead", value)
+					return fmt.Errorf("expected NullableRole to be of type string, got %T instead", value)
 				}
 				sv.LoggingRole = ptr.String(jtv)
 			}

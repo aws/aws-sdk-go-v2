@@ -578,3 +578,31 @@ func (UsageLimitPeriod) Values() []UsageLimitPeriod {
 		"monthly",
 	}
 }
+
+type ZeroETLIntegrationStatus string
+
+// Enum values for ZeroETLIntegrationStatus
+const (
+	ZeroETLIntegrationStatusCreating       ZeroETLIntegrationStatus = "creating"
+	ZeroETLIntegrationStatusActive         ZeroETLIntegrationStatus = "active"
+	ZeroETLIntegrationStatusModifying      ZeroETLIntegrationStatus = "modifying"
+	ZeroETLIntegrationStatusFailed         ZeroETLIntegrationStatus = "failed"
+	ZeroETLIntegrationStatusDeleting       ZeroETLIntegrationStatus = "deleting"
+	ZeroETLIntegrationStatusSyncing        ZeroETLIntegrationStatus = "syncing"
+	ZeroETLIntegrationStatusNeedsAttention ZeroETLIntegrationStatus = "needs_attention"
+)
+
+// Values returns all known values for ZeroETLIntegrationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ZeroETLIntegrationStatus) Values() []ZeroETLIntegrationStatus {
+	return []ZeroETLIntegrationStatus{
+		"creating",
+		"active",
+		"modifying",
+		"failed",
+		"deleting",
+		"syncing",
+		"needs_attention",
+	}
+}

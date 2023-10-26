@@ -1005,6 +1005,45 @@ type HsmStatus struct {
 	noSmithyDocumentSerde
 }
 
+// The content of an inbound integration.
+type InboundIntegration struct {
+
+	// The creation time of an inbound integration.
+	CreateTime *time.Time
+
+	// The outstanding errors of an inbound integration. Each item is an
+	// "IntegrationError". This is null if there is no error.
+	Errors []IntegrationError
+
+	// The Amazon Resource Name (ARN) of an inbound integration.
+	IntegrationArn *string
+
+	// The Amazon Resource Name (ARN) of the source of an inbound integration.
+	SourceArn *string
+
+	// The status of an inbound integration.
+	Status ZeroETLIntegrationStatus
+
+	// The Amazon Resource Name (ARN) of the target of an inbound integration.
+	TargetArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The error of an inbound integration.
+type IntegrationError struct {
+
+	// The error code of an inbound integration error.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The error message of an inbound integration error.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes an IP range used in a security group.
 type IPRange struct {
 
@@ -1436,6 +1475,18 @@ type ResizeInfo struct {
 
 	// Returns the value ClassicResize .
 	ResizeType *string
+
+	noSmithyDocumentSerde
+}
+
+// The policy that is attached to a resource.
+type ResourcePolicy struct {
+
+	// The content of a resource policy.
+	Policy *string
+
+	// The resources that a policy is attached to.
+	ResourceArn *string
 
 	noSmithyDocumentSerde
 }

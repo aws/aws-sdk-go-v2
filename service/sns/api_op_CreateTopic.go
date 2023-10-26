@@ -75,7 +75,12 @@ type CreateTopicInput struct {
 	//   in the Key Management Service API Reference.
 	// The following attributes apply only to FIFO topics (https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html)
 	// :
-	//   - FifoTopic – When this is set to true , a FIFO topic is created.
+	//   - ArchivePolicy – Adds or updates an inline policy document to archive
+	//   messages stored in the specified Amazon SNS topic.
+	//   - BeginningArchiveTime – The earliest starting point at which a message in the
+	//   topic’s archive can be replayed from. This point in time is based on the
+	//   configured message retention period set by the topic’s message archiving policy.
+	//
 	//   - ContentBasedDeduplication – Enables content-based deduplication for FIFO
 	//   topics.
 	//   - By default, ContentBasedDeduplication is set to false . If you create a FIFO

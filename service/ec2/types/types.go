@@ -13047,6 +13047,30 @@ type SecurityGroup struct {
 	noSmithyDocumentSerde
 }
 
+// A security group that can be used by interfaces in the VPC.
+type SecurityGroupForVpc struct {
+
+	// The security group's description.
+	Description *string
+
+	// The security group ID.
+	GroupId *string
+
+	// The security group name.
+	GroupName *string
+
+	// The security group owner ID.
+	OwnerId *string
+
+	// The VPC ID in which the security group was created.
+	PrimaryVpcId *string
+
+	// The security group tags.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
 // Describes a security group.
 type SecurityGroupIdentifier struct {
 

@@ -17551,6 +17551,12 @@ func awsAwsjson11_serializeDocumentAutoMLProblemTypeConfig(v types.AutoMLProblem
 			return err
 		}
 
+	case *types.AutoMLProblemTypeConfigMemberTextGenerationJobConfig:
+		av := object.Key("TextGenerationJobConfig")
+		if err := awsAwsjson11_serializeDocumentTextGenerationJobConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig:
 		av := object.Key("TimeSeriesForecastingJobConfig")
 		if err := awsAwsjson11_serializeDocumentTimeSeriesForecastingJobConfig(&uv.Value, av); err != nil {
@@ -25410,6 +25416,25 @@ func awsAwsjson11_serializeDocumentTextClassificationJobConfig(v *types.TextClas
 	if v.TargetLabelColumn != nil {
 		ok := object.Key("TargetLabelColumn")
 		ok.String(*v.TargetLabelColumn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTextGenerationJobConfig(v *types.TextGenerationJobConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BaseModelName != nil {
+		ok := object.Key("BaseModelName")
+		ok.String(*v.BaseModelName)
+	}
+
+	if v.CompletionCriteria != nil {
+		ok := object.Key("CompletionCriteria")
+		if err := awsAwsjson11_serializeDocumentAutoMLJobCompletionCriteria(v.CompletionCriteria, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

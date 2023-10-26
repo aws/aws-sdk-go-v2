@@ -2044,6 +2044,23 @@ func awsAwsjson10_serializeDocumentAzSubnets(v []string, value smithyjson.Value)
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentCheckCertificateRevocationStatusActions(v *types.CheckCertificateRevocationStatusActions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.RevokedStatusAction) > 0 {
+		ok := object.Key("RevokedStatusAction")
+		ok.String(string(v.RevokedStatusAction))
+	}
+
+	if len(v.UnknownStatusAction) > 0 {
+		ok := object.Key("UnknownStatusAction")
+		ok.String(string(v.UnknownStatusAction))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentCustomAction(v *types.CustomAction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2704,6 +2721,18 @@ func awsAwsjson10_serializeDocumentServerCertificate(v *types.ServerCertificate,
 func awsAwsjson10_serializeDocumentServerCertificateConfiguration(v *types.ServerCertificateConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CertificateAuthorityArn != nil {
+		ok := object.Key("CertificateAuthorityArn")
+		ok.String(*v.CertificateAuthorityArn)
+	}
+
+	if v.CheckCertificateRevocationStatus != nil {
+		ok := object.Key("CheckCertificateRevocationStatus")
+		if err := awsAwsjson10_serializeDocumentCheckCertificateRevocationStatusActions(v.CheckCertificateRevocationStatus, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Scopes != nil {
 		ok := object.Key("Scopes")

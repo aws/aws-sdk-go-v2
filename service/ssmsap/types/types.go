@@ -68,6 +68,9 @@ type ApplicationSummary struct {
 	// The Amazon Resource Name (ARN) of the application.
 	Arn *string
 
+	// The status of the latest discovery.
+	DiscoveryStatus ApplicationDiscoveryStatus
+
 	// The ID of the application.
 	Id *string
 
@@ -88,6 +91,9 @@ type AssociatedHost struct {
 
 	// The name of the host.
 	Hostname *string
+
+	// The IP addresses of the associated host.
+	IpAddresses []IpAddressMember
 
 	// The version of the operating system.
 	OsVersion *string
@@ -135,6 +141,9 @@ type Component struct {
 	// The type of the component.
 	ComponentType ComponentType
 
+	// The connection specifications for the database of the component.
+	DatabaseConnection *DatabaseConnection
+
 	// The SAP HANA databases of the component.
 	Databases []string
 
@@ -162,14 +171,33 @@ type Component struct {
 	// Details of the SAP HANA system replication for the component.
 	Resilience *Resilience
 
+	// The SAP feature of the component.
+	SapFeature *string
+
 	// The hostname of the component.
 	SapHostname *string
 
 	// The kernel version of the component.
 	SapKernelVersion *string
 
+	// The SAP System Identifier of the application component.
+	Sid *string
+
 	// The status of the component.
+	//   - ACTIVATED - this status has been deprecated.
+	//   - STARTING - the component is in the process of being started.
+	//   - STOPPED - the component is not running.
+	//   - STOPPING - the component is in the process of being stopped.
+	//   - RUNNING - the component is running.
+	//   - RUNNING_WITH_ERROR - one or more child component(s) of the parent component
+	//   is not running. Call GetComponent (https://docs.aws.amazon.com/ssmsap/latest/APIReference/API_GetComponent.html)
+	//   to review the status of each child component.
+	//   - UNDEFINED - AWS Systems Manager for SAP cannot provide the component status
+	//   based on the discovered information. Verify your SAP application.
 	Status ComponentStatus
+
+	// The SAP system number of the application component.
+	SystemNumber *string
 
 	noSmithyDocumentSerde
 }
@@ -231,6 +259,21 @@ type Database struct {
 
 	// The status of the database.
 	Status DatabaseStatus
+
+	noSmithyDocumentSerde
+}
+
+// The connection specifications for the database.
+type DatabaseConnection struct {
+
+	// The IP address for connection.
+	ConnectionIp *string
+
+	// The Amazon Resource Name of the connected SAP HANA database.
+	DatabaseArn *string
+
+	// The method of connection.
+	DatabaseConnectionMethod DatabaseConnectionMethod
 
 	noSmithyDocumentSerde
 }
@@ -306,6 +349,21 @@ type Host struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information of the IP address.
+type IpAddressMember struct {
+
+	// The type of allocation for the IP address.
+	AllocationType AllocationType
+
+	// The IP address.
+	IpAddress *string
+
+	// The primary IP address.
+	Primary *bool
+
+	noSmithyDocumentSerde
+}
+
 // The operations performed by AWS Systems Manager for SAP.
 type Operation struct {
 
@@ -350,6 +408,9 @@ type Resilience struct {
 
 	// The cluster status of the component.
 	ClusterStatus ClusterStatus
+
+	// Indicates if or not enqueue replication is enabled for the ASCS component.
+	EnqueueReplication *bool
 
 	// The operation mode of the component.
 	HsrOperationMode OperationMode

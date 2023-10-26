@@ -49,15 +49,16 @@ type RegisterApplicationInput struct {
 	// This member is required.
 	ApplicationType types.ApplicationType
 
-	// The credentials of the SAP application.
-	//
-	// This member is required.
-	Credentials []types.ApplicationCredential
-
 	// The Amazon EC2 instances on which your SAP application is running.
 	//
 	// This member is required.
 	Instances []string
+
+	// The credentials of the SAP application.
+	Credentials []types.ApplicationCredential
+
+	// The Amazon Resource Name of the SAP HANA database.
+	DatabaseArn *string
 
 	// The SAP instance number of the application.
 	SapInstanceNumber *string

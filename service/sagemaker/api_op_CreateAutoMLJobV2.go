@@ -23,9 +23,10 @@ import (
 // and DescribeAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html)
 // which offer backward compatibility. CreateAutoMLJobV2 can manage tabular
 // problem types identical to those of its previous version CreateAutoMLJob , as
-// well as time-series forecasting, and non-tabular problem types such as image or
-// text classification. Find guidelines about how to migrate a CreateAutoMLJob to
-// CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2)
+// well as time-series forecasting, non-tabular problem types such as image or text
+// classification, and text generation (LLMs fine-tuning). Find guidelines about
+// how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a
+// CreateAutoMLJob to CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2)
 // . For the list of available problem types supported by CreateAutoMLJobV2 , see
 // AutoMLProblemTypeConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html)
 // . You can find the best-performing model after you run an AutoML job V2 by
@@ -56,6 +57,7 @@ type CreateAutoMLJobV2Input struct {
 	//   - For image classification: S3Prefix , ManifestFile , AugmentedManifestFile .
 	//   - For text classification: S3Prefix .
 	//   - For time-series forecasting: S3Prefix .
+	//   - For text generation (LLMs fine-tuning): S3Prefix .
 	//
 	// This member is required.
 	AutoMLJobInputDataConfig []types.AutoMLJobChannel
@@ -85,9 +87,19 @@ type CreateAutoMLJobV2Input struct {
 	// Specifies a metric to minimize or maximize as the objective of a job. If not
 	// specified, the default objective metric depends on the problem type. For the
 	// list of default values per problem type, see AutoMLJobObjective (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html)
-	// . For tabular problem types, you must either provide both the AutoMLJobObjective
-	// and indicate the type of supervised learning problem in AutoMLProblemTypeConfig
-	// ( TabularJobConfig.ProblemType ), or none at all.
+	// .
+	//   - For tabular problem types: You must either provide both the
+	//   AutoMLJobObjective and indicate the type of supervised learning problem in
+	//   AutoMLProblemTypeConfig ( TabularJobConfig.ProblemType ), or none at all.
+	//   - For text generation problem types (LLMs fine-tuning): Fine-tuning language
+	//   models in Autopilot does not require setting the AutoMLJobObjective field.
+	//   Autopilot fine-tunes LLMs without requiring multiple candidates to be trained
+	//   and evaluated. Instead, using your dataset, Autopilot directly fine-tunes your
+	//   target model to enhance a default objective metric, the cross-entropy loss.
+	//   After fine-tuning a language model, you can evaluate the quality of its
+	//   generated text using different metrics. For a list of the available metrics, see
+	//   Metrics for fine-tuning LLMs in Autopilot (https://docs.aws.amazon.com/sagemaker/latest/dg/llms-finetuning-models.html)
+	//   .
 	AutoMLJobObjective *types.AutoMLJobObjective
 
 	// This structure specifies how to split the data into train and validation

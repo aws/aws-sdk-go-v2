@@ -5099,6 +5099,55 @@ func awsAwsjson10_deserializeDocumentCertificates(v *[]types.TlsCertificateData,
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCheckCertificateRevocationStatusActions(v **types.CheckCertificateRevocationStatusActions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CheckCertificateRevocationStatusActions
+	if *v == nil {
+		sv = &types.CheckCertificateRevocationStatusActions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RevokedStatusAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RevocationCheckAction to be of type string, got %T instead", value)
+				}
+				sv.RevokedStatusAction = types.RevocationCheckAction(jtv)
+			}
+
+		case "UnknownStatusAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RevocationCheckAction to be of type string, got %T instead", value)
+				}
+				sv.UnknownStatusAction = types.RevocationCheckAction(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentCIDRSummary(v **types.CIDRSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7924,6 +7973,20 @@ func awsAwsjson10_deserializeDocumentServerCertificateConfiguration(v **types.Se
 
 	for key, value := range shape {
 		switch key {
+		case "CertificateAuthorityArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.CertificateAuthorityArn = ptr.String(jtv)
+			}
+
+		case "CheckCertificateRevocationStatus":
+			if err := awsAwsjson10_deserializeDocumentCheckCertificateRevocationStatusActions(&sv.CheckCertificateRevocationStatus, value); err != nil {
+				return err
+			}
+
 		case "Scopes":
 			if err := awsAwsjson10_deserializeDocumentServerCertificateScopes(&sv.Scopes, value); err != nil {
 				return err
@@ -9376,6 +9439,11 @@ func awsAwsjson10_deserializeDocumentTLSInspectionConfigurationResponse(v **type
 
 	for key, value := range shape {
 		switch key {
+		case "CertificateAuthority":
+			if err := awsAwsjson10_deserializeDocumentTlsCertificateData(&sv.CertificateAuthority, value); err != nil {
+				return err
+			}
+
 		case "Certificates":
 			if err := awsAwsjson10_deserializeDocumentCertificates(&sv.Certificates, value); err != nil {
 				return err

@@ -240,6 +240,7 @@ type ResourceStatus string
 const (
 	ResourceStatusActive   ResourceStatus = "ACTIVE"
 	ResourceStatusDeleting ResourceStatus = "DELETING"
+	ResourceStatusError    ResourceStatus = "ERROR"
 )
 
 // Values returns all known values for ResourceStatus. Note that this can be
@@ -249,6 +250,27 @@ func (ResourceStatus) Values() []ResourceStatus {
 	return []ResourceStatus{
 		"ACTIVE",
 		"DELETING",
+		"ERROR",
+	}
+}
+
+type RevocationCheckAction string
+
+// Enum values for RevocationCheckAction
+const (
+	RevocationCheckActionPass   RevocationCheckAction = "PASS"
+	RevocationCheckActionDrop   RevocationCheckAction = "DROP"
+	RevocationCheckActionReject RevocationCheckAction = "REJECT"
+)
+
+// Values returns all known values for RevocationCheckAction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RevocationCheckAction) Values() []RevocationCheckAction {
+	return []RevocationCheckAction{
+		"PASS",
+		"DROP",
+		"REJECT",
 	}
 }
 

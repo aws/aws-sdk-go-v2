@@ -120,9 +120,9 @@ type CreateUserInput struct {
 	PosixProfile *types.PosixProfile
 
 	// The public portion of the Secure Shell (SSH) key used to authenticate the user
-	// to the server. The three standard SSH public key format elements are , , and an
-	// optional , with spaces between each element. Transfer Family accepts RSA,
-	// ECDSA, and ED25519 keys.
+	// to the server. The three standard SSH public key format elements are <key type>
+	// , <body base64> , and an optional <comment> , with spaces between each element.
+	// Transfer Family accepts RSA, ECDSA, and ED25519 keys.
 	//   - For RSA keys, the key type is ssh-rsa .
 	//   - For ED25519 keys, the key type is ssh-ed25519 .
 	//   - For ECDSA keys, the key type is either ecdsa-sha2-nistp256 ,

@@ -249,6 +249,9 @@ func awsRestjson1_deserializeOpErrorDeregisterApplication(response *smithyhttp.R
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("UnauthorizedException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
 
@@ -517,6 +520,9 @@ func awsRestjson1_deserializeOpErrorGetComponent(response *smithyhttp.Response, 
 	switch {
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
@@ -1299,6 +1305,9 @@ func awsRestjson1_deserializeOpErrorListComponents(response *smithyhttp.Response
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
@@ -2093,6 +2102,9 @@ func awsRestjson1_deserializeOpErrorRegisterApplication(response *smithyhttp.Res
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
 
@@ -2257,6 +2269,9 @@ func awsRestjson1_deserializeOpErrorStartApplicationRefresh(response *smithyhttp
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
@@ -2596,6 +2611,9 @@ func awsRestjson1_deserializeOpErrorUpdateApplicationSettings(response *smithyht
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("UnauthorizedException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
 
@@ -2746,6 +2764,42 @@ func awsRestjson1_deserializeErrorResourceNotFoundException(response *smithyhttp
 	}
 
 	err := awsRestjson1_deserializeDocumentResourceNotFoundException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorUnauthorizedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.UnauthorizedException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentUnauthorizedException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -3036,6 +3090,15 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "DiscoveryStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApplicationDiscoveryStatus to be of type string, got %T instead", value)
+				}
+				sv.DiscoveryStatus = types.ApplicationDiscoveryStatus(jtv)
+			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3142,6 +3205,11 @@ func awsRestjson1_deserializeDocumentAssociatedHost(v **types.AssociatedHost, va
 				sv.Hostname = ptr.String(jtv)
 			}
 
+		case "IpAddresses":
+			if err := awsRestjson1_deserializeDocumentIpAddressList(&sv.IpAddresses, value); err != nil {
+				return err
+			}
+
 		case "OsVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3228,6 +3296,11 @@ func awsRestjson1_deserializeDocumentComponent(v **types.Component, value interf
 				sv.ComponentType = types.ComponentType(jtv)
 			}
 
+		case "DatabaseConnection":
+			if err := awsRestjson1_deserializeDocumentDatabaseConnection(&sv.DatabaseConnection, value); err != nil {
+				return err
+			}
+
 		case "Databases":
 			if err := awsRestjson1_deserializeDocumentDatabaseIdList(&sv.Databases, value); err != nil {
 				return err
@@ -3286,6 +3359,15 @@ func awsRestjson1_deserializeDocumentComponent(v **types.Component, value interf
 				return err
 			}
 
+		case "SapFeature":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SapFeature = ptr.String(jtv)
+			}
+
 		case "SapHostname":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3304,6 +3386,15 @@ func awsRestjson1_deserializeDocumentComponent(v **types.Component, value interf
 				sv.SapKernelVersion = ptr.String(jtv)
 			}
 
+		case "Sid":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SID to be of type string, got %T instead", value)
+				}
+				sv.Sid = ptr.String(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3311,6 +3402,15 @@ func awsRestjson1_deserializeDocumentComponent(v **types.Component, value interf
 					return fmt.Errorf("expected ComponentStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.ComponentStatus(jtv)
+			}
+
+		case "SystemNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SAPInstanceNumber to be of type string, got %T instead", value)
+				}
+				sv.SystemNumber = ptr.String(jtv)
 			}
 
 		default:
@@ -3641,6 +3741,64 @@ func awsRestjson1_deserializeDocumentDatabase(v **types.Database, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDatabaseConnection(v **types.DatabaseConnection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatabaseConnection
+	if *v == nil {
+		sv = &types.DatabaseConnection{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConnectionIp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ConnectionIp = ptr.String(jtv)
+			}
+
+		case "DatabaseArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SsmSapArn to be of type string, got %T instead", value)
+				}
+				sv.DatabaseArn = ptr.String(jtv)
+			}
+
+		case "DatabaseConnectionMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatabaseConnectionMethod to be of type string, got %T instead", value)
+				}
+				sv.DatabaseConnectionMethod = types.DatabaseConnectionMethod(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDatabaseIdList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3951,6 +4109,98 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentIpAddressList(v *[]types.IpAddressMember, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.IpAddressMember
+	if *v == nil {
+		cv = []types.IpAddressMember{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.IpAddressMember
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentIpAddressMember(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIpAddressMember(v **types.IpAddressMember, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IpAddressMember
+	if *v == nil {
+		sv = &types.IpAddressMember{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AllocationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AllocationType to be of type string, got %T instead", value)
+				}
+				sv.AllocationType = types.AllocationType(jtv)
+			}
+
+		case "IpAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.IpAddress = ptr.String(jtv)
+			}
+
+		case "Primary":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Primary = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOperation(v **types.Operation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4235,6 +4485,15 @@ func awsRestjson1_deserializeDocumentResilience(v **types.Resilience, value inte
 				sv.ClusterStatus = types.ClusterStatus(jtv)
 			}
 
+		case "EnqueueReplication":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnqueueReplication = ptr.Bool(jtv)
+			}
+
 		case "HsrOperationMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4344,6 +4603,46 @@ func awsRestjson1_deserializeDocumentTagMap(v *map[string]string, value interfac
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUnauthorizedException(v **types.UnauthorizedException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UnauthorizedException
+	if *v == nil {
+		sv = &types.UnauthorizedException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

@@ -99,6 +99,9 @@ type UpdateDomainConfigInput struct {
 	// Encryption at rest options for the domain.
 	EncryptionAtRestOptions *types.EncryptionAtRestOptions
 
+	// The type of IP addresses supported by the endpoint for the domain.
+	IPAddressType types.IPAddressType
+
 	// Options to publish OpenSearch logs to Amazon CloudWatch Logs.
 	LogPublishingOptions map[string]types.LogPublishingOption
 

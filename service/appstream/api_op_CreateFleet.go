@@ -160,11 +160,15 @@ type CreateFleetInput struct {
 	// Elastic fleets, and not allowed for other fleet types.
 	MaxConcurrentSessions *int32
 
+	// The maximum number of user sessions on an instance. This only applies to
+	// multi-session fleets.
+	MaxSessionsPerInstance *int32
+
 	// The maximum amount of time that a streaming session can remain active, in
 	// seconds. If users are still connected to a streaming instance five minutes
 	// before this limit is reached, they are prompted to save any open documents
 	// before being disconnected. After this time elapses, the instance is terminated
-	// and replaced by a new instance. Specify a value between 600 and 360000.
+	// and replaced by a new instance. Specify a value between 600 and 432000.
 	MaxUserDurationInSeconds *int32
 
 	// The fleet platform. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for

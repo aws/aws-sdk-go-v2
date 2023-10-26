@@ -2,6 +2,28 @@
 
 package types
 
+type AllocationType string
+
+// Enum values for AllocationType
+const (
+	AllocationTypeVpcSubnet AllocationType = "VPC_SUBNET"
+	AllocationTypeElasticIp AllocationType = "ELASTIC_IP"
+	AllocationTypeOverlay   AllocationType = "OVERLAY"
+	AllocationTypeUnknown   AllocationType = "UNKNOWN"
+)
+
+// Values returns all known values for AllocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AllocationType) Values() []AllocationType {
+	return []AllocationType{
+		"VPC_SUBNET",
+		"ELASTIC_IP",
+		"OVERLAY",
+		"UNKNOWN",
+	}
+}
+
 type ApplicationDiscoveryStatus string
 
 // Enum values for ApplicationDiscoveryStatus
@@ -60,7 +82,8 @@ type ApplicationType string
 
 // Enum values for ApplicationType
 const (
-	ApplicationTypeHana ApplicationType = "HANA"
+	ApplicationTypeHana    ApplicationType = "HANA"
+	ApplicationTypeSapAbap ApplicationType = "SAP_ABAP"
 )
 
 // Values returns all known values for ApplicationType. Note that this can be
@@ -69,6 +92,7 @@ const (
 func (ApplicationType) Values() []ApplicationType {
 	return []ApplicationType{
 		"HANA",
+		"SAP_ABAP",
 	}
 }
 
@@ -146,6 +170,12 @@ type ComponentType string
 const (
 	ComponentTypeHana     ComponentType = "HANA"
 	ComponentTypeHanaNode ComponentType = "HANA_NODE"
+	ComponentTypeAbap     ComponentType = "ABAP"
+	ComponentTypeAscs     ComponentType = "ASCS"
+	ComponentTypeDialog   ComponentType = "DIALOG"
+	ComponentTypeWebdisp  ComponentType = "WEBDISP"
+	ComponentTypeWd       ComponentType = "WD"
+	ComponentTypeErs      ComponentType = "ERS"
 )
 
 // Values returns all known values for ComponentType. Note that this can be
@@ -155,6 +185,12 @@ func (ComponentType) Values() []ComponentType {
 	return []ComponentType{
 		"HANA",
 		"HANA_NODE",
+		"ABAP",
+		"ASCS",
+		"DIALOG",
+		"WEBDISP",
+		"WD",
+		"ERS",
 	}
 }
 
@@ -171,6 +207,24 @@ const (
 func (CredentialType) Values() []CredentialType {
 	return []CredentialType{
 		"ADMIN",
+	}
+}
+
+type DatabaseConnectionMethod string
+
+// Enum values for DatabaseConnectionMethod
+const (
+	DatabaseConnectionMethodDirect  DatabaseConnectionMethod = "DIRECT"
+	DatabaseConnectionMethodOverlay DatabaseConnectionMethod = "OVERLAY"
+)
+
+// Values returns all known values for DatabaseConnectionMethod. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatabaseConnectionMethod) Values() []DatabaseConnectionMethod {
+	return []DatabaseConnectionMethod{
+		"DIRECT",
+		"OVERLAY",
 	}
 }
 

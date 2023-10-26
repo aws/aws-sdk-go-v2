@@ -16,9 +16,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts the node maintenance (Node restart, Node reboot,
-// Opensearch/Elasticsearch process restart, Dashboard/kibana restart) on the data
-// node.
+// Starts the node maintenance process on the data node. These processes can
+// include a node reboot, an Opensearch or Elasticsearch process restart, or a
+// Dashboard or Kibana restart.
 func (c *Client) StartDomainMaintenance(ctx context.Context, params *StartDomainMaintenanceInput, optFns ...func(*Options)) (*StartDomainMaintenanceOutput, error) {
 	if params == nil {
 		params = &StartDomainMaintenanceInput{}
@@ -47,17 +47,17 @@ type StartDomainMaintenanceInput struct {
 	// This member is required.
 	DomainName *string
 
-	// Id of the data node.
+	// The ID of the data node.
 	NodeId *string
 
 	noSmithyDocumentSerde
 }
 
-// The result of a StartDomainMaintenance request. Contains information about the
+// The result of a StartDomainMaintenance request that information about the
 // requested action.
 type StartDomainMaintenanceOutput struct {
 
-	// Contains request id of requested action.
+	// The request ID of requested action.
 	MaintenanceId *string
 
 	// Metadata pertaining to the operation's result.
