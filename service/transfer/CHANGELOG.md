@@ -1,3 +1,7 @@
+# v1.35.0 (2023-10-26)
+
+* **Feature**: No API changes from previous release. This release migrated the model to Smithy keeping all features unchanged.
+
 # v1.34.2 (2023-10-16)
 
 * **Documentation**: Documentation updates for AWS Transfer Family

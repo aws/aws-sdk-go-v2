@@ -1,8 +1,0 @@
-{
-    "id": "7b26854e-fc03-4abb-95c3-d7c294f56a8d",
-    "type": "feature",
-    "description": "No API changes from previous release. This release migrated the model to Smithy keeping all features unchanged.",
-    "modules": [
-        "service/transfer"
-    ]
-}

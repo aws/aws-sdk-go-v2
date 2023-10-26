@@ -1,3 +1,7 @@
+# v1.3.1 (2023-10-26)
+
+* No change notes available for this release.
+
 # v1.3.0 (2023-10-16)
 
 * **Feature**: This release allows customers to manage MediaPackage v2 resource using CloudFormation.

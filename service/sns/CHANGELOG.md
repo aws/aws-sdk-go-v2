@@ -1,3 +1,7 @@
+# v1.23.0 (2023-10-26)
+
+* **Feature**: Message Archiving and Replay is now supported in Amazon SNS for FIFO topics.
+
 # v1.22.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

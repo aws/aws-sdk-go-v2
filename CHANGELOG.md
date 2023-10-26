@@ -1,3 +1,25 @@
+# Release (2023-10-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.26.0](service/appstream/CHANGELOG.md#v1260-2023-10-26)
+  * **Feature**: This release introduces multi-session fleets, allowing customers to provision more than one user session on a single fleet instance.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.128.0](service/ec2/CHANGELOG.md#v11280-2023-10-26)
+  * **Feature**: Launching GetSecurityGroupsForVpc API. This API gets security groups that can be associated by the AWS account making the request with network interfaces in the specified VPC.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.32.0](service/networkfirewall/CHANGELOG.md#v1320-2023-10-26)
+  * **Feature**: Network Firewall now supports inspection of outbound SSL/TLS traffic.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.23.0](service/opensearch/CHANGELOG.md#v1230-2023-10-26)
+  * **Feature**: You can specify ipv4 or dualstack IPAddressType for cluster endpoints. If you specify IPAddressType as dualstack, the new endpoint will be visible under the 'EndpointV2' parameter and will support IPv4 and IPv6 requests. Whereas, the 'Endpoint' will continue to serve IPv4 requests.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.32.0](service/redshift/CHANGELOG.md#v1320-2023-10-26)
+  * **Feature**: Add Redshift APIs GetResourcePolicy, DeleteResourcePolicy, PutResourcePolicy and DescribeInboundIntegrations for the new Amazon Redshift Zero-ETL integration feature, which can be used to control data ingress into Redshift namespace, and view inbound integrations.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.113.0](service/sagemaker/CHANGELOG.md#v11130-2023-10-26)
+  * **Feature**: Amazon Sagemaker Autopilot now supports Text Generation jobs.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.23.0](service/sns/CHANGELOG.md#v1230-2023-10-26)
+  * **Feature**: Message Archiving and Replay is now supported in Amazon SNS for FIFO topics.
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.6.0](service/ssmsap/CHANGELOG.md#v160-2023-10-26)
+  * **Feature**: AWS Systems Manager for SAP added support for registration and discovery of SAP ABAP applications
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.35.0](service/transfer/CHANGELOG.md#v1350-2023-10-26)
+  * **Feature**: No API changes from previous release. This release migrated the model to Smithy keeping all features unchanged.
+
 # Release (2023-10-25)
 
 ## Module Highlights

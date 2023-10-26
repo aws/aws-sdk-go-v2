@@ -1,3 +1,7 @@
+# v1.128.0 (2023-10-26)
+
+* **Feature**: Launching GetSecurityGroupsForVpc API. This API gets security groups that can be associated by the AWS account making the request with network interfaces in the specified VPC.
+
 # v1.127.0 (2023-10-24)
 
 * **Feature**: This release updates the documentation for InstanceInterruptionBehavior and HibernationOptionsRequest to more accurately describe the behavior of these two parameters when using Spot hibernation.

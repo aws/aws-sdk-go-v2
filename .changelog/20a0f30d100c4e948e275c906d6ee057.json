@@ -1,8 +1,0 @@
-{
-    "id": "20a0f30d-100c-4e94-8e27-5c906d6ee057",
-    "type": "feature",
-    "description": "Add Redshift APIs GetResourcePolicy, DeleteResourcePolicy, PutResourcePolicy and DescribeInboundIntegrations for the new Amazon Redshift Zero-ETL integration feature, which can be used to control data ingress into Redshift namespace, and view inbound integrations.",
-    "modules": [
-        "service/redshift"
-    ]
-}

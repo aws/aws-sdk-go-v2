@@ -1,3 +1,7 @@
+# v1.6.0 (2023-10-26)
+
+* **Feature**: AWS Systems Manager for SAP added support for registration and discovery of SAP ABAP applications
+
 # v1.5.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

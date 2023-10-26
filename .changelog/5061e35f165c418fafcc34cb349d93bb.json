@@ -1,8 +1,0 @@
-{
-    "id": "5061e35f-165c-418f-afcc-34cb349d93bb",
-    "type": "feature",
-    "description": "This release introduces multi-session fleets, allowing customers to provision more than one user session on a single fleet instance.",
-    "modules": [
-        "service/appstream"
-    ]
-}
