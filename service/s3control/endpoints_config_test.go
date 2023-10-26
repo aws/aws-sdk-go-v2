@@ -116,6 +116,7 @@ s3_control =
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			os.Clearenv()
 			for k, v := range c.Env {
 				t.Setenv(k, v)
 			}
