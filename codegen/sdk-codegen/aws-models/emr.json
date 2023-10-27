@@ -75,7 +75,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds an instance fleet to a running cluster.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Adds an instance fleet to a running cluster.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#AddInstanceFleetInput": {
@@ -365,7 +365,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>With Amazon EMR release version 4.0 and later, the only accepted parameter is\n         the application name. To pass arguments to applications, you use configuration\n         classifications specified using configuration JSON objects. For more information, see\n            <a href=\"https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html\">Configuring Applications</a>.</p>\n         <p>With earlier Amazon EMR releases, the application is any Amazon or third-party\n         software that you can add to the cluster. This structure contains a list of strings that\n         indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation\n         script as bootstrap action argument.</p>"
+                "smithy.api#documentation": "<p>With Amazon EMR release version 4.0 and higher, the only accepted parameter is\n         the application name. To pass arguments to applications, you use configuration\n         classifications specified using configuration JSON objects. For more information, see\n            <a href=\"https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html\">Configuring Applications</a>.</p>\n         <p>With earlier Amazon EMR releases, the application is any Amazon or third-party\n         software that you can add to the cluster. This structure contains a list of strings that\n         indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation\n         script as bootstrap action argument.</p>"
             }
         },
         "com.amazonaws.emr#ApplicationList": {
@@ -705,7 +705,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in\n         each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee\n         that a step will be canceled, even if the request is successfully submitted. When you use\n            Amazon EMR releases 5.28.0 and later, you can cancel steps that are in a\n            <code>PENDING</code> or <code>RUNNING</code> state. In earlier versions of Amazon EMR, you can only cancel steps that are in a <code>PENDING</code> state. </p>"
+                "smithy.api#documentation": "<p>Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and higher, excluding version 5.0.0. A maximum of 256 steps are allowed\n         in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not\n         guarantee that a step will be canceled, even if the request is successfully submitted. When\n         you use Amazon EMR releases 5.28.0 and higher, you can cancel steps that are in a\n            <code>PENDING</code> or <code>RUNNING</code> state. In earlier versions of Amazon EMR, you can only cancel steps that are in a <code>PENDING</code> state. </p>"
             }
         },
         "com.amazonaws.emr#CancelStepsInfo": {
@@ -731,7 +731,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specification of the status of a CancelSteps request. Available only in Amazon EMR version 4.8.0 and later, excluding version 5.0.0.</p>"
+                "smithy.api#documentation": "<p>Specification of the status of a CancelSteps request. Available only in Amazon EMR version 4.8.0 and higher, excluding version 5.0.0.</p>"
             }
         },
         "com.amazonaws.emr#CancelStepsInfoList": {
@@ -903,7 +903,7 @@
                 "InstanceCollectionType": {
                     "target": "com.amazonaws.emr#InstanceCollectionType",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>\n         <p>The instance group configuration of the cluster. A value of <code>INSTANCE_GROUP</code>\n         indicates a uniform instance group configuration. A value of <code>INSTANCE_FLEET</code>\n         indicates an instance fleets configuration.</p>"
+                        "smithy.api#documentation": "<note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions.</p>\n         </note>\n         <p>The instance group configuration of the cluster. A value of <code>INSTANCE_GROUP</code>\n         indicates a uniform instance group configuration. A value of <code>INSTANCE_FLEET</code>\n         indicates an instance fleets configuration.</p>"
                     }
                 },
                 "LogUri": {
@@ -915,7 +915,7 @@
                 "LogEncryptionKmsKeyId": {
                     "target": "com.amazonaws.emr#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The KMS key used for encrypting log files. This attribute is only\n         available with Amazon EMR 5.30.0 and later, excluding Amazon EMR 6.0.0.\n      </p>"
+                        "smithy.api#documentation": "<p> The KMS key used for encrypting log files. This attribute is only\n         available with Amazon EMR 5.30.0 and higher, excluding Amazon EMR 6.0.0.\n      </p>"
                     }
                 },
                 "RequestedAmiVersion": {
@@ -933,7 +933,7 @@
                 "ReleaseLabel": {
                     "target": "com.amazonaws.emr#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EMR release label, which determines the version of open-source\n         application packages installed on the cluster. Release labels are in the form\n            <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version such as\n            <code>emr-5.14.0</code>. For more information about Amazon EMR release versions\n         and included application versions and features, see <a href=\"https://docs.aws.amazon.com/emr/latest/ReleaseGuide/\">https://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR\n         releases version 4.0 and later. Earlier versions use <code>AmiVersion</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EMR release label, which determines the version of open-source\n         application packages installed on the cluster. Release labels are in the form\n            <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version such as\n            <code>emr-5.14.0</code>. For more information about Amazon EMR release versions\n         and included application versions and features, see <a href=\"https://docs.aws.amazon.com/emr/latest/ReleaseGuide/\">https://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR\n         releases version 4.0 and higher. Earlier versions use <code>AmiVersion</code>.</p>"
                     }
                 },
                 "AutoTerminate": {
@@ -987,7 +987,7 @@
                 "Configurations": {
                     "target": "com.amazonaws.emr#ConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Applies only to Amazon EMR releases 4.x and later. The list of configurations\n         that are supplied to the Amazon EMR cluster.</p>"
+                        "smithy.api#documentation": "<p>Applies only to Amazon EMR releases 4.x and higher. The list of configurations\n         that are supplied to the Amazon EMR cluster.</p>"
                     }
                 },
                 "SecurityConfiguration": {
@@ -1005,19 +1005,19 @@
                 "ScaleDownBehavior": {
                     "target": "com.amazonaws.emr#ScaleDownBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The way that individual Amazon EC2 instances terminate when an automatic\n         scale-in activity occurs or an instance group is resized.\n            <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates\n         nodes at the instance-hour boundary, regardless of when the request to terminate the\n         instance was submitted. This option is only available with Amazon EMR 5.1.0 and\n         later and is the default for clusters created using that version.\n            <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes\n         to a deny list and drains tasks from nodes before terminating the Amazon EC2\n         instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to\n         HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> is available only in Amazon EMR releases 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.</p>"
+                        "smithy.api#documentation": "<p>The way that individual Amazon EC2 instances terminate when an automatic\n         scale-in activity occurs or an instance group is resized.\n            <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates\n         nodes at the instance-hour boundary, regardless of when the request to terminate the\n         instance was submitted. This option is only available with Amazon EMR 5.1.0 and\n         higher and is the default for clusters created using that version.\n            <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes\n         to a deny list and drains tasks from nodes before terminating the Amazon EC2\n         instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to\n         HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> is available only in Amazon EMR releases 4.1.0 and higher, and is the default for versions of Amazon EMR earlier than 5.1.0.</p>"
                     }
                 },
                 "CustomAmiId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>Available only in Amazon EMR releases 5.7.0 and later. The ID of a custom Amazon\n         EBS-backed Linux AMI if the cluster uses a custom AMI.</p>"
+                        "smithy.api#documentation": "<p>Available only in Amazon EMR releases 5.7.0 and higher. The ID of a custom\n         Amazon EBS-backed Linux AMI if the cluster uses a custom AMI.</p>"
                     }
                 },
                 "EbsRootVolumeSize": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is\n         used for each Amazon EC2 instance. Available in Amazon EMR releases 4.x and\n         later.</p>"
+                        "smithy.api#documentation": "<p>The size, in GiB, of the Amazon EBS root device volume for the Linux AMI that\n         each Amazon EC2 instance uses. Available in Amazon EMR releases 4.x and\n         higher.</p>"
                     }
                 },
                 "RepoUpgradeOnBoot": {
@@ -1060,6 +1060,18 @@
                     "target": "com.amazonaws.emr#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Linux release specified in a cluster launch RunJobFlow request. If no Amazon\n         Linux release was specified, the default Amazon Linux release is shown in the\n         response.</p>"
+                    }
+                },
+                "EbsRootVolumeIops": {
+                    "target": "com.amazonaws.emr#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IOPS, of the Amazon EBS root device volume for the Linux AMI that each\n            Amazon EC2 instance uses. Available in Amazon EMR releases 6.15.0 and\n         higher.</p>"
+                    }
+                },
+                "EbsRootVolumeThroughput": {
+                    "target": "com.amazonaws.emr#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The throughput, in MiB/s, of the Amazon EBS root device volume for the Linux AMI\n         that each Amazon EC2 instance uses. Available in Amazon EMR releases 6.15.0\n         and higher.</p>"
                     }
                 }
             },
@@ -1455,7 +1467,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>Amazon EMR releases 4.x or later.</p>\n         </note>\n         <p>An optional configuration specification to be used when provisioning cluster instances,\n         which can include configurations for applications and software bundled with Amazon EMR. A configuration consists of a classification, properties, and optional\n         nested configurations. A classification refers to an application-specific configuration\n         file. Properties are the settings you want to change in that file. For more information,\n         see <a href=\"https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html\">Configuring Applications</a>.</p>"
+                "smithy.api#documentation": "<note>\n            <p>Amazon EMR releases 4.x or higher.</p>\n         </note>\n         <p>An optional configuration specification to be used when provisioning cluster instances,\n         which can include configurations for applications and software bundled with Amazon EMR. A configuration consists of a classification, properties, and optional\n         nested configurations. A classification refers to an application-specific configuration\n         file. Properties are the settings you want to change in that file. For more information,\n         see <a href=\"https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html\">Configuring Applications</a>.</p>"
             }
         },
         "com.amazonaws.emr#ConfigurationList": {
@@ -4039,7 +4051,7 @@
                     "target": "com.amazonaws.emr#BlockPublicAccessConfiguration",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A configuration for Amazon EMR block public access. The configuration applies to\n         all clusters created in your account for the current Region. The configuration specifies\n         whether block public access is enabled. If block public access is enabled, security groups\n         associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or\n         ::/0 on a port, unless the port is specified as an exception using\n            <code>PermittedPublicSecurityGroupRuleRanges</code> in the\n            <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception,\n         and public access is allowed on this port. You can change this by updating the block public\n         access configuration to remove the exception.</p>\n         <note>\n            <p>For accounts that created clusters in a Region before November 25, 2019, block public\n            access is disabled by default in that Region. To use this feature, you must manually\n            enable and configure it. For accounts that did not create an Amazon EMR cluster\n            in a Region before this date, block public access is enabled by default in that\n            Region.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A configuration for Amazon EMR block public access. The configuration applies to\n         all clusters created in your account for the current Region. The configuration specifies\n         whether block public access is enabled. If block public access is enabled, security groups\n         associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or\n         ::/0 on a port, unless the port is specified as an exception using\n            <code>PermittedPublicSecurityGroupRuleRanges</code> in the\n            <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception,\n         and public access is allowed on this port. To change this, update the block public access\n         configuration to remove the exception.</p>\n         <note>\n            <p>For accounts that created clusters in a Region before November 25, 2019, block public\n            access is disabled by default in that Region. To use this feature, you must manually\n            enable and configure it. For accounts that did not create an Amazon EMR cluster\n            in a Region before this date, block public access is enabled by default in that\n            Region.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4493,7 +4505,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an instance fleet, which is a group of Amazon EC2 instances that host\n         a particular node type (master, core, or task) in an Amazon EMR cluster. Instance\n         fleets can consist of a mix of instance types and On-Demand and Spot Instances, which are\n         provisioned to meet a defined target capacity. </p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Describes an instance fleet, which is a group of Amazon EC2 instances that host\n         a particular node type (master, core, or task) in an Amazon EMR cluster. Instance\n         fleets can consist of a mix of instance types and On-Demand and Spot Instances, which are\n         provisioned to meet a defined target capacity. </p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceFleetConfig": {
@@ -4545,7 +4557,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration that defines an instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The configuration that defines an instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceFleetConfigList": {
@@ -4594,7 +4606,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration parameters for an instance fleet modification request.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Configuration parameters for an instance fleet modification request.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceFleetProvisioningSpecifications": {
@@ -4609,12 +4621,12 @@
                 "OnDemandSpecification": {
                     "target": "com.amazonaws.emr#OnDemandProvisioningSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p> The launch specification for On-Demand Instances in the instance fleet, which\n         determines the allocation strategy. </p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions. On-Demand Instances allocation strategy is\n            available in Amazon EMR releases 5.12.1 and later.</p>\n         </note>"
+                        "smithy.api#documentation": "<p> The launch specification for On-Demand Instances in the instance fleet, which\n         determines the allocation strategy. </p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions. On-Demand Instances allocation strategy is\n            available in Amazon EMR releases 5.12.1 and higher.</p>\n         </note>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The launch specification for Spot Instances in the fleet, which determines the defined\n         duration, provisioning timeout behavior, and allocation strategy.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions. On-Demand and Spot instance allocation\n            strategies are available in Amazon EMR releases 5.12.1 and later.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The launch specification for Spot Instances in the fleet, which determines the defined\n         duration, provisioning timeout behavior, and allocation strategy.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions. On-Demand and Spot instance allocation\n            strategies are available in Amazon EMR releases 5.12.1 and higher.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceFleetResizingSpecifications": {
@@ -4701,7 +4713,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides status change reason details for the instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Provides status change reason details for the instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceFleetStateChangeReasonCode": {
@@ -4756,7 +4768,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The status of the instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The status of the instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceFleetTimeline": {
@@ -4782,7 +4794,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides historical timestamps for the instance fleet, including the time of creation,\n         the time it became ready to run jobs, and the time of termination.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Provides historical timestamps for the instance fleet, including the time of creation,\n         the time it became ready to run jobs, and the time of termination.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceFleetType": {
@@ -4868,7 +4880,7 @@
                 "Configurations": {
                     "target": "com.amazonaws.emr#ConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>Amazon EMR releases 4.x or later.</p>\n         </note>\n         <p>The list of configurations supplied for an Amazon EMR cluster instance group.\n         You can specify a separate configuration for each instance group (master, core, and\n         task).</p>"
+                        "smithy.api#documentation": "<note>\n            <p>Amazon EMR releases 4.x or higher.</p>\n         </note>\n         <p>The list of configurations supplied for an Amazon EMR cluster instance group.\n         You can specify a separate configuration for each instance group (master, core, and\n         task).</p>"
                     }
                 },
                 "ConfigurationsVersion": {
@@ -4972,7 +4984,7 @@
                 "Configurations": {
                     "target": "com.amazonaws.emr#ConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>Amazon EMR releases 4.x or later.</p>\n         </note>\n         <p>The list of configurations supplied for an Amazon EMR cluster instance group.\n         You can specify a separate configuration for each instance group (master, core, and\n         task).</p>"
+                        "smithy.api#documentation": "<note>\n            <p>Amazon EMR releases 4.x or higher.</p>\n         </note>\n         <p>The list of configurations supplied for an Amazon EMR cluster instance group.\n         You can specify a separate configuration for each instance group (master, core, and\n         task).</p>"
                     }
                 },
                 "EbsConfiguration": {
@@ -5655,7 +5667,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An instance type configuration for each instance type in an instance fleet, which\n         determines the Amazon EC2 instances Amazon EMR attempts to provision to\n         fulfill On-Demand and Spot target capacities. When you use an allocation strategy, you can\n         include a maximum of 30 instance type configurations for a fleet. For more information\n         about how to use an allocation strategy, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-fleet.html\">Configure Instance\n            Fleets</a>. Without an allocation strategy, you may specify a maximum of five\n         instance type configurations for a fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>An instance type configuration for each instance type in an instance fleet, which\n         determines the Amazon EC2 instances Amazon EMR attempts to provision to\n         fulfill On-Demand and Spot target capacities. When you use an allocation strategy, you can\n         include a maximum of 30 instance type configurations for a fleet. For more information\n         about how to use an allocation strategy, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-fleet.html\">Configure Instance\n            Fleets</a>. Without an allocation strategy, you may specify a maximum of five\n         instance type configurations for a fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceTypeConfigList": {
@@ -5717,7 +5729,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration specification for each instance type in an instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The configuration specification for each instance type in an instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceTypeSpecificationList": {
@@ -5806,13 +5818,13 @@
                 "LogEncryptionKmsKeyId": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key used for encrypting log files. This attribute is only\n         available with Amazon EMR 5.30.0 and later, excluding 6.0.0.</p>"
+                        "smithy.api#documentation": "<p>The KMS key used for encrypting log files. This attribute is only\n         available with Amazon EMR 5.30.0 and higher, excluding 6.0.0.</p>"
                     }
                 },
                 "AmiVersion": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR\n         releases 4.0 and later, <code>ReleaseLabel</code> is used. To specify a custom AMI, use\n            <code>CustomAmiID</code>.</p>"
+                        "smithy.api#documentation": "<p>Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR\n         releases 4.0 and higher, <code>ReleaseLabel</code> is used. To specify a custom AMI, use\n            <code>CustomAmiID</code>.</p>"
                     }
                 },
                 "ExecutionStatusDetail": {
@@ -5876,7 +5888,7 @@
                 "ScaleDownBehavior": {
                     "target": "com.amazonaws.emr#ScaleDownBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The way that individual Amazon EC2 instances terminate when an automatic\n         scale-in activity occurs or an instance group is resized.\n            <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates\n         nodes at the instance-hour boundary, regardless of when the request to terminate the\n         instance was submitted. This option is only available with Amazon EMR 5.1.0 and\n         later and is the default for clusters created using that version.\n            <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes\n         to a deny list and drains tasks from nodes before terminating the Amazon EC2\n         instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to\n         HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR releases 4.1.0 and later, and is the default for releases of Amazon EMR earlier than 5.1.0.</p>"
+                        "smithy.api#documentation": "<p>The way that individual Amazon EC2 instances terminate when an automatic\n         scale-in activity occurs or an instance group is resized.\n            <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates\n         nodes at the instance-hour boundary, regardless of when the request to terminate the\n         instance was submitted. This option is only available with Amazon EMR 5.1.0 and\n         higher and is the default for clusters created using that version.\n            <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes\n         to a deny list and drains tasks from nodes before terminating the Amazon EC2\n         instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to\n         HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR releases 4.1.0 and higher, and is the default for releases of Amazon EMR earlier than 5.1.0.</p>"
                     }
                 }
             },
@@ -6030,7 +6042,7 @@
                 "InstanceFleets": {
                     "target": "com.amazonaws.emr#InstanceFleetConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>\n         <p>Describes the Amazon EC2 instances and instance configurations for clusters that\n         use the instance fleet configuration.</p>"
+                        "smithy.api#documentation": "<note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions.</p>\n         </note>\n         <p>Describes the Amazon EC2 instances and instance configurations for clusters that\n         use the instance fleet configuration.</p>"
                     }
                 },
                 "Ec2KeyName": {
@@ -6072,7 +6084,7 @@
                 "Ec2SubnetIds": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256List",
                     "traits": {
-                        "smithy.api#documentation": "<p>Applies to clusters that use the instance fleet configuration. When multiple Amazon EC2 subnet IDs are specified, Amazon EMR evaluates them and launches\n         instances in the optimal subnet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Applies to clusters that use the instance fleet configuration. When multiple Amazon EC2 subnet IDs are specified, Amazon EMR evaluates them and launches\n         instances in the optimal subnet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions.</p>\n         </note>"
                     }
                 },
                 "EmrManagedMasterSecurityGroup": {
@@ -6435,7 +6447,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all available details about the instance fleets in a cluster.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists all available details about the instance fleets in a cluster.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -7100,7 +7112,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A list of the instance types that Amazon EMR supports. You can filter the\n         list by Amazon Web Services Region and Amazon EMR release. </p>",
+                "smithy.api#documentation": "<p>A list of the instance types that Amazon EMR supports. You can filter the list\n         by Amazon Web Services Region and Amazon EMR release. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker"
@@ -7294,7 +7306,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the target On-Demand and target Spot capacities for the instance fleet with the\n         specified InstanceFleetID within the cluster specified using ClusterID. The call either\n         succeeds or fails atomically.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Modifies the target On-Demand and target Spot capacities for the instance fleet with the\n         specified InstanceFleetID within the cluster specified using ClusterID. The call either\n         succeeds or fails atomically.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#ModifyInstanceFleetInput": {
@@ -7754,7 +7766,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The launch specification for On-Demand Instances in the instance fleet, which\n         determines the allocation strategy. </p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions. On-Demand Instances allocation strategy is\n            available in Amazon EMR releases 5.12.1 and later.</p>\n         </note>"
+                "smithy.api#documentation": "<p> The launch specification for On-Demand Instances in the instance fleet, which\n         determines the allocation strategy. </p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions. On-Demand Instances allocation strategy is\n            available in Amazon EMR releases 5.12.1 and higher.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#OnDemandResizingSpecification": {
@@ -7902,7 +7914,7 @@
                 "AvailabilityZones": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256List",
                     "traits": {
-                        "smithy.api#documentation": "<p>When multiple Availability Zones are specified, Amazon EMR evaluates them and\n         launches instances in the optimal Availability Zone. <code>AvailabilityZones</code> is used\n         for instance fleets, while <code>AvailabilityZone</code> (singular) is used for uniform\n         instance groups.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>When multiple Availability Zones are specified, Amazon EMR evaluates them and\n         launches instances in the optimal Availability Zone. <code>AvailabilityZones</code> is used\n         for instance fleets, while <code>AvailabilityZone</code> (singular) is used for uniform\n         instance groups.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions.</p>\n         </note>"
                     }
                 }
             },
@@ -8032,7 +8044,7 @@
                 "target": "com.amazonaws.emr#PutAutoTerminationPolicyOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>Auto-termination is supported in Amazon EMR releases 5.30.0 and 6.1.0 and\n            later. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-auto-termination-policy.html\">Using an\n               auto-termination policy</a>.</p>\n         </note>\n         <p>Creates or updates an auto-termination policy for an Amazon EMR cluster. An\n         auto-termination policy defines the amount of idle time in seconds after which a cluster\n         automatically terminates. For alternative cluster termination options, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html\">Control\n            cluster termination</a>.</p>"
+                "smithy.api#documentation": "<note>\n            <p>Auto-termination is supported in Amazon EMR releases 5.30.0 and 6.1.0 and\n            higher. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-auto-termination-policy.html\">Using an\n               auto-termination policy</a>.</p>\n         </note>\n         <p>Creates or updates an auto-termination policy for an Amazon EMR cluster. An\n         auto-termination policy defines the amount of idle time in seconds after which a cluster\n         automatically terminates. For alternative cluster termination options, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html\">Control\n            cluster termination</a>.</p>"
             }
         },
         "com.amazonaws.emr#PutAutoTerminationPolicyInput": {
@@ -8387,7 +8399,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>RunJobFlow creates and starts running a new cluster (job flow). The cluster runs the\n         steps specified. After the steps complete, the cluster stops and the HDFS partition is\n         lost. To prevent loss of data, configure the last step of the job flow to store results in\n            Amazon S3. If the <a>JobFlowInstancesConfig</a>\n            <code>KeepJobFlowAliveWhenNoSteps</code> parameter is set to <code>TRUE</code>, the cluster\n         transitions to the WAITING state rather than shutting down after the steps have completed. </p>\n         <p>For additional protection, you can set the <a>JobFlowInstancesConfig</a>\n            <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the cluster and\n         prevent it from being terminated by API call, user intervention, or in the event of a job\n         flow error.</p>\n         <p>A maximum of 256 steps are allowed in each job flow.</p>\n         <p>If your cluster is long-running (such as a Hive data warehouse) or complex, you may\n         require more than 256 steps to process your data. You can bypass the 256-step limitation in\n         various ways, including using the SSH shell to connect to the master node and submitting\n         queries directly to the software running on the master node, such as Hive and\n         Hadoop.</p>\n         <p>For long-running clusters, we recommend that you periodically store your results.</p>\n         <note>\n            <p>The instance fleets configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions. The RunJobFlow request can contain\n            InstanceFleets parameters or InstanceGroups parameters, but not both.</p>\n         </note>"
+                "smithy.api#documentation": "<p>RunJobFlow creates and starts running a new cluster (job flow). The cluster runs the\n         steps specified. After the steps complete, the cluster stops and the HDFS partition is\n         lost. To prevent loss of data, configure the last step of the job flow to store results in\n            Amazon S3. If the <a>JobFlowInstancesConfig</a>\n            <code>KeepJobFlowAliveWhenNoSteps</code> parameter is set to <code>TRUE</code>, the cluster\n         transitions to the WAITING state rather than shutting down after the steps have completed. </p>\n         <p>For additional protection, you can set the <a>JobFlowInstancesConfig</a>\n            <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the cluster and\n         prevent it from being terminated by API call, user intervention, or in the event of a job\n         flow error.</p>\n         <p>A maximum of 256 steps are allowed in each job flow.</p>\n         <p>If your cluster is long-running (such as a Hive data warehouse) or complex, you may\n         require more than 256 steps to process your data. You can bypass the 256-step limitation in\n         various ways, including using the SSH shell to connect to the master node and submitting\n         queries directly to the software running on the master node, such as Hive and\n         Hadoop.</p>\n         <p>For long-running clusters, we recommend that you periodically store your results.</p>\n         <note>\n            <p>The instance fleets configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions. The RunJobFlow request can contain\n            InstanceFleets parameters or InstanceGroups parameters, but not both.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#RunJobFlowInput": {
@@ -8410,7 +8422,7 @@
                 "LogEncryptionKmsKeyId": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key used for encrypting log files. If a value is not\n         provided, the logs remain encrypted by AES-256. This attribute is only available with\n            Amazon EMR releases 5.30.0 and later, excluding Amazon EMR 6.0.0.</p>"
+                        "smithy.api#documentation": "<p>The KMS key used for encrypting log files. If a value is not\n         provided, the logs remain encrypted by AES-256. This attribute is only available with\n            Amazon EMR releases 5.30.0 and higher, excluding Amazon EMR\n         6.0.0.</p>"
                     }
                 },
                 "AdditionalInfo": {
@@ -8422,13 +8434,13 @@
                 "AmiVersion": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR\n         releases 4.0 and later, <code>ReleaseLabel</code> is used. To specify a custom AMI, use\n            <code>CustomAmiID</code>.</p>"
+                        "smithy.api#documentation": "<p>Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR\n         releases 4.0 and higher, <code>ReleaseLabel</code> is used. To specify a custom AMI, use\n            <code>CustomAmiID</code>.</p>"
                     }
                 },
                 "ReleaseLabel": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EMR release label, which determines the version of open-source\n         application packages installed on the cluster. Release labels are in the form\n            <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version such as\n            <code>emr-5.14.0</code>. For more information about Amazon EMR release versions\n         and included application versions and features, see <a href=\"https://docs.aws.amazon.com/emr/latest/ReleaseGuide/\">https://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR\n         releases version 4.0 and later. Earlier versions use <code>AmiVersion</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EMR release label, which determines the version of open-source\n         application packages installed on the cluster. Release labels are in the form\n            <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version such as\n            <code>emr-5.14.0</code>. For more information about Amazon EMR release versions\n         and included application versions and features, see <a href=\"https://docs.aws.amazon.com/emr/latest/ReleaseGuide/\">https://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR\n         releases version 4.0 and higher. Earlier versions use <code>AmiVersion</code>.</p>"
                     }
                 },
                 "Instances": {
@@ -8454,25 +8466,25 @@
                 "SupportedProducts": {
                     "target": "com.amazonaws.emr#SupportedProductsList",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and\n            later, use Applications.</p>\n         </note>\n         <p>A list of strings that indicates third-party software to use. For more information, see\n         the <a href=\"https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf\">Amazon EMR Developer Guide</a>. Currently supported values are:</p>\n         <ul>\n            <li>\n               <p>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</p>\n            </li>\n            <li>\n               <p>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<note>\n            <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and\n            higher, use Applications.</p>\n         </note>\n         <p>A list of strings that indicates third-party software to use. For more information, see\n         the <a href=\"https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf\">Amazon EMR Developer Guide</a>. Currently supported values are:</p>\n         <ul>\n            <li>\n               <p>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</p>\n            </li>\n            <li>\n               <p>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NewSupportedProducts": {
                     "target": "com.amazonaws.emr#NewSupportedProductsList",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and\n            later, use Applications.</p>\n         </note>\n         <p>A list of strings that indicates third-party software to use with the job flow that\n         accepts a user argument list. Amazon EMR accepts and forwards the argument list to\n         the corresponding installation script as bootstrap action arguments. For more information,\n         see \"Launch a Job Flow on the MapR Distribution for Hadoop\" in the <a href=\"https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf\">Amazon EMR\n            Developer Guide</a>. Supported values are:</p>\n         <ul>\n            <li>\n               <p>\"mapr-m3\" - launch the cluster using MapR M3 Edition.</p>\n            </li>\n            <li>\n               <p>\"mapr-m5\" - launch the cluster using MapR M5 Edition.</p>\n            </li>\n            <li>\n               <p>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" -\n               launch the job flow using MapR M3 or M5 Edition respectively.</p>\n            </li>\n            <li>\n               <p>\"mapr-m7\" - launch the cluster using MapR M7 Edition.</p>\n            </li>\n            <li>\n               <p>\"hunk\" - launch the cluster with the Hunk Big Data Analytics Platform.</p>\n            </li>\n            <li>\n               <p>\"hue\"- launch the cluster with Hue installed.</p>\n            </li>\n            <li>\n               <p>\"spark\" - launch the cluster with Apache Spark installed.</p>\n            </li>\n            <li>\n               <p>\"ganglia\" - launch the cluster with the Ganglia Monitoring System\n               installed.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<note>\n            <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and\n            higher, use Applications.</p>\n         </note>\n         <p>A list of strings that indicates third-party software to use with the job flow that\n         accepts a user argument list. Amazon EMR accepts and forwards the argument list to\n         the corresponding installation script as bootstrap action arguments. For more information,\n         see \"Launch a Job Flow on the MapR Distribution for Hadoop\" in the <a href=\"https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf\">Amazon EMR\n            Developer Guide</a>. Supported values are:</p>\n         <ul>\n            <li>\n               <p>\"mapr-m3\" - launch the cluster using MapR M3 Edition.</p>\n            </li>\n            <li>\n               <p>\"mapr-m5\" - launch the cluster using MapR M5 Edition.</p>\n            </li>\n            <li>\n               <p>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" -\n               launch the job flow using MapR M3 or M5 Edition respectively.</p>\n            </li>\n            <li>\n               <p>\"mapr-m7\" - launch the cluster using MapR M7 Edition.</p>\n            </li>\n            <li>\n               <p>\"hunk\" - launch the cluster with the Hunk Big Data Analytics Platform.</p>\n            </li>\n            <li>\n               <p>\"hue\"- launch the cluster with Hue installed.</p>\n            </li>\n            <li>\n               <p>\"spark\" - launch the cluster with Apache Spark installed.</p>\n            </li>\n            <li>\n               <p>\"ganglia\" - launch the cluster with the Ganglia Monitoring System\n               installed.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Applications": {
                     "target": "com.amazonaws.emr#ApplicationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Applies to Amazon EMR releases 4.0 and later. A case-insensitive list of\n         applications for Amazon EMR to install and configure when launching the cluster.\n         For a list of applications available for each Amazon EMR release version, see the\n            <a href=\"https://docs.aws.amazon.com/emr/latest/ReleaseGuide/\">Amazon EMRRelease\n            Guide</a>.</p>"
+                        "smithy.api#documentation": "<p>Applies to Amazon EMR releases 4.0 and higher. A case-insensitive list of\n         applications for Amazon EMR to install and configure when launching the cluster.\n         For a list of applications available for each Amazon EMR release version, see the\n            <a href=\"https://docs.aws.amazon.com/emr/latest/ReleaseGuide/\">Amazon EMRRelease\n            Guide</a>.</p>"
                     }
                 },
                 "Configurations": {
                     "target": "com.amazonaws.emr#ConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>For Amazon EMR releases 4.0 and later. The list of configurations supplied for\n         the Amazon EMR cluster that you are creating.</p>"
+                        "smithy.api#documentation": "<p>For Amazon EMR releases 4.0 and higher. The list of configurations supplied for\n         the Amazon EMR cluster that you are creating.</p>"
                     }
                 },
                 "VisibleToAllUsers": {
@@ -8514,19 +8526,19 @@
                 "ScaleDownBehavior": {
                     "target": "com.amazonaws.emr#ScaleDownBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the way that individual Amazon EC2 instances terminate when an\n         automatic scale-in activity occurs or an instance group is resized.\n            <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates\n         nodes at the instance-hour boundary, regardless of when the request to terminate the\n         instance was submitted. This option is only available with Amazon EMR 5.1.0 and\n         later and is the default for clusters created using that version.\n            <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes\n         to a deny list and drains tasks from nodes before terminating the Amazon EC2\n         instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to\n         HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR releases 4.1.0 and later, and is the default for releases of Amazon EMR earlier than 5.1.0.</p>"
+                        "smithy.api#documentation": "<p>Specifies the way that individual Amazon EC2 instances terminate when an\n         automatic scale-in activity occurs or an instance group is resized.\n            <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates\n         nodes at the instance-hour boundary, regardless of when the request to terminate the\n         instance was submitted. This option is only available with Amazon EMR 5.1.0 and\n         higher and is the default for clusters created using that version.\n            <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes\n         to a deny list and drains tasks from nodes before terminating the Amazon EC2\n         instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to\n         HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR releases 4.1.0 and higher, and is the default for releases of Amazon EMR earlier than 5.1.0.</p>"
                     }
                 },
                 "CustomAmiId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>Available only in Amazon EMR releases 5.7.0 and later. The ID of a custom Amazon\n         EBS-backed Linux AMI. If specified, Amazon EMR uses this AMI when it launches\n         cluster Amazon EC2 instances. For more information about custom AMIs in Amazon EMR, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html\">Using a Custom AMI</a> in the\n               <i>Amazon EMR Management Guide</i>. If omitted, the cluster\n         uses the base Linux AMI for the <code>ReleaseLabel</code> specified. For Amazon EMR\n         releases 2.x and 3.x, use <code>AmiVersion</code> instead.</p>\n         <p>For information about creating a custom AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">Creating an Amazon EBS-Backed Linux AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux\n            Instances</i>. For information about finding an AMI ID, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Finding a Linux\n            AMI</a>. </p>"
+                        "smithy.api#documentation": "<p>Available only in Amazon EMR releases 5.7.0 and higher. The ID of a custom\n         Amazon EBS-backed Linux AMI. If specified, Amazon EMR uses this AMI when it\n         launches cluster Amazon EC2 instances. For more information about custom AMIs in\n            Amazon EMR, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html\">Using a Custom AMI</a> in the\n               <i>Amazon EMR Management Guide</i>. If omitted, the cluster\n         uses the base Linux AMI for the <code>ReleaseLabel</code> specified. For Amazon EMR\n         releases 2.x and 3.x, use <code>AmiVersion</code> instead.</p>\n         <p>For information about creating a custom AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">Creating an Amazon EBS-Backed Linux AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux\n            Instances</i>. For information about finding an AMI ID, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Finding a Linux\n            AMI</a>. </p>"
                     }
                 },
                 "EbsRootVolumeSize": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is\n         used for each Amazon EC2 instance. Available in Amazon EMR releases 4.x and\n         later.</p>"
+                        "smithy.api#documentation": "<p>The size, in GiB, of the Amazon EBS root device volume for the Linux AMI that\n         each Amazon EC2 instance uses. Available in Amazon EMR releases 4.x and\n         higher.</p>"
                     }
                 },
                 "RepoUpgradeOnBoot": {
@@ -8567,10 +8579,22 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a particular Amazon Linux release for all nodes in a cluster launch RunJobFlow\n         request. If a release is not specified, Amazon EMR uses the latest validated Amazon\n         Linux release for cluster launch.</p>"
                     }
+                },
+                "EbsRootVolumeIops": {
+                    "target": "com.amazonaws.emr#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IOPS for the Amazon EBS root device volume for the Linux AMI that each\n            Amazon EC2 instance uses. Available in Amazon EMR releases 6.15.0 and\n         higher.</p>"
+                    }
+                },
+                "EbsRootVolumeThroughput": {
+                    "target": "com.amazonaws.emr#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The throughput, in MiB/s, of the Amazon EBS root device volume for the Linux AMI\n         that each Amazon EC2 instance uses. Available in Amazon EMR releases 6.15.0\n         and higher.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Input to the <a>RunJobFlow</a> operation. </p>",
+                "smithy.api#documentation": "<p>Input to the <a>RunJobFlow</a> operation. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -9087,12 +9111,12 @@
                 "AllocationStrategy": {
                     "target": "com.amazonaws.emr#SpotProvisioningAllocationStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the strategy to use in launching Spot Instance fleets. Currently, the only\n         option is capacity-optimized (the default), which launches instances from Spot Instance\n         pools with optimal capacity for the number of instances that are launching. </p>"
+                        "smithy.api#documentation": "<p>Specifies one of the following strategies to launch Spot Instance fleets:\n            <code>price-capacity-optimized</code>, <code>capacity-optimized</code>,\n            <code>lowest-price</code>, or <code>diversified</code>. For more information on the\n         provisioning strategies, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html\">Allocation strategies\n            for Spot Instances</a> in the <i>Amazon EC2 User Guide for Linux\n            Instances</i>.</p>\n         <note>\n            <p>When you launch a Spot Instance fleet with the old console, it automatically launches\n            with the <code>capacity-optimized</code> strategy. You can't change the allocation\n            strategy from the old console.</p>\n         </note>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The launch specification for Spot Instances in the instance fleet, which determines the\n         defined duration, provisioning timeout behavior, and allocation strategy.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions. Spot Instance allocation strategy is\n            available in Amazon EMR releases 5.12.1 and later.</p>\n         </note>\n         <note>\n            <p>Spot Instances with a defined duration (also known as Spot blocks) are no longer\n            available to new customers from July 1, 2021. For customers who have previously used the\n            feature, we will continue to support Spot Instances with a defined duration until\n            December 31, 2022. </p>\n         </note>"
+                "smithy.api#documentation": "<p>The launch specification for Spot Instances in the instance fleet, which determines the\n         defined duration, provisioning timeout behavior, and allocation strategy.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and higher, excluding 5.0.x versions. Spot Instance allocation strategy is\n            available in Amazon EMR releases 5.12.1 and higher.</p>\n         </note>\n         <note>\n            <p>Spot Instances with a defined duration (also known as Spot blocks) are no longer\n            available to new customers from July 1, 2021. For customers who have previously used the\n            feature, we will continue to support Spot Instances with a defined duration until\n            December 31, 2022. </p>\n         </note>"
             }
         },
         "com.amazonaws.emr#SpotProvisioningTimeoutAction": {
@@ -9930,7 +9954,7 @@
                 "MemoryGB": {
                     "target": "com.amazonaws.emr#Float",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of memory that is available to Amazon EMR from the <code>SupportedInstanceType</code>. The kernel and hypervisor\n         software consume some memory, so this value might be lower than the overall memory for the\n         instance type.</p>"
+                        "smithy.api#documentation": "<p>The amount of memory that is available to Amazon EMR from the\n            <code>SupportedInstanceType</code>. The kernel and hypervisor software consume some\n         memory, so this value might be lower than the overall memory for the instance type.</p>"
                     }
                 },
                 "StorageGB": {

@@ -4773,7 +4773,7 @@
                 "EndpointId": {
                     "target": "com.amazonaws.pinpoint#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the endpoint.</p>",
+                        "smithy.api#documentation": "<p>The case insensitive unique identifier for the endpoint. The identifier can't contain <code>$</code>, <code>{</code> or <code>}</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9204,7 +9204,7 @@
                 "EndpointId": {
                     "target": "com.amazonaws.pinpoint#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the endpoint.</p>",
+                        "smithy.api#documentation": "<p>The case insensitive unique identifier for the endpoint. The identifier can't contain <code>$</code>, <code>{</code> or <code>}</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -19648,7 +19648,7 @@
                 "EndpointId": {
                     "target": "com.amazonaws.pinpoint#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the endpoint.</p>",
+                        "smithy.api#documentation": "<p>The case insensitive unique identifier for the endpoint. The identifier can't contain <code>$</code>, <code>{</code> or <code>}</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }

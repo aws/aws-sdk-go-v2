@@ -1496,6 +1496,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret.</p>"
                     }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the cluster. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2265,6 +2271,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of tags for the cluster subnet group.</p>"
                     }
+                },
+                "SupportedClusterIpAddressTypes": {
+                    "target": "com.amazonaws.redshift#ValueStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address types supported by this cluster subnet group. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2682,6 +2694,9 @@
                     "target": "com.amazonaws.redshift#InvalidVPCNetworkStateFault"
                 },
                 {
+                    "target": "com.amazonaws.redshift#Ipv6CidrBlockNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.redshift#LimitExceededFault"
                 },
                 {
@@ -2927,6 +2942,12 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret. \n            You can only use this parameter if <code>ManageMasterPassword</code> is true.</p>"
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address types that the cluster supports. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>"
                     }
                 }
             },
@@ -10265,6 +10286,23 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.redshift#Ipv6CidrBlockNotFoundFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "Ipv6CidrBlockNotFoundFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>There are no subnets in your VPC with associated IPv6 CIDR blocks. To use dual-stack mode,\n            associate an IPv6 CIDR block with each subnet in your VPC.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.redshift#LimitExceededFault": {
             "type": "structure",
             "members": {
@@ -10586,6 +10624,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#InvalidRetentionPeriodFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#Ipv6CidrBlockNotFoundFault"
                 },
                 {
                     "target": "com.amazonaws.redshift#LimitExceededFault"
@@ -10979,6 +11020,12 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret. \n            You can only use this parameter if <code>ManageMasterPassword</code> is true.</p>"
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address types that the cluster supports. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>"
                     }
                 }
             },
@@ -11753,6 +11800,12 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Availability Zone. </p>"
+                    }
+                },
+                "Ipv6Address": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 address of the network interface within the subnet. </p>"
                     }
                 }
             },
@@ -15050,6 +15103,9 @@
                     "target": "com.amazonaws.redshift#InvalidVPCNetworkStateFault"
                 },
                 {
+                    "target": "com.amazonaws.redshift#Ipv6CidrBlockNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.redshift#LimitExceededFault"
                 },
                 {
@@ -15300,6 +15356,12 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret. \n            You can only use this parameter if <code>ManageMasterPassword</code> is true.</p>"
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the cluster. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>"
                     }
                 }
             },
