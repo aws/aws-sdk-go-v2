@@ -1,3 +1,7 @@
+# v1.33.0 (2023-10-27)
+
+* **Feature**: added support to create a dual stack cluster
+
 # v1.32.0 (2023-10-26)
 
 * **Feature**: Add Redshift APIs GetResourcePolicy, DeleteResourcePolicy, PutResourcePolicy and DescribeInboundIntegrations for the new Amazon Redshift Zero-ETL integration feature, which can be used to control data ingress into Redshift namespace, and view inbound integrations.

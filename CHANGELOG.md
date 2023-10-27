@@ -1,3 +1,17 @@
+# Release (2023-10-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.30.0](service/emr/CHANGELOG.md#v1300-2023-10-27)
+  * **Feature**: Updated CreateCluster API request and DescribeCluster API responses to include EbsRootVolumeIops, and EbsRootVolumeThroughput attributes that specify the user configured root volume IOPS and throughput for Amazon EBS root device volume. This feature will be available from Amazon EMR releases 6.15.0
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.24.0](service/neptune/CHANGELOG.md#v1240-2023-10-27)
+  * **Feature**: Update TdeCredentialPassword type to SensitiveString
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.23.1](service/pinpoint/CHANGELOG.md#v1231-2023-10-27)
+  * **Documentation**: Updated documentation to describe the case insensitivity for EndpointIds.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.33.0](service/redshift/CHANGELOG.md#v1330-2023-10-27)
+  * **Feature**: added support to create a dual stack cluster
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.40.1](service/wafv2/CHANGELOG.md#v1401-2023-10-27)
+  * **Documentation**: Updates the descriptions for the calls that manage web ACL associations, to provide information for customer-managed IAM policies.
+
 # Release (2023-10-26)
 
 ## Module Highlights

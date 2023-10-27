@@ -41,7 +41,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.16.2
-	github.com/aws/aws-sdk-go-v2/service/emr v1.29.0
+	github.com/aws/aws-sdk-go-v2/service/emr v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.22.2
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.23.0
@@ -56,12 +56,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.15.0
-	github.com/aws/aws-sdk-go-v2/service/neptune v1.23.0
+	github.com/aws/aws-sdk-go-v2/service/neptune v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.14.3
 	github.com/aws/aws-sdk-go-v2/service/polly v1.31.2
 	github.com/aws/aws-sdk-go-v2/service/rds v1.58.0
-	github.com/aws/aws-sdk-go-v2/service/redshift v1.32.0
+	github.com/aws/aws-sdk-go-v2/service/redshift v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.17.5
@@ -83,7 +83,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.11.2
 	github.com/aws/aws-sdk-go-v2/service/waf v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.16.0
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.40.0
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.40.1
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.31.3
 	github.com/aws/smithy-go v1.15.0
 	github.com/google/go-cmp v0.5.8

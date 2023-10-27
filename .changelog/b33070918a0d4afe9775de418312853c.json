@@ -1,8 +1,0 @@
-{
-    "id": "b3307091-8a0d-4afe-9775-de418312853c",
-    "type": "feature",
-    "description": "added support to create a dual stack cluster",
-    "modules": [
-        "service/redshift"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.23.1 (2023-10-27)
+
+* **Documentation**: Updated documentation to describe the case insensitivity for EndpointIds.
+
 # v1.23.0 (2023-10-24)
 
 * **Feature**: **BREAKFIX**: Correct nullability and default value representation of various input fields across a large number of services. Calling code that references one or more of the affected fields will need to update usage accordingly. See [2162](https://github.com/aws/aws-sdk-go-v2/issues/2162).

@@ -1,8 +1,0 @@
-{
-    "id": "463e1812-36e7-42a8-994a-4f57ea540242",
-    "type": "feature",
-    "description": "Updated CreateCluster API request and DescribeCluster API responses to include EbsRootVolumeIops, and EbsRootVolumeThroughput attributes that specify the user configured root volume IOPS and throughput for Amazon EBS root device volume. This feature will be available from Amazon EMR releases 6.15.0",
-    "modules": [
-        "service/emr"
-    ]
-}
