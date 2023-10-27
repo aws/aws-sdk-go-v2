@@ -186,9 +186,7 @@ func finalizeClientEndpointResolverOptions(options *Options) {
 }
 
 func resolveEndpointResolverV2(options *Options) {
-	if options.EndpointResolverV2 == nil {
-		options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
-	}
+	options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
 }
 
 // EndpointParameters provides the parameters that influence how endpoints are
@@ -220,4 +218,18 @@ func (r *resolver) ResolveEndpoint(
 	endpoint smithyendpoints.Endpoint, err error,
 ) {
 	return endpoint, fmt.Errorf("no endpoint rules defined")
+}
+
+type resolveEndpointV2Middleware struct {
+	options Options
+}
+
+func (*resolveEndpointV2Middleware) ID() string {
+	return "ResolveEndpointV2"
+}
+
+func (m *resolveEndpointV2Middleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	return next.HandleFinalize(ctx, in)
 }

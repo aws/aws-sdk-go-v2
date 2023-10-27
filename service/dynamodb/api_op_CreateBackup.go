@@ -73,6 +73,9 @@ type CreateBackupOutput struct {
 }
 
 func (c *Client) addOperationCreateBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateBackup{}, middleware.After)
 	if err != nil {
 		return err
@@ -81,6 +84,10 @@ func (c *Client) addOperationCreateBackupMiddlewares(stack *middleware.Stack, op
 	if err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBackup"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
+
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
@@ -120,7 +127,7 @@ func (c *Client) addOperationCreateBackupMiddlewares(stack *middleware.Stack, op
 	if err = addOpCreateBackupDiscoverEndpointMiddleware(stack, options, c); err != nil {
 		return err
 	}
-	if err = addResolveEndpointV2Middleware(stack, options); err != nil {
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addOpCreateBackupValidationMiddleware(stack); err != nil {
@@ -147,26 +154,7 @@ func (c *Client) addOperationCreateBackupMiddlewares(stack *middleware.Stack, op
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	err = stack.Serialize.Insert(&resolveAuthSchemeMiddleware{
-		operation: "CreateBackup",
-		options:   options,
-	}, "ResolveEndpointV2", middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	err = stack.Finalize.Add(&signRequestMiddleware{}, middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	err = stack.Finalize.Add(&getIdentityMiddleware{
-		options: options,
-	}, middleware.Before)
-	if err != nil {
+	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil
@@ -216,7 +204,6 @@ func newServiceMetadataMiddleware_opCreateBackup(region string) *awsmiddleware.R
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "dynamodb",
 		OperationName: "CreateBackup",
 	}
 }

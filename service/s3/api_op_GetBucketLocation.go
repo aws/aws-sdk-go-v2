@@ -91,6 +91,9 @@ type GetBucketLocationOutput struct {
 }
 
 func (c *Client) addOperationGetBucketLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketLocation{}, middleware.After)
 	if err != nil {
 		return err
@@ -99,6 +102,10 @@ func (c *Client) addOperationGetBucketLocationMiddlewares(stack *middleware.Stac
 	if err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBucketLocation"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
+
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
@@ -138,10 +145,7 @@ func (c *Client) addOperationGetBucketLocationMiddlewares(stack *middleware.Stac
 	if err = swapDeserializerHelper(stack); err != nil {
 		return err
 	}
-	if err = swapWithCustomHTTPSignerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addResolveEndpointV2Middleware(stack, options); err != nil {
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addOpGetBucketLocationValidationMiddleware(stack); err != nil {
@@ -171,29 +175,10 @@ func (c *Client) addOperationGetBucketLocationMiddlewares(stack *middleware.Stac
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSerializeImmutableHostnameBucketMiddleware(stack, options); err != nil {
-		return err
-	}
-	err = stack.Serialize.Insert(&resolveAuthSchemeMiddleware{
-		operation: "GetBucketLocation",
-		options:   options,
-	}, "ResolveEndpointV2", middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	err = stack.Finalize.Add(&signRequestMiddleware{}, middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	err = stack.Finalize.Add(&getIdentityMiddleware{
-		options: options,
-	}, middleware.Before)
-	if err != nil {
 		return err
 	}
 	return nil
@@ -266,7 +251,6 @@ func newServiceMetadataMiddleware_opGetBucketLocation(region string) *awsmiddlew
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "s3",
 		OperationName: "GetBucketLocation",
 	}
 }

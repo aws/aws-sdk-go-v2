@@ -66,6 +66,9 @@ type DeleteJobTaggingOutput struct {
 }
 
 func (c *Client) addOperationDeleteJobTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteJobTagging{}, middleware.After)
 	if err != nil {
 		return err
@@ -74,6 +77,10 @@ func (c *Client) addOperationDeleteJobTaggingMiddlewares(stack *middleware.Stack
 	if err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteJobTagging"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
+
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
@@ -113,10 +120,10 @@ func (c *Client) addOperationDeleteJobTaggingMiddlewares(stack *middleware.Stack
 	if err = s3controlcust.AddUpdateOutpostARN(stack); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opDeleteJobTaggingMiddleware(stack); err != nil {
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addResolveEndpointV2Middleware(stack, options); err != nil {
+	if err = addEndpointPrefix_opDeleteJobTaggingMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addOpDeleteJobTaggingValidationMiddleware(stack); err != nil {
@@ -134,6 +141,9 @@ func (c *Client) addOperationDeleteJobTaggingMiddlewares(stack *middleware.Stack
 	if err = addDeleteJobTaggingUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
+	if err = addStashOperationInput(stack); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,29 +153,10 @@ func (c *Client) addOperationDeleteJobTaggingMiddlewares(stack *middleware.Stack
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = s3controlcust.AddDisableHostPrefixMiddleware(stack); err != nil {
-		return err
-	}
-	err = stack.Serialize.Insert(&resolveAuthSchemeMiddleware{
-		operation: "DeleteJobTagging",
-		options:   options,
-	}, "ResolveEndpointV2", middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	err = stack.Finalize.Add(&signRequestMiddleware{}, middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	err = stack.Finalize.Add(&getIdentityMiddleware{
-		options: options,
-	}, middleware.Before)
-	if err != nil {
 		return err
 	}
 	return nil
@@ -178,11 +169,11 @@ func (*endpointPrefix_opDeleteJobTaggingMiddleware) ID() string {
 	return "EndpointHostPrefix"
 }
 
-func (m *endpointPrefix_opDeleteJobTaggingMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+func (m *endpointPrefix_opDeleteJobTaggingMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
 	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleSerialize(ctx, in)
+		return next.HandleFinalize(ctx, in)
 	}
 
 	req, ok := in.Request.(*smithyhttp.Request)
@@ -190,9 +181,10 @@ func (m *endpointPrefix_opDeleteJobTaggingMiddleware) HandleSerialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	input, ok := in.Parameters.(*DeleteJobTaggingInput)
+	opaqueInput := getOperationInput(ctx)
+	input, ok := opaqueInput.(*DeleteJobTaggingInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("unknown input type %T", in.Parameters)
+		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
 	}
 
 	var prefix strings.Builder
@@ -206,17 +198,16 @@ func (m *endpointPrefix_opDeleteJobTaggingMiddleware) HandleSerialize(ctx contex
 	prefix.WriteString(".")
 	req.URL.Host = prefix.String() + req.URL.Host
 
-	return next.HandleSerialize(ctx, in)
+	return next.HandleFinalize(ctx, in)
 }
 func addEndpointPrefix_opDeleteJobTaggingMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opDeleteJobTaggingMiddleware{}, `OperationSerializer`, middleware.After)
+	return stack.Finalize.Insert(&endpointPrefix_opDeleteJobTaggingMiddleware{}, "ResolveEndpointV2", middleware.After)
 }
 
 func newServiceMetadataMiddleware_opDeleteJobTagging(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "s3",
 		OperationName: "DeleteJobTagging",
 	}
 }
@@ -228,6 +219,10 @@ func copyDeleteJobTaggingInputForUpdateEndpoint(params interface{}) (interface{}
 	}
 	cpy := *input
 	return &cpy, nil
+}
+func (in *DeleteJobTaggingInput) copy() interface{} {
+	v := *in
+	return &v
 }
 func backFillDeleteJobTaggingAccountID(input interface{}, v string) error {
 	in := input.(*DeleteJobTaggingInput)

@@ -58,6 +58,9 @@ type ListContributorInsightsOutput struct {
 }
 
 func (c *Client) addOperationListContributorInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListContributorInsights{}, middleware.After)
 	if err != nil {
 		return err
@@ -66,6 +69,10 @@ func (c *Client) addOperationListContributorInsightsMiddlewares(stack *middlewar
 	if err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListContributorInsights"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
+
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
@@ -102,7 +109,7 @@ func (c *Client) addOperationListContributorInsightsMiddlewares(stack *middlewar
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addResolveEndpointV2Middleware(stack, options); err != nil {
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContributorInsights(options.Region), middleware.Before); err != nil {
@@ -126,26 +133,7 @@ func (c *Client) addOperationListContributorInsightsMiddlewares(stack *middlewar
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	err = stack.Serialize.Insert(&resolveAuthSchemeMiddleware{
-		operation: "ListContributorInsights",
-		options:   options,
-	}, "ResolveEndpointV2", middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	err = stack.Finalize.Add(&signRequestMiddleware{}, middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	err = stack.Finalize.Add(&getIdentityMiddleware{
-		options: options,
-	}, middleware.Before)
-	if err != nil {
+	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil
@@ -243,7 +231,6 @@ func newServiceMetadataMiddleware_opListContributorInsights(region string) *awsm
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "dynamodb",
 		OperationName: "ListContributorInsights",
 	}
 }

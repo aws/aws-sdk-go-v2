@@ -62,6 +62,9 @@ type DescribeGlobalTableSettingsOutput struct {
 }
 
 func (c *Client) addOperationDescribeGlobalTableSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeGlobalTableSettings{}, middleware.After)
 	if err != nil {
 		return err
@@ -70,6 +73,10 @@ func (c *Client) addOperationDescribeGlobalTableSettingsMiddlewares(stack *middl
 	if err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeGlobalTableSettings"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
+
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
@@ -109,7 +116,7 @@ func (c *Client) addOperationDescribeGlobalTableSettingsMiddlewares(stack *middl
 	if err = addOpDescribeGlobalTableSettingsDiscoverEndpointMiddleware(stack, options, c); err != nil {
 		return err
 	}
-	if err = addResolveEndpointV2Middleware(stack, options); err != nil {
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addOpDescribeGlobalTableSettingsValidationMiddleware(stack); err != nil {
@@ -136,26 +143,7 @@ func (c *Client) addOperationDescribeGlobalTableSettingsMiddlewares(stack *middl
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	err = stack.Serialize.Insert(&resolveAuthSchemeMiddleware{
-		operation: "DescribeGlobalTableSettings",
-		options:   options,
-	}, "ResolveEndpointV2", middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	err = stack.Finalize.Add(&signRequestMiddleware{}, middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	err = stack.Finalize.Add(&getIdentityMiddleware{
-		options: options,
-	}, middleware.Before)
-	if err != nil {
+	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil
@@ -205,7 +193,6 @@ func newServiceMetadataMiddleware_opDescribeGlobalTableSettings(region string) *
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "dynamodb",
 		OperationName: "DescribeGlobalTableSettings",
 	}
 }

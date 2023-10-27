@@ -49,6 +49,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveHTTPSignerV4(&options)
 
+	resolveEndpointResolverV2(&options)
+
 	resolveAuthSchemeResolver(&options)
 
 	resolveAuthSchemes(&options)
@@ -100,8 +102,8 @@ type Options struct {
 	// endpoint, set the client option BaseEndpoint instead.
 	EndpointResolver EndpointResolver
 
-	// Resolves the endpoint used for a particular service. This should be used over
-	// the deprecated EndpointResolver
+	// Resolves the endpoint used for a particular service operation. This should be
+	// used over the deprecated EndpointResolver.
 	EndpointResolverV2 EndpointResolverV2
 
 	// Signature Version 4 (SigV4) Signer
@@ -165,6 +167,9 @@ func (o Options) GetIdentityResolver(schemeID string) smithyauth.IdentityResolve
 	if schemeID == "aws.auth#sigv4" {
 		return &internalauthsmithy.CredentialsProviderAdapter{Provider: o.Credentials}
 	}
+	if schemeID == "smithy.api#noAuth" {
+		return &smithyauth.AnonymousIdentityResolver{}
+	}
 	return nil
 }
 
@@ -212,7 +217,6 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	ctx = middleware.ClearStackValues(ctx)
 	stack := middleware.NewStack(opID, smithyhttp.NewStackRequest)
 	options := c.options.Copy()
-	resolveEndpointResolverV2(&options)
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -244,6 +248,46 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 		}
 	}
 	return result, metadata, err
+}
+
+type operationInputKey struct{}
+
+func setOperationInput(ctx context.Context, input interface{}) context.Context {
+	return middleware.WithStackValue(ctx, operationInputKey{}, input)
+}
+
+func getOperationInput(ctx context.Context) interface{} {
+	return middleware.GetStackValue(ctx, operationInputKey{})
+}
+
+type setOperationInputMiddleware struct {
+}
+
+func (*setOperationInputMiddleware) ID() string {
+	return "setOperationInput"
+}
+
+func (m *setOperationInputMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	ctx = setOperationInput(ctx, in.Parameters)
+	return next.HandleSerialize(ctx, in)
+}
+
+func addProtocolFinalizerMiddlewares(stack *middleware.Stack, options Options, operation string) error {
+	if err := stack.Finalize.Add(&resolveAuthSchemeMiddleware{operation: operation, options: options}, middleware.Before); err != nil {
+		return fmt.Errorf("add ResolveAuthScheme: %v", err)
+	}
+	if err := stack.Finalize.Insert(&getIdentityMiddleware{options: options}, "ResolveAuthScheme", middleware.After); err != nil {
+		return fmt.Errorf("add GetIdentity: %v", err)
+	}
+	if err := stack.Finalize.Insert(&resolveEndpointV2Middleware{options: options}, "GetIdentity", middleware.After); err != nil {
+		return fmt.Errorf("add ResolveEndpointV2: %v", err)
+	}
+	if err := stack.Finalize.Insert(&signRequestMiddleware{}, "ResolveEndpointV2", middleware.After); err != nil {
+		return fmt.Errorf("add Signing: %v", err)
+	}
+	return nil
 }
 func resolveAuthSchemeResolver(options *Options) {
 	options.AuthSchemeResolver = &defaultAuthSchemeResolver{}
@@ -517,31 +561,31 @@ func addRequestResponseLogging(stack *middleware.Stack, o Options) error {
 	}, middleware.After)
 }
 
-type endpointDisableHTTPSMiddleware struct {
-	EndpointDisableHTTPS bool
+type disableHTTPSMiddleware struct {
+	DisableHTTPS bool
 }
 
-func (*endpointDisableHTTPSMiddleware) ID() string {
-	return "endpointDisableHTTPSMiddleware"
+func (*disableHTTPSMiddleware) ID() string {
+	return "disableHTTPS"
 }
 
-func (m *endpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+func (m *disableHTTPSMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	if m.EndpointDisableHTTPS && !smithyhttp.GetHostnameImmutable(ctx) {
+	if m.DisableHTTPS && !smithyhttp.GetHostnameImmutable(ctx) {
 		req.URL.Scheme = "http"
 	}
 
-	return next.HandleSerialize(ctx, in)
-
+	return next.HandleFinalize(ctx, in)
 }
-func addendpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&endpointDisableHTTPSMiddleware{
-		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "OperationSerializer", middleware.Before)
+
+func addDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Finalize.Insert(&disableHTTPSMiddleware{
+		DisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "ResolveEndpointV2", middleware.After)
 }

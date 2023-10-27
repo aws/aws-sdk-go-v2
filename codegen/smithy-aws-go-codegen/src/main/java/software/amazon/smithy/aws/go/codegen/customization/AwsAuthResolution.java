@@ -33,6 +33,9 @@ import software.amazon.smithy.utils.ListUtils;
 
 import java.util.List;
 
+import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
+import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
+
 /**
  * Adds customizations for auth resolution in AWS services:
  * 1. Adds a field+resolver for endpoint parameters for the two services (s3, eventbridge) that delegate to endpoint
@@ -48,7 +51,11 @@ public class AwsAuthResolution implements GoIntegration {
     );
 
     private final AuthParametersResolver regionResolver = new AuthParametersResolver(
-            SymbolUtils.createValueSymbolBuilder("bindAuthParamsRegion").build()
+            buildPackageSymbol("bindAuthParamsRegion")
+    );
+
+    private final AuthParametersResolver endpointParamsResolver = new AuthParametersResolver(
+            buildPackageSymbol("bindAuthEndpointParams")
     );
 
     @Override
@@ -57,6 +64,7 @@ public class AwsAuthResolution implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .servicePredicate(this::isEndpointAuthService)
                         .addAuthParameter(endpointParams)
+                        .addAuthParameterResolver(endpointParamsResolver)
                         .build(),
                 RuntimeClientPlugin.builder()
                         .servicePredicate(this::isSigV4Service)
@@ -68,7 +76,10 @@ public class AwsAuthResolution implements GoIntegration {
     @Override
     public void writeAdditionalFiles(GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator) {
         if (isSigV4Service(model, settings.getService(model))) {
-            goDelegator.useFileWriter("auth.go", settings.getModuleName(), this::writeRegionResolver);
+            goDelegator.useFileWriter("auth.go", settings.getModuleName(), writeRegionResolver());
+        }
+        if (isEndpointAuthService(model, settings.getService(model))) {
+            goDelegator.useFileWriter("auth.go", settings.getModuleName(), writeEndpointParamResolver());
         }
     }
 
@@ -81,13 +92,19 @@ public class AwsAuthResolution implements GoIntegration {
         return service.hasTrait(SigV4Trait.class);
     };
 
-    private void writeRegionResolver(GoWriter writer) {
-        writer.write("""
+    private GoWriter.Writable writeRegionResolver() {
+        return goTemplate("""
                 func bindAuthParamsRegion(params $P, _ interface{}, options Options) {
                     params.Region = options.Region
                 }
-                """,
-                AuthParametersGenerator.STRUCT_SYMBOL
-        );
+                """, AuthParametersGenerator.STRUCT_SYMBOL);
+    }
+
+    private GoWriter.Writable writeEndpointParamResolver() {
+        return goTemplate("""
+                func bindAuthEndpointParams(params $P, input interface{}, options Options) {
+                    params.endpointParams = bindEndpointParams(input, options)
+                }
+                """, AuthParametersGenerator.STRUCT_SYMBOL);
     }
 }

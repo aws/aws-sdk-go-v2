@@ -5,6 +5,7 @@ package dynamodbstreams
 import (
 	"context"
 	"fmt"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	smithy "github.com/aws/smithy-go"
 	smithyauth "github.com/aws/smithy-go/auth"
 	"github.com/aws/smithy-go/middleware"
@@ -13,6 +14,42 @@ import (
 
 func bindAuthParamsRegion(params *AuthResolverParameters, _ interface{}, options Options) {
 	params.Region = options.Region
+}
+
+type setLegacyContextSigningOptionsMiddleware struct {
+}
+
+func (*setLegacyContextSigningOptionsMiddleware) ID() string {
+	return "setLegacyContextSigningOptions"
+}
+
+func (m *setLegacyContextSigningOptionsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	rscheme := getResolvedAuthScheme(ctx)
+	schemeID := rscheme.Scheme.SchemeID()
+
+	if sn := awsmiddleware.GetSigningName(ctx); sn != "" {
+		if schemeID == "aws.auth#sigv4" {
+			smithyhttp.SetSigV4SigningName(&rscheme.SignerProperties, sn)
+		} else if schemeID == "aws.auth#sigv4a" {
+			smithyhttp.SetSigV4ASigningName(&rscheme.SignerProperties, sn)
+		}
+	}
+
+	if sr := awsmiddleware.GetSigningRegion(ctx); sr != "" {
+		if schemeID == "aws.auth#sigv4" {
+			smithyhttp.SetSigV4SigningRegion(&rscheme.SignerProperties, sr)
+		} else if schemeID == "aws.auth#sigv4a" {
+			smithyhttp.SetSigV4ASigningRegions(&rscheme.SignerProperties, []string{sr})
+		}
+	}
+
+	return next.HandleFinalize(ctx, in)
+}
+
+func addSetLegacyContextSigningOptionsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&setLegacyContextSigningOptionsMiddleware{}, "Signing", middleware.Before)
 }
 
 // AuthResolverParameters contains the set of inputs necessary for auth scheme
@@ -72,10 +109,10 @@ func (*resolveAuthSchemeMiddleware) ID() string {
 	return "ResolveAuthScheme"
 }
 
-func (m *resolveAuthSchemeMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+func (m *resolveAuthSchemeMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
-	params := bindAuthResolverParams(m.operation, in.Parameters, m.options)
+	params := bindAuthResolverParams(m.operation, getOperationInput(ctx), m.options)
 	options, err := m.options.AuthSchemeResolver.ResolveAuthSchemes(ctx, params)
 	if err != nil {
 		return out, metadata, fmt.Errorf("resolve auth scheme: %v", err)
@@ -87,7 +124,7 @@ func (m *resolveAuthSchemeMiddleware) HandleSerialize(ctx context.Context, in mi
 	}
 
 	ctx = setResolvedAuthScheme(ctx, scheme)
-	return next.HandleSerialize(ctx, in)
+	return next.HandleFinalize(ctx, in)
 }
 
 func (m *resolveAuthSchemeMiddleware) selectScheme(options []*smithyauth.Option) (*resolvedAuthScheme, bool) {

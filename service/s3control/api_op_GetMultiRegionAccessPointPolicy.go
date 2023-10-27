@@ -76,6 +76,9 @@ type GetMultiRegionAccessPointPolicyOutput struct {
 }
 
 func (c *Client) addOperationGetMultiRegionAccessPointPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetMultiRegionAccessPointPolicy{}, middleware.After)
 	if err != nil {
 		return err
@@ -84,6 +87,10 @@ func (c *Client) addOperationGetMultiRegionAccessPointPolicyMiddlewares(stack *m
 	if err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMultiRegionAccessPointPolicy"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
+
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
@@ -123,13 +130,13 @@ func (c *Client) addOperationGetMultiRegionAccessPointPolicyMiddlewares(stack *m
 	if err = s3controlcust.AddUpdateOutpostARN(stack); err != nil {
 		return err
 	}
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addEndpointPrefix_opGetMultiRegionAccessPointPolicyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addResolveEndpointV2Middleware(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMultiRegionAccessPointPolicyValidationMiddleware(stack); err != nil {
@@ -147,6 +154,9 @@ func (c *Client) addOperationGetMultiRegionAccessPointPolicyMiddlewares(stack *m
 	if err = addGetMultiRegionAccessPointPolicyUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
+	if err = addStashOperationInput(stack); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,29 +166,10 @@ func (c *Client) addOperationGetMultiRegionAccessPointPolicyMiddlewares(stack *m
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = s3controlcust.AddDisableHostPrefixMiddleware(stack); err != nil {
-		return err
-	}
-	err = stack.Serialize.Insert(&resolveAuthSchemeMiddleware{
-		operation: "GetMultiRegionAccessPointPolicy",
-		options:   options,
-	}, "ResolveEndpointV2", middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	err = stack.Finalize.Add(&signRequestMiddleware{}, middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	err = stack.Finalize.Add(&getIdentityMiddleware{
-		options: options,
-	}, middleware.Before)
-	if err != nil {
 		return err
 	}
 	return nil
@@ -191,11 +182,11 @@ func (*endpointPrefix_opGetMultiRegionAccessPointPolicyMiddleware) ID() string {
 	return "EndpointHostPrefix"
 }
 
-func (m *endpointPrefix_opGetMultiRegionAccessPointPolicyMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+func (m *endpointPrefix_opGetMultiRegionAccessPointPolicyMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
 	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleSerialize(ctx, in)
+		return next.HandleFinalize(ctx, in)
 	}
 
 	req, ok := in.Request.(*smithyhttp.Request)
@@ -203,9 +194,10 @@ func (m *endpointPrefix_opGetMultiRegionAccessPointPolicyMiddleware) HandleSeria
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	input, ok := in.Parameters.(*GetMultiRegionAccessPointPolicyInput)
+	opaqueInput := getOperationInput(ctx)
+	input, ok := opaqueInput.(*GetMultiRegionAccessPointPolicyInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("unknown input type %T", in.Parameters)
+		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
 	}
 
 	var prefix strings.Builder
@@ -219,17 +211,16 @@ func (m *endpointPrefix_opGetMultiRegionAccessPointPolicyMiddleware) HandleSeria
 	prefix.WriteString(".")
 	req.URL.Host = prefix.String() + req.URL.Host
 
-	return next.HandleSerialize(ctx, in)
+	return next.HandleFinalize(ctx, in)
 }
 func addEndpointPrefix_opGetMultiRegionAccessPointPolicyMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opGetMultiRegionAccessPointPolicyMiddleware{}, `OperationSerializer`, middleware.After)
+	return stack.Finalize.Insert(&endpointPrefix_opGetMultiRegionAccessPointPolicyMiddleware{}, "ResolveEndpointV2", middleware.After)
 }
 
 func newServiceMetadataMiddleware_opGetMultiRegionAccessPointPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "s3",
 		OperationName: "GetMultiRegionAccessPointPolicy",
 	}
 }
@@ -241,6 +232,10 @@ func copyGetMultiRegionAccessPointPolicyInputForUpdateEndpoint(params interface{
 	}
 	cpy := *input
 	return &cpy, nil
+}
+func (in *GetMultiRegionAccessPointPolicyInput) copy() interface{} {
+	v := *in
+	return &v
 }
 func backFillGetMultiRegionAccessPointPolicyAccountID(input interface{}, v string) error {
 	in := input.(*GetMultiRegionAccessPointPolicyInput)

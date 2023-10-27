@@ -3,6 +3,7 @@ package customizations
 import (
 	"context"
 	"fmt"
+
 	awsarn "github.com/aws/aws-sdk-go-v2/aws/arn"
 	s3arn "github.com/aws/aws-sdk-go-v2/service/internal/s3shared/arn"
 	"github.com/aws/smithy-go/middleware"
@@ -22,7 +23,6 @@ func (m *updateOutpostARN) HandleSerialize(
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-
 	v, ok := s3arn.GetARNField(in.Parameters)
 	if ok && awsarn.IsARN(*v) {
 

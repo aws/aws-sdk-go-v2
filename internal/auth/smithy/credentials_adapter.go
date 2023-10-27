@@ -33,6 +33,10 @@ var _ (auth.IdentityResolver) = (*CredentialsProviderAdapter)(nil)
 func (v *CredentialsProviderAdapter) GetIdentity(ctx context.Context, _ smithy.Properties) (
 	auth.Identity, error,
 ) {
+	if v.Provider == nil {
+		return &CredentialsAdapter{Credentials: aws.Credentials{}}, nil
+	}
+
 	creds, err := v.Provider.Retrieve(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("get credentials: %v", err)

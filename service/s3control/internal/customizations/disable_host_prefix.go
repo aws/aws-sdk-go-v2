@@ -17,20 +17,20 @@ func (*DisableHostPrefixMiddleware) ID() string {
 	return "S3ControlDisableHostPrefix"
 }
 
-// HandleSerialize controls whether to serialize modeled host prefixes based on
+// HandleFinalize controls whether to serialize modeled host prefixes based on
 // the type of endpoint resolution used.
-func (m *DisableHostPrefixMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, md middleware.Metadata, err error,
+func (m *DisableHostPrefixMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, md middleware.Metadata, err error,
 ) {
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
-		return next.HandleSerialize(ctx, in)
+		return next.HandleFinalize(ctx, in)
 	}
 
 	ctx = smithyhttp.DisableEndpointHostPrefix(ctx, true)
-	return next.HandleSerialize(ctx, in)
+	return next.HandleFinalize(ctx, in)
 }
 
 // AddDisableHostPrefixMiddleware adds the middleware to the stack.
 func AddDisableHostPrefixMiddleware(s *middleware.Stack) error {
-	return s.Serialize.Insert(&DisableHostPrefixMiddleware{}, "ResolveEndpointV2", middleware.After)
+	return s.Finalize.Insert(&DisableHostPrefixMiddleware{}, "ResolveEndpointV2", middleware.After)
 }

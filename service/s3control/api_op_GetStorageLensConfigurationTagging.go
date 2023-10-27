@@ -70,6 +70,9 @@ type GetStorageLensConfigurationTaggingOutput struct {
 }
 
 func (c *Client) addOperationGetStorageLensConfigurationTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetStorageLensConfigurationTagging{}, middleware.After)
 	if err != nil {
 		return err
@@ -78,6 +81,10 @@ func (c *Client) addOperationGetStorageLensConfigurationTaggingMiddlewares(stack
 	if err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetStorageLensConfigurationTagging"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
+
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
@@ -117,10 +124,10 @@ func (c *Client) addOperationGetStorageLensConfigurationTaggingMiddlewares(stack
 	if err = s3controlcust.AddUpdateOutpostARN(stack); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opGetStorageLensConfigurationTaggingMiddleware(stack); err != nil {
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addResolveEndpointV2Middleware(stack, options); err != nil {
+	if err = addEndpointPrefix_opGetStorageLensConfigurationTaggingMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addOpGetStorageLensConfigurationTaggingValidationMiddleware(stack); err != nil {
@@ -138,6 +145,9 @@ func (c *Client) addOperationGetStorageLensConfigurationTaggingMiddlewares(stack
 	if err = addGetStorageLensConfigurationTaggingUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
+	if err = addStashOperationInput(stack); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,29 +157,10 @@ func (c *Client) addOperationGetStorageLensConfigurationTaggingMiddlewares(stack
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = s3controlcust.AddDisableHostPrefixMiddleware(stack); err != nil {
-		return err
-	}
-	err = stack.Serialize.Insert(&resolveAuthSchemeMiddleware{
-		operation: "GetStorageLensConfigurationTagging",
-		options:   options,
-	}, "ResolveEndpointV2", middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	err = stack.Finalize.Add(&signRequestMiddleware{}, middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	err = stack.Finalize.Add(&getIdentityMiddleware{
-		options: options,
-	}, middleware.Before)
-	if err != nil {
 		return err
 	}
 	return nil
@@ -182,11 +173,11 @@ func (*endpointPrefix_opGetStorageLensConfigurationTaggingMiddleware) ID() strin
 	return "EndpointHostPrefix"
 }
 
-func (m *endpointPrefix_opGetStorageLensConfigurationTaggingMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+func (m *endpointPrefix_opGetStorageLensConfigurationTaggingMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
 	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleSerialize(ctx, in)
+		return next.HandleFinalize(ctx, in)
 	}
 
 	req, ok := in.Request.(*smithyhttp.Request)
@@ -194,9 +185,10 @@ func (m *endpointPrefix_opGetStorageLensConfigurationTaggingMiddleware) HandleSe
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	input, ok := in.Parameters.(*GetStorageLensConfigurationTaggingInput)
+	opaqueInput := getOperationInput(ctx)
+	input, ok := opaqueInput.(*GetStorageLensConfigurationTaggingInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("unknown input type %T", in.Parameters)
+		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
 	}
 
 	var prefix strings.Builder
@@ -210,17 +202,16 @@ func (m *endpointPrefix_opGetStorageLensConfigurationTaggingMiddleware) HandleSe
 	prefix.WriteString(".")
 	req.URL.Host = prefix.String() + req.URL.Host
 
-	return next.HandleSerialize(ctx, in)
+	return next.HandleFinalize(ctx, in)
 }
 func addEndpointPrefix_opGetStorageLensConfigurationTaggingMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opGetStorageLensConfigurationTaggingMiddleware{}, `OperationSerializer`, middleware.After)
+	return stack.Finalize.Insert(&endpointPrefix_opGetStorageLensConfigurationTaggingMiddleware{}, "ResolveEndpointV2", middleware.After)
 }
 
 func newServiceMetadataMiddleware_opGetStorageLensConfigurationTagging(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "s3",
 		OperationName: "GetStorageLensConfigurationTagging",
 	}
 }
@@ -232,6 +223,10 @@ func copyGetStorageLensConfigurationTaggingInputForUpdateEndpoint(params interfa
 	}
 	cpy := *input
 	return &cpy, nil
+}
+func (in *GetStorageLensConfigurationTaggingInput) copy() interface{} {
+	v := *in
+	return &v
 }
 func backFillGetStorageLensConfigurationTaggingAccountID(input interface{}, v string) error {
 	in := input.(*GetStorageLensConfigurationTaggingInput)

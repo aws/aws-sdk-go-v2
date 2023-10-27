@@ -30,6 +30,14 @@ public final class SdkGoTypes {
 
         public static final Symbol FIPSEndpointStateEnabled = AwsGoDependency.AWS_CORE.valueSymbol("FIPSEndpointStateEnabled");
         public static final Symbol DualStackEndpointStateEnabled = AwsGoDependency.AWS_CORE.valueSymbol("DualStackEndpointStateEnabled");
+
+        public static final class Middleware {
+            public static final Symbol GetRequiresLegacyEndpoints = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("GetRequiresLegacyEndpoints");
+            public static final Symbol GetSigningName = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("GetSigningName");
+            public static final Symbol GetSigningRegion = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("GetSigningRegion");
+            public static final Symbol SetSigningName = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("SetSigningName");
+            public static final Symbol SetSigningRegion = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("SetSigningRegion");
+        }
     }
 
     public static final class Internal {
@@ -46,14 +54,37 @@ public final class SdkGoTypes {
                 public static final Symbol BearerTokenSignerAdapter = AwsGoDependency.INTERNAL_AUTH_SMITHY.pointableSymbol("BearerTokenSignerAdapter");
             }
         }
+
         public static final class Endpoints {
             public static final Symbol MapFIPSRegion = AwsGoDependency.INTERNAL_ENDPOINTS.valueSymbol("MapFIPSRegion");
+        }
+
+        public static final class V4A {
+            public static final Symbol SymmetricCredentialAdaptor = AwsGoDependency.INTERNAL_SIGV4A.pointableSymbol("SymmetricCredentialAdaptor");
+
+            public static final Symbol CredentialsAdapter = AwsGoDependency.INTERNAL_SIGV4A.pointableSymbol("CredentialsAdapter");
+            public static final Symbol CredentialsProviderAdapter = AwsGoDependency.INTERNAL_SIGV4A.pointableSymbol("CredentialsProviderAdapter");
+            public static final Symbol SignerAdapter = AwsGoDependency.INTERNAL_SIGV4A.pointableSymbol("SignerAdapter");
         }
     }
 
     public static final class ServiceCustomizations {
+        public static final class S3 {
+            public static final Symbol SetSignerVersion = AwsCustomGoDependency.S3_CUSTOMIZATION.valueSymbol("SetSignerVersion");
+        }
+
         public static final class S3Control {
             public static final Symbol AddDisableHostPrefixMiddleware = AwsCustomGoDependency.S3CONTROL_CUSTOMIZATION.valueSymbol("AddDisableHostPrefixMiddleware");
+        }
+
+        public static final class EventBridge {
+            public static final Symbol SetSignerVersion = AwsCustomGoDependency.EVENTBRIDGE_CUSTOMIZATION.valueSymbol("SetSignerVersion");
+        }
+    }
+
+    public static final class ServiceInternal {
+        public static final class AcceptEncoding {
+            public static final Symbol DisableGzip = AwsCustomGoDependency.ACCEPT_ENCODING_CUSTOMIZATION.pointableSymbol("DisableGzip");
         }
     }
 }

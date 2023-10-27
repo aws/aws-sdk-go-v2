@@ -201,9 +201,7 @@ func finalizeClientEndpointResolverOptions(options *Options) {
 }
 
 func resolveEndpointResolverV2(options *Options) {
-	if options.EndpointResolverV2 == nil {
-		options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
-	}
+	options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
 }
 
 // EndpointParameters provides the parameters that influence how endpoints are
@@ -4834,11 +4832,11 @@ func (*resolveEndpointV2Middleware) ID() string {
 	return "ResolveEndpointV2"
 }
 
-func (m *resolveEndpointV2Middleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+func (m *resolveEndpointV2Middleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
-		return next.HandleSerialize(ctx, in)
+		return next.HandleFinalize(ctx, in)
 	}
 
 	req, ok := in.Request.(*smithyhttp.Request)
@@ -4850,15 +4848,21 @@ func (m *resolveEndpointV2Middleware) HandleSerialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
 	}
 
-	params := bindEndpointParams(in.Parameters, m.options)
-	resolvedEndpoint, err := m.options.EndpointResolverV2.ResolveEndpoint(ctx, *params)
+	params := bindEndpointParams(getOperationInput(ctx), m.options)
+	endpt, err := m.options.EndpointResolverV2.ResolveEndpoint(ctx, *params)
 	if err != nil {
 		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
 	}
 
-	req.URL = &resolvedEndpoint.URI
-	for k := range resolvedEndpoint.Headers {
-		req.Header.Set(k, resolvedEndpoint.Headers.Get(k))
+	if endpt.URI.RawPath == "" && req.URL.RawPath != "" {
+		endpt.URI.RawPath = endpt.URI.Path
+	}
+	req.URL.Scheme = endpt.URI.Scheme
+	req.URL.Host = endpt.URI.Host
+	req.URL.Path = smithyhttp.JoinPath(endpt.URI.Path, req.URL.Path)
+	req.URL.RawPath = smithyhttp.JoinPath(endpt.URI.RawPath, req.URL.RawPath)
+	for k := range endpt.Headers {
+		req.Header.Set(k, endpt.Headers.Get(k))
 	}
 
 	rscheme := getResolvedAuthScheme(ctx)
@@ -4866,17 +4870,10 @@ func (m *resolveEndpointV2Middleware) HandleSerialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("no resolved auth scheme")
 	}
 
-	opts, _ := smithyauth.GetAuthOptions(&resolvedEndpoint.Properties)
+	opts, _ := smithyauth.GetAuthOptions(&endpt.Properties)
 	for _, o := range opts {
 		rscheme.SignerProperties.SetAll(&o.SignerProperties)
 	}
 
-	return next.HandleSerialize(ctx, in)
-
-}
-
-func addResolveEndpointV2Middleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&resolveEndpointV2Middleware{
-		options: options,
-	}, "ResolveEndpoint", middleware.After)
+	return next.HandleFinalize(ctx, in)
 }

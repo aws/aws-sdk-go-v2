@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3control"
 	"github.com/aws/smithy-go/middleware"
@@ -96,8 +96,8 @@ func TestUpdateEndpointBuild(t *testing.T) {
 								func(options *s3control.Options) {
 									options.APIOptions = append(options.APIOptions,
 										func(stack *middleware.Stack) error {
-											stack.Serialize.Insert(&fm,
-												"OperationSerializer", middleware.Before)
+											stack.Finalize.Insert(&fm,
+												"Signing", middleware.Before)
 											return nil
 										})
 
@@ -312,14 +312,14 @@ func TestEndpointWithARN(t *testing.T) {
 			options: s3control.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "Invalid ARN: The Outpost Id was not set",
+			expectedErr: "operation error S3 Control: GetBucket, invalid Amazon s3-outposts ARN",
 		},
 		"Missing access point for outpost resource": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456",
 			options: s3control.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "Invalid ARN: Expected a 4-component resource",
+			expectedErr: "operation error S3 Control: GetBucket, invalid Amazon s3-outposts ARN",
 		},
 		"access point": {
 			accessPoint: "myaccesspoint",
@@ -343,7 +343,7 @@ func TestEndpointWithARN(t *testing.T) {
 			options: s3control.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "Invalid ARN: Expected a 4-component resource",
+			expectedErr: "operation error S3 Control: GetAccessPoint, invalid Amazon s3-outposts ARN",
 		},
 		"Outpost Bucket with no S3UseARNRegion flag set": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
@@ -452,14 +452,14 @@ func TestEndpointWithARN(t *testing.T) {
 			options: s3control.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "Invalid ARN: expected a bucket name",
+			expectedErr: "operation error S3 Control: GetBucket, invalid Amazon s3-outposts ARN",
 		},
 		"Invalid ARN": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:bucket:mybucket",
 			options: s3control.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "Invalid ARN: Expected a 4-component resource",
+			expectedErr: "operation error S3 Control: GetBucket, invalid Amazon s3-outposts ARN",
 		},
 		"Invalid Outpost Bucket ARN with FIPS pseudo-region (prefix)": {
 			bucket: "arn:aws:s3-outposts:fips-us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
@@ -516,28 +516,12 @@ func TestEndpointWithARN(t *testing.T) {
 				_, err = svc.GetAccessPoint(ctx, &s3control.GetAccessPointInput{
 					Name:      ptr.String(c.accessPoint),
 					AccountId: ptr.String("123456789012"),
-				}, func(options *s3control.Options) {
-					// append request retriever middleware for request inspection
-					options.APIOptions = append(options.APIOptions,
-						func(stack *middleware.Stack) error {
-							// adds AFTER operation serializer middleware
-							stack.Serialize.Insert(&fm, "OperationSerializer", middleware.After)
-							return nil
-						})
-				})
+				}, addRequestRetriever(&fm))
 			} else {
 				_, err = svc.GetBucket(ctx, &s3control.GetBucketInput{
 					Bucket:    ptr.String(c.bucket),
 					AccountId: ptr.String("123456789012"),
-				}, func(options *s3control.Options) {
-					// append request retriever middleware for request inspection
-					options.APIOptions = append(options.APIOptions,
-						func(stack *middleware.Stack) error {
-							// adds AFTER operation serializer middleware
-							stack.Serialize.Insert(&fm, "OperationSerializer", middleware.After)
-							return nil
-						})
-				})
+				}, addRequestRetriever(&fm))
 			}
 
 			// inspect any errors
@@ -599,15 +583,7 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 				return svc.CreateBucket(ctx, &s3control.CreateBucketInput{
 					Bucket:    aws.String("mockBucket"),
 					OutpostId: aws.String("op-01234567890123456"),
-				}, func(options *s3control.Options) {
-					// append request retriever middleware for request inspection
-					options.APIOptions = append(options.APIOptions,
-						func(stack *middleware.Stack) error {
-							// adds AFTER operation serializer middleware
-							stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
-							return nil
-						})
-				})
+				}, addRequestRetriever(fm))
 			},
 			expectedReqURL:             "https://s3-outposts.us-west-2.amazonaws.com/v20180820/bucket/mockBucket",
 			expectedSigningName:        "s3-outposts",
@@ -623,15 +599,7 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 				return svc.ListRegionalBuckets(ctx, &s3control.ListRegionalBucketsInput{
 					AccountId: aws.String("123456789012"),
 					OutpostId: aws.String("op-01234567890123456"),
-				}, func(options *s3control.Options) {
-					// append request retriever middleware for request inspection
-					options.APIOptions = append(options.APIOptions,
-						func(stack *middleware.Stack) error {
-							// adds AFTER operation serializer middleware
-							stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
-							return nil
-						})
-				})
+				}, addRequestRetriever(fm))
 			},
 			expectedReqURL:             "https://s3-outposts.us-west-2.amazonaws.com/v20180820/bucket",
 			expectedSigningName:        "s3-outposts",
@@ -650,15 +618,7 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 				return svc.ListRegionalBuckets(ctx, &s3control.ListRegionalBucketsInput{
 					AccountId: aws.String("123456789012"),
 					OutpostId: aws.String("op-01234567890123456"),
-				}, func(options *s3control.Options) {
-					// append request retriever middleware for request inspection
-					options.APIOptions = append(options.APIOptions,
-						func(stack *middleware.Stack) error {
-							// adds AFTER operation serializer middleware
-							stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
-							return nil
-						})
-				})
+				}, addRequestRetriever(fm))
 			},
 			expectedReqURL:             "https://s3-outposts-fips.us-west-2.amazonaws.com/v20180820/bucket",
 			expectedSigningName:        "s3-outposts",
@@ -674,15 +634,7 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 				return svc.ListRegionalBuckets(ctx, &s3control.ListRegionalBucketsInput{
 					AccountId: aws.String("123456789012"),
 					OutpostId: aws.String("op-01234567890123456"),
-				}, func(options *s3control.Options) {
-					// append request retriever middleware for request inspection
-					options.APIOptions = append(options.APIOptions,
-						func(stack *middleware.Stack) error {
-							// adds AFTER operation serializer middleware
-							stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
-							return nil
-						})
-				})
+				}, addRequestRetriever(fm))
 			},
 			expectedReqURL:             "https://s3-outposts-fips.us-west-2.amazonaws.com/v20180820/bucket",
 			expectedSigningName:        "s3-outposts",
@@ -701,15 +653,7 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 				return svc.CreateBucket(ctx, &s3control.CreateBucketInput{
 					Bucket:    aws.String("mockBucket"),
 					OutpostId: aws.String("op-01234567890123456"),
-				}, func(options *s3control.Options) {
-					// append request retriever middleware for request inspection
-					options.APIOptions = append(options.APIOptions,
-						func(stack *middleware.Stack) error {
-							// adds AFTER operation serializer middleware
-							stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
-							return nil
-						})
-				})
+				}, addRequestRetriever(fm))
 			},
 			expectedReqURL:             "https://s3-outposts-fips.us-gov-west-1.amazonaws.com/v20180820/bucket/mockBucket",
 			expectedSigningName:        "s3-outposts",
@@ -725,15 +669,7 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 				return svc.CreateBucket(ctx, &s3control.CreateBucketInput{
 					Bucket:    aws.String("mockBucket"),
 					OutpostId: aws.String("op-01234567890123456"),
-				}, func(options *s3control.Options) {
-					// append request retriever middleware for request inspection
-					options.APIOptions = append(options.APIOptions,
-						func(stack *middleware.Stack) error {
-							// adds AFTER operation serializer middleware
-							stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
-							return nil
-						})
-				})
+				}, addRequestRetriever(fm))
 			},
 			expectedReqURL:             "https://s3-outposts-fips.us-gov-west-1.amazonaws.com/v20180820/bucket/mockBucket",
 			expectedSigningName:        "s3-outposts",
@@ -750,17 +686,9 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 					AccountId: aws.String("123456789012"),
 					Bucket:    aws.String("arn:aws:s3:us-west-2:123456789012:bucket:mockBucket"),
 					Name:      aws.String("mockName"),
-				}, func(options *s3control.Options) {
-					// append request retriever middleware for request inspection
-					options.APIOptions = append(options.APIOptions,
-						func(stack *middleware.Stack) error {
-							// adds AFTER operation serializer middleware
-							stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
-							return nil
-						})
-				})
+				}, addRequestRetriever(fm))
 			},
-			expectedErr: "Endpoint resolution failed. Invalid operation or environment input",
+			expectedErr: "operation error S3 Control: CreateAccessPoint, invalid Amazon s3 ARN, unknown resource type",
 		},
 		"CreateAccessPoint outpost bucket arn": {
 			options: s3control.Options{
@@ -771,15 +699,7 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 					AccountId: aws.String("123456789012"),
 					Bucket:    aws.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mockBucket"),
 					Name:      aws.String("mockName"),
-				}, func(options *s3control.Options) {
-					// append request retriever middleware for request inspection
-					options.APIOptions = append(options.APIOptions,
-						func(stack *middleware.Stack) error {
-							// adds AFTER operation serializer middleware
-							stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
-							return nil
-						})
-				})
+				}, addRequestRetriever(fm))
 			},
 			expectedReqURL:             "https://s3-outposts.us-west-2.amazonaws.com/v20180820/accesspoint/mockName",
 			expectedSigningName:        "s3-outposts",
@@ -798,15 +718,7 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 					AccountId: aws.String("123456789012"),
 					Bucket:    aws.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mockBucket"),
 					Name:      aws.String("mockName"),
-				}, func(options *s3control.Options) {
-					// append request retriever middleware for request inspection
-					options.APIOptions = append(options.APIOptions,
-						func(stack *middleware.Stack) error {
-							// adds AFTER operation serializer middleware
-							stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
-							return nil
-						})
-				})
+				}, addRequestRetriever(fm))
 			},
 			expectedReqURL:             "https://s3-outposts-fips.us-west-2.amazonaws.com/v20180820/accesspoint/mockName",
 			expectedSigningName:        "s3-outposts",
@@ -822,15 +734,7 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 					AccountId: aws.String("123456789012"),
 					Bucket:    aws.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mockBucket"),
 					Name:      aws.String("mockName"),
-				}, func(options *s3control.Options) {
-					// append request retriever middleware for request inspection
-					options.APIOptions = append(options.APIOptions,
-						func(stack *middleware.Stack) error {
-							// adds AFTER operation serializer middleware
-							stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
-							return nil
-						})
-				})
+				}, addRequestRetriever(fm))
 			},
 			expectedReqURL:             "https://s3-outposts-fips.us-west-2.amazonaws.com/v20180820/accesspoint/mockName",
 			expectedSigningName:        "s3-outposts",
@@ -1062,15 +966,7 @@ func TestInputIsNotModified(t *testing.T) {
 	fm := requestRetrieverMiddleware{}
 	svc := s3control.New(opts)
 	params := s3control.DeleteBucketInput{Bucket: ptr.String(inputBucket)}
-	_, err := svc.DeleteBucket(ctx, &params, func(options *s3control.Options) {
-		// append request retriever middleware for request inspection
-		options.APIOptions = append(options.APIOptions,
-			func(stack *middleware.Stack) error {
-				// adds AFTER operation serializer middleware
-				stack.Serialize.Insert(&fm, "OperationSerializer", middleware.After)
-				return nil
-			})
-	})
+	_, err := svc.DeleteBucket(ctx, &params, addRequestRetriever(&fm))
 
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err.Error())
@@ -1178,10 +1074,10 @@ func TestUseDualStackClientBehavior(t *testing.T) {
 
 func (*requestRetrieverMiddleware) ID() string { return "S3:requestRetrieverMiddleware" }
 
-func (rm *requestRetrieverMiddleware) HandleSerialize(
-	ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler,
+func (rm *requestRetrieverMiddleware) HandleFinalize(
+	ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler,
 ) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1189,20 +1085,19 @@ func (rm *requestRetrieverMiddleware) HandleSerialize(
 	}
 	rm.request = req
 
-	rm.signingName = awsmiddleware.GetSigningName(ctx)
-	rm.signingRegion = awsmiddleware.GetSigningRegion(ctx)
+	parsed := awstesting.ParseSigV4Signature(req.Header)
+	rm.signingName = parsed.SigningName
+	rm.signingRegion = parsed.SigningRegion
 
-	return next.HandleSerialize(ctx, in)
+	return next.HandleFinalize(ctx, in)
 }
 
-var addRequestRetriever = func(fm *requestRetrieverMiddleware) func(options *s3control.Options) {
+func addRequestRetriever(fm *requestRetrieverMiddleware) func(options *s3control.Options) {
 	return func(options *s3control.Options) {
-		// append request retriever middleware for request inspection
 		options.APIOptions = append(options.APIOptions,
 			func(stack *middleware.Stack) error {
-				// adds AFTER operation serializer middleware
-				stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
-				return nil
-			})
+				return stack.Finalize.Insert(fm, "Signing", middleware.After)
+			},
+		)
 	}
 }

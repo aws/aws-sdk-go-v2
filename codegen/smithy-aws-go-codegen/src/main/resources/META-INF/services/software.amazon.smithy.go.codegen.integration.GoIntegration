@@ -1,3 +1,4 @@
+software.amazon.smithy.aws.go.codegen.customization.auth.BackfillSigV4aTrait
 software.amazon.smithy.aws.go.codegen.AddProtocols
 software.amazon.smithy.aws.go.codegen.ClientResolvedDefaultsMode
 software.amazon.smithy.aws.go.codegen.AddAwsConfigFields
@@ -62,3 +63,6 @@ software.amazon.smithy.aws.go.codegen.customization.AwsAuthResolution
 software.amazon.smithy.aws.go.codegen.customization.AwsEndpointBuiltins
 software.amazon.smithy.aws.go.codegen.customization.auth.AwsSigV4AuthScheme
 software.amazon.smithy.aws.go.codegen.customization.auth.AwsHttpBearerAuthScheme
+software.amazon.smithy.aws.go.codegen.customization.auth.EndpointAuthResolution
+software.amazon.smithy.aws.go.codegen.customization.auth.AwsSigV4aAuthScheme
+software.amazon.smithy.aws.go.codegen.customization.auth.LegacyAuthContextOverride
