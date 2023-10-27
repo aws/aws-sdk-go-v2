@@ -8969,6 +8969,11 @@ func awsAwsquery_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, va
 		}
 	}
 
+	if v.IpAddressType != nil {
+		objectKey := object.Key("IpAddressType")
+		objectKey.String(*v.IpAddressType)
+	}
+
 	if v.KmsKeyId != nil {
 		objectKey := object.Key("KmsKeyId")
 		objectKey.String(*v.KmsKeyId)
@@ -11372,6 +11377,11 @@ func awsAwsquery_serializeOpDocumentModifyClusterInput(v *ModifyClusterInput, va
 		objectKey.String(*v.HsmConfigurationIdentifier)
 	}
 
+	if v.IpAddressType != nil {
+		objectKey := object.Key("IpAddressType")
+		objectKey.String(*v.IpAddressType)
+	}
+
 	if v.KmsKeyId != nil {
 		objectKey := object.Key("KmsKeyId")
 		objectKey.String(*v.KmsKeyId)
@@ -11992,6 +12002,11 @@ func awsAwsquery_serializeOpDocumentRestoreFromClusterSnapshotInput(v *RestoreFr
 		if err := awsAwsquery_serializeDocumentIamRoleArnList(v.IamRoles, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.IpAddressType != nil {
+		objectKey := object.Key("IpAddressType")
+		objectKey.String(*v.IpAddressType)
 	}
 
 	if v.KmsKeyId != nil {

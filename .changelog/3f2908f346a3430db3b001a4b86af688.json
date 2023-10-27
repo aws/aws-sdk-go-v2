@@ -1,0 +1,8 @@
+{
+    "id": "3f2908f3-46a3-430d-b3b0-01a4b86af688",
+    "type": "documentation",
+    "description": "Updated documentation to describe the case insensitivity for EndpointIds.",
+    "modules": [
+        "service/pinpoint"
+    ]
+}

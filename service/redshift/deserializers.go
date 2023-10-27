@@ -1562,6 +1562,9 @@ func awsAwsquery_deserializeOpErrorCreateCluster(response *smithyhttp.Response, 
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response, errorBody)
 
+	case strings.EqualFold("Ipv6CidrBlockNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorIpv6CidrBlockNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("LimitExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
@@ -10801,6 +10804,9 @@ func awsAwsquery_deserializeOpErrorModifyCluster(response *smithyhttp.Response, 
 	case strings.EqualFold("InvalidRetentionPeriodFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidRetentionPeriodFault(response, errorBody)
 
+	case strings.EqualFold("Ipv6CidrBlockNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorIpv6CidrBlockNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("LimitExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
@@ -13414,6 +13420,9 @@ func awsAwsquery_deserializeOpErrorRestoreFromClusterSnapshot(response *smithyht
 
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response, errorBody)
+
+	case strings.EqualFold("Ipv6CidrBlockNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorIpv6CidrBlockNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("LimitExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
@@ -17979,6 +17988,50 @@ func awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response *smithyhtt
 	return output
 }
 
+func awsAwsquery_deserializeErrorIpv6CidrBlockNotFoundFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.Ipv6CidrBlockNotFoundFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentIpv6CidrBlockNotFoundFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsAwsquery_deserializeErrorLimitExceededFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.LimitExceededFault{}
 	var buff [1024]byte
@@ -22157,6 +22210,19 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 				return err
 			}
 
+		case strings.EqualFold("IpAddressType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IpAddressType = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("KmsKeyId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -24431,6 +24497,12 @@ func awsAwsquery_deserializeDocumentClusterSubnetGroup(v **types.ClusterSubnetGr
 		case strings.EqualFold("Subnets", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentSubnetList(&sv.Subnets, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("SupportedClusterIpAddressTypes", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentValueStringList(&sv.SupportedClusterIpAddressTypes, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -30952,6 +31024,55 @@ func awsAwsquery_deserializeDocumentIPRangeListUnwrapped(v *[]types.IPRange, dec
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentIpv6CidrBlockNotFoundFault(v **types.Ipv6CidrBlockNotFoundFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.Ipv6CidrBlockNotFoundFault
+	if *v == nil {
+		sv = &types.Ipv6CidrBlockNotFoundFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentLimitExceededFault(v **types.LimitExceededFault, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -31182,6 +31303,19 @@ func awsAwsquery_deserializeDocumentNetworkInterface(v **types.NetworkInterface,
 			{
 				xtv := string(val)
 				sv.AvailabilityZone = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Ipv6Address", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Ipv6Address = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NetworkInterfaceId", t.Name.Local):
@@ -39321,6 +39455,86 @@ func awsAwsquery_deserializeDocumentUsageLimitsUnwrapped(v *[]types.UsageLimit, 
 			return err
 		}
 		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsAwsquery_deserializeDocumentValueStringList(v *[]string, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []string
+	if *v == nil {
+		sv = make([]string, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		switch {
+		case strings.EqualFold("item", t.Name.Local):
+			var col string
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				col = xtv
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentValueStringListUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
+	if *v == nil {
+		sv = make([]string, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv string
+		t := decoder.StartEl
+		_ = t
+		val, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if val == nil {
+			break
+		}
+		{
+			xtv := string(val)
+			mv = xtv
+		}
 		sv = append(sv, mv)
 	}
 	*v = sv

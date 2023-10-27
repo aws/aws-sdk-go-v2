@@ -1,0 +1,8 @@
+{
+    "id": "7f641a45-58a7-486b-a305-4c14b4e001b9",
+    "type": "feature",
+    "description": "Update TdeCredentialPassword type to SensitiveString",
+    "modules": [
+        "service/neptune"
+    ]
+}

@@ -25,28 +25,29 @@ import (
 //   - Update its settings as needed
 //   - Provide the complete web ACL specification to this call
 //
-// When you make changes to web ACLs or web ACL components, like rules and rule
-// groups, WAF propagates the changes everywhere that the web ACL and its
-// components are stored and used. Your changes are applied within seconds, but
-// there might be a brief period of inconsistency when the changes have arrived in
-// some places and not in others. So, for example, if you change a rule action
-// setting, the action might be the old action in one area and the new action in
-// another area. Or if you add an IP address to an IP set used in a blocking rule,
-// the new address might briefly be blocked in one area while still allowed in
-// another. This temporary inconsistency can occur when you first associate a web
-// ACL with an Amazon Web Services resource and when you change a web ACL that is
-// already associated with a resource. Generally, any inconsistencies of this type
-// last only a few seconds. A web ACL defines a collection of rules to use to
-// inspect and control web requests. Each rule has a statement that defines what to
-// look for in web requests and an action that WAF applies to requests that match
-// the statement. In the web ACL, you assign a default action to take (allow,
-// block) for any request that does not match any of the rules. The rules in a web
-// ACL can be a combination of the types Rule , RuleGroup , and managed rule group.
-// You can associate a web ACL with one or more Amazon Web Services resources to
-// protect. The resources can be an Amazon CloudFront distribution, an Amazon API
-// Gateway REST API, an Application Load Balancer, an AppSync GraphQL API, an
-// Amazon Cognito user pool, an App Runner service, or an Amazon Web Services
-// Verified Access instance.
+// A web ACL defines a collection of rules to use to inspect and control web
+// requests. Each rule has a statement that defines what to look for in web
+// requests and an action that WAF applies to requests that match the statement. In
+// the web ACL, you assign a default action to take (allow, block) for any request
+// that does not match any of the rules. The rules in a web ACL can be a
+// combination of the types Rule , RuleGroup , and managed rule group. You can
+// associate a web ACL with one or more Amazon Web Services resources to protect.
+// The resources can be an Amazon CloudFront distribution, an Amazon API Gateway
+// REST API, an Application Load Balancer, an AppSync GraphQL API, an Amazon
+// Cognito user pool, an App Runner service, or an Amazon Web Services Verified
+// Access instance. Temporary inconsistencies during updates When you create or
+// change a web ACL or other WAF resources, the changes take a small amount of time
+// to propagate to all areas where the resources are stored. The propagation time
+// can be from a few seconds to a number of minutes. The following are examples of
+// the temporary inconsistencies that you might notice during change propagation:
+//   - After you create a web ACL, if you try to associate it with a resource, you
+//     might get an exception indicating that the web ACL is unavailable.
+//   - After you add a rule group to a web ACL, the new rule group rules might be
+//     in effect in one area where the web ACL is used and not in another.
+//   - After you change a rule action setting, you might see the old action in
+//     some places and the new action in others.
+//   - After you add an IP address to an IP set that is in use in a blocking rule,
+//     the new address might be blocked in one area while still allowed in another.
 func (c *Client) UpdateWebACL(ctx context.Context, params *UpdateWebACLInput, optFns ...func(*Options)) (*UpdateWebACLOutput, error) {
 	if params == nil {
 		params = &UpdateWebACLInput{}

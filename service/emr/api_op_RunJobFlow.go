@@ -32,7 +32,7 @@ import (
 // submitting queries directly to the software running on the master node, such as
 // Hive and Hadoop. For long-running clusters, we recommend that you periodically
 // store your results. The instance fleets configuration is available only in
-// Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions. The RunJobFlow
+// Amazon EMR releases 4.8.0 and higher, excluding 5.0.x versions. The RunJobFlow
 // request can contain InstanceFleets parameters or InstanceGroups parameters, but
 // not both.
 func (c *Client) RunJobFlow(ctx context.Context, params *RunJobFlowInput, optFns ...func(*Options)) (*RunJobFlowOutput, error) {
@@ -67,10 +67,10 @@ type RunJobFlowInput struct {
 	AdditionalInfo *string
 
 	// Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases
-	// 4.0 and later, ReleaseLabel is used. To specify a custom AMI, use CustomAmiID .
+	// 4.0 and higher, ReleaseLabel is used. To specify a custom AMI, use CustomAmiID .
 	AmiVersion *string
 
-	// Applies to Amazon EMR releases 4.0 and later. A case-insensitive list of
+	// Applies to Amazon EMR releases 4.0 and higher. A case-insensitive list of
 	// applications for Amazon EMR to install and configure when launching the cluster.
 	// For a list of applications available for each Amazon EMR release version, see
 	// the Amazon EMRRelease Guide (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/)
@@ -93,11 +93,11 @@ type RunJobFlowInput struct {
 	// A list of bootstrap actions to run before Hadoop starts on the cluster nodes.
 	BootstrapActions []types.BootstrapActionConfig
 
-	// For Amazon EMR releases 4.0 and later. The list of configurations supplied for
+	// For Amazon EMR releases 4.0 and higher. The list of configurations supplied for
 	// the Amazon EMR cluster that you are creating.
 	Configurations []types.Configuration
 
-	// Available only in Amazon EMR releases 5.7.0 and later. The ID of a custom
+	// Available only in Amazon EMR releases 5.7.0 and higher. The ID of a custom
 	// Amazon EBS-backed Linux AMI. If specified, Amazon EMR uses this AMI when it
 	// launches cluster Amazon EC2 instances. For more information about custom AMIs in
 	// Amazon EMR, see Using a Custom AMI (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html)
@@ -110,10 +110,18 @@ type RunJobFlowInput struct {
 	// .
 	CustomAmiId *string
 
-	// The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is
-	// used for each Amazon EC2 instance. Available in Amazon EMR releases 4.x and
-	// later.
+	// The IOPS for the Amazon EBS root device volume for the Linux AMI that each
+	// Amazon EC2 instance uses. Available in Amazon EMR releases 6.15.0 and higher.
+	EbsRootVolumeIops *int32
+
+	// The size, in GiB, of the Amazon EBS root device volume for the Linux AMI that
+	// each Amazon EC2 instance uses. Available in Amazon EMR releases 4.x and higher.
 	EbsRootVolumeSize *int32
+
+	// The throughput, in MiB/s, of the Amazon EBS root device volume for the Linux
+	// AMI that each Amazon EC2 instance uses. Available in Amazon EMR releases 6.15.0
+	// and higher.
+	EbsRootVolumeThroughput *int32
 
 	// Also called instance profile and Amazon EC2 role. An IAM role for an Amazon EMR
 	// cluster. The Amazon EC2 instances of the cluster assume this role. The default
@@ -129,7 +137,7 @@ type RunJobFlowInput struct {
 
 	// The KMS key used for encrypting log files. If a value is not provided, the logs
 	// remain encrypted by AES-256. This attribute is only available with Amazon EMR
-	// releases 5.30.0 and later, excluding Amazon EMR 6.0.0.
+	// releases 5.30.0 and higher, excluding Amazon EMR 6.0.0.
 	LogEncryptionKmsKeyId *string
 
 	// The location in Amazon S3 to write the log files of the job flow. If a value is
@@ -139,12 +147,12 @@ type RunJobFlowInput struct {
 	// The specified managed scaling policy for an Amazon EMR cluster.
 	ManagedScalingPolicy *types.ManagedScalingPolicy
 
-	// For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use
-	// Applications. A list of strings that indicates third-party software to use with
-	// the job flow that accepts a user argument list. Amazon EMR accepts and forwards
-	// the argument list to the corresponding installation script as bootstrap action
-	// arguments. For more information, see "Launch a Job Flow on the MapR Distribution
-	// for Hadoop" in the Amazon EMR Developer Guide (https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf)
+	// For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and higher,
+	// use Applications. A list of strings that indicates third-party software to use
+	// with the job flow that accepts a user argument list. Amazon EMR accepts and
+	// forwards the argument list to the corresponding installation script as bootstrap
+	// action arguments. For more information, see "Launch a Job Flow on the MapR
+	// Distribution for Hadoop" in the Amazon EMR Developer Guide (https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf)
 	// . Supported values are:
 	//   - "mapr-m3" - launch the cluster using MapR M3 Edition.
 	//   - "mapr-m5" - launch the cluster using MapR M5 Edition.
@@ -171,7 +179,7 @@ type RunJobFlowInput struct {
 	// emr-x.x.x , where x.x.x is an Amazon EMR release version such as emr-5.14.0 .
 	// For more information about Amazon EMR release versions and included application
 	// versions and features, see https://docs.aws.amazon.com/emr/latest/ReleaseGuide/ (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/)
-	// . The release label applies only to Amazon EMR releases version 4.0 and later.
+	// . The release label applies only to Amazon EMR releases version 4.0 and higher.
 	// Earlier versions use AmiVersion .
 	ReleaseLabel *string
 
@@ -186,14 +194,14 @@ type RunJobFlowInput struct {
 	// automatic scale-in activity occurs or an instance group is resized.
 	// TERMINATE_AT_INSTANCE_HOUR indicates that Amazon EMR terminates nodes at the
 	// instance-hour boundary, regardless of when the request to terminate the instance
-	// was submitted. This option is only available with Amazon EMR 5.1.0 and later and
-	// is the default for clusters created using that version.
+	// was submitted. This option is only available with Amazon EMR 5.1.0 and higher
+	// and is the default for clusters created using that version.
 	// TERMINATE_AT_TASK_COMPLETION indicates that Amazon EMR adds nodes to a deny list
 	// and drains tasks from nodes before terminating the Amazon EC2 instances,
 	// regardless of the instance-hour boundary. With either behavior, Amazon EMR
 	// removes the least active nodes first and blocks instance termination if it could
 	// lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION available only in Amazon
-	// EMR releases 4.1.0 and later, and is the default for releases of Amazon EMR
+	// EMR releases 4.1.0 and higher, and is the default for releases of Amazon EMR
 	// earlier than 5.1.0.
 	ScaleDownBehavior types.ScaleDownBehavior
 
@@ -212,9 +220,9 @@ type RunJobFlowInput struct {
 	// A list of steps to run.
 	Steps []types.StepConfig
 
-	// For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use
-	// Applications. A list of strings that indicates third-party software to use. For
-	// more information, see the Amazon EMR Developer Guide (https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf)
+	// For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and higher,
+	// use Applications. A list of strings that indicates third-party software to use.
+	// For more information, see the Amazon EMR Developer Guide (https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf)
 	// . Currently supported values are:
 	//   - "mapr-m3" - launch the job flow using MapR M3 Edition.
 	//   - "mapr-m5" - launch the job flow using MapR M5 Edition.

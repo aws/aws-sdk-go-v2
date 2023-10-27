@@ -57,7 +57,7 @@ type FailoverDBClusterInput struct {
 type FailoverDBClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
-	// a response element in the DescribeDBClusters action.
+	// a response element in the DescribeDBClusters .
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

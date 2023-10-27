@@ -17,7 +17,7 @@ import (
 )
 
 // Auto-termination is supported in Amazon EMR releases 5.30.0 and 6.1.0 and
-// later. For more information, see Using an auto-termination policy (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-auto-termination-policy.html)
+// higher. For more information, see Using an auto-termination policy (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-auto-termination-policy.html)
 // . Creates or updates an auto-termination policy for an Amazon EMR cluster. An
 // auto-termination policy defines the amount of idle time in seconds after which a
 // cluster automatically terminates. For alternative cluster termination options,

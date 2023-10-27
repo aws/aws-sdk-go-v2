@@ -146,8 +146,7 @@ type CreateDBClusterInput struct {
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled using the BackupRetentionPeriod parameter. The default is a
 	// 30-minute window selected at random from an 8-hour block of time for each Amazon
-	// Region. To see the time blocks available, see Adjusting the Preferred
-	// Maintenance Window (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)
+	// Region. To see the time blocks available, see Neptune Maintenance Window (https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-maintaining.html#manage-console-maintaining-window)
 	// in the Amazon Neptune User Guide. Constraints:
 	//   - Must be in the format hh24:mi-hh24:mi .
 	//   - Must be in Universal Coordinated Time (UTC).
@@ -159,7 +158,7 @@ type CreateDBClusterInput struct {
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
 	// 30-minute window selected at random from an 8-hour block of time for each Amazon
 	// Region, occurring on a random day of the week. To see the time blocks available,
-	// see Adjusting the Preferred Maintenance Window (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)
+	// see Neptune Maintenance Window (https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-maintaining.html#manage-console-maintaining-window)
 	// in the Amazon Neptune User Guide. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
 	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
@@ -196,7 +195,7 @@ type CreateDBClusterInput struct {
 type CreateDBClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
-	// a response element in the DescribeDBClusters action.
+	// a response element in the DescribeDBClusters .
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

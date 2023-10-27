@@ -41,7 +41,8 @@ type GetEndpointInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The unique identifier for the endpoint.
+	// The case insensitive unique identifier for the endpoint. The identifier can't
+	// contain $ , { or } .
 	//
 	// This member is required.
 	EndpointId *string

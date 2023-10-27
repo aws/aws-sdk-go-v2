@@ -131,6 +131,10 @@ type ModifyClusterInput struct {
 	// Amazon Redshift cluster can use to retrieve and store keys in an HSM.
 	HsmConfigurationIdentifier *string
 
+	// The IP address types that the cluster supports. Possible values are ipv4 and
+	// dualstack .
+	IpAddressType *string
+
 	// The Key Management Service (KMS) key ID of the encryption key that you want to
 	// use to encrypt data in the cluster.
 	KmsKeyId *string

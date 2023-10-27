@@ -5628,9 +5628,19 @@ func awsAwsjson11_serializeOpDocumentRunJobFlowInput(v *RunJobFlowInput, value s
 		ok.String(*v.CustomAmiId)
 	}
 
+	if v.EbsRootVolumeIops != nil {
+		ok := object.Key("EbsRootVolumeIops")
+		ok.Integer(*v.EbsRootVolumeIops)
+	}
+
 	if v.EbsRootVolumeSize != nil {
 		ok := object.Key("EbsRootVolumeSize")
 		ok.Integer(*v.EbsRootVolumeSize)
+	}
+
+	if v.EbsRootVolumeThroughput != nil {
+		ok := object.Key("EbsRootVolumeThroughput")
+		ok.Integer(*v.EbsRootVolumeThroughput)
 	}
 
 	if v.Instances != nil {

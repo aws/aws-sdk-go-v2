@@ -1,0 +1,8 @@
+{
+    "id": "28e37e99-12dd-40d8-b1ca-3b29116801e6",
+    "type": "documentation",
+    "description": "Updates the descriptions for the calls that manage web ACL associations, to provide information for customer-managed IAM policies.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

@@ -6781,6 +6781,19 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				sv.CustomAmiId = ptr.String(jtv)
 			}
 
+		case "EbsRootVolumeIops":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EbsRootVolumeIops = ptr.Int32(int32(i64))
+			}
+
 		case "EbsRootVolumeSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6792,6 +6805,19 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 					return err
 				}
 				sv.EbsRootVolumeSize = ptr.Int32(int32(i64))
+			}
+
+		case "EbsRootVolumeThroughput":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EbsRootVolumeThroughput = ptr.Int32(int32(i64))
 			}
 
 		case "Ec2InstanceAttributes":

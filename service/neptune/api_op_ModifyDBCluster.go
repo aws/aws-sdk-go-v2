@@ -99,8 +99,7 @@ type ModifyDBClusterInput struct {
 	// Changing this parameter results in an outage. The change is applied during the
 	// next maintenance window unless the ApplyImmediately parameter is set to true.
 	// For a list of valid engine versions, see Engine Releases for Amazon Neptune (https://docs.aws.amazon.com/neptune/latest/userguide/engine-releases.html)
-	// , or call DescribeDBEngineVersions (https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions)
-	// .
+	// , or call DescribeDBEngineVersions .
 	EngineVersion *string
 
 	// Not supported by Neptune.
@@ -152,7 +151,7 @@ type ModifyDBClusterInput struct {
 type ModifyDBClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
-	// a response element in the DescribeDBClusters action.
+	// a response element in the DescribeDBClusters .
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

@@ -139,6 +139,9 @@ type RestoreFromClusterSnapshotInput struct {
 	// in the Amazon Redshift Cluster Management Guide.
 	IamRoles []string
 
+	// The IP address type for the cluster. Possible values are ipv4 and dualstack .
+	IpAddressType *string
+
 	// The Key Management Service (KMS) key ID of the encryption key that encrypts
 	// data in the cluster restored from a shared snapshot. You can also provide the
 	// key ID when you restore from an unencrypted snapshot to an encrypted cluster in

@@ -23,7 +23,11 @@ import (
 // CloudFront, don't use this call. Instead, use your CloudFront distribution
 // configuration. To disassociate a web ACL, provide an empty web ACL ID in the
 // CloudFront call UpdateDistribution . For information, see UpdateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html)
-// in the Amazon CloudFront API Reference.
+// in the Amazon CloudFront API Reference. Required permissions for
+// customer-managed IAM policies This call requires permissions that are specific
+// to the protected resource type. For details, see Permissions for
+// DisassociateWebACL (https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-DisassociateWebACL)
+// in the WAF Developer Guide.
 func (c *Client) DisassociateWebACL(ctx context.Context, params *DisassociateWebACLInput, optFns ...func(*Options)) (*DisassociateWebACLOutput, error) {
 	if params == nil {
 		params = &DisassociateWebACLInput{}

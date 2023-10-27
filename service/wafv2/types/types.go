@@ -342,9 +342,9 @@ type ByteMatchStatement struct {
 	//   able to calculate the fingerprint, it includes it in the logs. For information
 	//   about the logging fields, see Log fields (https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html)
 	//   in the WAF Developer Guide.
-	//   - HeaderOrder : The comma-separated list of header names to match for. WAF
-	//   creates a string that contains the ordered list of header names, from the
-	//   headers in the web request, and then matches against that string.
+	//   - HeaderOrder : The list of header names to match for. WAF creates a string
+	//   that contains the ordered list of header names, from the headers in the web
+	//   request, and then matches against that string.
 	// If SearchString includes alphabetic characters A-Z and a-z, note that the value
 	// is case sensitive. If you're using the WAF API Specify a base64-encoded version
 	// of the value. The maximum length of the value before you base64-encode it is 200
@@ -548,7 +548,11 @@ type Cookies struct {
 	MatchPattern *CookieMatchPattern
 
 	// The parts of the cookies to inspect with the rule inspection criteria. If you
-	// specify All , WAF inspects both keys and values.
+	// specify ALL , WAF inspects both keys and values. All does not require a match
+	// to be found in the keys and a match to be found in the values. It requires a
+	// match to be found in the keys or the values or both. To require a match in the
+	// keys and in the values, use a logical AND statement to combine two match rules,
+	// one that inspects the keys and another that inspects the values.
 	//
 	// This member is required.
 	MatchScope MapMatchScope
@@ -1047,7 +1051,11 @@ type Headers struct {
 	MatchPattern *HeaderMatchPattern
 
 	// The parts of the headers to match with the rule inspection criteria. If you
-	// specify All , WAF inspects both keys and values.
+	// specify ALL , WAF inspects both keys and values. All does not require a match
+	// to be found in the keys and a match to be found in the values. It requires a
+	// match to be found in the keys or the values or both. To require a match in the
+	// keys and in the values, use a logical AND statement to combine two match rules,
+	// one that inspects the keys and another that inspects the values.
 	//
 	// This member is required.
 	MatchScope MapMatchScope
@@ -1343,7 +1351,11 @@ type JsonBody struct {
 	MatchPattern *JsonMatchPattern
 
 	// The parts of the JSON to match against using the MatchPattern . If you specify
-	// All , WAF matches against keys and values.
+	// ALL , WAF matches against keys and values. All does not require a match to be
+	// found in the keys and a match to be found in the values. It requires a match to
+	// be found in the keys or the values or both. To require a match in the keys and
+	// in the values, use a logical AND statement to combine two match rules, one that
+	// inspects the keys and another that inspects the values.
 	//
 	// This member is required.
 	MatchScope JsonMatchScope

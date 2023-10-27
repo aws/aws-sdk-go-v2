@@ -2314,6 +2314,33 @@ func (e *InvalidVPCNetworkStateFault) ErrorCode() string {
 }
 func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// There are no subnets in your VPC with associated IPv6 CIDR blocks. To use
+// dual-stack mode, associate an IPv6 CIDR block with each subnet in your VPC.
+type Ipv6CidrBlockNotFoundFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *Ipv6CidrBlockNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *Ipv6CidrBlockNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *Ipv6CidrBlockNotFoundFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "Ipv6CidrBlockNotFoundFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *Ipv6CidrBlockNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The encryption key has exceeded its grant limit in Amazon Web Services KMS.
 type LimitExceededFault struct {
 	Message *string

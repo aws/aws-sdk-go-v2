@@ -77,7 +77,7 @@ type ClusterPendingModifiedValues struct {
 }
 
 // Contains the details of an Amazon Neptune DB cluster. This data type is used as
-// a response element in the DescribeDBClusters action.
+// a response element in the DescribeDBClusters .
 type DBCluster struct {
 
 	// AllocatedStorage always returns 1, because Neptune DB cluster storage size is
@@ -359,8 +359,7 @@ type DBClusterRole struct {
 
 	// The name of the feature associated with the Amazon Identity and Access
 	// Management (IAM) role. For the list of supported feature names, see
-	// DescribeDBEngineVersions (https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions)
-	// .
+	// DescribeDBEngineVersions .
 	FeatureName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that is associated with the DB

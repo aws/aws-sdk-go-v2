@@ -271,6 +271,9 @@ type Cluster struct {
 	// cluster to access other Amazon Web Services services.
 	IamRoles []ClusterIamRole
 
+	// The IP address type for the cluster. Possible values are ipv4 and dualstack .
+	IpAddressType *string
+
 	// The Key Management Service (KMS) key ID of the encryption key used to encrypt
 	// data in the cluster.
 	KmsKeyId *string
@@ -562,6 +565,10 @@ type ClusterSubnetGroup struct {
 
 	// A list of the VPC Subnet elements.
 	Subnets []Subnet
+
+	// The IP address types supported by this cluster subnet group. Possible values
+	// are ipv4 and dualstack .
+	SupportedClusterIpAddressTypes []string
 
 	// The list of tags for the cluster subnet group.
 	Tags []Tag
@@ -1083,6 +1090,9 @@ type NetworkInterface struct {
 
 	// The Availability Zone.
 	AvailabilityZone *string
+
+	// The IPv6 address of the network interface within the subnet.
+	Ipv6Address *string
 
 	// The network interface identifier.
 	NetworkInterfaceId *string

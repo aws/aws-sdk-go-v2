@@ -17,9 +17,14 @@ import (
 )
 
 // Retrieves an array of the Amazon Resource Names (ARNs) for the regional
-// resources that are associated with the specified web ACL. If you want the list
-// of Amazon CloudFront resources, use the CloudFront call
-// ListDistributionsByWebACLId .
+// resources that are associated with the specified web ACL. For Amazon CloudFront,
+// don't use this call. Instead, use the CloudFront call
+// ListDistributionsByWebACLId . For information, see ListDistributionsByWebACLId (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html)
+// in the Amazon CloudFront API Reference. Required permissions for
+// customer-managed IAM policies This call requires permissions that are specific
+// to the protected resource type. For details, see Permissions for
+// ListResourcesForWebACL (https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-ListResourcesForWebACL)
+// in the WAF Developer Guide.
 func (c *Client) ListResourcesForWebACL(ctx context.Context, params *ListResourcesForWebACLInput, optFns ...func(*Options)) (*ListResourcesForWebACLOutput, error) {
 	if params == nil {
 		params = &ListResourcesForWebACLInput{}
