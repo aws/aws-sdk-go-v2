@@ -5,15 +5,15 @@ package elasticbeanstalk
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"os"
 	"reflect"
 	"testing"
-	"os"
 )
 
 type mockConfigSource struct {
-	global string
+	global  string
 	service string
-	ignore bool
+	ignore  bool
 }
 
 // GetIgnoreConfiguredEndpoints is used in knowing when to disable configured
@@ -31,38 +31,37 @@ func (m mockConfigSource) GetServiceBaseEndpoint(ctx context.Context, sdkID stri
 	return "", false, nil
 }
 
-
 func TestResolveBaseEndpoint(t *testing.T) {
 	cases := map[string]struct {
-		envGlobal        string
-		envService       string
-		envIgnore        bool
-		configGlobal     string
-		configService    string
-		configIgnore     bool
-		clientEndpoint   *string
-		expectURL        *string
+		envGlobal      string
+		envService     string
+		envIgnore      bool
+		configGlobal   string
+		configService  string
+		configIgnore   bool
+		clientEndpoint *string
+		expectURL      *string
 	}{
 		"env ignore": {
-			envGlobal: "https://env-global.dev",
-			envService: "https://env-elastic-beanstalk.dev",
-			envIgnore: true,
-			configGlobal: "http://config-global.dev",
+			envGlobal:     "https://env-global.dev",
+			envService:    "https://env-elastic-beanstalk.dev",
+			envIgnore:     true,
+			configGlobal:  "http://config-global.dev",
 			configService: "http://config-elastic-beanstalk.dev",
-			expectURL: nil,
+			expectURL:     nil,
 		},
 		"env global": {
-			envGlobal: "https://env-global.dev",
-			configGlobal: "http://config-global.dev",
+			envGlobal:     "https://env-global.dev",
+			configGlobal:  "http://config-global.dev",
 			configService: "http://config-elastic-beanstalk.dev",
-			expectURL: aws.String("https://env-global.dev"),
+			expectURL:     aws.String("https://env-global.dev"),
 		},
 		"env service": {
-			envGlobal: "https://env-global.dev",
-			envService: "https://env-elastic-beanstalk.dev",
-			configGlobal: "http://config-global.dev",
+			envGlobal:     "https://env-global.dev",
+			envService:    "https://env-elastic-beanstalk.dev",
+			configGlobal:  "http://config-global.dev",
 			configService: "http://config-elastic-beanstalk.dev",
-			expectURL: aws.String("https://env-elastic-beanstalk.dev"),
+			expectURL:     aws.String("https://env-elastic-beanstalk.dev"),
 		},
 	}
 
@@ -71,7 +70,6 @@ func TestResolveBaseEndpoint(t *testing.T) {
 			os.Clearenv()
 
 			awsConfig := aws.Config{}
-
 			ignore := c.envIgnore || c.configIgnore
 
 			if c.configGlobal != "" && !ignore {
@@ -89,20 +87,18 @@ func TestResolveBaseEndpoint(t *testing.T) {
 				t.Setenv("AWS_ENDPOINT_URL_ELASTIC_BEANSTALK", c.envService)
 			}
 
-			cfgSources := []interface{}{
+			awsConfig.ConfigSources = []interface{}{
 				mockConfigSource{
-					global: c.envGlobal,
+					global:  c.envGlobal,
 					service: c.envService,
-					ignore: c.envIgnore,
+					ignore:  c.envIgnore,
 				},
 				mockConfigSource{
-					global: c.configGlobal,
+					global:  c.configGlobal,
 					service: c.configService,
-					ignore: c.configIgnore,
+					ignore:  c.configIgnore,
 				},
 			}
-
-			awsConfig.ConfigSources = cfgSources
 
 			client := NewFromConfig(awsConfig, func(o *Options) {
 				if c.clientEndpoint != nil {

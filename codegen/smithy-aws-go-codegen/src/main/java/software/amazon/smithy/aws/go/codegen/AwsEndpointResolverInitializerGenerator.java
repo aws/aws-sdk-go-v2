@@ -7,6 +7,7 @@ import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.TriConsumer;
 import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionGenerator;
@@ -72,8 +73,12 @@ public class AwsEndpointResolverInitializerGenerator implements GoIntegration {
                         o.BaseEndpoint = cfg.BaseEndpoint
                     }
 
-                    _, g := os.LookupEnv("AWS_ENDPOINT_URL")
-                    _, s := os.LookupEnv("AWS_ENDPOINT_URL_$envSdkId:L")
+                    _, g := $lookupEnv:T("AWS_ENDPOINT_URL")
+                    _, s := $lookupEnv:T("AWS_ENDPOINT_URL_$envSdkId:L")
+
+                    if g && !s  {
+                        return
+                    }
 
                     value, found, err := $resolveServiceEndpoint:T(context.Background(), "$sdkId:L", cfg.ConfigSources)
                     if found && err == nil {
@@ -84,6 +89,7 @@ public class AwsEndpointResolverInitializerGenerator implements GoIntegration {
             MapUtils.of(
                 "resolveMethodName", RESOLVE_BASE_ENDPOINT,
                 "awsConfig", SymbolUtils.createValueSymbolBuilder("Config", AwsGoDependency.AWS_CORE).build(),
+                "lookupEnv", SymbolUtils.createValueSymbolBuilder("LookupEnv", SmithyGoDependency.OS).build(),
                 "resolveServiceEndpoint", SymbolUtils.createValueSymbolBuilder(
                                         "ResolveServiceBaseEndpoint", AwsGoDependency.INTERNAL_ENDPOINTS_CONFIG).build(),
                 "sdkId", sdkId

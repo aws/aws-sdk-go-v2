@@ -17,8 +17,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 	"net/url"
-	"strings"
 	"os"
+	"strings"
 )
 
 // EndpointResolverOptions is the service endpoint resolver options
@@ -204,7 +204,7 @@ func resolveBaseEndpoint(cfg aws.Config, o *Options) {
 	_, g := os.LookupEnv("AWS_ENDPOINT_URL")
 	_, s := os.LookupEnv("AWS_ENDPOINT_URL_ELASTIC_BEANSTALK")
 
-	if g && !s  {
+	if g && !s {
 		return
 	}
 

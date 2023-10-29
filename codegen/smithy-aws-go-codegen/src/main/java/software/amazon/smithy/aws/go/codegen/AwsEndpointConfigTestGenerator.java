@@ -38,7 +38,8 @@ public class AwsEndpointConfigTestGenerator implements GoIntegration {
             "configSdkId", sdkId.toLowerCase().replaceAll(" ", "_"),
             "urlSdkId", sdkId.toLowerCase().replaceAll(" ", "-"),
             "testing", SymbolUtils.createPointableSymbolBuilder("T", SmithyGoDependency.TESTING).build(),
-            "awsString", SymbolUtils.createValueSymbolBuilder("String", AwsGoDependency.AWS_CORE).build()
+            "awsString", SymbolUtils.createValueSymbolBuilder("String", AwsGoDependency.AWS_CORE).build(),
+            "context", SymbolUtils.createValueSymbolBuilder("Context", SmithyGoDependency.CONTEXT).build()
         );
 
         writerFactory.accept("endpoints_config_test.go", settings.getModuleName(), writer -> {
@@ -47,12 +48,55 @@ public class AwsEndpointConfigTestGenerator implements GoIntegration {
 
     }
 
-
     private GoWriter.Writable generate() {
         return (GoWriter w) -> {
             w.write(
                 """
-                func TestConfiguredEndpoints(t $P) {
+                $W
+
+                $W
+                """,
+                generateMockProviders(),
+                generateTestFunction()
+            );
+        };
+    }
+
+    private GoWriter.Writable generateMockProviders() {
+        return goTemplate(
+            """
+                type mockConfigSource struct {
+                    global string
+                    service string
+                    ignore bool
+                }
+
+                // GetIgnoreConfiguredEndpoints is used in knowing when to disable configured
+                // endpoints feature.
+                func (m mockConfigSource) GetIgnoreConfiguredEndpoints($context:T) (bool, bool, error) {
+                    return m.ignore, m.ignore, nil
+                }
+                
+                // GetServiceBaseEndpoint is used to retrieve a normalized SDK ID for use
+                // with configured endpoints.
+                func (m mockConfigSource) GetServiceBaseEndpoint(ctx $context:T, sdkID string) (string, bool, error) {
+                    if m.service != "" {
+                        return m.service, true, nil
+                    }
+                    return "", false, nil
+                }
+                
+            """,
+            this.commonCodegenArgs
+        );
+    }
+
+
+    private GoWriter.Writable generateTestFunction() {
+        return (GoWriter w) -> {
+            w.write(
+                """
+                func TestResolveBaseEndpoint(t $P) {
                     $W
 
                     $W
@@ -69,103 +113,35 @@ public class AwsEndpointConfigTestGenerator implements GoIntegration {
         return goTemplate(
             """
                 cases := map[string]struct {
-                    Env                  map[string]string
-                    SharedConfigFile     string
-                    ClientEndpoint       *string
-                    ExpectURL            *string
+                    envGlobal        string
+                    envService       string
+                    envIgnore        bool
+                    configGlobal     string
+                    configService    string
+                    configIgnore     bool
+                    clientEndpoint   *string
+                    expectURL        *string
                 }{
                     "env ignore": {
-                        Env: map[string]string{
-                            "AWS_ENDPOINT_URL":         "https://env-global.dev",
-                            "AWS_ENDPOINT_URL_$envSdkId:L":  "https://env-$urlSdkId:L.dev",
-                            "AWS_IGNORE_CONFIGURED_ENDPOINT_URLS": "true",
-                        },
-                        SharedConfigFile: `[profile dev]
-endpoint_url = http://config-global.dev
-services = testing-$urlSdkId:L
-
-[services testing-$urlSdkId:L]
-$configSdkId:L =
-    endpoint_url = http://config-$urlSdkId:L.dev
-`,
-                        ExpectURL:            nil,
+                        envGlobal: "https://env-global.dev",
+                        envService: "https://env-$urlSdkId:L.dev",
+                        envIgnore: true,
+                        configGlobal: "http://config-global.dev",
+                        configService: "http://config-$urlSdkId:L.dev",
+                        expectURL: nil,
                     },
                     "env global": {
-                        Env: map[string]string{
-                            "AWS_ENDPOINT_URL": "https://env-global.dev",
-                        },
-                        SharedConfigFile: `[profile dev]
-endpoint_url = http://config-global.dev
-`,
-                        ExpectURL:            $awsString:T("https://env-global.dev"),
+                        envGlobal: "https://env-global.dev",
+                        configGlobal: "http://config-global.dev",
+                        configService: "http://config-$urlSdkId:L.dev",
+                        expectURL: aws.String("https://env-global.dev"),
                     },
                     "env service": {
-                        Env: map[string]string{
-                            "AWS_ENDPOINT_URL":                    "https://env-global.dev",
-                            "AWS_ENDPOINT_URL_$envSdkId:L":  "https://env-$urlSdkId:L.dev",
-                        },
-                        SharedConfigFile: `[profile dev]
-endpoint_url = http://config-global.dev
-services = testing-$urlSdkId:L
-
-[services testing-$urlSdkId:L]
-$configSdkId:L =
-    endpoint_url = http://config-$urlSdkId:L.dev
-`,
-                        ExpectURL:            $awsString:T("https://env-$urlSdkId:L.dev"),
-                    },
-                    "config ignore": {
-                        Env: map[string]string{
-                            "AWS_ENDPOINT_URL":                    "https://env-global.dev",
-                            "AWS_ENDPOINT_URL_$envSdkId:L":  "https://env-$urlSdkId:L.dev",
-                        },
-                        SharedConfigFile: `[profile dev]
-endpoint_url = http://config-global.dev
-services = testing-$urlSdkId:L
-ignore_configured_endpoint_urls = true
-
-[services testing-$urlSdkId:L]
-$configSdkId:L =
-    endpoint_url = http://config-$urlSdkId:L.dev
-`,
-                        ExpectURL:            nil,
-                    },
-                    "config global": {
-                        SharedConfigFile: `[profile dev]
-endpoint_url = http://config-global.dev
-`,
-                        ExpectURL:            $awsString:T("http://config-global.dev"),
-                    },
-                    "config service": {
-                        Env: map[string]string{
-                            "AWS_ENDPOINT_URL": "https://env-global.dev",
-                        },
-                        SharedConfigFile: `[profile dev]
-endpoint_url = http://config-global.dev
-services = testing-$urlSdkId:L
-
-[services testing-$urlSdkId:L]
-$configSdkId:L =
-    endpoint_url = http://config-$urlSdkId:L.dev
-`,
-                        ExpectURL:            $awsString:T("http://config-$urlSdkId:L.dev"),
-                    },
-                    "client": {
-                        Env: map[string]string{
-                            "AWS_ENDPOINT_URL":                    "https://env-global.dev",
-                            "AWS_ENDPOINT_URL_$envSdkId:L":  "https://env-$urlSdkId:L.dev",
-                            "AWS_IGNORE_CONFIGURED_ENDPOINT_URLS": "true",
-                        },
-                        SharedConfigFile: `[profile dev]
-endpoint_url = http://config-global.dev
-services = testing-$urlSdkId:L
-
-[services testing-$urlSdkId:L]
-$configSdkId:L =
-    endpoint_url = http://config-$urlSdkId:L.dev
-`,
-                        ClientEndpoint:       $awsString:T("https://client-$urlSdkId:L.dev"),
-                        ExpectURL:            $awsString:T("https://client-$urlSdkId:L.dev"),
+                        envGlobal: "https://env-global.dev",
+                        envService: "https://env-$urlSdkId:L.dev",
+                        configGlobal: "http://config-global.dev",
+                        configService: "http://config-$urlSdkId:L.dev",
+                        expectURL: aws.String("https://env-$urlSdkId:L.dev"),
                     },
                 }
             """,
@@ -179,29 +155,45 @@ $configSdkId:L =
                 for name, c := range cases {
                     t.Run(name, func(t $testing:P) {
                         $clearEnv:T()
-                        for k, v := range c.Env {
-                            t.Setenv(k, v)
+
+                        awsConfig := $awsConfig:T{}
+                        ignore := c.envIgnore || c.configIgnore
+            
+                        if c.configGlobal != "" && !ignore {
+                            awsConfig.BaseEndpoint = $awsString:T(c.configGlobal)
                         }
-
-                        tmpDir := t.TempDir()
-                        $writeFile:T($joinFile:T(tmpDir, "test_shared_config"), []byte(c.SharedConfigFile), $fileMode:T(int(0777)))
-
-                        awsConfig, err := $loadDefaultConfig:T(
-                            $contextTodo:T(),
-                            $withSharedConfig:T([]string{$joinFile:T(tmpDir, "test_shared_config")}),
-                            $withSharedConfigProfile:T("dev"),
-                        )
-                        if err != nil {
-                            t.Fatalf("error loading default config: %v", err)
+            
+                        if c.envGlobal != "" {
+                            t.Setenv("AWS_ENDPOINT_URL", c.envGlobal)
+                            if !ignore {
+                                awsConfig.BaseEndpoint = $awsString:T(c.envGlobal)
+                            }
                         }
-
+            
+                        if c.envService != "" {
+                            t.Setenv("AWS_ENDPOINT_URL_$envSdkId:L", c.envService)
+                        }
+            
+                        awsConfig.ConfigSources = []interface{}{
+                            mockConfigSource{
+                                global: c.envGlobal,
+                                service: c.envService,
+                                ignore: c.envIgnore,
+                            },
+                            mockConfigSource{
+                                global: c.configGlobal,
+                                service: c.configService,
+                                ignore: c.configIgnore,
+                            },
+                        }
+            
                         client := NewFromConfig(awsConfig, func (o *Options) {
-                            if c.ClientEndpoint != nil {
-                                o.BaseEndpoint = c.ClientEndpoint
+                            if c.clientEndpoint != nil {
+                                o.BaseEndpoint = c.clientEndpoint
                             }
                         })
 
-                        if e, a := c.ExpectURL, client.options.BaseEndpoint; !$deepEqual:T(e, a) {
+                        if e, a := c.expectURL, client.options.BaseEndpoint; !$deepEqual:T(e, a) {
                             t.Errorf("expect endpoint %v , got %v", e, a)
                         }
                     })
@@ -210,13 +202,7 @@ $configSdkId:L =
             this.commonCodegenArgs,
             MapUtils.of(
                 "clearEnv", SymbolUtils.createValueSymbolBuilder("Clearenv", SmithyGoDependency.OS).build(),
-                "writeFile", SymbolUtils.createValueSymbolBuilder("WriteFile", SmithyGoDependency.OS).build(),
-                "joinFile", SymbolUtils.createValueSymbolBuilder("Join", SmithyGoDependency.PATH_FILEPATH).build(),
-                "fileMode", SymbolUtils.createValueSymbolBuilder("FileMode", SmithyGoDependency.OS).build(),
-                "loadDefaultConfig", SymbolUtils.createValueSymbolBuilder("LoadDefaultConfig", AwsGoDependency.CONFIG).build(),
-                "contextTodo", SymbolUtils.createValueSymbolBuilder("TODO", SmithyGoDependency.CONTEXT).build(),
-                "withSharedConfig", SymbolUtils.createValueSymbolBuilder("WithSharedConfigFiles", AwsGoDependency.CONFIG).build(),
-                "withSharedConfigProfile", SymbolUtils.createValueSymbolBuilder("WithSharedConfigProfile", AwsGoDependency.CONFIG).build(),
+                "awsConfig", SymbolUtils.createValueSymbolBuilder("Config", AwsGoDependency.AWS_CORE).build(),
                 "deepEqual", SymbolUtils.createValueSymbolBuilder("DeepEqual", SmithyGoDependency.REFLECT).build()
             )
         );
