@@ -13,7 +13,7 @@ type ServiceBaseEndpointProvider interface {
 
 // ResolveServiceBaseEndpoint is used to retrieve service endpoints from configured sources
 // while allowing for configured endpoints to be disabled
-func ResolveServiceBaseEndpoint(ctx context.Context, sdkID string, configs []config.Config) (value string, found bool, err error) {
+func ResolveServiceBaseEndpoint(ctx context.Context, sdkID string, configs []interface{}) (value string, found bool, err error) {
 	if val, found, _ := config.GetIgnoreConfiguredEndpoints(ctx, configs); found && val {
 		return "", false, nil
 	}

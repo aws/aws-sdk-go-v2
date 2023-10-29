@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
 	internalepconfig "github.com/aws/aws-sdk-go-v2/internal/endpoints/config"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/internal/endpoints"
@@ -19,6 +18,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"os"
 )
 
 // EndpointResolverOptions is the service endpoint resolver options
@@ -200,13 +200,15 @@ func resolveBaseEndpoint(cfg aws.Config, o *Options) {
 	if cfg.BaseEndpoint != nil {
 		o.BaseEndpoint = cfg.BaseEndpoint
 	}
-	var configSources []config.Config
-	for _, c := range cfg.ConfigSources {
-		if cs, ok := c.(config.Config); ok {
-			configSources = append(configSources, cs)
-		}
+
+	_, g := os.LookupEnv("AWS_ENDPOINT_URL")
+	_, s := os.LookupEnv("AWS_ENDPOINT_URL_ELASTIC_BEANSTALK")
+
+	if g && !s  {
+		return
 	}
-	value, found, err := internalepconfig.ResolveServiceBaseEndpoint(context.Background(), "Elastic Beanstalk", configSources)
+
+	value, found, err := internalepconfig.ResolveServiceBaseEndpoint(context.Background(), "Elastic Beanstalk", cfg.ConfigSources)
 	if found && err == nil {
 		o.BaseEndpoint = &value
 	}

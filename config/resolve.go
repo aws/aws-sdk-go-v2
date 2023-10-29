@@ -107,7 +107,12 @@ func resolveRegion(ctx context.Context, cfg *aws.Config, configs configs) error 
 }
 
 func resolveBaseEndpoint(ctx context.Context, cfg *aws.Config, configs configs) error {
-	if val, found, err := GetIgnoreConfiguredEndpoints(ctx, configs); found && val && err == nil {
+	var downcastCfgSources []interface{}
+	for _, cs := range configs {
+		downcastCfgSources = append(downcastCfgSources, interface{}(cs))
+	}
+
+	if val, found, err := GetIgnoreConfiguredEndpoints(ctx, downcastCfgSources); found && val && err == nil {
 		cfg.BaseEndpoint = nil
 		return nil
 	}
