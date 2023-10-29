@@ -63,6 +63,31 @@ func TestResolveBaseEndpoint(t *testing.T) {
 			configService: "http://config-elastic-beanstalk.dev",
 			expectURL:     aws.String("https://env-elastic-beanstalk.dev"),
 		},
+		"config ignore": {
+			envGlobal:     "https://env-global.dev",
+			envService:    "https://env-elastic-beanstalk.dev",
+			configGlobal:  "http://config-global.dev",
+			configService: "http://config-elastic-beanstalk.dev",
+			configIgnore:  true,
+			expectURL:     nil,
+		},
+		"config global": {
+			configGlobal: "http://config-global.dev",
+			expectURL:    aws.String("http://config-global.dev"),
+		},
+		"config service": {
+			configGlobal:  "http://config-global.dev",
+			configService: "http://config-elastic-beanstalk.dev",
+			expectURL:     aws.String("http://config-elastic-beanstalk.dev"),
+		},
+		"client": {
+			envGlobal:      "https://env-global.dev",
+			envService:     "https://env-elastic-beanstalk.dev",
+			configGlobal:   "http://config-global.dev",
+			configService:  "http://config-elastic-beanstalk.dev",
+			clientEndpoint: aws.String("https://client-elastic-beanstalk.dev"),
+			expectURL:      aws.String("https://client-elastic-beanstalk.dev"),
+		},
 	}
 
 	for name, c := range cases {

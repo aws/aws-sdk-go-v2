@@ -143,6 +143,31 @@ public class AwsEndpointConfigTestGenerator implements GoIntegration {
                         configService: "http://config-$urlSdkId:L.dev",
                         expectURL: aws.String("https://env-$urlSdkId:L.dev"),
                     },
+                    "config ignore": {
+                        envGlobal:     "https://env-global.dev",
+                        envService:    "https://env-$urlSdkId:L.dev",
+                        configGlobal:  "http://config-global.dev",
+                        configService: "http://config-$urlSdkId:L.dev",
+                        configIgnore: true,
+                        expectURL:     nil,
+                    },
+                    "config global": {
+                        configGlobal:  "http://config-global.dev",
+                        expectURL:     aws.String("http://config-global.dev"),
+                    },
+                    "config service": {
+                        configGlobal:  "http://config-global.dev",
+                        configService: "http://config-$urlSdkId:L.dev",
+                        expectURL:     aws.String("http://config-$urlSdkId:L.dev"),
+                    },
+                    "client": {
+                        envGlobal:     "https://env-global.dev",
+                        envService:    "https://env-$urlSdkId:L.dev",
+                        configGlobal:  "http://config-global.dev",
+                        configService: "http://config-$urlSdkId:L.dev",
+                        clientEndpoint: aws.String("https://client-$urlSdkId:L.dev"),
+                        expectURL:     aws.String("https://client-$urlSdkId:L.dev"),
+                    },
                 }
             """,
             this.commonCodegenArgs
