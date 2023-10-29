@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
 	internalepconfig "github.com/aws/aws-sdk-go-v2/internal/endpoints/config"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/eventbridge/internal/endpoints"
@@ -20,6 +19,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 )
 
@@ -202,13 +202,15 @@ func resolveBaseEndpoint(cfg aws.Config, o *Options) {
 	if cfg.BaseEndpoint != nil {
 		o.BaseEndpoint = cfg.BaseEndpoint
 	}
-	var configSources []config.Config
-	for _, c := range cfg.ConfigSources {
-		if cs, ok := c.(config.Config); ok {
-			configSources = append(configSources, cs)
-		}
+
+	_, g := os.LookupEnv("AWS_ENDPOINT_URL")
+	_, s := os.LookupEnv("AWS_ENDPOINT_URL_EVENTBRIDGE")
+
+	if g && !s {
+		return
 	}
-	value, found, err := internalepconfig.ResolveServiceBaseEndpoint(context.Background(), "EventBridge", configSources)
+
+	value, found, err := internalepconfig.ResolveServiceBaseEndpoint(context.Background(), "EventBridge", cfg.ConfigSources)
 	if found && err == nil {
 		o.BaseEndpoint = &value
 	}

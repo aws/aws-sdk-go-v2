@@ -165,6 +165,7 @@
         "document/doc.go",
         "document/document.go",
         "endpoints.go",
+        "endpoints_config_test.go",
         "endpoints_test.go",
         "generated.json",
         "internal/document/document.go",

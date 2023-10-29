@@ -5,141 +5,133 @@ package s3control
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/config"
 	"os"
-	"path/filepath"
 	"reflect"
 	"testing"
 )
 
-func TestConfiguredEndpoints(t *testing.T) {
+type mockConfigSource struct {
+	global  string
+	service string
+	ignore  bool
+}
+
+// GetIgnoreConfiguredEndpoints is used in knowing when to disable configured
+// endpoints feature.
+func (m mockConfigSource) GetIgnoreConfiguredEndpoints(context.Context) (bool, bool, error) {
+	return m.ignore, m.ignore, nil
+}
+
+// GetServiceBaseEndpoint is used to retrieve a normalized SDK ID for use
+// with configured endpoints.
+func (m mockConfigSource) GetServiceBaseEndpoint(ctx context.Context, sdkID string) (string, bool, error) {
+	if m.service != "" {
+		return m.service, true, nil
+	}
+	return "", false, nil
+}
+
+func TestResolveBaseEndpoint(t *testing.T) {
 	cases := map[string]struct {
-		Env              map[string]string
-		SharedConfigFile string
-		ClientEndpoint   *string
-		ExpectURL        *string
+		envGlobal      string
+		envService     string
+		envIgnore      bool
+		configGlobal   string
+		configService  string
+		configIgnore   bool
+		clientEndpoint *string
+		expectURL      *string
 	}{
 		"env ignore": {
-			Env: map[string]string{
-				"AWS_ENDPOINT_URL":                    "https://env-global.dev",
-				"AWS_ENDPOINT_URL_S3_CONTROL":         "https://env-s3-control.dev",
-				"AWS_IGNORE_CONFIGURED_ENDPOINT_URLS": "true",
-			},
-			SharedConfigFile: `[profile dev]
-endpoint_url = http://config-global.dev
-services = testing-s3-control
-
-[services testing-s3-control]
-s3_control =
-    endpoint_url = http://config-s3-control.dev
-`,
-			ExpectURL: nil,
+			envGlobal:     "https://env-global.dev",
+			envService:    "https://env-s3-control.dev",
+			envIgnore:     true,
+			configGlobal:  "http://config-global.dev",
+			configService: "http://config-s3-control.dev",
+			expectURL:     nil,
 		},
 		"env global": {
-			Env: map[string]string{
-				"AWS_ENDPOINT_URL": "https://env-global.dev",
-			},
-			SharedConfigFile: `[profile dev]
-endpoint_url = http://config-global.dev
-`,
-			ExpectURL: aws.String("https://env-global.dev"),
+			envGlobal:     "https://env-global.dev",
+			configGlobal:  "http://config-global.dev",
+			configService: "http://config-s3-control.dev",
+			expectURL:     aws.String("https://env-global.dev"),
 		},
 		"env service": {
-			Env: map[string]string{
-				"AWS_ENDPOINT_URL":            "https://env-global.dev",
-				"AWS_ENDPOINT_URL_S3_CONTROL": "https://env-s3-control.dev",
-			},
-			SharedConfigFile: `[profile dev]
-endpoint_url = http://config-global.dev
-services = testing-s3-control
-
-[services testing-s3-control]
-s3_control =
-    endpoint_url = http://config-s3-control.dev
-`,
-			ExpectURL: aws.String("https://env-s3-control.dev"),
+			envGlobal:     "https://env-global.dev",
+			envService:    "https://env-s3-control.dev",
+			configGlobal:  "http://config-global.dev",
+			configService: "http://config-s3-control.dev",
+			expectURL:     aws.String("https://env-s3-control.dev"),
 		},
 		"config ignore": {
-			Env: map[string]string{
-				"AWS_ENDPOINT_URL":            "https://env-global.dev",
-				"AWS_ENDPOINT_URL_S3_CONTROL": "https://env-s3-control.dev",
-			},
-			SharedConfigFile: `[profile dev]
-endpoint_url = http://config-global.dev
-services = testing-s3-control
-ignore_configured_endpoint_urls = true
-
-[services testing-s3-control]
-s3_control =
-    endpoint_url = http://config-s3-control.dev
-`,
-			ExpectURL: nil,
+			envGlobal:     "https://env-global.dev",
+			envService:    "https://env-s3-control.dev",
+			configGlobal:  "http://config-global.dev",
+			configService: "http://config-s3-control.dev",
+			configIgnore:  true,
+			expectURL:     nil,
 		},
 		"config global": {
-			SharedConfigFile: `[profile dev]
-endpoint_url = http://config-global.dev
-`,
-			ExpectURL: aws.String("http://config-global.dev"),
+			configGlobal: "http://config-global.dev",
+			expectURL:    aws.String("http://config-global.dev"),
 		},
 		"config service": {
-			Env: map[string]string{
-				"AWS_ENDPOINT_URL": "https://env-global.dev",
-			},
-			SharedConfigFile: `[profile dev]
-endpoint_url = http://config-global.dev
-services = testing-s3-control
-
-[services testing-s3-control]
-s3_control =
-    endpoint_url = http://config-s3-control.dev
-`,
-			ExpectURL: aws.String("http://config-s3-control.dev"),
+			configGlobal:  "http://config-global.dev",
+			configService: "http://config-s3-control.dev",
+			expectURL:     aws.String("http://config-s3-control.dev"),
 		},
 		"client": {
-			Env: map[string]string{
-				"AWS_ENDPOINT_URL":                    "https://env-global.dev",
-				"AWS_ENDPOINT_URL_S3_CONTROL":         "https://env-s3-control.dev",
-				"AWS_IGNORE_CONFIGURED_ENDPOINT_URLS": "true",
-			},
-			SharedConfigFile: `[profile dev]
-endpoint_url = http://config-global.dev
-services = testing-s3-control
-
-[services testing-s3-control]
-s3_control =
-    endpoint_url = http://config-s3-control.dev
-`,
-			ClientEndpoint: aws.String("https://client-s3-control.dev"),
-			ExpectURL:      aws.String("https://client-s3-control.dev"),
+			envGlobal:      "https://env-global.dev",
+			envService:     "https://env-s3-control.dev",
+			configGlobal:   "http://config-global.dev",
+			configService:  "http://config-s3-control.dev",
+			clientEndpoint: aws.String("https://client-s3-control.dev"),
+			expectURL:      aws.String("https://client-s3-control.dev"),
 		},
 	}
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			os.Clearenv()
-			for k, v := range c.Env {
-				t.Setenv(k, v)
+
+			awsConfig := aws.Config{}
+			ignore := c.envIgnore || c.configIgnore
+
+			if c.configGlobal != "" && !ignore {
+				awsConfig.BaseEndpoint = aws.String(c.configGlobal)
 			}
 
-			tmpDir := t.TempDir()
-			os.WriteFile(filepath.Join(tmpDir, "test_shared_config"), []byte(c.SharedConfigFile), os.FileMode(int(0777)))
+			if c.envGlobal != "" {
+				t.Setenv("AWS_ENDPOINT_URL", c.envGlobal)
+				if !ignore {
+					awsConfig.BaseEndpoint = aws.String(c.envGlobal)
+				}
+			}
 
-			awsConfig, err := config.LoadDefaultConfig(
-				context.TODO(),
-				config.WithSharedConfigFiles([]string{filepath.Join(tmpDir, "test_shared_config")}),
-				config.WithSharedConfigProfile("dev"),
-			)
-			if err != nil {
-				t.Fatalf("error loading default config: %v", err)
+			if c.envService != "" {
+				t.Setenv("AWS_ENDPOINT_URL_S3_CONTROL", c.envService)
+			}
+
+			awsConfig.ConfigSources = []interface{}{
+				mockConfigSource{
+					global:  c.envGlobal,
+					service: c.envService,
+					ignore:  c.envIgnore,
+				},
+				mockConfigSource{
+					global:  c.configGlobal,
+					service: c.configService,
+					ignore:  c.configIgnore,
+				},
 			}
 
 			client := NewFromConfig(awsConfig, func(o *Options) {
-				if c.ClientEndpoint != nil {
-					o.BaseEndpoint = c.ClientEndpoint
+				if c.clientEndpoint != nil {
+					o.BaseEndpoint = c.clientEndpoint
 				}
 			})
 
-			if e, a := c.ExpectURL, client.options.BaseEndpoint; !reflect.DeepEqual(e, a) {
+			if e, a := c.expectURL, client.options.BaseEndpoint; !reflect.DeepEqual(e, a) {
 				t.Errorf("expect endpoint %v , got %v", e, a)
 			}
 		})
