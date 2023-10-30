@@ -1,6 +1,6 @@
 module github.com/aws/aws-sdk-go-v2/internal/codegen/defaults
 
-go 1.15
+go 1.19
 
 replace github.com/aws/aws-sdk-go-v2 => ../../
 
