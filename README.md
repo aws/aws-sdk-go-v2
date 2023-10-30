@@ -23,6 +23,15 @@ following in the AWS SDKs and Tools Shared Configuration and Credentials Referen
 * [AWS SDKs and Tools Maintenance Policy](https://docs.aws.amazon.com/credref/latest/refdocs/maint-policy.html)
 * [AWS SDKs and Tools Version Support Matrix](https://docs.aws.amazon.com/credref/latest/refdocs/version-support-matrix.html)
 
+### Go version support policy
+
+The v2 SDK follows the upstream [release policy](https://go.dev/doc/devel/release#policy)
+with an additional six months of support for the most recently deprecated
+language version.
+
+**AWS reserves the right to drop support for unsupported Go versions earlier to
+address critical security issues.**
+
 ## Getting started
 To get started working with the SDK setup your project for Go modules, and retrieve the SDK dependencies with `go get`.
 This example shows how you can use the v2 SDK to make an API request using the SDK's [Amazon DynamoDB] client.
