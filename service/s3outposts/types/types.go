@@ -91,6 +91,10 @@ type Outpost struct {
 	// comparing owned versus shared outposts.
 	OwnerId *string
 
+	// Specifies the unique S3 on Outposts ARN for use with Resource Access Manager
+	// (RAM).
+	S3OutpostArn *string
+
 	noSmithyDocumentSerde
 }
 

@@ -14,6 +14,7 @@ import (
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Lists your Resilience Hub applications. You can filter applications using only
@@ -41,8 +42,12 @@ type ListAppsInput struct {
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
 	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	AppArn *string
+
+	// Indicates the lower limit of the range that is used to filter applications
+	// based on their last assessment times.
+	FromLastAssessmentTime *time.Time
 
 	// Maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so
@@ -54,6 +59,16 @@ type ListAppsInput struct {
 
 	// Null, or the token from a previous call to get the next set of results.
 	NextToken *string
+
+	// The application list is sorted based on the values of
+	// lastAppComplianceEvaluationTime field. By default, application list is sorted in
+	// ascending order. To sort the appliation list in descending order, set this field
+	// to True .
+	ReverseOrder *bool
+
+	// Indicates the upper limit of the range that is used to filter the applications
+	// based on their last assessment times.
+	ToLastAssessmentTime *time.Time
 
 	noSmithyDocumentSerde
 }

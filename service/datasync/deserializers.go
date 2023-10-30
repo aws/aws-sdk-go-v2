@@ -7041,6 +7041,11 @@ func awsAwsjson11_deserializeDocumentAgentListEntry(v **types.AgentListEntry, va
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "Platform":
+			if err := awsAwsjson11_deserializeDocumentPlatform(&sv.Platform, value); err != nil {
+				return err
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9648,6 +9653,46 @@ func awsAwsjson11_deserializeDocumentP95Metrics(v **types.P95Metrics, value inte
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentPlatform(v **types.Platform, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Platform
+	if *v == nil {
+		sv = &types.Platform{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AgentVersion to be of type string, got %T instead", value)
+				}
+				sv.Version = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentPLSecurityGroupArnList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11905,6 +11950,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeAgentOutput(v **DescribeAgentOutp
 					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "Platform":
+			if err := awsAwsjson11_deserializeDocumentPlatform(&sv.Platform, value); err != nil {
+				return err
 			}
 
 		case "PrivateLinkConfig":

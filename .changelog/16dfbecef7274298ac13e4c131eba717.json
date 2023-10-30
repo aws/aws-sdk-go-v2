@@ -1,0 +1,8 @@
+{
+    "id": "16dfbece-f727-4298-ac13-e4c131eba717",
+    "type": "feature",
+    "description": "We added a new API action: SendDataSetNotification.",
+    "modules": [
+        "service/dataexchange"
+    ]
+}

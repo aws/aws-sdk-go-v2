@@ -104,7 +104,10 @@ type DescribeTaskExecutionOutput struct {
 	FilesTransferred int64
 
 	// The number of files, objects, and directories that DataSync verified during
-	// your transfer.
+	// your transfer. When you configure your task to verify only the data that's
+	// transferred (https://docs.aws.amazon.com/datasync/latest/userguide/configure-data-verification-options.html)
+	// , DataSync doesn't verify directories in some situations or files that fail to
+	// transfer.
 	FilesVerified int64
 
 	// A list of filter rules that include specific data during your transfer. For
@@ -120,7 +123,7 @@ type DescribeTaskExecutionOutput struct {
 	// starting your task.
 	Options *types.Options
 
-	// Indicates whether DataSync generated a complete task report (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+	// Indicates whether DataSync generated a complete task report (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
 	// for your transfer.
 	ReportResult *types.ReportResult
 

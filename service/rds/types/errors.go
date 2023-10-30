@@ -2044,6 +2044,113 @@ func (e *InsufficientStorageClusterCapacityFault) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
+// The integration you are trying to create already exists.
+type IntegrationAlreadyExistsFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IntegrationAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IntegrationAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IntegrationAlreadyExistsFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "IntegrationAlreadyExistsFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *IntegrationAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A conflicting conditional operation is currently in progress against this
+// resource. Typically occurs when there are multiple requests being made to the
+// same resource at the same time, and these requests conflict with each other.
+type IntegrationConflictOperationFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IntegrationConflictOperationFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IntegrationConflictOperationFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IntegrationConflictOperationFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "IntegrationConflictOperationFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *IntegrationConflictOperationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified integration could not be found.
+type IntegrationNotFoundFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IntegrationNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IntegrationNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IntegrationNotFoundFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "IntegrationNotFoundFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *IntegrationNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You can't crate any more zero-ETL integrations because the quota has been
+// reached.
+type IntegrationQuotaExceededFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IntegrationQuotaExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IntegrationQuotaExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IntegrationQuotaExceededFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "IntegrationQuotaExceededFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *IntegrationQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The blue/green deployment can't be switched over or deleted because there is an
 // invalid configuration in the green environment.
 type InvalidBlueGreenDeploymentStateFault struct {
@@ -2641,6 +2748,33 @@ func (e *InvalidGlobalClusterStateFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidGlobalClusterStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The integration is in an invalid state and can't perform the requested
+// operation.
+type InvalidIntegrationStateFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidIntegrationStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidIntegrationStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidIntegrationStateFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidIntegrationStateFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidIntegrationStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The option group isn't in the available state.
 type InvalidOptionGroupStateFault struct {

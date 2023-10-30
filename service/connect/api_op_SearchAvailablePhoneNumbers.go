@@ -47,11 +47,11 @@ type SearchAvailablePhoneNumbersInput struct {
 	// This member is required.
 	PhoneNumberType types.PhoneNumberType
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
-	// distribution groups that phone numbers are claimed to.
-	//
-	// This member is required.
-	TargetArn *string
+	// The identifier of the Amazon Connect instance that phone numbers are claimed
+	// to. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance. You must enter InstanceId or
+	// TargetArn .
+	InstanceId *string
 
 	// The maximum number of results to return per page.
 	MaxResults *int32
@@ -63,6 +63,11 @@ type SearchAvailablePhoneNumbersInput struct {
 	// The prefix of the phone number. If provided, it must contain + as part of the
 	// country code.
 	PhoneNumberPrefix *string
+
+	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+	// distribution groups that phone number inbound traffic is routed through. You
+	// must enter InstanceId or TargetArn .
+	TargetArn *string
 
 	noSmithyDocumentSerde
 }

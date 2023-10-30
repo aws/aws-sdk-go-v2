@@ -17,8 +17,8 @@ import (
 )
 
 // Creates an endpoint for an Amazon FSx for NetApp ONTAP file system that
-// DataSync can access for a transfer. For more information, see Creating a
-// location for FSx for ONTAP (https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html)
+// DataSync can use for a data transfer. Before you begin, make sure that you
+// understand how DataSync accesses an FSx for ONTAP file system (https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access)
 // .
 func (c *Client) CreateLocationFsxOntap(ctx context.Context, params *CreateLocationFsxOntapInput, optFns ...func(*Options)) (*CreateLocationFsxOntapOutput, error) {
 	if params == nil {

@@ -61,12 +61,6 @@ type ClaimPhoneNumberInput struct {
 	// This member is required.
 	PhoneNumber *string
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
-	// distribution groups that phone numbers are claimed to.
-	//
-	// This member is required.
-	TargetArn *string
-
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see Making retries safe with
@@ -74,12 +68,23 @@ type ClaimPhoneNumberInput struct {
 	// . Pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$
 	ClientToken *string
 
+	// The identifier of the Amazon Connect instance that phone numbers are claimed
+	// to. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance. You must enter InstanceId or
+	// TargetArn .
+	InstanceId *string
+
 	// The description of the phone number.
 	PhoneNumberDescription *string
 
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
+
+	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+	// distribution groups that phone number inbound traffic is routed through. You
+	// must enter InstanceId or TargetArn .
+	TargetArn *string
 
 	noSmithyDocumentSerde
 }

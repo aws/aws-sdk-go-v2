@@ -256,6 +256,28 @@ func (LimitName) Values() []LimitName {
 	}
 }
 
+type NotificationType string
+
+// Enum values for NotificationType
+const (
+	NotificationTypeDataDelay    NotificationType = "DATA_DELAY"
+	NotificationTypeDataUpdate   NotificationType = "DATA_UPDATE"
+	NotificationTypeDeprecation  NotificationType = "DEPRECATION"
+	NotificationTypeSchemaChange NotificationType = "SCHEMA_CHANGE"
+)
+
+// Values returns all known values for NotificationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationType) Values() []NotificationType {
+	return []NotificationType{
+		"DATA_DELAY",
+		"DATA_UPDATE",
+		"DEPRECATION",
+		"SCHEMA_CHANGE",
+	}
+}
+
 type Origin string
 
 // Enum values for Origin
@@ -311,6 +333,26 @@ func (ResourceType) Values() []ResourceType {
 		"ASSET",
 		"JOB",
 		"EVENT_ACTION",
+	}
+}
+
+type SchemaChangeType string
+
+// Enum values for SchemaChangeType
+const (
+	SchemaChangeTypeAdd    SchemaChangeType = "ADD"
+	SchemaChangeTypeRemove SchemaChangeType = "REMOVE"
+	SchemaChangeTypeModify SchemaChangeType = "MODIFY"
+)
+
+// Values returns all known values for SchemaChangeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SchemaChangeType) Values() []SchemaChangeType {
+	return []SchemaChangeType{
+		"ADD",
+		"REMOVE",
+		"MODIFY",
 	}
 }
 

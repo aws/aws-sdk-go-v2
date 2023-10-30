@@ -1,0 +1,8 @@
+{
+    "id": "5c93eb1b-55ab-4d13-af0d-001eb650f574",
+    "type": "feature",
+    "description": "This release adds InstanceId field for phone number APIs.",
+    "modules": [
+        "service/connect"
+    ]
+}

@@ -31984,6 +31984,15 @@ func awsRestjson1_deserializeDocumentClaimedPhoneNumberSummary(v **types.Claimed
 
 	for key, value := range shape {
 		switch key {
+		case "InstanceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceId to be of type string, got %T instead", value)
+				}
+				sv.InstanceId = ptr.String(jtv)
+			}
+
 		case "PhoneNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -38210,6 +38219,15 @@ func awsRestjson1_deserializeDocumentListPhoneNumbersSummary(v **types.ListPhone
 
 	for key, value := range shape {
 		switch key {
+		case "InstanceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceId to be of type string, got %T instead", value)
+				}
+				sv.InstanceId = ptr.String(jtv)
+			}
+
 		case "PhoneNumber":
 			if value != nil {
 				jtv, ok := value.(string)

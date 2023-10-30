@@ -237,8 +237,13 @@ type KxCacheStorageConfiguration struct {
 	// This member is required.
 	Size *int32
 
-	// The type of cache storage . The valid values are:
+	// The type of cache storage. The valid values are:
 	//   - CACHE_1000 – This type provides at least 1000 MB/s disk access throughput.
+	//   - CACHE_250 – This type provides at least 250 MB/s disk access throughput.
+	//   - CACHE_12 – This type provides at least 12 MB/s disk access throughput.
+	// For cache type CACHE_1000 and CACHE_250 you can select cache size as 1200 GB or
+	// increments of 2400 GB. For cache type CACHE_12 you can select the cache size in
+	// increments of 6000 GB.
 	//
 	// This member is required.
 	Type *string
@@ -351,6 +356,23 @@ type KxCluster struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration that allows you to choose how you want to update code on a
+// cluster. Depending on the option you choose, you can reduce the time it takes to
+// update the cluster.
+type KxClusterCodeDeploymentConfiguration struct {
+
+	// The type of deployment that you want on a cluster.
+	//   - ROLLING – This options updates the cluster by stopping the exiting q
+	//   process and starting a new q process with updated configuration.
+	//   - FORCE – This option updates the cluster by immediately stopping all the
+	//   running processes before starting up new ones with the updated configuration.
+	//
+	// This member is required.
+	DeploymentStrategy KxClusterCodeDeploymentStrategy
+
+	noSmithyDocumentSerde
+}
+
 // Defines the key-value pairs to make them available inside the cluster.
 type KxCommandLineArgument struct {
 
@@ -423,15 +445,17 @@ type KxDatabaseListEntry struct {
 
 // The configuration that allows you to choose how you want to update the
 // databases on a cluster. Depending on the option you choose, you can reduce the
-// time it takes to update the database changesets on to a cluster.
+// time it takes to update the cluster.
 type KxDeploymentConfiguration struct {
 
 	// The type of deployment that you want on a cluster.
-	//   - ROLLING – This options loads the updated database by stopping the exiting q
+	//   - ROLLING – This options updates the cluster by stopping the exiting q
 	//   process and starting a new q process with updated configuration.
-	//   - NO_RESTART – This option loads the updated database on the running q
-	//   process without stopping it. This option is quicker as it reduces the turn
-	//   around time to update a kdb database changeset configuration on a cluster.
+	//   - NO_RESTART – This option updates the cluster without stopping the running q
+	//   process. It is only available for HDB type cluster. This option is quicker as
+	//   it reduces the turn around time to update configuration on a cluster. With this
+	//   deployment mode, you cannot update the initializationScript and
+	//   commandLineArguments parameters.
 	//
 	// This member is required.
 	DeploymentStrategy KxDeploymentStrategy

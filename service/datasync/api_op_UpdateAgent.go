@@ -15,7 +15,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the name of an agent.
+// Updates the name of an DataSync agent.
 func (c *Client) UpdateAgent(ctx context.Context, params *UpdateAgentInput, optFns ...func(*Options)) (*UpdateAgentOutput, error) {
 	if params == nil {
 		params = &UpdateAgentInput{}

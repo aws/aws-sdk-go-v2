@@ -550,6 +550,26 @@ func (m *validateOpUpdateEnvironment) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateKxClusterCodeConfiguration struct {
+}
+
+func (*validateOpUpdateKxClusterCodeConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateKxClusterCodeConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateKxClusterCodeConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateKxClusterCodeConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateKxClusterDatabases struct {
 }
 
@@ -758,6 +778,10 @@ func addOpUpdateEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEnvironment{}, middleware.After)
 }
 
+func addOpUpdateKxClusterCodeConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateKxClusterCodeConfiguration{}, middleware.After)
+}
+
 func addOpUpdateKxClusterDatabasesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateKxClusterDatabases{}, middleware.After)
 }
@@ -887,6 +911,21 @@ func validateKxCacheStorageConfigurations(v []types.KxCacheStorageConfiguration)
 		if err := validateKxCacheStorageConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKxClusterCodeDeploymentConfiguration(v *types.KxClusterCodeDeploymentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KxClusterCodeDeploymentConfiguration"}
+	if len(v.DeploymentStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentStrategy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1612,6 +1651,32 @@ func validateOpUpdateEnvironmentInput(v *UpdateEnvironmentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateEnvironmentInput"}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateKxClusterCodeConfigurationInput(v *UpdateKxClusterCodeConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateKxClusterCodeConfigurationInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if v.DeploymentConfiguration != nil {
+		if err := validateKxClusterCodeDeploymentConfiguration(v.DeploymentConfiguration); err != nil {
+			invalidParams.AddNested("DeploymentConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

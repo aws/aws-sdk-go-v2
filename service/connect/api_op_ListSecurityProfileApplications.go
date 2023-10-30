@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of third party applications in a specific security profile.
+// Returns a list of third-party applications in a specific security profile.
 func (c *Client) ListSecurityProfileApplications(ctx context.Context, params *ListSecurityProfileApplicationsInput, optFns ...func(*Options)) (*ListSecurityProfileApplicationsOutput, error) {
 	if params == nil {
 		params = &ListSecurityProfileApplicationsInput{}
@@ -34,12 +34,13 @@ func (c *Client) ListSecurityProfileApplications(ctx context.Context, params *Li
 
 type ListSecurityProfileApplicationsInput struct {
 
-	// The instance identifier.
+	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The security profile identifier.
+	// The identifier for the security profle.
 	//
 	// This member is required.
 	SecurityProfileId *string
@@ -47,9 +48,8 @@ type ListSecurityProfileApplicationsInput struct {
 	// The maximum number of results to return per page.
 	MaxResults *int32
 
-	// The token for the next set of results. The next set of results can be retrieved
-	// by using the token value returned in the previous response when making the next
-	// request.
+	// The token for the next set of results. Use the value returned in the previous
+	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -58,12 +58,10 @@ type ListSecurityProfileApplicationsInput struct {
 type ListSecurityProfileApplicationsOutput struct {
 
 	// This API is in preview release for Amazon Connect and is subject to change. A
-	// list of the third party application's metadata.
+	// list of the third-party application's metadata.
 	Applications []types.Application
 
-	// The token for the next set of results. The next set of results can be retrieved
-	// by using the token value returned in the previous response when making the next
-	// request.
+	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

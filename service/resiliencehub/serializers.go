@@ -2779,6 +2779,10 @@ func awsRestjson1_serializeOpHttpBindingsListAppsInput(v *ListAppsInput, encoder
 		encoder.SetQuery("appArn").String(*v.AppArn)
 	}
 
+	if v.FromLastAssessmentTime != nil {
+		encoder.SetQuery("fromLastAssessmentTime").String(smithytime.FormatDateTime(*v.FromLastAssessmentTime))
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
@@ -2789,6 +2793,14 @@ func awsRestjson1_serializeOpHttpBindingsListAppsInput(v *ListAppsInput, encoder
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.ReverseOrder != nil {
+		encoder.SetQuery("reverseOrder").Boolean(*v.ReverseOrder)
+	}
+
+	if v.ToLastAssessmentTime != nil {
+		encoder.SetQuery("toLastAssessmentTime").String(smithytime.FormatDateTime(*v.ToLastAssessmentTime))
 	}
 
 	return nil

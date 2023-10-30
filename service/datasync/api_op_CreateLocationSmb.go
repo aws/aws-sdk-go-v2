@@ -79,8 +79,10 @@ type CreateLocationSmbInput struct {
 	// This member is required.
 	User *string
 
-	// Specifies the Windows domain name that your SMB file server belongs to. For
-	// more information, see required permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions)
+	// Specifies the Windows domain name that your SMB file server belongs to. If you
+	// have multiple domains in your environment, configuring this parameter makes sure
+	// that DataSync connects to the right file server. For more information, see
+	// required permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions)
 	// for SMB locations.
 	Domain *string
 

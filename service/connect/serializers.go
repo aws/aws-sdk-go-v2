@@ -1212,6 +1212,11 @@ func awsRestjson1_serializeOpDocumentClaimPhoneNumberInput(v *ClaimPhoneNumberIn
 		ok.String(*v.ClientToken)
 	}
 
+	if v.InstanceId != nil {
+		ok := object.Key("InstanceId")
+		ok.String(*v.InstanceId)
+	}
+
 	if v.PhoneNumber != nil {
 		ok := object.Key("PhoneNumber")
 		ok.String(*v.PhoneNumber)
@@ -10205,6 +10210,11 @@ func awsRestjson1_serializeOpDocumentListPhoneNumbersV2Input(v *ListPhoneNumbers
 	object := value.Object()
 	defer object.Close()
 
+	if v.InstanceId != nil {
+		ok := object.Key("InstanceId")
+		ok.String(*v.InstanceId)
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)
@@ -12287,6 +12297,11 @@ func awsRestjson1_serializeOpHttpBindingsSearchAvailablePhoneNumbersInput(v *Sea
 func awsRestjson1_serializeOpDocumentSearchAvailablePhoneNumbersInput(v *SearchAvailablePhoneNumbersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.InstanceId != nil {
+		ok := object.Key("InstanceId")
+		ok.String(*v.InstanceId)
+	}
 
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
@@ -16234,6 +16249,11 @@ func awsRestjson1_serializeOpDocumentUpdatePhoneNumberInput(v *UpdatePhoneNumber
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.InstanceId != nil {
+		ok := object.Key("InstanceId")
+		ok.String(*v.InstanceId)
 	}
 
 	if v.TargetArn != nil {

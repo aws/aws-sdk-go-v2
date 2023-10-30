@@ -7,6 +7,24 @@ import (
 	"time"
 )
 
+// An object that represents the custom domain name association.
+type Association struct {
+
+	// The custom domain name’s certificate Amazon resource name (ARN).
+	CustomDomainCertificateArn *string
+
+	// The expiration time for the certificate.
+	CustomDomainCertificateExpiryTime *time.Time
+
+	// The custom domain name associated with the workgroup.
+	CustomDomainName *string
+
+	// The name of the workgroup associated with the database.
+	WorkgroupName *string
+
+	noSmithyDocumentSerde
+}
+
 // An array of key-value pairs to set for advanced control over Amazon Redshift
 // Serverless.
 type ConfigParameter struct {
@@ -414,6 +432,15 @@ type Workgroup struct {
 
 	// The creation date of the workgroup.
 	CreationDate *time.Time
+
+	// The custom domain name’s certificate Amazon resource name (ARN).
+	CustomDomainCertificateArn *string
+
+	// The expiration time for the certificate.
+	CustomDomainCertificateExpiryTime *time.Time
+
+	// The custom domain name associated with the workgroup.
+	CustomDomainName *string
 
 	// The endpoint that is created from the workgroup.
 	Endpoint *Endpoint

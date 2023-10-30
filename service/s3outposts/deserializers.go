@@ -1523,6 +1523,15 @@ func awsRestjson1_deserializeDocumentOutpost(v **types.Outpost, value interface{
 				sv.OwnerId = ptr.String(jtv)
 			}
 
+		case "S3OutpostArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3OutpostArn to be of type string, got %T instead", value)
+				}
+				sv.S3OutpostArn = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

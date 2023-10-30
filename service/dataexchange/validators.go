@@ -390,6 +390,26 @@ func (m *validateOpSendApiAsset) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSendDataSetNotification struct {
+}
+
+func (*validateOpSendDataSetNotification) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendDataSetNotification) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendDataSetNotificationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendDataSetNotificationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartJob struct {
 }
 
@@ -606,6 +626,10 @@ func addOpSendApiAssetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendApiAsset{}, middleware.After)
 }
 
+func addOpSendDataSetNotificationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendDataSetNotification{}, middleware.After)
+}
+
 func addOpStartJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartJob{}, middleware.After)
 }
@@ -765,6 +789,21 @@ func validateDatabaseLFTagPolicyAndPermissions(v *types.DatabaseLFTagPolicyAndPe
 	}
 	if v.Permissions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeprecationRequestDetails(v *types.DeprecationRequestDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeprecationRequestDetails"}
+	if v.DeprecationAt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeprecationAt"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1142,6 +1181,23 @@ func validateListOfRedshiftDataShareAssetSourceEntry(v []types.RedshiftDataShare
 	}
 }
 
+func validateListOfRedshiftDataShares(v []types.RedshiftDataShareDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfRedshiftDataShares"}
+	for i := range v {
+		if err := validateRedshiftDataShareDetails(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateListOfRevisionDestinationEntry(v []types.RevisionDestinationEntry) error {
 	if v == nil {
 		return nil
@@ -1159,6 +1215,45 @@ func validateListOfRevisionDestinationEntry(v []types.RevisionDestinationEntry) 
 	}
 }
 
+func validateListOfSchemaChangeDetails(v []types.SchemaChangeDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfSchemaChangeDetails"}
+	for i := range v {
+		if err := validateSchemaChangeDetails(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotificationDetails(v *types.NotificationDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotificationDetails"}
+	if v.Deprecation != nil {
+		if err := validateDeprecationRequestDetails(v.Deprecation); err != nil {
+			invalidParams.AddNested("Deprecation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SchemaChange != nil {
+		if err := validateSchemaChangeRequestDetails(v.SchemaChange); err != nil {
+			invalidParams.AddNested("SchemaChange", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRedshiftDataShareAssetSourceEntry(v *types.RedshiftDataShareAssetSourceEntry) error {
 	if v == nil {
 		return nil
@@ -1166,6 +1261,24 @@ func validateRedshiftDataShareAssetSourceEntry(v *types.RedshiftDataShareAssetSo
 	invalidParams := smithy.InvalidParamsError{Context: "RedshiftDataShareAssetSourceEntry"}
 	if v.DataShareArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataShareArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftDataShareDetails(v *types.RedshiftDataShareDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftDataShareDetails"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1275,6 +1388,61 @@ func validateS3DataAccessAssetSourceEntry(v *types.S3DataAccessAssetSourceEntry)
 	if v.KmsKeysToGrant != nil {
 		if err := validateListOfKmsKeysToGrant(v.KmsKeysToGrant); err != nil {
 			invalidParams.AddNested("KmsKeysToGrant", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSchemaChangeDetails(v *types.SchemaChangeDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SchemaChangeDetails"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSchemaChangeRequestDetails(v *types.SchemaChangeRequestDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SchemaChangeRequestDetails"}
+	if v.Changes != nil {
+		if err := validateListOfSchemaChangeDetails(v.Changes); err != nil {
+			invalidParams.AddNested("Changes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SchemaChangeAt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaChangeAt"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScopeDetails(v *types.ScopeDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScopeDetails"}
+	if v.RedshiftDataShares != nil {
+		if err := validateListOfRedshiftDataShares(v.RedshiftDataShares); err != nil {
+			invalidParams.AddNested("RedshiftDataShares", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1640,6 +1808,34 @@ func validateOpSendApiAssetInput(v *SendApiAssetInput) error {
 	}
 	if v.RevisionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendDataSetNotificationInput(v *SendDataSetNotificationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendDataSetNotificationInput"}
+	if v.Scope != nil {
+		if err := validateScopeDetails(v.Scope); err != nil {
+			invalidParams.AddNested("Scope", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.Details != nil {
+		if err := validateNotificationDetails(v.Details); err != nil {
+			invalidParams.AddNested("Details", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

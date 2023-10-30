@@ -59,12 +59,12 @@ type App struct {
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
 	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
 
-	// Timestamp for when the app was created.
+	// Date and time when the app was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
@@ -92,13 +92,13 @@ type App struct {
 	// Scheduled assessment failure events.
 	EventSubscriptions []EventSubscription
 
-	// Timestamp for the most recent compliance evaluation.
+	// Date and time the most recent compliance evaluation.
 	LastAppComplianceEvaluationTime *time.Time
 
 	// Indicates the last time that a drift was evaluated.
 	LastDriftEvaluationTime *time.Time
 
-	// Timestamp for the most recent resiliency score evaluation.
+	// Date and time the most recent resiliency score evaluation.
 	LastResiliencyScoreEvaluationTime *time.Time
 
 	// Defines the roles and credentials that Resilience Hub would use while creating
@@ -108,11 +108,17 @@ type App struct {
 	// Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
 	// is: arn: partition :resiliencehub: region : account :resiliency-policy/ policy-id
 	// . For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	PolicyArn *string
 
 	// Current resiliency score for the application.
 	ResiliencyScore float64
+
+	// Recovery Point Objective (RPO) in seconds.
+	RpoInSecs *int32
+
+	// Recovery Time Objective (RTO) in seconds.
+	RtoInSecs *int32
 
 	// Status of the application.
 	Status AppStatusType
@@ -130,7 +136,7 @@ type AppAssessment struct {
 	// Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:
 	// partition :resiliencehub: region : account :app-assessment/ app-id . For more
 	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
@@ -148,7 +154,7 @@ type AppAssessment struct {
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
 	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	AppArn *string
 
 	// Version of an application.
@@ -205,7 +211,7 @@ type AppAssessmentSummary struct {
 	// Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:
 	// partition :resiliencehub: region : account :app-assessment/ app-id . For more
 	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
@@ -218,7 +224,7 @@ type AppAssessmentSummary struct {
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
 	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	AppArn *string
 
 	// Version of an application.
@@ -326,7 +332,7 @@ type AppInputSource struct {
 
 	// The Amazon Resource Name (ARN) of the input source. For more information about
 	// ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	SourceArn *string
 
 	// The name of the input source.
@@ -344,12 +350,12 @@ type AppSummary struct {
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
 	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
 
-	// The timestamp for when the app was created.
+	// Date and time when the app was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
@@ -372,8 +378,17 @@ type AppSummary struct {
 	// assessment for your application.
 	DriftStatus AppDriftStatusType
 
+	// Date and time of the most recent compliance evaluation.
+	LastAppComplianceEvaluationTime *time.Time
+
 	// The current resiliency score for the application.
 	ResiliencyScore float64
+
+	// Recovery Point Objective (RPO) in seconds.
+	RpoInSecs *int32
+
+	// Recovery Time Objective (RTO) in seconds.
+	RtoInSecs *int32
 
 	// Status of the application.
 	Status AppStatusType
@@ -627,7 +642,7 @@ type EksSource struct {
 	// The format for this ARN is: arn: aws :eks: region : account-id :cluster/
 	// cluster-name . For more information about ARNs, see  Amazon Resource Names
 	// (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	//
 	// This member is required.
 	EksClusterArn *string
@@ -649,7 +664,7 @@ type EksSourceClusterNamespace struct {
 	// The format for this ARN is: arn: aws :eks: region : account-id :cluster/
 	// cluster-name . For more information about ARNs, see  Amazon Resource Names
 	// (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	//
 	// This member is required.
 	EksClusterArn *string
@@ -682,9 +697,9 @@ type EventSubscription struct {
 	Name *string
 
 	// Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic. The
-	// format for this ARN is: arn: partition :resiliencehub: region : account :app/
-	// app-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// format for this ARN is: arn:partition:sns:region:account:topic-name . For more
+	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference guide.
 	SnsTopicArn *string
 
 	noSmithyDocumentSerde
@@ -693,12 +708,12 @@ type EventSubscription struct {
 // Defines a failure policy.
 type FailurePolicy struct {
 
-	// The Recovery Point Objective (RPO), in seconds.
+	// Recovery Point Objective (RPO) in seconds.
 	//
 	// This member is required.
 	RpoInSecs int32
 
-	// The Recovery Time Objective (RTO), in seconds.
+	// Recovery Time Objective (RTO) in seconds.
 	//
 	// This member is required.
 	RtoInSecs int32
@@ -777,7 +792,7 @@ type PhysicalResource struct {
 	// This member is required.
 	PhysicalResourceId *PhysicalResourceId
 
-	// The type of resource.
+	// Type of resource.
 	//
 	// This member is required.
 	ResourceType *string
@@ -915,7 +930,7 @@ type RecommendationTemplate struct {
 	// Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:
 	// partition :resiliencehub: region : account :app-assessment/ app-id . For more
 	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
@@ -951,7 +966,7 @@ type RecommendationTemplate struct {
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
 	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	AppArn *string
 
 	// The end time for the action.
@@ -979,10 +994,15 @@ type RecommendationTemplate struct {
 	noSmithyDocumentSerde
 }
 
-// Defines a resiliency policy.
+// Defines a resiliency policy. Resilience Hub allows you to provide a value of
+// zero for rtoInSecs and rpoInSecs of your resiliency policy. But, while
+// assessing your application, the lowest possible assessment result is near zero.
+// Hence, if you provide value zero for rtoInSecs and rpoInSecs , the estimated
+// workload RTO and estimated workload RPO result will be near zero and the
+// Compliance status for your application will be set to Policy breached.
 type ResiliencyPolicy struct {
 
-	// The timestamp for when the resiliency policy was created.
+	// Date and time when the resiliency policy was created.
 	CreationTime *time.Time
 
 	// Specifies a high-level geographical location constraint for where your
@@ -998,7 +1018,7 @@ type ResiliencyPolicy struct {
 	// Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
 	// is: arn: partition :resiliencehub: region : account :resiliency-policy/ policy-id
 	// . For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	PolicyArn *string
 
 	// The description for the policy.

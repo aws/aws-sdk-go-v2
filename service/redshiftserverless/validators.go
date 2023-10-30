@@ -30,6 +30,26 @@ func (m *validateOpConvertRecoveryPointToSnapshot) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCustomDomainAssociation struct {
+}
+
+func (*validateOpCreateCustomDomainAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomDomainAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomDomainAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomDomainAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEndpointAccess struct {
 }
 
@@ -125,6 +145,26 @@ func (m *validateOpCreateWorkgroup) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateWorkgroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCustomDomainAssociation struct {
+}
+
+func (*validateOpDeleteCustomDomainAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCustomDomainAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCustomDomainAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCustomDomainAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,21 +290,21 @@ func (m *validateOpDeleteWorkgroup) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpGetCredentials struct {
+type validateOpGetCustomDomainAssociation struct {
 }
 
-func (*validateOpGetCredentials) ID() string {
+func (*validateOpGetCustomDomainAssociation) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpGetCredentials) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpGetCustomDomainAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*GetCredentialsInput)
+	input, ok := in.Parameters.(*GetCustomDomainAssociationInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpGetCredentialsInput(input); err != nil {
+	if err := validateOpGetCustomDomainAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -550,6 +590,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCustomDomainAssociation struct {
+}
+
+func (*validateOpUpdateCustomDomainAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCustomDomainAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCustomDomainAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCustomDomainAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEndpointAccess struct {
 }
 
@@ -654,6 +714,10 @@ func addOpConvertRecoveryPointToSnapshotValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpConvertRecoveryPointToSnapshot{}, middleware.After)
 }
 
+func addOpCreateCustomDomainAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomDomainAssociation{}, middleware.After)
+}
+
 func addOpCreateEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEndpointAccess{}, middleware.After)
 }
@@ -672,6 +736,10 @@ func addOpCreateUsageLimitValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateWorkgroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkgroup{}, middleware.After)
+}
+
+func addOpDeleteCustomDomainAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCustomDomainAssociation{}, middleware.After)
 }
 
 func addOpDeleteEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
@@ -698,8 +766,8 @@ func addOpDeleteWorkgroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWorkgroup{}, middleware.After)
 }
 
-func addOpGetCredentialsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGetCredentials{}, middleware.After)
+func addOpGetCustomDomainAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCustomDomainAssociation{}, middleware.After)
 }
 
 func addOpGetEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
@@ -756,6 +824,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateCustomDomainAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCustomDomainAssociation{}, middleware.After)
 }
 
 func addOpUpdateEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
@@ -828,6 +900,27 @@ func validateOpConvertRecoveryPointToSnapshotInput(v *ConvertRecoveryPointToSnap
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCustomDomainAssociationInput(v *CreateCustomDomainAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomDomainAssociationInput"}
+	if v.WorkgroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkgroupName"))
+	}
+	if v.CustomDomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomDomainName"))
+	}
+	if v.CustomDomainCertificateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomDomainCertificateArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -944,6 +1037,24 @@ func validateOpCreateWorkgroupInput(v *CreateWorkgroupInput) error {
 	}
 }
 
+func validateOpDeleteCustomDomainAssociationInput(v *DeleteCustomDomainAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomDomainAssociationInput"}
+	if v.WorkgroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkgroupName"))
+	}
+	if v.CustomDomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomDomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteEndpointAccessInput(v *DeleteEndpointAccessInput) error {
 	if v == nil {
 		return nil
@@ -1034,11 +1145,14 @@ func validateOpDeleteWorkgroupInput(v *DeleteWorkgroupInput) error {
 	}
 }
 
-func validateOpGetCredentialsInput(v *GetCredentialsInput) error {
+func validateOpGetCustomDomainAssociationInput(v *GetCustomDomainAssociationInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "GetCredentialsInput"}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCustomDomainAssociationInput"}
+	if v.CustomDomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomDomainName"))
+	}
 	if v.WorkgroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkgroupName"))
 	}
@@ -1288,6 +1402,27 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCustomDomainAssociationInput(v *UpdateCustomDomainAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCustomDomainAssociationInput"}
+	if v.WorkgroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkgroupName"))
+	}
+	if v.CustomDomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomDomainName"))
+	}
+	if v.CustomDomainCertificateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomDomainCertificateArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

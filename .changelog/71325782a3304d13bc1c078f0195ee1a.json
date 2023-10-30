@@ -1,0 +1,8 @@
+{
+    "id": "71325782-a330-4d13-bc1c-078f0195ee1a",
+    "type": "documentation",
+    "description": "This release added necessary API documents on creating a Wisdom knowledge base to integrate with S3.",
+    "modules": [
+        "service/wisdom"
+    ]
+}

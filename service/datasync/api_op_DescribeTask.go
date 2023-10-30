@@ -115,7 +115,7 @@ type DescribeTaskOutput struct {
 	TaskArn *string
 
 	// The configuration of your task report. For more information, see Creating a
-	// task report (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+	// task report (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
 	// .
 	TaskReportConfig *types.TaskReportConfig
 

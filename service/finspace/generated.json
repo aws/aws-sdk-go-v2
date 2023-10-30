@@ -38,6 +38,7 @@
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateEnvironment.go",
+        "api_op_UpdateKxClusterCodeConfiguration.go",
         "api_op_UpdateKxClusterDatabases.go",
         "api_op_UpdateKxDatabase.go",
         "api_op_UpdateKxEnvironment.go",

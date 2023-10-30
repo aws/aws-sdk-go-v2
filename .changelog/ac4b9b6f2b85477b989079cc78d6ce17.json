@@ -1,0 +1,8 @@
+{
+    "id": "ac4b9b6f-2b85-477b-9890-79cc78d6ce17",
+    "type": "feature",
+    "description": "Introducing new API UpdateKxClusterCodeConfiguration, introducing new cache types for clusters and introducing new deployment modes for updating clusters.",
+    "modules": [
+        "service/finspace"
+    ]
+}

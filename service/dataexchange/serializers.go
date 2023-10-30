@@ -11,6 +11,7 @@ import (
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 	"strings"
@@ -1709,6 +1710,118 @@ func awsRestjson1_serializeOpHttpBindingsSendApiAssetInput(v *SendApiAssetInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpSendDataSetNotification struct {
+}
+
+func (*awsRestjson1_serializeOpSendDataSetNotification) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSendDataSetNotification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SendDataSetNotificationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/data-sets/{DataSetId}/notification")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsSendDataSetNotificationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSendDataSetNotificationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSendDataSetNotificationInput(v *SendDataSetNotificationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DataSetId == nil || len(*v.DataSetId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+	}
+	if v.DataSetId != nil {
+		if err := encoder.SetURI("DataSetId").String(*v.DataSetId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSendDataSetNotificationInput(v *SendDataSetNotificationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Comment != nil {
+		ok := object.Key("Comment")
+		ok.String(*v.Comment)
+	}
+
+	if v.Details != nil {
+		ok := object.Key("Details")
+		if err := awsRestjson1_serializeDocumentNotificationDetails(v.Details, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Scope != nil {
+		ok := object.Key("Scope")
+		if err := awsRestjson1_serializeDocumentScopeDetails(v.Scope, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpStartJob struct {
 }
 
@@ -2462,6 +2575,30 @@ func awsRestjson1_serializeDocumentDatabaseLFTagPolicyAndPermissions(v *types.Da
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDataUpdateRequestDetails(v *types.DataUpdateRequestDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataUpdatedAt != nil {
+		ok := object.Key("DataUpdatedAt")
+		ok.String(smithytime.FormatDateTime(*v.DataUpdatedAt))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDeprecationRequestDetails(v *types.DeprecationRequestDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeprecationAt != nil {
+		ok := object.Key("DeprecationAt")
+		ok.String(smithytime.FormatDateTime(*v.DeprecationAt))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEvent(v *types.Event, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2752,6 +2889,23 @@ func awsRestjson1_serializeDocumentKmsKeyToGrant(v *types.KmsKeyToGrant, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentLakeFormationTagPolicyDetails(v *types.LakeFormationTagPolicyDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		ok.String(*v.Database)
+	}
+
+	if v.Table != nil {
+		ok := object.Key("Table")
+		ok.String(*v.Table)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentLFTag(v *types.LFTag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2832,6 +2986,19 @@ func awsRestjson1_serializeDocumentListOfKmsKeysToGrant(v []types.KmsKeyToGrant,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentListOfLakeFormationTagPolicies(v []types.LakeFormationTagPolicyDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentLakeFormationTagPolicyDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentListOfLFTags(v []types.LFTag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2869,6 +3036,19 @@ func awsRestjson1_serializeDocumentListOfRedshiftDataShareAssetSourceEntry(v []t
 	return nil
 }
 
+func awsRestjson1_serializeDocumentListOfRedshiftDataShares(v []types.RedshiftDataShareDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRedshiftDataShareDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentListOfRevisionDestinationEntry(v []types.RevisionDestinationEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2876,6 +3056,32 @@ func awsRestjson1_serializeDocumentListOfRevisionDestinationEntry(v []types.Revi
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentRevisionDestinationEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListOfS3DataAccesses(v []types.S3DataAccessDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentS3DataAccessDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListOfSchemaChangeDetails(v []types.SchemaChangeDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSchemaChangeDetails(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2904,6 +3110,34 @@ func awsRestjson1_serializeDocumentMapOf__string(v map[string]string, value smit
 	return nil
 }
 
+func awsRestjson1_serializeDocumentNotificationDetails(v *types.NotificationDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataUpdate != nil {
+		ok := object.Key("DataUpdate")
+		if err := awsRestjson1_serializeDocumentDataUpdateRequestDetails(v.DataUpdate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Deprecation != nil {
+		ok := object.Key("Deprecation")
+		if err := awsRestjson1_serializeDocumentDeprecationRequestDetails(v.Deprecation, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaChange != nil {
+		ok := object.Key("SchemaChange")
+		if err := awsRestjson1_serializeDocumentSchemaChangeRequestDetails(v.SchemaChange, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRedshiftDataShareAssetSourceEntry(v *types.RedshiftDataShareAssetSourceEntry, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2911,6 +3145,43 @@ func awsRestjson1_serializeDocumentRedshiftDataShareAssetSourceEntry(v *types.Re
 	if v.DataShareArn != nil {
 		ok := object.Key("DataShareArn")
 		ok.String(*v.DataShareArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRedshiftDataShareDetails(v *types.RedshiftDataShareDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		ok.String(*v.Database)
+	}
+
+	if v.Function != nil {
+		ok := object.Key("Function")
+		ok.String(*v.Function)
+	}
+
+	if v.Schema != nil {
+		ok := object.Key("Schema")
+		ok.String(*v.Schema)
+	}
+
+	if v.Table != nil {
+		ok := object.Key("Table")
+		ok.String(*v.Table)
+	}
+
+	if v.View != nil {
+		ok := object.Key("View")
+		ok.String(*v.View)
 	}
 
 	return nil
@@ -3046,6 +3317,96 @@ func awsRestjson1_serializeDocumentS3DataAccessAssetSourceEntry(v *types.S3DataA
 	if v.KmsKeysToGrant != nil {
 		ok := object.Key("KmsKeysToGrant")
 		if err := awsRestjson1_serializeDocumentListOfKmsKeysToGrant(v.KmsKeysToGrant, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3DataAccessDetails(v *types.S3DataAccessDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KeyPrefixes != nil {
+		ok := object.Key("KeyPrefixes")
+		if err := awsRestjson1_serializeDocumentListOf__string(v.KeyPrefixes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Keys != nil {
+		ok := object.Key("Keys")
+		if err := awsRestjson1_serializeDocumentListOf__string(v.Keys, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchemaChangeDetails(v *types.SchemaChangeDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchemaChangeRequestDetails(v *types.SchemaChangeRequestDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Changes != nil {
+		ok := object.Key("Changes")
+		if err := awsRestjson1_serializeDocumentListOfSchemaChangeDetails(v.Changes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaChangeAt != nil {
+		ok := object.Key("SchemaChangeAt")
+		ok.String(smithytime.FormatDateTime(*v.SchemaChangeAt))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentScopeDetails(v *types.ScopeDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LakeFormationTagPolicies != nil {
+		ok := object.Key("LakeFormationTagPolicies")
+		if err := awsRestjson1_serializeDocumentListOfLakeFormationTagPolicies(v.LakeFormationTagPolicies, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RedshiftDataShares != nil {
+		ok := object.Key("RedshiftDataShares")
+		if err := awsRestjson1_serializeDocumentListOfRedshiftDataShares(v.RedshiftDataShares, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3DataAccesses != nil {
+		ok := object.Key("S3DataAccesses")
+		if err := awsRestjson1_serializeDocumentListOfS3DataAccesses(v.S3DataAccesses, ok); err != nil {
 			return err
 		}
 	}

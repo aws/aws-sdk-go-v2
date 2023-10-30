@@ -16,10 +16,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates some of the parameters of a previously created location for Server
-// Message Block (SMB) file system access. For information about creating an SMB
-// location, see Creating a location for SMB (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html)
-// .
+// Updates some of the parameters of a Server Message Block (SMB) file server
+// location that you can use for DataSync transfers.
 func (c *Client) UpdateLocationSmb(ctx context.Context, params *UpdateLocationSmbInput, optFns ...func(*Options)) (*UpdateLocationSmbOutput, error) {
 	if params == nil {
 		params = &UpdateLocationSmbInput{}
@@ -37,45 +35,46 @@ func (c *Client) UpdateLocationSmb(ctx context.Context, params *UpdateLocationSm
 
 type UpdateLocationSmbInput struct {
 
-	// The Amazon Resource Name (ARN) of the SMB location to update.
+	// Specifies the ARN of the SMB location that you want to update.
 	//
 	// This member is required.
 	LocationArn *string
 
-	// The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block
-	// (SMB) location.
+	// Specifies the DataSync agent (or agents) which you want to connect to your SMB
+	// file server. You specify an agent by using its Amazon Resource Name (ARN).
 	AgentArns []string
 
-	// The name of the Windows domain that the SMB server belongs to.
+	// Specifies the Windows domain name that your SMB file server belongs to. If you
+	// have multiple domains in your environment, configuring this parameter makes sure
+	// that DataSync connects to the right file server. For more information, see
+	// required permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions)
+	// for SMB locations.
 	Domain *string
 
 	// Specifies the version of the Server Message Block (SMB) protocol that DataSync
 	// uses to access an SMB file server.
 	MountOptions *types.SmbMountOptions
 
-	// The password of the user who can mount the share has the permissions to access
-	// files and folders in the SMB share.
+	// Specifies the password of the user who can mount your SMB file server and has
+	// permission to access the files and folders involved in your transfer. For more
+	// information, see required permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions)
+	// for SMB locations.
 	Password *string
 
-	// The subdirectory in the SMB file system that is used to read data from the SMB
-	// source location or write data to the SMB destination. The SMB path should be a
-	// path that's exported by the SMB server, or a subdirectory of that path. The path
-	// should be such that it can be mounted by other SMB clients in your network.
-	// Subdirectory must be specified with forward slashes. For example,
-	// /path/to/folder . To transfer all the data in the folder that you specified,
-	// DataSync must have permissions to mount the SMB share and to access all the data
-	// in that share. To ensure this, do either of the following:
-	//   - Ensure that the user/password specified belongs to the user who can mount
-	//   the share and who has the appropriate permissions for all of the files and
-	//   directories that you want DataSync to access.
-	//   - Use credentials of a member of the Backup Operators group to mount the
-	//   share.
-	// Doing either of these options enables the agent to access the data. For the
-	// agent to access directories, you must also enable all execute access.
+	// Specifies the name of the share exported by your SMB file server where DataSync
+	// will read or write data. You can include a subdirectory in the share path (for
+	// example, /path/to/subdirectory ). Make sure that other SMB clients in your
+	// network can also mount this path. To copy all data in the specified
+	// subdirectory, DataSync must be able to mount the SMB share and access all of its
+	// data. For more information, see required permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions)
+	// for SMB locations.
 	Subdirectory *string
 
-	// The user who can mount the share has the permissions to access files and
-	// folders in the SMB share.
+	// Specifies the user name that can mount your SMB file server and has permission
+	// to access the files and folders involved in your transfer. For information about
+	// choosing a user with the right level of access for your transfer, see required
+	// permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions)
+	// for SMB locations.
 	User *string
 
 	noSmithyDocumentSerde

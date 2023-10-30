@@ -570,6 +570,26 @@ func (m *validateOpCreateEventSubscription) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateIntegration struct {
+}
+
+func (*validateOpCreateIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateOptionGroup struct {
 }
 
@@ -905,6 +925,26 @@ func (m *validateOpDeleteGlobalCluster) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteGlobalClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteIntegration struct {
+}
+
+func (*validateOpDeleteIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIntegrationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1565,6 +1605,26 @@ func (m *validateOpDescribeGlobalClusters) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeGlobalClustersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeIntegrations struct {
+}
+
+func (*validateOpDescribeIntegrations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeIntegrations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeIntegrationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeIntegrationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2862,6 +2922,10 @@ func addOpCreateEventSubscriptionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpCreateEventSubscription{}, middleware.After)
 }
 
+func addOpCreateIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateIntegration{}, middleware.After)
+}
+
 func addOpCreateOptionGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateOptionGroup{}, middleware.After)
 }
@@ -2928,6 +2992,10 @@ func addOpDeleteEventSubscriptionValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDeleteGlobalClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteGlobalCluster{}, middleware.After)
+}
+
+func addOpDeleteIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIntegration{}, middleware.After)
 }
 
 func addOpDeleteOptionGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -3060,6 +3128,10 @@ func addOpDescribeExportTasksValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDescribeGlobalClustersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeGlobalClusters{}, middleware.After)
+}
+
+func addOpDescribeIntegrationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeIntegrations{}, middleware.After)
 }
 
 func addOpDescribeOptionGroupOptionsValidationMiddleware(stack *middleware.Stack) error {
@@ -3902,6 +3974,27 @@ func validateOpCreateEventSubscriptionInput(v *CreateEventSubscriptionInput) err
 	}
 }
 
+func validateOpCreateIntegrationInput(v *CreateIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIntegrationInput"}
+	if v.SourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))
+	}
+	if v.TargetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
+	}
+	if v.IntegrationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateOptionGroupInput(v *CreateOptionGroupInput) error {
 	if v == nil {
 		return nil
@@ -4161,6 +4254,21 @@ func validateOpDeleteGlobalClusterInput(v *DeleteGlobalClusterInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteGlobalClusterInput"}
 	if v.GlobalClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteIntegrationInput(v *DeleteIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIntegrationInput"}
+	if v.IntegrationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4734,6 +4842,23 @@ func validateOpDescribeGlobalClustersInput(v *DescribeGlobalClustersInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeGlobalClustersInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeIntegrationsInput(v *DescribeIntegrationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeIntegrationsInput"}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))

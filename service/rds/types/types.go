@@ -1267,6 +1267,10 @@ type DBEngineVersion struct {
 	// version.
 	SupportsGlobalDatabases *bool
 
+	// Indicates whether the DB engine version supports Aurora zero-ETL integrations
+	// with Amazon Redshift.
+	SupportsIntegrations *bool
+
 	// Indicates whether the DB engine version supports forwarding write operations
 	// from reader DB instances to the writer DB instance in the DB cluster. By
 	// default, write operations aren't allowed on reader DB instances. Valid for:
@@ -2769,6 +2773,63 @@ type GlobalClusterMember struct {
 	noSmithyDocumentSerde
 }
 
+// An Aurora zero-ETL integration with Amazon Redshift. For more information, see
+// Working with Amazon Aurora zero-ETL integrations with Amazon Redshift (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.html)
+// in the Amazon Aurora User Guide.
+type Integration struct {
+
+	// The encryption context for the integration. For more information, see
+	// Encryption context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
+	// in the Amazon Web Services Key Management Service Developer Guide.
+	AdditionalEncryptionContext map[string]string
+
+	// The time when the integration was created, in Universal Coordinated Time (UTC).
+	CreateTime *time.Time
+
+	// Any errors associated with the integration.
+	Errors []IntegrationError
+
+	// The ARN of the integration.
+	IntegrationArn *string
+
+	// The name of the integration.
+	IntegrationName *string
+
+	// The Amazon Web Services Key Management System (Amazon Web Services KMS) key
+	// identifier for the key used to to encrypt the integration.
+	KMSKeyId *string
+
+	// The Amazon Resource Name (ARN) of the Aurora DB cluster used as the source for
+	// replication.
+	SourceArn *string
+
+	// The current status of the integration.
+	Status IntegrationStatus
+
+	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
+	// in the Amazon RDS User Guide.
+	Tags []Tag
+
+	// The ARN of the Redshift data warehouse used as the target for replication.
+	TargetArn *string
+
+	noSmithyDocumentSerde
+}
+
+// An error associated with a zero-ETL integration with Amazon Redshift.
+type IntegrationError struct {
+
+	// The error code associated with the integration.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// A message explaining the error.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // This data type is used as a response element in the DescribeDBSecurityGroups
 // action.
 type IPRange struct {
@@ -3876,6 +3937,10 @@ type UpgradeTarget struct {
 	// Indicates whether you can use Aurora global databases with the target engine
 	// version.
 	SupportsGlobalDatabases *bool
+
+	// Indicates whether the DB engine version supports Aurora zero-ETL integrations
+	// with Amazon Redshift.
+	SupportsIntegrations *bool
 
 	// Indicates whether the target engine version supports forwarding write
 	// operations from reader DB instances to the writer DB instance in the DB cluster.

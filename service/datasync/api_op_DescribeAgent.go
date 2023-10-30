@@ -17,8 +17,8 @@ import (
 	"time"
 )
 
-// Returns metadata about an DataSync agent, such as its name, endpoint type, and
-// status.
+// Returns information about an DataSync agent, such as its name, service endpoint
+// type, and status.
 func (c *Client) DescribeAgent(ctx context.Context, params *DescribeAgentInput, optFns ...func(*Options)) (*DescribeAgentOutput, error) {
 	if params == nil {
 		params = &DescribeAgentInput{}
@@ -37,7 +37,8 @@ func (c *Client) DescribeAgent(ctx context.Context, params *DescribeAgentInput, 
 // DescribeAgent
 type DescribeAgentInput struct {
 
-	// Specifies the Amazon Resource Name (ARN) of the DataSync agent to describe.
+	// Specifies the Amazon Resource Name (ARN) of the DataSync agent that you want
+	// information about.
 	//
 	// This member is required.
 	AgentArn *string
@@ -51,27 +52,33 @@ type DescribeAgentOutput struct {
 	// The ARN of the agent.
 	AgentArn *string
 
-	// The time that the agent was activated (that is, created in your account).
+	// The time that the agent was activated (https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html)
+	// .
 	CreationTime *time.Time
 
-	// The type of endpoint that your agent is connected to. If the endpoint is a VPC
-	// endpoint, the agent is not accessible over the public internet.
+	// The type of service endpoint (https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html)
+	// that your agent is connected to.
 	EndpointType types.EndpointType
 
-	// The time that the agent last connected to DataSync.
+	// The last time that the agent was communicating with the DataSync service.
 	LastConnectionTime *time.Time
 
 	// The name of the agent.
 	Name *string
 
-	// The subnet and the security group that DataSync used to access a VPC endpoint.
+	// The platform-related details about the agent, such as the version number.
+	Platform *types.Platform
+
+	// The network configuration that the agent uses when connecting to a VPC service
+	// endpoint (https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc)
+	// .
 	PrivateLinkConfig *types.PrivateLinkConfig
 
-	// The status of the agent. If the status is ONLINE, then the agent is configured
-	// properly and is available to use. The Running status is the normal running
-	// status for an agent. If the status is OFFLINE, the agent's VM is turned off or
-	// the agent is in an unhealthy state. When the issue that caused the unhealthy
-	// state is resolved, the agent returns to ONLINE status.
+	// The status of the agent.
+	//   - If the status is ONLINE , the agent is configured properly and ready to use.
+	//   - If the status is OFFLINE , the agent has been out of contact with DataSync
+	//   for five minutes or longer. This can happen for a few reasons. For more
+	//   information, see What do I do if my agent is offline? (https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-agents.html#troubleshoot-agent-offline)
 	Status types.AgentStatus
 
 	// Metadata pertaining to the operation's result.

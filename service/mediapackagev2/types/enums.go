@@ -264,6 +264,9 @@ const (
 	ValidationExceptionTypeMemberMaxLength                                     ValidationExceptionType = "MEMBER_MAX_LENGTH"
 	ValidationExceptionTypeMemberInvalidEnumValue                              ValidationExceptionType = "MEMBER_INVALID_ENUM_VALUE"
 	ValidationExceptionTypeMemberDoesNotMatchPattern                           ValidationExceptionType = "MEMBER_DOES_NOT_MATCH_PATTERN"
+	ValidationExceptionTypeInvalidManifestFilter                               ValidationExceptionType = "INVALID_MANIFEST_FILTER"
+	ValidationExceptionTypeInvalidTimeDelaySeconds                             ValidationExceptionType = "INVALID_TIME_DELAY_SECONDS"
+	ValidationExceptionTypeEndTimeEarlierThanStartTime                         ValidationExceptionType = "END_TIME_EARLIER_THAN_START_TIME"
 )
 
 // Values returns all known values for ValidationExceptionType. Note that this can
@@ -305,5 +308,8 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"MEMBER_MAX_LENGTH",
 		"MEMBER_INVALID_ENUM_VALUE",
 		"MEMBER_DOES_NOT_MATCH_PATTERN",
+		"INVALID_MANIFEST_FILTER",
+		"INVALID_TIME_DELAY_SECONDS",
+		"END_TIME_EARLIER_THAN_START_TIME",
 	}
 }

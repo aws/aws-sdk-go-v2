@@ -72,7 +72,12 @@ type CreateKnowledgeBaseInput struct {
 	// Information about how to render the content.
 	RenderingConfiguration *types.RenderingConfiguration
 
-	// The KMS key used for encryption.
+	// The configuration information for the customer managed key used for encryption.
+	// This KMS key must have a policy that allows kms:CreateGrant and kms:DescribeKey
+	// permissions to the IAM identity using the key to invoke Wisdom. For more
+	// information about setting up a customer managed key for Wisdom, see Enable
+	// Amazon Connect Wisdom for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html)
+	// .
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
 	// The source of the knowledge base content. Only set this argument for EXTERNAL

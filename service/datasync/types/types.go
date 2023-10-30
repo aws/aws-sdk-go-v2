@@ -18,8 +18,14 @@ type AgentListEntry struct {
 	// The name of an agent.
 	Name *string
 
-	// The status of an agent. For more information, see DataSync agent statuses (https://docs.aws.amazon.com/datasync/latest/userguide/understand-agent-statuses.html)
-	// .
+	// The platform-related details about the agent, such as the version number.
+	Platform *Platform
+
+	// The status of an agent.
+	//   - If the status is ONLINE , the agent is configured properly and ready to use.
+	//   - If the status is OFFLINE , the agent has been out of contact with DataSync
+	//   for five minutes or longer. This can happen for a few reasons. For more
+	//   information, see What do I do if my agent is offline? (https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-agents.html#troubleshoot-agent-offline)
 	Status AgentStatus
 
 	noSmithyDocumentSerde
@@ -744,9 +750,24 @@ type P95Metrics struct {
 	noSmithyDocumentSerde
 }
 
+// The platform-related details about the DataSync agent, such as the version
+// number.
+type Platform struct {
+
+	// The version of the DataSync agent. Beginning December 7, 2023, we will
+	// discontinue version 1 DataSync agents. Check the DataSync console to see if you
+	// have affected agents. If you do, replace (https://docs.aws.amazon.com/datasync/latest/userguide/replacing-agent.html)
+	// those agents before then to avoid data transfer or storage discovery
+	// disruptions. If you need more help, contact Amazon Web Services Support (https://aws.amazon.com/contact-us/)
+	// .
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies how your DataSync agent connects to Amazon Web Services using a
-// virtual private cloud (VPC) service endpoint. An agent that uses a VPC endpoint
-// isn't accessible over the public internet.
+// virtual private cloud (VPC) service endpoint (https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc)
+// . An agent that uses a VPC endpoint isn't accessible over the public internet.
 type PrivateLinkConfig struct {
 
 	// Specifies the VPC endpoint provided by Amazon Web Services PrivateLink (https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html)
@@ -807,7 +828,7 @@ type Recommendation struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies where DataSync uploads your task report (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+// Specifies where DataSync uploads your task report (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
 // .
 type ReportDestination struct {
 
@@ -817,13 +838,13 @@ type ReportDestination struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the Amazon S3 bucket where DataSync uploads your task report (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+// Specifies the Amazon S3 bucket where DataSync uploads your task report (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
 // .
 type ReportDestinationS3 struct {
 
 	// Specifies the Amazon Resource Name (ARN) of the IAM policy that allows DataSync
 	// to upload a task report to your S3 bucket. For more information, see Allowing
-	// DataSync to upload a task report to an Amazon S3 bucket (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+	// DataSync to upload a task report to an Amazon S3 bucket (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
 	// .
 	//
 	// This member is required.
@@ -841,7 +862,7 @@ type ReportDestinationS3 struct {
 }
 
 // Specifies the level of detail for a particular aspect of your DataSync task
-// report (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+// report (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
 // .
 type ReportOverride struct {
 
@@ -857,7 +878,7 @@ type ReportOverride struct {
 	noSmithyDocumentSerde
 }
 
-// The level of detail included in each aspect of your DataSync task report (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+// The level of detail included in each aspect of your DataSync task report (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
 // .
 type ReportOverrides struct {
 
@@ -882,7 +903,7 @@ type ReportOverrides struct {
 	noSmithyDocumentSerde
 }
 
-// Indicates whether DataSync created a complete task report (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+// Indicates whether DataSync created a complete task report (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
 // for your transfer.
 type ReportResult struct {
 
@@ -1110,12 +1131,12 @@ type TaskListEntry struct {
 
 // Specifies how you want to configure a task report, which provides detailed
 // information about for your DataSync transfer. For more information, see Task
-// reports (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+// reports (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
 // .
 type TaskReportConfig struct {
 
 	// Specifies the Amazon S3 bucket where DataSync uploads your task report. For
-	// more information, see Task reports (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html#task-report-access)
+	// more information, see Task reports (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html#task-report-access)
 	// .
 	Destination *ReportDestination
 

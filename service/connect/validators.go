@@ -6509,9 +6509,6 @@ func validateOpClaimPhoneNumberInput(v *ClaimPhoneNumberInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ClaimPhoneNumberInput"}
-	if v.TargetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
-	}
 	if v.PhoneNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumber"))
 	}
@@ -8927,9 +8924,6 @@ func validateOpSearchAvailablePhoneNumbersInput(v *SearchAvailablePhoneNumbersIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchAvailablePhoneNumbersInput"}
-	if v.TargetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
-	}
 	if len(v.PhoneNumberCountryCode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberCountryCode"))
 	}
@@ -9700,9 +9694,6 @@ func validateOpUpdatePhoneNumberInput(v *UpdatePhoneNumberInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePhoneNumberInput"}
 	if v.PhoneNumberId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberId"))
-	}
-	if v.TargetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -9985,6 +9985,32 @@ func awsRestjson1_deserializeDocumentApp(v **types.App, value interface{}) error
 				}
 			}
 
+		case "rpoInSecs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RpoInSecs = ptr.Int32(int32(i64))
+			}
+
+		case "rtoInSecs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RtoInSecs = ptr.Int32(int32(i64))
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10821,6 +10847,22 @@ func awsRestjson1_deserializeDocumentAppSummary(v **types.AppSummary, value inte
 				sv.DriftStatus = types.AppDriftStatusType(jtv)
 			}
 
+		case "lastAppComplianceEvaluationTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastAppComplianceEvaluationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected TimeStamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10862,6 +10904,32 @@ func awsRestjson1_deserializeDocumentAppSummary(v **types.AppSummary, value inte
 					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "rpoInSecs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RpoInSecs = ptr.Int32(int32(i64))
+			}
+
+		case "rtoInSecs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RtoInSecs = ptr.Int32(int32(i64))
 			}
 
 		case "status":

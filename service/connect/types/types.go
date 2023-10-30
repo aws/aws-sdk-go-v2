@@ -148,7 +148,7 @@ type AnswerMachineDetectionConfig struct {
 }
 
 // This API is in preview release for Amazon Connect and is subject to change. A
-// third party application's metadata.
+// third-party application's metadata.
 type Application struct {
 
 	// The permissions that the agent is granted on the application. Only the ACCESS
@@ -266,6 +266,11 @@ type ChatStreamingConfiguration struct {
 // instance or traffic distribution group.
 type ClaimedPhoneNumberSummary struct {
 
+	// The identifier of the Amazon Connect instance that phone numbers are claimed
+	// to. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance.
+	InstanceId *string
+
 	// The phone number. Phone numbers are formatted [+] [country code] [subscriber
 	// number including area code] .
 	PhoneNumber *string
@@ -312,7 +317,7 @@ type ClaimedPhoneNumberSummary struct {
 	Tags map[string]string
 
 	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
-	// distribution groups that phone numbers are claimed to.
+	// distribution groups that phone number inbound traffic is routed through.
 	TargetArn *string
 
 	noSmithyDocumentSerde
@@ -2057,6 +2062,11 @@ type LexV2Bot struct {
 // instance or traffic distribution group.
 type ListPhoneNumbersSummary struct {
 
+	// The identifier of the Amazon Connect instance that phone numbers are claimed
+	// to. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance.
+	InstanceId *string
+
 	// The phone number. Phone numbers are formatted [+] [country code] [subscriber
 	// number including area code] .
 	PhoneNumber *string
@@ -2074,7 +2084,7 @@ type ListPhoneNumbersSummary struct {
 	PhoneNumberType PhoneNumberType
 
 	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
-	// distribution groups that phone numbers are claimed to.
+	// distribution groups that phone number inbound traffic is routed through.
 	TargetArn *string
 
 	noSmithyDocumentSerde

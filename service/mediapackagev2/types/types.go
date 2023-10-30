@@ -96,6 +96,11 @@ type CreateHlsManifestConfiguration struct {
 	// manifestName you provided on the originEndpoint object.
 	ChildManifestName *string
 
+	// Filter configuration includes settings for manifest filtering, start and end
+	// times, and time delay that apply to all of your egress requests for this
+	// manifest.
+	FilterConfiguration *FilterConfiguration
+
 	// The total duration (in seconds) of the manifest's content.
 	ManifestWindowSeconds *int32
 
@@ -133,6 +138,11 @@ type CreateLowLatencyHlsManifestConfiguration struct {
 	// from the manifest name. The manifestName on the HLSManifest object overrides the
 	// manifestName you provided on the originEndpoint object.
 	ChildManifestName *string
+
+	// Filter configuration includes settings for manifest filtering, start and end
+	// times, and time delay that apply to all of your egress requests for this
+	// manifest.
+	FilterConfiguration *FilterConfiguration
 
 	// The total duration (in seconds) of the manifest's content.
 	ManifestWindowSeconds *int32
@@ -250,6 +260,35 @@ type EncryptionMethod struct {
 	noSmithyDocumentSerde
 }
 
+// Filter configuration includes settings for manifest filtering, start and end
+// times, and time delay that apply to all of your egress requests for this
+// manifest.
+type FilterConfiguration struct {
+
+	// Optionally specify the end time for all of your manifest egress requests. When
+	// you include end time, note that you cannot use end time query parameters for
+	// this manifest's endpoint URL.
+	End *time.Time
+
+	// Optionally specify one or more manifest filters for all of your manifest egress
+	// requests. When you include a manifest filter, note that you cannot use an
+	// identical manifest filter query parameter for this manifest's endpoint URL.
+	ManifestFilter *string
+
+	// Optionally specify the start time for all of your manifest egress requests.
+	// When you include start time, note that you cannot use start time query
+	// parameters for this manifest's endpoint URL.
+	Start *time.Time
+
+	// Optionally specify the time delay for all of your manifest egress requests.
+	// Enter a value that is smaller than your endpoint's startover window. When you
+	// include time delay, note that you cannot use time delay query parameters for
+	// this manifest's endpoint URL.
+	TimeDelaySeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // Retrieve the HTTP live streaming (HLS) manifest configuration.
 type GetHlsManifestConfiguration struct {
 
@@ -274,6 +313,11 @@ type GetHlsManifestConfiguration struct {
 	// HLSManifest object overrides the manifestName you provided on the originEndpoint
 	// object.
 	ChildManifestName *string
+
+	// Filter configuration includes settings for manifest filtering, start and end
+	// times, and time delay that apply to all of your egress requests for this
+	// manifest.
+	FilterConfiguration *FilterConfiguration
 
 	// The total duration (in seconds) of the manifest's content.
 	ManifestWindowSeconds *int32
@@ -317,6 +361,11 @@ type GetLowLatencyHlsManifestConfiguration struct {
 	// HLSManifest object overrides the manifestName you provided on the originEndpoint
 	// object.
 	ChildManifestName *string
+
+	// Filter configuration includes settings for manifest filtering, start and end
+	// times, and time delay that apply to all of your egress requests for this
+	// manifest.
+	FilterConfiguration *FilterConfiguration
 
 	// The total duration (in seconds) of the manifest's content.
 	ManifestWindowSeconds *int32

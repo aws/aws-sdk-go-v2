@@ -2614,6 +2614,9 @@ func awsRestjson1_deserializeOpErrorListChannels(response *smithyhttp.Response, 
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
@@ -4903,6 +4906,91 @@ func awsRestjson1_deserializeDocumentEncryptionMethod(v **types.EncryptionMethod
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFilterConfiguration(v **types.FilterConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FilterConfiguration
+	if *v == nil {
+		sv = &types.FilterConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "End":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.End = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "ManifestFilter":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ManifestFilter = ptr.String(jtv)
+			}
+
+		case "Start":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Start = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "TimeDelaySeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeDelaySeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGetHlsManifestConfiguration(v **types.GetHlsManifestConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4932,6 +5020,11 @@ func awsRestjson1_deserializeDocumentGetHlsManifestConfiguration(v **types.GetHl
 					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
 				}
 				sv.ChildManifestName = ptr.String(jtv)
+			}
+
+		case "FilterConfiguration":
+			if err := awsRestjson1_deserializeDocumentFilterConfiguration(&sv.FilterConfiguration, value); err != nil {
+				return err
 			}
 
 		case "ManifestName":
@@ -5055,6 +5148,11 @@ func awsRestjson1_deserializeDocumentGetLowLatencyHlsManifestConfiguration(v **t
 					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
 				}
 				sv.ChildManifestName = ptr.String(jtv)
+			}
+
+		case "FilterConfiguration":
+			if err := awsRestjson1_deserializeDocumentFilterConfiguration(&sv.FilterConfiguration, value); err != nil {
+				return err
 			}
 
 		case "ManifestName":

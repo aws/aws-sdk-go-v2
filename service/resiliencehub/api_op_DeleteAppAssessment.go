@@ -38,7 +38,7 @@ type DeleteAppAssessmentInput struct {
 	// Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:
 	// partition :resiliencehub: region : account :app-assessment/ app-id . For more
 	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
@@ -56,7 +56,7 @@ type DeleteAppAssessmentOutput struct {
 	// Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:
 	// partition :resiliencehub: region : account :app-assessment/ app-id . For more
 	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string

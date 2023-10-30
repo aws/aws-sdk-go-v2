@@ -2449,6 +2449,129 @@ func awsRestjson1_serializeOpDocumentUpdateEnvironmentInput(v *UpdateEnvironment
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateKxClusterCodeConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateKxClusterCodeConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateKxClusterCodeConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateKxClusterCodeConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/clusters/{clusterName}/configuration/code")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateKxClusterCodeConfigurationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateKxClusterCodeConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateKxClusterCodeConfigurationInput(v *UpdateKxClusterCodeConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClusterName == nil || len(*v.ClusterName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+	}
+	if v.ClusterName != nil {
+		if err := encoder.SetURI("clusterName").String(*v.ClusterName); err != nil {
+			return err
+		}
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateKxClusterCodeConfigurationInput(v *UpdateKxClusterCodeConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Code != nil {
+		ok := object.Key("code")
+		if err := awsRestjson1_serializeDocumentCodeConfiguration(v.Code, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CommandLineArguments != nil {
+		ok := object.Key("commandLineArguments")
+		if err := awsRestjson1_serializeDocumentKxCommandLineArguments(v.CommandLineArguments, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeploymentConfiguration != nil {
+		ok := object.Key("deploymentConfiguration")
+		if err := awsRestjson1_serializeDocumentKxClusterCodeDeploymentConfiguration(v.DeploymentConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InitializationScript != nil {
+		ok := object.Key("initializationScript")
+		ok.String(*v.InitializationScript)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateKxClusterDatabases struct {
 }
 
@@ -3260,6 +3383,18 @@ func awsRestjson1_serializeDocumentKxCacheStorageConfigurations(v []types.KxCach
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKxClusterCodeDeploymentConfiguration(v *types.KxClusterCodeDeploymentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DeploymentStrategy) > 0 {
+		ok := object.Key("deploymentStrategy")
+		ok.String(string(v.DeploymentStrategy))
+	}
+
 	return nil
 }
 

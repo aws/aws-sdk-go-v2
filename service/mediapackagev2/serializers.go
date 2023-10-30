@@ -11,6 +11,7 @@ import (
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -2097,6 +2098,13 @@ func awsRestjson1_serializeDocumentCreateHlsManifestConfiguration(v *types.Creat
 		ok.String(*v.ChildManifestName)
 	}
 
+	if v.FilterConfiguration != nil {
+		ok := object.Key("FilterConfiguration")
+		if err := awsRestjson1_serializeDocumentFilterConfiguration(v.FilterConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ManifestName != nil {
 		ok := object.Key("ManifestName")
 		ok.String(*v.ManifestName)
@@ -2142,6 +2150,13 @@ func awsRestjson1_serializeDocumentCreateLowLatencyHlsManifestConfiguration(v *t
 	if v.ChildManifestName != nil {
 		ok := object.Key("ChildManifestName")
 		ok.String(*v.ChildManifestName)
+	}
+
+	if v.FilterConfiguration != nil {
+		ok := object.Key("FilterConfiguration")
+		if err := awsRestjson1_serializeDocumentFilterConfiguration(v.FilterConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ManifestName != nil {
@@ -2253,6 +2268,33 @@ func awsRestjson1_serializeDocumentEncryptionMethod(v *types.EncryptionMethod, v
 	if len(v.TsEncryptionMethod) > 0 {
 		ok := object.Key("TsEncryptionMethod")
 		ok.String(string(v.TsEncryptionMethod))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFilterConfiguration(v *types.FilterConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.End != nil {
+		ok := object.Key("End")
+		ok.Double(smithytime.FormatEpochSeconds(*v.End))
+	}
+
+	if v.ManifestFilter != nil {
+		ok := object.Key("ManifestFilter")
+		ok.String(*v.ManifestFilter)
+	}
+
+	if v.Start != nil {
+		ok := object.Key("Start")
+		ok.Double(smithytime.FormatEpochSeconds(*v.Start))
+	}
+
+	if v.TimeDelaySeconds != nil {
+		ok := object.Key("TimeDelaySeconds")
+		ok.Integer(*v.TimeDelaySeconds)
 	}
 
 	return nil

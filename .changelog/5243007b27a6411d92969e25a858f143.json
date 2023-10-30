@@ -1,0 +1,8 @@
+{
+    "id": "5243007b-27a6-411d-9296-9e25a858f143",
+    "type": "feature",
+    "description": "Updated ListOutpostsWithS3 API response to include S3OutpostArn for use with AWS RAM.",
+    "modules": [
+        "service/s3outposts"
+    ]
+}

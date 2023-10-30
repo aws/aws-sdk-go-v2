@@ -41,7 +41,7 @@ type DescribeDraftAppVersionResourcesImportStatusInput struct {
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
 	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
@@ -54,7 +54,7 @@ type DescribeDraftAppVersionResourcesImportStatusOutput struct {
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
 	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference guide.
+	// in the Amazon Web Services General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
@@ -69,7 +69,7 @@ type DescribeDraftAppVersionResourcesImportStatusOutput struct {
 	// This member is required.
 	Status types.ResourceImportStatusType
 
-	// The timestamp for when the status last changed.
+	// The time when the status last changed.
 	//
 	// This member is required.
 	StatusChangeTime *time.Time

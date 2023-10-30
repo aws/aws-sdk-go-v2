@@ -204,6 +204,25 @@ func (KxAzMode) Values() []KxAzMode {
 	}
 }
 
+type KxClusterCodeDeploymentStrategy string
+
+// Enum values for KxClusterCodeDeploymentStrategy
+const (
+	KxClusterCodeDeploymentStrategyRolling KxClusterCodeDeploymentStrategy = "ROLLING"
+	KxClusterCodeDeploymentStrategyForce   KxClusterCodeDeploymentStrategy = "FORCE"
+)
+
+// Values returns all known values for KxClusterCodeDeploymentStrategy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (KxClusterCodeDeploymentStrategy) Values() []KxClusterCodeDeploymentStrategy {
+	return []KxClusterCodeDeploymentStrategy{
+		"ROLLING",
+		"FORCE",
+	}
+}
+
 type KxClusterStatus string
 
 // Enum values for KxClusterStatus

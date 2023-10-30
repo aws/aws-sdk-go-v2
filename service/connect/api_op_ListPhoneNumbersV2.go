@@ -43,6 +43,14 @@ func (c *Client) ListPhoneNumbersV2(ctx context.Context, params *ListPhoneNumber
 
 type ListPhoneNumbersV2Input struct {
 
+	// The identifier of the Amazon Connect instance that phone numbers are claimed
+	// to. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
+	// in the Amazon Resource Name (ARN) of the instance. If both TargetArn and
+	// InstanceId are not provided, this API lists numbers claimed to all the Amazon
+	// Connect instances belonging to your account in the same AWS Region as the
+	// request.
+	InstanceId *string
+
 	// The maximum number of results to return per page.
 	MaxResults *int32
 
@@ -61,9 +69,10 @@ type ListPhoneNumbersV2Input struct {
 	PhoneNumberTypes []types.PhoneNumberType
 
 	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
-	// distribution groups that phone numbers are claimed to. If TargetArn input is
-	// not provided, this API lists numbers claimed to all the Amazon Connect instances
-	// belonging to your account in the same Amazon Web Services Region as the request.
+	// distribution groups that phone number inbound traffic is routed through. If both
+	// TargetArn and InstanceId input are not provided, this API lists numbers claimed
+	// to all the Amazon Connect instances belonging to your account in the same Amazon
+	// Web Services Region as the request.
 	TargetArn *string
 
 	noSmithyDocumentSerde

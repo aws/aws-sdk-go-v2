@@ -41,10 +41,9 @@ func (c *Client) GetCredentials(ctx context.Context, params *GetCredentialsInput
 
 type GetCredentialsInput struct {
 
-	// The name of the workgroup associated with the database.
-	//
-	// This member is required.
-	WorkgroupName *string
+	// The custom domain name associated with the workgroup. The custom domain name or
+	// the workgroup name must be included in the request.
+	CustomDomainName *string
 
 	// The name of the database to get temporary authorization to log on to.
 	// Constraints:
@@ -61,6 +60,9 @@ type GetCredentialsInput struct {
 	// The number of seconds until the returned temporary password expires. The
 	// minimum is 900 seconds, and the maximum is 3600 seconds.
 	DurationSeconds *int32
+
+	// The name of the workgroup associated with the database.
+	WorkgroupName *string
 
 	noSmithyDocumentSerde
 }
@@ -138,9 +140,6 @@ func (c *Client) addOperationGetCredentialsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addGetCredentialsResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addOpGetCredentialsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCredentials(options.Region), middleware.Before); err != nil {
