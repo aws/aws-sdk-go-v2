@@ -87,6 +87,14 @@ public class ResolveClientConfigFromSources implements GoIntegration {
                     .generatedOnClient(false)
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(USE_FIPS_ENDPOINT_CONFIG_RESOLVER)
                             .build())
+                    .build(),
+            AddAwsConfigFields.AwsConfigField.builder()
+                    .name("BaseEndpoint")
+                    .type(SymbolUtils.createPointableSymbolBuilder("string").build())
+                    .generatedOnClient(false)
+                    .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(
+                        AwsEndpointResolverInitializerGenerator.RESOLVE_BASE_ENDPOINT)
+                            .build())
                     .build()
     );
 
