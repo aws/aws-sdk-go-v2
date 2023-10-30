@@ -20,7 +20,7 @@
                 "appIntegrationArn": {
                     "target": "com.amazonaws.wisdom#GenericArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AppIntegrations DataIntegration to use for ingesting content.</p>\n         <ul>\n            <li>\n               <p> For <a href=\"https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm\"> Salesforce</a>, your AppIntegrations DataIntegration must have an ObjectConfiguration if\n          objectFields is not provided, including at least <code>Id</code>,\n            <code>ArticleNumber</code>, <code>VersionNumber</code>, <code>Title</code>,\n            <code>PublishStatus</code>, and <code>IsDeleted</code> as source fields. </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api\"> ServiceNow</a>, your AppIntegrations DataIntegration must have an ObjectConfiguration if\n          objectFields is not provided, including at least <code>number</code>,\n            <code>short_description</code>, <code>sys_mod_count</code>, <code>workflow_state</code>,\n          and <code>active</code> as source fields. </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/\">\n            Zendesk</a>, your AppIntegrations DataIntegration must have an ObjectConfiguration if\n            <code>objectFields</code> is not provided, including at least <code>id</code>,\n            <code>title</code>, <code>updated_at</code>, and <code>draft</code> as source fields.\n        </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://learn.microsoft.com/en-us/sharepoint/dev/sp-add-ins/sharepoint-net-server-csom-jsom-and-rest-api-index\"> SharePoint</a>, your AppIntegrations DataIntegration must have a FileConfiguration,\n          including only file extensions that are among <code>docx</code>, <code>pdf</code>,\n            <code>html</code>, <code>htm</code>, and <code>txt</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AppIntegrations DataIntegration to use for ingesting content.</p>\n         <ul>\n            <li>\n               <p> For <a href=\"https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm\"> Salesforce</a>, your AppIntegrations DataIntegration must have an ObjectConfiguration if\n          objectFields is not provided, including at least <code>Id</code>,\n            <code>ArticleNumber</code>, <code>VersionNumber</code>, <code>Title</code>,\n            <code>PublishStatus</code>, and <code>IsDeleted</code> as source fields. </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api\"> ServiceNow</a>, your AppIntegrations DataIntegration must have an ObjectConfiguration if\n          objectFields is not provided, including at least <code>number</code>,\n            <code>short_description</code>, <code>sys_mod_count</code>, <code>workflow_state</code>,\n          and <code>active</code> as source fields. </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/\">\n            Zendesk</a>, your AppIntegrations DataIntegration must have an ObjectConfiguration if\n            <code>objectFields</code> is not provided, including at least <code>id</code>,\n            <code>title</code>, <code>updated_at</code>, and <code>draft</code> as source fields.\n        </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://learn.microsoft.com/en-us/sharepoint/dev/sp-add-ins/sharepoint-net-server-csom-jsom-and-rest-api-index\">SharePoint</a>, your AppIntegrations DataIntegration must have a FileConfiguration,\n          including only file extensions that are among <code>docx</code>, <code>pdf</code>,\n            <code>html</code>, <code>htm</code>, and <code>txt</code>. </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://aws.amazon.com/s3/\">Amazon S3</a>, the\n            ObjectConfiguration and FileConfiguration of your AppIntegrations\n          DataIntegration must be null. The <code>SourceURI</code> of your\n            DataIntegration must use the following format:\n            <code>s3://your_s3_bucket_name</code>.</p>\n               <important>\n                  <p>The bucket policy of the corresponding S3 bucket must allow the Amazon Web Services\n            principal <code>app-integrations.amazonaws.com</code> to perform\n              <code>s3:ListBucket</code>, <code>s3:GetObject</code>, and <code>s3:GetBucketLocation</code>\n            against the bucket.</p>\n               </important>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -329,7 +329,7 @@
                 "serverSideEncryptionConfiguration": {
                     "target": "com.amazonaws.wisdom#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key used for encryption.</p>"
+                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>This KMS key must have a policy that allows <code>kms:CreateGrant</code>\n      and <code>kms:DescribeKey</code> permissions to the IAM identity using the key\n      to invoke Wisdom. To use Wisdom with chat, the key policy must also allow\n        <code>kms:Decrypt</code>, <code>kms:GenerateDataKey*</code>, and\n        <code>kms:DescribeKey</code> permissions to the <code>connect.amazonaws.com</code> service\n      principal. </p>\n         <p>For more information about setting up a customer managed key for Wisdom, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html\">Enable Amazon Connect Wisdom\n        for your instance</a>.</p>"
                     }
                 },
                 "integrationConfiguration": {
@@ -447,7 +447,7 @@
                 "serverSideEncryptionConfiguration": {
                     "target": "com.amazonaws.wisdom#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key used for encryption.</p>"
+                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>This KMS key must have a policy that allows <code>kms:CreateGrant</code>\n      and <code>kms:DescribeKey</code> permissions to the IAM identity using the key\n      to invoke Wisdom. To use Wisdom with chat, the key policy must also allow\n        <code>kms:Decrypt</code>, <code>kms:GenerateDataKey*</code>, and\n        <code>kms:DescribeKey</code> permissions to the <code>connect.amazonaws.com</code> service\n      principal. </p>\n         <p>For more information about setting up a customer managed key for Wisdom, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html\">Enable Amazon Connect Wisdom\n        for your instance</a>.</p>"
                     }
                 },
                 "integrationConfiguration": {
@@ -1005,7 +1005,7 @@
                 "serverSideEncryptionConfiguration": {
                     "target": "com.amazonaws.wisdom#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key used for encryption.</p>"
+                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>The customer managed key must have a policy that allows <code>kms:CreateGrant</code>\n      and <code> kms:DescribeKey</code> permissions to the IAM identity using the key\n      to invoke Wisdom. To use Wisdom with chat, the key policy must also allow\n        <code>kms:Decrypt</code>, <code>kms:GenerateDataKey*</code>, and\n        <code>kms:DescribeKey</code> permissions to the <code>connect.amazonaws.com</code> service\n      principal. </p>\n         <p>For more information about setting up a customer managed key for Wisdom, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html\">Enable Amazon Connect Wisdom\n        for your instance</a>.</p>"
                     }
                 }
             }
@@ -1194,7 +1194,7 @@
                 "serverSideEncryptionConfiguration": {
                     "target": "com.amazonaws.wisdom#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key used for encryption.</p>"
+                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>This KMS key must have a policy that allows <code>kms:CreateGrant</code>\n      and <code>kms:DescribeKey</code> permissions to the IAM identity using the key\n      to invoke Wisdom.</p>\n         <p>For more information about setting up a customer managed key for Wisdom, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html\">Enable Amazon Connect Wisdom\n        for your instance</a>.</p>"
                     }
                 },
                 "description": {
@@ -2222,7 +2222,7 @@
                 "serverSideEncryptionConfiguration": {
                     "target": "com.amazonaws.wisdom#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key used for encryption.</p>"
+                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>This KMS key must have a policy that allows <code>kms:CreateGrant</code>\n      and <code>kms:DescribeKey</code> permissions to the IAM identity using the key\n      to invoke Wisdom. </p>\n         <p>For more information about setting up a customer managed key for Wisdom, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html\">Enable Amazon Connect Wisdom\n        for your instance</a>.</p>"
                     }
                 },
                 "description": {
@@ -2337,7 +2337,7 @@
                 "serverSideEncryptionConfiguration": {
                     "target": "com.amazonaws.wisdom#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key used for encryption.</p>"
+                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>This KMS key must have a policy that allows <code>kms:CreateGrant</code>\n      and <code>kms:DescribeKey</code> permissions to the IAM identity using the key\n      to invoke Wisdom. </p>\n         <p>For more information about setting up a customer managed key for Wisdom, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html\">Enable Amazon Connect Wisdom\n        for your instance</a>.</p>"
                     }
                 },
                 "description": {
@@ -3491,12 +3491,12 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.wisdom#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key. For information about valid ID values, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers\n        (KeyId)</a>.</p>"
+                        "smithy.api#documentation": "<p>The customer managed key used for encryption. For more information about setting up a\n        customer managed key for Wisdom, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html\">Enable Amazon Connect Wisdom for your\n        instance</a>. For information about valid ID values, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers (KeyId)</a>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The KMS key used for encryption.</p>"
+                "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption.</p>"
             }
         },
         "com.amazonaws.wisdom#ServiceQuotaExceededException": {

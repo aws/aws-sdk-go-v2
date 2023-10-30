@@ -713,6 +713,9 @@
                             "max": 1209600
                         }
                     }
+                },
+                "FilterConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#FilterConfiguration"
                 }
             },
             "traits": {
@@ -763,6 +766,9 @@
                             "max": 1209600
                         }
                     }
+                },
+                "FilterConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#FilterConfiguration"
                 }
             },
             "traits": {
@@ -1869,6 +1875,46 @@
                 "smithy.api#documentation": "<p>The encryption type.</p>"
             }
         },
+        "com.amazonaws.mediapackagev2#FilterConfiguration": {
+            "type": "structure",
+            "members": {
+                "ManifestFilter": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        }
+                    }
+                },
+                "Start": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>"
+                    }
+                },
+                "End": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.</p>"
+                    }
+                },
+                "TimeDelaySeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1209600
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p>"
+            }
+        },
         "com.amazonaws.mediapackagev2#GetChannel": {
             "type": "operation",
             "input": {
@@ -2285,6 +2331,9 @@
                 },
                 "ScteHls": {
                     "target": "com.amazonaws.mediapackagev2#ScteHls"
+                },
+                "FilterConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#FilterConfiguration"
                 }
             },
             "traits": {
@@ -2334,6 +2383,9 @@
                 },
                 "ScteHls": {
                     "target": "com.amazonaws.mediapackagev2#ScteHls"
+                },
+                "FilterConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#FilterConfiguration"
                 }
             },
             "traits": {
@@ -2898,6 +2950,9 @@
                 },
                 {
                     "target": "com.amazonaws.mediapackagev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ResourceNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.mediapackagev2#ThrottlingException"
@@ -5166,6 +5221,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MEMBER_DOES_NOT_MATCH_PATTERN"
+                    }
+                },
+                "INVALID_MANIFEST_FILTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_MANIFEST_FILTER"
+                    }
+                },
+                "INVALID_TIME_DELAY_SECONDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_TIME_DELAY_SECONDS"
+                    }
+                },
+                "END_TIME_EARLIER_THAN_START_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "END_TIME_EARLIER_THAN_START_TIME"
                     }
                 }
             }

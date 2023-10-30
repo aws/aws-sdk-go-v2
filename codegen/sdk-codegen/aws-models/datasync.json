@@ -185,7 +185,13 @@
                 "Status": {
                     "target": "com.amazonaws.datasync#AgentStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of an agent. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/understand-agent-statuses.html\">DataSync agent\n        statuses</a>.</p>"
+                        "smithy.api#documentation": "<p>The status of an agent.</p>\n         <ul>\n            <li>\n               <p>If the status is <code>ONLINE</code>, the agent is configured properly and ready to\n          use.</p>\n            </li>\n            <li>\n               <p>If the status is <code>OFFLINE</code>, the agent has been out of contact with\n          DataSync for five minutes or longer. This can happen for a few reasons. For\n          more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-agents.html#troubleshoot-agent-offline\">What do I do if my agent is offline?</a>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Platform": {
+                    "target": "com.amazonaws.datasync#Platform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform-related details about the agent, such as the version number.</p>"
                     }
                 }
             },
@@ -208,6 +214,16 @@
                         "smithy.api#enumValue": "OFFLINE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.datasync#AgentVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$"
             }
         },
         "com.amazonaws.datasync#Atime": {
@@ -757,7 +773,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an endpoint for an Amazon FSx for NetApp ONTAP file system that DataSync can access for a transfer. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html\">Creating a location for FSx for ONTAP</a>.</p>"
+                "smithy.api#documentation": "<p>Creates an endpoint for an Amazon FSx for NetApp ONTAP file system that DataSync can use for a data transfer.</p>\n         <p>Before you begin, make sure that you understand how DataSync\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access\">accesses an FSx for ONTAP file system</a>.</p>"
             }
         },
         "com.amazonaws.datasync#CreateLocationFsxOntapRequest": {
@@ -906,7 +922,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an endpoint for an Amazon FSx for Windows File Server file system.</p>"
+                "smithy.api#documentation": "<p>Creates an endpoint for an Amazon FSx for Windows File Server file system that DataSync can use for a data transfer.</p>\n         <p>Before you begin, make sure that you understand how DataSync <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-location-access\">accesses an FSx for Windows File Server</a>.</p>"
             }
         },
         "com.amazonaws.datasync#CreateLocationFsxWindowsRequest": {
@@ -941,20 +957,20 @@
                 "User": {
                     "target": "com.amazonaws.datasync#SmbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the user who has the permissions to access files, folders, and metadata in your\n      file system.</p>\n         <p>For information about choosing a user with sufficient permissions, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions\">Required permissions</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the user who has the permissions to access files, folders, and metadata in your\n      file system.</p>\n         <p>For information about choosing a user with the right level of access for your transfer, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions\">required permissions</a> for FSx for Windows File Server locations.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Domain": {
                     "target": "com.amazonaws.datasync#SmbDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the Windows domain that the FSx for Windows File Server belongs\n      to.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name of the Windows domain that the FSx for Windows File Server belongs\n      to.</p>\n         <p>If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right file server.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions\">required permissions</a> for FSx for Windows File Server locations.</p>"
                     }
                 },
                 "Password": {
                     "target": "com.amazonaws.datasync#SmbPassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the password of the user who has the permissions to access files and folders in\n      the file system.</p>",
+                        "smithy.api#documentation": "<p>Specifies the password of the user who has the permissions to access files and folders in\n      the file system.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions\">required permissions</a> for FSx for Windows File Server locations.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1412,7 +1428,7 @@
                 "Domain": {
                     "target": "com.amazonaws.datasync#SmbDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Windows domain name that your SMB file server belongs to. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">required permissions</a> for SMB locations.</p>"
+                        "smithy.api#documentation": "<p>Specifies the Windows domain name that your SMB file server belongs to. </p>\n         <p>If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right file server.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">required permissions</a> for SMB locations.</p>"
                     }
                 },
                 "Password": {
@@ -1607,7 +1623,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN)\n      of the agent in your request. The operation disassociates the agent from your Amazon Web Services account. However, it doesn't delete the agent virtual machine (VM) from your\n      on-premises environment.</p>"
+                "smithy.api#documentation": "<p>Removes an DataSync agent resource from your Amazon Web Services account.</p>\n         <p>Keep in mind that this operation (which can't be undone) doesn't remove the agent's\n      virtual machine (VM) or Amazon EC2 instance from your storage environment. For next\n      steps, you can delete the VM or instance from your storage environment or reuse it to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html\">activate a new\n        agent</a>.</p>"
             }
         },
         "com.amazonaws.datasync#DeleteAgentRequest": {
@@ -1736,7 +1752,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns metadata about an DataSync agent, such as its name, endpoint\n      type, and status.</p>"
+                "smithy.api#documentation": "<p>Returns information about an DataSync agent, such as its name, service endpoint\n      type, and status.</p>"
             }
         },
         "com.amazonaws.datasync#DescribeAgentRequest": {
@@ -1745,7 +1761,7 @@
                 "AgentArn": {
                     "target": "com.amazonaws.datasync#AgentArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the DataSync agent to\n      describe.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the DataSync agent that you want\n      information about.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1773,31 +1789,37 @@
                 "Status": {
                     "target": "com.amazonaws.datasync#AgentStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the agent. If the status is ONLINE, then the agent is configured properly\n      and is available to use. The Running status is the normal running status for an agent. If the\n      status is OFFLINE, the agent's VM is turned off or the agent is in an unhealthy state. When\n      the issue that caused the unhealthy state is resolved, the agent returns to ONLINE\n      status.</p>"
+                        "smithy.api#documentation": "<p>The status of the agent.</p>\n         <ul>\n            <li>\n               <p>If the status is <code>ONLINE</code>, the agent is configured properly and ready to\n          use.</p>\n            </li>\n            <li>\n               <p>If the status is <code>OFFLINE</code>, the agent has been out of contact with\n            DataSync for five minutes or longer. This can happen for a few reasons. For\n          more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-agents.html#troubleshoot-agent-offline\">What do I do if my agent is offline?</a>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "LastConnectionTime": {
                     "target": "com.amazonaws.datasync#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time that the agent last connected to DataSync.</p>"
+                        "smithy.api#documentation": "<p>The last time that the agent was communicating with the DataSync\n      service.</p>"
                     }
                 },
                 "CreationTime": {
                     "target": "com.amazonaws.datasync#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time that the agent was activated (that is, created in your account).</p>"
+                        "smithy.api#documentation": "<p>The time that the agent was <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html\">activated</a>.</p>"
                     }
                 },
                 "EndpointType": {
                     "target": "com.amazonaws.datasync#EndpointType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint,\n      the agent is not accessible over the public internet. </p>"
+                        "smithy.api#documentation": "<p>The type of <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html\">service endpoint</a> that your agent is connected to.</p>"
                     }
                 },
                 "PrivateLinkConfig": {
                     "target": "com.amazonaws.datasync#PrivateLinkConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subnet and the security group that DataSync used to access a VPC endpoint.</p>"
+                        "smithy.api#documentation": "<p>The network configuration that the agent uses when connecting to a <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc\">VPC\n        service endpoint</a>.</p>"
+                    }
+                },
+                "Platform": {
+                    "target": "com.amazonaws.datasync#Platform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform-related details about the agent, such as the version number.</p>"
                     }
                 }
             },
@@ -3269,13 +3291,13 @@
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of files, objects, and directories that DataSync verified during your\n      transfer.</p>"
+                        "smithy.api#documentation": "<p>The number of files, objects, and directories that DataSync verified during your\n      transfer.</p>\n         <note>\n            <p>When you configure your task to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-data-verification-options.html\">verify only the\n          data that's transferred</a>, DataSync doesn't verify directories in some\n        situations or files that fail to transfer.</p>\n         </note>"
                     }
                 },
                 "ReportResult": {
                     "target": "com.amazonaws.datasync#ReportResult",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether DataSync generated a complete <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html\">task report</a> for your\n      transfer.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether DataSync generated a complete <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html\">task report</a> for your\n      transfer.</p>"
                     }
                 },
                 "EstimatedFilesToDelete": {
@@ -3409,7 +3431,7 @@
                 "TaskReportConfig": {
                     "target": "com.amazonaws.datasync#TaskReportConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of your task report. For more information, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html\">Creating a task report</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration of your task report. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html\">Creating a task report</a>.</p>"
                     }
                 }
             },
@@ -4107,7 +4129,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -4150,7 +4171,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -4163,7 +4185,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -4177,7 +4198,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -4200,7 +4220,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -4235,7 +4254,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4246,14 +4264,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -4267,14 +4287,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -4283,11 +4301,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4298,14 +4316,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -4319,7 +4339,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -4339,7 +4358,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4350,14 +4368,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -4368,9 +4388,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -6735,10 +6757,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 200
                 },
-                "smithy.api#pattern": "^.+$",
+                "smithy.api#pattern": "^.*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -7082,6 +7104,20 @@
                 }
             }
         },
+        "com.amazonaws.datasync#Platform": {
+            "type": "structure",
+            "members": {
+                "Version": {
+                    "target": "com.amazonaws.datasync#AgentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the DataSync agent.</p>\n         <important>\n            <p>Beginning December 7, 2023, we will discontinue version 1 DataSync agents. Check the DataSync console to see if you have affected agents. If you do, <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/replacing-agent.html\">replace</a> those agents before then to avoid data transfer or storage discovery disruptions. If you need more help, contact <a href=\"https://aws.amazon.com/contact-us/\">Amazon Web Services Support</a>.</p>\n         </important>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The platform-related details about the DataSync agent, such as the version\n      number.</p>"
+            }
+        },
         "com.amazonaws.datasync#PosixPermissions": {
             "type": "enum",
             "members": {
@@ -7162,7 +7198,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies how your DataSync agent connects to Amazon Web Services using a\n      virtual private cloud (VPC) service endpoint. An agent that uses a VPC endpoint isn't\n      accessible over the public internet.</p>"
+                "smithy.api#documentation": "<p>Specifies how your DataSync agent connects to Amazon Web Services using a\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc\">virtual private cloud (VPC) service endpoint</a>. An agent that uses a VPC endpoint isn't accessible over the public internet.</p>"
             }
         },
         "com.amazonaws.datasync#PtolemyBoolean": {
@@ -7355,7 +7391,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies where DataSync uploads your <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html\">task report</a>.</p>"
+                "smithy.api#documentation": "<p>Specifies where DataSync uploads your <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html\">task report</a>.</p>"
             }
         },
         "com.amazonaws.datasync#ReportDestinationS3": {
@@ -7377,13 +7413,13 @@
                 "BucketAccessRoleArn": {
                     "target": "com.amazonaws.datasync#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the IAM policy that allows DataSync to upload a task report to your S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html\">Allowing DataSync to upload a task report to an Amazon S3 bucket</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the IAM policy that allows DataSync to upload a task report to your S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/datasync/latest/userguide/task-reports.html\">Allowing DataSync to upload a task report to an Amazon S3 bucket</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the Amazon S3 bucket where DataSync uploads your <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html\">task report</a>.</p>"
+                "smithy.api#documentation": "<p>Specifies the Amazon S3 bucket where DataSync uploads your <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html\">task report</a>.</p>"
             }
         },
         "com.amazonaws.datasync#ReportLevel": {
@@ -7431,7 +7467,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the level of detail for a particular aspect of your DataSync\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html\">task\n        report</a>.</p>"
+                "smithy.api#documentation": "<p>Specifies the level of detail for a particular aspect of your DataSync\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html\">task\n        report</a>.</p>"
             }
         },
         "com.amazonaws.datasync#ReportOverrides": {
@@ -7463,7 +7499,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The level of detail included in each aspect of your DataSync\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html\">task\n        report</a>.</p>"
+                "smithy.api#documentation": "<p>The level of detail included in each aspect of your DataSync\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html\">task\n        report</a>.</p>"
             }
         },
         "com.amazonaws.datasync#ReportResult": {
@@ -7489,7 +7525,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates whether DataSync created a complete <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html\">task report</a> for your\n      transfer.</p>"
+                "smithy.api#documentation": "<p>Indicates whether DataSync created a complete <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html\">task report</a> for your\n      transfer.</p>"
             }
         },
         "com.amazonaws.datasync#ResourceDetails": {
@@ -8460,7 +8496,7 @@
                 "Destination": {
                     "target": "com.amazonaws.datasync#ReportDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon S3 bucket where DataSync uploads your task report. For more\n      information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html#task-report-access\">Task reports</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the Amazon S3 bucket where DataSync uploads your task report. For more\n      information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html#task-report-access\">Task reports</a>.</p>"
                     }
                 },
                 "OutputType": {
@@ -8489,7 +8525,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies how you want to configure a task report, which provides detailed information about for your DataSync transfer.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html\">Task\n        reports</a>.</p>"
+                "smithy.api#documentation": "<p>Specifies how you want to configure a task report, which provides detailed information about for your DataSync transfer.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html\">Task\n        reports</a>.</p>"
             }
         },
         "com.amazonaws.datasync#TaskSchedule": {
@@ -8693,7 +8729,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the name of an agent.</p>"
+                "smithy.api#documentation": "<p>Updates the name of an DataSync agent.</p>"
             }
         },
         "com.amazonaws.datasync#UpdateAgentRequest": {
@@ -9124,7 +9160,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates some of the parameters of a previously created location for Server Message Block\n      (SMB) file system access. For information about creating an SMB location, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html\">Creating a\n        location for SMB</a>.</p>"
+                "smithy.api#documentation": "<p>Updates some of the parameters of a Server Message Block\n      (SMB) file server location that you can use for DataSync transfers.</p>"
             }
         },
         "com.amazonaws.datasync#UpdateLocationSmbRequest": {
@@ -9133,38 +9169,38 @@
                 "LocationArn": {
                     "target": "com.amazonaws.datasync#LocationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SMB location to update.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ARN of the SMB location that you want to update.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#SmbSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subdirectory in the SMB file system that is used to read data from the SMB source\n      location or write data to the SMB destination. The SMB path should be a path that's\n      exported by the SMB server, or a subdirectory of that path. The path should be such that it\n      can be mounted by other SMB clients in your network.</p>\n         <note>\n            <p>\n               <code>Subdirectory</code> must be specified with forward slashes. For example,\n          <code>/path/to/folder</code>.</p>\n         </note>\n         <p>To transfer all the data in the folder that you specified, DataSync must have\n      permissions to mount the SMB share and to access all the data in that share. To ensure this,\n      do either of the following:</p>\n         <ul>\n            <li>\n               <p>Ensure that the user/password specified belongs to the user who can mount the share\n          and who has the appropriate permissions for all of the files and directories that you want\n            DataSync to access.</p>\n            </li>\n            <li>\n               <p>Use credentials of a member of the Backup Operators group to mount the share. </p>\n            </li>\n         </ul>\n         <p>Doing either of these options enables the agent to access the data. For the agent to\n      access directories, you must also enable all execute access.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name of the share exported by your SMB file server where DataSync\n      will read or write data. You can include a subdirectory in the share path (for example,\n      <code>/path/to/subdirectory</code>). Make sure that other SMB clients in your network can\n      also mount this path.</p>\n         <p>To copy all data in the specified subdirectory, DataSync must be able to mount\n      the SMB share and access all of its data. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">required permissions</a> for SMB locations.</p>"
                     }
                 },
                 "User": {
                     "target": "com.amazonaws.datasync#SmbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user who can mount the share has the permissions to access files and folders in the\n      SMB share.</p>"
+                        "smithy.api#documentation": "<p>Specifies the user name that can mount your SMB file server and has permission to access\n      the files and folders involved in your transfer.</p>\n         <p>For information about choosing a user with the right level of access for your transfer,\n      see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">required permissions</a> for SMB locations.</p>"
                     }
                 },
                 "Domain": {
                     "target": "com.amazonaws.datasync#SmbDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Windows domain that the SMB server belongs to.</p>"
+                        "smithy.api#documentation": "<p>Specifies the Windows domain name that your SMB file server belongs to. </p>\n         <p>If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right file server.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">required permissions</a> for SMB locations.</p>"
                     }
                 },
                 "Password": {
                     "target": "com.amazonaws.datasync#SmbPassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password of the user who can mount the share has the permissions to access files and\n      folders in the SMB share.</p>"
+                        "smithy.api#documentation": "<p>Specifies the password of the user who can mount your SMB file server and has permission\n      to access the files and folders involved in your transfer.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">required permissions</a> for SMB locations.</p>"
                     }
                 },
                 "AgentArns": {
                     "target": "com.amazonaws.datasync#AgentArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB)\n      location.</p>"
+                        "smithy.api#documentation": "<p>Specifies the DataSync agent (or agents) which you want to connect to your SMB file server. You specify an agent by using its Amazon Resource Name (ARN).</p>"
                     }
                 },
                 "MountOptions": {

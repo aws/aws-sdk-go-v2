@@ -1245,7 +1245,7 @@
                     "name": "connect"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that you use to set up and\n   manage a customer contact center and provide reliable customer engagement at any scale.</p>\n         <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize\n   contact routing. You can also resolve customer issues more efficiently by getting customers in\n   touch with the appropriate agents.</p>\n         <p>There are limits to the number of Amazon Connect resources that you can create. There\n   are also limits to the number of requests that you can make per second. For more information,\n   seeP98941055 <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service\n    Quotas</a> in the <i>Amazon Connect Administrator Guide</i>.</p>\n         <p>You can connect programmatically to an Amazon Web Services service by using an endpoint. For\n   a list of Amazon Connect endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect Endpoints</a>.</p>",
+                "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that you use to set up and\n   manage a customer contact center and provide reliable customer engagement at any scale.</p>\n         <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize\n   contact routing. You can also resolve customer issues more efficiently by getting customers in\n   touch with the appropriate agents.</p>\n         <p>There are limits to the number of Amazon Connect resources that you can create. There\n   are also limits to the number of requests that you can make per second. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <p>You can connect programmatically to an Amazon Web Services service by using an endpoint. For\n   a list of Amazon Connect endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect Endpoints</a>.</p>",
                 "smithy.api#title": "Amazon Connect Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2084,7 +2084,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A third party application's metadata.</p>"
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A third-party application's metadata.</p>"
             }
         },
         "com.amazonaws.connect#ApplicationPermissions": {
@@ -3243,8 +3243,13 @@
                 "TargetArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone number inbound traffic is routed through. You must enter <code>InstanceId</code> or <code>TargetArn</code>. </p>"
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance that phone numbers are claimed to. You\n   can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the\n    instance ID</a> in the Amazon Resource Name (ARN) of the instance. You must enter <code>InstanceId</code> or <code>TargetArn</code>. </p>"
                     }
                 },
                 "PhoneNumber": {
@@ -3340,7 +3345,13 @@
                 "TargetArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone number inbound traffic is routed through.</p>"
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance that phone numbers are claimed to. You\n   can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the\n    instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>"
                     }
                 },
                 "Tags": {
@@ -5629,7 +5640,7 @@
                 "Applications": {
                     "target": "com.amazonaws.connect#Applications",
                     "traits": {
-                        "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A list of third party applications that the security profile will give access to.</p>"
+                        "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A list of third-party applications that the security profile will give access to.</p>"
                     }
                 }
             },
@@ -14735,7 +14746,7 @@
                 "IntervalPeriod": {
                     "target": "com.amazonaws.connect#IntervalPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <code>IntervalPeriod</code>: An aggregated grouping applied to request metrics. Valid\n    <code>IntervalPeriod</code> values are: <code>FIFTEEN_MIN</code> | <code>THIRTY_MIN</code> |\n    <code>HOUR</code> | <code>DAY</code> | <code>WEEK</code> | <code>TOTAL</code>. </p>\n         <p>For example, if <code>IntervalPeriod</code> is selected <code>THIRTY_MIN</code>,\n    <code>StartTime</code> and <code>EndTime</code> differs by 1 day, then Amazon Connect\n   returns 48 results in the response. Each result is aggregated by the THIRTY_MIN period. By\n   default Amazon Connect aggregates results based on the <code>TOTAL</code> interval period. </p>\n         <p>The following list describes restrictions on <code>StartTime</code> and <code>EndTime</code>\n   based on what <code>IntervalPeriod</code> is requested. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>FIFTEEN_MIN</code>: The difference between <code>StartTime</code> and\n      <code>EndTime</code> must be less than 3 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THIRTY_MIN</code>: The difference between <code>StartTime</code> and\n      <code>EndTime</code> must be less than 3 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOUR</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 3 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DAY</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 35 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WEEK</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 35 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TOTAL</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 35 days.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            <code>IntervalPeriod</code>: An aggregated grouping applied to request metrics. Valid\n   <code>IntervalPeriod</code> values are: <code>FIFTEEN_MIN</code> | <code>THIRTY_MIN</code> |\n   <code>HOUR</code> | <code>DAY</code> | <code>WEEK</code> | <code>TOTAL</code>. </p>\n         <p>For example, if <code>IntervalPeriod</code> is selected <code>THIRTY_MIN</code>,\n   <code>StartTime</code> and <code>EndTime</code> differs by 1 day, then Amazon Connect\n   returns 48 results in the response. Each result is aggregated by the THIRTY_MIN period. By\n   default Amazon Connect aggregates results based on the <code>TOTAL</code> interval period. </p>\n         <p>The following list describes restrictions on <code>StartTime</code> and <code>EndTime</code>\n   based on what <code>IntervalPeriod</code> is requested. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>FIFTEEN_MIN</code>: The difference between <code>StartTime</code> and\n     <code>EndTime</code> must be less than 3 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THIRTY_MIN</code>: The difference between <code>StartTime</code> and\n     <code>EndTime</code> must be less than 3 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOUR</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 3 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DAY</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 35 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WEEK</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 35 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TOTAL</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 35 days.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -16760,7 +16771,13 @@
                 "TargetArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone number inbound traffic is routed through.</p>"
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance that phone numbers are claimed to. You\n   can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the\n    instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>"
                     }
                 }
             },
@@ -16820,7 +16837,13 @@
                 "TargetArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to. If <code>TargetArn</code> input is not provided, this API lists numbers claimed\n   to all the Amazon Connect instances belonging to your account in the same Amazon Web Services Region as the request.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone number inbound traffic is routed through. If both <code>TargetArn</code> and <code>InstanceId</code> input are not\n   provided, this API lists numbers claimed to all the Amazon Connect instances belonging to\n   your account in the same Amazon Web Services Region as the request.</p>"
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance that phone numbers are claimed to. You\n   can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the\n    instance ID</a> in the Amazon Resource Name (ARN) of the instance. If both <code>TargetArn</code> and <code>InstanceId</code> are not provided, this API lists numbers\n   claimed to all the Amazon Connect instances belonging to your account in the same AWS Region as\n   the request.</p>"
                     }
                 },
                 "MaxResults": {
@@ -17669,7 +17692,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of third party applications in a specific security profile.</p>",
+                "smithy.api#documentation": "<p>Returns a list of third-party applications in a specific security profile.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/security-profiles-applications/{InstanceId}/{SecurityProfileId}",
@@ -17689,7 +17712,7 @@
                 "SecurityProfileId": {
                     "target": "com.amazonaws.connect#SecurityProfileId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The security profile identifier.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the security profle.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -17697,7 +17720,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance identifier.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -17705,7 +17728,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.connect#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. The next set of results can be retrieved by using the\n   token value returned in the previous response when making the next request.</p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -17727,13 +17750,13 @@
                 "Applications": {
                     "target": "com.amazonaws.connect#Applications",
                     "traits": {
-                        "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A list of the third party application's metadata.</p>"
+                        "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A list of the third-party application's metadata.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.connect#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. The next set of results can be retrieved by using the\n   token value returned in the previous response when making the next request.</p>"
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
                     }
                 }
             },
@@ -18973,7 +18996,7 @@
                 "EndTime": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format. End time is based on the interval period selected.\n   For example, If <code>IntervalPeriod</code> is selected <code>THIRTY_MIN</code>,\n    <code>StartTime</code> and <code>EndTime</code> in the API request differs by 1 day, then 48\n   results are returned in the response. Each result is aggregated by the 30 minutes period, with\n   each <code>StartTime</code> and <code>EndTime</code> differing by 30 minutes. </p>"
+                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format. End time is based on the interval period selected.\n   For example, If <code>IntervalPeriod</code> is selected <code>THIRTY_MIN</code>,\n   <code>StartTime</code> and <code>EndTime</code> in the API request differs by 1 day, then 48\n   results are returned in the response. Each result is aggregated by the 30 minutes period, with\n   each <code>StartTime</code> and <code>EndTime</code> differing by 30 minutes. </p>"
                     }
                 }
             },
@@ -22810,7 +22833,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>When a contact is being recorded, and the recording has been suspended using\n   SuspendContactRecording, this API resumes recording the call or screen.</p>\n         <p>Voice and screen recordings are supported.</p>",
+                "smithy.api#documentation": "<p>When a contact is being recorded, and the recording has been suspended using\n   SuspendContactRecording, this API resumes recording whatever recording is selected in the flow\n   configuration: call, screen, or both. If only call recording or only screen recording is enabled,\n   then it would resume.</p>\n         <p>Voice and screen recordings are supported.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/resume-recording",
@@ -23529,8 +23552,13 @@
                 "TargetArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone number inbound traffic is routed through. You must enter <code>InstanceId</code> or <code>TargetArn</code>. </p>"
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance that phone numbers are claimed to. You\n   can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the\n    instance ID</a> in the Amazon Resource Name (ARN) of the instance. You must enter <code>InstanceId</code> or <code>TargetArn</code>. </p>"
                     }
                 },
                 "PhoneNumberCountryCode": {
@@ -26132,7 +26160,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>When a contact is being recorded, this API suspends recording the call or screen. For\n   example, you might suspend the call or screen recording while collecting sensitive information,\n   such as a credit card number. Then use ResumeContactRecording to restart recording.</p>\n         <p>The period of time that the recording is suspended is filled with silence in the final\n   recording.</p>\n         <p>Voice and screen recordings are supported.</p>",
+                "smithy.api#documentation": "<p>When a contact is being recorded, this API suspends recording whatever is selected in the\n   flow configuration: call, screen, or both. If only call recording or only screen recording is\n   enabled, then it would be suspended. For example, you might suspend the screen\n   recording while collecting sensitive information, such as a credit card number. Then use\n   ResumeContactRecording to restart recording the screen.</p>\n         <p>The period of time that the recording is suspended is filled with silence in the final\n   recording.</p>\n         <p>Voice and screen recordings are supported.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/suspend-recording",
@@ -28748,8 +28776,13 @@
                 "TargetArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone number inbound traffic is routed through. You must enter <code>InstanceId</code> or <code>TargetArn</code>. </p>"
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance that phone numbers are claimed to. You\n   can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the\n    instance ID</a> in the Amazon Resource Name (ARN) of the instance. You must enter <code>InstanceId</code> or <code>TargetArn</code>. </p>"
                     }
                 },
                 "ClientToken": {
@@ -29859,7 +29892,7 @@
                 "Applications": {
                     "target": "com.amazonaws.connect#Applications",
                     "traits": {
-                        "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A list of the third party application's metadata.</p>"
+                        "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A list of the third-party application's metadata.</p>"
                     }
                 }
             },

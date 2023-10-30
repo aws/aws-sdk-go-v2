@@ -32,6 +32,45 @@
                 }
             }
         },
+        "com.amazonaws.redshiftserverless#Association": {
+            "type": "structure",
+            "members": {
+                "customDomainCertificateArn": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainCertificateArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name’s certificate Amazon resource name (ARN).</p>"
+                    }
+                },
+                "customDomainCertificateExpiryTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration time for the certificate.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "customDomainName": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name associated with the workgroup.</p>"
+                    }
+                },
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup associated with the database.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the custom domain name association.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#AssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#Association"
+            }
+        },
         "com.amazonaws.redshiftserverless#ConfigParameter": {
             "type": "structure",
             "members": {
@@ -147,6 +186,100 @@
                     "target": "com.amazonaws.redshiftserverless#Snapshot",
                     "traits": {
                         "smithy.api#documentation": "<p>The snapshot converted from the recovery point.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateCustomDomainAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#CreateCustomDomainAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#CreateCustomDomainAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a custom domain association for Amazon Redshift Serverless.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateCustomDomainAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup associated with the database.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "customDomainName": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name to associate with the workgroup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "customDomainCertificateArn": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainCertificateArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name’s certificate Amazon resource name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateCustomDomainAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "customDomainName": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name to associate with the workgroup.</p>"
+                    }
+                },
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup associated with the database.</p>"
+                    }
+                },
+                "customDomainCertificateArn": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainCertificateArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name’s certificate Amazon resource name (ARN).</p>"
+                    }
+                },
+                "customDomainCertificateExpiryTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration time for the certificate.</p>",
+                        "smithy.api#timestampFormat": "date-time"
                     }
                 }
             },
@@ -655,6 +788,26 @@
                 }
             ]
         },
+        "com.amazonaws.redshiftserverless#CustomDomainCertificateArnString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "arn:[\\w+=/,.@-]+:acm:[\\w+=/,.@-]*:[0-9]+:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"
+            }
+        },
+        "com.amazonaws.redshiftserverless#CustomDomainName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 253
+                },
+                "smithy.api#pattern": "^(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])$"
+            }
+        },
         "com.amazonaws.redshiftserverless#DbName": {
             "type": "string"
         },
@@ -668,6 +821,67 @@
             "type": "string",
             "traits": {
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteCustomDomainAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#DeleteCustomDomainAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#DeleteCustomDomainAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a custom domain association for Amazon Redshift Serverless.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteCustomDomainAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup associated with the database.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "customDomainName": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name associated with the workgroup.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteCustomDomainAssociationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshiftserverless#DeleteEndpointAccess": {
@@ -1136,13 +1350,6 @@
         "com.amazonaws.redshiftserverless#GetCredentialsRequest": {
             "type": "structure",
             "members": {
-                "workgroupName": {
-                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The name of the workgroup associated with the database.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "dbName": {
                     "target": "com.amazonaws.redshiftserverless#DbName",
                     "traits": {
@@ -1153,6 +1360,18 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of seconds until the returned temporary password expires.\n         The minimum is 900 seconds, and the maximum is 3600 seconds.</p>"
+                    }
+                },
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup associated with the database.</p>"
+                    }
+                },
+                "customDomainName": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name associated with the workgroup. The custom domain name or the workgroup name must be included in the request.</p>"
                     }
                 }
             },
@@ -1185,6 +1404,93 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time of when the <code>DbUser</code> and <code>DbPassword</code> \n         authorization refreshes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetCustomDomainAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#GetCustomDomainAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#GetCustomDomainAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a specific custom domain association.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetCustomDomainAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "customDomainName": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name associated with the workgroup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup associated with the database.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetCustomDomainAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "customDomainName": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name associated with the workgroup.</p>"
+                    }
+                },
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup associated with the database.</p>"
+                    }
+                },
+                "customDomainCertificateArn": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainCertificateArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name’s certificate Amazon resource name (ARN).</p>"
+                    }
+                },
+                "customDomainCertificateExpiryTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration time for the certificate.</p>",
+                        "smithy.api#timestampFormat": "date-time"
                     }
                 }
             },
@@ -1696,6 +2002,101 @@
         },
         "com.amazonaws.redshiftserverless#KmsKeyId": {
             "type": "string"
+        },
+        "com.amazonaws.redshiftserverless#ListCustomDomainAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#ListCustomDomainAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#ListCustomDomainAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InvalidPaginationException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Lists custom domain associations for Amazon Redshift Serverless.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "associations"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListCustomDomainAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.redshiftserverless#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return.\n         You can use <code>nextToken</code> to display the next page of results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "customDomainName": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name associated with the workgroup.</p>"
+                    }
+                },
+                "customDomainCertificateArn": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainCertificateArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name’s certificate Amazon resource name (ARN).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListCustomDomainAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.redshiftserverless#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>"
+                    }
+                },
+                "associations": {
+                    "target": "com.amazonaws.redshiftserverless#AssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Association objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.redshiftserverless#ListEndpointAccess": {
             "type": "operation",
@@ -2758,13 +3159,25 @@
             "version": "2021-04-21",
             "operations": [
                 {
+                    "target": "com.amazonaws.redshiftserverless#CreateCustomDomainAssociation"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#DeleteCustomDomainAssociation"
+                },
+                {
                     "target": "com.amazonaws.redshiftserverless#DeleteResourcePolicy"
                 },
                 {
                     "target": "com.amazonaws.redshiftserverless#GetCredentials"
                 },
                 {
+                    "target": "com.amazonaws.redshiftserverless#GetCustomDomainAssociation"
+                },
+                {
                     "target": "com.amazonaws.redshiftserverless#GetResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ListCustomDomainAssociations"
                 },
                 {
                     "target": "com.amazonaws.redshiftserverless#ListTagsForResource"
@@ -2777,6 +3190,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshiftserverless#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#UpdateCustomDomainAssociation"
                 }
             ],
             "resources": [
@@ -4475,6 +4891,100 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshiftserverless#UpdateCustomDomainAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#UpdateCustomDomainAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#UpdateCustomDomainAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an Amazon Redshift Serverless certificate associated with a custom domain.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateCustomDomainAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup associated with the database.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "customDomainName": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name associated with the workgroup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "customDomainCertificateArn": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainCertificateArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name’s certificate Amazon resource name (ARN). This is optional.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateCustomDomainAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "customDomainName": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name associated with the workgroup.</p>"
+                    }
+                },
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup associated with the database.</p>"
+                    }
+                },
+                "customDomainCertificateArn": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainCertificateArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name’s certificate Amazon resource name (ARN).</p>"
+                    }
+                },
+                "customDomainCertificateExpiryTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration time for the certificate.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.redshiftserverless#UpdateEndpointAccess": {
             "type": "operation",
             "input": {
@@ -4578,7 +5088,7 @@
                 "adminUserPassword": {
                     "target": "com.amazonaws.redshiftserverless#DbPassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password of the administrator for the first database created in the namespace. This parameter must be updated together\n      with <code>adminUsername</code>.</p>\n         <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true.</p>"
+                        "smithy.api#documentation": "<p>The password of the administrator for the first database created in the namespace. This parameter must be updated together\n      with <code>adminUsername</code>.</p>\n         <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. </p>"
                     }
                 },
                 "adminUsername": {
@@ -5176,6 +5686,25 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.</p>"
+                    }
+                },
+                "customDomainName": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name associated with the workgroup.</p>"
+                    }
+                },
+                "customDomainCertificateArn": {
+                    "target": "com.amazonaws.redshiftserverless#CustomDomainCertificateArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name’s certificate Amazon resource name (ARN).</p>"
+                    }
+                },
+                "customDomainCertificateExpiryTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration time for the certificate.</p>",
+                        "smithy.api#timestampFormat": "date-time"
                     }
                 },
                 "workgroupVersion": {

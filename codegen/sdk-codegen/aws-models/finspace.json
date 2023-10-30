@@ -121,6 +121,9 @@
                     "target": "com.amazonaws.finspace#UpdateEnvironment"
                 },
                 {
+                    "target": "com.amazonaws.finspace#UpdateKxClusterCodeConfiguration"
+                },
+                {
                     "target": "com.amazonaws.finspace#UpdateKxClusterDatabases"
                 },
                 {
@@ -3854,7 +3857,7 @@
                 "type": {
                     "target": "com.amazonaws.finspace#KxCacheStorageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of cache storage . The valid values are: </p>\n         <ul>\n            <li>\n               <p>CACHE_1000 – This type provides at least 1000 MB/s disk access throughput. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of cache storage. The valid values are: </p>\n         <ul>\n            <li>\n               <p>CACHE_1000 – This type provides at least 1000 MB/s disk access throughput. </p>\n            </li>\n            <li>\n               <p>CACHE_250 – This type provides at least 250 MB/s disk access throughput. </p>\n            </li>\n            <li>\n               <p>CACHE_12 – This type provides at least 12 MB/s disk access throughput. </p>\n            </li>\n         </ul>\n         <p>For cache type <code>CACHE_1000</code> and <code>CACHE_250</code> you can select cache size as 1200 GB or increments of 2400 GB. For cache type <code>CACHE_12</code> you can select the cache size in increments of 6000 GB.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4016,6 +4019,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details of a kdb cluster.</p>"
+            }
+        },
+        "com.amazonaws.finspace#KxClusterCodeDeploymentConfiguration": {
+            "type": "structure",
+            "members": {
+                "deploymentStrategy": {
+                    "target": "com.amazonaws.finspace#KxClusterCodeDeploymentStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The type of deployment that you want on a cluster.\n        \n      </p>\n         <ul>\n            <li>\n               <p>ROLLING – This options updates the cluster by stopping the exiting q process and starting a new q process with updated configuration.</p>\n            </li>\n            <li>\n               <p>FORCE – This option updates the cluster by immediately stopping all the running processes before starting up new ones with the updated configuration. </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The configuration that allows you to choose how you want to update code on a cluster. Depending on the option you choose, you can reduce the time it takes to update the cluster.\n      </p>"
+            }
+        },
+        "com.amazonaws.finspace#KxClusterCodeDeploymentStrategy": {
+            "type": "enum",
+            "members": {
+                "ROLLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLING"
+                    }
+                },
+                "FORCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORCE"
+                    }
+                }
             }
         },
         "com.amazonaws.finspace#KxClusterDescription": {
@@ -4284,13 +4319,13 @@
                 "deploymentStrategy": {
                     "target": "com.amazonaws.finspace#KxDeploymentStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The type of deployment that you want on a cluster.\n        \n      </p>\n         <ul>\n            <li>\n               <p>ROLLING – This options loads the updated database by stopping the exiting q process and starting a new q process with updated configuration.</p>\n            </li>\n            <li>\n               <p>NO_RESTART – This option loads the updated database on the running q process without stopping it. This option is quicker as it reduces the turn around time to update a kdb database changeset configuration on a cluster.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n         The type of deployment that you want on a cluster.\n         \n      </p>\n         <ul>\n            <li>\n               <p>ROLLING – This options updates the cluster by stopping the exiting q process and starting a new q process with updated configuration.</p>\n            </li>\n            <li>\n               <p>NO_RESTART – This option updates the cluster without stopping the running q process. It is only available for <code>HDB</code> type cluster. This option is quicker as it reduces the turn around time to update configuration on a cluster. </p>\n               <p>With this deployment mode, you cannot update the <code>initializationScript</code> and <code>commandLineArguments</code> parameters.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         The configuration that allows you to choose how you want to update the databases on a cluster. Depending on the option you choose, you can reduce the time it takes to update the database changesets on to a cluster.\n      </p>"
+                "smithy.api#documentation": "<p>\n         The configuration that allows you to choose how you want to update the databases on a cluster. Depending on the option you choose, you can reduce the time it takes to update the cluster.\n      </p>"
             }
         },
         "com.amazonaws.finspace#KxDeploymentStrategy": {
@@ -5944,6 +5979,108 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.finspace#UpdateKxClusterCodeConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#UpdateKxClusterCodeConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#UpdateKxClusterCodeConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Allows you to update code configuration on a running cluster. By using this API you can update the code, the initialization script path, and the command line arguments for a specific cluster. \n      The configuration that you want to update will override any existing configurations on the cluster. \n      </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/kx/environments/{environmentId}/clusters/{clusterName}/configuration/code",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#UpdateKxClusterCodeConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#KxEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A unique identifier of the kdb environment.\n      </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clusterName": {
+                    "target": "com.amazonaws.finspace#KxClusterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspace#ClientTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.finspace#CodeConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "initializationScript": {
+                    "target": "com.amazonaws.finspace#InitializationScriptFilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a Q program that will be run at launch of a cluster. It is a relative path within\n         <i>.zip</i> file that contains the custom code, which will be loaded on\n         the cluster. It must include the file name itself. For example,\n         <code>somedir/init.q</code>.</p>"
+                    }
+                },
+                "commandLineArguments": {
+                    "target": "com.amazonaws.finspace#KxCommandLineArguments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the key-value pairs to make them available inside the cluster.</p>"
+                    }
+                },
+                "deploymentConfiguration": {
+                    "target": "com.amazonaws.finspace#KxClusterCodeDeploymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The configuration that allows you to choose how you want to update the code on a cluster.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#UpdateKxClusterCodeConfigurationResponse": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
