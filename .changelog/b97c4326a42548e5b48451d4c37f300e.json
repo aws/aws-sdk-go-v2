@@ -1,8 +1,0 @@
-{
-    "id": "b97c4326-a425-48e5-b484-51d4c37f300e",
-    "type": "feature",
-    "description": "Platform version changes to support AL1 deprecation initiative.",
-    "modules": [
-        "service/datasync"
-    ]
-}

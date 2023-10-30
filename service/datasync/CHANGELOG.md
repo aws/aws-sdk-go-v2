@@ -1,3 +1,7 @@
+# v1.30.0 (2023-10-30)
+
+* **Feature**: Platform version changes to support AL1 deprecation initiative.
+
 # v1.29.3 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

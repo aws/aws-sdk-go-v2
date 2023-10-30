@@ -1,3 +1,7 @@
+# v1.22.0 (2023-10-30)
+
+* **Feature**: We added a new API action: SendDataSetNotification.
+
 # v1.21.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

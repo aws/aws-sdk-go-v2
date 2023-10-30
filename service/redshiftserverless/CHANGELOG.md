@@ -1,3 +1,7 @@
+# v1.9.0 (2023-10-30)
+
+* **Feature**: Added support for custom domain names for Amazon Redshift Serverless workgroups. This feature enables customers to create a custom domain name and use ACM to generate fully secure connections to it.
+
 # v1.8.0 (2023-10-23)
 
 * **Feature**: This release adds support for customers to see the patch version and workgroup version in Amazon Redshift Serverless.

@@ -1,3 +1,7 @@
+# v1.16.1 (2023-10-30)
+
+* **Documentation**: This release added necessary API documents on creating a Wisdom knowledge base to integrate with S3.
+
 # v1.16.0 (2023-10-18)
 
 * **Feature**: This release adds an max limit of 25 recommendation ids for NotifyRecommendationsReceived API.

@@ -1,3 +1,7 @@
+# v1.14.0 (2023-10-30)
+
+* **Feature**: Introduced the ability to filter applications by their last assessment date and time and have included metrics for the application's estimated workload Recovery Time Objective (RTO) and estimated workload Recovery Point Objective (RPO).
+
 # v1.13.7 (2023-10-19)
 
 * No change notes available for this release.

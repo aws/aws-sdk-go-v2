@@ -1,3 +1,7 @@
+# v1.4.0 (2023-10-30)
+
+* **Feature**: This feature allows customers to create a combination of manifest filtering, startover and time delay configuration that applies to all egress requests by default.
+
 # v1.3.1 (2023-10-26)
 
 * No change notes available for this release.

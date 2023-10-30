@@ -1,8 +1,0 @@
-{
-    "id": "ba30715f-5380-4466-9076-ed9c354a806f",
-    "type": "feature",
-    "description": "This feature allows customers to create a combination of manifest filtering, startover and time delay configuration that applies to all egress requests by default.",
-    "modules": [
-        "service/mediapackagev2"
-    ]
-}

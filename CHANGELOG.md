@@ -1,3 +1,27 @@
+# Release (2023-10-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.72.0](service/connect/CHANGELOG.md#v1720-2023-10-30)
+  * **Feature**: This release adds InstanceId field for phone number APIs.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.22.0](service/dataexchange/CHANGELOG.md#v1220-2023-10-30)
+  * **Feature**: We added a new API action: SendDataSetNotification.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.30.0](service/datasync/CHANGELOG.md#v1300-2023-10-30)
+  * **Feature**: Platform version changes to support AL1 deprecation initiative.
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.14.0](service/finspace/CHANGELOG.md#v1140-2023-10-30)
+  * **Feature**: Introducing new API UpdateKxClusterCodeConfiguration, introducing new cache types for clusters and introducing new deployment modes for updating clusters.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.4.0](service/mediapackagev2/CHANGELOG.md#v140-2023-10-30)
+  * **Feature**: This feature allows customers to create a combination of manifest filtering, startover and time delay configuration that applies to all egress requests by default.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.59.0](service/rds/CHANGELOG.md#v1590-2023-10-30)
+  * **Feature**: This release launches the CreateIntegration, DeleteIntegration, and DescribeIntegrations APIs to manage zero-ETL Integrations.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.9.0](service/redshiftserverless/CHANGELOG.md#v190-2023-10-30)
+  * **Feature**: Added support for custom domain names for Amazon Redshift Serverless workgroups. This feature enables customers to create a custom domain name and use ACM to generate fully secure connections to it.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.14.0](service/resiliencehub/CHANGELOG.md#v1140-2023-10-30)
+  * **Feature**: Introduced the ability to filter applications by their last assessment date and time and have included metrics for the application's estimated workload Recovery Time Objective (RTO) and estimated workload Recovery Point Objective (RPO).
+* `github.com/aws/aws-sdk-go-v2/service/s3outposts`: [v1.19.0](service/s3outposts/CHANGELOG.md#v1190-2023-10-30)
+  * **Feature**: Updated ListOutpostsWithS3 API response to include S3OutpostArn for use with AWS RAM.
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.16.1](service/wisdom/CHANGELOG.md#v1161-2023-10-30)
+  * **Documentation**: This release added necessary API documents on creating a Wisdom knowledge base to integrate with S3.
+
 # Release (2023-10-27)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.19.0 (2023-10-30)
+
+* **Feature**: Updated ListOutpostsWithS3 API response to include S3OutpostArn for use with AWS RAM.
+
 # v1.18.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

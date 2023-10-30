@@ -1,8 +1,0 @@
-{
-    "id": "def961f9-913f-4a18-974b-17156f8d60a4",
-    "type": "feature",
-    "description": "This release launches the CreateIntegration, DeleteIntegration, and DescribeIntegrations APIs to manage zero-ETL Integrations.",
-    "modules": [
-        "service/rds"
-    ]
-}
