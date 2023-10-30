@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        go-version: ["1.20", "1.21"]
+        go-version: [1.19, "1.20"]
     steps:
     - uses: actions/checkout@v2
 
@@ -48,7 +48,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        go-version: [1.15, 1.16, 1.17, 1.18, 1.19]
+        go-version: [1.15, 1.16, 1.17, 1.18]
         exclude:
           - os: macos-latest
             go-version: 1.15
@@ -76,7 +76,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest]
-        go-version: ["1.20", "1.21"]
+        go-version: [1.19, "1.20"]
     env:
       EACHMODULE_SKIP: "internal\\repotools\\changes"
     steps:
@@ -103,7 +103,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest]
-        go-version: [1.15, 1.16, 1.17, 1.18, 1.19]
+        go-version: [1.15, 1.16, 1.17, 1.18]
     env:
       EACHMODULE_SKIP: "internal\\repotools\\changes"
     steps:
