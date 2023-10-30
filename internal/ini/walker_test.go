@@ -71,7 +71,12 @@ func TestValidDataFiles(t *testing.T) {
 				for k, v := range table {
 					switch e := v.(type) {
 					case string:
-						a := p.String(k)
+						var a string
+						if p.values[k].mp != nil {
+							a = fmt.Sprintf("%v", p.values[k].mp)
+						} else {
+							a = p.String(k)
+						}
 						if e != a {
 							t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
 						}

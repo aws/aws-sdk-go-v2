@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
+	internalepconfig "github.com/aws/aws-sdk-go-v2/internal/endpoints/config"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/signer/internal/endpoints"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -16,6 +17,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 )
 
@@ -191,6 +193,24 @@ func finalizeClientEndpointResolverOptions(options *Options) {
 func resolveEndpointResolverV2(options *Options) {
 	if options.EndpointResolverV2 == nil {
 		options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
+	}
+}
+
+func resolveBaseEndpoint(cfg aws.Config, o *Options) {
+	if cfg.BaseEndpoint != nil {
+		o.BaseEndpoint = cfg.BaseEndpoint
+	}
+
+	_, g := os.LookupEnv("AWS_ENDPOINT_URL")
+	_, s := os.LookupEnv("AWS_ENDPOINT_URL_SIGNER")
+
+	if g && !s {
+		return
+	}
+
+	value, found, err := internalepconfig.ResolveServiceBaseEndpoint(context.Background(), "signer", cfg.ConfigSources)
+	if found && err == nil {
+		o.BaseEndpoint = &value
 	}
 }
 

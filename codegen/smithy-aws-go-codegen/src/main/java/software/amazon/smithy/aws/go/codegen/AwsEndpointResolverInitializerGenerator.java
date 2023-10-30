@@ -3,9 +3,11 @@ package software.amazon.smithy.aws.go.codegen;
 
 import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
 
+import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.TriConsumer;
 import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionGenerator;
@@ -20,10 +22,16 @@ import software.amazon.smithy.utils.SetUtils;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.Map;
+
 
 public class AwsEndpointResolverInitializerGenerator implements GoIntegration {
 
     public static final String RESOLVE_ENDPOINT_RESOLVER_V2 = "resolve" + EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME;
+    public static final String RESOLVE_BASE_ENDPOINT = "resolveBaseEndpoint";
+
+    private Map<String, Object> commonCodegenArgs;
+
 
     @Override
     public void writeAdditionalFiles(
@@ -32,10 +40,62 @@ public class AwsEndpointResolverInitializerGenerator implements GoIntegration {
             SymbolProvider symbolProvider,
             TriConsumer<String, String, Consumer<GoWriter>> writerFactory
     ) {
+        String sdkId = settings.getService(model).expectTrait(ServiceTrait.class).getSdkId();
+        this.commonCodegenArgs = MapUtils.of(
+            "envSdkId", sdkId.toUpperCase().replaceAll(" ", "_"),
+            "configSdkId", sdkId.toLowerCase().replaceAll(" ", "_"),
+            "urlSdkId", sdkId.toLowerCase().replaceAll(" ", "-"),
+            "testing", SymbolUtils.createPointableSymbolBuilder("T", SmithyGoDependency.TESTING).build(),
+            "awsString", SymbolUtils.createValueSymbolBuilder("String", AwsGoDependency.AWS_CORE).build()
+        );
 
         writerFactory.accept("endpoints.go", settings.getModuleName(), writer -> {
-            writer.write("$W", generateResolveMethod());
+            writer.write(
+                """
+                $W
+
+                $W
+
+                """
+                ,
+                generateResolveMethod(),
+                generateConfigResolverMethod(
+                    settings.getService(model).expectTrait(ServiceTrait.class).getSdkId())
+                );
         });
+    }
+
+    private GoWriter.Writable generateConfigResolverMethod(String sdkId) {
+        return goTemplate(
+            """
+                func $resolveMethodName:L(cfg $awsConfig:T, o *Options) {
+                    if cfg.BaseEndpoint != nil {
+                        o.BaseEndpoint = cfg.BaseEndpoint
+                    }
+
+                    _, g := $lookupEnv:T("AWS_ENDPOINT_URL")
+                    _, s := $lookupEnv:T("AWS_ENDPOINT_URL_$envSdkId:L")
+
+                    if g && !s  {
+                        return
+                    }
+
+                    value, found, err := $resolveServiceEndpoint:T(context.Background(), "$sdkId:L", cfg.ConfigSources)
+                    if found && err == nil {
+                        o.BaseEndpoint = &value
+                    }
+                }
+            """,
+            MapUtils.of(
+                "resolveMethodName", RESOLVE_BASE_ENDPOINT,
+                "awsConfig", SymbolUtils.createValueSymbolBuilder("Config", AwsGoDependency.AWS_CORE).build(),
+                "lookupEnv", SymbolUtils.createValueSymbolBuilder("LookupEnv", SmithyGoDependency.OS).build(),
+                "resolveServiceEndpoint", SymbolUtils.createValueSymbolBuilder(
+                                        "ResolveServiceBaseEndpoint", AwsGoDependency.INTERNAL_ENDPOINTS_CONFIG).build(),
+                "sdkId", sdkId
+            ),
+            this.commonCodegenArgs
+        );
     }
 
 

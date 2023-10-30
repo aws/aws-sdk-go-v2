@@ -2,8 +2,6 @@ module github.com/aws/aws-sdk-go-v2/internal/endpoints/config
 
 go 1.15
 
-require github.com/aws/aws-sdk-go-v2/config v1.19.1
-
 replace github.com/aws/aws-sdk-go-v2 => ../../../
 
 replace github.com/aws/aws-sdk-go-v2/config => ../../../config/
@@ -13,6 +11,8 @@ replace github.com/aws/aws-sdk-go-v2/credentials => ../../../credentials/
 replace github.com/aws/aws-sdk-go-v2/feature/ec2/imds => ../../../feature/ec2/imds/
 
 replace github.com/aws/aws-sdk-go-v2/internal/configsources => ../../../internal/configsources/
+
+replace github.com/aws/aws-sdk-go-v2/internal/endpoints/config => ../../../internal/endpoints/config/
 
 replace github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 => ../../../internal/endpoints/v2/
 
