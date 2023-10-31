@@ -167,10 +167,11 @@ type StartLoaderJobInput struct {
 	// This is an optional flag parameter that indicates whether the load request can
 	// be queued up or not. You don't have to wait for one load job to complete before
 	// issuing the next one, because Neptune can queue up as many as 64 jobs at a time,
-	// provided that their queueRequest parameters are all set to "TRUE" . If the
-	// queueRequest parameter is omitted or set to "FALSE" , the load request will fail
-	// if another load job is already running. Allowed values: "TRUE" , "FALSE" .
-	// Default value: "FALSE" .
+	// provided that their queueRequest parameters are all set to "TRUE" . The queue
+	// order of the jobs will be first-in-first-out (FIFO). If the queueRequest
+	// parameter is omitted or set to "FALSE" , the load request will fail if another
+	// load job is already running. Allowed values: "TRUE" , "FALSE" . Default value:
+	// "FALSE" .
 	QueueRequest *bool
 
 	// updateSingleCardinalityProperties is an optional parameter that controls how

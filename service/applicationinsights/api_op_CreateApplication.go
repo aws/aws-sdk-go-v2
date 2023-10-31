@@ -34,6 +34,10 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 
 type CreateApplicationInput struct {
 
+	// If set to true, the managed policies for SSM and CW will be attached to the
+	// instance roles if they are missing.
+	AttachMissingPermission *bool
+
 	// Indicates whether Application Insights automatically configures unmonitored
 	// resources in the resource group.
 	AutoConfigEnabled *bool

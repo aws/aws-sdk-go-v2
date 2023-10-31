@@ -36,6 +36,9 @@ func ExampleBatchJobIdentifier_outputUsage() {
 	case *types.BatchJobIdentifierMemberFileBatchJobIdentifier:
 		_ = v.Value // Value is types.FileBatchJobIdentifier
 
+	case *types.BatchJobIdentifierMemberS3BatchJobIdentifier:
+		_ = v.Value // Value is types.S3BatchJobIdentifier
+
 	case *types.BatchJobIdentifierMemberScriptBatchJobIdentifier:
 		_ = v.Value // Value is types.ScriptBatchJobIdentifier
 
@@ -48,6 +51,7 @@ func ExampleBatchJobIdentifier_outputUsage() {
 	}
 }
 
+var _ *types.S3BatchJobIdentifier
 var _ *types.FileBatchJobIdentifier
 var _ *types.ScriptBatchJobIdentifier
 
@@ -160,6 +164,27 @@ func ExampleExternalLocation_outputUsage() {
 	// type switches can be used to check the union value
 	switch v := union.(type) {
 	case *types.ExternalLocationMemberS3Location:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleJobIdentifier_outputUsage() {
+	var union types.JobIdentifier
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.JobIdentifierMemberFileName:
+		_ = v.Value // Value is string
+
+	case *types.JobIdentifierMemberScriptName:
 		_ = v.Value // Value is string
 
 	case *types.UnknownUnionMember:

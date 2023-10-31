@@ -45,6 +45,10 @@ type CreateBranchInput struct {
 	// This member is required.
 	BranchName *string
 
+	// The backend for a Branch of an Amplify app. Use for a backend created from an
+	// CloudFormation stack.
+	Backend *types.Backend
+
 	// The Amazon Resource Name (ARN) for a backend environment that is part of an
 	// Amplify app.
 	BackendEnvironmentArn *string

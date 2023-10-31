@@ -1932,6 +1932,11 @@ func awsAwsjson11_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 	object := value.Object()
 	defer object.Close()
 
+	if v.AttachMissingPermission != nil {
+		ok := object.Key("AttachMissingPermission")
+		ok.Boolean(*v.AttachMissingPermission)
+	}
+
 	if v.AutoConfigEnabled != nil {
 		ok := object.Key("AutoConfigEnabled")
 		ok.Boolean(*v.AutoConfigEnabled)
@@ -2145,6 +2150,11 @@ func awsAwsjson11_serializeOpDocumentDescribeComponentConfigurationRecommendatio
 	if len(v.Tier) > 0 {
 		ok := object.Key("Tier")
 		ok.String(string(v.Tier))
+	}
+
+	if v.WorkloadName != nil {
+		ok := object.Key("WorkloadName")
+		ok.String(*v.WorkloadName)
 	}
 
 	return nil
@@ -2581,6 +2591,11 @@ func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, v
 func awsAwsjson11_serializeOpDocumentUpdateApplicationInput(v *UpdateApplicationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AttachMissingPermission != nil {
+		ok := object.Key("AttachMissingPermission")
+		ok.Boolean(*v.AttachMissingPermission)
+	}
 
 	if v.AutoConfigEnabled != nil {
 		ok := object.Key("AutoConfigEnabled")

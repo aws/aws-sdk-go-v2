@@ -39,6 +39,10 @@ type UpdateApplicationInput struct {
 	// This member is required.
 	ResourceGroupName *string
 
+	// If set to true, the managed policies for SSM and CW will be attached to the
+	// instance roles if they are missing.
+	AttachMissingPermission *bool
+
 	// Turns auto-configuration on or off.
 	AutoConfigEnabled *bool
 

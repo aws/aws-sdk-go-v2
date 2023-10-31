@@ -40,7 +40,7 @@ type DeleteJobInput struct {
 	// This member is required.
 	AppId *string
 
-	// The name for the branch, for the job.
+	// The name of the branch to use for the job.
 	//
 	// This member is required.
 	BranchName *string

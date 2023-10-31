@@ -1,0 +1,8 @@
+{
+    "id": "fc43e9c6-16c7-4885-8c77-2916ba10f07b",
+    "type": "feature",
+    "description": "Automate attaching managed policies",
+    "modules": [
+        "service/applicationinsights"
+    ]
+}

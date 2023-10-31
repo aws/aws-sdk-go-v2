@@ -40,7 +40,7 @@ type GetJobInput struct {
 	// This member is required.
 	AppId *string
 
-	// The branch name for the job.
+	// The name of the branch to use for the job.
 	//
 	// This member is required.
 	BranchName *string

@@ -3532,6 +3532,9 @@ func awsAwsjson11_deserializeOpErrorUpdateComponentConfiguration(response *smith
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceInUseException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -4375,6 +4378,15 @@ func awsAwsjson11_deserializeDocumentApplicationInfo(v **types.ApplicationInfo, 
 					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
 				}
 				sv.AccountId = ptr.String(jtv)
+			}
+
+		case "AttachMissingPermission":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected AttachMissingPermission to be of type *bool, got %T instead", value)
+				}
+				sv.AttachMissingPermission = ptr.Bool(jtv)
 			}
 
 		case "AutoConfigEnabled":

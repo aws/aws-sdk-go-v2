@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an existing Amplify app by appID.
+// Returns an existing Amplify app specified by an app ID.
 func (c *Client) GetApp(ctx context.Context, params *GetAppInput, optFns ...func(*Options)) (*GetAppOutput, error) {
 	if params == nil {
 		params = &GetAppInput{}

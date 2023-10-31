@@ -197,6 +197,7 @@ type BatchJobExecutionSummary struct {
 // The following types satisfy this interface:
 //
 //	BatchJobIdentifierMemberFileBatchJobIdentifier
+//	BatchJobIdentifierMemberS3BatchJobIdentifier
 //	BatchJobIdentifierMemberScriptBatchJobIdentifier
 type BatchJobIdentifier interface {
 	isBatchJobIdentifier()
@@ -210,6 +211,16 @@ type BatchJobIdentifierMemberFileBatchJobIdentifier struct {
 }
 
 func (*BatchJobIdentifierMemberFileBatchJobIdentifier) isBatchJobIdentifier() {}
+
+// Specifies an Amazon S3 location that identifies the batch jobs that you want to
+// run. Use this identifier to run ad hoc batch jobs.
+type BatchJobIdentifierMemberS3BatchJobIdentifier struct {
+	Value S3BatchJobIdentifier
+
+	noSmithyDocumentSerde
+}
+
+func (*BatchJobIdentifierMemberS3BatchJobIdentifier) isBatchJobIdentifier() {}
 
 // A batch job identifier in which the batch job to run is identified by the
 // script name.
@@ -393,6 +404,9 @@ type DataSetImportTask struct {
 	//
 	// This member is required.
 	TaskId *string
+
+	// If dataset import failed, the failure reason will show here.
+	StatusReason *string
 
 	noSmithyDocumentSerde
 }
@@ -748,6 +762,34 @@ type HighAvailabilityConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Identifies a specific batch job.
+//
+// The following types satisfy this interface:
+//
+//	JobIdentifierMemberFileName
+//	JobIdentifierMemberScriptName
+type JobIdentifier interface {
+	isJobIdentifier()
+}
+
+// The name of the file that contains the batch job definition.
+type JobIdentifierMemberFileName struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*JobIdentifierMemberFileName) isJobIdentifier() {}
+
+// The name of the script that contains the batch job definition.
+type JobIdentifierMemberScriptName struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*JobIdentifierMemberScriptName) isJobIdentifier() {}
+
 // A subset of the attributes that describe a log group. In CloudWatch a log group
 // is a group of log streams that share the same retention, monitoring, and access
 // control settings.
@@ -893,6 +935,29 @@ type RecordLength struct {
 	noSmithyDocumentSerde
 }
 
+// A batch job identifier in which the batch jobs to run are identified by an
+// Amazon S3 location.
+type S3BatchJobIdentifier struct {
+
+	// The Amazon S3 bucket that contains the batch job definitions.
+	//
+	// This member is required.
+	Bucket *string
+
+	// Identifies the batch job definition. This identifier can also point to any
+	// batch job definition that already exists in the application or to one of the
+	// batch job definitions within the directory that is specified in keyPrefix .
+	//
+	// This member is required.
+	Identifier JobIdentifier
+
+	// The key prefix that specifies the path to the folder in the S3 bucket that has
+	// the batch job definitions.
+	KeyPrefix *string
+
+	noSmithyDocumentSerde
+}
+
 // A batch job definition contained in a script.
 type ScriptBatchJobDefinition struct {
 
@@ -1034,4 +1099,5 @@ func (*UnknownUnionMember) isDataSetImportConfig()        {}
 func (*UnknownUnionMember) isDatasetOrgAttributes()       {}
 func (*UnknownUnionMember) isDefinition()                 {}
 func (*UnknownUnionMember) isExternalLocation()           {}
+func (*UnknownUnionMember) isJobIdentifier()              {}
 func (*UnknownUnionMember) isStorageConfiguration()       {}

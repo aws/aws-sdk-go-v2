@@ -35,7 +35,7 @@ func (c *Client) CreateApp(ctx context.Context, params *CreateAppInput, optFns .
 // The request structure used to create apps in Amplify.
 type CreateAppInput struct {
 
-	// The name for an Amplify app.
+	// The name of the Amplify app.
 	//
 	// This member is required.
 	Name *string
@@ -48,7 +48,7 @@ type CreateAppInput struct {
 	// or oauthToken when you create a new app. Existing Amplify apps deployed from a
 	// GitHub repository using OAuth continue to work with CI/CD. However, we strongly
 	// recommend that you migrate these apps to use the GitHub App. For more
-	// information, see Migrating an existing OAuth app to the Amplify GitHub App (https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth)
+	// information, see Migrating an existing OAuth app to the Amplify GitHub App (https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth)
 	// in the Amplify User Guide .
 	AccessToken *string
 
@@ -72,7 +72,7 @@ type CreateAppInput struct {
 	// The custom rewrite and redirect rules for an Amplify app.
 	CustomRules []types.CustomRule
 
-	// The description for an Amplify app.
+	// The description of the Amplify app.
 	Description *string
 
 	// Enables automated branch creation for an Amplify app.
@@ -85,11 +85,14 @@ type CreateAppInput struct {
 	// Enables the auto building of branches for an Amplify app.
 	EnableBranchAutoBuild *bool
 
-	// Automatically disconnects a branch in the Amplify Console when you delete a
+	// Automatically disconnects a branch in the Amplify console when you delete a
 	// branch from your Git repository.
 	EnableBranchAutoDeletion *bool
 
-	// The environment variables map for an Amplify app.
+	// The environment variables map for an Amplify app. For a list of the environment
+	// variables that are accessible to Amplify by default, see Amplify Environment
+	// variables (https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html)
+	// in the Amplify Hosting User Guide.
 	EnvironmentVariables map[string]string
 
 	// The AWS Identity and Access Management (IAM) service role for an Amplify app.
@@ -104,7 +107,7 @@ type CreateAppInput struct {
 	// deployed from a GitHub repository using OAuth continue to work with CI/CD.
 	// However, we strongly recommend that you migrate these apps to use the GitHub
 	// App. For more information, see Migrating an existing OAuth app to the Amplify
-	// GitHub App (https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth)
+	// GitHub App (https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth)
 	// in the Amplify User Guide .
 	OauthToken *string
 
@@ -114,7 +117,7 @@ type CreateAppInput struct {
 	// set the platform type to WEB_DYNAMIC .
 	Platform types.Platform
 
-	// The repository for an Amplify app.
+	// The Git repository for the Amplify app.
 	Repository *string
 
 	// The tag for an Amplify app.

@@ -963,6 +963,42 @@ type CapacityAllocation struct {
 	noSmithyDocumentSerde
 }
 
+// The recommended Capacity Block that fits your search requirements.
+type CapacityBlockOffering struct {
+
+	// The Availability Zone of the Capacity Block offering.
+	AvailabilityZone *string
+
+	// The amount of time of the Capacity Block reservation in hours.
+	CapacityBlockDurationHours *int32
+
+	// The ID of the Capacity Block offering.
+	CapacityBlockOfferingId *string
+
+	// The currency of the payment for the Capacity Block.
+	CurrencyCode *string
+
+	// The end date of the Capacity Block offering.
+	EndDate *time.Time
+
+	// The number of instances in the Capacity Block offering.
+	InstanceCount *int32
+
+	// The instance type of the Capacity Block offering.
+	InstanceType *string
+
+	// The start date of the Capacity Block offering.
+	StartDate *time.Time
+
+	// The tenancy of the Capacity Block.
+	Tenancy CapacityReservationTenancy
+
+	// The total price to be paid up front.
+	UpfrontFee *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a Capacity Reservation.
 type CapacityReservation struct {
 
@@ -1048,6 +1084,9 @@ type CapacityReservation struct {
 	// Reservations for cluster placement groups (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cr-cpg.html)
 	// in the Amazon EC2 User Guide.
 	PlacementGroupArn *string
+
+	// The type of Capacity Reservation.
+	ReservationType CapacityReservationType
 
 	// The date and time at which the Capacity Reservation was started.
 	StartDate *time.Time
@@ -6293,8 +6332,10 @@ type InstancePrivateIpAddress struct {
 // Scaling groups, EC2 Fleet, and Spot Fleet to launch instances. If you plan to
 // use the launch template in the launch instance wizard (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html)
 // or with the RunInstances API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
-// , you can't specify InstanceRequirements . For more information, see
-// Attribute-based instance type selection for EC2 Fleet (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html)
+// , you can't specify InstanceRequirements . For more information, see Create a
+// mixed instances group using attribute-based instance type selection (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html)
+// in the Amazon EC2 Auto Scaling User Guide, and also Attribute-based instance
+// type selection for EC2 Fleet (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html)
 // , Attribute-based instance type selection for Spot Fleet (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html)
 // , and Spot placement score (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html)
 // in the Amazon EC2 User Guide.

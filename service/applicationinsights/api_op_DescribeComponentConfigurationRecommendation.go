@@ -52,6 +52,9 @@ type DescribeComponentConfigurationRecommendationInput struct {
 	// The recommended configuration type.
 	RecommendationType types.RecommendationType
 
+	// The name of the workload.
+	WorkloadName *string
+
 	noSmithyDocumentSerde
 }
 

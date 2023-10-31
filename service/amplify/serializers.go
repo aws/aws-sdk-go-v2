@@ -368,6 +368,13 @@ func awsRestjson1_serializeOpDocumentCreateBranchInput(v *CreateBranchInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.Backend != nil {
+		ok := object.Key("backend")
+		if err := awsRestjson1_serializeDocumentBackend(v.Backend, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BackendEnvironmentArn != nil {
 		ok := object.Key("backendEnvironmentArn")
 		ok.String(*v.BackendEnvironmentArn)
@@ -3133,6 +3140,13 @@ func awsRestjson1_serializeOpDocumentUpdateBranchInput(v *UpdateBranchInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.Backend != nil {
+		ok := object.Key("backend")
+		if err := awsRestjson1_serializeDocumentBackend(v.Backend, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BackendEnvironmentArn != nil {
 		ok := object.Key("backendEnvironmentArn")
 		ok.String(*v.BackendEnvironmentArn)
@@ -3500,6 +3514,18 @@ func awsRestjson1_serializeDocumentAutoSubDomainCreationPatterns(v []string, val
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBackend(v *types.Backend, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StackArn != nil {
+		ok := object.Key("stackArn")
+		ok.String(*v.StackArn)
+	}
+
 	return nil
 }
 

@@ -46,7 +46,10 @@ type App struct {
 	// This member is required.
 	EnableBranchAutoBuild *bool
 
-	// The environment variables for the Amplify app.
+	// The environment variables for the Amplify app. For a list of the environment
+	// variables that are accessible to Amplify by default, see Amplify Environment
+	// variables (https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html)
+	// in the Amplify Hosting User Guide.
 	//
 	// This member is required.
 	EnvironmentVariables map[string]string
@@ -98,7 +101,7 @@ type App struct {
 	// Enables automated branch creation for the Amplify app.
 	EnableAutoBranchCreation *bool
 
-	// Automatically disconnect a branch in the Amplify Console when you delete a
+	// Automatically disconnect a branch in the Amplify console when you delete a
 	// branch from your Git repository.
 	EnableBranchAutoDeletion *bool
 
@@ -174,6 +177,15 @@ type AutoBranchCreationConfig struct {
 
 	// Describes the current stage for the autocreated branch.
 	Stage Stage
+
+	noSmithyDocumentSerde
+}
+
+// Describes the backend properties associated with an Amplify Branch .
+type Backend struct {
+
+	// The Amazon Resource Name (ARN) for the CloudFormation stack.
+	StackArn *string
 
 	noSmithyDocumentSerde
 }
@@ -303,6 +315,9 @@ type Branch struct {
 
 	// A list of custom resources that are linked to this branch.
 	AssociatedResources []string
+
+	// Describes the backend properties associated with an Amplify Branch .
+	Backend *Backend
 
 	// The Amazon Resource Name (ARN) for a backend environment that is part of an
 	// Amplify app.

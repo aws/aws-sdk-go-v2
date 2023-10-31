@@ -40,7 +40,7 @@ type GetBranchInput struct {
 	// This member is required.
 	AppId *string
 
-	// The name for the branch.
+	// The name of the branch.
 	//
 	// This member is required.
 	BranchName *string

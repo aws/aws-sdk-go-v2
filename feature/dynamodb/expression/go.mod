@@ -15,7 +15,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.15.7 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.9.15 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.7.37 // indirect
-	github.com/aws/smithy-go v1.15.0 // indirect
+	github.com/aws/smithy-go v1.16.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 )
 

@@ -144,6 +144,93 @@ func (c *Client) addOperationListDomainAssociationsMiddlewares(stack *middleware
 	return nil
 }
 
+// ListDomainAssociationsAPIClient is a client that implements the
+// ListDomainAssociations operation.
+type ListDomainAssociationsAPIClient interface {
+	ListDomainAssociations(context.Context, *ListDomainAssociationsInput, ...func(*Options)) (*ListDomainAssociationsOutput, error)
+}
+
+var _ ListDomainAssociationsAPIClient = (*Client)(nil)
+
+// ListDomainAssociationsPaginatorOptions is the paginator options for
+// ListDomainAssociations
+type ListDomainAssociationsPaginatorOptions struct {
+	// The maximum number of records to list in a single response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDomainAssociationsPaginator is a paginator for ListDomainAssociations
+type ListDomainAssociationsPaginator struct {
+	options   ListDomainAssociationsPaginatorOptions
+	client    ListDomainAssociationsAPIClient
+	params    *ListDomainAssociationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDomainAssociationsPaginator returns a new ListDomainAssociationsPaginator
+func NewListDomainAssociationsPaginator(client ListDomainAssociationsAPIClient, params *ListDomainAssociationsInput, optFns ...func(*ListDomainAssociationsPaginatorOptions)) *ListDomainAssociationsPaginator {
+	if params == nil {
+		params = &ListDomainAssociationsInput{}
+	}
+
+	options := ListDomainAssociationsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListDomainAssociationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDomainAssociationsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListDomainAssociations page.
+func (p *ListDomainAssociationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDomainAssociationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListDomainAssociations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opListDomainAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

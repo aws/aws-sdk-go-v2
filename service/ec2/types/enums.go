@@ -872,11 +872,14 @@ type CapacityReservationState string
 
 // Enum values for CapacityReservationState
 const (
-	CapacityReservationStateActive    CapacityReservationState = "active"
-	CapacityReservationStateExpired   CapacityReservationState = "expired"
-	CapacityReservationStateCancelled CapacityReservationState = "cancelled"
-	CapacityReservationStatePending   CapacityReservationState = "pending"
-	CapacityReservationStateFailed    CapacityReservationState = "failed"
+	CapacityReservationStateActive         CapacityReservationState = "active"
+	CapacityReservationStateExpired        CapacityReservationState = "expired"
+	CapacityReservationStateCancelled      CapacityReservationState = "cancelled"
+	CapacityReservationStatePending        CapacityReservationState = "pending"
+	CapacityReservationStateFailed         CapacityReservationState = "failed"
+	CapacityReservationStateScheduled      CapacityReservationState = "scheduled"
+	CapacityReservationStatePaymentPending CapacityReservationState = "payment-pending"
+	CapacityReservationStatePaymentFailed  CapacityReservationState = "payment-failed"
 )
 
 // Values returns all known values for CapacityReservationState. Note that this
@@ -889,6 +892,9 @@ func (CapacityReservationState) Values() []CapacityReservationState {
 		"cancelled",
 		"pending",
 		"failed",
+		"scheduled",
+		"payment-pending",
+		"payment-failed",
 	}
 }
 
@@ -907,6 +913,24 @@ func (CapacityReservationTenancy) Values() []CapacityReservationTenancy {
 	return []CapacityReservationTenancy{
 		"default",
 		"dedicated",
+	}
+}
+
+type CapacityReservationType string
+
+// Enum values for CapacityReservationType
+const (
+	CapacityReservationTypeDefault       CapacityReservationType = "default"
+	CapacityReservationTypeCapacityBlock CapacityReservationType = "capacity-block"
+)
+
+// Values returns all known values for CapacityReservationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationType) Values() []CapacityReservationType {
+	return []CapacityReservationType{
+		"default",
+		"capacity-block",
 	}
 }
 
@@ -1282,8 +1306,9 @@ type DefaultTargetCapacityType string
 
 // Enum values for DefaultTargetCapacityType
 const (
-	DefaultTargetCapacityTypeSpot     DefaultTargetCapacityType = "spot"
-	DefaultTargetCapacityTypeOnDemand DefaultTargetCapacityType = "on-demand"
+	DefaultTargetCapacityTypeSpot          DefaultTargetCapacityType = "spot"
+	DefaultTargetCapacityTypeOnDemand      DefaultTargetCapacityType = "on-demand"
+	DefaultTargetCapacityTypeCapacityBlock DefaultTargetCapacityType = "capacity-block"
 )
 
 // Values returns all known values for DefaultTargetCapacityType. Note that this
@@ -1293,6 +1318,7 @@ func (DefaultTargetCapacityType) Values() []DefaultTargetCapacityType {
 	return []DefaultTargetCapacityType{
 		"spot",
 		"on-demand",
+		"capacity-block",
 	}
 }
 
@@ -2670,8 +2696,9 @@ type InstanceLifecycleType string
 
 // Enum values for InstanceLifecycleType
 const (
-	InstanceLifecycleTypeSpot      InstanceLifecycleType = "spot"
-	InstanceLifecycleTypeScheduled InstanceLifecycleType = "scheduled"
+	InstanceLifecycleTypeSpot          InstanceLifecycleType = "spot"
+	InstanceLifecycleTypeScheduled     InstanceLifecycleType = "scheduled"
+	InstanceLifecycleTypeCapacityBlock InstanceLifecycleType = "capacity-block"
 )
 
 // Values returns all known values for InstanceLifecycleType. Note that this can
@@ -2681,6 +2708,7 @@ func (InstanceLifecycleType) Values() []InstanceLifecycleType {
 	return []InstanceLifecycleType{
 		"spot",
 		"scheduled",
+		"capacity-block",
 	}
 }
 
@@ -5292,7 +5320,8 @@ type MarketType string
 
 // Enum values for MarketType
 const (
-	MarketTypeSpot MarketType = "spot"
+	MarketTypeSpot          MarketType = "spot"
+	MarketTypeCapacityBlock MarketType = "capacity-block"
 )
 
 // Values returns all known values for MarketType. Note that this can be expanded
@@ -5301,6 +5330,7 @@ const (
 func (MarketType) Values() []MarketType {
 	return []MarketType{
 		"spot",
+		"capacity-block",
 	}
 }
 
@@ -7769,8 +7799,9 @@ type UsageClassType string
 
 // Enum values for UsageClassType
 const (
-	UsageClassTypeSpot     UsageClassType = "spot"
-	UsageClassTypeOnDemand UsageClassType = "on-demand"
+	UsageClassTypeSpot          UsageClassType = "spot"
+	UsageClassTypeOnDemand      UsageClassType = "on-demand"
+	UsageClassTypeCapacityBlock UsageClassType = "capacity-block"
 )
 
 // Values returns all known values for UsageClassType. Note that this can be
@@ -7780,6 +7811,7 @@ func (UsageClassType) Values() []UsageClassType {
 	return []UsageClassType{
 		"spot",
 		"on-demand",
+		"capacity-block",
 	}
 }
 

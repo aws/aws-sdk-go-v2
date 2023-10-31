@@ -746,6 +746,11 @@ func validateBatchJobIdentifier(v types.BatchJobIdentifier) error {
 			invalidParams.AddNested("[fileBatchJobIdentifier]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.BatchJobIdentifierMemberS3BatchJobIdentifier:
+		if err := validateS3BatchJobIdentifier(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3BatchJobIdentifier]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.BatchJobIdentifierMemberScriptBatchJobIdentifier:
 		if err := validateScriptBatchJobIdentifier(&uv.Value); err != nil {
 			invalidParams.AddNested("[scriptBatchJobIdentifier]", err.(smithy.InvalidParamsError))
@@ -991,6 +996,24 @@ func validateRecordLength(v *types.RecordLength) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RecordLength"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3BatchJobIdentifier(v *types.S3BatchJobIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3BatchJobIdentifier"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

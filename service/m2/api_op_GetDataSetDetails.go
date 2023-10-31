@@ -64,6 +64,9 @@ type GetDataSetDetailsOutput struct {
 	// The type of data set. The only supported value is VSAM.
 	DataSetOrg types.DatasetDetailOrgAttributes
 
+	// File size of the dataset.
+	FileSize *int64
+
 	// The last time the data set was referenced.
 	LastReferencedTime *time.Time
 

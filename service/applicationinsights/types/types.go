@@ -43,6 +43,10 @@ type ApplicationInfo struct {
 	// The AWS account ID for the owner of the application.
 	AccountId *string
 
+	// If set to true, the managed policies for SSM and CW will be attached to the
+	// instance roles if they are missing.
+	AttachMissingPermission *bool
+
 	// Indicates whether auto-configuration is turned on for this application.
 	AutoConfigEnabled *bool
 

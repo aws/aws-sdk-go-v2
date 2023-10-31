@@ -53,11 +53,23 @@ type UpdateEnvironmentInput struct {
 	// The version of the runtime engine for the runtime environment.
 	EngineVersion *string
 
+	// Forces the updates on the environment. This option is needed if the
+	// applications in the environment are not stopped or if there are ongoing
+	// application-related activities in the environment. If you use this option, be
+	// aware that it could lead to data corruption in the applications, and that you
+	// might need to perform repair and recovery procedures for the applications. This
+	// option is not needed if the attribute being updated is
+	// preferredMaintenanceWindow .
+	ForceUpdate bool
+
 	// The instance type for the runtime environment to update.
 	InstanceType *string
 
-	// Configures the maintenance window you want for the runtime environment. If you
-	// do not provide a value, a random system-generated value will be assigned.
+	// Configures the maintenance window that you want for the runtime environment.
+	// The maintenance window must have the format ddd:hh24:mi-ddd:hh24:mi and must be
+	// less than 24 hours. The following two examples are valid maintenance windows:
+	// sun:23:45-mon:00:15 or sat:01:00-sat:03:00 . If you do not provide a value, a
+	// random system-generated value will be assigned.
 	PreferredMaintenanceWindow *string
 
 	noSmithyDocumentSerde

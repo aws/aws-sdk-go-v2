@@ -41,7 +41,7 @@ type StartJobInput struct {
 	// This member is required.
 	AppId *string
 
-	// The branch name for the job.
+	// The name of the branch to use for the job.
 	//
 	// This member is required.
 	BranchName *string
@@ -67,7 +67,7 @@ type StartJobInput struct {
 	// RETRY .
 	JobId *string
 
-	// A descriptive reason for starting this job.
+	// A descriptive reason for starting the job.
 	JobReason *string
 
 	noSmithyDocumentSerde

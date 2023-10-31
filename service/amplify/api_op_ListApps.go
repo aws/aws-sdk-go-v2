@@ -136,6 +136,91 @@ func (c *Client) addOperationListAppsMiddlewares(stack *middleware.Stack, option
 	return nil
 }
 
+// ListAppsAPIClient is a client that implements the ListApps operation.
+type ListAppsAPIClient interface {
+	ListApps(context.Context, *ListAppsInput, ...func(*Options)) (*ListAppsOutput, error)
+}
+
+var _ ListAppsAPIClient = (*Client)(nil)
+
+// ListAppsPaginatorOptions is the paginator options for ListApps
+type ListAppsPaginatorOptions struct {
+	// The maximum number of records to list in a single response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListAppsPaginator is a paginator for ListApps
+type ListAppsPaginator struct {
+	options   ListAppsPaginatorOptions
+	client    ListAppsAPIClient
+	params    *ListAppsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListAppsPaginator returns a new ListAppsPaginator
+func NewListAppsPaginator(client ListAppsAPIClient, params *ListAppsInput, optFns ...func(*ListAppsPaginatorOptions)) *ListAppsPaginator {
+	if params == nil {
+		params = &ListAppsInput{}
+	}
+
+	options := ListAppsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListAppsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListAppsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListApps page.
+func (p *ListAppsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAppsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListApps(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opListApps(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

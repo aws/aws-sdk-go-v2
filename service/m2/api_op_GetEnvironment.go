@@ -102,7 +102,7 @@ type GetEnvironmentOutput struct {
 	VpcId *string
 
 	// The number of instances included in the runtime environment. A standalone
-	// runtime environment has a maxiumum of one instance. Currently, a high
+	// runtime environment has a maximum of one instance. Currently, a high
 	// availability runtime environment has a maximum of two instances.
 	ActualCapacity *int32
 
@@ -123,8 +123,8 @@ type GetEnvironmentOutput struct {
 	// Indicates the pending maintenance scheduled on this environment.
 	PendingMaintenance *types.PendingMaintenance
 
-	// Configures the maintenance window you want for the runtime environment. If you
-	// do not provide a value, a random system-generated value will be assigned.
+	// The maintenance window for the runtime environment. If you don't provide a
+	// value for the maintenance window, the service assigns a random value.
 	PreferredMaintenanceWindow *string
 
 	// Whether applications running in this runtime environment are publicly

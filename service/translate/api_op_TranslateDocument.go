@@ -17,13 +17,13 @@ import (
 )
 
 // Translates the input document from the source language to the target language.
-// This synchronous operation supports plain text or HTML for the input document.
-// TranslateDocument supports translations from English to any supported language,
-// and from any supported language to English. Therefore, specify either the source
-// language code or the target language code as “en” (English). TranslateDocument
-// does not support language auto-detection. If you set the Formality parameter,
-// the request will fail if the target language does not support formality. For a
-// list of target languages that support formality, see Setting formality (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html)
+// This synchronous operation supports text, HTML, or Word documents as the input
+// document. TranslateDocument supports translations from English to any supported
+// language, and from any supported language to English. Therefore, specify either
+// the source language code or the target language code as “en” (English). If you
+// set the Formality parameter, the request will fail if the target language does
+// not support formality. For a list of target languages that support formality,
+// see Setting formality (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html)
 // .
 func (c *Client) TranslateDocument(ctx context.Context, params *TranslateDocumentInput, optFns ...func(*Options)) (*TranslateDocumentOutput, error) {
 	if params == nil {
@@ -48,10 +48,15 @@ type TranslateDocumentInput struct {
 	// This member is required.
 	Document *types.Document
 
-	// The language code for the language of the source text. Do not use auto , because
-	// TranslateDocument does not support language auto-detection. For a list of
-	// supported language codes, see Supported languages (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html)
-	// .
+	// The language code for the language of the source text. For a list of supported
+	// language codes, see Supported languages (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html)
+	// . To have Amazon Translate determine the source language of your text, you can
+	// specify auto in the SourceLanguageCode field. If you specify auto , Amazon
+	// Translate will call Amazon Comprehend (https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html)
+	// to determine the source language. If you specify auto , you must send the
+	// TranslateDocument request in a region that supports Amazon Comprehend.
+	// Otherwise, the request returns an error indicating that autodetect is not
+	// supported.
 	//
 	// This member is required.
 	SourceLanguageCode *string
@@ -63,9 +68,11 @@ type TranslateDocumentInput struct {
 	// This member is required.
 	TargetLanguageCode *string
 
-	// Settings to configure your translation output, including the option to set the
-	// formality level of the output text and the option to mask profane words and
-	// phrases.
+	// Settings to configure your translation output. You can configure the following
+	// options:
+	//   - Brevity: not supported.
+	//   - Formality: sets the formality level of the output text.
+	//   - Profanity: masks profane words and phrases in your translation output.
 	Settings *types.TranslationSettings
 
 	// The name of a terminology list file to add to the translation job. This file
@@ -98,9 +105,12 @@ type TranslateDocumentOutput struct {
 	// This member is required.
 	TranslatedDocument *types.TranslatedDocument
 
-	// Settings to configure your translation output, including the option to set the
-	// formality level of the output text and the option to mask profane words and
-	// phrases.
+	// Settings to configure your translation output. You can configure the following
+	// options:
+	//   - Brevity: reduces the length of the translation output for most
+	//   translations. Available for TranslateText only.
+	//   - Formality: sets the formality level of the translation output.
+	//   - Profanity: masks profane words and phrases in the translation output.
 	AppliedSettings *types.TranslationSettings
 
 	// The names of the custom terminologies applied to the input text by Amazon

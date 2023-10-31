@@ -102,9 +102,11 @@ type StartTextTranslationJobInput struct {
 	// .
 	ParallelDataNames []string
 
-	// Settings to configure your translation output, including the option to set the
-	// formality level of the output text and the option to mask profane words and
-	// phrases.
+	// Settings to configure your translation output. You can configure the following
+	// options:
+	//   - Brevity: not supported.
+	//   - Formality: sets the formality level of the output text.
+	//   - Profanity: masks profane words and phrases in your translation output.
 	Settings *types.TranslationSettings
 
 	// The name of a custom terminology resource to add to the translation job. This

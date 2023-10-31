@@ -136,6 +136,7 @@ const (
 	DataSetTaskLifecycleCreating  DataSetTaskLifecycle = "Creating"
 	DataSetTaskLifecycleRunning   DataSetTaskLifecycle = "Running"
 	DataSetTaskLifecycleCompleted DataSetTaskLifecycle = "Completed"
+	DataSetTaskLifecycleFailed    DataSetTaskLifecycle = "Failed"
 )
 
 // Values returns all known values for DataSetTaskLifecycle. Note that this can be
@@ -146,6 +147,7 @@ func (DataSetTaskLifecycle) Values() []DataSetTaskLifecycle {
 		"Creating",
 		"Running",
 		"Completed",
+		"Failed",
 	}
 }
 
@@ -153,9 +155,10 @@ type DeploymentLifecycle string
 
 // Enum values for DeploymentLifecycle
 const (
-	DeploymentLifecycleDeploying DeploymentLifecycle = "Deploying"
-	DeploymentLifecycleSucceeded DeploymentLifecycle = "Succeeded"
-	DeploymentLifecycleFailed    DeploymentLifecycle = "Failed"
+	DeploymentLifecycleDeploying    DeploymentLifecycle = "Deploying"
+	DeploymentLifecycleSucceeded    DeploymentLifecycle = "Succeeded"
+	DeploymentLifecycleFailed       DeploymentLifecycle = "Failed"
+	DeploymentLifecycleDeployUpdate DeploymentLifecycle = "Updating Deployment"
 )
 
 // Values returns all known values for DeploymentLifecycle. Note that this can be
@@ -166,6 +169,7 @@ func (DeploymentLifecycle) Values() []DeploymentLifecycle {
 		"Deploying",
 		"Succeeded",
 		"Failed",
+		"Updating Deployment",
 	}
 }
 

@@ -16,7 +16,10 @@ import (
 )
 
 // Creates a deployment for a manually deployed Amplify app. Manually deployed
-// apps are not connected to a repository.
+// apps are not connected to a repository. The maximum duration between the
+// CreateDeployment call and the StartDeployment call cannot exceed 8 hours. If
+// the duration exceeds 8 hours, the StartDeployment call and the associated Job
+// will fail.
 func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentInput, optFns ...func(*Options)) (*CreateDeploymentOutput, error) {
 	if params == nil {
 		params = &CreateDeploymentInput{}
@@ -40,7 +43,7 @@ type CreateDeploymentInput struct {
 	// This member is required.
 	AppId *string
 
-	// The name for the branch, for the job.
+	// The name of the branch to use for the job.
 	//
 	// This member is required.
 	BranchName *string

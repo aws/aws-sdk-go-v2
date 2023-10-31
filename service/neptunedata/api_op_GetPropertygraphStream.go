@@ -32,7 +32,7 @@ import (
 // depending on the query: Note that you can restrict property-graph queries using
 // the following IAM context keys:
 //   - neptune-db:QueryLanguage:Gremlin (https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys)
-//   - neptune-db:QueryLanguage:Opencypher (https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys)
+//   - neptune-db:QueryLanguage:OpenCypher (https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys)
 //
 // See Condition keys available in Neptune IAM data-access policy statements (https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)
 // ).

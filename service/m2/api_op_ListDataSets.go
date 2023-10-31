@@ -48,6 +48,10 @@ type ListDataSetsInput struct {
 	// The maximum number of objects to return.
 	MaxResults *int32
 
+	// Filter dataset name matching the specified pattern. Can use * and % as wild
+	// cards.
+	NameFilter *string
+
 	// A pagination token returned from a previous call to this operation. This
 	// specifies the next item to return. To return to the beginning of the list,
 	// exclude this parameter.

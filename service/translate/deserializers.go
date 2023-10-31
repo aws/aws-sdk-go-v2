@@ -4887,6 +4887,15 @@ func awsAwsjson11_deserializeDocumentTranslationSettings(v **types.TranslationSe
 
 	for key, value := range shape {
 		switch key {
+		case "Brevity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Brevity to be of type string, got %T instead", value)
+				}
+				sv.Brevity = types.Brevity(jtv)
+			}
+
 		case "Formality":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -1760,6 +1760,10 @@ func awsRestjson1_serializeOpHttpBindingsListDataSetsInput(v *ListDataSetsInput,
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
+	if v.NameFilter != nil {
+		encoder.SetQuery("nameFilter").String(*v.NameFilter)
+	}
+
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
@@ -2657,6 +2661,11 @@ func awsRestjson1_serializeOpDocumentUpdateEnvironmentInput(v *UpdateEnvironment
 		ok.String(*v.EngineVersion)
 	}
 
+	if v.ForceUpdate {
+		ok := object.Key("forceUpdate")
+		ok.Boolean(v.ForceUpdate)
+	}
+
 	if v.InstanceType != nil {
 		ok := object.Key("instanceType")
 		ok.String(*v.InstanceType)
@@ -2718,6 +2727,12 @@ func awsRestjson1_serializeDocumentBatchJobIdentifier(v types.BatchJobIdentifier
 	case *types.BatchJobIdentifierMemberFileBatchJobIdentifier:
 		av := object.Key("fileBatchJobIdentifier")
 		if err := awsRestjson1_serializeDocumentFileBatchJobIdentifier(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.BatchJobIdentifierMemberS3BatchJobIdentifier:
+		av := object.Key("s3BatchJobIdentifier")
+		if err := awsRestjson1_serializeDocumentS3BatchJobIdentifier(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -2989,6 +3004,26 @@ func awsRestjson1_serializeDocumentHighAvailabilityConfig(v *types.HighAvailabil
 	return nil
 }
 
+func awsRestjson1_serializeDocumentJobIdentifier(v types.JobIdentifier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.JobIdentifierMemberFileName:
+		av := object.Key("fileName")
+		av.String(uv.Value)
+
+	case *types.JobIdentifierMemberScriptName:
+		av := object.Key("scriptName")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPoAttributes(v *types.PoAttributes, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3064,6 +3099,30 @@ func awsRestjson1_serializeDocumentRecordLength(v *types.RecordLength, value smi
 	{
 		ok := object.Key("min")
 		ok.Integer(v.Min)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3BatchJobIdentifier(v *types.S3BatchJobIdentifier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bucket != nil {
+		ok := object.Key("bucket")
+		ok.String(*v.Bucket)
+	}
+
+	if v.Identifier != nil {
+		ok := object.Key("identifier")
+		if err := awsRestjson1_serializeDocumentJobIdentifier(v.Identifier, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KeyPrefix != nil {
+		ok := object.Key("keyPrefix")
+		ok.String(*v.KeyPrefix)
 	}
 
 	return nil

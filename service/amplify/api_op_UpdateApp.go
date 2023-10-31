@@ -48,7 +48,7 @@ type UpdateAppInput struct {
 	// or oauthToken when you update an app. Existing Amplify apps deployed from a
 	// GitHub repository using OAuth continue to work with CI/CD. However, we strongly
 	// recommend that you migrate these apps to use the GitHub App. For more
-	// information, see Migrating an existing OAuth app to the Amplify GitHub App (https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth)
+	// information, see Migrating an existing OAuth app to the Amplify GitHub App (https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth)
 	// in the Amplify User Guide .
 	AccessToken *string
 
@@ -83,7 +83,7 @@ type UpdateAppInput struct {
 	// Enables branch auto-building for an Amplify app.
 	EnableBranchAutoBuild *bool
 
-	// Automatically disconnects a branch in the Amplify Console when you delete a
+	// Automatically disconnects a branch in the Amplify console when you delete a
 	// branch from your Git repository.
 	EnableBranchAutoDeletion *bool
 
@@ -105,7 +105,7 @@ type UpdateAppInput struct {
 	// deployed from a GitHub repository using OAuth continue to work with CI/CD.
 	// However, we strongly recommend that you migrate these apps to use the GitHub
 	// App. For more information, see Migrating an existing OAuth app to the Amplify
-	// GitHub App (https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth)
+	// GitHub App (https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth)
 	// in the Amplify User Guide .
 	OauthToken *string
 
@@ -115,7 +115,7 @@ type UpdateAppInput struct {
 	// set the platform type to WEB_DYNAMIC .
 	Platform types.Platform
 
-	// The name of the repository for an Amplify app
+	// The name of the Git repository for an Amplify app.
 	Repository *string
 
 	noSmithyDocumentSerde

@@ -444,24 +444,6 @@ func validateOutputDataConfig(v *types.OutputDataConfig) error {
 	}
 }
 
-func validateParallelDataConfig(v *types.ParallelDataConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ParallelDataConfig"}
-	if v.S3Uri == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
-	}
-	if len(v.Format) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Format"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -525,10 +507,6 @@ func validateOpCreateParallelDataInput(v *CreateParallelDataInput) error {
 	}
 	if v.ParallelDataConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParallelDataConfig"))
-	} else if v.ParallelDataConfig != nil {
-		if err := validateParallelDataConfig(v.ParallelDataConfig); err != nil {
-			invalidParams.AddNested("ParallelDataConfig", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.EncryptionKey != nil {
 		if err := validateEncryptionKey(v.EncryptionKey); err != nil {
@@ -824,10 +802,6 @@ func validateOpUpdateParallelDataInput(v *UpdateParallelDataInput) error {
 	}
 	if v.ParallelDataConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParallelDataConfig"))
-	} else if v.ParallelDataConfig != nil {
-		if err := validateParallelDataConfig(v.ParallelDataConfig); err != nil {
-			invalidParams.AddNested("ParallelDataConfig", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
