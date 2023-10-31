@@ -1,3 +1,8 @@
+# v1.21.0 (2023-10-31)
+
+* **Feature**: **BREAKING CHANGE**: Bump minimum go version to 1.19 per the revised [go version support policy](https://aws.amazon.com/blogs/developer/aws-sdk-for-go-aligns-with-go-release-policy-on-supported-runtimes/).
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2023-10-25)
 
 * **Feature**: This release will allow KMS alias names to be used when creating Mission Profiles

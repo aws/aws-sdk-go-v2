@@ -1,3 +1,8 @@
+# v1.9.0 (2023-10-31)
+
+* **Feature**: **BREAKING CHANGE**: Bump minimum go version to 1.19 per the revised [go version support policy](https://aws.amazon.com/blogs/developer/aws-sdk-for-go-aligns-with-go-release-policy-on-supported-runtimes/).
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2023-10-25)
 
 * **Feature**: Increase maximum length of CommentBody to 3000, and increase maximum length of StringValue to 1500

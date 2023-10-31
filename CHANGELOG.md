@@ -1,3 +1,23 @@
+# Release (2023-10-31)
+
+## General Highlights
+* **Feature**: **BREAKING CHANGE**: Bump minimum go version to 1.19 per the revised [go version support policy](https://aws.amazon.com/blogs/developer/aws-sdk-for-go-aligns-with-go-release-policy-on-supported-runtimes/).
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.16.0](service/amplify/CHANGELOG.md#v1160-2023-10-31)
+  * **Feature**: Add backend field to CreateBranch and UpdateBranch requests. Add pagination support for ListApps, ListDomainAssociations, ListBranches, and ListJobs
+* `github.com/aws/aws-sdk-go-v2/service/applicationinsights`: [v1.20.0](service/applicationinsights/CHANGELOG.md#v1200-2023-10-31)
+  * **Feature**: Automate attaching managed policies
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.129.0](service/ec2/CHANGELOG.md#v11290-2023-10-31)
+  * **Feature**: Capacity Blocks for ML are a new EC2 purchasing option for reserving GPU instances on a future date to support short duration machine learning (ML) workloads. Capacity Blocks automatically place instances close together inside Amazon EC2 UltraClusters for low-latency, high-throughput networking.
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.8.0](service/m2/CHANGELOG.md#v180-2023-10-31)
+  * **Feature**: Added name filter ability for ListDataSets API, added ForceUpdate for Updating environment and BatchJob submission using S3BatchJobIdentifier
+* `github.com/aws/aws-sdk-go-v2/service/neptunedata`: [v1.1.0](service/neptunedata/CHANGELOG.md#v110-2023-10-31)
+  * **Feature**: Minor change to not retry CancelledByUserException
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.20.0](service/translate/CHANGELOG.md#v1200-2023-10-31)
+  * **Feature**: Added support for Brevity translation settings feature.
+
 # Release (2023-10-30)
 
 ## Module Highlights

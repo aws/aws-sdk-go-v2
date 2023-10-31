@@ -1,8 +1,0 @@
-{
-    "id": "0a75ee24-9cc5-483b-b4dc-40c0303574cb",
-    "type": "feature",
-    "description": "Add backend field to CreateBranch and UpdateBranch requests. Add pagination support for ListApps, ListDomainAssociations, ListBranches, and ListJobs",
-    "modules": [
-        "service/amplify"
-    ]
-}

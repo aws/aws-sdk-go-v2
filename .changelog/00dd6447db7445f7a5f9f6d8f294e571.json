@@ -1,8 +1,0 @@
-{
-    "id": "00dd6447-db74-45f7-a5f9-f6d8f294e571",
-    "type": "feature",
-    "description": "Minor change to not retry CancelledByUserException",
-    "modules": [
-        "service/neptunedata"
-    ]
-}

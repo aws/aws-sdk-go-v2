@@ -3,4 +3,4 @@
 package sfn
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.19.8"
+const goModuleVersion = "1.20.0"

@@ -1,8 +1,0 @@
-{
-    "id": "ff5a4032-7724-4e59-9fda-6497d3d2870b",
-    "type": "feature",
-    "description": "Added support for Brevity translation settings feature.",
-    "modules": [
-        "service/translate"
-    ]
-}

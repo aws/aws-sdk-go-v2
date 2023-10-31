@@ -1,3 +1,9 @@
+# v1.16.0 (2023-10-31)
+
+* **Feature**: **BREAKING CHANGE**: Bump minimum go version to 1.19 per the revised [go version support policy](https://aws.amazon.com/blogs/developer/aws-sdk-for-go-aligns-with-go-release-policy-on-supported-runtimes/).
+* **Feature**: Add backend field to CreateBranch and UpdateBranch requests. Add pagination support for ListApps, ListDomainAssociations, ListBranches, and ListJobs
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.2 (2023-10-12)
 
 * **Dependency Update**: Updated to the latest SDK module versions

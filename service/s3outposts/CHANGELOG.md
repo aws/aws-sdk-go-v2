@@ -1,3 +1,8 @@
+# v1.20.0 (2023-10-31)
+
+* **Feature**: **BREAKING CHANGE**: Bump minimum go version to 1.19 per the revised [go version support policy](https://aws.amazon.com/blogs/developer/aws-sdk-for-go-aligns-with-go-release-policy-on-supported-runtimes/).
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2023-10-30)
 
 * **Feature**: Updated ListOutpostsWithS3 API response to include S3OutpostArn for use with AWS RAM.
