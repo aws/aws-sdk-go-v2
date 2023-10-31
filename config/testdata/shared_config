@@ -278,3 +278,7 @@ ca_bundle = custom_ca_bundle_file.pem
 
 [profile sdk_app_id]
 sdk_ua_app_id = 12345
+
+[profile endpoint_config]
+ignore_configured_endpoint_urls = true
+endpoint_url = https://example.com

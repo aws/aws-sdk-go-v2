@@ -17,6 +17,9 @@ func TestParser(t *testing.T) {
 	regionLit, _, _ := newLitToken([]rune(`"us-west-2"`))
 	regionNoQuotesLit, _, _ := newLitToken([]rune("us-west-2"))
 
+	s3ServiceID, _, _ := newLitToken([]rune("s3"))
+	nestedParamsLit, _, _ := newLitToken([]rune("\n\tfoo=bar\n\tbar=baz\n"))
+
 	credentialID, _, _ := newLitToken([]rune("credential_source"))
 	ec2MetadataLit, _, _ := newLitToken([]rune("Ec2InstanceMetadata"))
 
@@ -56,6 +59,9 @@ func TestParser(t *testing.T) {
 
 	sepInValueExpr := newEqualExpr(newExpression(sepInValueID), equalOp)
 	sepInValueExpr.AppendChild(newExpression(sepInValueLit))
+
+	nestedEQExpr := newEqualExpr(newExpression(s3ServiceID), equalOp)
+	nestedEQExpr.AppendChild(newExpression(nestedParamsLit))
 
 	cases := []struct {
 		name          string
@@ -206,8 +212,9 @@ func TestParser(t *testing.T) {
 		},
 		{
 			name: "section statement",
-			r: bytes.NewBuffer([]byte(`[default]
-							region="us-west-2"`)),
+			r: bytes.NewBuffer([]byte(
+				`[default]
+region="us-west-2"`)),
 			expectedStack: []AST{
 				newCompletedSectionStatement(
 					defaultProfileStmt,
@@ -217,15 +224,15 @@ func TestParser(t *testing.T) {
 		},
 		{
 			name: "complex section statement",
-			r: bytes.NewBuffer([]byte(`[default]
-		region = us-west-2
-		credential_source = Ec2InstanceMetadata
-		output = json
+			r: bytes.NewBuffer([]byte(
+				`[default]
+region = us-west-2
+credential_source = Ec2InstanceMetadata
+output = json
 
-		[assumerole]
-		output = json
-		region = us-west-2
-				`)),
+[assumerole]
+output = json
+region = us-west-2`)),
 			expectedStack: []AST{
 				newCompletedSectionStatement(
 					defaultProfileStmt,
@@ -258,7 +265,7 @@ region = us-west-2
 				newCompletedSectionStatement(
 					defaultProfileStmt,
 				),
-				newSkipStatement(newEqualExpr(newExpression(s3ID), equalOp)),
+				newExprStatement(nestedEQExpr),
 				newExprStatement(noQuotesRegionEQRegion),
 				newExprStatement(credEQExpr),
 				newExprStatement(outputEQExpr),
@@ -289,7 +296,7 @@ region = us-west-2
 				),
 				newExprStatement(noQuotesRegionEQRegion),
 				newExprStatement(credEQExpr),
-				newSkipStatement(newEqualExpr(newExpression(s3ID), equalOp)),
+				newExprStatement(nestedEQExpr),
 				newExprStatement(outputEQExpr),
 				newCompletedSectionStatement(
 					assumeProfileStmt,

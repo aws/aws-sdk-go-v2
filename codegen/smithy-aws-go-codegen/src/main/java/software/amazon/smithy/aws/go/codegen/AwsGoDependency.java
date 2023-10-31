@@ -38,6 +38,7 @@ public class AwsGoDependency {
             null, Versions.AWS_PROTOCOL_EVENTSTREAM, "eventstream");
     public static final GoDependency SERVICE_INTERNAL_EVENTSTREAMAPI = awsModuleDep("aws/protocol/eventstream",
             "eventstreamapi", Versions.AWS_PROTOCOL_EVENTSTREAM, "eventstreamapi");
+    public static final GoDependency CONFIG = aws("config");
 
     public static final GoDependency AWS_ENDPOINT_RULESFN = aws("internal/endpoints/awsrulesfn");
     public static final GoDependency INTERNAL_ENDPOINTS = aws("internal/endpoints");
