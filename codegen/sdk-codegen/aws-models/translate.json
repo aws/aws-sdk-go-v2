@@ -147,7 +147,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -190,7 +189,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -203,7 +203,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -217,7 +216,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -240,7 +238,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -275,7 +272,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -286,14 +282,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -307,14 +305,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -323,11 +319,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -338,14 +334,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -359,7 +357,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -379,7 +376,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -390,14 +386,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -408,9 +406,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1016,6 +1016,17 @@
                     "max": 10000
                 },
                 "smithy.api#pattern": "^[\\P{M}\\p{M}]{1,10000}$"
+            }
+        },
+        "com.amazonaws.translate#Brevity": {
+            "type": "enum",
+            "members": {
+                "ON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON"
+                    }
+                }
             }
         },
         "com.amazonaws.translate#ClientTokenString": {
@@ -2428,15 +2439,13 @@
                 "S3Uri": {
                     "target": "com.amazonaws.translate#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the Amazon S3 folder that contains the parallel data input file. The folder\n      must be in the same Region as the API endpoint you are calling.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The URI of the Amazon S3 folder that contains the parallel data input file. The folder\n      must be in the same Region as the API endpoint you are calling.</p>"
                     }
                 },
                 "Format": {
                     "target": "com.amazonaws.translate#ParallelDataFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format of the parallel data input file.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The format of the parallel data input file.</p>"
                     }
                 }
             },
@@ -2808,7 +2817,7 @@
                 "Settings": {
                     "target": "com.amazonaws.translate#TranslationSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings to configure your translation output, including the option to set the formality\n      level of the output text and the option to mask profane words and phrases.</p>"
+                        "smithy.api#documentation": "<p>Settings to configure your translation output. You can configure the following options:</p>\n         <ul>\n            <li>\n               <p>Brevity: not supported.</p>\n            </li>\n            <li>\n               <p>Formality: sets the formality level of the output text.</p>\n            </li>\n            <li>\n               <p>Profanity: masks profane words and phrases in your translation output.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3466,7 +3475,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Translates the input document from the source language to the target language.    \n      This synchronous operation supports plain text or HTML for the input document.\n      \n      <code>TranslateDocument</code> supports translations from English to any supported language, \n      and from any supported language to English. Therefore, specify either the source language code\n      or the target language code as “en” (English). \n    </p>\n         <p> \n            <code>TranslateDocument</code> does not support language auto-detection. </p>\n         <p> If you set the <code>Formality</code> parameter, the request will fail if the target language does \n       not support formality. For a list of target languages that support formality, see\n       <a href=\"https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html\">Setting formality</a>.\n    </p>"
+                "smithy.api#documentation": "<p>Translates the input document from the source language to the target language.    \n      This synchronous operation supports text, HTML, or Word documents as the input document.\n      \n      <code>TranslateDocument</code> supports translations from English to any supported language, \n      and from any supported language to English. Therefore, specify either the source language code\n      or the target language code as “en” (English). \n    </p>\n         <p> If you set the <code>Formality</code> parameter, the request will fail if the target language does \n       not support formality. For a list of target languages that support formality, see\n       <a href=\"https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html\">Setting formality</a>.\n    </p>"
             }
         },
         "com.amazonaws.translate#TranslateDocumentRequest": {
@@ -3488,7 +3497,7 @@
                 "SourceLanguageCode": {
                     "target": "com.amazonaws.translate#LanguageCodeString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code for the language of the source text. Do not use <code>auto</code>, because\n      <code>TranslateDocument</code> does not support language auto-detection.\n      For a list of supported language codes, see\n      <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html\">Supported languages</a>.</p>",
+                        "smithy.api#documentation": "<p>The language code for the language of the source text. For a list of supported language codes, see\n      <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html\">Supported languages</a>.</p>\n         <p>To have Amazon Translate determine the source language of your text, you can specify\n      <code>auto</code> in the <code>SourceLanguageCode</code> field. If you specify\n      <code>auto</code>, Amazon Translate will call <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html\">Amazon\n        Comprehend</a> to determine the source language.</p>\n         <note>\n            <p>If you specify <code>auto</code>, you must send the <code>TranslateDocument</code> request in a region that supports\n      Amazon Comprehend. Otherwise, the request returns an error indicating that autodetect is not supported. </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3500,7 +3509,10 @@
                     }
                 },
                 "Settings": {
-                    "target": "com.amazonaws.translate#TranslationSettings"
+                    "target": "com.amazonaws.translate#TranslationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings to configure your translation output. You can configure the following options:</p>\n         <ul>\n            <li>\n               <p>Brevity: not supported.</p>\n            </li>\n            <li>\n               <p>Formality: sets the formality level of the output text.</p>\n            </li>\n            <li>\n               <p>Profanity: masks profane words and phrases in your translation output.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -3616,7 +3628,7 @@
                 "Settings": {
                     "target": "com.amazonaws.translate#TranslationSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings to configure your translation output, including the option to set the formality\n      level of the output text and the option to mask profane words and phrases.</p>"
+                        "smithy.api#documentation": "<p>Settings to configure your translation output. You can configure the following options:</p>\n         <ul>\n            <li>\n               <p>Brevity: reduces the length of the translated output for most translations.</p>\n            </li>\n            <li>\n               <p>Formality: sets the formality level of the output text.</p>\n            </li>\n            <li>\n               <p>Profanity: masks profane words and phrases in your translation output.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3702,18 +3714,24 @@
                 "Formality": {
                     "target": "com.amazonaws.translate#Formality",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can optionally specify the desired level of formality for translations\n        to supported target languages. The formality\n      setting controls the level of formal language usage (also known as <a href=\"https://en.wikipedia.org/wiki/Register_(sociolinguistics)\">register</a>) in the\n      translation output.  You can set the value to informal or formal. If you don't specify a value for\n      formality, or if the target language doesn't support formality, the translation will\n      ignore the formality setting.</p>\n         <p> If you specify multiple target languages for the job, translate ignores\n      the formality setting for any unsupported target language.</p>\n         <p>For a list of target languages that support formality, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html#customizing-translations-formality-languages\">Supported languages</a>\n      in the Amazon Translate Developer Guide.</p>"
+                        "smithy.api#documentation": "<p>You can specify the desired level of formality for translations\n        to supported target languages. The formality\n      setting controls the level of formal language usage (also known as <a href=\"https://en.wikipedia.org/wiki/Register_(sociolinguistics)\">register</a>) in the\n      translation output.  You can set the value to informal or formal. If you don't specify a value for\n      formality, or if the target language doesn't support formality, the translation will\n      ignore the formality setting.</p>\n         <p> If you specify multiple target languages for the job, translate ignores\n      the formality setting for any unsupported target language.</p>\n         <p>For a list of target languages that support formality, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html#customizing-translations-formality-languages\">Supported languages</a>\n      in the Amazon Translate Developer Guide.</p>"
                     }
                 },
                 "Profanity": {
                     "target": "com.amazonaws.translate#Profanity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable the profanity setting if you want Amazon Translate to mask profane words and\n      phrases in your translation output.</p>\n         <p>To mask profane words and phrases, Amazon Translate replaces them with the grawlix string\n      “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the\n      length or number of words.</p>\n         <p>Amazon Translate doesn't detect profanity in all of its supported languages. For languages\n      that don't support profanity detection, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-profanity.html#customizing-translations-profanity-languages\">Unsupported languages</a> in the Amazon Translate Developer Guide.</p>\n         <p>If you specify multiple target languages for the job, all the\n      target languages must support profanity masking. If any of the\n      target languages don't support profanity masking, the\n      translation job won't mask profanity for any target\n      language.</p>"
+                        "smithy.api#documentation": "<p>You can enable the profanity setting if you want to mask profane words and\n      phrases in your translation output.</p>\n         <p>To mask profane words and phrases, Amazon Translate replaces them with the grawlix string\n      “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the\n      length or number of words.</p>\n         <p>Amazon Translate doesn't detect profanity in all of its supported languages. For languages\n      that don't support profanity detection, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-profanity.html#customizing-translations-profanity-languages\">Unsupported languages</a> in the Amazon Translate Developer Guide.</p>\n         <p>If you specify multiple target languages for the job, all the\n      target languages must support profanity masking. If any of the\n      target languages don't support profanity masking, the\n      translation job won't mask profanity for any target\n      language.</p>"
+                    }
+                },
+                "Brevity": {
+                    "target": "com.amazonaws.translate#Brevity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you turn on brevity, Amazon Translate reduces the length of the translation output for most translations (when\n      compared with the same translation with brevity turned off). By default, brevity is turned\n      off.</p>\n         <p>If you turn on brevity for a translation request with an unsupported language pair, the\n      translation proceeds with the brevity setting turned off.</p>\n         <p>For the language pairs that brevity supports, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-brevity\">Using brevity</a> in the\n      Amazon Translate Developer Guide.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Settings to configure your translation output, including the option to set the formality\n      level of the output text and the option to mask profane words and phrases.</p>"
+                "smithy.api#documentation": "<p>Settings to configure your translation output. You can configure the following options:</p>\n         <ul>\n            <li>\n               <p>Brevity: reduces the length of the translation output for most translations. Available for\n            <code>TranslateText</code> only.</p>\n            </li>\n            <li>\n               <p>Formality: sets the formality level of the translation output.</p>\n            </li>\n            <li>\n               <p>Profanity: masks profane words and phrases in the translation output.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.translate#UnboundedLengthString": {

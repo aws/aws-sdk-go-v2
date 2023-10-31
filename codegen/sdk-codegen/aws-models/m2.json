@@ -495,7 +495,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -538,7 +537,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -551,7 +551,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -565,7 +564,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -588,7 +586,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -623,7 +620,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -634,14 +630,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -655,14 +653,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -671,11 +667,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -686,14 +682,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -707,7 +705,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -727,7 +724,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -738,14 +734,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -756,9 +754,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1322,6 +1322,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A batch job identifier in which the batch job to run is identified by the script\n         name.</p>"
                     }
+                },
+                "s3BatchJobIdentifier": {
+                    "target": "com.amazonaws.m2#S3BatchJobIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an Amazon S3 location that identifies the batch jobs that you want to run. Use this identifier to run ad hoc batch jobs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1369,7 +1375,7 @@
                 "smithy.api#documentation": "See https://www.ibm.com/docs/en/workload-automation/9.3.0?topic=zos-coding-variables-in-jcl\nto get details about limits for both keys and values:\n8 for keys (variable names), 44 for values (variable values)\nIn addition, keys will be only alphabetic characters and digits, without any space\nor special characters (dash, underscore, etc ...)\n\nParameter key: the first character must be alphabetic.\nCan be of up to 8 alphanumeric characters.",
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 8
+                    "max": 32
                 },
                 "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9]{1,7}$"
             }
@@ -1380,7 +1386,7 @@
                 "smithy.api#documentation": "Parameter value can be of up to 44 alphanumeric characters.",
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 44
+                    "max": 80
                 }
             }
         },
@@ -1921,7 +1927,7 @@
                 "preferredMaintenanceWindow": {
                     "target": "com.amazonaws.m2#String50",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures the maintenance window you want for the runtime environment. If you do not\n         provide a value, a random system-generated value will be assigned.</p>"
+                        "smithy.api#documentation": "<p>Configures the maintenance window that you want for the runtime environment. The maintenance window must have the format <code>ddd:hh24:mi-ddd:hh24:mi</code> and must be less than 24 hours. The following two examples are valid maintenance windows: <code>sun:23:45-mon:00:15</code> or <code>sat:01:00-sat:03:00</code>. </p>\n         <p>If you do not provide a value, a random system-generated value will be assigned.</p>"
                     }
                 },
                 "clientToken": {
@@ -2117,6 +2123,12 @@
                         "smithy.api#documentation": "<p>A summary of the data set import task.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If dataset import failed, the failure reason will show here.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2189,6 +2201,10 @@
                     {
                         "value": "Completed",
                         "name": "COMPLETED"
+                    },
+                    {
+                        "value": "Failed",
+                        "name": "FAILED"
                     }
                 ]
             }
@@ -2502,6 +2518,10 @@
                     {
                         "value": "Failed",
                         "name": "FAILED"
+                    },
+                    {
+                        "value": "Updating Deployment",
+                        "name": "DEPLOY_UPDATE"
                     }
                 ]
             }
@@ -2795,6 +2815,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.m2#EnvironmentSummary"
+            }
+        },
+        "com.amazonaws.m2#ExecutionTimeoutException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Failed to connect to server, or didn’t receive response within expected time period.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 504,
+                "smithy.api#retryable": {}
             }
         },
         "com.amazonaws.m2#ExternalLocation": {
@@ -3360,10 +3397,19 @@
                     "target": "com.amazonaws.m2#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.m2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ExecutionTimeoutException"
+                },
+                {
                     "target": "com.amazonaws.m2#InternalServerException"
                 },
                 {
                     "target": "com.amazonaws.m2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ServiceUnavailableException"
                 },
                 {
                     "target": "com.amazonaws.m2#ThrottlingException"
@@ -3459,6 +3505,13 @@
                     "target": "com.amazonaws.m2#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The last time the data set was referenced.</p>"
+                    }
+                },
+                "fileSize": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>File size of the dataset.</p>"
                     }
                 }
             },
@@ -3821,7 +3874,7 @@
                 "actualCapacity": {
                     "target": "com.amazonaws.m2#CapacityValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of instances included in the runtime environment. A standalone runtime\n         environment has a maxiumum of one instance. Currently, a high availability runtime\n         environment has a maximum of two instances. </p>"
+                        "smithy.api#documentation": "<p>The number of instances included in the runtime environment. A standalone runtime\n         environment has a maximum of one instance. Currently, a high availability runtime\n         environment has a maximum of two instances. </p>"
                     }
                 },
                 "loadBalancerArn": {
@@ -3839,7 +3892,7 @@
                 "preferredMaintenanceWindow": {
                     "target": "com.amazonaws.m2#String50",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures the maintenance window you want for the runtime environment. If you do not\n         provide a value, a random system-generated value will be assigned.</p>"
+                        "smithy.api#documentation": "<p>The maintenance window for the runtime environment. If you don't\n         provide a value for the maintenance window, the service assigns a random value.</p>"
                     }
                 },
                 "pendingMaintenance": {
@@ -3964,6 +4017,26 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.m2#JobIdentifier": {
+            "type": "union",
+            "members": {
+                "fileName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the file that contains the batch job definition.</p>"
+                    }
+                },
+                "scriptName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the script that contains the batch job definition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies a specific batch job.</p>"
             }
         },
         "com.amazonaws.m2#ListApplicationVersions": {
@@ -4493,10 +4566,19 @@
                     "target": "com.amazonaws.m2#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.m2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ExecutionTimeoutException"
+                },
+                {
                     "target": "com.amazonaws.m2#InternalServerException"
                 },
                 {
                     "target": "com.amazonaws.m2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ServiceUnavailableException"
                 },
                 {
                     "target": "com.amazonaws.m2#ThrottlingException"
@@ -4553,6 +4635,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The prefix of the data set name, which you can use to filter the list of data\n         sets.</p>",
                         "smithy.api#httpQuery": "prefix"
+                    }
+                },
+                "nameFilter": {
+                    "target": "com.amazonaws.m2#String200",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter dataset name matching the specified pattern. Can use * and % as wild cards.</p>",
+                        "smithy.api#httpQuery": "nameFilter"
                     }
                 }
             },
@@ -5194,6 +5283,34 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.m2#S3BatchJobIdentifier": {
+            "type": "structure",
+            "members": {
+                "bucket": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket that contains the batch job definitions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "keyPrefix": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key prefix that specifies the path to the folder in the S3 bucket that has the batch job definitions.</p>"
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.m2#JobIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the batch job definition. This identifier can also point to any batch job definition that already exists in the application or to one of the batch job definitions within the directory that is specified in <code>keyPrefix</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A batch job identifier in which the batch jobs to run are identified by an Amazon S3 location.</p>"
+            }
+        },
         "com.amazonaws.m2#ScriptBatchJobDefinition": {
             "type": "structure",
             "members": {
@@ -5262,6 +5379,23 @@
                 "smithy.api#documentation": "<p>One or more quotas for Amazon Web Services Mainframe Modernization exceeds the limit.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.m2#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Server cannot process the request at the moment.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503,
+                "smithy.api#retryable": {}
             }
         },
         "com.amazonaws.m2#StartApplication": {
@@ -5664,7 +5798,7 @@
                 "quotaCode": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the throttled reuqest.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the throttled request.</p>"
                     }
                 },
                 "retryAfterSeconds": {
@@ -5911,7 +6045,7 @@
                 "preferredMaintenanceWindow": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures the maintenance window you want for the runtime environment. If you do not\n         provide a value, a random system-generated value will be assigned.</p>"
+                        "smithy.api#documentation": "<p>Configures the maintenance window that you want for the runtime environment. The maintenance window must have the format <code>ddd:hh24:mi-ddd:hh24:mi</code> and must be less than 24 hours. The following two examples are valid maintenance windows: <code>sun:23:45-mon:00:15</code> or <code>sat:01:00-sat:03:00</code>. </p>\n         <p>If you do not provide a value, a random system-generated value will be assigned.</p>"
                     }
                 },
                 "applyDuringMaintenanceWindow": {
@@ -5919,6 +6053,13 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether to update the runtime environment during the maintenance window. The\n         default is false. Currently, Amazon Web Services Mainframe Modernization accepts the <code>engineVersion</code> parameter\n         only if <code>applyDuringMaintenanceWindow</code> is true. If any parameter other than\n            <code>engineVersion</code> is provided in <code>UpdateEnvironmentRequest</code>, it will\n         fail if <code>applyDuringMaintenanceWindow</code> is set to true.</p>"
+                    }
+                },
+                "forceUpdate": {
+                    "target": "com.amazonaws.m2#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Forces the updates on the environment. This option is needed if the applications in the environment are not stopped or if there are ongoing application-related activities in the environment.</p>\n         <p>If you use this option, be aware that it could lead to data corruption in the applications, and that you might need to perform repair and recovery procedures for the applications.</p>\n         <p>This option is not needed if the attribute being updated is <code>preferredMaintenanceWindow</code>.</p>"
                     }
                 }
             }

@@ -177,7 +177,7 @@
                     "name": "amplify"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amplify enables developers to develop and deploy cloud-powered mobile and web apps.\n            The Amplify Console provides a continuous delivery and hosting service for web\n            applications. For more information, see the <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html\">Amplify Console User Guide</a>. The\n            Amplify Framework is a comprehensive set of SDKs, libraries, tools, and documentation\n            for client app development. For more information, see the <a href=\"https://docs.amplify.aws/\">Amplify Framework.</a>\n         </p>",
+                "smithy.api#documentation": "<p>Amplify enables developers to develop and deploy cloud-powered mobile and web apps.\n            Amplify Hosting provides a continuous delivery and hosting service for web\n            applications. For more information, see the <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html\">Amplify Hosting User Guide</a>. The\n            Amplify Framework is a comprehensive set of SDKs, libraries, tools, and documentation\n            for client app development. For more information, see the <a href=\"https://docs.amplify.aws/\">Amplify Framework.</a>\n         </p>",
                 "smithy.api#title": "AWS Amplify",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://amplify.amazonaws.com"
@@ -224,7 +224,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -267,7 +266,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -280,7 +280,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -294,7 +293,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -317,7 +315,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -352,7 +349,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -363,14 +359,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -384,14 +382,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -400,11 +396,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -415,14 +411,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -436,7 +434,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -456,7 +453,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -467,14 +463,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -485,9 +483,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1052,127 +1052,127 @@
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID of the Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appArn": {
                     "target": "com.amazonaws.amplify#AppArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.amplify#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for the Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The name for the Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.amplify#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p> The tag for the Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The tag for the Amplify app. </p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.amplify#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p> The description for the Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The description for the Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "repository": {
                     "target": "com.amazonaws.amplify#Repository",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Git repository for the Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The Git repository for the Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "platform": {
                     "target": "com.amazonaws.amplify#Platform",
                     "traits": {
-                        "smithy.api#documentation": "<p> The platform for the Amplify app. For a static app, set the platform type to <code>WEB</code>.\n            For a dynamic server-side rendered (SSR) app, set the platform type to\n            <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting's original SSR support only, set the platform type to\n            <code>WEB_DYNAMIC</code>.</p>",
+                        "smithy.api#documentation": "<p>The platform for the Amplify app. For a static app, set the platform type to <code>WEB</code>.\n            For a dynamic server-side rendered (SSR) app, set the platform type to\n            <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting's original SSR support only, set the platform type to\n            <code>WEB_DYNAMIC</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createTime": {
                     "target": "com.amazonaws.amplify#CreateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p> Creates a date and time for the Amplify app. </p>",
+                        "smithy.api#documentation": "<p>Creates a date and time for the Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "updateTime": {
                     "target": "com.amazonaws.amplify#UpdateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p> Updates the date and time for the Amplify app. </p>",
+                        "smithy.api#documentation": "<p>Updates the date and time for the Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "iamServiceRoleArn": {
                     "target": "com.amazonaws.amplify#ServiceRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The AWS Identity and Access Management (IAM) service role for the Amazon Resource\n            Name (ARN) of the Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The AWS Identity and Access Management (IAM) service role for the Amazon Resource\n            Name (ARN) of the Amplify app. </p>"
                     }
                 },
                 "environmentVariables": {
                     "target": "com.amazonaws.amplify#EnvironmentVariables",
                     "traits": {
-                        "smithy.api#documentation": "<p> The environment variables for the Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The environment variables for the Amplify app. </p>\n         <p>For a list of the environment variables that are accessible to Amplify by default, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html\">Amplify Environment variables</a> in the <i>Amplify Hosting User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "defaultDomain": {
                     "target": "com.amazonaws.amplify#DefaultDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p> The default domain for the Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The default domain for the Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "enableBranchAutoBuild": {
                     "target": "com.amazonaws.amplify#EnableBranchAutoBuild",
                     "traits": {
-                        "smithy.api#documentation": "<p> Enables the auto-building of branches for the Amplify app. </p>",
+                        "smithy.api#documentation": "<p>Enables the auto-building of branches for the Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "enableBranchAutoDeletion": {
                     "target": "com.amazonaws.amplify#EnableBranchAutoDeletion",
                     "traits": {
-                        "smithy.api#documentation": "<p> Automatically disconnect a branch in the Amplify Console when you delete a branch\n            from your Git repository. </p>"
+                        "smithy.api#documentation": "<p>Automatically disconnect a branch in the Amplify console when you delete a branch\n            from your Git repository.</p>"
                     }
                 },
                 "enableBasicAuth": {
                     "target": "com.amazonaws.amplify#EnableBasicAuth",
                     "traits": {
-                        "smithy.api#documentation": "<p> Enables basic authorization for the Amplify app's branches. </p>",
+                        "smithy.api#documentation": "<p>Enables basic authorization for the Amplify app's branches. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The basic authorization credentials for branches for the Amplify app. You must\n            base64-encode the authorization credentials and provide them in the format\n                <code>user:password</code>.</p>"
+                        "smithy.api#documentation": "<p>The basic authorization credentials for branches for the Amplify app. You must\n            base64-encode the authorization credentials and provide them in the format\n                <code>user:password</code>.</p>"
                     }
                 },
                 "customRules": {
                     "target": "com.amazonaws.amplify#CustomRules",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes the custom redirect and rewrite rules for the Amplify app. </p>"
+                        "smithy.api#documentation": "<p>Describes the custom redirect and rewrite rules for the Amplify app. </p>"
                     }
                 },
                 "productionBranch": {
                     "target": "com.amazonaws.amplify#ProductionBranch",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes the information about a production branch of the Amplify app. </p>"
+                        "smithy.api#documentation": "<p>Describes the information about a production branch of the Amplify app. </p>"
                     }
                 },
                 "buildSpec": {
                     "target": "com.amazonaws.amplify#BuildSpec",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes the content of the build specification (build spec) for the Amplify app.\n        </p>"
+                        "smithy.api#documentation": "<p>Describes the content of the build specification (build spec) for the Amplify app.\n        </p>"
                     }
                 },
                 "customHeaders": {
@@ -1184,19 +1184,19 @@
                 "enableAutoBranchCreation": {
                     "target": "com.amazonaws.amplify#EnableAutoBranchCreation",
                     "traits": {
-                        "smithy.api#documentation": "<p> Enables automated branch creation for the Amplify app. </p>"
+                        "smithy.api#documentation": "<p>Enables automated branch creation for the Amplify app. </p>"
                     }
                 },
                 "autoBranchCreationPatterns": {
                     "target": "com.amazonaws.amplify#AutoBranchCreationPatterns",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes the automated branch creation glob patterns for the Amplify app. </p>"
+                        "smithy.api#documentation": "<p>Describes the automated branch creation glob patterns for the Amplify app. </p>"
                     }
                 },
                 "autoBranchCreationConfig": {
                     "target": "com.amazonaws.amplify#AutoBranchCreationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes the automated branch creation configuration for the Amplify app. </p>"
+                        "smithy.api#documentation": "<p>Describes the automated branch creation configuration for the Amplify app. </p>"
                     }
                 },
                 "repositoryCloneMethod": {
@@ -1207,7 +1207,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Represents the different branches of a repository for building, deploying, and\n            hosting an Amplify app. </p>"
+                "smithy.api#documentation": "<p>Represents the different branches of a repository for building, deploying, and\n            hosting an Amplify app. </p>"
             }
         },
         "com.amazonaws.amplify#AppArn": {
@@ -1241,20 +1241,20 @@
                 "artifactFileName": {
                     "target": "com.amazonaws.amplify#ArtifactFileName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The file name for the artifact. </p>",
+                        "smithy.api#documentation": "<p>The file name for the artifact. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "artifactId": {
                     "target": "com.amazonaws.amplify#ArtifactId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for the artifact. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for the artifact. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Describes an artifact. </p>"
+                "smithy.api#documentation": "<p>Describes an artifact. </p>"
             }
         },
         "com.amazonaws.amplify#ArtifactFileName": {
@@ -1321,37 +1321,37 @@
                 "stage": {
                     "target": "com.amazonaws.amplify#Stage",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes the current stage for the autocreated branch. </p>"
+                        "smithy.api#documentation": "<p>Describes the current stage for the autocreated branch. </p>"
                     }
                 },
                 "framework": {
                     "target": "com.amazonaws.amplify#Framework",
                     "traits": {
-                        "smithy.api#documentation": "<p> The framework for the autocreated branch. </p>"
+                        "smithy.api#documentation": "<p>The framework for the autocreated branch. </p>"
                     }
                 },
                 "enableAutoBuild": {
                     "target": "com.amazonaws.amplify#EnableAutoBuild",
                     "traits": {
-                        "smithy.api#documentation": "<p> Enables auto building for the autocreated branch. </p>"
+                        "smithy.api#documentation": "<p>Enables auto building for the autocreated branch. </p>"
                     }
                 },
                 "environmentVariables": {
                     "target": "com.amazonaws.amplify#EnvironmentVariables",
                     "traits": {
-                        "smithy.api#documentation": "<p> The environment variables for the autocreated branch. </p>"
+                        "smithy.api#documentation": "<p>The environment variables for the autocreated branch. </p>"
                     }
                 },
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The basic authorization credentials for the autocreated branch. You must\n            base64-encode the authorization credentials and provide them in the format\n                <code>user:password</code>.</p>"
+                        "smithy.api#documentation": "<p>The basic authorization credentials for the autocreated branch. You must\n            base64-encode the authorization credentials and provide them in the format\n                <code>user:password</code>.</p>"
                     }
                 },
                 "enableBasicAuth": {
                     "target": "com.amazonaws.amplify#EnableBasicAuth",
                     "traits": {
-                        "smithy.api#documentation": "<p> Enables basic authorization for the autocreated branch. </p>"
+                        "smithy.api#documentation": "<p>Enables basic authorization for the autocreated branch. </p>"
                     }
                 },
                 "enablePerformanceMode": {
@@ -1363,24 +1363,24 @@
                 "buildSpec": {
                     "target": "com.amazonaws.amplify#BuildSpec",
                     "traits": {
-                        "smithy.api#documentation": "<p> The build specification (build spec) for the autocreated branch. </p>"
+                        "smithy.api#documentation": "<p>The build specification (build spec) for the autocreated branch. </p>"
                     }
                 },
                 "enablePullRequestPreview": {
                     "target": "com.amazonaws.amplify#EnablePullRequestPreview",
                     "traits": {
-                        "smithy.api#documentation": "<p> Enables pull request previews for the autocreated branch. </p>"
+                        "smithy.api#documentation": "<p>Enables pull request previews for the autocreated branch. </p>"
                     }
                 },
                 "pullRequestEnvironmentName": {
                     "target": "com.amazonaws.amplify#PullRequestEnvironmentName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amplify environment name for the pull request. </p>"
+                        "smithy.api#documentation": "<p>The Amplify environment name for the pull request. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Describes the automated branch creation configuration. </p>"
+                "smithy.api#documentation": "<p>Describes the automated branch creation configuration. </p>"
             }
         },
         "com.amazonaws.amplify#AutoBranchCreationPattern": {
@@ -1425,52 +1425,66 @@
                 "smithy.api#pattern": "^$|^arn:aws:iam::\\d{12}:role.+$"
             }
         },
+        "com.amazonaws.amplify#Backend": {
+            "type": "structure",
+            "members": {
+                "stackArn": {
+                    "target": "com.amazonaws.amplify#StackArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the CloudFormation stack.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the backend properties associated with an Amplify <code>Branch</code>.</p>"
+            }
+        },
         "com.amazonaws.amplify#BackendEnvironment": {
             "type": "structure",
             "members": {
                 "backendEnvironmentArn": {
                     "target": "com.amazonaws.amplify#BackendEnvironmentArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify\n            app. </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify\n            app. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "environmentName": {
                     "target": "com.amazonaws.amplify#EnvironmentName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for a backend environment that is part of an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The name for a backend environment that is part of an Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "stackName": {
                     "target": "com.amazonaws.amplify#StackName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The AWS CloudFormation stack name of a backend environment. </p>"
+                        "smithy.api#documentation": "<p>The AWS CloudFormation stack name of a backend environment. </p>"
                     }
                 },
                 "deploymentArtifacts": {
                     "target": "com.amazonaws.amplify#DeploymentArtifacts",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of deployment artifacts. </p>"
+                        "smithy.api#documentation": "<p>The name of deployment artifacts. </p>"
                     }
                 },
                 "createTime": {
                     "target": "com.amazonaws.amplify#CreateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p> The creation date and time for a backend environment that is part of an Amplify app.\n        </p>",
+                        "smithy.api#documentation": "<p>The creation date and time for a backend environment that is part of an Amplify app.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "updateTime": {
                     "target": "com.amazonaws.amplify#UpdateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p> The last updated date and time for a backend environment that is part of an Amplify\n            app. </p>",
+                        "smithy.api#documentation": "<p>The last updated date and time for a backend environment that is part of an Amplify\n            app. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Describes the backend environment for an Amplify app. </p>"
+                "smithy.api#documentation": "<p>Describes the backend environment for an Amplify app. </p>"
             }
         },
         "com.amazonaws.amplify#BackendEnvironmentArn": {
@@ -1497,7 +1511,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> A request contains unexpected data. </p>",
+                "smithy.api#documentation": "<p>A request contains unexpected data. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1694,6 +1708,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify\n            app. </p>"
                     }
+                },
+                "backend": {
+                    "target": "com.amazonaws.amplify#Backend"
                 }
             },
             "traits": {
@@ -1735,7 +1752,7 @@
         "com.amazonaws.amplify#BuildSpec": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p> The build specification (build spec) file for an Amplify app build. </p>",
+                "smithy.api#documentation": "<p>The build specification (build spec) file for an Amplify app build. </p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 25000
@@ -1818,7 +1835,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a new Amplify app. </p>",
+                "smithy.api#documentation": "<p>Creates a new Amplify app. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps",
@@ -1832,92 +1849,92 @@
                 "name": {
                     "target": "com.amazonaws.amplify#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The name of the Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.amplify#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p> The description for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The description of the Amplify app. </p>"
                     }
                 },
                 "repository": {
                     "target": "com.amazonaws.amplify#Repository",
                     "traits": {
-                        "smithy.api#documentation": "<p> The repository for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The Git repository for the Amplify app. </p>"
                     }
                 },
                 "platform": {
                     "target": "com.amazonaws.amplify#Platform",
                     "traits": {
-                        "smithy.api#documentation": "<p> The platform for the Amplify app. For a static app, set the platform type to <code>WEB</code>.\n            For a dynamic server-side rendered (SSR) app, set the platform type to\n            <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting's original SSR support only, set the platform type to\n            <code>WEB_DYNAMIC</code>.</p>"
+                        "smithy.api#documentation": "<p>The platform for the Amplify app. For a static app, set the platform type to <code>WEB</code>.\n            For a dynamic server-side rendered (SSR) app, set the platform type to\n            <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting's original SSR support only, set the platform type to\n            <code>WEB_DYNAMIC</code>.</p>"
                     }
                 },
                 "iamServiceRoleArn": {
                     "target": "com.amazonaws.amplify#ServiceRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The AWS Identity and Access Management (IAM) service role for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The AWS Identity and Access Management (IAM) service role for an Amplify app. </p>"
                     }
                 },
                 "oauthToken": {
                     "target": "com.amazonaws.amplify#OauthToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OAuth token for a third-party source control system for an Amplify app. The OAuth\n            token is used to create a webhook and a read-only deploy key using SSH cloning. The\n            OAuth token is not stored.</p>\n         <p>Use <code>oauthToken</code> for repository providers other than GitHub, such as\n            Bitbucket or CodeCommit. To authorize access to GitHub as your repository provider, use\n                <code>accessToken</code>.</p>\n         <p>You must specify either <code>oauthToken</code> or <code>accessToken</code> when you\n            create a new app.</p>\n         <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work\n            with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub\n            App. For more information, see <a href=\"https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth\">Migrating an existing OAuth app to the Amplify GitHub App</a> in the\n                <i>Amplify User Guide</i> .</p>"
+                        "smithy.api#documentation": "<p>The OAuth token for a third-party source control system for an Amplify app. The OAuth\n            token is used to create a webhook and a read-only deploy key using SSH cloning. The\n            OAuth token is not stored.</p>\n         <p>Use <code>oauthToken</code> for repository providers other than GitHub, such as\n            Bitbucket or CodeCommit. To authorize access to GitHub as your repository provider, use\n                <code>accessToken</code>.</p>\n         <p>You must specify either <code>oauthToken</code> or <code>accessToken</code> when you\n            create a new app.</p>\n         <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work\n            with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub\n            App. For more information, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth\">Migrating an existing OAuth app to the Amplify GitHub App</a> in the\n                <i>Amplify User Guide</i> .</p>"
                     }
                 },
                 "accessToken": {
                     "target": "com.amazonaws.amplify#AccessToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The personal access token for a GitHub repository for an Amplify app. The personal\n            access token is used to authorize access to a GitHub repository using the Amplify GitHub\n            App. The token is not stored.</p>\n         <p>Use <code>accessToken</code> for GitHub repositories only. To authorize access to a\n            repository provider such as Bitbucket or CodeCommit, use <code>oauthToken</code>.</p>\n         <p>You must specify either <code>accessToken</code> or <code>oauthToken</code> when you\n            create a new app.</p>\n         <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work\n            with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub\n            App. For more information, see <a href=\"https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth\">Migrating an existing OAuth app to the Amplify GitHub App</a> in the\n                <i>Amplify User Guide</i> .</p>"
+                        "smithy.api#documentation": "<p>The personal access token for a GitHub repository for an Amplify app. The personal\n            access token is used to authorize access to a GitHub repository using the Amplify GitHub\n            App. The token is not stored.</p>\n         <p>Use <code>accessToken</code> for GitHub repositories only. To authorize access to a\n            repository provider such as Bitbucket or CodeCommit, use <code>oauthToken</code>.</p>\n         <p>You must specify either <code>accessToken</code> or <code>oauthToken</code> when you\n            create a new app.</p>\n         <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work\n            with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub\n            App. For more information, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth\">Migrating an existing OAuth app to the Amplify GitHub App</a> in the\n                <i>Amplify User Guide</i> .</p>"
                     }
                 },
                 "environmentVariables": {
                     "target": "com.amazonaws.amplify#EnvironmentVariables",
                     "traits": {
-                        "smithy.api#documentation": "<p> The environment variables map for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The environment variables map for an Amplify app. </p>\n         <p>For a list of the environment variables that are accessible to Amplify by default, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html\">Amplify Environment variables</a> in the <i>Amplify Hosting User Guide</i>.</p>"
                     }
                 },
                 "enableBranchAutoBuild": {
                     "target": "com.amazonaws.amplify#EnableBranchAutoBuild",
                     "traits": {
-                        "smithy.api#documentation": "<p> Enables the auto building of branches for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>Enables the auto building of branches for an Amplify app. </p>"
                     }
                 },
                 "enableBranchAutoDeletion": {
                     "target": "com.amazonaws.amplify#EnableBranchAutoDeletion",
                     "traits": {
-                        "smithy.api#documentation": "<p> Automatically disconnects a branch in the Amplify Console when you delete a branch\n            from your Git repository. </p>"
+                        "smithy.api#documentation": "<p>Automatically disconnects a branch in the Amplify console when you delete a branch\n            from your Git repository. </p>"
                     }
                 },
                 "enableBasicAuth": {
                     "target": "com.amazonaws.amplify#EnableBasicAuth",
                     "traits": {
-                        "smithy.api#documentation": "<p> Enables basic authorization for an Amplify app. This will apply to all branches that\n            are part of this app. </p>"
+                        "smithy.api#documentation": "<p>Enables basic authorization for an Amplify app. This will apply to all branches that\n            are part of this app. </p>"
                     }
                 },
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The credentials for basic authorization for an Amplify app. You must base64-encode\n            the authorization credentials and provide them in the format\n            <code>user:password</code>.</p>"
+                        "smithy.api#documentation": "<p>The credentials for basic authorization for an Amplify app. You must base64-encode\n            the authorization credentials and provide them in the format\n            <code>user:password</code>.</p>"
                     }
                 },
                 "customRules": {
                     "target": "com.amazonaws.amplify#CustomRules",
                     "traits": {
-                        "smithy.api#documentation": "<p> The custom rewrite and redirect rules for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The custom rewrite and redirect rules for an Amplify app. </p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.amplify#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p> The tag for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The tag for an Amplify app. </p>"
                     }
                 },
                 "buildSpec": {
                     "target": "com.amazonaws.amplify#BuildSpec",
                     "traits": {
-                        "smithy.api#documentation": "<p> The build specification (build spec) for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The build specification (build spec) for an Amplify app. </p>"
                     }
                 },
                 "customHeaders": {
@@ -1929,24 +1946,24 @@
                 "enableAutoBranchCreation": {
                     "target": "com.amazonaws.amplify#EnableAutoBranchCreation",
                     "traits": {
-                        "smithy.api#documentation": "<p> Enables automated branch creation for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>Enables automated branch creation for an Amplify app. </p>"
                     }
                 },
                 "autoBranchCreationPatterns": {
                     "target": "com.amazonaws.amplify#AutoBranchCreationPatterns",
                     "traits": {
-                        "smithy.api#documentation": "<p> The automated branch creation glob patterns for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The automated branch creation glob patterns for an Amplify app. </p>"
                     }
                 },
                 "autoBranchCreationConfig": {
                     "target": "com.amazonaws.amplify#AutoBranchCreationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> The automated branch creation configuration for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The automated branch creation configuration for an Amplify app. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure used to create apps in Amplify. </p>",
+                "smithy.api#documentation": "<p>The request structure used to create apps in Amplify. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -1990,7 +2007,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a new backend environment for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Creates a new backend environment for an Amplify app. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps/{appId}/backendenvironments",
@@ -2004,7 +2021,7 @@
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2012,25 +2029,25 @@
                 "environmentName": {
                     "target": "com.amazonaws.amplify#EnvironmentName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for the backend environment. </p>",
+                        "smithy.api#documentation": "<p>The name for the backend environment. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "stackName": {
                     "target": "com.amazonaws.amplify#StackName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The AWS CloudFormation stack name of a backend environment. </p>"
+                        "smithy.api#documentation": "<p>The AWS CloudFormation stack name of a backend environment. </p>"
                     }
                 },
                 "deploymentArtifacts": {
                     "target": "com.amazonaws.amplify#DeploymentArtifacts",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of deployment artifacts. </p>"
+                        "smithy.api#documentation": "<p>The name of deployment artifacts. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the backend environment create request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the backend environment create request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -2040,13 +2057,13 @@
                 "backendEnvironment": {
                     "target": "com.amazonaws.amplify#BackendEnvironment",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes the backend environment for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>Describes the backend environment for an Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure for the create backend environment request. </p>",
+                "smithy.api#documentation": "<p>The result structure for the create backend environment request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -2101,20 +2118,20 @@
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for the branch. </p>",
+                        "smithy.api#documentation": "<p>The name for the branch. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.amplify#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p> The description for the branch. </p>"
+                        "smithy.api#documentation": "<p>The description for the branch. </p>"
                     }
                 },
                 "stage": {
                     "target": "com.amazonaws.amplify#Stage",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes the current stage for the branch. </p>"
+                        "smithy.api#documentation": "<p>Describes the current stage for the branch. </p>"
                     }
                 },
                 "framework": {
@@ -2198,7 +2215,13 @@
                 "backendEnvironmentArn": {
                     "target": "com.amazonaws.amplify#BackendEnvironmentArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify\n            app. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify\n            app. </p>"
+                    }
+                },
+                "backend": {
+                    "target": "com.amazonaws.amplify#Backend",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The backend for a <code>Branch</code> of an Amplify app. Use for a backend created from an CloudFormation stack.</p>"
                     }
                 }
             },
@@ -2246,7 +2269,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a deployment for a manually deployed Amplify app. Manually deployed apps are\n            not connected to a repository. </p>",
+                "smithy.api#documentation": "<p>Creates a deployment for a manually deployed Amplify app. Manually deployed apps are\n            not connected to a repository. </p>\n         <p>The maximum duration between the <code>CreateDeployment</code> call and the\n            <code>StartDeployment</code> call cannot exceed 8 hours. If the duration exceeds 8 hours, the\n            <code>StartDeployment</code> call and the associated <code>Job</code> will\n            fail.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps/{appId}/branches/{branchName}/deployments",
@@ -2268,7 +2291,7 @@
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for the branch, for the job. </p>",
+                        "smithy.api#documentation": "<p> The name of the branch to use for the job. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2448,7 +2471,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a new webhook on an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Creates a new webhook on an Amplify app. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps/{appId}/webhooks",
@@ -2462,7 +2485,7 @@
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2470,19 +2493,19 @@
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for a branch that is part of an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The name for a branch that is part of an Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.amplify#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p> The description for a webhook. </p>"
+                        "smithy.api#documentation": "<p>The description for a webhook. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the create webhook request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the create webhook request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -2492,13 +2515,13 @@
                 "webhook": {
                     "target": "com.amazonaws.amplify#Webhook",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes a webhook that connects repository events to an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>Describes a webhook that connects repository events to an Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure for the create webhook request. </p>",
+                "smithy.api#documentation": "<p>The result structure for the create webhook request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -2539,32 +2562,32 @@
                 "source": {
                     "target": "com.amazonaws.amplify#Source",
                     "traits": {
-                        "smithy.api#documentation": "<p> The source pattern for a URL rewrite or redirect rule. </p>",
+                        "smithy.api#documentation": "<p>The source pattern for a URL rewrite or redirect rule. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "target": {
                     "target": "com.amazonaws.amplify#Target",
                     "traits": {
-                        "smithy.api#documentation": "<p> The target pattern for a URL rewrite or redirect rule. </p>",
+                        "smithy.api#documentation": "<p>The target pattern for a URL rewrite or redirect rule. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.amplify#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p> The status code for a URL rewrite or redirect rule. </p>\n         <dl>\n            <dt>200</dt>\n            <dd>\n               <p>Represents a 200 rewrite rule.</p>\n            </dd>\n            <dt>301</dt>\n            <dd>\n               <p>Represents a 301 (moved pemanently) redirect rule. This and all future\n                        requests should be directed to the target URL. </p>\n            </dd>\n            <dt>302</dt>\n            <dd>\n               <p>Represents a 302 temporary redirect rule.</p>\n            </dd>\n            <dt>404</dt>\n            <dd>\n               <p>Represents a 404 redirect rule.</p>\n            </dd>\n            <dt>404-200</dt>\n            <dd>\n               <p>Represents a 404 rewrite rule.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The status code for a URL rewrite or redirect rule. </p>\n         <dl>\n            <dt>200</dt>\n            <dd>\n               <p>Represents a 200 rewrite rule.</p>\n            </dd>\n            <dt>301</dt>\n            <dd>\n               <p>Represents a 301 (moved pemanently) redirect rule. This and all future\n                        requests should be directed to the target URL. </p>\n            </dd>\n            <dt>302</dt>\n            <dd>\n               <p>Represents a 302 temporary redirect rule.</p>\n            </dd>\n            <dt>404</dt>\n            <dd>\n               <p>Represents a 404 redirect rule.</p>\n            </dd>\n            <dt>404-200</dt>\n            <dd>\n               <p>Represents a 404 rewrite rule.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "condition": {
                     "target": "com.amazonaws.amplify#Condition",
                     "traits": {
-                        "smithy.api#documentation": "<p> The condition for a URL rewrite or redirect rule, such as a country code. </p>"
+                        "smithy.api#documentation": "<p>The condition for a URL rewrite or redirect rule, such as a country code. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Describes a custom rewrite or redirect rule. </p>"
+                "smithy.api#documentation": "<p>Describes a custom rewrite or redirect rule. </p>"
             }
         },
         "com.amazonaws.amplify#CustomRules": {
@@ -2617,7 +2640,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Deletes an existing Amplify app specified by an app ID. </p>",
+                "smithy.api#documentation": "<p>Deletes an existing Amplify app specified by an app ID. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/apps/{appId}",
@@ -2631,14 +2654,14 @@
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Describes the request structure for the delete app request. </p>",
+                "smithy.api#documentation": "<p>Describes the request structure for the delete app request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -2653,7 +2676,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure for the delete app request. </p>",
+                "smithy.api#documentation": "<p>The result structure for the delete app request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -2683,7 +2706,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Deletes a backend environment for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Deletes a backend environment for an Amplify app. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/apps/{appId}/backendenvironments/{environmentName}",
@@ -2697,7 +2720,7 @@
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID of an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique ID of an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2705,14 +2728,14 @@
                 "environmentName": {
                     "target": "com.amazonaws.amplify#EnvironmentName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of a backend environment of an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The name of a backend environment of an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the delete backend environment request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the delete backend environment request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -2722,13 +2745,13 @@
                 "backendEnvironment": {
                     "target": "com.amazonaws.amplify#BackendEnvironment",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes the backend environment for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>Describes the backend environment for an Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure of the delete backend environment result. </p>",
+                "smithy.api#documentation": "<p>The result structure of the delete backend environment result. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -2780,7 +2803,7 @@
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for the branch. </p>",
+                        "smithy.api#documentation": "<p>The name of the branch. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2797,13 +2820,13 @@
                 "branch": {
                     "target": "com.amazonaws.amplify#Branch",
                     "traits": {
-                        "smithy.api#documentation": "<p> The branch for an Amplify app, which maps to a third-party repository branch. </p>",
+                        "smithy.api#documentation": "<p>The branch for an Amplify app, which maps to a third-party repository branch. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure for the delete branch request. </p>",
+                "smithy.api#documentation": "<p>The result structure for the delete branch request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -2928,7 +2951,7 @@
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for the branch, for the job. </p>",
+                        "smithy.api#documentation": "<p>The name of the branch to use for the job. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2988,7 +3011,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Deletes a webhook. </p>",
+                "smithy.api#documentation": "<p>Deletes a webhook. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/webhooks/{webhookId}",
@@ -3002,14 +3025,14 @@
                 "webhookId": {
                     "target": "com.amazonaws.amplify#WebhookId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for a webhook. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for a webhook. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the delete webhook request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the delete webhook request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -3019,13 +3042,13 @@
                 "webhook": {
                     "target": "com.amazonaws.amplify#Webhook",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes a webhook that connects repository events to an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>Describes a webhook that connects repository events to an Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure for the delete webhook request. </p>",
+                "smithy.api#documentation": "<p>The result structure for the delete webhook request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -3037,7 +3060,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> An operation failed because a dependent service threw an exception. </p>",
+                "smithy.api#documentation": "<p>An operation failed because a dependent service threw an exception. </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
             }
@@ -3373,7 +3396,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns the website access logs for a specific time range using a presigned URL.\n        </p>",
+                "smithy.api#documentation": "<p>Returns the website access logs for a specific time range using a presigned URL.\n        </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps/{appId}/accesslogs",
@@ -3387,33 +3410,33 @@
                 "startTime": {
                     "target": "com.amazonaws.amplify#StartTime",
                     "traits": {
-                        "smithy.api#documentation": "<p> The time at which the logs should start. The time range specified is inclusive of the\n            start time. </p>"
+                        "smithy.api#documentation": "<p>The time at which the logs should start. The time range specified is inclusive of the\n            start time. </p>"
                     }
                 },
                 "endTime": {
                     "target": "com.amazonaws.amplify#EndTime",
                     "traits": {
-                        "smithy.api#documentation": "<p> The time at which the logs should end. The time range specified is inclusive of the\n            end time. </p>"
+                        "smithy.api#documentation": "<p>The time at which the logs should end. The time range specified is inclusive of the\n            end time. </p>"
                     }
                 },
                 "domainName": {
                     "target": "com.amazonaws.amplify#DomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the domain. </p>",
+                        "smithy.api#documentation": "<p>The name of the domain. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the generate access logs request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the generate access logs request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -3423,12 +3446,12 @@
                 "logUrl": {
                     "target": "com.amazonaws.amplify#LogUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p> The pre-signed URL for the requested access logs. </p>"
+                        "smithy.api#documentation": "<p>The pre-signed URL for the requested access logs. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure for the generate access logs request. </p>",
+                "smithy.api#documentation": "<p>The result structure for the generate access logs request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -3455,7 +3478,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns an existing Amplify app by appID. </p>",
+                "smithy.api#documentation": "<p>Returns an existing Amplify app specified by an app ID.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/apps/{appId}",
@@ -3469,14 +3492,14 @@
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the get app request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the get app request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -3520,7 +3543,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns the artifact info that corresponds to an artifact id. </p>",
+                "smithy.api#documentation": "<p>Returns the artifact info that corresponds to an artifact id. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/artifacts/{artifactId}",
@@ -3534,14 +3557,14 @@
                 "artifactId": {
                     "target": "com.amazonaws.amplify#ArtifactId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an artifact. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for an artifact. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Returns the request structure for the get artifact request. </p>",
+                "smithy.api#documentation": "<p>Returns the request structure for the get artifact request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -3551,20 +3574,20 @@
                 "artifactId": {
                     "target": "com.amazonaws.amplify#ArtifactId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an artifact. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for an artifact. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "artifactUrl": {
                     "target": "com.amazonaws.amplify#ArtifactUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p> The presigned URL for the artifact. </p>",
+                        "smithy.api#documentation": "<p>The presigned URL for the artifact. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Returns the result structure for the get artifact request. </p>",
+                "smithy.api#documentation": "<p>Returns the result structure for the get artifact request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -3591,7 +3614,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns a backend environment for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Returns a backend environment for an Amplify app. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/apps/{appId}/backendenvironments/{environmentName}",
@@ -3605,7 +3628,7 @@
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique id for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique id for an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3613,14 +3636,14 @@
                 "environmentName": {
                     "target": "com.amazonaws.amplify#EnvironmentName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for the backend environment. </p>",
+                        "smithy.api#documentation": "<p>The name for the backend environment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the get backend environment request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the get backend environment request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -3630,13 +3653,13 @@
                 "backendEnvironment": {
                     "target": "com.amazonaws.amplify#BackendEnvironment",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes the backend environment for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>Describes the backend environment for an Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure for the get backend environment result. </p>",
+                "smithy.api#documentation": "<p>The result structure for the get backend environment result. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -3685,7 +3708,7 @@
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for the branch. </p>",
+                        "smithy.api#documentation": "<p>The name of the branch. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3822,7 +3845,7 @@
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3830,7 +3853,7 @@
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The branch name for the job. </p>",
+                        "smithy.api#documentation": "<p>The name of the branch to use for the job. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3838,14 +3861,14 @@
                 "jobId": {
                     "target": "com.amazonaws.amplify#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for the job. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for the job. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the get job request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the get job request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -3889,7 +3912,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns the webhook information that corresponds to a specified webhook ID. </p>",
+                "smithy.api#documentation": "<p>Returns the webhook information that corresponds to a specified webhook ID. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/webhooks/{webhookId}",
@@ -3903,14 +3926,14 @@
                 "webhookId": {
                     "target": "com.amazonaws.amplify#WebhookId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for a webhook. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for a webhook. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the get webhook request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the get webhook request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -3920,13 +3943,13 @@
                 "webhook": {
                     "target": "com.amazonaws.amplify#Webhook",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes the structure of a webhook. </p>",
+                        "smithy.api#documentation": "<p>Describes the structure of a webhook. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure for the get webhook request. </p>",
+                "smithy.api#documentation": "<p>The result structure for the get webhook request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -3938,7 +3961,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The service failed to perform an operation due to an internal issue. </p>",
+                "smithy.api#documentation": "<p>The service failed to perform an operation due to an internal issue. </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -4163,7 +4186,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> A resource could not be created because service quotas were exceeded. </p>",
+                "smithy.api#documentation": "<p>A resource could not be created because service quotas were exceeded. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -4188,11 +4211,17 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns a list of the existing Amplify apps. </p>",
+                "smithy.api#documentation": "<p>Returns a list of the existing Amplify apps. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/apps",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "apps",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -4202,7 +4231,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.amplify#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A pagination token. If non-null, the pagination token is returned in a result. Pass\n            its value in another request to retrieve more entries. </p>",
+                        "smithy.api#documentation": "<p>A pagination token. If non-null, the pagination token is returned in a result. Pass\n            its value in another request to retrieve more entries. </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -4210,13 +4239,13 @@
                     "target": "com.amazonaws.amplify#MaxResults",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p> The maximum number of records to list in a single response. </p>",
+                        "smithy.api#documentation": "<p>The maximum number of records to list in a single response. </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the list apps request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the list apps request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -4226,19 +4255,19 @@
                 "apps": {
                     "target": "com.amazonaws.amplify#Apps",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of Amplify apps. </p>",
+                        "smithy.api#documentation": "<p>A list of Amplify apps. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.amplify#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A pagination token. Set to null to start listing apps from start. If non-null, the\n            pagination token is returned in a result. Pass its value in here to list more projects.\n        </p>"
+                        "smithy.api#documentation": "<p>A pagination token. Set to null to start listing apps from start. If non-null, the\n            pagination token is returned in a result. Pass its value in here to list more projects.\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure for an Amplify app list request. </p>",
+                "smithy.api#documentation": "<p>The result structure for an Amplify app list request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -4265,7 +4294,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns a list of artifacts for a specified app, branch, and job. </p>",
+                "smithy.api#documentation": "<p>Returns a list of artifacts for a specified app, branch, and job. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/apps/{appId}/branches/{branchName}/jobs/{jobId}/artifacts",
@@ -4279,7 +4308,7 @@
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4287,7 +4316,7 @@
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of a branch that is part of an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The name of a branch that is part of an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4295,7 +4324,7 @@
                 "jobId": {
                     "target": "com.amazonaws.amplify#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for a job. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for a job. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4303,7 +4332,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.amplify#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A pagination token. Set to null to start listing artifacts from start. If a non-null\n            pagination token is returned in a result, pass its value in here to list more artifacts.\n        </p>",
+                        "smithy.api#documentation": "<p>A pagination token. Set to null to start listing artifacts from start. If a non-null\n            pagination token is returned in a result, pass its value in here to list more artifacts.\n        </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -4311,13 +4340,13 @@
                     "target": "com.amazonaws.amplify#MaxResults",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p> The maximum number of records to list in a single response. </p>",
+                        "smithy.api#documentation": "<p>The maximum number of records to list in a single response. </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Describes the request structure for the list artifacts request. </p>",
+                "smithy.api#documentation": "<p>Describes the request structure for the list artifacts request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -4327,19 +4356,19 @@
                 "artifacts": {
                     "target": "com.amazonaws.amplify#Artifacts",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of artifacts. </p>",
+                        "smithy.api#documentation": "<p>A list of artifacts. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.amplify#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A pagination token. If a non-null pagination token is returned in a result, pass its\n            value in another request to retrieve more entries. </p>"
+                        "smithy.api#documentation": "<p>A pagination token. If a non-null pagination token is returned in a result, pass its\n            value in another request to retrieve more entries. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure for the list artifacts request. </p>",
+                "smithy.api#documentation": "<p>The result structure for the list artifacts request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -4363,7 +4392,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Lists the backend environments for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Lists the backend environments for an Amplify app. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/apps/{appId}/backendenvironments",
@@ -4377,7 +4406,7 @@
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4385,14 +4414,14 @@
                 "environmentName": {
                     "target": "com.amazonaws.amplify#EnvironmentName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the backend environment </p>",
+                        "smithy.api#documentation": "<p>The name of the backend environment </p>",
                         "smithy.api#httpQuery": "environmentName"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.amplify#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A pagination token. Set to null to start listing backend environments from the start.\n            If a non-null pagination token is returned in a result, pass its value in here to list\n            more backend environments. </p>",
+                        "smithy.api#documentation": "<p>A pagination token. Set to null to start listing backend environments from the start.\n            If a non-null pagination token is returned in a result, pass its value in here to list\n            more backend environments. </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -4400,13 +4429,13 @@
                     "target": "com.amazonaws.amplify#MaxResults",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p> The maximum number of records to list in a single response. </p>",
+                        "smithy.api#documentation": "<p>The maximum number of records to list in a single response. </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the list backend environments request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the list backend environments request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -4416,19 +4445,19 @@
                 "backendEnvironments": {
                     "target": "com.amazonaws.amplify#BackendEnvironments",
                     "traits": {
-                        "smithy.api#documentation": "<p> The list of backend environments for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The list of backend environments for an Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.amplify#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A pagination token. If a non-null pagination token is returned in a result, pass its\n            value in another request to retrieve more entries. </p>"
+                        "smithy.api#documentation": "<p>A pagination token. If a non-null pagination token is returned in a result, pass its\n            value in another request to retrieve more entries. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure for the list backend environments result. </p>",
+                "smithy.api#documentation": "<p>The result structure for the list backend environments result. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -4457,6 +4486,12 @@
                     "method": "GET",
                     "uri": "/apps/{appId}/branches",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "branches",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -4466,7 +4501,7 @@
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4474,7 +4509,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.amplify#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A pagination token. Set to null to start listing branches from the start. If a\n            non-null pagination token is returned in a result, pass its value in here to list more\n            branches. </p>",
+                        "smithy.api#documentation": "<p>A pagination token. Set to null to start listing branches from the start. If a\n            non-null pagination token is returned in a result, pass its value in here to list more\n            branches. </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -4488,7 +4523,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the list branches request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the list branches request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -4539,6 +4574,12 @@
                     "method": "GET",
                     "uri": "/apps/{appId}/domains",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "domainAssociations",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -4624,6 +4665,12 @@
                     "method": "GET",
                     "uri": "/apps/{appId}/branches/{branchName}/jobs",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "jobSummaries",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -4641,7 +4688,7 @@
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for a branch. </p>",
+                        "smithy.api#documentation": "<p>The name of the branch to use for the request. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4649,7 +4696,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.amplify#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A pagination token. Set to null to start listing steps from the start. If a non-null\n            pagination token is returned in a result, pass its value in here to list more steps.\n        </p>",
+                        "smithy.api#documentation": "<p>A pagination token. Set to null to start listing steps from the start. If a non-null\n            pagination token is returned in a result, pass its value in here to list more steps.\n        </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -4657,7 +4704,7 @@
                     "target": "com.amazonaws.amplify#MaxResults",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p> The maximum number of records to list in a single response. </p>",
+                        "smithy.api#documentation": "<p>The maximum number of records to list in a single response. </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -4673,19 +4720,19 @@
                 "jobSummaries": {
                     "target": "com.amazonaws.amplify#JobSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p> The result structure for the list job result request. </p>",
+                        "smithy.api#documentation": "<p>The result structure for the list job result request. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.amplify#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A pagination token. If non-null the pagination token is returned in a result. Pass\n            its value in another request to retrieve more entries. </p>"
+                        "smithy.api#documentation": "<p>A pagination token. If non-null the pagination token is returned in a result. Pass\n            its value in another request to retrieve more entries. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The maximum number of records to list in a single response. </p>",
+                "smithy.api#documentation": "<p>The maximum number of records to list in a single response. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -4709,7 +4756,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns a list of tags for a specified Amazon Resource Name (ARN). </p>",
+                "smithy.api#documentation": "<p>Returns a list of tags for a specified Amazon Resource Name (ARN).</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{resourceArn}",
@@ -4723,14 +4770,14 @@
                 "resourceArn": {
                     "target": "com.amazonaws.amplify#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) to use to list tags. </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) to use to list tags. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure to use to list tags for a resource. </p>",
+                "smithy.api#documentation": "<p>The request structure to use to list tags for a resource. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -4740,12 +4787,12 @@
                 "tags": {
                     "target": "com.amazonaws.amplify#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of tags for the specified The Amazon Resource Name (ARN). </p>"
+                        "smithy.api#documentation": "<p>A list of tags for the specified The Amazon Resource Name (ARN). </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The response for the list tags for resource request. </p>",
+                "smithy.api#documentation": "<p>The response for the list tags for resource request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -4772,7 +4819,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns a list of webhooks for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Returns a list of webhooks for an Amplify app. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/apps/{appId}/webhooks",
@@ -4786,7 +4833,7 @@
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4794,7 +4841,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.amplify#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A pagination token. Set to null to start listing webhooks from the start. If\n            non-null,the pagination token is returned in a result. Pass its value in here to list\n            more webhooks. </p>",
+                        "smithy.api#documentation": "<p>A pagination token. Set to null to start listing webhooks from the start. If\n            non-null,the pagination token is returned in a result. Pass its value in here to list\n            more webhooks. </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -4802,13 +4849,13 @@
                     "target": "com.amazonaws.amplify#MaxResults",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p> The maximum number of records to list in a single response. </p>",
+                        "smithy.api#documentation": "<p>The maximum number of records to list in a single response. </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the list webhooks request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the list webhooks request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -4818,19 +4865,19 @@
                 "webhooks": {
                     "target": "com.amazonaws.amplify#Webhooks",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of webhooks. </p>",
+                        "smithy.api#documentation": "<p>A list of webhooks. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.amplify#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A pagination token. If non-null, the pagination token is returned in a result. Pass\n            its value in another request to retrieve more entries. </p>"
+                        "smithy.api#documentation": "<p>A pagination token. If non-null, the pagination token is returned in a result. Pass\n            its value in another request to retrieve more entries. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure for the list webhooks request. </p>",
+                "smithy.api#documentation": "<p>The result structure for the list webhooks request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -4891,7 +4938,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> An entity was not found during an operation. </p>",
+                "smithy.api#documentation": "<p>An entity was not found during an operation. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -4936,30 +4983,30 @@
                 "lastDeployTime": {
                     "target": "com.amazonaws.amplify#LastDeployTime",
                     "traits": {
-                        "smithy.api#documentation": "<p> The last deploy time of the production branch. </p>"
+                        "smithy.api#documentation": "<p>The last deploy time of the production branch. </p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.amplify#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p> The status of the production branch. </p>"
+                        "smithy.api#documentation": "<p>The status of the production branch. </p>"
                     }
                 },
                 "thumbnailUrl": {
                     "target": "com.amazonaws.amplify#ThumbnailUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p> The thumbnail URL for the production branch. </p>"
+                        "smithy.api#documentation": "<p>The thumbnail URL for the production branch. </p>"
                     }
                 },
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The branch name for the production branch. </p>"
+                        "smithy.api#documentation": "<p>The branch name for the production branch. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Describes the information about a production branch for an Amplify app. </p>"
+                "smithy.api#documentation": "<p>Describes the information about a production branch for an Amplify app. </p>"
             }
         },
         "com.amazonaws.amplify#PullRequestEnvironmentName": {
@@ -5032,7 +5079,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> An operation failed due to a non-existent resource. </p>",
+                "smithy.api#documentation": "<p>An operation failed due to a non-existent resource. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -5074,6 +5121,16 @@
                     "max": 3000
                 },
                 "smithy.api#pattern": "^(?s)"
+            }
+        },
+        "com.amazonaws.amplify#StackArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws:cloudformation:[a-z0-9-]+:\\d{12}:stack/.+/.+$"
             }
         },
         "com.amazonaws.amplify#StackName": {
@@ -5147,7 +5204,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Starts a deployment for a manually deployed app. Manually deployed apps are not\n            connected to a repository. </p>",
+                "smithy.api#documentation": "<p>Starts a deployment for a manually deployed app. Manually deployed apps are not\n            connected to a repository. </p>\n         <p>The maximum duration between the <code>CreateDeployment</code> call and the\n            <code>StartDeployment</code> call cannot exceed 8 hours. If the duration exceeds 8 hours, the\n            <code>StartDeployment</code> call and the associated <code>Job</code> will\n            fail.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps/{appId}/branches/{branchName}/deployments/start",
@@ -5161,7 +5218,7 @@
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5169,7 +5226,7 @@
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for the branch, for the job. </p>",
+                        "smithy.api#documentation": "<p>The name of the branch to use for the job. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5177,18 +5234,18 @@
                 "jobId": {
                     "target": "com.amazonaws.amplify#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The job ID for this deployment, generated by the create deployment request. </p>"
+                        "smithy.api#documentation": "<p>The job ID for this deployment, generated by the create deployment request. </p>"
                     }
                 },
                 "sourceUrl": {
                     "target": "com.amazonaws.amplify#SourceUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p> The source URL for this deployment, used when calling start deployment without create\n            deployment. The source URL can be any HTTP GET URL that is publicly accessible and\n            downloads a single .zip file. </p>"
+                        "smithy.api#documentation": "<p>The source URL for this deployment, used when calling start deployment without create\n            deployment. The source URL can be any HTTP GET URL that is publicly accessible and\n            downloads a single .zip file. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the start a deployment request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the start a deployment request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -5198,13 +5255,13 @@
                 "jobSummary": {
                     "target": "com.amazonaws.amplify#JobSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p> The summary for the job. </p>",
+                        "smithy.api#documentation": "<p>The summary for the job. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure for the start a deployment request. </p>",
+                "smithy.api#documentation": "<p>The result structure for the start a deployment request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -5248,7 +5305,7 @@
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5256,7 +5313,7 @@
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The branch name for the job. </p>",
+                        "smithy.api#documentation": "<p>The name of the branch to use for the job. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5264,20 +5321,20 @@
                 "jobId": {
                     "target": "com.amazonaws.amplify#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an existing job. This is required if the value of\n                <code>jobType</code> is <code>RETRY</code>. </p>"
+                        "smithy.api#documentation": "<p>The unique ID for an existing job. This is required if the value of\n                <code>jobType</code> is <code>RETRY</code>. </p>"
                     }
                 },
                 "jobType": {
                     "target": "com.amazonaws.amplify#JobType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes the type for the job. The job type <code>RELEASE</code> starts a new job\n            with the latest change from the specified branch. This value is available only for apps\n            that are connected to a repository. The job type <code>RETRY</code> retries an existing\n            job. If the job type value is <code>RETRY</code>, the <code>jobId</code> is also\n            required. </p>",
+                        "smithy.api#documentation": "<p>Describes the type for the job. The job type <code>RELEASE</code> starts a new job\n            with the latest change from the specified branch. This value is available only for apps\n            that are connected to a repository. </p>\n         <p>The job type <code>RETRY</code> retries an existing\n            job. If the job type value is <code>RETRY</code>, the <code>jobId</code> is also\n            required. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobReason": {
                     "target": "com.amazonaws.amplify#JobReason",
                     "traits": {
-                        "smithy.api#documentation": "<p> A descriptive reason for starting this job. </p>"
+                        "smithy.api#documentation": "<p>A descriptive reason for starting the job.</p>"
                     }
                 },
                 "commitId": {
@@ -5300,7 +5357,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the start job request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the start job request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -5483,7 +5540,7 @@
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for the branch, for the job. </p>",
+                        "smithy.api#documentation": "<p>The name of the branch to use for the stop job request. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5596,7 +5653,7 @@
         "com.amazonaws.amplify#TTL": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p> The content Time to Live (TTL) for the website in seconds. </p>",
+                "smithy.api#documentation": "<p>The content Time to Live (TTL) for the website in seconds.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 32
@@ -5661,7 +5718,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Tags the resource with a tag key and value. </p>",
+                "smithy.api#documentation": "<p>Tags the resource with a tag key and value.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}",
@@ -5683,13 +5740,13 @@
                 "tags": {
                     "target": "com.amazonaws.amplify#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p> The tags used to tag the resource. </p>",
+                        "smithy.api#documentation": "<p>The tags used to tag the resource. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure to tag a resource with a tag key and value. </p>",
+                "smithy.api#documentation": "<p>The request structure to tag a resource with a tag key and value.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -5697,7 +5754,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p> The response for the tag resource request. </p>",
+                "smithy.api#documentation": "<p>The response for the tag resource request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -5774,7 +5831,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> An operation failed due to a lack of access. </p>",
+                "smithy.api#documentation": "<p>An operation failed due to a lack of access. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 401
             }
@@ -5799,7 +5856,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Untags a resource with a specified Amazon Resource Name (ARN). </p>",
+                "smithy.api#documentation": "<p>Untags a resource with a specified Amazon Resource Name (ARN).</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{resourceArn}",
@@ -5813,7 +5870,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.amplify#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) to use to untag a resource. </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) to use to untag a resource. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5821,14 +5878,14 @@
                 "tagKeys": {
                     "target": "com.amazonaws.amplify#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The tag keys to use to untag a resource. </p>",
+                        "smithy.api#documentation": "<p>The tag keys to use to untag a resource. </p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the untag resource request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the untag resource request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -5836,7 +5893,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p> The response for the untag resource request. </p>",
+                "smithy.api#documentation": "<p>The response for the untag resource request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -5863,7 +5920,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Updates an existing Amplify app. </p>",
+                "smithy.api#documentation": "<p>Updates an existing Amplify app. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps/{appId}",
@@ -5877,7 +5934,7 @@
                 "appId": {
                     "target": "com.amazonaws.amplify#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for an Amplify app. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5885,67 +5942,67 @@
                 "name": {
                     "target": "com.amazonaws.amplify#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The name for an Amplify app. </p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.amplify#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p> The description for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The description for an Amplify app. </p>"
                     }
                 },
                 "platform": {
                     "target": "com.amazonaws.amplify#Platform",
                     "traits": {
-                        "smithy.api#documentation": "<p> The platform for the Amplify app. For a static app, set the platform type to <code>WEB</code>.\n            For a dynamic server-side rendered (SSR) app, set the platform type to\n            <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting's original SSR support only, set the platform type to\n            <code>WEB_DYNAMIC</code>.</p>"
+                        "smithy.api#documentation": "<p>The platform for the Amplify app. For a static app, set the platform type to <code>WEB</code>.\n            For a dynamic server-side rendered (SSR) app, set the platform type to\n            <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting's original SSR support only, set the platform type to\n            <code>WEB_DYNAMIC</code>.</p>"
                     }
                 },
                 "iamServiceRoleArn": {
                     "target": "com.amazonaws.amplify#ServiceRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The AWS Identity and Access Management (IAM) service role for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The AWS Identity and Access Management (IAM) service role for an Amplify app. </p>"
                     }
                 },
                 "environmentVariables": {
                     "target": "com.amazonaws.amplify#EnvironmentVariables",
                     "traits": {
-                        "smithy.api#documentation": "<p> The environment variables for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The environment variables for an Amplify app. </p>"
                     }
                 },
                 "enableBranchAutoBuild": {
                     "target": "com.amazonaws.amplify#EnableAutoBuild",
                     "traits": {
-                        "smithy.api#documentation": "<p> Enables branch auto-building for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>Enables branch auto-building for an Amplify app. </p>"
                     }
                 },
                 "enableBranchAutoDeletion": {
                     "target": "com.amazonaws.amplify#EnableBranchAutoDeletion",
                     "traits": {
-                        "smithy.api#documentation": "<p> Automatically disconnects a branch in the Amplify Console when you delete a branch\n            from your Git repository. </p>"
+                        "smithy.api#documentation": "<p>Automatically disconnects a branch in the Amplify console when you delete a branch\n            from your Git repository. </p>"
                     }
                 },
                 "enableBasicAuth": {
                     "target": "com.amazonaws.amplify#EnableBasicAuth",
                     "traits": {
-                        "smithy.api#documentation": "<p> Enables basic authorization for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>Enables basic authorization for an Amplify app. </p>"
                     }
                 },
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The basic authorization credentials for an Amplify app. You must base64-encode the\n            authorization credentials and provide them in the format\n            <code>user:password</code>.</p>"
+                        "smithy.api#documentation": "<p>The basic authorization credentials for an Amplify app. You must base64-encode the\n            authorization credentials and provide them in the format\n            <code>user:password</code>.</p>"
                     }
                 },
                 "customRules": {
                     "target": "com.amazonaws.amplify#CustomRules",
                     "traits": {
-                        "smithy.api#documentation": "<p> The custom redirect and rewrite rules for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The custom redirect and rewrite rules for an Amplify app. </p>"
                     }
                 },
                 "buildSpec": {
                     "target": "com.amazonaws.amplify#BuildSpec",
                     "traits": {
-                        "smithy.api#documentation": "<p> The build specification (build spec) for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The build specification (build spec) for an Amplify app. </p>"
                     }
                 },
                 "customHeaders": {
@@ -5957,42 +6014,42 @@
                 "enableAutoBranchCreation": {
                     "target": "com.amazonaws.amplify#EnableAutoBranchCreation",
                     "traits": {
-                        "smithy.api#documentation": "<p> Enables automated branch creation for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>Enables automated branch creation for an Amplify app. </p>"
                     }
                 },
                 "autoBranchCreationPatterns": {
                     "target": "com.amazonaws.amplify#AutoBranchCreationPatterns",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes the automated branch creation glob patterns for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>Describes the automated branch creation glob patterns for an Amplify app. </p>"
                     }
                 },
                 "autoBranchCreationConfig": {
                     "target": "com.amazonaws.amplify#AutoBranchCreationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> The automated branch creation configuration for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The automated branch creation configuration for an Amplify app. </p>"
                     }
                 },
                 "repository": {
                     "target": "com.amazonaws.amplify#Repository",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the repository for an Amplify app </p>"
+                        "smithy.api#documentation": "<p>The name of the Git repository for an Amplify app.</p>"
                     }
                 },
                 "oauthToken": {
                     "target": "com.amazonaws.amplify#OauthToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OAuth token for a third-party source control system for an Amplify app. The OAuth\n            token is used to create a webhook and a read-only deploy key using SSH cloning. The\n            OAuth token is not stored.</p>\n         <p>Use <code>oauthToken</code> for repository providers other than GitHub, such as\n            Bitbucket or CodeCommit.</p>\n         <p>To authorize access to GitHub as your repository provider, use\n                <code>accessToken</code>.</p>\n         <p>You must specify either <code>oauthToken</code> or <code>accessToken</code> when you\n            update an app.</p>\n         <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work\n            with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub\n            App. For more information, see <a href=\"https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth\">Migrating an existing OAuth app to the Amplify GitHub App</a> in the\n                <i>Amplify User Guide</i> .</p>"
+                        "smithy.api#documentation": "<p>The OAuth token for a third-party source control system for an Amplify app. The OAuth\n            token is used to create a webhook and a read-only deploy key using SSH cloning. The\n            OAuth token is not stored.</p>\n         <p>Use <code>oauthToken</code> for repository providers other than GitHub, such as\n            Bitbucket or CodeCommit.</p>\n         <p>To authorize access to GitHub as your repository provider, use\n                <code>accessToken</code>.</p>\n         <p>You must specify either <code>oauthToken</code> or <code>accessToken</code> when you\n            update an app.</p>\n         <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work\n            with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub\n            App. For more information, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth\">Migrating an existing OAuth app to the Amplify GitHub App</a> in the\n                <i>Amplify User Guide</i> .</p>"
                     }
                 },
                 "accessToken": {
                     "target": "com.amazonaws.amplify#AccessToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The personal access token for a GitHub repository for an Amplify app. The personal\n            access token is used to authorize access to a GitHub repository using the Amplify GitHub\n            App. The token is not stored.</p>\n         <p>Use <code>accessToken</code> for GitHub repositories only. To authorize access to a\n            repository provider such as Bitbucket or CodeCommit, use <code>oauthToken</code>.</p>\n         <p>You must specify either <code>accessToken</code> or <code>oauthToken</code> when you\n            update an app.</p>\n         <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work\n            with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub\n            App. For more information, see <a href=\"https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth\">Migrating an existing OAuth app to the Amplify GitHub App</a> in the\n                <i>Amplify User Guide</i> .</p>"
+                        "smithy.api#documentation": "<p>The personal access token for a GitHub repository for an Amplify app. The personal\n            access token is used to authorize access to a GitHub repository using the Amplify GitHub\n            App. The token is not stored.</p>\n         <p>Use <code>accessToken</code> for GitHub repositories only. To authorize access to a\n            repository provider such as Bitbucket or CodeCommit, use <code>oauthToken</code>.</p>\n         <p>You must specify either <code>accessToken</code> or <code>oauthToken</code> when you\n            update an app.</p>\n         <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work\n            with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub\n            App. For more information, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth\">Migrating an existing OAuth app to the Amplify GitHub App</a> in the\n                <i>Amplify User Guide</i> .</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the update app request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the update app request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -6002,13 +6059,13 @@
                 "app": {
                     "target": "com.amazonaws.amplify#App",
                     "traits": {
-                        "smithy.api#documentation": "<p> Represents the updated Amplify app. </p>",
+                        "smithy.api#documentation": "<p>Represents the updated Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure for an Amplify app update request. </p>",
+                "smithy.api#documentation": "<p>The result structure for an Amplify app update request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -6060,7 +6117,7 @@
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for the branch. </p>",
+                        "smithy.api#documentation": "<p>The name of the branch. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6152,12 +6209,18 @@
                 "backendEnvironmentArn": {
                     "target": "com.amazonaws.amplify#BackendEnvironmentArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify\n            app. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify\n            app. </p>"
+                    }
+                },
+                "backend": {
+                    "target": "com.amazonaws.amplify#Backend",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The backend for a <code>Branch</code> of an Amplify app. Use for a backend created from an CloudFormation stack.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the update branch request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the update branch request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -6305,7 +6368,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Updates a webhook. </p>",
+                "smithy.api#documentation": "<p>Updates a webhook. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/webhooks/{webhookId}",
@@ -6319,7 +6382,7 @@
                 "webhookId": {
                     "target": "com.amazonaws.amplify#WebhookId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID for a webhook. </p>",
+                        "smithy.api#documentation": "<p>The unique ID for a webhook. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6327,18 +6390,18 @@
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for a branch that is part of an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The name for a branch that is part of an Amplify app. </p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.amplify#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p> The description for a webhook. </p>"
+                        "smithy.api#documentation": "<p>The description for a webhook. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request structure for the update webhook request. </p>",
+                "smithy.api#documentation": "<p>The request structure for the update webhook request. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -6348,13 +6411,13 @@
                 "webhook": {
                     "target": "com.amazonaws.amplify#Webhook",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes a webhook that connects repository events to an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>Describes a webhook that connects repository events to an Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The result structure for the update webhook request. </p>",
+                "smithy.api#documentation": "<p>The result structure for the update webhook request. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -6376,55 +6439,55 @@
                 "webhookArn": {
                     "target": "com.amazonaws.amplify#WebhookArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) for the webhook. </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the webhook. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "webhookId": {
                     "target": "com.amazonaws.amplify#WebhookId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ID of the webhook. </p>",
+                        "smithy.api#documentation": "<p>The ID of the webhook. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "webhookUrl": {
                     "target": "com.amazonaws.amplify#WebhookUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p> The URL of the webhook. </p>",
+                        "smithy.api#documentation": "<p>The URL of the webhook. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name for a branch that is part of an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>The name for a branch that is part of an Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.amplify#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p> The description for a webhook. </p>",
+                        "smithy.api#documentation": "<p>The description for a webhook. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createTime": {
                     "target": "com.amazonaws.amplify#CreateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p> The create date and time for a webhook. </p>",
+                        "smithy.api#documentation": "<p>The create date and time for a webhook. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "updateTime": {
                     "target": "com.amazonaws.amplify#UpdateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p> Updates the date and time for a webhook. </p>",
+                        "smithy.api#documentation": "<p>Updates the date and time for a webhook. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Describes a webhook that connects repository events to an Amplify app. </p>"
+                "smithy.api#documentation": "<p>Describes a webhook that connects repository events to an Amplify app. </p>"
             }
         },
         "com.amazonaws.amplify#WebhookArn": {
