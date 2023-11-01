@@ -37,7 +37,6 @@ import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.integration.auth.HttpBearerAuth;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
-import software.amazon.smithy.model.traits.RequestCompressionTrait;
 import software.amazon.smithy.utils.ListUtils;
 
 /**
