@@ -58,7 +58,7 @@ func (m requestCompression) HandleBuild(
 		}
 		isCompressed = true
 	} else if req.ContentLength >= m.requestMinCompressSizeBytes {
-		compressedBytes, err := compress(req.Body) // refer to v1 implementation https://github.com/aws/aws-sdk-go/blob/1b80db7ac9c1c7d592cc25b8bc2c5c3e0a317850/internal/encoding/gzip/handler.go#L39
+		compressedBytes, err := compress(req.Body)
 		if err != nil {
 			return out, metadata, fmt.Errorf("failed to compress request body, %v", err)
 		}

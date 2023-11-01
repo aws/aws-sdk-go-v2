@@ -5,7 +5,7 @@ import (
 	"compress/gzip"
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go/aws/awsutil"
+	awsutil2 "github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -132,7 +132,7 @@ func TestRequestCompression(t *testing.T) {
 				}
 			}
 
-			if e, a := c.ExpectedHeader, map[string][]string(updatedRequest.Header); !awsutil.DeepEqual(e, a) {
+			if e, a := c.ExpectedHeader, map[string][]string(updatedRequest.Header); !awsutil2.DeepEqual(e, a) {
 				t.Errorf("expect request header to be %q, got %q", e, a)
 			}
 		})
