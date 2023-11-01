@@ -542,7 +542,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:algorithm/"
+                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:algorithm/[\\S]{1,2048}$"
             }
         },
         "com.amazonaws.sagemaker#AlgorithmImage": {
@@ -5763,7 +5763,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:code-repository/"
+                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:code-repository/[\\S]{1,2048}$"
             }
         },
         "com.amazonaws.sagemaker#CodeRepositoryContains": {
@@ -26323,7 +26323,11 @@
         "com.amazonaws.sagemaker#GitConfigUrl": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^https://([^/]+)/?(.*)$"
+                "smithy.api#length": {
+                    "min": 11,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^https://([^/]+)/?.{3,1016}$"
             }
         },
         "com.amazonaws.sagemaker#Group": {
@@ -39891,6 +39895,9 @@
                 },
                 "LastMonitoringExecutionSummary": {
                     "target": "com.amazonaws.sagemaker#MonitoringExecutionSummary"
+                },
+                "BatchTransformInput": {
+                    "target": "com.amazonaws.sagemaker#BatchTransformInput"
                 }
             },
             "traits": {
@@ -40504,7 +40511,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:model-package/"
+                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package/[\\S]{1,2048}$"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageArnList": {
@@ -40671,7 +40678,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:model-package-group/"
+                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package-group/[\\S]{1,2048}$"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageGroupSortBy": {
@@ -47486,7 +47493,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:project:"
+                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:project/[\\S]{1,2048}$"
             }
         },
         "com.amazonaws.sagemaker#ProjectEntityName": {

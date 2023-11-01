@@ -236,6 +236,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#UnauthorizedPartnerIntegrationFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -1502,6 +1505,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address type for the cluster. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>"
                     }
+                },
+                "MultiAZ": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean value that, if true, indicates that the cluster is deployed in two Availability Zones.</p>"
+                    }
+                },
+                "MultiAZSecondary": {
+                    "target": "com.amazonaws.redshift#SecondaryClusterInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secondary compute unit of a cluster, if Multi-AZ deployment is turned on.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2485,6 +2500,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.redshift#ClusterSnapshotAlreadyExistsFault"
                 },
                 {
@@ -2713,6 +2731,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#UnauthorizedOperation"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -2948,6 +2969,12 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address types that the cluster supports. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>"
+                    }
+                },
+                "MultiAZ": {
+                    "target": "com.amazonaws.redshift#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If true, Amazon Redshift will deploy the cluster in two Availability Zones (AZ).</p>"
                     }
                 }
             },
@@ -3744,6 +3771,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.redshift#InvalidScheduledActionFault"
                 },
                 {
@@ -3760,6 +3790,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#UnauthorizedOperation"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -5062,6 +5095,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#UnauthorizedPartnerIntegrationFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -6958,6 +6994,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -7140,6 +7179,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#UnauthorizedPartnerIntegrationFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -7400,6 +7442,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#ResizeNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -7884,6 +7929,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#InvalidClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -7927,6 +7975,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#UnauthorizedOperation"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -8117,6 +8168,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#InvalidS3KeyPrefixFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -8880,6 +8934,59 @@
         },
         "com.amazonaws.redshift#ExceptionMessage": {
             "type": "string"
+        },
+        "com.amazonaws.redshift#FailoverPrimaryCompute": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#FailoverPrimaryComputeInputMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#FailoverPrimaryComputeResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnauthorizedOperation"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Fails over the primary compute unit of the specified Multi-AZ cluster to another Availability Zone.</p>"
+            }
+        },
+        "com.amazonaws.redshift#FailoverPrimaryComputeInputMessage": {
+            "type": "structure",
+            "members": {
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier of the cluster for which the primary compute unit will be failed over to another Availability Zone.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshift#FailoverPrimaryComputeResult": {
+            "type": "structure",
+            "members": {
+                "Cluster": {
+                    "target": "com.amazonaws.redshift#Cluster"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.redshift#GetClusterCredentials": {
             "type": "operation",
@@ -10671,6 +10778,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#InvalidClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -11026,6 +11136,12 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address types that the cluster supports. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>"
+                    }
+                },
+                "MultiAZ": {
+                    "target": "com.amazonaws.redshift#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If true and the cluster is currently only deployed in a single Availability Zone, the cluster will be modified to be deployed in two Availability Zones.</p>"
                     }
                 }
             },
@@ -11529,6 +11645,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.redshift#InvalidScheduledActionFault"
                 },
                 {
@@ -11542,6 +11661,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#UnauthorizedOperation"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -12405,6 +12527,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#InvalidClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -12992,6 +13117,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#EnableSnapshotCopy"
+                },
+                {
+                    "target": "com.amazonaws.redshift#FailoverPrimaryCompute"
                 },
                 {
                     "target": "com.amazonaws.redshift#GetClusterCredentials"
@@ -15363,6 +15491,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address type for the cluster. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>"
                     }
+                },
+                "MultiAZ": {
+                    "target": "com.amazonaws.redshift#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If true, the snapshot will be restored to a cluster deployed in two Availability Zones.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15561,6 +15695,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#InvalidClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -15854,6 +15991,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#InvalidClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -16279,6 +16419,26 @@
                 "traits": {
                     "smithy.api#xmlName": "SnapshotTime"
                 }
+            }
+        },
+        "com.amazonaws.redshift#SecondaryClusterInfo": {
+            "type": "structure",
+            "members": {
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Availability Zone in which the secondary compute unit of the cluster is located.</p>"
+                    }
+                },
+                "ClusterNodes": {
+                    "target": "com.amazonaws.redshift#ClusterNodesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nodes in the secondary compute unit.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The AvailabilityZone and ClusterNodes information of the secondary compute unit.</p>"
             }
         },
         "com.amazonaws.redshift#SensitiveString": {
@@ -17645,6 +17805,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#UnauthorizedPartnerIntegrationFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {

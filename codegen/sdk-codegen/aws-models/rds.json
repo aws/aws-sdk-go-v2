@@ -2905,6 +2905,12 @@
                         "smithy.api#documentation": "<p>The allocated storage size in gibibytes (GiB) for all database engines except Amazon Aurora. For Aurora, \n            <code>AllocatedStorage</code> always returns 1, because Aurora DB cluster storage size isn't fixed, but \n            instead automatically adjusts as needed.</p>"
                     }
                 },
+                "RdsCustomClusterConfiguration": {
+                    "target": "com.amazonaws.rds#RdsCustomClusterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
+                },
                 "Iops": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
@@ -4180,6 +4186,12 @@
                     "target": "com.amazonaws.rds#ScalingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>For DB clusters in <code>serverless</code> DB engine mode, the scaling properties of the DB cluster.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters only</p>"
+                    }
+                },
+                "RdsCustomClusterConfiguration": {
+                    "target": "com.amazonaws.rds#RdsCustomClusterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
                     }
                 },
                 "DeletionProtection": {
@@ -6914,6 +6926,12 @@
                 },
                 "ScalingConfigurationInfo": {
                     "target": "com.amazonaws.rds#ScalingConfigurationInfo"
+                },
+                "RdsCustomClusterConfiguration": {
+                    "target": "com.amazonaws.rds#RdsCustomClusterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
                 },
                 "DeletionProtection": {
                     "target": "com.amazonaws.rds#BooleanOptional",
@@ -23078,6 +23096,26 @@
                 }
             }
         },
+        "com.amazonaws.rds#RdsCustomClusterConfiguration": {
+            "type": "structure",
+            "members": {
+                "InterconnectSubnetId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
+                },
+                "TransitGatewayMulticastDomainId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Reserved for future use.</p>"
+            }
+        },
         "com.amazonaws.rds#ReadReplicaDBClusterIdentifierList": {
             "type": "list",
             "member": {
@@ -24868,6 +24906,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The network type of the DB cluster.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon Aurora User Guide.</i>\n         </p>\n         <p>Valid for: Aurora DB clusters only</p>"
                     }
+                },
+                "RdsCustomClusterConfiguration": {
+                    "target": "com.amazonaws.rds#RdsCustomClusterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
                 }
             },
             "traits": {
@@ -25181,6 +25225,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The resource ID of the source DB cluster from which to restore.</p>"
+                    }
+                },
+                "RdsCustomClusterConfiguration": {
+                    "target": "com.amazonaws.rds#RdsCustomClusterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
                     }
                 }
             },
