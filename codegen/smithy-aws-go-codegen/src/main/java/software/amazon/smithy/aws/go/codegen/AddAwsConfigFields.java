@@ -37,6 +37,7 @@ import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.integration.auth.HttpBearerAuth;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
+import software.amazon.smithy.model.traits.RequestCompressionTrait;
 import software.amazon.smithy.utils.ListUtils;
 
 /**
@@ -70,6 +71,10 @@ public class AddAwsConfigFields implements GoIntegration {
     private static final String FINALIZE_RETRY_MAX_ATTEMPTS_OPTIONS = "finalizeRetryMaxAttemptOptions";
 
     private static final String SDK_APP_ID = "AppID";
+
+    private static final String DISABLE_REQUEST_COMPRESSION = "DisableRequestCompression";
+
+    private static final String REQUEST_MIN_COMPRESSION_SIZE_BYTES = "RequestMinCompressSizeBytes";
 
     private static final List<AwsConfigField> AWS_CONFIG_FIELDS = ListUtils.of(
             AwsConfigField.builder()
@@ -206,6 +211,20 @@ public class AddAwsConfigFields implements GoIntegration {
                     .name(SDK_APP_ID)
                     .type(getUniversalSymbol("string"))
                     .documentation("The optional application specific identifier appended to the User-Agent header.")
+                    .generatedOnClient(false)
+                    .build(),
+            AwsConfigField.builder()
+                    .name(DISABLE_REQUEST_COMPRESSION)
+                    .type(getUniversalSymbol("bool"))
+                    .documentation("Configure whether or not a operation request could be compressed.")
+                    .servicePredicate(RequestCompression::isRequestCompressionService)
+                    .generatedOnClient(false)
+                    .build(),
+            AwsConfigField.builder()
+                    .name(REQUEST_MIN_COMPRESSION_SIZE_BYTES)
+                    .type(getUniversalSymbol("int64"))
+                    .documentation("The inclusive min request body size to be compressed.")
+                    .servicePredicate(RequestCompression::isRequestCompressionService)
                     .generatedOnClient(false)
                     .build()
     );

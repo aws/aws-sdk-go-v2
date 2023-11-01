@@ -78,6 +78,9 @@ type Options struct {
 	// clients initial default settings.
 	DefaultsMode aws.DefaultsMode
 
+	// Determine if request compression is allowed, default to false
+	DisableRequestCompression bool
+
 	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions EndpointResolverOptions
 
@@ -103,6 +106,10 @@ type Options struct {
 
 	// The region to send requests to. (Required)
 	Region string
+
+	// Inclusive threshold request body size to trigger compression, default to 10240
+	// and must be within 0 and 10485760 bytes inclusively
+	RequestMinCompressSizeBytes int64
 
 	// RetryMaxAttempts specifies the maximum number attempts an API client will call
 	// an operation that fails with a retryable error. A value of 0 is ignored, and
@@ -277,14 +284,16 @@ func setResolvedDefaultsMode(o *Options) {
 // NewFromConfig returns a new client from the provided config.
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	opts := Options{
-		Region:             cfg.Region,
-		DefaultsMode:       cfg.DefaultsMode,
-		RuntimeEnvironment: cfg.RuntimeEnvironment,
-		HTTPClient:         cfg.HTTPClient,
-		APIOptions:         cfg.APIOptions,
-		Logger:             cfg.Logger,
-		ClientLogMode:      cfg.ClientLogMode,
-		AppID:              cfg.AppID,
+		Region:                      cfg.Region,
+		DefaultsMode:                cfg.DefaultsMode,
+		RuntimeEnvironment:          cfg.RuntimeEnvironment,
+		HTTPClient:                  cfg.HTTPClient,
+		APIOptions:                  cfg.APIOptions,
+		Logger:                      cfg.Logger,
+		ClientLogMode:               cfg.ClientLogMode,
+		AppID:                       cfg.AppID,
+		DisableRequestCompression:   cfg.DisableRequestCompression,
+		RequestMinCompressSizeBytes: cfg.RequestMinCompressSizeBytes,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
@@ -454,6 +463,10 @@ func resolveUseFIPSEndpoint(cfg aws.Config, o *Options) error {
 		o.EndpointOptions.UseFIPSEndpoint = value
 	}
 	return nil
+}
+
+func addRequestCompression(stack *middleware.Stack, options Options) error {
+	return awsmiddleware.AddRequestCompression(stack, options.DisableRequestCompression, options.RequestMinCompressSizeBytes)
 }
 
 // IdempotencyTokenProvider interface for providing idempotency token

@@ -282,3 +282,19 @@ sdk_ua_app_id = 12345
 [profile endpoint_config]
 ignore_configured_endpoint_urls = true
 endpoint_url = https://example.com
+
+[profile request_compression]
+disable_request_compression = true
+request_min_compression_size_bytes = 12345
+
+[profile request_compression_invalid_disable]
+disable_request_compression = blabla
+request_min_compression_size_bytes = 12345
+
+[profile request_compression_non_int_min_request]
+disable_request_compression = false
+request_min_compression_size_bytes = hahaha
+
+[profile request_compression_min_request_out_of_bounds]
+disable_request_compression = false
+request_min_compression_size_bytes = 10485761

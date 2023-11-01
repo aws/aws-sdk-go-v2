@@ -150,6 +150,86 @@ func TestResolveAppID(t *testing.T) {
 	}
 }
 
+func TestResolveRequestMinCompressSizeBytes(t *testing.T) {
+	cases := map[string]struct {
+		RequestMinCompressSizeBytes *int64
+		ExpectMinBytes              int64
+	}{
+		"min requet size of 100 bytes": {
+			RequestMinCompressSizeBytes: aws.Int64(100),
+			ExpectMinBytes:              100,
+		},
+		"min request size unset": {
+			ExpectMinBytes: 10240,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			var options LoadOptions
+			optFns := []func(options *LoadOptions) error{
+				WithRequestMinCompressSizeBytes(c.RequestMinCompressSizeBytes),
+			}
+
+			for _, optFn := range optFns {
+				optFn(&options)
+			}
+
+			configs := configs{options}
+
+			var cfg aws.Config
+
+			if err := resolveRequestMinCompressSizeBytes(context.Background(), &cfg, configs); err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			if e, a := c.ExpectMinBytes, cfg.RequestMinCompressSizeBytes; e != a {
+				t.Errorf("expect RequestMinCompressSizeBytes to be %v , got %v", e, a)
+			}
+		})
+	}
+}
+
+func TestResolveDisableRequestCompression(t *testing.T) {
+	cases := map[string]struct {
+		DisableRequestCompression *bool
+		ExpectDisable             bool
+	}{
+		"disable request compression": {
+			DisableRequestCompression: aws.Bool(true),
+			ExpectDisable:             true,
+		},
+		"disable request compression unset": {
+			ExpectDisable: false,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			var options LoadOptions
+			optFns := []func(options *LoadOptions) error{
+				WithDisableRequestCompression(c.DisableRequestCompression),
+			}
+
+			for _, optFn := range optFns {
+				optFn(&options)
+			}
+
+			configs := configs{options}
+
+			var cfg aws.Config
+
+			if err := resolveDisableRequestCompression(context.Background(), &cfg, configs); err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			if e, a := c.ExpectDisable, cfg.DisableRequestCompression; e != a {
+				t.Errorf("expect DisableRequestCompression to be %v , got %v", e, a)
+			}
+		})
+	}
+}
+
 func TestResolveCredentialsProvider(t *testing.T) {
 	var options LoadOptions
 	optFns := []func(options *LoadOptions) error{

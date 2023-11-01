@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/benchmark
 go 1.19
 
 require (
-	github.com/aws/aws-sdk-go v1.44.28
+	github.com/aws/aws-sdk-go v1.47.1
 	github.com/aws/aws-sdk-go-v2 v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/lexruntimeservice v1.17.0

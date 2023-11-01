@@ -439,6 +439,46 @@ func TestNewEnvConfig(t *testing.T) {
 				IgnoreConfiguredEndpoints: ptr.Bool(true),
 			},
 		},
+		40: {
+			Env: map[string]string{
+				"AWS_DISABLE_REQUEST_COMPRESSION":        "true",
+				"AWS_REQUEST_MIN_COMPRESSION_SIZE_BYTES": "12345",
+			},
+			Config: EnvConfig{
+				DisableRequestCompression:   aws.Bool(true),
+				RequestMinCompressSizeBytes: aws.Int64(12345),
+			},
+		},
+		41: {
+			Env: map[string]string{
+				"AWS_DISABLE_REQUEST_COMPRESSION":        "blabla",
+				"AWS_REQUEST_MIN_COMPRESSION_SIZE_BYTES": "12345",
+			},
+			Config: EnvConfig{
+				DisableRequestCompression: aws.Bool(false),
+			},
+			WantErr: true,
+		},
+		42: {
+			Env: map[string]string{
+				"AWS_DISABLE_REQUEST_COMPRESSION":        "true",
+				"AWS_REQUEST_MIN_COMPRESSION_SIZE_BYTES": "1.1",
+			},
+			Config: EnvConfig{
+				DisableRequestCompression: aws.Bool(true),
+			},
+			WantErr: true,
+		},
+		43: {
+			Env: map[string]string{
+				"AWS_DISABLE_REQUEST_COMPRESSION":        "false",
+				"AWS_REQUEST_MIN_COMPRESSION_SIZE_BYTES": "10485761",
+			},
+			Config: EnvConfig{
+				DisableRequestCompression: aws.Bool(false),
+			},
+			WantErr: true,
+		},
 	}
 
 	for i, c := range cases {
