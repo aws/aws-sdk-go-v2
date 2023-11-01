@@ -16,8 +16,9 @@ import (
 )
 
 // Replicates an Amazon Connect instance in the specified Amazon Web Services
-// Region. For more information about replicating an Amazon Connect instance, see
-// Create a replica of your existing Amazon Connect instance (https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html)
+// Region and copies configuration information for Amazon Connect resources across
+// Amazon Web Services Regions. For more information about replicating an Amazon
+// Connect instance, see Create a replica of your existing Amazon Connect instance (https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) ReplicateInstance(ctx context.Context, params *ReplicateInstanceInput, optFns ...func(*Options)) (*ReplicateInstanceOutput, error) {
 	if params == nil {

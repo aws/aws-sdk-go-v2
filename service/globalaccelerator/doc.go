@@ -29,8 +29,8 @@
 // addresses: two static IPv4 addresses and two static IPv6 addresses. With a
 // standard accelerator for IPv4, instead of using the addresses that Global
 // Accelerator provides, you can configure these entry points to be IPv4 addresses
-// from your own IP address ranges that you bring toGlobal Accelerator (BYOIP). For
-// a standard accelerator, they distribute incoming application traffic across
+// from your own IP address ranges that you bring to Global Accelerator (BYOIP).
+// For a standard accelerator, they distribute incoming application traffic across
 // multiple endpoint resources in multiple Amazon Web Services Regions , which
 // increases the availability of your applications. Endpoints for standard
 // accelerators can be Network Load Balancers, Application Load Balancers, Amazon

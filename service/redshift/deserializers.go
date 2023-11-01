@@ -254,6 +254,9 @@ func awsAwsquery_deserializeOpErrorAddPartner(response *smithyhttp.Response, met
 	case strings.EqualFold("UnauthorizedPartnerIntegration", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedPartnerIntegrationFault(response, errorBody)
 
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1280,6 +1283,9 @@ func awsAwsquery_deserializeOpErrorCopyClusterSnapshot(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("ClusterNotFound", errorCode):
+		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("ClusterSnapshotAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotAlreadyExistsFault(response, errorBody)
 
@@ -1582,6 +1588,9 @@ func awsAwsquery_deserializeOpErrorCreateCluster(response *smithyhttp.Response, 
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedOperation(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -2798,6 +2807,9 @@ func awsAwsquery_deserializeOpErrorCreateScheduledAction(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("ClusterNotFound", errorCode):
+		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("InvalidSchedule", errorCode):
 		return awsAwsquery_deserializeErrorInvalidScheduleFault(response, errorBody)
 
@@ -2815,6 +2827,9 @@ func awsAwsquery_deserializeOpErrorCreateScheduledAction(response *smithyhttp.Re
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedOperation(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -4491,6 +4506,9 @@ func awsAwsquery_deserializeOpErrorDeletePartner(response *smithyhttp.Response, 
 
 	case strings.EqualFold("UnauthorizedPartnerIntegration", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedPartnerIntegrationFault(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -7690,6 +7708,9 @@ func awsAwsquery_deserializeOpErrorDescribeLoggingStatus(response *smithyhttp.Re
 	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -8025,6 +8046,9 @@ func awsAwsquery_deserializeOpErrorDescribePartners(response *smithyhttp.Respons
 
 	case strings.EqualFold("UnauthorizedPartnerIntegration", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedPartnerIntegrationFault(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -8475,6 +8499,9 @@ func awsAwsquery_deserializeOpErrorDescribeResize(response *smithyhttp.Response,
 
 	case strings.EqualFold("ResizeNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResizeNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -9352,6 +9379,9 @@ func awsAwsquery_deserializeOpErrorDisableLogging(response *smithyhttp.Response,
 	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -9468,6 +9498,9 @@ func awsAwsquery_deserializeOpErrorDisableSnapshotCopy(response *smithyhttp.Resp
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedOperation(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -9703,6 +9736,9 @@ func awsAwsquery_deserializeOpErrorEnableLogging(response *smithyhttp.Response, 
 	case strings.EqualFold("InvalidS3KeyPrefixFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidS3KeyPrefixFault(response, errorBody)
 
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -9840,6 +9876,123 @@ func awsAwsquery_deserializeOpErrorEnableSnapshotCopy(response *smithyhttp.Respo
 
 	case strings.EqualFold("UnknownSnapshotCopyRegionFault", errorCode):
 		return awsAwsquery_deserializeErrorUnknownSnapshotCopyRegionFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsquery_deserializeOpFailoverPrimaryCompute struct {
+}
+
+func (*awsAwsquery_deserializeOpFailoverPrimaryCompute) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpFailoverPrimaryCompute) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorFailoverPrimaryCompute(response, &metadata)
+	}
+	output := &FailoverPrimaryComputeOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("FailoverPrimaryComputeResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeOpDocumentFailoverPrimaryComputeOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorFailoverPrimaryCompute(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("ClusterNotFound", errorCode):
+		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("InvalidClusterState", errorCode):
+		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnauthorizedOperation(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -10941,6 +11094,9 @@ func awsAwsquery_deserializeOpErrorModifyClusterDbRevision(response *smithyhttp.
 
 	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -12065,6 +12221,9 @@ func awsAwsquery_deserializeOpErrorModifyScheduledAction(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("ClusterNotFound", errorCode):
+		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("InvalidSchedule", errorCode):
 		return awsAwsquery_deserializeErrorInvalidScheduleFault(response, errorBody)
 
@@ -12079,6 +12238,9 @@ func awsAwsquery_deserializeOpErrorModifyScheduledAction(response *smithyhttp.Re
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedOperation(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -12538,6 +12700,9 @@ func awsAwsquery_deserializeOpErrorPauseCluster(response *smithyhttp.Response, m
 
 	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -13697,6 +13862,9 @@ func awsAwsquery_deserializeOpErrorResumeCluster(response *smithyhttp.Response, 
 	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -14168,6 +14336,9 @@ func awsAwsquery_deserializeOpErrorRotateEncryptionKey(response *smithyhttp.Resp
 	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -14281,6 +14452,9 @@ func awsAwsquery_deserializeOpErrorUpdatePartnerStatus(response *smithyhttp.Resp
 
 	case strings.EqualFold("UnauthorizedPartnerIntegration", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedPartnerIntegrationFault(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -22316,6 +22490,25 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 			{
 				xtv := string(val)
 				sv.ModifyStatus = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MultiAZ", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MultiAZ = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MultiAZSecondary", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentSecondaryClusterInfo(&sv.MultiAZSecondary, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("NextMaintenanceWindowStartTime", t.Name.Local):
@@ -35548,6 +35741,61 @@ func awsAwsquery_deserializeDocumentScheduledSnapshotTimeListUnwrapped(v *[]time
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentSecondaryClusterInfo(v **types.SecondaryClusterInfo, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.SecondaryClusterInfo
+	if *v == nil {
+		sv = &types.SecondaryClusterInfo{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("AvailabilityZone", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AvailabilityZone = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ClusterNodes", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentClusterNodesList(&sv.ClusterNodes, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45155,6 +45403,48 @@ func awsAwsquery_deserializeOpDocumentEnableSnapshotCopyOutput(v **EnableSnapsho
 	var sv *EnableSnapshotCopyOutput
 	if *v == nil {
 		sv = &EnableSnapshotCopyOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Cluster", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentCluster(&sv.Cluster, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeOpDocumentFailoverPrimaryComputeOutput(v **FailoverPrimaryComputeOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *FailoverPrimaryComputeOutput
+	if *v == nil {
+		sv = &FailoverPrimaryComputeOutput{}
 	} else {
 		sv = *v
 	}

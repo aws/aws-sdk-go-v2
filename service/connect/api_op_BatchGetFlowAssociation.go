@@ -10,30 +10,29 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a prompt. For more information about prompts, such as supported file
-// types and maximum length, see Create prompts (https://docs.aws.amazon.com/connect/latest/adminguide/prompts.html)
-// in the Amazon Connect Administrator's Guide.
-func (c *Client) CreatePrompt(ctx context.Context, params *CreatePromptInput, optFns ...func(*Options)) (*CreatePromptOutput, error) {
+// Retrieve the flow associations for the given resources.
+func (c *Client) BatchGetFlowAssociation(ctx context.Context, params *BatchGetFlowAssociationInput, optFns ...func(*Options)) (*BatchGetFlowAssociationOutput, error) {
 	if params == nil {
-		params = &CreatePromptInput{}
+		params = &BatchGetFlowAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePrompt", params, optFns, c.addOperationCreatePromptMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetFlowAssociation", params, optFns, c.addOperationBatchGetFlowAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreatePromptOutput)
+	out := result.(*BatchGetFlowAssociationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreatePromptInput struct {
+type BatchGetFlowAssociationInput struct {
 
 	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
@@ -41,35 +40,21 @@ type CreatePromptInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The name of the prompt.
+	// A list of resource identifiers to retrieve flow associations.
 	//
 	// This member is required.
-	Name *string
+	ResourceIds []string
 
-	// The URI for the S3 bucket where the prompt is stored. You can provide S3
-	// pre-signed URLs returned by the GetPromptFile (https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html)
-	// API instead of providing S3 URIs.
-	//
-	// This member is required.
-	S3Uri *string
-
-	// The description of the prompt.
-	Description *string
-
-	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
-	Tags map[string]string
+	// The type of resource association.
+	ResourceType types.ListFlowAssociationResourceType
 
 	noSmithyDocumentSerde
 }
 
-type CreatePromptOutput struct {
+type BatchGetFlowAssociationOutput struct {
 
-	// The Amazon Resource Name (ARN) of the prompt.
-	PromptARN *string
-
-	// A unique identifier for the prompt.
-	PromptId *string
+	// Information about flow associations.
+	FlowAssociationSummaryList []types.FlowAssociationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -77,12 +62,12 @@ type CreatePromptOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreatePromptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePrompt{}, middleware.After)
+func (c *Client) addOperationBatchGetFlowAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetFlowAssociation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePrompt{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetFlowAssociation{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -125,13 +110,13 @@ func (c *Client) addOperationCreatePromptMiddlewares(stack *middleware.Stack, op
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addCreatePromptResolveEndpointMiddleware(stack, options); err != nil {
+	if err = addBatchGetFlowAssociationResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpCreatePromptValidationMiddleware(stack); err != nil {
+	if err = addOpBatchGetFlowAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePrompt(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetFlowAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -152,25 +137,25 @@ func (c *Client) addOperationCreatePromptMiddlewares(stack *middleware.Stack, op
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreatePrompt(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opBatchGetFlowAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "connect",
-		OperationName: "CreatePrompt",
+		OperationName: "BatchGetFlowAssociation",
 	}
 }
 
-type opCreatePromptResolveEndpointMiddleware struct {
+type opBatchGetFlowAssociationResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  builtInParameterResolver
 }
 
-func (*opCreatePromptResolveEndpointMiddleware) ID() string {
+func (*opBatchGetFlowAssociationResolveEndpointMiddleware) ID() string {
 	return "ResolveEndpointV2"
 }
 
-func (m *opCreatePromptResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *opBatchGetFlowAssociationResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
@@ -272,8 +257,8 @@ func (m *opCreatePromptResolveEndpointMiddleware) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
-func addCreatePromptResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opCreatePromptResolveEndpointMiddleware{
+func addBatchGetFlowAssociationResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opBatchGetFlowAssociationResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
 		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,

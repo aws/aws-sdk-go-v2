@@ -1170,6 +1170,26 @@ func (m *validateOpEnableSnapshotCopy) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpFailoverPrimaryCompute struct {
+}
+
+func (*validateOpFailoverPrimaryCompute) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpFailoverPrimaryCompute) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*FailoverPrimaryComputeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpFailoverPrimaryComputeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetClusterCredentials struct {
 }
 
@@ -2100,6 +2120,10 @@ func addOpEnableLoggingValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpEnableSnapshotCopyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableSnapshotCopy{}, middleware.After)
+}
+
+func addOpFailoverPrimaryComputeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpFailoverPrimaryCompute{}, middleware.After)
 }
 
 func addOpGetClusterCredentialsValidationMiddleware(stack *middleware.Stack) error {
@@ -3401,6 +3425,21 @@ func validateOpEnableSnapshotCopyInput(v *EnableSnapshotCopyInput) error {
 	}
 	if v.DestinationRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpFailoverPrimaryComputeInput(v *FailoverPrimaryComputeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FailoverPrimaryComputeInput"}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

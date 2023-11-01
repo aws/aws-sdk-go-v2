@@ -307,6 +307,9 @@ type ClusterPendingModifiedValues struct {
 	// these log types are in the process of being activated or deactivated.
 	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports
 
+	// Reserved for future use.
+	RdsCustomClusterConfiguration *RdsCustomClusterConfiguration
+
 	// The storage type for the DB cluster.
 	StorageType *string
 
@@ -712,6 +715,9 @@ type DBCluster struct {
 	// more information, see CreateDBCluster . This setting is only for non-Aurora
 	// Multi-AZ DB clusters.
 	PubliclyAccessible *bool
+
+	// Reserved for future use.
+	RdsCustomClusterConfiguration *RdsCustomClusterConfiguration
 
 	// Contains one or more identifiers of the read replicas associated with this DB
 	// cluster.
@@ -3527,6 +3533,18 @@ type Range struct {
 
 	// The maximum value in the range.
 	To *int32
+
+	noSmithyDocumentSerde
+}
+
+// Reserved for future use.
+type RdsCustomClusterConfiguration struct {
+
+	// Reserved for future use.
+	InterconnectSubnetId *string
+
+	// Reserved for future use.
+	TransitGatewayMulticastDomainId *string
 
 	noSmithyDocumentSerde
 }

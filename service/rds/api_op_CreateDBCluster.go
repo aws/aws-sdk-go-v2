@@ -445,6 +445,9 @@ type CreateDBClusterInput struct {
 	//   it, the DB cluster is public.
 	PubliclyAccessible *bool
 
+	// Reserved for future use.
+	RdsCustomClusterConfiguration *types.RdsCustomClusterConfiguration
+
 	// The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this
 	// DB cluster is created as a read replica. Valid for Cluster Type: Aurora DB
 	// clusters and Multi-AZ DB clusters

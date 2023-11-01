@@ -110,6 +110,26 @@ func (m *validateOpCreateAccelerator) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCrossAccountAttachment struct {
+}
+
+func (*validateOpCreateCrossAccountAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCrossAccountAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCrossAccountAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCrossAccountAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCustomRoutingAccelerator struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpDeleteAccelerator) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAcceleratorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCrossAccountAttachment struct {
+}
+
+func (*validateOpDeleteCrossAccountAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCrossAccountAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCrossAccountAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCrossAccountAttachmentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +450,26 @@ func (m *validateOpDescribeAccelerator) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeCrossAccountAttachment struct {
+}
+
+func (*validateOpDescribeCrossAccountAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCrossAccountAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCrossAccountAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCrossAccountAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeCustomRoutingAcceleratorAttributes struct {
 }
 
@@ -525,6 +585,26 @@ func (m *validateOpDescribeListener) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeListenerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCrossAccountResources struct {
+}
+
+func (*validateOpListCrossAccountResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCrossAccountResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCrossAccountResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCrossAccountResourcesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -810,6 +890,26 @@ func (m *validateOpUpdateAccelerator) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCrossAccountAttachment struct {
+}
+
+func (*validateOpUpdateCrossAccountAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCrossAccountAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCrossAccountAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCrossAccountAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCustomRoutingAcceleratorAttributes struct {
 }
 
@@ -950,6 +1050,10 @@ func addOpCreateAcceleratorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAccelerator{}, middleware.After)
 }
 
+func addOpCreateCrossAccountAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCrossAccountAttachment{}, middleware.After)
+}
+
 func addOpCreateCustomRoutingAcceleratorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCustomRoutingAccelerator{}, middleware.After)
 }
@@ -972,6 +1076,10 @@ func addOpCreateListenerValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteAcceleratorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAccelerator{}, middleware.After)
+}
+
+func addOpDeleteCrossAccountAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCrossAccountAttachment{}, middleware.After)
 }
 
 func addOpDeleteCustomRoutingAcceleratorValidationMiddleware(stack *middleware.Stack) error {
@@ -1010,6 +1118,10 @@ func addOpDescribeAcceleratorValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeAccelerator{}, middleware.After)
 }
 
+func addOpDescribeCrossAccountAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCrossAccountAttachment{}, middleware.After)
+}
+
 func addOpDescribeCustomRoutingAcceleratorAttributesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCustomRoutingAcceleratorAttributes{}, middleware.After)
 }
@@ -1032,6 +1144,10 @@ func addOpDescribeEndpointGroupValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDescribeListenerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeListener{}, middleware.After)
+}
+
+func addOpListCrossAccountResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCrossAccountResources{}, middleware.After)
 }
 
 func addOpListCustomRoutingEndpointGroupsValidationMiddleware(stack *middleware.Stack) error {
@@ -1088,6 +1204,10 @@ func addOpUpdateAcceleratorAttributesValidationMiddleware(stack *middleware.Stac
 
 func addOpUpdateAcceleratorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAccelerator{}, middleware.After)
+}
+
+func addOpUpdateCrossAccountAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCrossAccountAttachment{}, middleware.After)
 }
 
 func addOpUpdateCustomRoutingAcceleratorAttributesValidationMiddleware(stack *middleware.Stack) error {
@@ -1192,6 +1312,38 @@ func validateEndpointIdentifiers(v []types.EndpointIdentifier) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EndpointIdentifiers"}
 	for i := range v {
 		if err := validateEndpointIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResource(v *types.Resource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Resource"}
+	if v.EndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResources(v []types.Resource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Resources"}
+	for i := range v {
+		if err := validateResource(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1313,6 +1465,34 @@ func validateOpCreateAcceleratorInput(v *CreateAcceleratorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAcceleratorInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCrossAccountAttachmentInput(v *CreateCrossAccountAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCrossAccountAttachmentInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Resources != nil {
+		if err := validateResources(v.Resources); err != nil {
+			invalidParams.AddNested("Resources", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.IdempotencyToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
@@ -1461,6 +1641,21 @@ func validateOpDeleteAcceleratorInput(v *DeleteAcceleratorInput) error {
 	}
 }
 
+func validateOpDeleteCrossAccountAttachmentInput(v *DeleteCrossAccountAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCrossAccountAttachmentInput"}
+	if v.AttachmentArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCustomRoutingAcceleratorInput(v *DeleteCustomRoutingAcceleratorInput) error {
 	if v == nil {
 		return nil
@@ -1599,6 +1794,21 @@ func validateOpDescribeAcceleratorInput(v *DescribeAcceleratorInput) error {
 	}
 }
 
+func validateOpDescribeCrossAccountAttachmentInput(v *DescribeCrossAccountAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCrossAccountAttachmentInput"}
+	if v.AttachmentArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeCustomRoutingAcceleratorAttributesInput(v *DescribeCustomRoutingAcceleratorAttributesInput) error {
 	if v == nil {
 		return nil
@@ -1681,6 +1891,21 @@ func validateOpDescribeListenerInput(v *DescribeListenerInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeListenerInput"}
 	if v.ListenerArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ListenerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCrossAccountResourcesInput(v *ListCrossAccountResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCrossAccountResourcesInput"}
+	if v.ResourceOwnerAwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceOwnerAwsAccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1921,6 +2146,31 @@ func validateOpUpdateAcceleratorInput(v *UpdateAcceleratorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAcceleratorInput"}
 	if v.AcceleratorArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AcceleratorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCrossAccountAttachmentInput(v *UpdateCrossAccountAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCrossAccountAttachmentInput"}
+	if v.AttachmentArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentArn"))
+	}
+	if v.AddResources != nil {
+		if err := validateResources(v.AddResources); err != nil {
+			invalidParams.AddNested("AddResources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RemoveResources != nil {
+		if err := validateResources(v.RemoveResources); err != nil {
+			invalidParams.AddNested("RemoveResources", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

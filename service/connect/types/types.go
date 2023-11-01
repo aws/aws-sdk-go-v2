@@ -85,6 +85,12 @@ type AgentStatus struct {
 	// The display order of the agent status.
 	DisplayOrder *int32
 
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
+
 	// The name of the agent status.
 	Name *string
 
@@ -124,6 +130,12 @@ type AgentStatusSummary struct {
 
 	// The identifier for an agent status.
 	Id *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// The name of the agent status.
 	Name *string
@@ -1466,6 +1478,21 @@ type FilterV2 struct {
 	noSmithyDocumentSerde
 }
 
+// Information about flow associations.
+type FlowAssociationSummary struct {
+
+	// The identifier of the flow.
+	FlowId *string
+
+	// The identifier of the resource.
+	ResourceId *string
+
+	// The type of resource association.
+	ResourceType ListFlowAssociationResourceType
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a hierarchy group.
 type HierarchyGroup struct {
 
@@ -1477,6 +1504,12 @@ type HierarchyGroup struct {
 
 	// The identifier of the hierarchy group.
 	Id *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// The identifier of the level in the hierarchy group.
 	LevelId *string
@@ -1512,6 +1545,12 @@ type HierarchyGroupSummary struct {
 	// The identifier of the hierarchy group.
 	Id *string
 
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
+
 	// The name of the hierarchy group.
 	Name *string
 
@@ -1538,6 +1577,12 @@ type HierarchyLevel struct {
 
 	// The identifier of the hierarchy level.
 	Id *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// The name of the hierarchy level.
 	Name *string
@@ -1699,6 +1744,12 @@ type HoursOfOperation struct {
 	// The identifier for the hours of operation.
 	HoursOfOperationId *string
 
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
+
 	// The name for the hours of operation.
 	Name *string
 
@@ -1770,6 +1821,12 @@ type HoursOfOperationSummary struct {
 
 	// The identifier of the hours of operation.
 	Id *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// The name of the hours of operation.
 	Name *string
@@ -2466,6 +2523,12 @@ type Prompt struct {
 	// The description of the prompt.
 	Description *string
 
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
+
 	// The name of the prompt.
 	Name *string
 
@@ -2520,6 +2583,12 @@ type PromptSummary struct {
 	// The identifier of the prompt.
 	Id *string
 
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
+
 	// The name of the prompt.
 	Name *string
 
@@ -2555,6 +2624,12 @@ type Queue struct {
 
 	// The identifier for the hours of operation.
 	HoursOfOperationId *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// The maximum number of contacts that can be in the queue before it is considered
 	// full.
@@ -2667,6 +2742,12 @@ type QueueSummary struct {
 	// The identifier of the queue.
 	Id *string
 
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
+
 	// The name of the queue.
 	Name *string
 
@@ -2681,6 +2762,12 @@ type QuickConnect struct {
 
 	// The description.
 	Description *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// The name of the quick connect.
 	Name *string
@@ -2761,6 +2848,12 @@ type QuickConnectSummary struct {
 
 	// The identifier for the quick connect.
 	Id *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// The name of the quick connect.
 	Name *string
@@ -2904,6 +2997,15 @@ type RoutingProfile struct {
 	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
 	InstanceId *string
+
+	// Whether this a default routing profile.
+	IsDefault bool
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// The channels agents can handle in the Contact Control Panel (CCP) for this
 	// routing profile.
@@ -3067,6 +3169,12 @@ type RoutingProfileSummary struct {
 
 	// The identifier of the routing profile.
 	Id *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// The name of the routing profile.
 	Name *string
@@ -3280,6 +3388,12 @@ type SecurityProfile struct {
 	// The identifier for the security profile.
 	Id *string
 
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
+
 	// The organization resource identifier for the security profile.
 	OrganizationResourceId *string
 
@@ -3360,6 +3474,12 @@ type SecurityProfileSummary struct {
 
 	// The identifier of the security profile.
 	Id *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// The name of the security profile.
 	Name *string
@@ -3702,9 +3822,11 @@ type TrafficDistributionGroup struct {
 	// replication. The default traffic distribution group cannot be deleted by the
 	// DeleteTrafficDistributionGroup API. The default traffic distribution group is
 	// deleted as part of the process for deleting a replica. The SignInConfig
-	// distribution is available only on the default TrafficDistributionGroup . If you
-	// call UpdateTrafficDistribution with a modified SignInConfig and a non-default
-	// TrafficDistributionGroup , an InvalidRequestException is returned.
+	// distribution is available only on a default TrafficDistributionGroup (see the
+	// IsDefault parameter in the TrafficDistributionGroup (https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html)
+	// data type). If you call UpdateTrafficDistribution with a modified SignInConfig
+	// and a non-default TrafficDistributionGroup , an InvalidRequestException is
+	// returned.
 	IsDefault bool
 
 	// The name of the traffic distribution group.
@@ -3846,6 +3968,12 @@ type User struct {
 
 	// Information about the user identity.
 	IdentityInfo *UserIdentityInfo
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// Information about the phone configuration for the user.
 	PhoneConfig *UserPhoneConfig
@@ -4095,6 +4223,12 @@ type UserSummary struct {
 
 	// The identifier of the user account.
 	Id *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// The Amazon Connect user name of the user account.
 	Username *string

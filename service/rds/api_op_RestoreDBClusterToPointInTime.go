@@ -205,6 +205,9 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// Valid for: Multi-AZ DB clusters only
 	PubliclyAccessible *bool
 
+	// Reserved for future use.
+	RdsCustomClusterConfiguration *types.RdsCustomClusterConfiguration
+
 	// The date and time to restore the DB cluster to. Valid Values: Value must be a
 	// time in Universal Coordinated Time (UTC) format Constraints:
 	//   - Must be before the latest restorable time for the DB instance

@@ -8376,6 +8376,9 @@ type ModelDashboardModelCard struct {
 // Dashboard.
 type ModelDashboardMonitoringSchedule struct {
 
+	// Input object for the batch transform job.
+	BatchTransformInput *BatchTransformInput
+
 	// A timestamp that indicates when the monitoring schedule was created.
 	CreationTime *time.Time
 

@@ -112,6 +112,32 @@ type AcceleratorEvent struct {
 	noSmithyDocumentSerde
 }
 
+// A cross-account attachment in Global Accelerator. A cross-account attachment
+// specifies the principals who have permission to add to accelerators in their own
+// account the resources in your account that you also list in the attachment.
+type Attachment struct {
+
+	// The Amazon Resource Name (ARN) of the cross-account attachment.
+	AttachmentArn *string
+
+	// The date and time that the cross-account attachment was created.
+	CreatedTime *time.Time
+
+	// The date and time that the cross-account attachment was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the cross-account attachment.
+	Name *string
+
+	// The principals included in the cross-account attachment.
+	Principals []string
+
+	// The resources included in the cross-account attachment.
+	Resources []Resource
+
+	noSmithyDocumentSerde
+}
+
 // Information about an IP address range that is provisioned for use with your
 // Amazon Web Services resources through bring your own IP address (BYOIP). The
 // following describes each BYOIP State that your IP address range can be in.
@@ -191,6 +217,23 @@ type CidrAuthorizationContext struct {
 	//
 	// This member is required.
 	Signature *string
+
+	noSmithyDocumentSerde
+}
+
+// An endpoint (Amazon Web Services resource) that is listed in a cross-account
+// attachment and can be added to an accelerator by specified principals, that are
+// also listed in the attachment.
+type CrossAccountResource struct {
+
+	// The Amazon Resource Name (ARN) of the cross-account attachment that specifies
+	// the endpoints (resources) that can be added to accelerators and principals that
+	// have permission to add the endpoints to accelerators.
+	AttachmentArn *string
+
+	// The endpoint ID for the endpoint that is listed in a cross-account attachment
+	// and can be added to an accelerator by specified principals.
+	EndpointId *string
 
 	noSmithyDocumentSerde
 }
@@ -316,6 +359,11 @@ type CustomRoutingDestinationDescription struct {
 // private cloud (VPC) subnet IDs.
 type CustomRoutingEndpointConfiguration struct {
 
+	// The Amazon Resource Name (ARN) of the cross-account attachment that specifies
+	// the endpoints (resources) that can be added to accelerators and principals that
+	// have permission to add the endpoints to accelerators.
+	AttachmentArn *string
+
 	// An ID for the endpoint. For custom routing accelerators, this is the virtual
 	// private cloud (VPC) subnet ID.
 	EndpointId *string
@@ -413,16 +461,21 @@ type DestinationPortMapping struct {
 // it as an endpoint.
 type EndpointConfiguration struct {
 
+	// The Amazon Resource Name (ARN) of the cross-account attachment that specifies
+	// the endpoints (resources) that can be added to accelerators and principals that
+	// have permission to add the endpoints to accelerators.
+	AttachmentArn *string
+
 	// Indicates whether client IP address preservation is enabled for an endpoint.
-	// The value is true or false. The default value is true for new accelerators. If
-	// the value is set to true, the client's IP address is preserved in the
-	// X-Forwarded-For request header as traffic travels to applications on the
-	// endpoint fronted by the accelerator. Client IP address preservation is
-	// supported, in specific Amazon Web Services Regions, for endpoints that are
-	// Application Load Balancers, Amazon EC2 instances, and Network Load Balancers
-	// with Security Groups. IMPORTANT: You cannot use client IP address preservation
-	// with Network Load Balancers with TLS listeners. For more information, see
-	// Preserve client IP addresses in Global Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html)
+	// The value is true or false. The default value is true for Application Load
+	// Balancer endpoints. If the value is set to true, the client's IP address is
+	// preserved in the X-Forwarded-For request header as traffic travels to
+	// applications on the endpoint fronted by the accelerator. Client IP address
+	// preservation is supported, in specific Amazon Web Services Regions, for
+	// endpoints that are Application Load Balancers, Amazon EC2 instances, and Network
+	// Load Balancers with security groups. IMPORTANT: You cannot use client IP address
+	// preservation with Network Load Balancers with TLS listeners. For more
+	// information, see Preserve client IP addresses in Global Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html)
 	// in the Global Accelerator Developer Guide.
 	ClientIPPreservationEnabled *bool
 
@@ -451,15 +504,15 @@ type EndpointConfiguration struct {
 type EndpointDescription struct {
 
 	// Indicates whether client IP address preservation is enabled for an endpoint.
-	// The value is true or false. The default value is true for new accelerators. If
-	// the value is set to true, the client's IP address is preserved in the
-	// X-Forwarded-For request header as traffic travels to applications on the
-	// endpoint fronted by the accelerator. Client IP address preservation is
-	// supported, in specific Amazon Web Services Regions, for endpoints that are
-	// Application Load Balancers, Amazon EC2 instances, and Network Load Balancers
-	// with Security Groups. IMPORTANT: You cannot use client IP address preservation
-	// with Network Load Balancers with TLS listeners. For more information, see
-	// Preserve client IP addresses in Global Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html)
+	// The value is true or false. The default value is true for Application Load
+	// Balancers endpoints. If the value is set to true, the client's IP address is
+	// preserved in the X-Forwarded-For request header as traffic travels to
+	// applications on the endpoint fronted by the accelerator. Client IP address
+	// preservation is supported, in specific Amazon Web Services Regions, for
+	// endpoints that are Application Load Balancers, Amazon EC2 instances, and Network
+	// Load Balancers with security groups. IMPORTANT: You cannot use client IP address
+	// preservation with Network Load Balancers with TLS listeners. For more
+	// information, see Preserve client IP addresses in Global Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html)
 	// in the Global Accelerator Developer Guide.
 	ClientIPPreservationEnabled *bool
 
@@ -672,6 +725,21 @@ type PortRange struct {
 
 	// The last port in the range of ports, inclusive.
 	ToPort *int32
+
+	noSmithyDocumentSerde
+}
+
+// An Amazon Web Services resource that is supported by Global Accelerator and can
+// be added as an endpoint for an accelerator.
+type Resource struct {
+
+	// The endpoint ID for the endpoint (Amazon Web Services resource).
+	//
+	// This member is required.
+	EndpointId *string
+
+	// The Amazon Web Services Region where a resource is located.
+	Region *string
 
 	noSmithyDocumentSerde
 }

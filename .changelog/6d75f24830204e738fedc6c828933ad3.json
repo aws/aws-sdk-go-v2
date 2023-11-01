@@ -1,0 +1,8 @@
+{
+    "id": "6d75f248-3020-4e73-8fed-c6c828933ad3",
+    "type": "feature",
+    "description": "Support for batch transform input in Model dashboard",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

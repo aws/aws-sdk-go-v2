@@ -249,6 +249,9 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	PubliclyAccessible *bool
 
+	// Reserved for future use.
+	RdsCustomClusterConfiguration *types.RdsCustomClusterConfiguration
+
 	// For DB clusters in serverless DB engine mode, the scaling properties of the DB
 	// cluster. Valid for: Aurora DB clusters only
 	ScalingConfiguration *types.ScalingConfiguration

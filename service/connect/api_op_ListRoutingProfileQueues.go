@@ -14,6 +14,7 @@ import (
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Lists the queues associated with a routing profile.
@@ -57,6 +58,12 @@ type ListRoutingProfileQueuesInput struct {
 }
 
 type ListRoutingProfileQueuesOutput struct {
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string

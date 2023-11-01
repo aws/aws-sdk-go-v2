@@ -13,6 +13,7 @@ import (
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Gets the prompt file.
@@ -48,6 +49,12 @@ type GetPromptFileInput struct {
 }
 
 type GetPromptFileOutput struct {
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// A generated URL to the prompt that can be given to an unauthorized user so they
 	// can access the prompt in S3.

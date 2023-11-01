@@ -100,6 +100,7 @@
         "api_op_DisassociateDataShareConsumer.go",
         "api_op_EnableLogging.go",
         "api_op_EnableSnapshotCopy.go",
+        "api_op_FailoverPrimaryCompute.go",
         "api_op_GetClusterCredentials.go",
         "api_op_GetClusterCredentialsWithIAM.go",
         "api_op_GetReservedNodeExchangeConfigurationOptions.go",

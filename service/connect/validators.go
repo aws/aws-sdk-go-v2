@@ -250,6 +250,26 @@ func (m *validateOpAssociateTrafficDistributionGroupUser) HandleInitialize(ctx c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetFlowAssociation struct {
+}
+
+func (*validateOpBatchGetFlowAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetFlowAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetFlowAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetFlowAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpClaimPhoneNumber struct {
 }
 
@@ -4198,6 +4218,10 @@ func addOpAssociateTrafficDistributionGroupUserValidationMiddleware(stack *middl
 	return stack.Initialize.Add(&validateOpAssociateTrafficDistributionGroupUser{}, middleware.After)
 }
 
+func addOpBatchGetFlowAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetFlowAssociation{}, middleware.After)
+}
+
 func addOpClaimPhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpClaimPhoneNumber{}, middleware.After)
 }
@@ -6496,6 +6520,24 @@ func validateOpAssociateTrafficDistributionGroupUserInput(v *AssociateTrafficDis
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetFlowAssociationInput(v *BatchGetFlowAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetFlowAssociationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ResourceIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

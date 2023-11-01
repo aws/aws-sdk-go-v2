@@ -50,7 +50,9 @@ type UpdatePromptInput struct {
 	// The name of the prompt.
 	Name *string
 
-	// The URI for the S3 bucket where the prompt is stored.
+	// The URI for the S3 bucket where the prompt is stored. You can provide S3
+	// pre-signed URLs returned by the GetPromptFile (https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html)
+	// API instead of providing S3 URIs.
 	S3Uri *string
 
 	noSmithyDocumentSerde

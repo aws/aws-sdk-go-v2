@@ -14,6 +14,7 @@ import (
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Returns a list of third-party applications in a specific security profile.
@@ -60,6 +61,12 @@ type ListSecurityProfileApplicationsOutput struct {
 	// This API is in preview release for Amazon Connect and is subject to change. A
 	// list of the third-party application's metadata.
 	Applications []types.Application
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string

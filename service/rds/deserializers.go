@@ -24677,6 +24677,12 @@ func awsAwsquery_deserializeDocumentClusterPendingModifiedValues(v **types.Clust
 				return err
 			}
 
+		case strings.EqualFold("RdsCustomClusterConfiguration", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentRdsCustomClusterConfiguration(&sv.RdsCustomClusterConfiguration, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("StorageType", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -25996,6 +26002,12 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
 				}
 				sv.PubliclyAccessible = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("RdsCustomClusterConfiguration", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentRdsCustomClusterConfiguration(&sv.RdsCustomClusterConfiguration, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("ReaderEndpoint", t.Name.Local):
@@ -44857,6 +44869,68 @@ func awsAwsquery_deserializeDocumentRangeListUnwrapped(v *[]types.Range, decoder
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentRdsCustomClusterConfiguration(v **types.RdsCustomClusterConfiguration, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.RdsCustomClusterConfiguration
+	if *v == nil {
+		sv = &types.RdsCustomClusterConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("InterconnectSubnetId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.InterconnectSubnetId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("TransitGatewayMulticastDomainId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TransitGatewayMulticastDomainId = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentReadersArnList(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)

@@ -14,6 +14,7 @@ import (
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
@@ -58,6 +59,12 @@ type ListQueueQuickConnectsInput struct {
 }
 
 type ListQueueQuickConnectsOutput struct {
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string

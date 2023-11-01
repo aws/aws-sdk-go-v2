@@ -175,6 +175,10 @@ type RestoreFromClusterSnapshotInput struct {
 	// ManageMasterPassword is true.
 	MasterPasswordSecretKmsKeyId *string
 
+	// If true, the snapshot will be restored to a cluster deployed in two
+	// Availability Zones.
+	MultiAZ *bool
+
 	// The node type that the restored cluster will be provisioned with. Default: The
 	// node type of the cluster from which the snapshot was taken. You can modify this
 	// if you are using any DS node type. In that case, you can choose to restore into

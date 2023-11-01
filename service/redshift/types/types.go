@@ -301,6 +301,13 @@ type Cluster struct {
 	// The status of a modify operation, if any, initiated for the cluster.
 	ModifyStatus *string
 
+	// A boolean value that, if true, indicates that the cluster is deployed in two
+	// Availability Zones.
+	MultiAZ *string
+
+	// The secondary compute unit of a cluster, if Multi-AZ deployment is turned on.
+	MultiAZSecondary *SecondaryClusterInfo
+
 	// The date and time in UTC when system maintenance can begin.
 	NextMaintenanceWindowStartTime *time.Time
 
@@ -1645,6 +1652,19 @@ type ScheduledActionType struct {
 
 	// An action that runs a ResumeCluster API operation.
 	ResumeCluster *ResumeClusterMessage
+
+	noSmithyDocumentSerde
+}
+
+// The AvailabilityZone and ClusterNodes information of the secondary compute unit.
+type SecondaryClusterInfo struct {
+
+	// The name of the Availability Zone in which the secondary compute unit of the
+	// cluster is located.
+	AvailabilityZone *string
+
+	// The nodes in the secondary compute unit.
+	ClusterNodes []ClusterNode
 
 	noSmithyDocumentSerde
 }

@@ -5772,6 +5772,70 @@ func (m *awsAwsquery_serializeOpEnableSnapshotCopy) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpFailoverPrimaryCompute struct {
+}
+
+func (*awsAwsquery_serializeOpFailoverPrimaryCompute) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpFailoverPrimaryCompute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*FailoverPrimaryComputeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("FailoverPrimaryCompute")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentFailoverPrimaryComputeInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpGetClusterCredentials struct {
 }
 
@@ -9014,6 +9078,11 @@ func awsAwsquery_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, va
 		objectKey.String(*v.MasterUserPassword)
 	}
 
+	if v.MultiAZ != nil {
+		objectKey := object.Key("MultiAZ")
+		objectKey.Boolean(*v.MultiAZ)
+	}
+
 	if v.NodeType != nil {
 		objectKey := object.Key("NodeType")
 		objectKey.String(*v.NodeType)
@@ -11082,6 +11151,18 @@ func awsAwsquery_serializeOpDocumentEnableSnapshotCopyInput(v *EnableSnapshotCop
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentFailoverPrimaryComputeInput(v *FailoverPrimaryComputeInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ClusterIdentifier != nil {
+		objectKey := object.Key("ClusterIdentifier")
+		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentGetClusterCredentialsInput(v *GetClusterCredentialsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -11410,6 +11491,11 @@ func awsAwsquery_serializeOpDocumentModifyClusterInput(v *ModifyClusterInput, va
 	if v.MasterUserPassword != nil {
 		objectKey := object.Key("MasterUserPassword")
 		objectKey.String(*v.MasterUserPassword)
+	}
+
+	if v.MultiAZ != nil {
+		objectKey := object.Key("MultiAZ")
+		objectKey.Boolean(*v.MultiAZ)
 	}
 
 	if v.NewClusterIdentifier != nil {
@@ -12032,6 +12118,11 @@ func awsAwsquery_serializeOpDocumentRestoreFromClusterSnapshotInput(v *RestoreFr
 	if v.MasterPasswordSecretKmsKeyId != nil {
 		objectKey := object.Key("MasterPasswordSecretKmsKeyId")
 		objectKey.String(*v.MasterPasswordSecretKmsKeyId)
+	}
+
+	if v.MultiAZ != nil {
+		objectKey := object.Key("MultiAZ")
+		objectKey.Boolean(*v.MultiAZ)
 	}
 
 	if v.NodeType != nil {

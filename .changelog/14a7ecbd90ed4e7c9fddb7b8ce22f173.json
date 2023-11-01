@@ -1,0 +1,8 @@
+{
+    "id": "14a7ecbd-90ed-4e7c-9fdd-b7b8ce22f173",
+    "type": "feature",
+    "description": "Global Accelerator now support accelerators with cross account endpoints.",
+    "modules": [
+        "service/globalaccelerator"
+    ]
+}

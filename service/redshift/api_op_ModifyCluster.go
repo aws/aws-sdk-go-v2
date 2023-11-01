@@ -181,6 +181,10 @@ type ModifyClusterInput struct {
 	//   quote), " (double quote), \ , / , or @ .
 	MasterUserPassword *string
 
+	// If true and the cluster is currently only deployed in a single Availability
+	// Zone, the cluster will be modified to be deployed in two Availability Zones.
+	MultiAZ *bool
+
 	// The new identifier for the cluster. Constraints:
 	//   - Must contain from 1 to 63 alphanumeric characters or hyphens.
 	//   - Alphabetic characters must be lowercase.

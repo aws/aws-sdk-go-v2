@@ -9840,6 +9840,23 @@ func awsAwsquery_serializeDocumentProcessorFeatureList(v []types.ProcessorFeatur
 	return nil
 }
 
+func awsAwsquery_serializeDocumentRdsCustomClusterConfiguration(v *types.RdsCustomClusterConfiguration, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.InterconnectSubnetId != nil {
+		objectKey := object.Key("InterconnectSubnetId")
+		objectKey.String(*v.InterconnectSubnetId)
+	}
+
+	if v.TransitGatewayMulticastDomainId != nil {
+		objectKey := object.Key("TransitGatewayMulticastDomainId")
+		objectKey.String(*v.TransitGatewayMulticastDomainId)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentScalingConfiguration(v *types.ScalingConfiguration, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -10783,6 +10800,13 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 	if v.PubliclyAccessible != nil {
 		objectKey := object.Key("PubliclyAccessible")
 		objectKey.Boolean(*v.PubliclyAccessible)
+	}
+
+	if v.RdsCustomClusterConfiguration != nil {
+		objectKey := object.Key("RdsCustomClusterConfiguration")
+		if err := awsAwsquery_serializeDocumentRdsCustomClusterConfiguration(v.RdsCustomClusterConfiguration, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.ReplicationSourceIdentifier != nil {
@@ -15209,6 +15233,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 		objectKey.Boolean(*v.PubliclyAccessible)
 	}
 
+	if v.RdsCustomClusterConfiguration != nil {
+		objectKey := object.Key("RdsCustomClusterConfiguration")
+		if err := awsAwsquery_serializeDocumentRdsCustomClusterConfiguration(v.RdsCustomClusterConfiguration, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.ScalingConfiguration != nil {
 		objectKey := object.Key("ScalingConfiguration")
 		if err := awsAwsquery_serializeDocumentScalingConfiguration(v.ScalingConfiguration, objectKey); err != nil {
@@ -15344,6 +15375,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 	if v.PubliclyAccessible != nil {
 		objectKey := object.Key("PubliclyAccessible")
 		objectKey.Boolean(*v.PubliclyAccessible)
+	}
+
+	if v.RdsCustomClusterConfiguration != nil {
+		objectKey := object.Key("RdsCustomClusterConfiguration")
+		if err := awsAwsquery_serializeDocumentRdsCustomClusterConfiguration(v.RdsCustomClusterConfiguration, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.RestoreToTime != nil {

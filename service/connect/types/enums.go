@@ -791,6 +791,25 @@ func (LexVersion) Values() []LexVersion {
 	}
 }
 
+type ListFlowAssociationResourceType string
+
+// Enum values for ListFlowAssociationResourceType
+const (
+	ListFlowAssociationResourceTypeSmsPhoneNumber   ListFlowAssociationResourceType = "SMS_PHONE_NUMBER"
+	ListFlowAssociationResourceTypeVoicePhoneNumber ListFlowAssociationResourceType = "VOICE_PHONE_NUMBER"
+)
+
+// Values returns all known values for ListFlowAssociationResourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ListFlowAssociationResourceType) Values() []ListFlowAssociationResourceType {
+	return []ListFlowAssociationResourceType{
+		"SMS_PHONE_NUMBER",
+		"VOICE_PHONE_NUMBER",
+	}
+}
+
 type MonitorCapability string
 
 // Enum values for MonitorCapability

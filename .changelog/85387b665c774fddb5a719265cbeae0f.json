@@ -1,0 +1,8 @@
+{
+    "id": "85387b66-5c77-4fdd-b5a7-19265cbeae0f",
+    "type": "feature",
+    "description": "This release adds support for customized networking resources to Amazon RDS Custom.",
+    "modules": [
+        "service/rds"
+    ]
+}

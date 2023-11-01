@@ -55029,6 +55029,11 @@ func awsAwsjson11_deserializeDocumentModelDashboardMonitoringSchedule(v **types.
 
 	for key, value := range shape {
 		switch key {
+		case "BatchTransformInput":
+			if err := awsAwsjson11_deserializeDocumentBatchTransformInput(&sv.BatchTransformInput, value); err != nil {
+				return err
+			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {

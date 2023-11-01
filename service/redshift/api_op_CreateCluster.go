@@ -235,6 +235,9 @@ type CreateClusterInput struct {
 	//   quote), " (double quote), \ , / , or @ .
 	MasterUserPassword *string
 
+	// If true, Amazon Redshift will deploy the cluster in two Availability Zones (AZ).
+	MultiAZ *bool
+
 	// The number of compute nodes in the cluster. This parameter is required when the
 	// ClusterType parameter is specified as multi-node . For information about
 	// determining how many nodes you need, go to Working with Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes)
