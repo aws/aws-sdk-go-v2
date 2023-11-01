@@ -1,8 +1,0 @@
-{
-    "id": "751fe4aa-c5c3-43a7-84e5-8b0164d3d321",
-    "type": "feature",
-    "description": "Adds the BatchGetFlowAssociation API which returns flow associations (flow-resource) corresponding to the list of resourceArns supplied in the request. This release also adds IsDefault, LastModifiedRegion and LastModifiedTime fields to the responses of several Describe and List APIs.",
-    "modules": [
-        "service/connect"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "58704f6c-b705-408a-bab1-e5eae877140f",
-    "type": "feature",
-    "description": "Added support for Multi-AZ deployments for Provisioned RA3 clusters that provide 99.99% SLA availability.",
-    "modules": [
-        "service/redshift"
-    ]
-}
