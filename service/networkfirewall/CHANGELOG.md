@@ -1,3 +1,7 @@
+# v1.35.0 (2023-11-02)
+
+* **Feature**: This release introduces the stateless rule analyzer, which enables you to analyze your stateless rules for asymmetric routing.
+
 # v1.34.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.

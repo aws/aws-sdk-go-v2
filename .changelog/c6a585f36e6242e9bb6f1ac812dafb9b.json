@@ -1,8 +1,0 @@
-{
-    "id": "c6a585f3-6e62-42e9-bb6f-1ac812dafb9b",
-    "type": "feature",
-    "description": "AWS App Runner now supports using dual-stack address type for the public endpoint of your incoming traffic.",
-    "modules": [
-        "service/apprunner"
-    ]
-}

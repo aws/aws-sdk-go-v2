@@ -1,8 +1,0 @@
-{
-    "id": "bd76b8de-1217-4968-8c20-1e0d15add6f0",
-    "type": "feature",
-    "description": "Amazon GameLift adds support for shared credentials, which allows applications that are deployed on managed EC2 fleets to interact with other AWS resources.",
-    "modules": [
-        "service/gamelift"
-    ]
-}

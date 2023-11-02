@@ -1,3 +1,7 @@
+# v1.26.0 (2023-11-02)
+
+* **Feature**: Amazon GameLift adds support for shared credentials, which allows applications that are deployed on managed EC2 fleets to interact with other AWS resources.
+
 # v1.25.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.

@@ -1,8 +1,0 @@
-{
-    "id": "a78661de-7897-4ae2-a391-e140f5669d8d",
-    "type": "feature",
-    "description": "This release introduces Google BigQuery Source and Target in AWS Glue CodeGenConfigurationNode.",
-    "modules": [
-        "service/glue"
-    ]
-}

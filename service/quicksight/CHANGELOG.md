@@ -1,3 +1,7 @@
+# v1.50.0 (2023-11-02)
+
+* **Feature**: Got confirmed from qmeixua@ about custom week features, and tested locally with aws cli and java sdk that the subtypes are showing up.
+
 # v1.49.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.

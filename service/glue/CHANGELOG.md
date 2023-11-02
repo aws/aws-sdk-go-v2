@@ -1,3 +1,7 @@
+# v1.67.0 (2023-11-02)
+
+* **Feature**: This release introduces Google BigQuery Source and Target in AWS Glue CodeGenConfigurationNode.
+
 # v1.66.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.

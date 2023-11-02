@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.22.1
-	github.com/aws/aws-sdk-go-v2/config v1.21.0
+	github.com/aws/aws-sdk-go-v2/config v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/acm v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.24.0
@@ -44,9 +44,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/emr v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.21.0
-	github.com/aws/aws-sdk-go-v2/service/gamelift v1.25.0
+	github.com/aws/aws-sdk-go-v2/service/gamelift v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.18.0
-	github.com/aws/aws-sdk-go-v2/service/glue v1.66.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.67.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/iam v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.18.0
@@ -91,8 +91,8 @@ require (
 
 require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.5.0 // indirect
-	github.com/aws/aws-sdk-go-v2/credentials v1.15.0 // indirect
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.14.1 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.15.1 // indirect
+	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.14.2 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.1 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.1 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.5.0 // indirect

@@ -1,3 +1,24 @@
+# Release (2023-11-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.22.0](config/CHANGELOG.md#v1220-2023-11-02)
+  * **Feature**: Add env and shared config settings for disabling IMDSv1 fallback.
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.24.0](service/apprunner/CHANGELOG.md#v1240-2023-11-02)
+  * **Feature**: AWS App Runner now supports using dual-stack address type for the public endpoint of your incoming traffic.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.75.0](service/connect/CHANGELOG.md#v1750-2023-11-02)
+  * **Feature**: GetMetricDataV2 API: Update to include new metrics PERCENT_NON_TALK_TIME, PERCENT_TALK_TIME, PERCENT_TALK_TIME_AGENT, PERCENT_TALK_TIME_CUSTOMER
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.26.0](service/gamelift/CHANGELOG.md#v1260-2023-11-02)
+  * **Feature**: Amazon GameLift adds support for shared credentials, which allows applications that are deployed on managed EC2 fleets to interact with other AWS resources.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.67.0](service/glue/CHANGELOG.md#v1670-2023-11-02)
+  * **Feature**: This release introduces Google BigQuery Source and Target in AWS Glue CodeGenConfigurationNode.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.35.0](service/networkfirewall/CHANGELOG.md#v1350-2023-11-02)
+  * **Feature**: This release introduces the stateless rule analyzer, which enables you to analyze your stateless rules for asymmetric routing.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.50.0](service/quicksight/CHANGELOG.md#v1500-2023-11-02)
+  * **Feature**: Got confirmed from qmeixua@ about custom week features, and tested locally with aws cli and java sdk that the subtypes are showing up.
+
 # Release (2023-11-01)
 
 ## General Highlights
