@@ -282,3 +282,12 @@ sdk_ua_app_id = 12345
 [profile endpoint_config]
 ignore_configured_endpoint_urls = true
 endpoint_url = https://example.com
+
+[profile ec2-metadata-v1-disabled-false]
+ec2_metadata_v1_disabled=False
+
+[profile ec2-metadata-v1-disabled-true]
+ec2_metadata_v1_disabled=True
+
+[profile ec2-metadata-v1-disabled-invalid]
+ec2_metadata_v1_disabled=invalid

@@ -1,0 +1,8 @@
+{
+    "id": "99f6ee13-8155-44af-9c5d-cf4c6fcd6453",
+    "type": "feature",
+    "description": "Add env and shared config settings for disabling IMDSv1 fallback.",
+    "modules": [
+        "config"
+    ]
+}
