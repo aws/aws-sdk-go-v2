@@ -1,7 +1,6 @@
 package software.amazon.smithy.aws.go.codegen;
 
 
-import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -20,8 +19,6 @@ import software.amazon.smithy.model.traits.RequestCompressionTrait;
 import software.amazon.smithy.utils.ListUtils;
 
 import java.util.List;
-
-import static software.amazon.smithy.aws.go.codegen.AwsGoDependency.AWS_MIDDLEWARE;
 
 public final class RequestCompression implements GoIntegration {
     private static final String ADD_Request_Compression = "addRequestCompression";
