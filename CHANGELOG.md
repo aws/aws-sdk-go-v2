@@ -17,7 +17,7 @@
 * `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.35.0](service/networkfirewall/CHANGELOG.md#v1350-2023-11-02)
   * **Feature**: This release introduces the stateless rule analyzer, which enables you to analyze your stateless rules for asymmetric routing.
 * `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.50.0](service/quicksight/CHANGELOG.md#v1500-2023-11-02)
-  * **Feature**: Got confirmed from qmeixua@ about custom week features, and tested locally with aws cli and java sdk that the subtypes are showing up.
+  * **Feature**: This release introduces Float Decimal Type as SubType in QuickSight SPICE datasets and Custom week start and Custom timezone options in Analysis and Dashboard
 
 # Release (2023-11-01)
 

@@ -1,6 +1,6 @@
 # v1.50.0 (2023-11-02)
 
-* **Feature**: Got confirmed from qmeixua@ about custom week features, and tested locally with aws cli and java sdk that the subtypes are showing up.
+* **Feature**: This release introduces Float Decimal Type as SubType in QuickSight SPICE datasets and Custom week start and Custom timezone options in Analysis and Dashboard
 
 # v1.49.0 (2023-11-01)
 
