@@ -422,6 +422,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>"
                     }
+                },
+                "Options": {
+                    "target": "com.amazonaws.quicksight#AssetOptions"
                 }
             },
             "traits": {
@@ -485,6 +488,12 @@
                 },
                 "AnalysisDefaults": {
                     "target": "com.amazonaws.quicksight#AnalysisDefaults"
+                },
+                "Options": {
+                    "target": "com.amazonaws.quicksight#AssetOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of option definitions for an analysis.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2332,6 +2341,26 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#AssetOptions": {
+            "type": "structure",
+            "members": {
+                "Timezone": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the timezone for the analysis.</p>"
+                    }
+                },
+                "WeekStart": {
+                    "target": "com.amazonaws.quicksight#DayOfTheWeek",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the week start day for an analysis.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of analysis level configurations.</p>"
+            }
+        },
         "com.amazonaws.quicksight#AssignmentStatus": {
             "type": "enum",
             "members": {
@@ -3868,6 +3897,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "SubType": {
+                    "target": "com.amazonaws.quicksight#ColumnDataSubType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sub data type of the new column. Sub types are only available for decimal columns that are part of a SPICE dataset.</p>"
+                    }
+                },
                 "Format": {
                     "target": "com.amazonaws.quicksight#TypeCastFormat",
                     "traits": {
@@ -4407,6 +4442,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MEASURE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ColumnDataSubType": {
+            "type": "enum",
+            "members": {
+                "FLOAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLOAT"
+                    }
+                },
+                "FIXED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIXED"
                     }
                 }
             }
@@ -9624,6 +9676,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>"
                     }
+                },
+                "Options": {
+                    "target": "com.amazonaws.quicksight#AssetOptions"
                 }
             },
             "traits": {
@@ -9672,6 +9727,12 @@
                 },
                 "AnalysisDefaults": {
                     "target": "com.amazonaws.quicksight#AnalysisDefaults"
+                },
+                "Options": {
+                    "target": "com.amazonaws.quicksight#AssetOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of option definitions for a dashboard.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12015,6 +12076,53 @@
                     "max": 17
                 },
                 "smithy.api#pattern": "^(?:LAST_DAY_OF_MONTH|1[0-9]|2[0-8]|[12]|[3-9])$"
+            }
+        },
+        "com.amazonaws.quicksight#DayOfTheWeek": {
+            "type": "enum",
+            "members": {
+                "SUNDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUNDAY"
+                    }
+                },
+                "MONDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONDAY"
+                    }
+                },
+                "TUESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TUESDAY"
+                    }
+                },
+                "WEDNESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEDNESDAY"
+                    }
+                },
+                "THURSDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THURSDAY"
+                    }
+                },
+                "FRIDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FRIDAY"
+                    }
+                },
+                "SATURDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SATURDAY"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#DayOfWeek": {
@@ -25018,6 +25126,12 @@
                         "smithy.api#documentation": "<p>The data type of the column.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "SubType": {
+                    "target": "com.amazonaws.quicksight#ColumnDataSubType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sub data type of the column. Sub types are only available for decimal columns that are part of a SPICE dataset.</p>"
+                    }
                 }
             },
             "traits": {
@@ -31710,7 +31824,7 @@
                 "Name": {
                     "target": "com.amazonaws.quicksight#ColumnName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A display name for the dataset.</p>"
+                        "smithy.api#documentation": "<p>The display name of the column..</p>"
                     }
                 },
                 "Description": {
@@ -31722,7 +31836,13 @@
                 "Type": {
                     "target": "com.amazonaws.quicksight#ColumnDataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type.</p>"
+                        "smithy.api#documentation": "<p>The data type of the column.</p>"
+                    }
+                },
+                "SubType": {
+                    "target": "com.amazonaws.quicksight#ColumnDataSubType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sub data type of the column.</p>"
                     }
                 }
             },
@@ -43040,6 +43160,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>"
                     }
+                },
+                "Options": {
+                    "target": "com.amazonaws.quicksight#AssetOptions"
                 }
             },
             "traits": {
@@ -43088,6 +43211,12 @@
                 },
                 "AnalysisDefaults": {
                     "target": "com.amazonaws.quicksight#AnalysisDefaults"
+                },
+                "Options": {
+                    "target": "com.amazonaws.quicksight#AssetOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of option definitions for a template.</p>"
+                    }
                 }
             },
             "traits": {

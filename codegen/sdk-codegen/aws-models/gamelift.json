@@ -67,7 +67,7 @@
                     }
                 },
                 "PlayerIds": {
-                    "target": "com.amazonaws.gamelift#StringList",
+                    "target": "com.amazonaws.gamelift#PlayerIdsForAcceptMatch",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for a player delivering the response. This parameter can include one or multiple player\n            IDs.</p>",
@@ -991,7 +991,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a fleet of Amazon Elastic Compute Cloud (Amazon EC2) instances to host your custom game server or\n            Realtime Servers. Use this operation to configure the computing resources for your fleet and\n            provide instructions for running game servers on each instance.</p>\n         <p>Most Amazon GameLift fleets can deploy instances to multiple locations, including the home\n            Region (where the fleet is created) and an optional set of remote locations. Fleets that\n            are created in the following Amazon Web Services Regions support multiple locations: us-east-1 (N.\n            Virginia), us-west-2 (Oregon), eu-central-1 (Frankfurt), eu-west-1 (Ireland),\n            ap-southeast-2 (Sydney), ap-northeast-1 (Tokyo), and ap-northeast-2 (Seoul). Fleets that\n            are created in other Amazon GameLift Regions can deploy instances in the fleet's home Region\n            only. All fleet instances use the same configuration regardless of location; however,\n            you can adjust capacity settings and turn auto-scaling on/off for each location.</p>\n         <p>To create a fleet, choose the hardware for your instances, specify a game server build\n            or Realtime script to deploy, and provide a runtime configuration to direct Amazon GameLift how\n            to start and run game servers on each instance in the fleet. Set permissions for inbound\n            traffic to your game servers, and enable optional features as needed. When creating a\n            multi-location fleet, provide a list of additional remote locations.</p>\n         <p>If you need to debug your fleet, fetch logs, view performance metrics or other actions\n            on the fleet, create the development fleet with port 22/3389 open. As a best practice,\n            we recommend opening ports for remote access only when you need them and closing them\n            when you're finished. </p>\n         <p>If successful, this operation creates a new Fleet resource and places it in\n                <code>NEW</code> status, which prompts Amazon GameLift to initiate the <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-all.html#fleets-creation-workflow\">fleet creation\n                workflow</a>.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up\n            fleets</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation\">Debug fleet creation issues</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Multi-location fleets</a>\n         </p>"
+                "smithy.api#documentation": "<p>Creates a fleet of Amazon Elastic Compute Cloud (Amazon EC2) instances to host your custom game server or\n            Realtime Servers. Use this operation to configure the computing resources for your fleet and\n            provide instructions for running game servers on each instance.</p>\n         <p>Most Amazon GameLift fleets can deploy instances to multiple locations, including the home\n            Region (where the fleet is created) and an optional set of remote locations. Fleets that\n            are created in the following Amazon Web Services Regions support multiple locations: us-east-1 (N.\n            Virginia), us-west-2 (Oregon), eu-central-1 (Frankfurt), eu-west-1 (Ireland),\n            ap-southeast-2 (Sydney), ap-northeast-1 (Tokyo), and ap-northeast-2 (Seoul). Fleets that\n            are created in other Amazon GameLift Regions can deploy instances in the fleet's home Region\n            only. All fleet instances use the same configuration regardless of location; however,\n            you can adjust capacity settings and turn auto-scaling on/off for each location.</p>\n         <p>To create a fleet, choose the hardware for your instances, specify a game server build\n            or Realtime script to deploy, and provide a runtime configuration to direct Amazon GameLift how\n            to start and run game servers on each instance in the fleet. Set permissions for inbound\n            traffic to your game servers, and enable optional features as needed. When creating a\n            multi-location fleet, provide a list of additional remote locations.</p>\n         <p>If you need to debug your fleet, fetch logs, view performance metrics or other actions\n            on the fleet, create the development fleet with port 22/3389 open. As a best practice,\n            we recommend opening ports for remote access only when you need them and closing them\n            when you're finished. </p>\n         <p>If successful, this operation creates a new Fleet resource and places it in\n                <code>NEW</code> status, which prompts Amazon GameLift to initiate the <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-all.html#fleets-creation-workflow\">fleet creation\n                workflow</a>. You can track fleet creation by checking fleet status using <a>DescribeFleetAttributes</a> and <a>DescribeFleetLocationAttributes</a>/, or by monitoring fleet creation events\n            using <a>DescribeFleetEvents</a>. </p>\n         <p>When the fleet status changes to <code>ACTIVE</code>, you can enable automatic scaling\n            with <a>PutScalingPolicy</a> and set capacity for the home Region with <a>UpdateFleetCapacity</a>. When the status of each remote location reaches\n                <code>ACTIVE</code>, you can set capacity by location using <a>UpdateFleetCapacity</a>.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up\n            fleets</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation\">Debug fleet creation issues</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Multi-location fleets</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#CreateFleetInput": {
@@ -1014,13 +1014,13 @@
                 "BuildId": {
                     "target": "com.amazonaws.gamelift#BuildIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for a custom game server build to be deployed on fleet\n            instances. You can use either the build ID or ARN. The build must be uploaded to Amazon GameLift\n            and in <code>READY</code> status. This fleet property cannot be changed later.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier for a custom game server build to be deployed on fleet\n            instances. You can use either the build ID or ARN. The build must be uploaded to Amazon GameLift\n            and in <code>READY</code> status. This fleet property can't be changed after the fleet is created.</p>"
                     }
                 },
                 "ScriptId": {
                     "target": "com.amazonaws.gamelift#ScriptIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for a Realtime configuration script to be deployed on fleet\n            instances. You can use either the script ID or ARN. Scripts must be uploaded to Amazon GameLift\n            prior to creating the fleet. This fleet property cannot be changed later.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier for a Realtime configuration script to be deployed on fleet\n            instances. You can use either the script ID or ARN. Scripts must be uploaded to Amazon GameLift\n            prior to creating the fleet. This fleet property can't be changed after the fleet is created.</p>"
                     }
                 },
                 "ServerLaunchPath": {
@@ -1092,13 +1092,13 @@
                 "FleetType": {
                     "target": "com.amazonaws.gamelift#FleetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to use On-Demand or Spot instances for this fleet. By default, this\n            property is set to <code>ON_DEMAND</code>. Learn more about when to use <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot\"> On-Demand versus Spot Instances</a>. This property cannot be changed after the\n            fleet is created.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to use On-Demand or Spot instances for this fleet. By default, this\n            property is set to <code>ON_DEMAND</code>. Learn more about when to use <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot\"> On-Demand versus Spot Instances</a>. This fleet property can't be changed after the fleet is created.</p>"
                     }
                 },
                 "InstanceRoleArn": {
                     "target": "com.amazonaws.gamelift#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for an IAM role that manages access to your Amazon Web Services services. \n        With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, \n        including install scripts, server processes, and daemons (background processes). Create a role or look up a role's \n        ARN by using the <a href=\"https://console.aws.amazon.com/iam/\">IAM dashboard</a> in the Amazon Web Services Management Console.\n        Learn more about using on-box credentials for your game servers at \n        <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html\">\n        Access external resources from a game server</a>. This property cannot be changed after the fleet is created.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for an IAM role with access permissions to other Amazon Web Services services. \n        Any application that runs on an instance in the fleet--including install scripts, server processes, and other \n        processes--can use these permissions to interact with Amazon Web Services resources that you own or have access to.\n        For more information about using the role with your game server builds, see \n        <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html\">\n        Communicate with other Amazon Web Services resources from your fleets</a>. This fleet property can't be changed after the fleet is created.</p>"
                     }
                 },
                 "CertificateConfiguration": {
@@ -1129,6 +1129,12 @@
                     "target": "com.amazonaws.gamelift#AnywhereConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Amazon GameLift Anywhere configuration options.</p>"
+                    }
+                },
+                "InstanceRoleCredentialsProvider": {
+                    "target": "com.amazonaws.gamelift#InstanceRoleCredentialsProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Prompts Amazon GameLift to generate a shared credentials file for the IAM role\n            defined in <code>InstanceRoleArn</code>. The shared credentials file is stored on each\n            fleet instance and refreshed as needed. Use shared credentials for applications that are\n            deployed along with the game server executable, if the game server is integrated with \n            server SDK version 5.x. For more information about using shared\n            credentials, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html\"> Communicate\n                with other Amazon Web Services resources from your fleets</a>.</p>"
                     }
                 }
             },
@@ -1956,7 +1962,7 @@
                     }
                 },
                 "PlayerId": {
-                    "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
+                    "target": "com.amazonaws.gamelift#PlayerId",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A unique identifier for a player. Player IDs are developer-defined.</p>",
@@ -2660,7 +2666,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a custom location.</p>\n         <p>Before deleting a custom location, review any fleets currently using the custom\n            location and deregister the location if it is in use. For more information see, <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeregisterCompute.html\">DeregisterCompute</a>.</p>"
+                "smithy.api#documentation": "<p>Deletes a custom location.</p>\n         <p>Before deleting a custom location, review any fleets currently using the custom\n            location and deregister the location if it is in use. For more information, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeregisterCompute.html\">DeregisterCompute</a>.</p>"
             }
         },
         "com.amazonaws.gamelift#DeleteLocationInput": {
@@ -4898,7 +4904,7 @@
                     }
                 },
                 "PlayerId": {
-                    "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
+                    "target": "com.amazonaws.gamelift#PlayerId",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for a player to retrieve player sessions for.</p>"
                     }
@@ -5261,7 +5267,7 @@
             "type": "structure",
             "members": {
                 "PlayerId": {
-                    "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
+                    "target": "com.amazonaws.gamelift#PlayerId",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for a player to associate with the player session.</p>"
                     }
@@ -6788,7 +6794,7 @@
                 "FleetType": {
                     "target": "com.amazonaws.gamelift#FleetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to use On-Demand or Spot instances for this fleet. By default, this\n            property is set to <code>ON_DEMAND</code>. Learn more about when to use <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot\"> On-Demand versus Spot Instances</a>. This property cannot be changed after the\n            fleet is created.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to use On-Demand or Spot instances for this fleet. By default, this\n            property is set to <code>ON_DEMAND</code>. Learn more about when to use <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot\"> On-Demand versus Spot Instances</a>. This fleet property can't be changed after the fleet is created.</p>"
                     }
                 },
                 "InstanceType": {
@@ -6899,7 +6905,7 @@
                 "InstanceRoleArn": {
                     "target": "com.amazonaws.gamelift#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for an IAM role that manages access to your Amazon Web Services services. \n        With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, \n        including install scripts, server processes, and daemons (background processes). Create a role or look up a role's \n        ARN by using the <a href=\"https://console.aws.amazon.com/iam/\">IAM dashboard</a> in the Amazon Web Services Management Console.\n        Learn more about using on-box credentials for your game servers at \n        <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html\">\n        Access external resources from a game server</a>.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for an IAM role with access permissions to other Amazon Web Services services. \n        Any application that runs on an instance in the fleet--including install scripts, server processes, and other \n        processes--can use these permissions to interact with Amazon Web Services resources that you own or have access to.\n        For more information about using the role with your game server builds, see \n        <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html\">\n        Communicate with other Amazon Web Services resources from your fleets</a>.</p>"
                     }
                 },
                 "CertificateConfiguration": {
@@ -6913,6 +6919,12 @@
                 },
                 "AnywhereConfiguration": {
                     "target": "com.amazonaws.gamelift#AnywhereConfiguration"
+                },
+                "InstanceRoleCredentialsProvider": {
+                    "target": "com.amazonaws.gamelift#InstanceRoleCredentialsProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that fleet instances maintain a shared credentials file for the IAM role\n                defined in <code>InstanceRoleArn</code>. Shared credentials allow applications that are\n                deployed with the game server executable to communicate with other Amazon Web Services resources. This property is used \n                only when the game server is integrated with the\n                server SDK version 5.x. For more information about using shared credentials, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html\"> Communicate\n                    with other Amazon Web Services resources from your fleets</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10536,6 +10548,17 @@
                 "target": "com.amazonaws.gamelift#Instance"
             }
         },
+        "com.amazonaws.gamelift#InstanceRoleCredentialsProvider": {
+            "type": "enum",
+            "members": {
+                "SHARED_CREDENTIAL_FILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED_CREDENTIAL_FILE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.gamelift#InstanceStatus": {
             "type": "enum",
             "members": {
@@ -10617,7 +10640,8 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[0-9A-Fa-f\\:\\.]+$"
+                "smithy.api#pattern": "^[0-9A-Fa-f\\:\\.]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.gamelift#IpPermission": {
@@ -10640,7 +10664,7 @@
                     }
                 },
                 "IpRange": {
-                    "target": "com.amazonaws.gamelift#NonBlankString",
+                    "target": "com.amazonaws.gamelift#IpRange",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A range of allowed IP addresses. This value must be expressed in CIDR notation.\n            Example: \"<code>000.000.000.000/[subnet mask]</code>\" or optionally the shortened\n            version \"<code>0.0.0.0/[subnet mask]</code>\".</p>",
@@ -10687,6 +10711,13 @@
                         "smithy.api#enumValue": "UDP"
                     }
                 }
+            }
+        },
+        "com.amazonaws.gamelift#IpRange": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[^\\s]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.gamelift#LargeGameSessionData": {
@@ -11667,7 +11698,7 @@
             "type": "structure",
             "members": {
                 "PlayerId": {
-                    "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
+                    "target": "com.amazonaws.gamelift#PlayerId",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for a player </p>"
                     }
@@ -12190,12 +12221,6 @@
                 "smithy.api#pattern": "\\S"
             }
         },
-        "com.amazonaws.gamelift#NonBlankString": {
-            "type": "string",
-            "traits": {
-                "smithy.api#pattern": "^[^\\s]+$"
-            }
-        },
         "com.amazonaws.gamelift#NonEmptyString": {
             "type": "string",
             "traits": {
@@ -12294,7 +12319,7 @@
             "type": "structure",
             "members": {
                 "PlayerId": {
-                    "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
+                    "target": "com.amazonaws.gamelift#PlayerId",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for a player that is associated with this player session.</p>"
                     }
@@ -12320,7 +12345,7 @@
             "type": "structure",
             "members": {
                 "PlayerId": {
-                    "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
+                    "target": "com.amazonaws.gamelift#PlayerId",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for a player</p>"
                     }
@@ -12399,23 +12424,43 @@
                 "target": "com.amazonaws.gamelift#PlayerData"
             }
         },
+        "com.amazonaws.gamelift#PlayerId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.gamelift#PlayerIdList": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.gamelift#NonZeroAndMaxString"
+                "target": "com.amazonaws.gamelift#PlayerId"
             },
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 25
-                }
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.gamelift#PlayerIdsForAcceptMatch": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.gamelift#PlayerId"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.gamelift#PlayerLatency": {
             "type": "structure",
             "members": {
                 "PlayerId": {
-                    "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
+                    "target": "com.amazonaws.gamelift#PlayerId",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for a player associated with the latency data.</p>"
                     }
@@ -12485,7 +12530,7 @@
                     }
                 },
                 "PlayerId": {
-                    "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
+                    "target": "com.amazonaws.gamelift#PlayerId",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for a player that is associated with this player session.</p>"
                     }
@@ -12636,7 +12681,8 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 60000
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.gamelift#PositiveInteger": {
@@ -12890,6 +12936,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"

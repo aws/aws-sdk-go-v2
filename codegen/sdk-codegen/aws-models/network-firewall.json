@@ -84,6 +84,38 @@
                 "target": "com.amazonaws.networkfirewall#Address"
             }
         },
+        "com.amazonaws.networkfirewall#AnalysisResult": {
+            "type": "structure",
+            "members": {
+                "IdentifiedRuleIds": {
+                    "target": "com.amazonaws.networkfirewall#RuleIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority number of the stateless rules identified in the analysis.</p>"
+                    }
+                },
+                "IdentifiedType": {
+                    "target": "com.amazonaws.networkfirewall#IdentifiedType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of rule configurations that Network Firewall analyzes your rule groups for. Network Firewall analyzes stateless rule groups for the following types of rule configurations:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STATELESS_RULE_FORWARDING_ASYMMETRICALLY</code>\n               </p>\n               <p>Cause: One or more stateless rules with the action <code>pass</code> or <code>forward</code> are forwarding traffic asymmetrically. Specifically, the rule's set of source IP addresses  or their associated port numbers, don't match the set of destination IP addresses or their associated port numbers.</p>\n               <p>To mitigate: Make sure that there's an existing return path. For example, if the rule allows traffic from source 10.1.0.0/24 to destination 20.1.0.0/24, you should allow return traffic from source 20.1.0.0/24 to destination 10.1.0.0/24.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATELESS_RULE_CONTAINS_TCP_FLAGS</code>\n               </p>\n               <p>Cause: At least one stateless rule with the action <code>pass</code> or<code>forward</code> contains TCP flags that are inconsistent in the forward and return directions.</p>\n               <p>To mitigate: Prevent asymmetric routing issues caused by TCP flags by following these actions:</p>\n               <ul>\n                  <li>\n                     <p>Remove unnecessary TCP flag inspections from the rules.</p>\n                  </li>\n                  <li>\n                     <p>If you need to inspect TCP flags, check that the rules correctly account for changes in TCP flags throughout the TCP connection cycle, for example <code>SYN</code> and <code>ACK</code> flags used in a 3-way TCP handshake.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                    }
+                },
+                "AnalysisDetail": {
+                    "target": "com.amazonaws.networkfirewall#CollectionMember_String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides analysis details for the identified rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The analysis result for Network Firewall's stateless rule group analyzer. Every time you call <a>CreateRuleGroup</a>, <a>UpdateRuleGroup</a>, or <a>DescribeRuleGroup</a> on a stateless rule group, Network Firewall analyzes the stateless rule groups in your account and identifies the rules that might adversely effect your firewall's functionality. For example, if Network Firewall detects a rule that's routing traffic asymmetrically, which impacts the service's ability to properly process traffic, the service includes the rule in a list of analysis results.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#AnalysisResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#AnalysisResult"
+            }
+        },
         "com.amazonaws.networkfirewall#AssociateFirewallPolicy": {
             "type": "operation",
             "input": {
@@ -440,13 +472,13 @@
                 "RevokedStatusAction": {
                     "target": "com.amazonaws.networkfirewall#RevocationCheckAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures how Network Firewall processes traffic when it determines that the certificate presented by the server in the SSL/TLS connection has a revoked status.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>PASS</b> - Allow the connection to continue, and pass subsequent packets to the stateful engine for inspection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DROP</b> - Network Firewall fails closed and drops all subsequent traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <b>REJECT</b> - Network Firewall sends a TCP reject packet back to your client so that the client can immediately establish a new session. Network Firewall then fails closed and drops all subsequent traffic. <code>REJECT</code> is available only for TCP traffic.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Configures how Network Firewall processes traffic when it determines that the certificate presented by the server in the SSL/TLS connection has a revoked status.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>PASS</b> - Allow the connection to continue, and pass subsequent packets to the stateful engine for inspection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DROP</b> - Network Firewall closes the connection and drops subsequent packets for that connection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>REJECT</b> - Network Firewall sends a TCP reject packet back to your client. The service closes the connection and drops subsequent packets for that connection. <code>REJECT</code> is available only for TCP traffic.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "UnknownStatusAction": {
                     "target": "com.amazonaws.networkfirewall#RevocationCheckAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures how Network Firewall processes traffic when it determines that the certificate presented by the server in the SSL/TLS connection has an unknown status, or a status that cannot be determined for any other reason, including when the service is unable to connect to the OCSP and CRL endpoints for the certificate.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>PASS</b> - Allow the connection to continue, and pass subsequent packets to the stateful engine for inspection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DROP</b> - Network Firewall fails closed and drops all subsequent traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <b>REJECT</b> - Network Firewall sends a TCP reject packet back to your client so that the client can immediately establish a new session. Network Firewall then fails closed and drops all subsequent traffic. <code>REJECT</code> is available only for TCP traffic. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Configures how Network Firewall processes traffic when it determines that the certificate presented by the server in the SSL/TLS connection has an unknown status, or a status that cannot be determined for any other reason, including when the service is unable to connect to the OCSP and CRL endpoints for the certificate.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>PASS</b> - Allow the connection to continue, and pass subsequent packets to the stateful engine for inspection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DROP</b> - Network Firewall closes the connection and drops subsequent packets for that connection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>REJECT</b> - Network Firewall sends a TCP reject packet back to your client. The service closes the connection and drops subsequent packets for that connection. <code>REJECT</code> is available only for TCP traffic.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -800,6 +832,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A complex type that contains metadata about the rule group that your own rule group is copied from. You can use the metadata to keep track of updates made to the originating rule group.</p>"
                     }
+                },
+                "AnalyzeRuleGroup": {
+                    "target": "com.amazonaws.networkfirewall#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing. If set to <code>TRUE</code>, Network Firewall runs the analysis and then creates the rule group for you. To run the stateless rule group analyzer without creating the rule group, set <code>DryRun</code> to <code>TRUE</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -854,7 +893,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Network Firewall TLS inspection configuration. A TLS inspection configuration contains the Certificate Manager certificate associations that Network Firewall uses to decrypt and re-encrypt traffic traveling through your firewall.</p>\n         <p>After you create a TLS inspection configuration, you can associate it with a new firewall policy.</p>\n         <p>To update the settings for a TLS inspection configuration, use <a>UpdateTLSInspectionConfiguration</a>.</p>\n         <p>To manage a TLS inspection configuration's tags, use the standard Amazon Web Services resource tagging operations, <a>ListTagsForResource</a>, <a>TagResource</a>, and <a>UntagResource</a>.</p>\n         <p>To retrieve information about TLS inspection configurations, use <a>ListTLSInspectionConfigurations</a> and <a>DescribeTLSInspectionConfiguration</a>.</p>\n         <p>\n              For more information about TLS inspection configurations, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html\">Inspecting SSL/TLS traffic with TLS\ninspection configurations</a> in the <i>Network Firewall Developer Guide</i>.\n            </p>"
+                "smithy.api#documentation": "<p>Creates an Network Firewall TLS inspection configuration. A TLS inspection configuration contains Certificate Manager certificate associations between and the scope configurations that Network Firewall uses to decrypt and re-encrypt traffic traveling through your firewall.</p>\n         <p>After you create a TLS inspection configuration, you can associate it with a new firewall policy.</p>\n         <p>To update the settings for a TLS inspection configuration, use <a>UpdateTLSInspectionConfiguration</a>.</p>\n         <p>To manage a TLS inspection configuration's tags, use the standard Amazon Web Services resource tagging operations, <a>ListTagsForResource</a>, <a>TagResource</a>, and <a>UntagResource</a>.</p>\n         <p>To retrieve information about TLS inspection configurations, use <a>ListTLSInspectionConfigurations</a> and <a>DescribeTLSInspectionConfiguration</a>.</p>\n         <p>\n              For more information about TLS inspection configurations, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html\">Inspecting SSL/TLS traffic with TLS\ninspection configurations</a> in the <i>Network Firewall Developer Guide</i>.\n            </p>"
             }
         },
         "com.amazonaws.networkfirewall#CreateTLSInspectionConfigurationRequest": {
@@ -1675,6 +1714,13 @@
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains\nstateless rules. If it is stateful, it contains stateful rules. </p>\n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
+                    }
+                },
+                "AnalyzeRuleGroup": {
+                    "target": "com.amazonaws.networkfirewall#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing. If set to <code>TRUE</code>, Network Firewall runs the analysis.</p>"
                     }
                 }
             },
@@ -2516,6 +2562,23 @@
             },
             "value": {
                 "target": "com.amazonaws.networkfirewall#IPSet"
+            }
+        },
+        "com.amazonaws.networkfirewall#IdentifiedType": {
+            "type": "enum",
+            "members": {
+                "STATELESS_RULE_FORWARDING_ASYMMETRICALLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATELESS_RULE_FORWARDING_ASYMMETRICALLY"
+                    }
+                },
+                "STATELESS_RULE_CONTAINS_TCP_FLAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATELESS_RULE_CONTAINS_TCP_FLAGS"
+                    }
+                }
             }
         },
         "com.amazonaws.networkfirewall#InsufficientCapacityException": {
@@ -4730,7 +4793,7 @@
                 "StatefulRuleOptions": {
                     "target": "com.amazonaws.networkfirewall#StatefulRuleOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional options governing how Network Firewall handles stateful rules. The policies where you use your stateful\n       rule group must have stateful rule options settings that are compatible with these settings.</p>"
+                        "smithy.api#documentation": "<p>Additional options governing how Network Firewall handles stateful rules. The policies where you use your stateful\n       rule group must have stateful rule options settings that are compatible with these settings. Some limitations apply; for more information, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-limitations-caveats.html\">Strict evaluation order</a> in the <i>Network Firewall Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -4847,6 +4910,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The last time that the rule group was changed.</p>"
                     }
+                },
+                "AnalysisResults": {
+                    "target": "com.amazonaws.networkfirewall#AnalysisResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of analysis results for <code>AnalyzeRuleGroup</code>. If you set <code>AnalyzeRuleGroup</code> to <code>TRUE</code> in <a>CreateRuleGroup</a>, <a>UpdateRuleGroup</a>, or <a>DescribeRuleGroup</a>, Network Firewall analyzes the rule group and identifies the rules that might adversely effect your firewall's functionality. For example, if Network Firewall detects a rule that's routing traffic asymmetrically, which impacts the service's ability to properly process traffic, the service includes the rule in the list of analysis results.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4874,6 +4943,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.networkfirewall#RuleGroupMetadata"
+            }
+        },
+        "com.amazonaws.networkfirewall#RuleIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#CollectionMember_String"
             }
         },
         "com.amazonaws.networkfirewall#RuleOption": {
@@ -4962,7 +5037,7 @@
                 "RulesString": {
                     "target": "com.amazonaws.networkfirewall#RulesString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Stateful inspection criteria, provided in Suricata compatible intrusion prevention\n         system (IPS) rules. Suricata is an open-source network IPS that includes a standard\n         rule-based language for network traffic inspection.</p>\n         <p>These rules contain the inspection criteria and the action to take for traffic that\n         matches the criteria, so this type of rule group doesn't have a separate action\n         setting.</p>"
+                        "smithy.api#documentation": "<p>Stateful inspection criteria, provided in Suricata compatible rules. Suricata is an open-source threat detection framework that includes a standard\n         rule-based language for network traffic inspection.</p>\n         <p>These rules contain the inspection criteria and the action to take for traffic that\n         matches the criteria, so this type of rule group doesn't have a separate action\n         setting.</p>\n         <note>\n            <p>You can't use the <code>priority</code> keyword if the <code>RuleOrder</code> option in <a>StatefulRuleOptions</a> is set to  <code>STRICT_ORDER</code>.</p>\n         </note>"
                     }
                 },
                 "RulesSourceList": {
@@ -5046,7 +5121,7 @@
                 "ServerCertificates": {
                     "target": "com.amazonaws.networkfirewall#ServerCertificates",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of a server certificate configuration's Certificate Manager certificates, used for inbound SSL/TLS inspection.</p>"
+                        "smithy.api#documentation": "<p>The list of server certificates to use for inbound SSL/TLS inspection.</p>"
                     }
                 },
                 "Scopes": {
@@ -5058,18 +5133,18 @@
                 "CertificateAuthorityArn": {
                     "target": "com.amazonaws.networkfirewall#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the imported certificate authority (CA) certificate configured in Certificate Manager (ACM) to use for outbound SSL/TLS inspection.</p>\n         <p>The following limitations apply:</p>\n         <ul>\n            <li>\n               <p>You can use CA certificates that you imported into ACM, but you can't generate CA certificates with ACM.</p>\n            </li>\n            <li>\n               <p>You can't use certificates issued by Private Certificate Authority.</p>\n            </li>\n         </ul>\n         <p>For more information about the certificate requirements for outbound inspection, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html\">Requirements for using SSL/TLS certificates with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>. </p>\n         <p>For information about working with certificates in ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates</a> in the <i>Certificate Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the imported certificate authority (CA) certificate within Certificate Manager (ACM) to use for outbound SSL/TLS inspection.</p>\n         <p>The following limitations apply:</p>\n         <ul>\n            <li>\n               <p>You can use CA certificates that you imported into ACM, but you can't generate CA certificates with ACM.</p>\n            </li>\n            <li>\n               <p>You can't use certificates issued by Private Certificate Authority.</p>\n            </li>\n         </ul>\n         <p>For more information about configuring certificates for outbound inspection, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html\">Using SSL/TLS certificates with certificates with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>. </p>\n         <p>For information about working with certificates in ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates</a> in the <i>Certificate Manager User Guide</i>.</p>"
                     }
                 },
                 "CheckCertificateRevocationStatus": {
                     "target": "com.amazonaws.networkfirewall#CheckCertificateRevocationStatusActions",
                     "traits": {
-                        "smithy.api#documentation": "<p>When enabled, Network Firewall checks if the server certificate presented by the server in the SSL/TLS connection has a revoked or unkown status. If the certificate has an unknown or revoked status, you must specify the actions that Network Firewall takes on outbound traffic. To use this option, you must specify a <code>CertificateAuthorityArn</code> in <a>ServerCertificateConfiguration</a>.</p>"
+                        "smithy.api#documentation": "<p>When enabled, Network Firewall checks if the server certificate presented by the server in the SSL/TLS connection has a revoked or unkown status. If the certificate has an unknown or revoked status, you must specify the actions that Network Firewall takes on outbound traffic. To check the certificate revocation status, you must also specify a <code>CertificateAuthorityArn</code> in <a>ServerCertificateConfiguration</a>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures the Certificate Manager certificates and scope that Network Firewall uses to decrypt and re-encrypt traffic using a <a>TLSInspectionConfiguration</a>. You can configure <code>ServerCertificates</code> for inbound SSL/TLS inspection, a <code>CertificateAuthorityArn</code> for outbound SSL/TLS inspection, or both. For information about working with certificates for TLS inspection, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html\"> Requirements for using SSL/TLS server certficiates with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>\n         <note>\n            <p>If a server certificate that's associated with your <a>TLSInspectionConfiguration</a> is revoked, deleted, or expired it can result in client-side TLS errors.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Configures the Certificate Manager certificates and scope that Network Firewall uses to decrypt and re-encrypt traffic using a <a>TLSInspectionConfiguration</a>. You can configure <code>ServerCertificates</code> for inbound SSL/TLS inspection, a <code>CertificateAuthorityArn</code> for outbound SSL/TLS inspection, or both. For information about working with certificates for TLS inspection, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html\"> Using SSL/TLS server certficiates with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>\n         <note>\n            <p>If a server certificate that's associated with your <a>TLSInspectionConfiguration</a> is revoked, deleted, or expired it can result in client-side TLS errors.</p>\n         </note>"
             }
         },
         "com.amazonaws.networkfirewall#ServerCertificateConfigurations": {
@@ -5215,7 +5290,7 @@
                 "RuleOrder": {
                     "target": "com.amazonaws.networkfirewall#RuleOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how to manage the order of stateful rule evaluation for the policy. <code>DEFAULT_ACTION_ORDER</code> is\n         the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them\n         based on certain settings. For more information, see\n         <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html\">Evaluation order for stateful rules</a> in the <i>Network Firewall Developer Guide</i>.\n      </p>"
+                        "smithy.api#documentation": "<p>Indicates how to manage the order of stateful rule evaluation for the policy. <code>STRICT_ORDER</code> is\n         the default and recommended option. With <code>STRICT_ORDER</code>, provide your rules in the order that you want them to be evaluated. You can then choose one or more default actions for packets that don't match any rules. Choose <code>STRICT_ORDER</code> to have the stateful rules engine determine the evaluation order of your rules. The default action for this rule order is <code>PASS</code>, followed by <code>DROP</code>, <code>REJECT</code>, and <code>ALERT</code> actions. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them\n         based on your settings. For more information, see\n         <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html\">Evaluation order for stateful rules</a> in the <i>Network Firewall Developer Guide</i>.\n      </p>"
                     }
                 },
                 "StreamExceptionPolicy": {
@@ -5235,7 +5310,7 @@
                 "Action": {
                     "target": "com.amazonaws.networkfirewall#StatefulAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines what Network Firewall should do with the packets in a traffic flow when the flow\n         matches the stateful rule criteria. For all actions, Network Firewall performs the specified\n         action and discontinues stateful inspection of the traffic flow. </p>\n         <p>The actions for a stateful rule are defined as follows: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>PASS</b> - Permits the packets to go to the\n               intended destination.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DROP</b> - Blocks the packets from going to\n               the intended destination and sends an alert log message, if alert logging is configured in the <a>Firewall</a>\n                  <a>LoggingConfiguration</a>. </p>\n            </li>\n            <li>\n               <p>\n                  <b>ALERT</b> - Permits the packets to go to the\n               intended destination and sends an alert log message, if alert logging is configured in the <a>Firewall</a>\n                  <a>LoggingConfiguration</a>. </p>\n               <p>You can use this action to test a rule that you intend to use to drop traffic. You\n               can enable the rule with <code>ALERT</code> action, verify in the logs that the rule\n               is filtering as you want, then change the action to <code>DROP</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Defines what Network Firewall should do with the packets in a traffic flow when the flow\n         matches the stateful rule criteria. For all actions, Network Firewall performs the specified\n         action and discontinues stateful inspection of the traffic flow. </p>\n         <p>The actions for a stateful rule are defined as follows: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>PASS</b> - Permits the packets to go to the\n               intended destination.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DROP</b> - Blocks the packets from going to\n               the intended destination and sends an alert log message, if alert logging is configured in the <a>Firewall</a>\n                  <a>LoggingConfiguration</a>. </p>\n            </li>\n            <li>\n               <p>\n                  <b>ALERT</b> - Sends an alert log message, if alert logging is configured in the <a>Firewall</a>\n                  <a>LoggingConfiguration</a>. </p>\n               <p>You can use this action to test a rule that you intend to use to drop traffic. You\n               can enable the rule with <code>ALERT</code> action, verify in the logs that the rule\n               is filtering as you want, then change the action to <code>DROP</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6761,6 +6836,13 @@
                     "target": "com.amazonaws.networkfirewall#SourceMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>A complex type that contains metadata about the rule group that your own rule group is copied from. You can use the metadata to keep track of updates made to the originating rule group.</p>"
+                    }
+                },
+                "AnalyzeRuleGroup": {
+                    "target": "com.amazonaws.networkfirewall#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing. If set to <code>TRUE</code>, Network Firewall runs the analysis and then updates the rule group for you. To run the stateless rule group analyzer without updating the rule group, set <code>DryRun</code> to <code>TRUE</code>. </p>"
                     }
                 }
             },

@@ -1616,6 +1616,17 @@
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
                             }
+                        },
+                        {
+                            "documentation": "Partition doesn't support DualStack",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
                         }
                     ],
                     "version": "1.0"
@@ -5263,6 +5274,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a target that writes to a Snowflake data source.</p>"
                     }
+                },
+                "ConnectorDataSource": {
+                    "target": "com.amazonaws.glue#ConnectorDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a source generated with standard connection options.</p>"
+                    }
+                },
+                "ConnectorDataTarget": {
+                    "target": "com.amazonaws.glue#ConnectorDataTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a target generated with standard connection options.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6437,6 +6460,85 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the connections used by a job.</p>"
+            }
+        },
+        "com.amazonaws.glue#ConnectorDataSource": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this source node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionType": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>connectionType</code>, as provided to the underlying Glue library. This node type supports\nthe following connection types: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>bigquery</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Data": {
+                    "target": "com.amazonaws.glue#ConnectorOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map specifying connection options for the node. You can find standard connection options for the\n    corresponding connection type in the\n    <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-connect.html\">\n    Connection parameters</a> section of the Glue documentation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputSchemas": {
+                    "target": "com.amazonaws.glue#GlueSchemas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data schema for this source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a source generated with standard connection options.</p>"
+            }
+        },
+        "com.amazonaws.glue#ConnectorDataTarget": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this target node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionType": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>connectionType</code>, as provided to the underlying Glue library. This node type supports\nthe following connection types: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>bigquery</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Data": {
+                    "target": "com.amazonaws.glue#ConnectorOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map specifying connection options for the node. You can find standard connection options for the \n    corresponding connection type in the \n    <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-connect.html\">\n    Connection parameters</a> section of the Glue documentation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Inputs": {
+                    "target": "com.amazonaws.glue#OneInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nodes that are inputs to the data target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a target generated with standard connection options.</p>"
+            }
+        },
+        "com.amazonaws.glue#ConnectorOptions": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#GenericString"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#GenericString"
             }
         },
         "com.amazonaws.glue#ContextWords": {
