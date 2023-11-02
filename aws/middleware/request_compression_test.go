@@ -50,7 +50,7 @@ func TestRequestCompression(t *testing.T) {
 			},
 			ExpectedBody: []byte("Hello, world!"),
 			ExpectedHeader: map[string][]string{
-				"Content-Encoding": {"custom,gzip"},
+				"Content-Encoding": {"custom, gzip"},
 			},
 		},
 		"GZip request stream ignoring min compress request size": {

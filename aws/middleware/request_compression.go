@@ -70,7 +70,7 @@ func (m requestCompression) HandleBuild(
 	if isCompressed {
 		// Either append to the header if it already exists, else set it
 		if len(req.Header["Content-Encoding"]) != 0 {
-			req.Header["Content-Encoding"][0] += ",gzip"
+			req.Header["Content-Encoding"][0] += ", gzip"
 		} else {
 			req.Header.Set("Content-Encoding", "gzip")
 		}

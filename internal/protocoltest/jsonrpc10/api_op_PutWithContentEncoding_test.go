@@ -61,14 +61,6 @@ func TestClient_PutWithContentEncoding_awsAwsjson10Serialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "SDKAppliedContentEncoding_awsJson1_0" {
-				t.Skip("disabled test aws.protocoltests.json10#JsonRpc10 aws.protocoltests.json10#PutWithContentEncoding")
-			}
-
-			if name == "SDKAppendsGzipAndIgnoresHttpProvidedEncoding_awsJson1_0" {
-				t.Skip("disabled test aws.protocoltests.json10#JsonRpc10 aws.protocoltests.json10#PutWithContentEncoding")
-			}
-
 			actualReq := &http.Request{}
 			serverURL := "http://localhost:8888/"
 			if c.Host != nil {

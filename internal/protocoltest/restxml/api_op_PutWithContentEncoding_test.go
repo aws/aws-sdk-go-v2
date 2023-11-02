@@ -62,14 +62,6 @@ func TestClient_PutWithContentEncoding_awsRestxmlSerialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "SDKAppliedContentEncoding_restXml" {
-				t.Skip("disabled test aws.protocoltests.restxml#RestXml aws.protocoltests.restxml#PutWithContentEncoding")
-			}
-
-			if name == "SDKAppendedGzipAfterProvidedEncoding_restXml" {
-				t.Skip("disabled test aws.protocoltests.restxml#RestXml aws.protocoltests.restxml#PutWithContentEncoding")
-			}
-
 			actualReq := &http.Request{}
 			serverURL := "http://localhost:8888/"
 			if c.Host != nil {
