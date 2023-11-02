@@ -1112,6 +1112,23 @@ func (GameSessionStatusReason) Values() []GameSessionStatusReason {
 	}
 }
 
+type InstanceRoleCredentialsProvider string
+
+// Enum values for InstanceRoleCredentialsProvider
+const (
+	InstanceRoleCredentialsProviderSharedCredentialFile InstanceRoleCredentialsProvider = "SHARED_CREDENTIAL_FILE"
+)
+
+// Values returns all known values for InstanceRoleCredentialsProvider. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (InstanceRoleCredentialsProvider) Values() []InstanceRoleCredentialsProvider {
+	return []InstanceRoleCredentialsProvider{
+		"SHARED_CREDENTIAL_FILE",
+	}
+}
+
 type InstanceStatus string
 
 // Enum values for InstanceStatus

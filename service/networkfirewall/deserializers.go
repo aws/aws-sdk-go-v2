@@ -4962,6 +4962,94 @@ func awsAwsjson10_deserializeDocumentAddresses(v *[]types.Address, value interfa
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentAnalysisResult(v **types.AnalysisResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AnalysisResult
+	if *v == nil {
+		sv = &types.AnalysisResult{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AnalysisDetail":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CollectionMember_String to be of type string, got %T instead", value)
+				}
+				sv.AnalysisDetail = ptr.String(jtv)
+			}
+
+		case "IdentifiedRuleIds":
+			if err := awsAwsjson10_deserializeDocumentRuleIdList(&sv.IdentifiedRuleIds, value); err != nil {
+				return err
+			}
+
+		case "IdentifiedType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdentifiedType to be of type string, got %T instead", value)
+				}
+				sv.IdentifiedType = types.IdentifiedType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentAnalysisResultList(v *[]types.AnalysisResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AnalysisResult
+	if *v == nil {
+		cv = []types.AnalysisResult{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AnalysisResult
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentAnalysisResult(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentAttachment(v **types.Attachment, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7474,6 +7562,11 @@ func awsAwsjson10_deserializeDocumentRuleGroupResponse(v **types.RuleGroupRespon
 
 	for key, value := range shape {
 		switch key {
+		case "AnalysisResults":
+			if err := awsAwsjson10_deserializeDocumentAnalysisResultList(&sv.AnalysisResults, value); err != nil {
+				return err
+			}
+
 		case "Capacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7643,6 +7736,42 @@ func awsAwsjson10_deserializeDocumentRuleGroups(v *[]types.RuleGroupMetadata, va
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRuleIdList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CollectionMember_String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}

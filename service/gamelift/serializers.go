@@ -6298,6 +6298,17 @@ func awsAwsjson11_serializeDocumentPlayerIdList(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentPlayerIdsForAcceptMatch(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentPlayerLatency(v *types.PlayerLatency, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6681,7 +6692,7 @@ func awsAwsjson11_serializeOpDocumentAcceptMatchInput(v *AcceptMatchInput, value
 
 	if v.PlayerIds != nil {
 		ok := object.Key("PlayerIds")
-		if err := awsAwsjson11_serializeDocumentStringList(v.PlayerIds, ok); err != nil {
+		if err := awsAwsjson11_serializeDocumentPlayerIdsForAcceptMatch(v.PlayerIds, ok); err != nil {
 			return err
 		}
 	}
@@ -6848,6 +6859,11 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 	if v.InstanceRoleArn != nil {
 		ok := object.Key("InstanceRoleArn")
 		ok.String(*v.InstanceRoleArn)
+	}
+
+	if len(v.InstanceRoleCredentialsProvider) > 0 {
+		ok := object.Key("InstanceRoleCredentialsProvider")
+		ok.String(string(v.InstanceRoleCredentialsProvider))
 	}
 
 	if v.Locations != nil {

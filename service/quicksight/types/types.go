@@ -209,6 +209,9 @@ type Analysis struct {
 	// The descriptive name of the analysis.
 	Name *string
 
+	// An array of analysis level configurations.
+	Options *AssetOptions
+
 	// A list of the associated sheets with the unique identifier and name of each
 	// sheet.
 	Sheets []Sheet
@@ -256,6 +259,9 @@ type AnalysisDefinition struct {
 	// Amazon QuickSight (https://docs.aws.amazon.com/quicksight/latest/user/adding-a-filter.html)
 	// in the Amazon QuickSight User Guide.
 	FilterGroups []FilterGroup
+
+	// An array of option definitions for an analysis.
+	Options *AssetOptions
 
 	// An array of parameter declarations for an analysis. Parameters are named
 	// variables that can transfer a value for use by an action or an object. For more
@@ -1021,6 +1027,18 @@ type AssetBundleImportSourceDescription struct {
 	noSmithyDocumentSerde
 }
 
+// An array of analysis level configurations.
+type AssetOptions struct {
+
+	// Determines the timezone for the analysis.
+	Timezone *string
+
+	// Determines the week start day for an analysis.
+	WeekStart DayOfTheWeek
+
+	noSmithyDocumentSerde
+}
+
 // Parameters for Amazon Athena.
 type AthenaParameters struct {
 
@@ -1719,6 +1737,10 @@ type CastColumnTypeOperation struct {
 	// When casting a column from string to datetime type, you can supply a string in
 	// a format supported by Amazon QuickSight to denote the source data format.
 	Format *string
+
+	// The sub data type of the new column. Sub types are only available for decimal
+	// columns that are part of a SPICE dataset.
+	SubType ColumnDataSubType
 
 	noSmithyDocumentSerde
 }
@@ -2972,6 +2994,9 @@ type DashboardVersion struct {
 	// Errors associated with this dashboard version.
 	Errors []DashboardError
 
+	// An array of analysis level configurations.
+	Options *AssetOptions
+
 	// A list of the associated sheets with the unique identifier and name of each
 	// sheet.
 	Sheets []Sheet
@@ -3016,6 +3041,9 @@ type DashboardVersionDefinition struct {
 	// Data in Amazon QuickSight (https://docs.aws.amazon.com/quicksight/latest/user/adding-a-filter.html)
 	// in the Amazon QuickSight User Guide.
 	FilterGroups []FilterGroup
+
+	// An array of option definitions for a dashboard.
+	Options *AssetOptions
 
 	// The parameter declarations for a dashboard. Parameters are named variables that
 	// can transfer a value for use by an action or an object. For more information,
@@ -6781,6 +6809,10 @@ type InputColumn struct {
 	// This member is required.
 	Type InputColumnDataType
 
+	// The sub data type of the column. Sub types are only available for decimal
+	// columns that are part of a SPICE dataset.
+	SubType ColumnDataSubType
+
 	noSmithyDocumentSerde
 }
 
@@ -8302,10 +8334,13 @@ type OutputColumn struct {
 	// A description for a column.
 	Description *string
 
-	// A display name for the dataset.
+	// The display name of the column..
 	Name *string
 
-	// The type.
+	// The sub data type of the column.
+	SubType ColumnDataSubType
+
+	// The data type of the column.
 	Type ColumnDataType
 
 	noSmithyDocumentSerde
@@ -12177,6 +12212,9 @@ type TemplateVersion struct {
 	// Errors associated with this template version.
 	Errors []TemplateError
 
+	// An array of analysis level configurations.
+	Options *AssetOptions
+
 	// A list of the associated sheets with the unique identifier and name of each
 	// sheet.
 	Sheets []Sheet
@@ -12226,6 +12264,9 @@ type TemplateVersionDefinition struct {
 	// Filter definitions for a template. For more information, see Filtering Data (https://docs.aws.amazon.com/quicksight/latest/user/filtering-visual-data.html)
 	// in the Amazon QuickSight User Guide.
 	FilterGroups []FilterGroup
+
+	// An array of option definitions for a template.
+	Options *AssetOptions
 
 	// An array of parameter declarations for a template. Parameters are named
 	// variables that can transfer a value for use by an action or an object. For more

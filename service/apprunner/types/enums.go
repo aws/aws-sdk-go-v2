@@ -165,6 +165,24 @@ func (ImageRepositoryType) Values() []ImageRepositoryType {
 	}
 }
 
+type IpAddressType string
+
+// Enum values for IpAddressType
+const (
+	IpAddressTypeIpv4      IpAddressType = "IPV4"
+	IpAddressTypeDualStack IpAddressType = "DUAL_STACK"
+)
+
+// Values returns all known values for IpAddressType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpAddressType) Values() []IpAddressType {
+	return []IpAddressType{
+		"IPV4",
+		"DUAL_STACK",
+	}
+}
+
 type ObservabilityConfigurationStatus string
 
 // Enum values for ObservabilityConfigurationStatus

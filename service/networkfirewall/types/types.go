@@ -51,6 +51,45 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
+// The analysis result for Network Firewall's stateless rule group analyzer. Every
+// time you call CreateRuleGroup , UpdateRuleGroup , or DescribeRuleGroup on a
+// stateless rule group, Network Firewall analyzes the stateless rule groups in
+// your account and identifies the rules that might adversely effect your
+// firewall's functionality. For example, if Network Firewall detects a rule that's
+// routing traffic asymmetrically, which impacts the service's ability to properly
+// process traffic, the service includes the rule in a list of analysis results.
+type AnalysisResult struct {
+
+	// Provides analysis details for the identified rule.
+	AnalysisDetail *string
+
+	// The priority number of the stateless rules identified in the analysis.
+	IdentifiedRuleIds []string
+
+	// The types of rule configurations that Network Firewall analyzes your rule
+	// groups for. Network Firewall analyzes stateless rule groups for the following
+	// types of rule configurations:
+	//   - STATELESS_RULE_FORWARDING_ASYMMETRICALLY Cause: One or more stateless rules
+	//   with the action pass or forward are forwarding traffic asymmetrically.
+	//   Specifically, the rule's set of source IP addresses or their associated port
+	//   numbers, don't match the set of destination IP addresses or their associated
+	//   port numbers. To mitigate: Make sure that there's an existing return path. For
+	//   example, if the rule allows traffic from source 10.1.0.0/24 to destination
+	//   20.1.0.0/24, you should allow return traffic from source 20.1.0.0/24 to
+	//   destination 10.1.0.0/24.
+	//   - STATELESS_RULE_CONTAINS_TCP_FLAGS Cause: At least one stateless rule with
+	//   the action pass or forward contains TCP flags that are inconsistent in the
+	//   forward and return directions. To mitigate: Prevent asymmetric routing issues
+	//   caused by TCP flags by following these actions:
+	//   - Remove unnecessary TCP flag inspections from the rules.
+	//   - If you need to inspect TCP flags, check that the rules correctly account
+	//   for changes in TCP flags throughout the TCP connection cycle, for example SYN
+	//   and ACK flags used in a 3-way TCP handshake.
+	IdentifiedType IdentifiedType
+
+	noSmithyDocumentSerde
+}
+
 // The configuration and status for a single subnet that you've specified for use
 // by the Network Firewall firewall. This is part of the FirewallStatus .
 type Attachment struct {
@@ -105,11 +144,11 @@ type CheckCertificateRevocationStatusActions struct {
 	// status.
 	//   - PASS - Allow the connection to continue, and pass subsequent packets to the
 	//   stateful engine for inspection.
-	//   - DROP - Network Firewall fails closed and drops all subsequent traffic.
-	//   - REJECT - Network Firewall sends a TCP reject packet back to your client so
-	//   that the client can immediately establish a new session. Network Firewall then
-	//   fails closed and drops all subsequent traffic. REJECT is available only for
-	//   TCP traffic.
+	//   - DROP - Network Firewall closes the connection and drops subsequent packets
+	//   for that connection.
+	//   - REJECT - Network Firewall sends a TCP reject packet back to your client.
+	//   The service closes the connection and drops subsequent packets for that
+	//   connection. REJECT is available only for TCP traffic.
 	RevokedStatusAction RevocationCheckAction
 
 	// Configures how Network Firewall processes traffic when it determines that the
@@ -119,11 +158,11 @@ type CheckCertificateRevocationStatusActions struct {
 	// certificate.
 	//   - PASS - Allow the connection to continue, and pass subsequent packets to the
 	//   stateful engine for inspection.
-	//   - DROP - Network Firewall fails closed and drops all subsequent traffic.
-	//   - REJECT - Network Firewall sends a TCP reject packet back to your client so
-	//   that the client can immediately establish a new session. Network Firewall then
-	//   fails closed and drops all subsequent traffic. REJECT is available only for
-	//   TCP traffic.
+	//   - DROP - Network Firewall closes the connection and drops subsequent packets
+	//   for that connection.
+	//   - REJECT - Network Firewall sends a TCP reject packet back to your client.
+	//   The service closes the connection and drops subsequent packets for that
+	//   connection. REJECT is available only for TCP traffic.
 	UnknownStatusAction RevocationCheckAction
 
 	noSmithyDocumentSerde
@@ -855,7 +894,9 @@ type RuleGroup struct {
 
 	// Additional options governing how Network Firewall handles stateful rules. The
 	// policies where you use your stateful rule group must have stateful rule options
-	// settings that are compatible with these settings.
+	// settings that are compatible with these settings. Some limitations apply; for
+	// more information, see Strict evaluation order (https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-limitations-caveats.html)
+	// in the Network Firewall Developer Guide.
 	StatefulRuleOptions *StatefulRuleOptions
 
 	noSmithyDocumentSerde
@@ -898,6 +939,15 @@ type RuleGroupResponse struct {
 	//
 	// This member is required.
 	RuleGroupName *string
+
+	// The list of analysis results for AnalyzeRuleGroup . If you set AnalyzeRuleGroup
+	// to TRUE in CreateRuleGroup , UpdateRuleGroup , or DescribeRuleGroup , Network
+	// Firewall analyzes the rule group and identifies the rules that might adversely
+	// effect your firewall's functionality. For example, if Network Firewall detects a
+	// rule that's routing traffic asymmetrically, which impacts the service's ability
+	// to properly process traffic, the service includes the rule in the list of
+	// analysis results.
+	AnalysisResults []AnalysisResult
 
 	// The maximum operating resources that this rule group can use. Rule group
 	// capacity is fixed at creation. When you update a rule group, you are limited to
@@ -980,12 +1030,13 @@ type RulesSource struct {
 	// Stateful inspection criteria for a domain list rule group.
 	RulesSourceList *RulesSourceList
 
-	// Stateful inspection criteria, provided in Suricata compatible intrusion
-	// prevention system (IPS) rules. Suricata is an open-source network IPS that
-	// includes a standard rule-based language for network traffic inspection. These
-	// rules contain the inspection criteria and the action to take for traffic that
-	// matches the criteria, so this type of rule group doesn't have a separate action
-	// setting.
+	// Stateful inspection criteria, provided in Suricata compatible rules. Suricata
+	// is an open-source threat detection framework that includes a standard rule-based
+	// language for network traffic inspection. These rules contain the inspection
+	// criteria and the action to take for traffic that matches the criteria, so this
+	// type of rule group doesn't have a separate action setting. You can't use the
+	// priority keyword if the RuleOrder option in StatefulRuleOptions is set to
+	// STRICT_ORDER .
 	RulesString *string
 
 	// An array of individual stateful rules inspection criteria to be used together
@@ -1073,22 +1124,21 @@ type ServerCertificate struct {
 // uses to decrypt and re-encrypt traffic using a TLSInspectionConfiguration . You
 // can configure ServerCertificates for inbound SSL/TLS inspection, a
 // CertificateAuthorityArn for outbound SSL/TLS inspection, or both. For
-// information about working with certificates for TLS inspection, see
-// Requirements for using SSL/TLS server certficiates with TLS inspection
-// configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html)
+// information about working with certificates for TLS inspection, see Using
+// SSL/TLS server certficiates with TLS inspection configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html)
 // in the Network Firewall Developer Guide. If a server certificate that's
 // associated with your TLSInspectionConfiguration is revoked, deleted, or expired
 // it can result in client-side TLS errors.
 type ServerCertificateConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the imported certificate authority (CA)
-	// certificate configured in Certificate Manager (ACM) to use for outbound SSL/TLS
+	// certificate within Certificate Manager (ACM) to use for outbound SSL/TLS
 	// inspection. The following limitations apply:
 	//   - You can use CA certificates that you imported into ACM, but you can't
 	//   generate CA certificates with ACM.
 	//   - You can't use certificates issued by Private Certificate Authority.
-	// For more information about the certificate requirements for outbound
-	// inspection, see Requirements for using SSL/TLS certificates with TLS inspection
+	// For more information about configuring certificates for outbound inspection,
+	// see Using SSL/TLS certificates with certificates with TLS inspection
 	// configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html)
 	// in the Network Firewall Developer Guide. For information about working with
 	// certificates in ACM, see Importing certificates (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
@@ -1098,15 +1148,15 @@ type ServerCertificateConfiguration struct {
 	// When enabled, Network Firewall checks if the server certificate presented by
 	// the server in the SSL/TLS connection has a revoked or unkown status. If the
 	// certificate has an unknown or revoked status, you must specify the actions that
-	// Network Firewall takes on outbound traffic. To use this option, you must specify
-	// a CertificateAuthorityArn in ServerCertificateConfiguration .
+	// Network Firewall takes on outbound traffic. To check the certificate revocation
+	// status, you must also specify a CertificateAuthorityArn in
+	// ServerCertificateConfiguration .
 	CheckCertificateRevocationStatus *CheckCertificateRevocationStatusActions
 
 	// A list of scopes.
 	Scopes []ServerCertificateScope
 
-	// The list of a server certificate configuration's Certificate Manager
-	// certificates, used for inbound SSL/TLS inspection.
+	// The list of server certificates to use for inbound SSL/TLS inspection.
 	ServerCertificates []ServerCertificate
 
 	noSmithyDocumentSerde
@@ -1170,9 +1220,14 @@ type SourceMetadata struct {
 type StatefulEngineOptions struct {
 
 	// Indicates how to manage the order of stateful rule evaluation for the policy.
-	// DEFAULT_ACTION_ORDER is the default behavior. Stateful rules are provided to the
-	// rule engine as Suricata compatible strings, and Suricata evaluates them based on
-	// certain settings. For more information, see Evaluation order for stateful rules (https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html)
+	// STRICT_ORDER is the default and recommended option. With STRICT_ORDER , provide
+	// your rules in the order that you want them to be evaluated. You can then choose
+	// one or more default actions for packets that don't match any rules. Choose
+	// STRICT_ORDER to have the stateful rules engine determine the evaluation order of
+	// your rules. The default action for this rule order is PASS , followed by DROP ,
+	// REJECT , and ALERT actions. Stateful rules are provided to the rule engine as
+	// Suricata compatible strings, and Suricata evaluates them based on your settings.
+	// For more information, see Evaluation order for stateful rules (https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html)
 	// in the Network Firewall Developer Guide.
 	RuleOrder RuleOrder
 
@@ -1214,12 +1269,11 @@ type StatefulRule struct {
 	//   - DROP - Blocks the packets from going to the intended destination and sends
 	//   an alert log message, if alert logging is configured in the Firewall
 	//   LoggingConfiguration .
-	//   - ALERT - Permits the packets to go to the intended destination and sends an
-	//   alert log message, if alert logging is configured in the Firewall
-	//   LoggingConfiguration . You can use this action to test a rule that you intend
-	//   to use to drop traffic. You can enable the rule with ALERT action, verify in
-	//   the logs that the rule is filtering as you want, then change the action to
-	//   DROP .
+	//   - ALERT - Sends an alert log message, if alert logging is configured in the
+	//   Firewall LoggingConfiguration . You can use this action to test a rule that
+	//   you intend to use to drop traffic. You can enable the rule with ALERT action,
+	//   verify in the logs that the rule is filtering as you want, then change the
+	//   action to DROP .
 	//
 	// This member is required.
 	Action StatefulAction

@@ -676,6 +676,24 @@ func (ColumnDataRole) Values() []ColumnDataRole {
 	}
 }
 
+type ColumnDataSubType string
+
+// Enum values for ColumnDataSubType
+const (
+	ColumnDataSubTypeFloat ColumnDataSubType = "FLOAT"
+	ColumnDataSubTypeFixed ColumnDataSubType = "FIXED"
+)
+
+// Values returns all known values for ColumnDataSubType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ColumnDataSubType) Values() []ColumnDataSubType {
+	return []ColumnDataSubType{
+		"FLOAT",
+		"FIXED",
+	}
+}
+
 type ColumnDataType string
 
 // Enum values for ColumnDataType
@@ -1268,6 +1286,34 @@ func (DateAggregationFunction) Values() []DateAggregationFunction {
 		"DISTINCT_COUNT",
 		"MIN",
 		"MAX",
+	}
+}
+
+type DayOfTheWeek string
+
+// Enum values for DayOfTheWeek
+const (
+	DayOfTheWeekSunday    DayOfTheWeek = "SUNDAY"
+	DayOfTheWeekMonday    DayOfTheWeek = "MONDAY"
+	DayOfTheWeekTuesday   DayOfTheWeek = "TUESDAY"
+	DayOfTheWeekWednesday DayOfTheWeek = "WEDNESDAY"
+	DayOfTheWeekThursday  DayOfTheWeek = "THURSDAY"
+	DayOfTheWeekFriday    DayOfTheWeek = "FRIDAY"
+	DayOfTheWeekSaturday  DayOfTheWeek = "SATURDAY"
+)
+
+// Values returns all known values for DayOfTheWeek. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DayOfTheWeek) Values() []DayOfTheWeek {
+	return []DayOfTheWeek{
+		"SUNDAY",
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
 	}
 }
 

@@ -104,6 +104,24 @@ func (GeneratedRulesType) Values() []GeneratedRulesType {
 	}
 }
 
+type IdentifiedType string
+
+// Enum values for IdentifiedType
+const (
+	IdentifiedTypeStatelessRuleForwardingAsymmetrically IdentifiedType = "STATELESS_RULE_FORWARDING_ASYMMETRICALLY"
+	IdentifiedTypeStatelessRuleContainsTcpFlags         IdentifiedType = "STATELESS_RULE_CONTAINS_TCP_FLAGS"
+)
+
+// Values returns all known values for IdentifiedType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IdentifiedType) Values() []IdentifiedType {
+	return []IdentifiedType{
+		"STATELESS_RULE_FORWARDING_ASYMMETRICALLY",
+		"STATELESS_RULE_CONTAINS_TCP_FLAGS",
+	}
+}
+
 type IPAddressType string
 
 // Enum values for IPAddressType

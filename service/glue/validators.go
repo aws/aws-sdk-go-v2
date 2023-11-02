@@ -4876,6 +4876,16 @@ func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
 			invalidParams.AddNested("SnowflakeTarget", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ConnectorDataSource != nil {
+		if err := validateConnectorDataSource(v.ConnectorDataSource); err != nil {
+			invalidParams.AddNested("ConnectorDataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConnectorDataTarget != nil {
+		if err := validateConnectorDataTarget(v.ConnectorDataTarget); err != nil {
+			invalidParams.AddNested("ConnectorDataTarget", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5115,6 +5125,53 @@ func validateConnectionPasswordEncryption(v *types.ConnectionPasswordEncryption)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConnectionPasswordEncryption"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorDataSource(v *types.ConnectorDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorDataSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ConnectionType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionType"))
+	}
+	if v.Data == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorDataTarget(v *types.ConnectorDataTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorDataTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ConnectionType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionType"))
+	}
+	if v.Data == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

@@ -1,0 +1,8 @@
+{
+    "id": "f2ff92f0-ef67-4dcf-a1d4-e9e8481fc8c4",
+    "type": "feature",
+    "description": "Got confirmed from qmeixua@ about custom week features, and tested locally with aws cli and java sdk that the subtypes are showing up.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

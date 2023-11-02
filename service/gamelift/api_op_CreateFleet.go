@@ -40,7 +40,13 @@ import (
 // them and closing them when you're finished. If successful, this operation
 // creates a new Fleet resource and places it in NEW status, which prompts Amazon
 // GameLift to initiate the fleet creation workflow (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-all.html#fleets-creation-workflow)
-// . Learn more Setting up fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// . You can track fleet creation by checking fleet status using
+// DescribeFleetAttributes and DescribeFleetLocationAttributes /, or by monitoring
+// fleet creation events using DescribeFleetEvents . When the fleet status changes
+// to ACTIVE , you can enable automatic scaling with PutScalingPolicy and set
+// capacity for the home Region with UpdateFleetCapacity . When the status of each
+// remote location reaches ACTIVE , you can set capacity by location using
+// UpdateFleetCapacity . Learn more Setting up fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // Debug fleet creation issues (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation)
 // Multi-location fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optFns ...func(*Options)) (*CreateFleetOutput, error) {
@@ -71,8 +77,8 @@ type CreateFleetInput struct {
 
 	// The unique identifier for a custom game server build to be deployed on fleet
 	// instances. You can use either the build ID or ARN. The build must be uploaded to
-	// Amazon GameLift and in READY status. This fleet property cannot be changed
-	// later.
+	// Amazon GameLift and in READY status. This fleet property can't be changed after
+	// the fleet is created.
 	BuildId *string
 
 	// Prompts Amazon GameLift to generate a TLS/SSL certificate for the fleet. Amazon
@@ -113,19 +119,28 @@ type CreateFleetInput struct {
 	// Indicates whether to use On-Demand or Spot instances for this fleet. By
 	// default, this property is set to ON_DEMAND . Learn more about when to use
 	// On-Demand versus Spot Instances (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot)
-	// . This property cannot be changed after the fleet is created.
+	// . This fleet property can't be changed after the fleet is created.
 	FleetType types.FleetType
 
-	// A unique identifier for an IAM role that manages access to your Amazon Web
-	// Services services. With an instance role ARN set, any application that runs on
-	// an instance in this fleet can assume the role, including install scripts, server
-	// processes, and daemons (background processes). Create a role or look up a role's
-	// ARN by using the IAM dashboard (https://console.aws.amazon.com/iam/) in the
-	// Amazon Web Services Management Console. Learn more about using on-box
-	// credentials for your game servers at Access external resources from a game
-	// server (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html)
-	// . This property cannot be changed after the fleet is created.
+	// A unique identifier for an IAM role with access permissions to other Amazon Web
+	// Services services. Any application that runs on an instance in the
+	// fleet--including install scripts, server processes, and other processes--can use
+	// these permissions to interact with Amazon Web Services resources that you own or
+	// have access to. For more information about using the role with your game server
+	// builds, see Communicate with other Amazon Web Services resources from your
+	// fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html)
+	// . This fleet property can't be changed after the fleet is created.
 	InstanceRoleArn *string
+
+	// Prompts Amazon GameLift to generate a shared credentials file for the IAM role
+	// defined in InstanceRoleArn . The shared credentials file is stored on each fleet
+	// instance and refreshed as needed. Use shared credentials for applications that
+	// are deployed along with the game server executable, if the game server is
+	// integrated with server SDK version 5.x. For more information about using shared
+	// credentials, see Communicate with other Amazon Web Services resources from your
+	// fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html)
+	// .
+	InstanceRoleCredentialsProvider types.InstanceRoleCredentialsProvider
 
 	// A set of remote locations to deploy additional instances to and manage as part
 	// of the fleet. This parameter can only be used when creating fleets in Amazon Web
@@ -188,7 +203,7 @@ type CreateFleetInput struct {
 	// The unique identifier for a Realtime configuration script to be deployed on
 	// fleet instances. You can use either the script ID or ARN. Scripts must be
 	// uploaded to Amazon GameLift prior to creating the fleet. This fleet property
-	// cannot be changed later.
+	// can't be changed after the fleet is created.
 	ScriptId *string
 
 	// This parameter is no longer used. Specify server launch parameters using the

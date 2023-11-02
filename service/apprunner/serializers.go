@@ -2364,6 +2364,11 @@ func awsAwsjson10_serializeDocumentNetworkConfiguration(v *types.NetworkConfigur
 		}
 	}
 
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("IpAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
 	return nil
 }
 

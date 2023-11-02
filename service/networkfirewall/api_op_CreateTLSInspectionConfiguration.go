@@ -17,17 +17,18 @@ import (
 )
 
 // Creates an Network Firewall TLS inspection configuration. A TLS inspection
-// configuration contains the Certificate Manager certificate associations that
-// Network Firewall uses to decrypt and re-encrypt traffic traveling through your
-// firewall. After you create a TLS inspection configuration, you can associate it
-// with a new firewall policy. To update the settings for a TLS inspection
-// configuration, use UpdateTLSInspectionConfiguration . To manage a TLS inspection
-// configuration's tags, use the standard Amazon Web Services resource tagging
-// operations, ListTagsForResource , TagResource , and UntagResource . To retrieve
-// information about TLS inspection configurations, use
-// ListTLSInspectionConfigurations and DescribeTLSInspectionConfiguration . For
-// more information about TLS inspection configurations, see Inspecting SSL/TLS
-// traffic with TLS inspection configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html)
+// configuration contains Certificate Manager certificate associations between and
+// the scope configurations that Network Firewall uses to decrypt and re-encrypt
+// traffic traveling through your firewall. After you create a TLS inspection
+// configuration, you can associate it with a new firewall policy. To update the
+// settings for a TLS inspection configuration, use
+// UpdateTLSInspectionConfiguration . To manage a TLS inspection configuration's
+// tags, use the standard Amazon Web Services resource tagging operations,
+// ListTagsForResource , TagResource , and UntagResource . To retrieve information
+// about TLS inspection configurations, use ListTLSInspectionConfigurations and
+// DescribeTLSInspectionConfiguration . For more information about TLS inspection
+// configurations, see Inspecting SSL/TLS traffic with TLS inspection
+// configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html)
 // in the Network Firewall Developer Guide.
 func (c *Client) CreateTLSInspectionConfiguration(ctx context.Context, params *CreateTLSInspectionConfigurationInput, optFns ...func(*Options)) (*CreateTLSInspectionConfigurationOutput, error) {
 	if params == nil {

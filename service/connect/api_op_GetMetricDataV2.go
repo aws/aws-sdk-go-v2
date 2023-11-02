@@ -169,20 +169,32 @@ type GetMetricDataV2Input struct {
 	// CONTACTS_TRANSFERRED_OUT_FROM_QUEUE Unit: Count Valid groupings and filters:
 	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy MAX_QUEUED_TIME Unit:
 	// Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-	// Agent Hierarchy SERVICE_LEVEL You can include up to 20 SERVICE_LEVEL metrics in
-	// a request. Unit: Percent Valid groupings and filters: Queue, Channel, Routing
-	// Profile Threshold: For ThresholdValue , enter any whole number from 1 to 604800
-	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
-	// SUM_CONTACTS_ANSWERED_IN_X Unit: Count Valid groupings and filters: Queue,
-	// Channel, Routing Profile Threshold: For ThresholdValue , enter any whole number
-	// from 1 to 604800 (inclusive), in seconds. For Comparison , you must enter LT
-	// (for "Less than"). SUM_CONTACTS_ABANDONED_IN_X Unit: Count Valid groupings and
+	// Agent Hierarchy PERCENT_NON_TALK_TIME This metric is available only for contacts
+	// analyzed by Contact Lens conversational analytics. Unit: Percentage Valid
+	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
+	// PERCENT_TALK_TIME This metric is available only for contacts analyzed by Contact
+	// Lens conversational analytics. Unit: Percentage Valid groupings and filters:
+	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy PERCENT_TALK_TIME_AGENT
+	// This metric is available only for contacts analyzed by Contact Lens
+	// conversational analytics. Unit: Percentage Valid groupings and filters: Queue,
+	// Channel, Routing Profile, Agent, Agent Hierarchy PERCENT_TALK_TIME_CUSTOMER This
+	// metric is available only for contacts analyzed by Contact Lens conversational
+	// analytics. Unit: Percentage Valid groupings and filters: Queue, Channel, Routing
+	// Profile, Agent, Agent Hierarchy SERVICE_LEVEL You can include up to 20
+	// SERVICE_LEVEL metrics in a request. Unit: Percent Valid groupings and filters:
+	// Queue, Channel, Routing Profile Threshold: For ThresholdValue , enter any whole
+	// number from 1 to 604800 (inclusive), in seconds. For Comparison , you must enter
+	// LT (for "Less than"). SUM_CONTACTS_ANSWERED_IN_X Unit: Count Valid groupings and
 	// filters: Queue, Channel, Routing Profile Threshold: For ThresholdValue , enter
 	// any whole number from 1 to 604800 (inclusive), in seconds. For Comparison , you
-	// must enter LT (for "Less than"). SUM_CONTACTS_DISCONNECTED Valid metric filter
-	// key: DISCONNECT_REASON Unit: Count Valid groupings and filters: Queue, Channel,
-	// Routing Profile SUM_RETRY_CALLBACK_ATTEMPTS Unit: Count Valid groupings and
-	// filters: Queue, Channel, Routing Profile
+	// must enter LT (for "Less than"). SUM_CONTACTS_ABANDONED_IN_X Unit: Count Valid
+	// groupings and filters: Queue, Channel, Routing Profile Threshold: For
+	// ThresholdValue , enter any whole number from 1 to 604800 (inclusive), in
+	// seconds. For Comparison , you must enter LT (for "Less than").
+	// SUM_CONTACTS_DISCONNECTED Valid metric filter key: DISCONNECT_REASON Unit:
+	// Count Valid groupings and filters: Queue, Channel, Routing Profile
+	// SUM_RETRY_CALLBACK_ATTEMPTS Unit: Count Valid groupings and filters: Queue,
+	// Channel, Routing Profile
 	//
 	// This member is required.
 	Metrics []types.MetricV2

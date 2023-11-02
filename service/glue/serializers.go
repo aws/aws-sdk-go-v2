@@ -12203,6 +12203,20 @@ func awsAwsjson11_serializeDocumentCodeGenConfigurationNode(v *types.CodeGenConf
 		}
 	}
 
+	if v.ConnectorDataSource != nil {
+		ok := object.Key("ConnectorDataSource")
+		if err := awsAwsjson11_serializeDocumentConnectorDataSource(v.ConnectorDataSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ConnectorDataTarget != nil {
+		ok := object.Key("ConnectorDataTarget")
+		if err := awsAwsjson11_serializeDocumentConnectorDataTarget(v.ConnectorDataTarget, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CustomCode != nil {
 		ok := object.Key("CustomCode")
 		if err := awsAwsjson11_serializeDocumentCustomCode(v.CustomCode, ok); err != nil {
@@ -12982,6 +12996,79 @@ func awsAwsjson11_serializeDocumentConnectionsList(v *types.ConnectionsList, val
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConnectorDataSource(v *types.ConnectorDataSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectionType != nil {
+		ok := object.Key("ConnectionType")
+		ok.String(*v.ConnectionType)
+	}
+
+	if v.Data != nil {
+		ok := object.Key("Data")
+		if err := awsAwsjson11_serializeDocumentConnectorOptions(v.Data, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.OutputSchemas != nil {
+		ok := object.Key("OutputSchemas")
+		if err := awsAwsjson11_serializeDocumentGlueSchemas(v.OutputSchemas, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConnectorDataTarget(v *types.ConnectorDataTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectionType != nil {
+		ok := object.Key("ConnectionType")
+		ok.String(*v.ConnectionType)
+	}
+
+	if v.Data != nil {
+		ok := object.Key("Data")
+		if err := awsAwsjson11_serializeDocumentConnectorOptions(v.Data, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Inputs != nil {
+		ok := object.Key("Inputs")
+		if err := awsAwsjson11_serializeDocumentOneInput(v.Inputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConnectorOptions(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 

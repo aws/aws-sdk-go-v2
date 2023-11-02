@@ -34,6 +34,11 @@ func (c *Client) DescribeRuleGroup(ctx context.Context, params *DescribeRuleGrou
 
 type DescribeRuleGroupInput struct {
 
+	// Indicates whether you want Network Firewall to analyze the stateless rules in
+	// the rule group for rule behavior such as asymmetric routing. If set to TRUE ,
+	// Network Firewall runs the analysis.
+	AnalyzeRuleGroup bool
+
 	// The Amazon Resource Name (ARN) of the rule group. You must specify the ARN or
 	// the name, and you can specify both.
 	RuleGroupArn *string

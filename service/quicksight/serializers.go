@@ -15096,6 +15096,13 @@ func awsRestjson1_serializeDocumentAnalysisDefinition(v *types.AnalysisDefinitio
 		}
 	}
 
+	if v.Options != nil {
+		ok := object.Key("Options")
+		if err := awsRestjson1_serializeDocumentAssetOptions(v.Options, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ParameterDeclarations != nil {
 		ok := object.Key("ParameterDeclarations")
 		if err := awsRestjson1_serializeDocumentParameterDeclarationList(v.ParameterDeclarations, ok); err != nil {
@@ -16160,6 +16167,23 @@ func awsRestjson1_serializeDocumentAssetBundleResourceArns(v []string, value smi
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetOptions(v *types.AssetOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Timezone != nil {
+		ok := object.Key("Timezone")
+		ok.String(*v.Timezone)
+	}
+
+	if len(v.WeekStart) > 0 {
+		ok := object.Key("WeekStart")
+		ok.String(string(v.WeekStart))
+	}
+
 	return nil
 }
 
@@ -17350,6 +17374,11 @@ func awsRestjson1_serializeDocumentCastColumnTypeOperation(v *types.CastColumnTy
 	if len(v.NewColumnType) > 0 {
 		ok := object.Key("NewColumnType")
 		ok.String(string(v.NewColumnType))
+	}
+
+	if len(v.SubType) > 0 {
+		ok := object.Key("SubType")
+		ok.String(string(v.SubType))
 	}
 
 	return nil
@@ -19275,6 +19304,13 @@ func awsRestjson1_serializeDocumentDashboardVersionDefinition(v *types.Dashboard
 	if v.FilterGroups != nil {
 		ok := object.Key("FilterGroups")
 		if err := awsRestjson1_serializeDocumentFilterGroupList(v.FilterGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Options != nil {
+		ok := object.Key("Options")
+		if err := awsRestjson1_serializeDocumentAssetOptions(v.Options, ok); err != nil {
 			return err
 		}
 	}
@@ -24554,6 +24590,11 @@ func awsRestjson1_serializeDocumentInputColumn(v *types.InputColumn, value smith
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.SubType) > 0 {
+		ok := object.Key("SubType")
+		ok.String(string(v.SubType))
 	}
 
 	if len(v.Type) > 0 {
@@ -32711,6 +32752,13 @@ func awsRestjson1_serializeDocumentTemplateVersionDefinition(v *types.TemplateVe
 	if v.FilterGroups != nil {
 		ok := object.Key("FilterGroups")
 		if err := awsRestjson1_serializeDocumentFilterGroupList(v.FilterGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Options != nil {
+		ok := object.Key("Options")
+		if err := awsRestjson1_serializeDocumentAssetOptions(v.Options, ok); err != nil {
 			return err
 		}
 	}

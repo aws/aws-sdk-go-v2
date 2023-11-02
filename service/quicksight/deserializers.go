@@ -33811,6 +33811,11 @@ func awsRestjson1_deserializeDocumentAnalysis(v **types.Analysis, value interfac
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "Options":
+			if err := awsRestjson1_deserializeDocumentAssetOptions(&sv.Options, value); err != nil {
+				return err
+			}
+
 		case "Sheets":
 			if err := awsRestjson1_deserializeDocumentSheetList(&sv.Sheets, value); err != nil {
 				return err
@@ -33923,6 +33928,11 @@ func awsRestjson1_deserializeDocumentAnalysisDefinition(v **types.AnalysisDefini
 
 		case "FilterGroups":
 			if err := awsRestjson1_deserializeDocumentFilterGroupList(&sv.FilterGroups, value); err != nil {
+				return err
+			}
+
+		case "Options":
+			if err := awsRestjson1_deserializeDocumentAssetOptions(&sv.Options, value); err != nil {
 				return err
 			}
 
@@ -36821,6 +36831,55 @@ func awsRestjson1_deserializeDocumentAssetBundleResourceArns(v *[]string, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAssetOptions(v **types.AssetOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetOptions
+	if *v == nil {
+		sv = &types.AssetOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Timezone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Timezone = ptr.String(jtv)
+			}
+
+		case "WeekStart":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DayOfTheWeek to be of type string, got %T instead", value)
+				}
+				sv.WeekStart = types.DayOfTheWeek(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAthenaParameters(v **types.AthenaParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -39232,6 +39291,15 @@ func awsRestjson1_deserializeDocumentCastColumnTypeOperation(v **types.CastColum
 					return fmt.Errorf("expected ColumnDataType to be of type string, got %T instead", value)
 				}
 				sv.NewColumnType = types.ColumnDataType(jtv)
+			}
+
+		case "SubType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColumnDataSubType to be of type string, got %T instead", value)
+				}
+				sv.SubType = types.ColumnDataSubType(jtv)
 			}
 
 		default:
@@ -43412,6 +43480,11 @@ func awsRestjson1_deserializeDocumentDashboardVersion(v **types.DashboardVersion
 				return err
 			}
 
+		case "Options":
+			if err := awsRestjson1_deserializeDocumentAssetOptions(&sv.Options, value); err != nil {
+				return err
+			}
+
 		case "Sheets":
 			if err := awsRestjson1_deserializeDocumentSheetList(&sv.Sheets, value); err != nil {
 				return err
@@ -43510,6 +43583,11 @@ func awsRestjson1_deserializeDocumentDashboardVersionDefinition(v **types.Dashbo
 
 		case "FilterGroups":
 			if err := awsRestjson1_deserializeDocumentFilterGroupList(&sv.FilterGroups, value); err != nil {
+				return err
+			}
+
+		case "Options":
+			if err := awsRestjson1_deserializeDocumentAssetOptions(&sv.Options, value); err != nil {
 				return err
 			}
 
@@ -55968,6 +56046,15 @@ func awsRestjson1_deserializeDocumentInputColumn(v **types.InputColumn, value in
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "SubType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColumnDataSubType to be of type string, got %T instead", value)
+				}
+				sv.SubType = types.ColumnDataSubType(jtv)
+			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -61276,6 +61363,15 @@ func awsRestjson1_deserializeDocumentOutputColumn(v **types.OutputColumn, value 
 					return fmt.Errorf("expected ColumnName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "SubType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColumnDataSubType to be of type string, got %T instead", value)
+				}
+				sv.SubType = types.ColumnDataSubType(jtv)
 			}
 
 		case "Type":
@@ -74712,6 +74808,11 @@ func awsRestjson1_deserializeDocumentTemplateVersion(v **types.TemplateVersion, 
 				return err
 			}
 
+		case "Options":
+			if err := awsRestjson1_deserializeDocumentAssetOptions(&sv.Options, value); err != nil {
+				return err
+			}
+
 		case "Sheets":
 			if err := awsRestjson1_deserializeDocumentSheetList(&sv.Sheets, value); err != nil {
 				return err
@@ -74810,6 +74911,11 @@ func awsRestjson1_deserializeDocumentTemplateVersionDefinition(v **types.Templat
 
 		case "FilterGroups":
 			if err := awsRestjson1_deserializeDocumentFilterGroupList(&sv.FilterGroups, value); err != nil {
+				return err
+			}
+
+		case "Options":
+			if err := awsRestjson1_deserializeDocumentAssetOptions(&sv.Options, value); err != nil {
 				return err
 			}
 

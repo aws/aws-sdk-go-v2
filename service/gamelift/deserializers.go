@@ -9128,6 +9128,9 @@ func awsAwsjson11_deserializeOpErrorRegisterCompute(response *smithyhttp.Respons
 	case strings.EqualFold("InvalidRequestException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidRequestException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("UnauthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorUnauthorizedException(response, errorBody)
 
@@ -14366,6 +14369,15 @@ func awsAwsjson11_deserializeDocumentFleetAttributes(v **types.FleetAttributes, 
 				sv.InstanceRoleArn = ptr.String(jtv)
 			}
 
+		case "InstanceRoleCredentialsProvider":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceRoleCredentialsProvider to be of type string, got %T instead", value)
+				}
+				sv.InstanceRoleCredentialsProvider = types.InstanceRoleCredentialsProvider(jtv)
+			}
+
 		case "InstanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16905,7 +16917,7 @@ func awsAwsjson11_deserializeDocumentIpPermission(v **types.IpPermission, value 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonBlankString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected IpRange to be of type string, got %T instead", value)
 				}
 				sv.IpRange = ptr.String(jtv)
 			}
@@ -17367,7 +17379,7 @@ func awsAwsjson11_deserializeDocumentMatchedPlayerSession(v **types.MatchedPlaye
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonZeroAndMaxString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PlayerId to be of type string, got %T instead", value)
 				}
 				sv.PlayerId = ptr.String(jtv)
 			}
@@ -18077,7 +18089,7 @@ func awsAwsjson11_deserializeDocumentPlacedPlayerSession(v **types.PlacedPlayerS
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonZeroAndMaxString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PlayerId to be of type string, got %T instead", value)
 				}
 				sv.PlayerId = ptr.String(jtv)
 			}
@@ -18170,7 +18182,7 @@ func awsAwsjson11_deserializeDocumentPlayer(v **types.Player, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonZeroAndMaxString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PlayerId to be of type string, got %T instead", value)
 				}
 				sv.PlayerId = ptr.String(jtv)
 			}
@@ -18385,7 +18397,7 @@ func awsAwsjson11_deserializeDocumentPlayerLatency(v **types.PlayerLatency, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonZeroAndMaxString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PlayerId to be of type string, got %T instead", value)
 				}
 				sv.PlayerId = ptr.String(jtv)
 			}
@@ -18663,7 +18675,7 @@ func awsAwsjson11_deserializeDocumentPlayerSession(v **types.PlayerSession, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonZeroAndMaxString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PlayerId to be of type string, got %T instead", value)
 				}
 				sv.PlayerId = ptr.String(jtv)
 			}

@@ -1,0 +1,8 @@
+{
+    "id": "5a4fd9e5-af6a-4c81-a53a-b3166fd34213",
+    "type": "feature",
+    "description": "This release introduces the stateless rule analyzer, which enables you to analyze your stateless rules for asymmetric routing.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

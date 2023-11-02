@@ -51,6 +51,13 @@ type UpdateRuleGroupInput struct {
 	// This member is required.
 	UpdateToken *string
 
+	// Indicates whether you want Network Firewall to analyze the stateless rules in
+	// the rule group for rule behavior such as asymmetric routing. If set to TRUE ,
+	// Network Firewall runs the analysis and then updates the rule group for you. To
+	// run the stateless rule group analyzer without updating the rule group, set
+	// DryRun to TRUE .
+	AnalyzeRuleGroup bool
+
 	// A description of the rule group.
 	Description *string
 

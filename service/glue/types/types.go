@@ -841,6 +841,12 @@ type CodeGenConfigurationNode struct {
 	// Specifies a target that uses a Glue Data Catalog table.
 	CatalogTarget *BasicCatalogTarget
 
+	// Specifies a source generated with standard connection options.
+	ConnectorDataSource *ConnectorDataSource
+
+	// Specifies a target generated with standard connection options.
+	ConnectorDataTarget *ConnectorDataTarget
+
 	// Specifies a transform that uses custom code you provide to perform the data
 	// transformation. The output is a collection of DynamicFrames.
 	CustomCode *CustomCode
@@ -1525,6 +1531,64 @@ type ConnectionsList struct {
 
 	// A list of connections used by the job.
 	Connections []string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a source generated with standard connection options.
+type ConnectorDataSource struct {
+
+	// The connectionType , as provided to the underlying Glue library. This node type
+	// supports the following connection types:
+	//   - bigquery
+	//
+	// This member is required.
+	ConnectionType *string
+
+	// A map specifying connection options for the node. You can find standard
+	// connection options for the corresponding connection type in the Connection
+	// parameters (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-connect.html)
+	// section of the Glue documentation.
+	//
+	// This member is required.
+	Data map[string]string
+
+	// The name of this source node.
+	//
+	// This member is required.
+	Name *string
+
+	// Specifies the data schema for this source.
+	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a target generated with standard connection options.
+type ConnectorDataTarget struct {
+
+	// The connectionType , as provided to the underlying Glue library. This node type
+	// supports the following connection types:
+	//   - bigquery
+	//
+	// This member is required.
+	ConnectionType *string
+
+	// A map specifying connection options for the node. You can find standard
+	// connection options for the corresponding connection type in the Connection
+	// parameters (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-connect.html)
+	// section of the Glue documentation.
+	//
+	// This member is required.
+	Data map[string]string
+
+	// The name of this target node.
+	//
+	// This member is required.
+	Name *string
+
+	// The nodes that are inputs to the data target.
+	Inputs []string
 
 	noSmithyDocumentSerde
 }

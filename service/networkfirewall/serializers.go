@@ -3400,6 +3400,11 @@ func awsAwsjson10_serializeOpDocumentCreateRuleGroupInput(v *CreateRuleGroupInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.AnalyzeRuleGroup {
+		ok := object.Key("AnalyzeRuleGroup")
+		ok.Boolean(v.AnalyzeRuleGroup)
+	}
+
 	if v.Capacity != nil {
 		ok := object.Key("Capacity")
 		ok.Integer(*v.Capacity)
@@ -3650,6 +3655,11 @@ func awsAwsjson10_serializeOpDocumentDescribeResourcePolicyInput(v *DescribeReso
 func awsAwsjson10_serializeOpDocumentDescribeRuleGroupInput(v *DescribeRuleGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AnalyzeRuleGroup {
+		ok := object.Key("AnalyzeRuleGroup")
+		ok.Boolean(v.AnalyzeRuleGroup)
+	}
 
 	if v.RuleGroupArn != nil {
 		ok := object.Key("RuleGroupArn")
@@ -4087,6 +4097,11 @@ func awsAwsjson10_serializeOpDocumentUpdateLoggingConfigurationInput(v *UpdateLo
 func awsAwsjson10_serializeOpDocumentUpdateRuleGroupInput(v *UpdateRuleGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AnalyzeRuleGroup {
+		ok := object.Key("AnalyzeRuleGroup")
+		ok.Boolean(v.AnalyzeRuleGroup)
+	}
 
 	if v.Description != nil {
 		ok := object.Key("Description")
