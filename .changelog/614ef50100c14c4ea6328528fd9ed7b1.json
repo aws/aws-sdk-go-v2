@@ -1,0 +1,8 @@
+{
+    "id": "614ef501-00c1-4c4e-a632-8528fd9ed7b1",
+    "type": "feature",
+    "description": "Amazon Connect Chat introduces Create Persistent Contact Association API, allowing customers to choose when to resume previous conversations from previous chats, eliminating the need to repeat themselves and allowing agents to provide personalized service with access to entire conversation history.",
+    "modules": [
+        "service/connect"
+    ]
+}

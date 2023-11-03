@@ -19628,6 +19628,15 @@ func awsRestjson1_deserializeDocumentOtaaV1_0_x(v **types.OtaaV1_0_x, value inte
 				sv.GenAppKey = ptr.String(jtv)
 			}
 
+		case "JoinEui":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JoinEui to be of type string, got %T instead", value)
+				}
+				sv.JoinEui = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

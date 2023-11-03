@@ -10158,6 +10158,11 @@ func awsRestjson1_serializeDocumentOtaaV1_0_x(v *types.OtaaV1_0_x, value smithyj
 		ok.String(*v.GenAppKey)
 	}
 
+	if v.JoinEui != nil {
+		ok := object.Key("JoinEui")
+		ok.String(*v.JoinEui)
+	}
+
 	return nil
 }
 

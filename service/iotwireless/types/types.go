@@ -713,7 +713,7 @@ type LoRaWANDeviceProfile struct {
 	// profile.
 	MacVersion *string
 
-	// The MaxDutyCycle value.
+	// The MaxDutyCycle value. It ranges from 0 to 15.
 	MaxDutyCycle *int32
 
 	// The MaxEIRP value.
@@ -1270,6 +1270,9 @@ type OtaaV1_0_x struct {
 	// The GenAppKey value.
 	GenAppKey *string
 
+	// The JoinEUI value.
+	JoinEui *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1790,7 +1793,7 @@ type TdscdmaObj struct {
 	noSmithyDocumentSerde
 }
 
-// Trace content for your wireless gateway and wireless device resources.
+// Trace content for your wireless devices, gateways, and multicast groups.
 type TraceContent struct {
 
 	// The log level for a log message. The log levels can be disabled, or set to ERROR
@@ -1799,8 +1802,8 @@ type TraceContent struct {
 	LogLevel LogLevel
 
 	// FrameInfo of your multicast group resources for the trace content. Use
-	// FrameInfo to debug the multicast communication between your LoRaWAN end devices
-	// and the network server.
+	// FrameInfo to debug the multicast communication between your multicast groups and
+	// the network server.
 	MulticastFrameInfo MulticastFrameInfo
 
 	// FrameInfo of your wireless device resources for the trace content. Use

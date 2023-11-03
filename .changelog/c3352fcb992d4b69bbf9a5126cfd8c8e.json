@@ -1,0 +1,8 @@
+{
+    "id": "c3352fcb-992d-4b69-bbf9-a5126cfd8c8e",
+    "type": "feature",
+    "description": "AWS Launch Wizard is a service that helps reduce the time it takes to deploy applications to the cloud while providing a guided deployment experience.",
+    "modules": [
+        "service/launchwizard"
+    ]
+}

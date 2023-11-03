@@ -47,10 +47,10 @@ type UpdateNetworkAnalyzerConfigurationInput struct {
 	MulticastGroupsToAdd []string
 
 	// Multicast group resources to remove from the network analyzer configuration.
-	// Provide the MulticastGroupId of the resource to remove in the input array.
+	// Provide the MulticastGroupId of the resources to remove in the input array.
 	MulticastGroupsToRemove []string
 
-	// Trace content for your wireless gateway and wireless device resources.
+	// Trace content for your wireless devices, gateways, and multicast groups.
 	TraceContent *types.TraceContent
 
 	// Wireless device resources to add to the network analyzer configuration. Provide

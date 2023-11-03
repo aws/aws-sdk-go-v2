@@ -56,7 +56,7 @@ type CreateNetworkAnalyzerConfigurationInput struct {
 	// to manage a resource.
 	Tags []types.Tag
 
-	// Trace content for your wireless gateway and wireless device resources.
+	// Trace content for your wireless devices, gateways, and multicast groups.
 	TraceContent *types.TraceContent
 
 	// Wireless device resources to add to the network analyzer configuration. Provide

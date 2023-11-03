@@ -1030,6 +1030,23 @@ const (
 	ResourceTypeCodeGuruProfilerProfilingGroup                       ResourceType = "AWS::CodeGuruProfiler::ProfilingGroup"
 	ResourceTypeRoute53ResolverResolverQueryLoggingConfig            ResourceType = "AWS::Route53Resolver::ResolverQueryLoggingConfig"
 	ResourceTypeBatchSchedulingPolicy                                ResourceType = "AWS::Batch::SchedulingPolicy"
+	ResourceTypeACMPCACertificateAuthorityActivation                 ResourceType = "AWS::ACMPCA::CertificateAuthorityActivation"
+	ResourceTypeAppMeshGatewayRoute                                  ResourceType = "AWS::AppMesh::GatewayRoute"
+	ResourceTypeAppMeshMesh                                          ResourceType = "AWS::AppMesh::Mesh"
+	ResourceTypeConnectInstance                                      ResourceType = "AWS::Connect::Instance"
+	ResourceTypeConnectQuickConnect                                  ResourceType = "AWS::Connect::QuickConnect"
+	ResourceTypeEC2CarrierGateway                                    ResourceType = "AWS::EC2::CarrierGateway"
+	ResourceTypeEC2IPAMPool                                          ResourceType = "AWS::EC2::IPAMPool"
+	ResourceTypeEC2TransitGatewayConnect                             ResourceType = "AWS::EC2::TransitGatewayConnect"
+	ResourceTypeEC2TransitGatewayMulticastDomain                     ResourceType = "AWS::EC2::TransitGatewayMulticastDomain"
+	ResourceTypeECSCapacityProvider                                  ResourceType = "AWS::ECS::CapacityProvider"
+	ResourceTypeIAMInstanceProfile                                   ResourceType = "AWS::IAM::InstanceProfile"
+	ResourceTypeIoTCACertificate                                     ResourceType = "AWS::IoT::CACertificate"
+	ResourceTypeIoTTwinMakerSyncJob                                  ResourceType = "AWS::IoTTwinMaker::SyncJob"
+	ResourceTypeKafkaConnectConnector                                ResourceType = "AWS::KafkaConnect::Connector"
+	ResourceTypeLambdaCodeSigningConfig                              ResourceType = "AWS::Lambda::CodeSigningConfig"
+	ResourceTypeNetworkManagerConnectPeer                            ResourceType = "AWS::NetworkManager::ConnectPeer"
+	ResourceTypeResourceExplorer2Index                               ResourceType = "AWS::ResourceExplorer2::Index"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -1409,6 +1426,23 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::CodeGuruProfiler::ProfilingGroup",
 		"AWS::Route53Resolver::ResolverQueryLoggingConfig",
 		"AWS::Batch::SchedulingPolicy",
+		"AWS::ACMPCA::CertificateAuthorityActivation",
+		"AWS::AppMesh::GatewayRoute",
+		"AWS::AppMesh::Mesh",
+		"AWS::Connect::Instance",
+		"AWS::Connect::QuickConnect",
+		"AWS::EC2::CarrierGateway",
+		"AWS::EC2::IPAMPool",
+		"AWS::EC2::TransitGatewayConnect",
+		"AWS::EC2::TransitGatewayMulticastDomain",
+		"AWS::ECS::CapacityProvider",
+		"AWS::IAM::InstanceProfile",
+		"AWS::IoT::CACertificate",
+		"AWS::IoTTwinMaker::SyncJob",
+		"AWS::KafkaConnect::Connector",
+		"AWS::Lambda::CodeSigningConfig",
+		"AWS::NetworkManager::ConnectPeer",
+		"AWS::ResourceExplorer2::Index",
 	}
 }
 

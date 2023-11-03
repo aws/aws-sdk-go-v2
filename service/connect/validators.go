@@ -450,6 +450,26 @@ func (m *validateOpCreateParticipant) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePersistentContactAssociation struct {
+}
+
+func (*validateOpCreatePersistentContactAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePersistentContactAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePersistentContactAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePersistentContactAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreatePrompt struct {
 }
 
@@ -4258,6 +4278,10 @@ func addOpCreateParticipantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateParticipant{}, middleware.After)
 }
 
+func addOpCreatePersistentContactAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePersistentContactAssociation{}, middleware.After)
+}
+
 func addOpCreatePromptValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePrompt{}, middleware.After)
 }
@@ -6740,6 +6764,30 @@ func validateOpCreateParticipantInput(v *CreateParticipantInput) error {
 	}
 	if v.ParticipantDetails == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParticipantDetails"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePersistentContactAssociationInput(v *CreatePersistentContactAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePersistentContactAssociationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.InitialContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InitialContactId"))
+	}
+	if len(v.RehydrationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RehydrationType"))
+	}
+	if v.SourceContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceContactId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

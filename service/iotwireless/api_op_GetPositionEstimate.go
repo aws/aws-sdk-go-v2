@@ -66,8 +66,12 @@ type GetPositionEstimateInput struct {
 type GetPositionEstimateOutput struct {
 
 	// The position information of the resource, displayed as a JSON payload. The
-	// payload uses the GeoJSON format, which a format that's used to encode geographic
-	// data structures. For more information, see GeoJSON (https://geojson.org/) .
+	// payload is of type blob and uses the GeoJSON (https://geojson.org/) format,
+	// which a format that's used to encode geographic data structures. A sample
+	// payload contains the timestamp information, the WGS84 coordinates of the
+	// location, and the accuracy and confidence level. For more information and
+	// examples, see Resolve device location (console) (https://docs.aws.amazon.com/iot/latest/developerguide/location-resolve-console.html)
+	// .
 	GeoJsonPayload []byte
 
 	// Metadata pertaining to the operation's result.
