@@ -690,6 +690,9 @@
                     "target": "com.amazonaws.connect#CreateParticipant"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreatePersistentContactAssociation"
+                },
+                {
                     "target": "com.amazonaws.connect#CreatePrompt"
                 },
                 {
@@ -2066,6 +2069,17 @@
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
                             }
+                        },
+                        {
+                            "documentation": "Partition doesn't support DualStack",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
                         }
                     ],
                     "version": "1.0"
@@ -2106,7 +2120,7 @@
                 "ApplicationPermissions": {
                     "target": "com.amazonaws.connect#ApplicationPermissions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The permissions that the agent is granted on the application. Only the <code>ACCESS</code> permission is supported.</p>"
+                        "smithy.api#documentation": "<p>The permissions that the agent is granted on the application. Only the <code>ACCESS</code>\n   permission is supported.</p>"
                     }
                 }
             },
@@ -5082,6 +5096,101 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#CreatePersistentContactAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreatePersistentContactAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreatePersistentContactAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables rehydration of chats for the lifespan of a contact. For more information about chat rehydration, see \n   <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html\">Enable persistent chat</a> in the \n   <i>Amazon Connect Administrator Guide</i>.\n  </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/contact/persistent-contact-association/{InstanceId}/{InitialContactId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreatePersistentContactAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InitialContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the contactId of the current contact that the\n    <code>CreatePersistentContactAssociation</code> API is being called from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RehydrationType": {
+                    "target": "com.amazonaws.connect#RehydrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contactId chosen for rehydration depends on the type chosen.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENTIRE_PAST_SESSION</code>: Rehydrates a chat from the most recently terminated past chat\n     contact of the specified past ended chat session. To use this type, provide the\n      <code>initialContactId</code> of the past ended chat session in the <code>sourceContactId</code> field. In\n     this type, Amazon Connect determines what the most recent chat contact on the past ended\n     chat session and uses it to start a persistent chat. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FROM_SEGMENT</code>: Rehydrates a chat from the specified past chat contact provided in the\n      <code>sourceContactId</code> field. </p>\n            </li>\n         </ul>\n         <p>The actual contactId used for rehydration is provided in the response of this API.</p>\n         <p>To illustrate how to use rehydration type, consider the following example: A customer starts\n   a chat session. Agent a1 accepts the chat and a conversation starts between the customer and\n   Agent a1. This first contact creates a contact ID <b>C1</b>. Agent a1\n   then transfers the chat to Agent a2. This creates another contact ID <b>C2</b>. At this point Agent a2 ends the chat. The customer is forwarded to the\n   disconnect flow for a post chat survey that creates another contact ID <b>C3</b>. After the chat survey, the chat session ends. Later, the customer returns and\n   wants to resume their past chat session. At this point, the customer can have following use\n   cases: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Use Case 1</b>: The customer wants to continue the past chat\n     session but they want to hide the post chat survey. For this they will use the following\n     configuration:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Configuration</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>SourceContactId = \"C2\"</p>\n                        </li>\n                        <li>\n                           <p>RehydrationType = \"FROM_SEGMENT\"</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Expected behavior</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>This starts a persistent chat session from the specified past ended contact (C2).\n         Transcripts of past chat sessions C2 and C1 are accessible in the current persistent chat\n         session. Note that chat segment C3 is dropped from the persistent chat session.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Use Case 2</b>: The customer wants to continue the past chat\n     session and see the transcript of the entire past engagement, including the post chat survey.\n     For this they will use the following configuration:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Configuration</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>SourceContactId = \"C1\"</p>\n                        </li>\n                        <li>\n                           <p>RehydrationType = \"ENTIRE_PAST_SESSION\"</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Expected behavior</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>This starts a persistent chat session from the most recently ended chat contact (C3).\n         Transcripts of past chat sessions C3, C2 and C1 are accessible in the current persistent\n         chat session.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contactId from which a persistent chat session must be started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CreatePersistentContactAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "ContinuedFromContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contactId from which a persistent chat session is started. This field is populated only\n   for persistent chat.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#CreatePrompt": {
             "type": "operation",
             "input": {
@@ -6363,7 +6472,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new view with the possible status of <code>SAVED</code> or <code>PUBLISHED</code>.</p>\n         <p>The views will have a unique name for each connect instance.</p>\n         <p>It performs basic content validation if the status is <code>SAVED</code> or full content validation if the status \n   is set to <code>PUBLISHED</code>. An error is returned if validation fails. It associates either \n   the <code>$SAVED</code> qualifier or both of the <code>$SAVED</code> and <code>$LATEST</code> qualifiers with the \n   provided view content based on the status. The view is idempotent if ClientToken is provided.</p>",
+                "smithy.api#documentation": "<p>Creates a new view with the possible status of <code>SAVED</code> or\n   <code>PUBLISHED</code>.</p>\n         <p>The views will have a unique name for each connect instance.</p>\n         <p>It performs basic content validation if the status is <code>SAVED</code> or full content\n   validation if the status is set to <code>PUBLISHED</code>. An error is returned if validation\n   fails. It associates either the <code>$SAVED</code> qualifier or both of the <code>$SAVED</code>\n   and <code>$LATEST</code> qualifiers with the provided view content based on the status. The view\n   is idempotent if ClientToken is provided.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/views/{InstanceId}",
@@ -6378,7 +6487,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of \n   the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6386,20 +6495,20 @@
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ViewsClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique Id for each create view request to avoid duplicate view creation. For example, the view \n   is idempotent ClientToken is provided.</p>"
+                        "smithy.api#documentation": "<p>A unique Id for each create view request to avoid duplicate view creation. For example, the\n   view is idempotent ClientToken is provided.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.connect#ViewStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The \n   <code>PUBLISHED</code> status will initiate validation on the content.</p>",
+                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The\n    <code>PUBLISHED</code> status will initiate validation on the content.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Content": {
                     "target": "com.amazonaws.connect#ViewInputContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data.</p>\n         <p>The total uncompressed content has a maximum file size of 400kB.</p>",
+                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input\n   data.</p>\n         <p>The total uncompressed content has a maximum file size of 400kB.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6419,7 +6528,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags associated with the view resource (not specific to view version).These tags can be used \n   to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags associated with the view resource (not specific to view version).These tags can be\n   used to organize, track, or control access for this resource. For example, { \"tags\":\n   {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -6476,7 +6585,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Publishes a new version of the view identifier.</p>\n         <p>Versions are immutable and monotonically increasing.</p>\n         <p>It returns the highest version if there is no change in content compared to that version. An error \n   is displayed if the supplied ViewContentSha256 is different from the ViewContentSha256 of the \n   <code>$LATEST</code> alias.</p>",
+                "smithy.api#documentation": "<p>Publishes a new version of the view identifier.</p>\n         <p>Versions are immutable and monotonically increasing.</p>\n         <p>It returns the highest version if there is no change in content compared to that version. An\n   error is displayed if the supplied ViewContentSha256 is different from the ViewContentSha256 of\n   the <code>$LATEST</code> alias.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/views/{InstanceId}/{ViewId}/versions",
@@ -6491,7 +6600,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6499,7 +6608,7 @@
                 "ViewId": {
                     "target": "com.amazonaws.connect#ViewId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be\n   used.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8177,7 +8286,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the view entirely. It deletes the view and all associated qualifiers (versions and aliases).</p>",
+                "smithy.api#documentation": "<p>Deletes the view entirely. It deletes the view and all associated qualifiers (versions and\n   aliases).</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/views/{InstanceId}/{ViewId}",
@@ -8191,7 +8300,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8199,7 +8308,7 @@
                 "ViewId": {
                     "target": "com.amazonaws.connect#ViewId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be\n   used.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8262,7 +8371,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8270,7 +8379,7 @@
                 "ViewId": {
                     "target": "com.amazonaws.connect#ViewId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be\n   used.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9915,7 +10024,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the view for the specified Amazon Connect instance and view identifier.</p>\n         <p>The view identifier can be supplied as a ViewId or ARN.</p>\n         <p>\n            <code>$SAVED</code> needs to be supplied if a view is unpublished.</p>\n         <p>The view identifier can contain an optional qualifier, for example, <code><view-id>:$SAVED</code>, which \n   is either an actual version number or an Amazon Connect managed qualifier <code>$SAVED | $LATEST</code>. \n   If it is not supplied, then <code>$LATEST</code> is assumed for customer managed views and an error is \n   returned if there is no published content available. Version 1 is assumed for Amazon Web Services managed views.</p>",
+                "smithy.api#documentation": "<p>Retrieves the view for the specified Amazon Connect instance and view identifier.</p>\n         <p>The view identifier can be supplied as a ViewId or ARN.</p>\n         <p>\n            <code>$SAVED</code> needs to be supplied if a view is unpublished.</p>\n         <p>The view identifier can contain an optional qualifier, for example,\n    <code><view-id>:$SAVED</code>, which is either an actual version number or an Amazon Connect managed qualifier <code>$SAVED | $LATEST</code>. If it is not supplied, then\n    <code>$LATEST</code> is assumed for customer managed views and an error is returned if there is\n   no published content available. Version 1 is assumed for Amazon Web Services managed views.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/views/{InstanceId}/{ViewId}",
@@ -9929,7 +10038,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -14957,7 +15066,7 @@
                 "IntervalPeriod": {
                     "target": "com.amazonaws.connect#IntervalPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <code>IntervalPeriod</code>: An aggregated grouping applied to request metrics. Valid\n   <code>IntervalPeriod</code> values are: <code>FIFTEEN_MIN</code> | <code>THIRTY_MIN</code> |\n   <code>HOUR</code> | <code>DAY</code> | <code>WEEK</code> | <code>TOTAL</code>. </p>\n         <p>For example, if <code>IntervalPeriod</code> is selected <code>THIRTY_MIN</code>,\n   <code>StartTime</code> and <code>EndTime</code> differs by 1 day, then Amazon Connect\n   returns 48 results in the response. Each result is aggregated by the THIRTY_MIN period. By\n   default Amazon Connect aggregates results based on the <code>TOTAL</code> interval period. </p>\n         <p>The following list describes restrictions on <code>StartTime</code> and <code>EndTime</code>\n   based on what <code>IntervalPeriod</code> is requested. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>FIFTEEN_MIN</code>: The difference between <code>StartTime</code> and\n     <code>EndTime</code> must be less than 3 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THIRTY_MIN</code>: The difference between <code>StartTime</code> and\n     <code>EndTime</code> must be less than 3 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOUR</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 3 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DAY</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 35 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WEEK</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 35 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TOTAL</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 35 days.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            <code>IntervalPeriod</code>: An aggregated grouping applied to request metrics. Valid\n    <code>IntervalPeriod</code> values are: <code>FIFTEEN_MIN</code> | <code>THIRTY_MIN</code> |\n    <code>HOUR</code> | <code>DAY</code> | <code>WEEK</code> | <code>TOTAL</code>. </p>\n         <p>For example, if <code>IntervalPeriod</code> is selected <code>THIRTY_MIN</code>,\n    <code>StartTime</code> and <code>EndTime</code> differs by 1 day, then Amazon Connect\n   returns 48 results in the response. Each result is aggregated by the THIRTY_MIN period. By\n   default Amazon Connect aggregates results based on the <code>TOTAL</code> interval period. </p>\n         <p>The following list describes restrictions on <code>StartTime</code> and <code>EndTime</code>\n   based on what <code>IntervalPeriod</code> is requested. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>FIFTEEN_MIN</code>: The difference between <code>StartTime</code> and\n      <code>EndTime</code> must be less than 3 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THIRTY_MIN</code>: The difference between <code>StartTime</code> and\n      <code>EndTime</code> must be less than 3 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOUR</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 3 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DAY</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 35 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WEEK</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 35 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TOTAL</code>: The difference between <code>StartTime</code> and <code>EndTime</code>\n     must be less than 35 days.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -17071,7 +17180,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance that phone numbers are claimed to. You\n   can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the\n    instance ID</a> in the Amazon Resource Name (ARN) of the instance. If both <code>TargetArn</code> and <code>InstanceId</code> are not provided, this API lists numbers\n   claimed to all the Amazon Connect instances belonging to your account in the same AWS Region as\n   the request.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance that phone numbers are claimed to. You\n   can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the\n    instance ID</a> in the Amazon Resource Name (ARN) of the instance. If both <code>TargetArn</code> and <code>InstanceId</code> are not\n   provided, this API lists numbers claimed to all the Amazon Connect instances belonging to your\n   account in the same AWS Region as the request.</p>"
                     }
                 },
                 "MaxResults": {
@@ -18877,7 +18986,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns all the available versions for the specified Amazon Connect instance and view identifier.</p>\n         <p>Results will be sorted from highest to lowest.</p>",
+                "smithy.api#documentation": "<p>Returns all the available versions for the specified Amazon Connect instance and view\n   identifier.</p>\n         <p>Results will be sorted from highest to lowest.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/views/{InstanceId}/{ViewId}/versions",
@@ -18897,7 +19006,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -18905,7 +19014,7 @@
                 "ViewId": {
                     "target": "com.amazonaws.connect#ViewId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be\n   used.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -18913,7 +19022,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.connect#ViewsNextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to \n   retrieve the next set of results.</p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n   the next request to retrieve the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -18942,7 +19051,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.connect#ViewsNextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to \n   retrieve the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n   the next request to retrieve the next set of results.</p>"
                     }
                 }
             },
@@ -18999,7 +19108,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -19014,7 +19123,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.connect#ViewsNextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to \n   retrieve the next set of results.</p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n   the next request to retrieve the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -19043,7 +19152,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.connect#ViewsNextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to \n   retrieve the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n   the next request to retrieve the next set of results.</p>"
                     }
                 }
             },
@@ -19272,7 +19381,7 @@
                 "EndTime": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format. End time is based on the interval period selected.\n   For example, If <code>IntervalPeriod</code> is selected <code>THIRTY_MIN</code>,\n   <code>StartTime</code> and <code>EndTime</code> in the API request differs by 1 day, then 48\n   results are returned in the response. Each result is aggregated by the 30 minutes period, with\n   each <code>StartTime</code> and <code>EndTime</code> differing by 30 minutes. </p>"
+                        "smithy.api#documentation": "<p>The timestamp, in UNIX Epoch time format. End time is based on the interval period selected.\n   For example, If <code>IntervalPeriod</code> is selected <code>THIRTY_MIN</code>,\n    <code>StartTime</code> and <code>EndTime</code> in the API request differs by 1 day, then 48\n   results are returned in the response. Each result is aggregated by the 30 minutes period, with\n   each <code>StartTime</code> and <code>EndTime</code> differing by 30 minutes. </p>"
                     }
                 }
             },
@@ -22930,7 +23039,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Replicates an Amazon Connect instance in the specified Amazon Web Services Region \n   and copies configuration information for Amazon Connect resources across Amazon Web Services Regions. \n   </p>\n         <p>For more information about replicating an Amazon Connect instance, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html\">Create\n    a replica of your existing Amazon Connect instance</a> in the <i>Amazon Connect\n    Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Replicates an Amazon Connect instance in the specified Amazon Web Services Region and\n   copies configuration information for Amazon Connect resources across Amazon Web Services Regions. </p>\n         <p>For more information about replicating an Amazon Connect instance, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html\">Create\n    a replica of your existing Amazon Connect instance</a> in the <i>Amazon Connect\n    Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/instance/{InstanceId}/replicate",
@@ -23712,7 +23821,7 @@
                 "SendNotificationAction": {
                     "target": "com.amazonaws.connect#SendNotificationActionDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the send notification action.</p>\n         <p>Supported only for <code>TriggerEventSource</code> values:\n    <code>OnPostCallAnalysisAvailable</code> | <code>OnRealTimeCallAnalysisAvailable</code> |\n    <code>OnPostChatAnalysisAvailable</code> | <code>OnContactEvaluationSubmit</code> |\n   <code>OnMetricDataUpdate</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Information about the send notification action.</p>\n         <p>Supported only for <code>TriggerEventSource</code> values:\n    <code>OnPostCallAnalysisAvailable</code> | <code>OnRealTimeCallAnalysisAvailable</code> |\n    <code>OnPostChatAnalysisAvailable</code> | <code>OnContactEvaluationSubmit</code> |\n    <code>OnMetricDataUpdate</code>\n         </p>"
                     }
                 }
             },
@@ -26569,7 +26678,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>When a contact is being recorded, this API suspends recording whatever is selected in the\n   flow configuration: call, screen, or both. If only call recording or only screen recording is\n   enabled, then it would be suspended. For example, you might suspend the screen\n   recording while collecting sensitive information, such as a credit card number. Then use\n   ResumeContactRecording to restart recording the screen.</p>\n         <p>The period of time that the recording is suspended is filled with silence in the final\n   recording.</p>\n         <p>Voice and screen recordings are supported.</p>",
+                "smithy.api#documentation": "<p>When a contact is being recorded, this API suspends recording whatever is selected in the\n   flow configuration: call, screen, or both. If only call recording or only screen recording is\n   enabled, then it would be suspended. For example, you might suspend the screen recording while\n   collecting sensitive information, such as a credit card number. Then use ResumeContactRecording\n   to restart recording the screen.</p>\n         <p>The period of time that the recording is suspended is filled with silence in the final\n   recording.</p>\n         <p>Voice and screen recordings are supported.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/suspend-recording",
@@ -31054,7 +31163,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the view content of the given view identifier in the specified Amazon Connect instance.</p>\n         <p>It performs content validation if <code>Status</code> is set to <code>SAVED</code> and performs full content validation if \n   <code>Status</code> is <code>PUBLISHED</code>. Note that the <code>$SAVED</code> alias' content will always be updated, \n   but the <code>$LATEST</code> alias' content will only be updated if <code>Status</code> is <code>PUBLISHED</code>.</p>",
+                "smithy.api#documentation": "<p>Updates the view content of the given view identifier in the specified Amazon Connect\n   instance.</p>\n         <p>It performs content validation if <code>Status</code> is set to <code>SAVED</code> and\n   performs full content validation if <code>Status</code> is <code>PUBLISHED</code>. Note that the\n    <code>$SAVED</code> alias' content will always be updated, but the <code>$LATEST</code> alias'\n   content will only be updated if <code>Status</code> is <code>PUBLISHED</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/views/{InstanceId}/{ViewId}",
@@ -31068,7 +31177,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -31076,7 +31185,7 @@
                 "ViewId": {
                     "target": "com.amazonaws.connect#ViewId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be\n   used.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -31084,14 +31193,14 @@
                 "Status": {
                     "target": "com.amazonaws.connect#ViewStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The \n   <code>PUBLISHED</code> status will initiate validation on the content.</p>",
+                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The\n    <code>PUBLISHED</code> status will initiate validation on the content.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Content": {
                     "target": "com.amazonaws.connect#ViewInputContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data \n   and the runtime input schema, which is auto-generated by this operation.</p>\n         <p>The total uncompressed content has a maximum file size of 400kB.</p>",
+                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data\n   and the runtime input schema, which is auto-generated by this operation.</p>\n         <p>The total uncompressed content has a maximum file size of 400kB.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -31149,7 +31258,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the view metadata. Note that either <code>Name</code> or <code>Description</code> \n   must be provided.</p>",
+                "smithy.api#documentation": "<p>Updates the view metadata. Note that either <code>Name</code> or <code>Description</code>\n   must be provided.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/views/{InstanceId}/{ViewId}/metadata",
@@ -31163,7 +31272,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#ViewsInstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of\n   the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -31171,7 +31280,7 @@
                 "ViewId": {
                     "target": "com.amazonaws.connect#ViewId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be\n   used.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -31845,7 +31954,7 @@
                 "Status": {
                     "target": "com.amazonaws.connect#ViewStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The \n   <code>PUBLISHED</code> status will initiate validation on the content.</p>"
+                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The\n    <code>PUBLISHED</code> status will initiate validation on the content.</p>"
                     }
                 },
                 "Type": {
@@ -31876,7 +31985,7 @@
                 "Content": {
                     "target": "com.amazonaws.connect#ViewContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data.</p>"
+                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input\n   data.</p>"
                     }
                 },
                 "Tags": {
@@ -31894,7 +32003,7 @@
                 "LastModifiedTime": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Latest timestamp of the <code>UpdateViewContent</code> or <code>CreateViewVersion</code> operations.</p>"
+                        "smithy.api#documentation": "<p>Latest timestamp of the <code>UpdateViewContent</code> or <code>CreateViewVersion</code>\n   operations.</p>"
                     }
                 },
                 "ViewContentSha256": {
@@ -31948,7 +32057,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data.</p>"
+                "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input\n   data.</p>"
             }
         },
         "com.amazonaws.connect#ViewContentSha256": {
@@ -31998,7 +32107,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>View content containing all content necessary to render a view except \n   for runtime input data and the runtime input schema, which is auto-generated \n   by this operation.</p>"
+                "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data\n   and the runtime input schema, which is auto-generated by this operation.</p>"
             }
         },
         "com.amazonaws.connect#ViewInputSchema": {
@@ -32065,7 +32174,7 @@
                 "Status": {
                     "target": "com.amazonaws.connect#ViewStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The \n   <code>PUBLISHED</code> status will initiate validation on the content.</p>"
+                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The\n    <code>PUBLISHED</code> status will initiate validation on the content.</p>"
                     }
                 },
                 "Description": {

@@ -1,0 +1,2276 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.launchwizard#CreateDeployment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.launchwizard#CreateDeploymentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.launchwizard#CreateDeploymentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.launchwizard#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ResourceLimitException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a deployment for the given workload. Deployments created by this operation are\n         not available in the Launch Wizard console to use the <code>Clone deployment</code> action\n         on.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Deploy a given workload with given settings.",
+                        "input": {
+                            "workloadName": "SAP",
+                            "deploymentPatternName": "SapHanaSingle",
+                            "name": "SapHanaSingleForTest",
+                            "dryRun": false,
+                            "specifications": {
+                                "applicationName": "SapHanaSingleForTest",
+                                "deploymentScenario": "SapHanaSingle",
+                                "DisableDeploymentRollback": "true",
+                                "saveDeploymentArtifacts": "Yes",
+                                "saveArtifactsS3Uri": "s3://testbucket",
+                                "KeyName": "testLinuxInstance",
+                                "VPCID": "vpc-1234567",
+                                "environmentType": "production",
+                                "SAPTZ": "America/Vancouver",
+                                "Encryption": "Yes"
+                            }
+                        },
+                        "output": {
+                            "deploymentId": "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/createDeployment"
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#CreateDeploymentInput": {
+            "type": "structure",
+            "members": {
+                "workloadName": {
+                    "target": "com.amazonaws.launchwizard#WorkloadName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workload. You can use the <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html\">\n               <code>ListWorkloadDeploymentPatterns</code>\n            </a> operation to discover supported\n         values for this parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deploymentPatternName": {
+                    "target": "com.amazonaws.launchwizard#DeploymentPatternName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the deployment pattern supported by a given workload. You can use the <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html\">\n               <code>ListWorkloadDeploymentPatterns</code>\n            </a> operation to discover supported\n         values for this parameter. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.launchwizard#DeploymentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "specifications": {
+                    "target": "com.amazonaws.launchwizard#DeploymentSpecifications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings specified for the deployment. For more information on the specifications\n         required for creating a deployment, see <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications.html\">Workload specifications</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dryRun": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making\n         the request, and provides an error response. If you have the required permissions, the\n         error response is <code>DryRunOperation</code>. Otherwise, it is\n            <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.launchwizard#CreateDeploymentOutput": {
+            "type": "structure",
+            "members": {
+                "deploymentId": {
+                    "target": "com.amazonaws.launchwizard#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deployment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.launchwizard#DeleteDeployment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.launchwizard#DeleteDeploymentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.launchwizard#DeleteDeploymentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.launchwizard#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a deployment.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Delete a deployment.",
+                        "input": {
+                            "deploymentId": "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d"
+                        },
+                        "output": {
+                            "status": "DELETED",
+                            "statusReason": "Finished processing DeleteApp request"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/deleteDeployment"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.launchwizard#DeleteDeploymentInput": {
+            "type": "structure",
+            "members": {
+                "deploymentId": {
+                    "target": "com.amazonaws.launchwizard#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.launchwizard#DeleteDeploymentOutput": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.launchwizard#DeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the deployment.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the deployment status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.launchwizard#Deployment": {
+            "type": "resource",
+            "identifiers": {
+                "deploymentId": {
+                    "target": "com.amazonaws.launchwizard#DeploymentId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.launchwizard#CreateDeployment"
+            },
+            "read": {
+                "target": "com.amazonaws.launchwizard#GetDeployment"
+            },
+            "delete": {
+                "target": "com.amazonaws.launchwizard#DeleteDeployment"
+            },
+            "list": {
+                "target": "com.amazonaws.launchwizard#ListDeployments"
+            },
+            "resources": [
+                {
+                    "target": "com.amazonaws.launchwizard#DeploymentEvent"
+                }
+            ]
+        },
+        "com.amazonaws.launchwizard#DeploymentData": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the deployment.</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.launchwizard#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deployment.</p>"
+                    }
+                },
+                "workloadName": {
+                    "target": "com.amazonaws.launchwizard#WorkloadName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workload.</p>"
+                    }
+                },
+                "patternName": {
+                    "target": "com.amazonaws.launchwizard#DeploymentPatternName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern name of the deployment.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.launchwizard#DeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the deployment.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the deployment was created.</p>"
+                    }
+                },
+                "specifications": {
+                    "target": "com.amazonaws.launchwizard#DeploymentSpecifications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specifications of the deployment. For more information on specifications for each\n         deployment, see <a href=\"https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications.html\">Workload specifications</a>.</p>"
+                    }
+                },
+                "resourceGroup": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource group of the deployment.</p>"
+                    }
+                },
+                "deletedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the deployment was deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data associated with a deployment.</p>"
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentDataSummary": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the deployment</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.launchwizard#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deployment.</p>"
+                    }
+                },
+                "workloadName": {
+                    "target": "com.amazonaws.launchwizard#WorkloadName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workload.</p>"
+                    }
+                },
+                "patternName": {
+                    "target": "com.amazonaws.launchwizard#DeploymentPatternName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workload deployment pattern.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.launchwizard#DeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the deployment.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the deployment was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the deployment data.</p>"
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentDataSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.launchwizard#DeploymentDataSummary"
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentEvent": {
+            "type": "resource",
+            "identifiers": {
+                "deploymentId": {
+                    "target": "com.amazonaws.launchwizard#DeploymentId"
+                },
+                "eventId": {
+                    "target": "com.amazonaws.launchwizard#EventId"
+                }
+            },
+            "list": {
+                "target": "com.amazonaws.launchwizard#ListDeploymentEvents"
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentEventDataSummary": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the deployment event.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the deployment event.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.launchwizard#EventStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the deployment event.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason of the deployment event status.</p>"
+                    }
+                },
+                "timestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the deployment event.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the deployment event data.</p>"
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentEventDataSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.launchwizard#DeploymentEventDataSummary"
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.launchwizard#DeploymentFilterKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter. Filter names are case-sensitive.</p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.launchwizard#DeploymentFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter values. Filter values are case-sensitive. If you specify multiple values for\n         a filter, the values are joined with an <code>OR</code>, and the request returns all\n         results that match any of the specified values.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter name and value pair that is used to return more specific results from a\n         describe operation. Filters can be used to match a set of resources by specific\n         criteria.</p>"
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentFilterKey": {
+            "type": "enum",
+            "members": {
+                "WORKLOAD_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORKLOAD_NAME"
+                    }
+                },
+                "DEPLOYMENT_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPLOYMENT_STATUS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.launchwizard#DeploymentFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 100
+                    }
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_\\s\\.-]+$"
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentPatternName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentSpecifications": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.launchwizard#KeyString"
+            },
+            "value": {
+                "target": "com.amazonaws.launchwizard#ValueString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentStatus": {
+            "type": "enum",
+            "members": {
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
+                    }
+                },
+                "DELETE_INITIATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_INITIATING"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "VALIDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#EventId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#EventStatus": {
+            "type": "enum",
+            "members": {
+                "CANCELED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELED"
+                    }
+                },
+                "CANCELING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELING"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "TIMED_OUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMED_OUT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#GetDeployment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.launchwizard#GetDeploymentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.launchwizard#GetDeploymentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.launchwizard#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the deployment.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get details about a given deployment.",
+                        "input": {
+                            "deploymentId": "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d"
+                        },
+                        "output": {
+                            "deployment": {
+                                "name": "SapHanaSingleForTest",
+                                "id": "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d",
+                                "workloadName": "SapHanaSingle",
+                                "status": "FAILED",
+                                "createdAt": "2023-04-24T13:10:09.857Z",
+                                "specifications": {
+                                    "applicationName": "SapHanaSingleForTest",
+                                    "deploymentScenario": "SapHanaSingle",
+                                    "DisableDeploymentRollback": "true",
+                                    "saveDeploymentArtifacts": "Yes",
+                                    "saveArtifactsS3Uri": "s3://testbucket",
+                                    "KeyName": "testLinuxInstance",
+                                    "VPCID": "vpc-1234567",
+                                    "environmentType": "production",
+                                    "SAPTZ": "America/Vancouver",
+                                    "Encryption": "Yes"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/getDeployment"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.launchwizard#GetDeploymentInput": {
+            "type": "structure",
+            "members": {
+                "deploymentId": {
+                    "target": "com.amazonaws.launchwizard#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.launchwizard#GetDeploymentOutput": {
+            "type": "structure",
+            "members": {
+                "deployment": {
+                    "target": "com.amazonaws.launchwizard#DeploymentData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that details the deployment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.launchwizard#GetWorkload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.launchwizard#GetWorkloadInput"
+            },
+            "output": {
+                "target": "com.amazonaws.launchwizard#GetWorkloadOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.launchwizard#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a workload.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get details about a specific workload.",
+                        "input": {
+                            "workloadName": "SAP"
+                        },
+                        "output": {
+                            "workload": {
+                                "workloadName": "SAP",
+                                "displayName": "SAP",
+                                "description": "Workload Description",
+                                "documentationUrl": "https://docs.aws.amazon.com/launchwizard/latest/userguide/launch-wizard-sap.html",
+                                "iconUrl": "https://aws-lw-workload-assets-test-us-east-1.s3.amazonaws.com/amazon/SAP/icon.png?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAUaCXVzLWVhc3QtMSJHMEUCIC4l3GCH4o%2Bgq3pJzcD1YJmtrmyNCoEgG2RIayjDWf9kAiEAnMK5nYixaZLuF1s1UVoNd7xIbDrOQ8EAbhcZWexMp9cq7wIIrf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAEGgw1ODI1NTgxMjEyMDYiDHxMN%2BZ8CoPORzvo4yrDAtkVZlBVxLwnFmwHw005vo13LOUUbyajEpp3HNh%2BaBL8K2DLx7Kzi0UPPD6z8pL1eiFLHAQ9zZgVc7pLVQjBKOdcw1GmIADDepqYEb%2B8zLi7zwWP1JT72YbT6ZXSoWpb5NCqcyAvdK47b0Ae586s6VkWzoeJ65jR%2FgbJMhRpFpqVSP2XI6Rf6yA3%2BkQyUCk3RdyF4ljIL8Nf5nIFb%2BOMK2PZ8aJX85l1j7UpJE1rfNb1PitVcQz3KlW5xkiXfcWRKeVhgHRyuCEL3FY0DyPFdqe3NxcA0%2FzPgBq6Y9B41kM6af5u2kQRfQOjWejDpzpG7w40eaIKAYnhBkjIA9550geSLB7O%2FuAPQLI9fI2lVowIBUKsKVOr0%2FFGIzW3WM7%2BbEx%2FZ0mDkP1IhcpZdP7owC77K8O%2BXDgBCabAy48K3ndi%2BQKQMPXjz6YGOp4Bbgv9mVc3sE4KvXZv1skhnOYcOKGdCncIKLne0W%2BgO3URxyDQiyO2FhM3OekXDH83CNCyDVIpkgpWkvgXDSaZiD5mj0T9iqEeJzfh6uQvX1dRN%2BxI1eV0M7HKY2e7F%2BKNjeLhzKgKpSpDqFIUSjLeBlLLyQCNKuUiO3DMiy3rB89aX4b9wyC8au0SfGb72YyNLXjh6M1whcj1VNGePyw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230809T202649Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Credential=ASIAYPIZLPT3GGDNTHTI%2F20230809%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=6a37e41e47208b426a5e7d32392d0815388cd0231187652204836943c37ad86a",
+                                "status": "ACTIVE"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/getWorkload"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.launchwizard#GetWorkloadInput": {
+            "type": "structure",
+            "members": {
+                "workloadName": {
+                    "target": "com.amazonaws.launchwizard#WorkloadName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workload.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.launchwizard#GetWorkloadOutput": {
+            "type": "structure",
+            "members": {
+                "workload": {
+                    "target": "com.amazonaws.launchwizard#WorkloadData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the workload.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.launchwizard#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal error has occurred. Retry your request, but if the problem persists, contact\n         us with details by posting a question on <a href=\"https://repost.aws/\">re:Post</a>.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.launchwizard#KeyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-:]+$"
+            }
+        },
+        "com.amazonaws.launchwizard#LaunchWizard": {
+            "type": "service",
+            "version": "2018-05-10",
+            "resources": [
+                {
+                    "target": "com.amazonaws.launchwizard#Deployment"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#SettingsSet"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#Workload"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Launch Wizard",
+                    "cloudFormationName": "LaunchWizard",
+                    "arnNamespace": "launchwizard",
+                    "endpointPrefix": "launchwizard",
+                    "cloudTrailEventSource": "launchwizard.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "launchwizard"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>Launch Wizard offers a guided way of sizing, configuring, and deploying Amazon Web Services resources for\n         third party applications, such as Microsoft SQL Server Always On and HANA based SAP\n         systems, without the need to manually identify and provision individual Amazon Web Services\n         resources.</p>",
+                "smithy.api#title": "AWS Launch Wizard",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://launchwizard-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://launchwizard-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://launchwizard.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://launchwizard.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://launchwizard.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        },
+                        {
+                            "documentation": "Partition doesn't support DualStack",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#ListDeploymentEvents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.launchwizard#ListDeploymentEventsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.launchwizard#ListDeploymentEventsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.launchwizard#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the events of a deployment.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List all actions taken during a deployment.",
+                        "input": {
+                            "deploymentId": "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d"
+                        },
+                        "output": {
+                            "deploymentEvents": [
+                                {
+                                    "name": "Create secure parameter",
+                                    "description": "Creates a new secure parameter",
+                                    "status": "COMPLETED",
+                                    "statusReason": "",
+                                    "timestamp": "2023-04-24T13:10:39.123Z"
+                                },
+                                {
+                                    "name": "Create resource group",
+                                    "description": "Creates a resource group with all the application resources",
+                                    "status": "COMPLETED",
+                                    "statusReason": "",
+                                    "timestamp": "2023-04-24T13:10:42.238Z"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/listDeploymentEvents"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "deploymentEvents"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.launchwizard#ListDeploymentEventsInput": {
+            "type": "structure",
+            "members": {
+                "deploymentId": {
+                    "target": "com.amazonaws.launchwizard#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.launchwizard#MaxDeploymentEventResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request. To get the next page of items,\n         make another request with the token returned in the output.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.launchwizard#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end\n         of the items returned by the previous request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.launchwizard#ListDeploymentEventsOutput": {
+            "type": "structure",
+            "members": {
+                "deploymentEvents": {
+                    "target": "com.amazonaws.launchwizard#DeploymentEventDataSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the deployment events.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.launchwizard#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is\n            <code>null</code> when there are no more items to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.launchwizard#ListDeployments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.launchwizard#ListDeploymentsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.launchwizard#ListDeploymentsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.launchwizard#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the deployments that have been created.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List deployments in the account with filters.",
+                        "input": {
+                            "filters": [
+                                {
+                                    "name": "DEPLOYMENT_STATUS",
+                                    "values": [
+                                        "IN_PROGRESS"
+                                    ]
+                                }
+                            ]
+                        },
+                        "output": {
+                            "deployments": [
+                                {
+                                    "name": "SapHanaSingleForTest",
+                                    "id": "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d",
+                                    "workloadName": "SAP",
+                                    "patternName": "SapHanaSingle",
+                                    "status": "IN_PROGRESS",
+                                    "createdAt": "2023-04-24T13:10:09.857Z"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/listDeployments"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "deployments"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.launchwizard#ListDeploymentsInput": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.launchwizard#DeploymentFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WORKLOAD_NAME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPLOYMENT_STATUS</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.launchwizard#MaxDeploymentResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request. To get the next page of items,\n         make another request with the token returned in the output.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.launchwizard#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end\n         of the items returned by the previous request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.launchwizard#ListDeploymentsOutput": {
+            "type": "structure",
+            "members": {
+                "deployments": {
+                    "target": "com.amazonaws.launchwizard#DeploymentDataSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the deployments.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.launchwizard#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is\n            <code>null</code> when there are no more items to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.launchwizard#ListWorkloadDeploymentPatterns": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.launchwizard#ListWorkloadDeploymentPatternsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.launchwizard#ListWorkloadDeploymentPatternsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.launchwizard#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the workload deployment patterns.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List all available workloads supported by AWS Launch Wizard.",
+                        "input": {
+                            "workloadName": "SAP"
+                        },
+                        "output": {
+                            "workloadDeploymentPatterns": [
+                                {
+                                    "workloadName": "SAP",
+                                    "deploymentPatternName": "SapHanaHA",
+                                    "workloadVersionName": "2023-08-02-01-00-00",
+                                    "displayName": "Deployment Option Display Name",
+                                    "description": "Deployment Option Description",
+                                    "status": "ACTIVE"
+                                },
+                                {
+                                    "workloadName": "SAP",
+                                    "deploymentPatternName": "SapHanaMulti",
+                                    "workloadVersionName": "2023-08-02-01-00-00",
+                                    "displayName": "Deployment Option Display Name",
+                                    "description": "Deployment Option Description",
+                                    "status": "ACTIVE"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/listWorkloadDeploymentPatterns"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "workloadDeploymentPatterns"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.launchwizard#ListWorkloadDeploymentPatternsInput": {
+            "type": "structure",
+            "members": {
+                "workloadName": {
+                    "target": "com.amazonaws.launchwizard#WorkloadName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workload.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.launchwizard#MaxWorkloadDeploymentPatternResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request. To get the next page of items,\n         make another request with the token returned in the output.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.launchwizard#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end\n         of the items returned by the previous request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.launchwizard#ListWorkloadDeploymentPatternsOutput": {
+            "type": "structure",
+            "members": {
+                "workloadDeploymentPatterns": {
+                    "target": "com.amazonaws.launchwizard#WorkloadDeploymentPatternDataSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the workload deployment patterns.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.launchwizard#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is\n            <code>null</code> when there are no more items to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.launchwizard#ListWorkloads": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.launchwizard#ListWorkloadsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.launchwizard#ListWorkloadsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.launchwizard#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.launchwizard#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the workloads.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List all available workloads supported by AWS Launch Wizard.",
+                        "input": {},
+                        "output": {
+                            "workloads": [
+                                {
+                                    "workloadName": "SAP",
+                                    "displayName": "SAP"
+                                },
+                                {
+                                    "workloadName": "SQL",
+                                    "displayName": "MS SQL Server"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/listWorkloads"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "workloads"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.launchwizard#ListWorkloadsInput": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.launchwizard#MaxWorkloadResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request. To get the next page of items,\n         make another request with the token returned in the output.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.launchwizard#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end\n         of the items returned by the previous request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.launchwizard#ListWorkloadsOutput": {
+            "type": "structure",
+            "members": {
+                "workloads": {
+                    "target": "com.amazonaws.launchwizard#WorkloadDataSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the workloads.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.launchwizard#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is\n            <code>null</code> when there are no more items to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.launchwizard#MaxDeploymentEventResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#MaxDeploymentResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#MaxWorkloadDeploymentPatternResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#MaxWorkloadResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#ResourceLimitException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You have exceeded an Launch Wizard resource limit. For example, you might have too many\n         deployments in progress.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.launchwizard#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified workload or deployment resource can't be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.launchwizard#SettingsSet": {
+            "type": "resource",
+            "identifiers": {
+                "name": {
+                    "target": "com.amazonaws.launchwizard#SettingsSetName"
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#SettingsSetName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9-]{2,50}$"
+            }
+        },
+        "com.amazonaws.launchwizard#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.launchwizard#ValueString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1500
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#Workload": {
+            "type": "resource",
+            "identifiers": {
+                "workloadName": {
+                    "target": "com.amazonaws.launchwizard#WorkloadName"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.launchwizard#GetWorkload"
+            },
+            "list": {
+                "target": "com.amazonaws.launchwizard#ListWorkloads"
+            },
+            "resources": [
+                {
+                    "target": "com.amazonaws.launchwizard#WorkloadDeploymentPattern"
+                }
+            ]
+        },
+        "com.amazonaws.launchwizard#WorkloadData": {
+            "type": "structure",
+            "members": {
+                "workloadName": {
+                    "target": "com.amazonaws.launchwizard#WorkloadName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workload.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of a workload.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of a workload.</p>"
+                    }
+                },
+                "documentationUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of a workload document.</p>"
+                    }
+                },
+                "iconUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of a workload icon.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.launchwizard#WorkloadStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a workload.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message about a workload's status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a workload.</p>"
+            }
+        },
+        "com.amazonaws.launchwizard#WorkloadDataSummary": {
+            "type": "structure",
+            "members": {
+                "workloadName": {
+                    "target": "com.amazonaws.launchwizard#WorkloadName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workload.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the workload data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes workload data.</p>"
+            }
+        },
+        "com.amazonaws.launchwizard#WorkloadDataSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.launchwizard#WorkloadDataSummary"
+            }
+        },
+        "com.amazonaws.launchwizard#WorkloadDeploymentPattern": {
+            "type": "resource",
+            "identifiers": {
+                "workloadName": {
+                    "target": "com.amazonaws.launchwizard#WorkloadName"
+                },
+                "deploymentPatternName": {
+                    "target": "com.amazonaws.launchwizard#DeploymentPatternName"
+                }
+            },
+            "list": {
+                "target": "com.amazonaws.launchwizard#ListWorkloadDeploymentPatterns"
+            }
+        },
+        "com.amazonaws.launchwizard#WorkloadDeploymentPatternDataSummary": {
+            "type": "structure",
+            "members": {
+                "workloadName": {
+                    "target": "com.amazonaws.launchwizard#WorkloadName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workload.</p>"
+                    }
+                },
+                "deploymentPatternName": {
+                    "target": "com.amazonaws.launchwizard#DeploymentPatternName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a workload deployment pattern.</p>"
+                    }
+                },
+                "workloadVersionName": {
+                    "target": "com.amazonaws.launchwizard#WorkloadVersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workload deployment pattern version.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of a workload deployment pattern.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of a workload deployment pattern.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.launchwizard#WorkloadDeploymentPatternStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a workload deployment pattern.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message about a workload deployment pattern's status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a workload deployment pattern.</p>"
+            }
+        },
+        "com.amazonaws.launchwizard#WorkloadDeploymentPatternDataSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.launchwizard#WorkloadDeploymentPatternDataSummary"
+            }
+        },
+        "com.amazonaws.launchwizard#WorkloadDeploymentPatternStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#WorkloadName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.launchwizard#WorkloadStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#WorkloadVersionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        }
+    }
+}

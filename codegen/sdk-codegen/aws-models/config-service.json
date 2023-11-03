@@ -13782,6 +13782,108 @@
                     "traits": {
                         "smithy.api#enumValue": "AWS::Batch::SchedulingPolicy"
                     }
+                },
+                "ACMPCACertificateAuthorityActivation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::ACMPCA::CertificateAuthorityActivation"
+                    }
+                },
+                "AppMeshGatewayRoute": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::AppMesh::GatewayRoute"
+                    }
+                },
+                "AppMeshMesh": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::AppMesh::Mesh"
+                    }
+                },
+                "ConnectInstance": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Connect::Instance"
+                    }
+                },
+                "ConnectQuickConnect": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Connect::QuickConnect"
+                    }
+                },
+                "EC2CarrierGateway": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::CarrierGateway"
+                    }
+                },
+                "EC2IPAMPool": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::IPAMPool"
+                    }
+                },
+                "EC2TransitGatewayConnect": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::TransitGatewayConnect"
+                    }
+                },
+                "EC2TransitGatewayMulticastDomain": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::TransitGatewayMulticastDomain"
+                    }
+                },
+                "ECSCapacityProvider": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::ECS::CapacityProvider"
+                    }
+                },
+                "IAMInstanceProfile": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::IAM::InstanceProfile"
+                    }
+                },
+                "IoTCACertificate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::IoT::CACertificate"
+                    }
+                },
+                "IoTTwinMakerSyncJob": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::IoTTwinMaker::SyncJob"
+                    }
+                },
+                "KafkaConnectConnector": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::KafkaConnect::Connector"
+                    }
+                },
+                "LambdaCodeSigningConfig": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Lambda::CodeSigningConfig"
+                    }
+                },
+                "NetworkManagerConnectPeer": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::NetworkManager::ConnectPeer"
+                    }
+                },
+                "ResourceExplorer2Index": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::ResourceExplorer2::Index"
+                    }
                 }
             }
         },
