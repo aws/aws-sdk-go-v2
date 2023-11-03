@@ -1,3 +1,7 @@
+# v1.41.0 (2023-11-03)
+
+* **Feature**: Updated ResourceType enum with new resource types onboarded by AWS Config in October 2023.
+
 # v1.40.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.

@@ -1,3 +1,16 @@
+# Release (2023-11-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.41.0](service/configservice/CHANGELOG.md#v1410-2023-11-03)
+  * **Feature**: Updated ResourceType enum with new resource types onboarded by AWS Config in October 2023.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.76.0](service/connect/CHANGELOG.md#v1760-2023-11-03)
+  * **Feature**: Amazon Connect Chat introduces Create Persistent Contact Association API, allowing customers to choose when to resume previous conversations from previous chats, eliminating the need to repeat themselves and allowing agents to provide personalized service with access to entire conversation history.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.33.0](service/iotwireless/CHANGELOG.md#v1330-2023-11-03)
+  * **Feature**: Added LoRaWAN version 1.0.4 support
+* `github.com/aws/aws-sdk-go-v2/service/launchwizard`: [v1.0.0](service/launchwizard/CHANGELOG.md#v100-2023-11-03)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Launch Wizard is a service that helps reduce the time it takes to deploy applications to the cloud while providing a guided deployment experience.
+
 # Release (2023-11-02)
 
 ## General Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "20d649a9-7729-4449-bc72-56d1d176c313",
-    "type": "feature",
-    "description": "Added LoRaWAN version 1.0.4 support",
-    "modules": [
-        "service/iotwireless"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.33.0 (2023-11-03)
+
+* **Feature**: Added LoRaWAN version 1.0.4 support
+
 # v1.32.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.
