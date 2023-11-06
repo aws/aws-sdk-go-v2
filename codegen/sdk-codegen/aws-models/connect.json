@@ -663,6 +663,9 @@
                     "target": "com.amazonaws.connect#BatchGetFlowAssociation"
                 },
                 {
+                    "target": "com.amazonaws.connect#BatchPutContact"
+                },
+                {
                     "target": "com.amazonaws.connect#ClaimPhoneNumber"
                 },
                 {
@@ -3133,6 +3136,94 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#BatchPutContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#BatchPutContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#BatchPutContactResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#IdempotencyException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note>\n            <p>Only the Amazon Connect outbound campaigns service principal is allowed to assume a\n    role in your account and call this API.</p>\n         </note>\n         <p>Allows you to create a batch of contacts in Amazon Connect. The outbound campaigns\n   capability ingests dial requests via the <a href=\"https://docs.aws.amazon.com/connect-outbound/latest/APIReference/API_PutDialRequestBatch.html\">PutDialRequestBatch</a>\n   API. It then uses BatchPutContact to create contacts corresponding to those\n   dial requests. If agents are available, the dial requests are dialed out, which results in a\n   voice call. The resulting voice call uses the same contactId that was created by BatchPutContact.\n  </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/contact/batch/{InstanceId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connect#BatchPutContactRequest": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactDataRequestList": {
+                    "target": "com.amazonaws.connect#ContactDataRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of individual contact requests.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#BatchPutContactResponse": {
+            "type": "structure",
+            "members": {
+                "SuccessfulRequestList": {
+                    "target": "com.amazonaws.connect#SuccessfulRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of requests for which contact was successfully created.</p>"
+                    }
+                },
+                "FailedRequestList": {
+                    "target": "com.amazonaws.connect#FailedRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of requests for which contact creation failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#BehaviorType": {
             "type": "enum",
             "members": {
@@ -3178,6 +3269,20 @@
                     "min": 1,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.connect#Campaign": {
+            "type": "structure",
+            "members": {
+                "CampaignId": {
+                    "target": "com.amazonaws.connect#CampaignId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for a campaign.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information associated with a campaign.</p>"
             }
         },
         "com.amazonaws.connect#CampaignId": {
@@ -3632,6 +3737,62 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about a contact.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactDataRequest": {
+            "type": "structure",
+            "members": {
+                "SystemEndpoint": {
+                    "target": "com.amazonaws.connect#Endpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Endpoint associated with the Amazon Connect instance from which outbound contact will be\n   initiated for the campaign.</p>"
+                    }
+                },
+                "CustomerEndpoint": {
+                    "target": "com.amazonaws.connect#Endpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Endpoint of the customer for which contact will be initiated.</p>"
+                    }
+                },
+                "RequestIdentifier": {
+                    "target": "com.amazonaws.connect#RequestIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier to uniquely identify individual requests in the batch.</p>"
+                    }
+                },
+                "QueueId": {
+                    "target": "com.amazonaws.connect#QueueId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the queue associated with the Amazon Connect instance in which\n   contacts that are created will be queued.</p>"
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.connect#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of attributes to be stored in a contact.</p>"
+                    }
+                },
+                "Campaign": {
+                    "target": "com.amazonaws.connect#Campaign",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Structure to store information associated with a campaign.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request object with information to create a contact.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactDataRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ContactDataRequest"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
             }
         },
         "com.amazonaws.connect#ContactFilter": {
@@ -5147,7 +5308,7 @@
                 "InitialContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the contactId of the current contact that the\n    <code>CreatePersistentContactAssociation</code> API is being called from.</p>",
+                        "smithy.api#documentation": "<p>This is the contactId of the current contact that the\n   <code>CreatePersistentContactAssociation</code> API is being called from.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5155,7 +5316,7 @@
                 "RehydrationType": {
                     "target": "com.amazonaws.connect#RehydrationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The contactId chosen for rehydration depends on the type chosen.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENTIRE_PAST_SESSION</code>: Rehydrates a chat from the most recently terminated past chat\n     contact of the specified past ended chat session. To use this type, provide the\n      <code>initialContactId</code> of the past ended chat session in the <code>sourceContactId</code> field. In\n     this type, Amazon Connect determines what the most recent chat contact on the past ended\n     chat session and uses it to start a persistent chat. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FROM_SEGMENT</code>: Rehydrates a chat from the specified past chat contact provided in the\n      <code>sourceContactId</code> field. </p>\n            </li>\n         </ul>\n         <p>The actual contactId used for rehydration is provided in the response of this API.</p>\n         <p>To illustrate how to use rehydration type, consider the following example: A customer starts\n   a chat session. Agent a1 accepts the chat and a conversation starts between the customer and\n   Agent a1. This first contact creates a contact ID <b>C1</b>. Agent a1\n   then transfers the chat to Agent a2. This creates another contact ID <b>C2</b>. At this point Agent a2 ends the chat. The customer is forwarded to the\n   disconnect flow for a post chat survey that creates another contact ID <b>C3</b>. After the chat survey, the chat session ends. Later, the customer returns and\n   wants to resume their past chat session. At this point, the customer can have following use\n   cases: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Use Case 1</b>: The customer wants to continue the past chat\n     session but they want to hide the post chat survey. For this they will use the following\n     configuration:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Configuration</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>SourceContactId = \"C2\"</p>\n                        </li>\n                        <li>\n                           <p>RehydrationType = \"FROM_SEGMENT\"</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Expected behavior</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>This starts a persistent chat session from the specified past ended contact (C2).\n         Transcripts of past chat sessions C2 and C1 are accessible in the current persistent chat\n         session. Note that chat segment C3 is dropped from the persistent chat session.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Use Case 2</b>: The customer wants to continue the past chat\n     session and see the transcript of the entire past engagement, including the post chat survey.\n     For this they will use the following configuration:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Configuration</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>SourceContactId = \"C1\"</p>\n                        </li>\n                        <li>\n                           <p>RehydrationType = \"ENTIRE_PAST_SESSION\"</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Expected behavior</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>This starts a persistent chat session from the most recently ended chat contact (C3).\n         Transcripts of past chat sessions C3, C2 and C1 are accessible in the current persistent\n         chat session.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The contactId chosen for rehydration depends on the type chosen.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENTIRE_PAST_SESSION</code>: Rehydrates a chat from the most recently terminated past chat\n     contact of the specified past ended chat session. To use this type, provide the\n     <code>initialContactId</code> of the past ended chat session in the <code>sourceContactId</code> field. In\n     this type, Amazon Connect determines what the most recent chat contact on the past ended\n     chat session and uses it to start a persistent chat. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FROM_SEGMENT</code>: Rehydrates a chat from the specified past chat contact provided in the\n     <code>sourceContactId</code> field. </p>\n            </li>\n         </ul>\n         <p>The actual contactId used for rehydration is provided in the response of this API.</p>\n         <p>To illustrate how to use rehydration type, consider the following example: A customer starts\n   a chat session. Agent a1 accepts the chat and a conversation starts between the customer and\n   Agent a1. This first contact creates a contact ID <b>C1</b>. Agent a1\n   then transfers the chat to Agent a2. This creates another contact ID <b>C2</b>. At this point Agent a2 ends the chat. The customer is forwarded to the\n   disconnect flow for a post chat survey that creates another contact ID <b>C3</b>. After the chat survey, the chat session ends. Later, the customer returns and\n   wants to resume their past chat session. At this point, the customer can have following use\n   cases: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Use Case 1</b>: The customer wants to continue the past chat\n     session but they want to hide the post chat survey. For this they will use the following\n     configuration:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Configuration</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>SourceContactId = \"C2\"</p>\n                        </li>\n                        <li>\n                           <p>RehydrationType = \"FROM_SEGMENT\"</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Expected behavior</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>This starts a persistent chat session from the specified past ended contact (C2).\n         Transcripts of past chat sessions C2 and C1 are accessible in the current persistent chat\n         session. Note that chat segment C3 is dropped from the persistent chat session.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Use Case 2</b>: The customer wants to continue the past chat\n     session and see the transcript of the entire past engagement, including the post chat survey.\n     For this they will use the following configuration:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Configuration</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>SourceContactId = \"C1\"</p>\n                        </li>\n                        <li>\n                           <p>RehydrationType = \"ENTIRE_PAST_SESSION\"</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Expected behavior</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>This starts a persistent chat session from the most recently ended chat contact (C3).\n         Transcripts of past chat sessions C3, C2 and C1 are accessible in the current persistent\n         chat session.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10894,6 +11055,23 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#DisconnectReason": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.connect#DisconnectReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A code that indicates how the contact was terminated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about why a contact was disconnected. Only Amazon Connect outbound\n   campaigns can provide this field.</p>"
+            }
+        },
+        "com.amazonaws.connect#DisconnectReasonCode": {
+            "type": "string"
+        },
         "com.amazonaws.connect#DismissUserContact": {
             "type": "operation",
             "input": {
@@ -11072,6 +11250,58 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "KMS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#Endpoint": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.connect#EndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the endpoint.</p>"
+                    }
+                },
+                "Address": {
+                    "target": "com.amazonaws.connect#EndpointAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Address of the endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the endpoint.</p>"
+            }
+        },
+        "com.amazonaws.connect#EndpointAddress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connect#EndpointType": {
+            "type": "enum",
+            "members": {
+                "TELEPHONE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TELEPHONE_NUMBER"
+                    }
+                },
+                "VOIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOIP"
+                    }
+                },
+                "CONTACT_FLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTACT_FLOW"
                     }
                 }
             }
@@ -12443,6 +12673,103 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "OnMetricDataUpdate"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#FailedRequest": {
+            "type": "structure",
+            "members": {
+                "RequestIdentifier": {
+                    "target": "com.amazonaws.connect#RequestIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request identifier provided in the API call in the ContactDataRequest to create a\n   contact.</p>"
+                    }
+                },
+                "FailureReasonCode": {
+                    "target": "com.amazonaws.connect#FailureReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reason code for the failure.</p>"
+                    }
+                },
+                "FailureReasonMessage": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Why the request to create a contact failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request for which contact failed to be generated.</p>"
+            }
+        },
+        "com.amazonaws.connect#FailedRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#FailedRequest"
+            }
+        },
+        "com.amazonaws.connect#FailureReasonCode": {
+            "type": "enum",
+            "members": {
+                "INVALID_ATTRIBUTE_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ATTRIBUTE_KEY"
+                    }
+                },
+                "INVALID_CUSTOMER_ENDPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_CUSTOMER_ENDPOINT"
+                    }
+                },
+                "INVALID_SYSTEM_ENDPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_SYSTEM_ENDPOINT"
+                    }
+                },
+                "INVALID_QUEUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_QUEUE"
+                    }
+                },
+                "MISSING_CAMPAIGN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_CAMPAIGN"
+                    }
+                },
+                "MISSING_CUSTOMER_ENDPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_CUSTOMER_ENDPOINT"
+                    }
+                },
+                "MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT"
+                    }
+                },
+                "REQUEST_THROTTLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUEST_THROTTLED"
+                    }
+                },
+                "IDEMPOTENCY_EXCEPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IDEMPOTENCY_EXCEPTION"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
                     }
                 }
             }
@@ -23104,6 +23431,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#RequestIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 80
+                }
+            }
+        },
         "com.amazonaws.connect#RequiredFieldInfo": {
             "type": "structure",
             "members": {
@@ -26352,6 +26688,12 @@
                         "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "DisconnectReason": {
+                    "target": "com.amazonaws.connect#DisconnectReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason a contact can be disconnected. Only Amazon Connect outbound campaigns can\n   provide this field.</p>"
+                    }
                 }
             },
             "traits": {
@@ -26641,6 +26983,32 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#SuccessfulRequest": {
+            "type": "structure",
+            "members": {
+                "RequestIdentifier": {
+                    "target": "com.amazonaws.connect#RequestIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request identifier provided in the API call in the ContactDataRequest to create a\n   contact.</p>"
+                    }
+                },
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contactId of the contact that was created successfully.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request for which contact was successfully created.</p>"
+            }
+        },
+        "com.amazonaws.connect#SuccessfulRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#SuccessfulRequest"
             }
         },
         "com.amazonaws.connect#SupportedMessagingContentType": {

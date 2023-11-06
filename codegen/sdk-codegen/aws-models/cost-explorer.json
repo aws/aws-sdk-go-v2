@@ -2987,7 +2987,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the Amazon EC2 instances that Amazon Web Services recommends that you\n            purchase.</p>"
+                "smithy.api#documentation": "<p>Details about the Amazon EC2 reservations that Amazon Web Services recommends that you\n            purchase.</p>"
             }
         },
         "com.amazonaws.costexplorer#EC2ResourceDetails": {
@@ -3147,7 +3147,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the Amazon OpenSearch Service instances that Amazon Web Services recommends\n            that you purchase.</p>"
+                "smithy.api#documentation": "<p>Details about the Amazon OpenSearch Service reservations that Amazon Web Services\n            recommends that you purchase.</p>"
             }
         },
         "com.amazonaws.costexplorer#ElastiCacheInstanceDetails": {
@@ -3193,7 +3193,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the Amazon ElastiCache instances that Amazon Web Services recommends that\n            you purchase.</p>"
+                "smithy.api#documentation": "<p>Details about the Amazon ElastiCache reservations that Amazon Web Services recommends\n            that you purchase.</p>"
             }
         },
         "com.amazonaws.costexplorer#Entity": {
@@ -5485,36 +5485,42 @@
                 "EC2InstanceDetails": {
                     "target": "com.amazonaws.costexplorer#EC2InstanceDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 instances that Amazon Web Services recommends that you purchase.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 reservations that Amazon Web Services recommends that you\n            purchase.</p>"
                     }
                 },
                 "RDSInstanceDetails": {
                     "target": "com.amazonaws.costexplorer#RDSInstanceDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon RDS instances that Amazon Web Services recommends that you purchase.</p>"
+                        "smithy.api#documentation": "<p>The Amazon RDS reservations that Amazon Web Services recommends that you\n            purchase.</p>"
                     }
                 },
                 "RedshiftInstanceDetails": {
                     "target": "com.amazonaws.costexplorer#RedshiftInstanceDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Redshift instances that Amazon Web Services recommends that you\n            purchase.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Redshift reservations that Amazon Web Services recommends that you\n            purchase.</p>"
                     }
                 },
                 "ElastiCacheInstanceDetails": {
                     "target": "com.amazonaws.costexplorer#ElastiCacheInstanceDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ElastiCache instances that Amazon Web Services recommends that you purchase.</p>"
+                        "smithy.api#documentation": "<p>The ElastiCache reservations that Amazon Web Services recommends that you\n            purchase.</p>"
                     }
                 },
                 "ESInstanceDetails": {
                     "target": "com.amazonaws.costexplorer#ESInstanceDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon OpenSearch Service instances that Amazon Web Services recommends that you\n            purchase.</p>"
+                        "smithy.api#documentation": "<p>The Amazon OpenSearch Service reservations that Amazon Web Services recommends that you\n            purchase.</p>"
+                    }
+                },
+                "MemoryDBInstanceDetails": {
+                    "target": "com.amazonaws.costexplorer#MemoryDBInstanceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MemoryDB reservations that Amazon Web Services recommends that you purchase.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the instances that Amazon Web Services recommends that you\n            purchase.</p>"
+                "smithy.api#documentation": "<p>Details about the reservations that Amazon Web Services recommends that you\n            purchase.</p>"
             }
         },
         "com.amazonaws.costexplorer#InvalidNextTokenException": {
@@ -5914,6 +5920,46 @@
                 "smithy.api#range": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.costexplorer#MemoryDBInstanceDetails": {
+            "type": "structure",
+            "members": {
+                "Family": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance family of the recommended reservation.</p>"
+                    }
+                },
+                "NodeType": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node type of the recommended reservation.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region of the recommended reservation.</p>"
+                    }
+                },
+                "CurrentGeneration": {
+                    "target": "com.amazonaws.costexplorer#GenericBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Determines whether the recommendation is for a current generation instance.</p>"
+                    }
+                },
+                "SizeFlexEligible": {
+                    "target": "com.amazonaws.costexplorer#GenericBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Determines whether the recommended reservation is size flexible.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the MemoryDB reservations that Amazon Web Services recommends that you\n            purchase.</p>"
             }
         },
         "com.amazonaws.costexplorer#Metric": {
@@ -6415,7 +6461,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the Amazon RDS instances that Amazon Web Services recommends that you\n            purchase.</p>"
+                "smithy.api#documentation": "<p>Details about the Amazon RDS reservations that Amazon Web Services recommends that you\n            purchase.</p>"
             }
         },
         "com.amazonaws.costexplorer#RICostForUnusedHours": {
@@ -6715,7 +6761,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the Amazon Redshift instances that Amazon Web Services recommends that\n            you purchase.</p>"
+                "smithy.api#documentation": "<p>Details about the Amazon Redshift reservations that Amazon Web Services recommends that\n            you purchase.</p>"
             }
         },
         "com.amazonaws.costexplorer#RequestChangedException": {
@@ -6934,7 +6980,7 @@
                 "InstanceDetails": {
                     "target": "com.amazonaws.costexplorer#InstanceDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the instances that Amazon Web Services recommends that you\n            purchase.</p>"
+                        "smithy.api#documentation": "<p>Details about the reservations that Amazon Web Services recommends that you\n            purchase.</p>"
                     }
                 },
                 "RecommendedNumberOfInstancesToPurchase": {

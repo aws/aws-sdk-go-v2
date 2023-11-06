@@ -1494,6 +1494,12 @@
         "com.amazonaws.docdb#BooleanOptional": {
             "type": "boolean"
         },
+        "com.amazonaws.docdb#CACertificateIdentifiersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.docdb#String"
+            }
+        },
         "com.amazonaws.docdb#Certificate": {
             "type": "structure",
             "members": {
@@ -1536,6 +1542,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A certificate authority (CA) certificate for an Amazon Web Services account.</p>"
+            }
+        },
+        "com.amazonaws.docdb#CertificateDetails": {
+            "type": "structure",
+            "members": {
+                "CAIdentifier": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CA identifier of the CA certificate used for the DB instance's server certificate.</p>"
+                    }
+                },
+                "ValidTill": {
+                    "target": "com.amazonaws.docdb#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration date of the DB instance’s server certificate.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details of the DB instance’s server certificate.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html\">Updating Your Amazon DocumentDB TLS \n            Certificates</a> and \n            <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html\">\n                Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer \n                    Guide</i>.</p>"
             }
         },
         "com.amazonaws.docdb#CertificateList": {
@@ -2259,6 +2285,12 @@
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The KMS key identifier for encryption of Performance Insights\n            data.</p>\n         <p>The KMS key identifier is the key ARN, key ID, alias ARN, or alias name\n            for the KMS key.</p>\n         <p>If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon DocumentDB uses your\n            default KMS key. There is a default KMS key for your\n            Amazon Web Services account. Your Amazon Web Services account has a different\n            default KMS key for each Amazon Web Services region.</p>"
+                    }
+                },
+                "CACertificateIdentifier": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CA certificate identifier to use for the DB instance's server certificate.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html\">Updating Your Amazon DocumentDB TLS \n            Certificates</a> and \n            <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html\">\n                Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer \n                    Guide</i>.</p>"
                     }
                 }
             },
@@ -3285,6 +3317,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A value that indicates whether the engine version supports exporting the log types\n            specified by <code>ExportableLogTypes</code> to CloudWatch Logs.</p>"
                     }
+                },
+                "SupportedCACertificateIdentifiers": {
+                    "target": "com.amazonaws.docdb#CACertificateIdentifiersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the supported CA certificate identifiers.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html\">Updating Your Amazon DocumentDB TLS \n            Certificates</a> and \n            <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html\">\n                Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer \n                    Guide</i>.</p>"
+                    }
+                },
+                "SupportsCertificateRotationWithoutRestart": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the engine version supports rotating the server certificate without \n            rebooting the DB instance.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3484,6 +3528,12 @@
                     "target": "com.amazonaws.docdb#LogTypeList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of log types that this instance is configured to export to CloudWatch Logs.</p>"
+                    }
+                },
+                "CertificateDetails": {
+                    "target": "com.amazonaws.docdb#CertificateDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the DB instance's server certificate.</p>"
                     }
                 }
             },
@@ -6665,6 +6715,12 @@
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The KMS key identifier for encryption of Performance Insights\n            data.</p>\n         <p>The KMS key identifier is the key ARN, key ID, alias ARN, or alias name\n            for the KMS key.</p>\n         <p>If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon DocumentDB uses your\n            default KMS key. There is a default KMS key for your\n            Amazon Web Services account. Your Amazon Web Services account has a different\n            default KMS key for each Amazon Web Services region.</p>"
+                    }
+                },
+                "CertificateRotationRestart": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the DB instance is restarted when you rotate your \n            SSL/TLS certificate.</p>\n         <p>By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate \n            is not updated until the DB instance is restarted.</p>\n         <important>\n            <p>Set this parameter only if you are <i>not</i> using SSL/TLS to connect to the DB instance.</p>\n         </important>\n         <p>If you are using SSL/TLS to connect to the DB instance, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html\">Updating Your Amazon DocumentDB TLS \n            Certificates</a> and \n            <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html\">\n                Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer \n                    Guide</i>.</p>"
                     }
                 }
             },

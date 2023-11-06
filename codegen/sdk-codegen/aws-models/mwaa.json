@@ -83,7 +83,7 @@
                     "name": "airflow"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon Managed Workflows for Apache Airflow</fullname>\n         <p>This section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html\">What is Amazon MWAA?</a>.</p>\n         <p>\n            <b>Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>api.airflow.{region}.amazonaws.com</code> - This endpoint is used for environment management.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateEnvironment.html\">CreateEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_DeleteEnvironment.html\">DeleteEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_GetEnvironment.html\">GetEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_ListEnvironments.html\">ListEnvironments</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_ListTagsForResource.html\">ListTagsForResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_TagResource.html\">TagResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_UntagResource.html\">UntagResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_UpdateEnvironment.html\">UpdateEnvironment</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>env.airflow.{region}.amazonaws.com</code> - This endpoint is used to operate the Airflow environment.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateCliToken.html \">CreateCliToken</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateWebLoginToken.html\">CreateWebLoginToken</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>ops.airflow.{region}.amazonaws.com</code> - This endpoint is used to push environment metrics that track environment health.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_PublishMetrics.html \">PublishMetrics</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>Regions</b>\n         </p>\n         <p>For a list of regions that Amazon MWAA supports, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html#regions-mwaa\">Region availability</a> in the <i>Amazon MWAA User Guide</i>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon Managed Workflows for Apache Airflow</fullname>\n         <p>This section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html\">What is Amazon MWAA?</a>.</p>\n         <p>\n            <b>Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>api.airflow.{region}.amazonaws.com</code> - This endpoint is used for environment management.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateEnvironment.html\">CreateEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_DeleteEnvironment.html\">DeleteEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_GetEnvironment.html\">GetEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_ListEnvironments.html\">ListEnvironments</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_ListTagsForResource.html\">ListTagsForResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_TagResource.html\">TagResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_UntagResource.html\">UntagResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_UpdateEnvironment.html\">UpdateEnvironment</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>env.airflow.{region}.amazonaws.com</code> - This endpoint is used to operate the Airflow environment.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateCliToken.html \">CreateCliToken</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateWebLoginToken.html\">CreateWebLoginToken</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>Regions</b>\n         </p>\n         <p>For a list of supported regions, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/mwaa.html\">Amazon MWAA endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                 "smithy.api#title": "AmazonMWAA",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -127,7 +127,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -170,7 +169,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -183,7 +183,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -197,7 +196,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -220,7 +218,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -255,7 +252,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -266,14 +262,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -287,14 +285,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -303,11 +299,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -318,14 +314,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -339,7 +337,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -359,7 +356,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -370,14 +366,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -388,9 +386,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1114,7 +1114,7 @@
                 "AirflowVersion": {
                     "target": "com.amazonaws.mwaa#AirflowVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version. Valid values:\n            <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, and <code>2.5.1</code>.\n            For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html\">Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA)</a>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version.\n            For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html\">Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA)</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>.</p>"
                     }
                 },
                 "LoggingConfiguration": {
@@ -1305,6 +1305,9 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This type is for internal use and not meant for public use. Data set for this type will be ignored."
+                },
                 "smithy.api#documentation": "<p>\n            <b>Internal only</b>. Represents the dimensions of a metric. To learn more about the metrics published to Amazon CloudWatch, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html\">Amazon MWAA performance metrics in Amazon CloudWatch</a>.</p>"
             }
         },
@@ -1312,6 +1315,11 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mwaa#Dimension"
+            },
+            "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This type is for internal use and not meant for public use. Data set for this type will be ignored."
+                }
             }
         },
         "com.amazonaws.mwaa#Environment": {
@@ -1368,7 +1376,7 @@
                 "AirflowVersion": {
                     "target": "com.amazonaws.mwaa#AirflowVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow version on your environment. Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, and <code>2.5.1</code>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow version on your environment.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>.</p>"
                     }
                 },
                 "SourceBucketArn": {
@@ -1966,6 +1974,11 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mwaa#MetricDatum"
+            },
+            "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This type is for internal use and not meant for public use. Data set for this type will be ignored."
+                }
             }
         },
         "com.amazonaws.mwaa#MetricDatum": {
@@ -2011,6 +2024,9 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This type is for internal use and not meant for public use. Data set for this type will be ignored."
+                },
                 "smithy.api#documentation": "<p>\n            <b>Internal only</b>. Collects Apache Airflow metrics. To learn more about the metrics published to Amazon CloudWatch, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html\">Amazon MWAA performance metrics in Amazon CloudWatch</a>.</p>"
             }
         },
@@ -2115,6 +2131,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This API is for internal use and not meant for public use, and is no longer available."
+                },
                 "smithy.api#documentation": "<p>\n            <b>Internal only</b>. Publishes environment health metrics to Amazon CloudWatch.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "ops."
@@ -2144,11 +2163,21 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This type is for internal use and not meant for public use. Data set for this type will be ignored."
+                }
             }
         },
         "com.amazonaws.mwaa#PublishMetricsOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This type is for internal use and not meant for public use. Data set for this type will be ignored."
+                }
+            }
         },
         "com.amazonaws.mwaa#RelativePath": {
             "type": "string",
@@ -2251,6 +2280,9 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This type is for internal use and not meant for public use. Data set for this type will be ignored."
+                },
                 "smithy.api#documentation": "<p>\n            <b>Internal only</b>. Represents a set of statistics that describe a specific metric. To learn more about the metrics published to Amazon CloudWatch, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html\">Amazon MWAA performance metrics in Amazon CloudWatch</a>.</p>"
             }
         },
@@ -2609,7 +2641,7 @@
                 "AirflowVersion": {
                     "target": "com.amazonaws.mwaa#AirflowVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. To upgrade your environment, specify a newer version of Apache Airflow supported by Amazon MWAA.</p>\n         <p>Before you upgrade an environment, make sure your requirements, DAGs, plugins, and other resources used in your workflows are compatible with the new Apache Airflow version. For more information about updating\n            your resources, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/upgrading-environment.html\">Upgrading an Amazon MWAA environment</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, and <code>2.5.1</code>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. To upgrade your environment, specify a newer version of Apache Airflow supported by Amazon MWAA.</p>\n         <p>Before you upgrade an environment, make sure your requirements, DAGs, plugins, and other resources used in your workflows are compatible with the new Apache Airflow version. For more information about updating\n            your resources, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/upgrading-environment.html\">Upgrading an Amazon MWAA environment</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>.</p>"
                     }
                 },
                 "SourceBucketArn": {
