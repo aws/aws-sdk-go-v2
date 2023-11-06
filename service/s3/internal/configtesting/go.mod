@@ -35,8 +35,6 @@ replace github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 => ../../../../intern
 
 replace github.com/aws/aws-sdk-go-v2/internal/ini => ../../../../internal/ini/
 
-replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../../../../service/internal/accept-encoding/
-
 replace github.com/aws/aws-sdk-go-v2/service/internal/presigned-url => ../../../../service/internal/presigned-url/
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/s3shared => ../../../../service/internal/s3shared/
