@@ -1,3 +1,7 @@
+# v1.77.0 (2023-11-06)
+
+* **Feature**: Added new API that allows Amazon Connect Outbound Campaigns to create contacts in Amazon Connect when ingesting your dial requests.
+
 # v1.76.0 (2023-11-03)
 
 * **Feature**: Amazon Connect Chat introduces Create Persistent Contact Association API, allowing customers to choose when to resume previous conversations from previous chats, eliminating the need to repeat themselves and allowing agents to provide personalized service with access to entire conversation history.

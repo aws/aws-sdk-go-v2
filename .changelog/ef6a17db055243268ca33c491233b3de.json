@@ -1,8 +1,0 @@
-{
-    "id": "ef6a17db-0552-4326-8ca3-3c491233b3de",
-    "type": "feature",
-    "description": "Add partitional endpoints for iso-e and iso-f.",
-    "modules": [
-        "service/route53"
-    ]
-}

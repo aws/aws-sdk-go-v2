@@ -1,8 +1,0 @@
-{
-    "id": "1f1082f2-e3b4-4ae7-810f-f615850d9a9f",
-    "type": "feature",
-    "description": "Added new API that allows Amazon Connect Outbound Campaigns to create contacts in Amazon Connect when ingesting your dial requests.",
-    "modules": [
-        "service/connect"
-    ]
-}

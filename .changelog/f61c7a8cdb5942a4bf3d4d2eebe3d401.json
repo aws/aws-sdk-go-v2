@@ -1,8 +1,0 @@
-{
-    "id": "f61c7a8c-db59-42a4-bf3d-4d2eebe3d401",
-    "type": "feature",
-    "description": "This release extends the GetReservationPurchaseRecommendation API to support recommendations for Amazon MemoryDB reservations.",
-    "modules": [
-        "service/costexplorer"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "dc341b8f-8aa6-4d78-a989-df1996a6cd55",
-    "type": "feature",
-    "description": "AWS CodeBuild now supports AWS Lambda compute.",
-    "modules": [
-        "service/codebuild"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.20.0 (2023-11-06)
+
+* **Feature**: This release adds support for Apache Airflow version 2.7.2. This version release includes support for deferrable operators and triggers.
+
 # v1.19.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.

@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.22.1
-	github.com/aws/aws-sdk-go-v2/config v1.22.0
+	github.com/aws/aws-sdk-go-v2/config v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/acm v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.24.0
@@ -17,7 +17,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.30.0
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.24.0
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.20.0
@@ -29,7 +29,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.21.0
-	github.com/aws/aws-sdk-go-v2/service/docdb v1.26.0
+	github.com/aws/aws-sdk-go-v2/service/docdb v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.130.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.22.0
@@ -48,7 +48,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/glue v1.67.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.21.0
-	github.com/aws/aws-sdk-go-v2/service/iam v1.26.0
+	github.com/aws/aws-sdk-go-v2/service/iam v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/iot v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.22.0
@@ -59,11 +59,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.16.0
-	github.com/aws/aws-sdk-go-v2/service/polly v1.33.0
+	github.com/aws/aws-sdk-go-v2/service/polly v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/rds v1.61.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.35.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.34.0
-	github.com/aws/aws-sdk-go-v2/service/route53 v1.33.0
+	github.com/aws/aws-sdk-go-v2/service/route53 v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.42.0

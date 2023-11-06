@@ -1,3 +1,7 @@
+# v1.34.0 (2023-11-06)
+
+* **Feature**: Add partitional endpoints for iso-e and iso-f.
+
 # v1.33.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.

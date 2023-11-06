@@ -1,3 +1,26 @@
+# Release (2023-11-06)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.25.0](service/codebuild/CHANGELOG.md#v1250-2023-11-06)
+  * **Feature**: AWS CodeBuild now supports AWS Lambda compute.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.77.0](service/connect/CHANGELOG.md#v1770-2023-11-06)
+  * **Feature**: Added new API that allows Amazon Connect Outbound Campaigns to create contacts in Amazon Connect when ingesting your dial requests.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.32.0](service/costexplorer/CHANGELOG.md#v1320-2023-11-06)
+  * **Feature**: This release extends the GetReservationPurchaseRecommendation API to support recommendations for Amazon MemoryDB reservations.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.27.0](service/docdb/CHANGELOG.md#v1270-2023-11-06)
+  * **Feature**: Update the input of CreateDBInstance and ModifyDBInstance to support setting CA Certificates. Update the output of DescribeDBInstance and DescribeDBEngineVersions to show current and supported CA certificates.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.27.0](service/iam/CHANGELOG.md#v1270-2023-11-06)
+  * **Feature**: Add partitional endpoint for iso-e.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.20.0](service/mwaa/CHANGELOG.md#v1200-2023-11-06)
+  * **Feature**: This release adds support for Apache Airflow version 2.7.2. This version release includes support for deferrable operators and triggers.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.34.0](service/polly/CHANGELOG.md#v1340-2023-11-06)
+  * **Feature**: Amazon Polly adds new US English voices - Danielle and Gregory. Danielle and Gregory are available as Neural voices only.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.34.0](service/route53/CHANGELOG.md#v1340-2023-11-06)
+  * **Feature**: Add partitional endpoints for iso-e and iso-f.
+
 # Release (2023-11-03)
 
 ## Module Highlights

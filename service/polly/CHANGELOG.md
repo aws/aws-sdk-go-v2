@@ -1,3 +1,7 @@
+# v1.34.0 (2023-11-06)
+
+* **Feature**: Amazon Polly adds new US English voices - Danielle and Gregory. Danielle and Gregory are available as Neural voices only.
+
 # v1.33.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.

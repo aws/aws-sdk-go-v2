@@ -1,8 +1,0 @@
-{
-    "id": "77b9b1c6-b1c3-4160-a724-d94870bf3b60",
-    "type": "feature",
-    "description": "Add partitional endpoint for iso-e.",
-    "modules": [
-        "service/iam"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "3f31b2f2-d213-4996-b150-c78a09bf9968",
-    "type": "feature",
-    "description": "This release adds support for Apache Airflow version 2.7.2. This version release includes support for deferrable operators and triggers.",
-    "modules": [
-        "service/mwaa"
-    ]
-}

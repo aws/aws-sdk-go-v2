@@ -1,3 +1,7 @@
+# v1.22.1 (2023-11-06)
+
+* No change notes available for this release.
+
 # v1.22.0 (2023-11-02)
 
 * **Feature**: Add env and shared config settings for disabling IMDSv1 fallback.

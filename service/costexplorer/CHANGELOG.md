@@ -1,3 +1,7 @@
+# v1.32.0 (2023-11-06)
+
+* **Feature**: This release extends the GetReservationPurchaseRecommendation API to support recommendations for Amazon MemoryDB reservations.
+
 # v1.31.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.
