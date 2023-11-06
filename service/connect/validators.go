@@ -270,6 +270,26 @@ func (m *validateOpBatchGetFlowAssociation) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchPutContact struct {
+}
+
+func (*validateOpBatchPutContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchPutContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchPutContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchPutContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpClaimPhoneNumber struct {
 }
 
@@ -4242,6 +4262,10 @@ func addOpBatchGetFlowAssociationValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpBatchGetFlowAssociation{}, middleware.After)
 }
 
+func addOpBatchPutContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchPutContact{}, middleware.After)
+}
+
 func addOpClaimPhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpClaimPhoneNumber{}, middleware.After)
 }
@@ -6562,6 +6586,24 @@ func validateOpBatchGetFlowAssociationInput(v *BatchGetFlowAssociationInput) err
 	}
 	if v.ResourceIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchPutContactInput(v *BatchPutContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchPutContactInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactDataRequestList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactDataRequestList"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -228,6 +228,11 @@ const (
 	ComputeTypeBuildGeneral1Medium  ComputeType = "BUILD_GENERAL1_MEDIUM"
 	ComputeTypeBuildGeneral1Large   ComputeType = "BUILD_GENERAL1_LARGE"
 	ComputeTypeBuildGeneral12xlarge ComputeType = "BUILD_GENERAL1_2XLARGE"
+	ComputeTypeBuildLambda1gb       ComputeType = "BUILD_LAMBDA_1GB"
+	ComputeTypeBuildLambda2gb       ComputeType = "BUILD_LAMBDA_2GB"
+	ComputeTypeBuildLambda4gb       ComputeType = "BUILD_LAMBDA_4GB"
+	ComputeTypeBuildLambda8gb       ComputeType = "BUILD_LAMBDA_8GB"
+	ComputeTypeBuildLambda10gb      ComputeType = "BUILD_LAMBDA_10GB"
 )
 
 // Values returns all known values for ComputeType. Note that this can be expanded
@@ -239,6 +244,11 @@ func (ComputeType) Values() []ComputeType {
 		"BUILD_GENERAL1_MEDIUM",
 		"BUILD_GENERAL1_LARGE",
 		"BUILD_GENERAL1_2XLARGE",
+		"BUILD_LAMBDA_1GB",
+		"BUILD_LAMBDA_2GB",
+		"BUILD_LAMBDA_4GB",
+		"BUILD_LAMBDA_8GB",
+		"BUILD_LAMBDA_10GB",
 	}
 }
 
@@ -267,6 +277,8 @@ const (
 	EnvironmentTypeLinuxGpuContainer          EnvironmentType = "LINUX_GPU_CONTAINER"
 	EnvironmentTypeArmContainer               EnvironmentType = "ARM_CONTAINER"
 	EnvironmentTypeWindowsServer2019Container EnvironmentType = "WINDOWS_SERVER_2019_CONTAINER"
+	EnvironmentTypeLinuxLambdaContainer       EnvironmentType = "LINUX_LAMBDA_CONTAINER"
+	EnvironmentTypeArmLambdaContainer         EnvironmentType = "ARM_LAMBDA_CONTAINER"
 )
 
 // Values returns all known values for EnvironmentType. Note that this can be
@@ -279,6 +291,8 @@ func (EnvironmentType) Values() []EnvironmentType {
 		"LINUX_GPU_CONTAINER",
 		"ARM_CONTAINER",
 		"WINDOWS_SERVER_2019_CONTAINER",
+		"LINUX_LAMBDA_CONTAINER",
+		"ARM_LAMBDA_CONTAINER",
 	}
 }
 

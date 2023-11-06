@@ -8418,6 +8418,11 @@ func awsAwsjson11_deserializeDocumentInstanceDetails(v **types.InstanceDetails, 
 				return err
 			}
 
+		case "MemoryDBInstanceDetails":
+			if err := awsAwsjson11_deserializeDocumentMemoryDBInstanceDetails(&sv.MemoryDBInstanceDetails, value); err != nil {
+				return err
+			}
+
 		case "RDSInstanceDetails":
 			if err := awsAwsjson11_deserializeDocumentRDSInstanceDetails(&sv.RDSInstanceDetails, value); err != nil {
 				return err
@@ -8586,6 +8591,82 @@ func awsAwsjson11_deserializeDocumentMatchOptions(v *[]types.MatchOption, value 
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMemoryDBInstanceDetails(v **types.MemoryDBInstanceDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MemoryDBInstanceDetails
+	if *v == nil {
+		sv = &types.MemoryDBInstanceDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CurrentGeneration":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected GenericBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.CurrentGeneration = jtv
+			}
+
+		case "Family":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Family = ptr.String(jtv)
+			}
+
+		case "NodeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.NodeType = ptr.String(jtv)
+			}
+
+		case "Region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		case "SizeFlexEligible":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected GenericBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.SizeFlexEligible = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

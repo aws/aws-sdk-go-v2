@@ -51,7 +51,7 @@ type UpdateEnvironmentInput struct {
 	// resources used in your workflows are compatible with the new Apache Airflow
 	// version. For more information about updating your resources, see Upgrading an
 	// Amazon MWAA environment (https://docs.aws.amazon.com/mwaa/latest/userguide/upgrading-environment.html)
-	// . Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , and 2.5.1 .
+	// . Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2 .
 	AirflowVersion *string
 
 	// The relative path to the DAGs folder on your Amazon S3 bucket. For example, dags

@@ -748,8 +748,8 @@ type EBSResourceUtilization struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the Amazon EC2 instances that Amazon Web Services recommends that
-// you purchase.
+// Details about the Amazon EC2 reservations that Amazon Web Services recommends
+// that you purchase.
 type EC2InstanceDetails struct {
 
 	// The Availability Zone of the recommended reservation.
@@ -854,7 +854,7 @@ type EC2Specification struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the Amazon ElastiCache instances that Amazon Web Services
+// Details about the Amazon ElastiCache reservations that Amazon Web Services
 // recommends that you purchase.
 type ElastiCacheInstanceDetails struct {
 
@@ -879,8 +879,8 @@ type ElastiCacheInstanceDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the Amazon OpenSearch Service instances that Amazon Web Services
-// recommends that you purchase.
+// Details about the Amazon OpenSearch Service reservations that Amazon Web
+// Services recommends that you purchase.
 type ESInstanceDetails struct {
 
 	// Determines whether the recommendation is for a current-generation instance.
@@ -1071,26 +1071,54 @@ type Impact struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the instances that Amazon Web Services recommends that you
+// Details about the reservations that Amazon Web Services recommends that you
 // purchase.
 type InstanceDetails struct {
 
-	// The Amazon EC2 instances that Amazon Web Services recommends that you purchase.
+	// The Amazon EC2 reservations that Amazon Web Services recommends that you
+	// purchase.
 	EC2InstanceDetails *EC2InstanceDetails
 
-	// The Amazon OpenSearch Service instances that Amazon Web Services recommends
+	// The Amazon OpenSearch Service reservations that Amazon Web Services recommends
 	// that you purchase.
 	ESInstanceDetails *ESInstanceDetails
 
-	// The ElastiCache instances that Amazon Web Services recommends that you purchase.
+	// The ElastiCache reservations that Amazon Web Services recommends that you
+	// purchase.
 	ElastiCacheInstanceDetails *ElastiCacheInstanceDetails
 
-	// The Amazon RDS instances that Amazon Web Services recommends that you purchase.
+	// The MemoryDB reservations that Amazon Web Services recommends that you purchase.
+	MemoryDBInstanceDetails *MemoryDBInstanceDetails
+
+	// The Amazon RDS reservations that Amazon Web Services recommends that you
+	// purchase.
 	RDSInstanceDetails *RDSInstanceDetails
 
-	// The Amazon Redshift instances that Amazon Web Services recommends that you
+	// The Amazon Redshift reservations that Amazon Web Services recommends that you
 	// purchase.
 	RedshiftInstanceDetails *RedshiftInstanceDetails
+
+	noSmithyDocumentSerde
+}
+
+// Details about the MemoryDB reservations that Amazon Web Services recommends
+// that you purchase.
+type MemoryDBInstanceDetails struct {
+
+	// Determines whether the recommendation is for a current generation instance.
+	CurrentGeneration bool
+
+	// The instance family of the recommended reservation.
+	Family *string
+
+	// The node type of the recommended reservation.
+	NodeType *string
+
+	// The Amazon Web Services Region of the recommended reservation.
+	Region *string
+
+	// Determines whether the recommended reservation is size flexible.
+	SizeFlexEligible bool
 
 	noSmithyDocumentSerde
 }
@@ -1136,8 +1164,8 @@ type NetworkResourceUtilization struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the Amazon RDS instances that Amazon Web Services recommends that
-// you purchase.
+// Details about the Amazon RDS reservations that Amazon Web Services recommends
+// that you purchase.
 type RDSInstanceDetails struct {
 
 	// Determines whether the recommendation is for a current-generation instance.
@@ -1305,8 +1333,8 @@ type RecommendationDetailHourlyMetrics struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the Amazon Redshift instances that Amazon Web Services recommends
-// that you purchase.
+// Details about the Amazon Redshift reservations that Amazon Web Services
+// recommends that you purchase.
 type RedshiftInstanceDetails struct {
 
 	// Determines whether the recommendation is for a current-generation instance.
@@ -1482,7 +1510,7 @@ type ReservationPurchaseRecommendationDetail struct {
 	// during the specified historical period if you had a reservation.
 	EstimatedReservationCostForLookbackPeriod *string
 
-	// Details about the instances that Amazon Web Services recommends that you
+	// Details about the reservations that Amazon Web Services recommends that you
 	// purchase.
 	InstanceDetails *InstanceDetails
 

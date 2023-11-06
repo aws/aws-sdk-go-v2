@@ -59,6 +59,16 @@ type ModifyDBInstanceInput struct {
 	// Indicates the certificate that needs to be associated with the instance.
 	CACertificateIdentifier *string
 
+	// Specifies whether the DB instance is restarted when you rotate your SSL/TLS
+	// certificate. By default, the DB instance is restarted when you rotate your
+	// SSL/TLS certificate. The certificate is not updated until the DB instance is
+	// restarted. Set this parameter only if you are not using SSL/TLS to connect to
+	// the DB instance. If you are using SSL/TLS to connect to the DB instance, see
+	// Updating Your Amazon DocumentDB TLS Certificates (https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html)
+	// and Encrypting Data in Transit (https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html)
+	// in the Amazon DocumentDB Developer Guide.
+	CertificateRotationRestart *bool
+
 	// A value that indicates whether to copy all tags from the DB instance to
 	// snapshots of the DB instance. By default, tags are not copied.
 	CopyTagsToSnapshot *bool

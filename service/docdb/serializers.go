@@ -3965,6 +3965,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		objectKey.String(*v.AvailabilityZone)
 	}
 
+	if v.CACertificateIdentifier != nil {
+		objectKey := object.Key("CACertificateIdentifier")
+		objectKey.String(*v.CACertificateIdentifier)
+	}
+
 	if v.CopyTagsToSnapshot != nil {
 		objectKey := object.Key("CopyTagsToSnapshot")
 		objectKey.Boolean(*v.CopyTagsToSnapshot)
@@ -4953,6 +4958,11 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 	if v.CACertificateIdentifier != nil {
 		objectKey := object.Key("CACertificateIdentifier")
 		objectKey.String(*v.CACertificateIdentifier)
+	}
+
+	if v.CertificateRotationRestart != nil {
+		objectKey := object.Key("CertificateRotationRestart")
+		objectKey.Boolean(*v.CertificateRotationRestart)
 	}
 
 	if v.CopyTagsToSnapshot != nil {

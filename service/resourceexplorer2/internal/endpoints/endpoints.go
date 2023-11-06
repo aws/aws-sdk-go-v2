@@ -140,6 +140,16 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
+				Region: "af-south-1",
+			}: endpoints.Endpoint{
+				Hostname: "resource-explorer-2.af-south-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "ap-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "resource-explorer-2.ap-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-northeast-1",
 			}: endpoints.Endpoint{
 				Hostname: "resource-explorer-2.ap-northeast-1.api.aws",
@@ -205,6 +215,11 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "resource-explorer-2.eu-north-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "eu-south-1",
+			}: endpoints.Endpoint{
+				Hostname: "resource-explorer-2.eu-south-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-west-1",
 			}: endpoints.Endpoint{
 				Hostname: "resource-explorer-2.eu-west-1.api.aws",
@@ -223,6 +238,11 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "il-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "resource-explorer-2.il-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "me-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "resource-explorer-2.me-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "me-south-1",

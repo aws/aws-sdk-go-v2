@@ -22,6 +22,7 @@
         "api_op_AssociateSecurityKey.go",
         "api_op_AssociateTrafficDistributionGroupUser.go",
         "api_op_BatchGetFlowAssociation.go",
+        "api_op_BatchPutContact.go",
         "api_op_ClaimPhoneNumber.go",
         "api_op_CreateAgentStatus.go",
         "api_op_CreateContactFlow.go",

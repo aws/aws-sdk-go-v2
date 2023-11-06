@@ -91,8 +91,7 @@ type Build struct {
 	// The entity that started the build. Valid values include:
 	//   - If CodePipeline started the build, the pipeline's name (for example,
 	//   codepipeline/my-demo-pipeline ).
-	//   - If an IAM user started the build, the user's name (for example, MyUserName
-	//   ).
+	//   - If a user started the build, the user's name (for example, MyUserName ).
 	//   - If the Jenkins plugin for CodeBuild started the build, the string
 	//   CodeBuild-Jenkins-Plugin .
 	Initiator *string
@@ -291,7 +290,7 @@ type BuildBatch struct {
 	// The entity that started the batch build. Valid values include:
 	//   - If CodePipeline started the build, the pipeline's name (for example,
 	//   codepipeline/my-demo-pipeline ).
-	//   - If an IAM user started the build, the user's name.
+	//   - If a user started the build, the user's name.
 	//   - If the Jenkins plugin for CodeBuild started the build, the string
 	//   CodeBuild-Jenkins-Plugin .
 	Initiator *string
@@ -687,24 +686,29 @@ type EnvironmentVariable struct {
 
 	// The value of the environment variable. We strongly discourage the use of
 	// PLAINTEXT environment variables to store sensitive values, especially Amazon Web
-	// Services secret key IDs and secret access keys. PLAINTEXT environment variables
-	// can be displayed in plain text using the CodeBuild console and the CLI. For
-	// sensitive values, we recommend you use an environment variable of type
-	// PARAMETER_STORE or SECRETS_MANAGER .
+	// Services secret key IDs. PLAINTEXT environment variables can be displayed in
+	// plain text using the CodeBuild console and the CLI. For sensitive values, we
+	// recommend you use an environment variable of type PARAMETER_STORE or
+	// SECRETS_MANAGER .
 	//
 	// This member is required.
 	Value *string
 
 	// The type of environment variable. Valid values include:
 	//   - PARAMETER_STORE : An environment variable stored in Systems Manager
-	//   Parameter Store. To learn how to specify a parameter store environment variable,
-	//   see env/parameter-store (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.parameter-store)
+	//   Parameter Store. For environment variables of this type, specify the name of the
+	//   parameter as the value of the EnvironmentVariable. The parameter value will be
+	//   substituted for the name at runtime. You can also define Parameter Store
+	//   environment variables in the buildspec. To learn how to do so, see
+	//   env/parameter-store (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.parameter-store)
 	//   in the CodeBuild User Guide.
 	//   - PLAINTEXT : An environment variable in plain text format. This is the
 	//   default value.
-	//   - SECRETS_MANAGER : An environment variable stored in Secrets Manager. To
-	//   learn how to specify a secrets manager environment variable, see
-	//   env/secrets-manager (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.secrets-manager)
+	//   - SECRETS_MANAGER : An environment variable stored in Secrets Manager. For
+	//   environment variables of this type, specify the name of the secret as the
+	//   value of the EnvironmentVariable. The secret value will be substituted for the
+	//   name at runtime. You can also define Secrets Manager environment variables in
+	//   the buildspec. To learn how to do so, see env/secrets-manager (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.secrets-manager)
 	//   in the CodeBuild User Guide.
 	Type EnvironmentVariableType
 
@@ -763,13 +767,17 @@ type LogsLocation struct {
 	// Information about CloudWatch Logs for a build project.
 	CloudWatchLogs *CloudWatchLogsConfig
 
-	// The ARN of CloudWatch Logs for a build project. Its format is
+	// The ARN of the CloudWatch Logs stream for a build execution. Its format is
 	// arn:${Partition}:logs:${Region}:${Account}:log-group:${LogGroupName}:log-stream:${LogStreamName}
-	// . For more information, see Resources Defined by CloudWatch Logs (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatchlogs.html#amazoncloudwatchlogs-resources-for-iam-policies)
+	// . The CloudWatch Logs stream is created during the PROVISIONING phase of a build
+	// and the ARN will not be valid until it is created. For more information, see
+	// Resources Defined by CloudWatch Logs (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatchlogs.html#amazoncloudwatchlogs-resources-for-iam-policies)
 	// .
 	CloudWatchLogsArn *string
 
-	// The URL to an individual build log in CloudWatch Logs.
+	// The URL to an individual build log in CloudWatch Logs. The log stream is
+	// created during the PROVISIONING phase of a build and the deeplink will not be
+	// valid until it is created.
 	DeepLink *string
 
 	// The name of the CloudWatch Logs group for the build logs.
@@ -1175,6 +1183,23 @@ type ProjectEnvironment struct {
 	//   - BUILD_GENERAL1_2XLARGE : Use up to 145 GB memory, 72 vCPUs, and 824 GB of
 	//   SSD storage for builds. This compute type supports Docker images up to 100 GB
 	//   uncompressed.
+	//   - BUILD_LAMBDA_1GB : Use up to 1 GB memory for builds. Only available for
+	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
+	//   - BUILD_LAMBDA_2GB : Use up to 2 GB memory for builds. Only available for
+	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
+	//   - BUILD_LAMBDA_4GB : Use up to 4 GB memory for builds. Only available for
+	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
+	//   - BUILD_LAMBDA_8GB : Use up to 8 GB memory for builds. Only available for
+	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
+	//   - BUILD_LAMBDA_10GB : Use up to 10 GB memory for builds. Only available for
+	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
+	// If you use BUILD_GENERAL1_SMALL :
+	//   - For environment type LINUX_CONTAINER , you can use up to 3 GB memory and 2
+	//   vCPUs for builds.
+	//   - For environment type LINUX_GPU_CONTAINER , you can use up to 16 GB memory, 4
+	//   vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+	//   - For environment type ARM_CONTAINER , you can use up to 4 GB memory and 2
+	//   vCPUs on ARM-based processors for builds.
 	// If you use BUILD_GENERAL1_LARGE :
 	//   - For environment type LINUX_CONTAINER , you can use up to 15 GB memory and 8
 	//   vCPUs for builds.
@@ -1215,6 +1240,12 @@ type ProjectEnvironment struct {
 	//   (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
 	//   (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and
 	//   China (Ningxia).
+	//
+	//   - The environment types ARM_LAMBDA_CONTAINER and LINUX_LAMBDA_CONTAINER are
+	//   available only in regions US East (N. Virginia), US East (Ohio), US West
+	//   (Oregon), Asia Pacific (Mumbai), Asia Pacific (Singapore), Asia Pacific
+	//   (Sydney), Asia Pacific (Tokyo), EU (Frankfurt), EU (Ireland), and South America
+	//   (São Paulo).
 	//
 	//   - The environment types WINDOWS_CONTAINER and WINDOWS_SERVER_2019_CONTAINER
 	//   are available only in regions US East (N. Virginia), US East (Ohio), US West

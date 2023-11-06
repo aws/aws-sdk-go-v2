@@ -43,6 +43,22 @@ type Certificate struct {
 	noSmithyDocumentSerde
 }
 
+// Returns the details of the DB instance’s server certificate. For more
+// information, see Updating Your Amazon DocumentDB TLS Certificates (https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html)
+// and Encrypting Data in Transit (https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html)
+// in the Amazon DocumentDB Developer Guide.
+type CertificateDetails struct {
+
+	// The CA identifier of the CA certificate used for the DB instance's server
+	// certificate.
+	CAIdentifier *string
+
+	// The expiration date of the DB instance’s server certificate.
+	ValidTill *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The configuration setting for the log types to be enabled for export to Amazon
 // CloudWatch Logs for a specific instance or cluster. The EnableLogTypes and
 // DisableLogTypes arrays determine which logs are exported (or not exported) to
@@ -371,6 +387,16 @@ type DBEngineVersion struct {
 	// CloudWatch Logs.
 	ExportableLogTypes []string
 
+	// A list of the supported CA certificate identifiers. For more information, see
+	// Updating Your Amazon DocumentDB TLS Certificates (https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html)
+	// and Encrypting Data in Transit (https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html)
+	// in the Amazon DocumentDB Developer Guide.
+	SupportedCACertificateIdentifiers []string
+
+	// Indicates whether the engine version supports rotating the server certificate
+	// without rebooting the DB instance.
+	SupportsCertificateRotationWithoutRestart *bool
+
 	// A value that indicates whether the engine version supports exporting the log
 	// types specified by ExportableLogTypes to CloudWatch Logs.
 	SupportsLogExportsToCloudwatchLogs *bool
@@ -396,6 +422,9 @@ type DBInstance struct {
 
 	// The identifier of the CA certificate for this DB instance.
 	CACertificateIdentifier *string
+
+	// The details of the DB instance's server certificate.
+	CertificateDetails *CertificateDetails
 
 	// A value that indicates whether to copy tags from the DB instance to snapshots
 	// of the DB instance. By default, tags are not copied.

@@ -360,6 +360,26 @@ func (EncryptionType) Values() []EncryptionType {
 	}
 }
 
+type EndpointType string
+
+// Enum values for EndpointType
+const (
+	EndpointTypeTelephoneNumber EndpointType = "TELEPHONE_NUMBER"
+	EndpointTypeVoip            EndpointType = "VOIP"
+	EndpointTypeContactFlow     EndpointType = "CONTACT_FLOW"
+)
+
+// Values returns all known values for EndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointType) Values() []EndpointType {
+	return []EndpointType{
+		"TELEPHONE_NUMBER",
+		"VOIP",
+		"CONTACT_FLOW",
+	}
+}
+
 type EvaluationFormQuestionType string
 
 // Enum values for EvaluationFormQuestionType
@@ -498,6 +518,40 @@ func (EventSourceName) Values() []EventSourceName {
 		"OnSalesforceCaseCreate",
 		"OnContactEvaluationSubmit",
 		"OnMetricDataUpdate",
+	}
+}
+
+type FailureReasonCode string
+
+// Enum values for FailureReasonCode
+const (
+	FailureReasonCodeInvalidAttributeKey             FailureReasonCode = "INVALID_ATTRIBUTE_KEY"
+	FailureReasonCodeInvalidCustomerEndpoint         FailureReasonCode = "INVALID_CUSTOMER_ENDPOINT"
+	FailureReasonCodeInvalidSystemEndpoint           FailureReasonCode = "INVALID_SYSTEM_ENDPOINT"
+	FailureReasonCodeInvalidQueue                    FailureReasonCode = "INVALID_QUEUE"
+	FailureReasonCodeMissingCampaign                 FailureReasonCode = "MISSING_CAMPAIGN"
+	FailureReasonCodeMissingCustomerEndpoint         FailureReasonCode = "MISSING_CUSTOMER_ENDPOINT"
+	FailureReasonCodeMissingQueueIdAndSystemEndpoint FailureReasonCode = "MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT"
+	FailureReasonCodeRequestThrottled                FailureReasonCode = "REQUEST_THROTTLED"
+	FailureReasonCodeIdempotencyException            FailureReasonCode = "IDEMPOTENCY_EXCEPTION"
+	FailureReasonCodeInternalError                   FailureReasonCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for FailureReasonCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FailureReasonCode) Values() []FailureReasonCode {
+	return []FailureReasonCode{
+		"INVALID_ATTRIBUTE_KEY",
+		"INVALID_CUSTOMER_ENDPOINT",
+		"INVALID_SYSTEM_ENDPOINT",
+		"INVALID_QUEUE",
+		"MISSING_CAMPAIGN",
+		"MISSING_CUSTOMER_ENDPOINT",
+		"MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT",
+		"REQUEST_THROTTLED",
+		"IDEMPOTENCY_EXCEPTION",
+		"INTERNAL_ERROR",
 	}
 }
 

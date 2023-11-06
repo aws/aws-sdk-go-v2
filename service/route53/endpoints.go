@@ -599,6 +599,62 @@ func (r *resolver) ResolveEndpoint(
 					}
 				}
 			}
+			if _PartitionResult.Name == "aws-iso-e" {
+				if _UseFIPS == false {
+					if _UseDualStack == false {
+						uriString := "https://route53.cloud.adc-e.uk"
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								out.Set("authSchemes", []interface{}{
+									map[string]interface{}{
+										"name":          "sigv4",
+										"signingName":   "route53",
+										"signingRegion": "eu-isoe-west-1",
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+				}
+			}
+			if _PartitionResult.Name == "aws-iso-f" {
+				if _UseFIPS == false {
+					if _UseDualStack == false {
+						uriString := "https://route53.csp.hci.ic.gov"
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								out.Set("authSchemes", []interface{}{
+									map[string]interface{}{
+										"name":          "sigv4",
+										"signingName":   "route53",
+										"signingRegion": "us-isof-south-1",
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+				}
+			}
 			if _UseFIPS == true {
 				if _UseDualStack == true {
 					if true == _PartitionResult.SupportsFIPS {

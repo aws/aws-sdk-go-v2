@@ -1,0 +1,8 @@
+{
+    "id": "c9290f91-2f28-4d50-8f80-1dc466861d61",
+    "type": "feature",
+    "description": "Update the input of CreateDBInstance and ModifyDBInstance to support setting CA Certificates. Update the output of DescribeDBInstance and DescribeDBEngineVersions to show current and supported CA certificates.",
+    "modules": [
+        "service/docdb"
+    ]
+}

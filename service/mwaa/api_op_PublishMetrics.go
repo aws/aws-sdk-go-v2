@@ -17,6 +17,9 @@ import (
 )
 
 // Internal only. Publishes environment health metrics to Amazon CloudWatch.
+//
+// Deprecated: This API is for internal use and not meant for public use, and is
+// no longer available.
 func (c *Client) PublishMetrics(ctx context.Context, params *PublishMetricsInput, optFns ...func(*Options)) (*PublishMetricsOutput, error) {
 	if params == nil {
 		params = &PublishMetricsInput{}
@@ -45,6 +48,9 @@ type PublishMetricsInput struct {
 	// .
 	//
 	// This member is required.
+	//
+	// Deprecated: This type is for internal use and not meant for public use. Data
+	// set for this type will be ignored.
 	MetricData []types.MetricDatum
 
 	noSmithyDocumentSerde

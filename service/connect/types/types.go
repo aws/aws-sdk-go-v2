@@ -225,6 +225,15 @@ type AvailableNumberSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Information associated with a campaign.
+type Campaign struct {
+
+	// A unique identifier for a campaign.
+	CampaignId *string
+
+	noSmithyDocumentSerde
+}
+
 // A chat message.
 type ChatMessage struct {
 
@@ -395,6 +404,32 @@ type Contact struct {
 
 	// Information about Amazon Connect Wisdom.
 	WisdomInfo *WisdomInfo
+
+	noSmithyDocumentSerde
+}
+
+// Request object with information to create a contact.
+type ContactDataRequest struct {
+
+	// List of attributes to be stored in a contact.
+	Attributes map[string]string
+
+	// Structure to store information associated with a campaign.
+	Campaign *Campaign
+
+	// Endpoint of the customer for which contact will be initiated.
+	CustomerEndpoint *Endpoint
+
+	// The identifier of the queue associated with the Amazon Connect instance in
+	// which contacts that are created will be queued.
+	QueueId *string
+
+	// Identifier to uniquely identify individual requests in the batch.
+	RequestIdentifier *string
+
+	// Endpoint associated with the Amazon Connect instance from which outbound
+	// contact will be initiated for the campaign.
+	SystemEndpoint *Endpoint
 
 	noSmithyDocumentSerde
 }
@@ -677,6 +712,16 @@ type Dimensions struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about why a contact was disconnected. Only Amazon Connect
+// outbound campaigns can provide this field.
+type DisconnectReason struct {
+
+	// A code that indicates how the contact was terminated.
+	Code *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a traffic distribution.
 type Distribution struct {
 
@@ -720,6 +765,18 @@ type EncryptionConfig struct {
 	//
 	// This member is required.
 	KeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the endpoint.
+type Endpoint struct {
+
+	// Address of the endpoint.
+	Address *string
+
+	// Type of the endpoint.
+	Type EndpointType
 
 	noSmithyDocumentSerde
 }
@@ -1440,6 +1497,22 @@ type EventBridgeActionDefinition struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Request for which contact failed to be generated.
+type FailedRequest struct {
+
+	// Reason code for the failure.
+	FailureReasonCode FailureReasonCode
+
+	// Why the request to create a contact failed.
+	FailureReasonMessage *string
+
+	// Request identifier provided in the API call in the ContactDataRequest to create
+	// a contact.
+	RequestIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -3596,6 +3669,19 @@ type StringReference struct {
 
 	// A valid string.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Request for which contact was successfully created.
+type SuccessfulRequest struct {
+
+	// The contactId of the contact that was created successfully.
+	ContactId *string
+
+	// Request identifier provided in the API call in the ContactDataRequest to create
+	// a contact.
+	RequestIdentifier *string
 
 	noSmithyDocumentSerde
 }

@@ -10,6 +10,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -50,6 +51,10 @@ type StopContactInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	// The reason a contact can be disconnected. Only Amazon Connect outbound
+	// campaigns can provide this field.
+	DisconnectReason *types.DisconnectReason
 
 	noSmithyDocumentSerde
 }

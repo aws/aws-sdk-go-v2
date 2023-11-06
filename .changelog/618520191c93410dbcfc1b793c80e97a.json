@@ -1,0 +1,8 @@
+{
+    "id": "61852019-1c93-410d-bcfc-1b793c80e97a",
+    "type": "feature",
+    "description": "Amazon Polly adds new US English voices - Danielle and Gregory. Danielle and Gregory are available as Neural voices only.",
+    "modules": [
+        "service/polly"
+    ]
+}

@@ -36,7 +36,7 @@ type Environment struct {
 	AirflowConfigurationOptions map[string]string
 
 	// The Apache Airflow version on your environment. Valid values: 1.10.12 , 2.0.2 ,
-	// 2.2.2 , 2.4.3 , and 2.5.1 .
+	// 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2 .
 	AirflowVersion *string
 
 	// The Amazon Resource Name (ARN) of the Amazon MWAA environment.
@@ -281,9 +281,15 @@ type MetricDatum struct {
 	Timestamp *time.Time
 
 	// Internal only. The dimensions associated with the metric.
+	//
+	// Deprecated: This type is for internal use and not meant for public use. Data
+	// set for this type will be ignored.
 	Dimensions []Dimension
 
 	// Internal only. The statistical values for the metric.
+	//
+	// Deprecated: This type is for internal use and not meant for public use. Data
+	// set for this type will be ignored.
 	StatisticValues *StatisticSet
 
 	// Internal only. The unit used to store the metric.
