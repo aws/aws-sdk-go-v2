@@ -71,7 +71,9 @@ public class AwsEndpointResolverInitializerGenerator implements GoIntegration {
         return goTemplate(
             """
                 func $resolveMethodName:L(options *Options) {
-                    options.EndpointResolverV2 = $newResolverFuncName:L()
+                    if options.EndpointResolverV2 == nil {
+                        options.EndpointResolverV2 = $newResolverFuncName:L()
+                    }
                 }
             """,
             MapUtils.of(
