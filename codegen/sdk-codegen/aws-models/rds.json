@@ -409,7 +409,13 @@
                     "target": "com.amazonaws.rds#DBSnapshotNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#DBSnapshotTenantDatabaseNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.rds#IntegrationNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#TenantDatabaseNotFoundFault"
                 }
             ],
             "traits": {
@@ -554,6 +560,9 @@
                     "target": "com.amazonaws.rds#CreateOptionGroup"
                 },
                 {
+                    "target": "com.amazonaws.rds#CreateTenantDatabase"
+                },
+                {
                     "target": "com.amazonaws.rds#DeleteBlueGreenDeployment"
                 },
                 {
@@ -609,6 +618,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#DeleteOptionGroup"
+                },
+                {
+                    "target": "com.amazonaws.rds#DeleteTenantDatabase"
                 },
                 {
                     "target": "com.amazonaws.rds#DeregisterDBProxyTargets"
@@ -686,6 +698,9 @@
                     "target": "com.amazonaws.rds#DescribeDBSnapshots"
                 },
                 {
+                    "target": "com.amazonaws.rds#DescribeDBSnapshotTenantDatabases"
+                },
+                {
                     "target": "com.amazonaws.rds#DescribeDBSubnetGroups"
                 },
                 {
@@ -732,6 +747,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#DescribeSourceRegions"
+                },
+                {
+                    "target": "com.amazonaws.rds#DescribeTenantDatabases"
                 },
                 {
                     "target": "com.amazonaws.rds#DescribeValidDBInstanceModifications"
@@ -804,6 +822,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#ModifyOptionGroup"
+                },
+                {
+                    "target": "com.amazonaws.rds#ModifyTenantDatabase"
                 },
                 {
                     "target": "com.amazonaws.rds#PromoteReadReplica"
@@ -1944,6 +1965,17 @@
                             "documentation": "Missing region",
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
+                            }
+                        },
+                        {
+                            "documentation": "Partition doesn't support DualStack",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         }
                     ],
@@ -4620,6 +4652,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#StorageTypeNotSupportedFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#TenantDatabaseQuotaExceededFault"
                 }
             ],
             "traits": {
@@ -5104,6 +5139,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>"
                     }
+                },
+                "MultiTenant": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to use the multi-tenant configuration or the single-tenant\n            configuration (default). This parameter only applies to RDS for Oracle container\n            database (CDB) engines.</p>\n         <p>Note the following restrictions: </p>\n         <ul>\n            <li>\n               <p>The DB engine that you specify in the request must support the multi-tenant\n                    configuration. If you attempt to enable the multi-tenant configuration on a DB\n                    engine that doesn't support it, the request fails.</p>\n            </li>\n            <li>\n               <p>If you specify the multi-tenant configuration when you create your DB instance,\n                    you can't later modify this DB instance to use the single-tenant configuration.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -5185,6 +5226,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#StorageTypeNotSupportedFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#TenantDatabaseQuotaExceededFault"
                 }
             ],
             "traits": {
@@ -6516,6 +6560,98 @@
             "members": {
                 "OptionGroup": {
                     "target": "com.amazonaws.rds#OptionGroup"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rds#CreateTenantDatabase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#CreateTenantDatabaseMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#CreateTenantDatabaseResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rds#DBInstanceNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidDBInstanceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#TenantDatabaseAlreadyExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#TenantDatabaseQuotaExceededFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a tenant database in a DB instance that uses the multi-tenant configuration.\n            Only RDS for Oracle container database (CDB) instances are supported.</p>"
+            }
+        },
+        "com.amazonaws.rds#CreateTenantDatabaseMessage": {
+            "type": "structure",
+            "members": {
+                "DBInstanceIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The user-supplied DB instance identifier. RDS creates your tenant database in this DB\n            instance. This parameter isn't case-sensitive.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TenantDBName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The user-supplied name of the tenant database that you want to create in your DB\n            instance. This parameter has the same constraints as <code>DBName</code> in\n                <code>CreateDBInstance</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MasterUsername": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name for the master user account in your tenant database. RDS creates this user\n            account in the tenant database and grants privileges to the master user. This parameter\n            is case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 16 letters, numbers, or underscores.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Can't be a reserved word for the chosen database engine.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MasterUserPassword": {
+                    "target": "com.amazonaws.rds#SensitiveString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The password for the master user in your tenant database.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 8 to 30 characters.</p>\n            </li>\n            <li>\n               <p>Can include any printable ASCII character except forward slash\n                    (<code>/</code>), double quote (<code>\"</code>), at symbol (<code>@</code>),\n                    ampersand (<code>&</code>), or single quote (<code>'</code>).</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CharacterSetName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The character set for your tenant database. If you don't specify a value, the\n            character set name defaults to <code>AL32UTF8</code>.</p>"
+                    }
+                },
+                "NcharCharacterSetName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>NCHAR</code> value for the tenant database.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.rds#TagList"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.rds#CreateTenantDatabaseResult": {
+            "type": "structure",
+            "members": {
+                "TenantDatabase": {
+                    "target": "com.amazonaws.rds#TenantDatabase"
                 }
             },
             "traits": {
@@ -8501,7 +8637,7 @@
                 "DBName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the initial database name that you provided (if required) when you created\n            the DB instance. This name is returned for the life of your DB instance. For an RDS for\n            Oracle CDB instance, the name identifies the PDB rather than the CDB.</p>"
+                        "smithy.api#documentation": "<p>The initial database name that you provided (if required) when you created\n            the DB instance. This name is returned for the life of your DB instance. For an RDS for\n            Oracle CDB instance, the name identifies the PDB rather than the CDB.</p>"
                     }
                 },
                 "Endpoint": {
@@ -8962,6 +9098,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether an upgrade is recommended for the storage file system configuration\n            on the DB instance. To migrate to the preferred configuration, you can either create a\n            blue/green deployment, or create a read replica from the DB instance. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem\">Upgrading the storage file system for a DB instance</a>.</p>"
                     }
+                },
+                "MultiTenant": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the DB instance is in the multi-tenant configuration (TRUE) or the\n            single-tenant configuration (FALSE).</p>"
+                    }
                 }
             },
             "traits": {
@@ -9166,6 +9308,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>"
+                    }
+                },
+                "MultiTenant": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the automatic backup is for a DB instance in the multi-tenant\n            configuration (TRUE) or the single-tenant configuration (FALSE). </p>"
                     }
                 }
             },
@@ -9405,7 +9553,7 @@
                 "Normal": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that is true if the instance is operating normally, or false if the instance is in an error state.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the instance is operating normally (TRUE) or is in an error state (FALSE).</p>"
                     }
                 },
                 "Status": {
@@ -10608,6 +10756,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>"
                     }
+                },
+                "MultiTenant": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the snapshot is of a DB instance using the multi-tenant\n            configuration (TRUE) or the single-tenant configuration (FALSE).</p>"
+                    }
                 }
             },
             "traits": {
@@ -10725,6 +10879,135 @@
                 "smithy.api#documentation": "<p>\n            <code>DBSnapshotIdentifier</code> doesn't refer to an existing DB snapshot.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.rds#DBSnapshotTenantDatabase": {
+            "type": "structure",
+            "members": {
+                "DBSnapshotIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the snapshot of the DB instance.</p>"
+                    }
+                },
+                "DBInstanceIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the DB instance that contains the tenant databases.</p>"
+                    }
+                },
+                "DbiResourceId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource identifier of the source CDB instance. This identifier can't be changed\n            and is unique to an Amazon Web Services Region.</p>"
+                    }
+                },
+                "EngineName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database engine.</p>"
+                    }
+                },
+                "SnapshotType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of DB snapshot.</p>"
+                    }
+                },
+                "TenantDatabaseCreateTime": {
+                    "target": "com.amazonaws.rds#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the DB snapshot was taken, specified in Coordinated Universal Time (UTC). If\n            you copy the snapshot, the creation time changes.</p>"
+                    }
+                },
+                "TenantDBName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant database.</p>"
+                    }
+                },
+                "MasterUsername": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The master username of the tenant database.</p>"
+                    }
+                },
+                "TenantDatabaseResourceId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ID of the tenant database.</p>"
+                    }
+                },
+                "CharacterSetName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the character set of a tenant database.</p>"
+                    }
+                },
+                "DBSnapshotTenantDatabaseARN": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the snapshot tenant database.</p>"
+                    }
+                },
+                "NcharCharacterSetName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>NCHAR</code> character set name of the tenant database.</p>"
+                    }
+                },
+                "TagList": {
+                    "target": "com.amazonaws.rds#TagList"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the details of a tenant database in a snapshot of a DB instance.</p>"
+            }
+        },
+        "com.amazonaws.rds#DBSnapshotTenantDatabaseNotFoundFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rds#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBSnapshotTenantDatabaseNotFoundFault",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The specified snapshot tenant database wasn't found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.rds#DBSnapshotTenantDatabasesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#DBSnapshotTenantDatabase",
+                "traits": {
+                    "smithy.api#xmlName": "DBSnapshotTenantDatabase"
+                }
+            }
+        },
+        "com.amazonaws.rds#DBSnapshotTenantDatabasesMessage": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is\n            specified, the response includes only records beyond the marker, up to the value\n            specified by <code>MaxRecords</code>.</p>"
+                    }
+                },
+                "DBSnapshotTenantDatabases": {
+                    "target": "com.amazonaws.rds#DBSnapshotTenantDatabasesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of DB snapshot tenant databases.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DBSubnetGroup": {
@@ -12113,6 +12396,76 @@
             "traits": {
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.rds#DeleteTenantDatabase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#DeleteTenantDatabaseMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#DeleteTenantDatabaseResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rds#DBInstanceNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidDBInstanceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#TenantDatabaseNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a tenant database from your DB instance. This command only applies to RDS for\n            Oracle container database (CDB) instances.</p>\n         <p>You can't delete a tenant database when it is the only tenant in the DB\n            instance.</p>"
+            }
+        },
+        "com.amazonaws.rds#DeleteTenantDatabaseMessage": {
+            "type": "structure",
+            "members": {
+                "DBInstanceIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The user-supplied identifier for the DB instance that contains the tenant database\n            that you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TenantDBName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The user-supplied name of the tenant database that you want to remove from your DB\n            instance. Amazon RDS deletes the tenant database with this name. This parameter isn’t\n            case-sensitive.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SkipFinalSnapshot": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to skip the creation of a final DB snapshot before removing the\n            tenant database from your DB instance. If you enable this parameter, RDS doesn't create\n            a DB snapshot. If you don't enable this parameter, RDS creates a DB snapshot before it\n            deletes the tenant database. By default, RDS doesn't skip the final snapshot. If you\n            don't enable this parameter, you must specify the <code>FinalDBSnapshotIdentifier</code>\n            parameter.</p>"
+                    }
+                },
+                "FinalDBSnapshotIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>DBSnapshotIdentifier</code> of the new <code>DBSnapshot</code> created when\n            the <code>SkipFinalSnapshot</code> parameter is disabled.</p>\n         <note>\n            <p>If you enable this parameter and also enable <code>SkipFinalShapshot</code>, the\n                command results in an error.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.rds#DeleteTenantDatabaseResult": {
+            "type": "structure",
+            "members": {
+                "TenantDatabase": {
+                    "target": "com.amazonaws.rds#TenantDatabase"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DeregisterDBProxyTargets": {
@@ -14772,6 +15125,79 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.rds#DescribeDBSnapshotTenantDatabases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#DescribeDBSnapshotTenantDatabasesMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#DBSnapshotTenantDatabasesMessage"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rds#DBSnapshotNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the tenant databases that exist in a DB snapshot. This command only applies\n            to RDS for Oracle DB instances in the multi-tenant configuration.</p>\n         <p>You can use this command to inspect the tenant databases within a snapshot before\n            restoring it. You can't directly interact with the tenant databases in a DB snapshot. If\n            you restore a snapshot that was taken from DB instance using the multi-tenant\n            configuration, you restore all its tenant databases.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "DBSnapshotTenantDatabases",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.rds#DescribeDBSnapshotTenantDatabasesMessage": {
+            "type": "structure",
+            "members": {
+                "DBInstanceIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the DB instance used to create the DB snapshots. This parameter isn't\n            case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If supplied, must match the identifier of an existing <code>DBInstance</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DBSnapshotIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a DB snapshot that contains the tenant databases to describe. This value is\n            stored as a lowercase string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If you specify this parameter, the value must match the ID of an existing DB snapshot.</p>\n            </li>\n            <li>\n               <p>If you specify an automatic snapshot, you must also specify\n                <code>SnapshotType</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "SnapshotType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of DB snapshots to be returned. You can specify one of the following\n            values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>automated</code> – All DB snapshots that have been automatically taken\n                    by Amazon RDS for my Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>manual</code> – All DB snapshots that have been taken by my Amazon Web\n                    Services account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>shared</code> – All manual DB snapshots that have been shared to my\n                    Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>public</code> – All DB snapshots that have been marked as public.</p>\n            </li>\n            <li>\n               <p>\n                  <code>awsbackup</code> – All DB snapshots managed by the Amazon Web Services Backup\n                    service.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.rds#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that specifies one or more tenant databases to describe.</p>\n         <p>Supported filters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tenant-db-name</code> - Tenant database names. The results list only\n                    includes information about the tenant databases that match these tenant DB\n                    names.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tenant-database-resource-id</code> - Tenant database resource\n                    identifiers. The results list only includes information about the tenant\n                    databases contained within the DB snapshots.</p>\n            </li>\n            <li>\n               <p>\n                  <code>dbi-resource-id</code> - DB instance resource identifiers. The results\n                    list only includes information about snapshots containing tenant databases\n                    contained within the DB instances identified by these resource\n                    identifiers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance\n                    Amazon Resource Names (ARNs).</p>\n            </li>\n            <li>\n               <p>\n                  <code>db-snapshot-id</code> - Accepts DB snapshot identifiers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>snapshot-type</code> - Accepts types of DB snapshots.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records exist than\n            the specified <code>MaxRecords</code> value, a pagination token called a marker is\n            included in the response so that you can retrieve the remaining results.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous\n                <code>DescribeDBSnapshotTenantDatabases</code> request. If this parameter is\n            specified, the response includes only records beyond the marker, up to the value\n            specified by <code>MaxRecords</code>.</p>"
+                    }
+                },
+                "DbiResourceId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A specific DB resource identifier to describe.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.rds#DescribeDBSnapshots": {
             "type": "operation",
             "input": {
@@ -16687,6 +17113,135 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.rds#DescribeTenantDatabases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#DescribeTenantDatabasesMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#TenantDatabasesMessage"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rds#DBInstanceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the tenant databases in a DB instance that uses the multi-tenant\n            configuration. Only RDS for Oracle CDB instances are supported.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "TenantDatabases",
+                    "pageSize": "MaxRecords"
+                },
+                "smithy.waiters#waitable": {
+                    "TenantDatabaseAvailable": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "TenantDatabases[].Status",
+                                        "expected": "available",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "TenantDatabases[].Status",
+                                        "expected": "deleted",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "TenantDatabases[].Status",
+                                        "expected": "incompatible-parameters",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "TenantDatabases[].Status",
+                                        "expected": "incompatible-restore",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 30
+                    },
+                    "TenantDatabaseDeleted": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "length(TenantDatabases) == `0`",
+                                        "expected": "true",
+                                        "comparator": "booleanEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "DBInstanceNotFoundFault"
+                                }
+                            }
+                        ],
+                        "minDelay": 30
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rds#DescribeTenantDatabasesMessage": {
+            "type": "structure",
+            "members": {
+                "DBInstanceIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-supplied DB instance identifier, which must match the identifier of an\n            existing instance owned by the Amazon Web Services account. This parameter isn't\n            case-sensitive.</p>"
+                    }
+                },
+                "TenantDBName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-supplied tenant database name, which must match the name of an existing\n            tenant database on the specified DB instance owned by your Amazon Web Services account. This parameter\n            isn’t case-sensitive.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.rds#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that specifies one or more database tenants to describe.</p>\n         <p>Supported filters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tenant-db-name</code> - Tenant database names. The results list only\n                    includes information about the tenant databases that match these tenant DB\n                    names.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tenant-database-resource-id</code> - Tenant database resource\n                    identifiers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>dbi-resource-id</code> - DB instance resource identifiers. The results\n                    list only includes information about the tenants contained within the DB\n                    instances identified by these resource identifiers.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous\n                <code>DescribeTenantDatabases</code> request. If this parameter is specified, the\n            response includes only records beyond the marker, up to the value specified by\n                <code>MaxRecords</code>.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records exist than\n            the specified <code>MaxRecords</code> value, a pagination token called a marker is\n            included in the response so that you can retrieve the remaining results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.rds#DescribeValidDBInstanceModifications": {
             "type": "operation",
             "input": {
@@ -17293,7 +17848,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value indicating if the subscription is enabled. True indicates the subscription is enabled.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the subscription is enabled. True indicates the subscription is enabled.</p>"
                     }
                 },
                 "EventSubscriptionArn": {
@@ -17711,7 +18266,7 @@
                 "Status": {
                     "target": "com.amazonaws.rds#FailoverStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the global cluster. Possible values are as follows:</p>\n         <ul>\n            <li>\n               <p>pending  The service received a request to switch over or fail over the global cluster. The\n        global cluster's primary DB cluster and the specified secondary DB cluster are being verified before the operation\n        starts.</p>\n            </li>\n            <li>\n               <p>failing-over  This status covers the range of Aurora internal operations that take place during the switchover or failover process, such\n        as demoting the primary Aurora DB cluster, promoting the secondary Aurora DB cluster, and synchronizing replicas.</p>\n            </li>\n            <li>\n               <p>cancelling  The request to switch over or fail over the global cluster was cancelled and the primary\n        Aurora DB cluster and the selected secondary Aurora DB cluster are returning to their previous states.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current status of the global cluster. Possible values are as follows:</p>\n         <ul>\n            <li>\n               <p>pending  The service received a request to switch over or fail over the global cluster. The\n        global cluster's primary DB cluster and the specified secondary DB cluster are being verified before the operation\n        starts.</p>\n            </li>\n            <li>\n               <p>failing-over  Aurora is promoting the chosen secondary Aurora DB cluster to become the new primary DB cluster to fail over the global cluster.</p>\n            </li>\n            <li>\n               <p>cancelling  The request to switch over or fail over the global cluster was cancelled and the primary\n        Aurora DB cluster and the selected secondary Aurora DB cluster are returning to their previous states.</p>\n            </li>\n            <li>\n               <p>switching-over  This status covers the range of Aurora internal operations that take place during the switchover process, such\n        as demoting the primary Aurora DB cluster, promoting the secondary Aurora DB cluster, and synchronizing replicas.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "FromDbClusterArn": {
@@ -19000,7 +19555,13 @@
                     "target": "com.amazonaws.rds#DBSnapshotNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#DBSnapshotTenantDatabaseNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.rds#IntegrationNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#TenantDatabaseNotFoundFault"
                 }
             ],
             "traits": {
@@ -20185,6 +20746,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#StorageTypeNotSupportedFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#TenantDatabaseQuotaExceededFault"
                 }
             ],
             "traits": {
@@ -20256,7 +20820,7 @@
                 "DBInstanceClass": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new compute and memory capacity of the DB instance, for example <code>db.m4.large</code>. Not all DB instance classes are available in all\n            Amazon Web Services Regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB Instance Class</a> in the \n                <i>Amazon RDS User Guide</i> or \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html\">Aurora\n                DB instance classes</a> in the <i>Amazon Aurora User Guide</i>. For RDS Custom, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.instances\">DB instance class support for RDS Custom for Oracle</a> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html#custom-reqs-limits.instancesMS\">\n                DB instance class support for RDS Custom for SQL Server</a>.</p>\n         <p>If you modify the DB instance class, an outage occurs during the change. The change is\n            applied during the next maintenance window, unless you specify\n                <code>ApplyImmediately</code> in your request. </p>\n         <p>Default: Uses existing setting</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If you are modifying the DB instance class and upgrading the engine version at the same time, the currently running engine version must be supported on the \n            specified DB instance class. Otherwise, the operation returns an error. In this case, first run the operation to modify the DB instance class, \n            and then run it again to upgrade the engine version.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The new compute and memory capacity of the DB instance, for example <code>db.m4.large</code>. Not all DB instance classes are available in all\n            Amazon Web Services Regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB Instance Class</a> in the \n                <i>Amazon RDS User Guide</i> or \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html\">Aurora\n                DB instance classes</a> in the <i>Amazon Aurora User Guide</i>. For RDS Custom, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.instances\">DB instance class support for RDS Custom for Oracle</a> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html#custom-reqs-limits.instancesMS\">\n                DB instance class support for RDS Custom for SQL Server</a>.</p>\n         <p>If you modify the DB instance class, an outage occurs during the change. The change is\n            applied during the next maintenance window, unless you specify\n                <code>ApplyImmediately</code> in your request. </p>\n         <p>Default: Uses existing setting</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If you are modifying the DB instance class and upgrading the engine version at the same time, the currently running engine version must be supported on the \n            specified DB instance class. Otherwise, the operation returns an error. In this case, first run the operation to upgrade the engine version, \n            and then run it again to modify the DB instance class.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DBSubnetGroupName": {
@@ -20322,7 +20886,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the database engine to upgrade to. \n    Changing this parameter results in an outage and the change \n    is applied during the next maintenance window\n    unless the <code>ApplyImmediately</code> parameter is enabled for this request.</p>\n         <p>For major version upgrades, if a nondefault DB parameter group is currently in use, a\n            new DB parameter group in the DB parameter group family for the new engine version must\n            be specified. The new DB parameter group can be the default for that DB parameter group\n            family.</p>\n         <p>If you specify only a major version, Amazon RDS updates the DB instance to the \n          default minor version if the current minor version is lower.\n          For information about valid engine versions, see <code>CreateDBInstance</code>, \n          or call <code>DescribeDBEngineVersions</code>.</p>\n         <p>If the instance that you're modifying is acting as a read replica, the engine version\n            that you specify must be the same or higher than the version that the source DB instance\n            or cluster is running.</p>\n         <p>In RDS Custom for Oracle, this parameter is supported for read replicas only if they are in the \n          <code>PATCH_DB_FAILURE</code> lifecycle.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If you are upgrading the engine version and modifying the DB instance class at the same time, the currently running engine version must be supported on the \n            specified DB instance class. Otherwise, the operation returns an error. In this case, first run the operation to modify the DB instance class, \n            and then run it again to upgrade the engine version.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The version number of the database engine to upgrade to. \n    Changing this parameter results in an outage and the change \n    is applied during the next maintenance window\n    unless the <code>ApplyImmediately</code> parameter is enabled for this request.</p>\n         <p>For major version upgrades, if a nondefault DB parameter group is currently in use, a\n            new DB parameter group in the DB parameter group family for the new engine version must\n            be specified. The new DB parameter group can be the default for that DB parameter group\n            family.</p>\n         <p>If you specify only a major version, Amazon RDS updates the DB instance to the \n          default minor version if the current minor version is lower.\n          For information about valid engine versions, see <code>CreateDBInstance</code>, \n          or call <code>DescribeDBEngineVersions</code>.</p>\n         <p>If the instance that you're modifying is acting as a read replica, the engine version\n            that you specify must be the same or higher than the version that the source DB instance\n            or cluster is running.</p>\n         <p>In RDS Custom for Oracle, this parameter is supported for read replicas only if they are in the \n          <code>PATCH_DB_FAILURE</code> lifecycle.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If you are upgrading the engine version and modifying the DB instance class at the same time, the currently running engine version must be supported on the \n            specified DB instance class. Otherwise, the operation returns an error. In this case, first run the operation to upgrade the engine version, \n            and then run it again to modify the DB instance class.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "AllowMajorVersionUpgrade": {
@@ -20593,6 +21157,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>"
+                    }
+                },
+                "MultiTenant": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the to convert your DB instance from the single-tenant conﬁguration\n            to the multi-tenant conﬁguration. This parameter is supported only for RDS for Oracle\n            CDB instances.</p>\n         <p>During the conversion, RDS creates an initial tenant database and associates the DB\n            name, master user name, character set, and national character set metadata with this\n            database. The tags associated with the instance also propagate to the initial tenant\n            database. You can add more tenant databases to your DB instance by using the\n                <code>CreateTenantDatabase</code> operation.</p>\n         <important>\n            <p>The conversion to the multi-tenant configuration is permanent and irreversible, so\n                you can't later convert back to the single-tenant configuration. When you specify\n                this parameter, you must also specify <code>ApplyImmediately</code>.</p>\n         </important>"
                     }
                 }
             },
@@ -21518,6 +22088,79 @@
             "members": {
                 "OptionGroup": {
                     "target": "com.amazonaws.rds#OptionGroup"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rds#ModifyTenantDatabase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#ModifyTenantDatabaseMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#ModifyTenantDatabaseResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rds#DBInstanceNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidDBInstanceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#TenantDatabaseAlreadyExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#TenantDatabaseNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies an existing tenant database in a DB instance. You can change the tenant\n            database name or the master user password. This operation is supported only for RDS for\n            Oracle CDB instances using the multi-tenant configuration.</p>"
+            }
+        },
+        "com.amazonaws.rds#ModifyTenantDatabaseMessage": {
+            "type": "structure",
+            "members": {
+                "DBInstanceIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The identifier of the DB instance that contains the tenant database that you are\n            modifying. This parameter isn't case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing DB instance.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TenantDBName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The user-supplied name of the tenant database that you want to modify. This parameter\n            isn’t case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing tenant database.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MasterUserPassword": {
+                    "target": "com.amazonaws.rds#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new password for the master user of the specified tenant database in your DB\n            instance.</p>\n         <note>\n            <p>Amazon RDS operations never return the password, so this action provides a way to regain\n                access to a tenant database user if the password is lost. This includes restoring\n                privileges that might have been accidentally revoked.</p>\n         </note>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can include any printable ASCII character except <code>/</code>, <code>\"</code> (double\n                    quote), <code>@</code>, <code>&</code> (ampersand), and <code>'</code>\n                    (single quote).</p>\n            </li>\n         </ul>\n         <p>Length constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain between 8 and 30 characters. </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "NewTenantDBName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new name of the tenant database when renaming a tenant database. This parameter\n            isn’t case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't be the string null or any other reserved word.</p>\n            </li>\n            <li>\n               <p>Can't be longer than 8 characters.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.rds#ModifyTenantDatabaseResult": {
+            "type": "structure",
+            "members": {
+                "TenantDatabase": {
+                    "target": "com.amazonaws.rds#TenantDatabase"
                 }
             },
             "traits": {
@@ -22767,6 +23410,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.></p>"
                     }
+                },
+                "MultiTenant": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the DB instance will change to the multi-tenant configuration (TRUE)\n            or the single-tenant configuration (FALSE). </p>"
+                    }
                 }
             },
             "traits": {
@@ -23716,7 +24365,13 @@
                     "target": "com.amazonaws.rds#DBSnapshotNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#DBSnapshotTenantDatabaseNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.rds#IntegrationNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#TenantDatabaseNotFoundFault"
                 }
             ],
             "traits": {
@@ -25324,6 +25979,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#StorageTypeNotSupportedFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#TenantDatabaseQuotaExceededFault"
                 }
             ],
             "traits": {
@@ -26092,6 +26750,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#StorageTypeNotSupportedFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#TenantDatabaseQuotaExceededFault"
                 }
             ],
             "traits": {
@@ -26716,6 +27377,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The scaling configuration for an Aurora DB cluster in <code>serverless</code> DB engine mode.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html\">Using Amazon Aurora Serverless v1</a> in the\n            <i>Amazon Aurora User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.rds#SensitiveString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.rds#ServerlessV2ScalingConfiguration": {
@@ -28476,6 +29143,189 @@
                         "smithy.api#enumValue": "TRACKED_CLUSTER"
                     }
                 }
+            }
+        },
+        "com.amazonaws.rds#TenantDatabase": {
+            "type": "structure",
+            "members": {
+                "TenantDatabaseCreateTime": {
+                    "target": "com.amazonaws.rds#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of the tenant database.</p>"
+                    }
+                },
+                "DBInstanceIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the DB instance that contains the tenant database.</p>"
+                    }
+                },
+                "TenantDBName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database name of the tenant database.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the tenant database.</p>"
+                    }
+                },
+                "MasterUsername": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The master username of the tenant database.</p>"
+                    }
+                },
+                "DbiResourceId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region-unique, immutable identifier for the DB instance.</p>"
+                    }
+                },
+                "TenantDatabaseResourceId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region-unique, immutable identifier for the tenant database.</p>"
+                    }
+                },
+                "TenantDatabaseARN": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the tenant database.</p>"
+                    }
+                },
+                "CharacterSetName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The character set of the tenant database.</p>"
+                    }
+                },
+                "NcharCharacterSetName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>NCHAR</code> character set name of the tenant database.</p>"
+                    }
+                },
+                "DeletionProtection": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether deletion protection is enabled for the DB instance.</p>"
+                    }
+                },
+                "PendingModifiedValues": {
+                    "target": "com.amazonaws.rds#TenantDatabasePendingModifiedValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about pending changes for a tenant database.</p>"
+                    }
+                },
+                "TagList": {
+                    "target": "com.amazonaws.rds#TagList"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A tenant database in the DB instance. This data type is an element in the response to\n            the <code>DescribeTenantDatabases</code> action.</p>"
+            }
+        },
+        "com.amazonaws.rds#TenantDatabaseAlreadyExistsFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rds#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TenantDatabaseAlreadyExists",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>You attempted to either create a tenant database that already exists or  \n                modify a tenant database to use the name of an existing tenant database.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.rds#TenantDatabaseNotFoundFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rds#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TenantDatabaseNotFound",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The specified tenant database wasn't found in the DB instance.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.rds#TenantDatabasePendingModifiedValues": {
+            "type": "structure",
+            "members": {
+                "MasterUserPassword": {
+                    "target": "com.amazonaws.rds#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The master password for the tenant database.</p>"
+                    }
+                },
+                "TenantDBName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant database.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A response element in the <code>ModifyTenantDatabase</code> operation that describes\n            changes that will be applied. Specific changes are identified by subelements.</p>"
+            }
+        },
+        "com.amazonaws.rds#TenantDatabaseQuotaExceededFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rds#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TenantDatabaseQuotaExceeded",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>You attempted to create more tenant databases than are permitted in your Amazon Web Services\n            account.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.rds#TenantDatabasesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#TenantDatabase",
+                "traits": {
+                    "smithy.api#xmlName": "TenantDatabase"
+                }
+            }
+        },
+        "com.amazonaws.rds#TenantDatabasesMessage": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous\n                <code>DescribeTenantDatabases</code> request. If this parameter is specified, the\n            response includes only records beyond the marker, up to the value specified by\n                <code>MaxRecords</code>.</p>"
+                    }
+                },
+                "TenantDatabases": {
+                    "target": "com.amazonaws.rds#TenantDatabasesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of the tenant databases requested by the <code>DescribeTenantDatabases</code>\n            operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#Timezone": {

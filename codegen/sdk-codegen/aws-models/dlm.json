@@ -284,10 +284,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1\n\t\t\tyear. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron\n\t\t\t\texpressions</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
                     }
+                },
+                "Scripts": {
+                    "target": "com.amazonaws.dlm#ScriptsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies that target instances only]</b> Specifies pre and/or post scripts for a snapshot lifecycle policy \n\t\t\tthat targets instances. This is useful for creating application-consistent snapshots, or for \n\t\t\tperforming specific administrative tasks before or after Amazon Data Lifecycle Manager initiates snapshot creation.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/automate-app-consistent-backups.html\">Automating \n\t\t\t\tapplication-consistent snapshots with pre and post scripts</a>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies when the policy should create snapshots or AMIs.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>You must specify either <b>CronExpression</b>, or \n\t\t\t\t\t\t<b>Interval</b>, <b>IntervalUnit</b>, \n\t\t\t\t\t\tand <b>Times</b>.</p>\n               </li>\n               <li>\n                  <p>If you need to specify an <a>ArchiveRule</a> for the schedule, then you must\n\t\t\t\t\t\tspecify a creation frequency of at least 28 days.</p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies when the policy should create snapshots or AMIs.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>You must specify either <b>CronExpression</b>, or \n\t\t\t\t\t\t<b>Interval</b>, <b>IntervalUnit</b>, \n\t\t\t\t\t\tand <b>Times</b>.</p>\n               </li>\n               <li>\n                  <p>If you need to specify an <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html\">ArchiveRule</a> \n\t\t\t\t\t\tfor the schedule, then you must specify a creation frequency of at least \n\t\t\t\t\t\t28 days.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.dlm#CronExpression": {
@@ -324,7 +330,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Event-based policies only]</b> Specifies a cross-Region copy action for event-based policies.</p>\n         <note>\n            <p>To specify a cross-Region copy rule for snapshot and AMI policies, use \n\t\t\t\t<a>CrossRegionCopyRule</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>\n            <b>[Event-based policies only]</b> Specifies a cross-Region copy action for event-based policies.</p>\n         <note>\n            <p>To specify a cross-Region copy rule for snapshot and AMI policies, use \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_CrossRegionCopyRule.html\">CrossRegionCopyRule</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.dlm#CrossRegionCopyActionList": {
@@ -385,13 +391,13 @@
                 "TargetRegion": {
                     "target": "com.amazonaws.dlm#TargetRegion",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>Avoid using this parameter when creating new policies. Instead, use \n\t\t\t\t<b>Target</b> to specify a target Region or a target \n\t\t\t\tOutpost for snapshot copies.</p>\n            <p>For policies created before the <b>Target</b> parameter \n\t\t\t\twas introduced, this parameter indicates the target Region for snapshot copies.</p>\n         </note>"
+                        "smithy.api#documentation": "<note>\n            <p>Use this parameter for AMI policies only. For snapshot policies, use \n\t\t\t\t<b>Target</b> instead. For snapshot policies \n\t\t\t\tcreated before the <b>Target</b> parameter \n\t\t\t\twas introduced, this parameter indicates the target Region for snapshot \n\t\t\t\tcopies.</p>\n            <p></p>\n         </note>\n         <p>\n            <b>[AMI policies only]</b> The target Region or the Amazon Resource Name (ARN) of the target Outpost for the \n\t\t\tsnapshot copies.</p>"
                     }
                 },
                 "Target": {
                     "target": "com.amazonaws.dlm#Target",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target Region or the Amazon Resource Name (ARN) of the target Outpost for the \n\t\t\tsnapshot copies.</p>\n         <p>Use this parameter instead of <b>TargetRegion</b>. Do not \n\t\t\tspecify both.</p>"
+                        "smithy.api#documentation": "<note>\n            <p>Use this parameter for snapshot policies only. For AMI policies, use \n\t\t\t\t<b>TargetRegion</b> instead.</p>\n         </note>\n         <p>\n            <b>[Snapshot policies only]</b> The target Region or the Amazon Resource Name (ARN) of the target Outpost for the \n\t\t\tsnapshot copies.</p>"
                     }
                 },
                 "Encrypted": {
@@ -428,7 +434,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies a cross-Region copy rule for snapshot and AMI policies.</p>\n         <note>\n            <p>To specify a cross-Region copy action for event-based polices, use \n\t\t\t\t<a>CrossRegionCopyAction</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies a cross-Region copy rule for a snapshot and AMI policies.</p>\n         <note>\n            <p>To specify a cross-Region copy action for event-based polices, use \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_CrossRegionCopyAction.html\">CrossRegionCopyAction</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.dlm#CrossRegionCopyRules": {
@@ -652,6 +658,30 @@
                 }
             }
         },
+        "com.amazonaws.dlm#ExecuteOperationOnScriptFailure": {
+            "type": "boolean"
+        },
+        "com.amazonaws.dlm#ExecutionHandler": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9_\\-.]{3,128}|[a-zA-Z0-9_\\-.:/]{3,200}|[A-Z0-9_]+)$"
+            }
+        },
+        "com.amazonaws.dlm#ExecutionHandlerServiceValues": {
+            "type": "enum",
+            "members": {
+                "AWS_SYSTEMS_MANAGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SYSTEMS_MANAGER"
+                    }
+                }
+            }
+        },
         "com.amazonaws.dlm#ExecutionRoleArn": {
             "type": "string",
             "traits": {
@@ -719,7 +749,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets summary information about all or the specified data lifecycle policies.</p>\n         <p>To get complete information about a policy, use <a>GetLifecyclePolicy</a>.</p>",
+                "smithy.api#documentation": "<p>Gets summary information about all or the specified data lifecycle policies.</p>\n         <p>To get complete information about a policy, use <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_GetLifecyclePolicy.html\">GetLifecyclePolicy</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/policies",
@@ -1382,7 +1412,7 @@
                 "Count": {
                     "target": "com.amazonaws.dlm#StandardTierRetainRuleCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of snapshots to retain for each volume, up to a maximum of 1000. For example if you want to \n\t\t\tretain a maximum of three snapshots, specify <code>3</code>. When the fourth snapshot is created, the \n\t\t\toldest retained snapshot is deleted, or it is moved to the archive tier if you have specified an \n\t\t\t<a>ArchiveRule</a>.</p>"
+                        "smithy.api#documentation": "<p>The number of snapshots to retain for each volume, up to a maximum of 1000. For example if you want to \n\t\t\tretain a maximum of three snapshots, specify <code>3</code>. When the fourth snapshot is created, the \n\t\t\toldest retained snapshot is deleted, or it is moved to the archive tier if you have specified an \n\t\t\t<a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html\">ArchiveRule</a>.</p>"
                     }
                 },
                 "Interval": {
@@ -1394,12 +1424,12 @@
                 "IntervalUnit": {
                     "target": "com.amazonaws.dlm#RetentionIntervalUnitValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unit of time for time-based retention. For example, to retain snapshots for 3 months, specify \n\t\t\t<code>Interval=3</code> and <code>IntervalUnit=MONTHS</code>. Once the snapshot has been retained for \n\t\t\t3 months, it is deleted, or it is moved to the archive tier if you have specified an \n\t\t\t<a>ArchiveRule</a>.</p>"
+                        "smithy.api#documentation": "<p>The unit of time for time-based retention. For example, to retain snapshots for 3 months, specify \n\t\t\t<code>Interval=3</code> and <code>IntervalUnit=MONTHS</code>. Once the snapshot has been retained for \n\t\t\t3 months, it is deleted, or it is moved to the archive tier if you have specified an \n\t\t\t<a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html\">ArchiveRule</a>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies a retention rule for snapshots created by snapshot policies, or for AMIs \n\t\t\tcreated by AMI policies.</p>\n         <note>\n            <p>For snapshot policies that have an <a>ArchiveRule</a>, this retention rule\n\t\t\t\tapplies to standard tier retention. When the retention threshold is met, snapshots\n\t\t\t\tare moved from the standard to the archive tier.</p>\n            <p>For snapshot policies that do not have an <b>ArchiveRule</b>, snapshots \n\t\t\t\tare permanently deleted when this retention threshold is met.</p>\n         </note>\n         <p>You can retain snapshots based on either a count or a time interval.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Count-based retention</b>\n               </p>\n               <p>You must specify <b>Count</b>. \n\t\t\t\t\tIf you specify an <a>ArchiveRule</a> for the schedule, then you can specify a retention count of \n\t\t\t\t\t<code>0</code> to archive snapshots immediately after creation. If you specify a <a>FastRestoreRule</a>, \n\t\t\t\t\t<a>ShareRule</a>, or a <a>CrossRegionCopyRule</a>, then you must specify a retention count \n\t\t\t\t\tof <code>1</code> or more.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Age-based retention</b>\n               </p>\n               <p>You must specify <b>Interval</b> \n\t\t\t\t\tand <b>IntervalUnit</b>. If you specify an <a>ArchiveRule</a> for the \n\t\t\t\t\tschedule, then you can specify a retention interval of <code>0</code> days to archive snapshots immediately \n\t\t\t\t\tafter creation. If you specify a <a>FastRestoreRule</a>, <a>ShareRule</a>, or a \n\t\t\t\t\t<a>CrossRegionCopyRule</a>, then you must specify a retention interval of <code>1</code> day or \n\t\t\t\t\tmore.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies a retention rule for snapshots created by snapshot policies, or for AMIs \n\t\t\tcreated by AMI policies.</p>\n         <note>\n            <p>For snapshot policies that have an <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html\">ArchiveRule</a>, this retention rule\n\t\t\t\tapplies to standard tier retention. When the retention threshold is met, snapshots\n\t\t\t\tare moved from the standard to the archive tier.</p>\n            <p>For snapshot policies that do not have an <b>ArchiveRule</b>, snapshots \n\t\t\t\tare permanently deleted when this retention threshold is met.</p>\n         </note>\n         <p>You can retain snapshots based on either a count or a time interval.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Count-based retention</b>\n               </p>\n               <p>You must specify <b>Count</b>. \n\t\t\t\t\tIf you specify an <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html\">ArchiveRule</a> for the schedule, then you can specify a retention count of \n\t\t\t\t\t<code>0</code> to archive snapshots immediately after creation. If you specify a <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_FastRestoreRule.html\">FastRestoreRule</a>, \n\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ShareRule.html\">ShareRule</a>, or a \n\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_CrossRegionCopyRule.html\">CrossRegionCopyRule</a>, then you must specify a retention count \n\t\t\t\t\tof <code>1</code> or more.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Age-based retention</b>\n               </p>\n               <p>You must specify <b>Interval</b> \n\t\t\t\t\tand <b>IntervalUnit</b>. If you specify an <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html\">ArchiveRule</a> for the \n\t\t\t\t\tschedule, then you can specify a retention interval of <code>0</code> days to archive snapshots immediately \n\t\t\t\t\tafter creation. If you specify a <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_FastRestoreRule.html\">FastRestoreRule</a>, <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ShareRule.html\">ShareRule</a>, or a \n\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_CrossRegionCopyRule.html\">CrossRegionCopyRule</a>, \n\t\t\t\t\tthen you must specify a retention interval of <code>1</code> day or \n\t\t\t\t\tmore.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.dlm#RetentionArchiveTier": {
@@ -1553,6 +1583,82 @@
                 "smithy.api#pattern": "^[0-9A-Za-z _-]+$"
             }
         },
+        "com.amazonaws.dlm#Script": {
+            "type": "structure",
+            "members": {
+                "Stages": {
+                    "target": "com.amazonaws.dlm#StagesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicate which scripts Amazon Data Lifecycle Manager should run on target instances. Pre scripts \n\t\t\trun before Amazon Data Lifecycle Manager initiates snapshot creation. Post scripts run after Amazon Data Lifecycle Manager \n\t\t\tinitiates snapshot creation.</p>\n         <ul>\n            <li>\n               <p>To run a pre script only, specify <code>PRE</code>. In this case, \n\t\t\t\t\tAmazon Data Lifecycle Manager calls the SSM document with the <code>pre-script</code> parameter \n\t\t\t\t\tbefore initiating snapshot creation.</p>\n            </li>\n            <li>\n               <p>To run a post script only, specify <code>POST</code>. In this case, \n\t\t\t\t\tAmazon Data Lifecycle Manager calls the SSM document with the <code>post-script</code> parameter \n\t\t\t\t\tafter initiating snapshot creation.</p>\n            </li>\n            <li>\n               <p>To run both pre and post scripts, specify both <code>PRE</code> and <code>POST</code>. In\n\t\t\t\t\tthis case, Amazon Data Lifecycle Manager calls the SSM document with the <code>pre-script</code>\n\t\t\t\t\tparameter before initiating snapshot creation, and then it calls the SSM\n\t\t\t\t\tdocument again with the <code>post-script</code> parameter after initiating\n\t\t\t\t\tsnapshot creation.</p>\n            </li>\n         </ul>\n         <p>If you are automating VSS Backups, omit this parameter.</p>\n         <p>Default: PRE and POST</p>"
+                    }
+                },
+                "ExecutionHandlerService": {
+                    "target": "com.amazonaws.dlm#ExecutionHandlerServiceValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the service used to execute the pre and/or post scripts.</p>\n         <ul>\n            <li>\n               <p>If you are using custom SSM documents, specify \n\t\t\t\t\t<code>AWS_SYSTEMS_MANAGER</code>.</p>\n            </li>\n            <li>\n               <p>If you are automating VSS Backups, omit this parameter.</p>\n            </li>\n         </ul>\n         <p>Default: AWS_SYSTEMS_MANAGER</p>"
+                    }
+                },
+                "ExecutionHandler": {
+                    "target": "com.amazonaws.dlm#ExecutionHandler",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The SSM document that includes the pre and/or post scripts to run.</p>\n         <ul>\n            <li>\n               <p>If you are automating VSS backups, specify <code>AWS_VSS_BACKUP</code>. \n\t\t\t\t\tIn this case, Amazon Data Lifecycle Manager automatically uses the <code>AWSEC2-CreateVssSnapshot</code> \n\t\t\t\t\tSSM document.</p>\n            </li>\n            <li>\n               <p>If you are using a custom SSM document that you own, specify either \n\t\t\t\t\tthe name or ARN of the SSM document. If you are using a custom SSM \n\t\t\t\t\tdocument that is shared with you, specify the ARN of the SSM document.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecuteOperationOnScriptFailure": {
+                    "target": "com.amazonaws.dlm#ExecuteOperationOnScriptFailure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether Amazon Data Lifecycle Manager should default to crash-consistent snapshots if the \n\t\t\tpre script fails.</p>\n         <ul>\n            <li>\n               <p>To default to crash consistent snapshot if the pre script fails, \n\t\t\t\t\tspecify <code>true</code>.</p>\n            </li>\n            <li>\n               <p>To skip the instance for snapshot creation if the pre script fails, \n\t\t\t\t\tspecify <code>false</code>.</p>\n            </li>\n         </ul>\n         <p>This parameter is supported only if you run a pre script. If you run a post \n\t\t\tscript only, omit this parameter.</p>\n         <p>Default: true</p>"
+                    }
+                },
+                "ExecutionTimeout": {
+                    "target": "com.amazonaws.dlm#ScriptExecutionTimeout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a timeout period, in seconds, after which Amazon Data Lifecycle Manager fails the script \n\t\t\trun attempt if it has not completed. If a script does not complete within its \n\t\t\ttimeout period, Amazon Data Lifecycle Manager fails the attempt. The timeout period applies to the pre \n\t\t\tand post scripts individually. </p>\n         <p>If you are automating VSS Backups, omit this parameter.</p>\n         <p>Default: 10</p>"
+                    }
+                },
+                "MaximumRetryCount": {
+                    "target": "com.amazonaws.dlm#ScriptMaximumRetryCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of times Amazon Data Lifecycle Manager should retry scripts that fail.</p>\n         <ul>\n            <li>\n               <p>If the pre script fails, Amazon Data Lifecycle Manager retries the entire snapshot creation \n\t\t\t\t\tprocess, including running the pre and post scripts.</p>\n            </li>\n            <li>\n               <p>If the post script fails, Amazon Data Lifecycle Manager retries the post script only; in this \n\t\t\t\t\tcase, the pre script will have completed and the snapshot might have \n\t\t\t\t\tbeen created.</p>\n            </li>\n         </ul>\n         <p>If you do not want Amazon Data Lifecycle Manager to retry failed scripts, specify <code>0</code>.</p>\n         <p>Default: 0</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot policies that target instances only]</b> Information about pre and/or post scripts for a \n\t\t\tsnapshot lifecycle policy that targets instances. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/automate-app-consistent-backups.html\">\n\t\t\t\tAutomating application-consistent snapshots with pre and post scripts</a>.</p>"
+            }
+        },
+        "com.amazonaws.dlm#ScriptExecutionTimeout": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 10,
+                    "max": 120
+                }
+            }
+        },
+        "com.amazonaws.dlm#ScriptMaximumRetryCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.dlm#ScriptsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dlm#Script"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.dlm#SettablePolicyStateValues": {
             "type": "enum",
             "members": {
@@ -1630,6 +1736,35 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 50
+                }
+            }
+        },
+        "com.amazonaws.dlm#StageValues": {
+            "type": "enum",
+            "members": {
+                "PRE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE"
+                    }
+                },
+                "POST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POST"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dlm#StagesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dlm#StageValues"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
                 }
             }
         },
@@ -3059,6 +3194,17 @@
                             "documentation": "Missing region",
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
+                            }
+                        },
+                        {
+                            "documentation": "Partition doesn't support DualStack",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         }
                     ],
