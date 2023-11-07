@@ -1,3 +1,16 @@
+# Release (2023-11-07)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/internal/ini`: [v1.5.1](internal/ini/CHANGELOG.md#v151-2023-11-07)
+  * **Bug Fix**: Fix subproperty performance regression
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.20.0](service/dlm/CHANGELOG.md#v1200-2023-11-07)
+  * **Feature**: Added support for pre and post scripts in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.62.0](service/rds/CHANGELOG.md#v1620-2023-11-07)
+  * **Feature**: This Amazon RDS release adds support for the multi-tenant configuration. In this configuration, an RDS DB instance can contain multiple tenant databases. In RDS for Oracle, a tenant database is a pluggable database (PDB).
+
 # Release (2023-11-06)
 
 ## General Highlights

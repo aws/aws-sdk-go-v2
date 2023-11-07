@@ -1,8 +1,0 @@
-{
-    "id": "0af056a6-691e-469a-bc7f-29c88a0b7a74",
-    "type": "feature",
-    "description": "Added support for pre and post scripts in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies.",
-    "modules": [
-        "service/dlm"
-    ]
-}

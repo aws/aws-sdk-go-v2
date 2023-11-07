@@ -1,3 +1,7 @@
+# v1.20.0 (2023-11-07)
+
+* **Feature**: Added support for pre and post scripts in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies.
+
 # v1.19.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.

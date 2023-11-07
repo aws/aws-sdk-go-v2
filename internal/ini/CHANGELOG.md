@@ -1,3 +1,7 @@
+# v1.5.1 (2023-11-07)
+
+* **Bug Fix**: Fix subproperty performance regression
+
 # v1.5.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.
