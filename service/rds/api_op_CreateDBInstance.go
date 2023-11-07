@@ -524,6 +524,17 @@ type CreateDBInstanceInput struct {
 	//   - RDS Custom
 	MultiAZ *bool
 
+	// Specifies whether to use the multi-tenant configuration or the single-tenant
+	// configuration (default). This parameter only applies to RDS for Oracle container
+	// database (CDB) engines. Note the following restrictions:
+	//   - The DB engine that you specify in the request must support the multi-tenant
+	//   configuration. If you attempt to enable the multi-tenant configuration on a DB
+	//   engine that doesn't support it, the request fails.
+	//   - If you specify the multi-tenant configuration when you create your DB
+	//   instance, you can't later modify this DB instance to use the single-tenant
+	//   configuration.
+	MultiTenant *bool
+
 	// The name of the NCHAR character set for the Oracle DB instance. This setting
 	// doesn't apply to RDS Custom DB instances.
 	NcharCharacterSetName *string

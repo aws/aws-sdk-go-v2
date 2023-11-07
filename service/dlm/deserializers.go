@@ -1390,6 +1390,11 @@ func awsRestjson1_deserializeDocumentCreateRule(v **types.CreateRule, value inte
 				sv.Location = types.LocationValues(jtv)
 			}
 
+		case "Scripts":
+			if err := awsRestjson1_deserializeDocumentScriptsList(&sv.Scripts, value); err != nil {
+				return err
+			}
+
 		case "Times":
 			if err := awsRestjson1_deserializeDocumentTimesList(&sv.Times, value); err != nil {
 				return err
@@ -3022,6 +3027,129 @@ func awsRestjson1_deserializeDocumentScheduleList(v *[]types.Schedule, value int
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentScript(v **types.Script, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Script
+	if *v == nil {
+		sv = &types.Script{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ExecuteOperationOnScriptFailure":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected ExecuteOperationOnScriptFailure to be of type *bool, got %T instead", value)
+				}
+				sv.ExecuteOperationOnScriptFailure = ptr.Bool(jtv)
+			}
+
+		case "ExecutionHandler":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionHandler to be of type string, got %T instead", value)
+				}
+				sv.ExecutionHandler = ptr.String(jtv)
+			}
+
+		case "ExecutionHandlerService":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionHandlerServiceValues to be of type string, got %T instead", value)
+				}
+				sv.ExecutionHandlerService = types.ExecutionHandlerServiceValues(jtv)
+			}
+
+		case "ExecutionTimeout":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ScriptExecutionTimeout to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ExecutionTimeout = ptr.Int32(int32(i64))
+			}
+
+		case "MaximumRetryCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ScriptMaximumRetryCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumRetryCount = ptr.Int32(int32(i64))
+			}
+
+		case "Stages":
+			if err := awsRestjson1_deserializeDocumentStagesList(&sv.Stages, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScriptsList(v *[]types.Script, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Script
+	if *v == nil {
+		cv = []types.Script{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Script
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentScript(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentShareRule(v **types.ShareRule, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3178,6 +3306,42 @@ func awsRestjson1_deserializeDocumentSnapshotOwnerList(v *[]string, value interf
 				return fmt.Errorf("expected AwsAccountId to be of type string, got %T instead", value)
 			}
 			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStagesList(v *[]types.StageValues, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.StageValues
+	if *v == nil {
+		cv = []types.StageValues{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.StageValues
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected StageValues to be of type string, got %T instead", value)
+			}
+			col = types.StageValues(jtv)
 		}
 		cv = append(cv, col)
 

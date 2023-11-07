@@ -52,8 +52,9 @@ type ArchiveRule struct {
 // snapshots or AMIs.
 //   - You must specify either CronExpression, or Interval, IntervalUnit, and
 //     Times.
-//   - If you need to specify an ArchiveRule for the schedule, then you must
-//     specify a creation frequency of at least 28 days.
+//   - If you need to specify an ArchiveRule (https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html)
+//     for the schedule, then you must specify a creation frequency of at least 28
+//     days.
 type CreateRule struct {
 
 	// The schedule, as a Cron expression. The schedule interval must be between 1
@@ -78,6 +79,15 @@ type CreateRule struct {
 	// the source resource, or in the Region of that Outpost.
 	Location LocationValues
 
+	// [Snapshot policies that target instances only] Specifies pre and/or post
+	// scripts for a snapshot lifecycle policy that targets instances. This is useful
+	// for creating application-consistent snapshots, or for performing specific
+	// administrative tasks before or after Amazon Data Lifecycle Manager initiates
+	// snapshot creation. For more information, see Automating application-consistent
+	// snapshots with pre and post scripts (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/automate-app-consistent-backups.html)
+	// .
+	Scripts []Script
+
 	// The time, in UTC, to start the operation. The supported format is hh:mm. The
 	// operation occurs within a one-hour window following the specified time. If you
 	// do not specify a time, Amazon Data Lifecycle Manager selects a time within the
@@ -89,7 +99,8 @@ type CreateRule struct {
 
 // [Event-based policies only] Specifies a cross-Region copy action for
 // event-based policies. To specify a cross-Region copy rule for snapshot and AMI
-// policies, use CrossRegionCopyRule .
+// policies, use CrossRegionCopyRule (https://docs.aws.amazon.com/dlm/latest/APIReference/API_CrossRegionCopyRule.html)
+// .
 type CrossRegionCopyAction struct {
 
 	// The encryption settings for the copied snapshot.
@@ -144,9 +155,10 @@ type CrossRegionCopyRetainRule struct {
 	noSmithyDocumentSerde
 }
 
-// [Snapshot and AMI policies only] Specifies a cross-Region copy rule for
+// [Snapshot and AMI policies only] Specifies a cross-Region copy rule for a
 // snapshot and AMI policies. To specify a cross-Region copy action for event-based
-// polices, use CrossRegionCopyAction .
+// polices, use CrossRegionCopyAction (https://docs.aws.amazon.com/dlm/latest/APIReference/API_CrossRegionCopyAction.html)
+// .
 type CrossRegionCopyRule struct {
 
 	// To encrypt a copy of an unencrypted snapshot if encryption by default is not
@@ -173,15 +185,16 @@ type CrossRegionCopyRule struct {
 	// copies are to be retained in the destination Region.
 	RetainRule *CrossRegionCopyRetainRule
 
-	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for
-	// the snapshot copies. Use this parameter instead of TargetRegion. Do not specify
-	// both.
+	// Use this parameter for snapshot policies only. For AMI policies, use
+	// TargetRegion instead. [Snapshot policies only] The target Region or the Amazon
+	// Resource Name (ARN) of the target Outpost for the snapshot copies.
 	Target *string
 
-	// Avoid using this parameter when creating new policies. Instead, use Target to
-	// specify a target Region or a target Outpost for snapshot copies. For policies
-	// created before the Target parameter was introduced, this parameter indicates the
-	// target Region for snapshot copies.
+	// Use this parameter for AMI policies only. For snapshot policies, use Target
+	// instead. For snapshot policies created before the Target parameter was
+	// introduced, this parameter indicates the target Region for snapshot copies. [AMI
+	// policies only] The target Region or the Amazon Resource Name (ARN) of the target
+	// Outpost for the snapshot copies.
 	TargetRegion *string
 
 	noSmithyDocumentSerde
@@ -447,27 +460,32 @@ type PolicyDetails struct {
 
 // [Snapshot and AMI policies only] Specifies a retention rule for snapshots
 // created by snapshot policies, or for AMIs created by AMI policies. For snapshot
-// policies that have an ArchiveRule , this retention rule applies to standard tier
-// retention. When the retention threshold is met, snapshots are moved from the
-// standard to the archive tier. For snapshot policies that do not have an
-// ArchiveRule, snapshots are permanently deleted when this retention threshold is
-// met. You can retain snapshots based on either a count or a time interval.
-//   - Count-based retention You must specify Count. If you specify an ArchiveRule
+// policies that have an ArchiveRule (https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html)
+// , this retention rule applies to standard tier retention. When the retention
+// threshold is met, snapshots are moved from the standard to the archive tier. For
+// snapshot policies that do not have an ArchiveRule, snapshots are permanently
+// deleted when this retention threshold is met. You can retain snapshots based on
+// either a count or a time interval.
+//   - Count-based retention You must specify Count. If you specify an ArchiveRule (https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html)
 //     for the schedule, then you can specify a retention count of 0 to archive
-//     snapshots immediately after creation. If you specify a FastRestoreRule ,
-//     ShareRule , or a CrossRegionCopyRule , then you must specify a retention count
-//     of 1 or more.
+//     snapshots immediately after creation. If you specify a FastRestoreRule (https://docs.aws.amazon.com/dlm/latest/APIReference/API_FastRestoreRule.html)
+//     , ShareRule (https://docs.aws.amazon.com/dlm/latest/APIReference/API_ShareRule.html)
+//     , or a CrossRegionCopyRule (https://docs.aws.amazon.com/dlm/latest/APIReference/API_CrossRegionCopyRule.html)
+//     , then you must specify a retention count of 1 or more.
 //   - Age-based retention You must specify Interval and IntervalUnit. If you
-//     specify an ArchiveRule for the schedule, then you can specify a retention
-//     interval of 0 days to archive snapshots immediately after creation. If you
-//     specify a FastRestoreRule , ShareRule , or a CrossRegionCopyRule , then you
-//     must specify a retention interval of 1 day or more.
+//     specify an ArchiveRule (https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html)
+//     for the schedule, then you can specify a retention interval of 0 days to
+//     archive snapshots immediately after creation. If you specify a FastRestoreRule (https://docs.aws.amazon.com/dlm/latest/APIReference/API_FastRestoreRule.html)
+//     , ShareRule (https://docs.aws.amazon.com/dlm/latest/APIReference/API_ShareRule.html)
+//     , or a CrossRegionCopyRule (https://docs.aws.amazon.com/dlm/latest/APIReference/API_CrossRegionCopyRule.html)
+//     , then you must specify a retention interval of 1 day or more.
 type RetainRule struct {
 
 	// The number of snapshots to retain for each volume, up to a maximum of 1000. For
 	// example if you want to retain a maximum of three snapshots, specify 3 . When the
 	// fourth snapshot is created, the oldest retained snapshot is deleted, or it is
-	// moved to the archive tier if you have specified an ArchiveRule .
+	// moved to the archive tier if you have specified an ArchiveRule (https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html)
+	// .
 	Count *int32
 
 	// The amount of time to retain each snapshot. The maximum is 100 years. This is
@@ -477,7 +495,8 @@ type RetainRule struct {
 	// The unit of time for time-based retention. For example, to retain snapshots for
 	// 3 months, specify Interval=3 and IntervalUnit=MONTHS . Once the snapshot has
 	// been retained for 3 months, it is deleted, or it is moved to the archive tier if
-	// you have specified an ArchiveRule .
+	// you have specified an ArchiveRule (https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html)
+	// .
 	IntervalUnit RetentionIntervalUnitValues
 
 	noSmithyDocumentSerde
@@ -564,6 +583,79 @@ type Schedule struct {
 	// following formats: $(instance-id) or $(timestamp) . Variable tags are only valid
 	// for EBS Snapshot Management – Instance policies.
 	VariableTags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// [Snapshot policies that target instances only] Information about pre and/or
+// post scripts for a snapshot lifecycle policy that targets instances. For more
+// information, see Automating application-consistent snapshots with pre and post
+// scripts (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/automate-app-consistent-backups.html)
+// .
+type Script struct {
+
+	// The SSM document that includes the pre and/or post scripts to run.
+	//   - If you are automating VSS backups, specify AWS_VSS_BACKUP . In this case,
+	//   Amazon Data Lifecycle Manager automatically uses the AWSEC2-CreateVssSnapshot
+	//   SSM document.
+	//   - If you are using a custom SSM document that you own, specify either the
+	//   name or ARN of the SSM document. If you are using a custom SSM document that is
+	//   shared with you, specify the ARN of the SSM document.
+	//
+	// This member is required.
+	ExecutionHandler *string
+
+	// Indicates whether Amazon Data Lifecycle Manager should default to
+	// crash-consistent snapshots if the pre script fails.
+	//   - To default to crash consistent snapshot if the pre script fails, specify
+	//   true .
+	//   - To skip the instance for snapshot creation if the pre script fails, specify
+	//   false .
+	// This parameter is supported only if you run a pre script. If you run a post
+	// script only, omit this parameter. Default: true
+	ExecuteOperationOnScriptFailure *bool
+
+	// Indicates the service used to execute the pre and/or post scripts.
+	//   - If you are using custom SSM documents, specify AWS_SYSTEMS_MANAGER .
+	//   - If you are automating VSS Backups, omit this parameter.
+	// Default: AWS_SYSTEMS_MANAGER
+	ExecutionHandlerService ExecutionHandlerServiceValues
+
+	// Specifies a timeout period, in seconds, after which Amazon Data Lifecycle
+	// Manager fails the script run attempt if it has not completed. If a script does
+	// not complete within its timeout period, Amazon Data Lifecycle Manager fails the
+	// attempt. The timeout period applies to the pre and post scripts individually. If
+	// you are automating VSS Backups, omit this parameter. Default: 10
+	ExecutionTimeout *int32
+
+	// Specifies the number of times Amazon Data Lifecycle Manager should retry
+	// scripts that fail.
+	//   - If the pre script fails, Amazon Data Lifecycle Manager retries the entire
+	//   snapshot creation process, including running the pre and post scripts.
+	//   - If the post script fails, Amazon Data Lifecycle Manager retries the post
+	//   script only; in this case, the pre script will have completed and the snapshot
+	//   might have been created.
+	// If you do not want Amazon Data Lifecycle Manager to retry failed scripts,
+	// specify 0 . Default: 0
+	MaximumRetryCount *int32
+
+	// Indicate which scripts Amazon Data Lifecycle Manager should run on target
+	// instances. Pre scripts run before Amazon Data Lifecycle Manager initiates
+	// snapshot creation. Post scripts run after Amazon Data Lifecycle Manager
+	// initiates snapshot creation.
+	//   - To run a pre script only, specify PRE . In this case, Amazon Data Lifecycle
+	//   Manager calls the SSM document with the pre-script parameter before initiating
+	//   snapshot creation.
+	//   - To run a post script only, specify POST . In this case, Amazon Data
+	//   Lifecycle Manager calls the SSM document with the post-script parameter after
+	//   initiating snapshot creation.
+	//   - To run both pre and post scripts, specify both PRE and POST . In this case,
+	//   Amazon Data Lifecycle Manager calls the SSM document with the pre-script
+	//   parameter before initiating snapshot creation, and then it calls the SSM
+	//   document again with the post-script parameter after initiating snapshot
+	//   creation.
+	// If you are automating VSS Backups, omit this parameter. Default: PRE and POST
+	Stages []StageValues
 
 	noSmithyDocumentSerde
 }

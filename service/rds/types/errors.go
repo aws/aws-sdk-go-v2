@@ -1445,6 +1445,34 @@ func (e *DBSnapshotNotFoundFault) ErrorCode() string {
 }
 func (e *DBSnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified snapshot tenant database wasn't found.
+type DBSnapshotTenantDatabaseNotFoundFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DBSnapshotTenantDatabaseNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DBSnapshotTenantDatabaseNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DBSnapshotTenantDatabaseNotFoundFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DBSnapshotTenantDatabaseNotFoundFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DBSnapshotTenantDatabaseNotFoundFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // DBSubnetGroupName is already used by an existing DB subnet group.
 type DBSubnetGroupAlreadyExistsFault struct {
 	Message *string
@@ -3625,3 +3653,83 @@ func (e *SubscriptionNotFoundFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SubscriptionNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You attempted to either create a tenant database that already exists or modify
+// a tenant database to use the name of an existing tenant database.
+type TenantDatabaseAlreadyExistsFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TenantDatabaseAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TenantDatabaseAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TenantDatabaseAlreadyExistsFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TenantDatabaseAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TenantDatabaseAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified tenant database wasn't found in the DB instance.
+type TenantDatabaseNotFoundFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TenantDatabaseNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TenantDatabaseNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TenantDatabaseNotFoundFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TenantDatabaseNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TenantDatabaseNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You attempted to create more tenant databases than are permitted in your Amazon
+// Web Services account.
+type TenantDatabaseQuotaExceededFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TenantDatabaseQuotaExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TenantDatabaseQuotaExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TenantDatabaseQuotaExceededFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TenantDatabaseQuotaExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TenantDatabaseQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

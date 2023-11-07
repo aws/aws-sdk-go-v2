@@ -1,0 +1,8 @@
+{
+    "id": "08f85468-c17c-4bd2-85e3-dfaa653c1f4d",
+    "type": "feature",
+    "description": "Updated SendDataSetNotificationRequest Comment to be maximum length 4096.",
+    "modules": [
+        "service/dataexchange"
+    ]
+}

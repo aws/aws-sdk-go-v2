@@ -251,6 +251,23 @@ func validateArchiveRule(v *types.ArchiveRule) error {
 	}
 }
 
+func validateCreateRule(v *types.CreateRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRule"}
+	if v.Scripts != nil {
+		if err := validateScriptsList(v.Scripts); err != nil {
+			invalidParams.AddNested("Scripts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCrossRegionCopyAction(v *types.CrossRegionCopyAction) error {
 	if v == nil {
 		return nil
@@ -479,6 +496,11 @@ func validateSchedule(v *types.Schedule) error {
 			invalidParams.AddNested("VariableTags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CreateRule != nil {
+		if err := validateCreateRule(v.CreateRule); err != nil {
+			invalidParams.AddNested("CreateRule", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.FastRestoreRule != nil {
 		if err := validateFastRestoreRule(v.FastRestoreRule); err != nil {
 			invalidParams.AddNested("FastRestoreRule", err.(smithy.InvalidParamsError))
@@ -513,6 +535,38 @@ func validateScheduleList(v []types.Schedule) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduleList"}
 	for i := range v {
 		if err := validateSchedule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScript(v *types.Script) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Script"}
+	if v.ExecutionHandler == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionHandler"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScriptsList(v []types.Script) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScriptsList"}
+	for i := range v {
+		if err := validateScript(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

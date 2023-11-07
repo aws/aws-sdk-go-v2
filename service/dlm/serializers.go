@@ -753,6 +753,13 @@ func awsRestjson1_serializeDocumentCreateRule(v *types.CreateRule, value smithyj
 		ok.String(string(v.Location))
 	}
 
+	if v.Scripts != nil {
+		ok := object.Key("Scripts")
+		if err := awsRestjson1_serializeDocumentScriptsList(v.Scripts, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Times != nil {
 		ok := object.Key("Times")
 		if err := awsRestjson1_serializeDocumentTimesList(v.Times, ok); err != nil {
@@ -1263,6 +1270,58 @@ func awsRestjson1_serializeDocumentScheduleList(v []types.Schedule, value smithy
 	return nil
 }
 
+func awsRestjson1_serializeDocumentScript(v *types.Script, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExecuteOperationOnScriptFailure != nil {
+		ok := object.Key("ExecuteOperationOnScriptFailure")
+		ok.Boolean(*v.ExecuteOperationOnScriptFailure)
+	}
+
+	if v.ExecutionHandler != nil {
+		ok := object.Key("ExecutionHandler")
+		ok.String(*v.ExecutionHandler)
+	}
+
+	if len(v.ExecutionHandlerService) > 0 {
+		ok := object.Key("ExecutionHandlerService")
+		ok.String(string(v.ExecutionHandlerService))
+	}
+
+	if v.ExecutionTimeout != nil {
+		ok := object.Key("ExecutionTimeout")
+		ok.Integer(*v.ExecutionTimeout)
+	}
+
+	if v.MaximumRetryCount != nil {
+		ok := object.Key("MaximumRetryCount")
+		ok.Integer(*v.MaximumRetryCount)
+	}
+
+	if v.Stages != nil {
+		ok := object.Key("Stages")
+		if err := awsRestjson1_serializeDocumentStagesList(v.Stages, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentScriptsList(v []types.Script, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentScript(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentShareRule(v *types.ShareRule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1318,6 +1377,17 @@ func awsRestjson1_serializeDocumentSnapshotOwnerList(v []string, value smithyjso
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStagesList(v []types.StageValues, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }

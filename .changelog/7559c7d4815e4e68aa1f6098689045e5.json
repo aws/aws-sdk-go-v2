@@ -1,0 +1,8 @@
+{
+    "id": "7559c7d4-815e-4e68-aa1f-6098689045e5",
+    "type": "feature",
+    "description": "This Amazon RDS release adds support for the multi-tenant configuration. In this configuration, an RDS DB instance can contain multiple tenant databases. In RDS for Oracle, a tenant database is a pluggable database (PDB).",
+    "modules": [
+        "service/rds"
+    ]
+}

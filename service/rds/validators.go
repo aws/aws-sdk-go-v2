@@ -610,6 +610,26 @@ func (m *validateOpCreateOptionGroup) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateTenantDatabase struct {
+}
+
+func (*validateOpCreateTenantDatabase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTenantDatabase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTenantDatabaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTenantDatabaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteBlueGreenDeployment struct {
 }
 
@@ -965,6 +985,26 @@ func (m *validateOpDeleteOptionGroup) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteOptionGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTenantDatabase struct {
+}
+
+func (*validateOpDeleteTenantDatabase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTenantDatabase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTenantDatabaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTenantDatabaseInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1450,6 +1490,26 @@ func (m *validateOpDescribeDBSnapshots) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDBSnapshotTenantDatabases struct {
+}
+
+func (*validateOpDescribeDBSnapshotTenantDatabases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDBSnapshotTenantDatabases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDBSnapshotTenantDatabasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDBSnapshotTenantDatabasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDBSubnetGroups struct {
 }
 
@@ -1765,6 +1825,26 @@ func (m *validateOpDescribeSourceRegions) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeSourceRegionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeTenantDatabases struct {
+}
+
+func (*validateOpDescribeTenantDatabases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTenantDatabases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTenantDatabasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTenantDatabasesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2185,6 +2265,26 @@ func (m *validateOpModifyOptionGroup) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpModifyOptionGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpModifyTenantDatabase struct {
+}
+
+func (*validateOpModifyTenantDatabase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyTenantDatabase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyTenantDatabaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyTenantDatabaseInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2930,6 +3030,10 @@ func addOpCreateOptionGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateOptionGroup{}, middleware.After)
 }
 
+func addOpCreateTenantDatabaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTenantDatabase{}, middleware.After)
+}
+
 func addOpDeleteBlueGreenDeploymentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBlueGreenDeployment{}, middleware.After)
 }
@@ -3000,6 +3104,10 @@ func addOpDeleteIntegrationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteOptionGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteOptionGroup{}, middleware.After)
+}
+
+func addOpDeleteTenantDatabaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTenantDatabase{}, middleware.After)
 }
 
 func addOpDeregisterDBProxyTargetsValidationMiddleware(stack *middleware.Stack) error {
@@ -3098,6 +3206,10 @@ func addOpDescribeDBSnapshotsValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeDBSnapshots{}, middleware.After)
 }
 
+func addOpDescribeDBSnapshotTenantDatabasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDBSnapshotTenantDatabases{}, middleware.After)
+}
+
 func addOpDescribeDBSubnetGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDBSubnetGroups{}, middleware.After)
 }
@@ -3160,6 +3272,10 @@ func addOpDescribeReservedDBInstancesOfferingsValidationMiddleware(stack *middle
 
 func addOpDescribeSourceRegionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSourceRegions{}, middleware.After)
+}
+
+func addOpDescribeTenantDatabasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTenantDatabases{}, middleware.After)
 }
 
 func addOpDescribeValidDBInstanceModificationsValidationMiddleware(stack *middleware.Stack) error {
@@ -3244,6 +3360,10 @@ func addOpModifyEventSubscriptionValidationMiddleware(stack *middleware.Stack) e
 
 func addOpModifyOptionGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyOptionGroup{}, middleware.After)
+}
+
+func addOpModifyTenantDatabaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyTenantDatabase{}, middleware.After)
 }
 
 func addOpPromoteReadReplicaDBClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -4019,6 +4139,30 @@ func validateOpCreateOptionGroupInput(v *CreateOptionGroupInput) error {
 	}
 }
 
+func validateOpCreateTenantDatabaseInput(v *CreateTenantDatabaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTenantDatabaseInput"}
+	if v.DBInstanceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
+	}
+	if v.TenantDBName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TenantDBName"))
+	}
+	if v.MasterUsername == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MasterUsername"))
+	}
+	if v.MasterUserPassword == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MasterUserPassword"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteBlueGreenDeploymentInput(v *DeleteBlueGreenDeploymentInput) error {
 	if v == nil {
 		return nil
@@ -4284,6 +4428,24 @@ func validateOpDeleteOptionGroupInput(v *DeleteOptionGroupInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteOptionGroupInput"}
 	if v.OptionGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OptionGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTenantDatabaseInput(v *DeleteTenantDatabaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTenantDatabaseInput"}
+	if v.DBInstanceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
+	}
+	if v.TenantDBName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TenantDBName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4712,6 +4874,23 @@ func validateOpDescribeDBSnapshotsInput(v *DescribeDBSnapshotsInput) error {
 	}
 }
 
+func validateOpDescribeDBSnapshotTenantDatabasesInput(v *DescribeDBSnapshotTenantDatabasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDBSnapshotTenantDatabasesInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDBSubnetGroupsInput(v *DescribeDBSubnetGroupsInput) error {
 	if v == nil {
 		return nil
@@ -4984,6 +5163,23 @@ func validateOpDescribeSourceRegionsInput(v *DescribeSourceRegionsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeSourceRegionsInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeTenantDatabasesInput(v *DescribeTenantDatabasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTenantDatabasesInput"}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
@@ -5340,6 +5536,24 @@ func validateOpModifyOptionGroupInput(v *ModifyOptionGroupInput) error {
 		if err := validateOptionConfigurationList(v.OptionsToInclude); err != nil {
 			invalidParams.AddNested("OptionsToInclude", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyTenantDatabaseInput(v *ModifyTenantDatabaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyTenantDatabaseInput"}
+	if v.DBInstanceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
+	}
+	if v.TenantDBName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TenantDBName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

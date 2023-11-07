@@ -1437,10 +1437,9 @@ type DBInstance struct {
 	// in the Amazon RDS User Guide.
 	DBInstanceStatus *string
 
-	// Contains the initial database name that you provided (if required) when you
-	// created the DB instance. This name is returned for the life of your DB instance.
-	// For an RDS for Oracle CDB instance, the name identifies the PDB rather than the
-	// CDB.
+	// The initial database name that you provided (if required) when you created the
+	// DB instance. This name is returned for the life of your DB instance. For an RDS
+	// for Oracle CDB instance, the name identifies the PDB rather than the CDB.
 	DBName *string
 
 	// The list of DB parameter groups applied to this DB instance.
@@ -1562,6 +1561,10 @@ type DBInstance struct {
 	// Indicates whether the DB instance is a Multi-AZ deployment. This setting
 	// doesn't apply to RDS Custom DB instances.
 	MultiAZ *bool
+
+	// Specifies whether the DB instance is in the multi-tenant configuration (TRUE)
+	// or the single-tenant configuration (FALSE).
+	MultiTenant *bool
 
 	// The name of the NCHAR character set for the Oracle DB instance. This character
 	// set specifies the Unicode encoding for data stored in table columns of type
@@ -1773,6 +1776,10 @@ type DBInstanceAutomatedBackup struct {
 	// The master user name of an automated backup.
 	MasterUsername *string
 
+	// Specifies whether the automatic backup is for a DB instance in the multi-tenant
+	// configuration (TRUE) or the single-tenant configuration (FALSE).
+	MultiTenant *bool
+
 	// The option group the automated backup is associated with. If omitted, the
 	// default option group for the engine specified is used.
 	OptionGroupName *string
@@ -1859,8 +1866,8 @@ type DBInstanceStatusInfo struct {
 	// isn't in an error state, this value is blank.
 	Message *string
 
-	// A Boolean value that is true if the instance is operating normally, or false if
-	// the instance is in an error state.
+	// Indicates whether the instance is operating normally (TRUE) or is in an error
+	// state (FALSE).
 	Normal *bool
 
 	// The status of the DB instance. For a StatusType of read replica, the values can
@@ -2227,6 +2234,10 @@ type DBSnapshot struct {
 	// Provides the master username for the DB snapshot.
 	MasterUsername *string
 
+	// Indicates whether the snapshot is of a DB instance using the multi-tenant
+	// configuration (TRUE) or the single-tenant configuration (FALSE).
+	MultiTenant *bool
+
 	// Provides the option group name for the DB snapshot.
 	OptionGroupName *string
 
@@ -2335,6 +2346,54 @@ type DBSnapshotAttributesResult struct {
 
 	// The identifier of the manual DB snapshot that the attributes apply to.
 	DBSnapshotIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details of a tenant database in a snapshot of a DB instance.
+type DBSnapshotTenantDatabase struct {
+
+	// The name of the character set of a tenant database.
+	CharacterSetName *string
+
+	// The ID for the DB instance that contains the tenant databases.
+	DBInstanceIdentifier *string
+
+	// The identifier for the snapshot of the DB instance.
+	DBSnapshotIdentifier *string
+
+	// The Amazon Resource Name (ARN) for the snapshot tenant database.
+	DBSnapshotTenantDatabaseARN *string
+
+	// The resource identifier of the source CDB instance. This identifier can't be
+	// changed and is unique to an Amazon Web Services Region.
+	DbiResourceId *string
+
+	// The name of the database engine.
+	EngineName *string
+
+	// The master username of the tenant database.
+	MasterUsername *string
+
+	// The NCHAR character set name of the tenant database.
+	NcharCharacterSetName *string
+
+	// The type of DB snapshot.
+	SnapshotType *string
+
+	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
+	// in the Amazon RDS User Guide.
+	TagList []Tag
+
+	// The name of the tenant database.
+	TenantDBName *string
+
+	// The time the DB snapshot was taken, specified in Coordinated Universal Time
+	// (UTC). If you copy the snapshot, the creation time changes.
+	TenantDatabaseCreateTime *time.Time
+
+	// The resource ID of the tenant database.
+	TenantDatabaseResourceId *string
 
 	noSmithyDocumentSerde
 }
@@ -2545,8 +2604,8 @@ type EventSubscription struct {
 	// notification subscription.
 	CustomerAwsId *string
 
-	// A Boolean value indicating if the subscription is enabled. True indicates the
-	// subscription is enabled.
+	// Specifies whether the subscription is enabled. True indicates the subscription
+	// is enabled.
 	Enabled *bool
 
 	// A list of event categories for the RDS event notification subscription.
@@ -2669,13 +2728,15 @@ type FailoverState struct {
 	//   - pending  The service received a request to switch over or fail over the
 	//   global cluster. The global cluster's primary DB cluster and the specified
 	//   secondary DB cluster are being verified before the operation starts.
-	//   - failing-over  This status covers the range of Aurora internal operations
-	//   that take place during the switchover or failover process, such as demoting the
-	//   primary Aurora DB cluster, promoting the secondary Aurora DB cluster, and
-	//   synchronizing replicas.
+	//   - failing-over  Aurora is promoting the chosen secondary Aurora DB cluster
+	//   to become the new primary DB cluster to fail over the global cluster.
 	//   - cancelling  The request to switch over or fail over the global cluster was
 	//   cancelled and the primary Aurora DB cluster and the selected secondary Aurora DB
 	//   cluster are returning to their previous states.
+	//   - switching-over  This status covers the range of Aurora internal operations
+	//   that take place during the switchover process, such as demoting the primary
+	//   Aurora DB cluster, promoting the secondary Aurora DB cluster, and synchronizing
+	//   replicas.
 	Status FailoverStatus
 
 	// The Amazon Resource Name (ARN) of the Aurora DB cluster that is currently being
@@ -3455,6 +3516,10 @@ type PendingModifiedValues struct {
 	// deployment.
 	MultiAZ *bool
 
+	// Indicates whether the DB instance will change to the multi-tenant configuration
+	// (TRUE) or the single-tenant configuration (FALSE).
+	MultiTenant *bool
+
 	// A list of the log types whose configuration is still pending. In other words,
 	// these log types are in the process of being activated or deactivated.
 	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports
@@ -3910,6 +3975,67 @@ type TargetHealth struct {
 	// The following is a typical lifecycle example for the states of an RDS Proxy
 	// target: registering > unavailable > available > unavailable > available
 	State TargetState
+
+	noSmithyDocumentSerde
+}
+
+// A tenant database in the DB instance. This data type is an element in the
+// response to the DescribeTenantDatabases action.
+type TenantDatabase struct {
+
+	// The character set of the tenant database.
+	CharacterSetName *string
+
+	// The ID of the DB instance that contains the tenant database.
+	DBInstanceIdentifier *string
+
+	// The Amazon Web Services Region-unique, immutable identifier for the DB instance.
+	DbiResourceId *string
+
+	// Specifies whether deletion protection is enabled for the DB instance.
+	DeletionProtection *bool
+
+	// The master username of the tenant database.
+	MasterUsername *string
+
+	// The NCHAR character set name of the tenant database.
+	NcharCharacterSetName *string
+
+	// Information about pending changes for a tenant database.
+	PendingModifiedValues *TenantDatabasePendingModifiedValues
+
+	// The status of the tenant database.
+	Status *string
+
+	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
+	// in the Amazon RDS User Guide.
+	TagList []Tag
+
+	// The database name of the tenant database.
+	TenantDBName *string
+
+	// The Amazon Resource Name (ARN) for the tenant database.
+	TenantDatabaseARN *string
+
+	// The creation time of the tenant database.
+	TenantDatabaseCreateTime *time.Time
+
+	// The Amazon Web Services Region-unique, immutable identifier for the tenant
+	// database.
+	TenantDatabaseResourceId *string
+
+	noSmithyDocumentSerde
+}
+
+// A response element in the ModifyTenantDatabase operation that describes changes
+// that will be applied. Specific changes are identified by subelements.
+type TenantDatabasePendingModifiedValues struct {
+
+	// The master password for the tenant database.
+	MasterUserPassword *string
+
+	// The name of the tenant database.
+	TenantDBName *string
 
 	noSmithyDocumentSerde
 }

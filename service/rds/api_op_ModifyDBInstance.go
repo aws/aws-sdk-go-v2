@@ -159,8 +159,8 @@ type ModifyDBInstanceInput struct {
 	//   - If you are modifying the DB instance class and upgrading the engine version
 	//   at the same time, the currently running engine version must be supported on the
 	//   specified DB instance class. Otherwise, the operation returns an error. In this
-	//   case, first run the operation to modify the DB instance class, and then run it
-	//   again to upgrade the engine version.
+	//   case, first run the operation to upgrade the engine version, and then run it
+	//   again to modify the DB instance class.
 	DBInstanceClass *string
 
 	// The name of the DB parameter group to apply to the DB instance. Changing this
@@ -325,8 +325,8 @@ type ModifyDBInstanceInput struct {
 	//   - If you are upgrading the engine version and modifying the DB instance class
 	//   at the same time, the currently running engine version must be supported on the
 	//   specified DB instance class. Otherwise, the operation returns an error. In this
-	//   case, first run the operation to modify the DB instance class, and then run it
-	//   again to upgrade the engine version.
+	//   case, first run the operation to upgrade the engine version, and then run it
+	//   again to modify the DB instance class.
 	EngineVersion *string
 
 	// The new Provisioned IOPS (I/O operations per second) value for the RDS
@@ -450,6 +450,18 @@ type ModifyDBInstanceInput struct {
 	// maintenance window unless the ApplyImmediately parameter is enabled for this
 	// request. This setting doesn't apply to RDS Custom DB instances.
 	MultiAZ *bool
+
+	// Specifies whether the to convert your DB instance from the single-tenant
+	// conﬁguration to the multi-tenant conﬁguration. This parameter is supported only
+	// for RDS for Oracle CDB instances. During the conversion, RDS creates an initial
+	// tenant database and associates the DB name, master user name, character set, and
+	// national character set metadata with this database. The tags associated with the
+	// instance also propagate to the initial tenant database. You can add more tenant
+	// databases to your DB instance by using the CreateTenantDatabase operation. The
+	// conversion to the multi-tenant configuration is permanent and irreversible, so
+	// you can't later convert back to the single-tenant configuration. When you
+	// specify this parameter, you must also specify ApplyImmediately .
+	MultiTenant *bool
 
 	// The network type of the DB instance. The network type is determined by the
 	// DBSubnetGroup specified for the DB instance. A DBSubnetGroup can support only

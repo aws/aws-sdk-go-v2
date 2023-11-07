@@ -34,6 +34,23 @@ func (EventTypeValues) Values() []EventTypeValues {
 	}
 }
 
+type ExecutionHandlerServiceValues string
+
+// Enum values for ExecutionHandlerServiceValues
+const (
+	ExecutionHandlerServiceValuesAwsSystemsManager ExecutionHandlerServiceValues = "AWS_SYSTEMS_MANAGER"
+)
+
+// Values returns all known values for ExecutionHandlerServiceValues. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ExecutionHandlerServiceValues) Values() []ExecutionHandlerServiceValues {
+	return []ExecutionHandlerServiceValues{
+		"AWS_SYSTEMS_MANAGER",
+	}
+}
+
 type GettablePolicyStateValues string
 
 // Enum values for GettablePolicyStateValues
@@ -181,5 +198,23 @@ func (SettablePolicyStateValues) Values() []SettablePolicyStateValues {
 	return []SettablePolicyStateValues{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type StageValues string
+
+// Enum values for StageValues
+const (
+	StageValuesPre  StageValues = "PRE"
+	StageValuesPost StageValues = "POST"
+)
+
+// Values returns all known values for StageValues. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StageValues) Values() []StageValues {
+	return []StageValues{
+		"PRE",
+		"POST",
 	}
 }
