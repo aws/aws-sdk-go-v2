@@ -1,0 +1,8 @@
+{
+    "id": "0e1f4e33-13a4-49c8-b223-0d6cc756ef18",
+    "type": "bugfix",
+    "description": "Fix subproperty performance regression",
+    "modules": [
+        "internal/ini"
+    ]
+}
