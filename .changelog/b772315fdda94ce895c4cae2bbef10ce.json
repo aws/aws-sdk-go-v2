@@ -1,0 +1,8 @@
+{
+    "id": "b772315f-dda9-4ce8-95c4-cae2bbef10ce",
+    "type": "bugfix",
+    "description": "added x-amz-expected-bucket-owner to the list of headers we should sign",
+    "modules": [
+        "."
+    ]
+}
