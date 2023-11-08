@@ -178,7 +178,7 @@ func getSubProperty(runes []rune, offset int) (int, error) {
 			return offset + idx, nil
 		}
 	}
-	return 0, fmt.Errorf("no sub property")
+	return offset + len(runes), nil
 }
 
 // MapValue returns a map value for sub properties
