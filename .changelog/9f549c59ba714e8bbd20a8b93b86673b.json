@@ -1,8 +1,0 @@
-{
-    "id": "9f549c59-ba71-4e8b-bd20-a8b93b86673b",
-    "type": "feature",
-    "description": "This release adds the ability to add/view comment authors through CreateRelatedItem and SearchRelatedItems API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html",
-    "modules": [
-        "service/connectcases"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.14.0 (2023-11-08)
+
+* **Feature**: Adding Run UUID and Run Output URI: GetRun and StartRun API response has two new fields "uuid" and "runOutputUri".
+
 # v1.13.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.

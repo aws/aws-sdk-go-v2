@@ -1,3 +1,7 @@
+# v1.62.1 (2023-11-08)
+
+* **Documentation**: This Amazon RDS release adds support for patching the OS of an RDS Custom for Oracle DB instance. You can now upgrade the database or operating system using the modify-db-instance command.
+
 # v1.62.0 (2023-11-07)
 
 * **Feature**: This Amazon RDS release adds support for the multi-tenant configuration. In this configuration, an RDS DB instance can contain multiple tenant databases. In RDS for Oracle, a tenant database is a pluggable database (PDB).

@@ -1,3 +1,7 @@
+# v1.36.0 (2023-11-08)
+
+* **Feature**: AWS Lex now supports selective log capture in conversation logs. When you enable this option within the conversation log settings, only the utterances that trigger intents and slots specified in session attributes will be logged.
+
 # v1.35.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.

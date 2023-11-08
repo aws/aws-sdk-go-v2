@@ -1,3 +1,7 @@
+# v1.78.0 (2023-11-08)
+
+* **Feature**: This release clarifies in our public documentation that InstanceId is a requirement for SearchUsers API requests.
+
 # v1.77.0 (2023-11-06)
 
 * **Feature**: Added new API that allows Amazon Connect Outbound Campaigns to create contacts in Amazon Connect when ingesting your dial requests.

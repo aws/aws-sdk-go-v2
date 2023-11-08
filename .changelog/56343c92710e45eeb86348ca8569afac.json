@@ -1,8 +1,0 @@
-{
-    "id": "56343c92-710e-45ee-b863-48ca8569afac",
-    "type": "feature",
-    "description": "Added API support for new GuardDuty EKS Audit Log finding types.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

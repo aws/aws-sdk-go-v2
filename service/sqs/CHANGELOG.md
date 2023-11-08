@@ -1,3 +1,7 @@
+# v1.27.0 (2023-11-08)
+
+* **Feature**: This release enables customers to call SQS using AWS JSON-1.0 protocol.
+
 # v1.26.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.

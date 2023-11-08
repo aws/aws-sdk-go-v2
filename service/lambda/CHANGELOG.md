@@ -1,3 +1,7 @@
+# v1.44.0 (2023-11-08)
+
+* **Feature**: Add Node 20 (nodejs20.x) support to AWS Lambda.
+
 # v1.43.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.

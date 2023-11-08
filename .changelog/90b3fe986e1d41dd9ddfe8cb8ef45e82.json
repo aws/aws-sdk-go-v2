@@ -1,8 +1,0 @@
-{
-    "id": "90b3fe98-6e1d-41dd-9ddf-e8cb8ef45e82",
-    "type": "feature",
-    "description": "AWS Resilience Hub enhances Resiliency Score, providing actionable recommendations to improve application resilience. Amazon Elastic Kubernetes Service (EKS) operational recommendations have been added to help improve the resilience posture of your applications.",
-    "modules": [
-        "service/resiliencehub"
-    ]
-}

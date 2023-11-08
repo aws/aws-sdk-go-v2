@@ -1,8 +1,0 @@
-{
-    "id": "8a0c3fca-689b-4f9f-9c76-f31fdffd8292",
-    "type": "documentation",
-    "description": "This Amazon RDS release adds support for patching the OS of an RDS Custom for Oracle DB instance. You can now upgrade the database or operating system using the modify-db-instance command.",
-    "modules": [
-        "service/rds"
-    ]
-}

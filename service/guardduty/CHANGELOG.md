@@ -1,3 +1,7 @@
+# v1.33.0 (2023-11-08)
+
+* **Feature**: Added API support for new GuardDuty EKS Audit Log finding types.
+
 # v1.32.0 (2023-11-01)
 
 * **Feature**: Adds support for configured endpoints via environment variables and the AWS shared configuration file.

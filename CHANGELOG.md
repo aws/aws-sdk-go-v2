@@ -1,3 +1,27 @@
+# Release (2023-11-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.78.0](service/connect/CHANGELOG.md#v1780-2023-11-08)
+  * **Feature**: This release clarifies in our public documentation that InstanceId is a requirement for SearchUsers API requests.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.11.0](service/connectcases/CHANGELOG.md#v1110-2023-11-08)
+  * **Feature**: This release adds the ability to add/view comment authors through CreateRelatedItem and SearchRelatedItems API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.33.0](service/guardduty/CHANGELOG.md#v1330-2023-11-08)
+  * **Feature**: Added API support for new GuardDuty EKS Audit Log finding types.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.44.0](service/lambda/CHANGELOG.md#v1440-2023-11-08)
+  * **Feature**: Add Node 20 (nodejs20.x) support to AWS Lambda.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.36.0](service/lexmodelsv2/CHANGELOG.md#v1360-2023-11-08)
+  * **Feature**: AWS Lex now supports selective log capture in conversation logs. When you enable this option within the conversation log settings, only the utterances that trigger intents and slots specified in session attributes will be logged.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.14.0](service/omics/CHANGELOG.md#v1140-2023-11-08)
+  * **Feature**: Adding Run UUID and Run Output URI: GetRun and StartRun API response has two new fields "uuid" and "runOutputUri".
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.62.1](service/rds/CHANGELOG.md#v1621-2023-11-08)
+  * **Documentation**: This Amazon RDS release adds support for patching the OS of an RDS Custom for Oracle DB instance. You can now upgrade the database or operating system using the modify-db-instance command.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.12.0](service/redshiftserverless/CHANGELOG.md#v1120-2023-11-08)
+  * **Feature**: Added a new parameter in the workgroup that helps you control your cost for compute resources. This feature provides a ceiling for RPUs that Amazon Redshift Serverless can scale up to. When automatic compute scaling is required, having a higher value for MaxRPU can enhance query throughput.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.17.0](service/resiliencehub/CHANGELOG.md#v1170-2023-11-08)
+  * **Feature**: AWS Resilience Hub enhances Resiliency Score, providing actionable recommendations to improve application resilience. Amazon Elastic Kubernetes Service (EKS) operational recommendations have been added to help improve the resilience posture of your applications.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.27.0](service/sqs/CHANGELOG.md#v1270-2023-11-08)
+  * **Feature**: This release enables customers to call SQS using AWS JSON-1.0 protocol.
+
 # Release (2023-11-07)
 
 ## General Highlights

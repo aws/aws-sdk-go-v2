@@ -1,3 +1,7 @@
+# v1.24.1 (2023-11-08)
+
+* No change notes available for this release.
+
 # v1.24.0 (2023-11-02)
 
 * **Feature**: AWS App Runner now supports using dual-stack address type for the public endpoint of your incoming traffic.

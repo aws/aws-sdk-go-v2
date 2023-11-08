@@ -1,8 +1,0 @@
-{
-    "id": "38e80340-3605-4915-9c19-c9ff6dc9cfc6",
-    "type": "feature",
-    "description": "This release clarifies in our public documentation that InstanceId is a requirement for SearchUsers API requests.",
-    "modules": [
-        "service/connect"
-    ]
-}

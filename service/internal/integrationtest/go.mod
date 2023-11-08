@@ -53,14 +53,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/kms v1.26.0
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.43.0
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.44.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/polly v1.34.0
-	github.com/aws/aws-sdk-go-v2/service/rds v1.62.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.62.1
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.35.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.34.0
@@ -75,7 +75,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/shield v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/sns v1.25.0
-	github.com/aws/aws-sdk-go-v2/service/sqs v1.26.0
+	github.com/aws/aws-sdk-go-v2/service/sqs v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.42.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/support v1.18.0

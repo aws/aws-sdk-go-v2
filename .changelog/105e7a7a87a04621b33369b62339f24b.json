@@ -1,8 +1,0 @@
-{
-    "id": "105e7a7a-87a0-4621-b333-69b62339f24b",
-    "type": "feature",
-    "description": "This change allows for 0 length access keys and secret keys for object storage locations. Users can now pass in empty string credentials.",
-    "modules": [
-        "service/datasync"
-    ]
-}
