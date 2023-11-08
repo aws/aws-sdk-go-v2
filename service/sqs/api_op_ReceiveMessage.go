@@ -193,11 +193,11 @@ type ReceiveMessageOutput struct {
 }
 
 func (c *Client) addOperationReceiveMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpReceiveMessage{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpReceiveMessage{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpReceiveMessage{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpReceiveMessage{}, middleware.After)
 	if err != nil {
 		return err
 	}

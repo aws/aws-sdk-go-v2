@@ -38,6 +38,8 @@ type SearchUsersInput struct {
 	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance. InstanceID is a required
 	// field. The "Required: No" below is incorrect.
+	//
+	// This member is required.
 	InstanceId *string
 
 	// The maximum number of results to return per page.
@@ -125,6 +127,9 @@ func (c *Client) addOperationSearchUsersMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addSearchUsersResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addOpSearchUsersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchUsers(options.Region), middleware.Before); err != nil {

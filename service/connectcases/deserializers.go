@@ -6986,6 +6986,11 @@ func awsRestjson1_deserializeDocumentSearchRelatedItemsResponseItem(v **types.Se
 				return err
 			}
 
+		case "performedBy":
+			if err := awsRestjson1_deserializeDocumentUserUnion(&sv.PerformedBy, value); err != nil {
+				return err
+			}
+
 		case "relatedItemId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7336,6 +7341,48 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUserUnion(v *types.UserUnion, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.UserUnion
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "userArn":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserArn to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.UserUnionMemberUserArn{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 

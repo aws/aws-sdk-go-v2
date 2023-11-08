@@ -79,11 +79,11 @@ type ListDeadLetterSourceQueuesOutput struct {
 }
 
 func (c *Client) addOperationListDeadLetterSourceQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListDeadLetterSourceQueues{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDeadLetterSourceQueues{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListDeadLetterSourceQueues{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDeadLetterSourceQueues{}, middleware.After)
 	if err != nil {
 		return err
 	}

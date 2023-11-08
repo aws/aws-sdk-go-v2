@@ -64,11 +64,11 @@ type RemovePermissionOutput struct {
 }
 
 func (c *Client) addOperationRemovePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemovePermission{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRemovePermission{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRemovePermission{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRemovePermission{}, middleware.After)
 	if err != nil {
 		return err
 	}

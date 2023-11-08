@@ -7200,6 +7200,15 @@ func awsRestjson1_deserializeOpDocumentGetRunOutput(v **GetRunOutput, value inte
 				sv.RunId = ptr.String(jtv)
 			}
 
+		case "runOutputUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RunOutputUri to be of type string, got %T instead", value)
+				}
+				sv.RunOutputUri = ptr.String(jtv)
+			}
+
 		case "startedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7269,6 +7278,15 @@ func awsRestjson1_deserializeOpDocumentGetRunOutput(v **GetRunOutput, value inte
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		case "uuid":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RunUuid to be of type string, got %T instead", value)
+				}
+				sv.Uuid = ptr.String(jtv)
 			}
 
 		case "workflowId":
@@ -13849,6 +13867,15 @@ func awsRestjson1_deserializeOpDocumentStartRunOutput(v **StartRunOutput, value 
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "runOutputUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RunOutputUri to be of type string, got %T instead", value)
+				}
+				sv.RunOutputUri = ptr.String(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13861,6 +13888,15 @@ func awsRestjson1_deserializeOpDocumentStartRunOutput(v **StartRunOutput, value 
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		case "uuid":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RunUuid to be of type string, got %T instead", value)
+				}
+				sv.Uuid = ptr.String(jtv)
 			}
 
 		default:

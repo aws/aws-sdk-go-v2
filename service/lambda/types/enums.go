@@ -368,6 +368,7 @@ const (
 	RuntimeJava17       Runtime = "java17"
 	RuntimeRuby32       Runtime = "ruby3.2"
 	RuntimePython311    Runtime = "python3.11"
+	RuntimeNodejs20x    Runtime = "nodejs20.x"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -407,6 +408,7 @@ func (Runtime) Values() []Runtime {
 		"java17",
 		"ruby3.2",
 		"python3.11",
+		"nodejs20.x",
 	}
 }
 

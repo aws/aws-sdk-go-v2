@@ -102,11 +102,11 @@ type ChangeMessageVisibilityOutput struct {
 }
 
 func (c *Client) addOperationChangeMessageVisibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpChangeMessageVisibility{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpChangeMessageVisibility{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpChangeMessageVisibility{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpChangeMessageVisibility{}, middleware.After)
 	if err != nil {
 		return err
 	}

@@ -50,7 +50,7 @@ type ListMessageMoveTasksInput struct {
 
 	// The maximum number of results to include in the response. The default is 1,
 	// which provides the most recent message movement task. The upper limit is 10.
-	MaxResults int32
+	MaxResults *int32
 
 	noSmithyDocumentSerde
 }
@@ -67,11 +67,11 @@ type ListMessageMoveTasksOutput struct {
 }
 
 func (c *Client) addOperationListMessageMoveTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListMessageMoveTasks{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListMessageMoveTasks{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListMessageMoveTasks{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListMessageMoveTasks{}, middleware.After)
 	if err != nil {
 		return err
 	}

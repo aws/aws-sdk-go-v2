@@ -58,11 +58,11 @@ type ListQueueTagsOutput struct {
 }
 
 func (c *Client) addOperationListQueueTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListQueueTags{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListQueueTags{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListQueueTags{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListQueueTags{}, middleware.After)
 	if err != nil {
 		return err
 	}

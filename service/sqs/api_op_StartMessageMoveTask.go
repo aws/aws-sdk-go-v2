@@ -65,7 +65,7 @@ type StartMessageMoveTaskInput struct {
 	// for messages per second is 500. If this field is left blank, the system will
 	// optimize the rate based on the queue message backlog size, which may vary
 	// throughout the duration of the message movement task.
-	MaxNumberOfMessagesPerSecond int32
+	MaxNumberOfMessagesPerSecond *int32
 
 	noSmithyDocumentSerde
 }
@@ -84,11 +84,11 @@ type StartMessageMoveTaskOutput struct {
 }
 
 func (c *Client) addOperationStartMessageMoveTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpStartMessageMoveTask{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartMessageMoveTask{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpStartMessageMoveTask{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartMessageMoveTask{}, middleware.After)
 	if err != nil {
 		return err
 	}

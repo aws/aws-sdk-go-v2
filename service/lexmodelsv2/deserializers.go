@@ -21155,6 +21155,15 @@ func awsRestjson1_deserializeDocumentAudioLogSetting(v **types.AudioLogSetting, 
 				sv.Enabled = jtv
 			}
 
+		case "selectiveLoggingEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.SelectiveLoggingEnabled = ptr.Bool(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -31695,6 +31704,15 @@ func awsRestjson1_deserializeDocumentTextLogSetting(v **types.TextLogSetting, va
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.Enabled = jtv
+			}
+
+		case "selectiveLoggingEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.SelectiveLoggingEnabled = ptr.Bool(jtv)
 			}
 
 		default:

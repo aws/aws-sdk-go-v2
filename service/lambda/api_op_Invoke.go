@@ -17,8 +17,11 @@ import (
 )
 
 // Invokes a Lambda function. You can invoke a function synchronously (and wait
-// for the response), or asynchronously. To invoke a function asynchronously, set
-// InvocationType to Event . For synchronous invocation (https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html)
+// for the response), or asynchronously. By default, Lambda invokes your function
+// synchronously (i.e. the InvocationType is RequestResponse ). To invoke a
+// function asynchronously, set InvocationType to Event . Lambda passes the
+// ClientContext object to your function for synchronous invocations only. For
+// synchronous invocation (https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html)
 // , details about the function response, including errors, are included in the
 // response body and headers. For either invocation type, you can find more
 // information in the execution log (https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html)

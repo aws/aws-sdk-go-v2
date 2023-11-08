@@ -96,6 +96,17 @@ type Action struct {
 	// Information about the Kubernetes API call action described in this finding.
 	KubernetesApiCallAction *KubernetesApiCallAction
 
+	// Information whether the user has the permission to use a specific Kubernetes
+	// API.
+	KubernetesPermissionCheckedDetails *KubernetesPermissionCheckedDetails
+
+	// Information about the role binding that grants the permission defined in a
+	// Kubernetes role.
+	KubernetesRoleBindingDetails *KubernetesRoleBindingDetails
+
+	// Information about the Kubernetes role name and role type.
+	KubernetesRoleDetails *KubernetesRoleDetails
+
 	// Information about the NETWORK_CONNECTION action described in this finding.
 	NetworkConnectionAction *NetworkConnectionAction
 
@@ -148,6 +159,43 @@ type Administrator struct {
 
 	// The status of the relationship between the administrator and member accounts.
 	RelationshipStatus *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the anomalies.
+type Anomaly struct {
+
+	// Information about the types of profiles.
+	Profiles map[string]map[string][]AnomalyObject
+
+	// Information about the behavior of the anomalies.
+	Unusual *AnomalyUnusual
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the unusual anomalies.
+type AnomalyObject struct {
+
+	// The recorded value.
+	Observations *Observations
+
+	// The frequency of the anomaly.
+	ProfileSubtype ProfileSubtype
+
+	// The type of behavior of the profile.
+	ProfileType ProfileType
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the behavior of the anomaly that is new to GuardDuty.
+type AnomalyUnusual struct {
+
+	// The behavior of the anomalous activity that caused GuardDuty to generate the
+	// finding.
+	Behavior map[string]map[string]AnomalyObject
 
 	noSmithyDocumentSerde
 }
@@ -634,6 +682,16 @@ type DestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the detected behavior.
+type Detection struct {
+
+	// The details about the anomalous activity that caused GuardDuty to generate the
+	// finding.
+	Anomaly *Anomaly
+
+	noSmithyDocumentSerde
+}
+
 // Information about the additional configuration for a feature in your GuardDuty
 // account.
 type DetectorAdditionalConfiguration struct {
@@ -1097,6 +1155,18 @@ type IamInstanceProfile struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the impersonated user.
+type ImpersonatedUser struct {
+
+	// The group to which the user name belongs.
+	Groups []string
+
+	// Information about the username that was being impersonated.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the details of an instance.
 type InstanceDetails struct {
 
@@ -1165,6 +1235,9 @@ type Invitation struct {
 // Information about the Kubernetes API call action described in this finding.
 type KubernetesApiCallAction struct {
 
+	// The name of the namespace where the Kubernetes API call action takes place.
+	Namespace *string
+
 	// Parameters related to the Kubernetes API call action.
 	Parameters *string
 
@@ -1174,12 +1247,21 @@ type KubernetesApiCallAction struct {
 	// The Kubernetes API request URI.
 	RequestUri *string
 
+	// The resource component in the Kubernetes API call action.
+	Resource *string
+
+	// The name of the resource in the Kubernetes API call action.
+	ResourceName *string
+
 	// The IP of the Kubernetes API caller and the IPs of any proxies or load
 	// balancers between the caller and the API endpoint.
 	SourceIps []string
 
 	// The resulting HTTP response code of the Kubernetes API call action.
 	StatusCode *int32
+
+	// The name of the sub-resource in the Kubernetes API call action.
+	Subresource *string
 
 	// The user agent of the caller of the Kubernetes API.
 	UserAgent *string
@@ -1258,11 +1340,73 @@ type KubernetesDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the Kubernetes API for which you check if you have permission
+// to call.
+type KubernetesPermissionCheckedDetails struct {
+
+	// Information whether the user has the permission to call the Kubernetes API.
+	Allowed *bool
+
+	// The namespace where the Kubernetes API action will take place.
+	Namespace *string
+
+	// The Kubernetes resource with which your Kubernetes API call will interact.
+	Resource *string
+
+	// The verb component of the Kubernetes API call. For example, when you check
+	// whether or not you have the permission to call the CreatePod API, the verb
+	// component will be Create .
+	Verb *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the role binding that grants the permission defined
+// in a Kubernetes role.
+type KubernetesRoleBindingDetails struct {
+
+	// The kind of the role. For role binding, this value will be RoleBinding .
+	Kind *string
+
+	// The name of the RoleBinding .
+	Name *string
+
+	// The type of the role being referenced. This could be either Role or ClusterRole .
+	RoleRefKind *string
+
+	// The name of the role being referenced. This must match the name of the Role or
+	// ClusterRole that you want to bind to.
+	RoleRefName *string
+
+	// The unique identifier of the role binding.
+	Uid *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the Kubernetes role name and role type.
+type KubernetesRoleDetails struct {
+
+	// The kind of role. For this API, the value of kind will be Role .
+	Kind *string
+
+	// The name of the Kubernetes role.
+	Name *string
+
+	// The unique identifier of the Kubernetes role name.
+	Uid *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about the Kubernetes user involved in a Kubernetes finding.
 type KubernetesUserDetails struct {
 
 	// The groups that include the user who called the Kubernetes API.
 	Groups []string
+
+	// Information about the impersonated user.
+	ImpersonatedUser *ImpersonatedUser
 
 	// Entity that assumes the IAM role when Kubernetes RBAC permissions are assigned
 	// to that role.
@@ -1283,14 +1427,23 @@ type KubernetesWorkloadDetails struct {
 	// Containers running as part of the Kubernetes workload.
 	Containers []Container
 
+	// Whether the host IPC flag is enabled for the pods in the workload.
+	HostIPC *bool
+
 	// Whether the hostNetwork flag is enabled for the pods included in the workload.
 	HostNetwork *bool
+
+	// Whether the host PID flag is enabled for the pods in the workload.
+	HostPID *bool
 
 	// Kubernetes workload name.
 	Name *string
 
 	// Kubernetes namespace that the workload is part of.
 	Namespace *string
+
+	// The service account name that is associated with a Kubernetes workload.
+	ServiceAccountName *string
 
 	// Kubernetes workload type (e.g. Pod, Deployment, etc.).
 	Type *string
@@ -1650,6 +1803,15 @@ type NetworkInterface struct {
 
 	// The VPC ID of the EC2 instance.
 	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the observed behavior.
+type Observations struct {
+
+	// The text that was unusual.
+	Text []string
 
 	noSmithyDocumentSerde
 }
@@ -2592,6 +2754,10 @@ type ScanThreatName struct {
 // Container security context.
 type SecurityContext struct {
 
+	// Whether or not a container or a Kubernetes pod is allowed to gain more
+	// privileges than its parent process.
+	AllowPrivilegeEscalation *bool
+
 	// Whether the container is privileged.
 	Privileged *bool
 
@@ -2624,6 +2790,9 @@ type Service struct {
 
 	// The total count of the occurrences of this finding type.
 	Count *int32
+
+	// Contains information about the detected unusual behavior.
+	Detection *Detection
 
 	// The detector ID for the GuardDuty service.
 	DetectorId *string

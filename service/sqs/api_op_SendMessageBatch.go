@@ -86,11 +86,11 @@ type SendMessageBatchOutput struct {
 }
 
 func (c *Client) addOperationSendMessageBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSendMessageBatch{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendMessageBatch{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSendMessageBatch{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSendMessageBatch{}, middleware.After)
 	if err != nil {
 		return err
 	}

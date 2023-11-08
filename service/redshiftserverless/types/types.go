@@ -450,6 +450,10 @@ type Workgroup struct {
 	// VPC.
 	EnhancedVpcRouting *bool
 
+	// The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve
+	// queries. The max capacity is specified in RPUs.
+	MaxCapacity *int32
+
 	// The namespace the workgroup is associated with.
 	NamespaceName *string
 

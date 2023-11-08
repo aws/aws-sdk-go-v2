@@ -62,7 +62,8 @@ type ListMembersInput struct {
 
 type ListMembersOutput struct {
 
-	// A list of members.
+	// A list of members. The values for email and invitedAt are available only if the
+	// member accounts are added by invitation.
 	Members []types.Member
 
 	// The pagination parameter to be used on the next list operation to retrieve more

@@ -732,6 +732,9 @@ type SearchRelatedItemsResponseItem struct {
 	// This member is required.
 	Type RelatedItemType
 
+	// Represents the creator of the related item.
+	PerformedBy UserUnion
+
 	// A map of of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string
@@ -799,6 +802,24 @@ type TemplateSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Represents the identity of the person who performed the action.
+//
+// The following types satisfy this interface:
+//
+//	UserUnionMemberUserArn
+type UserUnion interface {
+	isUserUnion()
+}
+
+// Represents the Amazon Connect ARN of the user.
+type UserUnionMemberUserArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*UserUnionMemberUserArn) isUserUnion() {}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -818,3 +839,4 @@ func (*UnknownUnionMember) isRelatedItemContent()      {}
 func (*UnknownUnionMember) isRelatedItemInputContent() {}
 func (*UnknownUnionMember) isRelatedItemTypeFilter()   {}
 func (*UnknownUnionMember) isSection()                 {}
+func (*UnknownUnionMember) isUserUnion()               {}

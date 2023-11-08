@@ -56,11 +56,11 @@ type PurgeQueueOutput struct {
 }
 
 func (c *Client) addOperationPurgeQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPurgeQueue{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPurgeQueue{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPurgeQueue{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPurgeQueue{}, middleware.After)
 	if err != nil {
 		return err
 	}

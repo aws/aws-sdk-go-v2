@@ -74,11 +74,11 @@ type DeleteMessageBatchOutput struct {
 }
 
 func (c *Client) addOperationDeleteMessageBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteMessageBatch{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteMessageBatch{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteMessageBatch{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteMessageBatch{}, middleware.After)
 	if err != nil {
 		return err
 	}

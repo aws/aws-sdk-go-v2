@@ -9661,6 +9661,21 @@ func awsRestjson1_deserializeDocumentAction(v **types.Action, value interface{})
 				return err
 			}
 
+		case "kubernetesPermissionCheckedDetails":
+			if err := awsRestjson1_deserializeDocumentKubernetesPermissionCheckedDetails(&sv.KubernetesPermissionCheckedDetails, value); err != nil {
+				return err
+			}
+
+		case "kubernetesRoleBindingDetails":
+			if err := awsRestjson1_deserializeDocumentKubernetesRoleBindingDetails(&sv.KubernetesRoleBindingDetails, value); err != nil {
+				return err
+			}
+
+		case "kubernetesRoleDetails":
+			if err := awsRestjson1_deserializeDocumentKubernetesRoleDetails(&sv.KubernetesRoleDetails, value); err != nil {
+				return err
+			}
+
 		case "networkConnectionAction":
 			if err := awsRestjson1_deserializeDocumentNetworkConnectionAction(&sv.NetworkConnectionAction, value); err != nil {
 				return err
@@ -9920,6 +9935,274 @@ func awsRestjson1_deserializeDocumentAffectedResources(v *map[string]string, val
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAnomaly(v **types.Anomaly, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Anomaly
+	if *v == nil {
+		sv = &types.Anomaly{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "profiles":
+			if err := awsRestjson1_deserializeDocumentAnomalyProfiles(&sv.Profiles, value); err != nil {
+				return err
+			}
+
+		case "unusual":
+			if err := awsRestjson1_deserializeDocumentAnomalyUnusual(&sv.Unusual, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAnomalyObject(v **types.AnomalyObject, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AnomalyObject
+	if *v == nil {
+		sv = &types.AnomalyObject{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "observations":
+			if err := awsRestjson1_deserializeDocumentObservations(&sv.Observations, value); err != nil {
+				return err
+			}
+
+		case "profileSubtype":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProfileSubtype to be of type string, got %T instead", value)
+				}
+				sv.ProfileSubtype = types.ProfileSubtype(jtv)
+			}
+
+		case "profileType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProfileType to be of type string, got %T instead", value)
+				}
+				sv.ProfileType = types.ProfileType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAnomalyProfileFeatureObjects(v *[]types.AnomalyObject, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AnomalyObject
+	if *v == nil {
+		cv = []types.AnomalyObject{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AnomalyObject
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAnomalyObject(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAnomalyProfileFeatures(v *map[string][]types.AnomalyObject, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string][]types.AnomalyObject
+	if *v == nil {
+		mv = map[string][]types.AnomalyObject{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal []types.AnomalyObject
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentAnomalyProfileFeatureObjects(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAnomalyProfiles(v *map[string]map[string][]types.AnomalyObject, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]map[string][]types.AnomalyObject
+	if *v == nil {
+		mv = map[string]map[string][]types.AnomalyObject{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal map[string][]types.AnomalyObject
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentAnomalyProfileFeatures(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAnomalyUnusual(v **types.AnomalyUnusual, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AnomalyUnusual
+	if *v == nil {
+		sv = &types.AnomalyUnusual{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "behavior":
+			if err := awsRestjson1_deserializeDocumentBehavior(&sv.Behavior, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAnomalyUnusualBehaviorFeature(v *map[string]types.AnomalyObject, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.AnomalyObject
+	if *v == nil {
+		mv = map[string]types.AnomalyObject{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.AnomalyObject
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentAnomalyObject(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAwsApiCallAction(v **types.AwsApiCallAction, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10062,6 +10345,40 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBehavior(v *map[string]map[string]types.AnomalyObject, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]map[string]types.AnomalyObject
+	if *v == nil {
+		mv = map[string]map[string]types.AnomalyObject{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal map[string]types.AnomalyObject
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentAnomalyUnusualBehaviorFeature(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -11485,6 +11802,42 @@ func awsRestjson1_deserializeDocumentDestinations(v *[]types.Destination, value 
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDetection(v **types.Detection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Detection
+	if *v == nil {
+		sv = &types.Detection{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "anomaly":
+			if err := awsRestjson1_deserializeDocumentAnomaly(&sv.Anomaly, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -13359,6 +13712,51 @@ func awsRestjson1_deserializeDocumentIamInstanceProfile(v **types.IamInstancePro
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentImpersonatedUser(v **types.ImpersonatedUser, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImpersonatedUser
+	if *v == nil {
+		sv = &types.ImpersonatedUser{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "groups":
+			if err := awsRestjson1_deserializeDocumentGroups(&sv.Groups, value); err != nil {
+				return err
+			}
+
+		case "username":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Username = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInstanceDetails(v **types.InstanceDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13735,6 +14133,15 @@ func awsRestjson1_deserializeDocumentKubernetesApiCallAction(v **types.Kubernete
 
 	for key, value := range shape {
 		switch key {
+		case "namespace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Namespace = ptr.String(jtv)
+			}
+
 		case "parameters":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13758,6 +14165,24 @@ func awsRestjson1_deserializeDocumentKubernetesApiCallAction(v **types.Kubernete
 				sv.RequestUri = ptr.String(jtv)
 			}
 
+		case "resource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Resource = ptr.String(jtv)
+			}
+
+		case "resourceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ResourceName = ptr.String(jtv)
+			}
+
 		case "sourceIps":
 			if err := awsRestjson1_deserializeDocumentSourceIps(&sv.SourceIps, value); err != nil {
 				return err
@@ -13774,6 +14199,15 @@ func awsRestjson1_deserializeDocumentKubernetesApiCallAction(v **types.Kubernete
 					return err
 				}
 				sv.StatusCode = ptr.Int32(int32(i64))
+			}
+
+		case "subresource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Subresource = ptr.String(jtv)
 			}
 
 		case "userAgent":
@@ -13956,6 +14390,207 @@ func awsRestjson1_deserializeDocumentKubernetesDetails(v **types.KubernetesDetai
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentKubernetesPermissionCheckedDetails(v **types.KubernetesPermissionCheckedDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KubernetesPermissionCheckedDetails
+	if *v == nil {
+		sv = &types.KubernetesPermissionCheckedDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowed":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Allowed = ptr.Bool(jtv)
+			}
+
+		case "namespace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Namespace = ptr.String(jtv)
+			}
+
+		case "resource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Resource = ptr.String(jtv)
+			}
+
+		case "verb":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Verb = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKubernetesRoleBindingDetails(v **types.KubernetesRoleBindingDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KubernetesRoleBindingDetails
+	if *v == nil {
+		sv = &types.KubernetesRoleBindingDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "kind":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Kind = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "roleRefKind":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RoleRefKind = ptr.String(jtv)
+			}
+
+		case "roleRefName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RoleRefName = ptr.String(jtv)
+			}
+
+		case "uid":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Uid = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKubernetesRoleDetails(v **types.KubernetesRoleDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KubernetesRoleDetails
+	if *v == nil {
+		sv = &types.KubernetesRoleDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "kind":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Kind = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "uid":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Uid = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentKubernetesUserDetails(v **types.KubernetesUserDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13980,6 +14615,11 @@ func awsRestjson1_deserializeDocumentKubernetesUserDetails(v **types.KubernetesU
 		switch key {
 		case "groups":
 			if err := awsRestjson1_deserializeDocumentGroups(&sv.Groups, value); err != nil {
+				return err
+			}
+
+		case "impersonatedUser":
+			if err := awsRestjson1_deserializeDocumentImpersonatedUser(&sv.ImpersonatedUser, value); err != nil {
 				return err
 			}
 
@@ -14042,6 +14682,15 @@ func awsRestjson1_deserializeDocumentKubernetesWorkloadDetails(v **types.Kuberne
 				return err
 			}
 
+		case "hostIPC":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.HostIPC = ptr.Bool(jtv)
+			}
+
 		case "hostNetwork":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -14049,6 +14698,15 @@ func awsRestjson1_deserializeDocumentKubernetesWorkloadDetails(v **types.Kuberne
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.HostNetwork = ptr.Bool(jtv)
+			}
+
+		case "hostPID":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.HostPID = ptr.Bool(jtv)
 			}
 
 		case "name":
@@ -14067,6 +14725,15 @@ func awsRestjson1_deserializeDocumentKubernetesWorkloadDetails(v **types.Kuberne
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Namespace = ptr.String(jtv)
+			}
+
+		case "serviceAccountName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServiceAccountName = ptr.String(jtv)
 			}
 
 		case "type":
@@ -15483,6 +16150,78 @@ func awsRestjson1_deserializeDocumentNetworkInterfaces(v *[]types.NetworkInterfa
 }
 
 func awsRestjson1_deserializeDocumentNotEquals(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentObservations(v **types.Observations, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Observations
+	if *v == nil {
+		sv = &types.Observations{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "text":
+			if err := awsRestjson1_deserializeDocumentObservationTexts(&sv.Text, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentObservationTexts(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -18278,6 +19017,15 @@ func awsRestjson1_deserializeDocumentSecurityContext(v **types.SecurityContext, 
 
 	for key, value := range shape {
 		switch key {
+		case "allowPrivilegeEscalation":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowPrivilegeEscalation = ptr.Bool(jtv)
+			}
+
 		case "privileged":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -18431,6 +19179,11 @@ func awsRestjson1_deserializeDocumentService(v **types.Service, value interface{
 					return err
 				}
 				sv.Count = ptr.Int32(int32(i64))
+			}
+
+		case "detection":
+			if err := awsRestjson1_deserializeDocumentDetection(&sv.Detection, value); err != nil {
+				return err
 			}
 
 		case "detectorId":

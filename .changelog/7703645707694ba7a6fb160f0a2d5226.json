@@ -1,0 +1,8 @@
+{
+    "id": "77036457-0769-4ba7-a6fb-160f0a2d5226",
+    "type": "feature",
+    "description": "Adding Run UUID and Run Output URI: GetRun and StartRun API response has two new fields \"uuid\" and \"runOutputUri\".",
+    "modules": [
+        "service/omics"
+    ]
+}

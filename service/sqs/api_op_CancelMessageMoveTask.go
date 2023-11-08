@@ -64,11 +64,11 @@ type CancelMessageMoveTaskOutput struct {
 }
 
 func (c *Client) addOperationCancelMessageMoveTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCancelMessageMoveTask{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelMessageMoveTask{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCancelMessageMoveTask{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelMessageMoveTask{}, middleware.After)
 	if err != nil {
 		return err
 	}

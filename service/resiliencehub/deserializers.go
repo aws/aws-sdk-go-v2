@@ -9695,6 +9695,15 @@ func awsRestjson1_deserializeDocumentAlarmRecommendation(v **types.AlarmRecommen
 				sv.RecommendationId = ptr.String(jtv)
 			}
 
+		case "recommendationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationStatus to be of type string, got %T instead", value)
+				}
+				sv.RecommendationStatus = types.RecommendationStatus(jtv)
+			}
+
 		case "referenceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13520,6 +13529,11 @@ func awsRestjson1_deserializeDocumentResiliencyScore(v **types.ResiliencyScore, 
 
 	for key, value := range shape {
 		switch key {
+		case "componentScore":
+			if err := awsRestjson1_deserializeDocumentScoringComponentResiliencyScores(&sv.ComponentScore, value); err != nil {
+				return err
+			}
+
 		case "disruptionScore":
 			if err := awsRestjson1_deserializeDocumentDisruptionResiliencyScore(&sv.DisruptionScore, value); err != nil {
 				return err
@@ -13945,6 +13959,166 @@ func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value inte
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentScoringComponentResiliencyScore(v **types.ScoringComponentResiliencyScore, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScoringComponentResiliencyScore
+	if *v == nil {
+		sv = &types.ScoringComponentResiliencyScore{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "excludedCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ExcludedCount = i64
+			}
+
+		case "outstandingCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OutstandingCount = i64
+			}
+
+		case "possibleScore":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.PossibleScore = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.PossibleScore = f64
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "score":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Score = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Score = f64
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScoringComponentResiliencyScores(v *map[string]types.ScoringComponentResiliencyScore, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.ScoringComponentResiliencyScore
+	if *v == nil {
+		mv = map[string]types.ScoringComponentResiliencyScore{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.ScoringComponentResiliencyScore
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentScoringComponentResiliencyScore(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.ServiceQuotaExceededException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14055,6 +14229,15 @@ func awsRestjson1_deserializeDocumentSopRecommendation(v **types.SopRecommendati
 					return fmt.Errorf("expected Uuid to be of type string, got %T instead", value)
 				}
 				sv.RecommendationId = ptr.String(jtv)
+			}
+
+		case "recommendationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationStatus to be of type string, got %T instead", value)
+				}
+				sv.RecommendationStatus = types.RecommendationStatus(jtv)
 			}
 
 		case "referenceId":
@@ -14348,6 +14531,15 @@ func awsRestjson1_deserializeDocumentTestRecommendation(v **types.TestRecommenda
 					return fmt.Errorf("expected Uuid to be of type string, got %T instead", value)
 				}
 				sv.RecommendationId = ptr.String(jtv)
+			}
+
+		case "recommendationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationStatus to be of type string, got %T instead", value)
+				}
+				sv.RecommendationStatus = types.RecommendationStatus(jtv)
 			}
 
 		case "referenceId":

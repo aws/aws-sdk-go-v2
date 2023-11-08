@@ -1,0 +1,8 @@
+{
+    "id": "a4f37e76-4803-4372-ba67-7b920b4b555c",
+    "type": "feature",
+    "description": "This release enables customers to call SQS using AWS JSON-1.0 protocol.",
+    "modules": [
+        "service/sqs"
+    ]
+}

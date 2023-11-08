@@ -200,3 +200,21 @@ func ExampleSection_outputUsage() {
 }
 
 var _ *types.FieldGroup
+
+func ExampleUserUnion_outputUsage() {
+	var union types.UserUnion
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UserUnionMemberUserArn:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string

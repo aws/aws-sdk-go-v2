@@ -97,11 +97,17 @@ type StartRunOutput struct {
 	// The run's ID.
 	Id *string
 
+	// The destination for workflow outputs.
+	RunOutputUri *string
+
 	// The run's status.
 	Status types.RunStatus
 
 	// The run's tags.
 	Tags map[string]string
+
+	// The universally unique identifier for a run.
+	Uuid *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

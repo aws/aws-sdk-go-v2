@@ -668,6 +668,13 @@ func awsRestjson1_serializeOpDocumentCreateRelatedItemInput(v *CreateRelatedItem
 		}
 	}
 
+	if v.PerformedBy != nil {
+		ok := object.Key("performedBy")
+		if err := awsRestjson1_serializeDocumentUserUnion(v.PerformedBy, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
@@ -3340,6 +3347,22 @@ func awsRestjson1_serializeDocumentTags(v map[string]*string, value smithyjson.V
 			continue
 		}
 		om.String(*v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUserUnion(v types.UserUnion, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.UserUnionMemberUserArn:
+		av := object.Key("userArn")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }

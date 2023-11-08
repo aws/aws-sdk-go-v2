@@ -186,11 +186,11 @@ type SetQueueAttributesOutput struct {
 }
 
 func (c *Client) addOperationSetQueueAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetQueueAttributes{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSetQueueAttributes{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetQueueAttributes{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSetQueueAttributes{}, middleware.After)
 	if err != nil {
 		return err
 	}

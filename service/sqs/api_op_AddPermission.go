@@ -95,11 +95,11 @@ type AddPermissionOutput struct {
 }
 
 func (c *Client) addOperationAddPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpAddPermission{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAddPermission{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAddPermission{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAddPermission{}, middleware.After)
 	if err != nil {
 		return err
 	}

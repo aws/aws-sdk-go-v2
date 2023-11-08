@@ -174,11 +174,11 @@ type SendMessageOutput struct {
 }
 
 func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSendMessage{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendMessage{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSendMessage{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSendMessage{}, middleware.After)
 	if err != nil {
 		return err
 	}

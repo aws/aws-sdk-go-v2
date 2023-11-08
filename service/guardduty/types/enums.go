@@ -606,6 +606,44 @@ func (OrgFeatureStatus) Values() []OrgFeatureStatus {
 	}
 }
 
+type ProfileSubtype string
+
+// Enum values for ProfileSubtype
+const (
+	ProfileSubtypeFrequent   ProfileSubtype = "FREQUENT"
+	ProfileSubtypeInfrequent ProfileSubtype = "INFREQUENT"
+	ProfileSubtypeUnseen     ProfileSubtype = "UNSEEN"
+	ProfileSubtypeRare       ProfileSubtype = "RARE"
+)
+
+// Values returns all known values for ProfileSubtype. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProfileSubtype) Values() []ProfileSubtype {
+	return []ProfileSubtype{
+		"FREQUENT",
+		"INFREQUENT",
+		"UNSEEN",
+		"RARE",
+	}
+}
+
+type ProfileType string
+
+// Enum values for ProfileType
+const (
+	ProfileTypeFrequency ProfileType = "FREQUENCY"
+)
+
+// Values returns all known values for ProfileType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ProfileType) Values() []ProfileType {
+	return []ProfileType{
+		"FREQUENCY",
+	}
+}
+
 type PublishingStatus string
 
 // Enum values for PublishingStatus

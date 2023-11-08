@@ -62,6 +62,10 @@ type CreateWorkgroupInput struct {
 	// your VPC instead of over the internet.
 	EnhancedVpcRouting *bool
 
+	// The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve
+	// queries. The max capacity is specified in RPUs.
+	MaxCapacity *int32
+
 	// The custom port to use when connecting to a workgroup. Valid port ranges are
 	// 5431-5455 and 8191-8215. The default is 5439.
 	Port *int32

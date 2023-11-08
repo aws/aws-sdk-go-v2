@@ -1,0 +1,8 @@
+{
+    "id": "33632f8e-0bf5-402d-b9be-dafd199a6814",
+    "type": "feature",
+    "description": "Add Node 20 (nodejs20.x) support to AWS Lambda.",
+    "modules": [
+        "service/lambda"
+    ]
+}

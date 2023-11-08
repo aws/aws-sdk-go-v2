@@ -106,6 +106,9 @@ type GetRunOutput struct {
 	// The run's ID.
 	RunId *string
 
+	// The destination for workflow outputs.
+	RunOutputUri *string
+
 	// When the run started.
 	StartTime *time.Time
 
@@ -126,6 +129,9 @@ type GetRunOutput struct {
 
 	// The run's tags.
 	Tags map[string]string
+
+	// The universally unique identifier for a run.
+	Uuid *string
 
 	// The run's workflow ID.
 	WorkflowId *string

@@ -2848,6 +2848,11 @@ func awsAwsjson11_serializeOpDocumentCreateWorkgroupInput(v *CreateWorkgroupInpu
 		ok.Boolean(*v.EnhancedVpcRouting)
 	}
 
+	if v.MaxCapacity != nil {
+		ok := object.Key("maxCapacity")
+		ok.Integer(*v.MaxCapacity)
+	}
+
 	if v.NamespaceName != nil {
 		ok := object.Key("namespaceName")
 		ok.String(*v.NamespaceName)
@@ -3705,6 +3710,11 @@ func awsAwsjson11_serializeOpDocumentUpdateWorkgroupInput(v *UpdateWorkgroupInpu
 	if v.EnhancedVpcRouting != nil {
 		ok := object.Key("enhancedVpcRouting")
 		ok.Boolean(*v.EnhancedVpcRouting)
+	}
+
+	if v.MaxCapacity != nil {
+		ok := object.Key("maxCapacity")
+		ok.Integer(*v.MaxCapacity)
 	}
 
 	if v.Port != nil {

@@ -1049,6 +1049,9 @@ type AudioLogSetting struct {
 	// This member is required.
 	Enabled bool
 
+	// The option to enable selective conversation log capture for audio.
+	SelectiveLoggingEnabled *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -4517,6 +4520,9 @@ type TextLogSetting struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	// The option to enable selective conversation log capture for text.
+	SelectiveLoggingEnabled *bool
 
 	noSmithyDocumentSerde
 }

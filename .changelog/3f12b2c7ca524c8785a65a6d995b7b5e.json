@@ -1,0 +1,8 @@
+{
+    "id": "3f12b2c7-ca52-4c87-85a6-5a6d995b7b5e",
+    "type": "feature",
+    "description": "AWS Lex now supports selective log capture in conversation logs. When you enable this option within the conversation log settings, only the utterances that trigger intents and slots specified in session attributes will be logged.",
+    "modules": [
+        "service/lexmodelsv2"
+    ]
+}

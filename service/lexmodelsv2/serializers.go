@@ -9900,6 +9900,11 @@ func awsRestjson1_serializeDocumentAudioLogSetting(v *types.AudioLogSetting, val
 		ok.Boolean(v.Enabled)
 	}
 
+	if v.SelectiveLoggingEnabled != nil {
+		ok := object.Key("selectiveLoggingEnabled")
+		ok.Boolean(*v.SelectiveLoggingEnabled)
+	}
+
 	return nil
 }
 
@@ -13135,6 +13140,11 @@ func awsRestjson1_serializeDocumentTextLogSetting(v *types.TextLogSetting, value
 	{
 		ok := object.Key("enabled")
 		ok.Boolean(v.Enabled)
+	}
+
+	if v.SelectiveLoggingEnabled != nil {
+		ok := object.Key("selectiveLoggingEnabled")
+		ok.Boolean(*v.SelectiveLoggingEnabled)
 	}
 
 	return nil

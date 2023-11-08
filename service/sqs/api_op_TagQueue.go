@@ -69,11 +69,11 @@ type TagQueueOutput struct {
 }
 
 func (c *Client) addOperationTagQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpTagQueue{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpTagQueue{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpTagQueue{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpTagQueue{}, middleware.After)
 	if err != nil {
 		return err
 	}

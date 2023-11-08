@@ -59,11 +59,11 @@ type UntagQueueOutput struct {
 }
 
 func (c *Client) addOperationUntagQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUntagQueue{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUntagQueue{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUntagQueue{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUntagQueue{}, middleware.After)
 	if err != nil {
 		return err
 	}

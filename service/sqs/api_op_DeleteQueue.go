@@ -60,11 +60,11 @@ type DeleteQueueOutput struct {
 }
 
 func (c *Client) addOperationDeleteQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteQueue{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteQueue{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteQueue{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteQueue{}, middleware.After)
 	if err != nil {
 		return err
 	}

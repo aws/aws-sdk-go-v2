@@ -65,11 +65,11 @@ type GetQueueUrlOutput struct {
 }
 
 func (c *Client) addOperationGetQueueUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetQueueUrl{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetQueueUrl{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetQueueUrl{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetQueueUrl{}, middleware.After)
 	if err != nil {
 		return err
 	}

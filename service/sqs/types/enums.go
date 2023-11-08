@@ -108,3 +108,27 @@ func (QueueAttributeName) Values() []QueueAttributeName {
 		"SqsManagedSseEnabled",
 	}
 }
+
+type TaskStatus string
+
+// Enum values for TaskStatus
+const (
+	TaskStatusRunning    TaskStatus = "RUNNING"
+	TaskStatusFailed     TaskStatus = "FAILED"
+	TaskStatusCancelling TaskStatus = "CANCELLING"
+	TaskStatusCancelled  TaskStatus = "CANCELLED"
+	TaskStatusCompleted  TaskStatus = "COMPLETED"
+)
+
+// Values returns all known values for TaskStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TaskStatus) Values() []TaskStatus {
+	return []TaskStatus{
+		"RUNNING",
+		"FAILED",
+		"CANCELLING",
+		"CANCELLED",
+		"COMPLETED",
+	}
+}

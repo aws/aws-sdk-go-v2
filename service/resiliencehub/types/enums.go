@@ -446,6 +446,28 @@ func (RecommendationComplianceStatus) Values() []RecommendationComplianceStatus 
 	}
 }
 
+type RecommendationStatus string
+
+// Enum values for RecommendationStatus
+const (
+	RecommendationStatusImplemented    RecommendationStatus = "Implemented"
+	RecommendationStatusInactive       RecommendationStatus = "Inactive"
+	RecommendationStatusNotImplemented RecommendationStatus = "NotImplemented"
+	RecommendationStatusExcluded       RecommendationStatus = "Excluded"
+)
+
+// Values returns all known values for RecommendationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationStatus) Values() []RecommendationStatus {
+	return []RecommendationStatus{
+		"Implemented",
+		"Inactive",
+		"NotImplemented",
+		"Excluded",
+	}
+}
+
 type RecommendationTemplateStatus string
 
 // Enum values for RecommendationTemplateStatus
@@ -512,6 +534,28 @@ func (ResiliencyPolicyTier) Values() []ResiliencyPolicyTier {
 		"CoreServices",
 		"NonCritical",
 		"NotApplicable",
+	}
+}
+
+type ResiliencyScoreType string
+
+// Enum values for ResiliencyScoreType
+const (
+	ResiliencyScoreTypeCompliance ResiliencyScoreType = "Compliance"
+	ResiliencyScoreTypeTest       ResiliencyScoreType = "Test"
+	ResiliencyScoreTypeAlarm      ResiliencyScoreType = "Alarm"
+	ResiliencyScoreTypeSop        ResiliencyScoreType = "Sop"
+)
+
+// Values returns all known values for ResiliencyScoreType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResiliencyScoreType) Values() []ResiliencyScoreType {
+	return []ResiliencyScoreType{
+		"Compliance",
+		"Test",
+		"Alarm",
+		"Sop",
 	}
 }
 
