@@ -1966,17 +1966,6 @@
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
                             }
-                        },
-                        {
-                            "documentation": "Partition doesn't support DualStack",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
                         }
                     ],
                     "version": "1.0"
@@ -3803,13 +3792,13 @@
                 "SourceCustomDbEngineVersionIdentifier": {
                     "target": "com.amazonaws.rds#String255",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                        "smithy.api#documentation": "<p>The ARN of a CEV to use as a source for creating a new CEV. You can specify a different\n            Amazon Machine Imagine (AMI) by using either <code>Source</code> or\n                <code>UseAwsProvidedLatestImage</code>. You can't specify a different JSON manifest\n            when you specify <code>SourceCustomDbEngineVersionIdentifier</code>.</p>"
                     }
                 },
                 "UseAwsProvidedLatestImage": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to use the latest service-provided Amazon Machine Image (AMI) for\n            the CEV. If you specify <code>UseAwsProvidedLatestImage</code>, you can't also specify\n                <code>ImageId</code>.</p>"
                     }
                 }
             },

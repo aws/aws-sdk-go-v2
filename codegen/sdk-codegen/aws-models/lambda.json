@@ -2811,7 +2811,7 @@
                 "EphemeralStorage": {
                     "target": "com.amazonaws.lambda#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n      number between 512 and 10,240 MB.</p>"
+                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n      number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>"
                     }
                 },
                 "SnapStart": {
@@ -3855,7 +3855,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but it can be any\n      whole number between 512 and 10,240 MB.</p>"
+                "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n  number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>"
             }
         },
         "com.amazonaws.lambda#EphemeralStorageSize": {
@@ -4452,7 +4452,7 @@
                 "EphemeralStorage": {
                     "target": "com.amazonaws.lambda#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the function’s <code>/tmp</code> directory in MB. The default value is 512, but it can be any\n      whole number between 512 and 10,240 MB.</p>"
+                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n  number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>"
                     }
                 },
                 "SnapStart": {
@@ -6455,7 +6455,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or\n      asynchronously. To invoke a function asynchronously, set <code>InvocationType</code> to <code>Event</code>.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html\">synchronous invocation</a>,\n      details about the function response, including errors, are included in the response body and headers. For either\n      invocation type, you can find more information in the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html\">execution log</a> and <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html\">trace</a>.</p>\n         <p>When an error occurs, your function may be invoked multiple times. Retry behavior varies by error type,\n      client, event source, and invocation type. For example, if you invoke a function asynchronously and it returns an\n      error, Lambda executes the function up to two more times. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-retries.html\">Error handling and automatic retries in\n          Lambda</a>.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html\">asynchronous invocation</a>,\n      Lambda adds events to a queue before sending them to your function. If your function does not have enough capacity\n      to keep up with the queue, events may be lost. Occasionally, your function may receive the same event multiple\n      times, even if no error occurs. To retain events that were not processed, configure your function with a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq\">dead-letter queue</a>.</p>\n         <p>The status code in the API response doesn't reflect function errors. Error codes are reserved for errors that\n      prevent your function from executing, such as permissions errors, <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html\">quota</a> errors, or issues with your function's code and\n      configuration. For example, Lambda returns <code>TooManyRequestsException</code> if running the\n      function would cause you to exceed a concurrency limit at either the account level\n        (<code>ConcurrentInvocationLimitExceeded</code>) or function level\n        (<code>ReservedFunctionConcurrentInvocationLimitExceeded</code>).</p>\n         <p>For functions with a long timeout, your client might disconnect during synchronous invocation while it waits\n      for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long\n      connections with timeout or keep-alive settings.</p>\n         <p>This operation requires permission for the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html\">lambda:InvokeFunction</a> action. For details on how to set up\n      permissions for cross-account invocations, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke\">Granting function\n      access to other accounts</a>.</p>",
+                "smithy.api#documentation": "<p>Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or\n      asynchronously. By default, Lambda invokes your function synchronously (i.e. the<code>InvocationType</code>\n      is <code>RequestResponse</code>). To invoke a function asynchronously, set <code>InvocationType</code> to\n      <code>Event</code>. Lambda passes the <code>ClientContext</code> object to your function for\n      synchronous invocations only.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html\">synchronous invocation</a>,\n      details about the function response, including errors, are included in the response body and headers. For either\n      invocation type, you can find more information in the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html\">execution log</a> and <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html\">trace</a>.</p>\n         <p>When an error occurs, your function may be invoked multiple times. Retry behavior varies by error type,\n      client, event source, and invocation type. For example, if you invoke a function asynchronously and it returns an\n      error, Lambda executes the function up to two more times. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-retries.html\">Error handling and automatic retries in\n          Lambda</a>.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html\">asynchronous invocation</a>,\n      Lambda adds events to a queue before sending them to your function. If your function does not have enough capacity\n      to keep up with the queue, events may be lost. Occasionally, your function may receive the same event multiple\n      times, even if no error occurs. To retain events that were not processed, configure your function with a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq\">dead-letter queue</a>.</p>\n         <p>The status code in the API response doesn't reflect function errors. Error codes are reserved for errors that\n      prevent your function from executing, such as permissions errors, <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html\">quota</a> errors, or issues with your function's code and\n      configuration. For example, Lambda returns <code>TooManyRequestsException</code> if running the\n      function would cause you to exceed a concurrency limit at either the account level\n        (<code>ConcurrentInvocationLimitExceeded</code>) or function level\n        (<code>ReservedFunctionConcurrentInvocationLimitExceeded</code>).</p>\n         <p>For functions with a long timeout, your client might disconnect during synchronous invocation while it waits\n      for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long\n      connections with timeout or keep-alive settings.</p>\n         <p>This operation requires permission for the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html\">lambda:InvokeFunction</a> action. For details on how to set up\n      permissions for cross-account invocations, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke\">Granting function\n      access to other accounts</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-03-31/functions/{FunctionName}/invocations",
@@ -6490,7 +6490,7 @@
             ],
             "traits": {
                 "smithy.api#deprecated": {},
-                "smithy.api#documentation": "<important>\n            <p>For asynchronous function invocation, use <a>Invoke</a>.</p>\n         </important>\n         <p>Invokes a function asynchronously.</p>",
+                "smithy.api#documentation": "<important>\n            <p>For asynchronous function invocation, use <a>Invoke</a>.</p>\n         </important>\n         <p>Invokes a function asynchronously.</p>\n         <note>\n            <p>If you do use the InvokeAsync action, note that it doesn't support the use of X-Ray active tracing. Trace ID is not \n        propagated to the function, even if X-Ray active tracing is turned on.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2014-11-13/functions/{FunctionName}/invoke-async",
@@ -9952,6 +9952,12 @@
                     "traits": {
                         "smithy.api#enumValue": "python3.11"
                     }
+                },
+                "nodejs20x": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nodejs20.x"
+                    }
                 }
             }
         },
@@ -11472,7 +11478,7 @@
                 "EphemeralStorage": {
                     "target": "com.amazonaws.lambda#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n      number between 512 and 10,240 MB.</p>"
+                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n      number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>"
                     }
                 },
                 "SnapStart": {

@@ -2072,17 +2072,6 @@
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
                             }
-                        },
-                        {
-                            "documentation": "Partition doesn't support DualStack",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
                         }
                     ],
                     "version": "1.0"
@@ -25226,7 +25215,8 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>\n         <note>\n            <p>InstanceID is a required field. The \"Required: No\" below is incorrect.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>\n         <note>\n            <p>InstanceID is a required field. The \"Required: No\" below is incorrect.</p>\n         </note>",
+                        "smithy.api#required": {}
                     }
                 },
                 "NextToken": {

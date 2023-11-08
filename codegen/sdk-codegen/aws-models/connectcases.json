@@ -1644,7 +1644,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a related item (comments, tasks, and contacts) and associates it with a\n      case.</p>\n         <note>\n            <p>A Related Item is a resource that is associated with a case. It may or may not have an\n        external identifier linking it to an external resource (for example, a\n          <code>contactArn</code>). All Related Items have their own internal identifier, the\n          <code>relatedItemArn</code>. Examples of related items include <code>comments</code> and\n          <code>contacts</code>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a related item (comments, tasks, and contacts) and associates it with a\n      case.</p>\n         <note>\n            <ul>\n               <li> \n                  <p>A Related Item is a resource that is associated with a case. It may or may not have an\n          external identifier linking it to an external resource (for example, a\n          <code>contactArn</code>). All Related Items have their own internal identifier, the\n          <code>relatedItemArn</code>. Examples of related items include <code>comments</code> and\n          <code>contacts</code>.</p>\n               </li>\n               <li>\n                  <p>If you provide a value for <code>performedBy.userArn</code> you must also have \n          <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">DescribeUser</a>\n           permission on the ARN of the user that you provide.</p>\n               </li>\n            </ul>\n     \n         </note>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/cases/{caseId}/related-items/",
                     "method": "POST"
@@ -1683,6 +1683,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The content of a related item to be created.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "performedBy": {
+                    "target": "com.amazonaws.connectcases#UserUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the creator of the related item.</p>"
                     }
                 }
             }
@@ -4372,6 +4378,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
                     }
+                },
+                "performedBy": {
+                    "target": "com.amazonaws.connectcases#UserUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the creator of the related item.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5061,6 +5073,29 @@
         "com.amazonaws.connectcases#UpdateTemplateResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.connectcases#UserArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#UserUnion": {
+            "type": "union",
+            "members": {
+                "userArn": {
+                    "target": "com.amazonaws.connectcases#UserArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the Amazon Connect ARN of the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the identity of the person who performed the action.</p>"
+            }
         },
         "com.amazonaws.connectcases#ValidationException": {
             "type": "structure",

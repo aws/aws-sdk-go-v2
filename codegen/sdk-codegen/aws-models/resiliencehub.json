@@ -180,6 +180,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of Application Component names for the CloudWatch alarm recommendation.</p>"
                     }
+                },
+                "recommendationStatus": {
+                    "target": "com.amazonaws.resiliencehub#RecommendationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the recommended Amazon CloudWatch alarm.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2585,7 +2591,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Resilience Hub application. An Resilience Hub application is a\n      collection of Amazon Web Services resources structured to prevent and recover Amazon Web Services application disruptions. To describe a Resilience Hub application,\n      you provide an application name, resources from one or more CloudFormation stacks, Resource Groups, Terraform state files, AppRegistry applications, and an appropriate\n      resiliency policy. In addition, you can also add resources that are located on Amazon Elastic Kubernetes Service (Amazon EKS) clusters as optional resources. For more information about the number of resources supported per application, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/resiliencehub.html#limits_resiliencehub\">Service\n      quotas</a>.</p>\n         <p>After you create an Resilience Hub application, you publish it so that you can run a resiliency\n      assessment on it. You can then use recommendations from the assessment to improve resiliency\n      by running another assessment, comparing results, and then iterating the process until you\n      achieve your goals for recovery time objective (RTO) and recovery point objective\n      (RPO).</p>",
+                "smithy.api#documentation": "<p>Creates an Resilience Hub application. An Resilience Hub application is a\n      collection of Amazon Web Services resources structured to prevent and recover Amazon Web Services application disruptions. To describe a Resilience Hub application, you provide an\n      application name, resources from one or more CloudFormation stacks, Resource Groups, Terraform state files, AppRegistry applications, and an appropriate\n      resiliency policy. In addition, you can also add resources that are located on Amazon Elastic Kubernetes Service (Amazon EKS) clusters as optional resources. For more information\n      about the number of resources supported per application, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/resiliencehub.html#limits_resiliencehub\">Service\n      quotas</a>.</p>\n         <p>After you create an Resilience Hub application, you publish it so that you can run a resiliency\n      assessment on it. You can then use recommendations from the assessment to improve resiliency\n      by running another assessment, comparing results, and then iterating the process until you\n      achieve your goals for recovery time objective (RTO) and recovery point objective\n      (RPO).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/create-app",
@@ -6697,6 +6703,12 @@
                 "smithy.api#documentation": "<p>Defines a logical resource identifier.</p>"
             }
         },
+        "com.amazonaws.resiliencehub#Long": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
         "com.amazonaws.resiliencehub#LongOptional": {
             "type": "long"
         },
@@ -6728,7 +6740,7 @@
                 "invokerRoleName": {
                     "target": "com.amazonaws.resiliencehub#IamRoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Existing Amazon Web Services\n      IAM role name in the primary Amazon Web Services account that will be assumed by\n        Resilience Hub Service Principle to obtain a read-only access to your application\n      resources while running an assessment.</p>\n         <note>\n            <p>You must have <code>iam:passRole</code> permission for this role while creating or\n        updating the application.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Existing Amazon Web Services\n      IAM role name in the primary Amazon Web Services account that will be assumed by\n        Resilience Hub Service Principle to obtain a read-only access to your application\n      resources while running an assessment.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>You must have <code>iam:passRole</code> permission for this role while creating or updating the application.</p>\n               </li>\n               <li>\n                  <p>Currently, <code>invokerRoleName</code> accepts only <code>[A-Za-z0-9_+=,.@-]</code> characters.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "crossAccountRoleArns": {
@@ -6798,7 +6810,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.resiliencehub#String255",
                     "traits": {
-                        "smithy.api#documentation": "<p>Type of resource.</p>",
+                        "smithy.api#documentation": "<p>The type of resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7164,6 +7176,29 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.resiliencehub#RecommendationItem"
+            }
+        },
+        "com.amazonaws.resiliencehub#RecommendationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Implemented",
+                        "name": "IMPLEMENTED"
+                    },
+                    {
+                        "value": "Inactive",
+                        "name": "INACTIVE"
+                    },
+                    {
+                        "value": "NotImplemented",
+                        "name": "NOT_IMPLEMENTED"
+                    },
+                    {
+                        "value": "Excluded",
+                        "name": "EXCLUDED"
+                    }
+                ]
             }
         },
         "com.amazonaws.resiliencehub#RecommendationTemplate": {
@@ -7554,10 +7589,39 @@
                         "smithy.api#documentation": "<p>The disruption score for a valid key.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "componentScore": {
+                    "target": "com.amazonaws.resiliencehub#ScoringComponentResiliencyScores",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The score generated by Resilience Hub for the scoring component after running an assessment.</p>\n         <p>For example, if the <code>score</code> is 25 points, it indicates the overall score of\n      your application generated by Resilience Hub after running an assessment.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The overall resiliency score, returned as an object that includes the disruption score and\n      outage score.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehub#ResiliencyScoreType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Compliance",
+                        "name": "COMPLIANCE"
+                    },
+                    {
+                        "value": "Test",
+                        "name": "TEST"
+                    },
+                    {
+                        "value": "Alarm",
+                        "name": "ALARM"
+                    },
+                    {
+                        "value": "Sop",
+                        "name": "SOP"
+                    }
+                ]
             }
         },
         "com.amazonaws.resiliencehub#ResolveAppVersionResources": {
@@ -7941,6 +8005,51 @@
                 "smithy.api#pattern": "^((https://([^/]+)\\.s3((-|\\.)[^/]+)?\\.amazonaws\\.com(.cn)?)|(s3://([^/]+)))/\\S{1,2000}$"
             }
         },
+        "com.amazonaws.resiliencehub#ScoringComponentResiliencyScore": {
+            "type": "structure",
+            "members": {
+                "score": {
+                    "target": "com.amazonaws.resiliencehub#Double",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Resiliency score of your application.</p>"
+                    }
+                },
+                "possibleScore": {
+                    "target": "com.amazonaws.resiliencehub#Double",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Maximum\n      possible score that can be obtained for the scoring component. If the <code>Possible\n        score</code> is 20 points, it indicates the maximum possible score you can achieve for your\n      application when you run a new assessment after implementing all the Resilience Hub\n      recommendations.</p>"
+                    }
+                },
+                "outstandingCount": {
+                    "target": "com.amazonaws.resiliencehub#Long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Number\n      of issues that must be resolved to obtain the maximum possible score for the scoring\n      component. For SOPs, alarms, and FIS experiments, these are the number of\n      recommendations that must be implemented. For compliance, it is the number of Application\n      Components that has breached the resiliency policy.</p>\n         <p>For example, if the <code>Outstanding count</code> for Resilience Hub recommended Amazon CloudWatch\n      alarms is 5, it indicates that 5 Amazon CloudWatch alarms must be fixed to achieve the\n      maximum possible score.</p>"
+                    }
+                },
+                "excludedCount": {
+                    "target": "com.amazonaws.resiliencehub#Long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Number\n      of recommendations that were excluded from the assessment.</p>\n         <p>For example, if the <code>Excluded count</code> for Resilience Hub recommended Amazon CloudWatch alarms\n      is 7, it indicates that 7 Amazon CloudWatch alarms are excluded from the assessment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Resiliency score of each scoring component. For more information about scoring component,\n      see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/calculate-score.html\">Calculating resiliency\n      score</a>.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehub#ScoringComponentResiliencyScores": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.resiliencehub#ResiliencyScoreType"
+            },
+            "value": {
+                "target": "com.amazonaws.resiliencehub#ScoringComponentResiliencyScore"
+            }
+        },
         "com.amazonaws.resiliencehub#Seconds": {
             "type": "integer",
             "traits": {
@@ -8015,6 +8124,12 @@
                     "target": "com.amazonaws.resiliencehub#String500",
                     "traits": {
                         "smithy.api#documentation": "<p>Prerequisite for the SOP recommendation.</p>"
+                    }
+                },
+                "recommendationStatus": {
+                    "target": "com.amazonaws.resiliencehub#RecommendationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the recommended standard operating procedure.</p>"
                     }
                 }
             },
@@ -8404,6 +8519,12 @@
                     "target": "com.amazonaws.resiliencehub#AlarmReferenceIdList",
                     "traits": {
                         "smithy.api#documentation": "<p> A list of recommended alarms that are used in the test and must be exported before or\n      with the test. </p>"
+                    }
+                },
+                "recommendationStatus": {
+                    "target": "com.amazonaws.resiliencehub#RecommendationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the recommended test.</p>"
                     }
                 }
             },

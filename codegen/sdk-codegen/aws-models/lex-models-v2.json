@@ -2236,6 +2236,12 @@
                     "traits": {
                         "smithy.api#required": {}
                     }
+                },
+                "selectiveLoggingEnabled": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to enable selective conversation log capture for audio.</p>"
+                    }
                 }
             },
             "traits": {
@@ -20475,6 +20481,12 @@
                     "target": "com.amazonaws.lexmodelsv2#TextLogDestination",
                     "traits": {
                         "smithy.api#required": {}
+                    }
+                },
+                "selectiveLoggingEnabled": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to enable selective conversation log capture for text.</p>"
                     }
                 }
             },

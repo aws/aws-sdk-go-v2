@@ -748,6 +748,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.</p>"
                     }
+                },
+                "maxCapacity": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries. The max capacity is specified in RPUs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5361,6 +5367,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.</p>"
                     }
+                },
+                "maxCapacity": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries. The max capacity is specified in RPUs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5717,6 +5729,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The patch version of your Amazon Redshift Serverless workgroup. For more information about patch versions, see\n         <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html\">Cluster versions for Amazon Redshift</a>.</p>"
+                    }
+                },
+                "maxCapacity": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries. The max capacity is specified in RPUs.</p>"
                     }
                 }
             },

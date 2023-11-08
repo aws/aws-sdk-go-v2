@@ -6340,6 +6340,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The location of the run log. \n    </p>"
                     }
+                },
+                "uuid": {
+                    "target": "com.amazonaws.omics#RunUuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The universally unique identifier for a run. \n    </p>"
+                    }
+                },
+                "runOutputUri": {
+                    "target": "com.amazonaws.omics#RunOutputUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The destination for workflow outputs.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -13038,6 +13050,16 @@
                 "smithy.api#timestampFormat": "date-time"
             }
         },
+        "com.amazonaws.omics#RunUuid": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
         "com.amazonaws.omics#S3Destination": {
             "type": "string",
             "traits": {
@@ -14497,6 +14519,18 @@
                     "target": "com.amazonaws.omics#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The run's tags.</p>"
+                    }
+                },
+                "uuid": {
+                    "target": "com.amazonaws.omics#RunUuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The universally unique identifier for a run. \n    </p>"
+                    }
+                },
+                "runOutputUri": {
+                    "target": "com.amazonaws.omics#RunOutputUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The destination for workflow outputs.\n    </p>"
                     }
                 }
             },
