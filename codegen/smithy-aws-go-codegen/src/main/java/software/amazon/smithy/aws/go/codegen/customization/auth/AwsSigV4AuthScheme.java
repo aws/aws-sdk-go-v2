@@ -27,14 +27,16 @@ import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.integration.auth.SigV4Definition;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.utils.ListUtils;
+import software.amazon.smithy.utils.MapUtils;
 
 import java.util.List;
 
+import static software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator.generateInitializeMiddlewareFunc;
 import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
 
 /**
  * Adds auth scheme codegen support for aws.auth#sigv4. Region as a config and SDK-specific auth params/resolution are
- * supplied by other integrations.
+ * supplied by other integrations. Includes config helpers to set caller overrides for signing name and region.
  */
 public class AwsSigV4AuthScheme implements GoIntegration {
     @Override
@@ -51,7 +53,7 @@ public class AwsSigV4AuthScheme implements GoIntegration {
             GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator
     ) {
         if (settings.getService(model).hasTrait(SigV4Trait.class)) {
-            goDelegator.useFileWriter("options.go", settings.getModuleName(), generateSource());
+            goDelegator.useFileWriter("options.go", settings.getModuleName(), generateAdditionalSource());
         }
     }
 
@@ -70,7 +72,14 @@ public class AwsSigV4AuthScheme implements GoIntegration {
         }
     }
 
-    private GoWriter.Writable generateSource() {
+    private GoWriter.Writable generateAdditionalSource() {
+        return GoWriter.ChainWritable.of(
+                generateGetIdentityResolver(),
+                generateHelpers()
+        ).compose();
+    }
+
+    private GoWriter.Writable generateGetIdentityResolver() {
         return goTemplate("""
                 func getSigV4IdentityResolver(o Options) $T {
                     if o.Credentials != nil {
@@ -81,5 +90,55 @@ public class AwsSigV4AuthScheme implements GoIntegration {
                 """,
                 SmithyGoTypes.Auth.IdentityResolver,
                 SdkGoTypes.Internal.Auth.Smithy.CredentialsProviderAdapter);
+    }
+
+    private GoWriter.Writable generateHelpers() {
+        return goTemplate("""
+                // WithSigV4SigningName applies an override to the authentication workflow to
+                // use the given signing name for SigV4-authenticated operations.
+                //
+                // This is an advanced setting. The value here is FINAL, taking precedence over
+                // the resolved signing name from both auth scheme resolution and endpoint
+                // resolution.
+                func WithSigV4SigningName(name string) func(*Options) {
+                    fn := $nameMW:W
+                    return func(o *Options) {
+                        o.APIOptions = append(o.APIOptions, func(s $stack:P) error {
+                            return s.Initialize.Add(
+                                middleware.InitializeMiddlewareFunc("withSigV4SigningName", fn),
+                                $before:T,
+                            )
+                        })
+                    }
+                }
+
+                // WithSigV4SigningRegion applies an override to the authentication workflow to
+                // use the given signing region for SigV4-authenticated operations.
+                //
+                // This is an advanced setting. The value here is FINAL, taking precedence over
+                // the resolved signing region from both auth scheme resolution and endpoint
+                // resolution.
+                func WithSigV4SigningRegion(region string) func(*Options) {
+                    fn := $regionMW:W
+                    return func(o *Options) {
+                        o.APIOptions = append(o.APIOptions, func(s $stack:P) error {
+                            return s.Initialize.Add(
+                                middleware.InitializeMiddlewareFunc("withSigV4SigningRegion", fn),
+                                $before:T,
+                            )
+                        })
+                    }
+                }
+                """,
+                MapUtils.of(
+                        "stack", SmithyGoTypes.Middleware.Stack,
+                        "before", SmithyGoTypes.Middleware.Before,
+                        "nameMW", generateInitializeMiddlewareFunc(goTemplate("""
+                                return next.HandleInitialize($T(ctx, name), in)
+                                """, SdkGoTypes.Aws.Middleware.SetSigningName)),
+                        "regionMW", generateInitializeMiddlewareFunc(goTemplate("""
+                                return next.HandleInitialize($T(ctx, region), in)
+                                """, SdkGoTypes.Aws.Middleware.SetSigningRegion))
+                ));
     }
 }

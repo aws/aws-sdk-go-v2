@@ -31,6 +31,8 @@ public final class SdkGoTypes {
         public static final Symbol FIPSEndpointStateEnabled = AwsGoDependency.AWS_CORE.valueSymbol("FIPSEndpointStateEnabled");
         public static final Symbol DualStackEndpointStateEnabled = AwsGoDependency.AWS_CORE.valueSymbol("DualStackEndpointStateEnabled");
 
+        public static final Symbol AnonymousCredentials = AwsGoDependency.AWS_CORE.pointableSymbol("AnonymousCredentials");
+
         public static final class Middleware {
             public static final Symbol GetRequiresLegacyEndpoints = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("GetRequiresLegacyEndpoints");
             public static final Symbol GetSigningName = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("GetSigningName");

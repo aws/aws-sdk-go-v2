@@ -3,7 +3,10 @@
 package s3
 
 import (
+	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	"github.com/aws/aws-sdk-go-v2/internal/v4a"
 	smithyauth "github.com/aws/smithy-go/auth"
@@ -197,14 +200,58 @@ func WithEndpointResolverV2(v EndpointResolverV2) func(*Options) {
 	}
 }
 
-func getSigV4IdentityResolver(o *Options) smithyauth.IdentityResolver {
+func getSigV4IdentityResolver(o Options) smithyauth.IdentityResolver {
 	if o.Credentials != nil {
 		return &internalauthsmithy.CredentialsProviderAdapter{Provider: o.Credentials}
 	}
 	return nil
 }
 
-func getSigV4AIdentityResolver(o *Options) smithyauth.IdentityResolver {
+// WithSigV4SigningName applies an override to the authentication workflow to
+// use the given signing name for SigV4-authenticated operations.
+//
+// This is an advanced setting. The value here is FINAL, taking precedence over
+// the resolved signing name from both auth scheme resolution and endpoint
+// resolution.
+func WithSigV4SigningName(name string) func(*Options) {
+	fn := func(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+		out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+	) {
+		return next.HandleInitialize(awsmiddleware.SetSigningName(ctx, name), in)
+	}
+	return func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(s *middleware.Stack) error {
+			return s.Initialize.Add(
+				middleware.InitializeMiddlewareFunc("withSigV4SigningName", fn),
+				middleware.Before,
+			)
+		})
+	}
+}
+
+// WithSigV4SigningRegion applies an override to the authentication workflow to
+// use the given signing region for SigV4-authenticated operations.
+//
+// This is an advanced setting. The value here is FINAL, taking precedence over
+// the resolved signing region from both auth scheme resolution and endpoint
+// resolution.
+func WithSigV4SigningRegion(region string) func(*Options) {
+	fn := func(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+		out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+	) {
+		return next.HandleInitialize(awsmiddleware.SetSigningRegion(ctx, region), in)
+	}
+	return func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(s *middleware.Stack) error {
+			return s.Initialize.Add(
+				middleware.InitializeMiddlewareFunc("withSigV4SigningRegion", fn),
+				middleware.Before,
+			)
+		})
+	}
+}
+
+func getSigV4AIdentityResolver(o Options) smithyauth.IdentityResolver {
 	if o.Credentials != nil {
 		return &v4a.CredentialsProviderAdapter{
 			Provider: &v4a.SymmetricCredentialAdaptor{
@@ -213,4 +260,39 @@ func getSigV4AIdentityResolver(o *Options) smithyauth.IdentityResolver {
 		}
 	}
 	return nil
+}
+
+// WithSigV4ASigningRegions applies an override to the authentication workflow to
+// use the given signing region set for SigV4A-authenticated operations.
+//
+// This is an advanced setting. The value here is FINAL, taking precedence over
+// the resolved signing region set from both auth scheme resolution and endpoint
+// resolution.
+func WithSigV4ASigningRegions(regions []string) func(*Options) {
+	fn := func(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+		out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+	) {
+		rscheme := getResolvedAuthScheme(ctx)
+		if rscheme == nil {
+			return out, metadata, fmt.Errorf("no resolved auth scheme")
+		}
+
+		smithyhttp.SetSigV4ASigningRegions(&rscheme.SignerProperties, regions)
+		return next.HandleFinalize(ctx, in)
+	}
+	return func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(s *middleware.Stack) error {
+			return s.Finalize.Insert(
+				middleware.FinalizeMiddlewareFunc("withSigV4ASigningRegions", fn),
+				"Signing",
+				middleware.Before,
+			)
+		})
+	}
+}
+
+func ignoreAnonymousAuth(options *Options) {
+	if _, ok := options.Credentials.(aws.AnonymousCredentials); ok {
+		options.Credentials = nil
+	}
 }

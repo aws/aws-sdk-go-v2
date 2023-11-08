@@ -9,6 +9,7 @@ import (
 	"strconv"
 
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -170,7 +171,7 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 	//
 	// Nil and empty streams will always be handled as a request header,
 	// regardless if the operation supports trailing checksums or not.
-	if req.IsHTTPS() {
+	if req.IsHTTPS() && !presignedurlcust.GetIsPresigning(ctx) {
 		if stream != nil && streamLength != 0 && m.EnableTrailingChecksum {
 			if m.EnableComputePayloadHash {
 				// ContentSHA256Header middleware handles the header

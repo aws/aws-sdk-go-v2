@@ -67,3 +67,4 @@ software.amazon.smithy.aws.go.codegen.customization.auth.AwsHttpBearerAuthScheme
 software.amazon.smithy.aws.go.codegen.customization.auth.EndpointAuthResolution
 software.amazon.smithy.aws.go.codegen.customization.auth.AwsSigV4aAuthScheme
 software.amazon.smithy.aws.go.codegen.customization.auth.LegacyAuthContextOverride
+software.amazon.smithy.aws.go.codegen.customization.auth.IgnoreAnonymousCredentials

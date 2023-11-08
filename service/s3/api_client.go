@@ -70,6 +70,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveCredentialProvider(&options)
 
+	ignoreAnonymousAuth(&options)
+
 	finalizeServiceEndpointAuthResolver(&options)
 
 	client := &Client{
