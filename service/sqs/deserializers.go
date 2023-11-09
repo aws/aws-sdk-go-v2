@@ -5044,9 +5044,9 @@ func awsAwsjson10_deserializeDocumentListMessageMoveTasksResultEntry(v **types.L
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected TaskStatus to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Status = types.TaskStatus(jtv)
+				sv.Status = ptr.String(jtv)
 			}
 
 		case "TaskHandle":

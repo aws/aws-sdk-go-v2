@@ -127,7 +127,7 @@ type ListMessageMoveTasksResultEntry struct {
 
 	// The status of the message movement task. Possible values are: RUNNING,
 	// COMPLETED, CANCELLING, CANCELLED, and FAILED.
-	Status TaskStatus
+	Status *string
 
 	// An identifier associated with a message movement task. When this field is
 	// returned in the response of the ListMessageMoveTasks action, it is only
