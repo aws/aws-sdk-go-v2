@@ -379,6 +379,7 @@ if err != nil {
 
 import "context"
 import "github.com/aws/aws-sdk-go-v2/credentials/stscreds"
+import "github.com/aws/aws-sdk-go-v2/service/sts"
 
 // ...
 
@@ -433,6 +434,7 @@ if err != nil {
 import "context"
 import "github.com/aws/aws-sdk-go-v2/aws"
 import "github.com/aws/aws-sdk-go-v2/credentials/stscreds"
+import "github.com/aws/aws-sdk-go-v2/service/sts"
 
 // ...
 
