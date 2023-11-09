@@ -54,6 +54,7 @@ func Test_EmptyResponse(t *testing.T) {
 				Retryer: func() aws.Retryer {
 					return aws.NopRetryer{}
 				},
+				Credentials: &fakeCredentials{},
 			}
 
 			client := ec2.NewFromConfig(cfg)
@@ -81,4 +82,10 @@ func Test_EmptyResponse(t *testing.T) {
 			}
 		})
 	}
+}
+
+type fakeCredentials struct{}
+
+func (*fakeCredentials) Retrieve(_ context.Context) (aws.Credentials, error) {
+	return aws.Credentials{}, nil
 }
