@@ -149,9 +149,3 @@ func WithEndpointResolverV2(v EndpointResolverV2) func(*Options) {
 		o.EndpointResolverV2 = v
 	}
 }
-
-func ignoreAnonymousAuth(options *Options) {
-	if _, ok := options.Credentials.(aws.AnonymousCredentials); ok {
-		options.Credentials = nil
-	}
-}

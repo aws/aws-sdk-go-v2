@@ -57,8 +57,6 @@ func New(options Options, optFns ...func(*Options)) *Client {
 		fn(&options)
 	}
 
-	ignoreAnonymousAuth(&options)
-
 	client := &Client{
 		options: options,
 	}
