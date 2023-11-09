@@ -1,3 +1,7 @@
+# v1.26.1 (2023-11-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2023-11-02)
 
 * **Feature**: Amazon GameLift adds support for shared credentials, which allows applications that are deployed on managed EC2 fleets to interact with other AWS resources.

@@ -1,3 +1,7 @@
+# v1.35.1 (2023-11-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2023-11-02)
 
 * **Feature**: This release introduces the stateless rule analyzer, which enables you to analyze your stateless rules for asymmetric routing.

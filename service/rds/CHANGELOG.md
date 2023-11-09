@@ -1,3 +1,7 @@
+# v1.62.2 (2023-11-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.62.1 (2023-11-08)
 
 * **Documentation**: This Amazon RDS release adds support for patching the OS of an RDS Custom for Oracle DB instance. You can now upgrade the database or operating system using the modify-db-instance command.

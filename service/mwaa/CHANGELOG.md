@@ -1,3 +1,7 @@
+# v1.20.1 (2023-11-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2023-11-06)
 
 * **Feature**: This release adds support for Apache Airflow version 2.7.2. This version release includes support for deferrable operators and triggers.

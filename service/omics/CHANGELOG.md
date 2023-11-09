@@ -1,3 +1,7 @@
+# v1.14.1 (2023-11-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2023-11-08)
 
 * **Feature**: Adding Run UUID and Run Output URI: GetRun and StartRun API response has two new fields "uuid" and "runOutputUri".

@@ -1,3 +1,7 @@
+# v1.27.1 (2023-11-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2023-11-06)
 
 * **Feature**: Add partitional endpoint for iso-e.

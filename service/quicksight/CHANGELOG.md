@@ -1,3 +1,7 @@
+# v1.50.1 (2023-11-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.0 (2023-11-02)
 
 * **Feature**: This release introduces Float Decimal Type as SubType in QuickSight SPICE datasets and Custom week start and Custom timezone options in Analysis and Dashboard

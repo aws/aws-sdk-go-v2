@@ -1,3 +1,7 @@
+# v1.78.1 (2023-11-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.78.0 (2023-11-08)
 
 * **Feature**: This release clarifies in our public documentation that InstanceId is a requirement for SearchUsers API requests.

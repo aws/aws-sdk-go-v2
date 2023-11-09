@@ -1,3 +1,7 @@
+# v1.33.1 (2023-11-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2023-11-08)
 
 * **Feature**: Added API support for new GuardDuty EKS Audit Log finding types.

@@ -1,3 +1,14 @@
+# Release (2023-11-09)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.22.2
+  * **Bug Fix**: added x-amz-expected-bucket-owner to the list of headers we should sign
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.28.0](service/sqs/CHANGELOG.md#v1280-2023-11-09)
+  * **Feature**: This release enables customers to call SQS using AWS JSON-1.0 protocol and bug fix.
+
 # Release (2023-11-08)
 
 ## Module Highlights

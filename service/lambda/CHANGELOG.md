@@ -1,3 +1,7 @@
+# v1.44.1 (2023-11-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.0 (2023-11-08)
 
 * **Feature**: Add Node 20 (nodejs20.x) support to AWS Lambda.

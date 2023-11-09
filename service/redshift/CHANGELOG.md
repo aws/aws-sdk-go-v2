@@ -1,3 +1,7 @@
+# v1.35.1 (2023-11-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2023-11-01)
 
 * **Feature**: Added support for Multi-AZ deployments for Provisioned RA3 clusters that provide 99.99% SLA availability.

@@ -1,3 +1,7 @@
+# v1.34.1 (2023-11-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2023-11-06)
 
 * **Feature**: Amazon Polly adds new US English voices - Danielle and Gregory. Danielle and Gregory are available as Neural voices only.

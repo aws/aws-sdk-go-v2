@@ -1,3 +1,7 @@
+# v1.32.1 (2023-11-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2023-11-06)
 
 * **Feature**: This release extends the GetReservationPurchaseRecommendation API to support recommendations for Amazon MemoryDB reservations.

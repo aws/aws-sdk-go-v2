@@ -1,3 +1,7 @@
+# v1.33.1 (2023-11-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2023-11-03)
 
 * **Feature**: Added LoRaWAN version 1.0.4 support

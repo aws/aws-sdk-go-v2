@@ -1,3 +1,7 @@
+# v1.67.1 (2023-11-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.67.0 (2023-11-02)
 
 * **Feature**: This release introduces Google BigQuery Source and Target in AWS Glue CodeGenConfigurationNode.
