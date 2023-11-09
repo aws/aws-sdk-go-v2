@@ -4878,6 +4878,11 @@ func awsAwsquery_serializeDocumentStackSetOperationPreferences(v *types.StackSet
 	object := value.Object()
 	_ = object
 
+	if len(v.ConcurrencyMode) > 0 {
+		objectKey := object.Key("ConcurrencyMode")
+		objectKey.String(string(v.ConcurrencyMode))
+	}
+
 	if v.FailureToleranceCount != nil {
 		objectKey := object.Key("FailureToleranceCount")
 		objectKey.Integer(*v.FailureToleranceCount)

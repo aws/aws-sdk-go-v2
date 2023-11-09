@@ -92,7 +92,7 @@ type RegisterTypeInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume
 	// when invoking the extension. For CloudFormation to assume the specified
 	// execution role, the role must contain a trust relationship with the
-	// CloudFormation service principle ( resources.cloudformation.amazonaws.com ). For
+	// CloudFormation service principal ( resources.cloudformation.amazonaws.com ). For
 	// more information about adding trust relationships, see Modifying a role trust
 	// policy (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy)
 	// in the Identity and Access Management User Guide. If your extension calls Amazon

@@ -318,7 +318,7 @@ type ConnectorConfigResponse struct {
 // The placement configuration for all the control plane instances of your local
 // Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see
 // Capacity considerations (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
-// in the Amazon EKS User Guide
+// in the Amazon EKS User Guide.
 type ControlPlanePlacementRequest struct {
 
 	// The name of the placement group for the Kubernetes control plane instances.
@@ -336,6 +336,72 @@ type ControlPlanePlacementResponse struct {
 
 	// The name of the placement group for the Kubernetes control plane instances.
 	GroupName *string
+
+	noSmithyDocumentSerde
+}
+
+// An EKS Anywhere subscription authorizing the customer to support for licensed
+// clusters and access to EKS Anywhere Curated Packages.
+type EksAnywhereSubscription struct {
+
+	// The Amazon Resource Name (ARN) for the subscription.
+	Arn *string
+
+	// A boolean indicating whether or not a subscription will auto renew when it
+	// expires.
+	AutoRenew bool
+
+	// The Unix timestamp in seconds for when the subscription was created.
+	CreatedAt *time.Time
+
+	// The Unix timestamp in seconds for when the subscription is effective.
+	EffectiveDate *time.Time
+
+	// The Unix timestamp in seconds for when the subscription will expire or auto
+	// renew, depending on the auto renew configuration of the subscription object.
+	ExpirationDate *time.Time
+
+	// UUID identifying a subscription.
+	Id *string
+
+	// License Manager License ARNs associated with the subscription.
+	LicenseArns []string
+
+	// The number of licenses included in a subscription. Valid values are between 1
+	// and 1000.
+	LicenseQuantity int32
+
+	// The type of licenses included in the subscription. Valid value is CLUSTER. With
+	// the CLUSTER license type, each license covers support for a single EKS Anywhere
+	// cluster.
+	LicenseType EksAnywhereSubscriptionLicenseType
+
+	// The status of a subscription.
+	Status *string
+
+	// The metadata for a subscription to assist with categorization and organization.
+	// Each tag consists of a key and an optional value. Subscription tags do not
+	// propagate to any other resources associated with the subscription.
+	Tags map[string]string
+
+	// An EksAnywhereSubscriptionTerm object.
+	Term *EksAnywhereSubscriptionTerm
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the term duration and term unit type of your
+// subscription. This determines the term length of your subscription. Valid values
+// are MONTHS for term unit and 12 or 36 for term duration, indicating a 12 month
+// or 36 month subscription.
+type EksAnywhereSubscriptionTerm struct {
+
+	// The duration of the subscription term. Valid values are 12 and 36, indicating a
+	// 12 month or 36 month subscription.
+	Duration int32
+
+	// The term unit of the subscription. Valid value is MONTHS.
+	Unit EksAnywhereSubscriptionTermUnit
 
 	noSmithyDocumentSerde
 }
@@ -1022,9 +1088,10 @@ type OutpostConfigResponse struct {
 type Provider struct {
 
 	// Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be
-	// symmetric, created in the same region as the cluster, and if the KMS key was
-	// created in a different account, the user must have access to the KMS key. For
-	// more information, see Allowing Users in Other Accounts to Use a KMS key (https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html)
+	// symmetric and created in the same Amazon Web Services Region as the cluster. If
+	// the KMS key was created in a different account, the IAM principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html)
+	// must have access to the KMS key. For more information, see Allowing users in
+	// other accounts to use a KMS key (https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html)
 	// in the Key Management Service Developer Guide.
 	KeyArn *string
 

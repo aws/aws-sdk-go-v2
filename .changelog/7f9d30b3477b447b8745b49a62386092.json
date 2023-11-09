@@ -1,0 +1,8 @@
+{
+    "id": "7f9d30b3-477b-447b-8745-b49a62386092",
+    "type": "feature",
+    "description": "This release adds support for toxicity detection and prompt safety classification.",
+    "modules": [
+        "service/comprehend"
+    ]
+}

@@ -10194,6 +10194,10 @@ func awsRestjson1_serializeOpHttpBindingsListIntegrationAssociationsInput(v *Lis
 		}
 	}
 
+	if v.IntegrationArn != nil {
+		encoder.SetQuery("integrationArn").String(*v.IntegrationArn)
+	}
+
 	if len(v.IntegrationType) > 0 {
 		encoder.SetQuery("integrationType").String(string(v.IntegrationType))
 	}

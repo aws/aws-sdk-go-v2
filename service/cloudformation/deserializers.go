@@ -16583,6 +16583,19 @@ func awsAwsquery_deserializeDocumentStackSetOperationPreferences(v **types.Stack
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("ConcurrencyMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ConcurrencyMode = types.ConcurrencyMode(xtv)
+			}
+
 		case strings.EqualFold("FailureToleranceCount", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

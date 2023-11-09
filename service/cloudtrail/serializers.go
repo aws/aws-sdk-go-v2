@@ -3293,6 +3293,11 @@ func awsAwsjson11_serializeOpDocumentGetInsightSelectorsInput(v *GetInsightSelec
 	object := value.Object()
 	defer object.Close()
 
+	if v.EventDataStore != nil {
+		ok := object.Key("EventDataStore")
+		ok.String(*v.EventDataStore)
+	}
+
 	if v.TrailName != nil {
 		ok := object.Key("TrailName")
 		ok.String(*v.TrailName)
@@ -3605,6 +3610,16 @@ func awsAwsjson11_serializeOpDocumentPutEventSelectorsInput(v *PutEventSelectors
 func awsAwsjson11_serializeOpDocumentPutInsightSelectorsInput(v *PutInsightSelectorsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EventDataStore != nil {
+		ok := object.Key("EventDataStore")
+		ok.String(*v.EventDataStore)
+	}
+
+	if v.InsightsDestination != nil {
+		ok := object.Key("InsightsDestination")
+		ok.String(*v.InsightsDestination)
+	}
 
 	if v.InsightSelectors != nil {
 		ok := object.Key("InsightSelectors")

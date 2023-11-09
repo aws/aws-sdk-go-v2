@@ -22,9 +22,9 @@ import (
 // parameter must be specified, or CloudTrail throws an error. RetentionPeriod is
 // in days, and valid values are integers between 90 and 2557. By default,
 // TerminationProtection is enabled. For event data stores for CloudTrail events,
-// AdvancedEventSelectors includes or excludes management and data events in your
-// event data store. For more information about AdvancedEventSelectors , see
-// AdvancedEventSelectors (https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html)
+// AdvancedEventSelectors includes or excludes management, data, or Insights events
+// in your event data store. For more information about AdvancedEventSelectors ,
+// see AdvancedEventSelectors (https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html)
 // . For event data stores for Config configuration items, Audit Manager evidence,
 // or non-Amazon Web Services events, AdvancedEventSelectors includes events of
 // that type in your event data store.
@@ -81,7 +81,10 @@ type UpdateEventDataStoreInput struct {
 	Name *string
 
 	// Specifies whether an event data store collects events logged for an
-	// organization in Organizations.
+	// organization in Organizations. Only the management account for the organization
+	// can convert an organization event data store to a non-organization event data
+	// store, or convert a non-organization event data store to an organization event
+	// data store.
 	OrganizationEnabled *bool
 
 	// The retention period of the event data store, in days. You can set a retention

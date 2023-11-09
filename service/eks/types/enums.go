@@ -248,6 +248,67 @@ func (ConnectorConfigProvider) Values() []ConnectorConfigProvider {
 	}
 }
 
+type EksAnywhereSubscriptionLicenseType string
+
+// Enum values for EksAnywhereSubscriptionLicenseType
+const (
+	EksAnywhereSubscriptionLicenseTypeCluster EksAnywhereSubscriptionLicenseType = "Cluster"
+)
+
+// Values returns all known values for EksAnywhereSubscriptionLicenseType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (EksAnywhereSubscriptionLicenseType) Values() []EksAnywhereSubscriptionLicenseType {
+	return []EksAnywhereSubscriptionLicenseType{
+		"Cluster",
+	}
+}
+
+type EksAnywhereSubscriptionStatus string
+
+// Enum values for EksAnywhereSubscriptionStatus
+const (
+	EksAnywhereSubscriptionStatusCreating EksAnywhereSubscriptionStatus = "CREATING"
+	EksAnywhereSubscriptionStatusActive   EksAnywhereSubscriptionStatus = "ACTIVE"
+	EksAnywhereSubscriptionStatusUpdating EksAnywhereSubscriptionStatus = "UPDATING"
+	EksAnywhereSubscriptionStatusExpiring EksAnywhereSubscriptionStatus = "EXPIRING"
+	EksAnywhereSubscriptionStatusExpired  EksAnywhereSubscriptionStatus = "EXPIRED"
+	EksAnywhereSubscriptionStatusDeleting EksAnywhereSubscriptionStatus = "DELETING"
+)
+
+// Values returns all known values for EksAnywhereSubscriptionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (EksAnywhereSubscriptionStatus) Values() []EksAnywhereSubscriptionStatus {
+	return []EksAnywhereSubscriptionStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"EXPIRING",
+		"EXPIRED",
+		"DELETING",
+	}
+}
+
+type EksAnywhereSubscriptionTermUnit string
+
+// Enum values for EksAnywhereSubscriptionTermUnit
+const (
+	EksAnywhereSubscriptionTermUnitMonths EksAnywhereSubscriptionTermUnit = "MONTHS"
+)
+
+// Values returns all known values for EksAnywhereSubscriptionTermUnit. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (EksAnywhereSubscriptionTermUnit) Values() []EksAnywhereSubscriptionTermUnit {
+	return []EksAnywhereSubscriptionTermUnit{
+		"MONTHS",
+	}
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode

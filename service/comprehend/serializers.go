@@ -2271,6 +2271,61 @@ func (m *awsAwsjson11_serializeOpDetectTargetedSentiment) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDetectToxicContent struct {
+}
+
+func (*awsAwsjson11_serializeOpDetectToxicContent) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDetectToxicContent) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DetectToxicContentInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DetectToxicContent")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDetectToxicContentInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpImportModel struct {
 }
 
@@ -5528,6 +5583,19 @@ func awsAwsjson11_serializeDocumentListOfPiiEntityTypes(v []types.PiiEntityType,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentListOfTextSegments(v []types.TextSegment, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentTextSegment(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOutputDataConfig(v *types.OutputDataConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5745,6 +5813,18 @@ func awsAwsjson11_serializeDocumentTaskConfig(v *types.TaskConfig, value smithyj
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("LanguageCode")
 		ok.String(string(v.LanguageCode))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTextSegment(v *types.TextSegment, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Text != nil {
+		ok := object.Key("Text")
+		ok.String(*v.Text)
 	}
 
 	return nil
@@ -6661,6 +6741,25 @@ func awsAwsjson11_serializeOpDocumentDetectTargetedSentimentInput(v *DetectTarge
 	if v.Text != nil {
 		ok := object.Key("Text")
 		ok.String(*v.Text)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDetectToxicContentInput(v *DetectToxicContentInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.LanguageCode) > 0 {
+		ok := object.Key("LanguageCode")
+		ok.String(string(v.LanguageCode))
+	}
+
+	if v.TextSegments != nil {
+		ok := object.Key("TextSegments")
+		if err := awsAwsjson11_serializeDocumentListOfTextSegments(v.TextSegments, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

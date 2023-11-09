@@ -112,6 +112,7 @@ type CreateChangeSetInput struct {
 	//   capability. For more information about macros, see Using CloudFormation
 	//   macros to perform custom processing on templates (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html)
 	//   .
+	// Only one of the Capabilities and ResourceType parameters can be specified.
 	Capabilities []types.Capability
 
 	// The type of change set operation. To create a change set for a new stack,
@@ -173,7 +174,8 @@ type CreateChangeSetInput struct {
 	// Management (IAM) uses this parameter for condition keys in IAM policies for
 	// CloudFormation. For more information, see Controlling access with Identity and
 	// Access Management (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html)
-	// in the CloudFormation User Guide.
+	// in the CloudFormation User Guide. Only one of the Capabilities and ResourceType
+	// parameters can be specified.
 	ResourceTypes []string
 
 	// The resources to import into your stack.

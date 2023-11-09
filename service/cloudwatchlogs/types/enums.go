@@ -24,6 +24,26 @@ func (DataProtectionStatus) Values() []DataProtectionStatus {
 	}
 }
 
+type DeliveryDestinationType string
+
+// Enum values for DeliveryDestinationType
+const (
+	DeliveryDestinationTypeS3  DeliveryDestinationType = "S3"
+	DeliveryDestinationTypeCwl DeliveryDestinationType = "CWL"
+	DeliveryDestinationTypeFh  DeliveryDestinationType = "FH"
+)
+
+// Values returns all known values for DeliveryDestinationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeliveryDestinationType) Values() []DeliveryDestinationType {
+	return []DeliveryDestinationType{
+		"S3",
+		"CWL",
+		"FH",
+	}
+}
+
 type Distribution string
 
 // Enum values for Distribution
@@ -99,6 +119,30 @@ func (OrderBy) Values() []OrderBy {
 	return []OrderBy{
 		"LogStreamName",
 		"LastEventTime",
+	}
+}
+
+type OutputFormat string
+
+// Enum values for OutputFormat
+const (
+	OutputFormatJson    OutputFormat = "json"
+	OutputFormatPlain   OutputFormat = "plain"
+	OutputFormatW3c     OutputFormat = "w3c"
+	OutputFormatRaw     OutputFormat = "raw"
+	OutputFormatParquet OutputFormat = "parquet"
+)
+
+// Values returns all known values for OutputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OutputFormat) Values() []OutputFormat {
+	return []OutputFormat{
+		"json",
+		"plain",
+		"w3c",
+		"raw",
+		"parquet",
 	}
 }
 

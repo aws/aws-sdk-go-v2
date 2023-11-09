@@ -1947,9 +1947,6 @@ func validateStartReadSetImportJobSourceItem(v *types.StartReadSetImportJobSourc
 	if v.SampleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SampleId"))
 	}
-	if v.ReferenceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReferenceArn"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2216,9 +2213,6 @@ func validateOpCreateMultipartReadSetUploadInput(v *CreateMultipartReadSetUpload
 	}
 	if v.SampleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SampleId"))
-	}
-	if v.ReferenceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReferenceArn"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))

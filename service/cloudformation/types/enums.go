@@ -238,6 +238,24 @@ func (ChangeType) Values() []ChangeType {
 	}
 }
 
+type ConcurrencyMode string
+
+// Enum values for ConcurrencyMode
+const (
+	ConcurrencyModeStrictFailureTolerance ConcurrencyMode = "STRICT_FAILURE_TOLERANCE"
+	ConcurrencyModeSoftFailureTolerance   ConcurrencyMode = "SOFT_FAILURE_TOLERANCE"
+)
+
+// Values returns all known values for ConcurrencyMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConcurrencyMode) Values() []ConcurrencyMode {
+	return []ConcurrencyMode{
+		"STRICT_FAILURE_TOLERANCE",
+		"SOFT_FAILURE_TOLERANCE",
+	}
+}
+
 type DeprecatedStatus string
 
 // Enum values for DeprecatedStatus

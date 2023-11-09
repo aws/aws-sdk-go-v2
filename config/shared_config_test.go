@@ -22,9 +22,9 @@ import (
 var _ regionProvider = (*SharedConfig)(nil)
 
 var (
-	testConfigFilename      = filepath.Join("testdata", "shared_config")
-	testConfigOtherFilename = filepath.Join("testdata", "shared_config_other")
-	testCredentialsFilename = filepath.Join("testdata", "shared_credentials")
+	testConfigFilename           = filepath.Join("testdata", "shared_config")
+	testConfigOtherFilename      = filepath.Join("testdata", "shared_config_other")
+	testCredentialsFilename      = filepath.Join("testdata", "shared_credentials")
 	testConfigLeadingWSFilename1 = filepath.Join("testdata", "leading_ws")
 	testConfigLeadingWSFilename2 = filepath.Join("testdata", "leading_ws_trailing_nl")
 )

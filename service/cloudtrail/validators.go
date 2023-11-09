@@ -290,26 +290,6 @@ func (m *validateOpGetImport) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpGetInsightSelectors struct {
-}
-
-func (*validateOpGetInsightSelectors) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGetInsightSelectors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GetInsightSelectorsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGetInsightSelectorsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpGetQueryResults struct {
 }
 
@@ -824,10 +804,6 @@ func addOpGetEventSelectorsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetImportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetImport{}, middleware.After)
-}
-
-func addOpGetInsightSelectorsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGetInsightSelectors{}, middleware.After)
 }
 
 func addOpGetQueryResultsValidationMiddleware(stack *middleware.Stack) error {
@@ -1382,21 +1358,6 @@ func validateOpGetImportInput(v *GetImportInput) error {
 	}
 }
 
-func validateOpGetInsightSelectorsInput(v *GetInsightSelectorsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GetInsightSelectorsInput"}
-	if v.TrailName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TrailName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpGetQueryResultsInput(v *GetQueryResultsInput) error {
 	if v == nil {
 		return nil
@@ -1544,9 +1505,6 @@ func validateOpPutInsightSelectorsInput(v *PutInsightSelectorsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutInsightSelectorsInput"}
-	if v.TrailName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TrailName"))
-	}
 	if v.InsightSelectors == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InsightSelectors"))
 	}

@@ -91,6 +91,7 @@ type UpdateStackInput struct {
 	//   notified. For more information, see Using CloudFormation Macros to Perform
 	//   Custom Processing on Templates (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html)
 	//   .
+	// Only one of the Capabilities and ResourceType parameters can be specified.
 	Capabilities []types.Capability
 
 	// A unique identifier for this UpdateStack request. Specify this token if you
@@ -130,7 +131,7 @@ type UpdateStackInput struct {
 	// Management (IAM) uses this parameter for CloudFormation-specific condition keys
 	// in IAM policies. For more information, see Controlling Access with Identity and
 	// Access Management (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html)
-	// .
+	// . Only one of the Capabilities and ResourceType parameters can be specified.
 	ResourceTypes []string
 
 	// When set to true , newly created resources are deleted when the operation rolls

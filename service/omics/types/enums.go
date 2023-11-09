@@ -117,6 +117,7 @@ const (
 	FileTypeFastq FileType = "FASTQ"
 	FileTypeBam   FileType = "BAM"
 	FileTypeCram  FileType = "CRAM"
+	FileTypeUbam  FileType = "UBAM"
 )
 
 // Values returns all known values for FileType. Note that this can be expanded in
@@ -127,6 +128,7 @@ func (FileType) Values() []FileType {
 		"FASTQ",
 		"BAM",
 		"CRAM",
+		"UBAM",
 	}
 }
 

@@ -1797,6 +1797,18 @@ type StackSetOperation struct {
 // .
 type StackSetOperationPreferences struct {
 
+	// Specifies how the concurrency level behaves during the operation execution.
+	//   - STRICT_FAILURE_TOLERANCE : Dynamically lowers the concurrency level to
+	//   ensure the number of failed accounts never exceeds the FailureToleranceCount
+	//   +1. StackSets will set the actual concurrency of your deployment as the minimum
+	//   value between the MaxConcurrentCount and the FailureToleranceCount +1. This is
+	//   the default behavior. If failure tolerance or Maximum concurrent accounts are
+	//   set to percentages, the behavior is similar.
+	//   - SOFT_FAILURE_TOLERANCE : Always run at the concurrency level set by the user
+	//   in the MaxConcurrentCount or MaxConcurrentPercentage , regardless of the
+	//   number of failures.
+	ConcurrencyMode ConcurrencyMode
+
 	// The number of accounts, per Region, for which this operation can fail before
 	// CloudFormation stops the operation in that Region. If the operation is stopped
 	// in a Region, CloudFormation doesn't attempt the operation in any subsequent
@@ -1814,13 +1826,14 @@ type StackSetOperationPreferences struct {
 	FailureTolerancePercentage *int32
 
 	// The maximum number of accounts in which to perform this operation at one time.
-	// This is dependent on the value of FailureToleranceCount . MaxConcurrentCount is
-	// at most one more than the FailureToleranceCount . Note that this setting lets
-	// you specify the maximum for operations. For large deployments, under certain
-	// circumstances the actual number of accounts acted upon concurrently may be lower
-	// due to service throttling. Conditional: You must specify either
-	// MaxConcurrentCount or MaxConcurrentPercentage , but not both. By default, 1 is
-	// specified.
+	// This can depend on the value of FailureToleranceCount depending on your
+	// ConcurrencyMode . MaxConcurrentCount is at most one more than the
+	// FailureToleranceCount if you're using STRICT_FAILURE_TOLERANCE . Note that this
+	// setting lets you specify the maximum for operations. For large deployments,
+	// under certain circumstances the actual number of accounts acted upon
+	// concurrently may be lower due to service throttling. Conditional: You must
+	// specify either MaxConcurrentCount or MaxConcurrentPercentage , but not both. By
+	// default, 1 is specified.
 	MaxConcurrentCount *int32
 
 	// The maximum percentage of accounts in which to perform this operation at one

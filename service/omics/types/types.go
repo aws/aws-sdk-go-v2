@@ -1299,11 +1299,6 @@ type StartReadSetActivationJobSourceItem struct {
 // A source for a read set import job.
 type StartReadSetImportJobSourceItem struct {
 
-	// The source's reference ARN.
-	//
-	// This member is required.
-	ReferenceArn *string
-
 	// The source's sample ID.
 	//
 	// This member is required.
@@ -1332,6 +1327,9 @@ type StartReadSetImportJobSourceItem struct {
 
 	// The source's name.
 	Name *string
+
+	// The source's reference ARN.
+	ReferenceArn *string
 
 	// The source's tags.
 	Tags map[string]string

@@ -16,7 +16,8 @@ import (
 )
 
 // Registers an organization’s member account as the CloudTrail delegated
-// administrator.
+// administrator (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-delegated-administrator.html)
+// .
 func (c *Client) RegisterOrganizationDelegatedAdmin(ctx context.Context, params *RegisterOrganizationDelegatedAdminInput, optFns ...func(*Options)) (*RegisterOrganizationDelegatedAdminOutput, error) {
 	if params == nil {
 		params = &RegisterOrganizationDelegatedAdminInput{}

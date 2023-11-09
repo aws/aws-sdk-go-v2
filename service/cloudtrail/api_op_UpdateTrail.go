@@ -57,7 +57,8 @@ type UpdateTrailInput struct {
 	// Specifies a log group name using an Amazon Resource Name (ARN), a unique
 	// identifier that represents the log group to which CloudTrail logs are delivered.
 	// You must use a log group that exists in your account. Not required unless you
-	// specify CloudWatchLogsRoleArn .
+	// specify CloudWatchLogsRoleArn . Only the management account can configure a
+	// CloudWatch Logs log group for an organization trail.
 	CloudWatchLogsLogGroupArn *string
 
 	// Specifies the role for the CloudWatch Logs endpoint to assume to write to a
@@ -91,13 +92,15 @@ type UpdateTrailInput struct {
 	// Specifies whether the trail is applied to all accounts in an organization in
 	// Organizations, or only for the current Amazon Web Services account. The default
 	// is false, and cannot be true unless the call is made on behalf of an Amazon Web
-	// Services account that is the management account or delegated administrator
-	// account for an organization in Organizations. If the trail is not an
-	// organization trail and this is set to true , the trail will be created in all
-	// Amazon Web Services accounts that belong to the organization. If the trail is an
-	// organization trail and this is set to false , the trail will remain in the
-	// current Amazon Web Services account but be deleted from all member accounts in
-	// the organization.
+	// Services account that is the management account for an organization in
+	// Organizations. If the trail is not an organization trail and this is set to true
+	// , the trail will be created in all Amazon Web Services accounts that belong to
+	// the organization. If the trail is an organization trail and this is set to false
+	// , the trail will remain in the current Amazon Web Services account but be
+	// deleted from all member accounts in the organization. Only the management
+	// account for the organization can convert an organization trail to a
+	// non-organization trail, or convert a non-organization trail to an organization
+	// trail.
 	IsOrganizationTrail *bool
 
 	// Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail.

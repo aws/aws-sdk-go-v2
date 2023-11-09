@@ -90,6 +90,26 @@ func (m *validateOpCreateCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateEksAnywhereSubscription struct {
+}
+
+func (*validateOpCreateEksAnywhereSubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEksAnywhereSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEksAnywhereSubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEksAnywhereSubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFargateProfile struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpDeleteCluster) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteEksAnywhereSubscription struct {
+}
+
+func (*validateOpDeleteEksAnywhereSubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEksAnywhereSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEksAnywhereSubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEksAnywhereSubscriptionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -285,6 +325,26 @@ func (m *validateOpDescribeCluster) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeEksAnywhereSubscription struct {
+}
+
+func (*validateOpDescribeEksAnywhereSubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeEksAnywhereSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeEksAnywhereSubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeEksAnywhereSubscriptionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -630,6 +690,26 @@ func (m *validateOpUpdateClusterVersion) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateEksAnywhereSubscription struct {
+}
+
+func (*validateOpUpdateEksAnywhereSubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEksAnywhereSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEksAnywhereSubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEksAnywhereSubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateNodegroupConfig struct {
 }
 
@@ -686,6 +766,10 @@ func addOpCreateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCluster{}, middleware.After)
 }
 
+func addOpCreateEksAnywhereSubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEksAnywhereSubscription{}, middleware.After)
+}
+
 func addOpCreateFargateProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFargateProfile{}, middleware.After)
 }
@@ -700,6 +784,10 @@ func addOpDeleteAddonValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCluster{}, middleware.After)
+}
+
+func addOpDeleteEksAnywhereSubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEksAnywhereSubscription{}, middleware.After)
 }
 
 func addOpDeleteFargateProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -724,6 +812,10 @@ func addOpDescribeAddonValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCluster{}, middleware.After)
+}
+
+func addOpDescribeEksAnywhereSubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeEksAnywhereSubscription{}, middleware.After)
 }
 
 func addOpDescribeFargateProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -792,6 +884,10 @@ func addOpUpdateClusterConfigValidationMiddleware(stack *middleware.Stack) error
 
 func addOpUpdateClusterVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateClusterVersion{}, middleware.After)
+}
+
+func addOpUpdateEksAnywhereSubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEksAnywhereSubscription{}, middleware.After)
 }
 
 func addOpUpdateNodegroupConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -961,6 +1057,24 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	}
 }
 
+func validateOpCreateEksAnywhereSubscriptionInput(v *CreateEksAnywhereSubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEksAnywhereSubscriptionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Term == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Term"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFargateProfileInput(v *CreateFargateProfileInput) error {
 	if v == nil {
 		return nil
@@ -1031,6 +1145,21 @@ func validateOpDeleteClusterInput(v *DeleteClusterInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteClusterInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteEksAnywhereSubscriptionInput(v *DeleteEksAnywhereSubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEksAnywhereSubscriptionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1133,6 +1262,21 @@ func validateOpDescribeClusterInput(v *DescribeClusterInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeClusterInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeEksAnywhereSubscriptionInput(v *DescribeEksAnywhereSubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeEksAnywhereSubscriptionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1430,6 +1574,21 @@ func validateOpUpdateClusterVersionInput(v *UpdateClusterVersionInput) error {
 	}
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateEksAnywhereSubscriptionInput(v *UpdateEksAnywhereSubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEksAnywhereSubscriptionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

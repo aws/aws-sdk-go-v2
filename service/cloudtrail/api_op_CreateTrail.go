@@ -58,7 +58,8 @@ type CreateTrailInput struct {
 	// Specifies a log group name using an Amazon Resource Name (ARN), a unique
 	// identifier that represents the log group to which CloudTrail logs will be
 	// delivered. You must use a log group that exists in your account. Not required
-	// unless you specify CloudWatchLogsRoleArn .
+	// unless you specify CloudWatchLogsRoleArn . Only the management account can
+	// configure a CloudWatch Logs log group for an organization trail.
 	CloudWatchLogsLogGroupArn *string
 
 	// Specifies the role for the CloudWatch Logs endpoint to assume to write to a

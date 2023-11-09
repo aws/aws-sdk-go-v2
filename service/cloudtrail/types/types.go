@@ -48,13 +48,14 @@ type AdvancedFieldSelector struct {
 	//   - readOnly - Optional. Can be set to Equals a value of true or false . If you
 	//   do not add this field, CloudTrail logs both read and write events. A value of
 	//   true logs only read events. A value of false logs only write events.
-	//   - eventSource - For filtering management events only. This can be set only to
-	//   NotEquals kms.amazonaws.com .
+	//   - eventSource - For filtering management events only. This can be set to
+	//   NotEquals kms.amazonaws.com or NotEquals rdsdata.amazonaws.com .
 	//   - eventName - Can use any operator. You can use it to ﬁlter in or ﬁlter out
 	//   any data event logged to CloudTrail, such as PutBucket or GetSnapshotBlock .
 	//   You can have multiple values for this ﬁeld, separated by commas.
 	//   - eventCategory - This is required and must be set to Equals .
 	//   - For CloudTrail event records, the value must be Management or Data .
+	//   - For CloudTrail Insights event records, the value must be Insight .
 	//   - For Config configuration items, the value must be ConfigurationItem .
 	//   - For Audit Manager evidence, the value must be Evidence .
 	//   - For non-Amazon Web Services events, the value must be ActivityAuditLog .
@@ -65,6 +66,7 @@ type AdvancedFieldSelector struct {
 	//   - AWS::Lambda::Function
 	//   - AWS::S3::Object
 	//   - AWS::CloudTrail::Channel
+	//   - AWS::CodeWhisperer::Customization
 	//   - AWS::CodeWhisperer::Profile
 	//   - AWS::Cognito::IdentityPool
 	//   - AWS::DynamoDB::Stream
@@ -74,15 +76,22 @@ type AdvancedFieldSelector struct {
 	//   - AWS::Glue::Table
 	//   - AWS::GuardDuty::Detector
 	//   - AWS::KendraRanking::ExecutionPlan
+	//   - AWS::KinesisVideo::Stream
 	//   - AWS::ManagedBlockchain::Network
 	//   - AWS::ManagedBlockchain::Node
 	//   - AWS::MedicalImaging::Datastore
+	//   - AWS::PCAConnectorAD::Connector
+	//   - AWS::SageMaker::Endpoint
 	//   - AWS::SageMaker::ExperimentTrialComponent
 	//   - AWS::SageMaker::FeatureGroup
+	//   - AWS::SNS::PlatformEndpoint
+	//   - AWS::SNS::Topic
 	//   - AWS::S3::AccessPoint
 	//   - AWS::S3ObjectLambda::AccessPoint
 	//   - AWS::S3Outposts::Object
 	//   - AWS::SSMMessages::ControlChannel
+	//   - AWS::Timestream::Database
+	//   - AWS::Timestream::Table
 	//   - AWS::VerifiedPermissions::PolicyStore You can have only one resources.type
 	//   ﬁeld per selector. To log data events on more than one resource type, add
 	//   another selector.
@@ -106,6 +115,9 @@ type AdvancedFieldSelector struct {
 	//   , and the operator is set to Equals or NotEquals , the ARN must be in the
 	//   following format:
 	//   - arn::cloudtrail:::channel/ When resources.type equals
+	//   AWS::CodeWhisperer::Customization , and the operator is set to Equals or
+	//   NotEquals , the ARN must be in the following format:
+	//   - arn::codewhisperer:::customization/ When resources.type equals
 	//   AWS::CodeWhisperer::Profile , and the operator is set to Equals or NotEquals ,
 	//   the ARN must be in the following format:
 	//   - arn::codewhisperer:::profile/ When resources.type equals
@@ -133,6 +145,9 @@ type AdvancedFieldSelector struct {
 	//   AWS::KendraRanking::ExecutionPlan , and the operator is set to Equals or
 	//   NotEquals , the ARN must be in the following format:
 	//   - arn::kendra-ranking:::rescore-execution-plan/ When resources.type equals
+	//   AWS::KinesisVideo::Stream , and the operator is set to Equals or NotEquals ,
+	//   the ARN must be in the following format:
+	//   - arn::kinesisvideo:::stream/ When resources.type equals
 	//   AWS::ManagedBlockchain::Network , and the operator is set to Equals or
 	//   NotEquals , the ARN must be in the following format:
 	//   - arn::managedblockchain:::networks/ When resources.type equals
@@ -142,16 +157,28 @@ type AdvancedFieldSelector struct {
 	//   AWS::MedicalImaging::Datastore , and the operator is set to Equals or
 	//   NotEquals , the ARN must be in the following format:
 	//   - arn::medical-imaging:::datastore/ When resources.type equals
+	//   AWS::PCAConnectorAD::Connector , and the operator is set to Equals or
+	//   NotEquals , the ARN must be in the following format:
+	//   - arn::pca-connector-ad:::connector/ When resources.type equals
+	//   AWS::SageMaker::Endpoint , and the operator is set to Equals or NotEquals ,
+	//   the ARN must be in the following format:
+	//   - arn::sagemaker:::endpoint/ When resources.type equals
 	//   AWS::SageMaker::ExperimentTrialComponent , and the operator is set to Equals
 	//   or NotEquals , the ARN must be in the following format:
 	//   - arn::sagemaker:::experiment-trial-component/ When resources.type equals
 	//   AWS::SageMaker::FeatureGroup , and the operator is set to Equals or NotEquals
 	//   , the ARN must be in the following format:
 	//   - arn::sagemaker:::feature-group/ When resources.type equals
-	//   AWS::S3::AccessPoint , and the operator is set to Equals or NotEquals , the
-	//   ARN must be in one of the following formats. To log events on all objects in an
-	//   S3 access point, we recommend that you use only the access point ARN, don’t
-	//   include the object path, and use the StartsWith or NotStartsWith operators.
+	//   AWS::SNS::PlatformEndpoint , and the operator is set to Equals or NotEquals ,
+	//   the ARN must be in the following format:
+	//   - arn::sns:::endpoint/// When resources.type equals AWS::SNS::Topic , and the
+	//   operator is set to Equals or NotEquals , the ARN must be in the following
+	//   format:
+	//   - arn::sns::: When resources.type equals AWS::S3::AccessPoint , and the
+	//   operator is set to Equals or NotEquals , the ARN must be in one of the
+	//   following formats. To log events on all objects in an S3 access point, we
+	//   recommend that you use only the access point ARN, don’t include the object path,
+	//   and use the StartsWith or NotStartsWith operators.
 	//   - arn::s3:::accesspoint/
 	//   - arn::s3:::accesspoint//object/ When resources.type equals
 	//   AWS::S3ObjectLambda::AccessPoint , and the operator is set to Equals or
@@ -163,6 +190,12 @@ type AdvancedFieldSelector struct {
 	//   AWS::SSMMessages::ControlChannel , and the operator is set to Equals or
 	//   NotEquals , the ARN must be in the following format:
 	//   - arn::ssmmessages:::control-channel/ When resources.type equals
+	//   AWS::Timestream::Database , and the operator is set to Equals or NotEquals ,
+	//   the ARN must be in the following format:
+	//   - arn::timestream:::database/ When resources.type equals
+	//   AWS::Timestream::Table , and the operator is set to Equals or NotEquals , the
+	//   ARN must be in the following format:
+	//   - arn::timestream:::database//table/ When resources.type equals
 	//   AWS::VerifiedPermissions::PolicyStore , and the operator is set to Equals or
 	//   NotEquals , the ARN must be in the following format:
 	//   - arn::verifiedpermissions:::policy-store/
@@ -261,6 +294,7 @@ type DataResource struct {
 	// event selectors. For more information, see AdvancedFieldSelector (https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedFieldSelector.html)
 	// .
 	//   - AWS::CloudTrail::Channel
+	//   - AWS::CodeWhisperer::Customization
 	//   - AWS::CodeWhisperer::Profile
 	//   - AWS::Cognito::IdentityPool
 	//   - AWS::DynamoDB::Stream
@@ -270,15 +304,22 @@ type DataResource struct {
 	//   - AWS::Glue::Table
 	//   - AWS::GuardDuty::Detector
 	//   - AWS::KendraRanking::ExecutionPlan
+	//   - AWS::KinesisVideo::Stream
 	//   - AWS::ManagedBlockchain::Network
 	//   - AWS::ManagedBlockchain::Node
 	//   - AWS::MedicalImaging::Datastore
+	//   - AWS::PCAConnectorAD::Connector
+	//   - AWS::SageMaker::Endpoint
 	//   - AWS::SageMaker::ExperimentTrialComponent
 	//   - AWS::SageMaker::FeatureGroup
+	//   - AWS::SNS::PlatformEndpoint
+	//   - AWS::SNS::Topic
 	//   - AWS::S3::AccessPoint
 	//   - AWS::S3ObjectLambda::AccessPoint
 	//   - AWS::S3Outposts::Object
 	//   - AWS::SSMMessages::ControlChannel
+	//   - AWS::Timestream::Database
+	//   - AWS::Timestream::Table
 	//   - AWS::VerifiedPermissions::PolicyStore
 	Type *string
 
@@ -578,15 +619,16 @@ type IngestionStatus struct {
 	noSmithyDocumentSerde
 }
 
-// A JSON string that contains a list of Insights types that are logged on a trail.
+// A JSON string that contains a list of Insights types that are logged on a trail
+// or event data store.
 type InsightSelector struct {
 
-	// The type of Insights events to log on a trail. ApiCallRateInsight and
-	// ApiErrorRateInsight are valid Insight types. The ApiCallRateInsight Insights
-	// type analyzes write-only management API calls that are aggregated per minute
-	// against a baseline API call volume. The ApiErrorRateInsight Insights type
-	// analyzes management API calls that result in error codes. The error is shown if
-	// the API call is unsuccessful.
+	// The type of Insights events to log on a trail or event data store.
+	// ApiCallRateInsight and ApiErrorRateInsight are valid Insight types. The
+	// ApiCallRateInsight Insights type analyzes write-only management API calls that
+	// are aggregated per minute against a baseline API call volume. The
+	// ApiErrorRateInsight Insights type analyzes management API calls that result in
+	// error codes. The error is shown if the API call is unsuccessful.
 	InsightType InsightType
 
 	noSmithyDocumentSerde

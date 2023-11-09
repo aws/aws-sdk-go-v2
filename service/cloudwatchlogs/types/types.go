@@ -31,6 +31,154 @@ type AccountPolicy struct {
 	noSmithyDocumentSerde
 }
 
+// This structure contains information about one delivery in your account. A
+// delivery is a connection between a logical delivery source and a logical
+// delivery destination. For more information, see CreateDelivery (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html)
+// . You can't update an existing delivery. You can only create and delete
+// deliveries.
+type Delivery struct {
+
+	// The Amazon Resource Name (ARN) that uniquely identifies this delivery.
+	Arn *string
+
+	// The ARN of the delivery destination that is associated with this delivery.
+	DeliveryDestinationArn *string
+
+	// Displays whether the delivery destination associated with this delivery is
+	// CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.
+	DeliveryDestinationType DeliveryDestinationType
+
+	// The name of the delivery source that is associated with this delivery.
+	DeliverySourceName *string
+
+	// The unique ID that identifies this delivery in your account.
+	Id *string
+
+	// The tags that have been assigned to this delivery.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains information about one delivery destination in your
+// account. A delivery destination is an Amazon Web Services resource that
+// represents an shared id="AWS"/> service that logs can be sent to. CloudWatch
+// Logs, Amazon S3, are supported as Kinesis Data Firehose delivery destinations.
+// To configure logs delivery between a supported Amazon Web Services service and a
+// destination, you must do the following:
+//   - Create a delivery source, which is a logical object that represents the
+//     resource that is actually sending the logs. For more information, see
+//     PutDeliverySource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html)
+//     .
+//   - Create a delivery destination, which is a logical object that represents
+//     the actual delivery destination.
+//   - If you are delivering logs cross-account, you must use
+//     PutDeliveryDestinationPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html)
+//     in the destination account to assign an IAM policy to the destination. This
+//     policy allows delivery to that destination.
+//   - Create a delivery by pairing exactly one delivery source and one delivery
+//     destination. For more information, see CreateDelivery (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html)
+//     .
+//
+// You can configure a single delivery source to send logs to multiple
+// destinations by creating multiple deliveries. You can also create multiple
+// deliveries to configure multiple delivery sources to send logs to the same
+// delivery destination.
+type DeliveryDestination struct {
+
+	// The Amazon Resource Name (ARN) that uniquely identifies this delivery
+	// destination.
+	Arn *string
+
+	// A structure that contains the ARN of the Amazon Web Services resource that will
+	// receive the logs.
+	DeliveryDestinationConfiguration *DeliveryDestinationConfiguration
+
+	// Displays whether this delivery destination is CloudWatch Logs, Amazon S3, or
+	// Kinesis Data Firehose.
+	DeliveryDestinationType DeliveryDestinationType
+
+	// The name of this delivery destination.
+	Name *string
+
+	// The format of the logs that are sent to this delivery destination.
+	OutputFormat OutputFormat
+
+	// The tags that have been assigned to this delivery destination.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information about one logs delivery destination.
+type DeliveryDestinationConfiguration struct {
+
+	// The ARN of the Amazon Web Services destination that this delivery destination
+	// represents. That Amazon Web Services destination can be a log group in
+	// CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Kinesis Data
+	// Firehose.
+	//
+	// This member is required.
+	DestinationResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains information about one delivery source in your account.
+// A delivery source is an Amazon Web Services resource that sends logs to an
+// Amazon Web Services destination. The destination can be CloudWatch Logs, Amazon
+// S3, or Kinesis Data Firehose. Only some Amazon Web Services services support
+// being configured as a delivery source. These services are listed as Supported
+// [V2 Permissions] in the table at Enabling logging from Amazon Web Services
+// services. (https://docs.aws.amazon.com/     AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions)
+// To configure logs delivery between a supported Amazon Web Services service and a
+// destination, you must do the following:
+//   - Create a delivery source, which is a logical object that represents the
+//     resource that is actually sending the logs. For more information, see
+//     PutDeliverySource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html)
+//     .
+//   - Create a delivery destination, which is a logical object that represents
+//     the actual delivery destination. For more information, see
+//     PutDeliveryDestination (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html)
+//     .
+//   - If you are delivering logs cross-account, you must use
+//     PutDeliveryDestinationPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html)
+//     in the destination account to assign an IAM policy to the destination. This
+//     policy allows delivery to that destination.
+//   - Create a delivery by pairing exactly one delivery source and one delivery
+//     destination. For more information, see CreateDelivery (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html)
+//     .
+//
+// You can configure a single delivery source to send logs to multiple
+// destinations by creating multiple deliveries. You can also create multiple
+// deliveries to configure multiple delivery sources to send logs to the same
+// delivery destination.
+type DeliverySource struct {
+
+	// The Amazon Resource Name (ARN) that uniquely identifies this delivery source.
+	Arn *string
+
+	// The type of log that the source is sending. For valid values for this
+	// parameter, see the documentation for the source service.
+	LogType *string
+
+	// The unique name of the delivery source.
+	Name *string
+
+	// This array contains the ARN of the Amazon Web Services resource that sends logs
+	// and is represented by this delivery source. Currently, only one ARN can be in
+	// the array.
+	ResourceArns []string
+
+	// The Amazon Web Services service that is sending logs.
+	Service *string
+
+	// The tags that have been assigned to this delivery source.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a cross-account destination that receives subscription log events.
 type Destination struct {
 
@@ -366,6 +514,15 @@ type OutputLogEvent struct {
 	// The time the event occurred, expressed as the number of milliseconds after Jan
 	// 1, 1970 00:00:00 UTC .
 	Timestamp *int64
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information about one delivery destination policy.
+type Policy struct {
+
+	// The contents of the delivery destination policy.
+	DeliveryDestinationPolicy *string
 
 	noSmithyDocumentSerde
 }

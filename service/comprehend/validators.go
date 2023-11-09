@@ -830,6 +830,26 @@ func (m *validateOpDetectTargetedSentiment) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDetectToxicContent struct {
+}
+
+func (*validateOpDetectToxicContent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDetectToxicContent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DetectToxicContentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDetectToxicContentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportModel struct {
 }
 
@@ -1534,6 +1554,10 @@ func addOpDetectTargetedSentimentValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDetectTargetedSentiment{}, middleware.After)
 }
 
+func addOpDetectToxicContentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDetectToxicContent{}, middleware.After)
+}
+
 func addOpImportModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportModel{}, middleware.After)
 }
@@ -2089,6 +2113,23 @@ func validateInputDataConfig(v *types.InputDataConfig) error {
 	}
 }
 
+func validateListOfTextSegments(v []types.TextSegment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfTextSegments"}
+	for i := range v {
+		if err := validateTextSegment(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOutputDataConfig(v *types.OutputDataConfig) error {
 	if v == nil {
 		return nil
@@ -2153,6 +2194,21 @@ func validateTaskConfig(v *types.TaskConfig) error {
 		if err := validateEntityRecognitionConfig(v.EntityRecognitionConfig); err != nil {
 			invalidParams.AddNested("EntityRecognitionConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTextSegment(v *types.TextSegment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextSegment"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2933,6 +2989,28 @@ func validateOpDetectTargetedSentimentInput(v *DetectTargetedSentimentInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "DetectTargetedSentimentInput"}
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDetectToxicContentInput(v *DetectToxicContentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DetectToxicContentInput"}
+	if v.TextSegments == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TextSegments"))
+	} else if v.TextSegments != nil {
+		if err := validateListOfTextSegments(v.TextSegments); err != nil {
+			invalidParams.AddNested("TextSegments", err.(smithy.InvalidParamsError))
+		}
 	}
 	if len(v.LanguageCode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))

@@ -50,6 +50,26 @@ func (m *validateOpCancelExportTask) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDelivery struct {
+}
+
+func (*validateOpCreateDelivery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDelivery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDeliveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDeliveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateExportTask struct {
 }
 
@@ -145,6 +165,86 @@ func (m *validateOpDeleteDataProtectionPolicy) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDataProtectionPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDeliveryDestination struct {
+}
+
+func (*validateOpDeleteDeliveryDestination) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDeliveryDestination) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDeliveryDestinationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDeliveryDestinationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDeliveryDestinationPolicy struct {
+}
+
+func (*validateOpDeleteDeliveryDestinationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDeliveryDestinationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDeliveryDestinationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDeliveryDestinationPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDelivery struct {
+}
+
+func (*validateOpDeleteDelivery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDelivery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDeliveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDeliveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDeliverySource struct {
+}
+
+func (*validateOpDeleteDeliverySource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDeliverySource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDeliverySourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDeliverySourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -350,6 +450,86 @@ func (m *validateOpGetDataProtectionPolicy) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDeliveryDestination struct {
+}
+
+func (*validateOpGetDeliveryDestination) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDeliveryDestination) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDeliveryDestinationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDeliveryDestinationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDeliveryDestinationPolicy struct {
+}
+
+func (*validateOpGetDeliveryDestinationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDeliveryDestinationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDeliveryDestinationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDeliveryDestinationPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDelivery struct {
+}
+
+func (*validateOpGetDelivery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDelivery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDeliveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDeliveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDeliverySource struct {
+}
+
+func (*validateOpGetDeliverySource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDeliverySource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDeliverySourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDeliverySourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetLogEvents struct {
 }
 
@@ -485,6 +665,66 @@ func (m *validateOpPutDataProtectionPolicy) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutDataProtectionPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutDeliveryDestination struct {
+}
+
+func (*validateOpPutDeliveryDestination) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutDeliveryDestination) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutDeliveryDestinationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutDeliveryDestinationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutDeliveryDestinationPolicy struct {
+}
+
+func (*validateOpPutDeliveryDestinationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutDeliveryDestinationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutDeliveryDestinationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutDeliveryDestinationPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutDeliverySource struct {
+}
+
+func (*validateOpPutDeliverySource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutDeliverySource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutDeliverySourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutDeliverySourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -778,6 +1018,10 @@ func addOpCancelExportTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelExportTask{}, middleware.After)
 }
 
+func addOpCreateDeliveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDelivery{}, middleware.After)
+}
+
 func addOpCreateExportTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateExportTask{}, middleware.After)
 }
@@ -796,6 +1040,22 @@ func addOpDeleteAccountPolicyValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeleteDataProtectionPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataProtectionPolicy{}, middleware.After)
+}
+
+func addOpDeleteDeliveryDestinationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDeliveryDestination{}, middleware.After)
+}
+
+func addOpDeleteDeliveryDestinationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDeliveryDestinationPolicy{}, middleware.After)
+}
+
+func addOpDeleteDeliveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDelivery{}, middleware.After)
+}
+
+func addOpDeleteDeliverySourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDeliverySource{}, middleware.After)
 }
 
 func addOpDeleteDestinationValidationMiddleware(stack *middleware.Stack) error {
@@ -838,6 +1098,22 @@ func addOpGetDataProtectionPolicyValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpGetDataProtectionPolicy{}, middleware.After)
 }
 
+func addOpGetDeliveryDestinationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDeliveryDestination{}, middleware.After)
+}
+
+func addOpGetDeliveryDestinationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDeliveryDestinationPolicy{}, middleware.After)
+}
+
+func addOpGetDeliveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDelivery{}, middleware.After)
+}
+
+func addOpGetDeliverySourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDeliverySource{}, middleware.After)
+}
+
 func addOpGetLogEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLogEvents{}, middleware.After)
 }
@@ -864,6 +1140,18 @@ func addOpPutAccountPolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutDataProtectionPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutDataProtectionPolicy{}, middleware.After)
+}
+
+func addOpPutDeliveryDestinationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutDeliveryDestination{}, middleware.After)
+}
+
+func addOpPutDeliveryDestinationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutDeliveryDestinationPolicy{}, middleware.After)
+}
+
+func addOpPutDeliverySourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutDeliverySource{}, middleware.After)
 }
 
 func addOpPutDestinationValidationMiddleware(stack *middleware.Stack) error {
@@ -920,6 +1208,21 @@ func addOpUntagLogGroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func validateDeliveryDestinationConfiguration(v *types.DeliveryDestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeliveryDestinationConfiguration"}
+	if v.DestinationResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateInputLogEvent(v *types.InputLogEvent) error {
@@ -1025,6 +1328,24 @@ func validateOpCancelExportTaskInput(v *CancelExportTaskInput) error {
 	}
 }
 
+func validateOpCreateDeliveryInput(v *CreateDeliveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDeliveryInput"}
+	if v.DeliverySourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliverySourceName"))
+	}
+	if v.DeliveryDestinationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryDestinationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateExportTaskInput(v *CreateExportTaskInput) error {
 	if v == nil {
 		return nil
@@ -1107,6 +1428,66 @@ func validateOpDeleteDataProtectionPolicyInput(v *DeleteDataProtectionPolicyInpu
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataProtectionPolicyInput"}
 	if v.LogGroupIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDeliveryDestinationInput(v *DeleteDeliveryDestinationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDeliveryDestinationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDeliveryDestinationPolicyInput(v *DeleteDeliveryDestinationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDeliveryDestinationPolicyInput"}
+	if v.DeliveryDestinationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryDestinationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDeliveryInput(v *DeleteDeliveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDeliveryInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDeliverySourceInput(v *DeleteDeliverySourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDeliverySourceInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1274,6 +1655,66 @@ func validateOpGetDataProtectionPolicyInput(v *GetDataProtectionPolicyInput) err
 	}
 }
 
+func validateOpGetDeliveryDestinationInput(v *GetDeliveryDestinationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDeliveryDestinationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDeliveryDestinationPolicyInput(v *GetDeliveryDestinationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDeliveryDestinationPolicyInput"}
+	if v.DeliveryDestinationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryDestinationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDeliveryInput(v *GetDeliveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDeliveryInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDeliverySourceInput(v *GetDeliverySourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDeliverySourceInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetLogEventsInput(v *GetLogEventsInput) error {
 	if v == nil {
 		return nil
@@ -1380,6 +1821,67 @@ func validateOpPutDataProtectionPolicyInput(v *PutDataProtectionPolicyInput) err
 	}
 	if v.PolicyDocument == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutDeliveryDestinationInput(v *PutDeliveryDestinationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutDeliveryDestinationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DeliveryDestinationConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryDestinationConfiguration"))
+	} else if v.DeliveryDestinationConfiguration != nil {
+		if err := validateDeliveryDestinationConfiguration(v.DeliveryDestinationConfiguration); err != nil {
+			invalidParams.AddNested("DeliveryDestinationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutDeliveryDestinationPolicyInput(v *PutDeliveryDestinationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutDeliveryDestinationPolicyInput"}
+	if v.DeliveryDestinationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryDestinationName"))
+	}
+	if v.DeliveryDestinationPolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryDestinationPolicy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutDeliverySourceInput(v *PutDeliverySourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutDeliverySourceInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.LogType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

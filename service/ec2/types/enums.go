@@ -6674,6 +6674,27 @@ func (SnapshotAttributeName) Values() []SnapshotAttributeName {
 	}
 }
 
+type SnapshotBlockPublicAccessState string
+
+// Enum values for SnapshotBlockPublicAccessState
+const (
+	SnapshotBlockPublicAccessStateBlockAllSharing SnapshotBlockPublicAccessState = "block-all-sharing"
+	SnapshotBlockPublicAccessStateBlockNewSharing SnapshotBlockPublicAccessState = "block-new-sharing"
+	SnapshotBlockPublicAccessStateUnblocked       SnapshotBlockPublicAccessState = "unblocked"
+)
+
+// Values returns all known values for SnapshotBlockPublicAccessState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SnapshotBlockPublicAccessState) Values() []SnapshotBlockPublicAccessState {
+	return []SnapshotBlockPublicAccessState{
+		"block-all-sharing",
+		"block-new-sharing",
+		"unblocked",
+	}
+}
+
 type SnapshotState string
 
 // Enum values for SnapshotState

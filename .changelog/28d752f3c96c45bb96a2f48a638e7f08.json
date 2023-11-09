@@ -1,0 +1,8 @@
+{
+    "id": "28d752f3-c96c-45bb-96a2-f48a638e7f08",
+    "type": "feature",
+    "description": "The Insights in Lake feature lets customers enable CloudTrail Insights on a source CloudTrail Lake event data store and create a destination event data store to collect Insights events based on unusual management event activity in the source event data store.",
+    "modules": [
+        "service/cloudtrail"
+    ]
+}

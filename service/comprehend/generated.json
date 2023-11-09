@@ -50,6 +50,7 @@
         "api_op_DetectSentiment.go",
         "api_op_DetectSyntax.go",
         "api_op_DetectTargetedSentiment.go",
+        "api_op_DetectToxicContent.go",
         "api_op_ImportModel.go",
         "api_op_ListDatasets.go",
         "api_op_ListDocumentClassificationJobs.go",

@@ -21,6 +21,8 @@ import (
 // log record. You can use the value of @ptr in a GetLogRecord (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html)
 // operation to get the full log record. GetQueryResults does not start running a
 // query. To run a query, use StartQuery (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html)
+// . For more information about how long results of previous queries are available,
+// see CloudWatch Logs quotas (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html)
 // . If the value of the Status field in the output is Running , this operation
 // returns only partial results. If you see a value of Scheduled or Running for
 // the status, you can retry the operation later to see the final results. If you

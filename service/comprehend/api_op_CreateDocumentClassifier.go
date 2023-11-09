@@ -91,7 +91,7 @@ type CreateDocumentClassifierInput struct {
 	ModelPolicy *string
 
 	// Specifies the location for the output files from a custom classifier job. This
-	// parameter is required for a request that creates a native classifier model.
+	// parameter is required for a request that creates a native document model.
 	OutputDataConfig *types.DocumentClassifierOutputDataConfig
 
 	// Tags to associate with the document classifier. A tag is a key-value pair that

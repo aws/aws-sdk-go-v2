@@ -15,7 +15,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the available add-ons.
+// Lists the installed add-ons.
 func (c *Client) ListAddons(ctx context.Context, params *ListAddonsInput, optFns ...func(*Options)) (*ListAddonsOutput, error) {
 	if params == nil {
 		params = &ListAddonsInput{}
@@ -60,7 +60,7 @@ type ListAddonsInput struct {
 
 type ListAddonsOutput struct {
 
-	// A list of available add-ons.
+	// A list of installed add-ons.
 	Addons []string
 
 	// The nextToken value returned from a previous paginated ListAddonsResponse where

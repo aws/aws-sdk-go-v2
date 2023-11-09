@@ -5010,6 +5010,26 @@ func (m *validateOpEnableIpamOrganizationAdminAccount) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpEnableSnapshotBlockPublicAccess struct {
+}
+
+func (*validateOpEnableSnapshotBlockPublicAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableSnapshotBlockPublicAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableSnapshotBlockPublicAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableSnapshotBlockPublicAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEnableTransitGatewayRouteTablePropagation struct {
 }
 
@@ -9528,6 +9548,10 @@ func addOpEnableImageValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpEnableIpamOrganizationAdminAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableIpamOrganizationAdminAccount{}, middleware.After)
+}
+
+func addOpEnableSnapshotBlockPublicAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableSnapshotBlockPublicAccess{}, middleware.After)
 }
 
 func addOpEnableTransitGatewayRouteTablePropagationValidationMiddleware(stack *middleware.Stack) error {
@@ -15295,6 +15319,21 @@ func validateOpEnableIpamOrganizationAdminAccountInput(v *EnableIpamOrganization
 	invalidParams := smithy.InvalidParamsError{Context: "EnableIpamOrganizationAdminAccountInput"}
 	if v.DelegatedAdminAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DelegatedAdminAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableSnapshotBlockPublicAccessInput(v *EnableSnapshotBlockPublicAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableSnapshotBlockPublicAccessInput"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

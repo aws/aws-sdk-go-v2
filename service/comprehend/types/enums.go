@@ -871,3 +871,31 @@ func (TargetedSentimentEntityType) Values() []TargetedSentimentEntityType {
 		"OTHER",
 	}
 }
+
+type ToxicContentType string
+
+// Enum values for ToxicContentType
+const (
+	ToxicContentTypeGraphic           ToxicContentType = "GRAPHIC"
+	ToxicContentTypeHarassmentOrAbuse ToxicContentType = "HARASSMENT_OR_ABUSE"
+	ToxicContentTypeHateSpeech        ToxicContentType = "HATE_SPEECH"
+	ToxicContentTypeInsult            ToxicContentType = "INSULT"
+	ToxicContentTypeProfanity         ToxicContentType = "PROFANITY"
+	ToxicContentTypeSexual            ToxicContentType = "SEXUAL"
+	ToxicContentTypeViolenceOrThreat  ToxicContentType = "VIOLENCE_OR_THREAT"
+)
+
+// Values returns all known values for ToxicContentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ToxicContentType) Values() []ToxicContentType {
+	return []ToxicContentType{
+		"GRAPHIC",
+		"HARASSMENT_OR_ABUSE",
+		"HATE_SPEECH",
+		"INSULT",
+		"PROFANITY",
+		"SEXUAL",
+		"VIOLENCE_OR_THREAT",
+	}
+}

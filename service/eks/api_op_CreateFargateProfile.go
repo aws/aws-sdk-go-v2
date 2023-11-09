@@ -27,7 +27,7 @@ import (
 // selectors in the Fargate profile, then that pod is run on Fargate. When you
 // create a Fargate profile, you must specify a pod execution role to use with the
 // pods that are scheduled with the profile. This role is added to the cluster's
-// Kubernetes Role Based Access Control (https://kubernetes.io/docs/admin/authorization/rbac/)
+// Kubernetes Role Based Access Control (https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
 // (RBAC) for authorization so that the kubelet that is running on the Fargate
 // infrastructure can register with your Amazon EKS cluster so that it can appear
 // in your cluster as a node. The pod execution role also provides IAM permissions

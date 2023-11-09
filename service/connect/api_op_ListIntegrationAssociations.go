@@ -41,6 +41,9 @@ type ListIntegrationAssociationsInput struct {
 	// This member is required.
 	InstanceId *string
 
+	// The Amazon Resource Name (ARN) of the integration.
+	IntegrationArn *string
+
 	// The integration type.
 	IntegrationType types.IntegrationType
 

@@ -1,0 +1,8 @@
+{
+    "id": "57ef8b60-d92b-4014-be08-64604f9ffc43",
+    "type": "feature",
+    "description": "Support UBAM filetype for Omics Storage and make referenceArn optional",
+    "modules": [
+        "service/omics"
+    ]
+}

@@ -40,11 +40,6 @@ type CreateMultipartReadSetUploadInput struct {
 	// This member is required.
 	Name *string
 
-	// The ARN of the reference.
-	//
-	// This member is required.
-	ReferenceArn *string
-
 	// The source's sample ID.
 	//
 	// This member is required.
@@ -75,6 +70,9 @@ type CreateMultipartReadSetUploadInput struct {
 
 	// Where the source originated.
 	GeneratedFrom *string
+
+	// The ARN of the reference.
+	ReferenceArn *string
 
 	// Any tags to add to the read set.
 	Tags map[string]string

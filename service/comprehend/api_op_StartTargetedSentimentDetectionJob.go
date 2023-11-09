@@ -37,7 +37,7 @@ func (c *Client) StartTargetedSentimentDetectionJob(ctx context.Context, params 
 type StartTargetedSentimentDetectionJobInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
-	// read access to your input data. For more information, see Role-based permissions (https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions)
+	// read access to your input data. For more information, see Role-based permissions (https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions)
 	// .
 	//
 	// This member is required.

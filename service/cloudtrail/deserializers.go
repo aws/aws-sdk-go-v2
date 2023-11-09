@@ -2344,6 +2344,12 @@ func awsAwsjson11_deserializeOpErrorGetInsightSelectors(response *smithyhttp.Res
 	case strings.EqualFold("InsightNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorInsightNotEnabledException(response, errorBody)
 
+	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterCombinationException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
 
@@ -4270,6 +4276,12 @@ func awsAwsjson11_deserializeOpErrorPutInsightSelectors(response *smithyhttp.Res
 	case strings.EqualFold("InvalidInsightSelectorsException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInsightSelectorsException(response, errorBody)
 
+	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterCombinationException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
 
@@ -6111,6 +6123,9 @@ func awsAwsjson11_deserializeOpErrorUpdateEventDataStore(response *smithyhttp.Re
 
 	case strings.EqualFold("InvalidEventSelectorsException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidEventSelectorsException(response, errorBody)
+
+	case strings.EqualFold("InvalidInsightSelectorsException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidInsightSelectorsException(response, errorBody)
 
 	case strings.EqualFold("InvalidKmsKeyIdException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidKmsKeyIdException(response, errorBody)
@@ -16154,6 +16169,24 @@ func awsAwsjson11_deserializeOpDocumentGetInsightSelectorsOutput(v **GetInsightS
 
 	for key, value := range shape {
 		switch key {
+		case "EventDataStoreArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventDataStoreArn to be of type string, got %T instead", value)
+				}
+				sv.EventDataStoreArn = ptr.String(jtv)
+			}
+
+		case "InsightsDestination":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventDataStoreArn to be of type string, got %T instead", value)
+				}
+				sv.InsightsDestination = ptr.String(jtv)
+			}
+
 		case "InsightSelectors":
 			if err := awsAwsjson11_deserializeDocumentInsightSelectors(&sv.InsightSelectors, value); err != nil {
 				return err
@@ -17033,6 +17066,24 @@ func awsAwsjson11_deserializeOpDocumentPutInsightSelectorsOutput(v **PutInsightS
 
 	for key, value := range shape {
 		switch key {
+		case "EventDataStoreArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventDataStoreArn to be of type string, got %T instead", value)
+				}
+				sv.EventDataStoreArn = ptr.String(jtv)
+			}
+
+		case "InsightsDestination":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventDataStoreArn to be of type string, got %T instead", value)
+				}
+				sv.InsightsDestination = ptr.String(jtv)
+			}
+
 		case "InsightSelectors":
 			if err := awsAwsjson11_deserializeDocumentInsightSelectors(&sv.InsightSelectors, value); err != nil {
 				return err

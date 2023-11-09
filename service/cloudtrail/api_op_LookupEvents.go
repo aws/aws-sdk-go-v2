@@ -20,7 +20,10 @@ import (
 // Looks up management events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events)
 // or CloudTrail Insights events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-insights-events)
 // that are captured by CloudTrail. You can look up events that occurred in a
-// Region within the last 90 days. Lookup supports the following attributes for
+// Region within the last 90 days. LookupEvents returns recent Insights events for
+// trails that enable Insights. To view Insights events for an event data store,
+// you can run queries on your Insights event data store, and you can also view the
+// Lake dashboard for Insights. Lookup supports the following attributes for
 // management events:
 //   - Amazon Web Services access key
 //   - Event ID

@@ -90,6 +90,7 @@ type CreateStackInput struct {
 	//   notified. For more information, see Using CloudFormation macros to perform
 	//   custom processing on templates (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html)
 	//   .
+	// Only one of the Capabilities and ResourceType parameters can be specified.
 	Capabilities []types.Capability
 
 	// A unique identifier for this CreateStack request. Specify this token if you
@@ -148,7 +149,7 @@ type CreateStackInput struct {
 	// grants permissions to all resource types. Identity and Access Management (IAM)
 	// uses this parameter for CloudFormation-specific condition keys in IAM policies.
 	// For more information, see Controlling Access with Identity and Access Management (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html)
-	// .
+	// . Only one of the Capabilities and ResourceType parameters can be specified.
 	ResourceTypes []string
 
 	// When set to true , newly created resources are deleted when the operation rolls

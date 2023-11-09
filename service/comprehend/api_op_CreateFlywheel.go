@@ -64,7 +64,8 @@ type CreateFlywheelInput struct {
 	FlywheelName *string
 
 	// To associate an existing model with the flywheel, specify the Amazon Resource
-	// Number (ARN) of the model version.
+	// Number (ARN) of the model version. Do not set TaskConfig or ModelType if you
+	// specify an ActiveModelArn .
 	ActiveModelArn *string
 
 	// A unique identifier for the request. If you don't set the client request token,
@@ -74,13 +75,15 @@ type CreateFlywheelInput struct {
 	// Data security configurations.
 	DataSecurityConfig *types.DataSecurityConfig
 
-	// The model type.
+	// The model type. You need to set ModelType if you are creating a flywheel for a
+	// new model.
 	ModelType types.ModelType
 
 	// The tags to associate with this flywheel.
 	Tags []types.Tag
 
-	// Configuration about the custom classifier associated with the flywheel.
+	// Configuration about the model associated with the flywheel. You need to set
+	// TaskConfig if you are creating a flywheel for a new model.
 	TaskConfig *types.TaskConfig
 
 	noSmithyDocumentSerde

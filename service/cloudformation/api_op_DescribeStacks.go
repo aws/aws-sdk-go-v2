@@ -23,7 +23,7 @@ import (
 
 // Returns the description for the specified stack; if no stack name was
 // specified, then it returns the description for all the stacks created. If the
-// stack doesn't exist, an ValidationError is returned.
+// stack doesn't exist, a ValidationError is returned.
 func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput, optFns ...func(*Options)) (*DescribeStacksOutput, error) {
 	if params == nil {
 		params = &DescribeStacksInput{}

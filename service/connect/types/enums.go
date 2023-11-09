@@ -784,6 +784,7 @@ const (
 	IntegrationTypeWisdomKnowledgeBase IntegrationType = "WISDOM_KNOWLEDGE_BASE"
 	IntegrationTypeCasesDomain         IntegrationType = "CASES_DOMAIN"
 	IntegrationTypeApplication         IntegrationType = "APPLICATION"
+	IntegrationTypeFileScanner         IntegrationType = "FILE_SCANNER"
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
@@ -798,6 +799,7 @@ func (IntegrationType) Values() []IntegrationType {
 		"WISDOM_KNOWLEDGE_BASE",
 		"CASES_DOMAIN",
 		"APPLICATION",
+		"FILE_SCANNER",
 	}
 }
 
