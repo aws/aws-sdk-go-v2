@@ -134,7 +134,7 @@ func (c *Client) addOperationUpdateScheduledQueryMiddlewares(stack *middleware.S
 }
 
 func addOpUpdateScheduledQueryDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
-	return stack.Serialize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
+	return stack.Finalize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
 		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
 			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
 				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
@@ -145,10 +145,11 @@ func addOpUpdateScheduledQueryDiscoverEndpointMiddleware(stack *middleware.Stack
 		DiscoverOperation:            c.fetchOpUpdateScheduledQueryDiscoverEndpoint,
 		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    true,
-	}, "ResolveEndpoint", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
-func (c *Client) fetchOpUpdateScheduledQueryDiscoverEndpoint(ctx context.Context, input interface{}, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+func (c *Client) fetchOpUpdateScheduledQueryDiscoverEndpoint(ctx context.Context, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+	input := getOperationInput(ctx)
 	in, ok := input.(*UpdateScheduledQueryInput)
 	if !ok {
 		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)

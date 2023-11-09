@@ -319,7 +319,7 @@ type streamingEventsPayload struct{}
 
 // AddStreamingEventsPayload adds the streamingEventsPayload middleware to the stack.
 func AddStreamingEventsPayload(stack *middleware.Stack) error {
-	return stack.Finalize.Add(&streamingEventsPayload{}, middleware.After)
+	return stack.Finalize.Add(&streamingEventsPayload{}, middleware.Before)
 }
 
 func (s *streamingEventsPayload) ID() string {

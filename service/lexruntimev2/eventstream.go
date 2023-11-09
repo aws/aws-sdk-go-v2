@@ -7,10 +7,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimev2/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -417,12 +417,32 @@ func (m *awsRestjson1_deserializeOpEventStreamStartConversation) HandleDeseriali
 		return out, metadata, fmt.Errorf("failed to get event stream seed signature: %v", err)
 	}
 
-	signer := v4.NewStreamSigner(
-		awsmiddleware.GetSigningCredentials(ctx),
-		awsmiddleware.GetSigningName(ctx),
-		awsmiddleware.GetSigningRegion(ctx),
-		requestSignature,
-	)
+	identity := getIdentity(ctx)
+	if identity == nil {
+		return out, metadata, fmt.Errorf("no identity")
+	}
+
+	creds, ok := identity.(*internalauthsmithy.CredentialsAdapter)
+	if !ok {
+		return out, metadata, fmt.Errorf("identity is not sigv4 credentials")
+	}
+
+	rscheme := getResolvedAuthScheme(ctx)
+	if rscheme == nil {
+		return out, metadata, fmt.Errorf("no resolved auth scheme")
+	}
+
+	name, ok := smithyhttp.GetSigV4SigningName(&rscheme.SignerProperties)
+	if !ok {
+		return out, metadata, fmt.Errorf("no sigv4 signing name")
+	}
+
+	region, ok := smithyhttp.GetSigV4SigningRegion(&rscheme.SignerProperties)
+	if !ok {
+		return out, metadata, fmt.Errorf("no sigv4 signing region")
+	}
+
+	signer := v4.NewStreamSigner(creds.Credentials, name, region, requestSignature)
 
 	eventWriter := newStartConversationRequestEventStreamWriter(
 		eventstreamapi.GetInputStreamWriter(ctx),
