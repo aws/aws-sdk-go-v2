@@ -2453,7 +2453,7 @@
                     }
                 },
                 "Status": {
-                    "target": "com.amazonaws.sqs#TaskStatus",
+                    "target": "com.amazonaws.sqs#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the message movement task. Possible values are: RUNNING, COMPLETED,\n            CANCELLING, CANCELLED, and FAILED.</p>"
                     }
@@ -4075,41 +4075,6 @@
         },
         "com.amazonaws.sqs#TagValue": {
             "type": "string"
-        },
-        "com.amazonaws.sqs#TaskStatus": {
-            "type": "enum",
-            "members": {
-                "RUNNING": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "RUNNING"
-                    }
-                },
-                "FAILED": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "FAILED"
-                    }
-                },
-                "CANCELLING": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "CANCELLING"
-                    }
-                },
-                "CANCELLED": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "CANCELLED"
-                    }
-                },
-                "COMPLETED": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "COMPLETED"
-                    }
-                }
-            }
         },
         "com.amazonaws.sqs#Token": {
             "type": "string"
