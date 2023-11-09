@@ -1,9 +1,0 @@
-{
-    "id": "d767f490-a7f6-44eb-b9eb-36f126053870",
-    "type": "feature",
-    "description": "BREAKFIX: In order to support subproperty parsing, invalid property definitions must not be ignored",
-    "modules": [
-        "internal/ini",
-        "config"
-    ]
-}

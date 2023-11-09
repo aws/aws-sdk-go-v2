@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.22.2
-	github.com/aws/aws-sdk-go-v2/config v1.22.3
+	github.com/aws/aws-sdk-go-v2/config v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/acm v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.24.1
@@ -11,11 +11,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/athena v1.34.1
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.34.1
 	github.com/aws/aws-sdk-go-v2/service/batch v1.29.1
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.38.1
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.39.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.19.1
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.31.1
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.18.1
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.25.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.130.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.131.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.32.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.23.1
@@ -53,7 +53,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.43.1
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/kms v1.26.1
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.44.1
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.45.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.26.1
@@ -95,7 +95,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.14.3 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.2 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.2 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/ini v1.5.2 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/ini v1.6.0 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.2.2 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.10.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.2.2 // indirect

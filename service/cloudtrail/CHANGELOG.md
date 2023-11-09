@@ -1,3 +1,7 @@
+# v1.32.0 (2023-11-09.2)
+
+* **Feature**: The Insights in Lake feature lets customers enable CloudTrail Insights on a source CloudTrail Lake event data store and create a destination event data store to collect Insights events based on unusual management event activity in the source event data store.
+
 # v1.31.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

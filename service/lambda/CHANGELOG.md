@@ -1,3 +1,7 @@
+# v1.45.0 (2023-11-09.2)
+
+* **Feature**: Add Custom runtime on Amazon Linux 2023 (provided.al2023) support to AWS Lambda.
+
 # v1.44.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

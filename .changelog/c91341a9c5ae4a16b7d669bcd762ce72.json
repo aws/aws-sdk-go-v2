@@ -1,8 +1,0 @@
-{
-    "id": "c91341a9-c5ae-4a16-b7d6-69bcd762ce72",
-    "type": "feature",
-    "description": "AWS EBS now supports Block Public Access for EBS Snapshots. This release introduces the EnableSnapshotBlockPublicAccess, DisableSnapshotBlockPublicAccess and GetSnapshotBlockPublicAccessState APIs to manage account-level public access settings for EBS Snapshots in an AWS Region.",
-    "modules": [
-        "service/ec2"
-    ]
-}

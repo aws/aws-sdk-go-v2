@@ -1,3 +1,32 @@
+# Release (2023-11-09.2)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.23.0](config/CHANGELOG.md#v1230-2023-11-092)
+  * **Feature**: BREAKFIX: In order to support subproperty parsing, invalid property definitions must not be ignored
+* `github.com/aws/aws-sdk-go-v2/internal/ini`: [v1.6.0](internal/ini/CHANGELOG.md#v160-2023-11-092)
+  * **Feature**: BREAKFIX: In order to support subproperty parsing, invalid property definitions must not be ignored
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.39.0](service/cloudformation/CHANGELOG.md#v1390-2023-11-092)
+  * **Feature**: Added new ConcurrencyMode feature for AWS CloudFormation StackSets for faster deployments to target accounts.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.32.0](service/cloudtrail/CHANGELOG.md#v1320-2023-11-092)
+  * **Feature**: The Insights in Lake feature lets customers enable CloudTrail Insights on a source CloudTrail Lake event data store and create a destination event data store to collect Insights events based on unusual management event activity in the source event data store.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.27.0](service/cloudwatchlogs/CHANGELOG.md#v1270-2023-11-092)
+  * **Feature**: Update to support new APIs for delivery of logs from AWS services.
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.28.0](service/comprehend/CHANGELOG.md#v1280-2023-11-092)
+  * **Feature**: This release adds support for toxicity detection and prompt safety classification.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.79.0](service/connect/CHANGELOG.md#v1790-2023-11-092)
+  * **Feature**: This release adds the ability to integrate customer lambda functions with Connect attachments for scanning and updates the ListIntegrationAssociations API to support filtering on IntegrationArn.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.131.0](service/ec2/CHANGELOG.md#v11310-2023-11-092)
+  * **Feature**: AWS EBS now supports Block Public Access for EBS Snapshots. This release introduces the EnableSnapshotBlockPublicAccess, DisableSnapshotBlockPublicAccess and GetSnapshotBlockPublicAccessState APIs to manage account-level public access settings for EBS Snapshots in an AWS Region.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.33.0](service/eks/CHANGELOG.md#v1330-2023-11-092)
+  * **Feature**: Adding EKS Anywhere subscription related operations.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.45.0](service/lambda/CHANGELOG.md#v1450-2023-11-092)
+  * **Feature**: Add Custom runtime on Amazon Linux 2023 (provided.al2023) support to AWS Lambda.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.15.0](service/omics/CHANGELOG.md#v1150-2023-11-092)
+  * **Feature**: Support UBAM filetype for Omics Storage and make referenceArn optional
+
 # Release (2023-11-09)
 
 ## General Highlights

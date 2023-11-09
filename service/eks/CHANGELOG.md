@@ -1,3 +1,7 @@
+# v1.33.0 (2023-11-09.2)
+
+* **Feature**: Adding EKS Anywhere subscription related operations.
+
 # v1.32.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

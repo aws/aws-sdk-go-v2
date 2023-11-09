@@ -1,8 +1,0 @@
-{
-    "id": "bdbb8783-6fe9-4c4a-ae8e-742f06c7bbf5",
-    "type": "feature",
-    "description": "This release adds the ability to integrate customer lambda functions with Connect attachments for scanning and updates the ListIntegrationAssociations API to support filtering on IntegrationArn.",
-    "modules": [
-        "service/connect"
-    ]
-}

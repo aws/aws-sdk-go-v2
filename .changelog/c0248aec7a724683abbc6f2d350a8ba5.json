@@ -1,8 +1,0 @@
-{
-    "id": "c0248aec-7a72-4683-abbc-6f2d350a8ba5",
-    "type": "feature",
-    "description": "Adding EKS Anywhere subscription related operations.",
-    "modules": [
-        "service/eks"
-    ]
-}

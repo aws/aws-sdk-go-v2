@@ -1,3 +1,7 @@
+# v1.15.0 (2023-11-09.2)
+
+* **Feature**: Support UBAM filetype for Omics Storage and make referenceArn optional
+
 # v1.14.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

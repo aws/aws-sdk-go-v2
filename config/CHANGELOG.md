@@ -1,3 +1,8 @@
+# v1.23.0 (2023-11-09.2)
+
+* **Feature**: BREAKFIX: In order to support subproperty parsing, invalid property definitions must not be ignored
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.3 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions
