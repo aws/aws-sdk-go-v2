@@ -603,7 +603,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Inspects a batch of documents and returns a sentiment analysis\n      for each entity identified in the documents.</p>\n         <p>For more information about targeted sentiment, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html\">Targeted sentiment</a>.</p>"
+                "smithy.api#documentation": "<p>Inspects a batch of documents and returns a sentiment analysis\n      for each entity identified in the documents.</p>\n         <p>For more information about targeted sentiment, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html\">Targeted sentiment</a> in the <i>Amazon Comprehend Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.comprehend#BatchDetectTargetedSentimentItemResult": {
@@ -979,7 +979,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new document classification request to analyze a single document in real-time,\n      using a previously created and trained custom model and an endpoint.</p>\n         <p>You can input plain text or you can upload a single-page input document (text, PDF, Word, or image). </p>\n         <p>If the system detects errors while processing a page in the input document,\n      the API response includes an entry in <code>Errors</code> that describes the errors.</p>\n         <p>If the system detects a document-level error in your input document, the API returns an\n      <code>InvalidRequestException</code> error response.\n      For details about this exception, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync-err.html\">\n        Errors in semi-structured documents</a> in the Comprehend Developer Guide.\n    </p>"
+                "smithy.api#documentation": "<p>Creates a classification request to analyze a single document in real-time. <code>ClassifyDocument</code> \n      supports the following model types:</p>\n         <ul>\n            <li>\n               <p>Custom classifier - a custom model that you have created and trained. \n        For input, you can provide plain text, a single-page document (PDF, Word, or image), or Textract API output.\n        For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-document-classification.html\">Custom classification</a> in the <i>Amazon Comprehend Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>Prompt classifier - Amazon Comprehend provides a model for classifying prompts. \n        For input, you provide English plain text input.\n        For prompt classification, the response includes only the <code>Classes</code> field.\n        For more information about prompt classifiers, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/prompt-classification.html\">Prompt classifiers</a> in the <i>Amazon Comprehend Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>If the system detects errors while processing a page in the input document,\n      the API response includes an entry in <code>Errors</code> that describes the errors.</p>\n         <p>If the system detects a document-level error in your input document, the API returns an\n      <code>InvalidRequestException</code> error response.\n      For details about this exception, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync-err.html\">\n        Errors in semi-structured documents</a> in the Comprehend Developer Guide.\n    </p>"
             }
         },
         "com.amazonaws.comprehend#ClassifyDocumentRequest": {
@@ -994,14 +994,14 @@
                 "EndpointArn": {
                     "target": "com.amazonaws.comprehend#DocumentClassifierEndpointArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the endpoint. For information about endpoints, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html\">Managing endpoints</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the endpoint. </p>\n         <p>For prompt classification, Amazon Comprehend provides the endpoint ARN: <code>zzz</code>.</p>\n         <p>For custom classification, you create an endpoint for your custom model. For more information, \n      see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/using-endpoints.html\">Using Amazon Comprehend endpoints</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Bytes": {
                     "target": "com.amazonaws.comprehend#SemiStructuredDocumentBlob",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use the <code>Bytes</code> parameter to input a text, PDF, Word or image file.\n      You can also use the <code>Bytes</code> parameter to input an Amazon Textract <code>DetectDocumentText</code>\n      or <code>AnalyzeDocument</code> output file.</p>\n         <p>Provide the input document as a sequence of base64-encoded bytes.\n      If your code uses an Amazon Web Services SDK to classify documents, the SDK may encode\n      the document file bytes for you. </p>\n         <p>The maximum length of this field depends on the input document type. For details, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync.html\">\n        Inputs for real-time custom analysis</a> in the Comprehend Developer Guide. </p>\n         <p>If you use the <code>Bytes</code> parameter, do not use the <code>Text</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>Use the <code>Bytes</code> parameter to input a text, PDF, Word or image file.</p>\n         <p>When you classify a document using a custom model, you can also use the <code>Bytes</code> parameter to input an Amazon Textract <code>DetectDocumentText</code>\n        or <code>AnalyzeDocument</code> output file.</p>\n         <p>To classify a document using the prompt classifier, use the <code>Text</code> parameter for input.</p>\n         <p>Provide the input document as a sequence of base64-encoded bytes.\n      If your code uses an Amazon Web Services SDK to classify documents, the SDK may encode\n      the document file bytes for you. </p>\n         <p>The maximum length of this field depends on the input document type. For details, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync.html\">\n        Inputs for real-time custom analysis</a> in the Comprehend Developer Guide. </p>\n         <p>If you use the <code>Bytes</code> parameter, do not use the <code>Text</code> parameter.</p>"
                     }
                 },
                 "DocumentReaderConfig": {
@@ -1021,7 +1021,7 @@
                 "Classes": {
                     "target": "com.amazonaws.comprehend#ListOfClasses",
                     "traits": {
-                        "smithy.api#documentation": "<p>The classes used by the document being analyzed. These are used for multi-class trained\n      models. Individual classes are mutually exclusive and each document is expected to have only a\n      single class assigned to it. For example, an animal can be a dog or a cat, but not both at the\n      same time. </p>"
+                        "smithy.api#documentation": "<p>The classes used by the document being analyzed. These are used for multi-class trained\n      models. Individual classes are mutually exclusive and each document is expected to have only a\n      single class assigned to it. For example, an animal can be a dog or a cat, but not both at the\n      same time. </p>\n         <p>For prompt classification, the response includes a single class (<code>UNDESIRED_PROMPT</code>), along with a confidence score. \n      A higher confidence score indicates that the input prompt is undesired in nature.</p>"
                     }
                 },
                 "Labels": {
@@ -1268,6 +1268,9 @@
                     "target": "com.amazonaws.comprehend#DetectTargetedSentiment"
                 },
                 {
+                    "target": "com.amazonaws.comprehend#DetectToxicContent"
+                },
+                {
                     "target": "com.amazonaws.comprehend#ImportModel"
                 },
                 {
@@ -1453,7 +1456,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1496,7 +1498,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -1509,7 +1512,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1523,7 +1525,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -1546,7 +1547,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -1581,7 +1581,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1592,14 +1591,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1613,14 +1614,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -1629,11 +1628,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1644,14 +1643,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1665,7 +1666,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -1685,7 +1685,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1696,14 +1695,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -1714,9 +1715,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -2491,7 +2494,7 @@
                 "OutputDataConfig": {
                     "target": "com.amazonaws.comprehend#DocumentClassifierOutputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the location for the output files from a custom classifier job.\n    This parameter is required for a request that creates a native classifier model.</p>"
+                        "smithy.api#documentation": "<p>Specifies the location for the output files from a custom classifier job.\n      This parameter is required for a request that creates a native document model.</p>"
                     }
                 },
                 "ClientRequestToken": {
@@ -2856,7 +2859,7 @@
                 "ActiveModelArn": {
                     "target": "com.amazonaws.comprehend#ComprehendModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>To associate an existing model with the flywheel, specify the Amazon Resource Number (ARN) of the model version.</p>"
+                        "smithy.api#documentation": "<p>To associate an existing model with the flywheel, specify the Amazon Resource Number (ARN) of the model version.\n      Do not set <code>TaskConfig</code> or <code>ModelType</code> if you specify an <code>ActiveModelArn</code>.</p>"
                     }
                 },
                 "DataAccessRoleArn": {
@@ -2869,13 +2872,13 @@
                 "TaskConfig": {
                     "target": "com.amazonaws.comprehend#TaskConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration about the custom classifier associated with the flywheel.</p>"
+                        "smithy.api#documentation": "<p>Configuration about the model associated with the flywheel.\n      You need to set <code>TaskConfig</code> if you are creating a flywheel for a new model.</p>"
                     }
                 },
                 "ModelType": {
                     "target": "com.amazonaws.comprehend#ModelType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The model type.</p>"
+                        "smithy.api#documentation": "<p>The model type. You need to set <code>ModelType</code> if you are creating a flywheel for a new model.</p>"
                     }
                 },
                 "DataLakeS3Uri": {
@@ -4931,7 +4934,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Inspects the input text and returns a sentiment analysis for each entity identified in the text.</p>\n         <p>For more information about targeted sentiment, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html\">Targeted sentiment</a>.</p>"
+                "smithy.api#documentation": "<p>Inspects the input text and returns a sentiment analysis for each entity identified in the text.</p>\n         <p>For more information about targeted sentiment, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html\">Targeted sentiment</a> in the <i>Amazon Comprehend Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.comprehend#DetectTargetedSentimentRequest": {
@@ -4969,6 +4972,68 @@
             "traits": {
                 "smithy.api#output": {},
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.comprehend#DetectToxicContent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehend#DetectToxicContentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehend#DetectToxicContentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehend#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#TextSizeLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#UnsupportedLanguageException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Performs toxicity analysis on the list of text strings that you provide as input.\n      The analysis uses the order of strings in the list to determine context when predicting toxicity.\n      The API response contains a results list that matches the size of the input list.\n      For more information about toxicity detection, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/toxicity-detection.html\">Toxicity detection</a> in the <i>Amazon Comprehend Developer Guide</i>\n         </p>"
+            }
+        },
+        "com.amazonaws.comprehend#DetectToxicContentRequest": {
+            "type": "structure",
+            "members": {
+                "TextSegments": {
+                    "target": "com.amazonaws.comprehend#ListOfTextSegments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of up to 10 text strings. The maximum size for the list is 10 KB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.comprehend#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language of the input text. Currently, English is the only supported language.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.comprehend#DetectToxicContentResponse": {
+            "type": "structure",
+            "members": {
+                "ResultList": {
+                    "target": "com.amazonaws.comprehend#ListOfToxicLabels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Results of the content moderation analysis.\n      Each entry in the results list contains a list of toxic content types identified in \n      the text, along with a confidence score for each content type. \n      The results list also includes a toxicity score for each entry in the results list.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehend#DocumentClass": {
@@ -5015,7 +5080,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration required for a custom classification model.</p>"
+                "smithy.api#documentation": "<p>Configuration required for a document classification model.</p>"
             }
         },
         "com.amazonaws.comprehend#DocumentClassificationJobFilter": {
@@ -5128,7 +5193,7 @@
                 "VpcConfig": {
                     "target": "com.amazonaws.comprehend#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the\n      resources you are using for your document classification job. For more information, see <a href=\"https://docs.aws.amazon.com/vppc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
+                        "smithy.api#documentation": "<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the\n      resources you are using for your document classification job. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
                     }
                 },
                 "FlywheelArn": {
@@ -5216,7 +5281,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The location of the training documents. This parameter is required in a request to create a native classifier model.</p>"
+                "smithy.api#documentation": "<p>The location of the training documents. This parameter is required in a request to create a semi-structured document classification model.</p>"
             }
         },
         "com.amazonaws.comprehend#DocumentClassifierEndpointArn": {
@@ -5226,7 +5291,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier-endpoint/[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:([0-9]{12}|aws):document-classifier-endpoint/[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.comprehend#DocumentClassifierFilter": {
@@ -5279,7 +5344,7 @@
                 "TestS3Uri": {
                     "target": "com.amazonaws.comprehend#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>This specifies the Amazon S3 location where the test annotations for an entity recognizer\n      are located. The URI must be in the same Amazon Web Services Region as the API endpoint that you are\n      calling. </p>"
+                        "smithy.api#documentation": "<p>This specifies the Amazon S3 location that contains the test annotations for the document classifier. \n      The URI must be in the same Amazon Web Services Region as the API endpoint that you are calling. </p>"
                     }
                 },
                 "LabelDelimiter": {
@@ -5297,13 +5362,13 @@
                 "DocumentType": {
                     "target": "com.amazonaws.comprehend#DocumentClassifierDocumentTypeFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of input documents for training the model. Provide plain-text documents to create a plain-text model, and\n    provide semi-structured documents to create a native model.</p>"
+                        "smithy.api#documentation": "<p>The type of input documents for training the model. Provide plain-text documents to create a plain-text model, and\n    provide semi-structured documents to create a native document model.</p>"
                     }
                 },
                 "Documents": {
                     "target": "com.amazonaws.comprehend#DocumentClassifierDocuments",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 location of the training documents.  \n      This parameter is required in a request to create a native classifier model.</p>"
+                        "smithy.api#documentation": "<p>The S3 location of the training documents.  \n      This parameter is required in a request to create a native document model.</p>"
                     }
                 },
                 "DocumentReaderConfig": {
@@ -5354,7 +5419,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provide the location for output data from a custom classifier job. This field is mandatory \n    if you are training a native classifier model.</p>"
+                "smithy.api#documentation": "<p>Provide the location for output data from a custom classifier job. This field is mandatory \n      if you are training a native document model.</p>"
             }
         },
         "com.amazonaws.comprehend#DocumentClassifierProperties": {
@@ -5441,7 +5506,7 @@
                 "VpcConfig": {
                     "target": "com.amazonaws.comprehend#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the\n      resources you are using for your custom classifier. For more information, see <a href=\"https://docs.aws.amazon.com/vppc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
+                        "smithy.api#documentation": "<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the\n      resources you are using for your custom classifier. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
                     }
                 },
                 "Mode": {
@@ -7209,7 +7274,7 @@
                 "TaskConfig": {
                     "target": "com.amazonaws.comprehend#TaskConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration about the custom classifier associated with the flywheel.</p>"
+                        "smithy.api#documentation": "<p>Configuration about the model associated with a flywheel.</p>"
                     }
                 },
                 "DataLakeS3Uri": {
@@ -9186,6 +9251,30 @@
                 "target": "com.amazonaws.comprehend#TargetedSentimentEntity"
             }
         },
+        "com.amazonaws.comprehend#ListOfTextSegments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#TextSegment"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.comprehend#ListOfToxicContent": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#ToxicContent"
+            }
+        },
+        "com.amazonaws.comprehend#ListOfToxicLabels": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#ToxicLabels"
+            }
+        },
         "com.amazonaws.comprehend#ListOfWarnings": {
             "type": "list",
             "member": {
@@ -9592,7 +9681,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the sentiment and sentiment score for one mention of an entity.</p>\n         <p>For more information about targeted sentiment, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html\">Targeted sentiment</a>.</p>"
+                "smithy.api#documentation": "<p>Contains the sentiment and sentiment score for one mention of an entity.</p>\n         <p>For more information about targeted sentiment, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html\">Targeted sentiment</a> in the <i>Amazon Comprehend Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.comprehend#ModelStatus": {
@@ -9690,7 +9779,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.comprehend#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>ID for the Amazon Web Services Key Management Service (KMS) key that Amazon Comprehend uses to encrypt the\n      output results from an analysis job. The KmsKeyId can be one of the following formats:</p>\n         <ul>\n            <li>\n               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Resource Name (ARN) of a KMS Key:\n            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n            <li>\n               <p>KMS Key Alias: <code>\"alias/ExampleAlias\"</code>\n               </p>\n            </li>\n            <li>\n               <p>ARN of a KMS Key Alias:\n            <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>ID for the Amazon Web Services Key Management Service (KMS) key that Amazon Comprehend uses to encrypt the\n      output results from an analysis job. Specify the Key Id of a symmetric key, because you cannot use an asymmetric\n       key for uploading data to S3.</p>\n         <p>The KmsKeyId can be one of the following formats:</p>\n         <ul>\n            <li>\n               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Resource Name (ARN) of a KMS Key:\n            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n            <li>\n               <p>KMS Key Alias: <code>\"alias/ExampleAlias\"</code>\n               </p>\n            </li>\n            <li>\n               <p>ARN of a KMS Key Alias:\n            <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -11809,7 +11898,7 @@
                 "DataAccessRoleArn": {
                     "target": "com.amazonaws.comprehend#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that\n      grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">Role-based permissions</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that\n      grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions\">Role-based permissions</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12872,7 +12961,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about one of the entities found by targeted sentiment analysis.</p>\n         <p>For more information about targeted sentiment, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html\">Targeted sentiment</a>.</p>"
+                "smithy.api#documentation": "<p>Information about one of the entities found by targeted sentiment analysis.</p>\n         <p>For more information about targeted sentiment, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html\">Targeted sentiment</a> in the <i>Amazon Comprehend Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.comprehend#TargetedSentimentEntityType": {
@@ -13029,7 +13118,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about one mention of an entity. The mention information includes the location of the mention\n      in the text and the sentiment of the mention.</p>\n         <p>For more information about targeted sentiment, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html\">Targeted sentiment</a>.</p>"
+                "smithy.api#documentation": "<p>Information about one mention of an entity. The mention information includes the location of the mention\n      in the text and the sentiment of the mention.</p>\n         <p>For more information about targeted sentiment, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html\">Targeted sentiment</a> in the <i>Amazon Comprehend Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.comprehend#TaskConfig": {
@@ -13045,7 +13134,7 @@
                 "DocumentClassificationConfig": {
                     "target": "com.amazonaws.comprehend#DocumentClassificationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration required for a classification model.</p>"
+                        "smithy.api#documentation": "<p>Configuration required for a document classification model.</p>"
                     }
                 },
                 "EntityRecognitionConfig": {
@@ -13056,7 +13145,22 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration about the custom classifier associated with the flywheel.</p>"
+                "smithy.api#documentation": "<p>Configuration about the model associated with a flywheel.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#TextSegment": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.comprehend#CustomerInputString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text content.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One of the of text strings. Each string has a size limit of 1KB.</p>"
             }
         },
         "com.amazonaws.comprehend#TextSizeLimitExceededException": {
@@ -13236,6 +13340,93 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.comprehend#TopicsDetectionJobProperties"
+            }
+        },
+        "com.amazonaws.comprehend#ToxicContent": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.comprehend#ToxicContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the toxic content type.</p>"
+                    }
+                },
+                "Score": {
+                    "target": "com.amazonaws.comprehend#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p> \n      Model confidence in the detected content type. Value range is zero to one, where one is highest confidence.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Toxic content analysis result for one string. For more information about toxicity detection, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/toxicity-detection.html\">Toxicity detection</a> in the <i>Amazon Comprehend Developer Guide</i>\n         </p>"
+            }
+        },
+        "com.amazonaws.comprehend#ToxicContentType": {
+            "type": "enum",
+            "members": {
+                "GRAPHIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHIC"
+                    }
+                },
+                "HARASSMENT_OR_ABUSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HARASSMENT_OR_ABUSE"
+                    }
+                },
+                "HATE_SPEECH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HATE_SPEECH"
+                    }
+                },
+                "INSULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSULT"
+                    }
+                },
+                "PROFANITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROFANITY"
+                    }
+                },
+                "SEXUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEXUAL"
+                    }
+                },
+                "VIOLENCE_OR_THREAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIOLENCE_OR_THREAT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#ToxicLabels": {
+            "type": "structure",
+            "members": {
+                "Labels": {
+                    "target": "com.amazonaws.comprehend#ListOfToxicContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Array of toxic content types identified in the string.</p>"
+                    }
+                },
+                "Toxicity": {
+                    "target": "com.amazonaws.comprehend#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Overall toxicity score for the string.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Toxicity analysis result for one string. For more information about toxicity detection, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/toxicity-detection.html\">Toxicity detection</a> in the <i>Amazon Comprehend Developer Guide</i>\n         </p>"
             }
         },
         "com.amazonaws.comprehend#UnsupportedLanguageException": {
@@ -13551,7 +13742,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The system identified one of the following warnings while processing the input document:</p>\n         <ul>\n            <li>\n               <p>The document to classify is plain text, but the classifier is a native model.</p>\n            </li>\n            <li>\n               <p>The document to classify is semi-structured, but the classifier is a plain-text model.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The system identified one of the following warnings while processing the input document:</p>\n         <ul>\n            <li>\n               <p>The document to classify is plain text, but the classifier is a native document model.</p>\n            </li>\n            <li>\n               <p>The document to classify is semi-structured, but the classifier is a plain-text model.</p>\n            </li>\n         </ul>"
             }
         }
     }

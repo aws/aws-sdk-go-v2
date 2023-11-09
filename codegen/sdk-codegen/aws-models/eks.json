@@ -123,6 +123,9 @@
                     "target": "com.amazonaws.eks#CreateCluster"
                 },
                 {
+                    "target": "com.amazonaws.eks#CreateEksAnywhereSubscription"
+                },
+                {
                     "target": "com.amazonaws.eks#CreateFargateProfile"
                 },
                 {
@@ -133,6 +136,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#DeleteCluster"
+                },
+                {
+                    "target": "com.amazonaws.eks#DeleteEksAnywhereSubscription"
                 },
                 {
                     "target": "com.amazonaws.eks#DeleteFargateProfile"
@@ -156,6 +162,9 @@
                     "target": "com.amazonaws.eks#DescribeCluster"
                 },
                 {
+                    "target": "com.amazonaws.eks#DescribeEksAnywhereSubscription"
+                },
+                {
                     "target": "com.amazonaws.eks#DescribeFargateProfile"
                 },
                 {
@@ -175,6 +184,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#ListClusters"
+                },
+                {
+                    "target": "com.amazonaws.eks#ListEksAnywhereSubscriptions"
                 },
                 {
                     "target": "com.amazonaws.eks#ListFargateProfiles"
@@ -210,6 +222,9 @@
                     "target": "com.amazonaws.eks#UpdateClusterVersion"
                 },
                 {
+                    "target": "com.amazonaws.eks#UpdateEksAnywhereSubscription"
+                },
+                {
                     "target": "com.amazonaws.eks#UpdateNodegroupConfig"
                 },
                 {
@@ -228,7 +243,7 @@
                     "name": "eks"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that makes it easy\n            for you to run Kubernetes on Amazon Web Services without needing to stand up or maintain\n            your own Kubernetes control plane. Kubernetes is an open-source system for automating\n            the deployment, scaling, and management of containerized applications. </p>\n         <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so\n            you can use all the existing plugins and tooling from the Kubernetes community.\n            Applications running on Amazon EKS are fully compatible with applications\n            running on any standard Kubernetes environment, whether running in on-premises data\n            centers or public clouds. This means that you can easily migrate any standard Kubernetes\n            application to Amazon EKS without any code modification required.</p>",
+                "smithy.api#documentation": "<p>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that makes it easy\n            for you to run Kubernetes on Amazon Web Services without needing to stand up or maintain your\n            own Kubernetes control plane. Kubernetes is an open-source system for automating the deployment,\n            scaling, and management of containerized applications. </p>\n         <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so you\n            can use all the existing plugins and tooling from the Kubernetes community. Applications\n            running on Amazon EKS are fully compatible with applications running on any\n            standard Kubernetes environment, whether running in on-premises data centers or public\n            clouds. This means that you can easily migrate any standard Kubernetes application to Amazon EKS without any code modification required.</p>",
                 "smithy.api#title": "Amazon Elastic Kubernetes Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1269,7 +1284,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You don't have permissions to perform the requested operation. The user or role that\n            is making the request must have at least one IAM permissions policy\n            attached that grants the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html\">Access\n                Management</a> in the <i>IAM User Guide</i>. </p>",
+                "smithy.api#documentation": "<p>You don't have permissions to perform the requested operation. The <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html\">IAM principal</a>\n            making the request must have at least one IAM permissions policy attached\n            that grants the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html\">Access\n                management</a> in the <i>IAM User Guide</i>.\n        </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -1877,12 +1892,18 @@
                 "addonName": {
                     "target": "com.amazonaws.eks#String"
                 },
+                "subscriptionId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EKS  subscription ID with the exception.</p>"
+                    }
+                },
                 "message": {
                     "target": "com.amazonaws.eks#String"
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>These errors are usually caused by a client action. Actions can include using an\n            action or resource on behalf of a user that doesn't have permissions to use the action\n            or resource or specifying an identifier that is not valid.</p>",
+                "smithy.api#documentation": "<p>These errors are usually caused by a client action. Actions can include using an\n            action or resource on behalf of an <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html\">IAM principal</a> that doesn't have permissions to use\n            the action or resource or specifying an identifier that is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1923,13 +1944,13 @@
                 "roleArn": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the\n            Kubernetes control plane to make calls to Amazon Web Services API operations on your\n            behalf.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes\n            control plane to make calls to Amazon Web Services API operations on your behalf.</p>"
                     }
                 },
                 "resourcesVpcConfig": {
                     "target": "com.amazonaws.eks#VpcConfigResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>The VPC configuration used by the cluster control plane. Amazon EKS VPC\n            resources have specific requirements to work properly with Kubernetes. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">Cluster VPC Considerations</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Cluster Security\n                Group Considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The VPC configuration used by the cluster control plane. Amazon EKS VPC\n            resources have specific requirements to work properly with Kubernetes. For more information,\n            see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">Cluster VPC\n                Considerations</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Cluster Security Group Considerations</a> in the\n            <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "kubernetesNetworkConfig": {
@@ -2394,7 +2415,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The placement configuration for all the control plane instances of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>\n         </p>"
+                "smithy.api#documentation": "<p>The placement configuration for all the control plane instances of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the Amazon EKS User Guide.</p>"
             }
         },
         "com.amazonaws.eks#ControlPlanePlacementResponse": {
@@ -2481,7 +2502,7 @@
                 "resolveConflicts": {
                     "target": "com.amazonaws.eks#ResolveConflicts",
                     "traits": {
-                        "smithy.api#documentation": "<p>How to resolve field value conflicts for an Amazon EKS add-on. Conflicts are\n            handled based on the value you choose:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>None</b> – If the self-managed version of\n                    the add-on is installed on your cluster, Amazon EKS doesn't change the\n                    value. Creation of the add-on might fail.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Overwrite</b> – If the self-managed\n                    version of the add-on is installed on your cluster and the Amazon EKS\n                    default value is different than the existing value, Amazon EKS changes\n                    the value to the Amazon EKS default value.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Preserve</b> – Not supported. You can set\n                    this value when updating an add-on though. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateAddon.html\">UpdateAddon</a>.</p>\n            </li>\n         </ul>\n         <p>If you don't currently have the self-managed version of the add-on installed on your\n            cluster, the Amazon EKS add-on is installed. Amazon EKS sets all values\n            to default values, regardless of the option that you specify.</p>"
+                        "smithy.api#documentation": "<p>How to resolve field value conflicts for an Amazon EKS add-on. Conflicts are\n            handled based on the value you choose:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>None</b> – If the self-managed version of\n                    the add-on is installed on your cluster, Amazon EKS doesn't change the\n                    value. Creation of the add-on might fail.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Overwrite</b> – If the self-managed\n                    version of the add-on is installed on your cluster and the Amazon EKS\n                    default value is different than the existing value, Amazon EKS changes\n                    the value to the Amazon EKS default value.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Preserve</b> – This is similar to the NONE\n                    option. If the self-managed version of the add-on is installed on your cluster\n                        Amazon EKS doesn't change the add-on resource properties. Creation\n                    of the add-on might fail if conflicts are detected. This option works\n                    differently during the update operation. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateAddon.html\">UpdateAddon</a>.</p>\n            </li>\n         </ul>\n         <p>If you don't currently have the self-managed version of the add-on installed on your\n            cluster, the Amazon EKS add-on is installed. Amazon EKS sets all values\n            to default values, regardless of the option that you specify.</p>"
                     }
                 },
                 "clientRequestToken": {
@@ -2551,7 +2572,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon EKS control plane. </p>\n         <p>The Amazon EKS control plane consists of control plane instances that run the\n            Kubernetes software, such as <code>etcd</code> and the API server. The control plane\n            runs in an account managed by Amazon Web Services, and the Kubernetes API is exposed by\n            the Amazon EKS API server endpoint. Each Amazon EKS cluster control\n            plane is single tenant and unique. It runs on its own set of Amazon EC2\n            instances.</p>\n         <p>The cluster control plane is provisioned across multiple Availability Zones and\n            fronted by an Elastic Load Balancing\n            Network Load Balancer. Amazon EKS also provisions elastic network interfaces in\n            your VPC subnets to provide connectivity from the control plane instances to the nodes\n            (for example, to support <code>kubectl exec</code>, <code>logs</code>, and\n                <code>proxy</code> data flows).</p>\n         <p>Amazon EKS nodes run in your Amazon Web Services account and connect to your\n            cluster's control plane over the Kubernetes API server endpoint and a certificate file\n            that is created for your cluster.</p>\n         <p>In most cases, it takes several minutes to create a cluster. After you create an\n                Amazon EKS cluster, you must configure your Kubernetes tooling to\n            communicate with the API server and launch nodes into your cluster. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html\">Managing Cluster Authentication</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html\">Launching\n                    Amazon EKS nodes</a> in the <i>Amazon EKS User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon EKS control plane. </p>\n         <p>The Amazon EKS control plane consists of control plane instances that run the\n            Kubernetes software, such as <code>etcd</code> and the API server. The control plane runs in\n            an account managed by Amazon Web Services, and the Kubernetes API is exposed by the Amazon EKS API server endpoint. Each Amazon EKS cluster control plane is\n            single tenant and unique. It runs on its own set of Amazon EC2 instances.</p>\n         <p>The cluster control plane is provisioned across multiple Availability Zones and\n            fronted by an Elastic Load Balancing\n            Network Load Balancer. Amazon EKS also provisions elastic network interfaces in\n            your VPC subnets to provide connectivity from the control plane instances to the nodes\n            (for example, to support <code>kubectl exec</code>, <code>logs</code>, and\n                <code>proxy</code> data flows).</p>\n         <p>Amazon EKS nodes run in your Amazon Web Services account and connect to your\n            cluster's control plane over the Kubernetes API server endpoint and a certificate file that\n            is created for your cluster.</p>\n         <p>In most cases, it takes several minutes to create a cluster. After you create an\n                Amazon EKS cluster, you must configure your Kubernetes tooling to communicate\n            with the API server and launch nodes into your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html\">Managing Cluster\n                Authentication</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html\">Launching Amazon EKS nodes</a> in the\n            <i>Amazon EKS User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a new cluster",
@@ -2594,20 +2615,20 @@
                 "version": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The desired Kubernetes version for your cluster. If you don't specify a value here,\n            the default version available in Amazon EKS is used.</p>\n         <note>\n            <p>The default version might not be the latest version available.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The desired Kubernetes version for your cluster. If you don't specify a value here, the\n            default version available in Amazon EKS is used.</p>\n         <note>\n            <p>The default version might not be the latest version available.</p>\n         </note>"
                     }
                 },
                 "roleArn": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the\n            Kubernetes control plane to make calls to Amazon Web Services API operations on your\n            behalf. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html\">Amazon EKS Service IAM Role</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes\n            control plane to make calls to Amazon Web Services API operations on your behalf. For\n            more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html\">Amazon EKS Service IAM Role</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourcesVpcConfig": {
                     "target": "com.amazonaws.eks#VpcConfigRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The VPC configuration that's used by the cluster control plane. Amazon EKS VPC\n            resources have specific requirements to work properly with Kubernetes. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">Cluster VPC Considerations</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Cluster Security\n                Group Considerations</a> in the <i>Amazon EKS User Guide</i>. You must specify at least two\n            subnets. You can specify up to five security groups. However, we recommend that you use\n            a dedicated security group for your cluster control plane.</p>",
+                        "smithy.api#documentation": "<p>The VPC configuration that's used by the cluster control plane. Amazon EKS VPC\n            resources have specific requirements to work properly with Kubernetes. For more information,\n            see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">Cluster VPC\n                Considerations</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Cluster Security Group Considerations</a> in the\n            <i>Amazon EKS User Guide</i>. You must specify at least two subnets. You can specify up to five\n            security groups. However, we recommend that you use a dedicated security group for your\n            cluster control plane.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2620,7 +2641,7 @@
                 "logging": {
                     "target": "com.amazonaws.eks#Logging",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to\n                CloudWatch Logs. By default, cluster control plane logs aren't exported to\n                CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster control plane logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster control plane logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n         </note>"
                     }
                 },
                 "clientRequestToken": {
@@ -2667,6 +2688,109 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.eks#CreateEksAnywhereSubscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#CreateEksAnywhereSubscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#CreateEksAnywhereSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an EKS Anywhere subscription. When a subscription is created, it is a contract\n            agreement for the length of the term specified in the request. Licenses that are used to\n            validate support are provisioned in Amazon Web Services License Manager and the caller account is\n            granted access to EKS Anywhere Curated Packages.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/eks-anywhere-subscriptions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#CreateEksAnywhereSubscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.eks#EksAnywhereSubscriptionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name for your subscription. It must be unique in your Amazon Web Services account in the\n            Amazon Web Services Region you're creating the subscription in. The name can contain only alphanumeric\n            characters (case-sensitive), hyphens, and underscores. It must start with an alphabetic\n            character and can't be longer than 100 characters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "term": {
+                    "target": "com.amazonaws.eks#EksAnywhereSubscriptionTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object representing the term duration and term unit type of your subscription. This\n            determines the term length of your subscription. Valid values are MONTHS for term unit\n            and 12 or 36 for term duration, indicating a 12 month or 36 month subscription. This\n            value cannot be changed after creating the subscription.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "licenseQuantity": {
+                    "target": "com.amazonaws.eks#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of licenses to purchase with the subscription. Valid values are between 1\n            and 1000. This value cannot be changed after creating the subscription.</p>"
+                    }
+                },
+                "licenseType": {
+                    "target": "com.amazonaws.eks#EksAnywhereSubscriptionLicenseType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The license type for all licenses in the subscription. Valid value is CLUSTER. With\n            the CLUSTER license type, each license covers support for a single EKS Anywhere\n            cluster.</p>"
+                    }
+                },
+                "autoRenew": {
+                    "target": "com.amazonaws.eks#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A boolean indicating whether the subscription auto renews at the end of the\n            term.</p>"
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.eks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata for a subscription to assist with categorization and organization. Each\n            tag consists of a key and an optional value. Subscription tags do not propagate to any\n            other resources associated with the subscription.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#CreateEksAnywhereSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "subscription": {
+                    "target": "com.amazonaws.eks#EksAnywhereSubscription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full description of the subscription.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.eks#CreateFargateProfile": {
             "type": "operation",
             "input": {
@@ -2696,7 +2820,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Fargate profile for your Amazon EKS cluster. You\n            must have at least one Fargate profile in a cluster to be able to run\n            pods on Fargate.</p>\n         <p>The Fargate profile allows an administrator to declare which pods run\n            on Fargate and specify which pods run on which Fargate\n            profile. This declaration is done through the profile’s selectors. Each profile can have\n            up to five selectors that contain a namespace and labels. A namespace is required for\n            every selector. The label field consists of multiple optional key-value pairs. Pods that\n            match the selectors are scheduled on Fargate. If a to-be-scheduled pod\n            matches any of the selectors in the Fargate profile, then that pod is run\n            on Fargate.</p>\n         <p>When you create a Fargate profile, you must specify a pod execution\n            role to use with the pods that are scheduled with the profile. This role is added to the\n            cluster's Kubernetes <a href=\"https://kubernetes.io/docs/admin/authorization/rbac/\">Role Based Access Control</a> (RBAC) for authorization so that the\n                <code>kubelet</code> that is running on the Fargate infrastructure\n            can register with your Amazon EKS cluster so that it can appear in your cluster\n            as a node. The pod execution role also provides IAM permissions to the\n                Fargate infrastructure to allow read access to Amazon ECR\n            image repositories. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html\">Pod\n                Execution Role</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <p>Fargate profiles are immutable. However, you can create a new updated\n            profile to replace an existing profile and then delete the original after the updated\n            profile has finished creating.</p>\n         <p>If any Fargate profiles in a cluster are in the <code>DELETING</code>\n            status, you must wait for that Fargate profile to finish deleting before\n            you can create any other profiles in that cluster.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html\">Fargate Profile</a> in the\n            <i>Amazon EKS User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an Fargate profile for your Amazon EKS cluster. You\n            must have at least one Fargate profile in a cluster to be able to run\n            pods on Fargate.</p>\n         <p>The Fargate profile allows an administrator to declare which pods run\n            on Fargate and specify which pods run on which Fargate\n            profile. This declaration is done through the profile’s selectors. Each profile can have\n            up to five selectors that contain a namespace and labels. A namespace is required for\n            every selector. The label field consists of multiple optional key-value pairs. Pods that\n            match the selectors are scheduled on Fargate. If a to-be-scheduled pod\n            matches any of the selectors in the Fargate profile, then that pod is run\n            on Fargate.</p>\n         <p>When you create a Fargate profile, you must specify a pod execution\n            role to use with the pods that are scheduled with the profile. This role is added to the\n            cluster's Kubernetes <a href=\"https://kubernetes.io/docs/reference/access-authn-authz/rbac/\">Role Based\n                Access Control</a> (RBAC) for authorization so that the <code>kubelet</code>\n            that is running on the Fargate infrastructure can register with your\n                Amazon EKS cluster so that it can appear in your cluster as a node. The pod\n            execution role also provides IAM permissions to the Fargate infrastructure to allow read access to Amazon ECR image repositories. For\n            more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html\">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <p>Fargate profiles are immutable. However, you can create a new updated\n            profile to replace an existing profile and then delete the original after the updated\n            profile has finished creating.</p>\n         <p>If any Fargate profiles in a cluster are in the <code>DELETING</code>\n            status, you must wait for that Fargate profile to finish deleting before\n            you can create any other profiles in that cluster.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html\">Fargate Profile</a> in the\n            <i>Amazon EKS User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/fargate-profiles",
@@ -2805,7 +2929,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a managed node group for an Amazon EKS cluster. You can only create a\n            node group for your cluster that is equal to the current Kubernetes version for the\n            cluster. All node groups are created with the latest AMI release version for the\n            respective minor Kubernetes version of the cluster, unless you deploy a custom AMI using\n            a launch template. For more information about using launch templates, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch\n                template support</a>.</p>\n         <p>An Amazon EKS managed node group is an Amazon EC2\n            Auto Scaling group and associated Amazon EC2 instances that are managed by\n                Amazon Web Services for an Amazon EKS cluster. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html\">Managed node groups</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <note>\n            <p>Windows AMI types are only supported for commercial Regions that support Windows\n                    Amazon EKS.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a managed node group for an Amazon EKS cluster. You can only create a\n            node group for your cluster that is equal to the current Kubernetes version for the\n            cluster.</p>\n         <p>An Amazon EKS managed node group is an Amazon EC2\n            Auto Scaling group and associated Amazon EC2 instances that are managed by\n                Amazon Web Services for an Amazon EKS cluster. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html\">Managed node groups</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <note>\n            <p>Windows AMI types are only supported for commercial Regions that support Windows\n                    Amazon EKS.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/node-groups",
@@ -2865,7 +2989,7 @@
                 "remoteAccess": {
                     "target": "com.amazonaws.eks#RemoteAccessConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The remote access configuration to use with your node group.\n            For Linux, the protocol is SSH. For Windows, the protocol is RDP.\n            If you specify <code>launchTemplate</code>, then don't specify \n                <code>remoteAccess</code>, or the node group  deployment will fail.\n            For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The remote access configuration to use with your node group. For Linux, the protocol\n            is SSH. For Windows, the protocol is RDP. If you specify <code>launchTemplate</code>, then don't specify \n                <code>remoteAccess</code>, or the node group  deployment will fail.\n            For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "nodeRole": {
@@ -2884,7 +3008,7 @@
                 "taints": {
                     "target": "com.amazonaws.eks#taintsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html\">Node taints on\n                managed node groups</a>.</p>"
+                        "smithy.api#documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group. For more information,\n            see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html\">Node taints on\n                managed node groups</a>.</p>"
                     }
                 },
                 "tags": {
@@ -2921,7 +3045,7 @@
                 "version": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kubernetes version to use for your managed nodes. By default, the Kubernetes\n            version of the cluster is used, and this is the only accepted specified value.\n            If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify  <code>version</code>,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Kubernetes version to use for your managed nodes. By default, the Kubernetes version of the\n            cluster is used, and this is the only accepted specified value. If you specify <code>launchTemplate</code>,\n            and your launch template uses a custom AMI, then don't specify  <code>version</code>, or the node group \n            deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "releaseVersion": {
@@ -3093,6 +3217,67 @@
                     "target": "com.amazonaws.eks#Cluster",
                     "traits": {
                         "smithy.api#documentation": "<p>The full description of the cluster to delete.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.eks#DeleteEksAnywhereSubscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#DeleteEksAnywhereSubscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#DeleteEksAnywhereSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an expired / inactive subscription. Deleting inactive subscriptions removes\n            them from the Amazon Web Services Management Console view and from list/describe API responses.\n            Subscriptions can only be cancelled within 7 days of creation, and are cancelled by\n            creating a ticket in the Amazon Web Services Support Center. </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/eks-anywhere-subscriptions/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#DeleteEksAnywhereSubscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the subscription.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#DeleteEksAnywhereSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "subscription": {
+                    "target": "com.amazonaws.eks#EksAnywhereSubscription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full description of the subscription to be deleted.</p>"
                     }
                 }
             },
@@ -3805,6 +3990,67 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.eks#DescribeEksAnywhereSubscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#DescribeEksAnywhereSubscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#DescribeEksAnywhereSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns descriptive information about a subscription.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/eks-anywhere-subscriptions/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#DescribeEksAnywhereSubscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the subscription.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#DescribeEksAnywhereSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "subscription": {
+                    "target": "com.amazonaws.eks#EksAnywhereSubscription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full description of the subscription.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.eks#DescribeFargateProfile": {
             "type": "operation",
             "input": {
@@ -4225,7 +4471,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates an identity provider configuration from a cluster. If you disassociate\n            an identity provider from your cluster, users included in the provider can no longer\n            access the cluster. However, you can still access the cluster with Amazon Web Services\n            IAM users.</p>",
+                "smithy.api#documentation": "<p>Disassociates an identity provider configuration from a cluster. If you disassociate\n            an identity provider from your cluster, users included in the provider can no longer\n            access the cluster. However, you can still access the cluster with\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html\">IAM principals</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/identity-provider-configs/disassociate",
@@ -4272,6 +4518,194 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.eks#EksAnywhereSubscription": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>UUID identifying a subscription.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the subscription.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp in seconds for when the subscription was created.</p>"
+                    }
+                },
+                "effectiveDate": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp in seconds for when the subscription is effective.</p>"
+                    }
+                },
+                "expirationDate": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp in seconds for when the subscription will expire or auto renew,\n            depending on the auto renew configuration of the subscription object.</p>"
+                    }
+                },
+                "licenseQuantity": {
+                    "target": "com.amazonaws.eks#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of licenses included in a subscription. Valid values are between 1 and\n            1000.</p>"
+                    }
+                },
+                "licenseType": {
+                    "target": "com.amazonaws.eks#EksAnywhereSubscriptionLicenseType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of licenses included in the subscription. Valid value is CLUSTER. With the\n            CLUSTER license type, each license covers support for a single EKS Anywhere\n            cluster.</p>"
+                    }
+                },
+                "term": {
+                    "target": "com.amazonaws.eks#EksAnywhereSubscriptionTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An EksAnywhereSubscriptionTerm object. </p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a subscription.</p>"
+                    }
+                },
+                "autoRenew": {
+                    "target": "com.amazonaws.eks#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A boolean indicating whether or not a subscription will auto renew when it\n            expires.</p>"
+                    }
+                },
+                "licenseArns": {
+                    "target": "com.amazonaws.eks#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>License Manager License ARNs associated with the subscription.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.eks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata for a subscription to assist with categorization and organization. Each\n            tag consists of a key and an optional value. Subscription tags do not propagate to any\n            other resources associated with the subscription.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An EKS Anywhere subscription authorizing the customer to support for licensed clusters\n            and access to EKS Anywhere Curated Packages.</p>"
+            }
+        },
+        "com.amazonaws.eks#EksAnywhereSubscriptionLicenseType": {
+            "type": "enum",
+            "members": {
+                "Cluster": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Cluster"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.eks#EksAnywhereSubscriptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.eks#EksAnywhereSubscription"
+            }
+        },
+        "com.amazonaws.eks#EksAnywhereSubscriptionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*$"
+            }
+        },
+        "com.amazonaws.eks#EksAnywhereSubscriptionStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "EXPIRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRING"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.eks#EksAnywhereSubscriptionStatusValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.eks#EksAnywhereSubscriptionStatus"
+            }
+        },
+        "com.amazonaws.eks#EksAnywhereSubscriptionTerm": {
+            "type": "structure",
+            "members": {
+                "duration": {
+                    "target": "com.amazonaws.eks#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The duration of the subscription term. Valid values are 12 and 36, indicating a 12 month or 36 month subscription.</p>"
+                    }
+                },
+                "unit": {
+                    "target": "com.amazonaws.eks#EksAnywhereSubscriptionTermUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The term unit of the subscription. Valid value is MONTHS.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the term duration and term unit type of your subscription. This\n            determines the term length of your subscription. Valid values are MONTHS for term unit\n            and 12 or 36 for term duration, indicating a 12 month or 36 month subscription.</p>"
+            }
+        },
+        "com.amazonaws.eks#EksAnywhereSubscriptionTermUnit": {
+            "type": "enum",
+            "members": {
+                "MONTHS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHS"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#EncryptionConfig": {
@@ -4528,7 +4962,7 @@
                 "labels": {
                     "target": "com.amazonaws.eks#FargateProfileLabel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kubernetes labels that the selector should match. A pod must contain all of the\n            labels that are specified in the selector for it to be considered a match.</p>"
+                        "smithy.api#documentation": "<p>The Kubernetes labels that the selector should match. A pod must contain all of the labels\n            that are specified in the selector for it to be considered a match.</p>"
                     }
                 }
             },
@@ -4648,6 +5082,12 @@
                 "target": "com.amazonaws.eks#String"
             }
         },
+        "com.amazonaws.eks#Integer": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
         "com.amazonaws.eks#InvalidParameterException": {
             "type": "structure",
             "members": {
@@ -4671,6 +5111,12 @@
                 },
                 "addonName": {
                     "target": "com.amazonaws.eks#String"
+                },
+                "subscriptionId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EKS  subscription ID with the exception.</p>"
+                    }
                 },
                 "message": {
                     "target": "com.amazonaws.eks#String"
@@ -4699,6 +5145,12 @@
                 },
                 "addonName": {
                     "target": "com.amazonaws.eks#String"
+                },
+                "subscriptionId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EKS  subscription ID with the exception.</p>"
+                    }
                 },
                 "message": {
                     "target": "com.amazonaws.eks#String"
@@ -4765,13 +5217,13 @@
                 "serviceIpv4Cidr": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Don't specify a value if you select <code>ipv6</code> for <b>ipFamily</b>. The CIDR block to assign Kubernetes service IP addresses from.\n            If you don't specify a block, Kubernetes assigns addresses from either the <code>10.100.0.0/16</code>\n            or <code>172.20.0.0/16</code> CIDR blocks. We recommend that you specify a block that does not\n            overlap with resources in other networks that are peered or connected to your VPC. The\n            block must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Within one of the following private IP address blocks: <code>10.0.0.0/8</code>,\n                    <code>172.16.0.0/12</code>, or <code>192.168.0.0/16</code>.</p>\n            </li>\n            <li>\n               <p>Doesn't overlap with any CIDR block assigned to the VPC that you selected for\n                    VPC.</p>\n            </li>\n            <li>\n               <p>Between /24 and /12.</p>\n            </li>\n         </ul>\n         <important>\n            <p>You can only specify a custom CIDR block when you create a cluster and can't\n                change this value once the cluster is created.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>Don't specify a value if you select <code>ipv6</code> for <b>ipFamily</b>. The CIDR block to assign Kubernetes service IP addresses from. If\n            you don't specify a block, Kubernetes assigns addresses from either the\n                <code>10.100.0.0/16</code> or <code>172.20.0.0/16</code> CIDR blocks. We recommend\n            that you specify a block that does not overlap with resources in other networks that are\n            peered or connected to your VPC. The block must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Within one of the following private IP address blocks:\n                    <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, or\n                        <code>192.168.0.0/16</code>.</p>\n            </li>\n            <li>\n               <p>Doesn't overlap with any CIDR block assigned to the VPC that you selected for\n                    VPC.</p>\n            </li>\n            <li>\n               <p>Between /24 and /12.</p>\n            </li>\n         </ul>\n         <important>\n            <p>You can only specify a custom CIDR block when you create a cluster and can't\n                change this value once the cluster is created.</p>\n         </important>"
                     }
                 },
                 "ipFamily": {
                     "target": "com.amazonaws.eks#IpFamily",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify which IP family is used to assign Kubernetes pod and service IP addresses. If\n            you don't specify a value, <code>ipv4</code> is used by default. You can only specify an\n            IP family when you create a cluster and can't change this value once the cluster is\n            created. If you specify <code>ipv6</code>, the VPC and subnets that you specify for\n            cluster creation must have both <code>IPv4</code> and <code>IPv6</code> CIDR blocks assigned to them. You can't\n            specify <code>ipv6</code> for clusters in China Regions.</p>\n         <p>You can only specify <code>ipv6</code> for <code>1.21</code> and later clusters that use version\n            <code>1.10.1</code> or later of the Amazon VPC CNI add-on. If you specify <code>ipv6</code>, then ensure\n            that your VPC meets the requirements listed in the considerations listed in <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cni-ipv6.html\">Assigning IPv6\n                addresses to pods and services</a> in the Amazon EKS User Guide.\n            Kubernetes assigns services <code>IPv6</code> addresses from the unique local address range\n            <code>(fc00::/7)</code>. You can't specify a custom <code>IPv6</code> CIDR block. Pod addresses are assigned from\n            the subnet's <code>IPv6</code> CIDR.</p>"
+                        "smithy.api#documentation": "<p>Specify which IP family is used to assign Kubernetes pod and service IP addresses. If you\n            don't specify a value, <code>ipv4</code> is used by default. You can only specify an IP\n            family when you create a cluster and can't change this value once the cluster is\n            created. If you specify <code>ipv6</code>, the VPC and subnets that you specify for\n            cluster creation must have both <code>IPv4</code> and <code>IPv6</code> CIDR blocks\n            assigned to them. You can't specify <code>ipv6</code> for clusters in China\n            Regions.</p>\n         <p>You can only specify <code>ipv6</code> for <code>1.21</code> and later clusters that\n            use version <code>1.10.1</code> or later of the Amazon VPC CNI add-on. If you specify\n                <code>ipv6</code>, then ensure that your VPC meets the requirements listed in the\n            considerations listed in <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cni-ipv6.html\">Assigning IPv6 addresses to pods and\n                services</a> in the Amazon EKS User Guide. Kubernetes assigns services\n                <code>IPv6</code> addresses from the unique local address range\n                <code>(fc00::/7)</code>. You can't specify a custom <code>IPv6</code> CIDR block.\n            Pod addresses are assigned from the subnet's <code>IPv6</code> CIDR.</p>"
                     }
                 }
             },
@@ -4791,7 +5243,7 @@
                 "serviceIpv6Cidr": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CIDR block that Kubernetes pod and service IP addresses are assigned from if you\n            created a 1.21 or later cluster with version 1.10.1 or later of the Amazon VPC CNI add-on and\n            specified <code>ipv6</code> for <b>ipFamily</b> when you\n            created the cluster. Kubernetes assigns service addresses from the unique local address\n            range (<code>fc00::/7</code>) because you can't specify a custom IPv6 CIDR block when\n            you create the cluster.</p>"
+                        "smithy.api#documentation": "<p>The CIDR block that Kubernetes pod and service IP addresses are assigned from if you\n            created a 1.21 or later cluster with version 1.10.1 or later of the Amazon VPC CNI add-on and\n            specified <code>ipv6</code> for <b>ipFamily</b> when you\n            created the cluster. Kubernetes assigns service addresses from the unique local address range\n                (<code>fc00::/7</code>) because you can't specify a custom IPv6 CIDR block when you\n            create the cluster.</p>"
                     }
                 },
                 "ipFamily": {
@@ -4802,7 +5254,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Kubernetes network configuration for the cluster. The response contains a value\n            for <b>serviceIpv6Cidr</b> or <b>serviceIpv4Cidr</b>, but not both. </p>"
+                "smithy.api#documentation": "<p>The Kubernetes network configuration for the cluster. The response contains a value for\n                <b>serviceIpv6Cidr</b> or <b>serviceIpv4Cidr</b>, but not both. </p>"
             }
         },
         "com.amazonaws.eks#LaunchTemplateSpecification": {
@@ -4857,7 +5309,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the available add-ons.</p>",
+                "smithy.api#documentation": "<p>Lists the installed add-ons.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/clusters/{clusterName}/addons",
@@ -4916,7 +5368,7 @@
                 "addons": {
                     "target": "com.amazonaws.eks#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of available add-ons.</p>"
+                        "smithy.api#documentation": "<p>A list of installed add-ons.</p>"
                     }
                 },
                 "nextToken": {
@@ -5030,6 +5482,95 @@
                     "target": "com.amazonaws.eks#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListClusters</code>\n            request. When the results of a <code>ListClusters</code> request exceed\n                <code>maxResults</code>, you can use this value to retrieve the next page of\n            results. This value is <code>null</code> when there are no more results to\n            return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.eks#ListEksAnywhereSubscriptions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#ListEksAnywhereSubscriptionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#ListEksAnywhereSubscriptionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Displays the full description of the subscription.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/eks-anywhere-subscriptions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#ListEksAnywhereSubscriptionsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.eks#ListEksAnywhereSubscriptionsRequestMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of cluster results returned by ListEksAnywhereSubscriptions in\n            paginated output. When you use this parameter, ListEksAnywhereSubscriptions returns only\n            maxResults results in a single page along with a nextToken response element. You can see\n            the remaining results of the initial request by sending another\n            ListEksAnywhereSubscriptions request with the returned nextToken value. This value can\n            be between 1 and 100. If you don't use this parameter, ListEksAnywhereSubscriptions\n            returns up to 10 results and a nextToken value if applicable.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nextToken value to include in a future ListEksAnywhereSubscriptions request. When\n            the results of a ListEksAnywhereSubscriptions request exceed maxResults, you can use\n            this value to retrieve the next page of results. This value is null when there are no\n            more results to return.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "includeStatus": {
+                    "target": "com.amazonaws.eks#EksAnywhereSubscriptionStatusValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of subscription statuses to filter on.</p>",
+                        "smithy.api#httpQuery": "includeStatus"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#ListEksAnywhereSubscriptionsRequestMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.eks#ListEksAnywhereSubscriptionsResponse": {
+            "type": "structure",
+            "members": {
+                "subscriptions": {
+                    "target": "com.amazonaws.eks#EksAnywhereSubscriptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all subscription objects in the region, filtered by includeStatus and\n            paginated by nextToken and maxResults.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nextToken value to include in a future ListEksAnywhereSubscriptions request. When\n            the results of a ListEksAnywhereSubscriptions request exceed maxResults, you can use\n            this value to retrieve the next page of results. This value is null when there are no\n            more results to return.</p>"
                     }
                 }
             },
@@ -5704,7 +6245,7 @@
                 "taints": {
                     "target": "com.amazonaws.eks#taintsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group when they are\n            created. Effect is one of <code>No_Schedule</code>, <code>Prefer_No_Schedule</code>, or\n                <code>No_Execute</code>. Kubernetes taints can be used together with tolerations to\n            control how workloads are scheduled to your nodes. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html\">Node taints on managed node groups</a>.</p>"
+                        "smithy.api#documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group when they are created.\n            Effect is one of <code>No_Schedule</code>, <code>Prefer_No_Schedule</code>, or\n                <code>No_Execute</code>. Kubernetes taints can be used together with tolerations to\n            control how workloads are scheduled to your nodes. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html\">Node taints on managed node groups</a>.</p>"
                     }
                 },
                 "resources": {
@@ -6323,7 +6864,7 @@
                 "keyArn": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same\n            region as the cluster, and if the KMS key was created in a different account, the user\n            must have access to the KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html\">Allowing\n                Users in Other Accounts to Use a KMS key</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be\n            symmetric and created in the same Amazon Web Services Region as the cluster. If the\n                KMS key was created in a different account, the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html\">IAM principal</a> must\n            have access to the KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html\">Allowing\n                users in other accounts to use a KMS key</a> in the\n                    <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -6366,7 +6907,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Connects a Kubernetes cluster to the Amazon EKS control plane. </p>\n         <p>Any Kubernetes cluster can be connected to the Amazon EKS control plane to\n            view current information about the cluster and its nodes. </p>\n         <p>Cluster connection requires two steps. First, send a <code>\n               <a>RegisterClusterRequest</a>\n            </code> to add it to the Amazon EKS\n            control plane.</p>\n         <p>Second, a <a href=\"https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml\">Manifest</a> containing the <code>activationID</code> and\n                <code>activationCode</code> must be applied to the Kubernetes cluster through it's\n            native provider to provide visibility.</p>\n         <p>After the Manifest is updated and applied, then the connected cluster is visible to\n            the Amazon EKS control plane. If the Manifest is not applied within three days,\n            then the connected cluster will no longer be visible and must be deregistered. See <a>DeregisterCluster</a>.</p>",
+                "smithy.api#documentation": "<p>Connects a Kubernetes cluster to the Amazon EKS control plane. </p>\n         <p>Any Kubernetes cluster can be connected to the Amazon EKS control plane to view\n            current information about the cluster and its nodes. </p>\n         <p>Cluster connection requires two steps. First, send a <code>\n               <a>RegisterClusterRequest</a>\n            </code> to add it to the Amazon EKS\n            control plane.</p>\n         <p>Second, a <a href=\"https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml\">Manifest</a> containing the <code>activationID</code> and\n                <code>activationCode</code> must be applied to the Kubernetes cluster through it's native\n            provider to provide visibility.</p>\n         <p>After the Manifest is updated and applied, then the connected cluster is visible to\n            the Amazon EKS control plane. If the Manifest is not applied within three days,\n            then the connected cluster will no longer be visible and must be deregistered. See <a>DeregisterCluster</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/cluster-registrations",
@@ -6506,6 +7047,12 @@
                         "smithy.api#documentation": "<p>The Amazon EKS managed node group associated with the exception.</p>"
                     }
                 },
+                "subscriptionId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EKS  subscription ID with the exception.</p>"
+                    }
+                },
                 "message": {
                     "target": "com.amazonaws.eks#String"
                 }
@@ -6539,6 +7086,12 @@
                 },
                 "addonName": {
                     "target": "com.amazonaws.eks#String"
+                },
+                "subscriptionId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EKS  subscription ID with the exception.</p>"
+                    }
                 },
                 "message": {
                     "target": "com.amazonaws.eks#String"
@@ -6589,6 +7142,12 @@
                 },
                 "addonName": {
                     "target": "com.amazonaws.eks#String"
+                },
+                "subscriptionId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EKS  subscription ID with the exception.</p>"
+                    }
                 },
                 "message": {
                     "target": "com.amazonaws.eks#String"
@@ -7037,7 +7596,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an Amazon EKS cluster configuration. Your cluster continues to\n            function during the update. The response output includes an update ID that you can use\n            to track the status of your cluster update with the <a>DescribeUpdate</a> API\n            operation.</p>\n         <p>You can use this API operation to enable or disable exporting the Kubernetes control\n            plane logs for your cluster to CloudWatch Logs. By default, cluster control plane\n            logs aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster Control Plane Logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n         </note>\n         <p>You can also use this API operation to enable or disable public and private access to\n            your cluster's Kubernetes API server endpoint. By default, public access is enabled, and\n            private access is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster endpoint access control</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>. </p>\n         <important>\n            <p>You can't update the subnets or security group IDs for an existing cluster.</p>\n         </important>\n         <p>Cluster updates are asynchronous, and they should finish within a few minutes. During\n            an update, the cluster status moves to <code>UPDATING</code> (this status transition is\n            eventually consistent). When the update is complete (either <code>Failed</code> or\n                <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>",
+                "smithy.api#documentation": "<p>Updates an Amazon EKS cluster configuration. Your cluster continues to\n            function during the update. The response output includes an update ID that you can use\n            to track the status of your cluster update with the <a>DescribeUpdate</a> API\n            operation.</p>\n         <p>You can use this API operation to enable or disable exporting the Kubernetes control plane\n            logs for your cluster to CloudWatch Logs. By default, cluster control plane logs\n            aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster Control Plane Logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n         </note>\n         <p>You can also use this API operation to enable or disable public and private access to\n            your cluster's Kubernetes API server endpoint. By default, public access is enabled, and\n            private access is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster endpoint access control</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>. </p>\n         <important>\n            <p>You can't update the subnets or security group IDs for an existing cluster.</p>\n         </important>\n         <p>Cluster updates are asynchronous, and they should finish within a few minutes. During\n            an update, the cluster status moves to <code>UPDATING</code> (this status transition is\n            eventually consistent). When the update is complete (either <code>Failed</code> or\n                <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{name}/update-config",
@@ -7062,7 +7621,7 @@
                 "logging": {
                     "target": "com.amazonaws.eks#Logging",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to\n                CloudWatch Logs. By default, cluster control plane logs aren't exported to\n                CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS cluster control plane logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS cluster control plane logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n         </note>"
                     }
                 },
                 "clientRequestToken": {
@@ -7117,7 +7676,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an Amazon EKS cluster to the specified Kubernetes version. Your\n            cluster continues to function during the update. The response output includes an update\n            ID that you can use to track the status of your cluster update with the <a>DescribeUpdate</a> API operation.</p>\n         <p>Cluster updates are asynchronous, and they should finish within a few minutes. During\n            an update, the cluster status moves to <code>UPDATING</code> (this status transition is\n            eventually consistent). When the update is complete (either <code>Failed</code> or\n                <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>\n         <p>If your cluster has managed node groups attached to it, all of your node groups’\n            Kubernetes versions must match the cluster’s Kubernetes version in order to update the\n            cluster to a new Kubernetes version.</p>",
+                "smithy.api#documentation": "<p>Updates an Amazon EKS cluster to the specified Kubernetes version. Your cluster\n            continues to function during the update. The response output includes an update ID that\n            you can use to track the status of your cluster update with the <a>DescribeUpdate</a> API operation.</p>\n         <p>Cluster updates are asynchronous, and they should finish within a few minutes. During\n            an update, the cluster status moves to <code>UPDATING</code> (this status transition is\n            eventually consistent). When the update is complete (either <code>Failed</code> or\n                <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>\n         <p>If your cluster has managed node groups attached to it, all of your node groups’ Kubernetes\n            versions must match the cluster’s Kubernetes version in order to update the cluster to a new\n            Kubernetes version.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{name}/updates",
@@ -7162,6 +7721,85 @@
                     "target": "com.amazonaws.eks#Update",
                     "traits": {
                         "smithy.api#documentation": "<p>The full description of the specified update</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.eks#UpdateEksAnywhereSubscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#UpdateEksAnywhereSubscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#UpdateEksAnywhereSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update an EKS Anywhere Subscription. Only auto renewal and tags can be updated after\n            subscription creation.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/eks-anywhere-subscriptions/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#UpdateEksAnywhereSubscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "autoRenew": {
+                    "target": "com.amazonaws.eks#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A boolean indicating whether or not to automatically renew the subscription.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#UpdateEksAnywhereSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "subscription": {
+                    "target": "com.amazonaws.eks#EksAnywhereSubscription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full description of the updated subscription.</p>"
                     }
                 }
             },
@@ -7218,7 +7856,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an Amazon EKS managed node group configuration. Your node group\n            continues to function during the update. The response output includes an update ID that\n            you can use to track the status of your node group update with the <a>DescribeUpdate</a> API operation. Currently you can update the Kubernetes\n            labels for a node group or the scaling configuration.</p>",
+                "smithy.api#documentation": "<p>Updates an Amazon EKS managed node group configuration. Your node group\n            continues to function during the update. The response output includes an update ID that\n            you can use to track the status of your node group update with the <a>DescribeUpdate</a> API operation. Currently you can update the Kubernetes labels\n            for a node group or the scaling configuration.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/node-groups/{nodegroupName}/update-config",
@@ -7248,13 +7886,13 @@
                 "labels": {
                     "target": "com.amazonaws.eks#UpdateLabelsPayload",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kubernetes labels to be applied to the nodes in the node group after the\n            update.</p>"
+                        "smithy.api#documentation": "<p>The Kubernetes labels to be applied to the nodes in the node group after the update.</p>"
                     }
                 },
                 "taints": {
                     "target": "com.amazonaws.eks#UpdateTaintsPayload",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group after the update.\n            For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html\">Node taints on\n                managed node groups</a>.</p>"
+                        "smithy.api#documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group after the update. For\n            more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html\">Node taints on\n                managed node groups</a>.</p>"
                     }
                 },
                 "scalingConfig": {
@@ -7321,7 +7959,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the Kubernetes version or AMI version of an Amazon EKS managed node\n            group.</p>\n         <p>You can update a node group using a launch template only if the node group was\n            originally deployed with a launch template. If you need to update a custom AMI in a node\n            group that was deployed with a launch template, then update your custom AMI, specify the\n            new ID in a new version of the launch template, and then update the node group to the\n            new version of the launch template.</p>\n         <p>If you update without a launch template, then you can update to the latest available\n            AMI version of a node group's current Kubernetes version by not specifying a Kubernetes version in\n            the request. You can update to the latest AMI version of your cluster's current Kubernetes\n            version by specifying your cluster's Kubernetes version in the request. For information about\n            Linux versions, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS optimized Amazon Linux AMI versions</a> in the\n            <i>Amazon EKS User Guide</i>. For information about Windows versions, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html\">Amazon EKS optimized Windows AMI versions</a> in the\n            <i>Amazon EKS User Guide</i>. </p>\n         <p>You cannot roll back a node group to an earlier Kubernetes version or AMI\n            version.</p>\n         <p>When a node in a managed node group is terminated due to a scaling action or update,\n            the pods in that node are drained first. Amazon EKS attempts to drain the nodes\n            gracefully and will fail if it is unable to do so. You can <code>force</code> the update\n            if Amazon EKS is unable to drain the nodes as a result of a pod disruption\n            budget issue.</p>",
+                "smithy.api#documentation": "<p>Updates the Kubernetes version or AMI version of an Amazon EKS managed node\n            group.</p>\n         <p>You can update a node group using a launch template only if the node group was\n            originally deployed with a launch template. If you need to update a custom AMI in a node\n            group that was deployed with a launch template, then update your custom AMI, specify the\n            new ID in a new version of the launch template, and then update the node group to the\n            new version of the launch template.</p>\n         <p>If you update without a launch template, then you can update to the latest available\n            AMI version of a node group's current Kubernetes version by not specifying a Kubernetes version in\n            the request. You can update to the latest AMI version of your cluster's current Kubernetes\n            version by specifying your cluster's Kubernetes version in the request. For information about\n            Linux versions, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS optimized Amazon Linux AMI versions</a> in the\n            <i>Amazon EKS User Guide</i>. For information about Windows versions, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html\">Amazon EKS optimized Windows AMI versions</a> in the\n            <i>Amazon EKS User Guide</i>. </p>\n         <p>You cannot roll back a node group to an earlier Kubernetes version or AMI version.</p>\n         <p>When a node in a managed node group is terminated due to a scaling action or update,\n            the pods in that node are drained first. Amazon EKS attempts to drain the nodes\n            gracefully and will fail if it is unable to do so. You can <code>force</code> the update\n            if Amazon EKS is unable to drain the nodes as a result of a pod disruption\n            budget issue.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/node-groups/{nodegroupName}/update-version",
@@ -7351,7 +7989,7 @@
                 "version": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kubernetes version to update to. If no version is specified, then the Kubernetes\n            version of the node group does not change. You can specify the Kubernetes version of the\n            cluster to update the node group to the latest AMI version of the cluster's Kubernetes\n            version. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify \n                <code>version</code>, or the node group  update will fail.\n            For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Kubernetes version to update to. If no version is specified, then the Kubernetes version of\n            the node group does not change. You can specify the Kubernetes version of the cluster to\n            update the node group to the latest AMI version of the cluster's Kubernetes version.\n            If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify  <code>version</code>,\n            or the node group  update will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "releaseVersion": {
@@ -7709,13 +8347,13 @@
                 "endpointPublicAccess": {
                     "target": "com.amazonaws.eks#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this value to <code>false</code> to disable public access to your cluster's\n            Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes\n            API server can only receive requests from within the cluster VPC. The default value for\n            this parameter is <code>true</code>, which enables public access for your Kubernetes API\n            server. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster endpoint access control</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
+                        "smithy.api#documentation": "<p>Set this value to <code>false</code> to disable public access to your cluster's Kubernetes\n            API server endpoint. If you disable public access, your cluster's Kubernetes API server can\n            only receive requests from within the cluster VPC. The default value for this parameter\n            is <code>true</code>, which enables public access for your Kubernetes API server. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster endpoint access control</a> in\n            the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
                     }
                 },
                 "endpointPrivateAccess": {
                     "target": "com.amazonaws.eks#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this value to <code>true</code> to enable private access for your cluster's\n            Kubernetes API server endpoint. If you enable private access, Kubernetes API requests\n            from within your cluster's VPC use the private VPC endpoint. The default value for this\n            parameter is <code>false</code>, which disables private access for your Kubernetes API\n            server. If you disable private access and you have nodes or Fargate\n            pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the\n            necessary CIDR blocks for communication with the nodes or Fargate pods.\n            For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster endpoint access control</a> in\n            the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
+                        "smithy.api#documentation": "<p>Set this value to <code>true</code> to enable private access for your cluster's Kubernetes\n            API server endpoint. If you enable private access, Kubernetes API requests from within your\n            cluster's VPC use the private VPC endpoint. The default value for this parameter is\n                <code>false</code>, which disables private access for your Kubernetes API server. If you\n            disable private access and you have nodes or Fargate pods in the\n            cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR\n            blocks for communication with the nodes or Fargate pods. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster endpoint access control</a> in\n            the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
                     }
                 },
                 "publicAccessCidrs": {
@@ -7741,7 +8379,7 @@
                 "securityGroupIds": {
                     "target": "com.amazonaws.eks#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The security groups associated with the cross-account elastic network interfaces that\n            are used to allow communication between your nodes and the Kubernetes control\n            plane.</p>"
+                        "smithy.api#documentation": "<p>The security groups associated with the cross-account elastic network interfaces that\n            are used to allow communication between your nodes and the Kubernetes control plane.</p>"
                     }
                 },
                 "clusterSecurityGroupId": {
@@ -7767,7 +8405,7 @@
                     "target": "com.amazonaws.eks#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>This parameter indicates whether the Amazon EKS private API server endpoint is\n            enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes\n            API requests that originate from within your cluster's VPC use the private VPC endpoint\n            instead of traversing the internet. If this value is disabled and you have nodes or\n                Fargate pods in the cluster, then ensure that\n                <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication\n            with the nodes or Fargate pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster endpoint access control</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
+                        "smithy.api#documentation": "<p>This parameter indicates whether the Amazon EKS private API server endpoint is\n            enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes API\n            requests that originate from within your cluster's VPC use the private VPC endpoint\n            instead of traversing the internet. If this value is disabled and you have nodes or\n                Fargate pods in the cluster, then ensure that\n                <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication\n            with the nodes or Fargate pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster endpoint access control</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
                     }
                 },
                 "publicAccessCidrs": {

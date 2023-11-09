@@ -29,6 +29,18 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.cloudwatchlogs#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cloudwatchlogs#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You don't have sufficient permissions to perform this action.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#AccessPolicy": {
             "type": "string",
             "traits": {
@@ -227,6 +239,95 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^\\S{36,128}$"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cloudwatchlogs#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This operation attempted to create a resource that already exists.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#CreateDelivery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#CreateDeliveryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#CreateDeliveryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a <i>delivery</i>. A delivery is a connection between a logical <i>delivery source</i> and a logical\n       <i>delivery destination</i>\n       that you have already created.</p>\n         <p>Only some Amazon Web Services services support being configured as a delivery source using this operation. These services are listed\n       as <b>Supported [V2 Permissions]</b> in the table at \n       <a href=\"https://docs.aws.amazon.com/     AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions\">Enabling \n         logging from Amazon Web Services services.</a>\n         </p>\n         <p>A delivery destination can represent a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Kinesis Data Firehose.</p>\n         <p>To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>\n            </li>\n            <li>\n               <p>Create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination.  For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html\">PutDeliveryDestination</a>.</p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Use <code>CreateDelivery</code> to create a <i>delivery</i> by pairing exactly one delivery source and one delivery destination.\n         </p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n       can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>\n         <p>You can't update an existing delivery. You can only create and delete deliveries.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#CreateDeliveryRequest": {
+            "type": "structure",
+            "members": {
+                "deliverySourceName": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliverySourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the delivery source to use for this delivery.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deliveryDestinationArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the delivery destination to use for this delivery.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.cloudwatchlogs#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of key-value pairs to associate with the resource.</p>\n         <p>For more information about tagging, see \n       <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#CreateDeliveryResponse": {
+            "type": "structure",
+            "members": {
+                "delivery": {
+                    "target": "com.amazonaws.cloudwatchlogs#Delivery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains information about the delivery that you just created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#CreateExportTask": {
@@ -570,6 +671,188 @@
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or ARN of the log group that you want to delete the data protection policy for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteDelivery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#DeleteDeliveryRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes s <i>delivery</i>. A delivery is a connection between a logical <i>delivery source</i> and a logical\n       <i>delivery destination</i>. Deleting a delivery only deletes the connection between the delivery source and delivery destination. It does\n     not delete the delivery destination or the delivery source.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteDeliveryDestination": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#DeleteDeliveryDestinationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a <i>delivery destination</i>. A delivery is a connection between a logical <i>delivery source</i> and a logical\n       <i>delivery destination</i>.</p>\n         <p>You can't delete a delivery destination if any current deliveries are associated with it. To find whether any deliveries are associated with \n       this delivery destination, use the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html\">DescribeDeliveries</a> operation and check the <code>deliveryDestinationArn</code> field in the results.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteDeliveryDestinationPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#DeleteDeliveryDestinationPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a delivery destination policy. For more information about these policies,\n        see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html\">PutDeliveryDestinationPolicy</a>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteDeliveryDestinationPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "deliveryDestinationName": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the delivery destination that you want to delete the policy for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteDeliveryDestinationRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the delivery destination that you want to delete. You can find a list of delivery destionation names\n        by using the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveryDestinations.html\">DescribeDeliveryDestinations</a>\n      operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteDeliveryRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the delivery to delete. You can find the ID of a delivery with the \n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html\">DescribeDeliveries</a> operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteDeliverySource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#DeleteDeliverySourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a <i>delivery source</i>. A delivery is a connection between a logical <i>delivery source</i> and a logical\n       <i>delivery destination</i>.</p>\n         <p>You can't delete a delivery source if any current deliveries are associated with it. To find whether any deliveries are associated with \n       this delivery source, use the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html\">DescribeDeliveries</a> operation and check the <code>deliverySourceName</code> field in the results.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteDeliverySourceRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliverySourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the delivery source that you want to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -935,6 +1218,233 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.cloudwatchlogs#Deliveries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#Delivery"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#Delivery": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID that identifies this delivery in your account.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies this delivery.</p>"
+                    }
+                },
+                "deliverySourceName": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliverySourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the delivery source that is associated with this delivery.</p>"
+                    }
+                },
+                "deliveryDestinationArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the delivery destination that is associated with this delivery.</p>"
+                    }
+                },
+                "deliveryDestinationType": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays whether the delivery destination associated with this delivery is CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.cloudwatchlogs#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that have been assigned to this delivery.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about one <i>delivery</i> in your account. </p>\n         <p>A delivery is a connection between a logical <i>delivery source</i> and a logical\n     <i>delivery destination</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.</p>\n         <p>You can't update an existing delivery. You can only create and delete deliveries.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeliveryDestination": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this delivery destination.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies this delivery destination.</p>"
+                    }
+                },
+                "deliveryDestinationType": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays whether this delivery destination is CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.</p>"
+                    }
+                },
+                "outputFormat": {
+                    "target": "com.amazonaws.cloudwatchlogs#OutputFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the logs that are sent to this delivery destination. </p>"
+                    }
+                },
+                "deliveryDestinationConfiguration": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the ARN of the Amazon Web Services resource that will receive the logs.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.cloudwatchlogs#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that have been assigned to this delivery destination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about one <i>delivery destination</i> in your account. \n     A delivery destination is an Amazon Web Services resource that represents an \n     shared id=\"AWS\"/> service that logs can be sent to. CloudWatch Logs, Amazon S3, are supported as Kinesis Data Firehose delivery destinations.</p>\n         <p>To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>\n            </li>\n            <li>\n               <p>Create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination. </p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Create a <i>delivery</i> by pairing exactly one delivery source and one delivery destination.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.</p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n     can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeliveryDestinationConfiguration": {
+            "type": "structure",
+            "members": {
+                "destinationResourceArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services destination that this delivery destination represents. That Amazon Web Services destination\n       can be a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Kinesis Data Firehose.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about one logs delivery destination.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeliveryDestinationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 60
+                },
+                "smithy.api#pattern": "^[\\w-]*$"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeliveryDestinationPolicy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 51200
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeliveryDestinationType": {
+            "type": "enum",
+            "members": {
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
+                    }
+                },
+                "CWL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CWL"
+                    }
+                },
+                "FH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FH"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeliveryDestinations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#DeliveryDestination"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeliveryId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z]+$"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeliverySource": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliverySourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the delivery source.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies this delivery source.</p>"
+                    }
+                },
+                "resourceArns": {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This array contains the ARN of the Amazon Web Services resource that sends logs and is represented by \n      this delivery source. Currently, only one ARN can be in the array.</p>"
+                    }
+                },
+                "service": {
+                    "target": "com.amazonaws.cloudwatchlogs#Service",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services service that is sending logs.</p>"
+                    }
+                },
+                "logType": {
+                    "target": "com.amazonaws.cloudwatchlogs#LogType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of log that the source is sending. For valid values for this parameter, see the documentation for\n       the source service.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.cloudwatchlogs#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that have been assigned to this delivery source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about one <i>delivery source</i> in your account. \n       A delivery source is an Amazon Web Services resource that sends logs to an\n       Amazon Web Services destination. The destination can be CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.</p>\n         <p>Only some Amazon Web Services services support being configured as a delivery source. These services are listed\n       as <b>Supported [V2 Permissions]</b> in the table at \n       <a href=\"https://docs.aws.amazon.com/     AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions\">Enabling \n         logging from Amazon Web Services services.</a>\n         </p>\n         <p>To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>\n            </li>\n            <li>\n               <p>Create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination.  For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html\">PutDeliveryDestination</a>.</p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Create a <i>delivery</i> by pairing exactly one delivery source and one delivery destination.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.</p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n       can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeliverySourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 60
+                },
+                "smithy.api#pattern": "^[\\w-]*$"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeliverySources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#DeliverySource"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#Descending": {
             "type": "boolean"
         },
@@ -999,6 +1509,204 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of structures that contain information about the CloudWatch Logs account policies that match \n    the specified filters.</p>"
                     }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeDeliveries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeDeliveriesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeDeliveriesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of the deliveries that have been created in the account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "deliveries",
+                    "pageSize": "limit"
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeDeliveriesRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.cloudwatchlogs#NextToken"
+                },
+                "limit": {
+                    "target": "com.amazonaws.cloudwatchlogs#DescribeLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optionally specify the maximum number of deliveries to return in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeDeliveriesResponse": {
+            "type": "structure",
+            "members": {
+                "deliveries": {
+                    "target": "com.amazonaws.cloudwatchlogs#Deliveries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures. Each structure contains information about one delivery in the account.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.cloudwatchlogs#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeDeliveryDestinations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeDeliveryDestinationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeDeliveryDestinationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of the delivery destinations that have been created in the account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "deliveryDestinations",
+                    "pageSize": "limit"
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeDeliveryDestinationsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.cloudwatchlogs#NextToken"
+                },
+                "limit": {
+                    "target": "com.amazonaws.cloudwatchlogs#DescribeLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optionally specify the maximum number of delivery destinations to return in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeDeliveryDestinationsResponse": {
+            "type": "structure",
+            "members": {
+                "deliveryDestinations": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures. Each structure contains information about one delivery destination in the account.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.cloudwatchlogs#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeDeliverySources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeDeliverySourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeDeliverySourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of the delivery sources that have been created in the account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "deliverySources",
+                    "pageSize": "limit"
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeDeliverySourcesRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.cloudwatchlogs#NextToken"
+                },
+                "limit": {
+                    "target": "com.amazonaws.cloudwatchlogs#DescribeLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optionally specify the maximum number of delivery sources to return in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeDeliverySourcesResponse": {
+            "type": "structure",
+            "members": {
+                "deliverySources": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliverySources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures. Each structure contains information about one delivery source in the account.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.cloudwatchlogs#NextToken"
                 }
             },
             "traits": {
@@ -2355,6 +3063,232 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudwatchlogs#GetDelivery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#GetDeliveryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#GetDeliveryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns complete information about one <i>delivery</i>. A delivery is a connection between a logical <i>delivery source</i> and a logical\n       <i>delivery destination</i>\n         </p>\n         <p>You need to specify the delivery <code>id</code> in this operation. You can find the IDs of the deliveries in your account with the  \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html\">DescribeDeliveries</a> operation.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetDeliveryDestination": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#GetDeliveryDestinationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#GetDeliveryDestinationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves complete information about one delivery destination.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetDeliveryDestinationPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#GetDeliveryDestinationPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#GetDeliveryDestinationPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the delivery destination policy assigned to the delivery destination that you specify.\n      For more information about delivery destinations and their policies, see \n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html\">PutDeliveryDestinationPolicy</a>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetDeliveryDestinationPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "deliveryDestinationName": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the delivery destination that you want to retrieve the policy of.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetDeliveryDestinationPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "policy": {
+                    "target": "com.amazonaws.cloudwatchlogs#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM policy for this delivery destination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetDeliveryDestinationRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the delivery destination that you want to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetDeliveryDestinationResponse": {
+            "type": "structure",
+            "members": {
+                "deliveryDestination": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure containing information about the delivery destination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetDeliveryRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the delivery that you want to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetDeliveryResponse": {
+            "type": "structure",
+            "members": {
+                "delivery": {
+                    "target": "com.amazonaws.cloudwatchlogs#Delivery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains information about the delivery.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetDeliverySource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#GetDeliverySourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#GetDeliverySourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves complete information about one delivery source.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetDeliverySourceRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliverySourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the delivery source that you want to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetDeliverySourceResponse": {
+            "type": "structure",
+            "members": {
+                "deliverySource": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliverySource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure containing information about the delivery source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatchlogs#GetLogEvents": {
             "type": "operation",
             "input": {
@@ -2622,7 +3556,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the results from the specified query.</p>\n         <p>Only the fields requested in the query are returned, along with a <code>@ptr</code>\n      field, which is the identifier for the log record. You can use the value of <code>@ptr</code>\n      in a <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html\">GetLogRecord</a>\n      operation to get the full log record.</p>\n         <p>\n            <code>GetQueryResults</code> does not start running a query. To run a query, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html\">StartQuery</a>.</p>\n         <p>If the value of the <code>Status</code> field in the output is <code>Running</code>, this operation \n      returns only partial results. If you see a value of <code>Scheduled</code> or <code>Running</code> for the status, \n      you can retry the operation later to see the final results. </p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account to start \n      queries in linked source accounts. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>"
+                "smithy.api#documentation": "<p>Returns the results from the specified query.</p>\n         <p>Only the fields requested in the query are returned, along with a <code>@ptr</code>\n      field, which is the identifier for the log record. You can use the value of <code>@ptr</code>\n      in a <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html\">GetLogRecord</a>\n      operation to get the full log record.</p>\n         <p>\n            <code>GetQueryResults</code> does not start running a query. To run a query, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html\">StartQuery</a>. For more information about how long results of previous queries\n      are available, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html\">CloudWatch Logs quotas</a>.</p>\n         <p>If the value of the <code>Status</code> field in the output is <code>Running</code>, this operation \n      returns only partial results. If you see a value of <code>Scheduled</code> or <code>Running</code> for the status, \n      you can retry the operation later to see the final results. </p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account to start \n      queries in linked source accounts. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#GetQueryResultsRequest": {
@@ -3138,6 +4072,16 @@
                 "target": "com.amazonaws.cloudwatchlogs#LogStream"
             }
         },
+        "com.amazonaws.cloudwatchlogs#LogType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\w]*$"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#Logs_20140328": {
             "type": "service",
             "version": "2014-03-28",
@@ -3147,6 +4091,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#CancelExportTask"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#CreateDelivery"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#CreateExportTask"
@@ -3162,6 +4109,18 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#DeleteDataProtectionPolicy"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#DeleteDelivery"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#DeleteDeliveryDestination"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#DeleteDeliveryDestinationPolicy"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#DeleteDeliverySource"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#DeleteDestination"
@@ -3189,6 +4148,15 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#DescribeAccountPolicies"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#DescribeDeliveries"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#DescribeDeliveryDestinations"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#DescribeDeliverySources"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#DescribeDestinations"
@@ -3227,6 +4195,18 @@
                     "target": "com.amazonaws.cloudwatchlogs#GetDataProtectionPolicy"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatchlogs#GetDelivery"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#GetDeliveryDestination"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#GetDeliveryDestinationPolicy"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#GetDeliverySource"
+                },
+                {
                     "target": "com.amazonaws.cloudwatchlogs#GetLogEvents"
                 },
                 {
@@ -3249,6 +4229,15 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#PutDataProtectionPolicy"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#PutDeliveryDestination"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#PutDeliveryDestinationPolicy"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#PutDeliverySource"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#PutDestination"
@@ -3356,7 +4345,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3399,7 +4387,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -3412,7 +4401,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3426,7 +4414,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -3449,7 +4436,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3484,7 +4470,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3495,14 +4480,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3516,14 +4503,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -3532,11 +4517,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -3585,14 +4570,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3606,7 +4593,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3626,7 +4612,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3637,14 +4622,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -3655,9 +4642,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -4566,6 +5555,41 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatchlogs#OutputFormat": {
+            "type": "enum",
+            "members": {
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "json"
+                    }
+                },
+                "PLAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "plain"
+                    }
+                },
+                "W3C": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "w3c"
+                    }
+                },
+                "RAW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "raw"
+                    }
+                },
+                "PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "parquet"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#OutputLogEvent": {
             "type": "structure",
             "members": {
@@ -4606,6 +5630,20 @@
                     "min": 0,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#Policy": {
+            "type": "structure",
+            "members": {
+                "deliveryDestinationPolicy": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contents of the delivery destination policy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about one delivery destination policy.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PolicyDocument": {
@@ -4776,6 +5814,229 @@
                     "target": "com.amazonaws.cloudwatchlogs#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that this policy was most recently updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutDeliveryDestination": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#PutDeliveryDestinationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#PutDeliveryDestinationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates a logical <i>delivery destination</i>. A delivery destination is an Amazon Web Services resource that represents an \n       Amazon Web Services service that logs can be sent to. CloudWatch Logs, Amazon S3, and\n       Kinesis Data Firehose are supported as logs delivery destinations.</p>\n         <p>To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>\n            </li>\n            <li>\n               <p>Use <code>PutDeliveryDestination</code> to create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination.  </p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Use <code>CreateDelivery</code> to create a <i>delivery</i> by pairing exactly \n         one delivery source and one delivery destination. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.\n       </p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n       can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>\n         <p>Only some Amazon Web Services services support being configured as a delivery source. These services are listed\n       as <b>Supported [V2 Permissions]</b> in the table at \n       <a href=\"https://docs.aws.amazon.com/     AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions\">Enabling \n         logging from Amazon Web Services services.</a>\n         </p>\n         <p>If you use this operation to update an existing delivery destination, all the current delivery destination parameters are overwritten\n       with the new parameter values that you specify.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutDeliveryDestinationPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#PutDeliveryDestinationPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#PutDeliveryDestinationPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates and assigns an IAM policy that grants permissions to CloudWatch Logs to deliver \n       logs cross-account to a specified destination in this account. To configure the delivery of logs from an \n     Amazon Web Services service in another account to a logs delivery destination in the current account, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>\n            </li>\n            <li>\n               <p>Create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination.  For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html\">PutDeliveryDestination</a>.</p>\n            </li>\n            <li>\n               <p>Use this operation in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n        </p>\n            </li>\n            <li>\n               <p>Create a <i>delivery</i> by pairing exactly one delivery source and one delivery destination.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.</p>\n            </li>\n         </ul>\n         <p>Only some Amazon Web Services services support being configured as a delivery source. These services are listed\n       as <b>Supported [V2 Permissions]</b> in the table at \n       <a href=\"https://docs.aws.amazon.com/     AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions\">Enabling \n         logging from Amazon Web Services services.</a>\n         </p>\n         <p>The contents of the policy must include two statements. One statement enables general logs delivery, and the other\n    allows delivery to the chosen destination. See the examples for the needed policies.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutDeliveryDestinationPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "deliveryDestinationName": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the delivery destination to assign this policy to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deliveryDestinationPolicy": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contents of the policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutDeliveryDestinationPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "policy": {
+                    "target": "com.amazonaws.cloudwatchlogs#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contents of the policy that you just created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutDeliveryDestinationRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for this delivery destination. This name must be unique for all delivery destinations in your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputFormat": {
+                    "target": "com.amazonaws.cloudwatchlogs#OutputFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format for the logs that this delivery destination will receive.</p>"
+                    }
+                },
+                "deliveryDestinationConfiguration": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the ARN of the Amazon Web Services resource that will receive the logs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.cloudwatchlogs#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of key-value pairs to associate with the resource.</p>\n         <p>For more information about tagging, see \n       <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutDeliveryDestinationResponse": {
+            "type": "structure",
+            "members": {
+                "deliveryDestination": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure containing information about the delivery destination that you just created or updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutDeliverySource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#PutDeliverySourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#PutDeliverySourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates a logical <i>delivery source</i>. A delivery source represents an Amazon Web Services resource that sends logs to an\n       logs delivery destination. The destination can be CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.</p>\n         <p>To configure logs delivery between a delivery destination and an Amazon Web Services service that is supported as a delivery source, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Use <code>PutDeliverySource</code> to create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. </p>\n            </li>\n            <li>\n               <p>Use <code>PutDeliveryDestination</code> to create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html\">PutDeliveryDestination</a>.</p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Use <code>CreateDelivery</code> to create a <i>delivery</i> by pairing exactly \n         one delivery source and one delivery destination. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.\n       </p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n       can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>\n         <p>Only some Amazon Web Services services support being configured as a delivery source. These services are listed\n       as <b>Supported [V2 Permissions]</b> in the table at \n       <a href=\"https://docs.aws.amazon.com/     AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions\">Enabling \n       logging from Amazon Web Services services.</a>\n         </p>\n         <p>If you use this operation to update an existing delivery source, all the current delivery source parameters are overwritten\n     with the new parameter values that you specify.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutDeliverySourceRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliverySourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for this delivery source. This name must be unique for all delivery sources in your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services resource that is generating and sending logs. \n       For example, <code>arn:aws:workmail:us-east-1:123456789012:organization/m-1234EXAMPLEabcd1234abcd1234abcd1234</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "logType": {
+                    "target": "com.amazonaws.cloudwatchlogs#LogType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the type of log that the source is sending. For valid values for this parameter, see the documentation for\n      the source service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.cloudwatchlogs#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of key-value pairs to associate with the resource.</p>\n         <p>For more information about tagging, see \n       <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutDeliverySourceResponse": {
+            "type": "structure",
+            "members": {
+                "deliverySource": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliverySource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure containing information about the delivery source that was just created or updated.</p>"
                     }
                 }
             },
@@ -5616,6 +6877,12 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.cloudwatchlogs#ResourceArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#Arn"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#ResourceIdentifier": {
             "type": "string",
             "traits": {
@@ -5747,6 +7014,28 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#Service": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\w]*$"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cloudwatchlogs#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This request exceeds a service quota.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.cloudwatchlogs#ServiceUnavailableException": {
@@ -6379,6 +7668,18 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudwatchlogs#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cloudwatchlogs#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was throttled because of quota limits.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#Timestamp": {
             "type": "long",
             "traits": {
@@ -6515,6 +7816,18 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cloudwatchlogs#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One of the parameters for the request is not valid.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.cloudwatchlogs#Value": {

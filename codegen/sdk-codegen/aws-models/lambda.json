@@ -9958,6 +9958,12 @@
                     "traits": {
                         "smithy.api#enumValue": "nodejs20.x"
                     }
+                },
+                "providedal2023": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "provided.al2023"
+                    }
                 }
             }
         },

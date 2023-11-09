@@ -1620,8 +1620,7 @@
                 "referenceArn": {
                     "target": "com.amazonaws.omics#ReferenceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ARN of the reference.\n    </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>\n      The ARN of the reference.\n    </p>"
                     }
                 },
                 "name": {
@@ -3565,6 +3564,10 @@
                     {
                         "value": "CRAM",
                         "name": "CRAM"
+                    },
+                    {
+                        "value": "UBAM",
+                        "name": "UBAM"
                     }
                 ]
             }
@@ -11454,7 +11457,7 @@
                     }
                 },
                 "referenceArn": {
-                    "target": "com.amazonaws.omics#ReferenceArn",
+                    "target": "com.amazonaws.omics#ReferenceArnFilter",
                     "traits": {
                         "smithy.api#documentation": "<p>A genome reference ARN to filter on.</p>"
                     }
@@ -11910,6 +11913,16 @@
                     "max": 127
                 },
                 "smithy.api#pattern": "^arn:.+$"
+            }
+        },
+        "com.amazonaws.omics#ReferenceArnFilter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 127
+                },
+                "smithy.api#pattern": "^$|^arn:.+$"
             }
         },
         "com.amazonaws.omics#ReferenceDescription": {
@@ -14145,8 +14158,7 @@
                 "referenceArn": {
                     "target": "com.amazonaws.omics#ReferenceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source's reference ARN.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The source's reference ARN.</p>"
                     }
                 },
                 "name": {

@@ -15351,6 +15351,12 @@
                     "traits": {
                         "smithy.api#enumValue": "APPLICATION"
                     }
+                },
+                "FILE_SCANNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILE_SCANNER"
+                    }
                 }
             }
         },
@@ -17077,6 +17083,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
                         "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "IntegrationArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the integration.</p>",
+                        "smithy.api#httpQuery": "integrationArn"
                     }
                 }
             },
