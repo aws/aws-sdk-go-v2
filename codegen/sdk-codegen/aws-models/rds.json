@@ -6404,7 +6404,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a zero-ETL integration with Amazon Redshift. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.html\">Working\n                with Amazon Aurora zero-ETL integrations with Amazon Redshift</a> in the\n                <i>Amazon Aurora User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a zero-ETL integration with Amazon Redshift.</p>"
             }
         },
         "com.amazonaws.rds#CreateIntegrationMessage": {
@@ -6414,7 +6414,7 @@
                     "target": "com.amazonaws.rds#SourceArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Aurora DB cluster to use as the source for\n            replication.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the database to use as the source for\n            replication.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6437,7 +6437,7 @@
                 "KMSKeyId": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management System (Amazon Web Services KMS) key identifier for the key to use to\n            encrypt the integration. If you don't specify an encryption key, Aurora uses a default\n            Amazon Web Services owned key. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management System (Amazon Web Services KMS) key identifier for the key to use to\n            encrypt the integration. If you don't specify an encryption key, RDS uses a default\n            Amazon Web Services owned key. </p>"
                     }
                 },
                 "AdditionalEncryptionContext": {
@@ -8546,7 +8546,7 @@
                 "SupportsIntegrations": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the DB engine version supports Aurora zero-ETL integrations with\n            Amazon Redshift.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the DB engine version supports zero-ETL integrations with\n            Amazon Redshift.</p>"
                     }
                 }
             },
@@ -12322,7 +12322,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a zero-ETL integration with Amazon Redshift. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.deleting.html\">Deleting Amazon Aurora zero-ETL integrations with Amazon Redshift</a> in the\n                <i>Amazon Aurora User Guide</i>\n         </p>"
+                "smithy.api#documentation": "<p>Deletes a zero-ETL integration with Amazon Redshift.</p>"
             }
         },
         "com.amazonaws.rds#DeleteIntegrationMessage": {
@@ -16206,7 +16206,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describe one or more zero-ETL integration with Amazon Redshift. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.describingmonitoring.html\">Viewing and monitoring Amazon Aurora zero-ETL integrations with Amazon Redshift</a> in\n            the <i>Amazon Aurora User Guide</i>\n         </p>",
+                "smithy.api#documentation": "<p>Describe one or more zero-ETL integrations with Amazon Redshift.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -18763,7 +18763,7 @@
                 "SourceArn": {
                     "target": "com.amazonaws.rds#SourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Aurora DB cluster used as the source for\n            replication.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the database used as the source for\n            replication.</p>"
                     }
                 },
                 "TargetArn": {
@@ -18819,7 +18819,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An Aurora zero-ETL integration with Amazon Redshift. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.html\">Working\n            with Amazon Aurora zero-ETL integrations with Amazon Redshift</a> in the\n            <i>Amazon Aurora User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A zero-ETL integration with Amazon Redshift.</p>"
             }
         },
         "com.amazonaws.rds#IntegrationAlreadyExistsFault": {
@@ -29397,7 +29397,7 @@
                 "SupportsIntegrations": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the DB engine version supports Aurora zero-ETL integrations with\n            Amazon Redshift.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the DB engine version supports zero-ETL integrations with\n            Amazon Redshift.</p>"
                     }
                 }
             },

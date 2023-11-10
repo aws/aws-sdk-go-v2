@@ -799,7 +799,7 @@
                 "SampleRate": {
                     "target": "com.amazonaws.mediaconvert#__integerMin8000Max192000",
                     "traits": {
-                        "smithy.api#documentation": "Sample rate in hz.",
+                        "smithy.api#documentation": "Sample rate in Hz.",
                         "smithy.api#jsonName": "sampleRate"
                     }
                 }
@@ -1180,7 +1180,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "You can add a tag for this mono-channel audio track to mimic its placement in a multi-channel layout. For example, if this track is the left surround channel, choose Left surround (LS)."
+                "smithy.api#documentation": "Specify the QuickTime audio channel layout tags for the audio channels in this audio track. Enter channel layout tags in the same order as your output's audio channel order. For example, if your output audio track has a left and a right channel, enter Left (L) for the first channel and Right (R) for the second. If your output has multiple single-channel audio tracks, enter a single channel layout tag for each track."
             }
         },
         "com.amazonaws.mediaconvert#AudioChannelTaggingSettings": {
@@ -1189,13 +1189,20 @@
                 "ChannelTag": {
                     "target": "com.amazonaws.mediaconvert#AudioChannelTag",
                     "traits": {
-                        "smithy.api#documentation": "You can add a tag for this mono-channel audio track to mimic its placement in a multi-channel layout. For example, if this track is the left surround channel, choose Left surround (LS).",
+                        "smithy.api#documentation": "Specify the QuickTime audio channel layout tags for the audio channels in this audio track. Enter channel layout tags in the same order as your output's audio channel order. For example, if your output audio track has a left and a right channel, enter Left (L) for the first channel and Right (R) for the second. If your output has multiple single-channel audio tracks, enter a single channel layout tag for each track.",
                         "smithy.api#jsonName": "channelTag"
+                    }
+                },
+                "ChannelTags": {
+                    "target": "com.amazonaws.mediaconvert#__listOfAudioChannelTag",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the QuickTime audio channel layout tags for the audio channels in this audio track. Enter channel layout tags in the same order as your output's audio channel order. For example, if your output audio track has a left and a right channel, enter Left (L) for the first channel and Right (R) for the second. If your output has multiple single-channel audio tracks, enter a single channel layout tag for each track.",
+                        "smithy.api#jsonName": "channelTags"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "When you mimic a multi-channel audio layout with multiple mono-channel tracks, you can tag each channel layout manually. For example, you would tag the tracks that contain your left, right, and center audio with Left (L), Right (R), and Center (C), respectively. When you don't specify a value, MediaConvert labels your track as Center (C) by default. To use audio layout tagging, your output must be in a QuickTime (.mov) container; your audio codec must be AAC, WAV, or AIFF; and you must set up your audio track to have only one channel."
+                "smithy.api#documentation": "Specify the QuickTime audio channel layout tags for the audio channels in this audio track. When you don't specify a value, MediaConvert labels your track as Center (C) by default. To use Audio layout tagging, your output must be in a QuickTime (MOV) container and your audio codec must be AAC, WAV, or AIFF."
             }
         },
         "com.amazonaws.mediaconvert#AudioCodec": {
@@ -1396,7 +1403,7 @@
                 "AudioChannelTaggingSettings": {
                     "target": "com.amazonaws.mediaconvert#AudioChannelTaggingSettings",
                     "traits": {
-                        "smithy.api#documentation": "When you mimic a multi-channel audio layout with multiple mono-channel tracks, you can tag each channel layout manually. For example, you would tag the tracks that contain your left, right, and center audio with Left (L), Right (R), and Center (C), respectively. When you don't specify a value, MediaConvert labels your track as Center (C) by default. To use audio layout tagging, your output must be in a QuickTime (.mov) container; your audio codec must be AAC, WAV, or AIFF; and you must set up your audio track to have only one channel.",
+                        "smithy.api#documentation": "Specify the QuickTime audio channel layout tags for the audio channels in this audio track. When you don't specify a value, MediaConvert labels your track as Center (C) by default. To use Audio layout tagging, your output must be in a QuickTime (MOV) container and your audio codec must be AAC, WAV, or AIFF.",
                         "smithy.api#jsonName": "audioChannelTaggingSettings"
                     }
                 },
@@ -8710,7 +8717,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end."
+                "smithy.api#documentation": "To place the MOOV atom at the beginning of your output, which is useful for progressive downloading: Leave blank or choose Progressive download. To place the MOOV at the end of your output: Choose Normal."
             }
         },
         "com.amazonaws.mediaconvert#F4vSettings": {
@@ -8719,7 +8726,7 @@
                 "MoovPlacement": {
                     "target": "com.amazonaws.mediaconvert#F4vMoovPlacement",
                     "traits": {
-                        "smithy.api#documentation": "If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end.",
+                        "smithy.api#documentation": "To place the MOOV atom at the beginning of your output, which is useful for progressive downloading: Leave blank or choose Progressive download. To place the MOOV at the end of your output: Choose Normal.",
                         "smithy.api#jsonName": "moovPlacement"
                     }
                 }
@@ -8860,7 +8867,7 @@
                 "SampleRate": {
                     "target": "com.amazonaws.mediaconvert#__integerMin22050Max48000",
                     "traits": {
-                        "smithy.api#documentation": "Sample rate in hz.",
+                        "smithy.api#documentation": "Sample rate in Hz.",
                         "smithy.api#jsonName": "sampleRate"
                     }
                 }
@@ -13734,6 +13741,13 @@
                         "smithy.api#jsonName": "extendedDataServices"
                     }
                 },
+                "FollowSource": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#jsonName": "followSource"
+                    }
+                },
                 "Inputs": {
                     "target": "com.amazonaws.mediaconvert#__listOfInput",
                     "traits": {
@@ -13991,6 +14005,13 @@
                     "traits": {
                         "smithy.api#documentation": "If your source content has EIA-608 Line 21 Data Services, enable this feature to specify what MediaConvert does with the Extended Data Services (XDS) packets. You can choose to pass through XDS packets, or remove them from the output. For more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h Content Advisory.",
                         "smithy.api#jsonName": "extendedDataServices"
+                    }
+                },
+                "FollowSource": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#jsonName": "followSource"
                     }
                 },
                 "Inputs": {
@@ -18099,7 +18120,7 @@
                 "SampleRate": {
                     "target": "com.amazonaws.mediaconvert#__integerMin32000Max48000",
                     "traits": {
-                        "smithy.api#documentation": "Sample rate in hz.",
+                        "smithy.api#documentation": "Sample rate in Hz.",
                         "smithy.api#jsonName": "sampleRate"
                     }
                 }
@@ -18155,7 +18176,7 @@
                 "SampleRate": {
                     "target": "com.amazonaws.mediaconvert#__integerMin22050Max48000",
                     "traits": {
-                        "smithy.api#documentation": "Sample rate in hz.",
+                        "smithy.api#documentation": "Sample rate in Hz.",
                         "smithy.api#jsonName": "sampleRate"
                     }
                 },
@@ -18228,7 +18249,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end."
+                "smithy.api#documentation": "To place the MOOV atom at the beginning of your output, which is useful for progressive downloading: Leave blank or choose Progressive download. To place the MOOV at the end of your output: Choose Normal."
             }
         },
         "com.amazonaws.mediaconvert#Mp4Settings": {
@@ -18265,7 +18286,7 @@
                 "MoovPlacement": {
                     "target": "com.amazonaws.mediaconvert#Mp4MoovPlacement",
                     "traits": {
-                        "smithy.api#documentation": "If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end.",
+                        "smithy.api#documentation": "To place the MOOV atom at the beginning of your output, which is useful for progressive downloading: Leave blank or choose Progressive download. To place the MOOV at the end of your output: Choose Normal.",
                         "smithy.api#jsonName": "moovPlacement"
                     }
                 },
@@ -20009,7 +20030,7 @@
                 "SampleRate": {
                     "target": "com.amazonaws.mediaconvert#__integerMin16000Max48000",
                     "traits": {
-                        "smithy.api#documentation": "Optional. Sample rate in hz. Valid values are 16000, 24000, and 48000. The default value is 48000.",
+                        "smithy.api#documentation": "Optional. Sample rate in Hz. Valid values are 16000, 24000, and 48000. The default value is 48000.",
                         "smithy.api#jsonName": "sampleRate"
                     }
                 }
@@ -21610,10 +21631,28 @@
                     "traits": {
                         "smithy.api#enumValue": "STRETCH_TO_OUTPUT"
                     }
+                },
+                "FIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIT"
+                    }
+                },
+                "FIT_NO_UPSCALE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIT_NO_UPSCALE"
+                    }
+                },
+                "FILL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILL"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specify how the service handles outputs that have a different aspect ratio from the input aspect ratio. Choose Stretch to output to have the service stretch your video image to fit. Keep the setting Default to have the service letterbox your video instead. This setting overrides any value that you specify for the setting Selection placement in this output."
+                "smithy.api#documentation": "Specify the video Scaling behavior when your output has a different resolution than your input. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html"
             }
         },
         "com.amazonaws.mediaconvert#SccDestinationFramerate": {
@@ -23262,7 +23301,7 @@
                 "ScalingBehavior": {
                     "target": "com.amazonaws.mediaconvert#ScalingBehavior",
                     "traits": {
-                        "smithy.api#documentation": "Specify how the service handles outputs that have a different aspect ratio from the input aspect ratio. Choose Stretch to output to have the service stretch your video image to fit. Keep the setting Default to have the service letterbox your video instead. This setting overrides any value that you specify for the setting Selection placement in this output.",
+                        "smithy.api#documentation": "Specify the video Scaling behavior when your output has a different resolution than your input. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html",
                         "smithy.api#jsonName": "scalingBehavior"
                     }
                 },
@@ -23347,7 +23386,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Overlay one or more videos on top of your input video."
+                "smithy.api#documentation": "Overlay one or more videos on top of your input video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/video-overlays.html"
             }
         },
         "com.amazonaws.mediaconvert#VideoOverlayInput": {
@@ -23370,7 +23409,7 @@
                 "TimecodeSource": {
                     "target": "com.amazonaws.mediaconvert#InputTimecodeSource",
                     "traits": {
-                        "smithy.api#documentation": "Specify the starting timecode for your video overlay. To use the timecode present in your video overlay: Choose Embedded. To use a zerobased timecode: Choose Start at 0. To choose a timecode: Choose Specified start. When you do, enter the starting timecode in Start timecode. If you don't specify a value for Timecode source, MediaConvert uses Embedded by default.",
+                        "smithy.api#documentation": "Specify the timecode source for your video overlay input clips. To use the timecode present in your video overlay: Choose Embedded. To use a zerobased timecode: Choose Start at 0. To choose a timecode: Choose Specified start. When you do, enter the starting timecode in Start timecode. If you don't specify a value for Timecode source, MediaConvert uses Embedded by default.",
                         "smithy.api#jsonName": "timecodeSource"
                     }
                 },
@@ -25496,6 +25535,15 @@
                 }
             }
         },
+        "com.amazonaws.mediaconvert#__integerMin1Max150": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 150
+                }
+            }
+        },
         "com.amazonaws.mediaconvert#__integerMin1Max17895697": {
             "type": "integer",
             "traits": {
@@ -25959,6 +26007,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconvert#AllowedRenditionSize"
+            }
+        },
+        "com.amazonaws.mediaconvert#__listOfAudioChannelTag": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#AudioChannelTag"
             }
         },
         "com.amazonaws.mediaconvert#__listOfAudioDescription": {

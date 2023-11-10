@@ -40,10 +40,19 @@
                     "target": "com.amazonaws.costandusagereportservice#DescribeReportDefinitions"
                 },
                 {
+                    "target": "com.amazonaws.costandusagereportservice#ListTagsForResource"
+                },
+                {
                     "target": "com.amazonaws.costandusagereportservice#ModifyReportDefinition"
                 },
                 {
                     "target": "com.amazonaws.costandusagereportservice#PutReportDefinition"
+                },
+                {
+                    "target": "com.amazonaws.costandusagereportservice#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.costandusagereportservice#UntagResource"
                 }
             ],
             "traits": {
@@ -59,7 +68,7 @@
                     "name": "cur"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>The AWS Cost and Usage Report API enables you to programmatically create, query, and delete \n        AWS Cost and Usage report definitions.</p>\n         <p>AWS Cost and Usage reports track the monthly AWS costs and usage \n   associated with your AWS account.\n    \n        The report contains line items for each unique combination of AWS product,\n        usage type, and operation that your AWS account uses. \n        \n        You can configure the AWS Cost and Usage report to show only the data that you want, using the\n        AWS Cost and Usage API.</p>\n\n         <p>Service Endpoint</p>\n         <p>The AWS Cost and Usage Report API provides the following endpoint:</p>\n         <ul>\n            <li>\n               <p>cur.us-east-1.amazonaws.com</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>You can use the Amazon Web Services Cost and Usage Report API to programmatically create, query, and delete \n      Amazon Web Services Cost and Usage Report definitions.</p>\n         <p>Amazon Web Services Cost and Usage Report track the monthly Amazon Web Services costs and usage \n      associated with your Amazon Web Services account.\n    \n        The report contains line items for each unique combination of Amazon Web Services product,\n        usage type, and operation that your Amazon Web Services account uses. \n        \n        You can configure the Amazon Web Services Cost and Usage Report to show only the data that you want, using the\n      Amazon Web Services Cost and Usage Report API.</p>\n         <p>Service Endpoint</p>\n         <p>The Amazon Web Services Cost and Usage Report API provides the following endpoint:</p>\n         <ul>\n            <li>\n               <p>cur.us-east-1.amazonaws.com</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS Cost and Usage Report Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -103,7 +112,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -146,7 +154,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -159,7 +168,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -173,7 +181,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -196,7 +203,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -231,7 +237,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -242,14 +247,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -263,14 +270,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -279,11 +284,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -294,14 +299,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -315,7 +322,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -335,7 +341,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -346,14 +351,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -364,9 +371,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -877,7 +886,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The region of the S3 bucket that AWS delivers the report into.</p>"
+                "smithy.api#documentation": "<p>The region of the S3 bucket that Amazon Web Services delivers the report into.</p>"
             }
         },
         "com.amazonaws.costandusagereportservice#AdditionalArtifact": {
@@ -903,7 +912,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The types of manifest that you want AWS to create for this report.</p>"
+                "smithy.api#documentation": "<p>The types of manifest that you want Amazon Web Services to create for this report.</p>"
             }
         },
         "com.amazonaws.costandusagereportservice#AdditionalArtifactList": {
@@ -948,7 +957,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The compression format that AWS uses for the report.</p>"
+                "smithy.api#documentation": "<p>The compression format that Amazon Web Services uses for the report.</p>"
             }
         },
         "com.amazonaws.costandusagereportservice#DeleteReportDefinition": {
@@ -968,7 +977,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified report.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified report. Any tags associated with the report are also\n      deleted.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete the AWS Cost and Usage report named ExampleReport.",
@@ -986,7 +995,8 @@
                 "ReportName": {
                     "target": "com.amazonaws.costandusagereportservice#ReportName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the report that you want to delete. The name must be unique, is case sensitive, and can't include spaces.</p>"
+                        "smithy.api#documentation": "<p>The name of the report that you want to delete. The name must be unique, is case sensitive, and can't include spaces.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -1027,7 +1037,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the AWS Cost and Usage reports available to this account.</p>",
+                "smithy.api#documentation": "<p>Lists the Amazon Web Services Cost and Usage Report available to this account.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To list the AWS Cost and Usage reports for the account.",
@@ -1089,7 +1099,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests a list of AWS Cost and Usage reports owned by the account.</p>",
+                "smithy.api#documentation": "<p>Requests a Amazon Web Services Cost and Usage Report list owned by the account.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -1099,7 +1109,7 @@
                 "ReportDefinitions": {
                     "target": "com.amazonaws.costandusagereportservice#ReportDefinitionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of AWS Cost and Usage reports owned by the account.</p>"
+                        "smithy.api#documentation": "<p>An Amazon Web Services Cost and Usage Report list owned by the account.</p>"
                     }
                 },
                 "NextToken": {
@@ -1152,10 +1162,95 @@
                 "smithy.api#error": "server"
             }
         },
+        "com.amazonaws.costandusagereportservice#LastDelivery": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^[0-9]{8}[T][0-9]{6}([Z]|[+-][0-9]{4})$"
+            }
+        },
+        "com.amazonaws.costandusagereportservice#LastStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "ERROR_PERMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR_PERMISSIONS"
+                    }
+                },
+                "ERROR_NO_BUCKET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR_NO_BUCKET"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.costandusagereportservice#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costandusagereportservice#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costandusagereportservice#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costandusagereportservice#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.costandusagereportservice#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.costandusagereportservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags associated with the specified report definition.</p>"
+            }
+        },
+        "com.amazonaws.costandusagereportservice#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ReportName": {
+                    "target": "com.amazonaws.costandusagereportservice#ReportName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The report name of the report definition that tags are to be returned for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costandusagereportservice#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.costandusagereportservice#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the report definition resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.costandusagereportservice#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "<p>The maximum number of results that AWS returns for the operation.</p>",
+                "smithy.api#documentation": "<p>The maximum number of results that Amazon Web Services returns for the operation.</p>",
                 "smithy.api#range": {
                     "min": 5,
                     "max": 5
@@ -1179,7 +1274,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows you to programatically update your report preferences.</p>"
+                "smithy.api#documentation": "<p>Allows you to programmatically update your report preferences.</p>"
             }
         },
         "com.amazonaws.costandusagereportservice#ModifyReportDefinitionRequest": {
@@ -1228,6 +1323,9 @@
                     "target": "com.amazonaws.costandusagereportservice#ReportLimitReachedException"
                 },
                 {
+                    "target": "com.amazonaws.costandusagereportservice#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.costandusagereportservice#ValidationException"
                 }
             ],
@@ -1267,6 +1365,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the output of the PutReportDefinition operation. The content consists of the detailed \n      metadata and data file information. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.costandusagereportservice#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be assigned to the report definition resource.</p>"
                     }
                 }
             },
@@ -1359,12 +1463,18 @@
                 "BillingViewArn": {
                     "target": "com.amazonaws.costandusagereportservice#BillingViewArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      The Amazon resource name of the billing view. The <code>BillingViewArn</code> is needed to create Amazon Web Services Cost and Usage Report for each billing group maintained in the Amazon Web Services Billing Conductor service. The <code>BillingViewArn</code> for a billing group can be constructed as: <code>arn:aws:billing::payer-account-id:billingview/billing-group-primary-account-id</code>\n         </p>"
+                    }
+                },
+                "ReportStatus": {
+                    "target": "com.amazonaws.costandusagereportservice#ReportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the report.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The definition of AWS Cost and Usage Report. You can specify the report name, \n         time unit, report format, compression format, S3 bucket, additional artifacts, and schema \n         elements in the definition.\n    </p>"
+                "smithy.api#documentation": "<p>The definition of Amazon Web Services Cost and Usage Report. You can specify the report name, \n         time unit, report format, compression format, S3 bucket, additional artifacts, and schema \n         elements in the definition.\n    </p>"
             }
         },
         "com.amazonaws.costandusagereportservice#ReportDefinitionList": {
@@ -1393,7 +1503,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The format that AWS saves the report in.</p>"
+                "smithy.api#documentation": "<p>The format that Amazon Web Services saves the report in.</p>"
             }
         },
         "com.amazonaws.costandusagereportservice#ReportLimitReachedException": {
@@ -1419,6 +1529,26 @@
                 "smithy.api#pattern": "^[0-9A-Za-z!\\-_.*\\'()]+$"
             }
         },
+        "com.amazonaws.costandusagereportservice#ReportStatus": {
+            "type": "structure",
+            "members": {
+                "lastDelivery": {
+                    "target": "com.amazonaws.costandusagereportservice#LastDelivery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that gives the date of a report delivery.</p>"
+                    }
+                },
+                "lastStatus": {
+                    "target": "com.amazonaws.costandusagereportservice#LastStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enum that gives the status of a report delivery.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A two element dictionary with a <code>lastDelivery</code> and <code>lastStatus</code> key\n      whose values describe the date and status of the last delivered report for a particular report\n      definition.</p>"
+            }
+        },
         "com.amazonaws.costandusagereportservice#ReportVersioning": {
             "type": "enum",
             "members": {
@@ -1436,10 +1566,22 @@
                 }
             }
         },
+        "com.amazonaws.costandusagereportservice#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.costandusagereportservice#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified report (<code>ReportName</code>) in the request doesn't exist.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.costandusagereportservice#S3Bucket": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The S3 bucket where AWS delivers the report.</p>",
+                "smithy.api#documentation": "<p>The S3 bucket where Amazon Web Services delivers the report.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
@@ -1450,7 +1592,7 @@
         "com.amazonaws.costandusagereportservice#S3Prefix": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The prefix that AWS adds to the report name when AWS delivers the report. Your prefix\n        can't include spaces.</p>",
+                "smithy.api#documentation": "<p>The prefix that Amazon Web Services adds to the report name when Amazon Web Services delivers the report. Your prefix\n        can't include spaces.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
@@ -1472,10 +1614,16 @@
                     "traits": {
                         "smithy.api#enumValue": "SPLIT_COST_ALLOCATION_DATA"
                     }
+                },
+                "MANUAL_DISCOUNT_COMPATIBILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL_DISCOUNT_COMPATIBILITY"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Whether or not AWS includes resource IDs in the report. </p>"
+                "smithy.api#documentation": "<p>Whether or not Amazon Web Services includes resource IDs in the report. </p>"
             }
         },
         "com.amazonaws.costandusagereportservice#SchemaElementList": {
@@ -1485,6 +1633,124 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A list of strings that indicate the content that is included in the report, such as service or usage type.</p>"
+            }
+        },
+        "com.amazonaws.costandusagereportservice#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.costandusagereportservice#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the tag. Tag keys are case sensitive. Each report definition can only have up\n      to one tag with the same key. If you try to add an existing tag with the same key, the\n      existing tag value will be updated to the new value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.costandusagereportservice#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the tag. Tag values are case-sensitive. This can be an empty string.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a tag. A tag is a key-value pair. You can add up to 50 tags to a report\n      definition.</p>"
+            }
+        },
+        "com.amazonaws.costandusagereportservice#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.costandusagereportservice#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costandusagereportservice#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.costandusagereportservice#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costandusagereportservice#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.costandusagereportservice#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costandusagereportservice#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costandusagereportservice#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costandusagereportservice#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.costandusagereportservice#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.costandusagereportservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a set of tags with a report definition.</p>"
+            }
+        },
+        "com.amazonaws.costandusagereportservice#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ReportName": {
+                    "target": "com.amazonaws.costandusagereportservice#ReportName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The report name of the report definition that tags are to be associated with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.costandusagereportservice#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be assigned to the report definition resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costandusagereportservice#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.costandusagereportservice#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*"
             }
         },
         "com.amazonaws.costandusagereportservice#TimeUnit": {
@@ -1513,6 +1779,58 @@
                 "smithy.api#documentation": "<p>The length of time covered by the report. </p>"
             }
         },
+        "com.amazonaws.costandusagereportservice#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costandusagereportservice#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costandusagereportservice#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costandusagereportservice#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.costandusagereportservice#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.costandusagereportservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates a set of tags from a report definition.</p>"
+            }
+        },
+        "com.amazonaws.costandusagereportservice#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ReportName": {
+                    "target": "com.amazonaws.costandusagereportservice#ReportName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The report name of the report definition that tags are to be disassociated\n      from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.costandusagereportservice#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be disassociated from the report definition resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costandusagereportservice#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.costandusagereportservice#ValidationException": {
             "type": "structure",
             "members": {
@@ -1521,7 +1839,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>",
                 "smithy.api#error": "client"
             }
         }
