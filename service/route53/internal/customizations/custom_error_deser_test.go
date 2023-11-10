@@ -83,6 +83,7 @@ func TestCustomErrorDeserialization(t *testing.T) {
 				Retryer: func() aws.Retryer {
 					return aws.NopRetryer{}
 				},
+				Credentials: &fakeCredentials{},
 			})
 			resp, err := svc.ChangeResourceRecordSets(context.Background(), &route53.ChangeResourceRecordSetsInput{
 				ChangeBatch: &types.ChangeBatch{
@@ -122,4 +123,10 @@ func TestCustomErrorDeserialization(t *testing.T) {
 
 		})
 	}
+}
+
+type fakeCredentials struct{}
+
+func (*fakeCredentials) Retrieve(_ context.Context) (aws.Credentials, error) {
+	return aws.Credentials{}, nil
 }
