@@ -1,32 +1,32 @@
 package ini
 
-type LineToken interface {
+type lineToken interface {
 	isLineToken()
 }
 
-type LineTokenProfile struct {
+type lineTokenProfile struct {
 	Type string
 	Name string
 }
 
-func (*LineTokenProfile) isLineToken() {}
+func (*lineTokenProfile) isLineToken() {}
 
-type LineTokenProperty struct {
+type lineTokenProperty struct {
 	Key   string
 	Value string
 }
 
-func (*LineTokenProperty) isLineToken() {}
+func (*lineTokenProperty) isLineToken() {}
 
-type LineTokenContinuation struct {
+type lineTokenContinuation struct {
 	Value string
 }
 
-func (*LineTokenContinuation) isLineToken() {}
+func (*lineTokenContinuation) isLineToken() {}
 
-type LineTokenSubProperty struct {
+type lineTokenSubProperty struct {
 	Key   string
 	Value string
 }
 
-func (*LineTokenSubProperty) isLineToken() {}
+func (*lineTokenSubProperty) isLineToken() {}

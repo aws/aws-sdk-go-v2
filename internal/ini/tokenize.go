@@ -5,8 +5,8 @@ import (
 	"strings"
 )
 
-func tokenize(lines []string) ([]LineToken, error) {
-	tokens := make([]LineToken, 0, len(lines))
+func tokenize(lines []string) ([]lineToken, error) {
+	tokens := make([]lineToken, 0, len(lines))
 	for _, line := range lines {
 		if len(strings.TrimSpace(line)) == 0 || isLineComment(line) {
 			continue
@@ -32,7 +32,7 @@ func isLineComment(line string) bool {
 	return strings.HasPrefix(trimmed, "#") || strings.HasPrefix(trimmed, ";")
 }
 
-func asProfile(line string) *LineTokenProfile { // "[ type name ] ; comment"
+func asProfile(line string) *lineTokenProfile { // "[ type name ] ; comment"
 	trimmed := strings.TrimRight(trimComment(line), " \t") // "[ type name ]"
 	if !strings.HasPrefix(trimmed, "[") || !strings.HasSuffix(trimmed, "]") {
 		return nil
@@ -40,13 +40,13 @@ func asProfile(line string) *LineTokenProfile { // "[ type name ] ; comment"
 	trimmed = trimmed[1 : len(trimmed)-1] // " type name " (or just " name ")
 	trimmed = strings.TrimSpace(trimmed)  // "type name" / "name"
 	typ, name := splitProfile(trimmed)
-	return &LineTokenProfile{
+	return &lineTokenProfile{
 		Type: typ,
 		Name: name,
 	}
 }
 
-func asProperty(line string) *LineTokenProperty {
+func asProperty(line string) *lineTokenProperty {
 	if isLineSpace(rune(line[0])) {
 		return nil
 	}
@@ -57,13 +57,13 @@ func asProperty(line string) *LineTokenProperty {
 		return nil
 	}
 
-	return &LineTokenProperty{
+	return &lineTokenProperty{
 		Key:   strings.ToLower(k), // LEGACY: normalize key case
 		Value: legacyStrconv(v),   // LEGACY: see func docs
 	}
 }
 
-func asSubProperty(line string) *LineTokenSubProperty {
+func asSubProperty(line string) *lineTokenSubProperty {
 	if !isLineSpace(rune(line[0])) {
 		return nil
 	}
@@ -75,20 +75,20 @@ func asSubProperty(line string) *LineTokenSubProperty {
 		return nil
 	}
 
-	return &LineTokenSubProperty{ // same LEGACY constraints as in normal property
+	return &lineTokenSubProperty{ // same LEGACY constraints as in normal property
 		Key:   strings.ToLower(k),
 		Value: legacyStrconv(v),
 	}
 }
 
-func asContinuation(line string) *LineTokenContinuation {
+func asContinuation(line string) *lineTokenContinuation {
 	if !isLineSpace(rune(line[0])) {
 		return nil
 	}
 
 	// includes comments like sub-properties
 	trimmed := strings.TrimLeft(line, " \t")
-	return &LineTokenContinuation{
+	return &lineTokenContinuation{
 		Value: trimmed,
 	}
 }

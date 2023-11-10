@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func parse(tokens []LineToken, path string) (Sections, error) {
+func parse(tokens []lineToken, path string) (Sections, error) {
 	cfg := Sections{
 		container: map[string]Section{},
 	}
@@ -13,7 +13,7 @@ func parse(tokens []LineToken, path string) (Sections, error) {
 
 	for _, otok := range tokens {
 		switch tok := otok.(type) {
-		case *LineTokenProfile:
+		case *lineTokenProfile:
 			name := tok.Name
 			if tok.Type != "" {
 				name = fmt.Sprintf("%s %s", tok.Type, tok.Name)
@@ -23,7 +23,7 @@ func parse(tokens []LineToken, path string) (Sections, error) {
 			if _, ok := cfg.container[name]; !ok {
 				cfg.container[name] = NewSection(name)
 			}
-		case *LineTokenProperty:
+		case *lineTokenProperty:
 			if currSection == "" {
 				continue // LEGACY: don't error on "global" properties
 			}
@@ -45,7 +45,7 @@ func parse(tokens []LineToken, path string) (Sections, error) {
 			}
 			cfg.container[currSection].SourceFile[tok.Key] = path
 
-		case *LineTokenSubProperty:
+		case *lineTokenSubProperty:
 			if currKey == "" {
 				continue
 			}
@@ -62,7 +62,7 @@ func parse(tokens []LineToken, path string) (Sections, error) {
 			}
 
 			cfg.container[currSection].values[currKey] = value
-		case *LineTokenContinuation:
+		case *lineTokenContinuation:
 			if currKey == "" {
 				continue
 			}
