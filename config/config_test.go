@@ -3,6 +3,7 @@ package config
 import (
 	"context"
 	"fmt"
+	"os"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -145,4 +146,67 @@ func TestLoadDefaultConfig(t *testing.T) {
 	if err == nil {
 		t.Fatal("expect error when optFn returns error, got nil")
 	}
+}
+
+func BenchmarkLoadProfile1(b *testing.B) {
+	benchConfigLoad(b, 1)
+}
+
+func BenchmarkLoadProfile10(b *testing.B) {
+	benchConfigLoad(b, 10)
+}
+
+func BenchmarkLoadProfile100(b *testing.B) {
+	benchConfigLoad(b, 100)
+}
+
+func BenchmarkLoadProfile1000(b *testing.B) {
+	benchConfigLoad(b, 1000)
+}
+
+func benchConfigLoad(b *testing.B, n int) {
+	f, err := generateProfiles(n)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	defer os.Remove(f)
+	opt := WithSharedConfigFiles([]string{f})
+
+	b.ResetTimer()
+	for n := 0; n < b.N; n++ {
+		LoadDefaultConfig(context.Background(), opt)
+	}
+}
+
+const profileTemplate = `
+[profile role%d]
+tool_sso_start_url  = https://example.awsapps.com/start
+tool_sso_region     = us-west-2
+tool_sso_account_id = 12345678901234
+tool_sso_role_name  = some_role_name
+tool_generated_from = some_tool
+credential_process  = some_tool credential-process
+`
+
+func generateProfiles(n int) (string, error) {
+	f, err := os.CreateTemp("", fmt.Sprintf("aws-bench-config-%d-*", n))
+	if err != nil {
+		return "", err
+	}
+
+	for i := 0; i < n; i++ {
+		if _, err := fmt.Fprintf(f, profileTemplate, n); err != nil {
+			f.Close()
+			os.Remove(f.Name())
+			return "", err
+		}
+	}
+
+	if err := f.Close(); err != nil {
+		os.Remove(f.Name())
+		return "", err
+	}
+
+	return f.Name(), nil
 }
