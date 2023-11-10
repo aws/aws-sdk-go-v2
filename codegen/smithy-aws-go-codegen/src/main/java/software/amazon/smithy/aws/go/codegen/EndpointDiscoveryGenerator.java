@@ -16,6 +16,7 @@ import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
+import software.amazon.smithy.go.codegen.endpoints.EndpointMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.integration.ClientMember;
 import software.amazon.smithy.go.codegen.integration.ClientMemberResolver;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
@@ -169,9 +170,9 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
                     writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
 
                     String closeBlock = String.format("}, \"%s\", middleware.After)",
-                            EndpointGenerator.MIDDLEWARE_NAME);
+                            EndpointMiddlewareGenerator.MIDDLEWARE_ID);
 
-                    writer.openBlock("return stack.Serialize.Insert(&$T{", closeBlock, DISCOVERY_MIDDLEWARE, () -> {
+                    writer.openBlock("return stack.Finalize.Insert(&$T{", closeBlock, DISCOVERY_MIDDLEWARE, () -> {
                         writer.openBlock("Options: []func($P){", "},", DISCOVERY_ENDPOINT_OPTIONS, () -> {
                             writer.openBlock("func (opt $P) {", "},", DISCOVERY_ENDPOINT_OPTIONS, () -> {
                                 writer.write("opt.$L = o.EndpointOptions.$L", DISABLE_HTTPS, DISABLE_HTTPS);
@@ -328,9 +329,10 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
 
         writer.addUseImports(SmithyGoDependency.CONTEXT);
         writer.openBlock(
-                "func (c *Client) $L(ctx context.Context, input interface{}, optFns ...func($P)) ($T, error) {", "}",
+                "func (c *Client) $L(ctx context.Context, optFns ...func($P)) ($T, error) {", "}",
                 fetchDiscoveredEndpointFuncName, DISCOVERY_ENDPOINT_OPTIONS, DISCOVERY_ENDPOINT_WEIGHTED_ADDRESS,
                 () -> {
+                    writer.write("input := getOperationInput(ctx)");
                     writer.write("in, ok := input.($P)", symbolProvider.toSymbol(inputShape));
                     writer.openBlock("if !ok {", "}", () -> {
                         writer.addUseImports(SmithyGoDependency.FMT);

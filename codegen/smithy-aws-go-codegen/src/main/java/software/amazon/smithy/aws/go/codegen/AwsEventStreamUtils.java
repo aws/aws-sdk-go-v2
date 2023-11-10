@@ -13,10 +13,12 @@ import software.amazon.smithy.go.codegen.GoDependency;
 import software.amazon.smithy.go.codegen.GoEventStreamIndex;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator;
+import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoValueAccessUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
 import software.amazon.smithy.go.codegen.knowledge.GoPointableIndex;
@@ -42,6 +44,7 @@ import software.amazon.smithy.model.traits.ErrorTrait;
 import software.amazon.smithy.model.traits.EventHeaderTrait;
 import software.amazon.smithy.model.traits.EventPayloadTrait;
 import software.amazon.smithy.model.traits.HttpTrait;
+import software.amazon.smithy.utils.MapUtils;
 import software.amazon.smithy.utils.StringUtils;
 
 public final class AwsEventStreamUtils {
@@ -306,26 +309,46 @@ public final class AwsEventStreamUtils {
                                 """, getEventStreamApiSymbol("ApplyHTTPTransportFixes"))
                                 .write("");
 
-                        w.write("""
-                                 requestSignature, err := $T(request.Request)
-                                 if err != nil {
-                                    return out, metadata, $T("failed to get event stream seed signature: %v", err)
+                        w.writeGoTemplate("""
+                                requestSignature, err := $getSignature:T(request.Request)
+                                if err != nil {
+                                   return out, metadata, $errorf:T("failed to get event stream seed signature: %v", err)
                                 }
-                                 """, getSignedRequestSignature, errorf).write("")
-                                .openBlock("signer := $T(", ")", getSymbol("NewStreamSigner",
-                                        AwsGoDependency.AWS_SIGNER_V4, false), () -> w
-                                        .write("""
-                                               $T(ctx),
-                                               $T(ctx),
-                                               $T(ctx),
-                                               requestSignature,
-                                               """, getSymbol("GetSigningCredentials",
-                                                        AwsGoDependency.AWS_MIDDLEWARE, false),
-                                                getSymbol("GetSigningName",
-                                                        AwsGoDependency.AWS_MIDDLEWARE, false),
-                                                getSymbol("GetSigningRegion",
-                                                        AwsGoDependency.AWS_MIDDLEWARE, false)
-                                        )).write("");
+
+                                identity := getIdentity(ctx)
+                                if identity == nil {
+                                    return out, metadata, $errorf:T("no identity")
+                                }
+
+                                creds, ok := identity.($credentialsAdapter:P)
+                                if !ok {
+                                    return out, metadata, $errorf:T("identity is not sigv4 credentials")
+                                }
+
+                                rscheme := getResolvedAuthScheme(ctx)
+                                if rscheme == nil {
+                                    return out, metadata, $errorf:T("no resolved auth scheme")
+                                }
+
+                                name, ok := $getSigningName:T(&rscheme.SignerProperties)
+                                if !ok {
+                                    return out, metadata, $errorf:T("no sigv4 signing name")
+                                }
+
+                                region, ok := $getSigningRegion:T(&rscheme.SignerProperties)
+                                if !ok {
+                                    return out, metadata, $errorf:T("no sigv4 signing region")
+                                }
+
+                                signer := v4.NewStreamSigner(creds.Credentials, name, region, requestSignature)
+                                """,
+                                MapUtils.of(
+                                        "getSignature", getSignedRequestSignature,
+                                        "errorf", GoStdlibTypes.Fmt.Errorf,
+                                        "credentialsAdapter", SdkGoTypes.Internal.Auth.Smithy.CredentialsAdapter,
+                                        "getSigningName", SmithyGoTypes.Transport.Http.GetSigV4SigningName,
+                                        "getSigningRegion", SmithyGoTypes.Transport.Http.GetSigV4SigningRegion
+                                ));
 
                         var events = inputInfo.get().getEventStreamTarget().asUnionShape()
                                 .get();

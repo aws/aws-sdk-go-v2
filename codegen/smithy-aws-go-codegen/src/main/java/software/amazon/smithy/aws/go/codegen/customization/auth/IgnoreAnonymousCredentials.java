@@ -16,6 +16,7 @@
 package software.amazon.smithy.aws.go.codegen.customization.auth;
 
 import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
+import software.amazon.smithy.aws.traits.auth.SigV4Trait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -24,6 +25,7 @@ import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.utils.ListUtils;
 
 import java.util.List;
@@ -42,10 +44,15 @@ public class IgnoreAnonymousCredentials implements GoIntegration {
             .resolver(buildPackageSymbol("ignoreAnonymousAuth"))
             .build();
 
+    private static boolean hasCredentials(Model model, ServiceShape service) {
+        return service.hasTrait(SigV4Trait.class) || service.hasTrait(SigV4Trait.class);
+    }
+
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
         return ListUtils.of(
                 RuntimeClientPlugin.builder()
+                        .servicePredicate(IgnoreAnonymousCredentials::hasCredentials)
                         .addConfigFieldResolver(IGNORE_ANONYMOUS_AUTH)
                         .build()
         );
@@ -55,7 +62,9 @@ public class IgnoreAnonymousCredentials implements GoIntegration {
     public void writeAdditionalFiles(
             GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator
     ) {
-        goDelegator.useFileWriter("options.go", settings.getModuleName(), generateResolver());
+        if (hasCredentials(model, settings.getService(model))) {
+            goDelegator.useFileWriter("options.go", settings.getModuleName(), generateResolver());
+        }
     }
 
     private GoWriter.Writable generateResolver() {
