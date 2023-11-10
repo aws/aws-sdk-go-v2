@@ -1,3 +1,7 @@
+# v1.132.0 (2023-11-10)
+
+* **Feature**: EC2 adds API updates to enable ENA Express at instance launch time.
+
 # v1.131.0 (2023-11-09.2)
 
 * **Feature**: AWS EBS now supports Block Public Access for EBS Snapshots. This release introduces the EnableSnapshotBlockPublicAccess, DisableSnapshotBlockPublicAccess and GetSnapshotBlockPublicAccessState APIs to manage account-level public access settings for EBS Snapshots in an AWS Region.

@@ -1,3 +1,7 @@
+# v1.7.0 (2023-11-10)
+
+* **Feature**: AWS Control Tower supports tagging for enabled controls. This release introduces TagResource, UntagResource and ListTagsForResource APIs to manage tags in existing enabled controls. It updates EnabledControl API to tag resources at creation time.
+
 # v1.6.2 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

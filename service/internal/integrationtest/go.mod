@@ -24,14 +24,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.41.1
-	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.19.1
+	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.33.1
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.19.1
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.25.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.131.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.132.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.32.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.23.1
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.16.1
 	github.com/aws/aws-sdk-go-v2/service/polly v1.34.1
-	github.com/aws/aws-sdk-go-v2/service/rds v1.62.2
+	github.com/aws/aws-sdk-go-v2/service/rds v1.62.3
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.35.1
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.34.1
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.34.1

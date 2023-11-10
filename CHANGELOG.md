@@ -1,3 +1,21 @@
+# Release (2023-11-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.7.0](service/controltower/CHANGELOG.md#v170-2023-11-10)
+  * **Feature**: AWS Control Tower supports tagging for enabled controls. This release introduces TagResource, UntagResource and ListTagsForResource APIs to manage tags in existing enabled controls. It updates EnabledControl API to tag resources at creation time.
+* `github.com/aws/aws-sdk-go-v2/service/costandusagereportservice`: [v1.20.0](service/costandusagereportservice/CHANGELOG.md#v1200-2023-11-10)
+  * **Feature**: This release adds support for tagging and customers can now tag report definitions. Additionally, ReportStatus is now added to report definition to show when the last delivered time stamp and if it succeeded or not.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.132.0](service/ec2/CHANGELOG.md#v11320-2023-11-10)
+  * **Feature**: EC2 adds API updates to enable ENA Express at instance launch time.
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.28.2](service/fms/CHANGELOG.md#v1282-2023-11-10)
+  * **Documentation**: Adds optimizeUnassociatedWebACL flag to ManagedServiceData, updates third-party firewall examples, and other minor documentation updates.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.17.0](service/marketplaceentitlementservice/CHANGELOG.md#v1170-2023-11-10)
+  * **Feature**: Add paginators to GetEntitlements.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.47.0](service/mediaconvert/CHANGELOG.md#v1470-2023-11-10)
+  * **Feature**: This release includes the ability to specify any input source as the primary input for corresponding follow modes, and allows users to specify fit and fill behaviors without resizing content.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.62.3](service/rds/CHANGELOG.md#v1623-2023-11-10)
+  * **Documentation**: Updates Amazon RDS documentation for zero-ETL integrations.
+
 # Release (2023-11-09.2)
 
 ## General Highlights

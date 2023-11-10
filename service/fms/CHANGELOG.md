@@ -1,3 +1,7 @@
+# v1.28.2 (2023-11-10)
+
+* **Documentation**: Adds optimizeUnassociatedWebACL flag to ManagedServiceData, updates third-party firewall examples, and other minor documentation updates.
+
 # v1.28.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.62.3 (2023-11-10)
+
+* **Documentation**: Updates Amazon RDS documentation for zero-ETL integrations.
+
 # v1.62.2 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

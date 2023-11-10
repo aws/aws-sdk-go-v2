@@ -1,8 +1,0 @@
-{
-    "id": "20c6deed-6659-4910-b718-61c1782f41fc",
-    "type": "documentation",
-    "description": "Updates Amazon RDS documentation for zero-ETL integrations.",
-    "modules": [
-        "service/rds"
-    ]
-}
