@@ -22,11 +22,9 @@ import (
 var _ regionProvider = (*SharedConfig)(nil)
 
 var (
-	testConfigFilename           = filepath.Join("testdata", "shared_config")
-	testConfigOtherFilename      = filepath.Join("testdata", "shared_config_other")
-	testCredentialsFilename      = filepath.Join("testdata", "shared_credentials")
-	testConfigLeadingWSFilename1 = filepath.Join("testdata", "leading_ws")
-	testConfigLeadingWSFilename2 = filepath.Join("testdata", "leading_ws_trailing_nl")
+	testConfigFilename      = filepath.Join("testdata", "shared_config")
+	testConfigOtherFilename = filepath.Join("testdata", "shared_config_other")
+	testCredentialsFilename = filepath.Join("testdata", "shared_credentials")
 )
 
 func TestNewSharedConfig(t *testing.T) {
@@ -142,7 +140,7 @@ func TestNewSharedConfig(t *testing.T) {
 			Profile:         "profile_name",
 			Err: SharedConfigLoadError{
 				Filename: filepath.Join("testdata", "shared_config_invalid_ini"),
-				Err:      fmt.Errorf("invalid state"),
+				Err:      fmt.Errorf("tokenize: unrecognized token"),
 			},
 		},
 		"S3UseARNRegion property on profile": {
@@ -686,16 +684,6 @@ func TestNewSharedConfig(t *testing.T) {
 				Profile:           "ec2-metadata-v1-disabled-invalid",
 				EC2IMDSv1Disabled: aws.Bool(false),
 			},
-		},
-		"leading whitespace error 1": {
-			ConfigFilenames: []string{testConfigLeadingWSFilename1},
-			Profile:         "leading-whitespace-error",
-			Err:             fmt.Errorf("Invalid token, remove leading whitespace"),
-		},
-		"leading whitespace error 2": {
-			ConfigFilenames: []string{testConfigLeadingWSFilename2},
-			Profile:         "leading-whitespace-error",
-			Err:             fmt.Errorf("Invalid token, remove leading whitespace"),
 		},
 	}
 

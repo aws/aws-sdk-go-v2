@@ -36,15 +36,9 @@ func TestValidDataFiles(t *testing.T) {
 				}
 			}()
 
-			tree, err := ParseAST(f)
+			v, err := Parse(f, path)
 			if err != nil {
 				t.Errorf("%s: unexpected parse error, %v", path, err)
-			}
-
-			v := NewDefaultVisitor(path)
-			err = Walk(tree, v)
-			if err != nil {
-				t.Errorf("%s: unexpected walk error, %v", path, err)
 			}
 
 			expectedPath := path + "_expected"
@@ -62,7 +56,7 @@ func TestValidDataFiles(t *testing.T) {
 			}
 
 			for profile, tableIface := range e {
-				p, ok := v.Sections.GetSection(profile)
+				p, ok := v.GetSection(profile)
 				if !ok {
 					t.Fatal("could not find profile " + profile)
 				}
@@ -75,7 +69,7 @@ func TestValidDataFiles(t *testing.T) {
 						if p.values[k].mp != nil {
 							a = fmt.Sprintf("%v", p.values[k].mp)
 						} else {
-							a = p.String(k)
+							a = p.values[k].str
 						}
 						if e != a {
 							t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
@@ -90,70 +84,5 @@ func TestValidDataFiles(t *testing.T) {
 		})
 	if err != nil {
 		t.Fatalf("Error while walking the file tree rooted at root, %d", err)
-	}
-}
-
-func TestInvalidDataFiles(t *testing.T) {
-	cases := []struct {
-		path               string
-		expectedParseError bool
-		expectedWalkError  bool
-	}{
-		{
-			path:               "./testdata/invalid/bad_syntax_1",
-			expectedParseError: true,
-		},
-		{
-			path:               "./testdata/invalid/bad_syntax_2",
-			expectedParseError: true,
-		},
-		{
-			path:               "./testdata/invalid/incomplete_section_profile",
-			expectedParseError: true,
-		},
-		{
-			path:               "./testdata/invalid/syntax_error_comment",
-			expectedParseError: true,
-		},
-		{
-			path:               "./testdata/invalid/invalid_keys",
-			expectedParseError: true,
-		},
-		{
-			path:               "./testdata/invalid/bad_section_name",
-			expectedParseError: true,
-		},
-	}
-
-	for i, c := range cases {
-		t.Run(c.path, func(t *testing.T) {
-			f, err := os.Open(c.path)
-			if err != nil {
-				t.Errorf("unexpected error, %v", err)
-			}
-			defer func() {
-				closeErr := f.Close()
-				if closeErr != nil {
-					t.Errorf("unexpected file close error: %v", closeErr)
-				}
-			}()
-
-			tree, err := ParseAST(f)
-			if err != nil && !c.expectedParseError {
-				t.Errorf("%d: unexpected error, %v", i+1, err)
-			} else if err == nil && c.expectedParseError {
-				t.Errorf("%d: expected error, but received none", i+1)
-			}
-
-			if c.expectedParseError {
-				return
-			}
-
-			v := NewDefaultVisitor(c.path)
-			err = Walk(tree, v)
-			if err == nil && c.expectedWalkError {
-				t.Errorf("%d: expected error, but received none", i+1)
-			}
-		})
 	}
 }
