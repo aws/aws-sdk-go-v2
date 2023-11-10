@@ -1,7 +1,6 @@
 package ini
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -20,9 +19,7 @@ func tokenize(lines []string) ([]lineToken, error) {
 			tokens = append(tokens, tok)
 		} else if tok := asContinuation(line); tok != nil {
 			tokens = append(tokens, tok)
-		} else {
-			return nil, fmt.Errorf("unrecognized token '%s'", line)
-		}
+		} // unrecognized tokens are effectively ignored
 	}
 	return tokens, nil
 }
@@ -32,9 +29,9 @@ func isLineComment(line string) bool {
 	return strings.HasPrefix(trimmed, "#") || strings.HasPrefix(trimmed, ";")
 }
 
-func asProfile(line string) *lineTokenProfile { // "[ type name ] ; comment"
-	trimmed := strings.TrimRight(trimComment(line), " \t") // "[ type name ]"
-	if !strings.HasPrefix(trimmed, "[") || !strings.HasSuffix(trimmed, "]") {
+func asProfile(line string) *lineTokenProfile { // " [ type name ] ; comment"
+	trimmed := strings.TrimSpace(trimComment(line)) // "[ type name ]"
+	if !isBracketed(trimmed) {
 		return nil
 	}
 	trimmed = trimmed[1 : len(trimmed)-1] // " type name " (or just " name ")

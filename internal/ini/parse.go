@@ -50,32 +50,19 @@ func parse(tokens []lineToken, path string) (Sections, error) {
 				continue
 			}
 
-			value, ok := cfg.container[currSection].values[currKey]
-			if !ok {
-				return cfg, fmt.Errorf("something went wrong")
-			}
-
+			value, _ := cfg.container[currSection].values[currKey]
 			if value.mp == nil && value.str == "" {
 				value.mp = map[string]string{
 					tok.Key: tok.Value,
 				}
 			}
-
 			cfg.container[currSection].values[currKey] = value
 		case *lineTokenContinuation:
 			if currKey == "" {
 				continue
 			}
 
-			if isBracketed(tok.Value) {
-				continue // LEGACY: ignore this for some reason
-			}
-
-			value, ok := cfg.container[currSection].values[currKey]
-			if !ok {
-				return cfg, fmt.Errorf("something went wrong")
-			}
-
+			value, _ := cfg.container[currSection].values[currKey]
 			if value.str != "" && value.mp == nil {
 				value.str = fmt.Sprintf("%s\n%s", value.str, tok.Value)
 			}

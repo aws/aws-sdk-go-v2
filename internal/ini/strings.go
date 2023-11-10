@@ -67,11 +67,11 @@ func legacyStrconv(s string) string {
 }
 
 func isSingleQuoted(s string) bool {
-	return len(s) > 2 && s[0] == '\'' && s[len(s)-1] == '\''
+	return hasAffixes(s, "'", "'")
 }
 
 func isDoubleQuoted(s string) bool {
-	return len(s) > 2 && s[0] == '"' && s[len(s)-1] == '"'
+	return hasAffixes(s, `"`, `"`)
 }
 
 func isBracketed(s string) bool {

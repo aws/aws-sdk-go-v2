@@ -138,9 +138,10 @@ func TestNewSharedConfig(t *testing.T) {
 		"Invalid INI file": {
 			ConfigFilenames: []string{filepath.Join("testdata", "shared_config_invalid_ini")},
 			Profile:         "profile_name",
-			Err: SharedConfigLoadError{
-				Filename: filepath.Join("testdata", "shared_config_invalid_ini"),
-				Err:      fmt.Errorf("tokenize: unrecognized token"),
+			Err: SharedConfigProfileNotExistError{
+				Filename: []string{filepath.Join("testdata", "shared_config_invalid_ini")},
+				Profile:  "profile_name",
+				Err:      nil,
 			},
 		},
 		"S3UseARNRegion property on profile": {
