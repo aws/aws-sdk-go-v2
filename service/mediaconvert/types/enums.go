@@ -7585,6 +7585,9 @@ type ScalingBehavior string
 const (
 	ScalingBehaviorDefault         ScalingBehavior = "DEFAULT"
 	ScalingBehaviorStretchToOutput ScalingBehavior = "STRETCH_TO_OUTPUT"
+	ScalingBehaviorFit             ScalingBehavior = "FIT"
+	ScalingBehaviorFitNoUpscale    ScalingBehavior = "FIT_NO_UPSCALE"
+	ScalingBehaviorFill            ScalingBehavior = "FILL"
 )
 
 // Values returns all known values for ScalingBehavior. Note that this can be
@@ -7594,6 +7597,9 @@ func (ScalingBehavior) Values() []ScalingBehavior {
 	return []ScalingBehavior{
 		"DEFAULT",
 		"STRETCH_TO_OUTPUT",
+		"FIT",
+		"FIT_NO_UPSCALE",
+		"FILL",
 	}
 }
 

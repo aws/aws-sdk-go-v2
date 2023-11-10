@@ -1,0 +1,8 @@
+{
+    "id": "4ca19024-ca4b-49f9-b436-158541f0bda6",
+    "type": "feature",
+    "description": "EC2 adds API updates to enable ENA Express at instance launch time.",
+    "modules": [
+        "service/ec2"
+    ]
+}

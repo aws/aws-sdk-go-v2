@@ -2408,6 +2408,17 @@ func awsRestjson1_serializeDocument__listOfAllowedRenditionSize(v []types.Allowe
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfAudioChannelTag(v []types.AudioChannelTag, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfAudioDescription(v []types.AudioDescription, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2967,6 +2978,13 @@ func awsRestjson1_serializeDocumentAudioChannelTaggingSettings(v *types.AudioCha
 	if len(v.ChannelTag) > 0 {
 		ok := object.Key("channelTag")
 		ok.String(string(v.ChannelTag))
+	}
+
+	if v.ChannelTags != nil {
+		ok := object.Key("channelTags")
+		if err := awsRestjson1_serializeDocument__listOfAudioChannelTag(v.ChannelTags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -7081,6 +7099,11 @@ func awsRestjson1_serializeDocumentJobSettings(v *types.JobSettings, value smith
 		}
 	}
 
+	if v.FollowSource != nil {
+		ok := object.Key("followSource")
+		ok.Integer(*v.FollowSource)
+	}
+
 	if v.Inputs != nil {
 		ok := object.Key("inputs")
 		if err := awsRestjson1_serializeDocument__listOfInput(v.Inputs, ok); err != nil {
@@ -7168,6 +7191,11 @@ func awsRestjson1_serializeDocumentJobTemplateSettings(v *types.JobTemplateSetti
 		if err := awsRestjson1_serializeDocumentExtendedDataServices(v.ExtendedDataServices, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.FollowSource != nil {
+		ok := object.Key("followSource")
+		ok.Integer(*v.FollowSource)
 	}
 
 	if v.Inputs != nil {

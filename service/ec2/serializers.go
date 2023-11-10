@@ -40255,7 +40255,38 @@ func awsEc2query_serializeDocumentEnaSrdSpecification(v *types.EnaSrdSpecificati
 	return nil
 }
 
+func awsEc2query_serializeDocumentEnaSrdSpecificationRequest(v *types.EnaSrdSpecificationRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.EnaSrdEnabled != nil {
+		objectKey := object.Key("EnaSrdEnabled")
+		objectKey.Boolean(*v.EnaSrdEnabled)
+	}
+
+	if v.EnaSrdUdpSpecification != nil {
+		objectKey := object.Key("EnaSrdUdpSpecification")
+		if err := awsEc2query_serializeDocumentEnaSrdUdpSpecificationRequest(v.EnaSrdUdpSpecification, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentEnaSrdUdpSpecification(v *types.EnaSrdUdpSpecification, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.EnaSrdUdpEnabled != nil {
+		objectKey := object.Key("EnaSrdUdpEnabled")
+		objectKey.Boolean(*v.EnaSrdUdpEnabled)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentEnaSrdUdpSpecificationRequest(v *types.EnaSrdUdpSpecificationRequest, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -41379,6 +41410,13 @@ func awsEc2query_serializeDocumentInstanceNetworkInterfaceSpecification(v *types
 	if v.DeviceIndex != nil {
 		objectKey := object.Key("DeviceIndex")
 		objectKey.Integer(*v.DeviceIndex)
+	}
+
+	if v.EnaSrdSpecification != nil {
+		objectKey := object.Key("EnaSrdSpecification")
+		if err := awsEc2query_serializeDocumentEnaSrdSpecificationRequest(v.EnaSrdSpecification, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.Groups != nil {
@@ -42558,6 +42596,13 @@ func awsEc2query_serializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecific
 	if v.DeviceIndex != nil {
 		objectKey := object.Key("DeviceIndex")
 		objectKey.Integer(*v.DeviceIndex)
+	}
+
+	if v.EnaSrdSpecification != nil {
+		objectKey := object.Key("EnaSrdSpecification")
+		if err := awsEc2query_serializeDocumentEnaSrdSpecificationRequest(v.EnaSrdSpecification, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.Groups != nil {

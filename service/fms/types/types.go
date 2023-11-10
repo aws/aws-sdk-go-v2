@@ -1007,16 +1007,20 @@ type Policy struct {
 	// The type of resource protected by or in scope of the policy. This is in the
 	// format shown in the Amazon Web Services Resource Types Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// . To apply this policy to multiple resource types, specify a resource type of
-	// ResourceTypeList and then specify the resource types in a ResourceTypeList . For
-	// WAF and Shield Advanced, resource types include
-	// AWS::ElasticLoadBalancingV2::LoadBalancer ,
-	// AWS::ElasticLoadBalancing::LoadBalancer , AWS::EC2::EIP , and
-	// AWS::CloudFront::Distribution . For a security group common policy, valid values
-	// are AWS::EC2::NetworkInterface and AWS::EC2::Instance . For a security group
-	// content audit policy, valid values are AWS::EC2::SecurityGroup ,
-	// AWS::EC2::NetworkInterface , and AWS::EC2::Instance . For a security group usage
-	// audit policy, the value is AWS::EC2::SecurityGroup . For an Network Firewall
-	// policy or DNS Firewall policy, the value is AWS::EC2::VPC .
+	// ResourceTypeList and then specify the resource types in a ResourceTypeList . The
+	// following are valid resource types for each Firewall Manager policy type:
+	//   - Amazon Web Services WAF Classic - AWS::ApiGateway::Stage ,
+	//   AWS::CloudFront::Distribution , and AWS::ElasticLoadBalancingV2::LoadBalancer
+	//   .
+	//   - WAF - AWS::ApiGateway::Stage , AWS::ElasticLoadBalancingV2::LoadBalancer ,
+	//   and AWS::CloudFront::Distribution .
+	//   - DNS Firewall, Network Firewall, and third-party firewall - AWS::EC2::VPC .
+	//   - Shield Advanced - AWS::ElasticLoadBalancingV2::LoadBalancer ,
+	//   AWS::ElasticLoadBalancing::LoadBalancer , AWS::EC2::EIP , and
+	//   AWS::CloudFront::Distribution .
+	//   - Security group content audit - AWS::EC2::SecurityGroup ,
+	//   AWS::EC2::NetworkInterface , and AWS::EC2::Instance .
+	//   - Security group usage audit - AWS::EC2::SecurityGroup .
 	//
 	// This member is required.
 	ResourceType *string
@@ -1768,14 +1772,6 @@ type SecurityServicePolicyData struct {
 	//   "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"fragmentcustomactionname\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}},{\"actionName\":\"fragmentcustomactionname\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"fragmentmetricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"firewallCreationConfig\":{\"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]},{\"availabilityZoneName\":\"us-east-1b\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]}]}},\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":null,\"routeManagementAction\":\"MONITOR\",\"routeManagementTargetTypes\":[\"InternetGateway\"],\"routeManagementConfig\":{\"allowCrossAZTrafficIfNoEndpoint\":true}},\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":boolean}}"
 	//   To use the distributed deployment model, you must set PolicyOption (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
 	//   to NULL .
-	//   - Example: THIRD_PARTY_FIREWALL "{ "type":"THIRD_PARTY_FIREWALL",
-	//   "thirdPartyFirewall":"PALO_ALTO_NETWORKS_CLOUD_NGFW",
-	//   "thirdPartyFirewallConfig":{ "thirdPartyFirewallPolicyList":["global-1"] },
-	//   "firewallDeploymentModel":{ "distributedFirewallDeploymentModel":{
-	//   "distributedFirewallOrchestrationConfig":{ "firewallCreationConfig":{
-	//   "endpointLocation":{ "availabilityZoneConfigList":[ {
-	//   "availabilityZoneName":"${AvailabilityZone}" } ] } }, "allowedIPV4CidrList":[ ]
-	//   } } } }"
 	//   - Example: SECURITY_GROUPS_COMMON
 	//   "{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false,
 	//   \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\"
@@ -1804,11 +1800,29 @@ type SecurityServicePolicyData struct {
 	//   policy security group.
 	//   - Example: SECURITY_GROUPS_USAGE_AUDIT
 	//   "{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"
+	//   - Example: SHIELD_ADVANCED with web ACL management
+	//   "{\"type\":\"SHIELD_ADVANCED\",\"optimizeUnassociatedWebACL\":true}" If you
+	//   set optimizeUnassociatedWebACL to true , Firewall Manager creates web ACLs in
+	//   accounts within the policy scope if the web ACLs will be used by at least one
+	//   resource. Firewall Manager creates web ACLs in the accounts within policy scope
+	//   only if the web ACLs will be used by at least one resource. If at any time an
+	//   account comes into policy scope, Firewall Manager automatically creates a web
+	//   ACL in the account if at least one resource will use the web ACL. Upon
+	//   enablement, Firewall Manager performs a one-time cleanup of unused web ACLs in
+	//   your account. The cleanup process can take several hours. If a resource leaves
+	//   policy scope after Firewall Manager creates a web ACL, Firewall Manager doesn't
+	//   disassociate the resource from the web ACL. If you want Firewall Manager to
+	//   clean up the web ACL, you must first manually disassociate the resources from
+	//   the web ACL, and then enable the manage unused web ACLs option in your policy.
+	//   If you set optimizeUnassociatedWebACL to false , and Firewall Manager
+	//   automatically creates an empty web ACL in each account that's within policy
+	//   scope.
 	//   - Specification for SHIELD_ADVANCED for Amazon CloudFront distributions
 	//   "{\"type\":\"SHIELD_ADVANCED\",\"automaticResponseConfiguration\":
 	//   {\"automaticResponseStatus\":\"ENABLED|IGNORED|DISABLED\",
 	//   \"automaticResponseAction\":\"BLOCK|COUNT\"},
-	//   \"overrideCustomerWebaclClassic\":true|false}" For example:
+	//   \"overrideCustomerWebaclClassic\":true|false,
+	//   \"optimizeUnassociatedWebACL\":true|false}" For example:
 	//   "{\"type\":\"SHIELD_ADVANCED\",\"automaticResponseConfiguration\":
 	//   {\"automaticResponseStatus\":\"ENABLED\",
 	//   \"automaticResponseAction\":\"COUNT\"}}" The default value for
@@ -1817,16 +1831,40 @@ type SecurityServicePolicyData struct {
 	//   value for overrideCustomerWebaclClassic is false . For other resource types
 	//   that you can protect with a Shield Advanced policy, this ManagedServiceData
 	//   configuration is an empty string.
-	//   - Example: WAFV2 - Account takeover prevention and Bot Control managed rule
-	//   groups, and rule action override
-	//   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesATPRuleSet\",\"managedRuleGroupConfigs\":[{\"awsmanagedRulesATPRuleSet\":{\"loginPath\":\"/loginpath\",\"requestInspection\":{\"payloadType\":\"FORM_ENCODED|JSON\",\"usernameField\":{\"identifier\":\"/form/username\"},\"passwordField\":{\"identifier\":\"/form/password\"}}}}]},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],\"sampledRequestsEnabled\":true},{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesBotControlRuleSet\",\"managedRuleGroupConfigs\":[{\"awsmanagedRulesBotControlRuleSet\":{\"inspectionLevel\":\"TARGETED|COMMON\"}}]},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],\"sampledRequestsEnabled\":true,\"ruleActionOverrides\":[{\"name\":\"Rule1\",\"actionToUse\":{\"allow|block|count|captcha|challenge\":{}}},{\"name\":\"Rule2\",\"actionToUse\":{\"allow|block|count|captcha|challenge\":{}}}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"customRequestHandling\":null,\"customResponse\":null,\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":null,\"sampledRequestsEnabledForDefaultActions\":true}"
+	//   - Example: THIRD_PARTY_FIREWALL Replace THIRD_PARTY_FIREWALL_NAME with the
+	//   name of the third-party firewall. "{ "type":"THIRD_PARTY_FIREWALL",
+	//   "thirdPartyFirewall":"THIRD_PARTY_FIREWALL_NAME", "thirdPartyFirewallConfig":{
+	//   "thirdPartyFirewallPolicyList":["global-1"] }, "firewallDeploymentModel":{
+	//   "distributedFirewallDeploymentModel":{
+	//   "distributedFirewallOrchestrationConfig":{ "firewallCreationConfig":{
+	//   "endpointLocation":{ "availabilityZoneConfigList":[ {
+	//   "availabilityZoneName":"${AvailabilityZone}" } ] } }, "allowedIPV4CidrList":[ ]
+	//   } } } }"
+	//   - Example: WAFV2 - Account takeover prevention, Bot Control managed rule
+	//   groups, optimize unassociated web ACL, and rule action override
+	//   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesATPRuleSet\",\"managedRuleGroupConfigs\":[{\"awsmanagedRulesATPRuleSet\":{\"loginPath\":\"/loginpath\",\"requestInspection\":{\"payloadType\":\"FORM_ENCODED|JSON\",\"usernameField\":{\"identifier\":\"/form/username\"},\"passwordField\":{\"identifier\":\"/form/password\"}}}}]},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],\"sampledRequestsEnabled\":true},{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesBotControlRuleSet\",\"managedRuleGroupConfigs\":[{\"awsmanagedRulesBotControlRuleSet\":{\"inspectionLevel\":\"TARGETED|COMMON\"}}]},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],\"sampledRequestsEnabled\":true,\"ruleActionOverrides\":[{\"name\":\"Rule1\",\"actionToUse\":{\"allow|block|count|captcha|challenge\":{}}},{\"name\":\"Rule2\",\"actionToUse\":{\"allow|block|count|captcha|challenge\":{}}}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"customRequestHandling\":null,\"customResponse\":null,\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":null,\"sampledRequestsEnabledForDefaultActions\":true,\"optimizeUnassociatedWebACL\":true}"
+	//   - Bot Control - For information about AWSManagedRulesBotControlRuleSet managed
+	//   rule groups, see AWSManagedRulesBotControlRuleSet (https://docs.aws.amazon.com/waf/latest/APIReference/API_AWSManagedRulesBotControlRuleSet.html)
+	//   in the WAF API Reference.
 	//   - Fraud Control account takeover prevention (ATP) - For information about the
 	//   properties available for AWSManagedRulesATPRuleSet managed rule groups, see
 	//   AWSManagedRulesATPRuleSet (https://docs.aws.amazon.com/waf/latest/APIReference/API_AWSManagedRulesATPRuleSet.html)
 	//   in the WAF API Reference.
-	//   - Bot Control - For information about AWSManagedRulesBotControlRuleSet managed
-	//   rule groups, see AWSManagedRulesBotControlRuleSet (https://docs.aws.amazon.com/waf/latest/APIReference/API_AWSManagedRulesBotControlRuleSet.html)
-	//   in the WAF API Reference.
+	//   - Optimize unassociated web ACL - If you set optimizeUnassociatedWebACL to
+	//   true , Firewall Manager creates web ACLs in accounts within the policy scope
+	//   if the web ACLs will be used by at least one resource. Firewall Manager creates
+	//   web ACLs in the accounts within policy scope only if the web ACLs will be used
+	//   by at least one resource. If at any time an account comes into policy scope,
+	//   Firewall Manager automatically creates a web ACL in the account if at least one
+	//   resource will use the web ACL. Upon enablement, Firewall Manager performs a
+	//   one-time cleanup of unused web ACLs in your account. The cleanup process can
+	//   take several hours. If a resource leaves policy scope after Firewall Manager
+	//   creates a web ACL, Firewall Manager disassociates the resource from the web ACL,
+	//   but won't clean up the unused web ACL. Firewall Manager only cleans up unused
+	//   web ACLs when you first enable management of unused web ACLs in a policy. If you
+	//   set optimizeUnassociatedWebACL to false Firewall Manager doesn't manage unused
+	//   web ACLs, and Firewall Manager automatically creates an empty web ACL in each
+	//   account that's within policy scope.
 	//   - Rule action overrides - Firewall Manager supports rule action overrides
 	//   only for managed rule groups. To configure a RuleActionOverrides add the Name
 	//   of the rule to override, and ActionToUse , which is the new action to use for
@@ -1834,14 +1872,20 @@ type SecurityServicePolicyData struct {
 	//   RuleActionOverride (https://docs.aws.amazon.com/waf/latest/APIReference/API_RuleActionOverride.html)
 	//   in the WAF API Reference.
 	//   - Example: WAFV2 - CAPTCHA and Challenge configs
-	//   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],\"sampledRequestsEnabled\":true}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"customRequestHandling\":null,\"customResponse\":null,\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":null,\"sampledRequestsEnabledForDefaultActions\":true,\"captchaConfig\":{\"immunityTimeProperty\":{\"immunityTime\":500}},\"challengeConfig\":{\"immunityTimeProperty\":{\"immunityTime\":800}},\"tokenDomains\":[\"google.com\",\"amazon.com\"]}"
-	//   If you update the policy's values for captchaConfig , challengeConfig , or
-	//   tokenDomains , Firewall Manager will overwrite your local web ACLs to contain
-	//   the new value(s). However, if you don't update the policy's captchaConfig ,
+	//   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],\"sampledRequestsEnabled\":true}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"customRequestHandling\":null,\"customResponse\":null,\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":null,\"sampledRequestsEnabledForDefaultActions\":true,\"captchaConfig\":{\"immunityTimeProperty\":{\"immunityTime\":500}},\"challengeConfig\":{\"immunityTimeProperty\":{\"immunityTime\":800}},\"tokenDomains\":[\"google.com\",\"amazon.com\"],\"associationConfig\":{\"requestBody\":{\"CLOUDFRONT\":{\"defaultSizeInspectionLimit\":\"KB_16\"}}}}"
+	//   - CAPTCHA and Challenge configs - If you update the policy's values for
+	//   associationConfig , captchaConfig , challengeConfig , or tokenDomains ,
+	//   Firewall Manager will overwrite your local web ACLs to contain the new value(s).
+	//   However, if you don't update the policy's associationConfig , captchaConfig ,
 	//   challengeConfig , or tokenDomains values, the values in your local web ACLs
-	//   will remain unchanged. For information about CAPTCHA and Challenge configs, see
-	//   CaptchaConfig (https://docs.aws.amazon.com/waf/latest/APIReference/API_CaptchaConfig.html)
+	//   will remain unchanged. For information about association configs, see
+	//   AssociationConfig (https://docs.aws.amazon.com/waf/latest/APIReference/API_AssociationConfig.html)
+	//   . For information about CAPTCHA and Challenge configs, see CaptchaConfig (https://docs.aws.amazon.com/waf/latest/APIReference/API_CaptchaConfig.html)
 	//   and ChallengeConfig (https://docs.aws.amazon.com/waf/latest/APIReference/API_ChallengeConfig.html)
+	//   in the WAF API Reference.
+	//   - defaultSizeInspectionLimit - Specifies the maximum size of the web request
+	//   body component that an associated Amazon CloudFront distribution should send to
+	//   WAF for inspection. For more information, see DefaultSizeInspectionLimit (https://docs.aws.amazon.com/waf/latest/APIReference/API_RequestBodyAssociatedResourceTypeConfig.html#WAF-Type-RequestBodyAssociatedResourceTypeConfig-DefaultSizeInspectionLimit)
 	//   in the WAF API Reference.
 	//   - Example: WAFV2 - Firewall Manager support for WAF managed rule group
 	//   versioning

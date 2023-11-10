@@ -1,0 +1,8 @@
+{
+    "id": "e6ab4efb-500d-45ce-a2fd-a2af187793e8",
+    "type": "feature",
+    "description": "Add paginators to GetEntitlements.",
+    "modules": [
+        "service/marketplaceentitlementservice"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "a425f54e-cac9-4da0-bf18-64e121e89fe8",
+    "type": "feature",
+    "description": "This release includes the ability to specify any input source as the primary input for corresponding follow modes, and allows users to specify fit and fill behaviors without resizing content.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

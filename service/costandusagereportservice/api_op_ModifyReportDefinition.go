@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to programatically update your report preferences.
+// Allows you to programmatically update your report preferences.
 func (c *Client) ModifyReportDefinition(ctx context.Context, params *ModifyReportDefinitionInput, optFns ...func(*Options)) (*ModifyReportDefinitionOutput, error) {
 	if params == nil {
 		params = &ModifyReportDefinitionInput{}
@@ -34,9 +34,9 @@ func (c *Client) ModifyReportDefinition(ctx context.Context, params *ModifyRepor
 
 type ModifyReportDefinitionInput struct {
 
-	// The definition of AWS Cost and Usage Report. You can specify the report name,
-	// time unit, report format, compression format, S3 bucket, additional artifacts,
-	// and schema elements in the definition.
+	// The definition of Amazon Web Services Cost and Usage Report. You can specify
+	// the report name, time unit, report format, compression format, S3 bucket,
+	// additional artifacts, and schema elements in the definition.
 	//
 	// This member is required.
 	ReportDefinition *types.ReportDefinition

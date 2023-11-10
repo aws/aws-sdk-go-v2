@@ -173,8 +173,8 @@ type DeleteCustomDBEngineVersionOutput struct {
 	// version.
 	SupportsGlobalDatabases *bool
 
-	// Indicates whether the DB engine version supports Aurora zero-ETL integrations
-	// with Amazon Redshift.
+	// Indicates whether the DB engine version supports zero-ETL integrations with
+	// Amazon Redshift.
 	SupportsIntegrations *bool
 
 	// Indicates whether the DB engine version supports forwarding write operations

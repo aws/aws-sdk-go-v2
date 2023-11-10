@@ -17,9 +17,7 @@ import (
 	"time"
 )
 
-// Creates a zero-ETL integration with Amazon Redshift. For more information, see
-// Working with Amazon Aurora zero-ETL integrations with Amazon Redshift (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.html)
-// in the Amazon Aurora User Guide.
+// Creates a zero-ETL integration with Amazon Redshift.
 func (c *Client) CreateIntegration(ctx context.Context, params *CreateIntegrationInput, optFns ...func(*Options)) (*CreateIntegrationOutput, error) {
 	if params == nil {
 		params = &CreateIntegrationInput{}
@@ -42,8 +40,8 @@ type CreateIntegrationInput struct {
 	// This member is required.
 	IntegrationName *string
 
-	// The Amazon Resource Name (ARN) of the Aurora DB cluster to use as the source
-	// for replication.
+	// The Amazon Resource Name (ARN) of the database to use as the source for
+	// replication.
 	//
 	// This member is required.
 	SourceArn *string
@@ -62,7 +60,7 @@ type CreateIntegrationInput struct {
 
 	// The Amazon Web Services Key Management System (Amazon Web Services KMS) key
 	// identifier for the key to use to encrypt the integration. If you don't specify
-	// an encryption key, Aurora uses a default Amazon Web Services owned key.
+	// an encryption key, RDS uses a default Amazon Web Services owned key.
 	KMSKeyId *string
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
@@ -72,9 +70,7 @@ type CreateIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
-// An Aurora zero-ETL integration with Amazon Redshift. For more information, see
-// Working with Amazon Aurora zero-ETL integrations with Amazon Redshift (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.html)
-// in the Amazon Aurora User Guide.
+// A zero-ETL integration with Amazon Redshift.
 type CreateIntegrationOutput struct {
 
 	// The encryption context for the integration. For more information, see
@@ -98,7 +94,7 @@ type CreateIntegrationOutput struct {
 	// identifier for the key used to to encrypt the integration.
 	KMSKeyId *string
 
-	// The Amazon Resource Name (ARN) of the Aurora DB cluster used as the source for
+	// The Amazon Resource Name (ARN) of the database used as the source for
 	// replication.
 	SourceArn *string
 

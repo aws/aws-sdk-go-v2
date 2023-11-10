@@ -1,0 +1,8 @@
+{
+    "id": "4a2554ab-9951-4829-98f6-2606d6a1d0db",
+    "type": "documentation",
+    "description": "Adds optimizeUnassociatedWebACL flag to ManagedServiceData, updates third-party firewall examples, and other minor documentation updates.",
+    "modules": [
+        "service/fms"
+    ]
+}

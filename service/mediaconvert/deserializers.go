@@ -4636,6 +4636,42 @@ func awsRestjson1_deserializeDocument__listOfAllowedRenditionSize(v *[]types.All
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfAudioChannelTag(v *[]types.AudioChannelTag, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AudioChannelTag
+	if *v == nil {
+		cv = []types.AudioChannelTag{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AudioChannelTag
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AudioChannelTag to be of type string, got %T instead", value)
+			}
+			col = types.AudioChannelTag(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfAudioDescription(v *[]types.AudioDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6438,6 +6474,11 @@ func awsRestjson1_deserializeDocumentAudioChannelTaggingSettings(v **types.Audio
 					return fmt.Errorf("expected AudioChannelTag to be of type string, got %T instead", value)
 				}
 				sv.ChannelTag = types.AudioChannelTag(jtv)
+			}
+
+		case "channelTags":
+			if err := awsRestjson1_deserializeDocument__listOfAudioChannelTag(&sv.ChannelTags, value); err != nil {
+				return err
 			}
 
 		default:
@@ -15652,6 +15693,19 @@ func awsRestjson1_deserializeDocumentJobSettings(v **types.JobSettings, value in
 				return err
 			}
 
+		case "followSource":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max150 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FollowSource = ptr.Int32(int32(i64))
+			}
+
 		case "inputs":
 			if err := awsRestjson1_deserializeDocument__listOfInput(&sv.Inputs, value); err != nil {
 				return err
@@ -15903,6 +15957,19 @@ func awsRestjson1_deserializeDocumentJobTemplateSettings(v **types.JobTemplateSe
 		case "extendedDataServices":
 			if err := awsRestjson1_deserializeDocumentExtendedDataServices(&sv.ExtendedDataServices, value); err != nil {
 				return err
+			}
+
+		case "followSource":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max150 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FollowSource = ptr.Int32(int32(i64))
 			}
 
 		case "inputs":

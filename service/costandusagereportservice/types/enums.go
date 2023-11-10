@@ -112,6 +112,26 @@ func (CompressionFormat) Values() []CompressionFormat {
 	}
 }
 
+type LastStatus string
+
+// Enum values for LastStatus
+const (
+	LastStatusSuccess          LastStatus = "SUCCESS"
+	LastStatusErrorPermissions LastStatus = "ERROR_PERMISSIONS"
+	LastStatusErrorNoBucket    LastStatus = "ERROR_NO_BUCKET"
+)
+
+// Values returns all known values for LastStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LastStatus) Values() []LastStatus {
+	return []LastStatus{
+		"SUCCESS",
+		"ERROR_PERMISSIONS",
+		"ERROR_NO_BUCKET",
+	}
+}
+
 type ReportFormat string
 
 // Enum values for ReportFormat
@@ -152,8 +172,9 @@ type SchemaElement string
 
 // Enum values for SchemaElement
 const (
-	SchemaElementResources               SchemaElement = "RESOURCES"
-	SchemaElementSplitCostAllocationData SchemaElement = "SPLIT_COST_ALLOCATION_DATA"
+	SchemaElementResources                   SchemaElement = "RESOURCES"
+	SchemaElementSplitCostAllocationData     SchemaElement = "SPLIT_COST_ALLOCATION_DATA"
+	SchemaElementManualDiscountCompatibility SchemaElement = "MANUAL_DISCOUNT_COMPATIBILITY"
 )
 
 // Values returns all known values for SchemaElement. Note that this can be
@@ -163,6 +184,7 @@ func (SchemaElement) Values() []SchemaElement {
 	return []SchemaElement{
 		"RESOURCES",
 		"SPLIT_COST_ALLOCATION_DATA",
+		"MANUAL_DISCOUNT_COMPATIBILITY",
 	}
 }
 

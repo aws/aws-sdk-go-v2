@@ -10,74 +10,57 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
-	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the controls enabled by AWS Control Tower on the specified organizational
-// unit and the accounts it contains. For usage examples, see the AWS Control
-// Tower User Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
+// Applies tags to a resource. For usage examples, see  the AWS Control Tower User
+// Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
 // .
-func (c *Client) ListEnabledControls(ctx context.Context, params *ListEnabledControlsInput, optFns ...func(*Options)) (*ListEnabledControlsOutput, error) {
+func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
-		params = &ListEnabledControlsInput{}
+		params = &TagResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEnabledControls", params, optFns, c.addOperationListEnabledControlsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagResource", params, optFns, c.addOperationTagResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListEnabledControlsOutput)
+	out := result.(*TagResourceOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListEnabledControlsInput struct {
+type TagResourceInput struct {
 
-	// The ARN of the organizational unit. For information on how to find the
-	// targetIdentifier , see the overview page (https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html)
-	// .
+	// The ARN of the resource to be tagged.
 	//
 	// This member is required.
-	TargetIdentifier *string
+	ResourceArn *string
 
-	// How many results to return per API call.
-	MaxResults *int32
-
-	// The token to continue the list from a previous API call with the same
-	// parameters.
-	NextToken *string
+	// Tags to be applied to the resource.
+	//
+	// This member is required.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-type ListEnabledControlsOutput struct {
-
-	// Lists the controls enabled by AWS Control Tower on the specified organizational
-	// unit and the accounts it contains.
-	//
-	// This member is required.
-	EnabledControls []types.EnabledControlSummary
-
-	// Retrieves the next page of results. If the string is empty, the current
-	// response is the end of the results.
-	NextToken *string
-
+type TagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListEnabledControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEnabledControls{}, middleware.After)
+func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpTagResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEnabledControls{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTagResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -120,13 +103,13 @@ func (c *Client) addOperationListEnabledControlsMiddlewares(stack *middleware.St
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addListEnabledControlsResolveEndpointMiddleware(stack, options); err != nil {
+	if err = addTagResourceResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpListEnabledControlsValidationMiddleware(stack); err != nil {
+	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnabledControls(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -147,116 +130,25 @@ func (c *Client) addOperationListEnabledControlsMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListEnabledControlsAPIClient is a client that implements the
-// ListEnabledControls operation.
-type ListEnabledControlsAPIClient interface {
-	ListEnabledControls(context.Context, *ListEnabledControlsInput, ...func(*Options)) (*ListEnabledControlsOutput, error)
-}
-
-var _ ListEnabledControlsAPIClient = (*Client)(nil)
-
-// ListEnabledControlsPaginatorOptions is the paginator options for
-// ListEnabledControls
-type ListEnabledControlsPaginatorOptions struct {
-	// How many results to return per API call.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// ListEnabledControlsPaginator is a paginator for ListEnabledControls
-type ListEnabledControlsPaginator struct {
-	options   ListEnabledControlsPaginatorOptions
-	client    ListEnabledControlsAPIClient
-	params    *ListEnabledControlsInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewListEnabledControlsPaginator returns a new ListEnabledControlsPaginator
-func NewListEnabledControlsPaginator(client ListEnabledControlsAPIClient, params *ListEnabledControlsInput, optFns ...func(*ListEnabledControlsPaginatorOptions)) *ListEnabledControlsPaginator {
-	if params == nil {
-		params = &ListEnabledControlsInput{}
-	}
-
-	options := ListEnabledControlsPaginatorOptions{}
-	if params.MaxResults != nil {
-		options.Limit = *params.MaxResults
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &ListEnabledControlsPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.NextToken,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListEnabledControlsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next ListEnabledControls page.
-func (p *ListEnabledControlsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListEnabledControlsOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.NextToken = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.MaxResults = limit
-
-	result, err := p.client.ListEnabledControls(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.NextToken
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
-}
-
-func newServiceMetadataMiddleware_opListEnabledControls(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opTagResource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "controltower",
-		OperationName: "ListEnabledControls",
+		OperationName: "TagResource",
 	}
 }
 
-type opListEnabledControlsResolveEndpointMiddleware struct {
+type opTagResourceResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  builtInParameterResolver
 }
 
-func (*opListEnabledControlsResolveEndpointMiddleware) ID() string {
+func (*opTagResourceResolveEndpointMiddleware) ID() string {
 	return "ResolveEndpointV2"
 }
 
-func (m *opListEnabledControlsResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *opTagResourceResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
@@ -358,8 +250,8 @@ func (m *opListEnabledControlsResolveEndpointMiddleware) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
-func addListEnabledControlsResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opListEnabledControlsResolveEndpointMiddleware{
+func addTagResourceResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opTagResourceResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
 		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,

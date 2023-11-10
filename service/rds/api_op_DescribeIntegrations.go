@@ -16,10 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe one or more zero-ETL integration with Amazon Redshift. For more
-// information, see Viewing and monitoring Amazon Aurora zero-ETL integrations
-// with Amazon Redshift (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.describingmonitoring.html)
-// in the Amazon Aurora User Guide
+// Describe one or more zero-ETL integrations with Amazon Redshift.
 func (c *Client) DescribeIntegrations(ctx context.Context, params *DescribeIntegrationsInput, optFns ...func(*Options)) (*DescribeIntegrationsOutput, error) {
 	if params == nil {
 		params = &DescribeIntegrationsInput{}

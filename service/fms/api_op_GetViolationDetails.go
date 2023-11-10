@@ -40,8 +40,13 @@ type GetViolationDetailsInput struct {
 	// This member is required.
 	MemberAccount *string
 
-	// The ID of the Firewall Manager policy that you want the details for. This
-	// currently only supports security group content audit policies.
+	// The ID of the Firewall Manager policy that you want the details for. You can
+	// get violation details for the following policy types:
+	//   - DNS Firewall
+	//   - Imported Network Firewall
+	//   - Network Firewall
+	//   - Security group content audit
+	//   - Third-party firewall
 	//
 	// This member is required.
 	PolicyId *string

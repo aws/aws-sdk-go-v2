@@ -19,6 +19,7 @@ import (
 // creates AWS resources on the specified organizational unit and the accounts it
 // contains. The resources created will vary according to the control that you
 // specify. For usage examples, see the AWS Control Tower User Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
+// .
 func (c *Client) EnableControl(ctx context.Context, params *EnableControlInput, optFns ...func(*Options)) (*EnableControlOutput, error) {
 	if params == nil {
 		params = &EnableControlInput{}
@@ -51,6 +52,9 @@ type EnableControlInput struct {
 	// This member is required.
 	TargetIdentifier *string
 
+	// Tags to be applied to the EnabledControl resource.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -61,6 +65,9 @@ type EnableControlOutput struct {
 	//
 	// This member is required.
 	OperationIdentifier *string
+
+	// The ARN of the EnabledControl resource.
+	Arn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

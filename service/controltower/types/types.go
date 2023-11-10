@@ -77,22 +77,19 @@ type EnabledControlDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of enabled controls.
+// Returns a summary of information about an enabled control.
 type EnabledControlSummary struct {
 
 	// The ARN of the enabled control.
 	Arn *string
 
-	// The ARN of the control. Only Strongly recommended and Elective controls are
-	// permitted, with the exception of the Region deny control. For information on how
-	// to find the controlIdentifier , see the overview page (https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html)
-	// .
+	// The controlIdentifier of the enabled control.
 	ControlIdentifier *string
 
 	// The drift status of the enabled control.
 	DriftStatusSummary *DriftStatusSummary
 
-	//
+	// A short description of the status of the enabled control.
 	StatusSummary *EnablementStatusSummary
 
 	// The ARN of the organizational unit.

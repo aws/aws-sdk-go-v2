@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the AWS Cost and Usage reports available to this account.
+// Lists the Amazon Web Services Cost and Usage Report available to this account.
 func (c *Client) DescribeReportDefinitions(ctx context.Context, params *DescribeReportDefinitionsInput, optFns ...func(*Options)) (*DescribeReportDefinitionsOutput, error) {
 	if params == nil {
 		params = &DescribeReportDefinitionsInput{}
@@ -32,10 +32,11 @@ func (c *Client) DescribeReportDefinitions(ctx context.Context, params *Describe
 	return out, nil
 }
 
-// Requests a list of AWS Cost and Usage reports owned by the account.
+// Requests a Amazon Web Services Cost and Usage Report list owned by the account.
 type DescribeReportDefinitionsInput struct {
 
-	// The maximum number of results that AWS returns for the operation.
+	// The maximum number of results that Amazon Web Services returns for the
+	// operation.
 	MaxResults *int32
 
 	// A generic string.
@@ -50,7 +51,7 @@ type DescribeReportDefinitionsOutput struct {
 	// A generic string.
 	NextToken *string
 
-	// A list of AWS Cost and Usage reports owned by the account.
+	// An Amazon Web Services Cost and Usage Report list owned by the account.
 	ReportDefinitions []types.ReportDefinition
 
 	// Metadata pertaining to the operation's result.
@@ -142,7 +143,8 @@ var _ DescribeReportDefinitionsAPIClient = (*Client)(nil)
 // DescribeReportDefinitionsPaginatorOptions is the paginator options for
 // DescribeReportDefinitions
 type DescribeReportDefinitionsPaginatorOptions struct {
-	// The maximum number of results that AWS returns for the operation.
+	// The maximum number of results that Amazon Web Services returns for the
+	// operation.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

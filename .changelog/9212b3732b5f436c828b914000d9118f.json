@@ -1,0 +1,8 @@
+{
+    "id": "9212b373-2b5f-436c-828b-914000d9118f",
+    "type": "feature",
+    "description": "This release adds support for tagging and customers can now tag report definitions. Additionally, ReportStatus is now added to report definition to show when the last delivered time stamp and if it succeeded or not.",
+    "modules": [
+        "service/costandusagereportservice"
+    ]
+}

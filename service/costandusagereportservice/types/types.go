@@ -6,9 +6,9 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// The definition of AWS Cost and Usage Report. You can specify the report name,
-// time unit, report format, compression format, S3 bucket, additional artifacts,
-// and schema elements in the definition.
+// The definition of Amazon Web Services Cost and Usage Report. You can specify
+// the report name, time unit, report format, compression format, S3 bucket,
+// additional artifacts, and schema elements in the definition.
 type ReportDefinition struct {
 
 	// A list of strings that indicate additional content that Amazon Web Services
@@ -17,12 +17,12 @@ type ReportDefinition struct {
 	// This member is required.
 	AdditionalSchemaElements []SchemaElement
 
-	// The compression format that AWS uses for the report.
+	// The compression format that Amazon Web Services uses for the report.
 	//
 	// This member is required.
 	Compression CompressionFormat
 
-	// The format that AWS saves the report in.
+	// The format that Amazon Web Services saves the report in.
 	//
 	// This member is required.
 	Format ReportFormat
@@ -33,18 +33,18 @@ type ReportDefinition struct {
 	// This member is required.
 	ReportName *string
 
-	// The S3 bucket where AWS delivers the report.
+	// The S3 bucket where Amazon Web Services delivers the report.
 	//
 	// This member is required.
 	S3Bucket *string
 
-	// The prefix that AWS adds to the report name when AWS delivers the report. Your
-	// prefix can't include spaces.
+	// The prefix that Amazon Web Services adds to the report name when Amazon Web
+	// Services delivers the report. Your prefix can't include spaces.
 	//
 	// This member is required.
 	S3Prefix *string
 
-	// The region of the S3 bucket that AWS delivers the report into.
+	// The region of the S3 bucket that Amazon Web Services delivers the report into.
 	//
 	// This member is required.
 	S3Region AWSRegion
@@ -57,8 +57,11 @@ type ReportDefinition struct {
 	// A list of manifests that you want Amazon Web Services to create for this report.
 	AdditionalArtifacts []AdditionalArtifact
 
-	// The Amazon resource name of the billing view. You can get this value by using
-	// the billing view service public APIs.
+	// The Amazon resource name of the billing view. The BillingViewArn is needed to
+	// create Amazon Web Services Cost and Usage Report for each billing group
+	// maintained in the Amazon Web Services Billing Conductor service. The
+	// BillingViewArn for a billing group can be constructed as:
+	// arn:aws:billing::payer-account-id:billingview/billing-group-primary-account-id
 	BillingViewArn *string
 
 	// Whether you want Amazon Web Services to update your reports after they have
@@ -66,9 +69,46 @@ type ReportDefinition struct {
 	// months. These charges can include refunds, credits, or support fees.
 	RefreshClosedReports *bool
 
+	// The status of the report.
+	ReportStatus *ReportStatus
+
 	// Whether you want Amazon Web Services to overwrite the previous version of each
 	// report or to deliver the report in addition to the previous versions.
 	ReportVersioning ReportVersioning
+
+	noSmithyDocumentSerde
+}
+
+// A two element dictionary with a lastDelivery and lastStatus key whose values
+// describe the date and status of the last delivered report for a particular
+// report definition.
+type ReportStatus struct {
+
+	// A timestamp that gives the date of a report delivery.
+	LastDelivery *string
+
+	// An enum that gives the status of a report delivery.
+	LastStatus LastStatus
+
+	noSmithyDocumentSerde
+}
+
+// Describes a tag. A tag is a key-value pair. You can add up to 50 tags to a
+// report definition.
+type Tag struct {
+
+	// The key of the tag. Tag keys are case sensitive. Each report definition can
+	// only have up to one tag with the same key. If you try to add an existing tag
+	// with the same key, the existing tag value will be updated to the new value.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the tag. Tag values are case-sensitive. This can be an empty
+	// string.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }

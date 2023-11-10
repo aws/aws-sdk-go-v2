@@ -41,6 +41,9 @@ type PutReportDefinitionInput struct {
 	// This member is required.
 	ReportDefinition *types.ReportDefinition
 
+	// The tags to be assigned to the report definition resource.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

@@ -155,6 +155,97 @@ func (c *Client) addOperationGetEntitlementsMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
+// GetEntitlementsAPIClient is a client that implements the GetEntitlements
+// operation.
+type GetEntitlementsAPIClient interface {
+	GetEntitlements(context.Context, *GetEntitlementsInput, ...func(*Options)) (*GetEntitlementsOutput, error)
+}
+
+var _ GetEntitlementsAPIClient = (*Client)(nil)
+
+// GetEntitlementsPaginatorOptions is the paginator options for GetEntitlements
+type GetEntitlementsPaginatorOptions struct {
+	// The maximum number of items to retrieve from the GetEntitlements operation. For
+	// pagination, use the NextToken field in subsequent calls to GetEntitlements.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetEntitlementsPaginator is a paginator for GetEntitlements
+type GetEntitlementsPaginator struct {
+	options   GetEntitlementsPaginatorOptions
+	client    GetEntitlementsAPIClient
+	params    *GetEntitlementsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetEntitlementsPaginator returns a new GetEntitlementsPaginator
+func NewGetEntitlementsPaginator(client GetEntitlementsAPIClient, params *GetEntitlementsInput, optFns ...func(*GetEntitlementsPaginatorOptions)) *GetEntitlementsPaginator {
+	if params == nil {
+		params = &GetEntitlementsInput{}
+	}
+
+	options := GetEntitlementsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &GetEntitlementsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetEntitlementsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next GetEntitlements page.
+func (p *GetEntitlementsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetEntitlementsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetEntitlements(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opGetEntitlements(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

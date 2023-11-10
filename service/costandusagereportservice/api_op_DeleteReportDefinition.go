@@ -15,7 +15,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified report.
+// Deletes the specified report. Any tags associated with the report are also
+// deleted.
 func (c *Client) DeleteReportDefinition(ctx context.Context, params *DeleteReportDefinitionInput, optFns ...func(*Options)) (*DeleteReportDefinitionOutput, error) {
 	if params == nil {
 		params = &DeleteReportDefinitionInput{}
@@ -36,6 +37,8 @@ type DeleteReportDefinitionInput struct {
 
 	// The name of the report that you want to delete. The name must be unique, is
 	// case sensitive, and can't include spaces.
+	//
+	// This member is required.
 	ReportName *string
 
 	noSmithyDocumentSerde
@@ -102,6 +105,9 @@ func (c *Client) addOperationDeleteReportDefinitionMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDeleteReportDefinitionResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addOpDeleteReportDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteReportDefinition(options.Region), middleware.Before); err != nil {

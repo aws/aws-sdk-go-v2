@@ -17,9 +17,7 @@ import (
 	"time"
 )
 
-// Deletes a zero-ETL integration with Amazon Redshift. For more information, see
-// Deleting Amazon Aurora zero-ETL integrations with Amazon Redshift (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.deleting.html)
-// in the Amazon Aurora User Guide
+// Deletes a zero-ETL integration with Amazon Redshift.
 func (c *Client) DeleteIntegration(ctx context.Context, params *DeleteIntegrationInput, optFns ...func(*Options)) (*DeleteIntegrationOutput, error) {
 	if params == nil {
 		params = &DeleteIntegrationInput{}
@@ -45,9 +43,7 @@ type DeleteIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
-// An Aurora zero-ETL integration with Amazon Redshift. For more information, see
-// Working with Amazon Aurora zero-ETL integrations with Amazon Redshift (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.html)
-// in the Amazon Aurora User Guide.
+// A zero-ETL integration with Amazon Redshift.
 type DeleteIntegrationOutput struct {
 
 	// The encryption context for the integration. For more information, see
@@ -71,7 +67,7 @@ type DeleteIntegrationOutput struct {
 	// identifier for the key used to to encrypt the integration.
 	KMSKeyId *string
 
-	// The Amazon Resource Name (ARN) of the Aurora DB cluster used as the source for
+	// The Amazon Resource Name (ARN) of the database used as the source for
 	// replication.
 	SourceArn *string
 

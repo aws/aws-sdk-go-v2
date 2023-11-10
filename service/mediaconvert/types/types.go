@@ -187,7 +187,7 @@ type AiffSettings struct {
 	// and even numbers up to 64. For example, 1, 2, 4, 6, and so on, up to 64.
 	Channels *int32
 
-	// Sample rate in hz.
+	// Sample rate in Hz.
 	SampleRate *int32
 
 	noSmithyDocumentSerde
@@ -236,19 +236,27 @@ type AncillarySourceSettings struct {
 	noSmithyDocumentSerde
 }
 
-// When you mimic a multi-channel audio layout with multiple mono-channel tracks,
-// you can tag each channel layout manually. For example, you would tag the tracks
-// that contain your left, right, and center audio with Left (L), Right (R), and
-// Center (C), respectively. When you don't specify a value, MediaConvert labels
-// your track as Center (C) by default. To use audio layout tagging, your output
-// must be in a QuickTime (.mov) container; your audio codec must be AAC, WAV, or
-// AIFF; and you must set up your audio track to have only one channel.
+// Specify the QuickTime audio channel layout tags for the audio channels in this
+// audio track. When you don't specify a value, MediaConvert labels your track as
+// Center (C) by default. To use Audio layout tagging, your output must be in a
+// QuickTime (MOV) container and your audio codec must be AAC, WAV, or AIFF.
 type AudioChannelTaggingSettings struct {
 
-	// You can add a tag for this mono-channel audio track to mimic its placement in a
-	// multi-channel layout. For example, if this track is the left surround channel,
-	// choose Left surround (LS).
+	// Specify the QuickTime audio channel layout tags for the audio channels in this
+	// audio track. Enter channel layout tags in the same order as your output's audio
+	// channel order. For example, if your output audio track has a left and a right
+	// channel, enter Left (L) for the first channel and Right (R) for the second. If
+	// your output has multiple single-channel audio tracks, enter a single channel
+	// layout tag for each track.
 	ChannelTag AudioChannelTag
+
+	// Specify the QuickTime audio channel layout tags for the audio channels in this
+	// audio track. Enter channel layout tags in the same order as your output's audio
+	// channel order. For example, if your output audio track has a left and a right
+	// channel, enter Left (L) for the first channel and Right (R) for the second. If
+	// your output has multiple single-channel audio tracks, enter a single channel
+	// layout tag for each track.
+	ChannelTags []AudioChannelTag
 
 	noSmithyDocumentSerde
 }
@@ -320,13 +328,10 @@ type AudioCodecSettings struct {
 // groups, one audio tab can correspond to a group of output audio tracks.
 type AudioDescription struct {
 
-	// When you mimic a multi-channel audio layout with multiple mono-channel tracks,
-	// you can tag each channel layout manually. For example, you would tag the tracks
-	// that contain your left, right, and center audio with Left (L), Right (R), and
-	// Center (C), respectively. When you don't specify a value, MediaConvert labels
-	// your track as Center (C) by default. To use audio layout tagging, your output
-	// must be in a QuickTime (.mov) container; your audio codec must be AAC, WAV, or
-	// AIFF; and you must set up your audio track to have only one channel.
+	// Specify the QuickTime audio channel layout tags for the audio channels in this
+	// audio track. When you don't specify a value, MediaConvert labels your track as
+	// Center (C) by default. To use Audio layout tagging, your output must be in a
+	// QuickTime (MOV) container and your audio codec must be AAC, WAV, or AIFF.
 	AudioChannelTaggingSettings *AudioChannelTaggingSettings
 
 	// Advanced audio normalization settings. Ignore these settings unless you need to
@@ -2904,9 +2909,9 @@ type ExtendedDataServices struct {
 // Settings for F4v container
 type F4vSettings struct {
 
-	// If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of
-	// the archive as required for progressive downloading. Otherwise it is placed
-	// normally at the end.
+	// To place the MOOV atom at the beginning of your output, which is useful for
+	// progressive downloading: Leave blank or choose Progressive download. To place
+	// the MOOV at the end of your output: Choose Normal.
 	MoovPlacement F4vMoovPlacement
 
 	noSmithyDocumentSerde
@@ -2995,7 +3000,7 @@ type FlacSettings struct {
 	// valid values are between 1 and 8.
 	Channels *int32
 
-	// Sample rate in hz.
+	// Sample rate in Hz.
 	SampleRate *int32
 
 	noSmithyDocumentSerde
@@ -5001,6 +5006,16 @@ type JobSettings struct {
 	// Content Advisory.
 	ExtendedDataServices *ExtendedDataServices
 
+	// Specify the input that MediaConvert references for your default output
+	// settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel
+	// aspect ratio for all outputs that you don't manually specify different output
+	// settings for. Enabling this setting will disable "Follow source" for all other
+	// inputs. If MediaConvert cannot follow your source, for example if you specify an
+	// audio-only input, MediaConvert uses the first followable input instead. In your
+	// JSON job specification, enter an integer from 1 to 150 corresponding to the
+	// order of your inputs.
+	FollowSource *int32
+
 	// Use Inputs to define source file used in the transcode job. There can be
 	// multiple inputs add in a job. These inputs will be concantenated together to
 	// create the output.
@@ -5136,6 +5151,16 @@ type JobTemplateSettings struct {
 	// more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h
 	// Content Advisory.
 	ExtendedDataServices *ExtendedDataServices
+
+	// Specify the input that MediaConvert references for your default output
+	// settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel
+	// aspect ratio for all outputs that you don't manually specify different output
+	// settings for. Enabling this setting will disable "Follow source" for all other
+	// inputs. If MediaConvert cannot follow your source, for example if you specify an
+	// audio-only input, MediaConvert uses the first followable input instead. In your
+	// JSON job specification, enter an integer from 1 to 150 corresponding to the
+	// order of your inputs.
+	FollowSource *int32
 
 	// Use Inputs to define the source file used in the transcode job. There can only
 	// be one input in a job template. Using the API, you can include multiple inputs
@@ -5787,7 +5812,7 @@ type Mp2Settings struct {
 	// 2. In the API, valid values are 1 and 2.
 	Channels *int32
 
-	// Sample rate in hz.
+	// Sample rate in Hz.
 	SampleRate *int32
 
 	noSmithyDocumentSerde
@@ -5809,7 +5834,7 @@ type Mp3Settings struct {
 	// bitrate (CBR) or a variable bitrate (VBR).
 	RateControlMode Mp3RateControlMode
 
-	// Sample rate in hz.
+	// Sample rate in Hz.
 	SampleRate *int32
 
 	// Required when you set Bitrate control mode to VBR. Specify the audio quality of
@@ -5855,9 +5880,9 @@ type Mp4Settings struct {
 	// Inserts a free-space box immediately after the moov box.
 	FreeSpaceBox Mp4FreeSpaceBox
 
-	// If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of
-	// the archive as required for progressive downloading. Otherwise it is placed
-	// normally at the end.
+	// To place the MOOV atom at the beginning of your output, which is useful for
+	// progressive downloading: Leave blank or choose Progressive download. To place
+	// the MOOV at the end of your output: Choose Normal.
 	MoovPlacement Mp4MoovPlacement
 
 	// Overrides the "Major Brand" field in the output file. Usually not necessary to
@@ -6570,7 +6595,7 @@ type OpusSettings struct {
 	// values are 1 and 2.
 	Channels *int32
 
-	// Optional. Sample rate in hz. Valid values are 16000, 24000, and 48000. The
+	// Optional. Sample rate in Hz. Valid values are 16000, 24000, and 48000. The
 	// default value is 48000.
 	SampleRate *int32
 
@@ -7685,11 +7710,9 @@ type VideoDescription struct {
 	// to remove all input AFD values from this output.
 	RespondToAfd RespondToAfd
 
-	// Specify how the service handles outputs that have a different aspect ratio from
-	// the input aspect ratio. Choose Stretch to output to have the service stretch
-	// your video image to fit. Keep the setting Default to have the service letterbox
-	// your video instead. This setting overrides any value that you specify for the
-	// setting Selection placement in this output.
+	// Specify the video Scaling behavior when your output has a different resolution
+	// than your input. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html
 	ScalingBehavior ScalingBehavior
 
 	// Use Sharpness setting to specify the strength of anti-aliasing. This setting
@@ -7737,7 +7760,8 @@ type VideoDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Overlay one or more videos on top of your input video.
+// Overlay one or more videos on top of your input video. For more information,
+// see https://docs.aws.amazon.com/mediaconvert/latest/ug/video-overlays.html
 type VideoOverlay struct {
 
 	// Enter the end timecode in the underlying input video for this overlay. Your
@@ -7782,11 +7806,11 @@ type VideoOverlayInput struct {
 	// start and end timecode.
 	InputClippings []VideoOverlayInputClipping
 
-	// Specify the starting timecode for your video overlay. To use the timecode
-	// present in your video overlay: Choose Embedded. To use a zerobased timecode:
-	// Choose Start at 0. To choose a timecode: Choose Specified start. When you do,
-	// enter the starting timecode in Start timecode. If you don't specify a value for
-	// Timecode source, MediaConvert uses Embedded by default.
+	// Specify the timecode source for your video overlay input clips. To use the
+	// timecode present in your video overlay: Choose Embedded. To use a zerobased
+	// timecode: Choose Start at 0. To choose a timecode: Choose Specified start. When
+	// you do, enter the starting timecode in Start timecode. If you don't specify a
+	// value for Timecode source, MediaConvert uses Embedded by default.
 	TimecodeSource InputTimecodeSource
 
 	// Specify the starting timecode for this video overlay. To use this setting, you

@@ -70837,6 +70837,116 @@ func awsEc2query_deserializeDocumentEnableFastSnapshotRestoreSuccessSetUnwrapped
 	*v = sv
 	return nil
 }
+func awsEc2query_deserializeDocumentEnaSrdSpecificationRequest(v **types.EnaSrdSpecificationRequest, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.EnaSrdSpecificationRequest
+	if *v == nil {
+		sv = &types.EnaSrdSpecificationRequest{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("EnaSrdEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.EnaSrdEnabled = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("EnaSrdUdpSpecification", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentEnaSrdUdpSpecificationRequest(&sv.EnaSrdUdpSpecification, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentEnaSrdUdpSpecificationRequest(v **types.EnaSrdUdpSpecificationRequest, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.EnaSrdUdpSpecificationRequest
+	if *v == nil {
+		sv = &types.EnaSrdUdpSpecificationRequest{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("EnaSrdUdpEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.EnaSrdUdpEnabled = ptr.Bool(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentEnclaveOptions(v **types.EnclaveOptions, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -80272,6 +80382,116 @@ func awsEc2query_deserializeDocumentInstance(v **types.Instance, decoder smithyx
 	return nil
 }
 
+func awsEc2query_deserializeDocumentInstanceAttachmentEnaSrdSpecification(v **types.InstanceAttachmentEnaSrdSpecification, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.InstanceAttachmentEnaSrdSpecification
+	if *v == nil {
+		sv = &types.InstanceAttachmentEnaSrdSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("enaSrdEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.EnaSrdEnabled = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("enaSrdUdpSpecification", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentInstanceAttachmentEnaSrdUdpSpecification(&sv.EnaSrdUdpSpecification, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentInstanceAttachmentEnaSrdUdpSpecification(v **types.InstanceAttachmentEnaSrdUdpSpecification, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.InstanceAttachmentEnaSrdUdpSpecification
+	if *v == nil {
+		sv = &types.InstanceAttachmentEnaSrdUdpSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("enaSrdUdpEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.EnaSrdUdpEnabled = ptr.Bool(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentInstanceBlockDeviceMapping(v **types.InstanceBlockDeviceMapping, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -82843,6 +83063,12 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceAttachment(v **types
 				sv.DeviceIndex = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("enaSrdSpecification", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentInstanceAttachmentEnaSrdSpecification(&sv.EnaSrdSpecification, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("networkCardIndex", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -83053,6 +83279,12 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceSpecification(v **ty
 					return err
 				}
 				sv.DeviceIndex = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("EnaSrdSpecification", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentEnaSrdSpecificationRequest(&sv.EnaSrdSpecification, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("SecurityGroupId", t.Name.Local):
@@ -92270,6 +92502,116 @@ func awsEc2query_deserializeDocumentLaunchTemplateElasticInferenceAcceleratorRes
 	*v = sv
 	return nil
 }
+func awsEc2query_deserializeDocumentLaunchTemplateEnaSrdSpecification(v **types.LaunchTemplateEnaSrdSpecification, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.LaunchTemplateEnaSrdSpecification
+	if *v == nil {
+		sv = &types.LaunchTemplateEnaSrdSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("enaSrdEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.EnaSrdEnabled = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("enaSrdUdpSpecification", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentLaunchTemplateEnaSrdUdpSpecification(&sv.EnaSrdUdpSpecification, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentLaunchTemplateEnaSrdUdpSpecification(v **types.LaunchTemplateEnaSrdUdpSpecification, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.LaunchTemplateEnaSrdUdpSpecification
+	if *v == nil {
+		sv = &types.LaunchTemplateEnaSrdUdpSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("enaSrdUdpEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.EnaSrdUdpEnabled = ptr.Bool(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentLaunchTemplateEnclaveOptions(v **types.LaunchTemplateEnclaveOptions, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -92756,6 +93098,12 @@ func awsEc2query_deserializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecif
 					return err
 				}
 				sv.DeviceIndex = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("enaSrdSpecification", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentLaunchTemplateEnaSrdSpecification(&sv.EnaSrdSpecification, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("groupSet", t.Name.Local):

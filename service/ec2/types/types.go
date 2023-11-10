@@ -612,22 +612,33 @@ type AthenaIntegration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the ENA Express configuration for the network interface that's
-// attached to the instance.
+// ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD)
+// technology to increase the maximum bandwidth used per stream and minimize tail
+// latency of network traffic between EC2 instances. With ENA Express, you can
+// communicate between two EC2 instances in the same subnet within the same
+// account, or in different accounts. Both sending and receiving instances must
+// have ENA Express enabled. To improve the reliability of network packet delivery,
+// ENA Express reorders network packets on the receiving end by default. However,
+// some UDP-based applications are designed to handle network packets that are out
+// of order to reduce the overhead for packet delivery at the network layer. When
+// ENA Express is enabled, you can specify whether UDP network traffic uses it.
 type AttachmentEnaSrdSpecification struct {
 
-	// Indicates whether ENA Express is enabled for the network interface that's
-	// attached to the instance.
+	// Indicates whether ENA Express is enabled for the network interface.
 	EnaSrdEnabled *bool
 
-	// ENA Express configuration for UDP network traffic.
+	// Configures ENA Express for UDP network traffic.
 	EnaSrdUdpSpecification *AttachmentEnaSrdUdpSpecification
 
 	noSmithyDocumentSerde
 }
 
-// Describes the ENA Express configuration for UDP traffic on the network
-// interface that's attached to the instance.
+// ENA Express is compatible with both TCP and UDP transport protocols. When it's
+// enabled, TCP traffic automatically uses it. However, some UDP-based applications
+// are designed to handle network packets that are out of order, without a need for
+// retransmission, such as live video broadcasting or other near-real-time
+// applications. For UDP traffic, you can specify whether to use ENA Express, based
+// on your application environment needs.
 type AttachmentEnaSrdUdpSpecification struct {
 
 	// Indicates whether UDP traffic to and from the instance uses ENA Express. To
@@ -3408,7 +3419,20 @@ type EnaSrdSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// ENA Express is compatible with both TCP and UDP transport protocols. When it’s
+// Launch instances with ENA Express settings configured from your launch template.
+type EnaSrdSpecificationRequest struct {
+
+	// Specifies whether ENA Express is enabled for the network interface when you
+	// launch an instance from your launch template.
+	EnaSrdEnabled *bool
+
+	// Contains ENA Express settings for UDP network traffic in your launch template.
+	EnaSrdUdpSpecification *EnaSrdUdpSpecificationRequest
+
+	noSmithyDocumentSerde
+}
+
+// ENA Express is compatible with both TCP and UDP transport protocols. When it's
 // enabled, TCP traffic automatically uses it. However, some UDP-based applications
 // are designed to handle network packets that are out of order, without a need for
 // retransmission, such as live video broadcasting or other near-real-time
@@ -3416,8 +3440,20 @@ type EnaSrdSpecification struct {
 // on your application environment needs.
 type EnaSrdUdpSpecification struct {
 
-	// Indicates whether UDP traffic uses ENA Express. To specify this setting, you
-	// must first enable ENA Express.
+	// Indicates whether UDP traffic to and from the instance uses ENA Express. To
+	// specify this setting, you must first enable ENA Express.
+	EnaSrdUdpEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Configures ENA Express for UDP network traffic from your launch template.
+type EnaSrdUdpSpecificationRequest struct {
+
+	// Indicates whether UDP traffic uses ENA Express for your instance. To ensure
+	// that UDP traffic can use ENA Express when you launch an instance, you must also
+	// set EnaSrdEnabled in the EnaSrdSpecificationRequest to true in your launch
+	// template.
 	EnaSrdUdpEnabled *bool
 
 	noSmithyDocumentSerde
@@ -5654,6 +5690,42 @@ type Instance struct {
 	noSmithyDocumentSerde
 }
 
+// ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD)
+// technology to increase the maximum bandwidth used per stream and minimize tail
+// latency of network traffic between EC2 instances. With ENA Express, you can
+// communicate between two EC2 instances in the same subnet within the same
+// account, or in different accounts. Both sending and receiving instances must
+// have ENA Express enabled. To improve the reliability of network packet delivery,
+// ENA Express reorders network packets on the receiving end by default. However,
+// some UDP-based applications are designed to handle network packets that are out
+// of order to reduce the overhead for packet delivery at the network layer. When
+// ENA Express is enabled, you can specify whether UDP network traffic uses it.
+type InstanceAttachmentEnaSrdSpecification struct {
+
+	// Indicates whether ENA Express is enabled for the network interface.
+	EnaSrdEnabled *bool
+
+	// Configures ENA Express for UDP network traffic.
+	EnaSrdUdpSpecification *InstanceAttachmentEnaSrdUdpSpecification
+
+	noSmithyDocumentSerde
+}
+
+// ENA Express is compatible with both TCP and UDP transport protocols. When it's
+// enabled, TCP traffic automatically uses it. However, some UDP-based applications
+// are designed to handle network packets that are out of order, without a need for
+// retransmission, such as live video broadcasting or other near-real-time
+// applications. For UDP traffic, you can specify whether to use ENA Express, based
+// on your application environment needs.
+type InstanceAttachmentEnaSrdUdpSpecification struct {
+
+	// Indicates whether UDP traffic to and from the instance uses ENA Express. To
+	// specify this setting, you must first enable ENA Express.
+	EnaSrdUdpEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // Describes a block device mapping.
 type InstanceBlockDeviceMapping struct {
 
@@ -6171,6 +6243,10 @@ type InstanceNetworkInterfaceAttachment struct {
 	// The index of the device on the instance for the network interface attachment.
 	DeviceIndex *int32
 
+	// Contains the ENA Express settings for the network interface that's attached to
+	// the instance.
+	EnaSrdSpecification *InstanceAttachmentEnaSrdSpecification
+
 	// The index of the network card.
 	NetworkCardIndex *int32
 
@@ -6210,6 +6286,10 @@ type InstanceNetworkInterfaceSpecification struct {
 	// network interface has a device index of 0. If you specify a network interface
 	// when launching an instance, you must specify the device index.
 	DeviceIndex *int32
+
+	// Specifies the ENA Express settings for the network interface that's attached to
+	// the instance.
+	EnaSrdSpecification *EnaSrdSpecificationRequest
 
 	// The IDs of the security groups for the network interface. Applies only if
 	// creating a network interface when launching an instance.
@@ -8373,6 +8453,42 @@ type LaunchTemplateElasticInferenceAcceleratorResponse struct {
 	noSmithyDocumentSerde
 }
 
+// ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD)
+// technology to increase the maximum bandwidth used per stream and minimize tail
+// latency of network traffic between EC2 instances. With ENA Express, you can
+// communicate between two EC2 instances in the same subnet within the same
+// account, or in different accounts. Both sending and receiving instances must
+// have ENA Express enabled. To improve the reliability of network packet delivery,
+// ENA Express reorders network packets on the receiving end by default. However,
+// some UDP-based applications are designed to handle network packets that are out
+// of order to reduce the overhead for packet delivery at the network layer. When
+// ENA Express is enabled, you can specify whether UDP network traffic uses it.
+type LaunchTemplateEnaSrdSpecification struct {
+
+	// Indicates whether ENA Express is enabled for the network interface.
+	EnaSrdEnabled *bool
+
+	// Configures ENA Express for UDP network traffic.
+	EnaSrdUdpSpecification *LaunchTemplateEnaSrdUdpSpecification
+
+	noSmithyDocumentSerde
+}
+
+// ENA Express is compatible with both TCP and UDP transport protocols. When it's
+// enabled, TCP traffic automatically uses it. However, some UDP-based applications
+// are designed to handle network packets that are out of order, without a need for
+// retransmission, such as live video broadcasting or other near-real-time
+// applications. For UDP traffic, you can specify whether to use ENA Express, based
+// on your application environment needs.
+type LaunchTemplateEnaSrdUdpSpecification struct {
+
+	// Indicates whether UDP traffic to and from the instance uses ENA Express. To
+	// specify this setting, you must first enable ENA Express.
+	EnaSrdUdpEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // Indicates whether the instance is enabled for Amazon Web Services Nitro
 // Enclaves.
 type LaunchTemplateEnclaveOptions struct {
@@ -8599,6 +8715,10 @@ type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 	// The device index for the network interface attachment.
 	DeviceIndex *int32
 
+	// Contains the ENA Express settings for instances launched from your launch
+	// template.
+	EnaSrdSpecification *LaunchTemplateEnaSrdSpecification
+
 	// The IDs of one or more security groups.
 	Groups []string
 
@@ -8675,6 +8795,9 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 
 	// The device index for the network interface attachment.
 	DeviceIndex *int32
+
+	// Configure ENA Express settings for your launch template.
+	EnaSrdSpecification *EnaSrdSpecificationRequest
 
 	// The IDs of one or more security groups.
 	Groups []string
@@ -9035,9 +9158,9 @@ type LaunchTemplateTagSpecificationRequest struct {
 	// The type of resource to tag. Valid Values lists all resource types for Amazon
 	// EC2 that can be tagged. When you create a launch template, you can specify tags
 	// for the following resource types only: instance | volume | elastic-gpu |
-	// network-interface | spot-instances-request . If the instance does include the
-	// resource type that you specify, the instance launch fails. For example, not all
-	// instance types include an Elastic GPU. To tag a resource after it has been
+	// network-interface | spot-instances-request . If the instance does not include
+	// the resource type that you specify, the instance launch fails. For example, not
+	// all instance types include an Elastic GPU. To tag a resource after it has been
 	// created, see CreateTags (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html)
 	// .
 	ResourceType ResourceType
@@ -11851,13 +11974,11 @@ type RequestLaunchTemplateData struct {
 
 	// One or more security group IDs. You can create a security group using
 	// CreateSecurityGroup (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html)
-	// . You cannot specify both a security group ID and security name in the same
-	// request.
+	// .
 	SecurityGroupIds []string
 
 	// One or more security group names. For a nondefault VPC, you must use security
-	// group IDs instead. You cannot specify both a security group ID and security name
-	// in the same request.
+	// group IDs instead.
 	SecurityGroups []string
 
 	// The tags to apply to the resources that are created during instance launch. You

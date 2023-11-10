@@ -16,13 +16,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides details about the enabled control. For usage examples, see  the AWS
+// Retrieves details about an enabled control. For usage examples, see  the AWS
 // Control Tower User Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
-// . Returned values
-//   - TargetRegions: Shows target AWS Regions where the enabled control is
-//     available to be deployed.
-//   - StatusSummary: Provides a detailed summary of the deployment status.
-//   - DriftSummary: Provides a detailed summary of the drifted status.
+// .
 func (c *Client) GetEnabledControl(ctx context.Context, params *GetEnabledControlInput, optFns ...func(*Options)) (*GetEnabledControlOutput, error) {
 	if params == nil {
 		params = &GetEnabledControlInput{}
@@ -40,7 +36,7 @@ func (c *Client) GetEnabledControl(ctx context.Context, params *GetEnabledContro
 
 type GetEnabledControlInput struct {
 
-	// The ARN of the enabled control.
+	// The controlIdentifier of the enabled control.
 	//
 	// This member is required.
 	EnabledControlIdentifier *string
