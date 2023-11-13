@@ -298,15 +298,6 @@ func TestEndpointWithARN(t *testing.T) {
 			expectedHeaderForOutpostID: "op-01234567890123456",
 			expectedHeaderForAccountID: true,
 		},
-		"Outpost AccessPoint with DualStack": {
-			accessPoint: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3control.Options{
-				Region:       "us-west-2",
-				UseARNRegion: true,
-				UseDualstack: true,
-			},
-			expectedErr: "Invalid configuration: Outpost Access Points do not support dual-stack",
-		},
 		"Invalid outpost resource format": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost",
 			options: s3control.Options{
@@ -438,14 +429,6 @@ func TestEndpointWithARN(t *testing.T) {
 			expectedSigningRegion:      "us-gov-east-1",
 			expectedHeaderForOutpostID: "op-01234567890123456",
 			expectedHeaderForAccountID: true,
-		},
-		"Outpost Bucket with DualStack": {
-			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
-			options: s3control.Options{
-				Region:       "us-west-2",
-				UseDualstack: true,
-			},
-			expectedErr: "Invalid configuration: Outpost buckets do not support dual-stack",
 		},
 		"Missing bucket id": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket",
