@@ -74,9 +74,9 @@ type CreateTaskSetInput struct {
 	// cluster is created.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
-	// The identifier that you provide to ensure the idempotency of the request. It's
-	// case sensitive and must be unique. It can be up to 32 ASCII characters are
-	// allowed.
+	// An identifier that you provide to ensure the idempotency of the request. It
+	// must be unique and is case sensitive. Up to 36 ASCII characters in the range of
+	// 33-126 (inclusive) are allowed.
 	ClientToken *string
 
 	// An optional non-unique tag that identifies this task set in external systems.

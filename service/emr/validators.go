@@ -2230,9 +2230,6 @@ func validateOpGetClusterSessionCredentialsInput(v *GetClusterSessionCredentials
 	if v.ClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
 	}
-	if v.ExecutionRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

@@ -430,8 +430,8 @@ func (r *resolver) ResolveEndpoint(
 				}
 			}
 			if _UseFIPS == true {
-				if true == _PartitionResult.SupportsFIPS {
-					if "aws-us-gov" == _PartitionResult.Name {
+				if _PartitionResult.SupportsFIPS == true {
+					if _PartitionResult.Name == "aws-us-gov" {
 						uriString := func() string {
 							var out strings.Builder
 							out.WriteString("https://dms.")
@@ -450,7 +450,7 @@ func (r *resolver) ResolveEndpoint(
 							Headers: http.Header{},
 						}, nil
 					}
-					if "aws-iso" == _PartitionResult.Name {
+					if _PartitionResult.Name == "aws-iso" {
 						uriString := func() string {
 							var out strings.Builder
 							out.WriteString("https://dms.")
@@ -469,7 +469,7 @@ func (r *resolver) ResolveEndpoint(
 							Headers: http.Header{},
 						}, nil
 					}
-					if "aws-iso-b" == _PartitionResult.Name {
+					if _PartitionResult.Name == "aws-iso-b" {
 						uriString := func() string {
 							var out strings.Builder
 							out.WriteString("https://dms.")

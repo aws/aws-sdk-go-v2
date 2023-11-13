@@ -17,7 +17,24 @@ import (
 )
 
 // Associates a resource with an application. The resource can be specified by its
-// ARN or name. The application can be specified by ARN, ID, or name.
+// ARN or name. The application can be specified by ARN, ID, or name. Minimum
+// permissions You must have the following permissions to associate a resource
+// using the OPTIONS parameter set to APPLY_APPLICATION_TAG .
+//   - tag:GetResources
+//   - tag:TagResources
+//
+// You must also have these additional permissions if you don't use the
+// AWSServiceCatalogAppRegistryFullAccess policy. For more information, see
+// AWSServiceCatalogAppRegistryFullAccess (https://docs.aws.amazon.com/servicecatalog/latest/arguide/full.html)
+// in the AppRegistry Administrator Guide.
+//   - resource-groups:DisassociateResource
+//   - cloudformation:UpdateStack
+//   - cloudformation:DescribeStacks
+//
+// In addition, you must have the tagging permission defined by the Amazon Web
+// Services service that creates the resource. For more information, see
+// TagResources (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html)
+// in the Resource Groups Tagging API Reference.
 func (c *Client) AssociateResource(ctx context.Context, params *AssociateResourceInput, optFns ...func(*Options)) (*AssociateResourceOutput, error) {
 	if params == nil {
 		params = &AssociateResourceInput{}
@@ -50,6 +67,9 @@ type AssociateResourceInput struct {
 	// This member is required.
 	ResourceType types.ResourceType
 
+	// Determines whether an application tag is applied or skipped.
+	Options []types.AssociationOption
+
 	noSmithyDocumentSerde
 }
 
@@ -58,6 +78,9 @@ type AssociateResourceOutput struct {
 	// The Amazon resource name (ARN) of the application that was augmented with
 	// attributes.
 	ApplicationArn *string
+
+	// Determines whether an application tag is applied or skipped.
+	Options []types.AssociationOption
 
 	// The Amazon resource name (ARN) that specifies the resource.
 	ResourceArn *string

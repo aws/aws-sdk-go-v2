@@ -129,6 +129,17 @@ func (m *awsRestjson1_serializeOpAssociateResource) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAssociateResourceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -164,6 +175,20 @@ func awsRestjson1_serializeOpHttpBindingsAssociateResourceInput(v *AssociateReso
 	}
 	if len(v.ResourceType) > 0 {
 		if err := encoder.SetURI("resourceType").String(string(v.ResourceType)); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAssociateResourceInput(v *AssociateResourceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Options != nil {
+		ok := object.Key("options")
+		if err := awsRestjson1_serializeDocumentOptions(v.Options, ok); err != nil {
 			return err
 		}
 	}
@@ -774,12 +799,26 @@ func awsRestjson1_serializeOpHttpBindingsGetAssociatedResourceInput(v *GetAssoci
 		}
 	}
 
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
 	if v.Resource == nil || len(*v.Resource) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member resource must not be empty")}
 	}
 	if v.Resource != nil {
 		if err := encoder.SetURI("resource").String(*v.Resource); err != nil {
 			return err
+		}
+	}
+
+	if v.ResourceTagStatus != nil {
+		for i := range v.ResourceTagStatus {
+			encoder.AddQuery("resourceTagStatus").String(string(v.ResourceTagStatus[i]))
 		}
 	}
 
@@ -1838,6 +1877,17 @@ func awsRestjson1_serializeDocumentAppRegistryConfiguration(v *types.AppRegistry
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOptions(v []types.AssociationOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

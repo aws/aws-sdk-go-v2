@@ -36,6 +36,7 @@ func (c *Client) DescribeDataProviders(ctx context.Context, params *DescribeData
 type DescribeDataProvidersInput struct {
 
 	// Filters applied to the data providers described in the form of key-value pairs.
+	// Valid filter names: data-provider-identifier
 	Filters []types.Filter
 
 	// Specifies the unique pagination token that makes it possible to display the

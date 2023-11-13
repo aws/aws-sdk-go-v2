@@ -17063,6 +17063,41 @@ func awsAwsjson11_deserializeDocumentIBMDb2Settings(v **types.IBMDb2Settings, va
 				sv.DatabaseName = ptr.String(jtv)
 			}
 
+		case "KeepCsvFiles":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.KeepCsvFiles = ptr.Bool(jtv)
+			}
+
+		case "LoadTimeout":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LoadTimeout = ptr.Int32(int32(i64))
+			}
+
+		case "MaxFileSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxFileSize = ptr.Int32(int32(i64))
+			}
+
 		case "MaxKBytesPerRead":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17141,6 +17176,19 @@ func awsAwsjson11_deserializeDocumentIBMDb2Settings(v **types.IBMDb2Settings, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Username = ptr.String(jtv)
+			}
+
+		case "WriteBufferSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WriteBufferSize = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -19282,6 +19330,19 @@ func awsAwsjson11_deserializeDocumentMySQLSettings(v **types.MySQLSettings, valu
 					return err
 				}
 				sv.EventsPollInterval = ptr.Int32(int32(i64))
+			}
+
+		case "ExecuteTimeout":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ExecuteTimeout = ptr.Int32(int32(i64))
 			}
 
 		case "MaxFileSize":
@@ -22101,6 +22162,22 @@ func awsAwsjson11_deserializeDocumentReplication(v **types.Replication, value in
 						return err
 					}
 					sv.ReplicationCreateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected TStamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "ReplicationDeprovisionTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ReplicationDeprovisionTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 
 				default:
 					return fmt.Errorf("expected TStamp to be a JSON Number, got %T instead", value)

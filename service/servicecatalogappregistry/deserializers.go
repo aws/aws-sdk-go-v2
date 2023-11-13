@@ -349,6 +349,11 @@ func awsRestjson1_deserializeOpDocumentAssociateResourceOutput(v **AssociateReso
 				sv.ApplicationArn = ptr.String(jtv)
 			}
 
+		case "options":
+			if err := awsRestjson1_deserializeDocumentOptions(&sv.Options, value); err != nil {
+				return err
+			}
+
 		case "resourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1465,6 +1470,11 @@ func awsRestjson1_deserializeOpDocumentGetApplicationOutput(v **GetApplicationOu
 
 	for key, value := range shape {
 		switch key {
+		case "applicationTag":
+			if err := awsRestjson1_deserializeDocumentApplicationTagDefinition(&sv.ApplicationTag, value); err != nil {
+				return err
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1698,6 +1708,16 @@ func awsRestjson1_deserializeOpDocumentGetAssociatedResourceOutput(v **GetAssoci
 
 	for key, value := range shape {
 		switch key {
+		case "applicationTagResult":
+			if err := awsRestjson1_deserializeDocumentApplicationTagResult(&sv.ApplicationTagResult, value); err != nil {
+				return err
+			}
+
+		case "options":
+			if err := awsRestjson1_deserializeDocumentOptions(&sv.Options, value); err != nil {
+				return err
+			}
+
 		case "resource":
 			if err := awsRestjson1_deserializeDocumentResource(&sv.Resource, value); err != nil {
 				return err
@@ -4059,6 +4079,11 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 
 	for key, value := range shape {
 		switch key {
+		case "applicationTag":
+			if err := awsRestjson1_deserializeDocumentApplicationTagDefinition(&sv.ApplicationTag, value); err != nil {
+				return err
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4251,6 +4276,105 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentApplicationTagDefinition(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentApplicationTagResult(v **types.ApplicationTagResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ApplicationTagResult
+	if *v == nil {
+		sv = &types.ApplicationTagResult{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "applicationTagStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApplicationTagStatus to be of type string, got %T instead", value)
+				}
+				sv.ApplicationTagStatus = types.ApplicationTagStatus(jtv)
+			}
+
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "resources":
+			if err := awsRestjson1_deserializeDocumentResourcesList(&sv.Resources, value); err != nil {
+				return err
 			}
 
 		default:
@@ -4731,6 +4855,11 @@ func awsRestjson1_deserializeDocumentIntegrations(v **types.Integrations, value 
 
 	for key, value := range shape {
 		switch key {
+		case "applicationTagResourceGroup":
+			if err := awsRestjson1_deserializeDocumentResourceGroup(&sv.ApplicationTagResourceGroup, value); err != nil {
+				return err
+			}
+
 		case "resourceGroup":
 			if err := awsRestjson1_deserializeDocumentResourceGroup(&sv.ResourceGroup, value); err != nil {
 				return err
@@ -4785,6 +4914,42 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentOptions(v *[]types.AssociationOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssociationOption
+	if *v == nil {
+		cv = []types.AssociationOption{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssociationOption
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AssociationOption to be of type string, got %T instead", value)
+			}
+			col = types.AssociationOption(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4811,7 +4976,7 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StackArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}
@@ -4990,6 +5155,11 @@ func awsRestjson1_deserializeDocumentResourceInfo(v **types.ResourceInfo, value 
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "options":
+			if err := awsRestjson1_deserializeDocumentOptions(&sv.Options, value); err != nil {
+				return err
+			}
+
 		case "resourceDetails":
 			if err := awsRestjson1_deserializeDocumentResourceDetails(&sv.ResourceDetails, value); err != nil {
 				return err
@@ -5120,6 +5290,107 @@ func awsRestjson1_deserializeDocumentResources(v *[]types.ResourceInfo, value in
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourcesList(v *[]types.ResourcesListItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ResourcesListItem
+	if *v == nil {
+		cv = []types.ResourcesListItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ResourcesListItem
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentResourcesListItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourcesListItem(v **types.ResourcesListItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResourcesListItem
+	if *v == nil {
+		sv = &types.ResourcesListItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourcesListItemErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "resourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		case "resourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceItemType to be of type string, got %T instead", value)
+				}
+				sv.ResourceType = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Status = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

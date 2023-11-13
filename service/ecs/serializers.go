@@ -6849,6 +6849,11 @@ func awsAwsjson11_serializeOpDocumentRunTaskInput(v *RunTaskInput, value smithyj
 		}
 	}
 
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.Cluster != nil {
 		ok := object.Key("cluster")
 		ok.String(*v.Cluster)

@@ -56,7 +56,7 @@ type CreateReplicationSubnetGroupInput struct {
 	// This member is required.
 	ReplicationSubnetGroupIdentifier *string
 
-	// One or more subnet IDs to be assigned to the subnet group.
+	// Two or more subnet IDs to be assigned to the subnet group.
 	//
 	// This member is required.
 	SubnetIds []string

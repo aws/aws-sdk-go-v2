@@ -375,8 +375,9 @@ type DataProvider struct {
 	Description *string
 
 	// The type of database engine for the data provider. Valid values include "aurora"
-	// , "aurora_postgresql" , "mysql" , "oracle" , "postgres" , and "sqlserver" . A
-	// value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
+	// , "aurora-postgresql" , "mysql" , "oracle" , "postgres" , "sqlserver" , redshift
+	// , mariadb , mongodb , and docdb . A value of "aurora" represents Amazon Aurora
+	// MySQL-Compatible Edition.
 	Engine *string
 
 	// The settings in JSON format for a data provider.
@@ -720,9 +721,9 @@ type Endpoint struct {
 
 	// The database engine name. Valid values, depending on the EndpointType, include
 	// "mysql" , "oracle" , "postgres" , "mariadb" , "aurora" , "aurora-postgresql" ,
-	// "redshift" , "s3" , "db2" , "db2-zos" , "azuredb" , "sybase" , "dynamodb" ,
-	// "mongodb" , "kinesis" , "kafka" , "elasticsearch" , "documentdb" , "sqlserver" ,
-	// "neptune" , and "babelfish" .
+	// "redshift" , "redshift-serverless" , "s3" , "db2" , "db2-zos" , "azuredb" ,
+	// "sybase" , "dynamodb" , "mongodb" , "kinesis" , "kafka" , "elasticsearch" ,
+	// "documentdb" , "sqlserver" , "neptune" , and "babelfish" .
 	EngineName *string
 
 	// Value returned by a call to CreateEndpoint that can be used for cross-account
@@ -1164,6 +1165,19 @@ type IBMDb2Settings struct {
 	// Database name for the endpoint.
 	DatabaseName *string
 
+	// If true, DMS saves any .csv files to the Db2 LUW target that were used to
+	// replicate data. DMS uses these files for analysis and troubleshooting. The
+	// default value is false.
+	KeepCsvFiles *bool
+
+	// The amount of time (in milliseconds) before DMS times out operations performed
+	// by DMS on the Db2 target. The default value is 1200 (20 minutes).
+	LoadTimeout *int32
+
+	// Specifies the maximum size (in KB) of .csv files used to transfer data to Db2
+	// LUW.
+	MaxFileSize *int32
+
 	// Maximum number of bytes per read, as a NUMBER value. The default is 64 KB.
 	MaxKBytesPerRead *int32
 
@@ -1199,6 +1213,11 @@ type IBMDb2Settings struct {
 
 	// Endpoint connection user name.
 	Username *string
+
+	// The size (in KB) of the in-memory file write buffer used when generating .csv
+	// files on the local disk on the DMS replication instance. The default value is
+	// 1024 (1 MB).
+	WriteBufferSize *int32
 
 	noSmithyDocumentSerde
 }
@@ -1820,6 +1839,9 @@ type MySQLSettings struct {
 	// database is idle. The default is five seconds. Example: eventsPollInterval=5;
 	// In the example, DMS checks for changes in the binary logs every five seconds.
 	EventsPollInterval *int32
+
+	// Sets the client statement timeout (in seconds) for a MySQL source endpoint.
+	ExecuteTimeout *int32
 
 	// Specifies the maximum size (in KB) of any .csv file used to transfer data to a
 	// MySQL-compatible database. Example: maxFileSize=512
@@ -2976,6 +2998,9 @@ type Replication struct {
 
 	// The time the serverless replication was created.
 	ReplicationCreateTime *time.Time
+
+	// The timestamp when DMS will deprovision the replication.
+	ReplicationDeprovisionTime *time.Time
 
 	// The timestamp when replication was last stopped.
 	ReplicationLastStopTime *time.Time

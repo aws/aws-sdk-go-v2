@@ -91,6 +91,13 @@ type RunTaskInput struct {
 	// capacity provider strategy may contain a maximum of 6 capacity providers.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
+	// An identifier that you provide to ensure the idempotency of the request. It
+	// must be unique and is case sensitive. Up to 64 characters are allowed. The valid
+	// characters are characters in the range of 33-126, inclusive. For more
+	// information, see Ensuring idempotency (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/ECS_Idempotency.html)
+	// .
+	ClientToken *string
+
 	// The short name or full Amazon Resource Name (ARN) of the cluster to run your
 	// task on. If you do not specify a cluster, the default cluster is assumed.
 	Cluster *string
@@ -176,7 +183,7 @@ type RunTaskInput struct {
 	// automatically trigger a task to run a batch process job, you could apply a
 	// unique identifier for that job to your task with the startedBy parameter. You
 	// can then identify which tasks belong to that job by filtering the results of a
-	// ListTasks call with the startedBy value. Up to 36 letters (uppercase and
+	// ListTasks call with the startedBy value. Up to 128 letters (uppercase and
 	// lowercase), numbers, hyphens (-), and underscores (_) are allowed. If a task is
 	// started by an Amazon ECS service, then the startedBy parameter contains the
 	// deployment ID of the service that starts it.
@@ -270,6 +277,9 @@ func (c *Client) addOperationRunTaskMiddlewares(stack *middleware.Stack, options
 	if err = addRunTaskResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opRunTaskMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRunTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -292,6 +302,39 @@ func (c *Client) addOperationRunTaskMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpRunTask struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpRunTask) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpRunTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*RunTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *RunTaskInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opRunTaskMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpRunTask{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opRunTask(region string) *awsmiddleware.RegisterServiceMetadata {

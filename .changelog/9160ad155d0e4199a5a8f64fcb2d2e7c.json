@@ -1,0 +1,8 @@
+{
+    "id": "9160ad15-5d0e-4199-a5a8-f64fcb2d2e7c",
+    "type": "feature",
+    "description": "Updated GetClusterSessionCredentials API  to allow Amazon SageMaker Studio to connect to EMR on EC2 clusters to support IdentityCenter/PEZ integration.",
+    "modules": [
+        "service/emr"
+    ]
+}

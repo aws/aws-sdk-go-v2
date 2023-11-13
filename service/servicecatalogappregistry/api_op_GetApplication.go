@@ -49,6 +49,9 @@ type GetApplicationInput struct {
 
 type GetApplicationOutput struct {
 
+	// A key-value pair that identifies an associated resource.
+	ApplicationTag map[string]string
+
 	// The Amazon resource name (ARN) that specifies the application across services.
 	Arn *string
 

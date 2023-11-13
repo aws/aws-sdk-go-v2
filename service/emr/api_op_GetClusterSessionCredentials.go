@@ -47,8 +47,6 @@ type GetClusterSessionCredentialsInput struct {
 	// submission on the cluster. The runtime role can be a cross-account IAM role. The
 	// runtime role ARN is a combination of account ID, role name, and role type using
 	// the following format: arn:partition:service:region:account:resource .
-	//
-	// This member is required.
 	ExecutionRoleArn *string
 
 	noSmithyDocumentSerde

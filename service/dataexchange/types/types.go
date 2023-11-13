@@ -1107,8 +1107,6 @@ type NotificationDetails struct {
 type OriginDetails struct {
 
 	// The product ID of the origin of the data set.
-	//
-	// This member is required.
 	ProductId *string
 
 	noSmithyDocumentSerde

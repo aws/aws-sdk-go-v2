@@ -534,6 +534,15 @@ func awsRestjson1_deserializeOpHttpBindingsStartStreamTranscriptionOutput(v *Sta
 		v.IdentifyLanguage = vv
 	}
 
+	if headerValues := response.Header.Values("x-amzn-transcribe-identify-multiple-languages"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		vv, err := strconv.ParseBool(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.IdentifyMultipleLanguages = vv
+	}
+
 	if headerValues := response.Header.Values("x-amzn-transcribe-language-code"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.LanguageCode = types.LanguageCode(headerValues[0])

@@ -331,6 +331,11 @@ func awsRestjson1_serializeOpHttpBindingsStartStreamTranscriptionInput(v *StartS
 		encoder.SetHeader(locationName).Boolean(v.IdentifyLanguage)
 	}
 
+	if v.IdentifyMultipleLanguages {
+		locationName := "X-Amzn-Transcribe-Identify-Multiple-Languages"
+		encoder.SetHeader(locationName).Boolean(v.IdentifyMultipleLanguages)
+	}
+
 	if len(v.LanguageCode) > 0 {
 		locationName := "X-Amzn-Transcribe-Language-Code"
 		encoder.SetHeader(locationName).String(string(v.LanguageCode))

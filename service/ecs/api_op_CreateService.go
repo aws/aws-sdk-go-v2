@@ -130,7 +130,8 @@ type CreateServiceInput struct {
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// An identifier that you provide to ensure the idempotency of the request. It
-	// must be unique and is case sensitive. Up to 32 ASCII characters are allowed.
+	// must be unique and is case sensitive. Up to 36 ASCII characters in the range of
+	// 33-126 (inclusive) are allowed.
 	ClientToken *string
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that you run

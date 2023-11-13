@@ -2492,41 +2492,40 @@ type DeregisterInstanceTagAttributeRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Describe details about a fast-launch enabled Windows image that meets the
-// requested criteria. Criteria are defined by the DescribeFastLaunchImages action
-// filters.
+// Describe details about a Windows image with Windows fast launch enabled that
+// meets the requested criteria. Criteria are defined by the
+// DescribeFastLaunchImages action filters.
 type DescribeFastLaunchImagesSuccessItem struct {
 
-	// The image ID that identifies the fast-launch enabled Windows image.
+	// The image ID that identifies the Windows fast launch enabled image.
 	ImageId *string
 
-	// The launch template that the fast-launch enabled Windows AMI uses when it
+	// The launch template that the Windows fast launch enabled AMI uses when it
 	// launches Windows instances from pre-provisioned snapshots.
 	LaunchTemplate *FastLaunchLaunchTemplateSpecificationResponse
 
 	// The maximum number of instances that Amazon EC2 can launch at the same time to
-	// create pre-provisioned snapshots for Windows faster launching.
+	// create pre-provisioned snapshots for Windows fast launch.
 	MaxParallelLaunches *int32
 
-	// The owner ID for the fast-launch enabled Windows AMI.
+	// The owner ID for the Windows fast launch enabled AMI.
 	OwnerId *string
 
-	// The resource type that is used for pre-provisioning the Windows AMI. Supported
-	// values include: snapshot .
+	// The resource type that Amazon EC2 uses for pre-provisioning the Windows AMI.
+	// Supported values include: snapshot .
 	ResourceType FastLaunchResourceType
 
 	// A group of parameters that are used for pre-provisioning the associated Windows
 	// AMI using snapshots.
 	SnapshotConfiguration *FastLaunchSnapshotConfigurationResponse
 
-	// The current state of faster launching for the specified Windows AMI.
+	// The current state of Windows fast launch for the specified Windows AMI.
 	State FastLaunchStateCode
 
-	// The reason that faster launching for the Windows AMI changed to the current
-	// state.
+	// The reason that Windows fast launch for the AMI changed to the current state.
 	StateTransitionReason *string
 
-	// The time that faster launching for the Windows AMI changed to the current state.
+	// The time that Windows fast launch for the AMI changed to the current state.
 	StateTransitionTime *time.Time
 
 	noSmithyDocumentSerde
@@ -3876,61 +3875,60 @@ type FailedQueuedPurchaseDeletion struct {
 	noSmithyDocumentSerde
 }
 
-// Request to create a launch template for a fast-launch enabled Windows AMI. Note
+// Request to create a launch template for a Windows fast launch enabled AMI. Note
 // - You can specify either the LaunchTemplateName or the LaunchTemplateId , but
 // not both.
 type FastLaunchLaunchTemplateSpecificationRequest struct {
 
-	// The version of the launch template to use for faster launching for a Windows
-	// AMI.
+	// Specify the version of the launch template that the AMI should use for Windows
+	// fast launch.
 	//
 	// This member is required.
 	Version *string
 
-	// The ID of the launch template to use for faster launching for a Windows AMI.
+	// Specify the ID of the launch template that the AMI should use for Windows fast
+	// launch.
 	LaunchTemplateId *string
 
-	// The name of the launch template to use for faster launching for a Windows AMI.
+	// Specify the name of the launch template that the AMI should use for Windows
+	// fast launch.
 	LaunchTemplateName *string
 
 	noSmithyDocumentSerde
 }
 
-// Identifies the launch template to use for faster launching of the Windows AMI.
+// Identifies the launch template that the AMI uses for Windows fast launch.
 type FastLaunchLaunchTemplateSpecificationResponse struct {
 
-	// The ID of the launch template for faster launching of the associated Windows
-	// AMI.
+	// The ID of the launch template that the AMI uses for Windows fast launch.
 	LaunchTemplateId *string
 
-	// The name of the launch template for faster launching of the associated Windows
-	// AMI.
+	// The name of the launch template that the AMI uses for Windows fast launch.
 	LaunchTemplateName *string
 
-	// The version of the launch template for faster launching of the associated
-	// Windows AMI.
+	// The version of the launch template that the AMI uses for Windows fast launch.
 	Version *string
 
 	noSmithyDocumentSerde
 }
 
 // Configuration settings for creating and managing pre-provisioned snapshots for
-// a fast-launch enabled Windows AMI.
+// a Windows fast launch enabled AMI.
 type FastLaunchSnapshotConfigurationRequest struct {
 
-	// The number of pre-provisioned snapshots to keep on hand for a fast-launch
-	// enabled Windows AMI.
+	// The number of pre-provisioned snapshots to keep on hand for a Windows fast
+	// launch enabled AMI.
 	TargetResourceCount *int32
 
 	noSmithyDocumentSerde
 }
 
 // Configuration settings for creating and managing pre-provisioned snapshots for
-// a fast-launch enabled Windows AMI.
+// a Windows fast launch enabled Windows AMI.
 type FastLaunchSnapshotConfigurationResponse struct {
 
-	// The number of pre-provisioned snapshots requested to keep on hand for a
-	// fast-launch enabled Windows AMI.
+	// The number of pre-provisioned snapshots requested to keep on hand for a Windows
+	// fast launch enabled AMI.
 	TargetResourceCount *int32
 
 	noSmithyDocumentSerde
@@ -7004,6 +7002,32 @@ type InstanceTagNotificationAttribute struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the instance topology.
+type InstanceTopology struct {
+
+	// The name of the Availability Zone or Local Zone that the instance is in.
+	AvailabilityZone *string
+
+	// The name of the placement group that the instance is in.
+	GroupName *string
+
+	// The instance ID.
+	InstanceId *string
+
+	// The instance type.
+	InstanceType *string
+
+	// The network nodes. The nodes are hashed based on your account. Instances from
+	// different accounts running under the same droplet will return a different hashed
+	// list of strings.
+	NetworkNodes []string
+
+	// The ID of the Availability Zone or Local Zone that the instance is in.
+	ZoneId *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the instance type.
 type InstanceTypeInfo struct {
 
@@ -9750,8 +9774,10 @@ type ModifyVpnTunnelOptionsSpecification struct {
 	// restart Default: clear
 	DPDTimeoutAction *string
 
-	// The number of seconds after which a DPD timeout occurs. Constraints: A value
-	// greater than or equal to 30. Default: 30
+	// The number of seconds after which a DPD timeout occurs. A DPD timeout of 40
+	// seconds means that the VPN endpoint will consider the peer dead 30 seconds after
+	// the first failed keep-alive. Constraints: A value greater than or equal to 30.
+	// Default: 40
 	DPDTimeoutSeconds *int32
 
 	// Turn on or off tunnel endpoint lifecycle control feature.
@@ -16705,7 +16731,7 @@ type VerifiedAccessEndpoint struct {
 	// The IDs of the security groups for the endpoint.
 	SecurityGroupIds []string
 
-	// Describes the options in use for server side encryption.
+	// The options in use for server side encryption.
 	SseSpecification *VerifiedAccessSseSpecificationResponse
 
 	// The endpoint status.
@@ -16790,7 +16816,7 @@ type VerifiedAccessGroup struct {
 	// The Amazon Web Services account number that owns the group.
 	Owner *string
 
-	// Describes the options in use for server side encryption.
+	// The options in use for server side encryption.
 	SseSpecification *VerifiedAccessSseSpecificationResponse
 
 	// The tags.
@@ -16817,7 +16843,7 @@ type VerifiedAccessInstance struct {
 	// A description for the Amazon Web Services Verified Access instance.
 	Description *string
 
-	// Describes whether support for Federal Information Processing Standards (FIPS)
+	// Indicates whether support for Federal Information Processing Standards (FIPS)
 	// is enabled on the instance.
 	FipsEnabled *bool
 
@@ -16924,13 +16950,13 @@ type VerifiedAccessLogOptions struct {
 	// Sends Verified Access logs to CloudWatch Logs.
 	CloudWatchLogs *VerifiedAccessLogCloudWatchLogsDestinationOptions
 
-	// Include trust data sent by trust providers into the logs.
+	// Indicates whether to include trust data sent by trust providers in the logs.
 	IncludeTrustContext *bool
 
 	// Sends Verified Access logs to Kinesis.
 	KinesisDataFirehose *VerifiedAccessLogKinesisDataFirehoseDestinationOptions
 
-	// The logging version to use. Valid values: ocsf-0.1 | ocsf-1.0.0-rc.2
+	// The logging version. Valid values: ocsf-0.1 | ocsf-1.0.0-rc.2
 	LogVersion *string
 
 	// Sends Verified Access logs to Amazon S3.
@@ -16945,13 +16971,13 @@ type VerifiedAccessLogs struct {
 	// CloudWatch Logs logging destination.
 	CloudWatchLogs *VerifiedAccessLogCloudWatchLogsDestination
 
-	// Describes current setting for including trust data into the logs.
+	// Indicates whether trust data is included in the logs.
 	IncludeTrustContext *bool
 
 	// Kinesis logging destination.
 	KinesisDataFirehose *VerifiedAccessLogKinesisDataFirehoseDestination
 
-	// Describes current setting for the logging version.
+	// The log version.
 	LogVersion *string
 
 	// Amazon S3 logging options.
@@ -17016,14 +17042,14 @@ type VerifiedAccessSseSpecificationRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the options in use for server side encryption.
+// The options in use for server side encryption.
 type VerifiedAccessSseSpecificationResponse struct {
 
-	// Describes the use of customer managed KMS keys for server side encryption.
-	// Valid values: True | False
+	// Indicates whether customer managed KMS keys are in use for server side
+	// encryption. Valid values: True | False
 	CustomerManagedKeyEnabled *bool
 
-	// Describes the ARN of the KMS key.
+	// The ARN of the KMS key.
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
@@ -17053,7 +17079,7 @@ type VerifiedAccessTrustProvider struct {
 	// The identifier to be used when working with policy rules.
 	PolicyReferenceName *string
 
-	// Describes the options in use for server side encryption.
+	// The options in use for server side encryption.
 	SseSpecification *VerifiedAccessSseSpecificationResponse
 
 	// The tags.
@@ -17101,7 +17127,8 @@ type VgwTelemetry struct {
 	// The Amazon Resource Name (ARN) of the VPN tunnel endpoint certificate.
 	CertificateArn *string
 
-	// The date and time of the last change in status.
+	// The date and time of the last change in status. This field is updated when
+	// changes in IKE (Phase 1), IPSec (Phase 2), or BGP status are detected.
 	LastStatusChange *time.Time
 
 	// The Internet-routable IP address of the virtual private gateway's outside

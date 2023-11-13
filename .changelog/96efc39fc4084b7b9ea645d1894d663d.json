@@ -1,0 +1,8 @@
+{
+    "id": "96efc39f-c408-4b7b-9ea6-45d1894d663d",
+    "type": "feature",
+    "description": "Added new Db2 LUW Target endpoint with related endpoint settings. New executeTimeout endpoint setting for mysql endpoint. New ReplicationDeprovisionTime field for serverless describe-replications.",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

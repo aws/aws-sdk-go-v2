@@ -6,9 +6,9 @@ type AcceleratorManufacturer string
 
 // Enum values for AcceleratorManufacturer
 const (
-	AcceleratorManufacturerNvidia            AcceleratorManufacturer = "nvidia"
-	AcceleratorManufacturerAmd               AcceleratorManufacturer = "amd"
 	AcceleratorManufacturerAmazonWebServices AcceleratorManufacturer = "amazon-web-services"
+	AcceleratorManufacturerAmd               AcceleratorManufacturer = "amd"
+	AcceleratorManufacturerNvidia            AcceleratorManufacturer = "nvidia"
 	AcceleratorManufacturerXilinx            AcceleratorManufacturer = "xilinx"
 )
 
@@ -17,9 +17,9 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (AcceleratorManufacturer) Values() []AcceleratorManufacturer {
 	return []AcceleratorManufacturer{
-		"nvidia",
-		"amd",
 		"amazon-web-services",
+		"amd",
+		"nvidia",
 		"xilinx",
 	}
 }
@@ -29,14 +29,14 @@ type AcceleratorName string
 // Enum values for AcceleratorName
 const (
 	AcceleratorNameA100          AcceleratorName = "a100"
-	AcceleratorNameV100          AcceleratorName = "v100"
-	AcceleratorNameK80           AcceleratorName = "k80"
-	AcceleratorNameT4            AcceleratorName = "t4"
-	AcceleratorNameM60           AcceleratorName = "m60"
-	AcceleratorNameRadeonProV520 AcceleratorName = "radeon-pro-v520"
-	AcceleratorNameVu9p          AcceleratorName = "vu9p"
 	AcceleratorNameInferentia    AcceleratorName = "inferentia"
 	AcceleratorNameK520          AcceleratorName = "k520"
+	AcceleratorNameK80           AcceleratorName = "k80"
+	AcceleratorNameM60           AcceleratorName = "m60"
+	AcceleratorNameRadeonProV520 AcceleratorName = "radeon-pro-v520"
+	AcceleratorNameT4            AcceleratorName = "t4"
+	AcceleratorNameVu9p          AcceleratorName = "vu9p"
+	AcceleratorNameV100          AcceleratorName = "v100"
 )
 
 // Values returns all known values for AcceleratorName. Note that this can be
@@ -45,14 +45,14 @@ const (
 func (AcceleratorName) Values() []AcceleratorName {
 	return []AcceleratorName{
 		"a100",
-		"v100",
-		"k80",
-		"t4",
-		"m60",
-		"radeon-pro-v520",
-		"vu9p",
 		"inferentia",
 		"k520",
+		"k80",
+		"m60",
+		"radeon-pro-v520",
+		"t4",
+		"vu9p",
+		"v100",
 	}
 }
 

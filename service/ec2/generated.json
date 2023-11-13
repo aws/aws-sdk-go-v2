@@ -280,6 +280,7 @@
         "api_op_DescribeInstanceEventNotificationAttributes.go",
         "api_op_DescribeInstanceEventWindows.go",
         "api_op_DescribeInstanceStatus.go",
+        "api_op_DescribeInstanceTopology.go",
         "api_op_DescribeInstanceTypeOfferings.go",
         "api_op_DescribeInstanceTypes.go",
         "api_op_DescribeInstances.go",

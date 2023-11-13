@@ -90,7 +90,7 @@ func (e *BlockedException) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 
 // These errors are usually caused by a client action. This client action might be
 // using an action or resource on behalf of a user that doesn't have permissions to
-// use the action or resource,. Or, it might be specifying an identifier that isn't
+// use the action or resource. Or, it might be specifying an identifier that isn't
 // valid.
 type ClientException struct {
 	Message *string
@@ -227,6 +227,39 @@ func (e *ClusterNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClusterNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The RunTask request could not be processed due to conflicts. The provided
+// clientToken is already in use with a different RunTask request. The resourceIds
+// are the existing task ARNs which are already associated with the clientToken .
+// To fix this issue:
+//   - Run RunTask with a unique clientToken .
+//   - Run RunTask with the clientToken and the original set of parameters
+type ConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ResourceIds []string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified parameter isn't valid. Review the available parameters for the
 // API request.

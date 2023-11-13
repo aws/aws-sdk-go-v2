@@ -1,0 +1,8 @@
+{
+    "id": "68151049-b2be-4a3c-afe5-940dda30d1f3",
+    "type": "feature",
+    "description": "This release enables customers to call the AWS Transcribe streaming service with the capability of identifying multiple languages in the stream.",
+    "modules": [
+        "service/transcribestreaming"
+    ]
+}

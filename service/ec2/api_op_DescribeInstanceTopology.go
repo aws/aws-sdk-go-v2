@@ -16,23 +16,39 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe details for Windows AMIs that are configured for Windows fast launch.
-func (c *Client) DescribeFastLaunchImages(ctx context.Context, params *DescribeFastLaunchImagesInput, optFns ...func(*Options)) (*DescribeFastLaunchImagesOutput, error) {
+// Describes a tree-based hierarchy that represents the physical host placement of
+// your EC2 instances within an Availability Zone or Local Zone. You can use this
+// information to determine the relative proximity of your EC2 instances within the
+// Amazon Web Services network to support your tightly coupled workloads.
+// Limitations
+//   - Supported zones
+//   - Availability Zone
+//   - Local Zone
+//   - Supported instance types
+//   - hpc6a.48xlarge | hpc6id.32xlarge | hpc7a.12xlarge | hpc7a.24xlarge |
+//     hpc7a.48xlarge | hpc7a.96xlarge | hpc7g.4xlarge | hpc7g.8xlarge |
+//     hpc7g.16xlarge
+//   - p3dn.24xlarge | p4d.24xlarge | p4de.24xlarge | p5.48xlarge
+//   - trn1.2xlarge | trn1.32xlarge | trn1n.32xlarge
+//
+// For more information, see Amazon EC2 instance topology (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-topology.html)
+// in the Amazon EC2 User Guide.
+func (c *Client) DescribeInstanceTopology(ctx context.Context, params *DescribeInstanceTopologyInput, optFns ...func(*Options)) (*DescribeInstanceTopologyOutput, error) {
 	if params == nil {
-		params = &DescribeFastLaunchImagesInput{}
+		params = &DescribeInstanceTopologyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFastLaunchImages", params, optFns, c.addOperationDescribeFastLaunchImagesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInstanceTopology", params, optFns, c.addOperationDescribeInstanceTopologyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeFastLaunchImagesOutput)
+	out := result.(*DescribeInstanceTopologyOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeFastLaunchImagesInput struct {
+type DescribeInstanceTopologyInput struct {
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -40,19 +56,30 @@ type DescribeFastLaunchImagesInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// Use the following filters to streamline results.
-	//   - resource-type - The resource type for pre-provisioning.
-	//   - owner-id - The owner ID for the pre-provisioning resource.
-	//   - state - The current state of fast launching for the Windows AMI.
+	// The filters.
+	//   - availability-zone - The name of the Availability Zone (for example,
+	//   us-west-2a ) or Local Zone (for example, us-west-2-lax-1b ) that the instance
+	//   is in.
+	//   - instance-type - The instance type (for example, p4d.24xlarge ) or instance
+	//   family (for example, p4d* ). You can use the * wildcard to match zero or more
+	//   characters, or the ? wildcard to match zero or one character.
+	//   - zone-id - The ID of the Availability Zone (for example, usw2-az2 ) or Local
+	//   Zone (for example, usw2-lax1-az1 ) that the instance is in.
 	Filters []types.Filter
 
-	// Specify one or more Windows AMI image IDs for the request.
-	ImageIds []string
+	// The name of the placement group that each instance is in. Constraints: Maximum
+	// 100 explicitly specified placement group names.
+	GroupNames []string
+
+	// The instance IDs. Default: Describes all your instances. Constraints: Maximum
+	// 100 explicitly specified instance IDs.
+	InstanceIds []string
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
-	// .
+	// . You can't specify this parameter and the instance IDs parameter in the same
+	// request. Default: 20
 	MaxResults *int32
 
 	// The token returned from a previous paginated request. Pagination continues from
@@ -62,11 +89,10 @@ type DescribeFastLaunchImagesInput struct {
 	noSmithyDocumentSerde
 }
 
-type DescribeFastLaunchImagesOutput struct {
+type DescribeInstanceTopologyOutput struct {
 
-	// A collection of details about the fast-launch enabled Windows images that meet
-	// the requested criteria.
-	FastLaunchImages []types.DescribeFastLaunchImagesSuccessItem
+	// Information about the topology of each instance.
+	Instances []types.InstanceTopology
 
 	// The token to include in another request to get the next page of items. This
 	// value is null when there are no more items to return.
@@ -78,12 +104,12 @@ type DescribeFastLaunchImagesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeFastLaunchImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeFastLaunchImages{}, middleware.After)
+func (c *Client) addOperationDescribeInstanceTopologyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeInstanceTopology{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsEc2query_deserializeOpDescribeFastLaunchImages{}, middleware.After)
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpDescribeInstanceTopology{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -126,10 +152,10 @@ func (c *Client) addOperationDescribeFastLaunchImagesMiddlewares(stack *middlewa
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addDescribeFastLaunchImagesResolveEndpointMiddleware(stack, options); err != nil {
+	if err = addDescribeInstanceTopologyResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFastLaunchImages(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInstanceTopology(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -150,21 +176,22 @@ func (c *Client) addOperationDescribeFastLaunchImagesMiddlewares(stack *middlewa
 	return nil
 }
 
-// DescribeFastLaunchImagesAPIClient is a client that implements the
-// DescribeFastLaunchImages operation.
-type DescribeFastLaunchImagesAPIClient interface {
-	DescribeFastLaunchImages(context.Context, *DescribeFastLaunchImagesInput, ...func(*Options)) (*DescribeFastLaunchImagesOutput, error)
+// DescribeInstanceTopologyAPIClient is a client that implements the
+// DescribeInstanceTopology operation.
+type DescribeInstanceTopologyAPIClient interface {
+	DescribeInstanceTopology(context.Context, *DescribeInstanceTopologyInput, ...func(*Options)) (*DescribeInstanceTopologyOutput, error)
 }
 
-var _ DescribeFastLaunchImagesAPIClient = (*Client)(nil)
+var _ DescribeInstanceTopologyAPIClient = (*Client)(nil)
 
-// DescribeFastLaunchImagesPaginatorOptions is the paginator options for
-// DescribeFastLaunchImages
-type DescribeFastLaunchImagesPaginatorOptions struct {
+// DescribeInstanceTopologyPaginatorOptions is the paginator options for
+// DescribeInstanceTopology
+type DescribeInstanceTopologyPaginatorOptions struct {
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
 	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
-	// .
+	// . You can't specify this parameter and the instance IDs parameter in the same
+	// request. Default: 20
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -172,23 +199,23 @@ type DescribeFastLaunchImagesPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// DescribeFastLaunchImagesPaginator is a paginator for DescribeFastLaunchImages
-type DescribeFastLaunchImagesPaginator struct {
-	options   DescribeFastLaunchImagesPaginatorOptions
-	client    DescribeFastLaunchImagesAPIClient
-	params    *DescribeFastLaunchImagesInput
+// DescribeInstanceTopologyPaginator is a paginator for DescribeInstanceTopology
+type DescribeInstanceTopologyPaginator struct {
+	options   DescribeInstanceTopologyPaginatorOptions
+	client    DescribeInstanceTopologyAPIClient
+	params    *DescribeInstanceTopologyInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewDescribeFastLaunchImagesPaginator returns a new
-// DescribeFastLaunchImagesPaginator
-func NewDescribeFastLaunchImagesPaginator(client DescribeFastLaunchImagesAPIClient, params *DescribeFastLaunchImagesInput, optFns ...func(*DescribeFastLaunchImagesPaginatorOptions)) *DescribeFastLaunchImagesPaginator {
+// NewDescribeInstanceTopologyPaginator returns a new
+// DescribeInstanceTopologyPaginator
+func NewDescribeInstanceTopologyPaginator(client DescribeInstanceTopologyAPIClient, params *DescribeInstanceTopologyInput, optFns ...func(*DescribeInstanceTopologyPaginatorOptions)) *DescribeInstanceTopologyPaginator {
 	if params == nil {
-		params = &DescribeFastLaunchImagesInput{}
+		params = &DescribeInstanceTopologyInput{}
 	}
 
-	options := DescribeFastLaunchImagesPaginatorOptions{}
+	options := DescribeInstanceTopologyPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -197,7 +224,7 @@ func NewDescribeFastLaunchImagesPaginator(client DescribeFastLaunchImagesAPIClie
 		fn(&options)
 	}
 
-	return &DescribeFastLaunchImagesPaginator{
+	return &DescribeInstanceTopologyPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -207,12 +234,12 @@ func NewDescribeFastLaunchImagesPaginator(client DescribeFastLaunchImagesAPIClie
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeFastLaunchImagesPaginator) HasMorePages() bool {
+func (p *DescribeInstanceTopologyPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next DescribeFastLaunchImages page.
-func (p *DescribeFastLaunchImagesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeFastLaunchImagesOutput, error) {
+// NextPage retrieves the next DescribeInstanceTopology page.
+func (p *DescribeInstanceTopologyPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeInstanceTopologyOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -226,7 +253,7 @@ func (p *DescribeFastLaunchImagesPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
-	result, err := p.client.DescribeFastLaunchImages(ctx, &params, optFns...)
+	result, err := p.client.DescribeInstanceTopology(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -245,25 +272,25 @@ func (p *DescribeFastLaunchImagesPaginator) NextPage(ctx context.Context, optFns
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opDescribeFastLaunchImages(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeInstanceTopology(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "ec2",
-		OperationName: "DescribeFastLaunchImages",
+		OperationName: "DescribeInstanceTopology",
 	}
 }
 
-type opDescribeFastLaunchImagesResolveEndpointMiddleware struct {
+type opDescribeInstanceTopologyResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  builtInParameterResolver
 }
 
-func (*opDescribeFastLaunchImagesResolveEndpointMiddleware) ID() string {
+func (*opDescribeInstanceTopologyResolveEndpointMiddleware) ID() string {
 	return "ResolveEndpointV2"
 }
 
-func (m *opDescribeFastLaunchImagesResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *opDescribeInstanceTopologyResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
@@ -365,8 +392,8 @@ func (m *opDescribeFastLaunchImagesResolveEndpointMiddleware) HandleSerialize(ct
 	return next.HandleSerialize(ctx, in)
 }
 
-func addDescribeFastLaunchImagesResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opDescribeFastLaunchImagesResolveEndpointMiddleware{
+func addDescribeInstanceTopologyResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opDescribeInstanceTopologyResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
 		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,

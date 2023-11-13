@@ -23,7 +23,7 @@ import (
 // Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to
 // Amazon Transcribe and the transcription results are streamed to your
 // application. The following parameters are required:
-//   - language-code or identify-language
+//   - language-code or identify-language or identify-multiple-language
 //   - media-encoding
 //   - sample-rate
 //
@@ -109,10 +109,25 @@ type StartStreamTranscriptionInput struct {
 	// omit this parameter. If you have multi-channel audio that contains different
 	// languages on each channel, and you've enabled channel identification, automatic
 	// language identification identifies the dominant language on each audio channel.
-	// Note that you must include either LanguageCode or IdentifyLanguage in your
-	// request. If you include both parameters, your request fails. Streaming language
-	// identification can't be combined with custom language models or redaction.
+	// Note that you must include either LanguageCode or IdentifyLanguage or
+	// IdentifyMultipleLanguages in your request. If you include more than one of these
+	// parameters, your transcription job fails. Streaming language identification
+	// can't be combined with custom language models or redaction.
 	IdentifyLanguage bool
+
+	// Enables automatic multi-language identification in your transcription job
+	// request. Use this parameter if your stream contains more than one language. If
+	// your stream contains only one language, use IdentifyLanguage instead. If you
+	// include IdentifyMultipleLanguages , you can optionally include a list of
+	// language codes, using LanguageOptions , that you think may be present in your
+	// stream. Including LanguageOptions restricts IdentifyMultipleLanguages to only
+	// the language options that you specify, which can improve transcription accuracy.
+	// If you want to apply a custom vocabulary or a custom vocabulary filter to your
+	// automatic multiple language identification request, include VocabularyNames or
+	// VocabularyFilterNames . Note that you must include one of LanguageCode ,
+	// IdentifyLanguage , or IdentifyMultipleLanguages in your request. If you include
+	// more than one of these parameters, your transcription job fails.
+	IdentifyMultipleLanguages bool
 
 	// Specify the language code that represents the language spoken in your audio. If
 	// you're unsure of the language spoken in your audio, consider using
@@ -249,6 +264,10 @@ type StartStreamTranscriptionOutput struct {
 	// Shows whether automatic language identification was enabled for your
 	// transcription.
 	IdentifyLanguage bool
+
+	// Shows whether automatic multi-language identification was enabled for your
+	// transcription.
+	IdentifyMultipleLanguages bool
 
 	// Provides the language code that you specified in your request.
 	LanguageCode types.LanguageCode

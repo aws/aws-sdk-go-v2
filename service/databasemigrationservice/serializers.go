@@ -6333,6 +6333,21 @@ func awsAwsjson11_serializeDocumentIBMDb2Settings(v *types.IBMDb2Settings, value
 		ok.String(*v.DatabaseName)
 	}
 
+	if v.KeepCsvFiles != nil {
+		ok := object.Key("KeepCsvFiles")
+		ok.Boolean(*v.KeepCsvFiles)
+	}
+
+	if v.LoadTimeout != nil {
+		ok := object.Key("LoadTimeout")
+		ok.Integer(*v.LoadTimeout)
+	}
+
+	if v.MaxFileSize != nil {
+		ok := object.Key("MaxFileSize")
+		ok.Integer(*v.MaxFileSize)
+	}
+
 	if v.MaxKBytesPerRead != nil {
 		ok := object.Key("MaxKBytesPerRead")
 		ok.Integer(*v.MaxKBytesPerRead)
@@ -6371,6 +6386,11 @@ func awsAwsjson11_serializeDocumentIBMDb2Settings(v *types.IBMDb2Settings, value
 	if v.Username != nil {
 		ok := object.Key("Username")
 		ok.String(*v.Username)
+	}
+
+	if v.WriteBufferSize != nil {
+		ok := object.Key("WriteBufferSize")
+		ok.Integer(*v.WriteBufferSize)
 	}
 
 	return nil
@@ -6907,6 +6927,11 @@ func awsAwsjson11_serializeDocumentMySQLSettings(v *types.MySQLSettings, value s
 	if v.EventsPollInterval != nil {
 		ok := object.Key("EventsPollInterval")
 		ok.Integer(*v.EventsPollInterval)
+	}
+
+	if v.ExecuteTimeout != nil {
+		ok := object.Key("ExecuteTimeout")
+		ok.Integer(*v.ExecuteTimeout)
 	}
 
 	if v.MaxFileSize != nil {

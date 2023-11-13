@@ -49,8 +49,9 @@ type ModifyDataProviderInput struct {
 	Description *string
 
 	// The type of database engine for the data provider. Valid values include "aurora"
-	// , "aurora_postgresql" , "mysql" , "oracle" , "postgres" , and "sqlserver" . A
-	// value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
+	// , "aurora-postgresql" , "mysql" , "oracle" , "postgres" , "sqlserver" , redshift
+	// , mariadb , mongodb , and docdb . A value of "aurora" represents Amazon Aurora
+	// MySQL-Compatible Edition.
 	Engine *string
 
 	// If this attribute is Y, the current call to ModifyDataProvider replaces all

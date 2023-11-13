@@ -36,8 +36,9 @@ func (c *Client) CreateDataProvider(ctx context.Context, params *CreateDataProvi
 type CreateDataProviderInput struct {
 
 	// The type of database engine for the data provider. Valid values include "aurora"
-	// , "aurora_postgresql" , "mysql" , "oracle" , "postgres" , and "sqlserver" . A
-	// value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
+	// , "aurora-postgresql" , "mysql" , "oracle" , "postgres" , "sqlserver" , redshift
+	// , mariadb , mongodb , and docdb . A value of "aurora" represents Amazon Aurora
+	// MySQL-Compatible Edition.
 	//
 	// This member is required.
 	Engine *string

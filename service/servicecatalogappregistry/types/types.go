@@ -11,6 +11,9 @@ import (
 // is the top-level node in a hierarchy of related cloud resource abstractions.
 type Application struct {
 
+	// A key-value pair that identifies an associated resource.
+	ApplicationTag map[string]string
+
 	// The Amazon resource name (ARN) that specifies the application across services.
 	Arn *string
 
@@ -59,6 +62,26 @@ type ApplicationSummary struct {
 	// The name of the application. The name must be unique in the region in which you
 	// are creating the application.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The result of the application tag that's applied to a resource.
+type ApplicationTagResult struct {
+
+	// The application tag is in the process of being applied to a resource, was
+	// successfully applied to a resource, or failed to apply to a resource.
+	ApplicationTagStatus ApplicationTagStatus
+
+	// The message returned if the call fails.
+	ErrorMessage *string
+
+	// A unique pagination token for each page of results. Make the call again with
+	// the returned token to retrieve the next page of results.
+	NextToken *string
+
+	// The resources associated with an application
+	Resources []ResourcesListItem
 
 	noSmithyDocumentSerde
 }
@@ -117,9 +140,6 @@ type AttributeGroupDetails struct {
 
 	// This field is no longer supported. We recommend you don't use the field when
 	// using ListAttributeGroupsForApplication . The name of the attribute group.
-	//
-	// Deprecated: This field is deprecated. We recommend not using the field when
-	// using ListAttributeGroupsForApplication.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -157,6 +177,9 @@ type AttributeGroupSummary struct {
 
 // The information about the service integration.
 type Integrations struct {
+
+	// The information about the resource group integration.
+	ApplicationTagResourceGroup *ResourceGroup
 
 	// The information about the resource group integration.
 	ResourceGroup *ResourceGroup
@@ -221,6 +244,9 @@ type ResourceInfo struct {
 	// The name of the resource.
 	Name *string
 
+	// Determines whether an application tag is applied or skipped.
+	Options []AssociationOption
+
 	// The details related to the resource.
 	ResourceDetails *ResourceDetails
 
@@ -235,6 +261,24 @@ type ResourceIntegrations struct {
 
 	// The information about the integration of Resource Groups.
 	ResourceGroup *ResourceGroup
+
+	noSmithyDocumentSerde
+}
+
+// The resource in a list of resources.
+type ResourcesListItem struct {
+
+	// The message returned if the call fails.
+	ErrorMessage *string
+
+	// The Amazon resource name (ARN) of the resource.
+	ResourceArn *string
+
+	// Provides information about the AppRegistry resource type.
+	ResourceType *string
+
+	// The status of the list item.
+	Status *string
 
 	noSmithyDocumentSerde
 }
