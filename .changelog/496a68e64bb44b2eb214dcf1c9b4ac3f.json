@@ -1,8 +1,0 @@
-{
-    "id": "496a68e6-4bb4-4b2e-b214-dcf1c9b4ac3f",
-    "type": "feature",
-    "description": "Removed Required trait for DataSet.OriginDetails.ProductId.",
-    "modules": [
-        "service/dataexchange"
-    ]
-}

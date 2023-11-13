@@ -1,3 +1,28 @@
+# Release (2023-11-13)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.24.0](config/CHANGELOG.md#v1240-2023-11-13)
+  * **Feature**: Replace the legacy config parser with a modern, less-strict implementation. Parsing failures within a section will now simply ignore the invalid line rather than silently drop the entire section.
+* `github.com/aws/aws-sdk-go-v2/internal/ini`: [v1.7.0](internal/ini/CHANGELOG.md#v170-2023-11-13)
+  * **Feature**: Replace the legacy config parser with a modern, less-strict implementation. Parsing failures within a section will now simply ignore the invalid line rather than silently drop the entire section.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.34.0](service/databasemigrationservice/CHANGELOG.md#v1340-2023-11-13)
+  * **Feature**: Added new Db2 LUW Target endpoint with related endpoint settings. New executeTimeout endpoint setting for mysql endpoint. New ReplicationDeprovisionTime field for serverless describe-replications.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.25.0](service/dataexchange/CHANGELOG.md#v1250-2023-11-13)
+  * **Feature**: Removed Required trait for DataSet.OriginDetails.ProductId.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.133.0](service/ec2/CHANGELOG.md#v11330-2023-11-13)
+  * **Feature**: Adds the new EC2 DescribeInstanceTopology API, which you can use to retrieve the network topology of your running instances on select platform types to determine their relative proximity to each other.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.33.0](service/ecs/CHANGELOG.md#v1330-2023-11-13)
+  * **Feature**: Adds a Client Token parameter to the ECS RunTask API. The Client Token parameter allows for idempotent RunTask requests.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.33.0](service/emr/CHANGELOG.md#v1330-2023-11-13)
+  * **Feature**: Updated GetClusterSessionCredentials API  to allow Amazon SageMaker Studio to connect to EMR on EC2 clusters to support IdentityCenter/PEZ integration.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry`: [v1.23.0](service/servicecatalogappregistry/CHANGELOG.md#v1230-2023-11-13)
+  * **Feature**: When the customer associates a resource collection to their application with this new feature, then a new application tag will be applied to all supported resources that are part of that collection. This allows customers to more easily find the application that is associated with those resources.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.14.0](service/transcribestreaming/CHANGELOG.md#v1140-2023-11-13)
+  * **Feature**: This release enables customers to call the AWS Transcribe streaming service with the capability of identifying multiple languages in the stream.
+
 # Release (2023-11-10)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.25.0 (2023-11-13)
+
+* **Feature**: Removed Required trait for DataSet.OriginDetails.ProductId.
+
 # v1.24.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

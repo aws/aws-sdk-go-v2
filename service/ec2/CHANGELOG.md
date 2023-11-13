@@ -1,3 +1,7 @@
+# v1.133.0 (2023-11-13)
+
+* **Feature**: Adds the new EC2 DescribeInstanceTopology API, which you can use to retrieve the network topology of your running instances on select platform types to determine their relative proximity to each other.
+
 # v1.132.0 (2023-11-10)
 
 * **Feature**: EC2 adds API updates to enable ENA Express at instance launch time.

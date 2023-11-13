@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.22.2
-	github.com/aws/aws-sdk-go-v2/config v1.23.0
+	github.com/aws/aws-sdk-go-v2/config v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/acm v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.24.1
@@ -20,20 +20,20 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.20.1
-	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.20.1
+	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.20.2
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.20.0
-	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.33.1
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.19.1
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.25.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.132.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.133.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.22.1
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.32.1
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.32.1
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.19.1
@@ -41,7 +41,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.24.1
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.18.1
-	github.com/aws/aws-sdk-go-v2/service/emr v1.32.1
+	github.com/aws/aws-sdk-go-v2/service/emr v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.24.1
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.26.1
@@ -67,7 +67,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.19.1
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.42.1
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.36.1
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.36.2
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.24.1
 	github.com/aws/aws-sdk-go-v2/service/ses v1.18.1
@@ -80,7 +80,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/support v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.22.1
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.13.1
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/waf v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.42.1
@@ -95,7 +95,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.14.3 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.2 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.2 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/ini v1.6.0 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/ini v1.7.0 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.2.2 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.10.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.2.2 // indirect

@@ -1,9 +1,0 @@
-{
-    "id": "7d0bbc14-77cd-4cef-a695-8c9762ace056",
-    "type": "feature",
-    "description": "Replace the legacy config parser with a modern, less-strict implementation. Parsing failures within a section will now simply ignore the invalid line rather than silently drop the entire section.",
-    "modules": [
-        "config",
-        "internal/ini"
-    ]
-}
