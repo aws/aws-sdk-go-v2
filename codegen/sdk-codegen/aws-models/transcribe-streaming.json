@@ -1890,7 +1890,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to \n      Amazon Transcribe and the transcription results are streamed to your application.</p>\n         <p>The following parameters are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>language-code</code> or <code>identify-language</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>media-encoding</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sample-rate</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information on streaming with Amazon Transcribe, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html\">Transcribing streaming audio</a>.</p>",
+                "smithy.api#documentation": "<p>Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to \n      Amazon Transcribe and the transcription results are streamed to your application.</p>\n         <p>The following parameters are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>language-code</code> or <code>identify-language</code> or <code>identify-multiple-language</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>media-encoding</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sample-rate</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information on streaming with Amazon Transcribe, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html\">Transcribing streaming audio</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/stream-transcription",
@@ -2030,7 +2030,7 @@
                     "target": "com.amazonaws.transcribestreaming#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Enables automatic language identification for your transcription.</p>\n         <p>If you include <code>IdentifyLanguage</code>, you can optionally include a list of \n      language codes, using <code>LanguageOptions</code>, that you think may be present in \n      your audio stream. Including language options can improve transcription accuracy.</p>\n         <p>You can also include a preferred language using <code>PreferredLanguage</code>. Adding a \n      preferred language can help Amazon Transcribe identify the language faster than if you omit this \n      parameter.</p>\n         <p>If you have multi-channel audio that contains different languages on each channel, and you've \n      enabled channel identification, automatic language identification identifies the dominant language on \n      each audio channel.</p>\n         <p>Note that you must include either <code>LanguageCode</code> or \n      <code>IdentifyLanguage</code> in your request. If you include both parameters, your request\n      fails.</p>\n         <p>Streaming language identification can't be combined with custom language models or \n      redaction.</p>",
+                        "smithy.api#documentation": "<p>Enables automatic language identification for your transcription.</p>\n         <p>If you include <code>IdentifyLanguage</code>, you can optionally include a list of \n      language codes, using <code>LanguageOptions</code>, that you think may be present in \n      your audio stream. Including language options can improve transcription accuracy.</p>\n         <p>You can also include a preferred language using <code>PreferredLanguage</code>. Adding a \n      preferred language can help Amazon Transcribe identify the language faster than if you omit this \n      parameter.</p>\n         <p>If you have multi-channel audio that contains different languages on each channel, and you've \n      enabled channel identification, automatic language identification identifies the dominant language on \n      each audio channel.</p>\n         <p>Note that you must include either <code>LanguageCode</code> or \n      <code>IdentifyLanguage</code> or <code>IdentifyMultipleLanguages</code> in your request. If you include more than one of these parameters, your transcription job\n      fails.</p>\n         <p>Streaming language identification can't be combined with custom language models or \n      redaction.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-identify-language"
                     }
                 },
@@ -2046,6 +2046,14 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specify a preferred language from the subset of languages codes you specified in \n      <code>LanguageOptions</code>.</p>\n         <p>You can only use this parameter if you've included <code>IdentifyLanguage</code> and\n        <code>LanguageOptions</code> in your request.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-preferred-language"
+                    }
+                },
+                "IdentifyMultipleLanguages": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Enables automatic multi-language identification in your transcription job request. Use this parameter if your stream contains more than one language. If your stream contains only one language, use IdentifyLanguage instead.</p>\n         <p>If you include <code>IdentifyMultipleLanguages</code>, you can optionally include a list of language codes, using <code>LanguageOptions</code>, that you think may be present in your stream. Including <code>LanguageOptions</code> restricts <code>IdentifyMultipleLanguages</code> to only the language options that you specify, which can improve transcription accuracy.</p>\n         <p>If you want to apply a custom vocabulary or a custom vocabulary filter to your automatic multiple language identification request, include <code>VocabularyNames</code> or <code>VocabularyFilterNames</code>.</p>\n         <p>Note that you must include one of <code>LanguageCode</code>, <code>IdentifyLanguage</code>, or <code>IdentifyMultipleLanguages</code> in your request. If you include more than one of these parameters, your transcription job fails.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-identify-multiple-languages"
                     }
                 },
                 "VocabularyNames": {
@@ -2221,6 +2229,14 @@
                         "smithy.api#httpHeader": "x-amzn-transcribe-preferred-language"
                     }
                 },
+                "IdentifyMultipleLanguages": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Shows whether automatic multi-language identification was enabled for your transcription.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-identify-multiple-languages"
+                    }
+                },
                 "VocabularyNames": {
                     "target": "com.amazonaws.transcribestreaming#VocabularyNames",
                     "traits": {
@@ -2353,7 +2369,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2396,7 +2411,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -2409,7 +2425,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2423,7 +2438,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -2446,7 +2460,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2481,7 +2494,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2492,14 +2504,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2513,14 +2527,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -2529,11 +2541,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2544,14 +2556,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2565,7 +2579,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2585,7 +2598,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2596,14 +2608,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -2614,9 +2628,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],

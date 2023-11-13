@@ -528,7 +528,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -571,7 +570,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -584,7 +584,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -598,7 +597,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -621,7 +619,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -656,7 +653,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -667,14 +663,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -688,14 +686,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -704,18 +700,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -724,7 +719,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -740,7 +736,6 @@
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-iso",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -749,7 +744,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-iso"
                                                                     ]
                                                                 }
                                                             ],
@@ -765,7 +761,6 @@
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-iso-b",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -774,7 +769,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-iso-b"
                                                                     ]
                                                                 }
                                                             ],
@@ -794,14 +790,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -815,7 +813,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -835,7 +832,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -846,14 +842,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -864,9 +862,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -2420,7 +2420,7 @@
                 "Engine": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora_postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         and <code>\"sqlserver\"</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>",
+                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3739,7 +3739,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.databasemigrationservice#SubnetIdentifierList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more subnet IDs to be assigned to the subnet group.</p>",
+                        "smithy.api#documentation": "<p>Two or more subnet IDs to be assigned to the subnet group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3993,7 +3993,7 @@
                 "Engine": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora_postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         and <code>\"sqlserver\"</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>"
+                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>"
                     }
                 },
                 "Settings": {
@@ -5809,7 +5809,7 @@
                 "Filters": {
                     "target": "com.amazonaws.databasemigrationservice#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters applied to the data providers described in the form of key-value pairs.</p>"
+                        "smithy.api#documentation": "<p>Filters applied to the data providers described in the form of key-value pairs.</p>\n         <p>Valid filter names: data-provider-identifier</p>"
                     }
                 },
                 "MaxRecords": {
@@ -9648,7 +9648,7 @@
                 "EngineName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database engine name. Valid values, depending on the EndpointType, include\n         <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,\n         <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>,\n         <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"db2-zos\"</code>, \n         <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, \n         <code>\"mongodb\"</code>, <code>\"kinesis\"</code>, <code>\"kafka\"</code>, \n         <code>\"elasticsearch\"</code>, <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, \n         <code>\"neptune\"</code>, and <code>\"babelfish\"</code>.</p>"
+                        "smithy.api#documentation": "<p>The database engine name. Valid values, depending on the EndpointType, include\n         <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,\n         <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>,\n         <code>\"redshift\"</code>, <code>\"redshift-serverless\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"db2-zos\"</code>, \n         <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, \n         <code>\"mongodb\"</code>, <code>\"kinesis\"</code>, <code>\"kafka\"</code>, \n         <code>\"elasticsearch\"</code>, <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, \n         <code>\"neptune\"</code>, and <code>\"babelfish\"</code>.</p>"
                     }
                 },
                 "EngineDisplayName": {
@@ -10612,6 +10612,30 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the Db2 LUW endpoint connection details.</p>"
+                    }
+                },
+                "LoadTimeout": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time (in milliseconds) before DMS times out operations performed by DMS on the Db2 target.\n         The default value is 1200 (20 minutes).</p>"
+                    }
+                },
+                "WriteBufferSize": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size (in KB) of the in-memory file write buffer used when generating .csv files on the local disk\n         on the DMS replication instance. The default value is 1024 (1 MB).</p>"
+                    }
+                },
+                "MaxFileSize": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum size (in KB) of .csv files used to transfer data to Db2 LUW.</p>"
+                    }
+                },
+                "KeepCsvFiles": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If true, DMS saves any .csv files to the Db2 LUW target that were used to replicate data. DMS uses these \n         files for analysis and troubleshooting.</p>\n         <p>The default value is false. </p>"
                     }
                 }
             },
@@ -11850,7 +11874,7 @@
                 "Engine": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora_postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         and <code>\"sqlserver\"</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>"
+                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>"
                     }
                 },
                 "ExactSettings": {
@@ -13378,6 +13402,12 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the MySQL endpoint connection details.</p>"
+                    }
+                },
+                "ExecuteTimeout": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the client statement timeout (in seconds) for a MySQL source endpoint.</p>"
                     }
                 }
             },
@@ -15297,6 +15327,12 @@
                     "target": "com.amazonaws.databasemigrationservice#TStamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when replication was last stopped.</p>"
+                    }
+                },
+                "ReplicationDeprovisionTime": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when DMS will deprovision the replication.</p>"
                     }
                 }
             },

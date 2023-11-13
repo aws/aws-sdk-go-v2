@@ -1738,7 +1738,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>These errors are usually caused by a client action. This client action might be using\n\t\t\tan action or resource on behalf of a user that doesn't have permissions to use the\n\t\t\taction or resource,. Or, it might be specifying an identifier that isn't valid.</p>",
+                "smithy.api#documentation": "<p>These errors are usually caused by a client action. This client action might be using\n\t\t\tan action or resource on behalf of a user that doesn't have permissions to use the\n\t\t\taction or resource. Or, it might be specifying an identifier that isn't valid.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -2052,6 +2052,24 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ecs#Compatibility"
+            }
+        },
+        "com.amazonaws.ecs#ConflictException": {
+            "type": "structure",
+            "members": {
+                "resourceIds": {
+                    "target": "com.amazonaws.ecs#ResourceIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The existing task ARNs which are already associated with the <code>clientToken</code>.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.ecs#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>RunTask</code> request could not be processed due to conflicts. The provided\n\t\t\t\t<code>clientToken</code> is already in use with a different <code>RunTask</code>\n\t\t\trequest. The <code>resourceIds</code> are the existing task ARNs which are already\n\t\t\tassociated with the <code>clientToken</code>. </p>\n         <p>To fix this issue:</p>\n         <ul>\n            <li>\n               <p>Run <code>RunTask</code> with a unique\n\t\t\t\t<code>clientToken</code>.</p>\n            </li>\n            <li>\n               <p>Run <code>RunTask</code> with the <code>clientToken</code> and the original set of\n\t\t\t\t\tparameters</p>\n            </li>\n         </ul>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.ecs#Connectivity": {
@@ -3138,7 +3156,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier that you provide to ensure the idempotency of the request. It must be\n\t\t\tunique and is case sensitive. Up to 32 ASCII characters are allowed.</p>"
+                        "smithy.api#documentation": "<p>An identifier that you provide to ensure the idempotency of the request. It must be\n\t\t\tunique and is case sensitive. Up to 36 ASCII characters in the range of 33-126 (inclusive) are allowed.</p>"
                     }
                 },
                 "launchType": {
@@ -3380,7 +3398,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier that you provide to ensure the idempotency of the request. It's case\n\t\t\tsensitive and must be unique. It can be up to 32 ASCII characters are allowed.</p>"
+                        "smithy.api#documentation": "<p>An identifier that you provide to ensure the idempotency of the request. It must be\n\t\t\tunique and is case sensitive. Up to 36 ASCII characters in the range of 33-126 (inclusive) are allowed.</p>"
                     }
                 },
                 "tags": {
@@ -8157,7 +8175,7 @@
                 "protocol": {
                     "target": "com.amazonaws.ecs#TransportProtocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol used for the port mapping. Valid values are <code>tcp</code> and\n\t\t\t\t<code>udp</code>. The default is <code>tcp</code>.</p>"
+                        "smithy.api#documentation": "<p>The protocol used for the port mapping. Valid values are <code>tcp</code> and\n\t\t\t<code>udp</code>. The default is <code>tcp</code>. <code>protocol</code> is immutable in a \n\t\t\tService Connect service. Updating this field requires a service deletion and \n\t\t\tredeployment.\n\t\t</p>"
                     }
                 },
                 "name": {
@@ -8169,7 +8187,7 @@
                 "appProtocol": {
                     "target": "com.amazonaws.ecs#ApplicationProtocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The application protocol that's used for the port mapping. This parameter only applies\n\t\t\tto Service Connect. We recommend that you set this parameter to be consistent with the\n\t\t\tprotocol that your application uses. If you set this parameter, Amazon ECS adds\n\t\t\tprotocol-specific connection handling to the Service Connect proxy. If you set this\n\t\t\tparameter, Amazon ECS adds protocol-specific telemetry in the Amazon ECS console and CloudWatch.</p>\n         <p>If you don't set a value for this parameter, then TCP is used. However, Amazon ECS doesn't\n\t\t\tadd protocol-specific telemetry for TCP.</p>\n         <p>Tasks that run in a namespace can use short names to connect\n\tto services in the namespace. Tasks can connect to services across all of the clusters in the namespace.\n\tTasks connect through a managed proxy container\n\tthat collects logs and metrics for increased visibility.\n\tOnly the tasks that Amazon ECS services create are supported with Service Connect.\n\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The application protocol that's used for the port mapping. This parameter only applies\n\t\t\tto Service Connect. We recommend that you set this parameter to be consistent with the\n\t\t\tprotocol that your application uses. If you set this parameter, Amazon ECS adds\n\t\t\tprotocol-specific connection handling to the Service Connect proxy. If you set this\n\t\t\tparameter, Amazon ECS adds protocol-specific telemetry in the Amazon ECS console and CloudWatch.</p>\n         <p>If you don't set a value for this parameter, then TCP is used. However, Amazon ECS doesn't\n\t\t\tadd protocol-specific telemetry for TCP.</p>\n         <p>\n            <code>appProtocol</code> is immutable in a Service Connect service. Updating this field \n\t\t\trequires a service deletion and redeployment.</p>\n         <p>Tasks that run in a namespace can use short names to connect\n\tto services in the namespace. Tasks can connect to services across all of the clusters in the namespace.\n\tTasks connect through a managed proxy container\n\tthat collects logs and metrics for increased visibility.\n\tOnly the tasks that Amazon ECS services create are supported with Service Connect.\n\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
                 "containerPortRange": {
@@ -8963,6 +8981,12 @@
                 "smithy.api#documentation": "<p>Describes the resources available for a container instance.</p>"
             }
         },
+        "com.amazonaws.ecs#ResourceIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#String"
+            }
+        },
         "com.amazonaws.ecs#ResourceInUseException": {
             "type": "structure",
             "members": {
@@ -9058,6 +9082,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.ecs#InvalidParameterException"
@@ -9207,7 +9234,7 @@
                 "startedBy": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional tag specified when a task is started. For example, if you automatically\n\t\t\ttrigger a task to run a batch process job, you could apply a unique identifier for that\n\t\t\tjob to your task with the <code>startedBy</code> parameter. You can then identify which\n\t\t\ttasks belong to that job by filtering the results of a <a>ListTasks</a> call\n\t\t\twith the <code>startedBy</code> value. Up to 36 letters (uppercase and lowercase),\n\t\t\tnumbers, hyphens (-), and underscores (_) are allowed.</p>\n         <p>If a task is started by an Amazon ECS service, then the <code>startedBy</code> parameter\n\t\t\tcontains the deployment ID of the service that starts it.</p>"
+                        "smithy.api#documentation": "<p>An optional tag specified when a task is started. For example, if you automatically trigger\n\t\t\ta task to run a batch process job, you could apply a unique identifier for that job to\n\t\t\tyour task with the <code>startedBy</code> parameter. You can then identify which tasks\n\t\t\tbelong to that job by filtering the results of a <a>ListTasks</a> call with\n\t\t\tthe <code>startedBy</code> value. Up to 128 letters (uppercase and lowercase), numbers,\n\t\t\thyphens (-), and underscores (_) are allowed.</p>\n         <p>If a task is started by an Amazon ECS service, then the <code>startedBy</code> parameter\n\t\t\tcontains the deployment ID of the service that starts it.</p>"
                     }
                 },
                 "tags": {
@@ -9222,6 +9249,13 @@
                         "smithy.api#documentation": "<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or\n\t\t\tfull ARN of the task definition to run. If a <code>revision</code> isn't specified,\n\t\t\tthe latest <code>ACTIVE</code> revision is used.</p>\n         <p>When you create a policy for run-task, you can set the resource to be the latest\n\t\t\ttask definition revision, or a specific revision.</p>\n         <p>The full ARN value must match the value that you specified as the\n\t\t\t\t<code>Resource</code> of the principal's permissions policy.</p>\n         <p>When you specify the policy resource as the latest task definition version (by setting\n\t\t\tthe <code>Resource</code> in the policy to\n\t\t\t\t<code>arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName</code>),\n\t\t\tthen set this value to\n\t\t\t\t<code>arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName</code>.</p>\n         <p>When you specify the policy resource as a specific task definition version (by setting\n\t\t\tthe <code>Resource</code> in the policy to\n\t\t\t\t<code>arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1</code> or\n\t\t\t\t<code>arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*</code>),\n\t\t\tthen set this value to\n\t\t\t\t<code>arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-resources\">Policy Resources for Amazon ECS</a> in the Amazon Elastic Container Service developer Guide.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier that you provide to ensure the idempotency of the request. It must be unique\n\t\t\tand is case sensitive. Up to 64 characters are allowed. The valid characters are characters in the range of 33-126, inclusive. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/ECS_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
                 }
             },
             "traits": {
@@ -9234,7 +9268,7 @@
                 "tasks": {
                     "target": "com.amazonaws.ecs#Tasks",
                     "traits": {
-                        "smithy.api#documentation": "<p>A full description of the tasks that were run. The tasks that were successfully placed\n\t\t\ton your cluster are described here.</p>"
+                        "smithy.api#documentation": "<p>A full description of the tasks that were run. The tasks that were successfully placed\n\t\t\ton your cluster are described here.</p>\n         <p></p>"
                     }
                 },
                 "failures": {

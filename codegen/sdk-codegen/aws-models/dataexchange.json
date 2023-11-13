@@ -4792,8 +4792,7 @@
                 "ProductId": {
                     "target": "com.amazonaws.dataexchange#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The product ID of the origin of the data set.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The product ID of the origin of the data set.</p>"
                     }
                 }
             },

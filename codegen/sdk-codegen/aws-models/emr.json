@@ -4102,9 +4102,7 @@
                 "ExecutionRoleArn": {
                     "target": "com.amazonaws.emr#ArnType",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the runtime role for interactive workload submission\n         on the cluster. The runtime role can be a cross-account IAM role. The\n         runtime role ARN is a combination of account ID, role name, and role type using the\n         following format: <code>arn:partition:service:region:account:resource</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the runtime role for interactive workload submission\n         on the cluster. The runtime role can be a cross-account IAM role. The\n         runtime role ARN is a combination of account ID, role name, and role type using the\n         following format: <code>arn:partition:service:region:account:resource</code>.</p>"
                     }
                 }
             },
