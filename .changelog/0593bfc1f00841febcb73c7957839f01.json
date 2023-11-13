@@ -2,7 +2,7 @@
     "id": "0593bfc1-f008-41fe-bcb7-3c7957839f01",
     "type": "feature",
     "collapse": true,
-    "description": "Add support for dynamic auth token from file and EKS container host in absolute/relative URIs in the HTTP credential provider to support upcoming IRSAv2 authentication in EKS.",
+    "description": "Add support for dynamic auth token from file and EKS container host in absolute/relative URIs in the HTTP credential provider.",
     "modules": [
         "config",
         "credentials"
