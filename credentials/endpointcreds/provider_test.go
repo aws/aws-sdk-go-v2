@@ -108,6 +108,90 @@ func TestRetrieveStaticCredentials(t *testing.T) {
 	}
 }
 
+func TestAuthTokenProvider(t *testing.T) {
+	cases := map[string]struct {
+		AuthToken         string
+		AuthTokenProvider endpointcreds.AuthTokenProvider
+		ExpectAuthToken   string
+		ExpectError       bool
+	}{
+		"AuthToken": {
+			AuthToken:       "Basic abc123",
+			ExpectAuthToken: "Basic abc123",
+		},
+		"AuthFileToken": {
+			AuthToken: "Basic abc123",
+			AuthTokenProvider: endpointcreds.TokenProviderFunc(func() (string, error) {
+				return "Hello %20world", nil
+			}),
+			ExpectAuthToken: "Hello %20world",
+		},
+		"RetrieveFileTokenError": {
+			AuthToken: "Basic abc123",
+			AuthTokenProvider: endpointcreds.TokenProviderFunc(func() (string, error) {
+				return "", fmt.Errorf("test error")
+			}),
+			ExpectAuthToken: "Hello %20world",
+			ExpectError:     true,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			orig := sdk.NowTime
+			defer func() { sdk.NowTime = orig }()
+
+			var actualToken string
+			p := endpointcreds.New("http://127.0.0.1", func(o *endpointcreds.Options) {
+				o.HTTPClient = mockClient(func(r *http.Request) (*http.Response, error) {
+					actualToken = r.Header["Authorization"][0]
+					return &http.Response{
+						StatusCode: 200,
+						Body: ioutil.NopCloser(bytes.NewReader([]byte(`{
+  "AccessKeyID": "AKID",
+  "SecretAccessKey": "SECRET"
+}`))),
+					}, nil
+				})
+				o.AuthorizationToken = c.AuthToken
+				o.AuthorizationTokenProvider = c.AuthTokenProvider
+			})
+			creds, err := p.Retrieve(context.Background())
+
+			if err != nil && !c.ExpectError {
+				t.Errorf("expect no error, got %v", err)
+			} else if err == nil && c.ExpectError {
+				t.Errorf("expect error, got nil")
+			}
+
+			if c.ExpectError {
+				return
+			}
+
+			if e, a := "AKID", creds.AccessKeyID; e != a {
+				t.Errorf("expect %v, got %v", e, a)
+			}
+			if e, a := "SECRET", creds.SecretAccessKey; e != a {
+				t.Errorf("expect %v, got %v", e, a)
+			}
+			if v := creds.SessionToken; len(v) != 0 {
+				t.Errorf("expect empty, got %v", v)
+			}
+			if e, a := c.ExpectAuthToken, actualToken; e != a {
+				t.Errorf("Expect %v, got %v", e, a)
+			}
+
+			sdk.NowTime = func() time.Time {
+				return time.Date(3000, 12, 16, 1, 30, 37, 0, time.UTC)
+			}
+
+			if creds.Expired() {
+				t.Errorf("expect not to be expired")
+			}
+		})
+	}
+}
+
 func TestFailedRetrieveCredentials(t *testing.T) {
 	p := endpointcreds.New("http://127.0.0.1", func(o *endpointcreds.Options) {
 		o.HTTPClient = mockClient(func(r *http.Request) (*http.Response, error) {
