@@ -5,85 +5,105 @@ import (
 	"strings"
 )
 
-func parse(tokens []lineToken, path string) (Sections, error) {
-	cfg := Sections{
-		container: map[string]Section{},
+func parse(tokens []lineToken, path string) Sections {
+	parser := &parser{
+		path:     path,
+		sections: NewSections(),
 	}
+	parser.parse(tokens)
+	return parser.sections
+}
 
-	var currSection, currKey string
+type parser struct {
+	csection, ckey string   // current state
+	path           string   // source file path
+	sections       Sections // parse result
+}
 
+func (p *parser) parse(tokens []lineToken) {
 	for _, otok := range tokens {
 		switch tok := otok.(type) {
 		case *lineTokenProfile:
-			name := tok.Name
-			if tok.Type != "" {
-				name = fmt.Sprintf("%s %s", tok.Type, tok.Name)
-			}
-			currKey = ""
-			currSection = name
-			if _, ok := cfg.container[name]; !ok {
-				cfg.container[name] = NewSection(name)
-			}
+			p.handleProfile(tok)
 		case *lineTokenProperty:
-			handleProperty(&currSection, &currKey, &cfg, path, tok)
+			p.handleProperty(tok)
 		case *lineTokenSubProperty:
-			if currSection == "" {
-				continue
-			}
-
-			if currKey == "" || cfg.container[currSection].values[currKey].str != "" {
-				// This is an "orphaned" subproperty, either because it's at
-				// the beginning of a section or because the last property's
-				// value isn't empty. Either way we're lenient here and
-				// "promote" this to a normal property.
-				handleProperty(&currSection, &currKey, &cfg, path, &lineTokenProperty{
-					Key:   tok.Key,
-					Value: strings.TrimSpace(trimComment(tok.Value)),
-				})
-				continue
-			}
-
-			if cfg.container[currSection].values[currKey].mp == nil {
-				cfg.container[currSection].values[currKey] = Value{
-					mp: map[string]string{},
-				}
-			}
-			cfg.container[currSection].values[currKey].mp[tok.Key] = tok.Value
+			p.handleSubProperty(tok)
 		case *lineTokenContinuation:
-			if currKey == "" {
-				continue
-			}
-
-			value, _ := cfg.container[currSection].values[currKey]
-			if value.str != "" && value.mp == nil {
-				value.str = fmt.Sprintf("%s\n%s", value.str, tok.Value)
-			}
-
-			cfg.container[currSection].values[currKey] = value
+			p.handleContinuation(tok)
 		}
 	}
-	return cfg, nil
 }
 
-func handleProperty(currSection, currKey *string, cfg *Sections, path string, tok *lineTokenProperty) {
-	if *currSection == "" {
+func (p *parser) handleProfile(tok *lineTokenProfile) {
+	name := tok.Name
+	if tok.Type != "" {
+		name = fmt.Sprintf("%s %s", tok.Type, tok.Name)
+	}
+	p.ckey = ""
+	p.csection = name
+	if _, ok := p.sections.container[name]; !ok {
+		p.sections.container[name] = NewSection(name)
+	}
+}
+
+func (p *parser) handleProperty(tok *lineTokenProperty) {
+	if p.csection == "" {
 		return // LEGACY: don't error on "global" properties
 	}
 
-	*currKey = tok.Key
-	if _, ok := cfg.container[*currSection].values[tok.Key]; ok {
-		section := cfg.container[*currSection]
-		section.Logs = append(cfg.container[*currSection].Logs,
+	p.ckey = tok.Key
+	if _, ok := p.sections.container[p.csection].values[tok.Key]; ok {
+		section := p.sections.container[p.csection]
+		section.Logs = append(p.sections.container[p.csection].Logs,
 			fmt.Sprintf(
 				"For profile: %v, overriding %v value, with a %v value found in a duplicate profile defined later in the same file %v. \n",
-				*currSection, tok.Key, tok.Key, path,
+				p.csection, tok.Key, tok.Key, p.path,
 			),
 		)
-		cfg.container[*currSection] = section
+		p.sections.container[p.csection] = section
 	}
 
-	cfg.container[*currSection].values[tok.Key] = Value{
+	p.sections.container[p.csection].values[tok.Key] = Value{
 		str: tok.Value,
 	}
-	cfg.container[*currSection].SourceFile[tok.Key] = path
+	p.sections.container[p.csection].SourceFile[tok.Key] = p.path
+}
+
+func (p *parser) handleSubProperty(tok *lineTokenSubProperty) {
+	if p.csection == "" {
+		return // LEGACY: don't error on "global" properties
+	}
+
+	if p.ckey == "" || p.sections.container[p.csection].values[p.ckey].str != "" {
+		// This is an "orphaned" subproperty, either because it's at
+		// the beginning of a section or because the last property's
+		// value isn't empty. Either way we're lenient here and
+		// "promote" this to a normal property.
+		p.handleProperty(&lineTokenProperty{
+			Key:   tok.Key,
+			Value: strings.TrimSpace(trimComment(tok.Value)),
+		})
+		return
+	}
+
+	if p.sections.container[p.csection].values[p.ckey].mp == nil {
+		p.sections.container[p.csection].values[p.ckey] = Value{
+			mp: map[string]string{},
+		}
+	}
+	p.sections.container[p.csection].values[p.ckey].mp[tok.Key] = tok.Value
+}
+
+func (p *parser) handleContinuation(tok *lineTokenContinuation) {
+	if p.ckey == "" {
+		return
+	}
+
+	value, _ := p.sections.container[p.csection].values[p.ckey]
+	if value.str != "" && value.mp == nil {
+		value.str = fmt.Sprintf("%s\n%s", value.str, tok.Value)
+	}
+
+	p.sections.container[p.csection].values[p.ckey] = value
 }

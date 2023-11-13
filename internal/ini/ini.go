@@ -52,10 +52,5 @@ func Parse(r io.Reader, path string) (Sections, error) {
 		return Sections{}, fmt.Errorf("tokenize: %v", err)
 	}
 
-	ss, err := parse(tokens, path)
-	if err != nil {
-		return Sections{}, fmt.Errorf("parse: %v", err)
-	}
-
-	return ss, nil
+	return parse(tokens, path), nil
 }
