@@ -1,3 +1,7 @@
+# v1.7.0 (2023-11-14)
+
+* **Feature**: This feature provides the ability for the collaboration creator to configure either the member who can run queries or a different member in the collaboration to be billed for query compute costs.
+
 # v1.6.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

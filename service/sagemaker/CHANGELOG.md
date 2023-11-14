@@ -1,3 +1,7 @@
+# v1.116.0 (2023-11-14)
+
+* **Feature**: This release makes Model Registry Inference Specification fields as not required.
+
 # v1.115.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

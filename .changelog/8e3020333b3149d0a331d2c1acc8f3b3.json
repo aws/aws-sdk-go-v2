@@ -1,8 +1,0 @@
-{
-    "id": "8e302033-3b31-49d0-a331-d2c1acc8f3b3",
-    "type": "feature",
-    "description": "This feature provides the ability for the collaboration creator to configure either the member who can run queries or a different member in the collaboration to be billed for query compute costs.",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

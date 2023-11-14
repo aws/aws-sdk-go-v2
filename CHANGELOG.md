@@ -1,3 +1,35 @@
+# Release (2023-11-14)
+
+## General Highlights
+* **Feature**: Add support for dynamic auth token from file and EKS container host in absolute/relative URIs in the HTTP credential provider.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.28.0](service/backup/CHANGELOG.md#v1280-2023-11-14)
+  * **Feature**: AWS Backup - Features: Provide Job Summary for your backup activity.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.7.0](service/cleanrooms/CHANGELOG.md#v170-2023-11-14)
+  * **Feature**: This feature provides the ability for the collaboration creator to configure either the member who can run queries or a different member in the collaboration to be billed for query compute costs.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.80.0](service/connect/CHANGELOG.md#v1800-2023-11-14)
+  * **Feature**: Introducing SegmentAttributes parameter for StartChatContact API
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.68.0](service/glue/CHANGELOG.md#v1680-2023-11-14)
+  * **Feature**: Introduces new storage optimization APIs to support automatic compaction of Apache Iceberg tables.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.44.0](service/iot/CHANGELOG.md#v1440-2023-11-14)
+  * **Feature**: This release introduces new attributes in API CreateSecurityProfile, UpdateSecurityProfile and DescribeSecurityProfile to support management of Metrics Export for AWS IoT Device Defender Detect.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.46.0](service/lambda/CHANGELOG.md#v1460-2023-11-14)
+  * **Feature**: Add Python 3.12 (python3.12) support to AWS Lambda
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.31.0](service/mediatailor/CHANGELOG.md#v1310-2023-11-14)
+  * **Feature**: Removed unnecessary default values.
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.7.0](service/pipes/CHANGELOG.md#v170-2023-11-14)
+  * **Feature**: Added support (via new LogConfiguration field in CreatePipe and UpdatePipe APIs) for logging to Amazon CloudWatch Logs, Amazon Simple Storage Service (Amazon S3), and Amazon Kinesis Data Firehose
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.7.0](service/resourceexplorer2/CHANGELOG.md#v170-2023-11-14)
+  * **Feature**: Resource Explorer supports multi-account search. You can now use Resource Explorer to search and discover resources across AWS accounts within your organization or organizational unit.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.116.0](service/sagemaker/CHANGELOG.md#v11160-2023-11-14)
+  * **Feature**: This release makes Model Registry Inference Specification fields as not required.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.22.0](service/sfn/CHANGELOG.md#v1220-2023-11-14)
+  * **Feature**: This release adds support to redrive executions in AWS Step Functions with a new RedriveExecution operation.
+* `github.com/aws/aws-sdk-go-v2/service/signer`: [v1.18.2](service/signer/CHANGELOG.md#v1182-2023-11-14)
+  * **Documentation**: Documentation updates for AWS Signer
+
 # Release (2023-11-13)
 
 ## General Highlights

@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.22.2
-	github.com/aws/aws-sdk-go-v2/config v1.24.0
+	github.com/aws/aws-sdk-go-v2/config v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/acm v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.24.1
@@ -20,7 +20,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.20.1
-	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.20.2
+	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.20.3
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.41.1
@@ -46,14 +46,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.18.1
-	github.com/aws/aws-sdk-go-v2/service/glue v1.67.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.68.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/iam v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.18.1
-	github.com/aws/aws-sdk-go-v2/service/iot v1.43.1
+	github.com/aws/aws-sdk-go-v2/service/iot v1.44.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/kms v1.26.1
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.45.0
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.46.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.26.1
@@ -71,7 +71,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.24.1
 	github.com/aws/aws-sdk-go-v2/service/ses v1.18.1
-	github.com/aws/aws-sdk-go-v2/service/sfn v1.21.1
+	github.com/aws/aws-sdk-go-v2/service/sfn v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/shield v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/sns v1.25.1
@@ -91,7 +91,7 @@ require (
 
 require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.5.0 // indirect
-	github.com/aws/aws-sdk-go-v2/credentials v1.15.2 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.16.0 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.14.3 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.2 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.2 // indirect

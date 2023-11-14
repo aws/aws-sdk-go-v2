@@ -1,8 +1,0 @@
-{
-    "id": "b529262a-1c6b-4281-bf70-29a037c8dc89",
-    "type": "feature",
-    "description": "Added support (via new LogConfiguration field in CreatePipe and UpdatePipe APIs) for logging to Amazon CloudWatch Logs, Amazon Simple Storage Service (Amazon S3), and Amazon Kinesis Data Firehose",
-    "modules": [
-        "service/pipes"
-    ]
-}

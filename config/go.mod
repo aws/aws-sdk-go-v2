@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.22.2
-	github.com/aws/aws-sdk-go-v2/credentials v1.15.2
+	github.com/aws/aws-sdk-go-v2/credentials v1.16.0
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.14.3
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.7.0
 	github.com/aws/aws-sdk-go-v2/service/sso v1.17.1

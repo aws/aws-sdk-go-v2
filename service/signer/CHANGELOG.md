@@ -1,3 +1,7 @@
+# v1.18.2 (2023-11-14)
+
+* **Documentation**: Documentation updates for AWS Signer
+
 # v1.18.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

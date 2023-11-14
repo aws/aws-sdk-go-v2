@@ -1,3 +1,7 @@
+# v1.80.0 (2023-11-14)
+
+* **Feature**: Introducing SegmentAttributes parameter for StartChatContact API
+
 # v1.79.0 (2023-11-09.2)
 
 * **Feature**: This release adds the ability to integrate customer lambda functions with Connect attachments for scanning and updates the ListIntegrationAssociations API to support filtering on IntegrationArn.

@@ -1,3 +1,7 @@
+# v1.46.0 (2023-11-14)
+
+* **Feature**: Add Python 3.12 (python3.12) support to AWS Lambda
+
 # v1.45.0 (2023-11-09.2)
 
 * **Feature**: Add Custom runtime on Amazon Linux 2023 (provided.al2023) support to AWS Lambda.

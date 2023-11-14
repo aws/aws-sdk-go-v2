@@ -1,8 +1,0 @@
-{
-    "id": "78a6f0eb-c1c1-45d5-9dd3-972e5cf62b99",
-    "type": "feature",
-    "description": "This release makes Model Registry Inference Specification fields as not required.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.20.3 (2023-11-14)
+
+* No change notes available for this release.
+
 # v1.20.2 (2023-11-13)
 
 * No change notes available for this release.

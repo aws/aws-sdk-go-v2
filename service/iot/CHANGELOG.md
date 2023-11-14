@@ -1,3 +1,7 @@
+# v1.44.0 (2023-11-14)
+
+* **Feature**: This release introduces new attributes in API CreateSecurityProfile, UpdateSecurityProfile and DescribeSecurityProfile to support management of Metrics Export for AWS IoT Device Defender Detect.
+
 # v1.43.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

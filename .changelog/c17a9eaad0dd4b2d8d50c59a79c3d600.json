@@ -1,8 +1,0 @@
-{
-    "id": "c17a9eaa-d0dd-4b2d-8d50-c59a79c3d600",
-    "type": "feature",
-    "description": "Introduces new storage optimization APIs to support automatic compaction of Apache Iceberg tables.",
-    "modules": [
-        "service/glue"
-    ]
-}

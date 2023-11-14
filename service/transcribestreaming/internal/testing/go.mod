@@ -5,14 +5,14 @@ go 1.19
 require (
 	github.com/aws/aws-sdk-go-v2 v1.22.2
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.5.0
-	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.2.2
+	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.2.3
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.14.0
 	github.com/aws/smithy-go v1.16.0
 	github.com/google/go-cmp v0.5.8
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/credentials v1.15.2 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.16.0 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.2 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.2 // indirect
 	golang.org/x/net v0.1.0 // indirect

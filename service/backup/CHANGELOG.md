@@ -1,3 +1,7 @@
+# v1.28.0 (2023-11-14)
+
+* **Feature**: AWS Backup - Features: Provide Job Summary for your backup activity.
+
 # v1.27.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "c0acbd7d-1034-49ce-b688-20c55cef32f9",
-    "type": "feature",
-    "description": "This release introduces new attributes in API CreateSecurityProfile, UpdateSecurityProfile and DescribeSecurityProfile to support management of Metrics Export for AWS IoT Device Defender Detect.",
-    "modules": [
-        "service/iot"
-    ]
-}

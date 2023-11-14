@@ -1,3 +1,7 @@
+# v1.68.0 (2023-11-14)
+
+* **Feature**: Introduces new storage optimization APIs to support automatic compaction of Apache Iceberg tables.
+
 # v1.67.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.22.0 (2023-11-14)
+
+* **Feature**: This release adds support to redrive executions in AWS Step Functions with a new RedriveExecution operation.
+
 # v1.21.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

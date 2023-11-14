@@ -1,8 +1,0 @@
-{
-    "id": "aa90b853-28ac-426e-90e8-4e3e52446f56",
-    "type": "feature",
-    "description": "Introducing SegmentAttributes parameter for StartChatContact API",
-    "modules": [
-        "service/connect"
-    ]
-}

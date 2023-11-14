@@ -1,8 +1,0 @@
-{
-    "id": "7991c363-5994-4dfa-b03f-83d85d8810ae",
-    "type": "documentation",
-    "description": "Documentation updates for AWS Signer",
-    "modules": [
-        "service/signer"
-    ]
-}
