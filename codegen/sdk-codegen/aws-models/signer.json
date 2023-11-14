@@ -122,7 +122,7 @@
                 "principal": {
                     "target": "com.amazonaws.signer#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS principal receiving cross-account permissions. This may be an IAM role or\n\t\t\tanother AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The AWS principal receiving cross-account permissions. This may be an IAM role or another\n\t\t\tAWS account ID.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -457,7 +457,7 @@
                 "signedObject": {
                     "target": "com.amazonaws.signer#SignedObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the S3 bucket where the signed code image is saved by code signing.</p>"
+                        "smithy.api#documentation": "<p>Name of the S3 bucket where the signed code image is saved by AWS Signer.</p>"
                     }
                 },
                 "jobOwner": {
@@ -517,20 +517,20 @@
                 "allowedValues": {
                     "target": "com.amazonaws.signer#EncryptionAlgorithms",
                     "traits": {
-                        "smithy.api#documentation": "<p>The set of accepted encryption algorithms that are allowed in a code signing job.</p>",
+                        "smithy.api#documentation": "<p>The set of accepted encryption algorithms that are allowed in a code-signing job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "defaultValue": {
                     "target": "com.amazonaws.signer#EncryptionAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default encryption algorithm that is used by a code signing job.</p>",
+                        "smithy.api#documentation": "<p>The default encryption algorithm that is used by a code-signing job.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The encryption algorithm options that are available to a code signing job.</p>"
+                "smithy.api#documentation": "<p>The encryption algorithm options that are available to a code-signing job.</p>"
             }
         },
         "com.amazonaws.signer#EncryptionAlgorithms": {
@@ -568,7 +568,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the\n\t\t\trevocation status of one or more of the signing profile, signing job, and signing\n\t\t\tcertificate.</p>",
+                "smithy.api#documentation": "<p>Retrieves the revocation status of one or more of the signing profile, signing job,\n\t\t\tand signing certificate.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "verification."
                 },
@@ -617,7 +617,7 @@
                 "certificateHashes": {
                     "target": "com.amazonaws.signer#CertificateHashes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of composite signed hashes that identify certificates.</p>\n\t\t       <p>A certificate identifier consists of a subject certificate TBS hash (signed by the\n\t\t\tparent CA) combined with a parent CA TBS hash (signed by the parent CA’s CA). Root\n\t\t\tcertificates are defined as their own CA.</p>",
+                        "smithy.api#documentation": "<p>A list of composite signed hashes that identify certificates.</p>\n\t\t       <p>A certificate identifier consists of a subject certificate TBS hash (signed by the\n\t\t\tparent CA) combined with a parent CA TBS hash (signed by the parent CA’s CA). Root\n\t\t\tcertificates are defined as their own CA.</p>\n\t\t       <p>The following example shows how to calculate a hash for this parameter using OpenSSL\n\t\t\tcommands: </p>\n\t\t\n\t\t\t      <p>\n            <code>openssl asn1parse -in childCert.pem -strparse 4 -out childCert.tbs</code> \n         </p>\n\t\t\t      <p>\n            <code>openssl sha384 < childCert.tbs -binary > childCertTbsHash</code> \n         </p>\n\t\t\t      <p>\n            <code>openssl asn1parse -in parentCert.pem -strparse 4 -out parentCert.tbs</code> \n         </p>\n\t\t\t      <p>\n            <code>openssl sha384 < parentCert.tbs -binary > parentCertTbsHash xxd -p\n\t\t\t\tchildCertTbsHash > certificateHash.hex xxd -p parentCertTbsHash >>\n\t\t\t\tcertificateHash.hex</code>\n         </p>\n\t\t\t      <p>\n            <code>cat certificateHash.hex | tr -d '\\n'</code>\n         </p>",
                         "smithy.api#httpQuery": "certificateHashes",
                         "smithy.api#required": {}
                     }
@@ -633,7 +633,7 @@
                 "revokedEntities": {
                     "target": "com.amazonaws.signer#RevokedEntities",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of revoked entities (including one or more of the signing profile ARN, signing\n\t\t\tjob ID, and certificate hash) supplied as input to the API.</p>"
+                        "smithy.api#documentation": "<p>A list of revoked entities (including zero or more of the signing profile ARN, signing job\n\t\t\tARN, and certificate hashes) supplied as input to the API.</p>"
                     }
                 }
             },
@@ -915,20 +915,20 @@
                 "allowedValues": {
                     "target": "com.amazonaws.signer#HashAlgorithms",
                     "traits": {
-                        "smithy.api#documentation": "<p>The set of accepted hash algorithms allowed in a code signing job.</p>",
+                        "smithy.api#documentation": "<p>The set of accepted hash algorithms allowed in a code-signing job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "defaultValue": {
                     "target": "com.amazonaws.signer#HashAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default hash algorithm that is used in a code signing job.</p>",
+                        "smithy.api#documentation": "<p>The default hash algorithm that is used in a code-signing job.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The hash algorithms that are available to a code signing job.</p>"
+                "smithy.api#documentation": "<p>The hash algorithms that are available to a code-signing job.</p>"
             }
         },
         "com.amazonaws.signer#HashAlgorithms": {
@@ -1107,7 +1107,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all your signing jobs. You can use the <code>maxResults</code> parameter to\n\t\t\tlimit the number of signing jobs that are returned in the response. If additional jobs\n\t\t\tremain to be listed, code signing returns a <code>nextToken</code> value. Use this value in\n\t\t\tsubsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can\n\t\t\tcontinue calling <code>ListSigningJobs</code> with your <code>maxResults</code>\n\t\t\tparameter and with new values that code signing returns in the <code>nextToken</code>\n\t\t\tparameter until all of your signing jobs have been returned. </p>",
+                "smithy.api#documentation": "<p>Lists all your signing jobs. You can use the <code>maxResults</code> parameter to limit the\n\t\t\tnumber of signing jobs that are returned in the response. If additional jobs remain to\n\t\t\tbe listed, AWS Signer returns a <code>nextToken</code> value. Use this value in\n\t\t\tsubsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can\n\t\t\tcontinue calling <code>ListSigningJobs</code> with your <code>maxResults</code>\n\t\t\tparameter and with new values that Signer returns in the <code>nextToken</code>\n\t\t\tparameter until all of your signing jobs have been returned. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/signing-jobs",
@@ -1235,7 +1235,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all signing platforms available in code signing that match the request parameters. If\n\t\t\tadditional jobs remain to be listed, code signing returns a <code>nextToken</code> value. Use\n\t\t\tthis value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining\n\t\t\tvalues. You can continue calling <code>ListSigningJobs</code> with your\n\t\t\t\t<code>maxResults</code> parameter and with new values that code signing returns in the\n\t\t\t\t<code>nextToken</code> parameter until all of your signing jobs have been\n\t\t\treturned.</p>",
+                "smithy.api#documentation": "<p>Lists all signing platforms available in AWS Signer that match the request parameters. If\n\t\t\tadditional jobs remain to be listed, Signer returns a <code>nextToken</code> value.\n\t\t\tUse this value in subsequent calls to <code>ListSigningJobs</code> to fetch the\n\t\t\tremaining values. You can continue calling <code>ListSigningJobs</code> with your\n\t\t\t\t<code>maxResults</code> parameter and with new values that Signer returns in the\n\t\t\t\t<code>nextToken</code> parameter until all of your signing jobs have been\n\t\t\treturned.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/signing-platforms",
@@ -1331,7 +1331,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all available signing profiles in your AWS account. Returns only profiles with\n\t\t\tan <code>ACTIVE</code> status unless the <code>includeCanceled</code> request field is\n\t\t\tset to <code>true</code>. If additional jobs remain to be listed, code signing returns a\n\t\t\t\t<code>nextToken</code> value. Use this value in subsequent calls to\n\t\t\t\t<code>ListSigningJobs</code> to fetch the remaining values. You can continue calling\n\t\t\t\t<code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with\n\t\t\tnew values that code signing returns in the <code>nextToken</code> parameter until all of your\n\t\t\tsigning jobs have been returned.</p>",
+                "smithy.api#documentation": "<p>Lists all available signing profiles in your AWS account. Returns only profiles with an\n\t\t\t\t<code>ACTIVE</code> status unless the <code>includeCanceled</code> request field is\n\t\t\tset to <code>true</code>. If additional jobs remain to be listed, AWS Signer returns a\n\t\t\t\t<code>nextToken</code> value. Use this value in subsequent calls to\n\t\t\t\t<code>ListSigningJobs</code> to fetch the remaining values. You can continue calling\n\t\t\t\t<code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with\n\t\t\tnew values that Signer returns in the <code>nextToken</code> parameter until all of\n\t\t\tyour signing jobs have been returned.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/signing-profiles",
@@ -1617,7 +1617,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a signing profile. A signing profile is a code signing template that can be used to\n\t\t\tcarry out a pre-defined signing job.\n\t\t\t</p>",
+                "smithy.api#documentation": "<p>Creates a signing profile. A signing profile is a code-signing template that can be used to\n\t\t\tcarry out a pre-defined signing job.\n\t\t\t</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/signing-profiles/{profileName}",
@@ -1967,12 +1967,12 @@
                 "prefix": {
                     "target": "com.amazonaws.signer#Prefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon S3 prefix that you can use to limit responses to those that begin with the\n\t\t\tspecified prefix.</p>"
+                        "smithy.api#documentation": "<p>An S3 prefix that you can use to limit responses to those that begin with the specified\n\t\t\tprefix.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The name and prefix of the S3 bucket where code signing saves your signed objects.</p>"
+                "smithy.api#documentation": "<p>The name and prefix of the Amazon S3 bucket where AWS Signer saves your signed objects.</p>"
             }
         },
         "com.amazonaws.signer#S3SignedObject": {
@@ -1992,7 +1992,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The S3 bucket name and key where code signing saved your signed code image.</p>"
+                "smithy.api#documentation": "<p>The Amazon S3 bucket name and key where Signer saved your signed code image.</p>"
             }
         },
         "com.amazonaws.signer#S3Source": {
@@ -2021,7 +2021,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the S3 bucket where you saved your unsigned code.</p>"
+                "smithy.api#documentation": "<p>Information about the Amazon S3 bucket where you saved your unsigned code.</p>"
             }
         },
         "com.amazonaws.signer#ServiceLimitExceededException": {
@@ -2066,7 +2066,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Signs a binary\n\t\t\tpayload and returns a signature envelope.</p>",
+                "smithy.api#documentation": "<p>Signs a binary payload and returns a signature envelope.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/signing-jobs/with-payload",
@@ -2100,7 +2100,7 @@
                 "payloadFormat": {
                     "target": "com.amazonaws.signer#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Payload content type</p>",
+                        "smithy.api#documentation": "<p>Payload content type. The single valid type is\n\t\t\t\t<code>application/vnd.cncf.notary.payload.v1+json</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2127,7 +2127,7 @@
                 "metadata": {
                     "target": "com.amazonaws.signer#Metadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information including the signing profile ARN and the signing job ID. Clients use\n\t\t\tmetadata to signature records, for example, as annotations added to the signature\n\t\t\tmanifest inside an OCI registry.</p>"
+                        "smithy.api#documentation": "<p>Information including the signing profile ARN and the signing job ID.</p>"
                     }
                 },
                 "signature": {
@@ -2182,20 +2182,20 @@
                 "encryptionAlgorithmOptions": {
                     "target": "com.amazonaws.signer#EncryptionAlgorithmOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption algorithm options that are available for a code signing job.</p>",
+                        "smithy.api#documentation": "<p>The encryption algorithm options that are available for a code-signing job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "hashAlgorithmOptions": {
                     "target": "com.amazonaws.signer#HashAlgorithmOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hash algorithm options that are available for a code signing job.</p>",
+                        "smithy.api#documentation": "<p>The hash algorithm options that are available for a code-signing job.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration of a code signing operation.</p>"
+                "smithy.api#documentation": "<p>The configuration of a signing operation.</p>"
             }
         },
         "com.amazonaws.signer#SigningConfigurationOverrides": {
@@ -2204,13 +2204,13 @@
                 "encryptionAlgorithm": {
                     "target": "com.amazonaws.signer#EncryptionAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>A specified override of the default encryption algorithm that is used in a code signing\n\t\t\tjob.</p>"
+                        "smithy.api#documentation": "<p>A specified override of the default encryption algorithm that is used in a code-signing\n\t\t\tjob.</p>"
                     }
                 },
                 "hashAlgorithm": {
                     "target": "com.amazonaws.signer#HashAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>A specified override of the default hash algorithm that is used in a code signing\n\t\t\tjob.</p>"
+                        "smithy.api#documentation": "<p>A specified override of the default hash algorithm that is used in a code-signing\n\t\t\tjob.</p>"
                     }
                 }
             },
@@ -2224,20 +2224,20 @@
                 "supportedFormats": {
                     "target": "com.amazonaws.signer#ImageFormats",
                     "traits": {
-                        "smithy.api#documentation": "<p>The supported formats of a code signing image.</p>",
+                        "smithy.api#documentation": "<p>The supported formats of a signing image.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "defaultFormat": {
                     "target": "com.amazonaws.signer#ImageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default format of a code signing image.</p>",
+                        "smithy.api#documentation": "<p>The default format of a signing image.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The image format of a code signing platform or profile.</p>"
+                "smithy.api#documentation": "<p>The image format of a AWS Signer platform or profile.</p>"
             }
         },
         "com.amazonaws.signer#SigningJob": {
@@ -2401,37 +2401,37 @@
                 "platformId": {
                     "target": "com.amazonaws.signer#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of a code signing platform.</p>"
+                        "smithy.api#documentation": "<p>The ID of a signing platform.</p>"
                     }
                 },
                 "displayName": {
                     "target": "com.amazonaws.signer#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of a code signing platform.</p>"
+                        "smithy.api#documentation": "<p>The display name of a signing platform.</p>"
                     }
                 },
                 "partner": {
                     "target": "com.amazonaws.signer#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Any partner entities linked to a code signing platform.</p>"
+                        "smithy.api#documentation": "<p>Any partner entities linked to a signing platform.</p>"
                     }
                 },
                 "target": {
                     "target": "com.amazonaws.signer#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The types of targets that can be signed by a code signing platform.</p>"
+                        "smithy.api#documentation": "<p>The types of targets that can be signed by a signing platform.</p>"
                     }
                 },
                 "category": {
                     "target": "com.amazonaws.signer#Category",
                     "traits": {
-                        "smithy.api#documentation": "<p>The category of a code signing platform.</p>"
+                        "smithy.api#documentation": "<p>The category of a signing platform.</p>"
                     }
                 },
                 "signingConfiguration": {
                     "target": "com.amazonaws.signer#SigningConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of a code signing platform. This includes the designated hash algorithm\n\t\t\tand encryption algorithm of a signing platform.</p>"
+                        "smithy.api#documentation": "<p>The configuration of a signing platform. This includes the designated hash algorithm and\n\t\t\tencryption algorithm of a signing platform.</p>"
                     }
                 },
                 "signingImageFormat": {
@@ -2441,7 +2441,7 @@
                     "target": "com.amazonaws.signer#MaxSizeInMB",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum size (in MB) of code that can be signed by a code signing platform.</p>"
+                        "smithy.api#documentation": "<p>The maximum size (in MB) of code that can be signed by a signing platform.</p>"
                     }
                 },
                 "revocationSupported": {
@@ -2453,7 +2453,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the signing configurations and parameters that are used to\n\t\t\tperform a code signing job.</p>"
+                "smithy.api#documentation": "<p>Contains information about the signing configurations and parameters that are used to\n\t\t\tperform a code-signing job.</p>"
             }
         },
         "com.amazonaws.signer#SigningPlatformOverrides": {
@@ -2473,7 +2473,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Any overrides that are applied to the signing configuration of a code signing\n\t\t\tplatform.</p>"
+                "smithy.api#documentation": "<p>Any overrides that are applied to the signing configuration of a signing platform.</p>"
             }
         },
         "com.amazonaws.signer#SigningPlatforms": {
@@ -2530,13 +2530,13 @@
                 "signingParameters": {
                     "target": "com.amazonaws.signer#SigningParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters that are available for use by a code signing user.</p>"
+                        "smithy.api#documentation": "<p>The parameters that are available for use by a Signer user.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.signer#SigningProfileStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of a code signing profile.</p>"
+                        "smithy.api#documentation": "<p>The status of a signing profile.</p>"
                     }
                 },
                 "arn": {
@@ -2553,7 +2553,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the ACM certificates and code signing configuration parameters\n\t\t\tthat can be used by a given code signing user.</p>"
+                "smithy.api#documentation": "<p>Contains information about the ACM certificates and signing configuration parameters that\n\t\t\tcan be used by a given code signing user.</p>"
             }
         },
         "com.amazonaws.signer#SigningProfileRevocationRecord": {
@@ -2677,7 +2677,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a signing job to be performed on the code provided. Signing jobs are\n\t\t\tviewable by the <code>ListSigningJobs</code> operation for two years after they are\n\t\t\tperformed. Note the following requirements: </p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p> You must create an Amazon S3 source bucket. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html\">Creating a Bucket</a> in the\n\t\t\t\t\t\t<i>Amazon S3 Getting Started Guide</i>. </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Your S3 source bucket must be version enabled.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You must create an S3 destination bucket. Code signing uses your S3 destination\n\t\t\t\t\tbucket to write your signed code.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You specify the name of the source and destination buckets when calling the\n\t\t\t\t\t\t<code>StartSigningJob</code> operation.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You must also specify a request token that identifies your request to\n\t\t\t\t\tcode signing.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>You can call the <a>DescribeSigningJob</a> and the <a>ListSigningJobs</a> actions after you call\n\t\t\t<code>StartSigningJob</code>.</p>\n\t\t       <p>For a Java example that shows how to use this action, see <a href=\"https://docs.aws.amazon.com/signer/latest/developerguide/api-startsigningjob.html\">StartSigningJob</a>.</p>",
+                "smithy.api#documentation": "<p>Initiates a signing job to be performed on the code provided. Signing jobs are\n\t\t\tviewable by the <code>ListSigningJobs</code> operation for two years after they are\n\t\t\tperformed. Note the following requirements: </p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p> You must create an Amazon S3 source bucket. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html\">Creating a Bucket</a> in the\n\t\t\t\t\t\t<i>Amazon S3 Getting Started Guide</i>. </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Your S3 source bucket must be version enabled.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You must create an S3 destination bucket. AWS Signer uses your S3 destination bucket to\n\t\t\t\t\twrite your signed code.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You specify the name of the source and destination buckets when calling the\n\t\t\t\t\t\t<code>StartSigningJob</code> operation.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You must also specify a request token that identifies your request to Signer.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>You can call the <a>DescribeSigningJob</a> and the <a>ListSigningJobs</a> actions after you call\n\t\t\t<code>StartSigningJob</code>.</p>\n\t\t       <p>For a Java example that shows how to use this action, see <a href=\"https://docs.aws.amazon.com/signer/latest/developerguide/api-startsigningjob.html\">StartSigningJob</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/signing-jobs",
@@ -3083,7 +3083,7 @@
                     "name": "signer"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>AWS Signer is a fully managed code signing service to help you ensure the trust and\n\t\t\tintegrity of your code. </p>\n\t\t       <p>AWS Signer supports the following applications:</p>\n\t\t       <p>With code signing for AWS Lambda, you can sign <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/\">AWS\n\t\t\t\tLambda</a> deployment packages. Integrated support is provided for <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/gsg/\">Amazon S3</a>, <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/\">Amazon\n\t\t\t\tCloudWatch</a>, and <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/\">AWS CloudTrail</a>. In order\n\t\t\tto sign code, you create a signing profile and then use Signer to sign Lambda zip files\n\t\t\tin S3. </p>\n\t\t       <p>With code signing for IoT, you can sign code for any IoT device that is supported by AWS.\n\t\t\tIoT code signing is available for <a href=\"http://docs.aws.amazon.com/freertos/latest/userguide/\">Amazon FreeRTOS</a> and <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/\">AWS IoT Device Management</a>, and is integrated with <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/\">AWS Certificate Manager (ACM)</a>. In order to sign code, you import a third-party code signing\n\t\t\tcertificate using ACM, and use that to sign updates in Amazon FreeRTOS and AWS IoT Device Management. </p>\n\t\t       <p>With code signing for\n\t\t\tcontainers …(TBD)</p>\n\t\t       <p>For more information about AWS Signer, see the <a href=\"https://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html\">AWS Signer Developer\n\t\t\tGuide</a>.</p>",
+                "smithy.api#documentation": "<p>AWS Signer is a fully managed code-signing service to help you ensure the trust and\n\t\t\tintegrity of your code. </p>\n\t\t       <p>Signer supports the following applications:</p>\n\t\t       <p>With code signing for AWS Lambda, you can sign <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/\">AWS\n\t\t\t\tLambda</a> deployment packages. Integrated support is provided for <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/gsg/\">Amazon S3</a>, <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/\">Amazon\n\t\t\t\tCloudWatch</a>, and <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/\">AWS CloudTrail</a>. In order\n\t\t\tto sign code, you create a signing profile and then use Signer to sign Lambda zip\n\t\t\tfiles in S3. </p>\n\t\t       <p>With code signing for IoT, you can sign code for any IoT device that is supported by AWS.\n\t\t\tIoT code signing is available for <a href=\"http://docs.aws.amazon.com/freertos/latest/userguide/\">Amazon FreeRTOS</a> and <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/\">AWS IoT Device Management</a>, and is integrated with <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/\">AWS Certificate Manager (ACM)</a>. In order to sign code, you import a third-party code-signing\n\t\t\tcertificate using ACM, and use that to sign updates in Amazon FreeRTOS and AWS IoT Device Management. </p>\n\t\t       <p>With Signer and the Notation CLI from the <a href=\"https://notaryproject.dev/\">Notary\u2028\n\t\t\t\tProject</a>, you can sign container images stored in a container registry such\n\t\t\tas Amazon Elastic Container Registry (ECR). The signatures are stored in the registry\n\t\t\talongside the images, where they are available for verifying image authenticity and\n\t\t\tintegrity.</p>\n\t\t       <p>For more information about Signer, see the <a href=\"https://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html\">AWS Signer Developer\n\t\t\tGuide</a>.</p>",
                 "smithy.api#title": "AWS Signer",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3127,7 +3127,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3170,7 +3169,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -3183,7 +3183,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3197,7 +3196,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -3220,7 +3218,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3255,7 +3252,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3266,14 +3262,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3287,14 +3285,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -3303,11 +3299,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3318,14 +3314,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3339,7 +3337,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3359,7 +3356,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3370,14 +3366,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -3388,9 +3386,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],

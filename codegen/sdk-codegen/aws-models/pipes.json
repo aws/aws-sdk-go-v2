@@ -361,6 +361,45 @@
                 }
             }
         },
+        "com.amazonaws.pipes#CloudwatchLogGroupArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^(^arn:aws([a-z]|\\-)*:logs:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):log-group:.+)$"
+            }
+        },
+        "com.amazonaws.pipes#CloudwatchLogsLogDestination": {
+            "type": "structure",
+            "members": {
+                "LogGroupArn": {
+                    "target": "com.amazonaws.pipes#CloudwatchLogGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon CloudWatch Logs logging configuration settings for the pipe.</p>"
+            }
+        },
+        "com.amazonaws.pipes#CloudwatchLogsLogDestinationParameters": {
+            "type": "structure",
+            "members": {
+                "LogGroupArn": {
+                    "target": "com.amazonaws.pipes#CloudwatchLogGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon CloudWatch Logs logging configuration settings for the pipe.</p>"
+            }
+        },
         "com.amazonaws.pipes#ConflictException": {
             "type": "structure",
             "members": {
@@ -494,7 +533,7 @@
                 "TargetParameters": {
                     "target": "com.amazonaws.pipes#PipeTargetParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters required to set up a target for your pipe.</p>"
+                        "smithy.api#documentation": "<p>The parameters required to set up a target for your pipe.</p>\n         <p>For more information about pipe target parameters, including how to use dynamic path parameters, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html\">Target parameters</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
                     }
                 },
                 "RoleArn": {
@@ -508,6 +547,13 @@
                     "target": "com.amazonaws.pipes#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of key-value pairs to associate with the pipe.</p>"
+                    }
+                },
+                "LogConfiguration": {
+                    "target": "com.amazonaws.pipes#PipeLogConfigurationParameters",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "write",
+                        "smithy.api#documentation": "<p>The logging configuration settings for the pipe.</p>"
                     }
                 }
             },
@@ -587,7 +633,7 @@
                 "Arn": {
                     "target": "com.amazonaws.pipes#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon SQS queue specified as the target for the dead-letter queue.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the specified target for the dead-letter queue. </p>\n         <p>For Amazon Kinesis stream and Amazon DynamoDB stream sources, specify\n         either an Amazon SNS topic or Amazon SQS queue ARN.</p>"
                     }
                 }
             },
@@ -824,7 +870,7 @@
                 "TargetParameters": {
                     "target": "com.amazonaws.pipes#PipeTargetParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters required to set up a target for your pipe.</p>"
+                        "smithy.api#documentation": "<p>The parameters required to set up a target for your pipe.</p>\n         <p>For more information about pipe target parameters, including how to use dynamic path parameters, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html\">Target parameters</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
                     }
                 },
                 "RoleArn": {
@@ -849,6 +895,13 @@
                     "target": "com.amazonaws.pipes#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>When the pipe was last updated, in <a href=\"https://www.w3.org/TR/NOTE-datetime\">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).</p>"
+                    }
+                },
+                "LogConfiguration": {
+                    "target": "com.amazonaws.pipes#PipeLogConfiguration",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read",
+                        "smithy.api#documentation": "<p>The logging configuration settings for the pipe.</p>"
                     }
                 }
             },
@@ -1236,7 +1289,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The collection of event patterns used to filter events. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html\">Events and Event\n         Patterns</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The collection of event patterns used to filter events.</p>\n         <p>To remove a filter, specify a <code>FilterCriteria</code> object with an empty array of <code>Filter</code> objects.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html\">Events and Event\n         Patterns</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
             }
         },
         "com.amazonaws.pipes#FilterList": {
@@ -1249,6 +1302,45 @@
                     "min": 0,
                     "max": 5
                 }
+            }
+        },
+        "com.amazonaws.pipes#FirehoseArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^(^arn:aws([a-z]|\\-)*:firehose:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):deliverystream/.+)$"
+            }
+        },
+        "com.amazonaws.pipes#FirehoseLogDestination": {
+            "type": "structure",
+            "members": {
+                "DeliveryStreamArn": {
+                    "target": "com.amazonaws.pipes#FirehoseArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery stream to which EventBridge delivers the pipe log records.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Kinesis Data Firehose logging configuration settings for the pipe.</p>"
+            }
+        },
+        "com.amazonaws.pipes#FirehoseLogDestinationParameters": {
+            "type": "structure",
+            "members": {
+                "DeliveryStreamArn": {
+                    "target": "com.amazonaws.pipes#FirehoseArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery stream to which EventBridge delivers the pipe log records.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Kinesis Data Firehose logging configuration settings for the pipe.</p>"
             }
         },
         "com.amazonaws.pipes#HeaderKey": {
@@ -1279,6 +1371,26 @@
                 },
                 "smithy.api#pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.pipes#IncludeExecutionData": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pipes#IncludeExecutionDataOption"
+            },
+            "traits": {
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.pipes#IncludeExecutionDataOption": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    }
+                ]
             }
         },
         "com.amazonaws.pipes#InputTemplate": {
@@ -1609,6 +1721,29 @@
                 }
             }
         },
+        "com.amazonaws.pipes#LogLevel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OFF",
+                        "name": "OFF"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    },
+                    {
+                        "value": "INFO",
+                        "name": "INFO"
+                    },
+                    {
+                        "value": "TRACE",
+                        "name": "TRACE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.pipes#LogStreamName": {
             "type": "string",
             "traits": {
@@ -1794,12 +1929,6 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.pipes#PathParameter"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 1
-                }
             }
         },
         "com.amazonaws.pipes#Pipe": {
@@ -1924,7 +2053,7 @@
                 "InputTemplate": {
                     "target": "com.amazonaws.pipes#InputTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Valid JSON text passed to the enrichment. In this case, nothing from the event itself is\n         passed to the enrichment. For more information, see <a href=\"http://www.rfc-editor.org/rfc/rfc7159.txt\">The JavaScript Object Notation (JSON) Data\n            Interchange Format</a>.</p>"
+                        "smithy.api#documentation": "<p>Valid JSON text passed to the enrichment. In this case, nothing from the event itself is\n         passed to the enrichment. For more information, see <a href=\"http://www.rfc-editor.org/rfc/rfc7159.txt\">The JavaScript Object Notation (JSON) Data\n            Interchange Format</a>.</p>\n         <p>To remove an input template, specify an empty string.</p>"
                     }
                 },
                 "HttpParameters": {
@@ -1942,6 +2071,83 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.pipes#Pipe"
+            }
+        },
+        "com.amazonaws.pipes#PipeLogConfiguration": {
+            "type": "structure",
+            "members": {
+                "S3LogDestination": {
+                    "target": "com.amazonaws.pipes#S3LogDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 logging configuration settings for the pipe.</p>"
+                    }
+                },
+                "FirehoseLogDestination": {
+                    "target": "com.amazonaws.pipes#FirehoseLogDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Kinesis Data Firehose logging configuration settings for the pipe.</p>"
+                    }
+                },
+                "CloudwatchLogsLogDestination": {
+                    "target": "com.amazonaws.pipes#CloudwatchLogsLogDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch Logs logging configuration settings for the pipe.</p>"
+                    }
+                },
+                "Level": {
+                    "target": "com.amazonaws.pipes#LogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level of logging detail to include. This applies to all log destinations for the pipe.</p>"
+                    }
+                },
+                "IncludeExecutionData": {
+                    "target": "com.amazonaws.pipes#IncludeExecutionData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the execution data (specifically, the <code>payload</code>,  <code>awsRequest</code>, and <code>awsResponse</code> fields) is included in the log messages for this pipe.</p>\n         <p>This applies to all log destinations for the pipe.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-execution-data\">Including execution data in logs</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The logging configuration settings for the pipe.</p>"
+            }
+        },
+        "com.amazonaws.pipes#PipeLogConfigurationParameters": {
+            "type": "structure",
+            "members": {
+                "S3LogDestination": {
+                    "target": "com.amazonaws.pipes#S3LogDestinationParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 logging configuration settings for the pipe.</p>"
+                    }
+                },
+                "FirehoseLogDestination": {
+                    "target": "com.amazonaws.pipes#FirehoseLogDestinationParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Kinesis Data Firehose logging configuration settings for the pipe.</p>"
+                    }
+                },
+                "CloudwatchLogsLogDestination": {
+                    "target": "com.amazonaws.pipes#CloudwatchLogsLogDestinationParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch Logs logging configuration settings for the pipe.</p>"
+                    }
+                },
+                "Level": {
+                    "target": "com.amazonaws.pipes#LogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level of logging detail to include. This applies to all log destinations for the pipe.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-level\">Specifying EventBridge Pipes log level</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncludeExecutionData": {
+                    "target": "com.amazonaws.pipes#IncludeExecutionData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify <code>ON</code> to include the execution data (specifically, the <code>payload</code> and <code>awsRequest</code> fields) in the log messages for this pipe.</p>\n         <p>This applies to all log destinations for the pipe.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-execution-data\">Including execution data in logs</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n         <p>The default is <code>OFF</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the logging configuration settings for the pipe.</p>\n         <p>When you call <code>UpdatePipe</code>, EventBridge updates the fields in the\n            <code>PipeLogConfigurationParameters</code> object atomically as one and overrides\n         existing values. This is by design. If you don't specify an optional field in any of the\n            Amazon Web Services service parameters objects\n            (<code>CloudwatchLogsLogDestinationParameters</code>,\n            <code>FirehoseLogDestinationParameters</code>, or\n            <code>S3LogDestinationParameters</code>), EventBridge sets that field to its\n         system-default value during the update. </p>\n         <p>For example, suppose when you created the pipe you\n         specified a Kinesis Data Firehose stream log destination. You then update the pipe to add an\n         Amazon S3 log destination. In addition to specifying the\n         <code>S3LogDestinationParameters</code> for the new log destination, you must also\n         specify the fields in the <code>FirehoseLogDestinationParameters</code> object in order to\n         retain the Kinesis Data Firehose stream log destination. </p>\n         <p>For more information on generating pipe log records, see <a href=\"eventbridge/latest/userguide/eb-pipes-logs.html\">Log EventBridge Pipes</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
             }
         },
         "com.amazonaws.pipes#PipeName": {
@@ -2206,7 +2412,7 @@
                 "FilterCriteria": {
                     "target": "com.amazonaws.pipes#FilterCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The collection of event patterns used to filter events. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html\">Events and Event\n         Patterns</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The collection of event patterns used to filter events.</p>\n         <p>To remove a filter, specify a <code>FilterCriteria</code> object with an empty array of <code>Filter</code> objects.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html\">Events and Event\n         Patterns</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
                     }
                 },
                 "KinesisStreamParameters": {
@@ -2426,6 +2632,22 @@
                     {
                         "value": "STOP_FAILED",
                         "name": "STOP_FAILED"
+                    },
+                    {
+                        "value": "DELETE_FAILED",
+                        "name": "DELETE_FAILED"
+                    },
+                    {
+                        "value": "CREATE_ROLLBACK_FAILED",
+                        "name": "CREATE_ROLLBACK_FAILED"
+                    },
+                    {
+                        "value": "DELETE_ROLLBACK_FAILED",
+                        "name": "DELETE_ROLLBACK_FAILED"
+                    },
+                    {
+                        "value": "UPDATE_ROLLBACK_FAILED",
+                        "name": "UPDATE_ROLLBACK_FAILED"
                     }
                 ]
             }
@@ -2619,7 +2841,7 @@
                 "EndpointId": {
                     "target": "com.amazonaws.pipes#EventBridgeEndpointId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is <code>abcde.veo</code>.</p>\n         <important>\n            <p>When using Java, you must include <code>auth-crt</code> on the class path.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is <code>abcde.veo</code>.</p>"
                     }
                 },
                 "DetailType": {
@@ -2704,7 +2926,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters for using a Kinesis stream as a source.</p>"
+                "smithy.api#documentation": "<p>The parameters for using a Kinesis stream as a target.</p>"
             }
         },
         "com.amazonaws.pipes#PipeTargetLambdaFunctionParameters": {
@@ -2713,7 +2935,7 @@
                 "InvocationType": {
                     "target": "com.amazonaws.pipes#PipeTargetInvocationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Choose from the following options.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RequestResponse</code> (default) - Invoke the function synchronously. Keep the connection open until\n               the function returns a response or times out. The API response includes the function response and additional\n               data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Event</code> - Invoke the function asynchronously. Send events that fail multiple times to the\n               function's dead-letter queue (if it's configured). The API response only includes a status code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DryRun</code> - Validate parameter values and verify that the user or role has permission to invoke\n               the function.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specify whether to invoke the function synchronously or asynchronously.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REQUEST_RESPONSE</code> (default) - Invoke synchronously. This corresponds to the <code>RequestResponse</code> option in the <code>InvocationType</code> parameter for the Lambda <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_RequestSyntax\">Invoke</a> API.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FIRE_AND_FORGET</code> - Invoke asynchronously. This corresponds to the <code>Event</code> option in the <code>InvocationType</code> parameter for the Lambda <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_RequestSyntax\">Invoke</a> API.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html#pipes-invocation\">Invocation types</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
                     }
                 }
             },
@@ -2727,7 +2949,7 @@
                 "InputTemplate": {
                     "target": "com.amazonaws.pipes#InputTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Valid JSON text passed to the target. In this case, nothing from the event itself is\n         passed to the target. For more information, see <a href=\"http://www.rfc-editor.org/rfc/rfc7159.txt\">The JavaScript Object Notation (JSON) Data\n            Interchange Format</a>.</p>"
+                        "smithy.api#documentation": "<p>Valid JSON text passed to the target. In this case, nothing from the event itself is\n         passed to the target. For more information, see <a href=\"http://www.rfc-editor.org/rfc/rfc7159.txt\">The JavaScript Object Notation (JSON) Data\n            Interchange Format</a>.</p>\n         <p>To remove an input template, specify an empty string.</p>"
                     }
                 },
                 "LambdaFunctionParameters": {
@@ -2745,7 +2967,7 @@
                 "KinesisStreamParameters": {
                     "target": "com.amazonaws.pipes#PipeTargetKinesisStreamParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters for using a Kinesis stream as a source.</p>"
+                        "smithy.api#documentation": "<p>The parameters for using a Kinesis stream as a target.</p>"
                     }
                 },
                 "EcsTaskParameters": {
@@ -2763,7 +2985,7 @@
                 "SqsQueueParameters": {
                     "target": "com.amazonaws.pipes#PipeTargetSqsQueueParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters for using a Amazon SQS stream as a source.</p>"
+                        "smithy.api#documentation": "<p>The parameters for using a Amazon SQS stream as a target.</p>"
                     }
                 },
                 "HttpParameters": {
@@ -2775,7 +2997,7 @@
                 "RedshiftDataParameters": {
                     "target": "com.amazonaws.pipes#PipeTargetRedshiftDataParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the\n      Amazon Redshift Data API ExecuteStatement.</p>"
+                        "smithy.api#documentation": "<p>These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the\n      Amazon Redshift Data API BatchExecuteStatement.</p>"
                     }
                 },
                 "SageMakerPipelineParameters": {
@@ -2798,7 +3020,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters required to set up a target for your pipe.</p>"
+                "smithy.api#documentation": "<p>The parameters required to set up a target for your pipe.</p>\n         <p>For more information about pipe target parameters, including how to use dynamic path parameters, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html\">Target parameters</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
             }
         },
         "com.amazonaws.pipes#PipeTargetRedshiftDataParameters": {
@@ -2807,7 +3029,7 @@
                 "SecretManagerArn": {
                     "target": "com.amazonaws.pipes#SecretManagerArnOrJsonPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ARN of the secret that enables access to the database. Required when\n         authenticating using SageMaker.</p>"
+                        "smithy.api#documentation": "<p>The name or ARN of the secret that enables access to the database. Required when\n         authenticating using Secrets Manager.</p>"
                     }
                 },
                 "Database": {
@@ -2845,7 +3067,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the\n      Amazon Redshift Data API ExecuteStatement.</p>"
+                "smithy.api#documentation": "<p>These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the\n      Amazon Redshift Data API BatchExecuteStatement.</p>"
             }
         },
         "com.amazonaws.pipes#PipeTargetSageMakerPipelineParameters": {
@@ -2879,7 +3101,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters for using a Amazon SQS stream as a source.</p>"
+                "smithy.api#documentation": "<p>The parameters for using a Amazon SQS stream as a target.</p>"
             }
         },
         "com.amazonaws.pipes#PipeTargetStateMachineParameters": {
@@ -2888,7 +3110,7 @@
                 "InvocationType": {
                     "target": "com.amazonaws.pipes#PipeTargetInvocationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify whether to wait for the state machine to finish or not.</p>"
+                        "smithy.api#documentation": "<p>Specify whether to invoke the Step Functions state machine synchronously or asynchronously.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REQUEST_RESPONSE</code> (default) - Invoke synchronously. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/apireference/API_StartSyncExecution.html\">StartSyncExecution</a> in the <i>Step Functions API Reference</i>.</p>\n               <note>\n                  <p>\n                     <code>REQUEST_RESPONSE</code> is not supported for <code>STANDARD</code> state machine workflows.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>FIRE_AND_FORGET</code> - Invoke asynchronously. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/apireference/API_StartExecution.html\">StartExecution</a> in the <i>Step Functions API Reference</i>.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html#pipes-invocation\">Invocation types</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
                     }
                 }
             },
@@ -3022,7 +3244,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3041,7 +3262,6 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -3069,13 +3289,14 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3088,7 +3309,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -3102,7 +3322,6 @@
                                                     "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3125,7 +3344,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -3160,11 +3378,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -3175,16 +3391,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -3198,14 +3417,12 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -3214,15 +3431,14 @@
                                                                                 },
                                                                                 "supportsFIPS"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        true
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -3233,16 +3449,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -3256,7 +3475,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -3276,11 +3494,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -3291,20 +3507,22 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "DualStack is enabled but this partition does not support DualStack",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3315,18 +3533,22 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
                                     "error": "Invalid Configuration: Missing Region",
                                     "type": "error"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
@@ -3868,6 +4090,99 @@
                 "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z0-9+=,.@\\-_/]+$"
             }
         },
+        "com.amazonaws.pipes#S3LogDestination": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "com.amazonaws.pipes#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket to which EventBridge delivers the log records for the pipe.</p>"
+                    }
+                },
+                "Prefix": {
+                    "target": "com.amazonaws.pipes#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix text with which to begin Amazon S3 log object names.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html\">Organizing objects using prefixes</a>\n         in the <i>Amazon Simple Storage Service User Guide</i>.</p>"
+                    }
+                },
+                "BucketOwner": {
+                    "target": "com.amazonaws.pipes#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account that owns the Amazon S3 bucket to which EventBridge delivers the log records for the pipe.</p>"
+                    }
+                },
+                "OutputFormat": {
+                    "target": "com.amazonaws.pipes#S3OutputFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format EventBridge uses for the log records.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>json</code>: JSON </p>\n            </li>\n            <li>\n               <p>\n                  <code>plain</code>: Plain text</p>\n            </li>\n            <li>\n               <p>\n                  <code>w3c</code>: <a href=\"https://www.w3.org/TR/WD-logfile\">W3C extended logging file format</a>\n               </p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 logging configuration settings for the pipe.</p>"
+            }
+        },
+        "com.amazonaws.pipes#S3LogDestinationParameters": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "com.amazonaws.pipes#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the Amazon S3 bucket to which EventBridge delivers the log records for the pipe.</p>",
+                        "smithy.api#length": {
+                            "min": 3,
+                            "max": 63
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "BucketOwner": {
+                    "target": "com.amazonaws.pipes#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services account that owns the Amazon S3 bucket to which EventBridge delivers the log records for the pipe.</p>",
+                        "smithy.api#pattern": "^\\d{12}$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputFormat": {
+                    "target": "com.amazonaws.pipes#S3OutputFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How EventBridge should format the log records.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>json</code>: JSON </p>\n            </li>\n            <li>\n               <p>\n                  <code>plain</code>: Plain text</p>\n            </li>\n            <li>\n               <p>\n                  <code>w3c</code>: <a href=\"https://www.w3.org/TR/WD-logfile\">W3C extended logging file format</a>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Prefix": {
+                    "target": "com.amazonaws.pipes#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies any prefix text with which to begin Amazon S3 log object names.</p>\n         <p>You can use prefixes to organize the data that you store in Amazon S3 buckets. \n         A prefix is a string of characters at the beginning of the object key name. \n         A prefix can be any length, subject to the maximum length of the object key name (1,024 bytes). \n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html\">Organizing objects using prefixes</a>\n         in the <i>Amazon Simple Storage Service User Guide</i>.</p>",
+                        "smithy.api#length": {
+                            "max": 256
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 logging configuration settings for the pipe.</p>"
+            }
+        },
+        "com.amazonaws.pipes#S3OutputFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "json",
+                        "name": "JSON"
+                    },
+                    {
+                        "value": "plain",
+                        "name": "PLAIN"
+                    },
+                    {
+                        "value": "w3c",
+                        "name": "W3C"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.pipes#SageMakerPipelineParameter": {
             "type": "structure",
             "members": {
@@ -4122,7 +4437,8 @@
             "traits": {
                 "smithy.api#documentation": "// A list of SQLs.",
                 "smithy.api#length": {
-                    "min": 1
+                    "min": 1,
+                    "max": 40
                 }
             }
         },
@@ -4685,7 +5001,7 @@
                     "aws:RequestTag/${TagKey}",
                     "aws:TagKeys"
                 ],
-                "smithy.api#documentation": "<p>Update an existing pipe. When you call <code>UpdatePipe</code>, only the fields that are included in the request are changed, the rest are unchanged. \n         The exception to this is if you modify any Amazon Web Services-service specific fields in the <code>SourceParameters</code>, <code>EnrichmentParameters</code>, or \n         <code>TargetParameters</code> objects. The fields in these objects are updated atomically as one and override existing values. This is by design and means that \n         if you don't specify an optional field in one of these Parameters objects, that field will be set to its system-default value after the update.</p>\n         <p>For more information about pipes, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html\">\n         Amazon EventBridge Pipes</a> in the Amazon EventBridge User Guide.</p>",
+                "smithy.api#documentation": "<p>Update an existing pipe. When you call <code>UpdatePipe</code>, EventBridge only the updates fields you have specified in the request; the rest remain unchanged.\n         The exception to this is if you modify any Amazon Web Services-service specific fields in the <code>SourceParameters</code>, <code>EnrichmentParameters</code>, or \n         <code>TargetParameters</code> objects. For example, <code>DynamoDBStreamParameters</code> or <code>EventBridgeEventBusParameters</code>. \n         EventBridge updates the fields in these objects atomically as one and overrides existing values. \n         This is by design, and means that if you don't specify an optional field in one of these <code>Parameters</code> objects, EventBridge sets that field to its system-default value during the update.</p>\n         <p>For more information about pipes, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html\">\n         Amazon EventBridge Pipes</a> in the Amazon EventBridge User Guide.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v1/pipes/{Name}",
@@ -4745,7 +5061,7 @@
                 "TargetParameters": {
                     "target": "com.amazonaws.pipes#PipeTargetParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters required to set up a target for your pipe.</p>"
+                        "smithy.api#documentation": "<p>The parameters required to set up a target for your pipe.</p>\n         <p>For more information about pipe target parameters, including how to use dynamic path parameters, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html\">Target parameters</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
                     }
                 },
                 "RoleArn": {
@@ -4753,6 +5069,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the role that allows the pipe to send data to the target.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "LogConfiguration": {
+                    "target": "com.amazonaws.pipes#PipeLogConfigurationParameters",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "write",
+                        "smithy.api#documentation": "<p>The logging configuration settings for the pipe.</p>"
                     }
                 }
             },
@@ -4963,7 +5286,7 @@
                 "FilterCriteria": {
                     "target": "com.amazonaws.pipes#FilterCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The collection of event patterns used to filter events. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html\">Events and Event\n         Patterns</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The collection of event patterns used to filter events.</p>\n         <p>To remove a filter, specify a <code>FilterCriteria</code> object with an empty array of <code>Filter</code> objects.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html\">Events and Event\n         Patterns</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
                     }
                 },
                 "KinesisStreamParameters": {

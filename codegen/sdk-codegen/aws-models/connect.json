@@ -3154,7 +3154,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>Only the Amazon Connect outbound campaigns service principal is allowed to assume a\n    role in your account and call this API.</p>\n         </note>\n         <p>Allows you to create a batch of contacts in Amazon Connect. The outbound campaigns\n   capability ingests dial requests via the <a href=\"https://docs.aws.amazon.com/connect-outbound/latest/APIReference/API_PutDialRequestBatch.html\">PutDialRequestBatch</a>\n   API. It then uses BatchPutContact to create contacts corresponding to those\n   dial requests. If agents are available, the dial requests are dialed out, which results in a\n   voice call. The resulting voice call uses the same contactId that was created by BatchPutContact.\n  </p>",
+                "smithy.api#documentation": "<note>\n            <p>Only the Amazon Connect outbound campaigns service principal is allowed to assume a\n    role in your account and call this API.</p>\n         </note>\n         <p>Allows you to create a batch of contacts in Amazon Connect. The outbound campaigns\n   capability ingests dial requests via the <a href=\"https://docs.aws.amazon.com/connect-outbound/latest/APIReference/API_PutDialRequestBatch.html\">PutDialRequestBatch</a> API. It then uses BatchPutContact to create contacts corresponding\n   to those dial requests. If agents are available, the dial requests are dialed out, which results\n   in a voice call. The resulting voice call uses the same contactId that was created by\n   BatchPutContact. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/batch/{InstanceId}",
@@ -5275,7 +5275,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables rehydration of chats for the lifespan of a contact. For more information about chat rehydration, see \n   <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html\">Enable persistent chat</a> in the \n   <i>Amazon Connect Administrator Guide</i>.\n  </p>",
+                "smithy.api#documentation": "<p>Enables rehydration of chats for the lifespan of a contact. For more information about chat\n   rehydration, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html\">Enable persistent chat</a> in the\n     <i>Amazon Connect Administrator Guide</i>. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/persistent-contact-association/{InstanceId}/{InitialContactId}",
@@ -5297,7 +5297,7 @@
                 "InitialContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the contactId of the current contact that the\n   <code>CreatePersistentContactAssociation</code> API is being called from.</p>",
+                        "smithy.api#documentation": "<p>This is the contactId of the current contact that the\n    <code>CreatePersistentContactAssociation</code> API is being called from.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5305,7 +5305,7 @@
                 "RehydrationType": {
                     "target": "com.amazonaws.connect#RehydrationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The contactId chosen for rehydration depends on the type chosen.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENTIRE_PAST_SESSION</code>: Rehydrates a chat from the most recently terminated past chat\n     contact of the specified past ended chat session. To use this type, provide the\n     <code>initialContactId</code> of the past ended chat session in the <code>sourceContactId</code> field. In\n     this type, Amazon Connect determines what the most recent chat contact on the past ended\n     chat session and uses it to start a persistent chat. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FROM_SEGMENT</code>: Rehydrates a chat from the specified past chat contact provided in the\n     <code>sourceContactId</code> field. </p>\n            </li>\n         </ul>\n         <p>The actual contactId used for rehydration is provided in the response of this API.</p>\n         <p>To illustrate how to use rehydration type, consider the following example: A customer starts\n   a chat session. Agent a1 accepts the chat and a conversation starts between the customer and\n   Agent a1. This first contact creates a contact ID <b>C1</b>. Agent a1\n   then transfers the chat to Agent a2. This creates another contact ID <b>C2</b>. At this point Agent a2 ends the chat. The customer is forwarded to the\n   disconnect flow for a post chat survey that creates another contact ID <b>C3</b>. After the chat survey, the chat session ends. Later, the customer returns and\n   wants to resume their past chat session. At this point, the customer can have following use\n   cases: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Use Case 1</b>: The customer wants to continue the past chat\n     session but they want to hide the post chat survey. For this they will use the following\n     configuration:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Configuration</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>SourceContactId = \"C2\"</p>\n                        </li>\n                        <li>\n                           <p>RehydrationType = \"FROM_SEGMENT\"</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Expected behavior</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>This starts a persistent chat session from the specified past ended contact (C2).\n         Transcripts of past chat sessions C2 and C1 are accessible in the current persistent chat\n         session. Note that chat segment C3 is dropped from the persistent chat session.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Use Case 2</b>: The customer wants to continue the past chat\n     session and see the transcript of the entire past engagement, including the post chat survey.\n     For this they will use the following configuration:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Configuration</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>SourceContactId = \"C1\"</p>\n                        </li>\n                        <li>\n                           <p>RehydrationType = \"ENTIRE_PAST_SESSION\"</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Expected behavior</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>This starts a persistent chat session from the most recently ended chat contact (C3).\n         Transcripts of past chat sessions C3, C2 and C1 are accessible in the current persistent\n         chat session.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The contactId chosen for rehydration depends on the type chosen.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENTIRE_PAST_SESSION</code>: Rehydrates a chat from the most recently terminated past\n     chat contact of the specified past ended chat session. To use this type, provide the\n      <code>initialContactId</code> of the past ended chat session in the\n      <code>sourceContactId</code> field. In this type, Amazon Connect determines what the most\n     recent chat contact on the past ended chat session and uses it to start a persistent chat.\n    </p>\n            </li>\n            <li>\n               <p>\n                  <code>FROM_SEGMENT</code>: Rehydrates a chat from the specified past chat contact provided\n     in the <code>sourceContactId</code> field. </p>\n            </li>\n         </ul>\n         <p>The actual contactId used for rehydration is provided in the response of this API.</p>\n         <p>To illustrate how to use rehydration type, consider the following example: A customer starts\n   a chat session. Agent a1 accepts the chat and a conversation starts between the customer and\n   Agent a1. This first contact creates a contact ID <b>C1</b>. Agent a1\n   then transfers the chat to Agent a2. This creates another contact ID <b>C2</b>. At this point Agent a2 ends the chat. The customer is forwarded to the\n   disconnect flow for a post chat survey that creates another contact ID <b>C3</b>. After the chat survey, the chat session ends. Later, the customer returns and\n   wants to resume their past chat session. At this point, the customer can have following use\n   cases: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Use Case 1</b>: The customer wants to continue the past chat\n     session but they want to hide the post chat survey. For this they will use the following\n     configuration:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Configuration</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>SourceContactId = \"C2\"</p>\n                        </li>\n                        <li>\n                           <p>RehydrationType = \"FROM_SEGMENT\"</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Expected behavior</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>This starts a persistent chat session from the specified past ended contact (C2).\n         Transcripts of past chat sessions C2 and C1 are accessible in the current persistent chat\n         session. Note that chat segment C3 is dropped from the persistent chat session.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Use Case 2</b>: The customer wants to continue the past chat\n     session and see the transcript of the entire past engagement, including the post chat survey.\n     For this they will use the following configuration:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Configuration</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>SourceContactId = \"C1\"</p>\n                        </li>\n                        <li>\n                           <p>RehydrationType = \"ENTIRE_PAST_SESSION\"</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Expected behavior</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>This starts a persistent chat session from the most recently ended chat contact (C3).\n         Transcripts of past chat sessions C3, C2 and C1 are accessible in the current persistent\n         chat session.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -25692,6 +25692,47 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.connect#SegmentAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.connect#SegmentAttributeValue": {
+            "type": "structure",
+            "members": {
+                "ValueString": {
+                    "target": "com.amazonaws.connect#SegmentAttributeValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of a segment attribute.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A value for a segment attribute. This is structured as a map where the key is\n    <code>valueString</code> and the value is a string.</p>"
+            }
+        },
+        "com.amazonaws.connect#SegmentAttributeValueString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.connect#SegmentAttributes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connect#SegmentAttributeName"
+            },
+            "value": {
+                "target": "com.amazonaws.connect#SegmentAttributeValue"
+            }
+        },
         "com.amazonaws.connect#SendNotificationActionDefinition": {
             "type": "structure",
             "members": {
@@ -25998,6 +26039,12 @@
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for an Amazon Connect contact. This identifier is related to the\n   chat starting.</p>\n         <note>\n            <p>You cannot provide data for both RelatedContactId and PersistentChat. </p>\n         </note>"
+                    }
+                },
+                "SegmentAttributes": {
+                    "target": "com.amazonaws.connect#SegmentAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of system defined key-value pairs stored on individual contact segments using an\n   attribute map. The attributes are standard Amazon Connect attributes. They can be accessed in\n   flows.</p>\n         <p>Attribute keys can include only alphanumeric, -, and _.</p>\n         <p>This field can be used to show channel subtype, such as <code>connect:Guide</code>.</p>\n         <note>\n            <p>The types <code>application/vnd.amazonaws.connect.message.interactive</code> and\n    <code>application/vnd.amazonaws.connect.message.interactive.response</code> must be present in the\n    SupportedMessagingContentTypes field of this API in order to set <code>SegmentAttributes</code> as {<code>\n    \"connect:Subtype\": {\"valueString\" : \"connect:Guide\" }}</code>.</p>\n         </note>"
                     }
                 }
             },

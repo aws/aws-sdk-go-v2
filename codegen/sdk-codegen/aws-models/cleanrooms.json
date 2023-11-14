@@ -113,7 +113,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -132,7 +131,6 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -160,13 +158,14 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -179,7 +178,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -193,7 +191,6 @@
                                                     "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -216,7 +213,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -251,11 +247,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -266,16 +260,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -289,14 +286,12 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -305,15 +300,14 @@
                                                                                 },
                                                                                 "supportsFIPS"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        true
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -324,16 +318,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -347,7 +344,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -367,11 +363,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -382,20 +376,22 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "DualStack is enabled but this partition does not support DualStack",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -406,18 +402,22 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
                                     "error": "Invalid Configuration: Missing Region",
                                     "type": "error"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
@@ -1405,7 +1405,7 @@
                     "min": 36,
                     "max": 36
                 },
-                "smithy.api#pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.cleanrooms#AnalysisTemplateResource": {
@@ -1532,7 +1532,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 15000
+                    "max": 90000
                 }
             }
         },
@@ -2084,7 +2084,7 @@
                     "min": 36,
                     "max": 36
                 },
-                "smithy.api#pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.cleanrooms#CollaborationName": {
@@ -2609,7 +2609,7 @@
                     "min": 36,
                     "max": 36
                 },
-                "smithy.api#pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.cleanrooms#ConfiguredTableAssociationResource": {
@@ -2727,7 +2727,7 @@
                     "min": 36,
                     "max": 36
                 },
-                "smithy.api#pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.cleanrooms#ConfiguredTableResource": {
@@ -3091,6 +3091,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An optional label that you can assign to a resource when you create it. Each tag\n         consists of a key and an optional value, both of which you define. When you use tagging,\n         you can also use tag-based access control in IAM policies to control access\n         to this resource.</p>"
                     }
+                },
+                "creatorPaymentConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#PaymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaboration\n         creator's payment responsibilities set by the collaboration creator. </p>\n         <p>If the collaboration creator hasn't specified anyone as the member paying for query\n         compute costs, then the member who can query is the default payer.</p>"
+                    }
                 }
             }
         },
@@ -3441,7 +3447,7 @@
                 "queryLogStatus": {
                     "target": "com.amazonaws.cleanrooms#MembershipQueryLogStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>An indicator as to whether query logging has been enabled or disabled for the\n         collaboration.</p>",
+                        "smithy.api#documentation": "<p>An indicator as to whether query logging has been enabled or disabled for the\n         membership.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3455,6 +3461,12 @@
                     "target": "com.amazonaws.cleanrooms#MembershipProtectedQueryResultConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The default\n         protected query result configuration as specified by the member who can receive\n         results.</p>"
+                    }
+                },
+                "paymentConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#MembershipPaymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment\n         responsibilities accepted by the collaboration member.</p>\n         <p>Not required if the collaboration member has the member ability to run queries. </p>\n         <p>Required if the collaboration member doesn't have the member ability to run queries but\n         is configured as a payer by the collaboration creator. </p>"
                     }
                 }
             }
@@ -3477,28 +3489,28 @@
                 "allowCleartext": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether encrypted tables can contain cleartext data (true) or are to\n         cryptographically process every column (false).</p>",
+                        "smithy.api#documentation": "<p>Indicates whether encrypted tables can contain cleartext data\n            (<code>TRUE</code>)\n         or are to cryptographically process every column\n            (<code>FALSE</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "allowDuplicates": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether Fingerprint columns can contain duplicate entries (true) or are to\n         contain only non-repeated values (false).</p>",
+                        "smithy.api#documentation": "<p>Indicates whether Fingerprint columns can contain duplicate entries\n            (<code>TRUE</code>)\n         or are to contain only non-repeated values\n            (<code>FALSE</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "allowJoinsOnColumnsWithDifferentNames": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether Fingerprint columns can be joined on any other Fingerprint column with\n         a different name (true) or can only be joined on Fingerprint columns of the same name\n         (false).</p>",
+                        "smithy.api#documentation": "<p>Indicates whether Fingerprint columns can be joined on any other Fingerprint column with\n         a different name\n            (<code>TRUE</code>)\n         or can only be joined on Fingerprint columns of the same name\n            (<code>FALSE</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "preserveNulls": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether NULL values are to be copied as NULL to encrypted tables (true) or\n         cryptographically processed (false).</p>",
+                        "smithy.api#documentation": "<p>Indicates whether NULL values are to be copied as NULL to encrypted tables\n            (<code>TRUE</code>)\n         or cryptographically processed\n            (<code>FALSE</code>).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5628,6 +5640,12 @@
                         "smithy.api#documentation": "<p>The member's display name.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "paymentConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#PaymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaboration\n         member's payment responsibilities set by the collaboration creator.\n         </p>\n         <p>If the collaboration creator hasn't speciﬁed anyone as the member paying for query\n         compute costs, then the member who can query is the default payer.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5671,7 +5689,7 @@
                 "status": {
                     "target": "com.amazonaws.cleanrooms#MemberStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the member. Valid values are `INVITED`, `ACTIVE`, `LEFT`, and\n         `REMOVED`.</p>",
+                        "smithy.api#documentation": "<p>The status of the member.\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5713,6 +5731,13 @@
                     "target": "com.amazonaws.cleanrooms#MembershipArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique ARN for the member's associated membership, if present.</p>"
+                    }
+                },
+                "paymentConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#PaymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaboration\n         member's payment responsibilities set by the collaboration creator.\n         </p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -5796,7 +5821,7 @@
                 "status": {
                     "target": "com.amazonaws.cleanrooms#MembershipStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the membership. Valid values are `ACTIVE`, `REMOVED`, and\n         `COLLABORATION_DELETED`.</p>",
+                        "smithy.api#documentation": "<p>The status of the\n         membership.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5810,14 +5835,21 @@
                 "queryLogStatus": {
                     "target": "com.amazonaws.cleanrooms#MembershipQueryLogStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>An indicator as to whether query logging has been enabled or disabled for the\n         collaboration.</p>",
+                        "smithy.api#documentation": "<p>An indicator as to whether query logging has been enabled or disabled for the\n         membership.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "defaultResultConfiguration": {
                     "target": "com.amazonaws.cleanrooms#MembershipProtectedQueryResultConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default\n         protected query result configuration as specified by the member who can receive\n         results.</p>"
+                        "smithy.api#documentation": "<p>The default protected query result configuration as specified by the member who can\n         receive results.</p>"
+                    }
+                },
+                "paymentConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#MembershipPaymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment\n         responsibilities accepted by the collaboration member.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -5841,7 +5873,22 @@
                     "min": 36,
                     "max": 36
                 },
-                "smithy.api#pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.cleanrooms#MembershipPaymentConfiguration": {
+            "type": "structure",
+            "members": {
+                "queryCompute": {
+                    "target": "com.amazonaws.cleanrooms#MembershipQueryComputePaymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment\n         responsibilities accepted by the collaboration member for query compute\n         costs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object\n         representing the payment responsibilities accepted by the collaboration\n         member.</p>"
             }
         },
         "com.amazonaws.cleanrooms#MembershipProtectedQueryOutputConfiguration": {
@@ -5852,7 +5899,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains\n         configurations for protected query results.</p>"
+                "smithy.api#documentation": "<p>Contains configurations for protected query results.</p>"
             }
         },
         "com.amazonaws.cleanrooms#MembershipProtectedQueryResultConfiguration": {
@@ -5861,19 +5908,34 @@
                 "outputConfiguration": {
                     "target": "com.amazonaws.cleanrooms#MembershipProtectedQueryOutputConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration for\n         protected query results.</p>",
+                        "smithy.api#documentation": "<p>Configuration for protected query results.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "roleArn": {
                     "target": "com.amazonaws.cleanrooms#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ARN for\n         an IAM role that is used by Clean Rooms to write protected query results to the\n         result location, given by the member who can receive results.</p>"
+                        "smithy.api#documentation": "<p>The unique ARN for an IAM role that is used by Clean Rooms to write protected\n         query results to the result location, given by the member who can receive results.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains\n         configurations for protected query results.</p>"
+                "smithy.api#documentation": "<p>Contains configurations for protected query results.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#MembershipQueryComputePaymentConfig": {
+            "type": "structure",
+            "members": {
+                "isResponsible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether\n         the collaboration member has accepted to pay for query compute costs (<code>TRUE</code>) or\n         has not accepted to pay for query compute costs\n         (<code>FALSE</code>).</p>\n         <p>If the collaboration creator has not specified anyone to pay for query compute costs,\n         then the member who can query is the default payer. </p>\n         <p>An error message is returned for the following reasons: </p>\n         <ul>\n            <li>\n               <p>If you set the value to <code>FALSE</code> but you are responsible to pay for\n               query compute costs. </p>\n            </li>\n            <li>\n               <p>If you set the value to <code>TRUE</code> but you are not responsible to pay for\n               query compute costs. </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object\n         representing the payment responsibilities accepted by the collaboration member for query\n         compute costs.</p>"
             }
         },
         "com.amazonaws.cleanrooms#MembershipQueryLogStatus": {
@@ -6027,7 +6089,7 @@
                 "status": {
                     "target": "com.amazonaws.cleanrooms#MembershipStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the membership. Valid values are `ACTIVE`, `REMOVED`, and\n         `COLLABORATION_DELETED`.</p>",
+                        "smithy.api#documentation": "<p>The status of the\n         membership.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6035,6 +6097,13 @@
                     "target": "com.amazonaws.cleanrooms#MemberAbilities",
                     "traits": {
                         "smithy.api#documentation": "<p>The abilities granted to the collaboration member.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "paymentConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#MembershipPaymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment\n         responsibilities accepted by the collaboration member.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6180,6 +6249,21 @@
                 }
             }
         },
+        "com.amazonaws.cleanrooms#PaymentConfiguration": {
+            "type": "structure",
+            "members": {
+                "queryCompute": {
+                    "target": "com.amazonaws.cleanrooms#QueryComputePaymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaboration\n         member's payment responsibilities set by the collaboration creator for query compute\n         costs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object\n         representing the collaboration member's payment responsibilities set by the collaboration\n         creator.</p>"
+            }
+        },
         "com.amazonaws.cleanrooms#ProtectedQuery": {
             "type": "structure",
             "members": {
@@ -6280,10 +6364,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 36,
                     "max": 36
                 },
-                "smithy.api#pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.cleanrooms#ProtectedQueryMemberOutputList": {
@@ -6304,7 +6388,7 @@
                 "memberList": {
                     "target": "com.amazonaws.cleanrooms#ProtectedQueryMemberOutputList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of member\n         Amazon Web Services account(s) that received the results of the query. </p>"
+                        "smithy.api#documentation": "<p>The list of member Amazon Web Services account(s) that received the results of the query. </p>"
                     }
                 }
             },
@@ -6412,7 +6496,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The query string to be submitted.</p>",
                         "smithy.api#length": {
-                            "max": 15000
+                            "max": 90000
                         }
                     }
                 },
@@ -6440,13 +6524,13 @@
                 "accountId": {
                     "target": "com.amazonaws.cleanrooms#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account\n         ID of the member in the collaboration who can receive results for the\n         query.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the member in the collaboration who can receive results for the\n         query.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the\n         member who received the query result.</p>"
+                "smithy.api#documentation": "<p>Details about the member who received the query result.</p>"
             }
         },
         "com.amazonaws.cleanrooms#ProtectedQueryStatistics": {
@@ -6559,6 +6643,21 @@
                 ]
             }
         },
+        "com.amazonaws.cleanrooms#QueryComputePaymentConfig": {
+            "type": "structure",
+            "members": {
+                "isResponsible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether\n         the collaboration creator has configured the collaboration member to pay for query compute\n         costs (<code>TRUE</code>) or has not configured the collaboration member to pay for query\n         compute costs (<code>FALSE</code>).</p>\n         <p>Exactly one member can be configured to pay for query compute costs. An error is\n         returned if the collaboration creator sets a <code>TRUE</code> value for more than one\n         member in the collaboration. </p>\n         <p>If the collaboration creator hasn't specified anyone as the member paying for query\n         compute costs, then the member who can query is the default payer. An error is returned if\n         the collaboration creator sets a <code>FALSE</code> value for the member who can\n         query.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object\n         representing the collaboration member's payment responsibilities set by the collaboration\n         creator for query compute costs.</p>"
+            }
+        },
         "com.amazonaws.cleanrooms#QueryTables": {
             "type": "list",
             "member": {
@@ -6658,7 +6757,7 @@
                     "min": 32,
                     "max": 512
                 },
-                "smithy.api#pattern": "^arn:aws:iam::[\\w]+:role/[\\w+=,./@-]+$"
+                "smithy.api#pattern": "^arn:aws:iam::[\\w]+:role/[\\w+=./@-]+$"
             }
         },
         "com.amazonaws.cleanrooms#ScalarFunctions": {
@@ -6906,14 +7005,14 @@
             }
         },
         "com.amazonaws.cleanrooms#SchemaType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "TABLE",
-                        "value": "TABLE"
+            "type": "enum",
+            "members": {
+                "TABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TABLE"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.cleanrooms#ServiceQuotaExceededException": {
@@ -7204,7 +7303,7 @@
                     "min": 36,
                     "max": 36
                 },
-                "smithy.api#pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.cleanrooms#UntagResource": {
@@ -7708,13 +7807,13 @@
                 "queryLogStatus": {
                     "target": "com.amazonaws.cleanrooms#MembershipQueryLogStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>An indicator as to whether query logging has been enabled or disabled for the\n         collaboration.</p>"
+                        "smithy.api#documentation": "<p>An indicator as to whether query logging has been enabled or disabled for the\n         membership.</p>"
                     }
                 },
                 "defaultResultConfiguration": {
                     "target": "com.amazonaws.cleanrooms#MembershipProtectedQueryResultConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default\n         protected query result configuration as specified by the member who can receive\n         results.</p>"
+                        "smithy.api#documentation": "<p>The default protected query result configuration as specified by the member who can\n         receive results.</p>"
                     }
                 }
             }

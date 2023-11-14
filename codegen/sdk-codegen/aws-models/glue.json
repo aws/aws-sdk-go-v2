@@ -70,6 +70,9 @@
                     "target": "com.amazonaws.glue#BatchGetPartition"
                 },
                 {
+                    "target": "com.amazonaws.glue#BatchGetTableOptimizer"
+                },
+                {
                     "target": "com.amazonaws.glue#BatchGetTriggers"
                 },
                 {
@@ -151,6 +154,9 @@
                     "target": "com.amazonaws.glue#CreateTable"
                 },
                 {
+                    "target": "com.amazonaws.glue#CreateTableOptimizer"
+                },
+                {
                     "target": "com.amazonaws.glue#CreateTrigger"
                 },
                 {
@@ -221,6 +227,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteTable"
+                },
+                {
+                    "target": "com.amazonaws.glue#DeleteTableOptimizer"
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteTableVersion"
@@ -385,6 +394,9 @@
                     "target": "com.amazonaws.glue#GetTable"
                 },
                 {
+                    "target": "com.amazonaws.glue#GetTableOptimizer"
+                },
+                {
                     "target": "com.amazonaws.glue#GetTables"
                 },
                 {
@@ -479,6 +491,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#ListStatements"
+                },
+                {
+                    "target": "com.amazonaws.glue#ListTableOptimizerRuns"
                 },
                 {
                     "target": "com.amazonaws.glue#ListTriggers"
@@ -629,6 +644,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#UpdateTable"
+                },
+                {
+                    "target": "com.amazonaws.glue#UpdateTableOptimizer"
                 },
                 {
                     "target": "com.amazonaws.glue#UpdateTrigger"
@@ -2182,6 +2200,15 @@
                 "smithy.api#documentation": "<p>Specifies a transform that maps data property keys in the data source to data property keys in the data target. You can rename keys, modify the data types for keys, and choose which keys to drop from the dataset.</p>"
             }
         },
+        "com.amazonaws.glue#ArnString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                }
+            }
+        },
         "com.amazonaws.glue#AthenaConnectorSource": {
             "type": "structure",
             "members": {
@@ -3286,6 +3313,140 @@
                 }
             }
         },
+        "com.amazonaws.glue#BatchGetTableOptimizer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#BatchGetTableOptimizerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#BatchGetTableOptimizerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the configuration for the specified table optimizers.</p>"
+            }
+        },
+        "com.amazonaws.glue#BatchGetTableOptimizerEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#BatchGetTableOptimizerEntry"
+            }
+        },
+        "com.amazonaws.glue#BatchGetTableOptimizerEntry": {
+            "type": "structure",
+            "members": {
+                "catalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Catalog ID of the table.</p>"
+                    }
+                },
+                "databaseName": {
+                    "target": "com.amazonaws.glue#databaseNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database in the catalog in which the table resides.</p>"
+                    }
+                },
+                "tableName": {
+                    "target": "com.amazonaws.glue#tableNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.glue#TableOptimizerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of table optimizer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a table optimizer to retrieve in the <code>BatchGetTableOptimizer</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.glue#BatchGetTableOptimizerError": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.glue#ErrorDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An <code>ErrorDetail</code> object containing code and message details about the error.</p>"
+                    }
+                },
+                "catalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Catalog ID of the table.</p>"
+                    }
+                },
+                "databaseName": {
+                    "target": "com.amazonaws.glue#databaseNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database in the catalog in which the table resides.</p>"
+                    }
+                },
+                "tableName": {
+                    "target": "com.amazonaws.glue#tableNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.glue#TableOptimizerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of table optimizer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details on one of the errors in the error list returned by the <code>BatchGetTableOptimizer</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.glue#BatchGetTableOptimizerErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#BatchGetTableOptimizerError"
+            }
+        },
+        "com.amazonaws.glue#BatchGetTableOptimizerRequest": {
+            "type": "structure",
+            "members": {
+                "Entries": {
+                    "target": "com.amazonaws.glue#BatchGetTableOptimizerEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>BatchGetTableOptimizerEntry</code> objects specifying the table optimizers to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#BatchGetTableOptimizerResponse": {
+            "type": "structure",
+            "members": {
+                "TableOptimizers": {
+                    "target": "com.amazonaws.glue#BatchTableOptimizers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>BatchTableOptimizer</code> objects.</p>"
+                    }
+                },
+                "Failures": {
+                    "target": "com.amazonaws.glue#BatchGetTableOptimizerErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of errors from the operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#BatchGetTriggers": {
             "type": "operation",
             "input": {
@@ -3550,6 +3711,44 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#BatchStopJobRunSuccessfulSubmission"
+            }
+        },
+        "com.amazonaws.glue#BatchTableOptimizer": {
+            "type": "structure",
+            "members": {
+                "catalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Catalog ID of the table.</p>"
+                    }
+                },
+                "databaseName": {
+                    "target": "com.amazonaws.glue#databaseNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database in the catalog in which the table resides.</p>"
+                    }
+                },
+                "tableName": {
+                    "target": "com.amazonaws.glue#tableNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>"
+                    }
+                },
+                "tableOptimizer": {
+                    "target": "com.amazonaws.glue#TableOptimizer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>TableOptimizer</code> object that contains details on the configuration and last run of a table optimzer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details for one of the table optimizers returned by the <code>BatchGetTableOptimizer</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.glue#BatchTableOptimizers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#BatchTableOptimizer"
             }
         },
         "com.amazonaws.glue#BatchUpdatePartition": {
@@ -9232,6 +9431,85 @@
                 "smithy.api#documentation": "<p>Creates a new table definition in the Data Catalog.</p>"
             }
         },
+        "com.amazonaws.glue#CreateTableOptimizer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#CreateTableOptimizerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#CreateTableOptimizerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new table optimizer for a specific function. <code>compaction</code> is the only currently supported optimizer type.</p>"
+            }
+        },
+        "com.amazonaws.glue#CreateTableOptimizerRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Catalog ID of the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database in the catalog in which the table resides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.glue#TableOptimizerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of table optimizer. Currently, the only valid value is <code>compaction</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableOptimizerConfiguration": {
+                    "target": "com.amazonaws.glue#TableOptimizerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>TableOptimizerConfiguration</code> object representing the configuration of a table optimizer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#CreateTableOptimizerResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#CreateTableRequest": {
             "type": "structure",
             "members": {
@@ -12121,6 +12399,75 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Removes a table definition from the Data Catalog.</p>\n         <note>\n            <p>After completing this operation, you no longer have access to the table versions and\n        partitions that belong to the deleted table. Glue deletes these \"orphaned\" resources\n        asynchronously in a timely manner, at the discretion of the service.</p>\n            <p>To ensure the immediate deletion of all related resources, before calling\n          <code>DeleteTable</code>, use <code>DeleteTableVersion</code> or\n          <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or\n          <code>BatchDeletePartition</code>, to delete any resources that belong to the\n        table.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.glue#DeleteTableOptimizer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DeleteTableOptimizerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DeleteTableOptimizerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an optimizer and all associated metadata for a table. The optimization will no longer be performed on the table.</p>"
+            }
+        },
+        "com.amazonaws.glue#DeleteTableOptimizerRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Catalog ID of the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database in the catalog in which the table resides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.glue#TableOptimizerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of table optimizer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteTableOptimizerResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.glue#DeleteTableRequest": {
@@ -18162,6 +18509,100 @@
                 "smithy.api#documentation": "<p>Retrieves the <code>Table</code> definition in a Data Catalog for\n      a specified table.</p>"
             }
         },
+        "com.amazonaws.glue#GetTableOptimizer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetTableOptimizerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetTableOptimizerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the configuration of all optimizers associated with a specified table.</p>"
+            }
+        },
+        "com.amazonaws.glue#GetTableOptimizerRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Catalog ID of the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database in the catalog in which the table resides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.glue#TableOptimizerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of table optimizer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#GetTableOptimizerResponse": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Catalog ID of the table.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database in the catalog in which the table resides.</p>"
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>"
+                    }
+                },
+                "TableOptimizer": {
+                    "target": "com.amazonaws.glue#TableOptimizer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optimizer associated with the specified table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#GetTableRequest": {
             "type": "structure",
             "members": {
@@ -23335,6 +23776,127 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#ListTableOptimizerRuns": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListTableOptimizerRunsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListTableOptimizerRunsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the history of previous optimizer runs for a specific table.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.glue#ListTableOptimizerRunsRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Catalog ID of the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database in the catalog in which the table resides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.glue#TableOptimizerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of table optimizer. Currently, the only valid value is <code>compaction</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#MaxListTableOptimizerRunsTokenResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of optimizer runs to return on each call.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#ListTableOptimizerRunsToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#ListTableOptimizerRunsResponse": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Catalog ID of the table.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database in the catalog in which the table resides.</p>"
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#ListTableOptimizerRunsToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token for paginating the returned list of optimizer runs, returned if the current segment of the list is not the last.</p>"
+                    }
+                },
+                "TableOptimizerRuns": {
+                    "target": "com.amazonaws.glue#TableOptimizerRuns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the optimizer runs associated with a table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#ListTableOptimizerRunsToken": {
+            "type": "string"
+        },
         "com.amazonaws.glue#ListTriggers": {
             "type": "operation",
             "input": {
@@ -23960,6 +24522,12 @@
             }
         },
         "com.amazonaws.glue#MaxConcurrentRuns": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.glue#MaxListTableOptimizerRunsTokenResults": {
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0
@@ -26970,6 +27538,38 @@
         "com.amazonaws.glue#RunId": {
             "type": "string"
         },
+        "com.amazonaws.glue#RunMetrics": {
+            "type": "structure",
+            "members": {
+                "NumberOfBytesCompacted": {
+                    "target": "com.amazonaws.glue#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of bytes removed by the compaction job run.</p>"
+                    }
+                },
+                "NumberOfFilesCompacted": {
+                    "target": "com.amazonaws.glue#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of files removed by the compaction job run.</p>"
+                    }
+                },
+                "NumberOfDpus": {
+                    "target": "com.amazonaws.glue#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of DPU hours consumed by the job.</p>"
+                    }
+                },
+                "JobDurationInHour": {
+                    "target": "com.amazonaws.glue#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration of the job in hours.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metrics for the optimizer run.</p>"
+            }
+        },
         "com.amazonaws.glue#RunStatement": {
             "type": "operation",
             "input": {
@@ -29868,7 +30468,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a recommendation run that is used to generate rules when you don't know what rules to write. Glue Data Quality analyzes the data and comes up with recommendations for a potential ruleset. You can then triage the ruleset and modify the generated ruleset to your liking.</p>",
+                "smithy.api#documentation": "<p>Starts a recommendation run that is used to generate rules when you don't know what rules to write. Glue Data Quality analyzes the data and comes up with recommendations for a potential ruleset. You can then triage the ruleset and modify the generated ruleset to your liking.</p>\n         <p>Recommendation runs are automatically deleted after 90 days.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -31488,6 +32088,139 @@
         },
         "com.amazonaws.glue#TableName": {
             "type": "string"
+        },
+        "com.amazonaws.glue#TableOptimizer": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.glue#TableOptimizerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of table optimizer. Currently, the only valid value is <code>compaction</code>.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.glue#TableOptimizerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>TableOptimizerConfiguration</code> object that was specified when creating or updating a table optimizer.</p>"
+                    }
+                },
+                "lastRun": {
+                    "target": "com.amazonaws.glue#TableOptimizerRun",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>TableOptimizerRun</code> object representing the last run of the table optimizer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about an optimizer associated with a table.</p>"
+            }
+        },
+        "com.amazonaws.glue#TableOptimizerConfiguration": {
+            "type": "structure",
+            "members": {
+                "roleArn": {
+                    "target": "com.amazonaws.glue#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A role passed by the caller which gives the service permission to update the resources associated with the optimizer on the caller's behalf.</p>"
+                    }
+                },
+                "enabled": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether table optimization is enabled. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details on the configuration of a table optimizer. You pass this configuration when creating or updating a table optimizer.</p>"
+            }
+        },
+        "com.amazonaws.glue#TableOptimizerEventType": {
+            "type": "enum",
+            "members": {
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "starting"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "completed"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "in_progress"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#TableOptimizerRun": {
+            "type": "structure",
+            "members": {
+                "eventType": {
+                    "target": "com.amazonaws.glue#TableOptimizerEventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An event type representing the status of the table optimizer run.</p>"
+                    }
+                },
+                "startTimestamp": {
+                    "target": "com.amazonaws.glue#TableOptimizerRunTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the epoch timestamp at which the compaction job was started within Lake Formation.</p>"
+                    }
+                },
+                "endTimestamp": {
+                    "target": "com.amazonaws.glue#TableOptimizerRunTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the epoch timestamp at which the compaction job ended.</p>"
+                    }
+                },
+                "metrics": {
+                    "target": "com.amazonaws.glue#RunMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>RunMetrics</code> object containing metrics for the optimizer run.</p>"
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.glue#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error that occured during the optimizer run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details for a table optimizer run.</p>"
+            }
+        },
+        "com.amazonaws.glue#TableOptimizerRunTimestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.glue#TableOptimizerRuns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#TableOptimizerRun"
+            }
+        },
+        "com.amazonaws.glue#TableOptimizerType": {
+            "type": "enum",
+            "members": {
+                "COMPACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "compaction"
+                    }
+                }
+            }
         },
         "com.amazonaws.glue#TablePrefix": {
             "type": "string",
@@ -34332,6 +35065,82 @@
                 "smithy.api#documentation": "<p>Updates a metadata table in the Data Catalog.</p>"
             }
         },
+        "com.amazonaws.glue#UpdateTableOptimizer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#UpdateTableOptimizerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#UpdateTableOptimizerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration for an existing table optimizer.</p>"
+            }
+        },
+        "com.amazonaws.glue#UpdateTableOptimizerRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Catalog ID of the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database in the catalog in which the table resides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.glue#TableOptimizerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of table optimizer. Currently, the only valid value is <code>compaction</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableOptimizerConfiguration": {
+                    "target": "com.amazonaws.glue#TableOptimizerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>TableOptimizerConfiguration</code> object representing the configuration of a table optimizer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#UpdateTableOptimizerResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#UpdateTableRequest": {
             "type": "structure",
             "members": {
@@ -35237,6 +36046,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A classifier for <code>XML</code> content.</p>"
+            }
+        },
+        "com.amazonaws.glue#databaseNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.glue#tableNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         }
     }

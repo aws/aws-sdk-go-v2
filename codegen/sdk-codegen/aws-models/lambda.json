@@ -9964,6 +9964,12 @@
                     "traits": {
                         "smithy.api#enumValue": "provided.al2023"
                     }
+                },
+                "python312": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "python3.12"
+                    }
                 }
             }
         },
