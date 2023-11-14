@@ -410,6 +410,26 @@ func (m *validateOpPublishStateMachineVersion) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRedriveExecution struct {
+}
+
+func (*validateOpRedriveExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRedriveExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RedriveExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRedriveExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendTaskFailure struct {
 }
 
@@ -708,6 +728,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPublishStateMachineVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPublishStateMachineVersion{}, middleware.After)
+}
+
+func addOpRedriveExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRedriveExecution{}, middleware.After)
 }
 
 func addOpSendTaskFailureValidationMiddleware(stack *middleware.Stack) error {
@@ -1091,6 +1115,21 @@ func validateOpPublishStateMachineVersionInput(v *PublishStateMachineVersionInpu
 	invalidParams := smithy.InvalidParamsError{Context: "PublishStateMachineVersionInput"}
 	if v.StateMachineArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StateMachineArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRedriveExecutionInput(v *RedriveExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedriveExecutionInput"}
+	if v.ExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

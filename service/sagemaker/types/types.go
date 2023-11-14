@@ -1508,7 +1508,7 @@ type AutoMLJobObjective struct {
 	//   target model to enhance a default objective metric, the cross-entropy loss.
 	//   After fine-tuning a language model, you can evaluate the quality of its
 	//   generated text using different metrics. For a list of the available metrics, see
-	//   Metrics for fine-tuning LLMs in Autopilot (https://docs.aws.amazon.com/sagemaker/latest/dg/llms-finetuning-models.html)
+	//   Metrics for fine-tuning LLMs in Autopilot (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-metrics.html)
 	//   .
 	//
 	// This member is required.
@@ -7057,19 +7057,15 @@ type InferenceSpecification struct {
 	Containers []ModelPackageContainerDefinition
 
 	// The supported MIME types for the input data.
-	//
-	// This member is required.
 	SupportedContentTypes []string
-
-	// The supported MIME types for the output data.
-	//
-	// This member is required.
-	SupportedResponseMIMETypes []string
 
 	// A list of the instance types that are used to generate inferences in real-time.
 	// This parameter is required for unversioned models, and optional for versioned
 	// models.
 	SupportedRealtimeInferenceInstanceTypes []ProductionVariantInstanceType
+
+	// The supported MIME types for the output data.
+	SupportedResponseMIMETypes []string
 
 	// A list of the instance types on which a transformation job can be run or on
 	// which an endpoint can be deployed. This parameter is required for unversioned
@@ -13596,7 +13592,7 @@ type TextGenerationJobConfig struct {
 
 	// The name of the base model to fine-tune. Autopilot supports fine-tuning a
 	// variety of large language models. For information on the list of supported
-	// models, see Text generation models supporting fine-tuning in Autopilot (https://docs.aws.amazon.com/sagemaker/src/AWSIronmanApiDoc/build/server-root/sagemaker/latest/dg/llms-finetuning-models.html#llms-finetuning-supported-llms)
+	// models, see Text generation models supporting fine-tuning in Autopilot (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-models.html#autopilot-llms-finetuning-supported-llms)
 	// . If no BaseModelName is provided, the default model used is Falcon-7B-Instruct.
 	BaseModelName *string
 

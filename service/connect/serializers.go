@@ -13657,6 +13657,13 @@ func awsRestjson1_serializeOpDocumentStartChatContactInput(v *StartChatContactIn
 		ok.String(*v.RelatedContactId)
 	}
 
+	if v.SegmentAttributes != nil {
+		ok := object.Key("SegmentAttributes")
+		if err := awsRestjson1_serializeDocumentSegmentAttributes(v.SegmentAttributes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SupportedMessagingContentTypes != nil {
 		ok := object.Key("SupportedMessagingContentTypes")
 		if err := awsRestjson1_serializeDocumentSupportedMessagingContentTypes(v.SupportedMessagingContentTypes, ok); err != nil {
@@ -21726,6 +21733,32 @@ func awsRestjson1_serializeDocumentSecurityProfilesSearchFilter(v *types.Securit
 		if err := awsRestjson1_serializeDocumentControlPlaneTagFilter(v.TagFilter, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSegmentAttributes(v map[string]types.SegmentAttributeValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentSegmentAttributeValue(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSegmentAttributeValue(v *types.SegmentAttributeValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ValueString != nil {
+		ok := object.Key("ValueString")
+		ok.String(*v.ValueString)
 	}
 
 	return nil

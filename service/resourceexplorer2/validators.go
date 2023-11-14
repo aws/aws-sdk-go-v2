@@ -110,6 +110,26 @@ func (m *validateOpGetView) HandleInitialize(ctx context.Context, in middleware.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListIndexesForMembers struct {
+}
+
+func (*validateOpListIndexesForMembers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIndexesForMembers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIndexesForMembersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIndexesForMembersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -248,6 +268,10 @@ func addOpDeleteViewValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetViewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetView{}, middleware.After)
+}
+
+func addOpListIndexesForMembersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIndexesForMembers{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -398,6 +422,21 @@ func validateOpGetViewInput(v *GetViewInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetViewInput"}
 	if v.ViewArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ViewArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListIndexesForMembersInput(v *ListIndexesForMembersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIndexesForMembersInput"}
+	if v.AccountIdList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIdList"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

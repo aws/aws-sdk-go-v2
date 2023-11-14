@@ -1142,7 +1142,7 @@ func awsRestjson1_deserializeOpDocumentCreateProgramOutput(v **CreateProgramOutp
 				if err != nil {
 					return err
 				}
-				sv.DurationMillis = i64
+				sv.DurationMillis = ptr.Int64(i64)
 			}
 
 		case "LiveSourceName":
@@ -3891,7 +3891,7 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				if err != nil {
 					return err
 				}
-				sv.PersonalizationThresholdSeconds = int32(i64)
+				sv.PersonalizationThresholdSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "PlaybackConfigurationArn":
@@ -5648,7 +5648,7 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				if err != nil {
 					return err
 				}
-				sv.PersonalizationThresholdSeconds = int32(i64)
+				sv.PersonalizationThresholdSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "PlaybackConfigurationArn":
@@ -6680,7 +6680,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProgramOutput(v **UpdateProgramOutp
 				if err != nil {
 					return err
 				}
-				sv.DurationMillis = i64
+				sv.DurationMillis = ptr.Int64(i64)
 			}
 
 		case "LiveSourceName":
@@ -8481,7 +8481,7 @@ func awsRestjson1_deserializeDocumentClipRange(v **types.ClipRange, value interf
 				if err != nil {
 					return err
 				}
-				sv.EndOffsetMillis = i64
+				sv.EndOffsetMillis = ptr.Int64(i64)
 			}
 
 		default:
@@ -8617,7 +8617,7 @@ func awsRestjson1_deserializeDocumentDashPlaylistSettings(v **types.DashPlaylist
 				if err != nil {
 					return err
 				}
-				sv.ManifestWindowSeconds = int32(i64)
+				sv.ManifestWindowSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "MinBufferTimeSeconds":
@@ -8630,7 +8630,7 @@ func awsRestjson1_deserializeDocumentDashPlaylistSettings(v **types.DashPlaylist
 				if err != nil {
 					return err
 				}
-				sv.MinBufferTimeSeconds = int32(i64)
+				sv.MinBufferTimeSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "MinUpdatePeriodSeconds":
@@ -8643,7 +8643,7 @@ func awsRestjson1_deserializeDocumentDashPlaylistSettings(v **types.DashPlaylist
 				if err != nil {
 					return err
 				}
-				sv.MinUpdatePeriodSeconds = int32(i64)
+				sv.MinUpdatePeriodSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "SuggestedPresentationDelaySeconds":
@@ -8656,7 +8656,7 @@ func awsRestjson1_deserializeDocumentDashPlaylistSettings(v **types.DashPlaylist
 				if err != nil {
 					return err
 				}
-				sv.SuggestedPresentationDelaySeconds = int32(i64)
+				sv.SuggestedPresentationDelaySeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -8785,7 +8785,7 @@ func awsRestjson1_deserializeDocumentHlsPlaylistSettings(v **types.HlsPlaylistSe
 				if err != nil {
 					return err
 				}
-				sv.ManifestWindowSeconds = int32(i64)
+				sv.ManifestWindowSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -9019,7 +9019,7 @@ func awsRestjson1_deserializeDocumentLivePreRollConfiguration(v **types.LivePreR
 				if err != nil {
 					return err
 				}
-				sv.MaxDurationSeconds = int32(i64)
+				sv.MaxDurationSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -9378,7 +9378,7 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				if err != nil {
 					return err
 				}
-				sv.PersonalizationThresholdSeconds = int32(i64)
+				sv.PersonalizationThresholdSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "PlaybackConfigurationArn":
@@ -9796,7 +9796,7 @@ func awsRestjson1_deserializeDocumentScheduleAdBreak(v **types.ScheduleAdBreak, 
 				if err != nil {
 					return err
 				}
-				sv.ApproximateDurationSeconds = i64
+				sv.ApproximateDurationSeconds = ptr.Int64(i64)
 			}
 
 		case "ApproximateStartTime":
@@ -9874,7 +9874,7 @@ func awsRestjson1_deserializeDocumentScheduleEntry(v **types.ScheduleEntry, valu
 				if err != nil {
 					return err
 				}
-				sv.ApproximateDurationSeconds = i64
+				sv.ApproximateDurationSeconds = ptr.Int64(i64)
 			}
 
 		case "ApproximateStartTime":
@@ -10429,7 +10429,7 @@ func awsRestjson1_deserializeDocumentSpliceInsertMessage(v **types.SpliceInsertM
 				if err != nil {
 					return err
 				}
-				sv.AvailNum = int32(i64)
+				sv.AvailNum = ptr.Int32(int32(i64))
 			}
 
 		case "AvailsExpected":
@@ -10442,7 +10442,7 @@ func awsRestjson1_deserializeDocumentSpliceInsertMessage(v **types.SpliceInsertM
 				if err != nil {
 					return err
 				}
-				sv.AvailsExpected = int32(i64)
+				sv.AvailsExpected = ptr.Int32(int32(i64))
 			}
 
 		case "SpliceEventId":
@@ -10455,7 +10455,7 @@ func awsRestjson1_deserializeDocumentSpliceInsertMessage(v **types.SpliceInsertM
 				if err != nil {
 					return err
 				}
-				sv.SpliceEventId = int32(i64)
+				sv.SpliceEventId = ptr.Int32(int32(i64))
 			}
 
 		case "UniqueProgramId":
@@ -10468,7 +10468,7 @@ func awsRestjson1_deserializeDocumentSpliceInsertMessage(v **types.SpliceInsertM
 				if err != nil {
 					return err
 				}
-				sv.UniqueProgramId = int32(i64)
+				sv.UniqueProgramId = ptr.Int32(int32(i64))
 			}
 
 		default:

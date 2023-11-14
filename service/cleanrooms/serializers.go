@@ -392,6 +392,13 @@ func awsRestjson1_serializeOpDocumentCreateCollaborationInput(v *CreateCollabora
 		}
 	}
 
+	if v.CreatorPaymentConfiguration != nil {
+		ok := object.Key("creatorPaymentConfiguration")
+		if err := awsRestjson1_serializeDocumentPaymentConfiguration(v.CreatorPaymentConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DataEncryptionMetadata != nil {
 		ok := object.Key("dataEncryptionMetadata")
 		if err := awsRestjson1_serializeDocumentDataEncryptionMetadata(v.DataEncryptionMetadata, ok); err != nil {
@@ -817,6 +824,13 @@ func awsRestjson1_serializeOpDocumentCreateMembershipInput(v *CreateMembershipIn
 	if v.DefaultResultConfiguration != nil {
 		ok := object.Key("defaultResultConfiguration")
 		if err := awsRestjson1_serializeDocumentMembershipProtectedQueryResultConfiguration(v.DefaultResultConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PaymentConfiguration != nil {
+		ok := object.Key("paymentConfiguration")
+		if err := awsRestjson1_serializeDocumentMembershipPaymentConfiguration(v.PaymentConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -4113,6 +4127,20 @@ func awsRestjson1_serializeDocumentMemberList(v []types.MemberSpecification, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMembershipPaymentConfiguration(v *types.MembershipPaymentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.QueryCompute != nil {
+		ok := object.Key("queryCompute")
+		if err := awsRestjson1_serializeDocumentMembershipQueryComputePaymentConfig(v.QueryCompute, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMembershipProtectedQueryOutputConfiguration(v types.MembershipProtectedQueryOutputConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4150,6 +4178,18 @@ func awsRestjson1_serializeDocumentMembershipProtectedQueryResultConfiguration(v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMembershipQueryComputePaymentConfig(v *types.MembershipQueryComputePaymentConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsResponsible != nil {
+		ok := object.Key("isResponsible")
+		ok.Boolean(*v.IsResponsible)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMemberSpecification(v *types.MemberSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4171,6 +4211,13 @@ func awsRestjson1_serializeDocumentMemberSpecification(v *types.MemberSpecificat
 		}
 	}
 
+	if v.PaymentConfiguration != nil {
+		ok := object.Key("paymentConfiguration")
+		if err := awsRestjson1_serializeDocumentPaymentConfiguration(v.PaymentConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4182,6 +4229,20 @@ func awsRestjson1_serializeDocumentParameterMap(v map[string]string, value smith
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPaymentConfiguration(v *types.PaymentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.QueryCompute != nil {
+		ok := object.Key("queryCompute")
+		if err := awsRestjson1_serializeDocumentQueryComputePaymentConfig(v.QueryCompute, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4258,6 +4319,18 @@ func awsRestjson1_serializeDocumentProtectedQuerySQLParameters(v *types.Protecte
 	if v.QueryString != nil {
 		ok := object.Key("queryString")
 		ok.String(*v.QueryString)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQueryComputePaymentConfig(v *types.QueryComputePaymentConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsResponsible != nil {
+		ok := object.Key("isResponsible")
+		ok.Boolean(*v.IsResponsible)
 	}
 
 	return nil

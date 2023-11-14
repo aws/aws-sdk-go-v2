@@ -52,7 +52,8 @@ type ListViewsInput struct {
 	// The parameter for receiving additional results if you receive a NextToken
 	// response in a previous request. A NextToken response indicates that more output
 	// is available. Set this parameter to the value of the previous call's NextToken
-	// response to indicate where the output should continue from.
+	// response to indicate where the output should continue from. The pagination
+	// tokens expire after 24 hours.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -63,7 +64,8 @@ type ListViewsOutput struct {
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken response element comes back as null .
+	// repeat this until the NextToken response element comes back as null . The
+	// pagination tokens expire after 24 hours.
 	NextToken *string
 
 	// The list of views available in the Amazon Web Services Region in which you

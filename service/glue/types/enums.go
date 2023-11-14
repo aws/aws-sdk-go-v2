@@ -1755,6 +1755,44 @@ func (StatementState) Values() []StatementState {
 	}
 }
 
+type TableOptimizerEventType string
+
+// Enum values for TableOptimizerEventType
+const (
+	TableOptimizerEventTypeStarting   TableOptimizerEventType = "starting"
+	TableOptimizerEventTypeCompleted  TableOptimizerEventType = "completed"
+	TableOptimizerEventTypeFailed     TableOptimizerEventType = "failed"
+	TableOptimizerEventTypeInProgress TableOptimizerEventType = "in_progress"
+)
+
+// Values returns all known values for TableOptimizerEventType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TableOptimizerEventType) Values() []TableOptimizerEventType {
+	return []TableOptimizerEventType{
+		"starting",
+		"completed",
+		"failed",
+		"in_progress",
+	}
+}
+
+type TableOptimizerType string
+
+// Enum values for TableOptimizerType
+const (
+	TableOptimizerTypeCompaction TableOptimizerType = "compaction"
+)
+
+// Values returns all known values for TableOptimizerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TableOptimizerType) Values() []TableOptimizerType {
+	return []TableOptimizerType{
+		"compaction",
+	}
+}
+
 type TargetFormat string
 
 // Enum values for TargetFormat

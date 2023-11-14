@@ -325,6 +325,21 @@ func validateCapacityProviderStrategyItem(v *types.CapacityProviderStrategyItem)
 	}
 }
 
+func validateCloudwatchLogsLogDestinationParameters(v *types.CloudwatchLogsLogDestinationParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudwatchLogsLogDestinationParameters"}
+	if v.LogGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEcsContainerOverride(v *types.EcsContainerOverride) error {
 	if v == nil {
 		return nil
@@ -468,6 +483,21 @@ func validateEcsTaskOverride(v *types.EcsTaskOverride) error {
 	}
 }
 
+func validateFirehoseLogDestinationParameters(v *types.FirehoseLogDestinationParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FirehoseLogDestinationParameters"}
+	if v.DeliveryStreamArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryStreamArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNetworkConfiguration(v *types.NetworkConfiguration) error {
 	if v == nil {
 		return nil
@@ -477,6 +507,36 @@ func validateNetworkConfiguration(v *types.NetworkConfiguration) error {
 		if err := validateAwsVpcConfiguration(v.AwsvpcConfiguration); err != nil {
 			invalidParams.AddNested("AwsvpcConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePipeLogConfigurationParameters(v *types.PipeLogConfigurationParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PipeLogConfigurationParameters"}
+	if v.S3LogDestination != nil {
+		if err := validateS3LogDestinationParameters(v.S3LogDestination); err != nil {
+			invalidParams.AddNested("S3LogDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FirehoseLogDestination != nil {
+		if err := validateFirehoseLogDestinationParameters(v.FirehoseLogDestination); err != nil {
+			invalidParams.AddNested("FirehoseLogDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudwatchLogsLogDestination != nil {
+		if err := validateCloudwatchLogsLogDestinationParameters(v.CloudwatchLogsLogDestination); err != nil {
+			invalidParams.AddNested("CloudwatchLogsLogDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Level) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Level"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -768,6 +828,24 @@ func validatePipeTargetSageMakerPipelineParameters(v *types.PipeTargetSageMakerP
 	}
 }
 
+func validateS3LogDestinationParameters(v *types.S3LogDestinationParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3LogDestinationParameters"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.BucketOwner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketOwner"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSageMakerPipelineParameter(v *types.SageMakerPipelineParameter) error {
 	if v == nil {
 		return nil
@@ -917,6 +995,11 @@ func validateOpCreatePipeInput(v *CreatePipeInput) error {
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
+	if v.LogConfiguration != nil {
+		if err := validatePipeLogConfigurationParameters(v.LogConfiguration); err != nil {
+			invalidParams.AddNested("LogConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1055,6 +1138,11 @@ func validateOpUpdatePipeInput(v *UpdatePipeInput) error {
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.LogConfiguration != nil {
+		if err := validatePipeLogConfigurationParameters(v.LogConfiguration); err != nil {
+			invalidParams.AddNested("LogConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

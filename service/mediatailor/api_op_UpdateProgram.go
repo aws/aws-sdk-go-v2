@@ -74,7 +74,7 @@ type UpdateProgramOutput struct {
 	CreationTime *time.Time
 
 	// The duration of the live program in milliseconds.
-	DurationMillis int64
+	DurationMillis *int64
 
 	// The name of the LiveSource for this Program.
 	LiveSourceName *string

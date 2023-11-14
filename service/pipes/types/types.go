@@ -209,12 +209,35 @@ type CapacityProviderStrategyItem struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon CloudWatch Logs logging configuration settings for the pipe.
+type CloudwatchLogsLogDestination struct {
+
+	// The Amazon Web Services Resource Name (ARN) for the CloudWatch log group to
+	// which EventBridge sends the log records.
+	LogGroupArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon CloudWatch Logs logging configuration settings for the pipe.
+type CloudwatchLogsLogDestinationParameters struct {
+
+	// The Amazon Web Services Resource Name (ARN) for the CloudWatch log group to
+	// which EventBridge sends the log records.
+	//
+	// This member is required.
+	LogGroupArn *string
+
+	noSmithyDocumentSerde
+}
+
 // A DeadLetterConfig object that contains information about a dead-letter queue
 // configuration.
 type DeadLetterConfig struct {
 
-	// The ARN of the Amazon SQS queue specified as the target for the dead-letter
-	// queue.
+	// The ARN of the specified target for the dead-letter queue. For Amazon Kinesis
+	// stream and Amazon DynamoDB stream sources, specify either an Amazon SNS topic or
+	// Amazon SQS queue ARN.
 	Arn *string
 
 	noSmithyDocumentSerde
@@ -421,13 +444,36 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-// The collection of event patterns used to filter events. For more information,
-// see Events and Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
+// The collection of event patterns used to filter events. To remove a filter,
+// specify a FilterCriteria object with an empty array of Filter objects. For more
+// information, see Events and Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
 // in the Amazon EventBridge User Guide.
 type FilterCriteria struct {
 
 	// The event patterns.
 	Filters []Filter
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
+type FirehoseLogDestination struct {
+
+	// The Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery stream to
+	// which EventBridge delivers the pipe log records.
+	DeliveryStreamArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
+type FirehoseLogDestinationParameters struct {
+
+	// Specifies the Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery
+	// stream to which EventBridge delivers the pipe log records.
+	//
+	// This member is required.
+	DeliveryStreamArn *string
 
 	noSmithyDocumentSerde
 }
@@ -563,8 +609,77 @@ type PipeEnrichmentParameters struct {
 	// Valid JSON text passed to the enrichment. In this case, nothing from the event
 	// itself is passed to the enrichment. For more information, see The JavaScript
 	// Object Notation (JSON) Data Interchange Format (http://www.rfc-editor.org/rfc/rfc7159.txt)
-	// .
+	// . To remove an input template, specify an empty string.
 	InputTemplate *string
+
+	noSmithyDocumentSerde
+}
+
+// The logging configuration settings for the pipe.
+type PipeLogConfiguration struct {
+
+	// The Amazon CloudWatch Logs logging configuration settings for the pipe.
+	CloudwatchLogsLogDestination *CloudwatchLogsLogDestination
+
+	// The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
+	FirehoseLogDestination *FirehoseLogDestination
+
+	// Whether the execution data (specifically, the payload , awsRequest , and
+	// awsResponse fields) is included in the log messages for this pipe. This applies
+	// to all log destinations for the pipe. For more information, see Including
+	// execution data in logs (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-execution-data)
+	// in the Amazon EventBridge User Guide.
+	IncludeExecutionData []IncludeExecutionDataOption
+
+	// The level of logging detail to include. This applies to all log destinations
+	// for the pipe.
+	Level LogLevel
+
+	// The Amazon S3 logging configuration settings for the pipe.
+	S3LogDestination *S3LogDestination
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the logging configuration settings for the pipe. When you call
+// UpdatePipe , EventBridge updates the fields in the
+// PipeLogConfigurationParameters object atomically as one and overrides existing
+// values. This is by design. If you don't specify an optional field in any of the
+// Amazon Web Services service parameters objects (
+// CloudwatchLogsLogDestinationParameters , FirehoseLogDestinationParameters , or
+// S3LogDestinationParameters ), EventBridge sets that field to its system-default
+// value during the update. For example, suppose when you created the pipe you
+// specified a Kinesis Data Firehose stream log destination. You then update the
+// pipe to add an Amazon S3 log destination. In addition to specifying the
+// S3LogDestinationParameters for the new log destination, you must also specify
+// the fields in the FirehoseLogDestinationParameters object in order to retain
+// the Kinesis Data Firehose stream log destination. For more information on
+// generating pipe log records, see Log EventBridge Pipes in the Amazon
+// EventBridge User Guide.
+type PipeLogConfigurationParameters struct {
+
+	// The level of logging detail to include. This applies to all log destinations
+	// for the pipe. For more information, see Specifying EventBridge Pipes log level (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-level)
+	// in the Amazon EventBridge User Guide.
+	//
+	// This member is required.
+	Level LogLevel
+
+	// The Amazon CloudWatch Logs logging configuration settings for the pipe.
+	CloudwatchLogsLogDestination *CloudwatchLogsLogDestinationParameters
+
+	// The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
+	FirehoseLogDestination *FirehoseLogDestinationParameters
+
+	// Specify ON to include the execution data (specifically, the payload and
+	// awsRequest fields) in the log messages for this pipe. This applies to all log
+	// destinations for the pipe. For more information, see Including execution data
+	// in logs (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-execution-data)
+	// in the Amazon EventBridge User Guide. The default is OFF .
+	IncludeExecutionData []IncludeExecutionDataOption
+
+	// The Amazon S3 logging configuration settings for the pipe.
+	S3LogDestination *S3LogDestinationParameters
 
 	noSmithyDocumentSerde
 }
@@ -710,8 +825,9 @@ type PipeSourceParameters struct {
 	// The parameters for using a DynamoDB stream as a source.
 	DynamoDBStreamParameters *PipeSourceDynamoDBStreamParameters
 
-	// The collection of event patterns used to filter events. For more information,
-	// see Events and Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
+	// The collection of event patterns used to filter events. To remove a filter,
+	// specify a FilterCriteria object with an empty array of Filter objects. For more
+	// information, see Events and Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
 	// in the Amazon EventBridge User Guide.
 	FilterCriteria *FilterCriteria
 
@@ -958,7 +1074,7 @@ type PipeTargetEventBridgeEventBusParameters struct {
 
 	// The URL subdomain of the endpoint. For example, if the URL for Endpoint is
 	// https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is
-	// abcde.veo . When using Java, you must include auth-crt on the class path.
+	// abcde.veo .
 	EndpointId *string
 
 	// Amazon Web Services resources, identified by Amazon Resource Name (ARN), which
@@ -995,7 +1111,7 @@ type PipeTargetHttpParameters struct {
 	noSmithyDocumentSerde
 }
 
-// The parameters for using a Kinesis stream as a source.
+// The parameters for using a Kinesis stream as a target.
 type PipeTargetKinesisStreamParameters struct {
 
 	// Determines which shard in the stream the data record is assigned to. Partition
@@ -1016,21 +1132,24 @@ type PipeTargetKinesisStreamParameters struct {
 // The parameters for using a Lambda function as a target.
 type PipeTargetLambdaFunctionParameters struct {
 
-	// Choose from the following options.
-	//   - RequestResponse (default) - Invoke the function synchronously. Keep the
-	//   connection open until the function returns a response or times out. The API
-	//   response includes the function response and additional data.
-	//   - Event - Invoke the function asynchronously. Send events that fail multiple
-	//   times to the function's dead-letter queue (if it's configured). The API response
-	//   only includes a status code.
-	//   - DryRun - Validate parameter values and verify that the user or role has
-	//   permission to invoke the function.
+	// Specify whether to invoke the function synchronously or asynchronously.
+	//   - REQUEST_RESPONSE (default) - Invoke synchronously. This corresponds to the
+	//   RequestResponse option in the InvocationType parameter for the Lambda Invoke (https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_RequestSyntax)
+	//   API.
+	//   - FIRE_AND_FORGET - Invoke asynchronously. This corresponds to the Event
+	//   option in the InvocationType parameter for the Lambda Invoke (https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_RequestSyntax)
+	//   API.
+	// For more information, see Invocation types (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html#pipes-invocation)
+	// in the Amazon EventBridge User Guide.
 	InvocationType PipeTargetInvocationType
 
 	noSmithyDocumentSerde
 }
 
-// The parameters required to set up a target for your pipe.
+// The parameters required to set up a target for your pipe. For more information
+// about pipe target parameters, including how to use dynamic path parameters, see
+// Target parameters (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html)
+// in the Amazon EventBridge User Guide.
 type PipeTargetParameters struct {
 
 	// The parameters for using an Batch job as a target.
@@ -1052,23 +1171,23 @@ type PipeTargetParameters struct {
 	// Valid JSON text passed to the target. In this case, nothing from the event
 	// itself is passed to the target. For more information, see The JavaScript Object
 	// Notation (JSON) Data Interchange Format (http://www.rfc-editor.org/rfc/rfc7159.txt)
-	// .
+	// . To remove an input template, specify an empty string.
 	InputTemplate *string
 
-	// The parameters for using a Kinesis stream as a source.
+	// The parameters for using a Kinesis stream as a target.
 	KinesisStreamParameters *PipeTargetKinesisStreamParameters
 
 	// The parameters for using a Lambda function as a target.
 	LambdaFunctionParameters *PipeTargetLambdaFunctionParameters
 
 	// These are custom parameters to be used when the target is a Amazon Redshift
-	// cluster to invoke the Amazon Redshift Data API ExecuteStatement.
+	// cluster to invoke the Amazon Redshift Data API BatchExecuteStatement.
 	RedshiftDataParameters *PipeTargetRedshiftDataParameters
 
 	// The parameters for using a SageMaker pipeline as a target.
 	SageMakerPipelineParameters *PipeTargetSageMakerPipelineParameters
 
-	// The parameters for using a Amazon SQS stream as a source.
+	// The parameters for using a Amazon SQS stream as a target.
 	SqsQueueParameters *PipeTargetSqsQueueParameters
 
 	// The parameters for using a Step Functions state machine as a target.
@@ -1078,7 +1197,7 @@ type PipeTargetParameters struct {
 }
 
 // These are custom parameters to be used when the target is a Amazon Redshift
-// cluster to invoke the Amazon Redshift Data API ExecuteStatement.
+// cluster to invoke the Amazon Redshift Data API BatchExecuteStatement.
 type PipeTargetRedshiftDataParameters struct {
 
 	// The name of the database. Required when authenticating using temporary
@@ -1097,7 +1216,7 @@ type PipeTargetRedshiftDataParameters struct {
 	DbUser *string
 
 	// The name or ARN of the secret that enables access to the database. Required
-	// when authenticating using SageMaker.
+	// when authenticating using Secrets Manager.
 	SecretManagerArn *string
 
 	// The name of the SQL statement. You can name the SQL statement when you create
@@ -1121,7 +1240,7 @@ type PipeTargetSageMakerPipelineParameters struct {
 	noSmithyDocumentSerde
 }
 
-// The parameters for using a Amazon SQS stream as a source.
+// The parameters for using a Amazon SQS stream as a target.
 type PipeTargetSqsQueueParameters struct {
 
 	// This parameter applies only to FIFO (first-in-first-out) queues. The token used
@@ -1137,7 +1256,17 @@ type PipeTargetSqsQueueParameters struct {
 // The parameters for using a Step Functions state machine as a target.
 type PipeTargetStateMachineParameters struct {
 
-	// Specify whether to wait for the state machine to finish or not.
+	// Specify whether to invoke the Step Functions state machine synchronously or
+	// asynchronously.
+	//   - REQUEST_RESPONSE (default) - Invoke synchronously. For more information, see
+	//   StartSyncExecution (https://docs.aws.amazon.com/step-functions/latest/apireference/API_StartSyncExecution.html)
+	//   in the Step Functions API Reference. REQUEST_RESPONSE is not supported for
+	//   STANDARD state machine workflows.
+	//   - FIRE_AND_FORGET - Invoke asynchronously. For more information, see
+	//   StartExecution (https://docs.aws.amazon.com/step-functions/latest/apireference/API_StartExecution.html)
+	//   in the Step Functions API Reference.
+	// For more information, see Invocation types (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html#pipes-invocation)
+	// in the Amazon EventBridge User Guide.
 	InvocationType PipeTargetInvocationType
 
 	noSmithyDocumentSerde
@@ -1183,6 +1312,63 @@ type PlacementStrategy struct {
 	// if you binpack on memory, a task is placed on the instance with the least amount
 	// of remaining memory (but still enough to run the task).
 	Type PlacementStrategyType
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 logging configuration settings for the pipe.
+type S3LogDestination struct {
+
+	// The name of the Amazon S3 bucket to which EventBridge delivers the log records
+	// for the pipe.
+	BucketName *string
+
+	// The Amazon Web Services account that owns the Amazon S3 bucket to which
+	// EventBridge delivers the log records for the pipe.
+	BucketOwner *string
+
+	// The format EventBridge uses for the log records.
+	//   - json : JSON
+	//   - plain : Plain text
+	//   - w3c : W3C extended logging file format (https://www.w3.org/TR/WD-logfile)
+	OutputFormat S3OutputFormat
+
+	// The prefix text with which to begin Amazon S3 log object names. For more
+	// information, see Organizing objects using prefixes (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html)
+	// in the Amazon Simple Storage Service User Guide.
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 logging configuration settings for the pipe.
+type S3LogDestinationParameters struct {
+
+	// Specifies the name of the Amazon S3 bucket to which EventBridge delivers the
+	// log records for the pipe.
+	//
+	// This member is required.
+	BucketName *string
+
+	// Specifies the Amazon Web Services account that owns the Amazon S3 bucket to
+	// which EventBridge delivers the log records for the pipe.
+	//
+	// This member is required.
+	BucketOwner *string
+
+	// How EventBridge should format the log records.
+	//   - json : JSON
+	//   - plain : Plain text
+	//   - w3c : W3C extended logging file format (https://www.w3.org/TR/WD-logfile)
+	OutputFormat S3OutputFormat
+
+	// Specifies any prefix text with which to begin Amazon S3 log object names. You
+	// can use prefixes to organize the data that you store in Amazon S3 buckets. A
+	// prefix is a string of characters at the beginning of the object key name. A
+	// prefix can be any length, subject to the maximum length of the object key name
+	// (1,024 bytes). For more information, see Organizing objects using prefixes (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html)
+	// in the Amazon Simple Storage Service User Guide.
+	Prefix *string
 
 	noSmithyDocumentSerde
 }
@@ -1402,8 +1588,9 @@ type UpdatePipeSourceParameters struct {
 	// The parameters for using a DynamoDB stream as a source.
 	DynamoDBStreamParameters *UpdatePipeSourceDynamoDBStreamParameters
 
-	// The collection of event patterns used to filter events. For more information,
-	// see Events and Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
+	// The collection of event patterns used to filter events. To remove a filter,
+	// specify a FilterCriteria object with an empty array of Filter objects. For more
+	// information, see Events and Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
 	// in the Amazon EventBridge User Guide.
 	FilterCriteria *FilterCriteria
 

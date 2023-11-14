@@ -1,0 +1,8 @@
+{
+    "id": "ef43596d-4441-40f1-ab14-f94d2e8ae6c0",
+    "type": "feature",
+    "description": "This release adds support to redrive executions in AWS Step Functions with a new RedriveExecution operation.",
+    "modules": [
+        "service/sfn"
+    ]
+}

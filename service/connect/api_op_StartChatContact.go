@@ -106,6 +106,16 @@ type StartChatContactInput struct {
 	// PersistentChat.
 	RelatedContactId *string
 
+	// A set of system defined key-value pairs stored on individual contact segments
+	// using an attribute map. The attributes are standard Amazon Connect attributes.
+	// They can be accessed in flows. Attribute keys can include only alphanumeric, -,
+	// and _. This field can be used to show channel subtype, such as connect:Guide .
+	// The types application/vnd.amazonaws.connect.message.interactive and
+	// application/vnd.amazonaws.connect.message.interactive.response must be present
+	// in the SupportedMessagingContentTypes field of this API in order to set
+	// SegmentAttributes as { "connect:Subtype": {"valueString" : "connect:Guide" }} .
+	SegmentAttributes map[string]types.SegmentAttributeValue
+
 	// The supported chat message content types. Supported types are text/plain ,
 	// text/markdown , application/json ,
 	// application/vnd.amazonaws.connect.message.interactive , and

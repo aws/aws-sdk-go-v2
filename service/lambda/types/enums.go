@@ -370,6 +370,7 @@ const (
 	RuntimePython311      Runtime = "python3.11"
 	RuntimeNodejs20x      Runtime = "nodejs20.x"
 	RuntimeProvidedal2023 Runtime = "provided.al2023"
+	RuntimePython312      Runtime = "python3.12"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -411,6 +412,7 @@ func (Runtime) Values() []Runtime {
 		"python3.11",
 		"nodejs20.x",
 		"provided.al2023",
+		"python3.12",
 	}
 }
 

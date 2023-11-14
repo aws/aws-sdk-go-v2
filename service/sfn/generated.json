@@ -32,6 +32,7 @@
         "api_op_ListStateMachines.go",
         "api_op_ListTagsForResource.go",
         "api_op_PublishStateMachineVersion.go",
+        "api_op_RedriveExecution.go",
         "api_op_SendTaskFailure.go",
         "api_op_SendTaskHeartbeat.go",
         "api_op_SendTaskSuccess.go",

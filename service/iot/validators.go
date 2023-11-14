@@ -5767,6 +5767,24 @@ func validateMetricDimension(v *types.MetricDimension) error {
 	}
 }
 
+func validateMetricsExportConfig(v *types.MetricsExportConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricsExportConfig"}
+	if v.MqttTopic == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MqttTopic"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetricToRetain(v *types.MetricToRetain) error {
 	if v == nil {
 		return nil
@@ -7253,6 +7271,11 @@ func validateOpCreateSecurityProfileInput(v *CreateSecurityProfileInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetricsExportConfig != nil {
+		if err := validateMetricsExportConfig(v.MetricsExportConfig); err != nil {
+			invalidParams.AddNested("MetricsExportConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -9800,6 +9823,11 @@ func validateOpUpdateSecurityProfileInput(v *UpdateSecurityProfileInput) error {
 	if v.AdditionalMetricsToRetainV2 != nil {
 		if err := validateAdditionalMetricsToRetainV2List(v.AdditionalMetricsToRetainV2); err != nil {
 			invalidParams.AddNested("AdditionalMetricsToRetainV2", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetricsExportConfig != nil {
+		if err := validateMetricsExportConfig(v.MetricsExportConfig); err != nil {
+			invalidParams.AddNested("MetricsExportConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

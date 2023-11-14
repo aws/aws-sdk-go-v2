@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a signing profile. A signing profile is a code signing template that
+// Creates a signing profile. A signing profile is a code-signing template that
 // can be used to carry out a pre-defined signing job.
 func (c *Client) PutSigningProfile(ctx context.Context, params *PutSigningProfileInput, optFns ...func(*Options)) (*PutSigningProfileOutput, error) {
 	if params == nil {

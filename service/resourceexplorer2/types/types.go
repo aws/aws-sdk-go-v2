@@ -73,6 +73,52 @@ type Index struct {
 	noSmithyDocumentSerde
 }
 
+// An index is the data store used by Amazon Web Services Resource Explorer to
+// hold information about your Amazon Web Services resources that the service
+// discovers.
+type MemberIndex struct {
+
+	// The account ID for the index.
+	AccountId *string
+
+	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the index.
+	Arn *string
+
+	// The Amazon Web Services Region in which the index exists.
+	Region *string
+
+	// The type of index. It can be one of the following values:
+	//   - LOCAL – The index contains information about resources from only the same
+	//   Amazon Web Services Region.
+	//   - AGGREGATOR – Resource Explorer replicates copies of the indexed information
+	//   about resources in all other Amazon Web Services Regions to the aggregator
+	//   index. This lets search results in the Region with the aggregator index to
+	//   include resources from all Regions in the account where Resource Explorer is
+	//   turned on.
+	Type IndexType
+
+	noSmithyDocumentSerde
+}
+
+// This is a structure that contains the status of Amazon Web Services service
+// access, and whether you have a valid service-linked role to enable multi-account
+// search for your organization.
+type OrgConfiguration struct {
+
+	// This value displays whether your Amazon Web Services service access is ENABLED
+	// or DISABLED .
+	//
+	// This member is required.
+	AWSServiceAccessStatus AWSServiceAccessStatus
+
+	// This value shows whether or not you have a valid a service-linked role required
+	// to start the multi-account search feature.
+	ServiceLinkedRole *string
+
+	noSmithyDocumentSerde
+}
+
 // A resource in Amazon Web Services that Amazon Web Services Resource Explorer
 // has discovered, and for which it has stored information in the index of the
 // Amazon Web Services Region that contains the resource.

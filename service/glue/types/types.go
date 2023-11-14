@@ -352,6 +352,47 @@ type BasicCatalogTarget struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a table optimizer to retrieve in the BatchGetTableOptimizer
+// operation.
+type BatchGetTableOptimizerEntry struct {
+
+	// The Catalog ID of the table.
+	CatalogId *string
+
+	// The name of the database in the catalog in which the table resides.
+	DatabaseName *string
+
+	// The name of the table.
+	TableName *string
+
+	// The type of table optimizer.
+	Type TableOptimizerType
+
+	noSmithyDocumentSerde
+}
+
+// Contains details on one of the errors in the error list returned by the
+// BatchGetTableOptimizer operation.
+type BatchGetTableOptimizerError struct {
+
+	// The Catalog ID of the table.
+	CatalogId *string
+
+	// The name of the database in the catalog in which the table resides.
+	DatabaseName *string
+
+	// An ErrorDetail object containing code and message details about the error.
+	Error *ErrorDetail
+
+	// The name of the table.
+	TableName *string
+
+	// The type of table optimizer.
+	Type TableOptimizerType
+
+	noSmithyDocumentSerde
+}
+
 // Records an error that occurred when attempting to stop a specified job run.
 type BatchStopJobRunError struct {
 
@@ -375,6 +416,26 @@ type BatchStopJobRunSuccessfulSubmission struct {
 
 	// The JobRunId of the job run that was stopped.
 	JobRunId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details for one of the table optimizers returned by the
+// BatchGetTableOptimizer operation.
+type BatchTableOptimizer struct {
+
+	// The Catalog ID of the table.
+	CatalogId *string
+
+	// The name of the database in the catalog in which the table resides.
+	DatabaseName *string
+
+	// The name of the table.
+	TableName *string
+
+	// A TableOptimizer object that contains details on the configuration and last run
+	// of a table optimzer.
+	TableOptimizer *TableOptimizer
 
 	noSmithyDocumentSerde
 }
@@ -5808,6 +5869,24 @@ type ResourceUri struct {
 	noSmithyDocumentSerde
 }
 
+// Metrics for the optimizer run.
+type RunMetrics struct {
+
+	// The duration of the job in hours.
+	JobDurationInHour *string
+
+	// The number of bytes removed by the compaction job run.
+	NumberOfBytesCompacted *string
+
+	// The number of DPU hours consumed by the job.
+	NumberOfDpus *string
+
+	// The number of files removed by the compaction job run.
+	NumberOfFilesCompacted *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a Delta Lake data source that is registered in the Glue Data Catalog.
 // The data source must be stored in Amazon S3.
 type S3CatalogDeltaSource struct {
@@ -7514,6 +7593,58 @@ type TableInput struct {
 	// operations. If the table is a VIRTUAL_VIEW , certain Athena configuration
 	// encoded in base64.
 	ViewOriginalText *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about an optimizer associated with a table.
+type TableOptimizer struct {
+
+	// A TableOptimizerConfiguration object that was specified when creating or
+	// updating a table optimizer.
+	Configuration *TableOptimizerConfiguration
+
+	// A TableOptimizerRun object representing the last run of the table optimizer.
+	LastRun *TableOptimizerRun
+
+	// The type of table optimizer. Currently, the only valid value is compaction .
+	Type TableOptimizerType
+
+	noSmithyDocumentSerde
+}
+
+// Contains details on the configuration of a table optimizer. You pass this
+// configuration when creating or updating a table optimizer.
+type TableOptimizerConfiguration struct {
+
+	// Whether table optimization is enabled.
+	Enabled *bool
+
+	// A role passed by the caller which gives the service permission to update the
+	// resources associated with the optimizer on the caller's behalf.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details for a table optimizer run.
+type TableOptimizerRun struct {
+
+	// Represents the epoch timestamp at which the compaction job ended.
+	EndTimestamp *time.Time
+
+	// An error that occured during the optimizer run.
+	Error *string
+
+	// An event type representing the status of the table optimizer run.
+	EventType TableOptimizerEventType
+
+	// A RunMetrics object containing metrics for the optimizer run.
+	Metrics *RunMetrics
+
+	// Represents the epoch timestamp at which the compaction job was started within
+	// Lake Formation.
+	StartTimestamp *time.Time
 
 	noSmithyDocumentSerde
 }

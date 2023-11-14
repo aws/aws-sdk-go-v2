@@ -72,6 +72,9 @@ type DescribeSecurityProfileOutput struct {
 	// The time the security profile was last modified.
 	LastModifiedDate *time.Time
 
+	// Specifies the MQTT topic and role ARN required for metric export.
+	MetricsExportConfig *types.MetricsExportConfig
+
 	// The ARN of the security profile.
 	SecurityProfileArn *string
 

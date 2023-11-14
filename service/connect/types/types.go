@@ -3560,6 +3560,16 @@ type SecurityProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A value for a segment attribute. This is structured as a map where the key is
+// valueString and the value is a string.
+type SegmentAttributeValue struct {
+
+	// The value of a segment attribute.
+	ValueString *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the send notification action.
 type SendNotificationActionDefinition struct {
 

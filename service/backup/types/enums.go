@@ -2,6 +2,26 @@
 
 package types
 
+type AggregationPeriod string
+
+// Enum values for AggregationPeriod
+const (
+	AggregationPeriodOneDay       AggregationPeriod = "ONE_DAY"
+	AggregationPeriodSevenDays    AggregationPeriod = "SEVEN_DAYS"
+	AggregationPeriodFourteenDays AggregationPeriod = "FOURTEEN_DAYS"
+)
+
+// Values returns all known values for AggregationPeriod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AggregationPeriod) Values() []AggregationPeriod {
+	return []AggregationPeriod{
+		"ONE_DAY",
+		"SEVEN_DAYS",
+		"FOURTEEN_DAYS",
+	}
+}
+
 type BackupJobState string
 
 // Enum values for BackupJobState
@@ -31,6 +51,42 @@ func (BackupJobState) Values() []BackupJobState {
 		"FAILED",
 		"EXPIRED",
 		"PARTIAL",
+	}
+}
+
+type BackupJobStatus string
+
+// Enum values for BackupJobStatus
+const (
+	BackupJobStatusCreated      BackupJobStatus = "CREATED"
+	BackupJobStatusPending      BackupJobStatus = "PENDING"
+	BackupJobStatusRunning      BackupJobStatus = "RUNNING"
+	BackupJobStatusAborting     BackupJobStatus = "ABORTING"
+	BackupJobStatusAborted      BackupJobStatus = "ABORTED"
+	BackupJobStatusCompleted    BackupJobStatus = "COMPLETED"
+	BackupJobStatusFailed       BackupJobStatus = "FAILED"
+	BackupJobStatusExpired      BackupJobStatus = "EXPIRED"
+	BackupJobStatusPartial      BackupJobStatus = "PARTIAL"
+	BackupJobStatusAggregateAll BackupJobStatus = "AGGREGATE_ALL"
+	BackupJobStatusAny          BackupJobStatus = "ANY"
+)
+
+// Values returns all known values for BackupJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BackupJobStatus) Values() []BackupJobStatus {
+	return []BackupJobStatus{
+		"CREATED",
+		"PENDING",
+		"RUNNING",
+		"ABORTING",
+		"ABORTED",
+		"COMPLETED",
+		"FAILED",
+		"EXPIRED",
+		"PARTIAL",
+		"AGGREGATE_ALL",
+		"ANY",
 	}
 }
 
@@ -122,6 +178,42 @@ func (CopyJobState) Values() []CopyJobState {
 	}
 }
 
+type CopyJobStatus string
+
+// Enum values for CopyJobStatus
+const (
+	CopyJobStatusCreated      CopyJobStatus = "CREATED"
+	CopyJobStatusRunning      CopyJobStatus = "RUNNING"
+	CopyJobStatusAborting     CopyJobStatus = "ABORTING"
+	CopyJobStatusAborted      CopyJobStatus = "ABORTED"
+	CopyJobStatusCompleting   CopyJobStatus = "COMPLETING"
+	CopyJobStatusCompleted    CopyJobStatus = "COMPLETED"
+	CopyJobStatusFailing      CopyJobStatus = "FAILING"
+	CopyJobStatusFailed       CopyJobStatus = "FAILED"
+	CopyJobStatusPartial      CopyJobStatus = "PARTIAL"
+	CopyJobStatusAggregateAll CopyJobStatus = "AGGREGATE_ALL"
+	CopyJobStatusAny          CopyJobStatus = "ANY"
+)
+
+// Values returns all known values for CopyJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CopyJobStatus) Values() []CopyJobStatus {
+	return []CopyJobStatus{
+		"CREATED",
+		"RUNNING",
+		"ABORTING",
+		"ABORTED",
+		"COMPLETING",
+		"COMPLETED",
+		"FAILING",
+		"FAILED",
+		"PARTIAL",
+		"AGGREGATE_ALL",
+		"ANY",
+	}
+}
+
 type LegalHoldStatus string
 
 // Enum values for LegalHoldStatus
@@ -163,6 +255,36 @@ func (RecoveryPointStatus) Values() []RecoveryPointStatus {
 		"PARTIAL",
 		"DELETING",
 		"EXPIRED",
+	}
+}
+
+type RestoreJobState string
+
+// Enum values for RestoreJobState
+const (
+	RestoreJobStateCreated      RestoreJobState = "CREATED"
+	RestoreJobStatePending      RestoreJobState = "PENDING"
+	RestoreJobStateRunning      RestoreJobState = "RUNNING"
+	RestoreJobStateAborted      RestoreJobState = "ABORTED"
+	RestoreJobStateCompleted    RestoreJobState = "COMPLETED"
+	RestoreJobStateFailed       RestoreJobState = "FAILED"
+	RestoreJobStateAggregateAll RestoreJobState = "AGGREGATE_ALL"
+	RestoreJobStateAny          RestoreJobState = "ANY"
+)
+
+// Values returns all known values for RestoreJobState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RestoreJobState) Values() []RestoreJobState {
+	return []RestoreJobState{
+		"CREATED",
+		"PENDING",
+		"RUNNING",
+		"ABORTED",
+		"COMPLETED",
+		"FAILED",
+		"AGGREGATE_ALL",
+		"ANY",
 	}
 }
 

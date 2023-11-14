@@ -1,0 +1,8 @@
+{
+    "id": "aeb654ab-45f5-4a3b-b2e2-f7eaba5be3bb",
+    "type": "feature",
+    "description": "Removed unnecessary default values.",
+    "modules": [
+        "service/mediatailor"
+    ]
+}

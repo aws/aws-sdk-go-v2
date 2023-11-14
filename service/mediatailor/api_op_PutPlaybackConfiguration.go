@@ -85,7 +85,7 @@ type PutPlaybackConfigurationInput struct {
 	// content stream. For more information about ad break behavior, including ad
 	// replacement and insertion, see Ad Behavior in AWS Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
 	// .
-	PersonalizationThresholdSeconds int32
+	PersonalizationThresholdSeconds *int32
 
 	// The URL for a high-quality video asset to transcode and use to fill in time
 	// that's not used by ads. AWS Elemental MediaTailor shows the slate to fill in
@@ -170,7 +170,7 @@ type PutPlaybackConfigurationOutput struct {
 	// content stream. For more information about ad break behavior, including ad
 	// replacement and insertion, see Ad Behavior in AWS Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
 	// .
-	PersonalizationThresholdSeconds int32
+	PersonalizationThresholdSeconds *int32
 
 	// The Amazon Resource Name (ARN) associated with the playback configuration.
 	PlaybackConfigurationArn *string

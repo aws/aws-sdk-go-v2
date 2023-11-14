@@ -62,6 +62,12 @@ type ListBackupJobsInput struct {
 	// Returns only backup jobs that were created before the specified date.
 	ByCreatedBefore *time.Time
 
+	// This returns a list of backup jobs for the specified message category. Example
+	// strings may include AccessDenied , Success , and InvalidParameters . See
+	// Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
+	// for a list of MessageCategory strings.
+	ByMessageCategory *string
+
 	// This is a filter to list child (nested) jobs based on parent job ID.
 	ByParentJobId *string
 

@@ -40,7 +40,7 @@ type ListPlaybackConfigurationsInput struct {
 	// return in response to the current request. If there are more than MaxResults
 	// playback configurations, use the value of NextToken in the response to get the
 	// next page of results.
-	MaxResults int32
+	MaxResults *int32
 
 	// Pagination token returned by the list request when results exceed the maximum
 	// allowed. Use the token to fetch the next page of results.
@@ -178,8 +178,8 @@ func NewListPlaybackConfigurationsPaginator(client ListPlaybackConfigurationsAPI
 	}
 
 	options := ListPlaybackConfigurationsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -209,7 +209,11 @@ func (p *ListPlaybackConfigurationsPaginator) NextPage(ctx context.Context, optF
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListPlaybackConfigurations(ctx, &params, optFns...)
 	if err != nil {

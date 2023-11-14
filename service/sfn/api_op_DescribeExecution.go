@@ -19,13 +19,15 @@ import (
 
 // Provides information about a state machine execution, such as the state machine
 // associated with the execution, the execution input and output, and relevant
-// execution metadata. Use this API action to return the Map Run Amazon Resource
-// Name (ARN) if the execution was dispatched by a Map Run. If you specify a
-// version or alias ARN when you call the StartExecution API action,
-// DescribeExecution returns that ARN. This operation is eventually consistent. The
-// results are best effort and may not reflect very recent updates and changes.
-// Executions of an EXPRESS state machinearen't supported by DescribeExecution
-// unless a Map Run dispatched them.
+// execution metadata. If you've redriven (https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html)
+// an execution, you can use this API action to return information about the
+// redrives of that execution. In addition, you can use this API action to return
+// the Map Run Amazon Resource Name (ARN) if the execution was dispatched by a Map
+// Run. If you specify a version or alias ARN when you call the StartExecution API
+// action, DescribeExecution returns that ARN. This operation is eventually
+// consistent. The results are best effort and may not reflect very recent updates
+// and changes. Executions of an EXPRESS state machine aren't supported by
+// DescribeExecution unless a Map Run dispatched them.
 func (c *Client) DescribeExecution(ctx context.Context, params *DescribeExecutionInput, optFns ...func(*Options)) (*DescribeExecutionOutput, error) {
 	if params == nil {
 		params = &DescribeExecutionInput{}
@@ -108,6 +110,48 @@ type DescribeExecutionOutput struct {
 
 	// Provides details about execution input or output.
 	OutputDetails *types.CloudWatchEventsExecutionDataDetails
+
+	// The number of times you've redriven an execution. If you have not yet redriven
+	// an execution, the redriveCount is 0. This count is not updated for redrives
+	// that failed to start or are pending to be redriven.
+	RedriveCount *int32
+
+	// The date the execution was last redriven. If you have not yet redriven an
+	// execution, the redriveDate is null. The redriveDate is unavailable if you
+	// redrive a Map Run that starts child workflow executions of type EXPRESS .
+	RedriveDate *time.Time
+
+	// Indicates whether or not an execution can be redriven at a given point in time.
+	//   - For executions of type STANDARD , redriveStatus is NOT_REDRIVABLE if calling
+	//   the RedriveExecution API action would return the ExecutionNotRedrivable error.
+	//   - For a Distributed Map that includes child workflows of type STANDARD ,
+	//   redriveStatus indicates whether or not the Map Run can redrive child workflow
+	//   executions.
+	//   - For a Distributed Map that includes child workflows of type EXPRESS ,
+	//   redriveStatus indicates whether or not the Map Run can redrive child workflow
+	//   executions. You can redrive failed or timed out EXPRESS workflows only if
+	//   they're a part of a Map Run. When you redrive (https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html)
+	//   the Map Run, these workflows are restarted using the StartExecution API
+	//   action.
+	RedriveStatus types.ExecutionRedriveStatus
+
+	// When redriveStatus is NOT_REDRIVABLE , redriveStatusReason specifies the reason
+	// why an execution cannot be redriven.
+	//   - For executions of type STANDARD , or for a Distributed Map that includes
+	//   child workflows of type STANDARD , redriveStatusReason can include one of the
+	//   following reasons:
+	//   - State machine is in DELETING status .
+	//   - Execution is RUNNING and cannot be redriven .
+	//   - Execution is SUCCEEDED and cannot be redriven .
+	//   - Execution was started before the launch of RedriveExecution .
+	//   - Execution history event limit exceeded .
+	//   - Execution has exceeded the max execution time .
+	//   - Execution redrivable period exceeded .
+	//   - For a Distributed Map that includes child workflows of type EXPRESS ,
+	//   redriveStatusReason is only returned if the child workflows are not
+	//   redrivable. This happens when the child workflow executions have completed
+	//   successfully.
+	RedriveStatusReason *string
 
 	// The Amazon Resource Name (ARN) of the state machine alias associated with the
 	// execution. The alias ARN is a combination of state machine ARN and the alias

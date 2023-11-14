@@ -15,7 +15,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used by activity workers and task states using the callback (https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token)
+// Used by activity workers, Task states using the callback (https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token)
+// pattern, and optionally Task states using the job run (https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync)
 // pattern to report that the task identified by the taskToken completed
 // successfully.
 func (c *Client) SendTaskSuccess(ctx context.Context, params *SendTaskSuccessInput, optFns ...func(*Options)) (*SendTaskSuccessOutput, error) {

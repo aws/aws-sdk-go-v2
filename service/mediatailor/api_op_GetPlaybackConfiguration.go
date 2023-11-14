@@ -99,7 +99,7 @@ type GetPlaybackConfigurationOutput struct {
 	// content stream. For more information about ad break behavior, including ad
 	// replacement and insertion, see Ad Behavior in AWS Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
 	// .
-	PersonalizationThresholdSeconds int32
+	PersonalizationThresholdSeconds *int32
 
 	// The Amazon Resource Name (ARN) for the playback configuration.
 	PlaybackConfigurationArn *string

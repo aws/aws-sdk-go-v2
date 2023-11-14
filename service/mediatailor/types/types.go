@@ -320,7 +320,7 @@ type ClipRange struct {
 	// of the VOD source associated with the program.
 	//
 	// This member is required.
-	EndOffsetMillis int64
+	EndOffsetMillis *int64
 
 	noSmithyDocumentSerde
 }
@@ -378,20 +378,20 @@ type DashPlaylistSettings struct {
 
 	// The total duration (in seconds) of each manifest. Minimum value: 30 seconds.
 	// Maximum value: 3600 seconds.
-	ManifestWindowSeconds int32
+	ManifestWindowSeconds *int32
 
 	// Minimum amount of content (measured in seconds) that a player must keep
 	// available in the buffer. Minimum value: 2 seconds. Maximum value: 60 seconds.
-	MinBufferTimeSeconds int32
+	MinBufferTimeSeconds *int32
 
 	// Minimum amount of time (in seconds) that the player should wait before
 	// requesting updates to the manifest. Minimum value: 2 seconds. Maximum value: 60
 	// seconds.
-	MinUpdatePeriodSeconds int32
+	MinUpdatePeriodSeconds *int32
 
 	// Amount of time (in seconds) that the player should be from the live point at
 	// the end of the manifest. Minimum value: 2 seconds. Maximum value: 60 seconds.
-	SuggestedPresentationDelaySeconds int32
+	SuggestedPresentationDelaySeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -431,7 +431,7 @@ type HlsPlaylistSettings struct {
 
 	// The total duration (in seconds) of each manifest. Minimum value: 30 seconds.
 	// Maximum value: 3600 seconds.
-	ManifestWindowSeconds int32
+	ManifestWindowSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -506,7 +506,7 @@ type LivePreRollConfiguration struct {
 	// The maximum allowed duration for the pre-roll ad avail. AWS Elemental
 	// MediaTailor won't play pre-roll ads to exceed this duration, regardless of the
 	// total duration of ads that the ADS returns.
-	MaxDurationSeconds int32
+	MaxDurationSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -647,7 +647,7 @@ type PlaybackConfiguration struct {
 	// content stream. For more information about ad break behavior, including ad
 	// replacement and insertion, see Ad Behavior in AWS Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
 	// .
-	PersonalizationThresholdSeconds int32
+	PersonalizationThresholdSeconds *int32
 
 	// The Amazon Resource Name (ARN) for the playback configuration.
 	PlaybackConfigurationArn *string
@@ -839,7 +839,7 @@ type ResponseOutputItem struct {
 type ScheduleAdBreak struct {
 
 	// The approximate duration of the ad break, in seconds.
-	ApproximateDurationSeconds int64
+	ApproximateDurationSeconds *int64
 
 	// The approximate time that the ad will start playing.
 	ApproximateStartTime *time.Time
@@ -892,7 +892,7 @@ type ScheduleEntry struct {
 	SourceLocationName *string
 
 	// The approximate duration of this program, in seconds.
-	ApproximateDurationSeconds int64
+	ApproximateDurationSeconds *int64
 
 	// The approximate time that the program will start playing.
 	ApproximateStartTime *time.Time
@@ -1070,21 +1070,21 @@ type SpliceInsertMessage struct {
 	// This is written to splice_insert.avail_num , as defined in section 9.7.3.1 of
 	// the SCTE-35 specification. The default value is 0 . Values must be between 0
 	// and 256 , inclusive.
-	AvailNum int32
+	AvailNum *int32
 
 	// This is written to splice_insert.avails_expected , as defined in section 9.7.3.1
 	// of the SCTE-35 specification. The default value is 0 . Values must be between 0
 	// and 256 , inclusive.
-	AvailsExpected int32
+	AvailsExpected *int32
 
 	// This is written to splice_insert.splice_event_id , as defined in section 9.7.3.1
 	// of the SCTE-35 specification. The default value is 1 .
-	SpliceEventId int32
+	SpliceEventId *int32
 
 	// This is written to splice_insert.unique_program_id , as defined in section
 	// 9.7.3.1 of the SCTE-35 specification. The default value is 0 . Values must be
 	// between 0 and 256 , inclusive.
-	UniqueProgramId int32
+	UniqueProgramId *int32
 
 	noSmithyDocumentSerde
 }
@@ -1129,14 +1129,14 @@ type Transition struct {
 	Type *string
 
 	// The duration of the live program in seconds.
-	DurationMillis int64
+	DurationMillis *int64
 
 	// The name of the program that this program will be inserted next to, as defined
 	// by RelativePosition .
 	RelativeProgram *string
 
 	// The date and time that the program is scheduled to start, in epoch milliseconds.
-	ScheduledStartTimeMillis int64
+	ScheduledStartTimeMillis *int64
 
 	noSmithyDocumentSerde
 }
@@ -1157,10 +1157,10 @@ type UpdateProgramScheduleConfiguration struct {
 type UpdateProgramTransition struct {
 
 	// The duration of the live program in seconds.
-	DurationMillis int64
+	DurationMillis *int64
 
 	// The date and time that the program is scheduled to start, in epoch milliseconds.
-	ScheduledStartTimeMillis int64
+	ScheduledStartTimeMillis *int64
 
 	noSmithyDocumentSerde
 }

@@ -17,16 +17,16 @@ type Destination struct {
 	noSmithyDocumentSerde
 }
 
-// The encryption algorithm options that are available to a code signing job.
+// The encryption algorithm options that are available to a code-signing job.
 type EncryptionAlgorithmOptions struct {
 
-	// The set of accepted encryption algorithms that are allowed in a code signing
+	// The set of accepted encryption algorithms that are allowed in a code-signing
 	// job.
 	//
 	// This member is required.
 	AllowedValues []EncryptionAlgorithm
 
-	// The default encryption algorithm that is used by a code signing job.
+	// The default encryption algorithm that is used by a code-signing job.
 	//
 	// This member is required.
 	DefaultValue EncryptionAlgorithm
@@ -34,15 +34,15 @@ type EncryptionAlgorithmOptions struct {
 	noSmithyDocumentSerde
 }
 
-// The hash algorithms that are available to a code signing job.
+// The hash algorithms that are available to a code-signing job.
 type HashAlgorithmOptions struct {
 
-	// The set of accepted hash algorithms allowed in a code signing job.
+	// The set of accepted hash algorithms allowed in a code-signing job.
 	//
 	// This member is required.
 	AllowedValues []HashAlgorithm
 
-	// The default hash algorithm that is used in a code signing job.
+	// The default hash algorithm that is used in a code-signing job.
 	//
 	// This member is required.
 	DefaultValue HashAlgorithm
@@ -68,21 +68,21 @@ type Permission struct {
 	noSmithyDocumentSerde
 }
 
-// The name and prefix of the S3 bucket where code signing saves your signed
+// The name and prefix of the Amazon S3 bucket where AWS Signer saves your signed
 // objects.
 type S3Destination struct {
 
 	// Name of the S3 bucket.
 	BucketName *string
 
-	// An Amazon S3 prefix that you can use to limit responses to those that begin
-	// with the specified prefix.
+	// An S3 prefix that you can use to limit responses to those that begin with the
+	// specified prefix.
 	Prefix *string
 
 	noSmithyDocumentSerde
 }
 
-// The S3 bucket name and key where code signing saved your signed code image.
+// The Amazon S3 bucket name and key where Signer saved your signed code image.
 type S3SignedObject struct {
 
 	// Name of the S3 bucket.
@@ -94,7 +94,7 @@ type S3SignedObject struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the S3 bucket where you saved your unsigned code.
+// Information about the Amazon S3 bucket where you saved your unsigned code.
 type S3Source struct {
 
 	// Name of the S3 bucket.
@@ -137,15 +137,15 @@ type SignedObject struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration of a code signing operation.
+// The configuration of a signing operation.
 type SigningConfiguration struct {
 
-	// The encryption algorithm options that are available for a code signing job.
+	// The encryption algorithm options that are available for a code-signing job.
 	//
 	// This member is required.
 	EncryptionAlgorithmOptions *EncryptionAlgorithmOptions
 
-	// The hash algorithm options that are available for a code signing job.
+	// The hash algorithm options that are available for a code-signing job.
 	//
 	// This member is required.
 	HashAlgorithmOptions *HashAlgorithmOptions
@@ -157,26 +157,26 @@ type SigningConfiguration struct {
 // of a signing job.
 type SigningConfigurationOverrides struct {
 
-	// A specified override of the default encryption algorithm that is used in a code
-	// signing job.
+	// A specified override of the default encryption algorithm that is used in a
+	// code-signing job.
 	EncryptionAlgorithm EncryptionAlgorithm
 
-	// A specified override of the default hash algorithm that is used in a code
-	// signing job.
+	// A specified override of the default hash algorithm that is used in a
+	// code-signing job.
 	HashAlgorithm HashAlgorithm
 
 	noSmithyDocumentSerde
 }
 
-// The image format of a code signing platform or profile.
+// The image format of a AWS Signer platform or profile.
 type SigningImageFormat struct {
 
-	// The default format of a code signing image.
+	// The default format of a signing image.
 	//
 	// This member is required.
 	DefaultFormat ImageFormat
 
-	// The supported formats of a code signing image.
+	// The supported formats of a signing image.
 	//
 	// This member is required.
 	SupportedFormats []ImageFormat
@@ -262,41 +262,41 @@ type SigningMaterial struct {
 }
 
 // Contains information about the signing configurations and parameters that are
-// used to perform a code signing job.
+// used to perform a code-signing job.
 type SigningPlatform struct {
 
-	// The category of a code signing platform.
+	// The category of a signing platform.
 	Category Category
 
-	// The display name of a code signing platform.
+	// The display name of a signing platform.
 	DisplayName *string
 
-	// The maximum size (in MB) of code that can be signed by a code signing platform.
+	// The maximum size (in MB) of code that can be signed by a signing platform.
 	MaxSizeInMB int32
 
-	// Any partner entities linked to a code signing platform.
+	// Any partner entities linked to a signing platform.
 	Partner *string
 
-	// The ID of a code signing platform.
+	// The ID of a signing platform.
 	PlatformId *string
 
 	// Indicates whether revocation is supported for the platform.
 	RevocationSupported bool
 
-	// The configuration of a code signing platform. This includes the designated hash
+	// The configuration of a signing platform. This includes the designated hash
 	// algorithm and encryption algorithm of a signing platform.
 	SigningConfiguration *SigningConfiguration
 
-	// The image format of a code signing platform or profile.
+	// The image format of a AWS Signer platform or profile.
 	SigningImageFormat *SigningImageFormat
 
-	// The types of targets that can be signed by a code signing platform.
+	// The types of targets that can be signed by a signing platform.
 	Target *string
 
 	noSmithyDocumentSerde
 }
 
-// Any overrides that are applied to the signing configuration of a code signing
+// Any overrides that are applied to the signing configuration of a signing
 // platform.
 type SigningPlatformOverrides struct {
 
@@ -314,7 +314,7 @@ type SigningPlatformOverrides struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the ACM certificates and code signing configuration
+// Contains information about the ACM certificates and signing configuration
 // parameters that can be used by a given code signing user.
 type SigningProfile struct {
 
@@ -342,10 +342,10 @@ type SigningProfile struct {
 	// The ACM certificate that is available for use by a signing profile.
 	SigningMaterial *SigningMaterial
 
-	// The parameters that are available for use by a code signing user.
+	// The parameters that are available for use by a Signer user.
 	SigningParameters map[string]string
 
-	// The status of a code signing profile.
+	// The status of a signing profile.
 	Status SigningProfileStatus
 
 	// A list of tags associated with the signing profile.

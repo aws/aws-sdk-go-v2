@@ -1301,6 +1301,25 @@ func validateMemberList(v []types.MemberSpecification) error {
 	}
 }
 
+func validateMembershipPaymentConfiguration(v *types.MembershipPaymentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MembershipPaymentConfiguration"}
+	if v.QueryCompute == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryCompute"))
+	} else if v.QueryCompute != nil {
+		if err := validateMembershipQueryComputePaymentConfig(v.QueryCompute); err != nil {
+			invalidParams.AddNested("QueryCompute", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMembershipProtectedQueryOutputConfiguration(v types.MembershipProtectedQueryOutputConfiguration) error {
 	if v == nil {
 		return nil
@@ -1339,6 +1358,21 @@ func validateMembershipProtectedQueryResultConfiguration(v *types.MembershipProt
 	}
 }
 
+func validateMembershipQueryComputePaymentConfig(v *types.MembershipQueryComputePaymentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MembershipQueryComputePaymentConfig"}
+	if v.IsResponsible == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsResponsible"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMemberSpecification(v *types.MemberSpecification) error {
 	if v == nil {
 		return nil
@@ -1352,6 +1386,30 @@ func validateMemberSpecification(v *types.MemberSpecification) error {
 	}
 	if v.DisplayName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
+	}
+	if v.PaymentConfiguration != nil {
+		if err := validatePaymentConfiguration(v.PaymentConfiguration); err != nil {
+			invalidParams.AddNested("PaymentConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePaymentConfiguration(v *types.PaymentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PaymentConfiguration"}
+	if v.QueryCompute == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryCompute"))
+	} else if v.QueryCompute != nil {
+		if err := validateQueryComputePaymentConfig(v.QueryCompute); err != nil {
+			invalidParams.AddNested("QueryCompute", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1408,6 +1466,21 @@ func validateProtectedQueryS3OutputConfiguration(v *types.ProtectedQueryS3Output
 	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueryComputePaymentConfig(v *types.QueryComputePaymentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryComputePaymentConfig"}
+	if v.IsResponsible == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsResponsible"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1532,6 +1605,11 @@ func validateOpCreateCollaborationInput(v *CreateCollaborationInput) error {
 	if len(v.QueryLogStatus) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryLogStatus"))
 	}
+	if v.CreatorPaymentConfiguration != nil {
+		if err := validatePaymentConfiguration(v.CreatorPaymentConfiguration); err != nil {
+			invalidParams.AddNested("CreatorPaymentConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1630,6 +1708,11 @@ func validateOpCreateMembershipInput(v *CreateMembershipInput) error {
 	if v.DefaultResultConfiguration != nil {
 		if err := validateMembershipProtectedQueryResultConfiguration(v.DefaultResultConfiguration); err != nil {
 			invalidParams.AddNested("DefaultResultConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PaymentConfiguration != nil {
+		if err := validateMembershipPaymentConfiguration(v.PaymentConfiguration); err != nil {
+			invalidParams.AddNested("PaymentConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

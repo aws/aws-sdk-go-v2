@@ -38,7 +38,8 @@ type SignPayloadInput struct {
 	// This member is required.
 	Payload []byte
 
-	// Payload content type
+	// Payload content type. The single valid type is
+	// application/vnd.cncf.notary.payload.v1+json .
 	//
 	// This member is required.
 	PayloadFormat *string
@@ -62,9 +63,7 @@ type SignPayloadOutput struct {
 	// The AWS account ID of the job owner.
 	JobOwner *string
 
-	// Information including the signing profile ARN and the signing job ID. Clients
-	// use metadata to signature records, for example, as annotations added to the
-	// signature manifest inside an OCI registry.
+	// Information including the signing profile ARN and the signing job ID.
 	Metadata map[string]string
 
 	// A cryptographic signature.

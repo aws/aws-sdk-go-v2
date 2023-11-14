@@ -17,8 +17,10 @@ import (
 	"time"
 )
 
-// Provides information about a Map Run's configuration, progress, and results.
-// For more information, see Examining Map Run (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html)
+// Provides information about a Map Run's configuration, progress, and results. If
+// you've redriven (https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html)
+// a Map Run, this API action also returns information about the redrives of that
+// Map Run. For more information, see Examining Map Run (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html)
 // in the Step Functions Developer Guide.
 func (c *Client) DescribeMapRun(ctx context.Context, params *DescribeMapRunInput, optFns ...func(*Options)) (*DescribeMapRunOutput, error) {
 	if params == nil {
@@ -97,6 +99,15 @@ type DescribeMapRunOutput struct {
 	//
 	// This member is required.
 	ToleratedFailurePercentage float32
+
+	// The number of times you've redriven a Map Run. If you have not yet redriven a
+	// Map Run, the redriveCount is 0. This count is not updated for redrives that
+	// failed to start or are pending to be redriven.
+	RedriveCount *int32
+
+	// The date a Map Run was last redriven. If you have not yet redriven a Map Run,
+	// the redriveDate is null.
+	RedriveDate *time.Time
 
 	// The date when the Map Run was stopped.
 	StopDate *time.Time

@@ -111,6 +111,22 @@ func (EcsResourceRequirementType) Values() []EcsResourceRequirementType {
 	}
 }
 
+type IncludeExecutionDataOption string
+
+// Enum values for IncludeExecutionDataOption
+const (
+	IncludeExecutionDataOptionAll IncludeExecutionDataOption = "ALL"
+)
+
+// Values returns all known values for IncludeExecutionDataOption. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IncludeExecutionDataOption) Values() []IncludeExecutionDataOption {
+	return []IncludeExecutionDataOption{
+		"ALL",
+	}
+}
+
 type KinesisStreamStartPosition string
 
 // Enum values for KinesisStreamStartPosition
@@ -148,6 +164,28 @@ func (LaunchType) Values() []LaunchType {
 		"EC2",
 		"FARGATE",
 		"EXTERNAL",
+	}
+}
+
+type LogLevel string
+
+// Enum values for LogLevel
+const (
+	LogLevelOff   LogLevel = "OFF"
+	LogLevelError LogLevel = "ERROR"
+	LogLevelInfo  LogLevel = "INFO"
+	LogLevelTrace LogLevel = "TRACE"
+)
+
+// Values returns all known values for LogLevel. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LogLevel) Values() []LogLevel {
+	return []LogLevel{
+		"OFF",
+		"ERROR",
+		"INFO",
+		"TRACE",
 	}
 }
 
@@ -190,17 +228,21 @@ type PipeState string
 
 // Enum values for PipeState
 const (
-	PipeStateRunning      PipeState = "RUNNING"
-	PipeStateStopped      PipeState = "STOPPED"
-	PipeStateCreating     PipeState = "CREATING"
-	PipeStateUpdating     PipeState = "UPDATING"
-	PipeStateDeleting     PipeState = "DELETING"
-	PipeStateStarting     PipeState = "STARTING"
-	PipeStateStopping     PipeState = "STOPPING"
-	PipeStateCreateFailed PipeState = "CREATE_FAILED"
-	PipeStateUpdateFailed PipeState = "UPDATE_FAILED"
-	PipeStateStartFailed  PipeState = "START_FAILED"
-	PipeStateStopFailed   PipeState = "STOP_FAILED"
+	PipeStateRunning              PipeState = "RUNNING"
+	PipeStateStopped              PipeState = "STOPPED"
+	PipeStateCreating             PipeState = "CREATING"
+	PipeStateUpdating             PipeState = "UPDATING"
+	PipeStateDeleting             PipeState = "DELETING"
+	PipeStateStarting             PipeState = "STARTING"
+	PipeStateStopping             PipeState = "STOPPING"
+	PipeStateCreateFailed         PipeState = "CREATE_FAILED"
+	PipeStateUpdateFailed         PipeState = "UPDATE_FAILED"
+	PipeStateStartFailed          PipeState = "START_FAILED"
+	PipeStateStopFailed           PipeState = "STOP_FAILED"
+	PipeStateDeleteFailed         PipeState = "DELETE_FAILED"
+	PipeStateCreateRollbackFailed PipeState = "CREATE_ROLLBACK_FAILED"
+	PipeStateDeleteRollbackFailed PipeState = "DELETE_ROLLBACK_FAILED"
+	PipeStateUpdateRollbackFailed PipeState = "UPDATE_ROLLBACK_FAILED"
 )
 
 // Values returns all known values for PipeState. Note that this can be expanded
@@ -219,6 +261,10 @@ func (PipeState) Values() []PipeState {
 		"UPDATE_FAILED",
 		"START_FAILED",
 		"STOP_FAILED",
+		"DELETE_FAILED",
+		"CREATE_ROLLBACK_FAILED",
+		"DELETE_ROLLBACK_FAILED",
+		"UPDATE_ROLLBACK_FAILED",
 	}
 }
 
@@ -330,6 +376,26 @@ func (RequestedPipeStateDescribeResponse) Values() []RequestedPipeStateDescribeR
 		"RUNNING",
 		"STOPPED",
 		"DELETED",
+	}
+}
+
+type S3OutputFormat string
+
+// Enum values for S3OutputFormat
+const (
+	S3OutputFormatJson  S3OutputFormat = "json"
+	S3OutputFormatPlain S3OutputFormat = "plain"
+	S3OutputFormatW3c   S3OutputFormat = "w3c"
+)
+
+// Values returns all known values for S3OutputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (S3OutputFormat) Values() []S3OutputFormat {
+	return []S3OutputFormat{
+		"json",
+		"plain",
+		"w3c",
 	}
 }
 

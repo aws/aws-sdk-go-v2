@@ -782,6 +782,9 @@ type Behavior struct {
 	// SNS when IoT Device Defender detects that a device is behaving anomalously.
 	Criteria *BehaviorCriteria
 
+	// Value indicates exporting metrics related to the behavior when it is true.
+	ExportMetric *bool
+
 	// What is measured by the behavior.
 	Metric *string
 
@@ -2489,6 +2492,24 @@ type MetricDimension struct {
 	noSmithyDocumentSerde
 }
 
+// Set configurations for metrics export.
+type MetricsExportConfig struct {
+
+	// The MQTT topic that Device Defender Detect should publish messages to for
+	// metrics export.
+	//
+	// This member is required.
+	MqttTopic *string
+
+	// This role ARN has permission to publish MQTT messages, after which Device
+	// Defender Detect can assume the role and publish messages on your behalf.
+	//
+	// This member is required.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The metric you want to retain. Dimensions are optional.
 type MetricToRetain struct {
 
@@ -2496,6 +2517,10 @@ type MetricToRetain struct {
 	//
 	// This member is required.
 	Metric *string
+
+	// Value added in both Behavior and AdditionalMetricsToRetainV2 to indicate if
+	// Device Defender Detect should export the corresponding metrics.
+	ExportMetric *bool
 
 	// The dimension of a metric. This can't be used with custom metrics.
 	MetricDimension *MetricDimension
@@ -3853,7 +3878,8 @@ type ThingGroupIndexingConfiguration struct {
 	// Contains fields that are indexed and whose types are already known by the Fleet
 	// Indexing service. This is an optional field. For more information, see Managed
 	// fields (https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html#managed-field)
-	// in the Amazon Web Services IoT Core Developer Guide.
+	// in the Amazon Web Services IoT Core Developer Guide. You can't modify managed
+	// fields by updating fleet indexing configuration.
 	ManagedFields []Field
 
 	noSmithyDocumentSerde
@@ -3918,7 +3944,10 @@ type ThingIndexingConfiguration struct {
 	Filter *IndexingFilter
 
 	// Contains fields that are indexed and whose types are already known by the Fleet
-	// Indexing service.
+	// Indexing service. This is an optional field. For more information, see Managed
+	// fields (https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html#managed-field)
+	// in the Amazon Web Services IoT Core Developer Guide. You can't modify managed
+	// fields by updating fleet indexing configuration.
 	ManagedFields []Field
 
 	// Named shadow indexing mode. Valid values are:

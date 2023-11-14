@@ -2,15 +2,54 @@
 
 package types
 
+type ExecutionRedriveFilter string
+
+// Enum values for ExecutionRedriveFilter
+const (
+	ExecutionRedriveFilterRedriven    ExecutionRedriveFilter = "REDRIVEN"
+	ExecutionRedriveFilterNotRedriven ExecutionRedriveFilter = "NOT_REDRIVEN"
+)
+
+// Values returns all known values for ExecutionRedriveFilter. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionRedriveFilter) Values() []ExecutionRedriveFilter {
+	return []ExecutionRedriveFilter{
+		"REDRIVEN",
+		"NOT_REDRIVEN",
+	}
+}
+
+type ExecutionRedriveStatus string
+
+// Enum values for ExecutionRedriveStatus
+const (
+	ExecutionRedriveStatusRedrivable         ExecutionRedriveStatus = "REDRIVABLE"
+	ExecutionRedriveStatusNotRedrivable      ExecutionRedriveStatus = "NOT_REDRIVABLE"
+	ExecutionRedriveStatusRedrivableByMapRun ExecutionRedriveStatus = "REDRIVABLE_BY_MAP_RUN"
+)
+
+// Values returns all known values for ExecutionRedriveStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionRedriveStatus) Values() []ExecutionRedriveStatus {
+	return []ExecutionRedriveStatus{
+		"REDRIVABLE",
+		"NOT_REDRIVABLE",
+		"REDRIVABLE_BY_MAP_RUN",
+	}
+}
+
 type ExecutionStatus string
 
 // Enum values for ExecutionStatus
 const (
-	ExecutionStatusRunning   ExecutionStatus = "RUNNING"
-	ExecutionStatusSucceeded ExecutionStatus = "SUCCEEDED"
-	ExecutionStatusFailed    ExecutionStatus = "FAILED"
-	ExecutionStatusTimedOut  ExecutionStatus = "TIMED_OUT"
-	ExecutionStatusAborted   ExecutionStatus = "ABORTED"
+	ExecutionStatusRunning        ExecutionStatus = "RUNNING"
+	ExecutionStatusSucceeded      ExecutionStatus = "SUCCEEDED"
+	ExecutionStatusFailed         ExecutionStatus = "FAILED"
+	ExecutionStatusTimedOut       ExecutionStatus = "TIMED_OUT"
+	ExecutionStatusAborted        ExecutionStatus = "ABORTED"
+	ExecutionStatusPendingRedrive ExecutionStatus = "PENDING_REDRIVE"
 )
 
 // Values returns all known values for ExecutionStatus. Note that this can be
@@ -23,6 +62,7 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 		"FAILED",
 		"TIMED_OUT",
 		"ABORTED",
+		"PENDING_REDRIVE",
 	}
 }
 
@@ -89,6 +129,8 @@ const (
 	HistoryEventTypeMapRunFailed                 HistoryEventType = "MapRunFailed"
 	HistoryEventTypeMapRunStarted                HistoryEventType = "MapRunStarted"
 	HistoryEventTypeMapRunSucceeded              HistoryEventType = "MapRunSucceeded"
+	HistoryEventTypeExecutionRedriven            HistoryEventType = "ExecutionRedriven"
+	HistoryEventTypeMapRunRedriven               HistoryEventType = "MapRunRedriven"
 )
 
 // Values returns all known values for HistoryEventType. Note that this can be
@@ -155,6 +197,8 @@ func (HistoryEventType) Values() []HistoryEventType {
 		"MapRunFailed",
 		"MapRunStarted",
 		"MapRunSucceeded",
+		"ExecutionRedriven",
+		"MapRunRedriven",
 	}
 }
 

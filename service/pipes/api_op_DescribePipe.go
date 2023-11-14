@@ -72,6 +72,9 @@ type DescribePipeOutput struct {
 	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	LastModifiedTime *time.Time
 
+	// The logging configuration settings for the pipe.
+	LogConfiguration *types.PipeLogConfiguration
+
 	// The name of the pipe.
 	Name *string
 
@@ -93,7 +96,10 @@ type DescribePipeOutput struct {
 	// The ARN of the target resource.
 	Target *string
 
-	// The parameters required to set up a target for your pipe.
+	// The parameters required to set up a target for your pipe. For more information
+	// about pipe target parameters, including how to use dynamic path parameters, see
+	// Target parameters (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html)
+	// in the Amazon EventBridge User Guide.
 	TargetParameters *types.PipeTargetParameters
 
 	// Metadata pertaining to the operation's result.

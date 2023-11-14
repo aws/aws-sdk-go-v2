@@ -44,7 +44,7 @@ type UpdateMembershipInput struct {
 	DefaultResultConfiguration *types.MembershipProtectedQueryResultConfiguration
 
 	// An indicator as to whether query logging has been enabled or disabled for the
-	// collaboration.
+	// membership.
 	QueryLogStatus types.MembershipQueryLogStatus
 
 	noSmithyDocumentSerde

@@ -15,8 +15,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a state machine. This is an asynchronous operation: It sets the state
-// machine's status to DELETING and begins the deletion process. A qualified state
+// Deletes a state machine. This is an asynchronous operation. It sets the state
+// machine's status to DELETING and begins the deletion process. A state machine
+// is deleted only when all its executions are completed. On the next state
+// transition, the state machine's executions are terminated. A qualified state
 // machine ARN can either refer to a Distributed Map state defined within a state
 // machine, a version ARN, or an alias ARN. The following are some examples of
 // qualified and unqualified state machine ARNs:

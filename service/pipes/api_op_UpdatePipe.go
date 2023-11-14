@@ -17,15 +17,16 @@ import (
 	"time"
 )
 
-// Update an existing pipe. When you call UpdatePipe , only the fields that are
-// included in the request are changed, the rest are unchanged. The exception to
-// this is if you modify any Amazon Web Services-service specific fields in the
-// SourceParameters , EnrichmentParameters , or TargetParameters objects. The
-// fields in these objects are updated atomically as one and override existing
-// values. This is by design and means that if you don't specify an optional field
-// in one of these Parameters objects, that field will be set to its system-default
-// value after the update. For more information about pipes, see Amazon
-// EventBridge Pipes (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html)
+// Update an existing pipe. When you call UpdatePipe , EventBridge only the updates
+// fields you have specified in the request; the rest remain unchanged. The
+// exception to this is if you modify any Amazon Web Services-service specific
+// fields in the SourceParameters , EnrichmentParameters , or TargetParameters
+// objects. For example, DynamoDBStreamParameters or EventBridgeEventBusParameters
+// . EventBridge updates the fields in these objects atomically as one and
+// overrides existing values. This is by design, and means that if you don't
+// specify an optional field in one of these Parameters objects, EventBridge sets
+// that field to its system-default value during the update. For more information
+// about pipes, see Amazon EventBridge Pipes (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html)
 // in the Amazon EventBridge User Guide.
 func (c *Client) UpdatePipe(ctx context.Context, params *UpdatePipeInput, optFns ...func(*Options)) (*UpdatePipeOutput, error) {
 	if params == nil {
@@ -66,13 +67,19 @@ type UpdatePipeInput struct {
 	// The parameters required to set up enrichment on your pipe.
 	EnrichmentParameters *types.PipeEnrichmentParameters
 
+	// The logging configuration settings for the pipe.
+	LogConfiguration *types.PipeLogConfigurationParameters
+
 	// The parameters required to set up a source for your pipe.
 	SourceParameters *types.UpdatePipeSourceParameters
 
 	// The ARN of the target resource.
 	Target *string
 
-	// The parameters required to set up a target for your pipe.
+	// The parameters required to set up a target for your pipe. For more information
+	// about pipe target parameters, including how to use dynamic path parameters, see
+	// Target parameters (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html)
+	// in the Amazon EventBridge User Guide.
 	TargetParameters *types.PipeTargetParameters
 
 	noSmithyDocumentSerde

@@ -34,9 +34,14 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request failed because either you specified parameters that didn’t match
-// the original request, or you attempted to create a view with a name that already
-// exists in this Amazon Web Services Region.
+// If you attempted to create a view, then the request failed because either you
+// specified parameters that didn’t match the original request, or you attempted to
+// create a view with a name that already exists in this Amazon Web Services
+// Region. If you attempted to create an index, then the request failed because
+// either you specified parameters that didn't match the original request, or an
+// index already exists in the current Amazon Web Services Region. If you attempted
+// to update an index type to AGGREGATOR , then the request failed because you
+// already have an AGGREGATOR index in a different Amazon Web Services Region.
 type ConflictException struct {
 	Message *string
 
@@ -146,7 +151,7 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request failed because you exceeded a rate limit for this operation. For
-// more information, see Quotas for Resource Explorer (https://docs.aws.amazon.com/arexug/mainline/quotas.html)
+// more information, see Quotas for Resource Explorer (https://docs.aws.amazon.com/resource-explorer/latest/userguide/quotas.html)
 // .
 type ThrottlingException struct {
 	Message *string

@@ -1892,8 +1892,8 @@ func awsRestjson1_serializeOpHttpBindingsGetChannelScheduleInput(v *GetChannelSc
 		encoder.SetQuery("durationMinutes").String(*v.DurationMinutes)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2095,8 +2095,8 @@ func awsRestjson1_serializeOpHttpBindingsListAlertsInput(v *ListAlertsInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2163,8 +2163,8 @@ func awsRestjson1_serializeOpHttpBindingsListChannelsInput(v *ListChannelsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2227,8 +2227,8 @@ func awsRestjson1_serializeOpHttpBindingsListLiveSourcesInput(v *ListLiveSources
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2300,8 +2300,8 @@ func awsRestjson1_serializeOpHttpBindingsListPlaybackConfigurationsInput(v *List
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2391,9 +2391,9 @@ func awsRestjson1_serializeOpDocumentListPrefetchSchedulesInput(v *ListPrefetchS
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2462,8 +2462,8 @@ func awsRestjson1_serializeOpHttpBindingsListSourceLocationsInput(v *ListSourceL
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2591,8 +2591,8 @@ func awsRestjson1_serializeOpHttpBindingsListVodSourcesInput(v *ListVodSourcesIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2825,9 +2825,9 @@ func awsRestjson1_serializeOpDocumentPutPlaybackConfigurationInput(v *PutPlaybac
 		ok.String(*v.Name)
 	}
 
-	if v.PersonalizationThresholdSeconds != 0 {
+	if v.PersonalizationThresholdSeconds != nil {
 		ok := object.Key("PersonalizationThresholdSeconds")
-		ok.Integer(v.PersonalizationThresholdSeconds)
+		ok.Integer(*v.PersonalizationThresholdSeconds)
 	}
 
 	if v.SlateAdUrl != nil {
@@ -3885,9 +3885,9 @@ func awsRestjson1_serializeDocumentClipRange(v *types.ClipRange, value smithyjso
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.EndOffsetMillis != nil {
 		ok := object.Key("EndOffsetMillis")
-		ok.Long(v.EndOffsetMillis)
+		ok.Long(*v.EndOffsetMillis)
 	}
 
 	return nil
@@ -3930,24 +3930,24 @@ func awsRestjson1_serializeDocumentDashPlaylistSettings(v *types.DashPlaylistSet
 	object := value.Object()
 	defer object.Close()
 
-	if v.ManifestWindowSeconds != 0 {
+	if v.ManifestWindowSeconds != nil {
 		ok := object.Key("ManifestWindowSeconds")
-		ok.Integer(v.ManifestWindowSeconds)
+		ok.Integer(*v.ManifestWindowSeconds)
 	}
 
-	if v.MinBufferTimeSeconds != 0 {
+	if v.MinBufferTimeSeconds != nil {
 		ok := object.Key("MinBufferTimeSeconds")
-		ok.Integer(v.MinBufferTimeSeconds)
+		ok.Integer(*v.MinBufferTimeSeconds)
 	}
 
-	if v.MinUpdatePeriodSeconds != 0 {
+	if v.MinUpdatePeriodSeconds != nil {
 		ok := object.Key("MinUpdatePeriodSeconds")
-		ok.Integer(v.MinUpdatePeriodSeconds)
+		ok.Integer(*v.MinUpdatePeriodSeconds)
 	}
 
-	if v.SuggestedPresentationDelaySeconds != 0 {
+	if v.SuggestedPresentationDelaySeconds != nil {
 		ok := object.Key("SuggestedPresentationDelaySeconds")
-		ok.Integer(v.SuggestedPresentationDelaySeconds)
+		ok.Integer(*v.SuggestedPresentationDelaySeconds)
 	}
 
 	return nil
@@ -3976,9 +3976,9 @@ func awsRestjson1_serializeDocumentHlsPlaylistSettings(v *types.HlsPlaylistSetti
 		}
 	}
 
-	if v.ManifestWindowSeconds != 0 {
+	if v.ManifestWindowSeconds != nil {
 		ok := object.Key("ManifestWindowSeconds")
-		ok.Integer(v.ManifestWindowSeconds)
+		ok.Integer(*v.ManifestWindowSeconds)
 	}
 
 	return nil
@@ -4057,9 +4057,9 @@ func awsRestjson1_serializeDocumentLivePreRollConfiguration(v *types.LivePreRoll
 		ok.String(*v.AdDecisionServerUrl)
 	}
 
-	if v.MaxDurationSeconds != 0 {
+	if v.MaxDurationSeconds != nil {
 		ok := object.Key("MaxDurationSeconds")
-		ok.Integer(v.MaxDurationSeconds)
+		ok.Integer(*v.MaxDurationSeconds)
 	}
 
 	return nil
@@ -4323,24 +4323,24 @@ func awsRestjson1_serializeDocumentSpliceInsertMessage(v *types.SpliceInsertMess
 	object := value.Object()
 	defer object.Close()
 
-	if v.AvailNum != 0 {
+	if v.AvailNum != nil {
 		ok := object.Key("AvailNum")
-		ok.Integer(v.AvailNum)
+		ok.Integer(*v.AvailNum)
 	}
 
-	if v.AvailsExpected != 0 {
+	if v.AvailsExpected != nil {
 		ok := object.Key("AvailsExpected")
-		ok.Integer(v.AvailsExpected)
+		ok.Integer(*v.AvailsExpected)
 	}
 
-	if v.SpliceEventId != 0 {
+	if v.SpliceEventId != nil {
 		ok := object.Key("SpliceEventId")
-		ok.Integer(v.SpliceEventId)
+		ok.Integer(*v.SpliceEventId)
 	}
 
-	if v.UniqueProgramId != 0 {
+	if v.UniqueProgramId != nil {
 		ok := object.Key("UniqueProgramId")
-		ok.Integer(v.UniqueProgramId)
+		ok.Integer(*v.UniqueProgramId)
 	}
 
 	return nil
@@ -4364,9 +4364,9 @@ func awsRestjson1_serializeDocumentTransition(v *types.Transition, value smithyj
 	object := value.Object()
 	defer object.Close()
 
-	if v.DurationMillis != 0 {
+	if v.DurationMillis != nil {
 		ok := object.Key("DurationMillis")
-		ok.Long(v.DurationMillis)
+		ok.Long(*v.DurationMillis)
 	}
 
 	if len(v.RelativePosition) > 0 {
@@ -4379,9 +4379,9 @@ func awsRestjson1_serializeDocumentTransition(v *types.Transition, value smithyj
 		ok.String(*v.RelativeProgram)
 	}
 
-	if v.ScheduledStartTimeMillis != 0 {
+	if v.ScheduledStartTimeMillis != nil {
 		ok := object.Key("ScheduledStartTimeMillis")
-		ok.Long(v.ScheduledStartTimeMillis)
+		ok.Long(*v.ScheduledStartTimeMillis)
 	}
 
 	if v.Type != nil {
@@ -4417,14 +4417,14 @@ func awsRestjson1_serializeDocumentUpdateProgramTransition(v *types.UpdateProgra
 	object := value.Object()
 	defer object.Close()
 
-	if v.DurationMillis != 0 {
+	if v.DurationMillis != nil {
 		ok := object.Key("DurationMillis")
-		ok.Long(v.DurationMillis)
+		ok.Long(*v.DurationMillis)
 	}
 
-	if v.ScheduledStartTimeMillis != 0 {
+	if v.ScheduledStartTimeMillis != nil {
 		ok := object.Key("ScheduledStartTimeMillis")
-		ok.Long(v.ScheduledStartTimeMillis)
+		ok.Long(*v.ScheduledStartTimeMillis)
 	}
 
 	return nil

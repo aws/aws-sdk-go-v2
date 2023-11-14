@@ -8396,12 +8396,6 @@ func validateInferenceSpecification(v *types.InferenceSpecification) error {
 			invalidParams.AddNested("Containers", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SupportedContentTypes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SupportedContentTypes"))
-	}
-	if v.SupportedResponseMIMETypes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SupportedResponseMIMETypes"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

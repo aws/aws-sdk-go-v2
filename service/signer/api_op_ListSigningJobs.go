@@ -19,11 +19,11 @@ import (
 
 // Lists all your signing jobs. You can use the maxResults parameter to limit the
 // number of signing jobs that are returned in the response. If additional jobs
-// remain to be listed, code signing returns a nextToken value. Use this value in
+// remain to be listed, AWS Signer returns a nextToken value. Use this value in
 // subsequent calls to ListSigningJobs to fetch the remaining values. You can
 // continue calling ListSigningJobs with your maxResults parameter and with new
-// values that code signing returns in the nextToken parameter until all of your
-// signing jobs have been returned.
+// values that Signer returns in the nextToken parameter until all of your signing
+// jobs have been returned.
 func (c *Client) ListSigningJobs(ctx context.Context, params *ListSigningJobsInput, optFns ...func(*Options)) (*ListSigningJobsOutput, error) {
 	if params == nil {
 		params = &ListSigningJobsInput{}

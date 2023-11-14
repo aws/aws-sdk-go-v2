@@ -1281,6 +1281,61 @@ func (m *awsAwsjson10_serializeOpPublishStateMachineVersion) HandleSerialize(ctx
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpRedriveExecution struct {
+}
+
+func (*awsAwsjson10_serializeOpRedriveExecution) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpRedriveExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RedriveExecutionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSStepFunctions.RedriveExecution")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentRedriveExecutionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpSendTaskFailure struct {
 }
 
@@ -2337,6 +2392,11 @@ func awsAwsjson10_serializeOpDocumentListExecutionsInput(v *ListExecutionsInput,
 		ok.String(*v.NextToken)
 	}
 
+	if len(v.RedriveFilter) > 0 {
+		ok := object.Key("redriveFilter")
+		ok.String(string(v.RedriveFilter))
+	}
+
 	if v.StateMachineArn != nil {
 		ok := object.Key("stateMachineArn")
 		ok.String(*v.StateMachineArn)
@@ -2462,6 +2522,23 @@ func awsAwsjson10_serializeOpDocumentPublishStateMachineVersionInput(v *PublishS
 	if v.StateMachineArn != nil {
 		ok := object.Key("stateMachineArn")
 		ok.String(*v.StateMachineArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentRedriveExecutionInput(v *RedriveExecutionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.ExecutionArn != nil {
+		ok := object.Key("executionArn")
+		ok.String(*v.ExecutionArn)
 	}
 
 	return nil

@@ -1085,6 +1085,9 @@ func validateClipRange(v *types.ClipRange) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ClipRange"}
+	if v.EndOffsetMillis == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndOffsetMillis"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

@@ -23,12 +23,12 @@ import (
 //     Creating a Bucket (http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
 //     in the Amazon S3 Getting Started Guide.
 //   - Your S3 source bucket must be version enabled.
-//   - You must create an S3 destination bucket. Code signing uses your S3
+//   - You must create an S3 destination bucket. AWS Signer uses your S3
 //     destination bucket to write your signed code.
 //   - You specify the name of the source and destination buckets when calling the
 //     StartSigningJob operation.
-//   - You must also specify a request token that identifies your request to code
-//     signing.
+//   - You must also specify a request token that identifies your request to
+//     Signer.
 //
 // You can call the DescribeSigningJob and the ListSigningJobs actions after you
 // call StartSigningJob . For a Java example that shows how to use this action, see

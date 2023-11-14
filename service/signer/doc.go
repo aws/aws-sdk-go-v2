@@ -3,8 +3,8 @@
 // Package signer provides the API client, operations, and parameter types for AWS
 // Signer.
 //
-// AWS Signer is a fully managed code signing service to help you ensure the trust
-// and integrity of your code. AWS Signer supports the following applications: With
+// AWS Signer is a fully managed code-signing service to help you ensure the trust
+// and integrity of your code. Signer supports the following applications: With
 // code signing for AWS Lambda, you can sign AWS Lambda (http://docs.aws.amazon.com/lambda/latest/dg/)
 // deployment packages. Integrated support is provided for Amazon S3 (http://docs.aws.amazon.com/AmazonS3/latest/gsg/)
 // , Amazon CloudWatch (http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/)
@@ -15,9 +15,12 @@
 // Amazon FreeRTOS (http://docs.aws.amazon.com/freertos/latest/userguide/) and AWS
 // IoT Device Management (http://docs.aws.amazon.com/iot/latest/developerguide/) ,
 // and is integrated with AWS Certificate Manager (ACM) (http://docs.aws.amazon.com/acm/latest/userguide/)
-// . In order to sign code, you import a third-party code signing certificate using
+// . In order to sign code, you import a third-party code-signing certificate using
 // ACM, and use that to sign updates in Amazon FreeRTOS and AWS IoT Device
-// Management. With code signing for containers …(TBD) For more information about
-// AWS Signer, see the AWS Signer Developer Guide (https://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html)
-// .
+// Management. With Signer and the Notation CLI from the Notary  Project (https://notaryproject.dev/)
+// , you can sign container images stored in a container registry such as Amazon
+// Elastic Container Registry (ECR). The signatures are stored in the registry
+// alongside the images, where they are available for verifying image authenticity
+// and integrity. For more information about Signer, see the AWS Signer Developer
+// Guide (https://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html) .
 package signer

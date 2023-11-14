@@ -68,13 +68,19 @@ type CreatePipeInput struct {
 	// The parameters required to set up enrichment on your pipe.
 	EnrichmentParameters *types.PipeEnrichmentParameters
 
+	// The logging configuration settings for the pipe.
+	LogConfiguration *types.PipeLogConfigurationParameters
+
 	// The parameters required to set up a source for your pipe.
 	SourceParameters *types.PipeSourceParameters
 
 	// The list of key-value pairs to associate with the pipe.
 	Tags map[string]string
 
-	// The parameters required to set up a target for your pipe.
+	// The parameters required to set up a target for your pipe. For more information
+	// about pipe target parameters, including how to use dynamic path parameters, see
+	// Target parameters (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html)
+	// in the Amazon EventBridge User Guide.
 	TargetParameters *types.PipeTargetParameters
 
 	noSmithyDocumentSerde

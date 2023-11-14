@@ -74,6 +74,10 @@ type CreateViewInput struct {
 	// is an empty list, with no optional fields included in the results.
 	IncludedProperties []types.IncludedProperty
 
+	// The root ARN of the account, an organizational unit (OU), or an organization
+	// ARN. If left empty, the default is account.
+	Scope *string
+
 	// Tag key and value pairs that are attached to the view.
 	Tags map[string]string
 

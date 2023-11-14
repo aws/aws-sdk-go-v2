@@ -99,6 +99,13 @@ type BackupJob struct {
 	// This is a boolean value indicating this is a parent (composite) backup job.
 	IsParent bool
 
+	// This parameter is the job count for the specified message category. Example
+	// strings include AccessDenied , Success , and InvalidParameters . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
+	// for a list of MessageCategory strings. The the value ANY returns count of all
+	// message categories. AGGREGATE_ALL aggregates job counts for all message
+	// categories and returns the sum.
+	MessageCategory *string
+
 	// This uniquely identifies a request to Backup to back up a resource. The return
 	// will be the parent (composite) job ID.
 	ParentJobId *string
@@ -140,6 +147,49 @@ type BackupJob struct {
 
 	// A detailed message explaining the status of the job to back up a resource.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// This is a summary of jobs created or running within the most recent 30 days.
+// The returned summary may contain the following: Region, Account, State,
+// RestourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
+type BackupJobSummary struct {
+
+	// The account ID that owns the jobs within the summary.
+	AccountId *string
+
+	// The value as a number of jobs in a job summary.
+	Count int32
+
+	// The value of time in number format of a job end time. This value is the time in
+	// Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For
+	// example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	EndTime *time.Time
+
+	// This parameter is the job count for the specified message category. Example
+	// strings include AccessDenied , Success , and InvalidParameters . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
+	// for a list of MessageCategory strings. The the value ANY returns count of all
+	// message categories. AGGREGATE_ALL aggregates job counts for all message
+	// categories and returns the sum.
+	MessageCategory *string
+
+	// The Amazon Web Services Regions within the job summary.
+	Region *string
+
+	// This value is the job count for the specified resource type. The request
+	// GetSupportedResourceTypes returns strings for supported resource types.
+	ResourceType *string
+
+	// The value of time in number format of a job start time. This value is the time
+	// in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds.
+	// For example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	StartTime *time.Time
+
+	// This value is job count for jobs with the specified state.
+	State BackupJobStatus
 
 	noSmithyDocumentSerde
 }
@@ -771,6 +821,13 @@ type CopyJob struct {
 	// This is a boolean value indicating this is a parent (composite) copy job.
 	IsParent bool
 
+	// This parameter is the job count for the specified message category. Example
+	// strings include AccessDenied , Success , and InvalidParameters . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
+	// for a list of MessageCategory strings. The the value ANY returns count of all
+	// message categories. AGGREGATE_ALL aggregates job counts for all message
+	// categories and returns the sum
+	MessageCategory *string
+
 	// This is the number of child (nested) copy jobs.
 	NumberOfChildJobs *int64
 
@@ -806,6 +863,49 @@ type CopyJob struct {
 
 	// A detailed message explaining the status of the job to copy a resource.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// This is a summary of copy jobs created or running within the most recent 30
+// days. The returned summary may contain the following: Region, Account, State,
+// RestourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
+type CopyJobSummary struct {
+
+	// The account ID that owns the jobs within the summary.
+	AccountId *string
+
+	// The value as a number of jobs in a job summary.
+	Count int32
+
+	// The value of time in number format of a job end time. This value is the time in
+	// Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For
+	// example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	EndTime *time.Time
+
+	// This parameter is the job count for the specified message category. Example
+	// strings include AccessDenied , Success , and InvalidParameters . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
+	// for a list of MessageCategory strings. The the value ANY returns count of all
+	// message categories. AGGREGATE_ALL aggregates job counts for all message
+	// categories and returns the sum.
+	MessageCategory *string
+
+	// This is the Amazon Web Services Regions within the job summary.
+	Region *string
+
+	// This value is the job count for the specified resource type. The request
+	// GetSupportedResourceTypes returns strings for supported resource types
+	ResourceType *string
+
+	// The value of time in number format of a job start time. This value is the time
+	// in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds.
+	// For example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	StartTime *time.Time
+
+	// This value is job count for jobs with the specified state.
+	State CopyJobStatus
 
 	noSmithyDocumentSerde
 }
@@ -1422,6 +1522,42 @@ type RestoreJobsListMember struct {
 
 	// A detailed message explaining the status of the job to restore a recovery point.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// This is a summary of restore jobs created or running within the most recent 30
+// days. The returned summary may contain the following: Region, Account, State,
+// ResourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
+type RestoreJobSummary struct {
+
+	// The account ID that owns the jobs within the summary.
+	AccountId *string
+
+	// The value as a number of jobs in a job summary.
+	Count int32
+
+	// The value of time in number format of a job end time. This value is the time in
+	// Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For
+	// example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	EndTime *time.Time
+
+	// The Amazon Web Services Regions within the job summary.
+	Region *string
+
+	// This value is the job count for the specified resource type. The request
+	// GetSupportedResourceTypes returns strings for supported resource types.
+	ResourceType *string
+
+	// The value of time in number format of a job start time. This value is the time
+	// in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds.
+	// For example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	StartTime *time.Time
+
+	// This value is job count for jobs with the specified state.
+	State RestoreJobState
 
 	noSmithyDocumentSerde
 }

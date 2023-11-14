@@ -41,7 +41,7 @@ type CreateMembershipInput struct {
 	CollaborationIdentifier *string
 
 	// An indicator as to whether query logging has been enabled or disabled for the
-	// collaboration.
+	// membership.
 	//
 	// This member is required.
 	QueryLogStatus types.MembershipQueryLogStatus
@@ -49,6 +49,12 @@ type CreateMembershipInput struct {
 	// The default protected query result configuration as specified by the member who
 	// can receive results.
 	DefaultResultConfiguration *types.MembershipProtectedQueryResultConfiguration
+
+	// The payment responsibilities accepted by the collaboration member. Not required
+	// if the collaboration member has the member ability to run queries. Required if
+	// the collaboration member doesn't have the member ability to run queries but is
+	// configured as a payer by the collaboration creator.
+	PaymentConfiguration *types.MembershipPaymentConfiguration
 
 	// An optional label that you can assign to a resource when you create it. Each
 	// tag consists of a key and an optional value, both of which you define. When you

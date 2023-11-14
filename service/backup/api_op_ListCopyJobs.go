@@ -58,6 +58,14 @@ type ListCopyJobsInput struct {
 	// .
 	ByDestinationVaultArn *string
 
+	// This parameter returns the job count for the specified message category.
+	// Example accepted strings include AccessDenied , Success , and InvalidParameters
+	// . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
+	// for a list of accepted MessageCategory strings. The the value ANY returns count
+	// of all message categories. AGGREGATE_ALL aggregates job counts for all message
+	// categories and returns the sum.
+	ByMessageCategory *string
+
 	// This is a filter to list child (nested) jobs based on parent job ID.
 	ByParentJobId *string
 

@@ -1,0 +1,8 @@
+{
+    "id": "b5c5a7bf-1f8d-4ff8-8919-9222ce8eae06",
+    "type": "feature",
+    "description": "AWS Backup - Features: Provide Job Summary for your backup activity.",
+    "modules": [
+        "service/backup"
+    ]
+}

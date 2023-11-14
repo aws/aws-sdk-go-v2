@@ -76,10 +76,16 @@ type UpdateSecurityProfileInput struct {
 	// behaviors are defined in the current invocation, an exception occurs.
 	DeleteBehaviors bool
 
+	// Set the value as true to delete metrics export related configurations.
+	DeleteMetricsExportConfig bool
+
 	// The expected version of the security profile. A new version is generated
 	// whenever the security profile is updated. If you specify a value that is
 	// different from the actual version, a VersionConflictException is thrown.
 	ExpectedVersion *int64
+
+	// Specifies the MQTT topic and role ARN required for metric export.
+	MetricsExportConfig *types.MetricsExportConfig
 
 	// A description of the security profile.
 	SecurityProfileDescription *string
@@ -114,6 +120,9 @@ type UpdateSecurityProfileOutput struct {
 
 	// The time the security profile was last modified.
 	LastModifiedDate *time.Time
+
+	// Specifies the MQTT topic and role ARN required for metric export.
+	MetricsExportConfig *types.MetricsExportConfig
 
 	// The ARN of the security profile that was updated.
 	SecurityProfileArn *string

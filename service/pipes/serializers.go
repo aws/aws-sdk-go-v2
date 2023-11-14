@@ -117,6 +117,13 @@ func awsRestjson1_serializeOpDocumentCreatePipeInput(v *CreatePipeInput, value s
 		}
 	}
 
+	if v.LogConfiguration != nil {
+		ok := object.Key("LogConfiguration")
+		if err := awsRestjson1_serializeDocumentPipeLogConfigurationParameters(v.LogConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
@@ -828,6 +835,13 @@ func awsRestjson1_serializeOpDocumentUpdatePipeInput(v *UpdatePipeInput, value s
 		}
 	}
 
+	if v.LogConfiguration != nil {
+		ok := object.Key("LogConfiguration")
+		if err := awsRestjson1_serializeDocumentPipeLogConfigurationParameters(v.LogConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
@@ -1069,6 +1083,18 @@ func awsRestjson1_serializeDocumentCapacityProviderStrategyItem(v *types.Capacit
 	if v.Weight != 0 {
 		ok := object.Key("weight")
 		ok.Integer(v.Weight)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCloudwatchLogsLogDestinationParameters(v *types.CloudwatchLogsLogDestinationParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LogGroupArn != nil {
+		ok := object.Key("LogGroupArn")
+		ok.String(*v.LogGroupArn)
 	}
 
 	return nil
@@ -1384,6 +1410,18 @@ func awsRestjson1_serializeDocumentFilterList(v []types.Filter, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFirehoseLogDestinationParameters(v *types.FirehoseLogDestinationParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeliveryStreamArn != nil {
+		ok := object.Key("DeliveryStreamArn")
+		ok.String(*v.DeliveryStreamArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentHeaderParametersMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1391,6 +1429,17 @@ func awsRestjson1_serializeDocumentHeaderParametersMap(v map[string]string, valu
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIncludeExecutionData(v []types.IncludeExecutionDataOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -1509,6 +1558,46 @@ func awsRestjson1_serializeDocumentPipeEnrichmentParameters(v *types.PipeEnrichm
 	if v.InputTemplate != nil {
 		ok := object.Key("InputTemplate")
 		ok.String(*v.InputTemplate)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPipeLogConfigurationParameters(v *types.PipeLogConfigurationParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CloudwatchLogsLogDestination != nil {
+		ok := object.Key("CloudwatchLogsLogDestination")
+		if err := awsRestjson1_serializeDocumentCloudwatchLogsLogDestinationParameters(v.CloudwatchLogsLogDestination, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FirehoseLogDestination != nil {
+		ok := object.Key("FirehoseLogDestination")
+		if err := awsRestjson1_serializeDocumentFirehoseLogDestinationParameters(v.FirehoseLogDestination, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IncludeExecutionData != nil {
+		ok := object.Key("IncludeExecutionData")
+		if err := awsRestjson1_serializeDocumentIncludeExecutionData(v.IncludeExecutionData, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Level) > 0 {
+		ok := object.Key("Level")
+		ok.String(string(v.Level))
+	}
+
+	if v.S3LogDestination != nil {
+		ok := object.Key("S3LogDestination")
+		if err := awsRestjson1_serializeDocumentS3LogDestinationParameters(v.S3LogDestination, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2345,6 +2434,33 @@ func awsRestjson1_serializeDocumentQueryStringParametersMap(v map[string]string,
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3LogDestinationParameters(v *types.S3LogDestinationParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketName != nil {
+		ok := object.Key("BucketName")
+		ok.String(*v.BucketName)
+	}
+
+	if v.BucketOwner != nil {
+		ok := object.Key("BucketOwner")
+		ok.String(*v.BucketOwner)
+	}
+
+	if len(v.OutputFormat) > 0 {
+		ok := object.Key("OutputFormat")
+		ok.String(string(v.OutputFormat))
+	}
+
+	if v.Prefix != nil {
+		ok := object.Key("Prefix")
+		ok.String(*v.Prefix)
+	}
+
 	return nil
 }
 

@@ -15925,6 +15925,11 @@ func awsRestjson1_deserializeOpDocumentDescribeSecurityProfileOutput(v **Describ
 				}
 			}
 
+		case "metricsExportConfig":
+			if err := awsRestjson1_deserializeDocumentMetricsExportConfig(&sv.MetricsExportConfig, value); err != nil {
+				return err
+			}
+
 		case "securityProfileArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -37323,6 +37328,11 @@ func awsRestjson1_deserializeOpDocumentUpdateSecurityProfileOutput(v **UpdateSec
 				}
 			}
 
+		case "metricsExportConfig":
+			if err := awsRestjson1_deserializeDocumentMetricsExportConfig(&sv.MetricsExportConfig, value); err != nil {
+				return err
+			}
+
 		case "securityProfileArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -42313,6 +42323,15 @@ func awsRestjson1_deserializeDocumentBehavior(v **types.Behavior, value interfac
 		case "criteria":
 			if err := awsRestjson1_deserializeDocumentBehaviorCriteria(&sv.Criteria, value); err != nil {
 				return err
+			}
+
+		case "exportMetric":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected ExportMetric to be of type *bool, got %T instead", value)
+				}
+				sv.ExportMetric = ptr.Bool(jtv)
 			}
 
 		case "metric":
@@ -49320,6 +49339,55 @@ func awsRestjson1_deserializeDocumentMetricNames(v *[]string, value interface{})
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMetricsExportConfig(v **types.MetricsExportConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MetricsExportConfig
+	if *v == nil {
+		sv = &types.MetricsExportConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "mqttTopic":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MqttTopic to be of type string, got %T instead", value)
+				}
+				sv.MqttTopic = ptr.String(jtv)
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMetricToRetain(v **types.MetricToRetain, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -49342,6 +49410,15 @@ func awsRestjson1_deserializeDocumentMetricToRetain(v **types.MetricToRetain, va
 
 	for key, value := range shape {
 		switch key {
+		case "exportMetric":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected ExportMetric to be of type *bool, got %T instead", value)
+				}
+				sv.ExportMetric = ptr.Bool(jtv)
+			}
+
 		case "metric":
 			if value != nil {
 				jtv, ok := value.(string)

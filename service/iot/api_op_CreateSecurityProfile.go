@@ -63,6 +63,9 @@ type CreateSecurityProfileInput struct {
 	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
 	Behaviors []types.Behavior
 
+	// Specifies the MQTT topic and role ARN required for metric export.
+	MetricsExportConfig *types.MetricsExportConfig
+
 	// A description of the security profile.
 	SecurityProfileDescription *string
 

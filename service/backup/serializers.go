@@ -2988,6 +2988,10 @@ func awsRestjson1_serializeOpHttpBindingsListBackupJobsInput(v *ListBackupJobsIn
 		encoder.SetQuery("createdBefore").String(smithytime.FormatDateTime(*v.ByCreatedBefore))
 	}
 
+	if v.ByMessageCategory != nil {
+		encoder.SetQuery("messageCategory").String(*v.ByMessageCategory)
+	}
+
 	if v.ByParentJobId != nil {
 		encoder.SetQuery("parentJobId").String(*v.ByParentJobId)
 	}
@@ -3010,6 +3014,90 @@ func awsRestjson1_serializeOpHttpBindingsListBackupJobsInput(v *ListBackupJobsIn
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListBackupJobSummaries struct {
+}
+
+func (*awsRestjson1_serializeOpListBackupJobSummaries) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListBackupJobSummaries) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListBackupJobSummariesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/audit/backup-job-summaries")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListBackupJobSummariesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListBackupJobSummariesInput(v *ListBackupJobSummariesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AccountId != nil {
+		encoder.SetQuery("AccountId").String(*v.AccountId)
+	}
+
+	if len(v.AggregationPeriod) > 0 {
+		encoder.SetQuery("AggregationPeriod").String(string(v.AggregationPeriod))
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
+	}
+
+	if v.MessageCategory != nil {
+		encoder.SetQuery("MessageCategory").String(*v.MessageCategory)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	if v.ResourceType != nil {
+		encoder.SetQuery("ResourceType").String(*v.ResourceType)
+	}
+
+	if len(v.State) > 0 {
+		encoder.SetQuery("State").String(string(v.State))
 	}
 
 	return nil
@@ -3442,6 +3530,10 @@ func awsRestjson1_serializeOpHttpBindingsListCopyJobsInput(v *ListCopyJobsInput,
 		encoder.SetQuery("destinationVaultArn").String(*v.ByDestinationVaultArn)
 	}
 
+	if v.ByMessageCategory != nil {
+		encoder.SetQuery("messageCategory").String(*v.ByMessageCategory)
+	}
+
 	if v.ByParentJobId != nil {
 		encoder.SetQuery("parentJobId").String(*v.ByParentJobId)
 	}
@@ -3464,6 +3556,90 @@ func awsRestjson1_serializeOpHttpBindingsListCopyJobsInput(v *ListCopyJobsInput,
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListCopyJobSummaries struct {
+}
+
+func (*awsRestjson1_serializeOpListCopyJobSummaries) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListCopyJobSummaries) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListCopyJobSummariesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/audit/copy-job-summaries")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListCopyJobSummariesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListCopyJobSummariesInput(v *ListCopyJobSummariesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AccountId != nil {
+		encoder.SetQuery("AccountId").String(*v.AccountId)
+	}
+
+	if len(v.AggregationPeriod) > 0 {
+		encoder.SetQuery("AggregationPeriod").String(string(v.AggregationPeriod))
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
+	}
+
+	if v.MessageCategory != nil {
+		encoder.SetQuery("MessageCategory").String(*v.MessageCategory)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	if v.ResourceType != nil {
+		encoder.SetQuery("ResourceType").String(*v.ResourceType)
+	}
+
+	if len(v.State) > 0 {
+		encoder.SetQuery("State").String(string(v.State))
 	}
 
 	return nil
@@ -4212,6 +4388,86 @@ func awsRestjson1_serializeOpHttpBindingsListRestoreJobsInput(v *ListRestoreJobs
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListRestoreJobSummaries struct {
+}
+
+func (*awsRestjson1_serializeOpListRestoreJobSummaries) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListRestoreJobSummaries) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListRestoreJobSummariesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/audit/restore-job-summaries")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListRestoreJobSummariesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListRestoreJobSummariesInput(v *ListRestoreJobSummariesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AccountId != nil {
+		encoder.SetQuery("AccountId").String(*v.AccountId)
+	}
+
+	if len(v.AggregationPeriod) > 0 {
+		encoder.SetQuery("AggregationPeriod").String(string(v.AggregationPeriod))
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	if v.ResourceType != nil {
+		encoder.SetQuery("ResourceType").String(*v.ResourceType)
+	}
+
+	if len(v.State) > 0 {
+		encoder.SetQuery("State").String(string(v.State))
 	}
 
 	return nil

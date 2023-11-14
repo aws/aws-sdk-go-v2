@@ -691,6 +691,11 @@ func awsRestjson1_deserializeOpDocumentDescribePipeOutput(v **DescribePipeOutput
 				}
 			}
 
+		case "LogConfiguration":
+			if err := awsRestjson1_deserializeDocumentPipeLogConfiguration(&sv.LogConfiguration, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2753,6 +2758,46 @@ func awsRestjson1_deserializeDocumentCapacityProviderStrategyItem(v **types.Capa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCloudwatchLogsLogDestination(v **types.CloudwatchLogsLogDestination, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CloudwatchLogsLogDestination
+	if *v == nil {
+		sv = &types.CloudwatchLogsLogDestination{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LogGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CloudwatchLogGroupArn to be of type string, got %T instead", value)
+				}
+				sv.LogGroupArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3588,6 +3633,46 @@ func awsRestjson1_deserializeDocumentFilterList(v *[]types.Filter, value interfa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFirehoseLogDestination(v **types.FirehoseLogDestination, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FirehoseLogDestination
+	if *v == nil {
+		sv = &types.FirehoseLogDestination{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DeliveryStreamArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FirehoseArn to be of type string, got %T instead", value)
+				}
+				sv.DeliveryStreamArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentHeaderParametersMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3621,6 +3706,42 @@ func awsRestjson1_deserializeDocumentHeaderParametersMap(v *map[string]string, v
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIncludeExecutionData(v *[]types.IncludeExecutionDataOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.IncludeExecutionDataOption
+	if *v == nil {
+		cv = []types.IncludeExecutionDataOption{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.IncludeExecutionDataOption
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected IncludeExecutionDataOption to be of type string, got %T instead", value)
+			}
+			col = types.IncludeExecutionDataOption(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -4178,6 +4299,66 @@ func awsRestjson1_deserializeDocumentPipeList(v *[]types.Pipe, value interface{}
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPipeLogConfiguration(v **types.PipeLogConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PipeLogConfiguration
+	if *v == nil {
+		sv = &types.PipeLogConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CloudwatchLogsLogDestination":
+			if err := awsRestjson1_deserializeDocumentCloudwatchLogsLogDestination(&sv.CloudwatchLogsLogDestination, value); err != nil {
+				return err
+			}
+
+		case "FirehoseLogDestination":
+			if err := awsRestjson1_deserializeDocumentFirehoseLogDestination(&sv.FirehoseLogDestination, value); err != nil {
+				return err
+			}
+
+		case "IncludeExecutionData":
+			if err := awsRestjson1_deserializeDocumentIncludeExecutionData(&sv.IncludeExecutionData, value); err != nil {
+				return err
+			}
+
+		case "Level":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogLevel to be of type string, got %T instead", value)
+				}
+				sv.Level = types.LogLevel(jtv)
+			}
+
+		case "S3LogDestination":
+			if err := awsRestjson1_deserializeDocumentS3LogDestination(&sv.S3LogDestination, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -5878,6 +6059,73 @@ func awsRestjson1_deserializeDocumentQueryStringParametersMap(v *map[string]stri
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3LogDestination(v **types.S3LogDestination, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3LogDestination
+	if *v == nil {
+		sv = &types.S3LogDestination{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BucketName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.BucketName = ptr.String(jtv)
+			}
+
+		case "BucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.BucketOwner = ptr.String(jtv)
+			}
+
+		case "OutputFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3OutputFormat to be of type string, got %T instead", value)
+				}
+				sv.OutputFormat = types.S3OutputFormat(jtv)
+			}
+
+		case "Prefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Prefix = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

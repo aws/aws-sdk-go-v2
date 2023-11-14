@@ -91,7 +91,9 @@ type StartExecutionInput struct {
 	// Optional name of the execution. This name must be unique for your Amazon Web
 	// Services account, Region, and state machine for 90 days. For more information,
 	// see Limits Related to State Machine Executions (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
-	// in the Step Functions Developer Guide. A name must not contain:
+	// in the Step Functions Developer Guide. If you don't provide a name for the
+	// execution, Step Functions automatically generates a universally unique
+	// identifier (UUID) as the execution name. A name must not contain:
 	//   - white space
 	//   - brackets < > { } [ ]
 	//   - wildcard characters ? *

@@ -1007,27 +1007,27 @@ type ConfiguredTableSummary struct {
 // The settings for client-side encryption for cryptographic computing.
 type DataEncryptionMetadata struct {
 
-	// Indicates whether encrypted tables can contain cleartext data (true) or are to
-	// cryptographically process every column (false).
+	// Indicates whether encrypted tables can contain cleartext data ( TRUE ) or are to
+	// cryptographically process every column ( FALSE ).
 	//
 	// This member is required.
 	AllowCleartext *bool
 
-	// Indicates whether Fingerprint columns can contain duplicate entries (true) or
-	// are to contain only non-repeated values (false).
+	// Indicates whether Fingerprint columns can contain duplicate entries ( TRUE ) or
+	// are to contain only non-repeated values ( FALSE ).
 	//
 	// This member is required.
 	AllowDuplicates *bool
 
 	// Indicates whether Fingerprint columns can be joined on any other Fingerprint
-	// column with a different name (true) or can only be joined on Fingerprint columns
-	// of the same name (false).
+	// column with a different name ( TRUE ) or can only be joined on Fingerprint
+	// columns of the same name ( FALSE ).
 	//
 	// This member is required.
 	AllowJoinsOnColumnsWithDifferentNames *bool
 
-	// Indicates whether NULL values are to be copied as NULL to encrypted tables
-	// (true) or cryptographically processed (false).
+	// Indicates whether NULL values are to be copied as NULL to encrypted tables ( TRUE
+	// ) or cryptographically processed ( FALSE ).
 	//
 	// This member is required.
 	PreserveNulls *bool
@@ -1100,14 +1100,18 @@ type Membership struct {
 	// This member is required.
 	MemberAbilities []MemberAbility
 
+	// The payment responsibilities accepted by the collaboration member.
+	//
+	// This member is required.
+	PaymentConfiguration *MembershipPaymentConfiguration
+
 	// An indicator as to whether query logging has been enabled or disabled for the
-	// collaboration.
+	// membership.
 	//
 	// This member is required.
 	QueryLogStatus MembershipQueryLogStatus
 
-	// The status of the membership. Valid values are `ACTIVE`, `REMOVED`, and
-	// `COLLABORATION_DELETED`.
+	// The status of the membership.
 	//
 	// This member is required.
 	Status MembershipStatus
@@ -1120,6 +1124,19 @@ type Membership struct {
 	// The default protected query result configuration as specified by the member who
 	// can receive results.
 	DefaultResultConfiguration *MembershipProtectedQueryResultConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the payment responsibilities accepted by the
+// collaboration member.
+type MembershipPaymentConfiguration struct {
+
+	// The payment responsibilities accepted by the collaboration member for query
+	// compute costs.
+	//
+	// This member is required.
+	QueryCompute *MembershipQueryComputePaymentConfig
 
 	noSmithyDocumentSerde
 }
@@ -1155,6 +1172,26 @@ type MembershipProtectedQueryResultConfiguration struct {
 	// query results to the result location, given by the member who can receive
 	// results.
 	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the payment responsibilities accepted by the
+// collaboration member for query compute costs.
+type MembershipQueryComputePaymentConfig struct {
+
+	// Indicates whether the collaboration member has accepted to pay for query
+	// compute costs ( TRUE ) or has not accepted to pay for query compute costs ( FALSE
+	// ). If the collaboration creator has not specified anyone to pay for query
+	// compute costs, then the member who can query is the default payer. An error
+	// message is returned for the following reasons:
+	//   - If you set the value to FALSE but you are responsible to pay for query
+	//   compute costs.
+	//   - If you set the value to TRUE but you are not responsible to pay for query
+	//   compute costs.
+	//
+	// This member is required.
+	IsResponsible *bool
 
 	noSmithyDocumentSerde
 }
@@ -1208,8 +1245,12 @@ type MembershipSummary struct {
 	// This member is required.
 	MemberAbilities []MemberAbility
 
-	// The status of the membership. Valid values are `ACTIVE`, `REMOVED`, and
-	// `COLLABORATION_DELETED`.
+	// The payment responsibilities accepted by the collaboration member.
+	//
+	// This member is required.
+	PaymentConfiguration *MembershipPaymentConfiguration
+
+	// The status of the membership.
 	//
 	// This member is required.
 	Status MembershipStatus
@@ -1241,6 +1282,12 @@ type MemberSpecification struct {
 	// This member is required.
 	MemberAbilities []MemberAbility
 
+	// The collaboration member's payment responsibilities set by the collaboration
+	// creator. If the collaboration creator hasn't speciﬁed anyone as the member
+	// paying for query compute costs, then the member who can query is the default
+	// payer.
+	PaymentConfiguration *PaymentConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -1268,8 +1315,13 @@ type MemberSummary struct {
 	// This member is required.
 	DisplayName *string
 
-	// The status of the member. Valid values are `INVITED`, `ACTIVE`, `LEFT`, and
-	// `REMOVED`.
+	// The collaboration member's payment responsibilities set by the collaboration
+	// creator.
+	//
+	// This member is required.
+	PaymentConfiguration *PaymentConfiguration
+
+	// The status of the member.
 	//
 	// This member is required.
 	Status MemberStatus
@@ -1284,6 +1336,19 @@ type MemberSummary struct {
 
 	// The unique ID for the member's associated membership, if present.
 	MembershipId *string
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the collaboration member's payment responsibilities set
+// by the collaboration creator.
+type PaymentConfiguration struct {
+
+	// The collaboration member's payment responsibilities set by the collaboration
+	// creator for query compute costs.
+	//
+	// This member is required.
+	QueryCompute *QueryComputePaymentConfig
 
 	noSmithyDocumentSerde
 }
@@ -1514,6 +1579,26 @@ type ProtectedQuerySummary struct {
 	//
 	// This member is required.
 	Status ProtectedQueryStatus
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the collaboration member's payment responsibilities set
+// by the collaboration creator for query compute costs.
+type QueryComputePaymentConfig struct {
+
+	// Indicates whether the collaboration creator has configured the collaboration
+	// member to pay for query compute costs ( TRUE ) or has not configured the
+	// collaboration member to pay for query compute costs ( FALSE ). Exactly one
+	// member can be configured to pay for query compute costs. An error is returned if
+	// the collaboration creator sets a TRUE value for more than one member in the
+	// collaboration. If the collaboration creator hasn't specified anyone as the
+	// member paying for query compute costs, then the member who can query is the
+	// default payer. An error is returned if the collaboration creator sets a FALSE
+	// value for the member who can query.
+	//
+	// This member is required.
+	IsResponsible *bool
 
 	noSmithyDocumentSerde
 }

@@ -196,6 +196,33 @@ func (e *ExecutionLimitExceeded) ErrorCode() string {
 }
 func (e *ExecutionLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The execution Amazon Resource Name (ARN) that you specified for executionArn
+// cannot be redriven.
+type ExecutionNotRedrivable struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ExecutionNotRedrivable) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ExecutionNotRedrivable) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ExecutionNotRedrivable) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ExecutionNotRedrivable"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ExecutionNotRedrivable) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The provided Amazon Resource Name (ARN) is not valid.
 type InvalidArn struct {
 	Message *string
@@ -616,6 +643,7 @@ func (e *StateMachineTypeNotSupported) ErrorCode() string {
 }
 func (e *StateMachineTypeNotSupported) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The activity does not exist.
 type TaskDoesNotExist struct {
 	Message *string
 
@@ -641,6 +669,8 @@ func (e *TaskDoesNotExist) ErrorCode() string {
 }
 func (e *TaskDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The task token has either expired or the task associated with the token has
+// already been closed.
 type TaskTimedOut struct {
 	Message *string
 

@@ -70,7 +70,7 @@ type CreateIndexInput struct {
 	// This value helps ensure idempotency. Resource Explorer uses this value to
 	// prevent the accidental creation of duplicate versions. We recommend that you
 	// generate a UUID-type value (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// to ensure the uniqueness of your views.
+	// to ensure the uniqueness of your index.
 	ClientToken *string
 
 	// The specified tags are attached only to the index created in this Amazon Web

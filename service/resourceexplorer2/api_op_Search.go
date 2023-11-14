@@ -70,7 +70,8 @@ type SearchInput struct {
 	// The parameter for receiving additional results if you receive a NextToken
 	// response in a previous request. A NextToken response indicates that more output
 	// is available. Set this parameter to the value of the previous call's NextToken
-	// response to indicate where the output should continue from.
+	// response to indicate where the output should continue from. The pagination
+	// tokens expire after 24 hours.
 	NextToken *string
 
 	// Specifies the Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
@@ -92,7 +93,8 @@ type SearchOutput struct {
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
-	// repeat this until the NextToken response element comes back as null .
+	// repeat this until the NextToken response element comes back as null . The
+	// pagination tokens expire after 24 hours.
 	NextToken *string
 
 	// The list of structures that describe the resources that match the query.
