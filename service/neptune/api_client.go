@@ -55,13 +55,13 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveAuthSchemeResolver(&options)
 
-	resolveAuthSchemes(&options)
-
 	for _, fn := range optFns {
 		fn(&options)
 	}
 
 	ignoreAnonymousAuth(&options)
+
+	resolveAuthSchemes(&options)
 
 	client := &Client{
 		options: options,
@@ -147,16 +147,20 @@ func addProtocolFinalizerMiddlewares(stack *middleware.Stack, options Options, o
 	return nil
 }
 func resolveAuthSchemeResolver(options *Options) {
-	options.AuthSchemeResolver = &defaultAuthSchemeResolver{}
+	if options.AuthSchemeResolver == nil {
+		options.AuthSchemeResolver = &defaultAuthSchemeResolver{}
+	}
 }
 
 func resolveAuthSchemes(options *Options) {
-	options.AuthSchemes = []smithyhttp.AuthScheme{
-		internalauth.NewHTTPAuthScheme("aws.auth#sigv4", &internalauthsmithy.V4SignerAdapter{
-			Signer:     options.HTTPSignerV4,
-			Logger:     options.Logger,
-			LogSigning: options.ClientLogMode.IsSigning(),
-		}),
+	if options.AuthSchemes == nil {
+		options.AuthSchemes = []smithyhttp.AuthScheme{
+			internalauth.NewHTTPAuthScheme("aws.auth#sigv4", &internalauthsmithy.V4SignerAdapter{
+				Signer:     options.HTTPSignerV4,
+				Logger:     options.Logger,
+				LogSigning: options.ClientLogMode.IsSigning(),
+			}),
+		}
 	}
 }
 
