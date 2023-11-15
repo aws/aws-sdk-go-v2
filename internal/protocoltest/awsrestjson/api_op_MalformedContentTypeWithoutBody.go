@@ -4,6 +4,7 @@ package awsrestjson
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -36,6 +37,9 @@ type MalformedContentTypeWithoutBodyOutput struct {
 }
 
 func (c *Client) addOperationMalformedContentTypeWithoutBodyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedContentTypeWithoutBody{}, middleware.After)
 	if err != nil {
 		return err
@@ -44,6 +48,10 @@ func (c *Client) addOperationMalformedContentTypeWithoutBodyMiddlewares(stack *m
 	if err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedContentTypeWithoutBody"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
+
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
@@ -77,6 +85,9 @@ func (c *Client) addOperationMalformedContentTypeWithoutBodyMiddlewares(stack *m
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedContentTypeWithoutBody(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -92,7 +103,7 @@ func (c *Client) addOperationMalformedContentTypeWithoutBodyMiddlewares(stack *m
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

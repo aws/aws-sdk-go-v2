@@ -9,6 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/internal/v4a"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -134,9 +135,9 @@ func Test_UpdateEndpointBuild(t *testing.T) {
 				},
 				tests: []s3BucketTest{
 					{"abc", "key", "https://example.region.amazonaws.com/abc/key?x-id=GetObject", ""},
-					{"a$b$c", "key", "https://example.region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://example.region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
-					{"a..bc", "key", "https://example.region.amazonaws.com/a..bc/key?x-id=GetObject", ""},
+					{"a$b$c", "key", "", "cannot be used with"},
+					{"a.b.c", "key", "", "cannot be used with"},
+					{"a..bc", "key", "", "cannot be used with"},
 				},
 			},
 			"AccelerateNoSSLTests": {
@@ -148,8 +149,8 @@ func Test_UpdateEndpointBuild(t *testing.T) {
 				},
 				tests: []s3BucketTest{
 					{"abc", "key", "https://example.region.amazonaws.com/abc/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://example.region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
-					{"a$b$c", "key", "https://example.region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "", "cannot be used with"},
+					{"a$b$c", "key", "", "cannot be used with"},
 				},
 			},
 		},
@@ -1543,11 +1544,11 @@ func runValidations(t *testing.T, c testCaseForEndpointCustomization, operation 
 		t.Fatalf("expect url %s, got %s", e, a)
 	}
 
-	if e, a := c.expectedSigningRegion, serializedRequest.signingRegion; !strings.EqualFold(e, a) {
+	if e, a := c.expectedSigningRegion, signedRequest.signingRegion; !strings.EqualFold(e, a) {
 		t.Fatalf("expect signing region as %s, got %s", e, a)
 	}
 
-	if e, a := c.expectedSigningName, serializedRequest.signingName; !strings.EqualFold(e, a) {
+	if e, a := c.expectedSigningName, signedRequest.signingName; !strings.EqualFold(e, a) {
 		t.Fatalf("expect signing name as %s, got %s", e, a)
 	}
 
@@ -1602,8 +1603,9 @@ func (rm *requestRetrieverMiddleware) HandleFinalize(
 	}
 	rm.request = req
 
-	rm.signingName = awsmiddleware.GetSigningName(ctx)
-	rm.signingRegion = awsmiddleware.GetSigningRegion(ctx)
+	signature := awstesting.ParseSigV4Signature(req.Header)
+	rm.signingName = signature.SigningName
+	rm.signingRegion = signature.SigningRegion
 
 	return next.HandleFinalize(ctx, in)
 }

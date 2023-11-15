@@ -4,6 +4,7 @@ package restxml
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
 	"github.com/aws/smithy-go/middleware"
@@ -42,6 +43,9 @@ type HttpPayloadWithXmlNamespaceOutput struct {
 }
 
 func (c *Client) addOperationHttpPayloadWithXmlNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadWithXmlNamespace{}, middleware.After)
 	if err != nil {
 		return err
@@ -50,6 +54,10 @@ func (c *Client) addOperationHttpPayloadWithXmlNamespaceMiddlewares(stack *middl
 	if err != nil {
 		return err
 	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpPayloadWithXmlNamespace"); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
+
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
@@ -83,6 +91,9 @@ func (c *Client) addOperationHttpPayloadWithXmlNamespaceMiddlewares(stack *middl
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithXmlNamespace(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -98,7 +109,7 @@ func (c *Client) addOperationHttpPayloadWithXmlNamespaceMiddlewares(stack *middl
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

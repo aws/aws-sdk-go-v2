@@ -3,6 +3,7 @@ package awstesting
 import (
 	"context"
 	"io"
+	"net/http"
 	"os"
 	"runtime"
 	"strings"
@@ -151,4 +152,50 @@ func getEnvs(envs []string) map[string]string {
 		}
 	}
 	return extraEnvs
+}
+
+const (
+	signaturePreambleSigV4  = "AWS4-HMAC-SHA256"
+	signaturePreambleSigV4A = "AWS4-ECDSA-P256-SHA256"
+)
+
+// SigV4Signature represents a parsed sigv4 or sigv4a signature.
+type SigV4Signature struct {
+	Preamble      string   // e.g. AWS4-HMAC-SHA256, AWS4-ECDSA-P256-SHA256
+	SigningName   string   // generally the service name e.g. "s3"
+	SigningRegion string   // for sigv4a this is the region-set header as-is
+	SignedHeaders []string // list of signed headers
+	Signature     string   // calculated signature
+}
+
+// ParseSigV4Signature deconstructs a sigv4 or sigv4a signature from a set of
+// request headers.
+func ParseSigV4Signature(header http.Header) *SigV4Signature {
+	auth := header.Get("Authorization")
+
+	preamble, after, _ := strings.Cut(auth, " ")
+	credential, after, _ := strings.Cut(after, ", ")
+	signedHeaders, signature, _ := strings.Cut(after, ", ")
+
+	credentialParts := strings.Split(credential, "/")
+
+	// sigv4  : AccessKeyID/DateString/SigningRegion/SigningName/SignatureID
+	// sigv4a : AccessKeyID/DateString/SigningName/SignatureID, region set on
+	//          header
+	var signingName, signingRegion string
+	if preamble == signaturePreambleSigV4 {
+		signingName = credentialParts[3]
+		signingRegion = credentialParts[2]
+	} else if preamble == signaturePreambleSigV4A {
+		signingName = credentialParts[2]
+		signingRegion = header.Get("X-Amz-Region-Set")
+	}
+
+	return &SigV4Signature{
+		Preamble:      preamble,
+		SigningName:   signingName,
+		SigningRegion: signingRegion,
+		SignedHeaders: strings.Split(signedHeaders, ";"),
+		Signature:     signature,
+	}
 }

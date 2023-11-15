@@ -41,10 +41,11 @@ import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
-import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.utils.ListUtils;
 import software.amazon.smithy.utils.SetUtils;
+
+import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
 
 /**
  * S3UpdateEndpoint integration serves to apply customizations for S3 service,
@@ -182,6 +183,16 @@ public class S3UpdateEndpoint implements GoIntegration {
                         .build()
         ));
         runtimeClientPlugins.addAll(S3.getClientPlugins());
+        runtimeClientPlugins.add(
+                RuntimeClientPlugin.builder()
+                        .servicePredicate(S3ModelUtils::isServiceS3Control)
+                        .registerMiddleware(
+                                MiddlewareRegistrar.builder()
+                                        .resolvedFunction(buildPackageSymbol("addStashOperationInput"))
+                                        .build()
+                        )
+                        .build()
+        );
         return runtimeClientPlugins;
     }
 
@@ -588,6 +599,11 @@ public class S3UpdateEndpoint implements GoIntegration {
                         writer.write("cpy := *input");
                         writer.write("return &cpy, nil");
                     });
+            writer.write("""
+                    func (in $P) copy() interface{} {
+                        v := *in
+                        return &v
+                    }""", inputSymbol);
         }
 
         /**
