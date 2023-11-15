@@ -9970,6 +9970,12 @@
                     "traits": {
                         "smithy.api#enumValue": "python3.12"
                     }
+                },
+                "java21": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "java21"
+                    }
                 }
             }
         },

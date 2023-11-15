@@ -302,6 +302,23 @@
                 }
             }
         },
+        "com.amazonaws.cloudtrail#BillingMode": {
+            "type": "enum",
+            "members": {
+                "EXTENDABLE_RETENTION_PRICING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTENDABLE_RETENTION_PRICING"
+                    }
+                },
+                "FIXED_RETENTION_PRICING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIXED_RETENTION_PRICING"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudtrail#Boolean": {
             "type": "boolean"
         },
@@ -2073,7 +2090,7 @@
                 "RetentionPeriod": {
                     "target": "com.amazonaws.cloudtrail#RetentionPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The retention period of the event data store, in days. You can set a retention period of\n         up to 2557 days, the equivalent of seven years. CloudTrail  Lake determines whether to retain an event by checking if the <code>eventTime</code> \n         of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events \n      when the <code>eventTime</code> is older than 90 days.</p>\n         <note>\n            <p>If you plan to copy trail events to this event data store, we recommend \n            that you consider both the age of the events that you\n            want to copy as well as how long you want to keep the copied events\n            in your event data store. For example, if you copy trail events that are 5 years old \n            and specify a retention period of 7 years, the event data store \n            will retain those events for two years.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The retention period of the event data store, in days. If <code>BillingMode</code> is set to <code>EXTENDABLE_RETENTION_PRICING</code>, you can set a retention period of\n         up to 3653 days, the equivalent of 10 years. If <code>BillingMode</code> is set to <code>FIXED_RETENTION_PRICING</code>, you can set a retention period of\n         up to 2557 days, the equivalent of seven years.</p>\n         <p>CloudTrail  Lake determines whether to retain an event by checking if the <code>eventTime</code> \n         of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events \n      when the <code>eventTime</code> is older than 90 days.</p>\n         <note>\n            <p>If you plan to copy trail events to this event data store, we recommend \n            that you consider both the age of the events that you\n            want to copy as well as how long you want to keep the copied events\n            in your event data store. For example, if you copy trail events that are 5 years old \n            and specify a retention period of 7 years, the event data store \n            will retain those events for two years.</p>\n         </note>"
                     }
                 },
                 "TerminationProtectionEnabled": {
@@ -2095,6 +2112,12 @@
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the event data store should start ingesting live events. The default is true.</p>"
+                    }
+                },
+                "BillingMode": {
+                    "target": "com.amazonaws.cloudtrail#BillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing mode for the event data store determines the cost for ingesting events and the default and maximum retention period for the event data store.</p>\n         <p>The following are the possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EXTENDABLE_RETENTION_PRICING</code> - This billing mode is generally recommended if you want a flexible retention period of up to 3653 days (about 10 years). \n                The default retention period for this billing mode is 366 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FIXED_RETENTION_PRICING</code> - This billing mode is recommended if you expect to ingest more than 25 TB of event data per month and need a retention period of up to 2557 days (about 7 years). \n                The default retention period for this billing mode is 2557 days.</p>\n            </li>\n         </ul>\n         <p>The default value is <code>EXTENDABLE_RETENTION_PRICING</code>.</p>\n         <p>For more information about CloudTrail pricing, \n         see <a href=\"http://aws.amazon.com/cloudtrail/pricing/\">CloudTrail Pricing</a> and \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html\">Managing CloudTrail Lake costs</a>.</p>"
                     }
                 }
             },
@@ -2172,6 +2195,12 @@
                     "target": "com.amazonaws.cloudtrail#EventDataStoreKmsKeyId",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the\n         following format.</p>\n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
+                    }
+                },
+                "BillingMode": {
+                    "target": "com.amazonaws.cloudtrail#BillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing mode for the event data store.</p>"
                     }
                 }
             },
@@ -3305,7 +3334,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A storage lake of event data against which you can run complex SQL-based queries. An\n         event data store can include events that you have logged on your account from the last 90\n         to 2557 days (about three months to up to seven years). To select events for an event data\n         store, use <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced\">advanced event selectors</a>.</p>"
+                "smithy.api#documentation": "<p>A storage lake of event data against which you can run complex SQL-based queries. An\n         event data store can include events that you have logged on your account. To select events for an event data\n         store, use <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced\">advanced event selectors</a>.</p>"
             }
         },
         "com.amazonaws.cloudtrail#EventDataStoreARNInvalidException": {
@@ -3756,6 +3785,12 @@
                     "target": "com.amazonaws.cloudtrail#EventDataStoreKmsKeyId",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the\n         following format.</p>\n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
+                    }
+                },
+                "BillingMode": {
+                    "target": "com.amazonaws.cloudtrail#BillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing mode for the event data store.</p>"
                     }
                 }
             },
@@ -7683,6 +7718,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the\n         following format.</p>\n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
                     }
+                },
+                "BillingMode": {
+                    "target": "com.amazonaws.cloudtrail#BillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing mode for the event data store.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7694,7 +7735,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 7,
-                    "max": 2557
+                    "max": 3653
                 }
             }
         },
@@ -8935,7 +8976,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an event data store. The required <code>EventDataStore</code> value is an ARN or\n         the ID portion of the ARN. Other parameters are optional, but at least one optional\n         parameter must be specified, or CloudTrail throws an error.\n            <code>RetentionPeriod</code> is in days, and valid values are integers between 90 and\n         2557. By default, <code>TerminationProtection</code> is enabled.</p>\n         <p>For event data stores for CloudTrail events, <code>AdvancedEventSelectors</code>\n         includes or excludes management, data, or Insights events in your event data store. For more\n         information about <code>AdvancedEventSelectors</code>, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html\">AdvancedEventSelectors</a>.</p>\n         <p> For event data stores for Config configuration items, Audit Manager evidence, or non-Amazon Web Services events,\n            <code>AdvancedEventSelectors</code> includes events of that type in your event data store.</p>",
+                "smithy.api#documentation": "<p>Updates an event data store. The required <code>EventDataStore</code> value is an ARN or\n         the ID portion of the ARN. Other parameters are optional, but at least one optional\n         parameter must be specified, or CloudTrail throws an error.\n            <code>RetentionPeriod</code> is in days, and valid values are integers between 7 and\n         3653 if the <code>BillingMode</code> is set to <code>EXTENDABLE_RETENTION_PRICING</code>, or between 7 and 2557 if <code>BillingMode</code> is set to <code>FIXED_RETENTION_PRICING</code>. By default, <code>TerminationProtection</code> is enabled.</p>\n         <p>For event data stores for CloudTrail events, <code>AdvancedEventSelectors</code>\n         includes or excludes management, data, or Insights events in your event data store. For more\n         information about <code>AdvancedEventSelectors</code>, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html\">AdvancedEventSelectors</a>.</p>\n         <p> For event data stores for Config configuration items, Audit Manager evidence, or non-Amazon Web Services events,\n            <code>AdvancedEventSelectors</code> includes events of that type in your event data store.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -8976,7 +9017,7 @@
                 "RetentionPeriod": {
                     "target": "com.amazonaws.cloudtrail#RetentionPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The retention period of the event data store, in days. You can set a retention period of\n         up to 2557 days, the equivalent of seven years. CloudTrail  Lake determines whether to retain an event by checking if the <code>eventTime</code> \n         of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events \n         when the <code>eventTime</code> is older than 90 days.</p>\n         <note>\n            <p>If you decrease the retention period of an event data store, CloudTrail will remove any events with an <code>eventTime</code> older than the new retention period. For example, if the previous \n            retention period was 365 days and you decrease it to 100 days, CloudTrail  will remove events with an <code>eventTime</code> older than 100 days.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The retention period of the event data store, in days. If <code>BillingMode</code> is set to <code>EXTENDABLE_RETENTION_PRICING</code>, you can set a retention period of\n         up to 3653 days, the equivalent of 10 years. If <code>BillingMode</code> is set to <code>FIXED_RETENTION_PRICING</code>, you can set a retention period of\n         up to 2557 days, the equivalent of seven years.</p>\n         <p>CloudTrail  Lake determines whether to retain an event by checking if the <code>eventTime</code> \n         of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events \n         when the <code>eventTime</code> is older than 90 days.</p>\n         <note>\n            <p>If you decrease the retention period of an event data store, CloudTrail will remove any events with an <code>eventTime</code> older than the new retention period. For example, if the previous \n            retention period was 365 days and you decrease it to 100 days, CloudTrail  will remove events with an <code>eventTime</code> older than 100 days.</p>\n         </note>"
                     }
                 },
                 "TerminationProtectionEnabled": {
@@ -8989,6 +9030,12 @@
                     "target": "com.amazonaws.cloudtrail#EventDataStoreKmsKeyId",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the KMS key ID to use to encrypt the events delivered by\n            CloudTrail. The value can be an alias name prefixed by <code>alias/</code>, a\n         fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique\n         identifier.</p>\n         <important>\n            <p>Disabling or deleting the KMS key, or removing CloudTrail\n            permissions on the key, prevents CloudTrail from logging events to the event data\n            store, and prevents users from querying the data in the event data store that was\n            encrypted with the key. After you associate an event data store with a KMS key, the KMS key cannot be removed or changed. Before you\n            disable or delete a KMS key that you are using with an event data store,\n            delete or back up your event data store.</p>\n         </important>\n         <p>CloudTrail also supports KMS multi-Region keys. For more\n         information about multi-Region keys, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html\">Using multi-Region\n            keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>Examples:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>alias/MyAliasName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:kms:us-east-2:123456789012:alias/MyAliasName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>12345678-1234-1234-1234-123456789012</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "BillingMode": {
+                    "target": "com.amazonaws.cloudtrail#BillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<note>\n            <p>You can't change the billing mode from <code>EXTENDABLE_RETENTION_PRICING</code> to <code>FIXED_RETENTION_PRICING</code>. If <code>BillingMode</code> is set to \n            <code>EXTENDABLE_RETENTION_PRICING</code> and you want to use <code>FIXED_RETENTION_PRICING</code> instead, you'll need to stop ingestion on the event data store and create a new event data store that uses <code>FIXED_RETENTION_PRICING</code>.</p>\n         </note>\n         <p>The billing mode for the event data store determines the cost \n         for ingesting events and the default and maximum retention period for the event data store.</p>\n         <p>The following are the possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EXTENDABLE_RETENTION_PRICING</code> - This billing mode is generally recommended if you want a flexible retention period of up to 3653 days (about 10 years). The default retention period for this billing mode is \n               366 days.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FIXED_RETENTION_PRICING</code> - This billing mode is recommended if you expect to ingest more than 25 TB of event data per month and need a retention period of up to 2557 days (about 7 years). \n               The default retention period for this billing mode is 2557 days.</p>\n            </li>\n         </ul>\n         <p>For more information about CloudTrail pricing, \n         see <a href=\"http://aws.amazon.com/cloudtrail/pricing/\">CloudTrail Pricing</a> and \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html\">Managing CloudTrail Lake costs</a>.</p>"
                     }
                 }
             },
@@ -9063,6 +9110,12 @@
                     "target": "com.amazonaws.cloudtrail#EventDataStoreKmsKeyId",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the\n         following format.</p>\n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
+                    }
+                },
+                "BillingMode": {
+                    "target": "com.amazonaws.cloudtrail#BillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing mode for the event data store.</p>"
                     }
                 }
             },

@@ -956,6 +956,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Adds a user to a permission group to grant permissions for actions a user can perform in FinSpace.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1417,6 +1420,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Creates a new Changeset in a FinSpace Dataset.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1520,6 +1526,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Creates a Dataview for a Dataset.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1638,6 +1647,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Creates a new FinSpace Dataset.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1751,6 +1763,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Creates a group of permissions for various actions that a user can perform in FinSpace.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1837,6 +1852,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Creates a new user in FinSpace.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2384,6 +2402,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Deletes a FinSpace Dataset.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2464,6 +2485,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Deletes a permission group. This action is irreversible.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2539,6 +2563,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Denies access to the FinSpace web application and API for the specified user.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2613,6 +2640,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Removes a user from a permission group.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2712,6 +2742,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p> Allows the specified user to access the FinSpace web application and API.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2898,6 +2931,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Get information about a Changeset.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3047,6 +3083,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Gets information about a Dataview.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3194,6 +3233,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Returns information about a Dataset.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3316,6 +3358,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Returns the credentials to access the external Dataview from an S3 location. To call this API:</p>\n         <ul>\n            <li>\n               <p>You must retrieve the programmatic credentials.</p>\n            </li>\n            <li>\n               <p>You must be a member of a FinSpace user group, where the dataset that you want to access has <code>Read Dataset Data</code> permissions.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -3394,6 +3439,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Retrieves the details of a specific permission group.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3452,6 +3500,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Request programmatic credentials to use with FinSpace SDK. For more information, see <a href=\"https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#accessing-credentials\">Step 2. Access credentials programmatically using IAM access key id and secret access key</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3531,6 +3582,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Retrieves details for a specific user.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3669,6 +3723,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>A temporary Amazon S3 location, where you can copy your files from a source location to stage or use\n      as a scratch space in FinSpace notebook.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -3830,6 +3887,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Lists the FinSpace Changesets for a Dataset.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3922,6 +3982,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Lists all available Dataviews for a Dataset.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -4013,6 +4076,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Lists all of the active Datasets that a user has access to.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -4094,6 +4160,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Lists all available permission groups in FinSpace.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -4134,6 +4203,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Lists all the permission groups that are associated with a specific user.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -4259,6 +4331,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Lists all available users in FinSpace.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -4299,6 +4374,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Lists details of all the users in a specific permission group.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -4640,6 +4718,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Resets the password for a specified user ID and generates a temporary one. Only a superuser can reset password for other users. Resetting the password immediately invalidates the previous password associated with the user.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -4988,6 +5069,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Updates a FinSpace Changeset.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -5092,6 +5176,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Updates a FinSpace Dataset.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -5200,6 +5287,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Modifies the details of a permission group. You cannot modify a <code>permissionGroupID</code>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -5292,6 +5382,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Modifies the details of the specified user. You cannot update the <code>userId</code> for a user.</p>",
                 "smithy.api#http": {
                     "method": "PUT",

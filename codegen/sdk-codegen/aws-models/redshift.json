@@ -4226,7 +4226,7 @@
                     "min": 1,
                     "max": 253
                 },
-                "smithy.api#pattern": "^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,6}$"
+                "smithy.api#pattern": "^(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])$"
             }
         },
         "com.amazonaws.redshift#CustomerStorageMessage": {
@@ -4899,6 +4899,9 @@
                     "target": "com.amazonaws.redshift#CustomCnameAssociationFault"
                 },
                 {
+                    "target": "com.amazonaws.redshift#CustomDomainAssociationNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
@@ -4914,6 +4917,14 @@
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the cluster to delete a custom domain association for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomDomainName": {
+                    "target": "com.amazonaws.redshift#CustomDomainNameString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The custom domain name for the custom domain association.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -11409,6 +11420,9 @@
                     "target": "com.amazonaws.redshift#CustomCnameAssociationFault"
                 },
                 {
+                    "target": "com.amazonaws.redshift#CustomDomainAssociationNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
@@ -11422,13 +11436,17 @@
                 "CustomDomainName": {
                     "target": "com.amazonaws.redshift#CustomDomainNameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The custom domain name for a changed custom domain association.</p>"
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The custom domain name for a changed custom domain association.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "CustomDomainCertificateArn": {
                     "target": "com.amazonaws.redshift#CustomDomainCertificateArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The certificate Amazon Resource Name (ARN) for the changed custom domain association.</p>"
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The certificate Amazon Resource Name (ARN) for the changed custom domain association.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "ClusterIdentifier": {

@@ -152,7 +152,7 @@
                     "endpointPrefix": "codecatalyst"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Welcome to the Amazon CodeCatalyst API reference. This reference provides descriptions of operations and data types for Amazon CodeCatalyst. You can use the Amazon CodeCatalyst \n      API to work with the following objects. </p>\n         <p>Spaces, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteSpace</a>, which deletes a space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSpace</a>, which returns information about a space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSubscription</a>, which returns information about the Amazon Web Services account used for billing purposes \n        and the billing plan for the space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSpaces</a>, which retrieves a list of spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateSpace</a>, which hanges one or more values for a space.</p>\n            </li>\n         </ul>\n         <p>Projects, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateProject</a> which creates a project in a specified space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetProject</a>, which returns information about a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListProjects</a>, which retrieves a list of projects in a space.</p>\n            </li>\n         </ul>\n         <p>Users, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetUserDetails</a>, which returns information about a user in Amazon CodeCatalyst.</p>\n            </li>\n         </ul>\n         <p>Source repositories, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateSourceRepository</a>, which creates an empty Git-based source repository in a specified project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateSourceRepositoryBranch</a>, which creates a branch in a specified repository where you can work on code.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteSourceRepository</a>, which deletes a source repository.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSourceRepository</a>, which returns information about a source repository.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSourceRepositoryCloneUrls</a>, which returns information about the URLs that can be used with a Git client to clone a source\n        repository.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSourceRepositories</a>, which retrieves a list of source repositories in a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSourceRepositoryBranches</a>, which retrieves a list of branches in a source repository.</p>\n            </li>\n         </ul>\n         <p>Dev Environments and the Amazon Web Services Toolkits, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateDevEnvironment</a>, which creates a Dev Environment, \n       where you can quickly work on the code stored in the source repositories of your project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteDevEnvironment</a>, which deletes a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetDevEnvironment</a>, which returns information about a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListDevEnvironments</a>, which retrieves a list of Dev Environments in a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListDevEnvironmentSessions</a>, which retrieves a list of active Dev Environment sessions in a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartDevEnvironment</a>, which starts a specified Dev Environment and puts it into an active state.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartDevEnvironmentSession</a>, which starts a session to a specified Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopDevEnvironment</a>, which stops a specified Dev Environment and puts it into an stopped state.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopDevEnvironmentSession</a>, which stops a session for a specified Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateDevEnvironment</a>, which changes one or more values for a Dev Environment.</p>\n            </li>\n         </ul>\n         <p>Security, activity, and resource management in Amazon CodeCatalyst, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateAccessToken</a>, which creates a personal access token (PAT) for the current user.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteAccessToken</a>, which deletes a specified personal access token (PAT).</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAccessTokens</a>, which lists all personal access tokens (PATs) associated with a user.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListEventLogs</a>, which retrieves a list of events that occurred during a specified time period in a space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>VerifySession</a>, which verifies whether the calling user has a valid Amazon CodeCatalyst login and session.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If you are using the Amazon CodeCatalyst APIs with an SDK or the CLI, you must configure your computer to work with Amazon CodeCatalyst and single sign-on (SSO).\n        For more information, see <a href=\"https://docs.aws.amazon.com/codecatalyst/latest/userguide/set-up-cli.html\">Setting up to use the CLI with Amazon CodeCatalyst</a>\n      and the SSO documentation for your SDK.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Welcome to the Amazon CodeCatalyst API reference. This reference provides descriptions of operations and data types for Amazon CodeCatalyst. You can use the Amazon CodeCatalyst \n      API to work with the following objects. </p>\n         <p>Spaces, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteSpace</a>, which deletes a space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSpace</a>, which returns information about a space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSubscription</a>, which returns information about the Amazon Web Services account used for billing purposes \n        and the billing plan for the space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSpaces</a>, which retrieves a list of spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateSpace</a>, which changes one or more values for a space.</p>\n            </li>\n         </ul>\n         <p>Projects, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateProject</a> which creates a project in a specified space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetProject</a>, which returns information about a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListProjects</a>, which retrieves a list of projects in a space.</p>\n            </li>\n         </ul>\n         <p>Users, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetUserDetails</a>, which returns information about a user in Amazon CodeCatalyst.</p>\n            </li>\n         </ul>\n         <p>Source repositories, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateSourceRepository</a>, which creates an empty Git-based source repository in a specified project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateSourceRepositoryBranch</a>, which creates a branch in a specified repository where you can work on code.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteSourceRepository</a>, which deletes a source repository.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSourceRepository</a>, which returns information about a source repository.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetSourceRepositoryCloneUrls</a>, which returns information about the URLs that can be used with a Git client to clone a source\n        repository.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSourceRepositories</a>, which retrieves a list of source repositories in a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListSourceRepositoryBranches</a>, which retrieves a list of branches in a source repository.</p>\n            </li>\n         </ul>\n         <p>Dev Environments and the Amazon Web Services Toolkits, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateDevEnvironment</a>, which creates a Dev Environment, \n       where you can quickly work on the code stored in the source repositories of your project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteDevEnvironment</a>, which deletes a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetDevEnvironment</a>, which returns information about a Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListDevEnvironments</a>, which retrieves a list of Dev Environments in a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListDevEnvironmentSessions</a>, which retrieves a list of active Dev Environment sessions in a project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartDevEnvironment</a>, which starts a specified Dev Environment and puts it into an active state.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartDevEnvironmentSession</a>, which starts a session to a specified Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopDevEnvironment</a>, which stops a specified Dev Environment and puts it into an stopped state.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopDevEnvironmentSession</a>, which stops a session for a specified Dev Environment.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateDevEnvironment</a>, which changes one or more values for a Dev Environment.</p>\n            </li>\n         </ul>\n         <p>Workflows, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetWorkflow</a>, which returns information about a workflow.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetWorkflowRun</a>, which returns information about a specified run of a workflow.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListWorkflowRuns</a>, which retrieves a list of runs of a specified workflow.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListWorkflows</a>, which retrieves a list of workflows in a specified project.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartWorkflowRun</a>, which starts a run of a specified workflow.</p>\n            </li>\n         </ul>\n         <p>Security, activity, and resource management in Amazon CodeCatalyst, by calling the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateAccessToken</a>, which creates a personal access token (PAT) for the current user.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteAccessToken</a>, which deletes a specified personal access token (PAT).</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAccessTokens</a>, which lists all personal access tokens (PATs) associated with a user.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListEventLogs</a>, which retrieves a list of events that occurred during a specified time period in a space.</p>\n            </li>\n            <li>\n               <p>\n                  <a>VerifySession</a>, which verifies whether the calling user has a valid Amazon CodeCatalyst login and session.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If you are using the Amazon CodeCatalyst APIs with an SDK or the CLI, you must configure your computer to work with Amazon CodeCatalyst and single sign-on (SSO).\n        For more information, see <a href=\"https://docs.aws.amazon.com/codecatalyst/latest/userguide/set-up-cli.html\">Setting up to use the CLI with Amazon CodeCatalyst</a>\n      and the SSO documentation for your SDK.</p>\n         </note>",
                 "smithy.api#httpBearerAuth": {},
                 "smithy.api#title": "Amazon CodeCatalyst",
                 "smithy.rules#endpointRuleSet": {
@@ -222,7 +222,6 @@
                                     "assign": "PartitionResult"
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -236,7 +235,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -268,7 +266,8 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
@@ -279,7 +278,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -301,7 +301,6 @@
                                     "assign": "PartitionResult"
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -315,7 +314,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -347,7 +345,8 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
@@ -358,7 +357,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
@@ -492,6 +492,10 @@
                     {
                         "name": "LESS_THAN_OR_EQUALS",
                         "value": "LE"
+                    },
+                    {
+                        "name": "BEGINS_WITH",
+                        "value": "BEGINS_WITH"
                     }
                 ]
             }
@@ -1308,9 +1312,6 @@
             "delete": {
                 "target": "com.amazonaws.codecatalyst#DeleteDevEnvironment"
             },
-            "list": {
-                "target": "com.amazonaws.codecatalyst#ListDevEnvironments"
-            },
             "operations": [
                 {
                     "target": "com.amazonaws.codecatalyst#ListDevEnvironmentSessions"
@@ -1857,6 +1858,10 @@
                     {
                         "name": "HAS_ACCESS_TO",
                         "value": "hasAccessTo"
+                    },
+                    {
+                        "name": "NAME",
+                        "value": "name"
                     }
                 ]
             }
@@ -2438,6 +2443,273 @@
                 }
             }
         },
+        "com.amazonaws.codecatalyst#GetWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codecatalyst#GetWorkflowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codecatalyst#GetWorkflowResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a workflow.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/spaces/{spaceName}/projects/{projectName}/workflows/{id}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.codecatalyst#GetWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "spaceName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.codecatalyst#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workflow. To rerieve a list of workflow IDs, use <a>ListWorkflows</a>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "workflowId"
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project in the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codecatalyst#GetWorkflowResponse": {
+            "type": "structure",
+            "members": {
+                "spaceName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project in the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.codecatalyst#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workflow.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "workflowId"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceRepositoryName": {
+                    "target": "com.amazonaws.codecatalyst#SourceRepositoryNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source repository where the workflow YAML is stored.</p>"
+                    }
+                },
+                "sourceBranchName": {
+                    "target": "com.amazonaws.codecatalyst#SourceRepositoryBranchString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the branch that contains the workflow YAML.</p>"
+                    }
+                },
+                "definition": {
+                    "target": "com.amazonaws.codecatalyst#WorkflowDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the workflow definition file for the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdTime": {
+                    "target": "com.amazonaws.codecatalyst#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the workflow was created, in coordinated universal time (UTC) timestamp format as specified in <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339</a>\n         </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "com.amazonaws.codecatalyst#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the workflow was last updated, in coordinated universal time (UTC) timestamp format as specified in <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339</a>\n         </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "runMode": {
+                    "target": "com.amazonaws.codecatalyst#WorkflowRunMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The behavior to use when multiple workflows occur at the same time. For more information, see \n      <a href=\"https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflows-configure-runs.html\">https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflows-configure-runs.html</a> in the Amazon CodeCatalyst User Guide.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.codecatalyst#WorkflowStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codecatalyst#GetWorkflowRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codecatalyst#GetWorkflowRunRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codecatalyst#GetWorkflowRunResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a specified run of a workflow.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns/{id}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.codecatalyst#GetWorkflowRunRequest": {
+            "type": "structure",
+            "members": {
+                "spaceName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.codecatalyst#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workflow run. To retrieve a list of workflow run IDs, use <a>ListWorkflowRuns</a>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "workflowRunId"
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project in the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codecatalyst#GetWorkflowRunResponse": {
+            "type": "structure",
+            "members": {
+                "spaceName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project in the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.codecatalyst#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workflow run.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "workflowRunId"
+                    }
+                },
+                "workflowId": {
+                    "target": "com.amazonaws.codecatalyst#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.codecatalyst#WorkflowRunStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the workflow run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReasons": {
+                    "target": "com.amazonaws.codecatalyst#WorkflowRunStatusReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the reasons for the status of the workflow run.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.codecatalyst#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the workflow run began, in coordinated universal time (UTC) timestamp format as specified in <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339</a>\n         </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.codecatalyst#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the workflow run ended, in coordinated universal time (UTC) timestamp format as specified in <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339</a>.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "com.amazonaws.codecatalyst#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the workflow run status was last updated, in coordinated universal time (UTC) timestamp format as specified in <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339</a>\n         </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.codecatalyst#Ide": {
             "type": "structure",
             "members": {
@@ -2733,7 +3005,7 @@
                 "smithy.api#documentation": "<p>Retrieves a list of Dev Environments in a project.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments",
+                    "uri": "/v1/spaces/{spaceName}/devEnvironments",
                     "code": 200
                 },
                 "smithy.api#paginated": {
@@ -2759,9 +3031,7 @@
                 "projectName": {
                     "target": "com.amazonaws.codecatalyst#NameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the project in the space.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the project in the space.</p>"
                     }
                 },
                 "filters": {
@@ -2819,7 +3089,7 @@
                 "target": "com.amazonaws.codecatalyst#ListEventLogsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of events that occurred during a specified time period in a space. You can use these events to audit user and system activity in a space.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of events that occurred during a specific time in a space. You can\n      use these events to audit user and system activity in a space. For more information, see\n        <a href=\"https://docs.aws.amazon.com/codecatalyst/latest/userguide/ipa-monitoring.html\">Monitoring</a> in the <i>Amazon CodeCatalyst User Guide</i>.</p>\n         <note>\n            <p>ListEventLogs guarantees events for the last 30 days in a given space. You can also\n        view and retrieve a list of management events over the last 90 days for Amazon CodeCatalyst in the\n          CloudTrail console by viewing Event history, or by creating a trail to create\n        and maintain a record of events that extends past 90 days. For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html\">Working with CloudTrail Event History</a> and <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-getting-started.html\">Working with\n          CloudTrail trails</a>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/spaces/{spaceName}/eventLogs",
@@ -3302,6 +3572,211 @@
                 }
             }
         },
+        "com.amazonaws.codecatalyst#ListWorkflowRuns": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codecatalyst#ListWorkflowRunsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codecatalyst#ListWorkflowRunsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of workflow runs of a specified workflow.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.codecatalyst#ListWorkflowRunsRequest": {
+            "type": "structure",
+            "members": {
+                "spaceName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "workflowId": {
+                    "target": "com.amazonaws.codecatalyst#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workflow. To retrieve a list of workflow IDs, use <a>ListWorkflows</a>.</p>",
+                        "smithy.api#httpQuery": "workflowId"
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project in the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token returned from a call to this API to indicate the next batch of results to return, if any.</p>",
+                        "smithy.api#httpQuery": "nextToken",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        }
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.codecatalyst#WorkflowRunSortCriteriaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information used to sort the items in the returned list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codecatalyst#ListWorkflowRunsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token returned from a call to this API to indicate the next batch of results to return, if any.</p>"
+                    }
+                },
+                "items": {
+                    "target": "com.amazonaws.codecatalyst#WorkflowRunSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the runs of a workflow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codecatalyst#ListWorkflows": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codecatalyst#ListWorkflowsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codecatalyst#ListWorkflowsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of workflows in a specified project.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/spaces/{spaceName}/projects/{projectName}/workflows",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.codecatalyst#ListWorkflowsRequest": {
+            "type": "structure",
+            "members": {
+                "spaceName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project in the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token returned from a call to this API to indicate the next batch of results to return, if any.</p>",
+                        "smithy.api#httpQuery": "nextToken",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        }
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.codecatalyst#WorkflowSortCriteriaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information used to sort the items in the returned list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codecatalyst#ListWorkflowsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token returned from a call to this API to indicate the next batch of results to return, if any.</p>"
+                    }
+                },
+                "items": {
+                    "target": "com.amazonaws.codecatalyst#WorkflowSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the workflows in a project.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.codecatalyst#NameString": {
             "type": "string",
             "traits": {
@@ -3396,6 +3871,12 @@
                 },
                 {
                     "target": "com.amazonaws.codecatalyst#SourceRepository"
+                },
+                {
+                    "target": "com.amazonaws.codecatalyst#Workflow"
+                },
+                {
+                    "target": "com.amazonaws.codecatalyst#WorkflowRun"
                 }
             ]
         },
@@ -3708,6 +4189,11 @@
             "list": {
                 "target": "com.amazonaws.codecatalyst#ListSpaces"
             },
+            "operations": [
+                {
+                    "target": "com.amazonaws.codecatalyst#ListDevEnvironments"
+                }
+            ],
             "resources": [
                 {
                     "target": "com.amazonaws.codecatalyst#EventLogResource"
@@ -3965,6 +4451,110 @@
                         "smithy.api#resourceIdentifier": "devEnvironmentId"
                     }
                 }
+            }
+        },
+        "com.amazonaws.codecatalyst#StartWorkflowRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codecatalyst#StartWorkflowRunRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codecatalyst#StartWorkflowRunResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Begins a run of a specified workflow.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.codecatalyst#StartWorkflowRunRequest": {
+            "type": "structure",
+            "members": {
+                "spaceName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project in the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "workflowId": {
+                    "target": "com.amazonaws.codecatalyst#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-generated unique ID of the workflow. To retrieve a list of workflow IDs, use <a>ListWorkflows</a>.</p>",
+                        "smithy.api#httpQuery": "workflowId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-specified idempotency token.  Idempotency ensures that an API request completes only once. \n       With an idempotent request, if the original request completes successfully, the subsequent retries return the result from the original successful request and have no additional effect.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codecatalyst#StartWorkflowRunResponse": {
+            "type": "structure",
+            "members": {
+                "spaceName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.codecatalyst#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project in the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.codecatalyst#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-generated unique ID of the workflow run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workflowId": {
+                    "target": "com.amazonaws.codecatalyst#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-generated unique ID of the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codecatalyst#StatusReason": {
@@ -4595,6 +5185,365 @@
                         }
                     }
                 }
+            }
+        },
+        "com.amazonaws.codecatalyst#Workflow": {
+            "type": "resource",
+            "identifiers": {
+                "spaceName": {
+                    "target": "com.amazonaws.codecatalyst#NameString"
+                },
+                "projectName": {
+                    "target": "com.amazonaws.codecatalyst#NameString"
+                },
+                "workflowId": {
+                    "target": "com.amazonaws.codecatalyst#Uuid"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.codecatalyst#GetWorkflow"
+            },
+            "list": {
+                "target": "com.amazonaws.codecatalyst#ListWorkflows"
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowDefinition": {
+            "type": "structure",
+            "members": {
+                "path": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the workflow definition file stored in the source repository for the project, including the file name.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a workflow definition file.</p>"
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowDefinitionSummary": {
+            "type": "structure",
+            "members": {
+                "path": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the workflow definition file stored in the source repository for the project, including the file name.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a workflow definition.</p>"
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowRun": {
+            "type": "resource",
+            "identifiers": {
+                "spaceName": {
+                    "target": "com.amazonaws.codecatalyst#NameString"
+                },
+                "projectName": {
+                    "target": "com.amazonaws.codecatalyst#NameString"
+                },
+                "workflowRunId": {
+                    "target": "com.amazonaws.codecatalyst#Uuid"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.codecatalyst#StartWorkflowRun"
+            },
+            "read": {
+                "target": "com.amazonaws.codecatalyst#GetWorkflowRun"
+            },
+            "list": {
+                "target": "com.amazonaws.codecatalyst#ListWorkflowRuns"
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowRunMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "QUEUED",
+                        "value": "QUEUED"
+                    },
+                    {
+                        "name": "PARALLEL",
+                        "value": "PARALLEL"
+                    },
+                    {
+                        "name": "SUPERSEDED",
+                        "value": "SUPERSEDED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowRunSortCriteria": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Information used to sort workflow runs in the returned list.</p>"
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowRunSortCriteriaList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codecatalyst#WorkflowRunSortCriteria"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowRunStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "SUCCEEDED",
+                        "value": "SUCCEEDED"
+                    },
+                    {
+                        "name": "FAILED",
+                        "value": "FAILED"
+                    },
+                    {
+                        "name": "STOPPED",
+                        "value": "STOPPED"
+                    },
+                    {
+                        "name": "SUPERSEDED",
+                        "value": "SUPERSEDED"
+                    },
+                    {
+                        "name": "CANCELLED",
+                        "value": "CANCELLED"
+                    },
+                    {
+                        "name": "NOT_RUN",
+                        "value": "NOT_RUN"
+                    },
+                    {
+                        "name": "VALIDATING",
+                        "value": "VALIDATING"
+                    },
+                    {
+                        "name": "PROVISIONING",
+                        "value": "PROVISIONING"
+                    },
+                    {
+                        "name": "IN_PROGRESS",
+                        "value": "IN_PROGRESS"
+                    },
+                    {
+                        "name": "STOPPING",
+                        "value": "STOPPING"
+                    },
+                    {
+                        "name": "ABANDONED",
+                        "value": "ABANDONED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowRunStatusReason": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the status of a workflow run.</p>"
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowRunStatusReasons": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codecatalyst#WorkflowRunStatusReason"
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowRunSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codecatalyst#WorkflowRunSummary"
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowRunSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.codecatalyst#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-generated unique ID of the workflow run.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "workflowRunId"
+                    }
+                },
+                "workflowId": {
+                    "target": "com.amazonaws.codecatalyst#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-generated unique ID of the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workflowName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.codecatalyst#WorkflowRunStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the workflow run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReasons": {
+                    "target": "com.amazonaws.codecatalyst#WorkflowRunStatusReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reasons for the workflow run status.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.codecatalyst#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the workflow run began, in coordinated universal time (UTC) timestamp format as specified in <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339</a>.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.codecatalyst#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the workflow run ended, in coordinated universal time (UTC) timestamp format as specified in <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339</a>\n         </p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "com.amazonaws.codecatalyst#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the workflow was last updated, in coordinated universal time (UTC) timestamp format as specified in <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339</a>\n         </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a workflow run.</p>"
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowSortCriteria": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Information used to sort workflows in the returned list.</p>"
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowSortCriteriaList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codecatalyst#WorkflowSortCriteria"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "INVALID",
+                        "value": "INVALID"
+                    },
+                    {
+                        "name": "ACTIVE",
+                        "value": "ACTIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codecatalyst#WorkflowSummary"
+            }
+        },
+        "com.amazonaws.codecatalyst#WorkflowSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.codecatalyst#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-generated unique ID of a workflow.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "workflowId"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceRepositoryName": {
+                    "target": "com.amazonaws.codecatalyst#SourceRepositoryNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source repository where the workflow definition file is stored.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceBranchName": {
+                    "target": "com.amazonaws.codecatalyst#SourceRepositoryBranchString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the branch of the source repository where the workflow definition file is stored.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "definition": {
+                    "target": "com.amazonaws.codecatalyst#WorkflowDefinitionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the workflow definition file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdTime": {
+                    "target": "com.amazonaws.codecatalyst#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the workflow was created, in coordinated universal time (UTC) timestamp format as specified in <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339</a>\n         </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "com.amazonaws.codecatalyst#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the workflow was last updated, in coordinated universal time (UTC) timestamp format as specified in <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339</a>\n         </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "runMode": {
+                    "target": "com.amazonaws.codecatalyst#WorkflowRunMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The run mode of the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.codecatalyst#WorkflowStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a workflow.</p>"
             }
         }
     }

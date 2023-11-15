@@ -897,6 +897,16 @@
                 }
             }
         },
+        "com.amazonaws.mwaa#CeleryExecutorQueue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)?:sqs:[a-z0-9\\-]+:\\d{12}:[a-zA-Z_0-9+=,.@\\-_/]+$"
+            }
+        },
         "com.amazonaws.mwaa#CloudWatchLogGroupArn": {
             "type": "string",
             "traits": {
@@ -1114,7 +1124,7 @@
                 "AirflowVersion": {
                     "target": "com.amazonaws.mwaa#AirflowVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version.\n            For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html\">Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA)</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version.\n            For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html\">Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA)</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>\n         </p>"
                     }
                 },
                 "LoggingConfiguration": {
@@ -1138,7 +1148,7 @@
                 "WebserverAccessMode": {
                     "target": "com.amazonaws.mwaa#WebserverAccessMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow <i>Web server</i> access mode. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html\">Apache Airflow access modes</a>.</p>"
+                        "smithy.api#documentation": "<p>Defines the access mode for the Apache Airflow <i>web server</i>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html\">Apache Airflow access modes</a>.</p>"
                     }
                 },
                 "MinWorkers": {
@@ -1151,6 +1161,12 @@
                     "target": "com.amazonaws.mwaa#Schedulers",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of Apache Airflow schedulers to run in your environment. Valid values:</p>\n         <ul>\n            <li>\n               <p>v2 - Accepts between 2 to 5. Defaults to 2.</p>\n            </li>\n            <li>\n               <p>v1 - Accepts 1.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "EndpointManagement": {
+                    "target": "com.amazonaws.mwaa#EndpointManagement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA. If set to <code>SERVICE</code>, Amazon MWAA will create and manage the required VPC endpoints in\n        your VPC. If set to <code>CUSTOMER</code>, you must create, and manage, the VPC endpoints for your VPC. If you choose to create an environment in a shared VPC, you must set this value to <code>CUSTOMER</code>.\n        In a shared VPC deployment, the environment will remain in <code>PENDING</code> status until you create the VPC endpoints. If you do not take action to\n            create the endpoints within 72 hours, the status will change to <code>CREATE_FAILED</code>. You can delete the failed environment and create a new one.</p>"
                     }
                 }
             },
@@ -1322,6 +1338,21 @@
                 }
             }
         },
+        "com.amazonaws.mwaa#EndpointManagement": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CUSTOMER",
+                        "name": "CUSTOMER"
+                    },
+                    {
+                        "value": "SERVICE",
+                        "name": "SERVICE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mwaa#Environment": {
             "type": "structure",
             "members": {
@@ -1334,7 +1365,7 @@
                 "Status": {
                     "target": "com.amazonaws.mwaa#EnvironmentStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the Amazon MWAA environment. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - Indicates the request to create the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING_SNAPSHOT</code> - Indicates the request to update environment details, or upgrade the environment version, is in progress and Amazon MWAA is creating a storage volume snapshot of the Amazon RDS\n                    database cluster associated with the environment. A database snapshot is a backup created at a specific point in time. Amazon MWAA uses snapshots to recover environment metadata if the process to update or upgrade\n                    an environment fails.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> - Indicates the request to create the environment failed, and the environment could not be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - Indicates the request was successful and the environment is ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - Indicates the request to update the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ROLLING_BACK</code> - Indicates the request to update environment details, or upgrade the environment version, failed and Amazon MWAA is restoring the environment using the latest storage volume snapshot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - Indicates the request to delete the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - Indicates the request to delete the environment is complete, and the environment has been deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNAVAILABLE</code> - Indicates the request failed, but the environment was unable to rollback and is not in a stable state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_FAILED</code> - Indicates the request to update the environment failed, and the environment has rolled back successfully and is ready to use.</p>\n            </li>\n         </ul>\n         <p>We recommend reviewing our troubleshooting guide for a list of common errors and their solutions. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/troubleshooting.html\">Amazon MWAA troubleshooting</a>.</p>"
+                        "smithy.api#documentation": "<p>The status of the Amazon MWAA environment.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - Indicates the request to create the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING_SNAPSHOT</code> - Indicates the request to update environment details, or upgrade the environment version, is in progress and Amazon MWAA is creating a storage volume snapshot of the Amazon RDS\n                    database cluster associated with the environment. A database snapshot is a backup created at a specific point in time. Amazon MWAA uses snapshots to recover environment metadata if the process to update or upgrade\n                    an environment fails.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> - Indicates the request to create the environment failed, and the environment could not be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - Indicates the request was successful and the environment is ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> - Indicates the request was successful, but the process to create the environment is paused until you create the required\n                    VPC endpoints in your VPC. After you create the VPC endpoints, the process resumes.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - Indicates the request to update the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ROLLING_BACK</code> - Indicates the request to update environment details, or upgrade the environment version, failed and Amazon MWAA is restoring the environment using the latest storage volume snapshot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - Indicates the request to delete the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - Indicates the request to delete the environment is complete, and the environment has been deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNAVAILABLE</code> - Indicates the request failed, but the environment was unable to rollback and is not in a stable state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_FAILED</code> - Indicates the request to update the environment failed, and the environment has rolled back successfully and is ready to use.</p>\n            </li>\n         </ul>\n         <p>We recommend reviewing our troubleshooting guide for a list of common errors and their solutions. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/troubleshooting.html\">Amazon MWAA troubleshooting</a>.</p>"
                     }
                 },
                 "Arn": {
@@ -1478,7 +1509,7 @@
                 "WebserverAccessMode": {
                     "target": "com.amazonaws.mwaa#WebserverAccessMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow <i>Web server</i> access mode. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html\">Apache Airflow access modes</a>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow <i>web server</i> access mode. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html\">Apache Airflow access modes</a>.</p>"
                     }
                 },
                 "MinWorkers": {
@@ -1491,6 +1522,30 @@
                     "target": "com.amazonaws.mwaa#Schedulers",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of Apache Airflow schedulers that run in your Amazon MWAA environment.</p>"
+                    }
+                },
+                "WebserverVpcEndpointService": {
+                    "target": "com.amazonaws.mwaa#VpcEndpointServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC endpoint for the environment's web server.</p>"
+                    }
+                },
+                "DatabaseVpcEndpointService": {
+                    "target": "com.amazonaws.mwaa#VpcEndpointServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC endpoint for the environment's Amazon RDS database.</p>"
+                    }
+                },
+                "CeleryExecutorQueue": {
+                    "target": "com.amazonaws.mwaa#CeleryExecutorQueue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The queue ARN for the environment's <a href=\"https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/celery.html\">Celery Executor</a>. Amazon MWAA uses a Celery Executor\n            to distribute tasks across multiple workers. When you create an environment in a shared VPC, you must provide access to the Celery Executor queue from your VPC.</p>"
+                    }
+                },
+                "EndpointManagement": {
+                    "target": "com.amazonaws.mwaa#EndpointManagement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA. If set to <code>SERVICE</code>, Amazon MWAA will create and manage the required VPC endpoints in\n            your VPC. If set to <code>CUSTOMER</code>, you must create, and manage, the VPC endpoints in your VPC.</p>"
                     }
                 }
             },
@@ -1576,6 +1631,10 @@
                     {
                         "value": "CREATING_SNAPSHOT",
                         "name": "CREATING_SNAPSHOT"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
                     }
                 ]
             }
@@ -2834,6 +2893,16 @@
                 "smithy.api#documentation": "<p>ValidationException: The provided input is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.mwaa#VpcEndpointServiceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^([a-z.-]+)?com\\.amazonaws\\.vpce\\.[a-z0-9\\-]+\\.[a-zA-Z_0-9+=,.@\\-_/]+$"
             }
         },
         "com.amazonaws.mwaa#WebserverAccessMode": {

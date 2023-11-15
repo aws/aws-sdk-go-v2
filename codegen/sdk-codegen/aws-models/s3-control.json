@@ -49,6 +49,9 @@
                     "target": "com.amazonaws.s3control#CreateMultiRegionAccessPoint"
                 },
                 {
+                    "target": "com.amazonaws.s3control#CreateStorageLensGroup"
+                },
+                {
                     "target": "com.amazonaws.s3control#DeleteAccessPoint"
                 },
                 {
@@ -89,6 +92,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3control#DeleteStorageLensConfigurationTagging"
+                },
+                {
+                    "target": "com.amazonaws.s3control#DeleteStorageLensGroup"
                 },
                 {
                     "target": "com.amazonaws.s3control#DescribeJob"
@@ -160,6 +166,9 @@
                     "target": "com.amazonaws.s3control#GetStorageLensConfigurationTagging"
                 },
                 {
+                    "target": "com.amazonaws.s3control#GetStorageLensGroup"
+                },
+                {
                     "target": "com.amazonaws.s3control#ListAccessPoints"
                 },
                 {
@@ -176,6 +185,12 @@
                 },
                 {
                     "target": "com.amazonaws.s3control#ListStorageLensConfigurations"
+                },
+                {
+                    "target": "com.amazonaws.s3control#ListStorageLensGroups"
+                },
+                {
+                    "target": "com.amazonaws.s3control#ListTagsForResource"
                 },
                 {
                     "target": "com.amazonaws.s3control#PutAccessPointConfigurationForObjectLambda"
@@ -220,10 +235,19 @@
                     "target": "com.amazonaws.s3control#SubmitMultiRegionAccessPointRoutes"
                 },
                 {
+                    "target": "com.amazonaws.s3control#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.s3control#UntagResource"
+                },
+                {
                     "target": "com.amazonaws.s3control#UpdateJobPriority"
                 },
                 {
                     "target": "com.amazonaws.s3control#UpdateJobStatus"
+                },
+                {
+                    "target": "com.amazonaws.s3control#UpdateStorageLensGroup"
                 }
             ],
             "traits": {
@@ -6082,37 +6106,43 @@
                 "ActivityMetrics": {
                     "target": "com.amazonaws.s3control#ActivityMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container for S3 Storage Lens activity metrics.</p>"
+                        "smithy.api#documentation": "<p>A container element for S3 Storage Lens activity metrics.</p>"
                     }
                 },
                 "BucketLevel": {
                     "target": "com.amazonaws.s3control#BucketLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container for the S3 Storage Lens bucket-level configuration.</p>",
+                        "smithy.api#documentation": "<p>A container element for the S3 Storage Lens bucket-level configuration.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AdvancedCostOptimizationMetrics": {
                     "target": "com.amazonaws.s3control#AdvancedCostOptimizationMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container for S3 Storage Lens advanced cost-optimization metrics.</p>"
+                        "smithy.api#documentation": "<p>A container element for S3 Storage Lens advanced cost-optimization metrics.</p>"
                     }
                 },
                 "AdvancedDataProtectionMetrics": {
                     "target": "com.amazonaws.s3control#AdvancedDataProtectionMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container for S3 Storage Lens advanced data-protection metrics.</p>"
+                        "smithy.api#documentation": "<p>A container element for S3 Storage Lens advanced data-protection metrics.</p>"
                     }
                 },
                 "DetailedStatusCodesMetrics": {
                     "target": "com.amazonaws.s3control#DetailedStatusCodesMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container for detailed status code metrics. </p>"
+                        "smithy.api#documentation": "<p>A container element for detailed status code metrics. </p>"
+                    }
+                },
+                "StorageLensGroupLevel": {
+                    "target": "com.amazonaws.s3control#StorageLensGroupLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA container element for S3 Storage Lens groups metrics.\n</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A container for the account-level Amazon S3 Storage Lens configuration.</p>\n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A container element for the account-level Amazon S3 Storage Lens configuration.</p>\n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.s3control#ActivityMetrics": {
@@ -7186,6 +7216,64 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.s3control#CreateStorageLensGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#CreateStorageLensGroupRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Creates a new S3 Storage Lens group and associates it with the specified Amazon Web Services account ID. An\n         S3 Storage Lens group is a custom grouping of objects based on prefix, suffix, object tags,\n         object size, object age, or a combination of these filters. For each Storage Lens group\n         that you’ve created, you can also optionally add Amazon Web Services resource tags. For more information\n         about S3 Storage Lens groups, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups-overview.html\">Working with S3 Storage Lens\n            groups</a>.</p>\n         <p>To use this operation, you must have the permission to perform the\n            <code>s3:CreateStorageLensGroup</code> action. If you’re trying to create a Storage Lens\n         group with Amazon Web Services resource tags, you must also have permission to perform the\n            <code>s3:TagResource</code> action. For more information about the required Storage Lens\n         Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n            Lens error codes</a>.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v20180820/storagelensgroup",
+                    "code": 204
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#CreateStorageLensGroupRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID that the Storage Lens group is created from and associated with.\n</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "StorageLensGroup": {
+                    "target": "com.amazonaws.s3control#StorageLensGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Storage Lens group configuration.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.s3control#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services resource tags that you're adding to your Storage Lens group. This parameter is optional.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.s3control#CreationDate": {
             "type": "timestamp"
         },
@@ -7459,7 +7547,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This action deletes an Amazon S3 on Outposts bucket's lifecycle configuration. To delete\n            an S3 bucket's lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html\">DeleteBucketLifecycle</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Deletes the lifecycle configuration from the specified Outposts bucket.\n         Amazon S3 on Outposts removes all the lifecycle configuration rules in the lifecycle subresource\n         associated with the bucket. Your objects never expire, and Amazon S3 on Outposts no longer\n         automatically deletes any objects on the basis of rules contained in the deleted lifecycle\n         configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>To use this action, you must have permission to perform the\n            <code>s3-outposts:DeleteLifecycleConfiguration</code> action. By default, the bucket\n         owner has this permission and the Outposts bucket owner can grant this permission to\n         others.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples\">Examples</a> section.</p>\n         <p>For more information about object expiration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions\">Elements to Describe Lifecycle Actions</a>.</p>\n         <p>Related actions include:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This action deletes an Amazon S3 on Outposts bucket's lifecycle configuration. To delete\n            an S3 bucket's lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html\">DeleteBucketLifecycle</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Deletes the lifecycle configuration from the specified Outposts bucket.\n         Amazon S3 on Outposts removes all the lifecycle configuration rules in the lifecycle subresource\n         associated with the bucket. Your objects never expire, and Amazon S3 on Outposts no longer\n         automatically deletes any objects on the basis of rules contained in the deleted lifecycle\n         configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>To use this operation, you must have permission to perform the\n            <code>s3-outposts:PutLifecycleConfiguration</code> action. By default, the bucket owner\n         has this permission and the Outposts bucket owner can grant this permission to\n         others.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples\">Examples</a> section.</p>\n         <p>For more information about object expiration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions\">Elements to Describe Lifecycle Actions</a>.</p>\n         <p>Related actions include:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -8054,6 +8142,59 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3control#DeleteStorageLensGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#DeleteStorageLensGroupRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nDeletes an existing S3 Storage Lens group.</p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:DeleteStorageLensGroup</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n      Lens error codes</a>.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v20180820/storagelensgroup/{Name}",
+                    "code": 204
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#DeleteStorageLensGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.s3control#StorageLensGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the Storage Lens group that you're trying to delete.\n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID used to create the Storage Lens group that you're trying to delete.\n</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.s3control#DescribeJob": {
@@ -9990,6 +10131,74 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.s3control#GetStorageLensGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#GetStorageLensGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#GetStorageLensGroupResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nRetrieves the Storage Lens group configuration details.</p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:GetStorageLensGroup</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n      Lens error codes</a>.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/storagelensgroup/{Name}",
+                    "code": 200
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetStorageLensGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.s3control#StorageLensGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the Storage Lens group that you're trying to retrieve the configuration details for.\n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID associated with the Storage Lens group that you're trying to retrieve the details for.\n</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#GetStorageLensGroupResult": {
+            "type": "structure",
+            "members": {
+                "StorageLensGroup": {
+                    "target": "com.amazonaws.s3control#StorageLensGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the Storage Lens group that you're trying to retrieve the configuration details for.\n</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.s3control#GrantFullControl": {
             "type": "string"
         },
@@ -11635,6 +11844,179 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.s3control#ListStorageLensGroupEntry": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.s3control#StorageLensGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nContains the name of the Storage Lens group that exists in the specified home Region.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StorageLensGroupArn": {
+                    "target": "com.amazonaws.s3control#StorageLensGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nContains the Amazon Resource Name (ARN) of the Storage Lens group. This property is read-only.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HomeRegion": {
+                    "target": "com.amazonaws.s3control#S3AWSRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nContains the Amazon Web Services Region where the Storage Lens group was created.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nEach entry contains a Storage Lens group that exists in the specified home Region.\n</p>"
+            }
+        },
+        "com.amazonaws.s3control#ListStorageLensGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#ListStorageLensGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#ListStorageLensGroupsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nLists all the Storage Lens groups in the specified home Region.\n</p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:ListStorageLensGroups</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n      Lens error codes</a>.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/storagelensgroup",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken"
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#ListStorageLensGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The Amazon Web Services account ID that owns the Storage Lens groups.\n</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.s3control#ContinuationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> if there are no more results.\n   </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#ListStorageLensGroupsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.s3control#ContinuationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   If <code>NextToken</code> is returned, there are more Storage Lens groups results available. The value of <code>NextToken</code> is a\n      unique pagination token for each page. Make the call again using the returned token to\n      retrieve the next page. Keep all other arguments unchanged. Each pagination token expires\n      after 24 hours.\n</p>"
+                    }
+                },
+                "StorageLensGroupList": {
+                    "target": "com.amazonaws.s3control#StorageLensGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe list of Storage Lens groups that exist in the specified home Region.\n</p>",
+                        "smithy.api#xmlFlattened": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3control#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#ListTagsForResourceResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> This operation allows you to list all the Amazon Web Services resource tags for the specified\n         resource. </p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:ListTagsForResource</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3 Tagging error codes</a>.</p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens\n               groups</a>.</p>\n         </note>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/tags/{ResourceArn+}",
+                    "code": 200
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID of the resource owner.\n</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.s3control#S3ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Resource Name (ARN) of the S3 resource that you want to list the tags for.\n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#ListTagsForResourceResult": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.s3control#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services resource tags that are associated with the resource.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.s3control#Location": {
             "type": "string"
         },
@@ -11682,6 +12064,77 @@
                     "min": 1,
                     "max": 512
                 }
+            }
+        },
+        "com.amazonaws.s3control#MatchAnyPrefix": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#Prefix",
+                "traits": {
+                    "smithy.api#xmlName": "Prefix"
+                }
+            }
+        },
+        "com.amazonaws.s3control#MatchAnySuffix": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#Suffix",
+                "traits": {
+                    "smithy.api#xmlName": "Suffix"
+                }
+            }
+        },
+        "com.amazonaws.s3control#MatchAnyTag": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#S3Tag",
+                "traits": {
+                    "smithy.api#xmlName": "Tag"
+                }
+            }
+        },
+        "com.amazonaws.s3control#MatchObjectAge": {
+            "type": "structure",
+            "members": {
+                "DaysGreaterThan": {
+                    "target": "com.amazonaws.s3control#ObjectAgeValue",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\nSpecifies the maximum object age in days. Must be a positive whole number, greater than the minimum object age and less than or equal to 2,147,483,647. \n</p>"
+                    }
+                },
+                "DaysLessThan": {
+                    "target": "com.amazonaws.s3control#ObjectAgeValue",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\nSpecifies the minimum object age in days. The value must be a positive whole number, greater than 0 and less than or equal to 2,147,483,647.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   A filter condition that specifies the object age range of included objects in days. Only integers are supported.\n</p>"
+            }
+        },
+        "com.amazonaws.s3control#MatchObjectSize": {
+            "type": "structure",
+            "members": {
+                "BytesGreaterThan": {
+                    "target": "com.amazonaws.s3control#ObjectSizeValue",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\nSpecifies the minimum object size in Bytes. The value must be a positive number, greater than 0 and less than 5 TB.\n</p>"
+                    }
+                },
+                "BytesLessThan": {
+                    "target": "com.amazonaws.s3control#ObjectSizeValue",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\nSpecifies the maximum object size in Bytes. The value must be a positive number, greater than the minimum object size and less than 5 TB.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nA filter condition that specifies the object size range of included objects in bytes. Only integers are supported.\n</p>"
             }
         },
         "com.amazonaws.s3control#MaxLength1024String": {
@@ -12116,6 +12569,12 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.s3control#ObjectAgeValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
         "com.amazonaws.s3control#ObjectCreationTime": {
             "type": "timestamp"
         },
@@ -12410,6 +12869,12 @@
             }
         },
         "com.amazonaws.s3control#ObjectSizeLessThanBytes": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.s3control#ObjectSizeValue": {
             "type": "long",
             "traits": {
                 "smithy.api#default": 0
@@ -14341,7 +14806,7 @@
                 "ChecksumAlgorithm": {
                     "target": "com.amazonaws.s3control#S3ChecksumAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the algorithm\n         that\n         you want Amazon S3 to use to create the checksum. For more\n         information,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CheckingObjectIntegrity.xml\"> Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Indicates the algorithm\n         that\n         you want Amazon S3 to use to create the checksum. For more\n         information,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\"> Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 }
             },
@@ -14825,6 +15290,16 @@
                 "smithy.api#documentation": "<p>Directs the specified job to invoke <code>ReplicateObject</code> on every object in the\n         job's manifest.</p>"
             }
         },
+        "com.amazonaws.s3control#S3ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:[^:]+:s3:[^:]"
+            }
+        },
         "com.amazonaws.s3control#S3Retention": {
             "type": "structure",
             "members": {
@@ -15288,6 +15763,241 @@
                 "smithy.api#documentation": "<p>A container for the encryption of the S3 Storage Lens metrics exports.</p>"
             }
         },
+        "com.amazonaws.s3control#StorageLensGroup": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.s3control#StorageLensGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nContains the name of the Storage Lens group.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.s3control#StorageLensGroupFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the criteria for the Storage Lens group data that is displayed. For multiple filter conditions, the <code>AND</code> or <code>OR</code>\n         logical operator is used.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StorageLensGroupArn": {
+                    "target": "com.amazonaws.s3control#StorageLensGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nContains the Amazon Resource Name (ARN) of the Storage Lens group. This property is read-only.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A custom grouping of objects that include filters for prefixes, suffixes, object tags,\n         object size, or object age. You can create an S3 Storage Lens group that includes a single\n         filter or multiple filter conditions. To specify multiple filter conditions, you use\n            <code>AND</code> or <code>OR</code> logical operators. </p>"
+            }
+        },
+        "com.amazonaws.s3control#StorageLensGroupAndOperator": {
+            "type": "structure",
+            "members": {
+                "MatchAnyPrefix": {
+                    "target": "com.amazonaws.s3control#MatchAnyPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Contains a list of prefixes. At least one prefix must be specified. Up to 10 prefixes are allowed.\n</p>"
+                    }
+                },
+                "MatchAnySuffix": {
+                    "target": "com.amazonaws.s3control#MatchAnySuffix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Contains a list of suffixes. At least one suffix must be specified. Up to 10 suffixes are allowed.\n</p>"
+                    }
+                },
+                "MatchAnyTag": {
+                    "target": "com.amazonaws.s3control#MatchAnyTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Contains the list of object tags. At least one object tag must be specified. Up to 10 object tags are allowed.\n</p>"
+                    }
+                },
+                "MatchObjectAge": {
+                    "target": "com.amazonaws.s3control#MatchObjectAge",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Contains <code>DaysGreaterThan</code> and <code>DaysLessThan</code> to define the object age range (minimum and maximum number of days).\n</p>"
+                    }
+                },
+                "MatchObjectSize": {
+                    "target": "com.amazonaws.s3control#MatchObjectSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Contains <code>BytesGreaterThan</code> and <code>BytesLessThan</code> to define the object size range (minimum and maximum number of Bytes).\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nA logical operator that allows multiple filter conditions to be joined for more complex comparisons of Storage Lens group data.\n</p>"
+            }
+        },
+        "com.amazonaws.s3control#StorageLensGroupArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:[a-z\\-]+:s3:[a-z0-9\\-]+:\\d{12}:storage\\-lens\\-group\\/"
+            }
+        },
+        "com.amazonaws.s3control#StorageLensGroupFilter": {
+            "type": "structure",
+            "members": {
+                "MatchAnyPrefix": {
+                    "target": "com.amazonaws.s3control#MatchAnyPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Contains a list of prefixes. At least one prefix must be specified. Up to 10 prefixes are allowed.\n</p>"
+                    }
+                },
+                "MatchAnySuffix": {
+                    "target": "com.amazonaws.s3control#MatchAnySuffix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Contains a list of suffixes. At least one suffix must be specified. Up to 10 suffixes are allowed.\n</p>"
+                    }
+                },
+                "MatchAnyTag": {
+                    "target": "com.amazonaws.s3control#MatchAnyTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Contains the list of S3 object tags. At least one object tag must be specified. Up to 10 object tags are allowed.\n</p>"
+                    }
+                },
+                "MatchObjectAge": {
+                    "target": "com.amazonaws.s3control#MatchObjectAge",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Contains <code>DaysGreaterThan</code> and <code>DaysLessThan</code> to define the object age range (minimum and maximum number of days).\n</p>"
+                    }
+                },
+                "MatchObjectSize": {
+                    "target": "com.amazonaws.s3control#MatchObjectSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Contains <code>BytesGreaterThan</code> and <code>BytesLessThan</code> to define the object size range (minimum and maximum number of Bytes).\n</p>"
+                    }
+                },
+                "And": {
+                    "target": "com.amazonaws.s3control#StorageLensGroupAndOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A logical operator that allows multiple filter conditions to be joined for more complex\n         comparisons of Storage Lens group data. Objects must match all of the listed filter\n         conditions that are joined by the <code>And</code> logical operator. Only one of each filter condition\n         is allowed.</p>"
+                    }
+                },
+                "Or": {
+                    "target": "com.amazonaws.s3control#StorageLensGroupOrOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A single logical operator that allows multiple filter conditions to be joined. Objects\n         can match any of the listed filter conditions, which are joined by the <code>Or</code> logical operator.\n         Only one of each filter condition is allowed. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter element sets the criteria for the Storage Lens group data that is displayed. For multiple filter conditions, the <code>AND</code> or <code>OR</code>\n      logical operator is used.</p>"
+            }
+        },
+        "com.amazonaws.s3control#StorageLensGroupLevel": {
+            "type": "structure",
+            "members": {
+                "SelectionCriteria": {
+                    "target": "com.amazonaws.s3control#StorageLensGroupLevelSelectionCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Indicates which Storage Lens group ARNs to include or exclude in the Storage Lens group aggregation. If this value is left null, then all Storage Lens groups are selected.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nSpecifies the Storage Lens groups to include in the Storage Lens group aggregation.\n</p>"
+            }
+        },
+        "com.amazonaws.s3control#StorageLensGroupLevelExclude": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#StorageLensGroupArn",
+                "traits": {
+                    "smithy.api#xmlName": "Arn"
+                }
+            }
+        },
+        "com.amazonaws.s3control#StorageLensGroupLevelInclude": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#StorageLensGroupArn",
+                "traits": {
+                    "smithy.api#xmlName": "Arn"
+                }
+            }
+        },
+        "com.amazonaws.s3control#StorageLensGroupLevelSelectionCriteria": {
+            "type": "structure",
+            "members": {
+                "Include": {
+                    "target": "com.amazonaws.s3control#StorageLensGroupLevelInclude",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates which Storage Lens group ARNs to include in the Storage Lens group aggregation.\n</p>"
+                    }
+                },
+                "Exclude": {
+                    "target": "com.amazonaws.s3control#StorageLensGroupLevelExclude",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates which Storage Lens group ARNs to exclude from the Storage Lens group\n         aggregation. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Indicates which Storage Lens group ARNs to include or exclude in the Storage Lens group\n         aggregation. You can only attach Storage Lens groups to your Storage Lens dashboard if\n         they're included in your Storage Lens group aggregation. If this value is left null, then\n         all Storage Lens groups are selected. </p>"
+            }
+        },
+        "com.amazonaws.s3control#StorageLensGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#ListStorageLensGroupEntry",
+                "traits": {
+                    "smithy.api#xmlName": "StorageLensGroup"
+                }
+            }
+        },
+        "com.amazonaws.s3control#StorageLensGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-\\_]+$"
+            }
+        },
+        "com.amazonaws.s3control#StorageLensGroupOrOperator": {
+            "type": "structure",
+            "members": {
+                "MatchAnyPrefix": {
+                    "target": "com.amazonaws.s3control#MatchAnyPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Filters objects that match any of the specified prefixes. </p>"
+                    }
+                },
+                "MatchAnySuffix": {
+                    "target": "com.amazonaws.s3control#MatchAnySuffix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nFilters objects that match any of the specified suffixes.\n</p>"
+                    }
+                },
+                "MatchAnyTag": {
+                    "target": "com.amazonaws.s3control#MatchAnyTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nFilters objects that match any of the specified S3 object tags.\n</p>"
+                    }
+                },
+                "MatchObjectAge": {
+                    "target": "com.amazonaws.s3control#MatchObjectAge",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nFilters objects that match the specified object age range.\n</p>"
+                    }
+                },
+                "MatchObjectSize": {
+                    "target": "com.amazonaws.s3control#MatchObjectSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nFilters objects that match the specified object size range.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container element for specifying <code>Or</code> rule conditions. The rule conditions\n         determine the subset of objects to which the <code>Or</code> rule applies. Objects can\n         match any of the listed filter conditions, which are joined by the <code>Or</code> logical operator.\n         Only one of each filter condition is allowed.</p>"
+            }
+        },
         "com.amazonaws.s3control#StorageLensPrefixLevelDelimiter": {
             "type": "string",
             "traits": {
@@ -15415,6 +16125,9 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.s3control#Suffix": {
+            "type": "string"
+        },
         "com.amazonaws.s3control#SuspendedCause": {
             "type": "string",
             "traits": {
@@ -15427,14 +16140,130 @@
         "com.amazonaws.s3control#SuspendedDate": {
             "type": "timestamp"
         },
+        "com.amazonaws.s3control#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.s3control#TagKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The tag key for your Amazon Web Services resource. A tag key can be up to 128 Unicode characters in\n         length and is case-sensitive. System created tags that begin with <code>aws:</code> aren’t supported.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.s3control#TagValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The tag value for your Amazon Web Services resource. A tag value can be up to 256 Unicode characters in length and is case-sensitive.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   An Amazon Web Services resource tag that's associated with your S3 resource. You can add tags to new objects when you upload them, or you can add object tags to existing objects. \n</p>\n         <note>\n            <p>This data type is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens groups</a>.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.s3control#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#TagKeyString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.s3control#TagKeyString": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1024
+                    "max": 128
                 },
                 "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.s3control#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#Tag",
+                "traits": {
+                    "smithy.api#xmlName": "Tag"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.s3control#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#TagResourceResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Creates a new Amazon Web Services resource tag or updates an existing resource tag. You can add up to\n         50 Amazon Web Services resource tags for each S3 resource. </p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:TagResource</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3 Tagging error codes</a>.</p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens groups</a>.</p>\n         </note>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v20180820/tags/{ResourceArn+}",
+                    "code": 204
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID that created the S3 resource that you're trying to add tags to. \n</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.s3control#S3ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Resource Name (ARN) of the S3 resource that you're trying to add tags to.\n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.s3control#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services resource tags that you want to add to the specified S3 resource.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#TagResourceResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.s3control#TagValueString": {
@@ -15442,7 +16271,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 1024
+                    "max": 256
                 },
                 "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
             }
@@ -15567,6 +16396,74 @@
                         "smithy.api#enumValue": "DEEP_ARCHIVE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.s3control#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#UntagResourceResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> This operation removes the specified Amazon Web Services resource tags from an S3 resource. </p>\n         <p>To use this operation, you must have the permission to perform the\n            <code>s3:UntagResource</code> action. For more information about the required Storage\n         Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3\n            Tagging error codes</a>.</p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens\n               groups</a>.</p>\n         </note>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v20180820/tags/{ResourceArn+}",
+                    "code": 204
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID that owns the resource that you're trying to remove the tags from.\n</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.s3control#S3ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Resource Name (ARN) of the S3 resource that you want to remove the resource tags from.\n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.s3control#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe tag key pair of the S3 resource tag that you're trying to remove.\n</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#UntagResourceResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.s3control#UpdateJobPriority": {
@@ -15777,6 +16674,66 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3control#UpdateStorageLensGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#UpdateStorageLensGroupRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nUpdates the existing Storage Lens group.</p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:UpdateStorageLensGroup</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n      Lens error codes</a>.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v20180820/storagelensgroup/{Name}",
+                    "code": 204
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#UpdateStorageLensGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.s3control#StorageLensGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the Storage Lens group that you want to update.\n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID of the Storage Lens group owner.\n</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "StorageLensGroup": {
+                    "target": "com.amazonaws.s3control#StorageLensGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe JSON file that contains the Storage Lens group configuration.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.s3control#VersioningConfiguration": {

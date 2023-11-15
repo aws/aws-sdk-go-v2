@@ -1151,6 +1151,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Create a new FinSpace environment.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2158,6 +2161,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Delete an FinSpace environment.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2916,6 +2922,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Returns the FinSpace environment object.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -4649,6 +4658,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>A list of all of your FinSpace environments.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -5924,6 +5936,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This method will be discontinued."
+                },
                 "smithy.api#documentation": "<p>Update your FinSpace environment.</p>",
                 "smithy.api#http": {
                     "method": "PUT",

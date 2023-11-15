@@ -916,6 +916,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The traffic sources associated with this Auto Scaling group.</p>"
                     }
+                },
+                "InstanceMaintenancePolicy": {
+                    "target": "com.amazonaws.autoscaling#InstanceMaintenancePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An instance maintenance policy.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2498,14 +2504,14 @@
                 "VirtualName": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the instance store volume (virtual device) to attach to an instance at\n            launch. The name must be in the form ephemeral<i>X</i> where\n                <i>X</i> is a number starting from zero (0), for example,\n                <code>ephemeral0</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the instance store volume (virtual device) to attach to an instance at\n            launch. The name must be in the form ephemeral<i>X</i> where\n            <i>X</i> is a number starting from zero (0), for example,\n            <code>ephemeral0</code>.</p>"
                     }
                 },
                 "DeviceName": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The device name assigned to the volume (for example, <code>/dev/sdh</code> or\n                <code>xvdh</code>). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html\">Device naming on Linux\n                instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <note>\n            <p>To define a block device mapping, set the device name and exactly one of the\n                following properties: <code>Ebs</code>, <code>NoDevice</code>, or\n                    <code>VirtualName</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The device name assigned to the volume (for example, <code>/dev/sdh</code> or\n            <code>xvdh</code>). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html\">Device naming on Linux\n                instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <note>\n            <p>To define a block device mapping, set the device name and exactly one of the\n                following properties: <code>Ebs</code>, <code>NoDevice</code>, or\n                <code>VirtualName</code>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2985,6 +2991,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of traffic sources to attach to this Auto Scaling group. You can use any of the\n            following as traffic sources for an Auto Scaling group: Classic Load Balancer, Application Load Balancer, Gateway Load Balancer, Network Load Balancer, and\n            VPC Lattice.</p>"
                     }
+                },
+                "InstanceMaintenancePolicy": {
+                    "target": "com.amazonaws.autoscaling#InstanceMaintenancePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An instance maintenance policy. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html\">Set instance maintenance policy</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                    }
                 }
             }
         },
@@ -3008,7 +3020,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a launch configuration.</p>\n         <p>If you exceed your maximum limit of launch configurations, the call fails. To query\n            this limit, call the <a>DescribeAccountLimits</a> API. For information about\n            updating this limit, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-quotas.html\">Quotas for\n                Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html\">Launch\n                configurations</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <note>\n            <p>Amazon EC2 Auto Scaling configures instances launched as part of an Auto Scaling group using either a\n                launch template or a launch configuration. We strongly recommend that you do not use\n                launch configurations. They do not provide full functionality for Amazon EC2 Auto Scaling or Amazon EC2.\n                For information about using launch templates, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html\">Launch templates</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a launch configuration.</p>\n         <p>If you exceed your maximum limit of launch configurations, the call fails. To query\n            this limit, call the <a>DescribeAccountLimits</a> API. For information about\n            updating this limit, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-quotas.html\">Quotas for\n                Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html\">Launch\n            configurations</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <note>\n            <p>Amazon EC2 Auto Scaling configures instances launched as part of an Auto Scaling group using either a\n                launch template or a launch configuration. We strongly recommend that you do not use\n                launch configurations. They do not provide full functionality for Amazon EC2 Auto Scaling or Amazon EC2.\n                For information about using launch templates, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html\">Launch templates</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a launch configuration",
@@ -3040,19 +3052,19 @@
                 "ImageId": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon Machine Image (AMI) that was assigned during registration. For\n            more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Finding a Linux AMI</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <p>If you specify <code>InstanceId</code>, an <code>ImageId</code> is not\n            required.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Machine Image (AMI) that was assigned during registration. For\n            more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Finding a Linux AMI</a> in the\n            <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <p>If you specify <code>InstanceId</code>, an <code>ImageId</code> is not\n            required.</p>"
                     }
                 },
                 "KeyName": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the key pair. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 key pairs and Linux\n                instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+                        "smithy.api#documentation": "<p>The name of the key pair. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 key pairs and Linux\n            instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
                     }
                 },
                 "SecurityGroups": {
                     "target": "com.amazonaws.autoscaling#SecurityGroups",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list that contains the security group IDs to assign to the instances in the Auto Scaling\n            group. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Control traffic to\n                resources using security groups</a> in the <i>Amazon Virtual Private\n                Cloud User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list that contains the security group IDs to assign to the instances in the Auto Scaling\n            group. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Control traffic to\n                resources using security groups</a> in the <i>Amazon Virtual Private\n                    Cloud User Guide</i>.</p>"
                     }
                 },
                 "ClassicLinkVPCId": {
@@ -3070,13 +3082,13 @@
                 "UserData": {
                     "target": "com.amazonaws.autoscaling#XmlStringUserData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user data to make available to the launched EC2 instances. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance metadata and user data</a> (Linux) and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html\">Instance metadata and\n                user data</a> (Windows). If you are using a command line tool, base64-encoding\n            is performed for you, and you can load the text from a file. Otherwise, you must provide\n            base64-encoded text. User data is limited to 16 KB.</p>"
+                        "smithy.api#documentation": "<p>The user data to make available to the launched EC2 instances. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance metadata and user data</a> (Linux) and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html\">Instance metadata and\n                    user data</a> (Windows). If you are using a command line tool, base64-encoding\n            is performed for you, and you can load the text from a file. Otherwise, you must provide\n            base64-encoded text. User data is limited to 16 KB.</p>"
                     }
                 },
                 "InstanceId": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen19",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the instance to use to create the launch configuration. The new launch\n            configuration derives attributes from the instance, except for the block device\n            mapping.</p>\n         <p>To create a launch configuration with a block device mapping or override any other\n            instance attributes, specify them as part of the same request.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-lc-with-instanceID.html\">Creating a launch\n                configuration using an EC2 instance</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The ID of the instance to use to create the launch configuration. The new launch\n            configuration derives attributes from the instance, except for the block device\n            mapping.</p>\n         <p>To create a launch configuration with a block device mapping or override any other\n            instance attributes, specify them as part of the same request.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-lc-with-instanceID.html\">Creating a launch\n            configuration using an EC2 instance</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 },
                 "InstanceType": {
@@ -3088,13 +3100,13 @@
                 "KernelId": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the kernel associated with the AMI.</p>\n         <note>\n            <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more\n                information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html\">User provided\n                    kernels</a> in the <i>Amazon EC2 User Guide for Linux\n                    Instances</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The ID of the kernel associated with the AMI.</p>\n         <note>\n            <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more\n                information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html\">User provided\n                    kernels</a> in the <i>Amazon EC2 User Guide for Linux\n                        Instances</i>.</p>\n         </note>"
                     }
                 },
                 "RamdiskId": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the RAM disk to select.</p>\n         <note>\n            <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more\n                information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html\">User provided\n                    kernels</a> in the <i>Amazon EC2 User Guide for Linux\n                    Instances</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The ID of the RAM disk to select.</p>\n         <note>\n            <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more\n                information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html\">User provided\n                    kernels</a> in the <i>Amazon EC2 User Guide for Linux\n                        Instances</i>.</p>\n         </note>"
                     }
                 },
                 "BlockDeviceMappings": {
@@ -3112,7 +3124,7 @@
                 "SpotPrice": {
                     "target": "com.amazonaws.autoscaling#SpotPrice",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum hourly price to be paid for any Spot Instance launched to fulfill the\n            request. Spot Instances are launched when the price you specify exceeds the current Spot\n            price. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-template-spot-instances.html\">Request Spot\n                Instances for fault-tolerant and flexible applications</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <p>Valid Range: Minimum value of 0.001</p>\n         <note>\n            <p>When you change your maximum price by creating a new launch configuration, running\n                instances will continue to run as long as the maximum price for those running\n                instances is higher than the current Spot price.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The maximum hourly price to be paid for any Spot Instance launched to fulfill the\n            request. Spot Instances are launched when the price you specify exceeds the current Spot\n            price. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-template-spot-instances.html\">Request Spot\n                Instances for fault-tolerant and flexible applications</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <p>Valid Range: Minimum value of 0.001</p>\n         <note>\n            <p>When you change your maximum price by creating a new launch configuration, running\n                instances will continue to run as long as the maximum price for those running\n                instances is higher than the current Spot price.</p>\n         </note>"
                     }
                 },
                 "IamInstanceProfile": {
@@ -3130,19 +3142,19 @@
                 "AssociatePublicIpAddress": {
                     "target": "com.amazonaws.autoscaling#AssociatePublicIpAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to assign a public IPv4 address to the group's instances. If the\n            instance is launched into a default subnet, the default is to assign a public IPv4\n            address, unless you disabled the option to assign a public IPv4 address on the subnet.\n            If the instance is launched into a nondefault subnet, the default is not to assign a\n            public IPv4 address, unless you enabled the option to assign a public IPv4 address on\n            the subnet.</p>\n         <p>If you specify <code>true</code>, each instance in the Auto Scaling group receives a unique\n            public IPv4 address. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html\">Launching Auto Scaling instances in a\n                VPC</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <p>If you specify this property, you must specify at least one subnet for\n                <code>VPCZoneIdentifier</code> when you create your group.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to assign a public IPv4 address to the group's instances. If the\n            instance is launched into a default subnet, the default is to assign a public IPv4\n            address, unless you disabled the option to assign a public IPv4 address on the subnet.\n            If the instance is launched into a nondefault subnet, the default is not to assign a\n            public IPv4 address, unless you enabled the option to assign a public IPv4 address on\n            the subnet.</p>\n         <p>If you specify <code>true</code>, each instance in the Auto Scaling group receives a unique\n            public IPv4 address. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html\">Launching Auto Scaling instances in a\n                VPC</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <p>If you specify this property, you must specify at least one subnet for\n            <code>VPCZoneIdentifier</code> when you create your group.</p>"
                     }
                 },
                 "PlacementTenancy": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen64",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tenancy of the instance, either <code>default</code> or <code>dedicated</code>. An\n            instance with <code>dedicated</code> tenancy runs on isolated, single-tenant hardware\n            and can only be launched into a VPC. To launch dedicated instances into a shared tenancy\n            VPC (a VPC with the instance placement tenancy attribute set to <code>default</code>),\n            you must set the value of this property to <code>dedicated</code>. For more information,\n            see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html\">Configuring\n                instance tenancy with Amazon EC2 Auto Scaling</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <p>If you specify <code>PlacementTenancy</code>, you must specify at least one subnet for\n                <code>VPCZoneIdentifier</code> when you create your group.</p>\n         <p>Valid values: <code>default</code> | <code>dedicated</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The tenancy of the instance, either <code>default</code> or <code>dedicated</code>. An\n            instance with <code>dedicated</code> tenancy runs on isolated, single-tenant hardware\n            and can only be launched into a VPC. To launch dedicated instances into a shared tenancy\n            VPC (a VPC with the instance placement tenancy attribute set to <code>default</code>),\n            you must set the value of this property to <code>dedicated</code>. For more information,\n            see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html\">Configuring\n                instance tenancy with Amazon EC2 Auto Scaling</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <p>If you specify <code>PlacementTenancy</code>, you must specify at least one subnet for\n            <code>VPCZoneIdentifier</code> when you create your group.</p>\n         <p>Valid values: <code>default</code> | <code>dedicated</code>\n         </p>"
                     }
                 },
                 "MetadataOptions": {
                     "target": "com.amazonaws.autoscaling#InstanceMetadataOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metadata options for the instances. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds\">Configuring the Instance Metadata Options</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The metadata options for the instances. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds\">Configuring the Instance Metadata Options</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 }
             }
@@ -5567,7 +5579,7 @@
                 "VolumeType": {
                     "target": "com.amazonaws.autoscaling#BlockDeviceEbsVolumeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The volume type. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS volume types</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <p>Valid values: <code>standard</code> | <code>io1</code> | <code>gp2</code> |\n                <code>st1</code> | <code>sc1</code> | <code>gp3</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The volume type. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS volume types</a> in the\n            <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <p>Valid values: <code>standard</code> | <code>io1</code> | <code>gp2</code> |\n            <code>st1</code> | <code>sc1</code> | <code>gp3</code>\n         </p>"
                     }
                 },
                 "DeleteOnTermination": {
@@ -5579,13 +5591,13 @@
                 "Iops": {
                     "target": "com.amazonaws.autoscaling#BlockDeviceEbsIops",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of input/output (I/O) operations per second (IOPS) to provision for the\n            volume. For <code>gp3</code> and <code>io1</code> volumes, this represents the number of\n            IOPS that are provisioned for the volume. For <code>gp2</code> volumes, this represents\n            the baseline performance of the volume and the rate at which the volume accumulates I/O\n            credits for bursting. </p>\n         <p>The following are the supported values for each volume type: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>gp3</code>: 3,000-16,000 IOPS</p>\n            </li>\n            <li>\n               <p>\n                  <code>io1</code>: 100-64,000 IOPS</p>\n            </li>\n         </ul>\n         <p>For <code>io1</code> volumes, we guarantee 64,000 IOPS only for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Instances\n                built on the Nitro System</a>. Other instance families guarantee performance up\n            to 32,000 IOPS. </p>\n         <p>\n            <code>Iops</code> is supported when the volume type is <code>gp3</code> or\n                <code>io1</code> and required only when the volume type is <code>io1</code>. (Not\n            used with <code>standard</code>, <code>gp2</code>, <code>st1</code>, or <code>sc1</code>\n            volumes.) </p>"
+                        "smithy.api#documentation": "<p>The number of input/output (I/O) operations per second (IOPS) to provision for the\n            volume. For <code>gp3</code> and <code>io1</code> volumes, this represents the number of\n            IOPS that are provisioned for the volume. For <code>gp2</code> volumes, this represents\n            the baseline performance of the volume and the rate at which the volume accumulates I/O\n            credits for bursting. </p>\n         <p>The following are the supported values for each volume type: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>gp3</code>: 3,000-16,000 IOPS</p>\n            </li>\n            <li>\n               <p>\n                  <code>io1</code>: 100-64,000 IOPS</p>\n            </li>\n         </ul>\n         <p>For <code>io1</code> volumes, we guarantee 64,000 IOPS only for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Instances\n            built on the Nitro System</a>. Other instance families guarantee performance up\n            to 32,000 IOPS. </p>\n         <p>\n            <code>Iops</code> is supported when the volume type is <code>gp3</code> or\n            <code>io1</code> and required only when the volume type is <code>io1</code>. (Not\n            used with <code>standard</code>, <code>gp2</code>, <code>st1</code>, or <code>sc1</code>\n            volumes.) </p>"
                     }
                 },
                 "Encrypted": {
                     "target": "com.amazonaws.autoscaling#BlockDeviceEbsEncrypted",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the volume should be encrypted. Encrypted EBS volumes can only be\n            attached to instances that support Amazon EBS encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported instance types</a>. If your AMI uses encrypted volumes, you can also\n            only launch it on supported instance types.</p>\n         <note>\n            <p>If you are creating a volume from a snapshot, you cannot create an unencrypted\n                volume from an encrypted snapshot. Also, you cannot specify a KMS key ID when using\n                a launch configuration.</p>\n            <p>If you enable encryption by default, the EBS volumes that you create are always\n                encrypted, either using the Amazon Web Services managed KMS key or a customer-managed KMS key,\n                regardless of whether the snapshot was encrypted. </p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-data-protection.html#encryption\">Use Amazon Web Services KMS keys to encrypt Amazon EBS volumes</a> in the\n                    <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies whether the volume should be encrypted. Encrypted EBS volumes can only be\n            attached to instances that support Amazon EBS encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported instance types</a>. If your AMI uses encrypted volumes, you can also\n            only launch it on supported instance types.</p>\n         <note>\n            <p>If you are creating a volume from a snapshot, you cannot create an unencrypted\n                volume from an encrypted snapshot. Also, you cannot specify a KMS key ID when using\n                a launch configuration.</p>\n            <p>If you enable encryption by default, the EBS volumes that you create are always\n                encrypted, either using the Amazon Web Services managed KMS key or a customer-managed KMS key,\n                regardless of whether the snapshot was encrypted. </p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-data-protection.html#encryption\">Use Amazon Web Services KMS keys to encrypt Amazon EBS volumes</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         </note>"
                     }
                 },
                 "Throughput": {
@@ -6193,6 +6205,26 @@
                 "target": "com.amazonaws.autoscaling#XmlStringMaxLen19"
             }
         },
+        "com.amazonaws.autoscaling#InstanceMaintenancePolicy": {
+            "type": "structure",
+            "members": {
+                "MinHealthyPercentage": {
+                    "target": "com.amazonaws.autoscaling#IntPercentResettable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the lower threshold as a percentage of the desired capacity of the Auto Scaling\n            group. It represents the minimum percentage of the group to keep in service, healthy,\n            and ready to use to support your workload when replacing instances. Value range is 0 to\n            100. After it's set, a value of <code>-1</code> will clear the previously set\n            value.</p>"
+                    }
+                },
+                "MaxHealthyPercentage": {
+                    "target": "com.amazonaws.autoscaling#IntPercent100To200Resettable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the upper threshold as a percentage of the desired capacity of the Auto Scaling\n            group. It represents the maximum percentage of the group that can be in service and\n            healthy, or pending, to support your workload when replacing instances. Value range is\n            100 to 200. After it's set, a value of <code>-1</code> will clear the previously set\n            value. </p>\n         <p>Both <code>MinHealthyPercentage</code> and <code>MaxHealthyPercentage</code> must be\n            specified, and the difference between them cannot be greater than 100. A large range\n            increases the number of instances that can be replaced at the same time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an instance maintenance policy.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html\">Set instance maintenance policy</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.autoscaling#InstanceMetadataEndpointState": {
             "type": "enum",
             "members": {
@@ -6738,6 +6770,33 @@
                 }
             }
         },
+        "com.amazonaws.autoscaling#IntPercent100To200": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 100,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.autoscaling#IntPercent100To200Resettable": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": -1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.autoscaling#IntPercentResettable": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": -1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.autoscaling#InvalidNextToken": {
             "type": "structure",
             "members": {
@@ -6796,20 +6855,20 @@
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The ID of the Amazon Machine Image (AMI) to use to launch your EC2 instances. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Find a Linux AMI</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Machine Image (AMI) to use to launch your EC2 instances. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Find a Linux AMI</a> in the\n            <i>Amazon EC2 User Guide for Linux Instances</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "KeyName": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the key pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 Key Pairs</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+                        "smithy.api#documentation": "<p>The name of the key pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 Key Pairs</a> in the\n            <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
                     }
                 },
                 "SecurityGroups": {
                     "target": "com.amazonaws.autoscaling#SecurityGroups",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list that contains the security groups to assign to the instances in the Auto Scaling group.\n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security Groups for Your\n                VPC</a> in the <i>Amazon Virtual Private Cloud User\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list that contains the security groups to assign to the instances in the Auto Scaling group.\n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security Groups for Your\n                VPC</a> in the <i>Amazon Virtual Private Cloud User\n                    Guide</i>.</p>"
                     }
                 },
                 "ClassicLinkVPCId": {
@@ -6827,7 +6886,7 @@
                 "UserData": {
                     "target": "com.amazonaws.autoscaling#XmlStringUserData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user data to make available to the launched EC2 instances. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance metadata and user data</a> (Linux) and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html\">Instance metadata and\n                user data</a> (Windows). If you are using a command line tool, base64-encoding\n            is performed for you, and you can load the text from a file. Otherwise, you must provide\n            base64-encoded text. User data is limited to 16 KB.</p>"
+                        "smithy.api#documentation": "<p>The user data to make available to the launched EC2 instances. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance metadata and user data</a> (Linux) and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html\">Instance metadata and\n                    user data</a> (Windows). If you are using a command line tool, base64-encoding\n            is performed for you, and you can load the text from a file. Otherwise, you must provide\n            base64-encoded text. User data is limited to 16 KB.</p>"
                     }
                 },
                 "InstanceType": {
@@ -6859,7 +6918,7 @@
                 "InstanceMonitoring": {
                     "target": "com.amazonaws.autoscaling#InstanceMonitoring",
                     "traits": {
-                        "smithy.api#documentation": "<p>Controls whether instances in this group are launched with detailed\n            (<code>true</code>) or basic (<code>false</code>) monitoring.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/latest/userguide/enable-as-instance-metrics.html\">Configure\n                Monitoring for Auto Scaling Instances</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Controls whether instances in this group are launched with detailed\n            (<code>true</code>) or basic (<code>false</code>) monitoring.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/latest/userguide/enable-as-instance-metrics.html\">Configure\n            Monitoring for Auto Scaling Instances</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 },
                 "SpotPrice": {
@@ -6897,13 +6956,13 @@
                 "PlacementTenancy": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen64",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tenancy of the instance, either <code>default</code> or <code>dedicated</code>. An\n            instance with <code>dedicated</code> tenancy runs on isolated, single-tenant hardware\n            and can only be launched into a VPC.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html\">Configuring\n                instance tenancy with Amazon EC2 Auto Scaling</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The tenancy of the instance, either <code>default</code> or <code>dedicated</code>. An\n            instance with <code>dedicated</code> tenancy runs on isolated, single-tenant hardware\n            and can only be launched into a VPC.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html\">Configuring\n            instance tenancy with Amazon EC2 Auto Scaling</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 },
                 "MetadataOptions": {
                     "target": "com.amazonaws.autoscaling#InstanceMetadataOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metadata options for the instances. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds\">Configuring the Instance Metadata Options</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The metadata options for the instances. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds\">Configuring the Instance Metadata Options</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 }
             },
@@ -6948,7 +7007,7 @@
                 "MaxRecords": {
                     "target": "com.amazonaws.autoscaling#MaxRecords",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return with this call. The default value is\n                <code>50</code> and the maximum value is <code>100</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return with this call. The default value is\n            <code>50</code> and the maximum value is <code>100</code>.</p>"
                     }
                 }
             }
@@ -6973,7 +7032,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.autoscaling#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that indicates that the response contains more items than can be returned in\n            a single response. To receive additional items, specify this string for the\n                <code>NextToken</code> value when requesting the next set of items. This value is\n            null when there are no more items to return.</p>"
+                        "smithy.api#documentation": "<p>A string that indicates that the response contains more items than can be returned in\n            a single response. To receive additional items, specify this string for the\n            <code>NextToken</code> value when requesting the next set of items. This value is\n            null when there are no more items to return.</p>"
                     }
                 }
             }
@@ -9075,7 +9134,7 @@
                 "MinHealthyPercentage": {
                     "target": "com.amazonaws.autoscaling#IntPercent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of capacity in the Auto Scaling group that must pass your group's health checks to\n            allow the operation to continue. The value is expressed as a percentage of the desired\n            capacity of the Auto Scaling group (rounded up to the nearest integer). The default is\n                <code>90</code>.</p>\n         <p>Setting the minimum healthy percentage to 100 percent limits the rate of replacement\n            to one instance at a time. In contrast, setting it to 0 percent has the effect of\n            replacing all instances at the same time. </p>"
+                        "smithy.api#documentation": "<p>Specifies the minimum percentage of the group to keep in service, healthy, and ready\n            to use to support your workload to allow the operation to continue. The value is\n            expressed as a percentage of the desired capacity of the Auto Scaling group. Value range is 0 to\n            100.</p>\n         <p>If you do not specify this property, the default is 90 percent, or the percentage set\n            in the instance maintenance policy for the Auto Scaling group, if defined.</p>"
                     }
                 },
                 "InstanceWarmup": {
@@ -9124,6 +9183,12 @@
                     "target": "com.amazonaws.autoscaling#AlarmSpecification",
                     "traits": {
                         "smithy.api#documentation": "<p>(Optional) The CloudWatch alarm specification. CloudWatch alarms can be used to identify any\n            issues and fail the operation if an alarm threshold is met.</p>"
+                    }
+                },
+                "MaxHealthyPercentage": {
+                    "target": "com.amazonaws.autoscaling#IntPercent100To200",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum percentage of the group that can be in service and healthy, or\n            pending, to support your workload when replacing instances. The value is expressed as a\n            percentage of the desired capacity of the Auto Scaling group. Value range is 100 to 200.</p>\n         <p>If you specify <code>MaxHealthyPercentage</code>, you must also specify\n                <code>MinHealthyPercentage</code>, and the difference between them cannot be greater\n            than 100. A larger range increases the number of instances that can be replaced at the\n            same time.</p>\n         <p>If you do not specify this property, the default is 100 percent, or the percentage set\n            in the instance maintenance policy for the Auto Scaling group, if defined.</p>"
                     }
                 }
             },
@@ -9474,7 +9539,7 @@
                 "PolicyType": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen64",
                     "traits": {
-                        "smithy.api#documentation": "<p>One of the following policy types: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>TargetTrackingScaling</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StepScaling</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SimpleScaling</code> (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>PredictiveScaling</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html\">Target tracking\n                scaling policies</a> and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html\">Step and simple scaling\n                policies</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>One of the following policy types: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>TargetTrackingScaling</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StepScaling</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SimpleScaling</code> (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>PredictiveScaling</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html\">Target tracking\n            scaling policies</a> and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html\">Step and simple scaling\n                policies</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 },
                 "AdjustmentType": {
@@ -9492,7 +9557,7 @@
                 "MinAdjustmentMagnitude": {
                     "target": "com.amazonaws.autoscaling#MinAdjustmentMagnitude",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum value to scale by when the adjustment type is\n                <code>PercentChangeInCapacity</code>. </p>"
+                        "smithy.api#documentation": "<p>The minimum value to scale by when the adjustment type is\n            <code>PercentChangeInCapacity</code>. </p>"
                     }
                 },
                 "ScalingAdjustment": {
@@ -9516,7 +9581,7 @@
                 "MetricAggregationType": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The aggregation type for the CloudWatch metrics. The valid values are <code>Minimum</code>,\n                <code>Maximum</code>, and <code>Average</code>.</p>"
+                        "smithy.api#documentation": "<p>The aggregation type for the CloudWatch metrics. The valid values are <code>Minimum</code>,\n            <code>Maximum</code>, and <code>Average</code>.</p>"
                     }
                 },
                 "EstimatedInstanceWarmup": {
@@ -10008,7 +10073,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an instance refresh. During an instance refresh, Amazon EC2 Auto Scaling performs a rolling\n            update of instances in an Auto Scaling group. Instances are terminated first and then replaced,\n            which temporarily reduces the capacity available within your Auto Scaling group.</p>\n         <p>This operation is part of the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">instance refresh\n                feature</a> in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group.\n            This feature is helpful, for example, when you have a new AMI or a new user data script.\n            You just need to create a new launch template that specifies the new AMI or user data\n            script. Then start an instance refresh to immediately begin the process of updating\n            instances in the group. </p>\n         <p>If successful, the request's response contains a unique ID that you can use to track\n            the progress of the instance refresh. To query its status, call the <a>DescribeInstanceRefreshes</a> API. To describe the instance refreshes that\n            have already run, call the <a>DescribeInstanceRefreshes</a> API. To cancel an\n            instance refresh that is in progress, use the <a>CancelInstanceRefresh</a>\n            API. </p>\n         <p>An instance refresh might fail for several reasons, such as EC2 launch failures,\n            misconfigured health checks, or not ignoring or allowing the termination of instances\n            that are in <code>Standby</code> state or protected from scale in. You can monitor for\n            failed EC2 launches using the scaling activities. To find the scaling activities, call\n            the <a>DescribeScalingActivities</a> API.</p>\n         <p>If you enable auto rollback, your Auto Scaling group will be rolled back automatically when\n            the instance refresh fails. You can enable this feature before starting an instance\n            refresh by specifying the <code>AutoRollback</code> property in the instance refresh\n            preferences. Otherwise, to roll back an instance refresh before it finishes, use the\n                <a>RollbackInstanceRefresh</a> API. </p>",
+                "smithy.api#documentation": "<p>Starts an instance refresh.</p>\n         <p>This operation is part of the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">instance refresh\n                feature</a> in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group.\n            This feature is helpful, for example, when you have a new AMI or a new user data script.\n            You just need to create a new launch template that specifies the new AMI or user data\n            script. Then start an instance refresh to immediately begin the process of updating\n            instances in the group. </p>\n         <p>If successful, the request's response contains a unique ID that you can use to track\n            the progress of the instance refresh. To query its status, call the <a>DescribeInstanceRefreshes</a> API. To describe the instance refreshes that\n            have already run, call the <a>DescribeInstanceRefreshes</a> API. To cancel an\n            instance refresh that is in progress, use the <a>CancelInstanceRefresh</a>\n            API. </p>\n         <p>An instance refresh might fail for several reasons, such as EC2 launch failures,\n            misconfigured health checks, or not ignoring or allowing the termination of instances\n            that are in <code>Standby</code> state or protected from scale in. You can monitor for\n            failed EC2 launches using the scaling activities. To find the scaling activities, call\n            the <a>DescribeScalingActivities</a> API.</p>\n         <p>If you enable auto rollback, your Auto Scaling group will be rolled back automatically when\n            the instance refresh fails. You can enable this feature before starting an instance\n            refresh by specifying the <code>AutoRollback</code> property in the instance refresh\n            preferences. Otherwise, to roll back an instance refresh before it finishes, use the\n                <a>RollbackInstanceRefresh</a> API. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To start an instance refresh",
@@ -10023,13 +10088,14 @@
                             },
                             "Preferences": {
                                 "AutoRollback": true,
+                                "InstanceWarmup": 200,
+                                "MinHealthyPercentage": 90,
+                                "MaxHealthyPercentage": 120,
                                 "AlarmSpecification": {
                                     "Alarms": [
                                         "my-alarm"
                                     ]
-                                },
-                                "InstanceWarmup": 200,
-                                "MinHealthyPercentage": 90
+                                }
                             }
                         },
                         "output": {
@@ -10076,7 +10142,7 @@
                 "Preferences": {
                     "target": "com.amazonaws.autoscaling#RefreshPreferences",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets your preferences for the instance refresh so that it performs as expected when\n            you start it. Includes the instance warmup time, the minimum healthy percentage, and the\n            behaviors that you want Amazon EC2 Auto Scaling to use if instances that are in <code>Standby</code>\n            state or protected from scale in are found. You can also choose to enable additional\n            features, such as the following:</p>\n         <ul>\n            <li>\n               <p>Auto rollback</p>\n            </li>\n            <li>\n               <p>Checkpoints</p>\n            </li>\n            <li>\n               <p>CloudWatch alarms</p>\n            </li>\n            <li>\n               <p>Skip matching</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Sets your preferences for the instance refresh so that it performs as expected when\n            you start it. Includes the instance warmup time, the minimum and maximum healthy\n            percentages, and the behaviors that you want Amazon EC2 Auto Scaling to use if instances that are in\n                <code>Standby</code> state or protected from scale in are found. You can also choose\n            to enable additional features, such as the following:</p>\n         <ul>\n            <li>\n               <p>Auto rollback</p>\n            </li>\n            <li>\n               <p>Checkpoints</p>\n            </li>\n            <li>\n               <p>CloudWatch alarms</p>\n            </li>\n            <li>\n               <p>Skip matching</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -10378,7 +10444,7 @@
                 "ReturnData": {
                     "target": "com.amazonaws.autoscaling#ReturnData",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to return the timestamps and raw data values of this metric. </p>\n         <p>If you use any math expressions, specify <code>true</code> for this value for only the\n            final math expression that the metric specification is based on. You must specify\n                <code>false</code> for <code>ReturnData</code> for all the other metrics and\n            expressions used in the metric specification.</p>\n         <p>If you are only retrieving metrics and not performing any math expressions, do not\n            specify anything for <code>ReturnData</code>. This sets it to its default\n                (<code>true</code>).</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to return the timestamps and raw data values of this metric. </p>\n         <p>If you use any math expressions, specify <code>true</code> for this value for only the\n            final math expression that the metric specification is based on. You must specify\n            <code>false</code> for <code>ReturnData</code> for all the other metrics and\n            expressions used in the metric specification.</p>\n         <p>If you are only retrieving metrics and not performing any math expressions, do not\n            specify anything for <code>ReturnData</code>. This sets it to its default\n            (<code>true</code>).</p>"
                     }
                 }
             },
@@ -10413,7 +10479,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure defines the CloudWatch metric to return, along with the statistic and\n            unit.</p>\n         <p>For more information about the CloudWatch terminology below, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n                concepts</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>This structure defines the CloudWatch metric to return, along with the statistic and\n            unit.</p>\n         <p>For more information about the CloudWatch terminology below, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n            concepts</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscaling#TerminateInstanceInAutoScalingGroup": {
@@ -10733,6 +10799,12 @@
                     "target": "com.amazonaws.autoscaling#DefaultInstanceWarmup",
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of time, in seconds, until a new instance is considered to have finished\n            initializing and resource consumption to become stable after it enters the\n                <code>InService</code> state. </p>\n         <p>During an instance refresh, Amazon EC2 Auto Scaling waits for the warm-up period after it replaces an\n            instance before it moves on to replacing the next instance. Amazon EC2 Auto Scaling also waits for the\n            warm-up period before aggregating the metrics for new instances with existing instances\n            in the Amazon CloudWatch metrics that are used for scaling, resulting in more reliable usage\n            data. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html\">Set\n                the default instance warmup for an Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <important>\n            <p>To manage various warm-up settings at the group level, we recommend that you set\n                the default instance warmup, <i>even if it is set to 0 seconds</i>. To\n                remove a value that you previously set, include the property but specify\n                    <code>-1</code> for the value. However, we strongly recommend keeping the\n                default instance warmup enabled by specifying a value of <code>0</code> or other\n                nominal value.</p>\n         </important>"
+                    }
+                },
+                "InstanceMaintenancePolicy": {
+                    "target": "com.amazonaws.autoscaling#InstanceMaintenancePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An instance maintenance policy. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html\">Set instance maintenance policy</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 }
             }
