@@ -1,0 +1,8 @@
+{
+    "id": "cb8e0d47-3b92-4443-96bc-d34db0cefe86",
+    "type": "feature",
+    "description": "**BREAKING CHANGE**: Request body checksum middlewares (flex checksums, SHA256, etc.) have changed steps from Build to Finalize. Middleware that indexes off of this field will need to be updated accordingly.",
+    "modules": [
+        "."
+    ]
+}

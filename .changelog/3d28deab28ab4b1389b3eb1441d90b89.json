@@ -1,0 +1,8 @@
+{
+    "id": "3d28deab-28ab-4b13-89b3-eb1441d90b89",
+    "type": "feature",
+    "description": "**BREAKING CHANGE**: V2 endpoint resolution middleware has changed steps from Serialize to Finalize. Middleware that indexes off of this field will need to be updated accordingly.",
+    "modules": [
+        "."
+    ]
+}
