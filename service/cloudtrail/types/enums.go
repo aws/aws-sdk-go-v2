@@ -2,6 +2,24 @@
 
 package types
 
+type BillingMode string
+
+// Enum values for BillingMode
+const (
+	BillingModeExtendableRetentionPricing BillingMode = "EXTENDABLE_RETENTION_PRICING"
+	BillingModeFixedRetentionPricing      BillingMode = "FIXED_RETENTION_PRICING"
+)
+
+// Values returns all known values for BillingMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BillingMode) Values() []BillingMode {
+	return []BillingMode{
+		"EXTENDABLE_RETENTION_PRICING",
+		"FIXED_RETENTION_PRICING",
+	}
+}
+
 type DeliveryStatus string
 
 // Enum values for DeliveryStatus

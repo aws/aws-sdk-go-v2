@@ -4,6 +4,7 @@ package codecatalyst
 
 import (
 	"context"
+	cryptorand "crypto/rand"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
@@ -18,6 +19,7 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
+	smithyrand "github.com/aws/smithy-go/rand"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net"
 	"net/http"
@@ -44,6 +46,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	resolveRetryer(&options)
 
 	resolveHTTPClient(&options)
+
+	resolveIdempotencyTokenProvider(&options)
 
 	resolveEndpointResolverV2(&options)
 
@@ -344,6 +348,13 @@ func addClientUserAgent(stack *middleware.Stack, options Options) error {
 	return nil
 }
 
+func resolveIdempotencyTokenProvider(o *Options) {
+	if o.IdempotencyTokenProvider != nil {
+		return
+	}
+	o.IdempotencyTokenProvider = smithyrand.NewUUIDIdempotencyToken(cryptorand.Reader)
+}
+
 func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 	mo := retry.AddRetryMiddlewaresOptions{
 		Retryer:          o.Retryer,
@@ -390,6 +401,11 @@ func resolveBearerAuthSigner(o *Options) {
 }
 func newDefaultBearerAuthSigner(o Options) bearer.Signer {
 	return bearer.NewSignHTTPSMessage()
+}
+
+// IdempotencyTokenProvider interface for providing idempotency token
+type IdempotencyTokenProvider interface {
+	GetIdempotencyToken() (string, error)
 }
 
 func addRequestIDRetrieverMiddleware(stack *middleware.Stack) error {

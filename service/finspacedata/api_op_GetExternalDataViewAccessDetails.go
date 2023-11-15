@@ -17,6 +17,8 @@ import (
 //   - You must retrieve the programmatic credentials.
 //   - You must be a member of a FinSpace user group, where the dataset that you
 //     want to access has Read Dataset Data permissions.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) GetExternalDataViewAccessDetails(ctx context.Context, params *GetExternalDataViewAccessDetailsInput, optFns ...func(*Options)) (*GetExternalDataViewAccessDetailsOutput, error) {
 	if params == nil {
 		params = &GetExternalDataViewAccessDetailsInput{}

@@ -42,6 +42,12 @@ type Environment struct {
 	// The Amazon Resource Name (ARN) of the Amazon MWAA environment.
 	Arn *string
 
+	// The queue ARN for the environment's Celery Executor (https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/celery.html)
+	// . Amazon MWAA uses a Celery Executor to distribute tasks across multiple
+	// workers. When you create an environment in a shared VPC, you must provide access
+	// to the Celery Executor queue from your VPC.
+	CeleryExecutorQueue *string
+
 	// The day and time the environment was created.
 	CreatedAt *time.Time
 
@@ -49,6 +55,15 @@ type Environment struct {
 	// s3://mwaa-environment/dags . For more information, see Adding or updating DAGs (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html)
 	// .
 	DagS3Path *string
+
+	// The VPC endpoint for the environment's Amazon RDS database.
+	DatabaseVpcEndpointService *string
+
+	// Defines whether the VPC endpoints configured for the environment are created,
+	// and managed, by the customer or by Amazon MWAA. If set to SERVICE , Amazon MWAA
+	// will create and manage the required VPC endpoints in your VPC. If set to
+	// CUSTOMER , you must create, and manage, the VPC endpoints in your VPC.
+	EndpointManagement EndpointManagement
 
 	// The environment class type. Valid values: mw1.small , mw1.medium , mw1.large .
 	// For more information, see Amazon MWAA environment class (https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html)
@@ -163,6 +178,9 @@ type Environment struct {
 	//   the environment could not be created.
 	//   - AVAILABLE - Indicates the request was successful and the environment is
 	//   ready to use.
+	//   - PENDING - Indicates the request was successful, but the process to create
+	//   the environment is paused until you create the required VPC endpoints in your
+	//   VPC. After you create the VPC endpoints, the process resumes.
 	//   - UPDATING - Indicates the request to update the environment is in progress.
 	//   - ROLLING_BACK - Indicates the request to update environment details, or
 	//   upgrade the environment version, failed and Amazon MWAA is restoring the
@@ -185,7 +203,7 @@ type Environment struct {
 	// .
 	Tags map[string]string
 
-	// The Apache Airflow Web server access mode. For more information, see Apache
+	// The Apache Airflow web server access mode. For more information, see Apache
 	// Airflow access modes (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html)
 	// .
 	WebserverAccessMode WebserverAccessMode
@@ -194,6 +212,9 @@ type Environment struct {
 	// more information, see Accessing the Apache Airflow UI (https://docs.aws.amazon.com/mwaa/latest/userguide/access-airflow-ui.html)
 	// .
 	WebserverUrl *string
+
+	// The VPC endpoint for the environment's web server.
+	WebserverVpcEndpointService *string
 
 	// The day and time of the week in Coordinated Universal Time (UTC) 24-hour
 	// standard time that weekly maintenance updates are scheduled. For example:

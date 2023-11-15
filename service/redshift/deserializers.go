@@ -4042,6 +4042,9 @@ func awsAwsquery_deserializeOpErrorDeleteCustomDomainAssociation(response *smith
 	case strings.EqualFold("CustomCnameAssociationFault", errorCode):
 		return awsAwsquery_deserializeErrorCustomCnameAssociationFault(response, errorBody)
 
+	case strings.EqualFold("CustomDomainAssociationNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorCustomDomainAssociationNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
@@ -11857,6 +11860,9 @@ func awsAwsquery_deserializeOpErrorModifyCustomDomainAssociation(response *smith
 
 	case strings.EqualFold("CustomCnameAssociationFault", errorCode):
 		return awsAwsquery_deserializeErrorCustomCnameAssociationFault(response, errorBody)
+
+	case strings.EqualFold("CustomDomainAssociationNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorCustomDomainAssociationNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)

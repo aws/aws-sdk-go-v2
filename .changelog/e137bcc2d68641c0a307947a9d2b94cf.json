@@ -1,0 +1,8 @@
+{
+    "id": "e137bcc2-d686-41c0-a307-947a9d2b94cf",
+    "type": "feature",
+    "description": "Adding deprecated trait on Dataset Browser Environment APIs",
+    "modules": [
+        "service/finspace"
+    ]
+}

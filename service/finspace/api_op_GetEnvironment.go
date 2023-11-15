@@ -13,6 +13,8 @@ import (
 )
 
 // Returns the FinSpace environment object.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) GetEnvironment(ctx context.Context, params *GetEnvironmentInput, optFns ...func(*Options)) (*GetEnvironmentOutput, error) {
 	if params == nil {
 		params = &GetEnvironmentInput{}

@@ -1,0 +1,8 @@
+{
+    "id": "d739e298-f833-4e78-aa0a-3cc203129044",
+    "type": "feature",
+    "description": "AWS EBS now supports Snapshot Lock, giving users the ability to lock an EBS Snapshot to prohibit deletion of the snapshot. This release introduces the LockSnapshot, UnlockSnapshot \u0026 DescribeLockedSnapshots APIs to manage lock configuration for snapshots. The release also includes the dl2q_24xlarge.",
+    "modules": [
+        "service/ec2"
+    ]
+}

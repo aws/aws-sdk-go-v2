@@ -46,6 +46,9 @@ type GetEventDataStoreOutput struct {
 	// The advanced event selectors used to select events for the data store.
 	AdvancedEventSelectors []types.AdvancedEventSelector
 
+	// The billing mode for the event data store.
+	BillingMode types.BillingMode
+
 	// The timestamp of the event data store's creation.
 	CreatedTimestamp *time.Time
 

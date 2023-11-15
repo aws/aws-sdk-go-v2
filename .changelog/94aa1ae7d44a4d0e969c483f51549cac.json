@@ -1,0 +1,8 @@
+{
+    "id": "94aa1ae7-d44a-4d0e-969c-483f51549cac",
+    "type": "feature",
+    "description": "This release adds functionality for retrieving information about workflows and workflow runs and starting workflow runs in Amazon CodeCatalyst.",
+    "modules": [
+        "service/codecatalyst"
+    ]
+}

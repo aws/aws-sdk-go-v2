@@ -60,6 +60,10 @@ type Options struct {
 	// used over the deprecated EndpointResolver.
 	EndpointResolverV2 EndpointResolverV2
 
+	// Provides idempotency tokens values that will be automatically populated into
+	// idempotent API operations.
+	IdempotencyTokenProvider IdempotencyTokenProvider
+
 	// The logger writer interface to write logging messages to.
 	Logger logging.Logger
 

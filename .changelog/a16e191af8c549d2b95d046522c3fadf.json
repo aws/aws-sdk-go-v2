@@ -1,0 +1,8 @@
+{
+    "id": "a16e191a-f8c5-49d2-b95d-046522c3fadf",
+    "type": "feature",
+    "description": "This Amazon MWAA release adds support for customer-managed VPC endpoints. This lets you choose whether to create, and manage your environment's VPC endpoints, or to have Amazon MWAA create, and manage them for you.",
+    "modules": [
+        "service/mwaa"
+    ]
+}

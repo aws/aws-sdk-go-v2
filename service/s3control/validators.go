@@ -110,6 +110,26 @@ func (m *validateOpCreateMultiRegionAccessPoint) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateStorageLensGroup struct {
+}
+
+func (*validateOpCreateStorageLensGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateStorageLensGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateStorageLensGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateStorageLensGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAccessPointForObjectLambda struct {
 }
 
@@ -385,6 +405,26 @@ func (m *validateOpDeleteStorageLensConfigurationTagging) HandleInitialize(ctx c
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteStorageLensConfigurationTaggingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteStorageLensGroup struct {
+}
+
+func (*validateOpDeleteStorageLensGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteStorageLensGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteStorageLensGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteStorageLensGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -850,6 +890,26 @@ func (m *validateOpGetStorageLensConfigurationTagging) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetStorageLensGroup struct {
+}
+
+func (*validateOpGetStorageLensGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetStorageLensGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetStorageLensGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetStorageLensGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAccessPointsForObjectLambda struct {
 }
 
@@ -965,6 +1025,46 @@ func (m *validateOpListStorageLensConfigurations) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListStorageLensConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListStorageLensGroups struct {
+}
+
+func (*validateOpListStorageLensGroups) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListStorageLensGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListStorageLensGroupsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListStorageLensGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1250,6 +1350,46 @@ func (m *validateOpSubmitMultiRegionAccessPointRoutes) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateJobPriority struct {
 }
 
@@ -1290,6 +1430,26 @@ func (m *validateOpUpdateJobStatus) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateStorageLensGroup struct {
+}
+
+func (*validateOpUpdateStorageLensGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateStorageLensGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateStorageLensGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateStorageLensGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateAccessPointForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAccessPointForObjectLambda{}, middleware.After)
 }
@@ -1308,6 +1468,10 @@ func addOpCreateJobValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateMultiRegionAccessPointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMultiRegionAccessPoint{}, middleware.After)
+}
+
+func addOpCreateStorageLensGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateStorageLensGroup{}, middleware.After)
 }
 
 func addOpDeleteAccessPointForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
@@ -1364,6 +1528,10 @@ func addOpDeleteStorageLensConfigurationValidationMiddleware(stack *middleware.S
 
 func addOpDeleteStorageLensConfigurationTaggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteStorageLensConfigurationTagging{}, middleware.After)
+}
+
+func addOpDeleteStorageLensGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteStorageLensGroup{}, middleware.After)
 }
 
 func addOpDescribeJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1458,6 +1626,10 @@ func addOpGetStorageLensConfigurationTaggingValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpGetStorageLensConfigurationTagging{}, middleware.After)
 }
 
+func addOpGetStorageLensGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetStorageLensGroup{}, middleware.After)
+}
+
 func addOpListAccessPointsForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccessPointsForObjectLambda{}, middleware.After)
 }
@@ -1480,6 +1652,14 @@ func addOpListRegionalBucketsValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListStorageLensConfigurationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListStorageLensConfigurations{}, middleware.After)
+}
+
+func addOpListStorageLensGroupsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListStorageLensGroups{}, middleware.After)
+}
+
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
 func addOpPutAccessPointConfigurationForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
@@ -1538,12 +1718,24 @@ func addOpSubmitMultiRegionAccessPointRoutesValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpSubmitMultiRegionAccessPointRoutes{}, middleware.After)
 }
 
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
 func addOpUpdateJobPriorityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateJobPriority{}, middleware.After)
 }
 
 func addOpUpdateJobStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateJobStatus{}, middleware.After)
+}
+
+func addOpUpdateStorageLensGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateStorageLensGroup{}, middleware.After)
 }
 
 func validateAccessControlTranslation(v *types.AccessControlTranslation) error {
@@ -1948,6 +2140,23 @@ func validateLifecycleRules(v []types.LifecycleRule) error {
 	invalidParams := smithy.InvalidParamsError{Context: "LifecycleRules"}
 	for i := range v {
 		if err := validateLifecycleRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMatchAnyTag(v []types.S3Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MatchAnyTag"}
+	for i := range v {
+		if err := validateS3Tag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2698,6 +2907,89 @@ func validateStorageLensDataExportEncryption(v *types.StorageLensDataExportEncry
 	}
 }
 
+func validateStorageLensGroup(v *types.StorageLensGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageLensGroup"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Filter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filter"))
+	} else if v.Filter != nil {
+		if err := validateStorageLensGroupFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStorageLensGroupAndOperator(v *types.StorageLensGroupAndOperator) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageLensGroupAndOperator"}
+	if v.MatchAnyTag != nil {
+		if err := validateMatchAnyTag(v.MatchAnyTag); err != nil {
+			invalidParams.AddNested("MatchAnyTag", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStorageLensGroupFilter(v *types.StorageLensGroupFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageLensGroupFilter"}
+	if v.MatchAnyTag != nil {
+		if err := validateMatchAnyTag(v.MatchAnyTag); err != nil {
+			invalidParams.AddNested("MatchAnyTag", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.And != nil {
+		if err := validateStorageLensGroupAndOperator(v.And); err != nil {
+			invalidParams.AddNested("And", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Or != nil {
+		if err := validateStorageLensGroupOrOperator(v.Or); err != nil {
+			invalidParams.AddNested("Or", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStorageLensGroupOrOperator(v *types.StorageLensGroupOrOperator) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageLensGroupOrOperator"}
+	if v.MatchAnyTag != nil {
+		if err := validateMatchAnyTag(v.MatchAnyTag); err != nil {
+			invalidParams.AddNested("MatchAnyTag", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateStorageLensTag(v *types.StorageLensTag) error {
 	if v == nil {
 		return nil
@@ -2733,6 +3025,24 @@ func validateStorageLensTags(v []types.StorageLensTag) error {
 	}
 }
 
+func validateTag(v *types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTagging(v *types.Tagging) error {
 	if v == nil {
 		return nil
@@ -2743,6 +3053,23 @@ func validateTagging(v *types.Tagging) error {
 	} else if v.TagSet != nil {
 		if err := validateS3TagSet(v.TagSet); err != nil {
 			invalidParams.AddNested("TagSet", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagList(v []types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
+	for i := range v {
+		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2902,6 +3229,33 @@ func validateOpCreateMultiRegionAccessPointInput(v *CreateMultiRegionAccessPoint
 	} else if v.Details != nil {
 		if err := validateCreateMultiRegionAccessPointInput(v.Details); err != nil {
 			invalidParams.AddNested("Details", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateStorageLensGroupInput(v *CreateStorageLensGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateStorageLensGroupInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.StorageLensGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageLensGroup"))
+	} else if v.StorageLensGroup != nil {
+		if err := validateStorageLensGroup(v.StorageLensGroup); err != nil {
+			invalidParams.AddNested("StorageLensGroup", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3156,6 +3510,24 @@ func validateOpDeleteStorageLensConfigurationTaggingInput(v *DeleteStorageLensCo
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteStorageLensConfigurationTaggingInput"}
 	if v.ConfigId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteStorageLensGroupInput(v *DeleteStorageLensGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteStorageLensGroupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
@@ -3578,6 +3950,24 @@ func validateOpGetStorageLensConfigurationTaggingInput(v *GetStorageLensConfigur
 	}
 }
 
+func validateOpGetStorageLensGroupInput(v *GetStorageLensGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetStorageLensGroupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAccessPointsForObjectLambdaInput(v *ListAccessPointsForObjectLambdaInput) error {
 	if v == nil {
 		return nil
@@ -3660,6 +4050,39 @@ func validateOpListStorageLensConfigurationsInput(v *ListStorageLensConfiguratio
 	invalidParams := smithy.InvalidParamsError{Context: "ListStorageLensConfigurationsInput"}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListStorageLensGroupsInput(v *ListStorageLensGroupsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListStorageLensGroupsInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3998,6 +4421,52 @@ func validateOpSubmitMultiRegionAccessPointRoutesInput(v *SubmitMultiRegionAcces
 	}
 }
 
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateJobPriorityInput(v *UpdateJobPriorityInput) error {
 	if v == nil {
 		return nil
@@ -4029,6 +4498,31 @@ func validateOpUpdateJobStatusInput(v *UpdateJobStatusInput) error {
 	}
 	if len(v.RequestedJobStatus) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestedJobStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateStorageLensGroupInput(v *UpdateStorageLensGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateStorageLensGroupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.StorageLensGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageLensGroup"))
+	} else if v.StorageLensGroup != nil {
+		if err := validateStorageLensGroup(v.StorageLensGroup); err != nil {
+			invalidParams.AddNested("StorageLensGroup", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

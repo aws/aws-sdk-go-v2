@@ -1,0 +1,8 @@
+{
+    "id": "9cc487a1-c418-47bf-95f3-d2284ec6187e",
+    "type": "feature",
+    "description": "Update the default value of MaxResult to 50.",
+    "modules": [
+        "service/ssmsap"
+    ]
+}

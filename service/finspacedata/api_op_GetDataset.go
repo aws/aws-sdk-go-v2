@@ -13,6 +13,8 @@ import (
 )
 
 // Returns information about a Dataset.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) GetDataset(ctx context.Context, params *GetDatasetInput, optFns ...func(*Options)) (*GetDatasetOutput, error) {
 	if params == nil {
 		params = &GetDatasetInput{}

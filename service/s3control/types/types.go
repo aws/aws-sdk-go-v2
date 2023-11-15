@@ -69,30 +69,33 @@ type AccessPoint struct {
 	noSmithyDocumentSerde
 }
 
-// A container for the account-level Amazon S3 Storage Lens configuration. For
-// more information about S3 Storage Lens, see Assessing your storage activity and
-// usage with S3 Storage Lens (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html)
+// A container element for the account-level Amazon S3 Storage Lens configuration.
+// For more information about S3 Storage Lens, see Assessing your storage activity
+// and usage with S3 Storage Lens (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html)
 // in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see
 // S3 Storage Lens metrics glossary (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html)
 // in the Amazon S3 User Guide.
 type AccountLevel struct {
 
-	// A container for the S3 Storage Lens bucket-level configuration.
+	// A container element for the S3 Storage Lens bucket-level configuration.
 	//
 	// This member is required.
 	BucketLevel *BucketLevel
 
-	// A container for S3 Storage Lens activity metrics.
+	// A container element for S3 Storage Lens activity metrics.
 	ActivityMetrics *ActivityMetrics
 
-	// A container for S3 Storage Lens advanced cost-optimization metrics.
+	// A container element for S3 Storage Lens advanced cost-optimization metrics.
 	AdvancedCostOptimizationMetrics *AdvancedCostOptimizationMetrics
 
-	// A container for S3 Storage Lens advanced data-protection metrics.
+	// A container element for S3 Storage Lens advanced data-protection metrics.
 	AdvancedDataProtectionMetrics *AdvancedDataProtectionMetrics
 
-	// A container for detailed status code metrics.
+	// A container element for detailed status code metrics.
 	DetailedStatusCodesMetrics *DetailedStatusCodesMetrics
+
+	// A container element for S3 Storage Lens groups metrics.
+	StorageLensGroupLevel *StorageLensGroupLevel
 
 	noSmithyDocumentSerde
 }
@@ -964,6 +967,61 @@ type ListStorageLensConfigurationEntry struct {
 	noSmithyDocumentSerde
 }
 
+// Each entry contains a Storage Lens group that exists in the specified home
+// Region.
+type ListStorageLensGroupEntry struct {
+
+	// Contains the Amazon Web Services Region where the Storage Lens group was
+	// created.
+	//
+	// This member is required.
+	HomeRegion *string
+
+	// Contains the name of the Storage Lens group that exists in the specified home
+	// Region.
+	//
+	// This member is required.
+	Name *string
+
+	// Contains the Amazon Resource Name (ARN) of the Storage Lens group. This
+	// property is read-only.
+	//
+	// This member is required.
+	StorageLensGroupArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter condition that specifies the object age range of included objects in
+// days. Only integers are supported.
+type MatchObjectAge struct {
+
+	// Specifies the maximum object age in days. Must be a positive whole number,
+	// greater than the minimum object age and less than or equal to 2,147,483,647.
+	DaysGreaterThan int32
+
+	// Specifies the minimum object age in days. The value must be a positive whole
+	// number, greater than 0 and less than or equal to 2,147,483,647.
+	DaysLessThan int32
+
+	noSmithyDocumentSerde
+}
+
+// A filter condition that specifies the object size range of included objects in
+// bytes. Only integers are supported.
+type MatchObjectSize struct {
+
+	// Specifies the minimum object size in Bytes. The value must be a positive
+	// number, greater than 0 and less than 5 TB.
+	BytesGreaterThan int64
+
+	// Specifies the maximum object size in Bytes. The value must be a positive
+	// number, greater than the minimum object size and less than 5 TB.
+	BytesLessThan int64
+
+	noSmithyDocumentSerde
+}
+
 // A container that specifies replication metrics-related settings.
 type Metrics struct {
 
@@ -1663,7 +1721,7 @@ type S3CopyObjectOperation struct {
 	CannedAccessControlList S3CannedAccessControlList
 
 	// Indicates the algorithm that you want Amazon S3 to use to create the checksum.
-	// For more information, see Checking object integrity (https://docs.aws.amazon.com/AmazonS3/latest/userguide/CheckingObjectIntegrity.xml)
+	// For more information, see Checking object integrity (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
 	// in the Amazon S3 User Guide.
 	ChecksumAlgorithm S3ChecksumAlgorithm
 
@@ -2187,6 +2245,149 @@ type StorageLensDataExportEncryption struct {
 	noSmithyDocumentSerde
 }
 
+// A custom grouping of objects that include filters for prefixes, suffixes,
+// object tags, object size, or object age. You can create an S3 Storage Lens group
+// that includes a single filter or multiple filter conditions. To specify multiple
+// filter conditions, you use AND or OR logical operators.
+type StorageLensGroup struct {
+
+	// Sets the criteria for the Storage Lens group data that is displayed. For
+	// multiple filter conditions, the AND or OR logical operator is used.
+	//
+	// This member is required.
+	Filter *StorageLensGroupFilter
+
+	// Contains the name of the Storage Lens group.
+	//
+	// This member is required.
+	Name *string
+
+	// Contains the Amazon Resource Name (ARN) of the Storage Lens group. This
+	// property is read-only.
+	StorageLensGroupArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A logical operator that allows multiple filter conditions to be joined for more
+// complex comparisons of Storage Lens group data.
+type StorageLensGroupAndOperator struct {
+
+	// Contains a list of prefixes. At least one prefix must be specified. Up to 10
+	// prefixes are allowed.
+	MatchAnyPrefix []string
+
+	// Contains a list of suffixes. At least one suffix must be specified. Up to 10
+	// suffixes are allowed.
+	MatchAnySuffix []string
+
+	// Contains the list of object tags. At least one object tag must be specified. Up
+	// to 10 object tags are allowed.
+	MatchAnyTag []S3Tag
+
+	// Contains DaysGreaterThan and DaysLessThan to define the object age range
+	// (minimum and maximum number of days).
+	MatchObjectAge *MatchObjectAge
+
+	// Contains BytesGreaterThan and BytesLessThan to define the object size range
+	// (minimum and maximum number of Bytes).
+	MatchObjectSize *MatchObjectSize
+
+	noSmithyDocumentSerde
+}
+
+// The filter element sets the criteria for the Storage Lens group data that is
+// displayed. For multiple filter conditions, the AND or OR logical operator is
+// used.
+type StorageLensGroupFilter struct {
+
+	// A logical operator that allows multiple filter conditions to be joined for more
+	// complex comparisons of Storage Lens group data. Objects must match all of the
+	// listed filter conditions that are joined by the And logical operator. Only one
+	// of each filter condition is allowed.
+	And *StorageLensGroupAndOperator
+
+	// Contains a list of prefixes. At least one prefix must be specified. Up to 10
+	// prefixes are allowed.
+	MatchAnyPrefix []string
+
+	// Contains a list of suffixes. At least one suffix must be specified. Up to 10
+	// suffixes are allowed.
+	MatchAnySuffix []string
+
+	// Contains the list of S3 object tags. At least one object tag must be specified.
+	// Up to 10 object tags are allowed.
+	MatchAnyTag []S3Tag
+
+	// Contains DaysGreaterThan and DaysLessThan to define the object age range
+	// (minimum and maximum number of days).
+	MatchObjectAge *MatchObjectAge
+
+	// Contains BytesGreaterThan and BytesLessThan to define the object size range
+	// (minimum and maximum number of Bytes).
+	MatchObjectSize *MatchObjectSize
+
+	// A single logical operator that allows multiple filter conditions to be joined.
+	// Objects can match any of the listed filter conditions, which are joined by the
+	// Or logical operator. Only one of each filter condition is allowed.
+	Or *StorageLensGroupOrOperator
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the Storage Lens groups to include in the Storage Lens group
+// aggregation.
+type StorageLensGroupLevel struct {
+
+	// Indicates which Storage Lens group ARNs to include or exclude in the Storage
+	// Lens group aggregation. If this value is left null, then all Storage Lens groups
+	// are selected.
+	SelectionCriteria *StorageLensGroupLevelSelectionCriteria
+
+	noSmithyDocumentSerde
+}
+
+// Indicates which Storage Lens group ARNs to include or exclude in the Storage
+// Lens group aggregation. You can only attach Storage Lens groups to your Storage
+// Lens dashboard if they're included in your Storage Lens group aggregation. If
+// this value is left null, then all Storage Lens groups are selected.
+type StorageLensGroupLevelSelectionCriteria struct {
+
+	// Indicates which Storage Lens group ARNs to exclude from the Storage Lens group
+	// aggregation.
+	Exclude []string
+
+	// Indicates which Storage Lens group ARNs to include in the Storage Lens group
+	// aggregation.
+	Include []string
+
+	noSmithyDocumentSerde
+}
+
+// A container element for specifying Or rule conditions. The rule conditions
+// determine the subset of objects to which the Or rule applies. Objects can match
+// any of the listed filter conditions, which are joined by the Or logical
+// operator. Only one of each filter condition is allowed.
+type StorageLensGroupOrOperator struct {
+
+	// Filters objects that match any of the specified prefixes.
+	MatchAnyPrefix []string
+
+	// Filters objects that match any of the specified suffixes.
+	MatchAnySuffix []string
+
+	// Filters objects that match any of the specified S3 object tags.
+	MatchAnyTag []S3Tag
+
+	// Filters objects that match the specified object age range.
+	MatchObjectAge *MatchObjectAge
+
+	// Filters objects that match the specified object size range.
+	MatchObjectSize *MatchObjectSize
+
+	noSmithyDocumentSerde
+}
+
 type StorageLensTag struct {
 
 	//
@@ -2195,6 +2396,28 @@ type StorageLensTag struct {
 	Key *string
 
 	//
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// An Amazon Web Services resource tag that's associated with your S3 resource.
+// You can add tags to new objects when you upload them, or you can add object tags
+// to existing objects. This data type is only supported for S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html)
+// .
+type Tag struct {
+
+	// The tag key for your Amazon Web Services resource. A tag key can be up to 128
+	// Unicode characters in length and is case-sensitive. System created tags that
+	// begin with aws: aren’t supported.
+	//
+	// This member is required.
+	Key *string
+
+	// The tag value for your Amazon Web Services resource. A tag value can be up to
+	// 256 Unicode characters in length and is case-sensitive.
 	//
 	// This member is required.
 	Value *string

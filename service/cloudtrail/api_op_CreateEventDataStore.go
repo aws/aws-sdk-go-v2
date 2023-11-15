@@ -49,6 +49,22 @@ type CreateEventDataStoreInput struct {
 	// in the CloudTrail User Guide.
 	AdvancedEventSelectors []types.AdvancedEventSelector
 
+	// The billing mode for the event data store determines the cost for ingesting
+	// events and the default and maximum retention period for the event data store.
+	// The following are the possible values:
+	//   - EXTENDABLE_RETENTION_PRICING - This billing mode is generally recommended if
+	//   you want a flexible retention period of up to 3653 days (about 10 years). The
+	//   default retention period for this billing mode is 366 days.
+	//   - FIXED_RETENTION_PRICING - This billing mode is recommended if you expect to
+	//   ingest more than 25 TB of event data per month and need a retention period of up
+	//   to 2557 days (about 7 years). The default retention period for this billing mode
+	//   is 2557 days.
+	// The default value is EXTENDABLE_RETENTION_PRICING . For more information about
+	// CloudTrail pricing, see CloudTrail Pricing (http://aws.amazon.com/cloudtrail/pricing/)
+	// and Managing CloudTrail Lake costs (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html)
+	// .
+	BillingMode types.BillingMode
+
 	// Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail.
 	// The value can be an alias name prefixed by alias/ , a fully specified ARN to an
 	// alias, a fully specified ARN to a key, or a globally unique identifier.
@@ -75,17 +91,19 @@ type CreateEventDataStoreInput struct {
 	// organization in Organizations.
 	OrganizationEnabled *bool
 
-	// The retention period of the event data store, in days. You can set a retention
-	// period of up to 2557 days, the equivalent of seven years. CloudTrail Lake
-	// determines whether to retain an event by checking if the eventTime of the event
-	// is within the specified retention period. For example, if you set a retention
-	// period of 90 days, CloudTrail will remove events when the eventTime is older
-	// than 90 days. If you plan to copy trail events to this event data store, we
-	// recommend that you consider both the age of the events that you want to copy as
-	// well as how long you want to keep the copied events in your event data store.
-	// For example, if you copy trail events that are 5 years old and specify a
-	// retention period of 7 years, the event data store will retain those events for
-	// two years.
+	// The retention period of the event data store, in days. If BillingMode is set to
+	// EXTENDABLE_RETENTION_PRICING , you can set a retention period of up to 3653
+	// days, the equivalent of 10 years. If BillingMode is set to
+	// FIXED_RETENTION_PRICING , you can set a retention period of up to 2557 days, the
+	// equivalent of seven years. CloudTrail Lake determines whether to retain an event
+	// by checking if the eventTime of the event is within the specified retention
+	// period. For example, if you set a retention period of 90 days, CloudTrail will
+	// remove events when the eventTime is older than 90 days. If you plan to copy
+	// trail events to this event data store, we recommend that you consider both the
+	// age of the events that you want to copy as well as how long you want to keep the
+	// copied events in your event data store. For example, if you copy trail events
+	// that are 5 years old and specify a retention period of 7 years, the event data
+	// store will retain those events for two years.
 	RetentionPeriod *int32
 
 	// Specifies whether the event data store should start ingesting live events. The
@@ -108,6 +126,9 @@ type CreateEventDataStoreOutput struct {
 	// The advanced event selectors that were used to select the events for the data
 	// store.
 	AdvancedEventSelectors []types.AdvancedEventSelector
+
+	// The billing mode for the event data store.
+	BillingMode types.BillingMode
 
 	// The timestamp that shows when the event data store was created.
 	CreatedTimestamp *time.Time

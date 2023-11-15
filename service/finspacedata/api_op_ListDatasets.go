@@ -13,6 +13,8 @@ import (
 )
 
 // Lists all of the active Datasets that a user has access to.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, optFns ...func(*Options)) (*ListDatasetsOutput, error) {
 	if params == nil {
 		params = &ListDatasetsInput{}

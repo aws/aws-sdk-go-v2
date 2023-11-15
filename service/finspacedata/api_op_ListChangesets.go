@@ -13,6 +13,8 @@ import (
 )
 
 // Lists the FinSpace Changesets for a Dataset.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) ListChangesets(ctx context.Context, params *ListChangesetsInput, optFns ...func(*Options)) (*ListChangesetsOutput, error) {
 	if params == nil {
 		params = &ListChangesetsInput{}

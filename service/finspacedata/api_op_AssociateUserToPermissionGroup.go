@@ -13,6 +13,8 @@ import (
 
 // Adds a user to a permission group to grant permissions for actions a user can
 // perform in FinSpace.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) AssociateUserToPermissionGroup(ctx context.Context, params *AssociateUserToPermissionGroupInput, optFns ...func(*Options)) (*AssociateUserToPermissionGroupOutput, error) {
 	if params == nil {
 		params = &AssociateUserToPermissionGroupInput{}

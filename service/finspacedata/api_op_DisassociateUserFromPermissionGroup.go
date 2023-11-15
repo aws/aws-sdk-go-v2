@@ -12,6 +12,8 @@ import (
 )
 
 // Removes a user from a permission group.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) DisassociateUserFromPermissionGroup(ctx context.Context, params *DisassociateUserFromPermissionGroupInput, optFns ...func(*Options)) (*DisassociateUserFromPermissionGroupOutput, error) {
 	if params == nil {
 		params = &DisassociateUserFromPermissionGroupInput{}

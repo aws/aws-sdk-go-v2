@@ -10,7 +10,7 @@ require (
 )
 
 require (
-	github.com/aws/smithy-go v1.16.0 // indirect
+	github.com/aws/smithy-go v1.17.0 // indirect
 	golang.org/x/text v0.4.0 // indirect
 )
 

@@ -13,6 +13,8 @@ import (
 )
 
 // Lists all available permission groups in FinSpace.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) ListPermissionGroups(ctx context.Context, params *ListPermissionGroupsInput, optFns ...func(*Options)) (*ListPermissionGroupsOutput, error) {
 	if params == nil {
 		params = &ListPermissionGroupsInput{}

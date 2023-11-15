@@ -4539,6 +4539,23 @@ func awsAwsquery_serializeDocumentInstanceIds(v []string, value query.Value) err
 	return nil
 }
 
+func awsAwsquery_serializeDocumentInstanceMaintenancePolicy(v *types.InstanceMaintenancePolicy, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MaxHealthyPercentage != nil {
+		objectKey := object.Key("MaxHealthyPercentage")
+		objectKey.Integer(*v.MaxHealthyPercentage)
+	}
+
+	if v.MinHealthyPercentage != nil {
+		objectKey := object.Key("MinHealthyPercentage")
+		objectKey.Integer(*v.MinHealthyPercentage)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentInstanceMetadataOptions(v *types.InstanceMetadataOptions, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -5528,6 +5545,11 @@ func awsAwsquery_serializeDocumentRefreshPreferences(v *types.RefreshPreferences
 		objectKey.Integer(*v.InstanceWarmup)
 	}
 
+	if v.MaxHealthyPercentage != nil {
+		objectKey := object.Key("MaxHealthyPercentage")
+		objectKey.Integer(*v.MaxHealthyPercentage)
+	}
+
 	if v.MinHealthyPercentage != nil {
 		objectKey := object.Key("MinHealthyPercentage")
 		objectKey.Integer(*v.MinHealthyPercentage)
@@ -6184,6 +6206,13 @@ func awsAwsquery_serializeOpDocumentCreateAutoScalingGroupInput(v *CreateAutoSca
 	if v.InstanceId != nil {
 		objectKey := object.Key("InstanceId")
 		objectKey.String(*v.InstanceId)
+	}
+
+	if v.InstanceMaintenancePolicy != nil {
+		objectKey := object.Key("InstanceMaintenancePolicy")
+		if err := awsAwsquery_serializeDocumentInstanceMaintenancePolicy(v.InstanceMaintenancePolicy, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.LaunchConfigurationName != nil {
@@ -7660,6 +7689,13 @@ func awsAwsquery_serializeOpDocumentUpdateAutoScalingGroupInput(v *UpdateAutoSca
 	if v.HealthCheckType != nil {
 		objectKey := object.Key("HealthCheckType")
 		objectKey.String(*v.HealthCheckType)
+	}
+
+	if v.InstanceMaintenancePolicy != nil {
+		objectKey := object.Key("InstanceMaintenancePolicy")
+		if err := awsAwsquery_serializeDocumentInstanceMaintenancePolicy(v.InstanceMaintenancePolicy, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.LaunchConfigurationName != nil {

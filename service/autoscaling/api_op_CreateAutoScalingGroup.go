@@ -153,6 +153,11 @@ type CreateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	InstanceId *string
 
+	// An instance maintenance policy. For more information, see Set instance
+	// maintenance policy (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
+	InstanceMaintenancePolicy *types.InstanceMaintenancePolicy
+
 	// The name of the launch configuration to use to launch instances. Conditional:
 	// You must specify either a launch template ( LaunchTemplate or
 	// MixedInstancesPolicy ) or a launch configuration ( LaunchConfigurationName or

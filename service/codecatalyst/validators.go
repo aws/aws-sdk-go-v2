@@ -330,6 +330,46 @@ func (m *validateOpGetSubscription) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetWorkflow struct {
+}
+
+func (*validateOpGetWorkflow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetWorkflow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetWorkflowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetWorkflowRun struct {
+}
+
+func (*validateOpGetWorkflowRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetWorkflowRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetWorkflowRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetWorkflowRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDevEnvironmentSessions struct {
 }
 
@@ -450,6 +490,46 @@ func (m *validateOpListSourceRepositoryBranches) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListWorkflowRuns struct {
+}
+
+func (*validateOpListWorkflowRuns) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListWorkflowRuns) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListWorkflowRunsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListWorkflowRunsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListWorkflows struct {
+}
+
+func (*validateOpListWorkflows) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListWorkflows) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListWorkflowsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListWorkflowsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartDevEnvironment struct {
 }
 
@@ -485,6 +565,26 @@ func (m *validateOpStartDevEnvironmentSession) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartDevEnvironmentSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartWorkflowRun struct {
+}
+
+func (*validateOpStartWorkflowRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartWorkflowRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartWorkflowRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartWorkflowRunInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -654,6 +754,14 @@ func addOpGetSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSubscription{}, middleware.After)
 }
 
+func addOpGetWorkflowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetWorkflow{}, middleware.After)
+}
+
+func addOpGetWorkflowRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetWorkflowRun{}, middleware.After)
+}
+
 func addOpListDevEnvironmentSessionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDevEnvironmentSessions{}, middleware.After)
 }
@@ -678,12 +786,24 @@ func addOpListSourceRepositoryBranchesValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpListSourceRepositoryBranches{}, middleware.After)
 }
 
+func addOpListWorkflowRunsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListWorkflowRuns{}, middleware.After)
+}
+
+func addOpListWorkflowsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListWorkflows{}, middleware.After)
+}
+
 func addOpStartDevEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartDevEnvironment{}, middleware.After)
 }
 
 func addOpStartDevEnvironmentSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartDevEnvironmentSession{}, middleware.After)
+}
+
+func addOpStartWorkflowRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartWorkflowRun{}, middleware.After)
 }
 
 func addOpStopDevEnvironmentValidationMiddleware(stack *middleware.Stack) error {
@@ -1170,6 +1290,48 @@ func validateOpGetSubscriptionInput(v *GetSubscriptionInput) error {
 	}
 }
 
+func validateOpGetWorkflowInput(v *GetWorkflowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetWorkflowInput"}
+	if v.SpaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceName"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetWorkflowRunInput(v *GetWorkflowRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetWorkflowRunInput"}
+	if v.SpaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceName"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListDevEnvironmentSessionsInput(v *ListDevEnvironmentSessionsInput) error {
 	if v == nil {
 		return nil
@@ -1198,9 +1360,6 @@ func validateOpListDevEnvironmentsInput(v *ListDevEnvironmentsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListDevEnvironmentsInput"}
 	if v.SpaceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SpaceName"))
-	}
-	if v.ProjectName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
 	if v.Filters != nil {
 		if err := validateFilters(v.Filters); err != nil {
@@ -1294,6 +1453,42 @@ func validateOpListSourceRepositoryBranchesInput(v *ListSourceRepositoryBranches
 	}
 }
 
+func validateOpListWorkflowRunsInput(v *ListWorkflowRunsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListWorkflowRunsInput"}
+	if v.SpaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceName"))
+	}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListWorkflowsInput(v *ListWorkflowsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListWorkflowsInput"}
+	if v.SpaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceName"))
+	}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartDevEnvironmentInput(v *StartDevEnvironmentInput) error {
 	if v == nil {
 		return nil
@@ -1335,6 +1530,27 @@ func validateOpStartDevEnvironmentSessionInput(v *StartDevEnvironmentSessionInpu
 		if err := validateDevEnvironmentSessionConfiguration(v.SessionConfiguration); err != nil {
 			invalidParams.AddNested("SessionConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartWorkflowRunInput(v *StartWorkflowRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartWorkflowRunInput"}
+	if v.SpaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceName"))
+	}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

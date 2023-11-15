@@ -2,6 +2,24 @@
 
 package types
 
+type EndpointManagement string
+
+// Enum values for EndpointManagement
+const (
+	EndpointManagementCustomer EndpointManagement = "CUSTOMER"
+	EndpointManagementService  EndpointManagement = "SERVICE"
+)
+
+// Values returns all known values for EndpointManagement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointManagement) Values() []EndpointManagement {
+	return []EndpointManagement{
+		"CUSTOMER",
+		"SERVICE",
+	}
+}
+
 type EnvironmentStatus string
 
 // Enum values for EnvironmentStatus
@@ -16,6 +34,7 @@ const (
 	EnvironmentStatusUpdateFailed     EnvironmentStatus = "UPDATE_FAILED"
 	EnvironmentStatusRollingBack      EnvironmentStatus = "ROLLING_BACK"
 	EnvironmentStatusCreatingSnapshot EnvironmentStatus = "CREATING_SNAPSHOT"
+	EnvironmentStatusPending          EnvironmentStatus = "PENDING"
 )
 
 // Values returns all known values for EnvironmentStatus. Note that this can be
@@ -33,6 +52,7 @@ func (EnvironmentStatus) Values() []EnvironmentStatus {
 		"UPDATE_FAILED",
 		"ROLLING_BACK",
 		"CREATING_SNAPSHOT",
+		"PENDING",
 	}
 }
 

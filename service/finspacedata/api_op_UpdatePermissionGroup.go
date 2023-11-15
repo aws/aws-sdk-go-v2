@@ -14,6 +14,8 @@ import (
 
 // Modifies the details of a permission group. You cannot modify a
 // permissionGroupID .
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) UpdatePermissionGroup(ctx context.Context, params *UpdatePermissionGroupInput, optFns ...func(*Options)) (*UpdatePermissionGroupOutput, error) {
 	if params == nil {
 		params = &UpdatePermissionGroupInput{}

@@ -48,6 +48,9 @@ type RestoreEventDataStoreOutput struct {
 	// The advanced event selectors that were used to select events.
 	AdvancedEventSelectors []types.AdvancedEventSelector
 
+	// The billing mode for the event data store.
+	BillingMode types.BillingMode
+
 	// The timestamp of an event data store's creation.
 	CreatedTimestamp *time.Time
 

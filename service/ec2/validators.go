@@ -6050,6 +6050,26 @@ func (m *validateOpImportVolume) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpLockSnapshot struct {
+}
+
+func (*validateOpLockSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpLockSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*LockSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpLockSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyAddressAttribute struct {
 }
 
@@ -8510,6 +8530,26 @@ func (m *validateOpUnassignPrivateNatGatewayAddress) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUnlockSnapshot struct {
+}
+
+func (*validateOpUnlockSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUnlockSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UnlockSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUnlockSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUnmonitorInstances struct {
 }
 
@@ -9758,6 +9798,10 @@ func addOpImportVolumeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportVolume{}, middleware.After)
 }
 
+func addOpLockSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpLockSnapshot{}, middleware.After)
+}
+
 func addOpModifyAddressAttributeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyAddressAttribute{}, middleware.After)
 }
@@ -10248,6 +10292,10 @@ func addOpUnassignPrivateIpAddressesValidationMiddleware(stack *middleware.Stack
 
 func addOpUnassignPrivateNatGatewayAddressValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUnassignPrivateNatGatewayAddress{}, middleware.After)
+}
+
+func addOpUnlockSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUnlockSnapshot{}, middleware.After)
 }
 
 func addOpUnmonitorInstancesValidationMiddleware(stack *middleware.Stack) error {
@@ -16196,6 +16244,24 @@ func validateOpImportVolumeInput(v *ImportVolumeInput) error {
 	}
 }
 
+func validateOpLockSnapshotInput(v *LockSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LockSnapshotInput"}
+	if v.SnapshotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotId"))
+	}
+	if len(v.LockMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LockMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpModifyAddressAttributeInput(v *ModifyAddressAttributeInput) error {
 	if v == nil {
 		return nil
@@ -18275,6 +18341,21 @@ func validateOpUnassignPrivateNatGatewayAddressInput(v *UnassignPrivateNatGatewa
 	}
 	if v.PrivateIpAddresses == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PrivateIpAddresses"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUnlockSnapshotInput(v *UnlockSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UnlockSnapshotInput"}
+	if v.SnapshotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

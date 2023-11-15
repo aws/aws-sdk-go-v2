@@ -3625,6 +3625,7 @@ const (
 	InstanceTypeR7i16xlarge     InstanceType = "r7i.16xlarge"
 	InstanceTypeR7i24xlarge     InstanceType = "r7i.24xlarge"
 	InstanceTypeR7i48xlarge     InstanceType = "r7i.48xlarge"
+	InstanceTypeDl2q24xlarge    InstanceType = "dl2q.24xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -4403,6 +4404,7 @@ func (InstanceType) Values() []InstanceType {
 		"r7i.16xlarge",
 		"r7i.24xlarge",
 		"r7i.48xlarge",
+		"dl2q.24xlarge",
 	}
 }
 
@@ -5293,6 +5295,46 @@ func (LocationType) Values() []LocationType {
 		"availability-zone",
 		"availability-zone-id",
 		"outpost",
+	}
+}
+
+type LockMode string
+
+// Enum values for LockMode
+const (
+	LockModeCompliance LockMode = "compliance"
+	LockModeGovernance LockMode = "governance"
+)
+
+// Values returns all known values for LockMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LockMode) Values() []LockMode {
+	return []LockMode{
+		"compliance",
+		"governance",
+	}
+}
+
+type LockState string
+
+// Enum values for LockState
+const (
+	LockStateCompliance        LockState = "compliance"
+	LockStateGovernance        LockState = "governance"
+	LockStateComplianceCooloff LockState = "compliance-cooloff"
+	LockStateExpired           LockState = "expired"
+)
+
+// Values returns all known values for LockState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LockState) Values() []LockState {
+	return []LockState{
+		"compliance",
+		"governance",
+		"compliance-cooloff",
+		"expired",
 	}
 }
 

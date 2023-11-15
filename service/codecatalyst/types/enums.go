@@ -11,6 +11,7 @@ const (
 	ComparisonOperatorGreaterThanOrEquals ComparisonOperator = "GE"
 	ComparisonOperatorLessThan            ComparisonOperator = "LT"
 	ComparisonOperatorLessThanOrEquals    ComparisonOperator = "LE"
+	ComparisonOperatorBeginsWith          ComparisonOperator = "BEGINS_WITH"
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
@@ -23,6 +24,7 @@ func (ComparisonOperator) Values() []ComparisonOperator {
 		"GE",
 		"LT",
 		"LE",
+		"BEGINS_WITH",
 	}
 }
 
@@ -79,6 +81,7 @@ type FilterKey string
 // Enum values for FilterKey
 const (
 	FilterKeyHasAccessTo FilterKey = "hasAccessTo"
+	FilterKeyName        FilterKey = "name"
 )
 
 // Values returns all known values for FilterKey. Note that this can be expanded
@@ -87,6 +90,7 @@ const (
 func (FilterKey) Values() []FilterKey {
 	return []FilterKey{
 		"hasAccessTo",
+		"name",
 	}
 }
 
@@ -147,5 +151,79 @@ func (UserType) Values() []UserType {
 		"USER",
 		"AWS_ACCOUNT",
 		"UNKNOWN",
+	}
+}
+
+type WorkflowRunMode string
+
+// Enum values for WorkflowRunMode
+const (
+	WorkflowRunModeQueued     WorkflowRunMode = "QUEUED"
+	WorkflowRunModeParallel   WorkflowRunMode = "PARALLEL"
+	WorkflowRunModeSuperseded WorkflowRunMode = "SUPERSEDED"
+)
+
+// Values returns all known values for WorkflowRunMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkflowRunMode) Values() []WorkflowRunMode {
+	return []WorkflowRunMode{
+		"QUEUED",
+		"PARALLEL",
+		"SUPERSEDED",
+	}
+}
+
+type WorkflowRunStatus string
+
+// Enum values for WorkflowRunStatus
+const (
+	WorkflowRunStatusSucceeded    WorkflowRunStatus = "SUCCEEDED"
+	WorkflowRunStatusFailed       WorkflowRunStatus = "FAILED"
+	WorkflowRunStatusStopped      WorkflowRunStatus = "STOPPED"
+	WorkflowRunStatusSuperseded   WorkflowRunStatus = "SUPERSEDED"
+	WorkflowRunStatusCancelled    WorkflowRunStatus = "CANCELLED"
+	WorkflowRunStatusNotRun       WorkflowRunStatus = "NOT_RUN"
+	WorkflowRunStatusValidating   WorkflowRunStatus = "VALIDATING"
+	WorkflowRunStatusProvisioning WorkflowRunStatus = "PROVISIONING"
+	WorkflowRunStatusInProgress   WorkflowRunStatus = "IN_PROGRESS"
+	WorkflowRunStatusStopping     WorkflowRunStatus = "STOPPING"
+	WorkflowRunStatusAbandoned    WorkflowRunStatus = "ABANDONED"
+)
+
+// Values returns all known values for WorkflowRunStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkflowRunStatus) Values() []WorkflowRunStatus {
+	return []WorkflowRunStatus{
+		"SUCCEEDED",
+		"FAILED",
+		"STOPPED",
+		"SUPERSEDED",
+		"CANCELLED",
+		"NOT_RUN",
+		"VALIDATING",
+		"PROVISIONING",
+		"IN_PROGRESS",
+		"STOPPING",
+		"ABANDONED",
+	}
+}
+
+type WorkflowStatus string
+
+// Enum values for WorkflowStatus
+const (
+	WorkflowStatusInvalid WorkflowStatus = "INVALID"
+	WorkflowStatusActive  WorkflowStatus = "ACTIVE"
+)
+
+// Values returns all known values for WorkflowStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkflowStatus) Values() []WorkflowStatus {
+	return []WorkflowStatus{
+		"INVALID",
+		"ACTIVE",
 	}
 }

@@ -1,0 +1,8 @@
+{
+    "id": "9eb0690f-3e99-4311-9548-e2bd9be18f5d",
+    "type": "feature",
+    "description": "The custom domain name SDK for Amazon Redshift provisioned clusters is updated with additional required parameters for modify and delete operations. Additionally, users can provide domain names with longer top-level domains.",
+    "modules": [
+        "service/redshift"
+    ]
+}

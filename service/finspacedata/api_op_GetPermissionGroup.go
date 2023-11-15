@@ -13,6 +13,8 @@ import (
 )
 
 // Retrieves the details of a specific permission group.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) GetPermissionGroup(ctx context.Context, params *GetPermissionGroupInput, optFns ...func(*Options)) (*GetPermissionGroupOutput, error) {
 	if params == nil {
 		params = &GetPermissionGroupInput{}

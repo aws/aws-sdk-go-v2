@@ -13,6 +13,8 @@ import (
 )
 
 // Update your FinSpace environment.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) UpdateEnvironment(ctx context.Context, params *UpdateEnvironmentInput, optFns ...func(*Options)) (*UpdateEnvironmentOutput, error) {
 	if params == nil {
 		params = &UpdateEnvironmentInput{}

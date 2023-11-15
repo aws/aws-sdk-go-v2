@@ -9508,6 +9508,57 @@ type LocalGatewayVirtualInterfaceGroup struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a locked snapshot.
+type LockedSnapshotsInfo struct {
+
+	// The compliance mode cooling-off period, in hours.
+	CoolOffPeriod *int32
+
+	// The date and time at which the compliance mode cooling-off period expires, in
+	// the UTC time zone ( YYYY-MM-DDThh:mm:ss.sssZ ).
+	CoolOffPeriodExpiresOn *time.Time
+
+	// The date and time at which the snapshot was locked, in the UTC time zone (
+	// YYYY-MM-DDThh:mm:ss.sssZ ).
+	LockCreatedOn *time.Time
+
+	// The period of time for which the snapshot is locked, in days.
+	LockDuration *int32
+
+	// The date and time at which the lock duration started, in the UTC time zone (
+	// YYYY-MM-DDThh:mm:ss.sssZ ). If you lock a snapshot that is in the pending
+	// state, the lock duration starts only once the snapshot enters the completed
+	// state.
+	LockDurationStartTime *time.Time
+
+	// The date and time at which the lock will expire, in the UTC time zone (
+	// YYYY-MM-DDThh:mm:ss.sssZ ).
+	LockExpiresOn *time.Time
+
+	// The state of the snapshot lock. Valid states include:
+	//   - compliance-cooloff - The snapshot has been locked in compliance mode but it
+	//   is still within the cooling-off period. The snapshot can't be deleted, but it
+	//   can be unlocked and the lock settings can be modified by users with appropriate
+	//   permissions.
+	//   - governance - The snapshot is locked in governance mode. The snapshot can't
+	//   be deleted, but it can be unlocked and the lock settings can be modified by
+	//   users with appropriate permissions.
+	//   - compliance - The snapshot is locked in compliance mode and the cooling-off
+	//   period has expired. The snapshot can't be unlocked or deleted. The lock duration
+	//   can only be increased by users with appropriate permissions.
+	//   - expired - The snapshot was locked in compliance or governance mode but the
+	//   lock duration has expired. The snapshot is not locked and can be deleted.
+	LockState LockState
+
+	// The account ID of the Amazon Web Services account that owns the snapshot.
+	OwnerId *string
+
+	// The ID of the snapshot.
+	SnapshotId *string
+
+	noSmithyDocumentSerde
+}
+
 // Details for Site-to-Site VPN tunnel endpoint maintenance events.
 type MaintenanceDetails struct {
 

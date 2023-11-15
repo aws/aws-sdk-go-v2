@@ -178,6 +178,11 @@ func awsRestjson1_serializeOpDocumentCreateEnvironmentInput(v *CreateEnvironment
 		ok.String(*v.DagS3Path)
 	}
 
+	if len(v.EndpointManagement) > 0 {
+		ok := object.Key("EndpointManagement")
+		ok.String(string(v.EndpointManagement))
+	}
+
 	if v.EnvironmentClass != nil {
 		ok := object.Key("EnvironmentClass")
 		ok.String(*v.EnvironmentClass)

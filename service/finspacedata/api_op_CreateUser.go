@@ -13,6 +13,8 @@ import (
 )
 
 // Creates a new user in FinSpace.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
 	if params == nil {
 		params = &CreateUserInput{}

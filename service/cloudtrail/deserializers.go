@@ -15201,6 +15201,15 @@ func awsAwsjson11_deserializeOpDocumentCreateEventDataStoreOutput(v **CreateEven
 				return err
 			}
 
+		case "BillingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
+			}
+
 		case "CreatedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15850,6 +15859,15 @@ func awsAwsjson11_deserializeOpDocumentGetEventDataStoreOutput(v **GetEventDataS
 		case "AdvancedEventSelectors":
 			if err := awsAwsjson11_deserializeDocumentAdvancedEventSelectors(&sv.AdvancedEventSelectors, value); err != nil {
 				return err
+			}
+
+		case "BillingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
 			}
 
 		case "CreatedTimestamp":
@@ -17245,6 +17263,15 @@ func awsAwsjson11_deserializeOpDocumentRestoreEventDataStoreOutput(v **RestoreEv
 				return err
 			}
 
+		case "BillingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
+			}
+
 		case "CreatedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -17865,6 +17892,15 @@ func awsAwsjson11_deserializeOpDocumentUpdateEventDataStoreOutput(v **UpdateEven
 		case "AdvancedEventSelectors":
 			if err := awsAwsjson11_deserializeDocumentAdvancedEventSelectors(&sv.AdvancedEventSelectors, value); err != nil {
 				return err
+			}
+
+		case "BillingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
 			}
 
 		case "CreatedTimestamp":

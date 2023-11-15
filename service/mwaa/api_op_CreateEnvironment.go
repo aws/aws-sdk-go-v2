@@ -83,8 +83,19 @@ type CreateEnvironmentInput struct {
 	// The Apache Airflow version for your environment. If no value is specified, it
 	// defaults to the latest version. For more information, see Apache Airflow
 	// versions on Amazon Managed Workflows for Apache Airflow (MWAA) (https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html)
-	// . Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2 .
+	// . Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2
 	AirflowVersion *string
+
+	// Defines whether the VPC endpoints configured for the environment are created,
+	// and managed, by the customer or by Amazon MWAA. If set to SERVICE , Amazon MWAA
+	// will create and manage the required VPC endpoints in your VPC. If set to
+	// CUSTOMER , you must create, and manage, the VPC endpoints for your VPC. If you
+	// choose to create an environment in a shared VPC, you must set this value to
+	// CUSTOMER . In a shared VPC deployment, the environment will remain in PENDING
+	// status until you create the VPC endpoints. If you do not take action to create
+	// the endpoints within 72 hours, the status will change to CREATE_FAILED . You can
+	// delete the failed environment and create a new one.
+	EndpointManagement types.EndpointManagement
 
 	// The environment class type. Valid values: mw1.small , mw1.medium , mw1.large .
 	// For more information, see Amazon MWAA environment class (https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html)
@@ -170,8 +181,8 @@ type CreateEnvironmentInput struct {
 	// .
 	Tags map[string]string
 
-	// The Apache Airflow Web server access mode. For more information, see Apache
-	// Airflow access modes (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html)
+	// Defines the access mode for the Apache Airflow web server. For more
+	// information, see Apache Airflow access modes (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html)
 	// .
 	WebserverAccessMode types.WebserverAccessMode
 

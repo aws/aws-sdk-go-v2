@@ -13,6 +13,8 @@ import (
 )
 
 // Creates a new Changeset in a FinSpace Dataset.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) CreateChangeset(ctx context.Context, params *CreateChangesetInput, optFns ...func(*Options)) (*CreateChangesetOutput, error) {
 	if params == nil {
 		params = &CreateChangesetInput{}

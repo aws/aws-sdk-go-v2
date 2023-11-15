@@ -13,6 +13,8 @@ import (
 )
 
 // Creates a Dataview for a Dataset.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) CreateDataView(ctx context.Context, params *CreateDataViewInput, optFns ...func(*Options)) (*CreateDataViewOutput, error) {
 	if params == nil {
 		params = &CreateDataViewInput{}

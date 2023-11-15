@@ -520,4 +520,143 @@ type UserIdentity struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a workflow definition file.
+type WorkflowDefinition struct {
+
+	// The path to the workflow definition file stored in the source repository for
+	// the project, including the file name.
+	//
+	// This member is required.
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a workflow definition.
+type WorkflowDefinitionSummary struct {
+
+	// The path to the workflow definition file stored in the source repository for
+	// the project, including the file name.
+	//
+	// This member is required.
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
+// Information used to sort workflow runs in the returned list.
+type WorkflowRunSortCriteria struct {
+	noSmithyDocumentSerde
+}
+
+// Information about the status of a workflow run.
+type WorkflowRunStatusReason struct {
+	noSmithyDocumentSerde
+}
+
+// Information about a workflow run.
+type WorkflowRunSummary struct {
+
+	// The system-generated unique ID of the workflow run.
+	//
+	// This member is required.
+	Id *string
+
+	// The date and time the workflow was last updated, in coordinated universal time
+	// (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	//
+	// This member is required.
+	LastUpdatedTime *time.Time
+
+	// The date and time the workflow run began, in coordinated universal time (UTC)
+	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// .
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The status of the workflow run.
+	//
+	// This member is required.
+	Status WorkflowRunStatus
+
+	// The system-generated unique ID of the workflow.
+	//
+	// This member is required.
+	WorkflowId *string
+
+	// The name of the workflow.
+	//
+	// This member is required.
+	WorkflowName *string
+
+	// The date and time the workflow run ended, in coordinated universal time (UTC)
+	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	EndTime *time.Time
+
+	// The reasons for the workflow run status.
+	StatusReasons []WorkflowRunStatusReason
+
+	noSmithyDocumentSerde
+}
+
+// Information used to sort workflows in the returned list.
+type WorkflowSortCriteria struct {
+	noSmithyDocumentSerde
+}
+
+// Information about a workflow.
+type WorkflowSummary struct {
+
+	// The date and time the workflow was created, in coordinated universal time (UTC)
+	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// Information about the workflow definition file.
+	//
+	// This member is required.
+	Definition *WorkflowDefinitionSummary
+
+	// The system-generated unique ID of a workflow.
+	//
+	// This member is required.
+	Id *string
+
+	// The date and time the workflow was last updated, in coordinated universal time
+	// (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	//
+	// This member is required.
+	LastUpdatedTime *time.Time
+
+	// The name of the workflow.
+	//
+	// This member is required.
+	Name *string
+
+	// The run mode of the workflow.
+	//
+	// This member is required.
+	RunMode WorkflowRunMode
+
+	// The name of the branch of the source repository where the workflow definition
+	// file is stored.
+	//
+	// This member is required.
+	SourceBranchName *string
+
+	// The name of the source repository where the workflow definition file is stored.
+	//
+	// This member is required.
+	SourceRepositoryName *string
+
+	// The status of the workflow.
+	//
+	// This member is required.
+	Status WorkflowStatus
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde

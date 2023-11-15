@@ -12,6 +12,8 @@ import (
 )
 
 // Updates a FinSpace Changeset.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) UpdateChangeset(ctx context.Context, params *UpdateChangesetInput, optFns ...func(*Options)) (*UpdateChangesetOutput, error) {
 	if params == nil {
 		params = &UpdateChangesetInput{}

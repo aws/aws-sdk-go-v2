@@ -14,6 +14,8 @@ import (
 
 // Creates a group of permissions for various actions that a user can perform in
 // FinSpace.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) CreatePermissionGroup(ctx context.Context, params *CreatePermissionGroupInput, optFns ...func(*Options)) (*CreatePermissionGroupOutput, error) {
 	if params == nil {
 		params = &CreatePermissionGroupInput{}

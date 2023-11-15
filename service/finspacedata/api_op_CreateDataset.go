@@ -13,6 +13,8 @@ import (
 )
 
 // Creates a new FinSpace Dataset.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}

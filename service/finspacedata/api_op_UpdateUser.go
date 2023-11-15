@@ -14,6 +14,8 @@ import (
 
 // Modifies the details of the specified user. You cannot update the userId for a
 // user.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns ...func(*Options)) (*UpdateUserOutput, error) {
 	if params == nil {
 		params = &UpdateUserInput{}

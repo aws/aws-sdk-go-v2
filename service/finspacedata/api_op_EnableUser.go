@@ -12,6 +12,8 @@ import (
 )
 
 // Allows the specified user to access the FinSpace web application and API.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) EnableUser(ctx context.Context, params *EnableUserInput, optFns ...func(*Options)) (*EnableUserOutput, error) {
 	if params == nil {
 		params = &EnableUserInput{}

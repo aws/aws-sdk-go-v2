@@ -9710,6 +9710,11 @@ func awsAwsquery_serializeOpDocumentDeleteCustomDomainAssociationInput(v *Delete
 		objectKey.String(*v.ClusterIdentifier)
 	}
 
+	if v.CustomDomainName != nil {
+		objectKey := object.Key("CustomDomainName")
+		objectKey.String(*v.CustomDomainName)
+	}
+
 	return nil
 }
 

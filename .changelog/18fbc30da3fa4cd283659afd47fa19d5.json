@@ -1,0 +1,8 @@
+{
+    "id": "18fbc30d-a3fa-4cd2-8365-9afd47fa19d5",
+    "type": "feature",
+    "description": "Add Java 21 (java21) support to AWS Lambda",
+    "modules": [
+        "service/lambda"
+    ]
+}

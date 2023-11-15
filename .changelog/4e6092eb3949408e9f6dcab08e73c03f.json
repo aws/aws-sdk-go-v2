@@ -1,0 +1,8 @@
+{
+    "id": "4e6092eb-3949-408e-9f6d-cab08e73c03f",
+    "type": "feature",
+    "description": "Adding deprecated trait to APIs in this name space.",
+    "modules": [
+        "service/finspacedata"
+    ]
+}

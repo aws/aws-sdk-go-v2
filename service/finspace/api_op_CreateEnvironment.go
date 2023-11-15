@@ -13,6 +13,8 @@ import (
 )
 
 // Create a new FinSpace environment.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmentInput, optFns ...func(*Options)) (*CreateEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentInput{}

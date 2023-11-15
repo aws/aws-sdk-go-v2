@@ -13,6 +13,8 @@ import (
 )
 
 // Gets information about a Dataview.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) GetDataView(ctx context.Context, params *GetDataViewInput, optFns ...func(*Options)) (*GetDataViewOutput, error) {
 	if params == nil {
 		params = &GetDataViewInput{}

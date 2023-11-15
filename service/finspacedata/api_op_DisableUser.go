@@ -12,6 +12,8 @@ import (
 )
 
 // Denies access to the FinSpace web application and API for the specified user.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) DisableUser(ctx context.Context, params *DisableUserInput, optFns ...func(*Options)) (*DisableUserOutput, error) {
 	if params == nil {
 		params = &DisableUserInput{}

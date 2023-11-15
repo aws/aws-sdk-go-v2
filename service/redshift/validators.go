@@ -3044,6 +3044,9 @@ func validateOpDeleteCustomDomainAssociationInput(v *DeleteCustomDomainAssociati
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
+	if v.CustomDomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomDomainName"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3675,6 +3678,12 @@ func validateOpModifyCustomDomainAssociationInput(v *ModifyCustomDomainAssociati
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyCustomDomainAssociationInput"}
+	if v.CustomDomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomDomainName"))
+	}
+	if v.CustomDomainCertificateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomDomainCertificateArn"))
+	}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}

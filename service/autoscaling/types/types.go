@@ -185,6 +185,9 @@ type AutoScalingGroup struct {
 	// The duration of the health check grace period, in seconds.
 	HealthCheckGracePeriod *int32
 
+	// An instance maintenance policy.
+	InstanceMaintenancePolicy *InstanceMaintenancePolicy
+
 	// The EC2 instances associated with the group.
 	Instances []Instance
 
@@ -645,6 +648,31 @@ type Instance struct {
 	// The number of capacity units contributed by the instance based on its instance
 	// type. Valid Range: Minimum value of 1. Maximum value of 999.
 	WeightedCapacity *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes an instance maintenance policy. For more information, see Set
+// instance maintenance policy (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html)
+// in the Amazon EC2 Auto Scaling User Guide.
+type InstanceMaintenancePolicy struct {
+
+	// Specifies the upper threshold as a percentage of the desired capacity of the
+	// Auto Scaling group. It represents the maximum percentage of the group that can
+	// be in service and healthy, or pending, to support your workload when replacing
+	// instances. Value range is 100 to 200. After it's set, a value of -1 will clear
+	// the previously set value. Both MinHealthyPercentage and MaxHealthyPercentage
+	// must be specified, and the difference between them cannot be greater than 100. A
+	// large range increases the number of instances that can be replaced at the same
+	// time.
+	MaxHealthyPercentage *int32
+
+	// Specifies the lower threshold as a percentage of the desired capacity of the
+	// Auto Scaling group. It represents the minimum percentage of the group to keep in
+	// service, healthy, and ready to use to support your workload when replacing
+	// instances. Value range is 0 to 100. After it's set, a value of -1 will clear
+	// the previously set value.
+	MinHealthyPercentage *int32
 
 	noSmithyDocumentSerde
 }
@@ -2066,13 +2094,23 @@ type RefreshPreferences struct {
 	// or the HealthCheckGracePeriod property otherwise.
 	InstanceWarmup *int32
 
-	// The amount of capacity in the Auto Scaling group that must pass your group's
-	// health checks to allow the operation to continue. The value is expressed as a
-	// percentage of the desired capacity of the Auto Scaling group (rounded up to the
-	// nearest integer). The default is 90 . Setting the minimum healthy percentage to
-	// 100 percent limits the rate of replacement to one instance at a time. In
-	// contrast, setting it to 0 percent has the effect of replacing all instances at
-	// the same time.
+	// Specifies the maximum percentage of the group that can be in service and
+	// healthy, or pending, to support your workload when replacing instances. The
+	// value is expressed as a percentage of the desired capacity of the Auto Scaling
+	// group. Value range is 100 to 200. If you specify MaxHealthyPercentage , you must
+	// also specify MinHealthyPercentage , and the difference between them cannot be
+	// greater than 100. A larger range increases the number of instances that can be
+	// replaced at the same time. If you do not specify this property, the default is
+	// 100 percent, or the percentage set in the instance maintenance policy for the
+	// Auto Scaling group, if defined.
+	MaxHealthyPercentage *int32
+
+	// Specifies the minimum percentage of the group to keep in service, healthy, and
+	// ready to use to support your workload to allow the operation to continue. The
+	// value is expressed as a percentage of the desired capacity of the Auto Scaling
+	// group. Value range is 0 to 100. If you do not specify this property, the default
+	// is 90 percent, or the percentage set in the instance maintenance policy for the
+	// Auto Scaling group, if defined.
 	MinHealthyPercentage *int32
 
 	// Choose the behavior that you want Amazon EC2 Auto Scaling to use if instances

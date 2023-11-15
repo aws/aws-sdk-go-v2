@@ -29,11 +29,6 @@ func (c *Client) ListDevEnvironments(ctx context.Context, params *ListDevEnviron
 
 type ListDevEnvironmentsInput struct {
 
-	// The name of the project in the space.
-	//
-	// This member is required.
-	ProjectName *string
-
 	// The name of the space.
 	//
 	// This member is required.
@@ -50,6 +45,9 @@ type ListDevEnvironmentsInput struct {
 	// A token returned from a call to this API to indicate the next batch of results
 	// to return, if any.
 	NextToken *string
+
+	// The name of the project in the space.
+	ProjectName *string
 
 	noSmithyDocumentSerde
 }

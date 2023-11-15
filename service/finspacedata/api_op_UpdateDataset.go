@@ -13,6 +13,8 @@ import (
 )
 
 // Updates a FinSpace Dataset.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) UpdateDataset(ctx context.Context, params *UpdateDatasetInput, optFns ...func(*Options)) (*UpdateDatasetOutput, error) {
 	if params == nil {
 		params = &UpdateDatasetInput{}

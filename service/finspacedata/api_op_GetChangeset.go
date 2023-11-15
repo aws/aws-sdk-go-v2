@@ -13,6 +13,8 @@ import (
 )
 
 // Get information about a Changeset.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) GetChangeset(ctx context.Context, params *GetChangesetInput, optFns ...func(*Options)) (*GetChangesetOutput, error) {
 	if params == nil {
 		params = &GetChangesetInput{}

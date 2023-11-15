@@ -12,6 +12,8 @@ import (
 )
 
 // Deletes a permission group. This action is irreversible.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) DeletePermissionGroup(ctx context.Context, params *DeletePermissionGroupInput, optFns ...func(*Options)) (*DeletePermissionGroupOutput, error) {
 	if params == nil {
 		params = &DeletePermissionGroupInput{}

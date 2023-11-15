@@ -8363,6 +8363,12 @@ func awsAwsquery_deserializeDocumentAutoScalingGroup(v **types.AutoScalingGroup,
 				sv.HealthCheckType = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("InstanceMaintenancePolicy", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentInstanceMaintenancePolicy(&sv.InstanceMaintenancePolicy, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("Instances", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentInstances(&sv.Instances, nodeDecoder); err != nil {
@@ -10454,6 +10460,76 @@ func awsAwsquery_deserializeDocumentInstanceGenerationsUnwrapped(v *[]types.Inst
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentInstanceMaintenancePolicy(v **types.InstanceMaintenancePolicy, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.InstanceMaintenancePolicy
+	if *v == nil {
+		sv = &types.InstanceMaintenancePolicy{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("MaxHealthyPercentage", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxHealthyPercentage = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("MinHealthyPercentage", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MinHealthyPercentage = ptr.Int32(int32(i64))
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentInstanceMetadataOptions(v **types.InstanceMetadataOptions, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15209,6 +15285,23 @@ func awsAwsquery_deserializeDocumentRefreshPreferences(v **types.RefreshPreferen
 					return err
 				}
 				sv.InstanceWarmup = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("MaxHealthyPercentage", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxHealthyPercentage = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("MinHealthyPercentage", t.Name.Local):

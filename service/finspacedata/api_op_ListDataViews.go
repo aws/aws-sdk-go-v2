@@ -13,6 +13,8 @@ import (
 )
 
 // Lists all available Dataviews for a Dataset.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) ListDataViews(ctx context.Context, params *ListDataViewsInput, optFns ...func(*Options)) (*ListDataViewsOutput, error) {
 	if params == nil {
 		params = &ListDataViewsInput{}

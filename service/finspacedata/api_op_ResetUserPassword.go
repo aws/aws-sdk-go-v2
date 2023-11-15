@@ -14,6 +14,8 @@ import (
 // Resets the password for a specified user ID and generates a temporary one. Only
 // a superuser can reset password for other users. Resetting the password
 // immediately invalidates the previous password associated with the user.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) ResetUserPassword(ctx context.Context, params *ResetUserPasswordInput, optFns ...func(*Options)) (*ResetUserPasswordOutput, error) {
 	if params == nil {
 		params = &ResetUserPasswordInput{}

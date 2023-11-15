@@ -134,6 +134,11 @@ type UpdateAutoScalingGroupInput struct {
 	// value that was previously set.
 	HealthCheckType *string
 
+	// An instance maintenance policy. For more information, see Set instance
+	// maintenance policy (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
+	InstanceMaintenancePolicy *types.InstanceMaintenancePolicy
+
 	// The name of the launch configuration. If you specify LaunchConfigurationName in
 	// your update request, you can't specify LaunchTemplate or MixedInstancesPolicy .
 	LaunchConfigurationName *string

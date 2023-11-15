@@ -3026,6 +3026,11 @@ func awsAwsjson11_serializeOpDocumentCreateEventDataStoreInput(v *CreateEventDat
 		}
 	}
 
+	if len(v.BillingMode) > 0 {
+		ok := object.Key("BillingMode")
+		ok.String(string(v.BillingMode))
+	}
+
 	if v.KmsKeyId != nil {
 		ok := object.Key("KmsKeyId")
 		ok.String(*v.KmsKeyId)
@@ -3854,6 +3859,11 @@ func awsAwsjson11_serializeOpDocumentUpdateEventDataStoreInput(v *UpdateEventDat
 		if err := awsAwsjson11_serializeDocumentAdvancedEventSelectors(v.AdvancedEventSelectors, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.BillingMode) > 0 {
+		ok := object.Key("BillingMode")
+		ok.String(string(v.BillingMode))
 	}
 
 	if v.EventDataStore != nil {

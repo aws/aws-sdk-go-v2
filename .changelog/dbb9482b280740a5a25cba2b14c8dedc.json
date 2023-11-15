@@ -1,0 +1,8 @@
+{
+    "id": "dbb9482b-2807-40a5-a25c-ba2b14c8dedc",
+    "type": "feature",
+    "description": "This release introduces Instance Maintenance Policy, a new EC2 Auto Scaling capability that allows customers to define whether instances are launched before or after existing instances are terminated during instance replacement operations.",
+    "modules": [
+        "service/autoscaling"
+    ]
+}

@@ -34,6 +34,11 @@ type DeleteCustomDomainAssociationInput struct {
 	// This member is required.
 	ClusterIdentifier *string
 
+	// The custom domain name for the custom domain association.
+	//
+	// This member is required.
+	CustomDomainName *string
+
 	noSmithyDocumentSerde
 }
 

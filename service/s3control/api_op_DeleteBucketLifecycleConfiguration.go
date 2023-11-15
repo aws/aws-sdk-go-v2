@@ -23,9 +23,9 @@ import (
 // Your objects never expire, and Amazon S3 on Outposts no longer automatically
 // deletes any objects on the basis of rules contained in the deleted lifecycle
 // configuration. For more information, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
-// in Amazon S3 User Guide. To use this action, you must have permission to perform
-// the s3-outposts:DeleteLifecycleConfiguration action. By default, the bucket
-// owner has this permission and the Outposts bucket owner can grant this
+// in Amazon S3 User Guide. To use this operation, you must have permission to
+// perform the s3-outposts:PutLifecycleConfiguration action. By default, the
+// bucket owner has this permission and the Outposts bucket owner can grant this
 // permission to others. All Amazon S3 on Outposts REST API requests for this
 // action require an additional parameter of x-amz-outpost-id to be passed with
 // the request. In addition, you must use an S3 on Outposts endpoint hostname

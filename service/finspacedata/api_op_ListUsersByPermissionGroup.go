@@ -13,6 +13,8 @@ import (
 )
 
 // Lists details of all the users in a specific permission group.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) ListUsersByPermissionGroup(ctx context.Context, params *ListUsersByPermissionGroupInput, optFns ...func(*Options)) (*ListUsersByPermissionGroupOutput, error) {
 	if params == nil {
 		params = &ListUsersByPermissionGroupInput{}

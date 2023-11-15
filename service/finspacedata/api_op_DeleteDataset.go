@@ -12,6 +12,8 @@ import (
 )
 
 // Deletes a FinSpace Dataset.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, optFns ...func(*Options)) (*DeleteDatasetOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetInput{}

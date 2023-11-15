@@ -1429,6 +1429,172 @@ func awsRestjson1_serializeOpHttpBindingsGetUserDetailsInput(v *GetUserDetailsIn
 	return nil
 }
 
+type awsRestjson1_serializeOpGetWorkflow struct {
+}
+
+func (*awsRestjson1_serializeOpGetWorkflow) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetWorkflow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetWorkflowInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/spaces/{spaceName}/projects/{projectName}/workflows/{id}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetWorkflowInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetWorkflowInput(v *GetWorkflowInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Id == nil || len(*v.Id) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
+	}
+	if v.Id != nil {
+		if err := encoder.SetURI("id").String(*v.Id); err != nil {
+			return err
+		}
+	}
+
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
+	}
+	if v.ProjectName != nil {
+		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
+			return err
+		}
+	}
+
+	if v.SpaceName == nil || len(*v.SpaceName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member spaceName must not be empty")}
+	}
+	if v.SpaceName != nil {
+		if err := encoder.SetURI("spaceName").String(*v.SpaceName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetWorkflowRun struct {
+}
+
+func (*awsRestjson1_serializeOpGetWorkflowRun) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetWorkflowRun) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetWorkflowRunInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns/{id}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetWorkflowRunInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetWorkflowRunInput(v *GetWorkflowRunInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Id == nil || len(*v.Id) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
+	}
+	if v.Id != nil {
+		if err := encoder.SetURI("id").String(*v.Id); err != nil {
+			return err
+		}
+	}
+
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
+	}
+	if v.ProjectName != nil {
+		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
+			return err
+		}
+	}
+
+	if v.SpaceName == nil || len(*v.SpaceName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member spaceName must not be empty")}
+	}
+	if v.SpaceName != nil {
+		if err := encoder.SetURI("spaceName").String(*v.SpaceName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListAccessTokens struct {
 }
 
@@ -1530,7 +1696,7 @@ func (m *awsRestjson1_serializeOpListDevEnvironments) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments")
+	opPath, opQuery := httpbinding.SplitURI("/v1/spaces/{spaceName}/devEnvironments")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
@@ -1573,15 +1739,6 @@ func awsRestjson1_serializeOpHttpBindingsListDevEnvironmentsInput(v *ListDevEnvi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
-	}
-	if v.ProjectName != nil {
-		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
-			return err
-		}
-	}
-
 	if v.SpaceName == nil || len(*v.SpaceName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member spaceName must not be empty")}
 	}
@@ -1613,6 +1770,11 @@ func awsRestjson1_serializeOpDocumentListDevEnvironmentsInput(v *ListDevEnvironm
 	if v.NextToken != nil {
 		ok := object.Key("nextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if v.ProjectName != nil {
+		ok := object.Key("projectName")
+		ok.String(*v.ProjectName)
 	}
 
 	return nil
@@ -2225,6 +2387,224 @@ func awsRestjson1_serializeOpDocumentListSpacesInput(v *ListSpacesInput, value s
 	return nil
 }
 
+type awsRestjson1_serializeOpListWorkflowRuns struct {
+}
+
+func (*awsRestjson1_serializeOpListWorkflowRuns) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListWorkflowRuns) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListWorkflowRunsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListWorkflowRunsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListWorkflowRunsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListWorkflowRunsInput(v *ListWorkflowRunsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
+	}
+	if v.ProjectName != nil {
+		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
+			return err
+		}
+	}
+
+	if v.SpaceName == nil || len(*v.SpaceName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member spaceName must not be empty")}
+	}
+	if v.SpaceName != nil {
+		if err := encoder.SetURI("spaceName").String(*v.SpaceName); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkflowId != nil {
+		encoder.SetQuery("workflowId").String(*v.WorkflowId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListWorkflowRunsInput(v *ListWorkflowRunsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SortBy != nil {
+		ok := object.Key("sortBy")
+		if err := awsRestjson1_serializeDocumentWorkflowRunSortCriteriaList(v.SortBy, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListWorkflows struct {
+}
+
+func (*awsRestjson1_serializeOpListWorkflows) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListWorkflows) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListWorkflowsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/spaces/{spaceName}/projects/{projectName}/workflows")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListWorkflowsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListWorkflowsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListWorkflowsInput(v *ListWorkflowsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
+	}
+	if v.ProjectName != nil {
+		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
+			return err
+		}
+	}
+
+	if v.SpaceName == nil || len(*v.SpaceName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member spaceName must not be empty")}
+	}
+	if v.SpaceName != nil {
+		if err := encoder.SetURI("spaceName").String(*v.SpaceName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListWorkflowsInput(v *ListWorkflowsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SortBy != nil {
+		ok := object.Key("sortBy")
+		if err := awsRestjson1_serializeDocumentWorkflowSortCriteriaList(v.SortBy, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpStartDevEnvironment struct {
 }
 
@@ -2446,6 +2826,107 @@ func awsRestjson1_serializeOpDocumentStartDevEnvironmentSessionInput(v *StartDev
 		if err := awsRestjson1_serializeDocumentDevEnvironmentSessionConfiguration(v.SessionConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStartWorkflowRun struct {
+}
+
+func (*awsRestjson1_serializeOpStartWorkflowRun) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartWorkflowRun) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartWorkflowRunInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartWorkflowRunInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartWorkflowRunInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartWorkflowRunInput(v *StartWorkflowRunInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
+	}
+	if v.ProjectName != nil {
+		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
+			return err
+		}
+	}
+
+	if v.SpaceName == nil || len(*v.SpaceName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member spaceName must not be empty")}
+	}
+	if v.SpaceName != nil {
+		if err := encoder.SetURI("spaceName").String(*v.SpaceName); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkflowId != nil {
+		encoder.SetQuery("workflowId").String(*v.WorkflowId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartWorkflowRunInput(v *StartWorkflowRunInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
 	}
 
 	return nil
@@ -3193,6 +3674,46 @@ func awsRestjson1_serializeDocumentStringList(v []string, value smithyjson.Value
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWorkflowRunSortCriteria(v *types.WorkflowRunSortCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWorkflowRunSortCriteriaList(v []types.WorkflowRunSortCriteria, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentWorkflowRunSortCriteria(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWorkflowSortCriteria(v *types.WorkflowSortCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWorkflowSortCriteriaList(v []types.WorkflowSortCriteria, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentWorkflowSortCriteria(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

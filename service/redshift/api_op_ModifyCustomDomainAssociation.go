@@ -36,9 +36,13 @@ type ModifyCustomDomainAssociationInput struct {
 
 	// The certificate Amazon Resource Name (ARN) for the changed custom domain
 	// association.
+	//
+	// This member is required.
 	CustomDomainCertificateArn *string
 
 	// The custom domain name for a changed custom domain association.
+	//
+	// This member is required.
 	CustomDomainName *string
 
 	noSmithyDocumentSerde

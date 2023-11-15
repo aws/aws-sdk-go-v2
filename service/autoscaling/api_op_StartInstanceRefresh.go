@@ -12,11 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an instance refresh. During an instance refresh, Amazon EC2 Auto Scaling
-// performs a rolling update of instances in an Auto Scaling group. Instances are
-// terminated first and then replaced, which temporarily reduces the capacity
-// available within your Auto Scaling group. This operation is part of the
-// instance refresh feature (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
+// Starts an instance refresh. This operation is part of the instance refresh
+// feature (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
 // in Amazon EC2 Auto Scaling, which helps you update instances in your Auto
 // Scaling group. This feature is helpful, for example, when you have a new AMI or
 // a new user data script. You just need to create a new launch template that
@@ -71,10 +68,11 @@ type StartInstanceRefreshInput struct {
 	DesiredConfiguration *types.DesiredConfiguration
 
 	// Sets your preferences for the instance refresh so that it performs as expected
-	// when you start it. Includes the instance warmup time, the minimum healthy
-	// percentage, and the behaviors that you want Amazon EC2 Auto Scaling to use if
-	// instances that are in Standby state or protected from scale in are found. You
-	// can also choose to enable additional features, such as the following:
+	// when you start it. Includes the instance warmup time, the minimum and maximum
+	// healthy percentages, and the behaviors that you want Amazon EC2 Auto Scaling to
+	// use if instances that are in Standby state or protected from scale in are
+	// found. You can also choose to enable additional features, such as the following:
+	//
 	//   - Auto rollback
 	//   - Checkpoints
 	//   - CloudWatch alarms

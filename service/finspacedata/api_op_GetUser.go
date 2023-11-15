@@ -13,6 +13,8 @@ import (
 )
 
 // Retrieves details for a specific user.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) GetUser(ctx context.Context, params *GetUserInput, optFns ...func(*Options)) (*GetUserOutput, error) {
 	if params == nil {
 		params = &GetUserInput{}

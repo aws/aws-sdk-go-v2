@@ -14,6 +14,8 @@ import (
 
 // A temporary Amazon S3 location, where you can copy your files from a source
 // location to stage or use as a scratch space in FinSpace notebook.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) GetWorkingLocation(ctx context.Context, params *GetWorkingLocationInput, optFns ...func(*Options)) (*GetWorkingLocationOutput, error) {
 	if params == nil {
 		params = &GetWorkingLocationInput{}

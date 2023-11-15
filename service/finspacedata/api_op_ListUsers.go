@@ -13,6 +13,8 @@ import (
 )
 
 // Lists all available users in FinSpace.
+//
+// Deprecated: This method will be discontinued.
 func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns ...func(*Options)) (*ListUsersOutput, error) {
 	if params == nil {
 		params = &ListUsersInput{}
