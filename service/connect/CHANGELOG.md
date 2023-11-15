@@ -1,3 +1,7 @@
+# v1.80.1 (2023-11-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.80.0 (2023-11-14)
 
 * **Feature**: Introducing SegmentAttributes parameter for StartChatContact API

@@ -1,3 +1,8 @@
+# v1.36.0 (2023-11-15)
+
+* **Feature**: The custom domain name SDK for Amazon Redshift provisioned clusters is updated with additional required parameters for modify and delete operations. Additionally, users can provide domain names with longer top-level domains.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

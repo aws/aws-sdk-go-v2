@@ -1,3 +1,7 @@
+# v1.20.1 (2023-11-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2023-11-10)
 
 * **Feature**: This release adds support for tagging and customers can now tag report definitions. Additionally, ReportStatus is now added to report definition to show when the last delivered time stamp and if it succeeded or not.

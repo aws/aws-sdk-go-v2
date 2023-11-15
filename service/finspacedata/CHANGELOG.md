@@ -1,3 +1,8 @@
+# v1.21.0 (2023-11-15)
+
+* **Feature**: Adding deprecated trait to APIs in this name space.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

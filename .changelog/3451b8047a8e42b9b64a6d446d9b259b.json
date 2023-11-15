@@ -1,8 +1,0 @@
-{
-    "id": "3451b804-7a8e-42b9-b64a-6d446d9b259b",
-    "type": "feature",
-    "description": "The Lake Repricing feature lets customers configure a BillingMode for an event data store. The BillingMode determines the cost for ingesting and storing events and the default and maximum retention period for the event data store.",
-    "modules": [
-        "service/cloudtrail"
-    ]
-}

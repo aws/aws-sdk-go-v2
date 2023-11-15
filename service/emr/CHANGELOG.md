@@ -1,3 +1,7 @@
+# v1.33.1 (2023-11-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2023-11-13)
 
 * **Feature**: Updated GetClusterSessionCredentials API  to allow Amazon SageMaker Studio to connect to EMR on EC2 clusters to support IdentityCenter/PEZ integration.

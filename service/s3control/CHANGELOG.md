@@ -1,3 +1,8 @@
+# v1.37.0 (2023-11-15)
+
+* **Feature**: Add 5 APIs to create, update, get, list, delete S3 Storage Lens group(eg. CreateStorageLensGroup), 3 APIs for tagging(TagResource,UntagResource,ListTagsForResource), and update to StorageLensConfiguration to allow metrics to be aggregated on Storage Lens groups.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.2 (2023-11-13)
 
 * No change notes available for this release.

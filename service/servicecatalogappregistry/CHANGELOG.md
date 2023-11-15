@@ -1,3 +1,7 @@
+# v1.23.1 (2023-11-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2023-11-13)
 
 * **Feature**: When the customer associates a resource collection to their application with this new feature, then a new application tag will be applied to all supported resources that are part of that collection. This allows customers to more easily find the application that is associated with those resources.

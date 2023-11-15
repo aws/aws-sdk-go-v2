@@ -1,3 +1,7 @@
+# v1.34.1 (2023-11-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2023-11-13)
 
 * **Feature**: Added new Db2 LUW Target endpoint with related endpoint settings. New executeTimeout endpoint setting for mysql endpoint. New ReplicationDeprovisionTime field for serverless describe-replications.

@@ -1,3 +1,8 @@
+# v1.8.0 (2023-11-15)
+
+* **Feature**: This release adds functionality for retrieving information about workflows and workflow runs and starting workflow runs in Amazon CodeCatalyst.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "5b1f5186-7cf6-4283-bb29-9ade04d2d3d6",
-    "type": "feature",
-    "description": "Support smithy-modeled identity and auth resolution. Service clients can now be configured to override or use additional authentication schemes.",
-    "modules": [
-        "."
-    ]
-}

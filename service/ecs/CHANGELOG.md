@@ -1,3 +1,7 @@
+# v1.33.1 (2023-11-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2023-11-13)
 
 * **Feature**: Adds a Client Token parameter to the ECS RunTask API. The Client Token parameter allows for idempotent RunTask requests.

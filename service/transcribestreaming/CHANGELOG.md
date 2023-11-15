@@ -1,3 +1,7 @@
+# v1.14.1 (2023-11-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2023-11-13)
 
 * **Feature**: This release enables customers to call the AWS Transcribe streaming service with the capability of identifying multiple languages in the stream.

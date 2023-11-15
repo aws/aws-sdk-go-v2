@@ -1,8 +1,0 @@
-{
-    "id": "4b09f5bc-a287-465e-90e5-98267752b46b",
-    "type": "feature",
-    "description": "Add client config helpers for overriding SigV4 signing name and region.",
-    "modules": [
-        "."
-    ]
-}

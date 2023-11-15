@@ -1,8 +1,0 @@
-{
-    "id": "e5e9b315-fbb5-4866-8d7c-d72589a88334",
-    "type": "documentation",
-    "description": "Updates Amazon RDS documentation for support for upgrading RDS for MySQL snapshots from version 5.7 to version 8.0.",
-    "modules": [
-        "service/rds"
-    ]
-}

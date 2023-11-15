@@ -1,3 +1,41 @@
+# Release (2023-11-15)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.23.0
+  * **Feature**: **BREAKING CHANGE**: DisableHTTPS middleware has changed steps from Serialize to Finalize. Middleware that indexes off of this field will need to be updated accordingly.
+  * **Feature**: **BREAKING CHANGE**: Request body checksum middlewares (flex checksums, SHA256, etc.) have changed steps from Build to Finalize. Middleware that indexes off of this field will need to be updated accordingly.
+  * **Feature**: **BREAKING CHANGE**: V2 endpoint resolution middleware has changed steps from Serialize to Finalize. Middleware that indexes off of this field will need to be updated accordingly.
+  * **Feature**: Add client config helpers for overriding SigV4 signing name and region.
+  * **Feature**: Refactored endpoint resolution middleware into a single implementation per-service, reducing generated code footprint.
+  * **Feature**: Support smithy-modeled identity and auth resolution. Service clients can now be configured to override or use additional authentication schemes.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.35.0](service/autoscaling/CHANGELOG.md#v1350-2023-11-15)
+  * **Feature**: This release introduces Instance Maintenance Policy, a new EC2 Auto Scaling capability that allows customers to define whether instances are launched before or after existing instances are terminated during instance replacement operations.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.33.0](service/cloudtrail/CHANGELOG.md#v1330-2023-11-15)
+  * **Feature**: The Lake Repricing feature lets customers configure a BillingMode for an event data store. The BillingMode determines the cost for ingesting and storing events and the default and maximum retention period for the event data store.
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.8.0](service/codecatalyst/CHANGELOG.md#v180-2023-11-15)
+  * **Feature**: This release adds functionality for retrieving information about workflows and workflow runs and starting workflow runs in Amazon CodeCatalyst.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.134.0](service/ec2/CHANGELOG.md#v11340-2023-11-15)
+  * **Feature**: AWS EBS now supports Snapshot Lock, giving users the ability to lock an EBS Snapshot to prohibit deletion of the snapshot. This release introduces the LockSnapshot, UnlockSnapshot & DescribeLockedSnapshots APIs to manage lock configuration for snapshots. The release also includes the dl2q_24xlarge.
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.17.0](service/finspace/CHANGELOG.md#v1170-2023-11-15)
+  * **Feature**: Adding deprecated trait on Dataset Browser Environment APIs
+* `github.com/aws/aws-sdk-go-v2/service/finspacedata`: [v1.21.0](service/finspacedata/CHANGELOG.md#v1210-2023-11-15)
+  * **Feature**: Adding deprecated trait to APIs in this name space.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.47.0](service/lambda/CHANGELOG.md#v1470-2023-11-15)
+  * **Feature**: Add Java 21 (java21) support to AWS Lambda
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.21.0](service/mwaa/CHANGELOG.md#v1210-2023-11-15)
+  * **Feature**: This Amazon MWAA release adds support for customer-managed VPC endpoints. This lets you choose whether to create, and manage your environment's VPC endpoints, or to have Amazon MWAA create, and manage them for you.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.62.4](service/rds/CHANGELOG.md#v1624-2023-11-15)
+  * **Documentation**: Updates Amazon RDS documentation for support for upgrading RDS for MySQL snapshots from version 5.7 to version 8.0.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.36.0](service/redshift/CHANGELOG.md#v1360-2023-11-15)
+  * **Feature**: The custom domain name SDK for Amazon Redshift provisioned clusters is updated with additional required parameters for modify and delete operations. Additionally, users can provide domain names with longer top-level domains.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.37.0](service/s3control/CHANGELOG.md#v1370-2023-11-15)
+  * **Feature**: Add 5 APIs to create, update, get, list, delete S3 Storage Lens group(eg. CreateStorageLensGroup), 3 APIs for tagging(TagResource,UntagResource,ListTagsForResource), and update to StorageLensConfiguration to allow metrics to be aggregated on Storage Lens groups.
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.9.0](service/ssmsap/CHANGELOG.md#v190-2023-11-15)
+  * **Feature**: Update the default value of MaxResult to 50.
+
 # Release (2023-11-14)
 
 ## General Highlights

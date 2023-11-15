@@ -1,3 +1,8 @@
+# v1.47.0 (2023-11-15)
+
+* **Feature**: Add Java 21 (java21) support to AWS Lambda
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.46.0 (2023-11-14)
 
 * **Feature**: Add Python 3.12 (python3.12) support to AWS Lambda

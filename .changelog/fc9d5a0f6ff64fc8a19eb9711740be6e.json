@@ -1,8 +1,0 @@
-{
-    "id": "fc9d5a0f-6ff6-4fc8-a19e-b9711740be6e",
-    "type": "feature",
-    "description": "**BREAKING CHANGE**: DisableHTTPS middleware has changed steps from Serialize to Finalize. Middleware that indexes off of this field will need to be updated accordingly.",
-    "modules": [
-        "."
-    ]
-}

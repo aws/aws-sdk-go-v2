@@ -1,3 +1,8 @@
+# v1.9.0 (2023-11-15)
+
+* **Feature**: Update the default value of MaxResult to 50.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

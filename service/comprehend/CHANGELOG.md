@@ -1,3 +1,7 @@
+# v1.28.1 (2023-11-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2023-11-09.2)
 
 * **Feature**: This release adds support for toxicity detection and prompt safety classification.

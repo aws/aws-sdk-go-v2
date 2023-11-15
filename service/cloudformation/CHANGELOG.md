@@ -1,3 +1,7 @@
+# v1.39.1 (2023-11-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2023-11-09.2)
 
 * **Feature**: Added new ConcurrencyMode feature for AWS CloudFormation StackSets for faster deployments to target accounts.

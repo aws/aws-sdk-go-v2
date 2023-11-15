@@ -1,3 +1,8 @@
+# v1.17.0 (2023-11-15)
+
+* **Feature**: Adding deprecated trait on Dataset Browser Environment APIs
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.1 (2023-11-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

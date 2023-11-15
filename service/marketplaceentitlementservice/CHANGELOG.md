@@ -1,3 +1,7 @@
+# v1.17.1 (2023-11-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2023-11-10)
 
 * **Feature**: Add paginators to GetEntitlements.

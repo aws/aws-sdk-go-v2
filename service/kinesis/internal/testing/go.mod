@@ -3,18 +3,18 @@ module github.com/aws/aws-sdk-go-v2/service/kinesis/internal/testing
 go 1.19
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.22.2
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.5.0
-	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.2.3
-	github.com/aws/aws-sdk-go-v2/service/kinesis v1.22.1
+	github.com/aws/aws-sdk-go-v2 v1.23.0
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.5.1
+	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.2.4
+	github.com/aws/aws-sdk-go-v2/service/kinesis v1.22.2
 	github.com/aws/smithy-go v1.17.0
 	github.com/google/go-cmp v0.5.8
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/credentials v1.16.0 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.2 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.2 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.16.1 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.3 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.3 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	golang.org/x/net v0.1.0 // indirect
 	golang.org/x/text v0.4.0 // indirect

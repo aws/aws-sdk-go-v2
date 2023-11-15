@@ -1,8 +1,0 @@
-{
-    "id": "f074fcf7-bb8c-43ac-be57-5b407d7efdae",
-    "type": "feature",
-    "description": "Refactored endpoint resolution middleware into a single implementation per-service, reducing generated code footprint.",
-    "modules": [
-        "."
-    ]
-}

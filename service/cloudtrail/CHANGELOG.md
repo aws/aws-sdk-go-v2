@@ -1,3 +1,8 @@
+# v1.33.0 (2023-11-15)
+
+* **Feature**: The Lake Repricing feature lets customers configure a BillingMode for an event data store. The BillingMode determines the cost for ingesting and storing events and the default and maximum retention period for the event data store.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2023-11-09.2)
 
 * **Feature**: The Insights in Lake feature lets customers enable CloudTrail Insights on a source CloudTrail Lake event data store and create a destination event data store to collect Insights events based on unusual management event activity in the source event data store.

@@ -1,3 +1,8 @@
+# v1.62.4 (2023-11-15)
+
+* **Documentation**: Updates Amazon RDS documentation for support for upgrading RDS for MySQL snapshots from version 5.7 to version 8.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.62.3 (2023-11-10)
 
 * **Documentation**: Updates Amazon RDS documentation for zero-ETL integrations.

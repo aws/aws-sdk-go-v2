@@ -1,3 +1,8 @@
+# v1.134.0 (2023-11-15)
+
+* **Feature**: AWS EBS now supports Snapshot Lock, giving users the ability to lock an EBS Snapshot to prohibit deletion of the snapshot. This release introduces the LockSnapshot, UnlockSnapshot & DescribeLockedSnapshots APIs to manage lock configuration for snapshots. The release also includes the dl2q_24xlarge.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.133.0 (2023-11-13)
 
 * **Feature**: Adds the new EC2 DescribeInstanceTopology API, which you can use to retrieve the network topology of your running instances on select platform types to determine their relative proximity to each other.
