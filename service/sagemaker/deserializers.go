@@ -68800,6 +68800,19 @@ func awsAwsjson11_deserializeDocumentStoppingCondition(v **types.StoppingConditi
 
 	for key, value := range shape {
 		switch key {
+		case "MaxPendingTimeInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxPendingTimeInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxPendingTimeInSeconds = ptr.Int32(int32(i64))
+			}
+
 		case "MaxRuntimeInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -79536,6 +79549,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeDomainOutput(v **DescribeDomainOu
 					return fmt.Errorf("expected SecurityGroupId to be of type string, got %T instead", value)
 				}
 				sv.SecurityGroupIdForDomainBoundary = ptr.String(jtv)
+			}
+
+		case "SingleSignOnApplicationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SingleSignOnApplicationArn to be of type string, got %T instead", value)
+				}
+				sv.SingleSignOnApplicationArn = ptr.String(jtv)
 			}
 
 		case "SingleSignOnManagedApplicationInstanceId":

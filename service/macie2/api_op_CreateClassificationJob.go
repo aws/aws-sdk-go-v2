@@ -102,11 +102,11 @@ type CreateClassificationJobInput struct {
 	// If you don't specify a value for this property, the job uses the recommended
 	// set of managed data identifiers. If the job is a recurring job and you specify
 	// ALL or EXCLUDE, each job run automatically uses new managed data identifiers
-	// that are released. If you specify RECOMMENDED for a recurring job, each job run
-	// automatically uses all the managed data identifiers that are in the recommended
-	// set when the run starts. For information about individual managed data
-	// identifiers or to determine which ones are in the recommended set, see Using
-	// managed data identifiers (https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html)
+	// that are released. If you don't specify a value for this property or you specify
+	// RECOMMENDED for a recurring job, each job run automatically uses all the managed
+	// data identifiers that are in the recommended set when the run starts. For
+	// information about individual managed data identifiers or to determine which ones
+	// are in the recommended set, see Using managed data identifiers (https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html)
 	// and Recommended managed data identifiers (https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-mdis-recommended.html)
 	// in the Amazon Macie User Guide.
 	ManagedDataIdentifierSelector types.ManagedDataIdentifierSelector

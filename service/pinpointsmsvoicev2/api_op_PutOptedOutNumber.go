@@ -14,7 +14,7 @@ import (
 
 // Creates an opted out destination phone number in the opt-out list. If the
 // destination phone number isn't valid or if the specified opt-out list doesn't
-// exist, an Error is returned.
+// exist, an error is returned.
 func (c *Client) PutOptedOutNumber(ctx context.Context, params *PutOptedOutNumberInput, optFns ...func(*Options)) (*PutOptedOutNumberOutput, error) {
 	if params == nil {
 		params = &PutOptedOutNumberInput{}

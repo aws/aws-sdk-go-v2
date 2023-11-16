@@ -813,6 +813,13 @@ func awsRestjson1_serializeOpDocumentCreateFunctionInput(v *CreateFunctionInput,
 		}
 	}
 
+	if v.LoggingConfig != nil {
+		ok := object.Key("LoggingConfig")
+		if err := awsRestjson1_serializeDocumentLoggingConfig(v.LoggingConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MemorySize != nil {
 		ok := object.Key("MemorySize")
 		ok.Integer(*v.MemorySize)
@@ -5540,6 +5547,13 @@ func awsRestjson1_serializeOpDocumentUpdateFunctionConfigurationInput(v *UpdateF
 		}
 	}
 
+	if v.LoggingConfig != nil {
+		ok := object.Key("LoggingConfig")
+		if err := awsRestjson1_serializeDocumentLoggingConfig(v.LoggingConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MemorySize != nil {
 		ok := object.Key("MemorySize")
 		ok.Integer(*v.MemorySize)
@@ -6274,6 +6288,33 @@ func awsRestjson1_serializeDocumentLayerVersionContentInput(v *types.LayerVersio
 	if v.ZipFile != nil {
 		ok := object.Key("ZipFile")
 		ok.Base64EncodeBytes(v.ZipFile)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLoggingConfig(v *types.LoggingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ApplicationLogLevel) > 0 {
+		ok := object.Key("ApplicationLogLevel")
+		ok.String(string(v.ApplicationLogLevel))
+	}
+
+	if len(v.LogFormat) > 0 {
+		ok := object.Key("LogFormat")
+		ok.String(string(v.LogFormat))
+	}
+
+	if v.LogGroup != nil {
+		ok := object.Key("LogGroup")
+		ok.String(*v.LogGroup)
+	}
+
+	if len(v.SystemLogLevel) > 0 {
+		ok := object.Key("SystemLogLevel")
+		ok.String(string(v.SystemLogLevel))
 	}
 
 	return nil

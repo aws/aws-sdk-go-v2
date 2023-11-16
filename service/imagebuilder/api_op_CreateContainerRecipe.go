@@ -31,7 +31,9 @@ func (c *Client) CreateContainerRecipe(ctx context.Context, params *CreateContai
 
 type CreateContainerRecipeInput struct {
 
-	// The client token used to make this request idempotent.
+	// Unique, case-sensitive identifier you provide to ensure idempotency of the
+	// request. For more information, see Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// in the Amazon EC2 API Reference.
 	//
 	// This member is required.
 	ClientToken *string
@@ -110,7 +112,7 @@ type CreateContainerRecipeInput struct {
 
 type CreateContainerRecipeOutput struct {
 
-	// The client token used to make this request idempotent.
+	// The client token that uniquely identifies the request.
 	ClientToken *string
 
 	// Returns the Amazon Resource Name (ARN) of the container recipe that the request

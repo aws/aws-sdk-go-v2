@@ -15,7 +15,7 @@ import (
 // Deletes an existing opted out destination phone number from the specified
 // opt-out list. Each destination phone number can only be deleted once every 30
 // days. If the specified destination phone number doesn't exist or if the opt-out
-// list doesn't exist, an Error is returned.
+// list doesn't exist, an error is returned.
 func (c *Client) DeleteOptedOutNumber(ctx context.Context, params *DeleteOptedOutNumberInput, optFns ...func(*Options)) (*DeleteOptedOutNumberOutput, error) {
 	if params == nil {
 		params = &DeleteOptedOutNumberInput{}

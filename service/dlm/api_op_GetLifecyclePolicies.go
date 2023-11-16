@@ -32,6 +32,13 @@ func (c *Client) GetLifecyclePolicies(ctx context.Context, params *GetLifecycleP
 
 type GetLifecyclePoliciesInput struct {
 
+	// [Default policies only] Specifies the type of default policy to get. Specify
+	// one of the following:
+	//   - VOLUME - To get only the default policy for EBS snapshots
+	//   - INSTANCE - To get only the default policy for EBS-backed AMIs
+	//   - ALL - To get all default policies
+	DefaultPolicyType types.DefaultPoliciesTypeValues
+
 	// The identifiers of the data lifecycle policies.
 	PolicyIds []string
 

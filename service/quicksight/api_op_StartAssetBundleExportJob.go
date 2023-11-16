@@ -81,6 +81,23 @@ type StartAssetBundleExportJobInput struct {
 	// is also exported.
 	IncludeAllDependencies bool
 
+	// A Boolean that determines whether all permissions for each resource ARN are
+	// exported with the job. If you set IncludePermissions to TRUE , any permissions
+	// associated with each resource are exported.
+	IncludePermissions bool
+
+	// A Boolean that determines whether all tags for each resource ARN are exported
+	// with the job. If you set IncludeTags to TRUE , any tags associated with each
+	// resource are exported.
+	IncludeTags bool
+
+	// An optional parameter that determines which validation strategy to use for the
+	// export job. If StrictModeForAllResources is set to TRUE , strict validation for
+	// every error is enforced. If it is set to FALSE , validation is skipped for
+	// specific UI errors that are shown as warnings. The default value for
+	// StrictModeForAllResources is FALSE .
+	ValidationStrategy *types.AssetBundleExportJobValidationStrategy
+
 	noSmithyDocumentSerde
 }
 

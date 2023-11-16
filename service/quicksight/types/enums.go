@@ -1231,6 +1231,9 @@ const (
 	DataSourceTypeAmazonOpensearch    DataSourceType = "AMAZON_OPENSEARCH"
 	DataSourceTypeExasol              DataSourceType = "EXASOL"
 	DataSourceTypeDatabricks          DataSourceType = "DATABRICKS"
+	DataSourceTypeStarburst           DataSourceType = "STARBURST"
+	DataSourceTypeTrino               DataSourceType = "TRINO"
+	DataSourceTypeBigquery            DataSourceType = "BIGQUERY"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -1264,6 +1267,9 @@ func (DataSourceType) Values() []DataSourceType {
 		"AMAZON_OPENSEARCH",
 		"EXASOL",
 		"DATABRICKS",
+		"STARBURST",
+		"TRINO",
+		"BIGQUERY",
 	}
 }
 
@@ -3283,6 +3289,26 @@ func (ResourceStatus) Values() []ResourceStatus {
 		"UPDATE_SUCCESSFUL",
 		"UPDATE_FAILED",
 		"DELETED",
+	}
+}
+
+type Role string
+
+// Enum values for Role
+const (
+	RoleAdmin  Role = "ADMIN"
+	RoleAuthor Role = "AUTHOR"
+	RoleReader Role = "READER"
+)
+
+// Values returns all known values for Role. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Role) Values() []Role {
+	return []Role{
+		"ADMIN",
+		"AUTHOR",
+		"READER",
 	}
 }
 

@@ -737,6 +737,9 @@ type AutomationExecution struct {
 	// The CloudWatch alarm that was invoked by the automation.
 	TriggeredAlarms []AlarmStateInformation
 
+	// Variables defined for the automation.
+	Variables map[string][]string
+
 	noSmithyDocumentSerde
 }
 
@@ -3431,7 +3434,7 @@ type OpsItem struct {
 	//   OpsCenter.
 	//   - /aws/changerequest This type of OpsItem is used by Change Manager for
 	//   reviewing and approving or rejecting change requests.
-	//   - /aws/insights This type of OpsItem is used by OpsCenter for aggregating and
+	//   - /aws/insight This type of OpsItem is used by OpsCenter for aggregating and
 	//   reporting on duplicate OpsItems.
 	OpsItemType *string
 
@@ -3671,7 +3674,7 @@ type OpsItemSummary struct {
 	//   OpsCenter.
 	//   - /aws/changerequest This type of OpsItem is used by Change Manager for
 	//   reviewing and approving or rejecting change requests.
-	//   - /aws/insights This type of OpsItem is used by OpsCenter for aggregating and
+	//   - /aws/insight This type of OpsItem is used by OpsCenter for aggregating and
 	//   reporting on duplicate OpsItems.
 	OpsItemType *string
 
@@ -3960,6 +3963,27 @@ type ParameterStringFilter struct {
 
 	// The value you want to search for.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// A detailed status of the parent step.
+type ParentStepDetails struct {
+
+	// The name of the automation action.
+	Action *string
+
+	// The current repetition of the loop represented by an integer.
+	Iteration *int32
+
+	// The current value of the specified iterator in the loop.
+	IteratorValue *string
+
+	// The unique ID of a step execution.
+	StepExecutionId *string
+
+	// The name of the step.
+	StepName *string
 
 	noSmithyDocumentSerde
 }
@@ -4909,6 +4933,9 @@ type StepExecution struct {
 	// A user-specified list of parameters to override when running a step.
 	OverriddenParameters map[string][]string
 
+	// Information about the parent step.
+	ParentStepDetails *ParentStepDetails
+
 	// A message associated with the response code for an execution.
 	Response *string
 
@@ -4949,9 +4976,7 @@ type StepExecution struct {
 // A filter to limit the amount of step execution information returned by the call.
 type StepExecutionFilter struct {
 
-	// One or more keys to limit the results. Valid filter keys include the following:
-	// StepName, Action, StepExecutionId, StepExecutionStatus, StartTimeBefore,
-	// StartTimeAfter.
+	// One or more keys to limit the results.
 	//
 	// This member is required.
 	Key StepExecutionFilterKey

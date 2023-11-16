@@ -110,6 +110,106 @@ func (m *validateOpCreatePool) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRegistrationAssociation struct {
+}
+
+func (*validateOpCreateRegistrationAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRegistrationAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRegistrationAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRegistrationAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRegistrationAttachment struct {
+}
+
+func (*validateOpCreateRegistrationAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRegistrationAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRegistrationAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRegistrationAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRegistration struct {
+}
+
+func (*validateOpCreateRegistration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRegistration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRegistrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRegistrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRegistrationVersion struct {
+}
+
+func (*validateOpCreateRegistrationVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRegistrationVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRegistrationVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRegistrationVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateVerifiedDestinationNumber struct {
+}
+
+func (*validateOpCreateVerifiedDestinationNumber) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVerifiedDestinationNumber) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVerifiedDestinationNumberInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVerifiedDestinationNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteConfigurationSet struct {
 }
 
@@ -270,6 +370,86 @@ func (m *validateOpDeletePool) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteRegistrationAttachment struct {
+}
+
+func (*validateOpDeleteRegistrationAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRegistrationAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRegistrationAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRegistrationAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRegistrationFieldValue struct {
+}
+
+func (*validateOpDeleteRegistrationFieldValue) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRegistrationFieldValue) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRegistrationFieldValueInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRegistrationFieldValueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRegistration struct {
+}
+
+func (*validateOpDeleteRegistration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRegistration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRegistrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRegistrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteVerifiedDestinationNumber struct {
+}
+
+func (*validateOpDeleteVerifiedDestinationNumber) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVerifiedDestinationNumber) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVerifiedDestinationNumberInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVerifiedDestinationNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeConfigurationSets struct {
 }
 
@@ -370,6 +550,146 @@ func (m *validateOpDescribePools) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeRegistrationAttachments struct {
+}
+
+func (*validateOpDescribeRegistrationAttachments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRegistrationAttachments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRegistrationAttachmentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRegistrationAttachmentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeRegistrationFieldDefinitions struct {
+}
+
+func (*validateOpDescribeRegistrationFieldDefinitions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRegistrationFieldDefinitions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRegistrationFieldDefinitionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRegistrationFieldDefinitionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeRegistrationFieldValues struct {
+}
+
+func (*validateOpDescribeRegistrationFieldValues) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRegistrationFieldValues) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRegistrationFieldValuesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRegistrationFieldValuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeRegistrationSectionDefinitions struct {
+}
+
+func (*validateOpDescribeRegistrationSectionDefinitions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRegistrationSectionDefinitions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRegistrationSectionDefinitionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRegistrationSectionDefinitionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeRegistrations struct {
+}
+
+func (*validateOpDescribeRegistrations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRegistrations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRegistrationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRegistrationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeRegistrationTypeDefinitions struct {
+}
+
+func (*validateOpDescribeRegistrationTypeDefinitions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRegistrationTypeDefinitions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRegistrationTypeDefinitionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRegistrationTypeDefinitionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeRegistrationVersions struct {
+}
+
+func (*validateOpDescribeRegistrationVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRegistrationVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRegistrationVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRegistrationVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeSenderIds struct {
 }
 
@@ -385,6 +705,26 @@ func (m *validateOpDescribeSenderIds) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeSenderIdsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeVerifiedDestinationNumbers struct {
+}
+
+func (*validateOpDescribeVerifiedDestinationNumbers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeVerifiedDestinationNumbers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeVerifiedDestinationNumbersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeVerifiedDestinationNumbersInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +750,26 @@ func (m *validateOpDisassociateOriginationIdentity) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDiscardRegistrationVersion struct {
+}
+
+func (*validateOpDiscardRegistrationVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDiscardRegistrationVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DiscardRegistrationVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDiscardRegistrationVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPoolOriginationIdentities struct {
 }
 
@@ -425,6 +785,26 @@ func (m *validateOpListPoolOriginationIdentities) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListPoolOriginationIdentitiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRegistrationAssociations struct {
+}
+
+func (*validateOpListRegistrationAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRegistrationAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRegistrationAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRegistrationAssociationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -490,6 +870,26 @@ func (m *validateOpPutOptedOutNumber) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutRegistrationFieldValue struct {
+}
+
+func (*validateOpPutRegistrationFieldValue) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutRegistrationFieldValue) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutRegistrationFieldValueInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutRegistrationFieldValueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpReleasePhoneNumber struct {
 }
 
@@ -510,6 +910,26 @@ func (m *validateOpReleasePhoneNumber) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpReleaseSenderId struct {
+}
+
+func (*validateOpReleaseSenderId) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpReleaseSenderId) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ReleaseSenderIdInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpReleaseSenderIdInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRequestPhoneNumber struct {
 }
 
@@ -525,6 +945,46 @@ func (m *validateOpRequestPhoneNumber) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRequestPhoneNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRequestSenderId struct {
+}
+
+func (*validateOpRequestSenderId) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRequestSenderId) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RequestSenderIdInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRequestSenderIdInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSendDestinationNumberVerificationCode struct {
+}
+
+func (*validateOpSendDestinationNumberVerificationCode) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendDestinationNumberVerificationCode) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendDestinationNumberVerificationCodeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendDestinationNumberVerificationCodeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -650,6 +1110,26 @@ func (m *validateOpSetVoiceMessageSpendLimitOverride) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSubmitRegistrationVersion struct {
+}
+
+func (*validateOpSubmitRegistrationVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSubmitRegistrationVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SubmitRegistrationVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSubmitRegistrationVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -750,6 +1230,46 @@ func (m *validateOpUpdatePool) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSenderId struct {
+}
+
+func (*validateOpUpdateSenderId) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSenderId) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSenderIdInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSenderIdInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpVerifyDestinationNumber struct {
+}
+
+func (*validateOpVerifyDestinationNumber) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpVerifyDestinationNumber) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*VerifyDestinationNumberInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpVerifyDestinationNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateOriginationIdentityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateOriginationIdentity{}, middleware.After)
 }
@@ -768,6 +1288,26 @@ func addOpCreateOptOutListValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreatePoolValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePool{}, middleware.After)
+}
+
+func addOpCreateRegistrationAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRegistrationAssociation{}, middleware.After)
+}
+
+func addOpCreateRegistrationAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRegistrationAttachment{}, middleware.After)
+}
+
+func addOpCreateRegistrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRegistration{}, middleware.After)
+}
+
+func addOpCreateRegistrationVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRegistrationVersion{}, middleware.After)
+}
+
+func addOpCreateVerifiedDestinationNumberValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVerifiedDestinationNumber{}, middleware.After)
 }
 
 func addOpDeleteConfigurationSetValidationMiddleware(stack *middleware.Stack) error {
@@ -802,6 +1342,22 @@ func addOpDeletePoolValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePool{}, middleware.After)
 }
 
+func addOpDeleteRegistrationAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRegistrationAttachment{}, middleware.After)
+}
+
+func addOpDeleteRegistrationFieldValueValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRegistrationFieldValue{}, middleware.After)
+}
+
+func addOpDeleteRegistrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRegistration{}, middleware.After)
+}
+
+func addOpDeleteVerifiedDestinationNumberValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVerifiedDestinationNumber{}, middleware.After)
+}
+
 func addOpDescribeConfigurationSetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeConfigurationSets{}, middleware.After)
 }
@@ -822,16 +1378,56 @@ func addOpDescribePoolsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribePools{}, middleware.After)
 }
 
+func addOpDescribeRegistrationAttachmentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRegistrationAttachments{}, middleware.After)
+}
+
+func addOpDescribeRegistrationFieldDefinitionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRegistrationFieldDefinitions{}, middleware.After)
+}
+
+func addOpDescribeRegistrationFieldValuesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRegistrationFieldValues{}, middleware.After)
+}
+
+func addOpDescribeRegistrationSectionDefinitionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRegistrationSectionDefinitions{}, middleware.After)
+}
+
+func addOpDescribeRegistrationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRegistrations{}, middleware.After)
+}
+
+func addOpDescribeRegistrationTypeDefinitionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRegistrationTypeDefinitions{}, middleware.After)
+}
+
+func addOpDescribeRegistrationVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRegistrationVersions{}, middleware.After)
+}
+
 func addOpDescribeSenderIdsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSenderIds{}, middleware.After)
+}
+
+func addOpDescribeVerifiedDestinationNumbersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeVerifiedDestinationNumbers{}, middleware.After)
 }
 
 func addOpDisassociateOriginationIdentityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateOriginationIdentity{}, middleware.After)
 }
 
+func addOpDiscardRegistrationVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDiscardRegistrationVersion{}, middleware.After)
+}
+
 func addOpListPoolOriginationIdentitiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPoolOriginationIdentities{}, middleware.After)
+}
+
+func addOpListRegistrationAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRegistrationAssociations{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -846,12 +1442,28 @@ func addOpPutOptedOutNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutOptedOutNumber{}, middleware.After)
 }
 
+func addOpPutRegistrationFieldValueValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutRegistrationFieldValue{}, middleware.After)
+}
+
 func addOpReleasePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpReleasePhoneNumber{}, middleware.After)
 }
 
+func addOpReleaseSenderIdValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpReleaseSenderId{}, middleware.After)
+}
+
 func addOpRequestPhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRequestPhoneNumber{}, middleware.After)
+}
+
+func addOpRequestSenderIdValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRequestSenderId{}, middleware.After)
+}
+
+func addOpSendDestinationNumberVerificationCodeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendDestinationNumberVerificationCode{}, middleware.After)
 }
 
 func addOpSendTextMessageValidationMiddleware(stack *middleware.Stack) error {
@@ -878,6 +1490,10 @@ func addOpSetVoiceMessageSpendLimitOverrideValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpSetVoiceMessageSpendLimitOverride{}, middleware.After)
 }
 
+func addOpSubmitRegistrationVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSubmitRegistrationVersion{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -896,6 +1512,14 @@ func addOpUpdatePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdatePoolValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePool{}, middleware.After)
+}
+
+func addOpUpdateSenderIdValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSenderId{}, middleware.After)
+}
+
+func addOpVerifyDestinationNumberValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpVerifyDestinationNumber{}, middleware.After)
 }
 
 func validateCloudWatchLogsDestination(v *types.CloudWatchLogsDestination) error {
@@ -1161,6 +1785,181 @@ func validatePoolOriginationIdentitiesFilterList(v []types.PoolOriginationIdenti
 	}
 }
 
+func validateRegistrationAssociationFilter(v *types.RegistrationAssociationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistrationAssociationFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegistrationAssociationFilterList(v []types.RegistrationAssociationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistrationAssociationFilterList"}
+	for i := range v {
+		if err := validateRegistrationAssociationFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegistrationAttachmentFilter(v *types.RegistrationAttachmentFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistrationAttachmentFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegistrationAttachmentFilterList(v []types.RegistrationAttachmentFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistrationAttachmentFilterList"}
+	for i := range v {
+		if err := validateRegistrationAttachmentFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegistrationFilter(v *types.RegistrationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistrationFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegistrationFilterList(v []types.RegistrationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistrationFilterList"}
+	for i := range v {
+		if err := validateRegistrationFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegistrationTypeFilter(v *types.RegistrationTypeFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistrationTypeFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegistrationTypeFilterList(v []types.RegistrationTypeFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistrationTypeFilterList"}
+	for i := range v {
+		if err := validateRegistrationTypeFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegistrationVersionFilter(v *types.RegistrationVersionFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistrationVersionFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegistrationVersionFilterList(v []types.RegistrationVersionFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistrationVersionFilterList"}
+	for i := range v {
+		if err := validateRegistrationVersionFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSenderIdAndCountry(v *types.SenderIdAndCountry) error {
 	if v == nil {
 		return nil
@@ -1281,6 +2080,41 @@ func validateTagList(v []types.Tag) error {
 	}
 }
 
+func validateVerifiedDestinationNumberFilter(v *types.VerifiedDestinationNumberFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VerifiedDestinationNumberFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVerifiedDestinationNumberFilterList(v []types.VerifiedDestinationNumberFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VerifiedDestinationNumberFilterList"}
+	for i := range v {
+		if err := validateVerifiedDestinationNumberFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateOriginationIdentityInput(v *AssociateOriginationIdentityInput) error {
 	if v == nil {
 		return nil
@@ -1391,6 +2225,96 @@ func validateOpCreatePoolInput(v *CreatePoolInput) error {
 	}
 	if len(v.MessageType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MessageType"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRegistrationAssociationInput(v *CreateRegistrationAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRegistrationAssociationInput"}
+	if v.RegistrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRegistrationAttachmentInput(v *CreateRegistrationAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRegistrationAttachmentInput"}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRegistrationInput(v *CreateRegistrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRegistrationInput"}
+	if v.RegistrationType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationType"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRegistrationVersionInput(v *CreateRegistrationVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRegistrationVersionInput"}
+	if v.RegistrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateVerifiedDestinationNumberInput(v *CreateVerifiedDestinationNumberInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVerifiedDestinationNumberInput"}
+	if v.DestinationPhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPhoneNumber"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -1533,6 +2457,69 @@ func validateOpDeletePoolInput(v *DeletePoolInput) error {
 	}
 }
 
+func validateOpDeleteRegistrationAttachmentInput(v *DeleteRegistrationAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRegistrationAttachmentInput"}
+	if v.RegistrationAttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationAttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRegistrationFieldValueInput(v *DeleteRegistrationFieldValueInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRegistrationFieldValueInput"}
+	if v.RegistrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationId"))
+	}
+	if v.FieldPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRegistrationInput(v *DeleteRegistrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRegistrationInput"}
+	if v.RegistrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteVerifiedDestinationNumberInput(v *DeleteVerifiedDestinationNumberInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVerifiedDestinationNumberInput"}
+	if v.VerifiedDestinationNumberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VerifiedDestinationNumberId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeConfigurationSetsInput(v *DescribeConfigurationSetsInput) error {
 	if v == nil {
 		return nil
@@ -1624,6 +2611,122 @@ func validateOpDescribePoolsInput(v *DescribePoolsInput) error {
 	}
 }
 
+func validateOpDescribeRegistrationAttachmentsInput(v *DescribeRegistrationAttachmentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRegistrationAttachmentsInput"}
+	if v.Filters != nil {
+		if err := validateRegistrationAttachmentFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeRegistrationFieldDefinitionsInput(v *DescribeRegistrationFieldDefinitionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRegistrationFieldDefinitionsInput"}
+	if v.RegistrationType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeRegistrationFieldValuesInput(v *DescribeRegistrationFieldValuesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRegistrationFieldValuesInput"}
+	if v.RegistrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeRegistrationSectionDefinitionsInput(v *DescribeRegistrationSectionDefinitionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRegistrationSectionDefinitionsInput"}
+	if v.RegistrationType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeRegistrationsInput(v *DescribeRegistrationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRegistrationsInput"}
+	if v.Filters != nil {
+		if err := validateRegistrationFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeRegistrationTypeDefinitionsInput(v *DescribeRegistrationTypeDefinitionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRegistrationTypeDefinitionsInput"}
+	if v.Filters != nil {
+		if err := validateRegistrationTypeFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeRegistrationVersionsInput(v *DescribeRegistrationVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRegistrationVersionsInput"}
+	if v.RegistrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationId"))
+	}
+	if v.Filters != nil {
+		if err := validateRegistrationVersionFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeSenderIdsInput(v *DescribeSenderIdsInput) error {
 	if v == nil {
 		return nil
@@ -1636,6 +2739,23 @@ func validateOpDescribeSenderIdsInput(v *DescribeSenderIdsInput) error {
 	}
 	if v.Filters != nil {
 		if err := validateSenderIdFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeVerifiedDestinationNumbersInput(v *DescribeVerifiedDestinationNumbersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeVerifiedDestinationNumbersInput"}
+	if v.Filters != nil {
+		if err := validateVerifiedDestinationNumberFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1667,6 +2787,21 @@ func validateOpDisassociateOriginationIdentityInput(v *DisassociateOriginationId
 	}
 }
 
+func validateOpDiscardRegistrationVersionInput(v *DiscardRegistrationVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DiscardRegistrationVersionInput"}
+	if v.RegistrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListPoolOriginationIdentitiesInput(v *ListPoolOriginationIdentitiesInput) error {
 	if v == nil {
 		return nil
@@ -1677,6 +2812,26 @@ func validateOpListPoolOriginationIdentitiesInput(v *ListPoolOriginationIdentiti
 	}
 	if v.Filters != nil {
 		if err := validatePoolOriginationIdentitiesFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRegistrationAssociationsInput(v *ListRegistrationAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRegistrationAssociationsInput"}
+	if v.RegistrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationId"))
+	}
+	if v.Filters != nil {
+		if err := validateRegistrationAssociationFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1741,6 +2896,24 @@ func validateOpPutOptedOutNumberInput(v *PutOptedOutNumberInput) error {
 	}
 }
 
+func validateOpPutRegistrationFieldValueInput(v *PutRegistrationFieldValueInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutRegistrationFieldValueInput"}
+	if v.RegistrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationId"))
+	}
+	if v.FieldPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpReleasePhoneNumberInput(v *ReleasePhoneNumberInput) error {
 	if v == nil {
 		return nil
@@ -1748,6 +2921,24 @@ func validateOpReleasePhoneNumberInput(v *ReleasePhoneNumberInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ReleasePhoneNumberInput"}
 	if v.PhoneNumberId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpReleaseSenderIdInput(v *ReleaseSenderIdInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReleaseSenderIdInput"}
+	if v.SenderId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SenderId"))
+	}
+	if v.IsoCountryCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsoCountryCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1777,6 +2968,47 @@ func validateOpRequestPhoneNumberInput(v *RequestPhoneNumberInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRequestSenderIdInput(v *RequestSenderIdInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RequestSenderIdInput"}
+	if v.SenderId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SenderId"))
+	}
+	if v.IsoCountryCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsoCountryCode"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendDestinationNumberVerificationCodeInput(v *SendDestinationNumberVerificationCodeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendDestinationNumberVerificationCodeInput"}
+	if v.VerifiedDestinationNumberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VerifiedDestinationNumberId"))
+	}
+	if len(v.VerificationChannel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VerificationChannel"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1884,6 +3116,21 @@ func validateOpSetVoiceMessageSpendLimitOverrideInput(v *SetVoiceMessageSpendLim
 	}
 }
 
+func validateOpSubmitRegistrationVersionInput(v *SubmitRegistrationVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubmitRegistrationVersionInput"}
+	if v.RegistrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -1979,6 +3226,42 @@ func validateOpUpdatePoolInput(v *UpdatePoolInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePoolInput"}
 	if v.PoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PoolId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSenderIdInput(v *UpdateSenderIdInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSenderIdInput"}
+	if v.SenderId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SenderId"))
+	}
+	if v.IsoCountryCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsoCountryCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpVerifyDestinationNumberInput(v *VerifyDestinationNumberInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VerifyDestinationNumberInput"}
+	if v.VerifiedDestinationNumberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VerifiedDestinationNumberId"))
+	}
+	if v.VerificationCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VerificationCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

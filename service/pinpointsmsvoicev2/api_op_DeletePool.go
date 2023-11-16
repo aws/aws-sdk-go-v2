@@ -15,7 +15,7 @@ import (
 
 // Deletes an existing pool. Deleting a pool disassociates all origination
 // identities from that pool. If the pool status isn't active or if deletion
-// protection is enabled, an Error is returned. A pool is a collection of phone
+// protection is enabled, an error is returned. A pool is a collection of phone
 // numbers and SenderIds. A pool can include one or more phone numbers and
 // SenderIds that are associated with your Amazon Web Services account.
 func (c *Client) DeletePool(ctx context.Context, params *DeletePoolInput, optFns ...func(*Options)) (*DeletePoolOutput, error) {
@@ -82,6 +82,10 @@ type DeletePoolOutput struct {
 
 	// The Amazon Resource Name (ARN) of the TwoWayChannel.
 	TwoWayChannelArn *string
+
+	// An optional IAM Role Arn for a service to assume, to be able to post inbound
+	// SMS messages.
+	TwoWayChannelRole *string
 
 	// By default this is set to false. When set to true you can receive incoming text
 	// messages from your end recipients.

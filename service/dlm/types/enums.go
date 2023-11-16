@@ -2,6 +2,44 @@
 
 package types
 
+type DefaultPoliciesTypeValues string
+
+// Enum values for DefaultPoliciesTypeValues
+const (
+	DefaultPoliciesTypeValuesVolume   DefaultPoliciesTypeValues = "VOLUME"
+	DefaultPoliciesTypeValuesInstance DefaultPoliciesTypeValues = "INSTANCE"
+	DefaultPoliciesTypeValuesAll      DefaultPoliciesTypeValues = "ALL"
+)
+
+// Values returns all known values for DefaultPoliciesTypeValues. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DefaultPoliciesTypeValues) Values() []DefaultPoliciesTypeValues {
+	return []DefaultPoliciesTypeValues{
+		"VOLUME",
+		"INSTANCE",
+		"ALL",
+	}
+}
+
+type DefaultPolicyTypeValues string
+
+// Enum values for DefaultPolicyTypeValues
+const (
+	DefaultPolicyTypeValuesVolume   DefaultPolicyTypeValues = "VOLUME"
+	DefaultPolicyTypeValuesInstance DefaultPolicyTypeValues = "INSTANCE"
+)
+
+// Values returns all known values for DefaultPolicyTypeValues. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DefaultPolicyTypeValues) Values() []DefaultPolicyTypeValues {
+	return []DefaultPolicyTypeValues{
+		"VOLUME",
+		"INSTANCE",
+	}
+}
+
 type EventSourceValues string
 
 // Enum values for EventSourceValues
@@ -102,6 +140,24 @@ func (LocationValues) Values() []LocationValues {
 	return []LocationValues{
 		"CLOUD",
 		"OUTPOST_LOCAL",
+	}
+}
+
+type PolicyLanguageValues string
+
+// Enum values for PolicyLanguageValues
+const (
+	PolicyLanguageValuesSimplified PolicyLanguageValues = "SIMPLIFIED"
+	PolicyLanguageValuesStandard   PolicyLanguageValues = "STANDARD"
+)
+
+// Values returns all known values for PolicyLanguageValues. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyLanguageValues) Values() []PolicyLanguageValues {
+	return []PolicyLanguageValues{
+		"SIMPLIFIED",
+		"STANDARD",
 	}
 }
 

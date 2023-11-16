@@ -724,6 +724,24 @@ func (RelationshipStatus) Values() []RelationshipStatus {
 	}
 }
 
+type RetrievalMode string
+
+// Enum values for RetrievalMode
+const (
+	RetrievalModeCallerCredentials RetrievalMode = "CALLER_CREDENTIALS"
+	RetrievalModeAssumeRole        RetrievalMode = "ASSUME_ROLE"
+)
+
+// Values returns all known values for RetrievalMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RetrievalMode) Values() []RetrievalMode {
+	return []RetrievalMode{
+		"CALLER_CREDENTIALS",
+		"ASSUME_ROLE",
+	}
+}
+
 type RevealRequestStatus string
 
 // Enum values for RevealRequestStatus
@@ -1029,6 +1047,12 @@ const (
 	UnavailabilityReasonCodeUnsupportedFindingType      UnavailabilityReasonCode = "UNSUPPORTED_FINDING_TYPE"
 	UnavailabilityReasonCodeInvalidClassificationResult UnavailabilityReasonCode = "INVALID_CLASSIFICATION_RESULT"
 	UnavailabilityReasonCodeObjectUnavailable           UnavailabilityReasonCode = "OBJECT_UNAVAILABLE"
+	UnavailabilityReasonCodeAccountNotInOrganization    UnavailabilityReasonCode = "ACCOUNT_NOT_IN_ORGANIZATION"
+	UnavailabilityReasonCodeMissingGetMemberPermission  UnavailabilityReasonCode = "MISSING_GET_MEMBER_PERMISSION"
+	UnavailabilityReasonCodeRoleTooPermissive           UnavailabilityReasonCode = "ROLE_TOO_PERMISSIVE"
+	UnavailabilityReasonCodeMemberRoleTooPermissive     UnavailabilityReasonCode = "MEMBER_ROLE_TOO_PERMISSIVE"
+	UnavailabilityReasonCodeInvalidResultSignature      UnavailabilityReasonCode = "INVALID_RESULT_SIGNATURE"
+	UnavailabilityReasonCodeResultNotSigned             UnavailabilityReasonCode = "RESULT_NOT_SIGNED"
 )
 
 // Values returns all known values for UnavailabilityReasonCode. Note that this
@@ -1041,6 +1065,12 @@ func (UnavailabilityReasonCode) Values() []UnavailabilityReasonCode {
 		"UNSUPPORTED_FINDING_TYPE",
 		"INVALID_CLASSIFICATION_RESULT",
 		"OBJECT_UNAVAILABLE",
+		"ACCOUNT_NOT_IN_ORGANIZATION",
+		"MISSING_GET_MEMBER_PERMISSION",
+		"ROLE_TOO_PERMISSIVE",
+		"MEMBER_ROLE_TOO_PERMISSIVE",
+		"INVALID_RESULT_SIGNATURE",
+		"RESULT_NOT_SIGNED",
 	}
 }
 

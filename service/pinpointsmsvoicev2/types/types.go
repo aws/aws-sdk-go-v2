@@ -117,7 +117,7 @@ type ConfigurationSetInformation struct {
 
 // Contains information about an event destination. Event destinations are
 // associated with configuration sets, which enable you to publish message sending
-// events to Amazon CloudWatch, Amazon Kinesis Data Firehose, or Amazon SNS.
+// events to CloudWatch, Kinesis Data Firehose,or Amazon SNS.
 type EventDestination struct {
 
 	// When set to true events will be logged.
@@ -130,7 +130,8 @@ type EventDestination struct {
 	// This member is required.
 	EventDestinationName *string
 
-	// An array of event types that determine which events to log.
+	// An array of event types that determine which events to log. The TEXT_SENT event
+	// type is not supported.
 	//
 	// This member is required.
 	MatchingEventTypes []EventType
@@ -292,6 +293,9 @@ type OriginationIdentityMetadata struct {
 	// This member is required.
 	OriginationIdentityArn *string
 
+	// The phone number in E.164 format.
+	PhoneNumber *string
+
 	noSmithyDocumentSerde
 }
 
@@ -311,7 +315,8 @@ type PhoneNumberFilter struct {
 	noSmithyDocumentSerde
 }
 
-// The information for a phone number in an Amazon Web Services account.
+// The information for a phone number, in E.164 format, in an Amazon Web Services
+// account.
 type PhoneNumberInformation struct {
 
 	// The time when the phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
@@ -395,8 +400,15 @@ type PhoneNumberInformation struct {
 	// The unique identifier of the pool associated with the phone number.
 	PoolId *string
 
+	// The unique identifier for the registration.
+	RegistrationId *string
+
 	// The Amazon Resource Name (ARN) of the two way channel.
 	TwoWayChannelArn *string
+
+	// An optional IAM Role Arn for a service to assume, to be able to post inbound
+	// SMS messages.
+	TwoWayChannelRole *string
 
 	noSmithyDocumentSerde
 }
@@ -487,6 +499,10 @@ type PoolInformation struct {
 	// The Amazon Resource Name (ARN) of the two way channel.
 	TwoWayChannelArn *string
 
+	// An optional IAM Role Arn for a service to assume, to be able to post inbound
+	// SMS messages.
+	TwoWayChannelRole *string
+
 	noSmithyDocumentSerde
 }
 
@@ -503,6 +519,532 @@ type PoolOriginationIdentitiesFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// The filter definition for filtering registrations that meets a specified
+// criteria.
+type RegistrationAssociationFilter struct {
+
+	// The name of the attribute to filter on.
+	//
+	// This member is required.
+	Name RegistrationAssociationFilterName
+
+	// An array of values to filter for.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for the origination identity that is associated with the registration.
+type RegistrationAssociationMetadata struct {
+
+	// The Amazon Resource Name (ARN) of the origination identity that is associated
+	// with the registration.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	// The unique identifier for the origination identity. For example this could be a
+	// PhoneNumberId or SenderId.
+	//
+	// This member is required.
+	ResourceId *string
+
+	// The origination identity type.
+	//
+	// This member is required.
+	ResourceType *string
+
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	IsoCountryCode *string
+
+	// The phone number associated with the registration in E.164 format.
+	PhoneNumber *string
+
+	noSmithyDocumentSerde
+}
+
+// The filter definition for filtering registration attachments that meets a
+// specified criteria.
+type RegistrationAttachmentFilter struct {
+
+	// The name of the attribute to filter on.
+	//
+	// This member is required.
+	Name RegistrationAttachmentFilterName
+
+	// An array of values to filter on.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information on the specified registration attachments.
+type RegistrationAttachmentsInformation struct {
+
+	// The status of the registration attachment.
+	//   - UPLOAD_IN_PROGRESS The attachment is being uploaded.
+	//   - UPLOAD_COMPLETE The attachment has been uploaded.
+	//   - UPLOAD_FAILED The attachment failed to uploaded.
+	//   - DELETED The attachment has been deleted..
+	//
+	// This member is required.
+	AttachmentStatus AttachmentStatus
+
+	// The time when the registration attachment was created, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
+	//
+	// This member is required.
+	CreatedTimestamp *time.Time
+
+	// The Amazon Resource Name (ARN) for the registration attachment.
+	//
+	// This member is required.
+	RegistrationAttachmentArn *string
+
+	// The unique identifier for the registration attachment.
+	//
+	// This member is required.
+	RegistrationAttachmentId *string
+
+	// A description of why the upload didn't successfully complete.
+	AttachmentUploadErrorReason AttachmentUploadErrorReason
+
+	noSmithyDocumentSerde
+}
+
+// Provides the reason a registration was rejected.
+type RegistrationDeniedReasonInformation struct {
+
+	// The reason a registration was rejected.
+	//
+	// This member is required.
+	Reason *string
+
+	// A short description of the rejection reason.
+	//
+	// This member is required.
+	ShortDescription *string
+
+	// The link to the document.
+	DocumentationLink *string
+
+	// The title of the document.
+	DocumentationTitle *string
+
+	// A long description of the rejection reason.
+	LongDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a description of the specified field.
+type RegistrationFieldDefinition struct {
+
+	// An array of RegistrationFieldDisplayHints objects for the field.
+	//
+	// This member is required.
+	DisplayHints *RegistrationFieldDisplayHints
+
+	// The path to the registration form field. You can use
+	// DescribeRegistrationFieldDefinitions for a list of FieldPaths.
+	//
+	// This member is required.
+	FieldPath *string
+
+	// Specifies if the field for the registration form is required, conditional or
+	// optional.
+	//
+	// This member is required.
+	FieldRequirement FieldRequirement
+
+	// The type of field.
+	//
+	// This member is required.
+	FieldType FieldType
+
+	// The section path of the field.
+	//
+	// This member is required.
+	SectionPath *string
+
+	// The validation rules for a select field.
+	SelectValidation *SelectValidation
+
+	// The validation rules for a text field.
+	TextValidation *TextValidation
+
+	noSmithyDocumentSerde
+}
+
+// Provides help information on the registration field.
+type RegistrationFieldDisplayHints struct {
+
+	// A short description of the display hint.
+	//
+	// This member is required.
+	ShortDescription *string
+
+	// The title of the display hint.
+	//
+	// This member is required.
+	Title *string
+
+	// The link to the document the display hint is associated with.
+	DocumentationLink *string
+
+	// The title of the document the display hint is associated with.
+	DocumentationTitle *string
+
+	// Example text of what the value of a field should contain.
+	ExampleTextValue *string
+
+	// A full description of the display hint.
+	LongDescription *string
+
+	// An array of SelectOptionDescription objects.
+	SelectOptionDescriptions []SelectOptionDescription
+
+	// The validation rules for the text field.
+	TextValidationDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides the values of the specified field.
+type RegistrationFieldValueInformation struct {
+
+	// The path to the registration form field. You can use
+	// DescribeRegistrationFieldDefinitions for a list of FieldPaths.
+	//
+	// This member is required.
+	FieldPath *string
+
+	// A description of why the registration was denied.
+	DeniedReason *string
+
+	// The unique identifier for the registration attachment.
+	RegistrationAttachmentId *string
+
+	// An array of values for the form field.
+	SelectChoices []string
+
+	// The text data for a free form field.
+	TextValue *string
+
+	noSmithyDocumentSerde
+}
+
+// The filter definition for filtering registrations that meets a specified
+// criteria.
+type RegistrationFilter struct {
+
+	// The name of the attribute to filter on.
+	//
+	// This member is required.
+	Name RegistrationFilterName
+
+	// An array of values to filter on.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the requested registration.
+type RegistrationInformation struct {
+
+	// The time when the registration was created, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
+	//
+	// This member is required.
+	CreatedTimestamp *time.Time
+
+	// The current version number of the registration.
+	//
+	// This member is required.
+	CurrentVersionNumber *int64
+
+	// The Amazon Resource Name (ARN) for the registration.
+	//
+	// This member is required.
+	RegistrationArn *string
+
+	// The unique identifier for the registration.
+	//
+	// This member is required.
+	RegistrationId *string
+
+	// The status of the registration.
+	//   - CREATED : Your registration is created but not submitted.
+	//   - SUBMITTED : Your registration has been submitted and is awaiting review.
+	//   - REVIEWING : Your registration has been accepted and is being reviewed.
+	//   - PROVISIONING : Your registration has been approved and your origination
+	//   identity is being created.
+	//   - COMPLETE : Your registration has been approved and and your origination
+	//   identity has been created.
+	//   - REQUIRES_UPDATES : You must fix your registration and resubmit it.
+	//   - CLOSED : The phone number or sender ID has been deleted and you must also
+	//   delete the registration for the number.
+	//   - DELETED : The registration has been deleted.
+	//
+	// This member is required.
+	RegistrationStatus RegistrationStatus
+
+	// The type of registration form. The list of RegistrationTypes can be found using
+	// the DescribeRegistrationTypeDefinitions action.
+	//
+	// This member is required.
+	RegistrationType *string
+
+	// Metadata about a given registration which is specific to that registration type.
+	AdditionalAttributes map[string]string
+
+	// The version number of the registration that was approved.
+	ApprovedVersionNumber *int64
+
+	// The latest version number of the registration that was denied.
+	LatestDeniedVersionNumber *int64
+
+	noSmithyDocumentSerde
+}
+
+// Provides information on the specified section definition.
+type RegistrationSectionDefinition struct {
+
+	// The path to the section of the registration.
+	//
+	// This member is required.
+	DisplayHints *RegistrationSectionDisplayHints
+
+	// The path to the section of the registration.
+	//
+	// This member is required.
+	SectionPath *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides help information on the registration section.
+type RegistrationSectionDisplayHints struct {
+
+	// A short description of the display hint.
+	//
+	// This member is required.
+	ShortDescription *string
+
+	// The title of the display hint.
+	//
+	// This member is required.
+	Title *string
+
+	// The link to the document the display hint is associated with.
+	DocumentationLink *string
+
+	// The title of the document the display hint is associated with.
+	DocumentationTitle *string
+
+	// A full description of the display hint.
+	LongDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information on the supported registration type.
+type RegistrationTypeDefinition struct {
+
+	// Provides help information on the registration.
+	//
+	// This member is required.
+	DisplayHints *RegistrationTypeDisplayHints
+
+	// The type of registration form. The list of RegistrationTypes can be found using
+	// the DescribeRegistrationTypeDefinitions action.
+	//
+	// This member is required.
+	RegistrationType *string
+
+	// The supported association behavior for the registration type.
+	SupportedAssociations []SupportedAssociation
+
+	noSmithyDocumentSerde
+}
+
+// Provides help information on the registration type.
+type RegistrationTypeDisplayHints struct {
+
+	// The title of the display hint.
+	//
+	// This member is required.
+	Title *string
+
+	// The link to the document the display hint is associated with.
+	DocumentationLink *string
+
+	// The title of the document the display hint is associated with.
+	DocumentationTitle *string
+
+	// A full description of the display hint.
+	LongDescription *string
+
+	// A short description of the display hint.
+	ShortDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// The filter definition for filtering registration types that meets a specified
+// criteria.
+type RegistrationTypeFilter struct {
+
+	// The name of the attribute to filter on.
+	//
+	// This member is required.
+	Name RegistrationTypeFilterName
+
+	// An array of values to filter on.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// The filter definition for filtering registration versions that meets a
+// specified criteria.
+type RegistrationVersionFilter struct {
+
+	// The name of the attribute to filter on.
+	//
+	// This member is required.
+	Name RegistrationVersionFilterName
+
+	// An array of values to filter on.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the specified version of the registration.
+type RegistrationVersionInformation struct {
+
+	// The status of the registration.
+	//   - DRAFT : The initial status of a registration version after it’s created.
+	//   - SUBMITTED : Your registration has been submitted.
+	//   - REVIEWING : Your registration has been accepted and is being reviewed.
+	//   - APPROVED : Your registration has been approved.
+	//   - DISCARDED : You've abandon this version of their registration to start over
+	//   with a new version.
+	//   - DENIED : You must fix your registration and resubmit it.
+	//   - REVOKED : Your previously approved registration has been revoked.
+	//   - ARCHIVED : Your previously approved registration version moves into this
+	//   status when a more recently submitted version is approved.
+	//
+	// This member is required.
+	RegistrationVersionStatus RegistrationVersionStatus
+
+	// The RegistrationVersionStatusHistory object contains the time stamps for when
+	// the reservations status changes.
+	//
+	// This member is required.
+	RegistrationVersionStatusHistory *RegistrationVersionStatusHistory
+
+	// The version number of the registration.
+	//
+	// This member is required.
+	VersionNumber *int64
+
+	// An array of RegistrationDeniedReasonInformation objects.
+	DeniedReasons []RegistrationDeniedReasonInformation
+
+	noSmithyDocumentSerde
+}
+
+// The RegistrationVersionStatusHistory object contains the time stamps for when
+// the reservations status changes.
+type RegistrationVersionStatusHistory struct {
+
+	// The time when the registration was in the draft state, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
+	//
+	// This member is required.
+	DraftTimestamp *time.Time
+
+	// The time when the registration was in the approved state, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
+	ApprovedTimestamp *time.Time
+
+	// The time when the registration was in the archived state, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
+	ArchivedTimestamp *time.Time
+
+	// The time when the registration was in the denied state, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
+	DeniedTimestamp *time.Time
+
+	// The time when the registration was in the discarded state, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
+	DiscardedTimestamp *time.Time
+
+	// The time when the registration was in the reviewing state, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
+	ReviewingTimestamp *time.Time
+
+	// The time when the registration was in the revoked state, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
+	RevokedTimestamp *time.Time
+
+	// The time when the registration was in the submitted state, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
+	SubmittedTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A description of each select option.
+type SelectOptionDescription struct {
+
+	// The value of the option.
+	//
+	// This member is required.
+	Option *string
+
+	// A description of the option meaning.
+	Description *string
+
+	// The title of the select option.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// Validation rules for a select field.
+type SelectValidation struct {
+
+	// The maximum number of choices for the select.
+	//
+	// This member is required.
+	MaxChoices *int32
+
+	// The minimum number of choices for the select.
+	//
+	// This member is required.
+	MinChoices *int32
+
+	// An array of strings for the possible selection options.
+	//
+	// This member is required.
+	Options []string
 
 	noSmithyDocumentSerde
 }
@@ -545,6 +1087,12 @@ type SenderIdFilter struct {
 // The information for all SenderIds in an Amazon Web Services account.
 type SenderIdInformation struct {
 
+	// By default this is set to false. When set to true the sender ID can't be
+	// deleted.
+	//
+	// This member is required.
+	DeletionProtectionEnabled bool
+
 	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
 	//
 	// This member is required.
@@ -562,6 +1110,11 @@ type SenderIdInformation struct {
 	// This member is required.
 	MonthlyLeasingPrice *string
 
+	// True if the sender ID is registered.
+	//
+	// This member is required.
+	Registered bool
+
 	// The alphanumeric sender ID in a specific country that you'd like to describe.
 	//
 	// This member is required.
@@ -571,6 +1124,9 @@ type SenderIdInformation struct {
 	//
 	// This member is required.
 	SenderIdArn *string
+
+	// The unique identifier for the registration.
+	RegistrationId *string
 
 	noSmithyDocumentSerde
 }
@@ -622,6 +1178,45 @@ type SpendLimit struct {
 	noSmithyDocumentSerde
 }
 
+// The processing rules for when a registration can be associated with an
+// origination identity and disassociated from an origination identity.
+type SupportedAssociation struct {
+
+	// The association behavior.
+	//   - ASSOCIATE_BEFORE_SUBMIT The origination identity has to be supplied when
+	//   creating a registration.
+	//   - ASSOCIATE_ON_APPROVAL This applies to all short code registrations. The
+	//   short code will be automatically provisioned once the registration is approved.
+	//   - ASSOCIATE_AFTER_COMPLETE This applies to phone number registrations when you
+	//   must complete a registration first, then associate one or more phone numbers
+	//   later. For example 10DLC campaigns and long codes.
+	//
+	// This member is required.
+	AssociationBehavior RegistrationAssociationBehavior
+
+	// The disassociation behavior.
+	//   - DISASSOCIATE_ALL_CLOSES_REGISTRATION All origination identities must be
+	//   disassociated from the registration before the registration can be closed.
+	//   - DISASSOCIATE_ALL_ALLOWS_DELETE_REGISTRATION All origination identities must
+	//   be disassociated from the registration before the registration can be deleted.
+	//   - DELETE_REGISTRATION_DISASSOCIATES The registration can be deleted and all
+	//   origination identities will be disasscoiated.
+	//
+	// This member is required.
+	DisassociationBehavior RegistrationDisassociationBehavior
+
+	// Defines the behavior of when an origination identity and registration can be
+	// associated with each other.
+	//
+	// This member is required.
+	ResourceType *string
+
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	IsoCountryCode *string
+
+	noSmithyDocumentSerde
+}
+
 // The list of tags to be added to the specified topic.
 type Tag struct {
 
@@ -634,6 +1229,27 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Validation rules for a text field.
+type TextValidation struct {
+
+	// The maximum number of characters for the text field.
+	//
+	// This member is required.
+	MaxLength *int32
+
+	// The minimum number of characters for the text field.
+	//
+	// This member is required.
+	MinLength *int32
+
+	// The regular expression used to validate the text field.
+	//
+	// This member is required.
+	Pattern *string
 
 	noSmithyDocumentSerde
 }
@@ -651,6 +1267,57 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The filter definition for filtering verified destination phone numbers that
+// meets a specified criteria.
+type VerifiedDestinationNumberFilter struct {
+
+	// The name of the attribute to filter on.
+	//
+	// This member is required.
+	Name VerifiedDestinationNumberFilterName
+
+	// An array of values to filter on.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the requested verified destintion phone number.
+type VerifiedDestinationNumberInformation struct {
+
+	// The time when the destination phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
+	//
+	// This member is required.
+	CreatedTimestamp *time.Time
+
+	// The verified destination phone number, in E.164 format.
+	//
+	// This member is required.
+	DestinationPhoneNumber *string
+
+	// The status of the verified destination phone number.
+	//   - PENDING : The phone number hasn't been verified yet.
+	//   - VERIFIED : The phone number is verified and can receive messages.
+	//
+	// This member is required.
+	Status VerificationStatus
+
+	// The Amazon Resource Name (ARN) for the verified destination phone number.
+	//
+	// This member is required.
+	VerifiedDestinationNumberArn *string
+
+	// The unique identifier for the verified destination phone number.
+	//
+	// This member is required.
+	VerifiedDestinationNumberId *string
 
 	noSmithyDocumentSerde
 }

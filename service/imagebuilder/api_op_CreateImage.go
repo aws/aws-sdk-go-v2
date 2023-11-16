@@ -33,7 +33,9 @@ func (c *Client) CreateImage(ctx context.Context, params *CreateImageInput, optF
 
 type CreateImageInput struct {
 
-	// The idempotency token used to make this request idempotent.
+	// Unique, case-sensitive identifier you provide to ensure idempotency of the
+	// request. For more information, see Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// in the Amazon EC2 API Reference.
 	//
 	// This member is required.
 	ClientToken *string
@@ -75,10 +77,10 @@ type CreateImageInput struct {
 
 type CreateImageOutput struct {
 
-	// The idempotency token used to make this request idempotent.
+	// The client token that uniquely identifies the request.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the image that this request created.
+	// The Amazon Resource Name (ARN) of the image that the request created.
 	ImageBuildVersionArn *string
 
 	// The request ID that uniquely identifies this request.

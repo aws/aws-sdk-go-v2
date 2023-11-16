@@ -1719,6 +1719,80 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyRules(v *[]types.CrossRegion
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCrossRegionCopyTarget(v **types.CrossRegionCopyTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CrossRegionCopyTarget
+	if *v == nil {
+		sv = &types.CrossRegionCopyTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TargetRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetRegion to be of type string, got %T instead", value)
+				}
+				sv.TargetRegion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCrossRegionCopyTargetList(v *[]types.CrossRegionCopyTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CrossRegionCopyTarget
+	if *v == nil {
+		cv = []types.CrossRegionCopyTarget{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CrossRegionCopyTarget
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCrossRegionCopyTarget(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDeprecateRule(v **types.DeprecateRule, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1967,6 +2041,126 @@ func awsRestjson1_deserializeDocumentExcludeDataVolumeTagList(v *[]types.Tag, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentExcludeTagsList(v *[]types.Tag, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Tag
+	if *v == nil {
+		cv = []types.Tag{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Tag
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTag(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExcludeVolumeTypesList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected VolumeTypeValues to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExclusions(v **types.Exclusions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Exclusions
+	if *v == nil {
+		sv = &types.Exclusions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ExcludeBootVolumes":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected ExcludeBootVolumes to be of type *bool, got %T instead", value)
+				}
+				sv.ExcludeBootVolumes = ptr.Bool(jtv)
+			}
+
+		case "ExcludeTags":
+			if err := awsRestjson1_deserializeDocumentExcludeTagsList(&sv.ExcludeTags, value); err != nil {
+				return err
+			}
+
+		case "ExcludeVolumeTypes":
+			if err := awsRestjson1_deserializeDocumentExcludeVolumeTypesList(&sv.ExcludeVolumeTypes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFastRestoreRule(v **types.FastRestoreRule, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2194,6 +2388,15 @@ func awsRestjson1_deserializeDocumentLifecyclePolicy(v **types.LifecyclePolicy, 
 				sv.DateModified = ptr.Time(t)
 			}
 
+		case "DefaultPolicy":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected DefaultPolicy to be of type *bool, got %T instead", value)
+				}
+				sv.DefaultPolicy = ptr.Bool(jtv)
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2289,6 +2492,15 @@ func awsRestjson1_deserializeDocumentLifecyclePolicySummary(v **types.LifecycleP
 
 	for key, value := range shape {
 		switch key {
+		case "DefaultPolicy":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected DefaultPolicy to be of type *bool, got %T instead", value)
+				}
+				sv.DefaultPolicy = ptr.Bool(jtv)
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2548,14 +2760,64 @@ func awsRestjson1_deserializeDocumentPolicyDetails(v **types.PolicyDetails, valu
 				return err
 			}
 
+		case "CopyTags":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected CopyTagsNullable to be of type *bool, got %T instead", value)
+				}
+				sv.CopyTags = ptr.Bool(jtv)
+			}
+
+		case "CreateInterval":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected CreateInterval to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CreateInterval = ptr.Int32(int32(i64))
+			}
+
+		case "CrossRegionCopyTargets":
+			if err := awsRestjson1_deserializeDocumentCrossRegionCopyTargetList(&sv.CrossRegionCopyTargets, value); err != nil {
+				return err
+			}
+
 		case "EventSource":
 			if err := awsRestjson1_deserializeDocumentEventSource(&sv.EventSource, value); err != nil {
 				return err
 			}
 
+		case "Exclusions":
+			if err := awsRestjson1_deserializeDocumentExclusions(&sv.Exclusions, value); err != nil {
+				return err
+			}
+
+		case "ExtendDeletion":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected ExtendDeletion to be of type *bool, got %T instead", value)
+				}
+				sv.ExtendDeletion = ptr.Bool(jtv)
+			}
+
 		case "Parameters":
 			if err := awsRestjson1_deserializeDocumentParameters(&sv.Parameters, value); err != nil {
 				return err
+			}
+
+		case "PolicyLanguage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyLanguageValues to be of type string, got %T instead", value)
+				}
+				sv.PolicyLanguage = types.PolicyLanguageValues(jtv)
 			}
 
 		case "PolicyType":
@@ -2572,9 +2834,31 @@ func awsRestjson1_deserializeDocumentPolicyDetails(v **types.PolicyDetails, valu
 				return err
 			}
 
+		case "ResourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceTypeValues to be of type string, got %T instead", value)
+				}
+				sv.ResourceType = types.ResourceTypeValues(jtv)
+			}
+
 		case "ResourceTypes":
 			if err := awsRestjson1_deserializeDocumentResourceTypeValuesList(&sv.ResourceTypes, value); err != nil {
 				return err
+			}
+
+		case "RetainInterval":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RetainInterval to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RetainInterval = ptr.Int32(int32(i64))
 			}
 
 		case "Schedules":

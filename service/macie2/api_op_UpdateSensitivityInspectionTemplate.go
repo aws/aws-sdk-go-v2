@@ -48,7 +48,7 @@ type UpdateSensitivityInspectionTemplateInput struct {
 	Excludes *types.SensitivityInspectionTemplateExcludes
 
 	// The allow lists, custom data identifiers, and managed data identifiers to
-	// include (use) when analyzing data.
+	// explicitly include (use) when analyzing data.
 	Includes *types.SensitivityInspectionTemplateIncludes
 
 	noSmithyDocumentSerde

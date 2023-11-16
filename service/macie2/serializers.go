@@ -5843,6 +5843,13 @@ func awsRestjson1_serializeOpDocumentUpdateRevealConfigurationInput(v *UpdateRev
 		}
 	}
 
+	if v.RetrievalConfiguration != nil {
+		ok := object.Key("retrievalConfiguration")
+		if err := awsRestjson1_serializeDocumentUpdateRetrievalConfiguration(v.RetrievalConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7080,6 +7087,23 @@ func awsRestjson1_serializeDocumentTagValuePair(v *types.TagValuePair, value smi
 	if v.Value != nil {
 		ok := object.Key("value")
 		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateRetrievalConfiguration(v *types.UpdateRetrievalConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.RetrievalMode) > 0 {
+		ok := object.Key("retrievalMode")
+		ok.String(string(v.RetrievalMode))
+	}
+
+	if v.RoleName != nil {
+		ok := object.Key("roleName")
+		ok.String(*v.RoleName)
 	}
 
 	return nil

@@ -249,6 +249,9 @@ type ClusterInfo struct {
 	// The current version of the MSK cluster.
 	CurrentVersion *string
 
+	// Determines if there is an action required from the customer.
+	CustomerActionStatus CustomerActionStatus
+
 	// Includes all encryption-related information.
 	EncryptionInfo *EncryptionInfo
 
@@ -940,6 +943,9 @@ type Provisioned struct {
 
 	// Information about the Apache Kafka version deployed on the brokers.
 	CurrentBrokerSoftwareInfo *BrokerSoftwareInfo
+
+	// Determines if there is an action required from the customer.
+	CustomerActionStatus CustomerActionStatus
 
 	// Includes all encryption-related information.
 	EncryptionInfo *EncryptionInfo

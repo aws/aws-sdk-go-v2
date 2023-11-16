@@ -1,0 +1,8 @@
+{
+    "id": "7170bcf8-4450-449a-95e9-c4dd9ff33e60",
+    "type": "feature",
+    "description": "Add new engine - long-form - dedicated for longer content, such as news articles, training materials, or marketing videos.",
+    "modules": [
+        "service/polly"
+    ]
+}

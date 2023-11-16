@@ -59,6 +59,92 @@ func (e *AlreadyExistsException) ErrorCode() string {
 }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An exception thrown when you try to stop a task run when there is no task
+// running.
+type ColumnStatisticsTaskNotRunningException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ColumnStatisticsTaskNotRunningException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ColumnStatisticsTaskNotRunningException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ColumnStatisticsTaskNotRunningException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ColumnStatisticsTaskNotRunningException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ColumnStatisticsTaskNotRunningException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// An exception thrown when you try to start another job while running a column
+// stats generation job.
+type ColumnStatisticsTaskRunningException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ColumnStatisticsTaskRunningException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ColumnStatisticsTaskRunningException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ColumnStatisticsTaskRunningException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ColumnStatisticsTaskRunningException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ColumnStatisticsTaskRunningException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// An exception thrown when you try to stop a task run.
+type ColumnStatisticsTaskStoppingException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ColumnStatisticsTaskStoppingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ColumnStatisticsTaskStoppingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ColumnStatisticsTaskStoppingException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ColumnStatisticsTaskStoppingException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ColumnStatisticsTaskStoppingException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // Two processes are trying to modify a resource simultaneously.
 type ConcurrentModificationException struct {
 	Message *string

@@ -166,6 +166,30 @@ func (CloudWatchEncryptionMode) Values() []CloudWatchEncryptionMode {
 	}
 }
 
+type ColumnStatisticsState string
+
+// Enum values for ColumnStatisticsState
+const (
+	ColumnStatisticsStateStarting  ColumnStatisticsState = "STARTING"
+	ColumnStatisticsStateRunning   ColumnStatisticsState = "RUNNING"
+	ColumnStatisticsStateSucceeded ColumnStatisticsState = "SUCCEEDED"
+	ColumnStatisticsStateFailed    ColumnStatisticsState = "FAILED"
+	ColumnStatisticsStateStopped   ColumnStatisticsState = "STOPPED"
+)
+
+// Values returns all known values for ColumnStatisticsState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ColumnStatisticsState) Values() []ColumnStatisticsState {
+	return []ColumnStatisticsState{
+		"STARTING",
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+		"STOPPED",
+	}
+}
+
 type ColumnStatisticsType string
 
 // Enum values for ColumnStatisticsType

@@ -2215,6 +2215,10 @@ type CreateVerifiedAccessEndpointLoadBalancerOptions struct {
 // trust provider using the device type.
 type CreateVerifiedAccessTrustProviderDeviceOptions struct {
 
+	// The URL Amazon Web Services Verified Access will use to verify the authenticity
+	// of the device tokens.
+	PublicSigningKeyUrl *string
+
 	// The ID of the tenant application with the device-identity provider.
 	TenantId *string
 
@@ -2661,6 +2665,10 @@ type DestinationOptionsResponse struct {
 // Describes the options for an Amazon Web Services Verified Access
 // device-identity based trust provider.
 type DeviceOptions struct {
+
+	// The URL Amazon Web Services Verified Access will use to verify the authenticity
+	// of the device tokens.
+	PublicSigningKeyUrl *string
 
 	// The ID of the tenant application with the device-identity provider.
 	TenantId *string
@@ -9784,6 +9792,17 @@ type ModifyVerifiedAccessEndpointLoadBalancerOptions struct {
 
 	// The IDs of the subnets.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Modifies the configuration of the specified device-based Amazon Web Services
+// Verified Access trust provider.
+type ModifyVerifiedAccessTrustProviderDeviceOptions struct {
+
+	// The URL Amazon Web Services Verified Access will use to verify the authenticity
+	// of the device tokens.
+	PublicSigningKeyUrl *string
 
 	noSmithyDocumentSerde
 }

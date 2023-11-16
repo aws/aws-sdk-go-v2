@@ -132,8 +132,9 @@ type ManifestLayout string
 
 // Enum values for ManifestLayout
 const (
-	ManifestLayoutFull    ManifestLayout = "FULL"
-	ManifestLayoutCompact ManifestLayout = "COMPACT"
+	ManifestLayoutFull               ManifestLayout = "FULL"
+	ManifestLayoutCompact            ManifestLayout = "COMPACT"
+	ManifestLayoutDrmTopLevelCompact ManifestLayout = "DRM_TOP_LEVEL_COMPACT"
 )
 
 // Values returns all known values for ManifestLayout. Note that this can be
@@ -143,6 +144,7 @@ func (ManifestLayout) Values() []ManifestLayout {
 	return []ManifestLayout{
 		"FULL",
 		"COMPACT",
+		"DRM_TOP_LEVEL_COMPACT",
 	}
 }
 

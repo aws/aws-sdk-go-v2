@@ -36,10 +36,10 @@ type ListStageSessionsInput struct {
 	StageArn *string
 
 	// Maximum number of results to return. Default: 50.
-	MaxResults int32
+	MaxResults *int32
 
-	// The first stage to retrieve. This is used for pagination; see the nextToken
-	// response field.
+	// The first stage session to retrieve. This is used for pagination; see the
+	// nextToken response field.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,8 +52,8 @@ type ListStageSessionsOutput struct {
 	// This member is required.
 	StageSessions []types.StageSessionSummary
 
-	// If there are more rooms than maxResults , use nextToken in the request to get
-	// the next set.
+	// If there are more stage sessions than maxResults , use nextToken in the request
+	// to get the next set.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -175,8 +175,8 @@ func NewListStageSessionsPaginator(client ListStageSessionsAPIClient, params *Li
 	}
 
 	options := ListStageSessionsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -206,7 +206,11 @@ func (p *ListStageSessionsPaginator) NextPage(ctx context.Context, optFns ...fun
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListStageSessions(ctx, &params, optFns...)
 	if err != nil {

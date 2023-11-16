@@ -128,6 +128,25 @@ func (CustomStepStatus) Values() []CustomStepStatus {
 	}
 }
 
+type DirectoryListingOptimization string
+
+// Enum values for DirectoryListingOptimization
+const (
+	DirectoryListingOptimizationEnabled  DirectoryListingOptimization = "ENABLED"
+	DirectoryListingOptimizationDisabled DirectoryListingOptimization = "DISABLED"
+)
+
+// Values returns all known values for DirectoryListingOptimization. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DirectoryListingOptimization) Values() []DirectoryListingOptimization {
+	return []DirectoryListingOptimization{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type Domain string
 
 // Enum values for Domain
@@ -293,6 +312,24 @@ func (IdentityProviderType) Values() []IdentityProviderType {
 		"API_GATEWAY",
 		"AWS_DIRECTORY_SERVICE",
 		"AWS_LAMBDA",
+	}
+}
+
+type MapType string
+
+// Enum values for MapType
+const (
+	MapTypeFile      MapType = "FILE"
+	MapTypeDirectory MapType = "DIRECTORY"
+)
+
+// Values returns all known values for MapType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (MapType) Values() []MapType {
+	return []MapType{
+		"FILE",
+		"DIRECTORY",
 	}
 }
 

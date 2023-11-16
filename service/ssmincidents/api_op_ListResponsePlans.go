@@ -33,7 +33,8 @@ type ListResponsePlansInput struct {
 	// The maximum number of response plans per page.
 	MaxResults *int32
 
-	// The pagination token to continue to the next page of results.
+	// The pagination token for the next set of items to return. (You received this
+	// token from a previous call.)
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,7 +47,8 @@ type ListResponsePlansOutput struct {
 	// This member is required.
 	ResponsePlanSummaries []types.ResponsePlanSummary
 
-	// The pagination token to continue to the next page of results.
+	// The pagination token to use when requesting the next set of items. If there are
+	// no additional items to return, the string is null.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

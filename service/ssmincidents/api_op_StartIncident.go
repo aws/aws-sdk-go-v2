@@ -42,15 +42,12 @@ type StartIncidentInput struct {
 	ClientToken *string
 
 	// Defines the impact to the customers. Providing an impact overwrites the impact
-	// provided by a response plan. Possible impacts:
-	//   - 1 - Critical impact, this typically relates to full application failure that
-	//   impacts many to all customers.
-	//   - 2 - High impact, partial application failure with impact to many customers.
-	//   - 3 - Medium impact, the application is providing reduced service to
-	//   customers.
-	//   - 4 - Low impact, customer might aren't impacted by the problem yet.
-	//   - 5 - No impact, customers aren't currently impacted but urgent action is
-	//   needed to avoid impact.
+	// provided by a response plan. Supported impact codes
+	//   - 1 - Critical
+	//   - 2 - High
+	//   - 3 - Medium
+	//   - 4 - Low
+	//   - 5 - No Impact
 	Impact *int32
 
 	// Add related items to the incident for other responders to use. Related items

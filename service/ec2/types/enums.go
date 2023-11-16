@@ -1389,6 +1389,7 @@ type DeviceTrustProviderType string
 const (
 	DeviceTrustProviderTypeJamf        DeviceTrustProviderType = "jamf"
 	DeviceTrustProviderTypeCrowdstrike DeviceTrustProviderType = "crowdstrike"
+	DeviceTrustProviderTypeJumpcloud   DeviceTrustProviderType = "jumpcloud"
 )
 
 // Values returns all known values for DeviceTrustProviderType. Note that this can
@@ -1398,6 +1399,7 @@ func (DeviceTrustProviderType) Values() []DeviceTrustProviderType {
 	return []DeviceTrustProviderType{
 		"jamf",
 		"crowdstrike",
+		"jumpcloud",
 	}
 }
 

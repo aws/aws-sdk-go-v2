@@ -39978,6 +39978,11 @@ func awsEc2query_serializeDocumentCreateVerifiedAccessTrustProviderDeviceOptions
 	object := value.Object()
 	_ = object
 
+	if v.PublicSigningKeyUrl != nil {
+		objectKey := object.Key("PublicSigningKeyUrl")
+		objectKey.String(*v.PublicSigningKeyUrl)
+	}
+
 	if v.TenantId != nil {
 		objectKey := object.Key("TenantId")
 		objectKey.String(*v.TenantId)
@@ -43684,6 +43689,18 @@ func awsEc2query_serializeDocumentModifyVerifiedAccessEndpointSubnetIdList(v []s
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentModifyVerifiedAccessTrustProviderDeviceOptions(v *types.ModifyVerifiedAccessTrustProviderDeviceOptions, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.PublicSigningKeyUrl != nil {
+		objectKey := object.Key("PublicSigningKeyUrl")
+		objectKey.String(*v.PublicSigningKeyUrl)
+	}
+
 	return nil
 }
 
@@ -64659,6 +64676,13 @@ func awsEc2query_serializeOpDocumentModifyVerifiedAccessTrustProviderInput(v *Mo
 	if v.Description != nil {
 		objectKey := object.Key("Description")
 		objectKey.String(*v.Description)
+	}
+
+	if v.DeviceOptions != nil {
+		objectKey := object.Key("DeviceOptions")
+		if err := awsEc2query_serializeDocumentModifyVerifiedAccessTrustProviderDeviceOptions(v.DeviceOptions, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.DryRun != nil {

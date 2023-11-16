@@ -89,7 +89,7 @@ type ImportVmImageInput struct {
 
 type ImportVmImageOutput struct {
 
-	// The idempotency token that was used for this request.
+	// The client token that uniquely identifies the request.
 	ClientToken *string
 
 	// The Amazon Resource Name (ARN) of the AMI that was created during the VM import

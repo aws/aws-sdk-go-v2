@@ -12,10 +12,10 @@ import (
 )
 
 // Associates the specified origination identity with a pool. If the origination
-// identity is a phone number and is already associated with another pool, an Error
+// identity is a phone number and is already associated with another pool, an error
 // is returned. A sender ID can be associated with multiple pools. If the
 // origination identity configuration doesn't match the pool's configuration, an
-// Error is returned.
+// error is returned.
 func (c *Client) AssociateOriginationIdentity(ctx context.Context, params *AssociateOriginationIdentityInput, optFns ...func(*Options)) (*AssociateOriginationIdentityOutput, error) {
 	if params == nil {
 		params = &AssociateOriginationIdentityInput{}

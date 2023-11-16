@@ -225,6 +225,11 @@ func awsRestjson1_serializeOpDocumentCreateDevEnvironmentInput(v *CreateDevEnvir
 		}
 	}
 
+	if v.VpcConnectionName != nil {
+		ok := object.Key("vpcConnectionName")
+		ok.String(*v.VpcConnectionName)
+	}
+
 	return nil
 }
 

@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the IAM Identity Center instances that the caller has access to.
+// Lists the details of the organization and account instances of IAM Identity
+// Center that were created in or visible to the account calling this API.
 func (c *Client) ListInstances(ctx context.Context, params *ListInstancesInput, optFns ...func(*Options)) (*ListInstancesOutput, error) {
 	if params == nil {
 		params = &ListInstancesInput{}

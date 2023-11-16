@@ -59,12 +59,12 @@ type UpdateResponsePlanInput struct {
 	IncidentTemplateDedupeString *string
 
 	// Defines the impact to the customers. Providing an impact overwrites the impact
-	// provided by a response plan. Possible impacts:
-	//   - 5 - Severe impact
-	//   - 4 - High impact
-	//   - 3 - Medium impact
-	//   - 2 - Low impact
-	//   - 1 - No impact
+	// provided by a response plan. Supported impact codes
+	//   - 1 - Critical
+	//   - 2 - High
+	//   - 3 - Medium
+	//   - 4 - Low
+	//   - 5 - No Impact
 	IncidentTemplateImpact *int32
 
 	// The Amazon SNS targets that are notified when updates are made to an incident.

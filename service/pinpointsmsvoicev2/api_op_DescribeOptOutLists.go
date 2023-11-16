@@ -17,7 +17,7 @@ import (
 // specified opt-out lists. Opt-out lists include only those that meet the filter
 // criteria. If you don't specify opt-out list names or filters, the output
 // includes information for all opt-out lists. If you specify an opt-out list name
-// that isn't valid, an Error is returned.
+// that isn't valid, an error is returned.
 func (c *Client) DescribeOptOutLists(ctx context.Context, params *DescribeOptOutListsInput, optFns ...func(*Options)) (*DescribeOptOutListsOutput, error) {
 	if params == nil {
 		params = &DescribeOptOutListsInput{}

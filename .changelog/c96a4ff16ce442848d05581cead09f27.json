@@ -1,0 +1,8 @@
+{
+    "id": "c96a4ff1-6ce4-4284-8d05-581cead09f27",
+    "type": "feature",
+    "description": "Adds support for logging configuration in Lambda Functions. Customers will have more control how their function logs are captured and to which cloud watch log group they are delivered also.",
+    "modules": [
+        "service/lambda"
+    ]
+}

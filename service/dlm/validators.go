@@ -412,6 +412,40 @@ func validateExcludeDataVolumeTagList(v []types.Tag) error {
 	}
 }
 
+func validateExcludeTagsList(v []types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExcludeTagsList"}
+	for i := range v {
+		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExclusions(v *types.Exclusions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Exclusions"}
+	if v.ExcludeTags != nil {
+		if err := validateExcludeTagsList(v.ExcludeTags); err != nil {
+			invalidParams.AddNested("ExcludeTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFastRestoreRule(v *types.FastRestoreRule) error {
 	if v == nil {
 		return nil
@@ -472,6 +506,11 @@ func validatePolicyDetails(v *types.PolicyDetails) error {
 	if v.Actions != nil {
 		if err := validateActionList(v.Actions); err != nil {
 			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Exclusions != nil {
+		if err := validateExclusions(v.Exclusions); err != nil {
+			invalidParams.AddNested("Exclusions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -692,11 +731,14 @@ func validateOpCreateLifecyclePolicyInput(v *CreateLifecyclePolicyInput) error {
 	if len(v.State) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("State"))
 	}
-	if v.PolicyDetails == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyDetails"))
-	} else if v.PolicyDetails != nil {
+	if v.PolicyDetails != nil {
 		if err := validatePolicyDetails(v.PolicyDetails); err != nil {
 			invalidParams.AddNested("PolicyDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Exclusions != nil {
+		if err := validateExclusions(v.Exclusions); err != nil {
+			invalidParams.AddNested("Exclusions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -798,6 +840,11 @@ func validateOpUpdateLifecyclePolicyInput(v *UpdateLifecyclePolicyInput) error {
 	if v.PolicyDetails != nil {
 		if err := validatePolicyDetails(v.PolicyDetails); err != nil {
 			invalidParams.AddNested("PolicyDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Exclusions != nil {
+		if err := validateExclusions(v.Exclusions); err != nil {
+			invalidParams.AddNested("Exclusions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

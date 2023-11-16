@@ -30,18 +30,16 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// Amazon Web Services Service Namespaces in the Amazon Web Services General
-	// Reference.
-	//
-	// This member is required.
-	InstanceArn *string
-
 	// The ARN of the resource with the tags to be listed.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The ARN of the IAM Identity Center instance under which the operation will be
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
+	// Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
+	InstanceArn *string
 
 	// The pagination token for the list API. Initially the value is null. Use the
 	// output of previous API calls to make subsequent calls.

@@ -48,9 +48,9 @@ type ListParticipantEventsInput struct {
 	StageArn *string
 
 	// Maximum number of results to return. Default: 50.
-	MaxResults int32
+	MaxResults *int32
 
-	// The first participant to retrieve. This is used for pagination; see the
+	// The first participant event to retrieve. This is used for pagination; see the
 	// nextToken response field.
 	NextToken *string
 
@@ -64,7 +64,7 @@ type ListParticipantEventsOutput struct {
 	// This member is required.
 	Events []types.Event
 
-	// If there are more rooms than maxResults , use nextToken in the request to get
+	// If there are more events than maxResults , use nextToken in the request to get
 	// the next set.
 	NextToken *string
 
@@ -188,8 +188,8 @@ func NewListParticipantEventsPaginator(client ListParticipantEventsAPIClient, pa
 	}
 
 	options := ListParticipantEventsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -219,7 +219,11 @@ func (p *ListParticipantEventsPaginator) NextPage(ctx context.Context, optFns ..
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListParticipantEvents(ctx, &params, optFns...)
 	if err != nil {

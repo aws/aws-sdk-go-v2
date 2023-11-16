@@ -1,0 +1,8 @@
+{
+    "id": "7c91529b-9055-4034-92b7-dee64e1ef77e",
+    "type": "feature",
+    "description": "This release adds support for configuring Macie to assume an IAM role when retrieving sample occurrences of sensitive data reported by findings.",
+    "modules": [
+        "service/macie2"
+    ]
+}

@@ -56,17 +56,19 @@ type SynthesizeSpeechInput struct {
 	// This member is required.
 	VoiceId types.VoiceId
 
-	// Specifies the engine ( standard or neural ) for Amazon Polly to use when
-	// processing input text for speech synthesis. For information on Amazon Polly
-	// voices and which voices are available in standard-only, NTTS-only, and both
-	// standard and NTTS formats, see Available Voices (https://docs.aws.amazon.com/polly/latest/dg/voicelist.html)
+	// Specifies the engine ( standard , neural or long-form ) for Amazon Polly to use
+	// when processing input text for speech synthesis. For information on Amazon Polly
+	// voices and which voices are available for each engine, see Available Voices (https://docs.aws.amazon.com/polly/latest/dg/voicelist.html)
 	// . NTTS-only voices When using NTTS-only voices such as Kevin (en-US), this
 	// parameter is required and must be set to neural . If the engine is not
-	// specified, or is set to standard , this will result in an error. Type: String
-	// Valid Values: standard | neural Required: Yes Standard voices For standard
-	// voices, this is not required; the engine parameter defaults to standard . If the
-	// engine is not specified, or is set to standard and an NTTS-only voice is
-	// selected, this will result in an error.
+	// specified, or is set to standard , this will result in an error. long-form-only
+	// voices When using long-form-only voices such as Danielle (en-US), this parameter
+	// is required and must be set to long-form . If the engine is not specified, or is
+	// set to standard or neural , this will result in an error. Type: String Valid
+	// Values: standard | neural | long-form Required: Yes Standard voices For
+	// standard voices, this is not required; the engine parameter defaults to standard
+	// . If the engine is not specified, or is set to standard and an NTTS-only voice
+	// is selected, this will result in an error.
 	Engine types.Engine
 
 	// Optional language code for the Synthesize Speech request. This is only
@@ -88,8 +90,9 @@ type SynthesizeSpeechInput struct {
 
 	// The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis
 	// are "8000", "16000", "22050", and "24000". The default value for standard voices
-	// is "22050". The default value for neural voices is "24000". Valid values for pcm
-	// are "8000" and "16000" The default value is "16000".
+	// is "22050". The default value for neural voices is "24000". The default value
+	// for long-form voices is "24000". Valid values for pcm are "8000" and "16000" The
+	// default value is "16000".
 	SampleRate *string
 
 	// The type of speech marks returned for the input text.

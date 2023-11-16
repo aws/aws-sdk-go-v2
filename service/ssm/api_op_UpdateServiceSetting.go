@@ -63,17 +63,18 @@ type UpdateServiceSettingInput struct {
 
 	// The new value to specify for the service setting. The following list specifies
 	// the available values for each setting.
-	//   - /ssm/managed-instance/default-ec2-instance-management-role: The name of an
-	//   IAM role
-	//   - /ssm/automation/customer-script-log-destination : CloudWatch
-	//   - /ssm/automation/customer-script-log-group-name : The name of an Amazon
-	//   CloudWatch Logs log group
-	//   - /ssm/documents/console/public-sharing-permission : Enable or Disable
-	//   - /ssm/managed-instance/activation-tier : standard or advanced
-	//   - /ssm/opsinsights/opscenter : Enabled or Disabled
-	//   - /ssm/parameter-store/default-parameter-tier : Standard , Advanced ,
-	//   Intelligent-Tiering
-	//   - /ssm/parameter-store/high-throughput-enabled : true or false
+	//   - For /ssm/managed-instance/default-ec2-instance-management-role , enter the
+	//   name of an IAM role.
+	//   - For /ssm/automation/customer-script-log-destination , enter CloudWatch .
+	//   - For /ssm/automation/customer-script-log-group-name , enter the name of an
+	//   Amazon CloudWatch Logs log group.
+	//   - For /ssm/documents/console/public-sharing-permission , enter Enable or
+	//   Disable .
+	//   - For /ssm/managed-instance/activation-tier , enter standard or advanced .
+	//   - For /ssm/opsinsights/opscenter , enter Enabled or Disabled .
+	//   - For /ssm/parameter-store/default-parameter-tier , enter Standard , Advanced
+	//   , or Intelligent-Tiering
+	//   - For /ssm/parameter-store/high-throughput-enabled , enter true or false .
 	//
 	// This member is required.
 	SettingValue *string

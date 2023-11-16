@@ -1,0 +1,8 @@
+{
+    "id": "17f5d149-3f9c-4a32-b782-4dbb65a1fbfb",
+    "type": "feature",
+    "description": "DRM_TOP_LEVEL_COMPACT allows placing content protection elements at the MPD level and referenced at the AdaptationSet level",
+    "modules": [
+        "service/mediapackage"
+    ]
+}

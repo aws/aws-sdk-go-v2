@@ -287,9 +287,7 @@ type EnvironmentResponse struct {
 }
 
 // The size of the function's /tmp directory in MB. The default value is 512, but
-// can be any whole number between 512 and 10,240 MB. For more information, see
-// Configuring ephemeral storage (console) (https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage)
-// .
+// it can be any whole number between 512 and 10,240 MB.
 type EphemeralStorage struct {
 
 	// The size of the function's /tmp directory.
@@ -539,10 +537,8 @@ type FunctionConfiguration struct {
 	// . Omitted from CloudTrail logs.
 	Environment *EnvironmentResponse
 
-	// The size of the function's /tmp directory in MB. The default value is 512, but
-	// can be any whole number between 512 and 10,240 MB. For more information, see
-	// Configuring ephemeral storage (console) (https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage)
-	// .
+	// The size of the function’s /tmp directory in MB. The default value is 512, but
+	// it can be any whole number between 512 and 10,240 MB.
 	EphemeralStorage *EphemeralStorage
 
 	// Connection settings for an Amazon EFS file system (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
@@ -584,6 +580,9 @@ type FunctionConfiguration struct {
 	// The function's layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
 	// .
 	Layers []Layer
+
+	// The function's Amazon CloudWatch Logs configuration settings.
+	LoggingConfig *LoggingConfig
 
 	// For Lambda@Edge functions, the ARN of the main function.
 	MasterArn *string
@@ -931,6 +930,31 @@ type LayerVersionsListItem struct {
 
 	// The version number.
 	Version int64
+
+	noSmithyDocumentSerde
+}
+
+// The function's Amazon CloudWatch Logs configuration settings.
+type LoggingConfig struct {
+
+	// Set this property to filter the application logs for your function that Lambda
+	// sends to CloudWatch. Lambda only sends application logs at the selected level
+	// and lower.
+	ApplicationLogLevel ApplicationLogLevel
+
+	// The format in which Lambda sends your function's application and system logs to
+	// CloudWatch. Select between plain text and structured JSON.
+	LogFormat LogFormat
+
+	// The name of the Amazon CloudWatch log group the function sends logs to. By
+	// default, Lambda functions send logs to a default log group named /aws/lambda/ .
+	// To use a different log group, enter an existing log group or enter a new log
+	// group name.
+	LogGroup *string
+
+	// Set this property to filter the system logs for your function that Lambda sends
+	// to CloudWatch. Lambda only sends system logs at the selected level and lower.
+	SystemLogLevel SystemLogLevel
 
 	noSmithyDocumentSerde
 }

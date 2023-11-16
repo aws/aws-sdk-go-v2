@@ -798,6 +798,10 @@ type Image struct {
 	// The date on which Image Builder created this image.
 	DateCreated *string
 
+	// The time when deprecation occurs for an image resource. This can be a past or
+	// future date.
+	DeprecationTime *time.Time
+
 	// The distribution configuration that Image Builder used to create this image.
 	DistributionConfiguration *DistributionConfiguration
 
@@ -820,6 +824,10 @@ type Image struct {
 
 	// The infrastructure that Image Builder used to create this image.
 	InfrastructureConfiguration *InfrastructureConfiguration
+
+	// Identifies the last runtime instance of the lifecycle policy to take action on
+	// the image.
+	LifecycleExecutionId *string
 
 	// The name of the image.
 	Name *string
@@ -1197,8 +1205,16 @@ type ImageSummary struct {
 	// The date on which Image Builder created this image.
 	DateCreated *string
 
+	// The time when deprecation occurs for an image resource. This can be a past or
+	// future date.
+	DeprecationTime *time.Time
+
 	// The origin of the base image that Image Builder used to build this image.
 	ImageSource ImageSource
+
+	// Identifies the last runtime instance of the lifecycle policy to take action on
+	// the image.
+	LifecycleExecutionId *string
 
 	// The name of the image.
 	Name *string
@@ -1521,6 +1537,378 @@ type LaunchTemplateConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains metadata from a runtime instance of a lifecycle policy.
+type LifecycleExecution struct {
+
+	// The timestamp when the lifecycle runtime instance completed.
+	EndTime *time.Time
+
+	// Identifies the lifecycle policy runtime instance.
+	LifecycleExecutionId *string
+
+	// The Amazon Resource Name (ARN) of the lifecycle policy that ran.
+	LifecyclePolicyArn *string
+
+	// Contains information about associated resources that are identified for action
+	// by the runtime instance of the lifecycle policy.
+	ResourcesImpactedSummary *LifecycleExecutionResourcesImpactedSummary
+
+	// The timestamp when the lifecycle runtime instance started.
+	StartTime *time.Time
+
+	// Runtime state that reports if the policy action ran successfully, failed, or
+	// was skipped.
+	State *LifecycleExecutionState
+
+	noSmithyDocumentSerde
+}
+
+// Contains details for a resource that the runtime instance of the lifecycle
+// policy identified for action.
+type LifecycleExecutionResource struct {
+
+	// The account that owns the impacted resource.
+	AccountId *string
+
+	// The action to take for the identified resource.
+	Action *LifecycleExecutionResourceAction
+
+	// For an impacted container image, this identifies a list of URIs for associated
+	// container images distributed to ECR repositories.
+	ImageUris []string
+
+	// The Amazon Web Services Region where the lifecycle execution resource is stored.
+	Region *string
+
+	// Identifies the impacted resource. The resource ID depends on the type of
+	// resource, as follows.
+	//   - Image Builder image resources: Amazon Resource Name (ARN)
+	//   - Distributed AMIs: AMI ID
+	//   - Container images distributed to an ECR repository: image URI or SHA Digest
+	ResourceId *string
+
+	// A list of associated resource snapshots for the impacted resource if it’s an
+	// AMI.
+	Snapshots []LifecycleExecutionSnapshotResource
+
+	// The runtime state for the lifecycle execution.
+	State *LifecycleExecutionResourceState
+
+	noSmithyDocumentSerde
+}
+
+// The lifecycle policy action that was identified for the impacted resource.
+type LifecycleExecutionResourceAction struct {
+
+	// The name of the resource that was identified for a lifecycle policy action.
+	Name LifecycleExecutionResourceActionName
+
+	// The reason why the lifecycle policy action is taken.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details for an image resource that was identified for a lifecycle
+// action.
+type LifecycleExecutionResourcesImpactedSummary struct {
+
+	// Indicates whether an image resource that was identified for a lifecycle action
+	// has associated resources that are also impacted.
+	HasImpactedResources bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains the state of an impacted resource that the runtime instance of the
+// lifecycle policy identified for action.
+type LifecycleExecutionResourceState struct {
+
+	// Messaging that clarifies the reason for the assigned status.
+	Reason *string
+
+	// The runtime status of the lifecycle action taken for the impacted resource.
+	Status LifecycleExecutionResourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains the state of an impacted snapshot resource that the runtime instance
+// of the lifecycle policy identified for action.
+type LifecycleExecutionSnapshotResource struct {
+
+	// Identifies the impacted snapshot resource.
+	SnapshotId *string
+
+	// The runtime status of the lifecycle action taken for the snapshot.
+	State *LifecycleExecutionResourceState
+
+	noSmithyDocumentSerde
+}
+
+// The current state of the runtime instance of the lifecycle policy.
+type LifecycleExecutionState struct {
+
+	// The reason for the current status.
+	Reason *string
+
+	// The runtime status of the lifecycle execution.
+	Status LifecycleExecutionStatus
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for a lifecycle policy resource.
+type LifecyclePolicy struct {
+
+	// The Amazon Resource Name (ARN) of the lifecycle policy resource.
+	Arn *string
+
+	// The timestamp when Image Builder created the lifecycle policy resource.
+	DateCreated *time.Time
+
+	// The timestamp for the last time Image Builder ran the lifecycle policy.
+	DateLastRun *time.Time
+
+	// The timestamp when Image Builder updated the lifecycle policy resource.
+	DateUpdated *time.Time
+
+	// Optional description for the lifecycle policy.
+	Description *string
+
+	// The name of the IAM role that Image Builder uses to run the lifecycle policy.
+	// This is a custom role that you create.
+	ExecutionRole *string
+
+	// The name of the lifecycle policy.
+	Name *string
+
+	// The configuration details for a lifecycle policy resource.
+	PolicyDetails []LifecyclePolicyDetail
+
+	// Resource selection criteria used to run the lifecycle policy.
+	ResourceSelection *LifecyclePolicyResourceSelection
+
+	// The type of resources the lifecycle policy targets.
+	ResourceType LifecyclePolicyResourceType
+
+	// Indicates whether the lifecycle policy resource is enabled.
+	Status LifecyclePolicyStatus
+
+	// To help manage your lifecycle policy resources, you can assign your own
+	// metadata to each resource in the form of tags. Each tag consists of a key and an
+	// optional value, both of which you define.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for a lifecycle policy resource.
+type LifecyclePolicyDetail struct {
+
+	// Configuration details for the policy action.
+	//
+	// This member is required.
+	Action *LifecyclePolicyDetailAction
+
+	// Specifies the resources that the lifecycle policy applies to.
+	//
+	// This member is required.
+	Filter *LifecyclePolicyDetailFilter
+
+	// Additional rules to specify resources that should be exempt from policy actions.
+	ExclusionRules *LifecyclePolicyDetailExclusionRules
+
+	noSmithyDocumentSerde
+}
+
+// Contains selection criteria for the lifecycle policy.
+type LifecyclePolicyDetailAction struct {
+
+	// Specifies the lifecycle action to take.
+	//
+	// This member is required.
+	Type LifecyclePolicyDetailActionType
+
+	// Specifies the resources that the lifecycle policy applies to.
+	IncludeResources *LifecyclePolicyDetailActionIncludeResources
+
+	noSmithyDocumentSerde
+}
+
+// Specifies how the lifecycle policy should apply actions to selected resources.
+type LifecyclePolicyDetailActionIncludeResources struct {
+
+	// Specifies whether the lifecycle action should apply to distributed AMIs.
+	Amis bool
+
+	// Specifies whether the lifecycle action should apply to distributed containers.
+	Containers bool
+
+	// Specifies whether the lifecycle action should apply to snapshots associated
+	// with distributed AMIs.
+	Snapshots bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies resources that lifecycle policy actions should not apply to.
+type LifecyclePolicyDetailExclusionRules struct {
+
+	// Lists configuration values that apply to AMIs that Image Builder should exclude
+	// from the lifecycle action.
+	Amis *LifecyclePolicyDetailExclusionRulesAmis
+
+	// Contains a list of tags that Image Builder uses to skip lifecycle actions for
+	// AMIs that have them.
+	TagMap map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Defines criteria for AMIs that are excluded from lifecycle actions.
+type LifecyclePolicyDetailExclusionRulesAmis struct {
+
+	// Configures whether public AMIs are excluded from the lifecycle action.
+	IsPublic bool
+
+	// Configures Amazon Web Services Regions that are excluded from the lifecycle
+	// action.
+	LastLaunched *LifecyclePolicyDetailExclusionRulesAmisLastLaunched
+
+	// Specifies Amazon Web Services accounts whose resources are excluded from the
+	// lifecycle action.
+	Regions []string
+
+	// Specifies configuration details for Image Builder to exclude the most recent
+	// resources from lifecycle actions.
+	SharedAccounts []string
+
+	// Lists tags that should be excluded from lifecycle actions for the AMIs that
+	// have them.
+	TagMap map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Defines criteria to exclude AMIs from lifecycle actions based on the last time
+// they were used to launch an instance.
+type LifecyclePolicyDetailExclusionRulesAmisLastLaunched struct {
+
+	// Defines the unit of time that the lifecycle policy uses to calculate elapsed
+	// time since the last instance launched from the AMI. For example: days, weeks,
+	// months, or years.
+	//
+	// This member is required.
+	Unit LifecyclePolicyTimeUnit
+
+	// The integer number of units for the time period. For example 6 (months).
+	//
+	// This member is required.
+	Value *int32
+
+	noSmithyDocumentSerde
+}
+
+// Defines filters that the lifecycle policy uses to determine impacted resource.
+type LifecyclePolicyDetailFilter struct {
+
+	// Filter resources based on either age or count .
+	//
+	// This member is required.
+	Type LifecyclePolicyDetailFilterType
+
+	// The number of units for the time period or for the count. For example, a value
+	// of 6 might refer to six months or six AMIs. For count-based filters, this value
+	// represents the minimum number of resources to keep on hand. If you have fewer
+	// resources than this number, the resource is excluded from lifecycle actions.
+	//
+	// This member is required.
+	Value *int32
+
+	// For age-based filters, this is the number of resources to keep on hand after
+	// the lifecycle DELETE action is applied. Impacted resources are only deleted if
+	// you have more than this number of resources. If you have fewer resources than
+	// this number, the impacted resource is not deleted.
+	RetainAtLeast *int32
+
+	// Defines the unit of time that the lifecycle policy uses to determine impacted
+	// resources. This is required for age-based rules.
+	Unit LifecyclePolicyTimeUnit
+
+	noSmithyDocumentSerde
+}
+
+// Resource selection criteria for the lifecycle policy.
+type LifecyclePolicyResourceSelection struct {
+
+	// A list of recipes that are used as selection criteria for the output images
+	// that the lifecycle policy applies to.
+	Recipes []LifecyclePolicyResourceSelectionRecipe
+
+	// A list of tags that are used as selection criteria for the resources that the
+	// lifecycle policy applies to.
+	TagMap map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an Image Builder recipe that the lifecycle policy uses for resource
+// selection.
+type LifecyclePolicyResourceSelectionRecipe struct {
+
+	// The name of an Image Builder recipe that the lifecycle policy uses for resource
+	// selection.
+	//
+	// This member is required.
+	Name *string
+
+	// The version of the Image Builder recipe specified by the name field.
+	//
+	// This member is required.
+	SemanticVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains a summary of lifecycle policy resources.
+type LifecyclePolicySummary struct {
+
+	// The Amazon Resource Name (ARN) of the lifecycle policy summary resource.
+	Arn *string
+
+	// The timestamp when Image Builder created the lifecycle policy resource.
+	DateCreated *time.Time
+
+	// The timestamp for the last time Image Builder ran the lifecycle policy.
+	DateLastRun *time.Time
+
+	// The timestamp when Image Builder updated the lifecycle policy resource.
+	DateUpdated *time.Time
+
+	// Optional description for the lifecycle policy.
+	Description *string
+
+	// The name of the IAM role that Image Builder uses to run the lifecycle policy.
+	ExecutionRole *string
+
+	// The name of the lifecycle policy.
+	Name *string
+
+	// The type of resources the lifecycle policy targets.
+	ResourceType LifecyclePolicyResourceType
+
+	// The lifecycle policy resource status.
+	Status LifecyclePolicyStatus
+
+	// To help manage your lifecycle policy resources, you can assign your own
+	// metadata to each resource in the form of tags. Each tag consists of a key and an
+	// optional value, both of which you define.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Logging configuration defines where Image Builder uploads your logs.
 type Logging struct {
 
@@ -1604,6 +1992,42 @@ type RemediationRecommendation struct {
 	// A link to more information about the recommended remediation for this
 	// vulnerability.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// The current state of an impacted resource.
+type ResourceState struct {
+
+	// Shows the current lifecycle policy action that was applied to an impacted
+	// resource.
+	Status ResourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// Additional rules to specify resources that should be exempt from ad-hoc
+// lifecycle actions.
+type ResourceStateUpdateExclusionRules struct {
+
+	// Defines criteria for AMIs that are excluded from lifecycle actions.
+	Amis *LifecyclePolicyDetailExclusionRulesAmis
+
+	noSmithyDocumentSerde
+}
+
+// Specifies if the lifecycle policy should apply actions to selected resources.
+type ResourceStateUpdateIncludeResources struct {
+
+	// Specifies whether the lifecycle action should apply to distributed AMIs
+	Amis bool
+
+	// Specifies whether the lifecycle action should apply to distributed containers.
+	Containers bool
+
+	// Specifies whether the lifecycle action should apply to snapshots associated
+	// with distributed AMIs.
+	Snapshots bool
 
 	noSmithyDocumentSerde
 }

@@ -48,7 +48,7 @@ type CancelImageCreationInput struct {
 
 type CancelImageCreationOutput struct {
 
-	// The idempotency token that was used for this request.
+	// The client token that uniquely identifies the request.
 	ClientToken *string
 
 	// The ARN of the image whose creation this request canceled.

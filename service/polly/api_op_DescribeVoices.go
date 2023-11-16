@@ -41,8 +41,8 @@ func (c *Client) DescribeVoices(ctx context.Context, params *DescribeVoicesInput
 
 type DescribeVoicesInput struct {
 
-	// Specifies the engine ( standard or neural ) used by Amazon Polly when processing
-	// input text for speech synthesis.
+	// Specifies the engine ( standard , neural or long-form ) used by Amazon Polly
+	// when processing input text for speech synthesis.
 	Engine types.Engine
 
 	// Boolean value indicating whether to return any bilingual voices that use the

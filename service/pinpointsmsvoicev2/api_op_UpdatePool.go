@@ -61,6 +61,10 @@ type UpdatePoolInput struct {
 	// The Amazon Resource Name (ARN) of the two way channel.
 	TwoWayChannelArn *string
 
+	// An optional IAM Role Arn for a service to assume, to be able to post inbound
+	// SMS messages.
+	TwoWayChannelRole *string
+
 	// By default this is set to false. When set to true you can receive incoming text
 	// messages from your end recipients.
 	TwoWayEnabled *bool
@@ -104,6 +108,10 @@ type UpdatePoolOutput struct {
 
 	// The Amazon Resource Name (ARN) of the two way channel.
 	TwoWayChannelArn *string
+
+	// An optional IAM Role Arn for a service to assume, to be able to post inbound
+	// SMS messages.
+	TwoWayChannelRole *string
 
 	// By default this is set to false. When set to true you can receive incoming text
 	// messages from your end recipients.

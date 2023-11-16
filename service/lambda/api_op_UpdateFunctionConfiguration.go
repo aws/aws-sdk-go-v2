@@ -65,9 +65,7 @@ type UpdateFunctionConfigurationInput struct {
 	Environment *types.Environment
 
 	// The size of the function's /tmp directory in MB. The default value is 512, but
-	// can be any whole number between 512 and 10,240 MB. For more information, see
-	// Configuring ephemeral storage (console) (https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage)
-	// .
+	// can be any whole number between 512 and 10,240 MB.
 	EphemeralStorage *types.EphemeralStorage
 
 	// Connection settings for an Amazon EFS file system.
@@ -99,6 +97,9 @@ type UpdateFunctionConfigurationInput struct {
 	// to add to the function's execution environment. Specify each layer by its ARN,
 	// including the version.
 	Layers []string
+
+	// The function's Amazon CloudWatch Logs configuration settings.
+	LoggingConfig *types.LoggingConfig
 
 	// The amount of memory available to the function (https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-memory-console)
 	// at runtime. Increasing the function memory also increases its CPU allocation.
@@ -168,10 +169,8 @@ type UpdateFunctionConfigurationOutput struct {
 	// . Omitted from CloudTrail logs.
 	Environment *types.EnvironmentResponse
 
-	// The size of the function's /tmp directory in MB. The default value is 512, but
-	// can be any whole number between 512 and 10,240 MB. For more information, see
-	// Configuring ephemeral storage (console) (https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage)
-	// .
+	// The size of the function’s /tmp directory in MB. The default value is 512, but
+	// it can be any whole number between 512 and 10,240 MB.
 	EphemeralStorage *types.EphemeralStorage
 
 	// Connection settings for an Amazon EFS file system (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
@@ -213,6 +212,9 @@ type UpdateFunctionConfigurationOutput struct {
 	// The function's layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
 	// .
 	Layers []types.Layer
+
+	// The function's Amazon CloudWatch Logs configuration settings.
+	LoggingConfig *types.LoggingConfig
 
 	// For Lambda@Edge functions, the ARN of the main function.
 	MasterArn *string

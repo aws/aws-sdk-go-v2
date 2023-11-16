@@ -8914,11 +8914,6 @@ type ModelPackageSummary struct {
 	// This member is required.
 	ModelPackageArn *string
 
-	// The name of the model package.
-	//
-	// This member is required.
-	ModelPackageName *string
-
 	// The overall status of the model package.
 	//
 	// This member is required.
@@ -8936,6 +8931,9 @@ type ModelPackageSummary struct {
 	// If the model package is a versioned model, the model group that the versioned
 	// model belongs to.
 	ModelPackageGroupName *string
+
+	// The name of the model package.
+	ModelPackageName *string
 
 	// If the model package is a versioned model, the version of the model.
 	ModelPackageVersion *int32
@@ -13284,6 +13282,9 @@ type Stairs struct {
 // saving intermediate model artifacts. When training NTMs, make sure that the
 // maximum runtime is sufficient for the training job to complete.
 type StoppingCondition struct {
+
+	// The maximum pending time in seconds.
+	MaxPendingTimeInSeconds *int32
 
 	// The maximum length of time, in seconds, that a training or compilation job can
 	// run before it is stopped. For compilation jobs, if the job does not complete

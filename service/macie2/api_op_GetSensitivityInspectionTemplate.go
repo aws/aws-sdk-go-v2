@@ -48,7 +48,7 @@ type GetSensitivityInspectionTemplateOutput struct {
 	Excludes *types.SensitivityInspectionTemplateExcludes
 
 	// The allow lists, custom data identifiers, and managed data identifiers that are
-	// included (used) when analyzing data.
+	// explicitly included (used) when analyzing data.
 	Includes *types.SensitivityInspectionTemplateIncludes
 
 	// The name of the template: automated-sensitive-data-discovery.

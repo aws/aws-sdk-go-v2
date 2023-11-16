@@ -70,6 +70,46 @@ func (m *validateOpCreateAccountAssignment) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateApplicationAssignment struct {
+}
+
+func (*validateOpCreateApplicationAssignment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateApplicationAssignment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateApplicationAssignmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateApplicationAssignmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateApplication struct {
+}
+
+func (*validateOpCreateApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateInstanceAccessControlAttributeConfiguration struct {
 }
 
@@ -85,6 +125,26 @@ func (m *validateOpCreateInstanceAccessControlAttributeConfiguration) HandleInit
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateInstanceAccessControlAttributeConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateInstance struct {
+}
+
+func (*validateOpCreateInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateInstanceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -110,6 +170,26 @@ func (m *validateOpCreatePermissionSet) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateTrustedTokenIssuer struct {
+}
+
+func (*validateOpCreateTrustedTokenIssuer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTrustedTokenIssuer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTrustedTokenIssuerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTrustedTokenIssuerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAccountAssignment struct {
 }
 
@@ -125,6 +205,106 @@ func (m *validateOpDeleteAccountAssignment) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAccountAssignmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteApplicationAccessScope struct {
+}
+
+func (*validateOpDeleteApplicationAccessScope) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteApplicationAccessScope) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteApplicationAccessScopeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteApplicationAccessScopeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteApplicationAssignment struct {
+}
+
+func (*validateOpDeleteApplicationAssignment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteApplicationAssignment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteApplicationAssignmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteApplicationAssignmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteApplicationAuthenticationMethod struct {
+}
+
+func (*validateOpDeleteApplicationAuthenticationMethod) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteApplicationAuthenticationMethod) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteApplicationAuthenticationMethodInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteApplicationAuthenticationMethodInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteApplicationGrant struct {
+}
+
+func (*validateOpDeleteApplicationGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteApplicationGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteApplicationGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteApplicationGrantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteApplication struct {
+}
+
+func (*validateOpDeleteApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteApplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -170,6 +350,26 @@ func (m *validateOpDeleteInstanceAccessControlAttributeConfiguration) HandleInit
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteInstance struct {
+}
+
+func (*validateOpDeleteInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeletePermissionsBoundaryFromPermissionSet struct {
 }
 
@@ -205,6 +405,26 @@ func (m *validateOpDeletePermissionSet) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeletePermissionSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTrustedTokenIssuer struct {
+}
+
+func (*validateOpDeleteTrustedTokenIssuer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTrustedTokenIssuer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTrustedTokenIssuerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTrustedTokenIssuerInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +470,66 @@ func (m *validateOpDescribeAccountAssignmentDeletionStatus) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeApplicationAssignment struct {
+}
+
+func (*validateOpDescribeApplicationAssignment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeApplicationAssignment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeApplicationAssignmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeApplicationAssignmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeApplication struct {
+}
+
+func (*validateOpDescribeApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeApplicationProvider struct {
+}
+
+func (*validateOpDescribeApplicationProvider) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeApplicationProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeApplicationProviderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeApplicationProviderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeInstanceAccessControlAttributeConfiguration struct {
 }
 
@@ -265,6 +545,26 @@ func (m *validateOpDescribeInstanceAccessControlAttributeConfiguration) HandleIn
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeInstanceAccessControlAttributeConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeInstance struct {
+}
+
+func (*validateOpDescribeInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeInstanceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +610,26 @@ func (m *validateOpDescribePermissionSetProvisioningStatus) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeTrustedTokenIssuer struct {
+}
+
+func (*validateOpDescribeTrustedTokenIssuer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTrustedTokenIssuer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTrustedTokenIssuerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTrustedTokenIssuerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDetachCustomerManagedPolicyReferenceFromPermissionSet struct {
 }
 
@@ -345,6 +665,86 @@ func (m *validateOpDetachManagedPolicyFromPermissionSet) HandleInitialize(ctx co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDetachManagedPolicyFromPermissionSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetApplicationAccessScope struct {
+}
+
+func (*validateOpGetApplicationAccessScope) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetApplicationAccessScope) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetApplicationAccessScopeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetApplicationAccessScopeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetApplicationAssignmentConfiguration struct {
+}
+
+func (*validateOpGetApplicationAssignmentConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetApplicationAssignmentConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetApplicationAssignmentConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetApplicationAssignmentConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetApplicationAuthenticationMethod struct {
+}
+
+func (*validateOpGetApplicationAuthenticationMethod) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetApplicationAuthenticationMethod) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetApplicationAuthenticationMethodInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetApplicationAuthenticationMethodInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetApplicationGrant struct {
+}
+
+func (*validateOpGetApplicationGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetApplicationGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetApplicationGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetApplicationGrantInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -430,6 +830,26 @@ func (m *validateOpListAccountAssignmentDeletionStatus) HandleInitialize(ctx con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAccountAssignmentsForPrincipal struct {
+}
+
+func (*validateOpListAccountAssignmentsForPrincipal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAccountAssignmentsForPrincipal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAccountAssignmentsForPrincipalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAccountAssignmentsForPrincipalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAccountAssignments struct {
 }
 
@@ -465,6 +885,126 @@ func (m *validateOpListAccountsForProvisionedPermissionSet) HandleInitialize(ctx
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAccountsForProvisionedPermissionSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListApplicationAccessScopes struct {
+}
+
+func (*validateOpListApplicationAccessScopes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListApplicationAccessScopes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListApplicationAccessScopesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListApplicationAccessScopesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListApplicationAssignmentsForPrincipal struct {
+}
+
+func (*validateOpListApplicationAssignmentsForPrincipal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListApplicationAssignmentsForPrincipal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListApplicationAssignmentsForPrincipalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListApplicationAssignmentsForPrincipalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListApplicationAssignments struct {
+}
+
+func (*validateOpListApplicationAssignments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListApplicationAssignments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListApplicationAssignmentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListApplicationAssignmentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListApplicationAuthenticationMethods struct {
+}
+
+func (*validateOpListApplicationAuthenticationMethods) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListApplicationAuthenticationMethods) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListApplicationAuthenticationMethodsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListApplicationAuthenticationMethodsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListApplicationGrants struct {
+}
+
+func (*validateOpListApplicationGrants) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListApplicationGrants) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListApplicationGrantsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListApplicationGrantsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListApplications struct {
+}
+
+func (*validateOpListApplications) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListApplications) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListApplicationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListApplicationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -590,6 +1130,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTrustedTokenIssuers struct {
+}
+
+func (*validateOpListTrustedTokenIssuers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTrustedTokenIssuers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTrustedTokenIssuersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTrustedTokenIssuersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpProvisionPermissionSet struct {
 }
 
@@ -605,6 +1165,86 @@ func (m *validateOpProvisionPermissionSet) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpProvisionPermissionSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutApplicationAccessScope struct {
+}
+
+func (*validateOpPutApplicationAccessScope) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutApplicationAccessScope) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutApplicationAccessScopeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutApplicationAccessScopeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutApplicationAssignmentConfiguration struct {
+}
+
+func (*validateOpPutApplicationAssignmentConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutApplicationAssignmentConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutApplicationAssignmentConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutApplicationAssignmentConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutApplicationAuthenticationMethod struct {
+}
+
+func (*validateOpPutApplicationAuthenticationMethod) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutApplicationAuthenticationMethod) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutApplicationAuthenticationMethodInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutApplicationAuthenticationMethodInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutApplicationGrant struct {
+}
+
+func (*validateOpPutApplicationGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutApplicationGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutApplicationGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutApplicationGrantInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -690,6 +1330,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateApplication struct {
+}
+
+func (*validateOpUpdateApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateInstanceAccessControlAttributeConfiguration struct {
 }
 
@@ -705,6 +1365,26 @@ func (m *validateOpUpdateInstanceAccessControlAttributeConfiguration) HandleInit
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateInstanceAccessControlAttributeConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateInstance struct {
+}
+
+func (*validateOpUpdateInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateInstanceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -730,6 +1410,26 @@ func (m *validateOpUpdatePermissionSet) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateTrustedTokenIssuer struct {
+}
+
+func (*validateOpUpdateTrustedTokenIssuer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTrustedTokenIssuer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTrustedTokenIssuerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTrustedTokenIssuerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAttachCustomerManagedPolicyReferenceToPermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAttachCustomerManagedPolicyReferenceToPermissionSet{}, middleware.After)
 }
@@ -742,16 +1442,52 @@ func addOpCreateAccountAssignmentValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpCreateAccountAssignment{}, middleware.After)
 }
 
+func addOpCreateApplicationAssignmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateApplicationAssignment{}, middleware.After)
+}
+
+func addOpCreateApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateApplication{}, middleware.After)
+}
+
 func addOpCreateInstanceAccessControlAttributeConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateInstanceAccessControlAttributeConfiguration{}, middleware.After)
+}
+
+func addOpCreateInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateInstance{}, middleware.After)
 }
 
 func addOpCreatePermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePermissionSet{}, middleware.After)
 }
 
+func addOpCreateTrustedTokenIssuerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTrustedTokenIssuer{}, middleware.After)
+}
+
 func addOpDeleteAccountAssignmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAccountAssignment{}, middleware.After)
+}
+
+func addOpDeleteApplicationAccessScopeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteApplicationAccessScope{}, middleware.After)
+}
+
+func addOpDeleteApplicationAssignmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteApplicationAssignment{}, middleware.After)
+}
+
+func addOpDeleteApplicationAuthenticationMethodValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteApplicationAuthenticationMethod{}, middleware.After)
+}
+
+func addOpDeleteApplicationGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteApplicationGrant{}, middleware.After)
+}
+
+func addOpDeleteApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteApplication{}, middleware.After)
 }
 
 func addOpDeleteInlinePolicyFromPermissionSetValidationMiddleware(stack *middleware.Stack) error {
@@ -762,12 +1498,20 @@ func addOpDeleteInstanceAccessControlAttributeConfigurationValidationMiddleware(
 	return stack.Initialize.Add(&validateOpDeleteInstanceAccessControlAttributeConfiguration{}, middleware.After)
 }
 
+func addOpDeleteInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteInstance{}, middleware.After)
+}
+
 func addOpDeletePermissionsBoundaryFromPermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePermissionsBoundaryFromPermissionSet{}, middleware.After)
 }
 
 func addOpDeletePermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePermissionSet{}, middleware.After)
+}
+
+func addOpDeleteTrustedTokenIssuerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTrustedTokenIssuer{}, middleware.After)
 }
 
 func addOpDescribeAccountAssignmentCreationStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -778,8 +1522,24 @@ func addOpDescribeAccountAssignmentDeletionStatusValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpDescribeAccountAssignmentDeletionStatus{}, middleware.After)
 }
 
+func addOpDescribeApplicationAssignmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeApplicationAssignment{}, middleware.After)
+}
+
+func addOpDescribeApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeApplication{}, middleware.After)
+}
+
+func addOpDescribeApplicationProviderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeApplicationProvider{}, middleware.After)
+}
+
 func addOpDescribeInstanceAccessControlAttributeConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeInstanceAccessControlAttributeConfiguration{}, middleware.After)
+}
+
+func addOpDescribeInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeInstance{}, middleware.After)
 }
 
 func addOpDescribePermissionSetValidationMiddleware(stack *middleware.Stack) error {
@@ -790,12 +1550,32 @@ func addOpDescribePermissionSetProvisioningStatusValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpDescribePermissionSetProvisioningStatus{}, middleware.After)
 }
 
+func addOpDescribeTrustedTokenIssuerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTrustedTokenIssuer{}, middleware.After)
+}
+
 func addOpDetachCustomerManagedPolicyReferenceFromPermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDetachCustomerManagedPolicyReferenceFromPermissionSet{}, middleware.After)
 }
 
 func addOpDetachManagedPolicyFromPermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDetachManagedPolicyFromPermissionSet{}, middleware.After)
+}
+
+func addOpGetApplicationAccessScopeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetApplicationAccessScope{}, middleware.After)
+}
+
+func addOpGetApplicationAssignmentConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetApplicationAssignmentConfiguration{}, middleware.After)
+}
+
+func addOpGetApplicationAuthenticationMethodValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetApplicationAuthenticationMethod{}, middleware.After)
+}
+
+func addOpGetApplicationGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetApplicationGrant{}, middleware.After)
 }
 
 func addOpGetInlinePolicyForPermissionSetValidationMiddleware(stack *middleware.Stack) error {
@@ -814,12 +1594,40 @@ func addOpListAccountAssignmentDeletionStatusValidationMiddleware(stack *middlew
 	return stack.Initialize.Add(&validateOpListAccountAssignmentDeletionStatus{}, middleware.After)
 }
 
+func addOpListAccountAssignmentsForPrincipalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAccountAssignmentsForPrincipal{}, middleware.After)
+}
+
 func addOpListAccountAssignmentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccountAssignments{}, middleware.After)
 }
 
 func addOpListAccountsForProvisionedPermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccountsForProvisionedPermissionSet{}, middleware.After)
+}
+
+func addOpListApplicationAccessScopesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListApplicationAccessScopes{}, middleware.After)
+}
+
+func addOpListApplicationAssignmentsForPrincipalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListApplicationAssignmentsForPrincipal{}, middleware.After)
+}
+
+func addOpListApplicationAssignmentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListApplicationAssignments{}, middleware.After)
+}
+
+func addOpListApplicationAuthenticationMethodsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListApplicationAuthenticationMethods{}, middleware.After)
+}
+
+func addOpListApplicationGrantsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListApplicationGrants{}, middleware.After)
+}
+
+func addOpListApplicationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListApplications{}, middleware.After)
 }
 
 func addOpListCustomerManagedPolicyReferencesInPermissionSetValidationMiddleware(stack *middleware.Stack) error {
@@ -846,8 +1654,28 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpListTrustedTokenIssuersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTrustedTokenIssuers{}, middleware.After)
+}
+
 func addOpProvisionPermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpProvisionPermissionSet{}, middleware.After)
+}
+
+func addOpPutApplicationAccessScopeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutApplicationAccessScope{}, middleware.After)
+}
+
+func addOpPutApplicationAssignmentConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutApplicationAssignmentConfiguration{}, middleware.After)
+}
+
+func addOpPutApplicationAuthenticationMethodValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutApplicationAuthenticationMethod{}, middleware.After)
+}
+
+func addOpPutApplicationGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutApplicationGrant{}, middleware.After)
 }
 
 func addOpPutInlinePolicyToPermissionSetValidationMiddleware(stack *middleware.Stack) error {
@@ -866,12 +1694,24 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateApplication{}, middleware.After)
+}
+
 func addOpUpdateInstanceAccessControlAttributeConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateInstanceAccessControlAttributeConfiguration{}, middleware.After)
 }
 
+func addOpUpdateInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateInstance{}, middleware.After)
+}
+
 func addOpUpdatePermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePermissionSet{}, middleware.After)
+}
+
+func addOpUpdateTrustedTokenIssuerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTrustedTokenIssuer{}, middleware.After)
 }
 
 func validateAccessControlAttribute(v *types.AccessControlAttribute) error {
@@ -928,6 +1768,25 @@ func validateAccessControlAttributeValue(v *types.AccessControlAttributeValue) e
 	}
 }
 
+func validateAuthenticationMethod(v types.AuthenticationMethod) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthenticationMethod"}
+	switch uv := v.(type) {
+	case *types.AuthenticationMethodMemberIam:
+		if err := validateIamAuthenticationMethod(&uv.Value); err != nil {
+			invalidParams.AddNested("[Iam]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomerManagedPolicyReference(v *types.CustomerManagedPolicyReference) error {
 	if v == nil {
 		return nil
@@ -935,6 +1794,21 @@ func validateCustomerManagedPolicyReference(v *types.CustomerManagedPolicyRefere
 	invalidParams := smithy.InvalidParamsError{Context: "CustomerManagedPolicyReference"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIamAuthenticationMethod(v *types.IamAuthenticationMethod) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IamAuthenticationMethod"}
+	if v.ActorPolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActorPolicy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -962,6 +1836,30 @@ func validateInstanceAccessControlAttributeConfiguration(v *types.InstanceAccess
 	}
 }
 
+func validateOidcJwtConfiguration(v *types.OidcJwtConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OidcJwtConfiguration"}
+	if v.IssuerUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IssuerUrl"))
+	}
+	if v.ClaimAttributePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClaimAttributePath"))
+	}
+	if v.IdentityStoreAttributePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityStoreAttributePath"))
+	}
+	if len(v.JwksRetrievalOption) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("JwksRetrievalOption"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePermissionsBoundary(v *types.PermissionsBoundary) error {
 	if v == nil {
 		return nil
@@ -971,6 +1869,38 @@ func validatePermissionsBoundary(v *types.PermissionsBoundary) error {
 		if err := validateCustomerManagedPolicyReference(v.CustomerManagedPolicyReference); err != nil {
 			invalidParams.AddNested("CustomerManagedPolicyReference", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePortalOptions(v *types.PortalOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PortalOptions"}
+	if v.SignInOptions != nil {
+		if err := validateSignInOptions(v.SignInOptions); err != nil {
+			invalidParams.AddNested("SignInOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSignInOptions(v *types.SignInOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SignInOptions"}
+	if len(v.Origin) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Origin"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1005,6 +1935,42 @@ func validateTagList(v []types.Tag) error {
 	for i := range v {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrustedTokenIssuerConfiguration(v types.TrustedTokenIssuerConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrustedTokenIssuerConfiguration"}
+	switch uv := v.(type) {
+	case *types.TrustedTokenIssuerConfigurationMemberOidcJwtConfiguration:
+		if err := validateOidcJwtConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[OidcJwtConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateApplicationPortalOptions(v *types.UpdateApplicationPortalOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateApplicationPortalOptions"}
+	if v.SignInOptions != nil {
+		if err := validateSignInOptions(v.SignInOptions); err != nil {
+			invalidParams.AddNested("SignInOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1090,6 +2056,58 @@ func validateOpCreateAccountAssignmentInput(v *CreateAccountAssignmentInput) err
 	}
 }
 
+func validateOpCreateApplicationAssignmentInput(v *CreateApplicationAssignmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateApplicationAssignmentInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if v.PrincipalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
+	}
+	if len(v.PrincipalType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateApplicationInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.ApplicationProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationProviderArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.PortalOptions != nil {
+		if err := validatePortalOptions(v.PortalOptions); err != nil {
+			invalidParams.AddNested("PortalOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateInstanceAccessControlAttributeConfigurationInput(v *CreateInstanceAccessControlAttributeConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -1112,6 +2130,23 @@ func validateOpCreateInstanceAccessControlAttributeConfigurationInput(v *CreateI
 	}
 }
 
+func validateOpCreateInstanceInput(v *CreateInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateInstanceInput"}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreatePermissionSetInput(v *CreatePermissionSetInput) error {
 	if v == nil {
 		return nil
@@ -1122,6 +2157,39 @@ func validateOpCreatePermissionSetInput(v *CreatePermissionSetInput) error {
 	}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateTrustedTokenIssuerInput(v *CreateTrustedTokenIssuerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTrustedTokenIssuerInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.TrustedTokenIssuerType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustedTokenIssuerType"))
+	}
+	if v.TrustedTokenIssuerConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustedTokenIssuerConfiguration"))
+	} else if v.TrustedTokenIssuerConfiguration != nil {
+		if err := validateTrustedTokenIssuerConfiguration(v.TrustedTokenIssuerConfiguration); err != nil {
+			invalidParams.AddNested("TrustedTokenIssuerConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -1165,6 +2233,96 @@ func validateOpDeleteAccountAssignmentInput(v *DeleteAccountAssignmentInput) err
 	}
 }
 
+func validateOpDeleteApplicationAccessScopeInput(v *DeleteApplicationAccessScopeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationAccessScopeInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if v.Scope == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteApplicationAssignmentInput(v *DeleteApplicationAssignmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationAssignmentInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if v.PrincipalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
+	}
+	if len(v.PrincipalType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteApplicationAuthenticationMethodInput(v *DeleteApplicationAuthenticationMethodInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationAuthenticationMethodInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if len(v.AuthenticationMethodType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationMethodType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteApplicationGrantInput(v *DeleteApplicationGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationGrantInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if len(v.GrantType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("GrantType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteApplicationInput(v *DeleteApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteInlinePolicyFromPermissionSetInput(v *DeleteInlinePolicyFromPermissionSetInput) error {
 	if v == nil {
 		return nil
@@ -1188,6 +2346,21 @@ func validateOpDeleteInstanceAccessControlAttributeConfigurationInput(v *DeleteI
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteInstanceAccessControlAttributeConfigurationInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteInstanceInput(v *DeleteInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteInstanceInput"}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
@@ -1234,6 +2407,21 @@ func validateOpDeletePermissionSetInput(v *DeletePermissionSetInput) error {
 	}
 }
 
+func validateOpDeleteTrustedTokenIssuerInput(v *DeleteTrustedTokenIssuerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTrustedTokenIssuerInput"}
+	if v.TrustedTokenIssuerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustedTokenIssuerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeAccountAssignmentCreationStatusInput(v *DescribeAccountAssignmentCreationStatusInput) error {
 	if v == nil {
 		return nil
@@ -1270,11 +2458,77 @@ func validateOpDescribeAccountAssignmentDeletionStatusInput(v *DescribeAccountAs
 	}
 }
 
+func validateOpDescribeApplicationAssignmentInput(v *DescribeApplicationAssignmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeApplicationAssignmentInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if v.PrincipalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
+	}
+	if len(v.PrincipalType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeApplicationInput(v *DescribeApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeApplicationInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeApplicationProviderInput(v *DescribeApplicationProviderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeApplicationProviderInput"}
+	if v.ApplicationProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationProviderArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeInstanceAccessControlAttributeConfigurationInput(v *DescribeInstanceAccessControlAttributeConfigurationInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeInstanceAccessControlAttributeConfigurationInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeInstanceInput(v *DescribeInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeInstanceInput"}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
@@ -1321,6 +2575,21 @@ func validateOpDescribePermissionSetProvisioningStatusInput(v *DescribePermissio
 	}
 }
 
+func validateOpDescribeTrustedTokenIssuerInput(v *DescribeTrustedTokenIssuerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTrustedTokenIssuerInput"}
+	if v.TrustedTokenIssuerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustedTokenIssuerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDetachCustomerManagedPolicyReferenceFromPermissionSetInput(v *DetachCustomerManagedPolicyReferenceFromPermissionSetInput) error {
 	if v == nil {
 		return nil
@@ -1359,6 +2628,75 @@ func validateOpDetachManagedPolicyFromPermissionSetInput(v *DetachManagedPolicyF
 	}
 	if v.ManagedPolicyArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ManagedPolicyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetApplicationAccessScopeInput(v *GetApplicationAccessScopeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetApplicationAccessScopeInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if v.Scope == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetApplicationAssignmentConfigurationInput(v *GetApplicationAssignmentConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetApplicationAssignmentConfigurationInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetApplicationAuthenticationMethodInput(v *GetApplicationAuthenticationMethodInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetApplicationAuthenticationMethodInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if len(v.AuthenticationMethodType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationMethodType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetApplicationGrantInput(v *GetApplicationGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetApplicationGrantInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if len(v.GrantType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("GrantType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1433,6 +2771,27 @@ func validateOpListAccountAssignmentDeletionStatusInput(v *ListAccountAssignment
 	}
 }
 
+func validateOpListAccountAssignmentsForPrincipalInput(v *ListAccountAssignmentsForPrincipalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAccountAssignmentsForPrincipalInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.PrincipalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
+	}
+	if len(v.PrincipalType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAccountAssignmentsInput(v *ListAccountAssignmentsInput) error {
 	if v == nil {
 		return nil
@@ -1464,6 +2823,102 @@ func validateOpListAccountsForProvisionedPermissionSetInput(v *ListAccountsForPr
 	}
 	if v.PermissionSetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListApplicationAccessScopesInput(v *ListApplicationAccessScopesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListApplicationAccessScopesInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListApplicationAssignmentsForPrincipalInput(v *ListApplicationAssignmentsForPrincipalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListApplicationAssignmentsForPrincipalInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.PrincipalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
+	}
+	if len(v.PrincipalType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListApplicationAssignmentsInput(v *ListApplicationAssignmentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListApplicationAssignmentsInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListApplicationAuthenticationMethodsInput(v *ListApplicationAuthenticationMethodsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListApplicationAuthenticationMethodsInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListApplicationGrantsInput(v *ListApplicationGrantsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListApplicationGrantsInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListApplicationsInput(v *ListApplicationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListApplicationsInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1561,11 +3016,23 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
-	if v.InstanceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTrustedTokenIssuersInput(v *ListTrustedTokenIssuersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTrustedTokenIssuersInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1587,6 +3054,88 @@ func validateOpProvisionPermissionSetInput(v *ProvisionPermissionSetInput) error
 	}
 	if len(v.TargetType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutApplicationAccessScopeInput(v *PutApplicationAccessScopeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutApplicationAccessScopeInput"}
+	if v.Scope == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutApplicationAssignmentConfigurationInput(v *PutApplicationAssignmentConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutApplicationAssignmentConfigurationInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if v.AssignmentRequired == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssignmentRequired"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutApplicationAuthenticationMethodInput(v *PutApplicationAuthenticationMethodInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutApplicationAuthenticationMethodInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if len(v.AuthenticationMethodType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationMethodType"))
+	}
+	if v.AuthenticationMethod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationMethod"))
+	} else if v.AuthenticationMethod != nil {
+		if err := validateAuthenticationMethod(v.AuthenticationMethod); err != nil {
+			invalidParams.AddNested("AuthenticationMethod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutApplicationGrantInput(v *PutApplicationGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutApplicationGrantInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if len(v.GrantType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("GrantType"))
+	}
+	if v.Grant == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Grant"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1646,9 +3195,6 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.InstanceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
@@ -1671,14 +3217,31 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.InstanceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateApplicationInput(v *UpdateApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateApplicationInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if v.PortalOptions != nil {
+		if err := validateUpdateApplicationPortalOptions(v.PortalOptions); err != nil {
+			invalidParams.AddNested("PortalOptions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1709,6 +3272,24 @@ func validateOpUpdateInstanceAccessControlAttributeConfigurationInput(v *UpdateI
 	}
 }
 
+func validateOpUpdateInstanceInput(v *UpdateInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateInstanceInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdatePermissionSetInput(v *UpdatePermissionSetInput) error {
 	if v == nil {
 		return nil
@@ -1719,6 +3300,21 @@ func validateOpUpdatePermissionSetInput(v *UpdatePermissionSetInput) error {
 	}
 	if v.PermissionSetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTrustedTokenIssuerInput(v *UpdateTrustedTokenIssuerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTrustedTokenIssuerInput"}
+	if v.TrustedTokenIssuerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustedTokenIssuerArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

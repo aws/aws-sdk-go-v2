@@ -17,7 +17,7 @@ import (
 // update the opt-out list, enable or disable two-way messaging, change the
 // TwoWayChannelArn, enable or disable self-managed opt-outs, and enable or disable
 // deletion protection. If the origination phone number is associated with a pool,
-// an Error is returned.
+// an error is returned.
 func (c *Client) UpdatePhoneNumber(ctx context.Context, params *UpdatePhoneNumberInput, optFns ...func(*Options)) (*UpdatePhoneNumberOutput, error) {
 	if params == nil {
 		params = &UpdatePhoneNumberInput{}
@@ -59,6 +59,10 @@ type UpdatePhoneNumberInput struct {
 
 	// The Amazon Resource Name (ARN) of the two way channel.
 	TwoWayChannelArn *string
+
+	// An optional IAM Role Arn for a service to assume, to be able to post inbound
+	// SMS messages.
+	TwoWayChannelRole *string
 
 	// By default this is set to false. When set to true you can receive incoming text
 	// messages from your end recipients.
@@ -105,6 +109,9 @@ type UpdatePhoneNumberOutput struct {
 	// The unique identifier of the phone number.
 	PhoneNumberId *string
 
+	// The unique identifier for the registration.
+	RegistrationId *string
+
 	// This is true if self managed opt-out are enabled.
 	SelfManagedOptOutsEnabled bool
 
@@ -113,6 +120,10 @@ type UpdatePhoneNumberOutput struct {
 
 	// The Amazon Resource Name (ARN) of the two way channel.
 	TwoWayChannelArn *string
+
+	// An optional IAM Role Arn for a service to assume, to be able to post inbound
+	// SMS messages.
+	TwoWayChannelRole *string
 
 	// By default this is set to false. When set to true you can receive incoming text
 	// messages from your end recipients.

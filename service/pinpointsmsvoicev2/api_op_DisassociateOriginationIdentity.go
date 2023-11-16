@@ -12,7 +12,7 @@ import (
 )
 
 // Removes the specified origination identity from an existing pool. If the
-// origination identity isn't associated with the specified pool, an Error is
+// origination identity isn't associated with the specified pool, an error is
 // returned.
 func (c *Client) DisassociateOriginationIdentity(ctx context.Context, params *DisassociateOriginationIdentityInput, optFns ...func(*Options)) (*DisassociateOriginationIdentityOutput, error) {
 	if params == nil {

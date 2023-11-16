@@ -52,7 +52,7 @@ type DescribeJobTemplateOutput struct {
 
 	// The package version Amazon Resource Names (ARNs) that are installed on the
 	// device when the job successfully completes. Note:The following Length
-	// Constraints relates to a single string. Up to five strings are allowed.
+	// Constraints relates to a single ARN. Up to 25 package version ARNs are allowed.
 	DestinationPackageVersions []string
 
 	// The job document.

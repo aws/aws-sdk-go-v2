@@ -2,6 +2,98 @@
 
 package types
 
+type ApplicationStatus string
+
+// Enum values for ApplicationStatus
+const (
+	ApplicationStatusEnabled  ApplicationStatus = "ENABLED"
+	ApplicationStatusDisabled ApplicationStatus = "DISABLED"
+)
+
+// Values returns all known values for ApplicationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationStatus) Values() []ApplicationStatus {
+	return []ApplicationStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type ApplicationVisibility string
+
+// Enum values for ApplicationVisibility
+const (
+	ApplicationVisibilityEnabled  ApplicationVisibility = "ENABLED"
+	ApplicationVisibilityDisabled ApplicationVisibility = "DISABLED"
+)
+
+// Values returns all known values for ApplicationVisibility. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationVisibility) Values() []ApplicationVisibility {
+	return []ApplicationVisibility{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type AuthenticationMethodType string
+
+// Enum values for AuthenticationMethodType
+const (
+	AuthenticationMethodTypeIam AuthenticationMethodType = "IAM"
+)
+
+// Values returns all known values for AuthenticationMethodType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthenticationMethodType) Values() []AuthenticationMethodType {
+	return []AuthenticationMethodType{
+		"IAM",
+	}
+}
+
+type FederationProtocol string
+
+// Enum values for FederationProtocol
+const (
+	FederationProtocolSaml  FederationProtocol = "SAML"
+	FederationProtocolOauth FederationProtocol = "OAUTH"
+)
+
+// Values returns all known values for FederationProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FederationProtocol) Values() []FederationProtocol {
+	return []FederationProtocol{
+		"SAML",
+		"OAUTH",
+	}
+}
+
+type GrantType string
+
+// Enum values for GrantType
+const (
+	GrantTypeAuthorizationCode GrantType = "authorization_code"
+	GrantTypeRefreshToken      GrantType = "refresh_token"
+	GrantTypeJwtBearer         GrantType = "urn:ietf:params:oauth:grant-type:jwt-bearer"
+	GrantTypeTokenExchange     GrantType = "urn:ietf:params:oauth:grant-type:token-exchange"
+)
+
+// Values returns all known values for GrantType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (GrantType) Values() []GrantType {
+	return []GrantType{
+		"authorization_code",
+		"refresh_token",
+		"urn:ietf:params:oauth:grant-type:jwt-bearer",
+		"urn:ietf:params:oauth:grant-type:token-exchange",
+	}
+}
+
 type InstanceAccessControlAttributeConfigurationStatus string
 
 // Enum values for InstanceAccessControlAttributeConfigurationStatus
@@ -20,6 +112,42 @@ func (InstanceAccessControlAttributeConfigurationStatus) Values() []InstanceAcce
 		"ENABLED",
 		"CREATION_IN_PROGRESS",
 		"CREATION_FAILED",
+	}
+}
+
+type InstanceStatus string
+
+// Enum values for InstanceStatus
+const (
+	InstanceStatusCreateInProgress InstanceStatus = "CREATE_IN_PROGRESS"
+	InstanceStatusDeleteInProgress InstanceStatus = "DELETE_IN_PROGRESS"
+	InstanceStatusActive           InstanceStatus = "ACTIVE"
+)
+
+// Values returns all known values for InstanceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceStatus) Values() []InstanceStatus {
+	return []InstanceStatus{
+		"CREATE_IN_PROGRESS",
+		"DELETE_IN_PROGRESS",
+		"ACTIVE",
+	}
+}
+
+type JwksRetrievalOption string
+
+// Enum values for JwksRetrievalOption
+const (
+	JwksRetrievalOptionOpenIdDiscovery JwksRetrievalOption = "OPEN_ID_DISCOVERY"
+)
+
+// Values returns all known values for JwksRetrievalOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JwksRetrievalOption) Values() []JwksRetrievalOption {
+	return []JwksRetrievalOption{
+		"OPEN_ID_DISCOVERY",
 	}
 }
 
@@ -77,6 +205,24 @@ func (ProvisionTargetType) Values() []ProvisionTargetType {
 	}
 }
 
+type SignInOrigin string
+
+// Enum values for SignInOrigin
+const (
+	SignInOriginIdentityCenter SignInOrigin = "IDENTITY_CENTER"
+	SignInOriginApplication    SignInOrigin = "APPLICATION"
+)
+
+// Values returns all known values for SignInOrigin. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SignInOrigin) Values() []SignInOrigin {
+	return []SignInOrigin{
+		"IDENTITY_CENTER",
+		"APPLICATION",
+	}
+}
+
 type StatusValues string
 
 // Enum values for StatusValues
@@ -110,5 +256,21 @@ const (
 func (TargetType) Values() []TargetType {
 	return []TargetType{
 		"AWS_ACCOUNT",
+	}
+}
+
+type TrustedTokenIssuerType string
+
+// Enum values for TrustedTokenIssuerType
+const (
+	TrustedTokenIssuerTypeOidcJwt TrustedTokenIssuerType = "OIDC_JWT"
+)
+
+// Values returns all known values for TrustedTokenIssuerType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TrustedTokenIssuerType) Values() []TrustedTokenIssuerType {
+	return []TrustedTokenIssuerType{
+		"OIDC_JWT",
 	}
 }

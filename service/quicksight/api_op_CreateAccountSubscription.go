@@ -59,9 +59,10 @@ type CreateAccountSubscriptionInput struct {
 	AccountName *string
 
 	// The method that you want to use to authenticate your Amazon QuickSight account.
-	// Currently, the valid values for this parameter are IAM_AND_QUICKSIGHT , IAM_ONLY
-	// , and ACTIVE_DIRECTORY . If you choose ACTIVE_DIRECTORY , provide an
-	// ActiveDirectoryName and an AdminGroup associated with your Active Directory.
+	// If you choose ACTIVE_DIRECTORY , provide an ActiveDirectoryName and an
+	// AdminGroup associated with your Active Directory. If you choose
+	// IAM_IDENTITY_CENTER , provide an AdminGroup associated with your IAM Identity
+	// Center account.
 	//
 	// This member is required.
 	AuthenticationMethod types.AuthenticationMethodOption
@@ -93,16 +94,24 @@ type CreateAccountSubscriptionInput struct {
 	// is the selected authentication method of the new Amazon QuickSight account.
 	ActiveDirectoryName *string
 
-	// The admin group associated with your Active Directory. This field is required
-	// if ACTIVE_DIRECTORY is the selected authentication method of the new Amazon
-	// QuickSight account. For more information about using Active Directory in Amazon
-	// QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
+	// The admin group associated with your Active Directory or IAM Identity Center
+	// account. This field is required if ACTIVE_DIRECTORY or IAM_IDENTITY_CENTER is
+	// the selected authentication method of the new Amazon QuickSight account. For
+	// more information about using IAM Identity Center in Amazon QuickSight, see
+	// Using IAM Identity Center with Amazon QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html)
+	// in the Amazon QuickSight User Guide. For more information about using Active
+	// Directory in Amazon QuickSight, see Using Active Directory with Amazon
+	// QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
 	// in the Amazon QuickSight User Guide.
 	AdminGroup []string
 
-	// The author group associated with your Active Directory. For more information
-	// about using Active Directory in Amazon QuickSight, see Using Active Directory
-	// with Amazon QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
+	// The author group associated with your Active Directory or IAM Identity Center
+	// account. For more information about using IAM Identity Center in Amazon
+	// QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise
+	// Edition (https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html)
+	// in the Amazon QuickSight User Guide. For more information about using Active
+	// Directory in Amazon QuickSight, see Using Active Directory with Amazon
+	// QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
 	// in the Amazon QuickSight User Guide.
 	AuthorGroup []string
 
@@ -130,9 +139,13 @@ type CreateAccountSubscriptionInput struct {
 	// edition of the new Amazon QuickSight account.
 	LastName *string
 
-	// The reader group associated with your Active Direcrtory. For more information
-	// about using Active Directory in Amazon QuickSight, see Using Active Directory
-	// with Amazon QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
+	// The reader group associated with your Active Directory or IAM Identity Center
+	// account. For more information about using IAM Identity Center in Amazon
+	// QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise
+	// Edition (https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html)
+	// in the Amazon QuickSight User Guide. For more information about using Active
+	// Directory in Amazon QuickSight, see Using Active Directory with Amazon
+	// QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
 	// in the Amazon QuickSight User Guide.
 	ReaderGroup []string
 

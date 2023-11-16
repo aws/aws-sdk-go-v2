@@ -89,6 +89,30 @@ type AutomationExecutionMemberSsmExecutionArn struct {
 
 func (*AutomationExecutionMemberSsmExecutionArn) isAutomationExecution() {}
 
+// Details about an error returned for a BatchGetIncidentFindings operation.
+type BatchGetIncidentFindingsError struct {
+
+	// The code associated with an error that was returned for a
+	// BatchGetIncidentFindings operation.
+	//
+	// This member is required.
+	Code *string
+
+	// The ID of a specified finding for which an error was returned for a
+	// BatchGetIncidentFindings operation.
+	//
+	// This member is required.
+	FindingId *string
+
+	// The description for an error that was returned for a BatchGetIncidentFindings
+	// operation.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // The Chatbot chat channel used for collaboration during an incident.
 //
 // The following types satisfy this interface:
@@ -118,6 +142,55 @@ type ChatChannelMemberEmpty struct {
 }
 
 func (*ChatChannelMemberEmpty) isChatChannel() {}
+
+// Information about an CloudFormation stack creation or update that occurred
+// around the time of an incident and could be a potential cause of the incident.
+type CloudFormationStackUpdate struct {
+
+	// The Amazon Resource Name (ARN) of the CloudFormation stack involved in the
+	// update.
+	//
+	// This member is required.
+	StackArn *string
+
+	// The timestamp for when the CloudFormation stack creation or update began.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The timestamp for when the CloudFormation stack creation or update ended. Not
+	// reported for deployments that are still in progress.
+	EndTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Information about a CodeDeploy deployment that occurred around the time of an
+// incident and could be a possible cause of the incident.
+type CodeDeployDeployment struct {
+
+	// The Amazon Resource Name (ARN) of the CodeDeploy deployment group associated
+	// with the deployment.
+	//
+	// This member is required.
+	DeploymentGroupArn *string
+
+	// The ID of the CodeDeploy deployment.
+	//
+	// This member is required.
+	DeploymentId *string
+
+	// The timestamp for when the CodeDeploy deployment began.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The timestamp for when the CodeDeploy deployment ended. Not reported for
+	// deployments that are still in progress.
+	EndTime *time.Time
+
+	noSmithyDocumentSerde
+}
 
 // A conditional statement with which to compare a value, after a timestamp,
 // before a timestamp, or equal to a string or integer. If multiple conditions are
@@ -236,17 +309,17 @@ type EventSummary struct {
 	// This member is required.
 	EventId *string
 
-	// The time that the event occurred.
+	// The timestamp for when the event occurred.
 	//
 	// This member is required.
 	EventTime *time.Time
 
-	// The type of event. The timeline event must be Custom Event .
+	// The type of event. The timeline event must be Custom Event or Note .
 	//
 	// This member is required.
 	EventType *string
 
-	// The time that the timeline event was last updated.
+	// The timestamp for when the timeline event was last updated.
 	//
 	// This member is required.
 	EventUpdatedTime *time.Time
@@ -279,6 +352,78 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a specific CodeDeploy deployment or CloudFormation stack
+// creation or update that occurred around the time of a reported incident. These
+// activities can be investigated as a potential cause of the incident.
+type Finding struct {
+
+	// The timestamp for when a finding was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The ID assigned to the finding.
+	//
+	// This member is required.
+	Id *string
+
+	// The timestamp for when the finding was most recently updated with additional
+	// information.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// Details about the finding.
+	Details FindingDetails
+
+	noSmithyDocumentSerde
+}
+
+// Extended textual information about the finding.
+//
+// The following types satisfy this interface:
+//
+//	FindingDetailsMemberCloudFormationStackUpdate
+//	FindingDetailsMemberCodeDeployDeployment
+type FindingDetails interface {
+	isFindingDetails()
+}
+
+// Information about the CloudFormation stack creation or update associated with
+// the finding.
+type FindingDetailsMemberCloudFormationStackUpdate struct {
+	Value CloudFormationStackUpdate
+
+	noSmithyDocumentSerde
+}
+
+func (*FindingDetailsMemberCloudFormationStackUpdate) isFindingDetails() {}
+
+// Information about the CodeDeploy deployment associated with the finding.
+type FindingDetailsMemberCodeDeployDeployment struct {
+	Value CodeDeployDeployment
+
+	noSmithyDocumentSerde
+}
+
+func (*FindingDetailsMemberCodeDeployDeployment) isFindingDetails() {}
+
+// Identifying information about the finding.
+type FindingSummary struct {
+
+	// The ID of the finding.
+	//
+	// This member is required.
+	Id *string
+
+	// The timestamp for when the finding was last updated.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The record of the incident that's created when an incident occurs.
 type IncidentRecord struct {
 
@@ -287,7 +432,7 @@ type IncidentRecord struct {
 	// This member is required.
 	Arn *string
 
-	// The time that Incident Manager created the incident record.
+	// The timestamp for when Incident Manager created the incident record.
 	//
 	// This member is required.
 	CreationTime *time.Time
@@ -298,7 +443,13 @@ type IncidentRecord struct {
 	// This member is required.
 	DedupeString *string
 
-	// The impact of the incident on customers and applications.
+	// The impact of the incident on customers and applications. Supported impact
+	// codes
+	//   - 1 - Critical
+	//   - 2 - High
+	//   - 3 - Medium
+	//   - 4 - Low
+	//   - 5 - No Impact
 	//
 	// This member is required.
 	Impact *int32
@@ -313,7 +464,7 @@ type IncidentRecord struct {
 	// This member is required.
 	LastModifiedBy *string
 
-	// The time at which the incident was most recently modified.
+	// The timestamp for when the incident was most recently modified.
 	//
 	// This member is required.
 	LastModifiedTime *time.Time
@@ -338,7 +489,8 @@ type IncidentRecord struct {
 	// The Amazon SNS targets that are notified when updates are made to an incident.
 	NotificationTargets []NotificationTargetItem
 
-	// The time at which the incident was resolved. This appears as a timeline event.
+	// The timestamp for when the incident was resolved. This appears as a timeline
+	// event.
 	ResolvedTime *time.Time
 
 	// The summary of the incident. The summary is a brief synopsis of what occurred,
@@ -381,7 +533,7 @@ type IncidentRecordSummary struct {
 	// This member is required.
 	Arn *string
 
-	// The time the incident was created.
+	// The timestamp for when the incident was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
@@ -407,7 +559,7 @@ type IncidentRecordSummary struct {
 	// This member is required.
 	Title *string
 
-	// The time the incident was resolved.
+	// The timestamp for when the incident was resolved.
 	ResolvedTime *time.Time
 
 	noSmithyDocumentSerde
@@ -417,7 +569,13 @@ type IncidentRecordSummary struct {
 // to create an incident record.
 type IncidentTemplate struct {
 
-	// The impact of the incident on your customers and applications.
+	// The impact of the incident on your customers and applications. Supported impact
+	// codes
+	//   - 1 - Critical
+	//   - 2 - High
+	//   - 3 - Medium
+	//   - 4 - Low
+	//   - 5 - No Impact
 	//
 	// This member is required.
 	Impact *int32
@@ -427,8 +585,16 @@ type IncidentTemplate struct {
 	// This member is required.
 	Title *string
 
-	// Used to stop Incident Manager from creating multiple incident records for the
-	// same incident.
+	// The string Incident Manager uses to prevent the same root cause from creating
+	// multiple incidents in the same account. A deduplication string is a term or
+	// phrase the system uses to check for duplicate incidents. If you specify a
+	// deduplication string, Incident Manager searches for open incidents that contain
+	// the same string in the dedupeString field when it creates the incident. If a
+	// duplicate is detected, Incident Manager deduplicates the newer incident into the
+	// existing incident. By default, Incident Manager automatically deduplicates
+	// multiple incidents created by the same Amazon CloudWatch alarm or Amazon
+	// EventBridge event. You don't have to enter your own deduplication string to
+	// prevent duplication for these resource types.
 	DedupeString *string
 
 	// Tags to assign to the template. When the StartIncident API action is called,
@@ -612,8 +778,8 @@ type RegionInfo struct {
 	// This member is required.
 	Status RegionStatus
 
-	// The most recent date and time that Incident Manager updated the Amazon Web
-	// Services Region's status.
+	// The timestamp for when Incident Manager updated the status of the Amazon Web
+	// Services Region.
 	//
 	// This member is required.
 	StatusUpdateDateTime *time.Time
@@ -819,18 +985,18 @@ type TimelineEvent struct {
 	// This member is required.
 	EventId *string
 
-	// The time that the event occurred.
+	// The timestamp for when the event occurred.
 	//
 	// This member is required.
 	EventTime *time.Time
 
 	// The type of event that occurred. Currently Incident Manager supports only the
-	// Custom Event type.
+	// Custom Event and Note types.
 	//
 	// This member is required.
 	EventType *string
 
-	// The time that the timeline event was last updated.
+	// The timestamp for when the timeline event was last updated.
 	//
 	// This member is required.
 	EventUpdatedTime *time.Time
@@ -857,7 +1023,7 @@ type TriggerDetails struct {
 	// This member is required.
 	Source *string
 
-	// The time that the incident was detected.
+	// The timestamp for when the incident was detected.
 	//
 	// This member is required.
 	Timestamp *time.Time
@@ -920,6 +1086,7 @@ func (*UnknownUnionMember) isChatChannel()                {}
 func (*UnknownUnionMember) isCondition()                  {}
 func (*UnknownUnionMember) isDynamicSsmParameterValue()   {}
 func (*UnknownUnionMember) isEventReference()             {}
+func (*UnknownUnionMember) isFindingDetails()             {}
 func (*UnknownUnionMember) isIntegration()                {}
 func (*UnknownUnionMember) isItemValue()                  {}
 func (*UnknownUnionMember) isNotificationTargetItem()     {}

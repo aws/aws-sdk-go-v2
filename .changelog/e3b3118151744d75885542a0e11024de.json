@@ -1,0 +1,8 @@
+{
+    "id": "e3b31181-5174-4d75-8855-42a0e11024de",
+    "type": "feature",
+    "description": "Added a new API response field which determines if there is an action required from the customer regarding their cluster.",
+    "modules": [
+        "service/kafka"
+    ]
+}

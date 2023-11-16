@@ -60,10 +60,10 @@ type UpdateTimelineEventInput struct {
 	// any existing references and enters only new references.
 	EventReferences []types.EventReference
 
-	// The time that the event occurred.
+	// The timestamp for when the event occurred.
 	EventTime *time.Time
 
-	// The type of event. You can update events of type Custom Event .
+	// The type of event. You can update events of type Custom Event and Note .
 	EventType *string
 
 	noSmithyDocumentSerde

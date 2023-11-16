@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchGetIncidentFindings struct {
+}
+
+func (*validateOpBatchGetIncidentFindings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetIncidentFindings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetIncidentFindingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetIncidentFindingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateReplicationSet struct {
 }
 
@@ -265,6 +285,26 @@ func (m *validateOpGetTimelineEvent) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTimelineEventInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListIncidentFindings struct {
+}
+
+func (*validateOpListIncidentFindings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIncidentFindings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIncidentFindingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIncidentFindingsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -550,6 +590,10 @@ func (m *validateOpUpdateTimelineEvent) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchGetIncidentFindingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetIncidentFindings{}, middleware.After)
+}
+
 func addOpCreateReplicationSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateReplicationSet{}, middleware.After)
 }
@@ -600,6 +644,10 @@ func addOpGetResponsePlanValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetTimelineEventValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTimelineEvent{}, middleware.After)
+}
+
+func addOpListIncidentFindingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIncidentFindings{}, middleware.After)
 }
 
 func addOpListIncidentRecordsValidationMiddleware(stack *middleware.Stack) error {
@@ -1046,6 +1094,24 @@ func validateUpdateReplicationSetAction(v types.UpdateReplicationSetAction) erro
 	}
 }
 
+func validateOpBatchGetIncidentFindingsInput(v *BatchGetIncidentFindingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetIncidentFindingsInput"}
+	if v.IncidentRecordArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IncidentRecordArn"))
+	}
+	if v.FindingIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateReplicationSetInput(v *CreateReplicationSetInput) error {
 	if v == nil {
 		return nil
@@ -1268,6 +1334,21 @@ func validateOpGetTimelineEventInput(v *GetTimelineEventInput) error {
 	}
 	if v.EventId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListIncidentFindingsInput(v *ListIncidentFindingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIncidentFindingsInput"}
+	if v.IncidentRecordArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IncidentRecordArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

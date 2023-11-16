@@ -1,0 +1,8 @@
+{
+    "id": "65b801da-1182-4c8e-b2e8-b0b13c871faf",
+    "type": "feature",
+    "description": "Enables customers to update their PerUnitStorageThroughput on their Lustre file systems.",
+    "modules": [
+        "service/fsx"
+    ]
+}

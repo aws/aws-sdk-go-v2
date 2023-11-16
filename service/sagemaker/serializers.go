@@ -25203,6 +25203,11 @@ func awsAwsjson11_serializeDocumentStoppingCondition(v *types.StoppingCondition,
 	object := value.Object()
 	defer object.Close()
 
+	if v.MaxPendingTimeInSeconds != nil {
+		ok := object.Key("MaxPendingTimeInSeconds")
+		ok.Integer(*v.MaxPendingTimeInSeconds)
+	}
+
 	if v.MaxRuntimeInSeconds != nil {
 		ok := object.Key("MaxRuntimeInSeconds")
 		ok.Integer(*v.MaxRuntimeInSeconds)

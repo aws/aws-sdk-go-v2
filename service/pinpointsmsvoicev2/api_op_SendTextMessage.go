@@ -70,8 +70,8 @@ type SendTextMessageInput struct {
 	// The body of the text message.
 	MessageBody *string
 
-	// The type of message. Valid values are TRANSACTIONAL for messages that are
-	// critical or time-sensitive and PROMOTIONAL for messages that aren't critical or
+	// The type of message. Valid values are for messages that are critical or
+	// time-sensitive and PROMOTIONAL for messages that aren't critical or
 	// time-sensitive.
 	MessageType types.MessageType
 

@@ -3960,6 +3960,11 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemLustreConfiguration(v *types.
 		}
 	}
 
+	if v.PerUnitStorageThroughput != nil {
+		ok := object.Key("PerUnitStorageThroughput")
+		ok.Integer(*v.PerUnitStorageThroughput)
+	}
+
 	if v.RootSquashConfiguration != nil {
 		ok := object.Key("RootSquashConfiguration")
 		if err := awsAwsjson11_serializeDocumentLustreRootSquashConfiguration(v.RootSquashConfiguration, ok); err != nil {

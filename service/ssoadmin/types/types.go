@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -69,6 +70,26 @@ type AccountAssignment struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that describes an assignment of an Amazon Web Services account to a
+// principal and the permissions that principal has in the account.
+type AccountAssignmentForPrincipal struct {
+
+	// The account ID number of the Amazon Web Services account.
+	AccountId *string
+
+	// The ARN of the IAM Identity Center permission set assigned to this principal
+	// for this Amazon Web Services account.
+	PermissionSetArn *string
+
+	// The ID of the principal.
+	PrincipalId *string
+
+	// The type of the principal.
+	PrincipalType PrincipalType
+
+	noSmithyDocumentSerde
+}
+
 // The status of the creation or deletion operation of an assignment that a
 // principal needs to access an account.
 type AccountAssignmentOperationStatus struct {
@@ -126,6 +147,101 @@ type AccountAssignmentOperationStatusMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that describes an application that uses IAM Identity Center for
+// access management.
+type Application struct {
+
+	// The Amazon Web Services account ID number of the application.
+	ApplicationAccount *string
+
+	// The ARN of the application.
+	ApplicationArn *string
+
+	// The ARN of the application provider for this application.
+	ApplicationProviderArn *string
+
+	// The date and time when the application was originally created.
+	CreatedDate *time.Time
+
+	// The description of the application.
+	Description *string
+
+	// The ARN of the instance of IAM Identity Center that is configured with this
+	// application.
+	InstanceArn *string
+
+	// The name of the application.
+	Name *string
+
+	// A structure that describes the options for the access portal associated with
+	// this application.
+	PortalOptions *PortalOptions
+
+	// The current status of the application in this instance of IAM Identity Center.
+	Status ApplicationStatus
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes an assignment of a principal to an application.
+type ApplicationAssignment struct {
+
+	// The ARN of the application that has principals assigned.
+	//
+	// This member is required.
+	ApplicationArn *string
+
+	// The unique identifier of the principal assigned to the application.
+	//
+	// This member is required.
+	PrincipalId *string
+
+	// The type of the principal assigned to the application.
+	//
+	// This member is required.
+	PrincipalType PrincipalType
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes an application to which a principal is assigned.
+type ApplicationAssignmentForPrincipal struct {
+
+	// The ARN of the application to which the specified principal is assigned.
+	ApplicationArn *string
+
+	// The unique identifier of the principal assigned to the application.
+	PrincipalId *string
+
+	// The type of the principal assigned to the application.
+	PrincipalType PrincipalType
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes a provider that can be used to connect an Amazon Web
+// Services managed application or customer managed application to IAM Identity
+// Center.
+type ApplicationProvider struct {
+
+	// The ARN of the application provider.
+	//
+	// This member is required.
+	ApplicationProviderArn *string
+
+	// A structure that describes how IAM Identity Center represents the application
+	// provider in the portal.
+	DisplayData *DisplayData
+
+	// The protocol that the application provider uses to perform federation.
+	FederationProtocol FederationProtocol
+
+	// A structure that describes the application provider's resource server.
+	ResourceServerConfig *ResourceServerConfig
+
+	noSmithyDocumentSerde
+}
+
 // A structure that stores the details of the Amazon Web Services managed policy.
 type AttachedManagedPolicy struct {
 
@@ -136,6 +252,61 @@ type AttachedManagedPolicy struct {
 
 	// The name of the Amazon Web Services managed policy.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes an authentication method that can be used by an
+// application.
+//
+// The following types satisfy this interface:
+//
+//	AuthenticationMethodMemberIam
+type AuthenticationMethod interface {
+	isAuthenticationMethod()
+}
+
+// A structure that describes details for IAM authentication.
+type AuthenticationMethodMemberIam struct {
+	Value IamAuthenticationMethod
+
+	noSmithyDocumentSerde
+}
+
+func (*AuthenticationMethodMemberIam) isAuthenticationMethod() {}
+
+// A structure that describes an authentication method and its type.
+type AuthenticationMethodItem struct {
+
+	// A structure that describes an authentication method. The contents of this
+	// structure is determined by the AuthenticationMethodType .
+	AuthenticationMethod AuthenticationMethod
+
+	// The type of authentication that is used by this method.
+	AuthenticationMethodType AuthenticationMethodType
+
+	noSmithyDocumentSerde
+}
+
+// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+type AuthorizationCodeGrant struct {
+
+	// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+	RedirectUris []string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes a trusted token issuer and associates it with a set
+// of authorized audiences.
+type AuthorizedTokenIssuer struct {
+
+	// An array list of authorized audiences, or applications, that can consume the
+	// tokens generated by the associated trusted token issuer.
+	AuthorizedAudiences []string
+
+	// The ARN of the trusted token issuer.
+	TrustedTokenIssuerArn *string
 
 	noSmithyDocumentSerde
 }
@@ -160,6 +331,76 @@ type CustomerManagedPolicyReference struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that describes how the portal represents an application provider.
+type DisplayData struct {
+
+	// The description of the application provider that appears in the portal.
+	Description *string
+
+	// The name of the application provider that appears in the portal.
+	DisplayName *string
+
+	// A URL that points to an icon that represents the application provider.
+	IconUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+//
+// The following types satisfy this interface:
+//
+//	GrantMemberAuthorizationCode
+//	GrantMemberJwtBearer
+type Grant interface {
+	isGrant()
+}
+
+// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+type GrantMemberAuthorizationCode struct {
+	Value AuthorizationCodeGrant
+
+	noSmithyDocumentSerde
+}
+
+func (*GrantMemberAuthorizationCode) isGrant() {}
+
+// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+type GrantMemberJwtBearer struct {
+	Value JwtBearerGrant
+
+	noSmithyDocumentSerde
+}
+
+func (*GrantMemberJwtBearer) isGrant() {}
+
+// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+type GrantItem struct {
+
+	// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+	//
+	// This member is required.
+	Grant Grant
+
+	// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+	//
+	// This member is required.
+	GrantType GrantType
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes details for authentication that uses IAM.
+type IamAuthenticationMethod struct {
+
+	// An IAM policy document in JSON.
+	//
+	// This member is required.
+	ActorPolicy document.Interface
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the attributes to add to your attribute-based access control (ABAC)
 // configuration.
 type InstanceAccessControlAttributeConfiguration struct {
@@ -176,20 +417,133 @@ type InstanceAccessControlAttributeConfiguration struct {
 // Provides information about the IAM Identity Center instance.
 type InstanceMetadata struct {
 
-	// The identifier of the identity store that is connected to the IAM Identity
-	// Center instance.
+	// The date and time that the Identity Center instance was created.
+	CreatedDate *time.Time
+
+	// The identifier of the identity store that is connected to the Identity Center
+	// instance.
 	IdentityStoreId *string
 
-	// The ARN of the IAM Identity Center instance under which the operation will be
+	// The ARN of the Identity Center instance under which the operation will be
 	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
 	// Amazon Web Services Service Namespaces in the Amazon Web Services General
 	// Reference.
 	InstanceArn *string
 
+	// The name of the Identity Center instance.
+	Name *string
+
+	// The Amazon Web Services account ID number of the owner of the Identity Center
+	// instance.
+	OwnerAccountId *string
+
+	// The current status of this Identity Center instance.
+	Status InstanceStatus
+
 	noSmithyDocumentSerde
 }
 
-// Filters he operation status list based on the passed attribute value.
+// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+type JwtBearerGrant struct {
+
+	// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+	AuthorizedTokenIssuers []AuthorizedTokenIssuer
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes a filter for account assignments.
+type ListAccountAssignmentsFilter struct {
+
+	// The ID number of an Amazon Web Services account that filters the results in the
+	// response.
+	AccountId *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes a filter for application assignments.
+type ListApplicationAssignmentsFilter struct {
+
+	// The ARN of an application.
+	ApplicationArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes a filter for applications.
+type ListApplicationsFilter struct {
+
+	// An Amazon Web Services account ID number that filters the results in the
+	// response.
+	ApplicationAccount *string
+
+	// The ARN of an application provider that can filter the results in the response.
+	ApplicationProvider *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes configuration settings for a trusted token issuer
+// that supports OpenID Connect (OIDC) and JSON Web Tokens (JWTs).
+type OidcJwtConfiguration struct {
+
+	// The path of the source attribute in the JWT from the trusted token issuer. The
+	// attribute mapped by this JMESPath expression is compared against the attribute
+	// mapped by IdentityStoreAttributePath when a trusted token issuer token is
+	// exchanged for an IAM Identity Center token.
+	//
+	// This member is required.
+	ClaimAttributePath *string
+
+	// The path of the destination attribute in a JWT from IAM Identity Center. The
+	// attribute mapped by this JMESPath expression is compared against the attribute
+	// mapped by ClaimAttributePath when a trusted token issuer token is exchanged for
+	// an IAM Identity Center token.
+	//
+	// This member is required.
+	IdentityStoreAttributePath *string
+
+	// The URL that IAM Identity Center uses for OpenID Discovery. OpenID Discovery is
+	// used to obtain the information required to verify the tokens that the trusted
+	// token issuer generates.
+	//
+	// This member is required.
+	IssuerUrl *string
+
+	// The method that the trusted token issuer can use to retrieve the JSON Web Key
+	// Set used to verify a JWT.
+	//
+	// This member is required.
+	JwksRetrievalOption JwksRetrievalOption
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes updated configuration settings for a trusted token
+// issuer that supports OpenID Connect (OIDC) and JSON Web Tokens (JWTs).
+type OidcJwtUpdateConfiguration struct {
+
+	// The path of the source attribute in the JWT from the trusted token issuer. The
+	// attribute mapped by this JMESPath expression is compared against the attribute
+	// mapped by IdentityStoreAttributePath when a trusted token issuer token is
+	// exchanged for an IAM Identity Center token.
+	ClaimAttributePath *string
+
+	// The path of the destination attribute in a JWT from IAM Identity Center. The
+	// attribute mapped by this JMESPath expression is compared against the attribute
+	// mapped by ClaimAttributePath when a trusted token issuer token is exchanged for
+	// an IAM Identity Center token.
+	IdentityStoreAttributePath *string
+
+	// The method that the trusted token issuer can use to retrieve the JSON Web Key
+	// Set used to verify a JWT.
+	JwksRetrievalOption JwksRetrievalOption
+
+	noSmithyDocumentSerde
+}
+
+// Filters the operation status list based on the passed attribute value.
 type OperationStatusFilter struct {
 
 	// Filters the list operations result based on the status attribute.
@@ -297,6 +651,77 @@ type PermissionSetProvisioningStatusMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that describes the options for the access portal associated with an
+// application.
+type PortalOptions struct {
+
+	// A structure that describes the sign-in options for the access portal.
+	SignInOptions *SignInOptions
+
+	// Indicates whether this application is visible in the access portal.
+	Visibility ApplicationVisibility
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes the configuration of a resource server.
+type ResourceServerConfig struct {
+
+	// A list of the IAM Identity Center access scopes that are associated with this
+	// resource server.
+	Scopes map[string]ResourceServerScopeDetails
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes details for an IAM Identity Center access scope that
+// is associated with a resource server.
+type ResourceServerScopeDetails struct {
+
+	// The title of an access scope for a resource server.
+	DetailedTitle *string
+
+	// The description of an access scope for a resource server.
+	LongDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes an IAM Identity Center access scope and its
+// authorized targets.
+type ScopeDetails struct {
+
+	// The name of the access scope.
+	//
+	// This member is required.
+	Scope *string
+
+	// An array list of ARNs of applications.
+	AuthorizedTargets []string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes the sign-in options for an application portal.
+type SignInOptions struct {
+
+	// This determines how IAM Identity Center navigates the user to the target
+	// application. It can be one of the following values:
+	//   - APPLICATION : IAM Identity Center redirects the customer to the configured
+	//   ApplicationUrl .
+	//   - IDENTITY_CENTER : IAM Identity Center uses SAML identity-provider initiated
+	//   authentication to sign the customer directly into a SAML-based application.
+	//
+	// This member is required.
+	Origin SignInOrigin
+
+	// The URL that accepts authentication requests for an application. This is a
+	// required parameter if the Origin parameter is APPLICATION .
+	ApplicationUrl *string
+
+	noSmithyDocumentSerde
+}
+
 // A set of key-value pairs that are used to manage the resource. Tags can only be
 // applied to permission sets and cannot be applied to corresponding roles that IAM
 // Identity Center creates in Amazon Web Services accounts.
@@ -315,4 +740,87 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that describes the configuration of a trusted token issuer. The
+// structure and available settings are determined by the type of the trusted token
+// issuer.
+//
+// The following types satisfy this interface:
+//
+//	TrustedTokenIssuerConfigurationMemberOidcJwtConfiguration
+type TrustedTokenIssuerConfiguration interface {
+	isTrustedTokenIssuerConfiguration()
+}
+
+// A structure that describes the settings for a trusted token issuer that works
+// with OpenID Connect (OIDC) by using JSON Web Tokens (JWT).
+type TrustedTokenIssuerConfigurationMemberOidcJwtConfiguration struct {
+	Value OidcJwtConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*TrustedTokenIssuerConfigurationMemberOidcJwtConfiguration) isTrustedTokenIssuerConfiguration() {
+}
+
+// A structure that describes a trusted token issuer.
+type TrustedTokenIssuerMetadata struct {
+
+	// The name of the trusted token issuer configuration in the instance of IAM
+	// Identity Center.
+	Name *string
+
+	// The ARN of the trusted token issuer configuration in the instance of IAM
+	// Identity Center.
+	TrustedTokenIssuerArn *string
+
+	// The type of trusted token issuer.
+	TrustedTokenIssuerType TrustedTokenIssuerType
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains details to be updated for a trusted token issuer
+// configuration. The structure and settings that you can include depend on the
+// type of the trusted token issuer being updated.
+//
+// The following types satisfy this interface:
+//
+//	TrustedTokenIssuerUpdateConfigurationMemberOidcJwtConfiguration
+type TrustedTokenIssuerUpdateConfiguration interface {
+	isTrustedTokenIssuerUpdateConfiguration()
+}
+
+// A structure that describes an updated configuration for a trusted token issuer
+// that uses OpenID Connect (OIDC) with JSON web tokens (JWT).
+type TrustedTokenIssuerUpdateConfigurationMemberOidcJwtConfiguration struct {
+	Value OidcJwtUpdateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*TrustedTokenIssuerUpdateConfigurationMemberOidcJwtConfiguration) isTrustedTokenIssuerUpdateConfiguration() {
+}
+
+type UpdateApplicationPortalOptions struct {
+
+	// A structure that describes the sign-in options for an application portal.
+	SignInOptions *SignInOptions
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isAuthenticationMethod()                  {}
+func (*UnknownUnionMember) isGrant()                                 {}
+func (*UnknownUnionMember) isTrustedTokenIssuerConfiguration()       {}
+func (*UnknownUnionMember) isTrustedTokenIssuerUpdateConfiguration() {}

@@ -1,0 +1,8 @@
+{
+    "id": "9bf3fff2-63f9-42ce-9b4d-6bdb259c98eb",
+    "type": "feature",
+    "description": "Amazon Pinpoint now offers additional operations as part of version 2 of the SMS and voice APIs. This release includes 26 new APIs to create and manage phone number registrations, add verified destination numbers, and request sender IDs.",
+    "modules": [
+        "service/pinpointsmsvoicev2"
+    ]
+}

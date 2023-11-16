@@ -19,7 +19,7 @@ import (
 // numbers that meet the filter criteria. If you don't specify opted out numbers or
 // filters, the output includes information for all opted out destination numbers
 // in your opt-out list. If you specify an opted out number that isn't valid, an
-// Error is returned.
+// error is returned.
 func (c *Client) DescribeOptedOutNumbers(ctx context.Context, params *DescribeOptedOutNumbersInput, optFns ...func(*Options)) (*DescribeOptedOutNumbersOutput, error) {
 	if params == nil {
 		params = &DescribeOptedOutNumbersInput{}

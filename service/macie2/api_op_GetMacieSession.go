@@ -56,7 +56,7 @@ type GetMacieSessionOutput struct {
 	Status types.MacieStatus
 
 	// The date and time, in UTC and extended ISO 8601 format, of the most recent
-	// change to the status of the Amazon Macie account.
+	// change to the status or configuration settings for the Amazon Macie account.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

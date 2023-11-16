@@ -41,8 +41,8 @@ type SearchIndexInput struct {
 	// The search index name.
 	IndexName *string
 
-	// The maximum number of results to return at one time. The response might contain
-	// fewer results but will never contain more.
+	// The maximum number of results to return per page at one time. The response
+	// might contain fewer results but will never contain more.
 	MaxResults *int32
 
 	// The token used to get the next set of results, or null if there are no

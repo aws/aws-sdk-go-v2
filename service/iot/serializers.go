@@ -21570,6 +21570,36 @@ func awsRestjson1_serializeDocumentFirehoseAction(v *types.FirehoseAction, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGeoLocationsFilter(v []types.GeoLocationTarget, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentGeoLocationTarget(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGeoLocationTarget(v *types.GeoLocationTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Order) > 0 {
+		ok := object.Key("order")
+		ok.String(string(v.Order))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentHeaderList(v []types.HttpActionHeader, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -21690,6 +21720,13 @@ func awsRestjson1_serializeDocumentHttpUrlDestinationConfiguration(v *types.Http
 func awsRestjson1_serializeDocumentIndexingFilter(v *types.IndexingFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.GeoLocations != nil {
+		ok := object.Key("geoLocations")
+		if err := awsRestjson1_serializeDocumentGeoLocationsFilter(v.GeoLocations, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.NamedShadowNames != nil {
 		ok := object.Key("namedShadowNames")

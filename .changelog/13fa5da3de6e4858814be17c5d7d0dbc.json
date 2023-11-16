@@ -1,0 +1,8 @@
+{
+    "id": "13fa5da3-de6e-4858-814b-e17c5d7d0dbc",
+    "type": "feature",
+    "description": "Introduced S3StorageOptions for servers to enable directory listing optimizations and added Type fields to logical directory mappings.",
+    "modules": [
+        "service/transfer"
+    ]
+}

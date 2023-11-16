@@ -41,7 +41,9 @@ type DescribeInstancePatchesInput struct {
 	//   - Classification Sample values: Security | SecurityUpdates
 	//   - KBId Sample values: KB4480056 | java-1.7.0-openjdk.x86_64
 	//   - Severity Sample values: Important | Medium | Low
-	//   - State Sample values: Installed | InstalledOther | InstalledPendingReboot
+	//   - State Sample values: Installed | InstalledOther | InstalledPendingReboot For
+	//   lists of all State values, see Understanding patch compliance state values (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-compliance-states.html)
+	//   in the Amazon Web Services Systems Manager User Guide.
 	Filters []types.PatchOrchestratorFilter
 
 	// The maximum number of patches to return (per page).

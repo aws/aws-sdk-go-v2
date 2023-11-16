@@ -101,6 +101,10 @@ type DescribeDomainOutput struct {
 	// apps and the RStudioServerPro app.
 	SecurityGroupIdForDomainBoundary *string
 
+	// The ARN of the associated Amazon Web Services Single Sign-On application for
+	// this Domain.
+	SingleSignOnApplicationArn *string
+
 	// The IAM Identity Center managed application instance ID.
 	SingleSignOnManagedApplicationInstanceId *string
 

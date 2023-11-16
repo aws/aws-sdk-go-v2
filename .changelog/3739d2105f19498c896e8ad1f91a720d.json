@@ -1,0 +1,8 @@
+{
+    "id": "3739d210-5f19-498c-896e-8ad1f91a720d",
+    "type": "feature",
+    "description": "Introduces new APIs ListIncidentFindings and BatchGetIncidentFindings to use findings related to an incident.",
+    "modules": [
+        "service/ssmincidents"
+    ]
+}

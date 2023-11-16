@@ -84,8 +84,20 @@ type DescribeAssetBundleImportJobOutput struct {
 	//   - FAILED_ROLLBACK_ERROR
 	JobStatus types.AssetBundleImportJobStatus
 
-	// Optional overrides to be applied to the resource configuration before import.
+	// Optional overrides that are applied to the resource configuration before import.
 	OverrideParameters *types.AssetBundleImportJobOverrideParameters
+
+	// Optional permission overrides that are applied to the resource configuration
+	// before import.
+	OverridePermissions *types.AssetBundleImportJobOverridePermissions
+
+	// Optional tag overrides that are applied to the resource configuration before
+	// import.
+	OverrideTags *types.AssetBundleImportJobOverrideTags
+
+	// An optional validation strategy override for all analyses and dashboards to be
+	// applied to the resource configuration before import.
+	OverrideValidationStrategy *types.AssetBundleImportJobOverrideValidationStrategy
 
 	// The Amazon Web Services request ID for this operation.
 	RequestId *string

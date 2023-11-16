@@ -17,7 +17,7 @@ import (
 // for only the specified SenderIds. If you specify filters, the output includes
 // information for only those SenderIds that meet the filter criteria. If you don't
 // specify SenderIds or filters, the output includes information for all SenderIds.
-// f you specify a sender ID that isn't valid, an Error is returned.
+// f you specify a sender ID that isn't valid, an error is returned.
 func (c *Client) DescribeSenderIds(ctx context.Context, params *DescribeSenderIdsInput, optFns ...func(*Options)) (*DescribeSenderIdsOutput, error) {
 	if params == nil {
 		params = &DescribeSenderIdsInput{}

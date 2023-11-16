@@ -1,0 +1,8 @@
+{
+    "id": "81e7edff-0967-4357-bfa9-c1d54f34a3bd",
+    "type": "feature",
+    "description": "This release introduces server side composition and recording for stages.",
+    "modules": [
+        "service/ivsrealtime"
+    ]
+}

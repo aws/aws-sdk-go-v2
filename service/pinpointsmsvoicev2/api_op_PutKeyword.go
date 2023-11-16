@@ -18,7 +18,7 @@ import (
 // number to elicit a response, such as an informational message or a special
 // offer. When your number receives a message that begins with a keyword, Amazon
 // Pinpoint responds with a customizable message. If you specify a keyword that
-// isn't valid, an Error is returned.
+// isn't valid, an error is returned.
 func (c *Client) PutKeyword(ctx context.Context, params *PutKeywordInput, optFns ...func(*Options)) (*PutKeywordOutput, error) {
 	if params == nil {
 		params = &PutKeywordInput{}
@@ -42,9 +42,6 @@ type PutKeywordInput struct {
 	Keyword *string
 
 	// The message associated with the keyword.
-	//   - AUTOMATIC_RESPONSE: A message is sent to the recipient.
-	//   - OPT_OUT: Keeps the recipient from receiving future messages.
-	//   - OPT_IN: The recipient wants to receive future messages.
 	//
 	// This member is required.
 	KeywordMessage *string
@@ -58,6 +55,9 @@ type PutKeywordInput struct {
 	OriginationIdentity *string
 
 	// The action to perform for the new keyword when it is received.
+	//   - AUTOMATIC_RESPONSE: A message is sent to the recipient.
+	//   - OPT_OUT: Keeps the recipient from receiving future messages.
+	//   - OPT_IN: The recipient wants to receive future messages.
 	KeywordAction types.KeywordAction
 
 	noSmithyDocumentSerde

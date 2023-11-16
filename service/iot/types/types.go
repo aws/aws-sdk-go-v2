@@ -1658,6 +1658,21 @@ type FleetMetricNameAndArn struct {
 	noSmithyDocumentSerde
 }
 
+// A geolocation target that you select to index. Each geolocation target contains
+// a name and order key-value pair that specifies the geolocation target fields.
+type GeoLocationTarget struct {
+
+	// The name of the geolocation target field. If the target field is part of a
+	// named shadow, you must select the named shadow using the namedShadow filter.
+	Name *string
+
+	// The order of the geolocation target field. This field is optional. The default
+	// value is LatLon .
+	Order TargetFieldOrder
+
+	noSmithyDocumentSerde
+}
+
 // The name and ARN of a group.
 type GroupNameAndArn struct {
 
@@ -1779,11 +1794,25 @@ type ImplicitDeny struct {
 	noSmithyDocumentSerde
 }
 
-// Provides additional filters for specific data sources. Named shadow is the only
-// data source that currently supports and requires a filter. To add named shadows
-// to your fleet indexing configuration, set namedShadowIndexingMode to be ON and
-// specify your shadow names in filter .
+// Provides additional selections for named shadows and geolocation data. To add
+// named shadows to your fleet indexing configuration, set namedShadowIndexingMode
+// to be ON and specify your shadow names in namedShadowNames filter. To add
+// geolocation data to your fleet indexing configuration:
+//   - If you store geolocation data in a class/unnamed shadow, set
+//     thingIndexingMode to be REGISTRY_AND_SHADOW and specify your geolocation data
+//     in geoLocations filter.
+//   - If you store geolocation data in a named shadow, set namedShadowIndexingMode
+//     to be ON , add the shadow name in namedShadowNames filter, and specify your
+//     geolocation data in geoLocations filter. For more information, see Managing
+//     fleet indexing (https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html)
+//     .
 type IndexingFilter struct {
+
+	// The list of geolocation targets that you select to index. The default maximum
+	// number of geolocation targets for indexing is 1 . To increase the limit, see
+	// Amazon Web Services IoT Device Management Quotas (https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits)
+	// in the Amazon Web Services General Reference.
+	GeoLocations []GeoLocationTarget
 
 	// The shadow names that you select to index. The default maximum number of shadow
 	// names for indexing is 10. To increase the limit, see Amazon Web Services IoT
@@ -1902,7 +1931,7 @@ type Job struct {
 
 	// The package version Amazon Resource Names (ARNs) that are installed on the
 	// device when the job successfully completes. Note:The following Length
-	// Constraints relates to a single string. Up to five strings are allowed.
+	// Constraints relates to a single ARN. Up to 25 package version ARNs are allowed.
 	DestinationPackageVersions []string
 
 	// A key-value map that pairs the patterns that need to be replaced in a managed
@@ -3937,10 +3966,18 @@ type ThingIndexingConfiguration struct {
 	// Detect. (https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-detect.html)
 	DeviceDefenderIndexingMode DeviceDefenderIndexingMode
 
-	// Provides additional filters for specific data sources. Named shadow is the only
-	// data source that currently supports and requires a filter. To add named shadows
-	// to your fleet indexing configuration, set namedShadowIndexingMode to be ON and
-	// specify your shadow names in filter .
+	// Provides additional selections for named shadows and geolocation data. To add
+	// named shadows to your fleet indexing configuration, set namedShadowIndexingMode
+	// to be ON and specify your shadow names in namedShadowNames filter. To add
+	// geolocation data to your fleet indexing configuration:
+	//   - If you store geolocation data in a class/unnamed shadow, set
+	//   thingIndexingMode to be REGISTRY_AND_SHADOW and specify your geolocation data
+	//   in geoLocations filter.
+	//   - If you store geolocation data in a named shadow, set namedShadowIndexingMode
+	//   to be ON , add the shadow name in namedShadowNames filter, and specify your
+	//   geolocation data in geoLocations filter. For more information, see Managing
+	//   fleet indexing (https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html)
+	//   .
 	Filter *IndexingFilter
 
 	// Contains fields that are indexed and whose types are already known by the Fleet

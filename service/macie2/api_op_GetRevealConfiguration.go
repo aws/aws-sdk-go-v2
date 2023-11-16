@@ -35,9 +35,12 @@ type GetRevealConfigurationInput struct {
 
 type GetRevealConfigurationOutput struct {
 
-	// The current configuration settings and the status of the configuration for the
-	// account.
+	// The KMS key that's used to encrypt the sensitive data, and the status of the
+	// configuration for the Amazon Macie account.
 	Configuration *types.RevealConfiguration
+
+	// The access method and settings that are used to retrieve the sensitive data.
+	RetrievalConfiguration *types.RetrievalConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

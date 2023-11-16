@@ -32,6 +32,7 @@ import (
 //   - DataCompressionType
 //   - LogConfiguration
 //   - LustreRootSquashConfiguration
+//   - PerUnitStorageThroughput
 //   - StorageCapacity
 //   - WeeklyMaintenanceStartTime
 //

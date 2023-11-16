@@ -10935,6 +10935,15 @@ func awsRestjson1_deserializeDocumentClusterInfo(v **types.ClusterInfo, value in
 				sv.CurrentVersion = ptr.String(jtv)
 			}
 
+		case "customerActionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomerActionStatus to be of type string, got %T instead", value)
+				}
+				sv.CustomerActionStatus = types.CustomerActionStatus(jtv)
+			}
+
 		case "encryptionInfo":
 			if err := awsRestjson1_deserializeDocumentEncryptionInfo(&sv.EncryptionInfo, value); err != nil {
 				return err
@@ -13174,6 +13183,15 @@ func awsRestjson1_deserializeDocumentProvisioned(v **types.Provisioned, value in
 		case "currentBrokerSoftwareInfo":
 			if err := awsRestjson1_deserializeDocumentBrokerSoftwareInfo(&sv.CurrentBrokerSoftwareInfo, value); err != nil {
 				return err
+			}
+
+		case "customerActionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomerActionStatus to be of type string, got %T instead", value)
+				}
+				sv.CustomerActionStatus = types.CustomerActionStatus(jtv)
 			}
 
 		case "encryptionInfo":

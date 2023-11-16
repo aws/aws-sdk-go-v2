@@ -16,7 +16,7 @@ import (
 // Releases an existing origination phone number in your account. Once released, a
 // phone number is no longer available for sending messages. If the origination
 // phone number has deletion protection enabled or is associated with a pool, an
-// Error is returned.
+// error is returned.
 func (c *Client) ReleasePhoneNumber(ctx context.Context, params *ReleasePhoneNumberInput, optFns ...func(*Options)) (*ReleasePhoneNumberOutput, error) {
 	if params == nil {
 		params = &ReleasePhoneNumberInput{}
@@ -76,6 +76,9 @@ type ReleasePhoneNumberOutput struct {
 	// The PhoneNumberId of the phone number that was released.
 	PhoneNumberId *string
 
+	// The unique identifier for the registration.
+	RegistrationId *string
+
 	// By default this is set to false. When an end recipient sends a message that
 	// begins with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint
 	// automatically replies with a customizable message and adds the end recipient to
@@ -89,6 +92,10 @@ type ReleasePhoneNumberOutput struct {
 
 	// The Amazon Resource Name (ARN) of the TwoWayChannel.
 	TwoWayChannelArn *string
+
+	// An optional IAM Role Arn for a service to assume, to be able to post inbound
+	// SMS messages.
+	TwoWayChannelRole *string
 
 	// By default this is set to false. When set to true you can receive incoming text
 	// messages from your end recipients.

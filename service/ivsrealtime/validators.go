@@ -5,6 +5,7 @@ package ivsrealtime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -24,6 +25,46 @@ func (m *validateOpCreateParticipantToken) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateParticipantTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateStorageConfiguration struct {
+}
+
+func (*validateOpCreateStorageConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateStorageConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateStorageConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateStorageConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteEncoderConfiguration struct {
+}
+
+func (*validateOpDeleteEncoderConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEncoderConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEncoderConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEncoderConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -49,6 +90,26 @@ func (m *validateOpDeleteStage) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteStorageConfiguration struct {
+}
+
+func (*validateOpDeleteStorageConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteStorageConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteStorageConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteStorageConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisconnectParticipant struct {
 }
 
@@ -64,6 +125,46 @@ func (m *validateOpDisconnectParticipant) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisconnectParticipantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetComposition struct {
+}
+
+func (*validateOpGetComposition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetComposition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCompositionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCompositionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetEncoderConfiguration struct {
+}
+
+func (*validateOpGetEncoderConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEncoderConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEncoderConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEncoderConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -124,6 +225,26 @@ func (m *validateOpGetStageSession) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetStageSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetStorageConfiguration struct {
+}
+
+func (*validateOpGetStorageConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetStorageConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetStorageConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetStorageConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -209,6 +330,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartComposition struct {
+}
+
+func (*validateOpStartComposition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartComposition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartCompositionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartCompositionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopComposition struct {
+}
+
+func (*validateOpStopComposition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopComposition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopCompositionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopCompositionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -273,12 +434,32 @@ func addOpCreateParticipantTokenValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateParticipantToken{}, middleware.After)
 }
 
+func addOpCreateStorageConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateStorageConfiguration{}, middleware.After)
+}
+
+func addOpDeleteEncoderConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEncoderConfiguration{}, middleware.After)
+}
+
 func addOpDeleteStageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteStage{}, middleware.After)
 }
 
+func addOpDeleteStorageConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteStorageConfiguration{}, middleware.After)
+}
+
 func addOpDisconnectParticipantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisconnectParticipant{}, middleware.After)
+}
+
+func addOpGetCompositionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetComposition{}, middleware.After)
+}
+
+func addOpGetEncoderConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEncoderConfiguration{}, middleware.After)
 }
 
 func addOpGetParticipantValidationMiddleware(stack *middleware.Stack) error {
@@ -291,6 +472,10 @@ func addOpGetStageValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetStageSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStageSession{}, middleware.After)
+}
+
+func addOpGetStorageConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetStorageConfiguration{}, middleware.After)
 }
 
 func addOpListParticipantEventsValidationMiddleware(stack *middleware.Stack) error {
@@ -309,6 +494,14 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpStartCompositionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartComposition{}, middleware.After)
+}
+
+func addOpStopCompositionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopComposition{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -321,6 +514,93 @@ func addOpUpdateStageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateStage{}, middleware.After)
 }
 
+func validateChannelDestinationConfiguration(v *types.ChannelDestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChannelDestinationConfiguration"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestinationConfiguration(v *types.DestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationConfiguration"}
+	if v.Channel != nil {
+		if err := validateChannelDestinationConfiguration(v.Channel); err != nil {
+			invalidParams.AddNested("Channel", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3 != nil {
+		if err := validateS3DestinationConfiguration(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestinationConfigurationList(v []types.DestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationConfigurationList"}
+	for i := range v {
+		if err := validateDestinationConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3DestinationConfiguration(v *types.S3DestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3DestinationConfiguration"}
+	if v.StorageConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageConfigurationArn"))
+	}
+	if v.EncoderConfigurationArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EncoderConfigurationArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3StorageConfiguration(v *types.S3StorageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3StorageConfiguration"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateParticipantTokenInput(v *CreateParticipantTokenInput) error {
 	if v == nil {
 		return nil
@@ -328,6 +608,40 @@ func validateOpCreateParticipantTokenInput(v *CreateParticipantTokenInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "CreateParticipantTokenInput"}
 	if v.StageArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StageArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateStorageConfigurationInput(v *CreateStorageConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateStorageConfigurationInput"}
+	if v.S3 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3"))
+	} else if v.S3 != nil {
+		if err := validateS3StorageConfiguration(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteEncoderConfigurationInput(v *DeleteEncoderConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEncoderConfigurationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -351,6 +665,21 @@ func validateOpDeleteStageInput(v *DeleteStageInput) error {
 	}
 }
 
+func validateOpDeleteStorageConfigurationInput(v *DeleteStorageConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteStorageConfigurationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisconnectParticipantInput(v *DisconnectParticipantInput) error {
 	if v == nil {
 		return nil
@@ -361,6 +690,36 @@ func validateOpDisconnectParticipantInput(v *DisconnectParticipantInput) error {
 	}
 	if v.ParticipantId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParticipantId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCompositionInput(v *GetCompositionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCompositionInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEncoderConfigurationInput(v *GetEncoderConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEncoderConfigurationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -415,6 +774,21 @@ func validateOpGetStageSessionInput(v *GetStageSessionInput) error {
 	}
 	if v.SessionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetStorageConfigurationInput(v *GetStorageConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetStorageConfigurationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -484,6 +858,43 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartCompositionInput(v *StartCompositionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCompositionInput"}
+	if v.StageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageArn"))
+	}
+	if v.Destinations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destinations"))
+	} else if v.Destinations != nil {
+		if err := validateDestinationConfigurationList(v.Destinations); err != nil {
+			invalidParams.AddNested("Destinations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopCompositionInput(v *StopCompositionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopCompositionInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

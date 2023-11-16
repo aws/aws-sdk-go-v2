@@ -66,7 +66,7 @@ type RequestPhoneNumberInput struct {
 	DeletionProtectionEnabled *bool
 
 	// The name of the OptOutList to associate with the phone number. You can use the
-	// OutOutListName or OptPutListArn.
+	// OptOutListName or OptOutListArn.
 	OptOutListName *string
 
 	// The pool to associated with the phone number. You can use the PoolId or PoolArn.
@@ -125,6 +125,9 @@ type RequestPhoneNumberOutput struct {
 	// The unique identifier of the pool associated with the phone number
 	PoolId *string
 
+	// The unique identifier for the registration.
+	RegistrationId *string
+
 	// By default this is set to false. When an end recipient sends a message that
 	// begins with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint
 	// automatically replies with a customizable message and adds the end recipient to
@@ -141,6 +144,10 @@ type RequestPhoneNumberOutput struct {
 
 	// The ARN used to identify the two way channel.
 	TwoWayChannelArn *string
+
+	// An optional IAM Role Arn for a service to assume, to be able to post inbound
+	// SMS messages.
+	TwoWayChannelRole *string
 
 	// By default this is set to false. When set to true you can receive incoming text
 	// messages from your end recipients.

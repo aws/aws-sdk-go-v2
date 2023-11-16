@@ -6905,6 +6905,11 @@ func awsRestjson1_deserializeOpDocumentGetRevealConfigurationOutput(v **GetRevea
 				return err
 			}
 
+		case "retrievalConfiguration":
+			if err := awsRestjson1_deserializeDocumentRetrievalConfiguration(&sv.RetrievalConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12213,6 +12218,11 @@ func awsRestjson1_deserializeOpDocumentUpdateRevealConfigurationOutput(v **Updat
 		switch key {
 		case "configuration":
 			if err := awsRestjson1_deserializeDocumentRevealConfiguration(&sv.Configuration, value); err != nil {
+				return err
+			}
+
+		case "retrievalConfiguration":
+			if err := awsRestjson1_deserializeDocumentRetrievalConfiguration(&sv.RetrievalConfiguration, value); err != nil {
 				return err
 			}
 
@@ -19172,6 +19182,64 @@ func awsRestjson1_deserializeDocumentResourceStatistics(v **types.ResourceStatis
 					return err
 				}
 				sv.TotalItemsSkippedPermissionDenied = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRetrievalConfiguration(v **types.RetrievalConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RetrievalConfiguration
+	if *v == nil {
+		sv = &types.RetrievalConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "externalId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ExternalId = ptr.String(jtv)
+			}
+
+		case "retrievalMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RetrievalMode to be of type string, got %T instead", value)
+				}
+				sv.RetrievalMode = types.RetrievalMode(jtv)
+			}
+
+		case "roleName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max64PatternW to be of type string, got %T instead", value)
+				}
+				sv.RoleName = ptr.String(jtv)
 			}
 
 		default:

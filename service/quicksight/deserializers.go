@@ -3158,6 +3158,189 @@ func awsRestjson1_deserializeOpDocumentCreateRefreshScheduleOutput(v **CreateRef
 	return nil
 }
 
+type awsRestjson1_deserializeOpCreateRoleMembership struct {
+}
+
+func (*awsRestjson1_deserializeOpCreateRoleMembership) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpCreateRoleMembership) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateRoleMembership(response, &metadata)
+	}
+	output := &CreateRoleMembershipOutput{}
+	out.Result = output
+
+	err = awsRestjson1_deserializeOpHttpBindingsCreateRoleMembershipOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentCreateRoleMembershipOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorCreateRoleMembership(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalFailureException", errorCode):
+		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("PreconditionNotMetException", errorCode):
+		return awsRestjson1_deserializeErrorPreconditionNotMetException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ResourceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorResourceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpHttpBindingsCreateRoleMembershipOutput(v *CreateRoleMembershipOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	v.Status = int32(response.StatusCode)
+
+	return nil
+}
+func awsRestjson1_deserializeOpDocumentCreateRoleMembershipOutput(v **CreateRoleMembershipOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateRoleMembershipOutput
+	if *v == nil {
+		sv = &CreateRoleMembershipOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpCreateTemplate struct {
 }
 
@@ -7311,6 +7494,371 @@ func awsRestjson1_deserializeOpDocumentDeleteRefreshScheduleOutput(v **DeleteRef
 	return nil
 }
 
+type awsRestjson1_deserializeOpDeleteRoleCustomPermission struct {
+}
+
+func (*awsRestjson1_deserializeOpDeleteRoleCustomPermission) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDeleteRoleCustomPermission) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteRoleCustomPermission(response, &metadata)
+	}
+	output := &DeleteRoleCustomPermissionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentDeleteRoleCustomPermissionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDeleteRoleCustomPermission(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalFailureException", errorCode):
+		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("PreconditionNotMetException", errorCode):
+		return awsRestjson1_deserializeErrorPreconditionNotMetException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ResourceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorResourceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentDeleteRoleCustomPermissionOutput(v **DeleteRoleCustomPermissionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DeleteRoleCustomPermissionOutput
+	if *v == nil {
+		sv = &DeleteRoleCustomPermissionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected StatusCode to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Status = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpDeleteRoleMembership struct {
+}
+
+func (*awsRestjson1_deserializeOpDeleteRoleMembership) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDeleteRoleMembership) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteRoleMembership(response, &metadata)
+	}
+	output := &DeleteRoleMembershipOutput{}
+	out.Result = output
+
+	err = awsRestjson1_deserializeOpHttpBindingsDeleteRoleMembershipOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentDeleteRoleMembershipOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDeleteRoleMembership(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalFailureException", errorCode):
+		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("PreconditionNotMetException", errorCode):
+		return awsRestjson1_deserializeErrorPreconditionNotMetException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ResourceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorResourceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpHttpBindingsDeleteRoleMembershipOutput(v *DeleteRoleMembershipOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	v.Status = int32(response.StatusCode)
+
+	return nil
+}
+func awsRestjson1_deserializeOpDocumentDeleteRoleMembershipOutput(v **DeleteRoleMembershipOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DeleteRoleMembershipOutput
+	if *v == nil {
+		sv = &DeleteRoleMembershipOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpDeleteTemplate struct {
 }
 
@@ -10524,7 +11072,7 @@ func awsRestjson1_deserializeOpDocumentDescribeAssetBundleExportJobOutput(v **De
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveS3Uri to be of type string, got %T instead", value)
 				}
 				sv.DownloadUrl = ptr.String(jtv)
 			}
@@ -10552,6 +11100,24 @@ func awsRestjson1_deserializeOpDocumentDescribeAssetBundleExportJobOutput(v **De
 				sv.IncludeAllDependencies = jtv
 			}
 
+		case "IncludePermissions":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludePermissions = jtv
+			}
+
+		case "IncludeTags":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeTags = jtv
+			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10572,6 +11138,16 @@ func awsRestjson1_deserializeOpDocumentDescribeAssetBundleExportJobOutput(v **De
 
 		case "ResourceArns":
 			if err := awsRestjson1_deserializeDocumentAssetBundleResourceArns(&sv.ResourceArns, value); err != nil {
+				return err
+			}
+
+		case "ValidationStrategy":
+			if err := awsRestjson1_deserializeDocumentAssetBundleExportJobValidationStrategy(&sv.ValidationStrategy, value); err != nil {
+				return err
+			}
+
+		case "Warnings":
+			if err := awsRestjson1_deserializeDocumentAssetBundleExportJobWarningList(&sv.Warnings, value); err != nil {
 				return err
 			}
 
@@ -10810,6 +11386,21 @@ func awsRestjson1_deserializeOpDocumentDescribeAssetBundleImportJobOutput(v **De
 
 		case "OverrideParameters":
 			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobOverrideParameters(&sv.OverrideParameters, value); err != nil {
+				return err
+			}
+
+		case "OverridePermissions":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobOverridePermissions(&sv.OverridePermissions, value); err != nil {
+				return err
+			}
+
+		case "OverrideTags":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobOverrideTags(&sv.OverrideTags, value); err != nil {
+				return err
+			}
+
+		case "OverrideValidationStrategy":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobOverrideValidationStrategy(&sv.OverrideValidationStrategy, value); err != nil {
 				return err
 			}
 
@@ -14850,6 +15441,197 @@ func awsRestjson1_deserializeOpDocumentDescribeRefreshScheduleOutput(v **Describ
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.RequestId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpDescribeRoleCustomPermission struct {
+}
+
+func (*awsRestjson1_deserializeOpDescribeRoleCustomPermission) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDescribeRoleCustomPermission) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeRoleCustomPermission(response, &metadata)
+	}
+	output := &DescribeRoleCustomPermissionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentDescribeRoleCustomPermissionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDescribeRoleCustomPermission(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalFailureException", errorCode):
+		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("PreconditionNotMetException", errorCode):
+		return awsRestjson1_deserializeErrorPreconditionNotMetException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ResourceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorResourceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentDescribeRoleCustomPermissionOutput(v **DescribeRoleCustomPermissionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DescribeRoleCustomPermissionOutput
+	if *v == nil {
+		sv = &DescribeRoleCustomPermissionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CustomPermissionsName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleName to be of type string, got %T instead", value)
+				}
+				sv.CustomPermissionsName = ptr.String(jtv)
+			}
+
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected StatusCode to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Status = int32(i64)
 			}
 
 		default:
@@ -21302,6 +22084,209 @@ func awsRestjson1_deserializeOpDocumentListRefreshSchedulesOutput(v **ListRefres
 		case "RefreshSchedules":
 			if err := awsRestjson1_deserializeDocumentRefreshSchedules(&sv.RefreshSchedules, value); err != nil {
 				return err
+			}
+
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListRoleMemberships struct {
+}
+
+func (*awsRestjson1_deserializeOpListRoleMemberships) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListRoleMemberships) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListRoleMemberships(response, &metadata)
+	}
+	output := &ListRoleMembershipsOutput{}
+	out.Result = output
+
+	err = awsRestjson1_deserializeOpHttpBindingsListRoleMembershipsOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListRoleMembershipsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListRoleMemberships(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalFailureException", errorCode):
+		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
+
+	case strings.EqualFold("InvalidNextTokenException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidNextTokenException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("PreconditionNotMetException", errorCode):
+		return awsRestjson1_deserializeErrorPreconditionNotMetException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ResourceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorResourceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpHttpBindingsListRoleMembershipsOutput(v *ListRoleMembershipsOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	v.Status = int32(response.StatusCode)
+
+	return nil
+}
+func awsRestjson1_deserializeOpDocumentListRoleMembershipsOutput(v **ListRoleMembershipsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListRoleMembershipsOutput
+	if *v == nil {
+		sv = &ListRoleMembershipsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MembersList":
+			if err := awsRestjson1_deserializeDocumentGroupsList(&sv.MembersList, value); err != nil {
+				return err
+			}
+
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "RequestId":
@@ -30048,6 +31033,188 @@ func awsRestjson1_deserializeOpDocumentUpdateRefreshScheduleOutput(v **UpdateRef
 	return nil
 }
 
+type awsRestjson1_deserializeOpUpdateRoleCustomPermission struct {
+}
+
+func (*awsRestjson1_deserializeOpUpdateRoleCustomPermission) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpUpdateRoleCustomPermission) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateRoleCustomPermission(response, &metadata)
+	}
+	output := &UpdateRoleCustomPermissionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentUpdateRoleCustomPermissionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorUpdateRoleCustomPermission(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalFailureException", errorCode):
+		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("PreconditionNotMetException", errorCode):
+		return awsRestjson1_deserializeErrorPreconditionNotMetException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ResourceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorResourceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentUpdateRoleCustomPermissionOutput(v **UpdateRoleCustomPermissionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateRoleCustomPermissionOutput
+	if *v == nil {
+		sv = &UpdateRoleCustomPermissionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected StatusCode to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Status = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpUpdateTemplate struct {
 }
 
@@ -33811,11 +34978,6 @@ func awsRestjson1_deserializeDocumentAnalysis(v **types.Analysis, value interfac
 				sv.Name = ptr.String(jtv)
 			}
 
-		case "Options":
-			if err := awsRestjson1_deserializeDocumentAssetOptions(&sv.Options, value); err != nil {
-				return err
-			}
-
 		case "Sheets":
 			if err := awsRestjson1_deserializeDocumentSheetList(&sv.Sheets, value); err != nil {
 				return err
@@ -35409,6 +36571,24 @@ func awsRestjson1_deserializeDocumentAssetBundleExportJobSummary(v **types.Asset
 				sv.IncludeAllDependencies = jtv
 			}
 
+		case "IncludePermissions":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludePermissions = jtv
+			}
+
+		case "IncludeTags":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeTags = jtv
+			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -35576,6 +36756,46 @@ func awsRestjson1_deserializeDocumentAssetBundleExportJobThemePropertyToOverride
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAssetBundleExportJobValidationStrategy(v **types.AssetBundleExportJobValidationStrategy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleExportJobValidationStrategy
+	if *v == nil {
+		sv = &types.AssetBundleExportJobValidationStrategy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StrictModeForAllResources":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.StrictModeForAllResources = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAssetBundleExportJobVPCConnectionOverrideProperties(v **types.AssetBundleExportJobVPCConnectionOverrideProperties, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -35691,6 +36911,89 @@ func awsRestjson1_deserializeDocumentAssetBundleExportJobVPCConnectionPropertyTo
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAssetBundleExportJobWarning(v **types.AssetBundleExportJobWarning, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleExportJobWarning
+	if *v == nil {
+		sv = &types.AssetBundleExportJobWarning{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleExportJobWarningList(v *[]types.AssetBundleExportJobWarning, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleExportJobWarning
+	if *v == nil {
+		cv = []types.AssetBundleExportJobWarning{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleExportJobWarning
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleExportJobWarning(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAssetBundleImportJobAnalysisOverrideParameters(v **types.AssetBundleImportJobAnalysisOverrideParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -35764,6 +37067,156 @@ func awsRestjson1_deserializeDocumentAssetBundleImportJobAnalysisOverrideParamet
 		var col types.AssetBundleImportJobAnalysisOverrideParameters
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobAnalysisOverrideParameters(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobAnalysisOverridePermissions(v **types.AssetBundleImportJobAnalysisOverridePermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobAnalysisOverridePermissions
+	if *v == nil {
+		sv = &types.AssetBundleImportJobAnalysisOverridePermissions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AnalysisIds":
+			if err := awsRestjson1_deserializeDocumentAssetBundleRestrictiveResourceIdList(&sv.AnalysisIds, value); err != nil {
+				return err
+			}
+
+		case "Permissions":
+			if err := awsRestjson1_deserializeDocumentAssetBundleResourcePermissions(&sv.Permissions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobAnalysisOverridePermissionsList(v *[]types.AssetBundleImportJobAnalysisOverridePermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleImportJobAnalysisOverridePermissions
+	if *v == nil {
+		cv = []types.AssetBundleImportJobAnalysisOverridePermissions{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleImportJobAnalysisOverridePermissions
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobAnalysisOverridePermissions(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobAnalysisOverrideTags(v **types.AssetBundleImportJobAnalysisOverrideTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobAnalysisOverrideTags
+	if *v == nil {
+		sv = &types.AssetBundleImportJobAnalysisOverrideTags{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AnalysisIds":
+			if err := awsRestjson1_deserializeDocumentAssetBundleRestrictiveResourceIdList(&sv.AnalysisIds, value); err != nil {
+				return err
+			}
+
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobAnalysisOverrideTagsList(v *[]types.AssetBundleImportJobAnalysisOverrideTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleImportJobAnalysisOverrideTags
+	if *v == nil {
+		cv = []types.AssetBundleImportJobAnalysisOverrideTags{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleImportJobAnalysisOverrideTags
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobAnalysisOverrideTags(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -35857,6 +37310,161 @@ func awsRestjson1_deserializeDocumentAssetBundleImportJobDashboardOverrideParame
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAssetBundleImportJobDashboardOverridePermissions(v **types.AssetBundleImportJobDashboardOverridePermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobDashboardOverridePermissions
+	if *v == nil {
+		sv = &types.AssetBundleImportJobDashboardOverridePermissions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DashboardIds":
+			if err := awsRestjson1_deserializeDocumentAssetBundleRestrictiveResourceIdList(&sv.DashboardIds, value); err != nil {
+				return err
+			}
+
+		case "LinkSharingConfiguration":
+			if err := awsRestjson1_deserializeDocumentAssetBundleResourceLinkSharingConfiguration(&sv.LinkSharingConfiguration, value); err != nil {
+				return err
+			}
+
+		case "Permissions":
+			if err := awsRestjson1_deserializeDocumentAssetBundleResourcePermissions(&sv.Permissions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobDashboardOverridePermissionsList(v *[]types.AssetBundleImportJobDashboardOverridePermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleImportJobDashboardOverridePermissions
+	if *v == nil {
+		cv = []types.AssetBundleImportJobDashboardOverridePermissions{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleImportJobDashboardOverridePermissions
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobDashboardOverridePermissions(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobDashboardOverrideTags(v **types.AssetBundleImportJobDashboardOverrideTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobDashboardOverrideTags
+	if *v == nil {
+		sv = &types.AssetBundleImportJobDashboardOverrideTags{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DashboardIds":
+			if err := awsRestjson1_deserializeDocumentAssetBundleRestrictiveResourceIdList(&sv.DashboardIds, value); err != nil {
+				return err
+			}
+
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobDashboardOverrideTagsList(v *[]types.AssetBundleImportJobDashboardOverrideTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleImportJobDashboardOverrideTags
+	if *v == nil {
+		cv = []types.AssetBundleImportJobDashboardOverrideTags{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleImportJobDashboardOverrideTags
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobDashboardOverrideTags(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAssetBundleImportJobDataSetOverrideParameters(v **types.AssetBundleImportJobDataSetOverrideParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -35930,6 +37538,156 @@ func awsRestjson1_deserializeDocumentAssetBundleImportJobDataSetOverrideParamete
 		var col types.AssetBundleImportJobDataSetOverrideParameters
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobDataSetOverrideParameters(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobDataSetOverridePermissions(v **types.AssetBundleImportJobDataSetOverridePermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobDataSetOverridePermissions
+	if *v == nil {
+		sv = &types.AssetBundleImportJobDataSetOverridePermissions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataSetIds":
+			if err := awsRestjson1_deserializeDocumentAssetBundleRestrictiveResourceIdList(&sv.DataSetIds, value); err != nil {
+				return err
+			}
+
+		case "Permissions":
+			if err := awsRestjson1_deserializeDocumentAssetBundleResourcePermissions(&sv.Permissions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobDataSetOverridePermissionsList(v *[]types.AssetBundleImportJobDataSetOverridePermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleImportJobDataSetOverridePermissions
+	if *v == nil {
+		cv = []types.AssetBundleImportJobDataSetOverridePermissions{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleImportJobDataSetOverridePermissions
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobDataSetOverridePermissions(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobDataSetOverrideTags(v **types.AssetBundleImportJobDataSetOverrideTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobDataSetOverrideTags
+	if *v == nil {
+		sv = &types.AssetBundleImportJobDataSetOverrideTags{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataSetIds":
+			if err := awsRestjson1_deserializeDocumentAssetBundleRestrictiveResourceIdList(&sv.DataSetIds, value); err != nil {
+				return err
+			}
+
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobDataSetOverrideTagsList(v *[]types.AssetBundleImportJobDataSetOverrideTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleImportJobDataSetOverrideTags
+	if *v == nil {
+		cv = []types.AssetBundleImportJobDataSetOverrideTags{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleImportJobDataSetOverrideTags
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobDataSetOverrideTags(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -36137,6 +37895,156 @@ func awsRestjson1_deserializeDocumentAssetBundleImportJobDataSourceOverrideParam
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAssetBundleImportJobDataSourceOverridePermissions(v **types.AssetBundleImportJobDataSourceOverridePermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobDataSourceOverridePermissions
+	if *v == nil {
+		sv = &types.AssetBundleImportJobDataSourceOverridePermissions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataSourceIds":
+			if err := awsRestjson1_deserializeDocumentAssetBundleRestrictiveResourceIdList(&sv.DataSourceIds, value); err != nil {
+				return err
+			}
+
+		case "Permissions":
+			if err := awsRestjson1_deserializeDocumentAssetBundleResourcePermissions(&sv.Permissions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobDataSourceOverridePermissionsList(v *[]types.AssetBundleImportJobDataSourceOverridePermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleImportJobDataSourceOverridePermissions
+	if *v == nil {
+		cv = []types.AssetBundleImportJobDataSourceOverridePermissions{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleImportJobDataSourceOverridePermissions
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobDataSourceOverridePermissions(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobDataSourceOverrideTags(v **types.AssetBundleImportJobDataSourceOverrideTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobDataSourceOverrideTags
+	if *v == nil {
+		sv = &types.AssetBundleImportJobDataSourceOverrideTags{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataSourceIds":
+			if err := awsRestjson1_deserializeDocumentAssetBundleRestrictiveResourceIdList(&sv.DataSourceIds, value); err != nil {
+				return err
+			}
+
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobDataSourceOverrideTagsList(v *[]types.AssetBundleImportJobDataSourceOverrideTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleImportJobDataSourceOverrideTags
+	if *v == nil {
+		cv = []types.AssetBundleImportJobDataSourceOverrideTags{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleImportJobDataSourceOverrideTags
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobDataSourceOverrideTags(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAssetBundleImportJobError(v **types.AssetBundleImportJobError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -36289,6 +38197,163 @@ func awsRestjson1_deserializeDocumentAssetBundleImportJobOverrideParameters(v **
 		case "VPCConnections":
 			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobVPCConnectionOverrideParametersList(&sv.VPCConnections, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobOverridePermissions(v **types.AssetBundleImportJobOverridePermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobOverridePermissions
+	if *v == nil {
+		sv = &types.AssetBundleImportJobOverridePermissions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Analyses":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobAnalysisOverridePermissionsList(&sv.Analyses, value); err != nil {
+				return err
+			}
+
+		case "Dashboards":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobDashboardOverridePermissionsList(&sv.Dashboards, value); err != nil {
+				return err
+			}
+
+		case "DataSets":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobDataSetOverridePermissionsList(&sv.DataSets, value); err != nil {
+				return err
+			}
+
+		case "DataSources":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobDataSourceOverridePermissionsList(&sv.DataSources, value); err != nil {
+				return err
+			}
+
+		case "Themes":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobThemeOverridePermissionsList(&sv.Themes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobOverrideTags(v **types.AssetBundleImportJobOverrideTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobOverrideTags
+	if *v == nil {
+		sv = &types.AssetBundleImportJobOverrideTags{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Analyses":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobAnalysisOverrideTagsList(&sv.Analyses, value); err != nil {
+				return err
+			}
+
+		case "Dashboards":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobDashboardOverrideTagsList(&sv.Dashboards, value); err != nil {
+				return err
+			}
+
+		case "DataSets":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobDataSetOverrideTagsList(&sv.DataSets, value); err != nil {
+				return err
+			}
+
+		case "DataSources":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobDataSourceOverrideTagsList(&sv.DataSources, value); err != nil {
+				return err
+			}
+
+		case "Themes":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobThemeOverrideTagsList(&sv.Themes, value); err != nil {
+				return err
+			}
+
+		case "VPCConnections":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobVPCConnectionOverrideTagsList(&sv.VPCConnections, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobOverrideValidationStrategy(v **types.AssetBundleImportJobOverrideValidationStrategy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobOverrideValidationStrategy
+	if *v == nil {
+		sv = &types.AssetBundleImportJobOverrideValidationStrategy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StrictModeForAllResources":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.StrictModeForAllResources = jtv
 			}
 
 		default:
@@ -36639,6 +38704,156 @@ func awsRestjson1_deserializeDocumentAssetBundleImportJobThemeOverrideParameters
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAssetBundleImportJobThemeOverridePermissions(v **types.AssetBundleImportJobThemeOverridePermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobThemeOverridePermissions
+	if *v == nil {
+		sv = &types.AssetBundleImportJobThemeOverridePermissions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Permissions":
+			if err := awsRestjson1_deserializeDocumentAssetBundleResourcePermissions(&sv.Permissions, value); err != nil {
+				return err
+			}
+
+		case "ThemeIds":
+			if err := awsRestjson1_deserializeDocumentAssetBundleRestrictiveResourceIdList(&sv.ThemeIds, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobThemeOverridePermissionsList(v *[]types.AssetBundleImportJobThemeOverridePermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleImportJobThemeOverridePermissions
+	if *v == nil {
+		cv = []types.AssetBundleImportJobThemeOverridePermissions{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleImportJobThemeOverridePermissions
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobThemeOverridePermissions(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobThemeOverrideTags(v **types.AssetBundleImportJobThemeOverrideTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobThemeOverrideTags
+	if *v == nil {
+		sv = &types.AssetBundleImportJobThemeOverrideTags{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "ThemeIds":
+			if err := awsRestjson1_deserializeDocumentAssetBundleRestrictiveResourceIdList(&sv.ThemeIds, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobThemeOverrideTagsList(v *[]types.AssetBundleImportJobThemeOverrideTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleImportJobThemeOverrideTags
+	if *v == nil {
+		cv = []types.AssetBundleImportJobThemeOverrideTags{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleImportJobThemeOverrideTags
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobThemeOverrideTags(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAssetBundleImportJobVPCConnectionOverrideParameters(v **types.AssetBundleImportJobVPCConnectionOverrideParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -36746,6 +38961,81 @@ func awsRestjson1_deserializeDocumentAssetBundleImportJobVPCConnectionOverridePa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAssetBundleImportJobVPCConnectionOverrideTags(v **types.AssetBundleImportJobVPCConnectionOverrideTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobVPCConnectionOverrideTags
+	if *v == nil {
+		sv = &types.AssetBundleImportJobVPCConnectionOverrideTags{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "VPCConnectionIds":
+			if err := awsRestjson1_deserializeDocumentAssetBundleRestrictiveResourceIdList(&sv.VPCConnectionIds, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobVPCConnectionOverrideTagsList(v *[]types.AssetBundleImportJobVPCConnectionOverrideTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleImportJobVPCConnectionOverrideTags
+	if *v == nil {
+		cv = []types.AssetBundleImportJobVPCConnectionOverrideTags{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleImportJobVPCConnectionOverrideTags
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobVPCConnectionOverrideTags(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAssetBundleImportSourceDescription(v **types.AssetBundleImportSourceDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -36772,7 +39062,7 @@ func awsRestjson1_deserializeDocumentAssetBundleImportSourceDescription(v **type
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveS3Uri to be of type string, got %T instead", value)
 				}
 				sv.Body = ptr.String(jtv)
 			}
@@ -36792,6 +39082,42 @@ func awsRestjson1_deserializeDocumentAssetBundleImportSourceDescription(v **type
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundlePrincipalList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Principal to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -36821,6 +39147,119 @@ func awsRestjson1_deserializeDocumentAssetBundleResourceArns(v *[]string, value 
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleResourceLinkSharingConfiguration(v **types.AssetBundleResourceLinkSharingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleResourceLinkSharingConfiguration
+	if *v == nil {
+		sv = &types.AssetBundleResourceLinkSharingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Permissions":
+			if err := awsRestjson1_deserializeDocumentAssetBundleResourcePermissions(&sv.Permissions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleResourcePermissions(v **types.AssetBundleResourcePermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleResourcePermissions
+	if *v == nil {
+		sv = &types.AssetBundleResourcePermissions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Actions":
+			if err := awsRestjson1_deserializeDocumentActionList(&sv.Actions, value); err != nil {
+				return err
+			}
+
+		case "Principals":
+			if err := awsRestjson1_deserializeDocumentAssetBundlePrincipalList(&sv.Principals, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleRestrictiveResourceIdList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AssetBundleRestrictiveResourceId to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
@@ -38167,6 +40606,55 @@ func awsRestjson1_deserializeDocumentBarChartVisual(v **types.BarChartVisual, va
 					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
 				}
 				sv.VisualId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBigQueryParameters(v **types.BigQueryParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BigQueryParameters
+	if *v == nil {
+		sv = &types.BigQueryParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataSetRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSetRegion to be of type string, got %T instead", value)
+				}
+				sv.DataSetRegion = ptr.String(jtv)
+			}
+
+		case "ProjectId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProjectId to be of type string, got %T instead", value)
+				}
+				sv.ProjectId = ptr.String(jtv)
 			}
 
 		default:
@@ -43480,11 +45968,6 @@ func awsRestjson1_deserializeDocumentDashboardVersion(v **types.DashboardVersion
 				return err
 			}
 
-		case "Options":
-			if err := awsRestjson1_deserializeDocumentAssetOptions(&sv.Options, value); err != nil {
-				return err
-			}
-
 		case "Sheets":
 			if err := awsRestjson1_deserializeDocumentSheetList(&sv.Sheets, value); err != nil {
 				return err
@@ -45957,6 +48440,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.DataSourceParametersMemberAwsIotAnalyticsParameters{Value: mv}
+			break loop
+
+		case "BigQueryParameters":
+			var mv types.BigQueryParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentBigQueryParameters(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberBigQueryParameters{Value: mv}
 			break loop
 
 		case "DatabricksParameters":
@@ -54668,6 +57161,42 @@ func awsRestjson1_deserializeDocumentGroupMemberList(v *[]types.GroupMember, val
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGroupsList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}
@@ -74805,11 +77334,6 @@ func awsRestjson1_deserializeDocumentTemplateVersion(v **types.TemplateVersion, 
 
 		case "Errors":
 			if err := awsRestjson1_deserializeDocumentTemplateErrorList(&sv.Errors, value); err != nil {
-				return err
-			}
-
-		case "Options":
-			if err := awsRestjson1_deserializeDocumentAssetOptions(&sv.Options, value); err != nil {
 				return err
 			}
 

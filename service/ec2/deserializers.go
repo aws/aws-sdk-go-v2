@@ -67591,6 +67591,19 @@ func awsEc2query_deserializeDocumentDeviceOptions(v **types.DeviceOptions, decod
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("publicSigningKeyUrl", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.PublicSigningKeyUrl = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("tenantId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

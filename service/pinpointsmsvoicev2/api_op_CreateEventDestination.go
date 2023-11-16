@@ -50,7 +50,8 @@ type CreateEventDestinationInput struct {
 	EventDestinationName *string
 
 	// An array of event types that determine which events to log. If "ALL" is used,
-	// then Amazon Pinpoint logs every event type.
+	// then Amazon Pinpoint logs every event type. The TEXT_SENT event type is not
+	// supported.
 	//
 	// This member is required.
 	MatchingEventTypes []types.EventType

@@ -217,6 +217,7 @@ const (
 	ImageStatusFailed       ImageStatus = "FAILED"
 	ImageStatusDeprecated   ImageStatus = "DEPRECATED"
 	ImageStatusDeleted      ImageStatus = "DELETED"
+	ImageStatusDisabled     ImageStatus = "DISABLED"
 )
 
 // Values returns all known values for ImageStatus. Note that this can be expanded
@@ -235,6 +236,7 @@ func (ImageStatus) Values() []ImageStatus {
 		"FAILED",
 		"DEPRECATED",
 		"DELETED",
+		"DISABLED",
 	}
 }
 
@@ -253,6 +255,174 @@ func (ImageType) Values() []ImageType {
 	return []ImageType{
 		"AMI",
 		"DOCKER",
+	}
+}
+
+type LifecycleExecutionResourceActionName string
+
+// Enum values for LifecycleExecutionResourceActionName
+const (
+	LifecycleExecutionResourceActionNameAvailable LifecycleExecutionResourceActionName = "AVAILABLE"
+	LifecycleExecutionResourceActionNameDelete    LifecycleExecutionResourceActionName = "DELETE"
+	LifecycleExecutionResourceActionNameDeprecate LifecycleExecutionResourceActionName = "DEPRECATE"
+	LifecycleExecutionResourceActionNameDisable   LifecycleExecutionResourceActionName = "DISABLE"
+)
+
+// Values returns all known values for LifecycleExecutionResourceActionName. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LifecycleExecutionResourceActionName) Values() []LifecycleExecutionResourceActionName {
+	return []LifecycleExecutionResourceActionName{
+		"AVAILABLE",
+		"DELETE",
+		"DEPRECATE",
+		"DISABLE",
+	}
+}
+
+type LifecycleExecutionResourceStatus string
+
+// Enum values for LifecycleExecutionResourceStatus
+const (
+	LifecycleExecutionResourceStatusFailed     LifecycleExecutionResourceStatus = "FAILED"
+	LifecycleExecutionResourceStatusInProgress LifecycleExecutionResourceStatus = "IN_PROGRESS"
+	LifecycleExecutionResourceStatusSkipped    LifecycleExecutionResourceStatus = "SKIPPED"
+	LifecycleExecutionResourceStatusSuccess    LifecycleExecutionResourceStatus = "SUCCESS"
+)
+
+// Values returns all known values for LifecycleExecutionResourceStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LifecycleExecutionResourceStatus) Values() []LifecycleExecutionResourceStatus {
+	return []LifecycleExecutionResourceStatus{
+		"FAILED",
+		"IN_PROGRESS",
+		"SKIPPED",
+		"SUCCESS",
+	}
+}
+
+type LifecycleExecutionStatus string
+
+// Enum values for LifecycleExecutionStatus
+const (
+	LifecycleExecutionStatusInProgress LifecycleExecutionStatus = "IN_PROGRESS"
+	LifecycleExecutionStatusCancelled  LifecycleExecutionStatus = "CANCELLED"
+	LifecycleExecutionStatusCancelling LifecycleExecutionStatus = "CANCELLING"
+	LifecycleExecutionStatusFailed     LifecycleExecutionStatus = "FAILED"
+	LifecycleExecutionStatusSuccess    LifecycleExecutionStatus = "SUCCESS"
+)
+
+// Values returns all known values for LifecycleExecutionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LifecycleExecutionStatus) Values() []LifecycleExecutionStatus {
+	return []LifecycleExecutionStatus{
+		"IN_PROGRESS",
+		"CANCELLED",
+		"CANCELLING",
+		"FAILED",
+		"SUCCESS",
+	}
+}
+
+type LifecyclePolicyDetailActionType string
+
+// Enum values for LifecyclePolicyDetailActionType
+const (
+	LifecyclePolicyDetailActionTypeDelete    LifecyclePolicyDetailActionType = "DELETE"
+	LifecyclePolicyDetailActionTypeDeprecate LifecyclePolicyDetailActionType = "DEPRECATE"
+	LifecyclePolicyDetailActionTypeDisable   LifecyclePolicyDetailActionType = "DISABLE"
+)
+
+// Values returns all known values for LifecyclePolicyDetailActionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LifecyclePolicyDetailActionType) Values() []LifecyclePolicyDetailActionType {
+	return []LifecyclePolicyDetailActionType{
+		"DELETE",
+		"DEPRECATE",
+		"DISABLE",
+	}
+}
+
+type LifecyclePolicyDetailFilterType string
+
+// Enum values for LifecyclePolicyDetailFilterType
+const (
+	LifecyclePolicyDetailFilterTypeAge   LifecyclePolicyDetailFilterType = "AGE"
+	LifecyclePolicyDetailFilterTypeCount LifecyclePolicyDetailFilterType = "COUNT"
+)
+
+// Values returns all known values for LifecyclePolicyDetailFilterType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LifecyclePolicyDetailFilterType) Values() []LifecyclePolicyDetailFilterType {
+	return []LifecyclePolicyDetailFilterType{
+		"AGE",
+		"COUNT",
+	}
+}
+
+type LifecyclePolicyResourceType string
+
+// Enum values for LifecyclePolicyResourceType
+const (
+	LifecyclePolicyResourceTypeAmiImage       LifecyclePolicyResourceType = "AMI_IMAGE"
+	LifecyclePolicyResourceTypeContainerImage LifecyclePolicyResourceType = "CONTAINER_IMAGE"
+)
+
+// Values returns all known values for LifecyclePolicyResourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LifecyclePolicyResourceType) Values() []LifecyclePolicyResourceType {
+	return []LifecyclePolicyResourceType{
+		"AMI_IMAGE",
+		"CONTAINER_IMAGE",
+	}
+}
+
+type LifecyclePolicyStatus string
+
+// Enum values for LifecyclePolicyStatus
+const (
+	LifecyclePolicyStatusDisabled LifecyclePolicyStatus = "DISABLED"
+	LifecyclePolicyStatusEnabled  LifecyclePolicyStatus = "ENABLED"
+)
+
+// Values returns all known values for LifecyclePolicyStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LifecyclePolicyStatus) Values() []LifecyclePolicyStatus {
+	return []LifecyclePolicyStatus{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
+type LifecyclePolicyTimeUnit string
+
+// Enum values for LifecyclePolicyTimeUnit
+const (
+	LifecyclePolicyTimeUnitDays   LifecyclePolicyTimeUnit = "DAYS"
+	LifecyclePolicyTimeUnitWeeks  LifecyclePolicyTimeUnit = "WEEKS"
+	LifecyclePolicyTimeUnitMonths LifecyclePolicyTimeUnit = "MONTHS"
+	LifecyclePolicyTimeUnitYears  LifecyclePolicyTimeUnit = "YEARS"
+)
+
+// Values returns all known values for LifecyclePolicyTimeUnit. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LifecyclePolicyTimeUnit) Values() []LifecyclePolicyTimeUnit {
+	return []LifecyclePolicyTimeUnit{
+		"DAYS",
+		"WEEKS",
+		"MONTHS",
+		"YEARS",
 	}
 }
 
@@ -330,6 +500,28 @@ func (Platform) Values() []Platform {
 	return []Platform{
 		"Windows",
 		"Linux",
+	}
+}
+
+type ResourceStatus string
+
+// Enum values for ResourceStatus
+const (
+	ResourceStatusAvailable  ResourceStatus = "AVAILABLE"
+	ResourceStatusDeleted    ResourceStatus = "DELETED"
+	ResourceStatusDeprecated ResourceStatus = "DEPRECATED"
+	ResourceStatusDisabled   ResourceStatus = "DISABLED"
+)
+
+// Values returns all known values for ResourceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceStatus) Values() []ResourceStatus {
+	return []ResourceStatus{
+		"AVAILABLE",
+		"DELETED",
+		"DEPRECATED",
+		"DISABLED",
 	}
 }
 

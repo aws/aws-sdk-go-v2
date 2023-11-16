@@ -1064,8 +1064,8 @@ type DefaultDetection struct {
 // finding.
 type DetectedDataDetails struct {
 
-	// An occurrence of the specified type of sensitive data. Each occurrence can
-	// contain 1-128 characters.
+	// An occurrence of the specified type of sensitive data. Each occurrence contains
+	// 1-128 characters.
 	//
 	// This member is required.
 	Value *string
@@ -2014,10 +2014,10 @@ type Record struct {
 	// path to the field or array that contains the data. If the data is a value in an
 	// array, the path also indicates which value contains the data. If Amazon Macie
 	// detects sensitive data in the name of any element in the path, Macie omits this
-	// field. If the name of an element exceeds 20 characters, Macie truncates the name
-	// by removing characters from the beginning of the name. If the resulting full
-	// path exceeds 250 characters, Macie also truncates the path, starting with the
-	// first element in the path, until the path contains 250 or fewer characters.
+	// field. If the name of an element exceeds 240 characters, Macie truncates the
+	// name by removing characters from the beginning of the name. If the resulting
+	// full path exceeds 250 characters, Macie also truncates the path, starting with
+	// the first element in the path, until the path contains 250 or fewer characters.
 	JsonPath *string
 
 	// For an Avro object container or Parquet file, the record index, starting from
@@ -2123,7 +2123,7 @@ type ResourceStatistics struct {
 	TotalItemsSensitive *int64
 
 	// The total number of objects that Amazon Macie wasn't able to analyze in the
-	// bucket due to an object-level issue or error. For example, the object is a
+	// bucket due to an object-level issue or error. For example, an object is a
 	// malformed file. This value includes objects that Macie wasn't able to analyze
 	// for reasons reported by other statistics in the ResourceStatistics object.
 	TotalItemsSkipped *int64
@@ -2146,12 +2146,41 @@ type ResourceStatistics struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the configuration settings for retrieving occurrences of sensitive
-// data reported by findings, and the status of the configuration for an Amazon
-// Macie account. When you enable the configuration for the first time, your
-// request must specify an Key Management Service (KMS) key. Otherwise, an error
-// occurs. Macie uses the specified key to encrypt the sensitive data that you
-// retrieve.
+// Provides information about the access method and settings that are used to
+// retrieve occurrences of sensitive data reported by findings.
+type RetrievalConfiguration struct {
+
+	// The access method that's used when retrieving sensitive data from affected S3
+	// objects. Valid values are: ASSUME_ROLE, assume an IAM role that is in the
+	// affected Amazon Web Services account and delegates access to Amazon Macie
+	// (roleName); and, CALLER_CREDENTIALS, use the credentials of the IAM user who
+	// requests the sensitive data.
+	//
+	// This member is required.
+	RetrievalMode RetrievalMode
+
+	// The external ID to specify in the trust policy for the IAM role to assume when
+	// retrieving sensitive data from affected S3 objects (roleName). The trust policy
+	// must include an sts:ExternalId condition that requires this ID. This ID is a
+	// unique alphanumeric string that Amazon Macie generates automatically after you
+	// configure it to assume a role. This value is null if the value for retrievalMode
+	// is CALLER_CREDENTIALS.
+	ExternalId *string
+
+	// The name of the IAM role that is in the affected Amazon Web Services account
+	// and Amazon Macie is allowed to assume when retrieving sensitive data from
+	// affected S3 objects for the account. This value is null if the value for
+	// retrievalMode is CALLER_CREDENTIALS.
+	RoleName *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the status of the Amazon Macie configuration for retrieving
+// occurrences of sensitive data reported by findings, and the Key Management
+// Service (KMS) key to use to encrypt sensitive data that's retrieved. When you
+// enable the configuration for the first time, your request must specify an KMS
+// key. Otherwise, an error occurs.
 type RevealConfiguration struct {
 
 	// The status of the configuration for the Amazon Macie account. In a request,
@@ -2165,11 +2194,11 @@ type RevealConfiguration struct {
 
 	// The Amazon Resource Name (ARN), ID, or alias of the KMS key to use to encrypt
 	// sensitive data that's retrieved. The key must be an existing, customer managed,
-	// symmetric encryption key that's in the same Amazon Web Services Region as the
-	// Amazon Macie account. If this value specifies an alias, it must include the
-	// following prefix: alias/. If this value specifies a key that's owned by another
-	// Amazon Web Services account, it must specify the ARN of the key or the ARN of
-	// the key's alias.
+	// symmetric encryption key that's enabled in the same Amazon Web Services Region
+	// as the Amazon Macie account. If this value specifies an alias, it must include
+	// the following prefix: alias/. If this value specifies a key that's owned by
+	// another Amazon Web Services account, it must specify the ARN of the key or the
+	// ARN of the key's alias.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -2344,7 +2373,8 @@ type S3Destination struct {
 
 	// The Amazon Resource Name (ARN) of the customer managed KMS key to use for
 	// encryption of the results. This must be the ARN of an existing, symmetric
-	// encryption KMS key that's in the same Amazon Web Services Region as the bucket.
+	// encryption KMS key that's enabled in the same Amazon Web Services Region as the
+	// bucket.
 	//
 	// This member is required.
 	KmsKeyArn *string
@@ -2884,8 +2914,10 @@ type SimpleScopeTerm struct {
 	// (key) are:
 	//   - OBJECT_EXTENSION - EQ (equals) or NE (not equals)
 	//   - OBJECT_KEY - STARTS_WITH
-	//   - OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS
-	//   - OBJECT_SIZE - Any operator except CONTAINS
+	//   - OBJECT_LAST_MODIFIED_DATE - EQ (equals), GT (greater than), GTE (greater
+	//   than or equals), LT (less than), LTE (less than or equals), or NE (not equals)
+	//   - OBJECT_SIZE - EQ (equals), GT (greater than), GTE (greater than or equals),
+	//   LT (less than), LTE (less than or equals), or NE (not equals)
 	Comparator JobComparator
 
 	// The object property to use in the condition.
@@ -2902,7 +2934,7 @@ type SimpleScopeTerm struct {
 	//   condition to objects whose keys (names) begin with the specified value.
 	//   - OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601
 	//   format) when an object was created or last changed, whichever is latest. For
-	//   example: 2020-09-28T14:31:13Z
+	//   example: 2023-09-24T14:31:13Z
 	//   - OBJECT_SIZE - An integer that represents the storage size (in bytes) of an
 	//   object.
 	// Macie doesn't support use of wildcard characters in these values. Also, string
@@ -3041,6 +3073,38 @@ type UnprocessedAccount struct {
 
 	// The reason why the request hasn't been processed.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the access method and settings to use when retrieving occurrences of
+// sensitive data reported by findings. If your request specifies an Identity and
+// Access Management (IAM) role to assume when retrieving the sensitive data,
+// Amazon Macie verifies that the role exists and the attached policies are
+// configured correctly. If there's an issue, Macie returns an error. For
+// information about addressing the issue, see Retrieving sensitive data samples
+// with findings (https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd.html)
+// in the Amazon Macie User Guide.
+type UpdateRetrievalConfiguration struct {
+
+	// The access method to use when retrieving sensitive data from affected S3
+	// objects. Valid values are: ASSUME_ROLE, assume an IAM role that is in the
+	// affected Amazon Web Services account and delegates access to Amazon Macie; and,
+	// CALLER_CREDENTIALS, use the credentials of the IAM user who requests the
+	// sensitive data. If you specify ASSUME_ROLE, also specify the name of an existing
+	// IAM role for Macie to assume (roleName). If you change this value from
+	// ASSUME_ROLE to CALLER_CREDENTIALS for an existing configuration, Macie
+	// permanently deletes the external ID and role name currently specified for the
+	// configuration. These settings can't be recovered after they're deleted.
+	//
+	// This member is required.
+	RetrievalMode RetrievalMode
+
+	// The name of the IAM role that is in the affected Amazon Web Services account
+	// and Amazon Macie is allowed to assume when retrieving sensitive data from
+	// affected S3 objects for the account. The trust and permissions policies for the
+	// role must meet all requirements for Macie to assume the role.
+	RoleName *string
 
 	noSmithyDocumentSerde
 }

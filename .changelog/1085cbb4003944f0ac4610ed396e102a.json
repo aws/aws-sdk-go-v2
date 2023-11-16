@@ -1,0 +1,8 @@
+{
+    "id": "1085cbb4-0039-44f0-ac46-10ed396e102a",
+    "type": "feature",
+    "description": "This release introduces the ability to filter automation execution steps which have parent steps. In addition, runbook variable information is returned by GetAutomationExecution and parent step information is returned by the DescribeAutomationStepExecutions API.",
+    "modules": [
+        "service/ssm"
+    ]
+}

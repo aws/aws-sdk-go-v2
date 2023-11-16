@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Creates a new opt-out list. If the opt-out list name already exists, an Error
+// Creates a new opt-out list. If the opt-out list name already exists, an error
 // is returned. An opt-out list is a list of phone numbers that are opted out,
 // meaning you can't send SMS or voice messages to them. If end user replies with
 // the keyword "STOP," an entry for the phone number is added to the opt-out list.

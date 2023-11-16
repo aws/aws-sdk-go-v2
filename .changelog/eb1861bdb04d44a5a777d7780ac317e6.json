@@ -1,0 +1,8 @@
+{
+    "id": "eb1861bd-b04d-44a5-a777-d7780ac317e6",
+    "type": "feature",
+    "description": "This release includes updates to the Dev Environment APIs to include an optional vpcConnectionName parameter that supports using Dev Environments with Amazon VPC.",
+    "modules": [
+        "service/codecatalyst"
+    ]
+}

@@ -37,6 +37,7 @@ type ListTimelineEventsInput struct {
 
 	// Filters the timeline events based on the provided conditional values. You can
 	// filter timeline events with the following keys:
+	//   - eventReference
 	//   - eventTime
 	//   - eventType
 	// Note the following when deciding how to use Filters:
@@ -50,7 +51,8 @@ type ListTimelineEventsInput struct {
 	// The maximum number of results per page.
 	MaxResults *int32
 
-	// The pagination token to continue to the next page of results.
+	// The pagination token for the next set of items to return. (You received this
+	// token from a previous call.)
 	NextToken *string
 
 	// Sort timeline events by the specified key value pair.
@@ -69,7 +71,8 @@ type ListTimelineEventsOutput struct {
 	// This member is required.
 	EventSummaries []types.EventSummary
 
-	// The pagination token to continue to the next page of results.
+	// The pagination token to use when requesting the next set of items. If there are
+	// no additional items to return, the string is null.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

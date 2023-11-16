@@ -90,6 +90,12 @@ type DescribeAssetBundleExportJobOutput struct {
 	// The include dependencies flag.
 	IncludeAllDependencies bool
 
+	// The include permissions flag.
+	IncludePermissions bool
+
+	// The include tags flag.
+	IncludeTags bool
+
 	// Indicates the status of a job through its queuing and execution. Poll this
 	// DescribeAssetBundleExportApi until JobStatus is either SUCCESSFUL or FAILED .
 	JobStatus types.AssetBundleExportJobStatus
@@ -102,6 +108,15 @@ type DescribeAssetBundleExportJobOutput struct {
 
 	// The HTTP status of the response.
 	Status int32
+
+	// The validation strategy that is used to export the analysis or dashboard.
+	ValidationStrategy *types.AssetBundleExportJobValidationStrategy
+
+	// An array of warning records that describe the analysis or dashboard that is
+	// exported. This array includes UI errors that can be skipped during the
+	// validation process. This property only appears if StrictModeForAllResources in
+	// ValidationStrategy is set to FALSE .
+	Warnings []types.AssetBundleExportJobWarning
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

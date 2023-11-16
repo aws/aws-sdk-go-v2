@@ -153,6 +153,28 @@ func ExampleEventReference_outputUsage() {
 var _ *string
 var _ *string
 
+func ExampleFindingDetails_outputUsage() {
+	var union types.FindingDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FindingDetailsMemberCloudFormationStackUpdate:
+		_ = v.Value // Value is types.CloudFormationStackUpdate
+
+	case *types.FindingDetailsMemberCodeDeployDeployment:
+		_ = v.Value // Value is types.CodeDeployDeployment
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CodeDeployDeployment
+var _ *types.CloudFormationStackUpdate
+
 func ExampleIntegration_outputUsage() {
 	var union types.Integration
 	// type switches can be used to check the union value

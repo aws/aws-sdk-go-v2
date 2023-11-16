@@ -1,0 +1,8 @@
+{
+    "id": "4a269dfa-2ac3-49b5-9b8f-6e09b5bb7d6e",
+    "type": "feature",
+    "description": "Introduces new column statistics APIs to support statistics generation for tables within the Glue Data Catalog.",
+    "modules": [
+        "service/glue"
+    ]
+}

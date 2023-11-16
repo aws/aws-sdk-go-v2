@@ -106,6 +106,26 @@ func (ConfigurationState) Values() []ConfigurationState {
 	}
 }
 
+type CustomerActionStatus string
+
+// Enum values for CustomerActionStatus
+const (
+	CustomerActionStatusCriticalActionRequired CustomerActionStatus = "CRITICAL_ACTION_REQUIRED"
+	CustomerActionStatusActionRecommended      CustomerActionStatus = "ACTION_RECOMMENDED"
+	CustomerActionStatusNone                   CustomerActionStatus = "NONE"
+)
+
+// Values returns all known values for CustomerActionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CustomerActionStatus) Values() []CustomerActionStatus {
+	return []CustomerActionStatus{
+		"CRITICAL_ACTION_REQUIRED",
+		"ACTION_RECOMMENDED",
+		"NONE",
+	}
+}
+
 type EnhancedMonitoring string
 
 // Enum values for EnhancedMonitoring

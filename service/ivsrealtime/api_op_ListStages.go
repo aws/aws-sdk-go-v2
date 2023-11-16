@@ -32,7 +32,7 @@ func (c *Client) ListStages(ctx context.Context, params *ListStagesInput, optFns
 type ListStagesInput struct {
 
 	// Maximum number of results to return. Default: 50.
-	MaxResults int32
+	MaxResults *int32
 
 	// The first stage to retrieve. This is used for pagination; see the nextToken
 	// response field.
@@ -48,7 +48,7 @@ type ListStagesOutput struct {
 	// This member is required.
 	Stages []types.StageSummary
 
-	// If there are more rooms than maxResults , use nextToken in the request to get
+	// If there are more stages than maxResults , use nextToken in the request to get
 	// the next set.
 	NextToken *string
 
@@ -167,8 +167,8 @@ func NewListStagesPaginator(client ListStagesAPIClient, params *ListStagesInput,
 	}
 
 	options := ListStagesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -198,7 +198,11 @@ func (p *ListStagesPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListStages(ctx, &params, optFns...)
 	if err != nil {

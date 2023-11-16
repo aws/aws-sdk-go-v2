@@ -688,6 +688,13 @@ type DescribedServer struct {
 	//   must be Amazon S3.
 	Protocols []Protocol
 
+	// Specifies whether or not performance for your Amazon S3 directories is
+	// optimized. This is disabled by default. By default, home directory mappings have
+	// a TYPE of DIRECTORY . If you enable this option, you would then need to
+	// explicitly set the HomeDirectoryMapEntry Type to FILE if you want a mapping to
+	// have a file target.
+	S3StorageOptions *S3StorageOptions
+
 	// Specifies the name of the security policy that is attached to the server.
 	SecurityPolicyName *string
 
@@ -990,10 +997,17 @@ type HomeDirectoryMapEntry struct {
 	// This member is required.
 	Entry *string
 
-	// Represents the map target that is used in a HomeDirectorymapEntry .
+	// Represents the map target that is used in a HomeDirectoryMapEntry .
 	//
 	// This member is required.
 	Target *string
+
+	// Specifies the type of mapping. Set the type to FILE if you want the mapping to
+	// point to a file, or DIRECTORY for the directory to point to a directory. By
+	// default, home directory mappings have a Type of DIRECTORY when you create a
+	// Transfer Family server. You would need to explicitly set Type to FILE if you
+	// want a mapping to have a file target.
+	Type MapType
 
 	noSmithyDocumentSerde
 }
@@ -1518,6 +1532,19 @@ type S3InputFileLocation struct {
 	// The name assigned to the file when it was created in Amazon S3. You use the
 	// object key to retrieve the object.
 	Key *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 storage options that are configured for your server.
+type S3StorageOptions struct {
+
+	// Specifies whether or not performance for your Amazon S3 directories is
+	// optimized. This is disabled by default. By default, home directory mappings have
+	// a TYPE of DIRECTORY . If you enable this option, you would then need to
+	// explicitly set the HomeDirectoryMapEntry Type to FILE if you want a mapping to
+	// have a file target.
+	DirectoryListingOptimization DirectoryListingOptimization
 
 	noSmithyDocumentSerde
 }

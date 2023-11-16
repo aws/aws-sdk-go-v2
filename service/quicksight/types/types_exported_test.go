@@ -29,6 +29,9 @@ func ExampleDataSourceParameters_outputUsage() {
 	case *types.DataSourceParametersMemberAwsIotAnalyticsParameters:
 		_ = v.Value // Value is types.AwsIotAnalyticsParameters
 
+	case *types.DataSourceParametersMemberBigQueryParameters:
+		_ = v.Value // Value is types.BigQueryParameters
+
 	case *types.DataSourceParametersMemberDatabricksParameters:
 		_ = v.Value // Value is types.DatabricksParameters
 
@@ -100,6 +103,7 @@ var _ *types.DatabricksParameters
 var _ *types.JiraParameters
 var _ *types.MySqlParameters
 var _ *types.SnowflakeParameters
+var _ *types.BigQueryParameters
 var _ *types.ServiceNowParameters
 var _ *types.PrestoParameters
 var _ *types.AuroraParameters

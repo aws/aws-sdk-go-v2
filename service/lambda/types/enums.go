@@ -2,6 +2,32 @@
 
 package types
 
+type ApplicationLogLevel string
+
+// Enum values for ApplicationLogLevel
+const (
+	ApplicationLogLevelTrace ApplicationLogLevel = "TRACE"
+	ApplicationLogLevelDebug ApplicationLogLevel = "DEBUG"
+	ApplicationLogLevelInfo  ApplicationLogLevel = "INFO"
+	ApplicationLogLevelWarn  ApplicationLogLevel = "WARN"
+	ApplicationLogLevelError ApplicationLogLevel = "ERROR"
+	ApplicationLogLevelFatal ApplicationLogLevel = "FATAL"
+)
+
+// Values returns all known values for ApplicationLogLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationLogLevel) Values() []ApplicationLogLevel {
+	return []ApplicationLogLevel{
+		"TRACE",
+		"DEBUG",
+		"INFO",
+		"WARN",
+		"ERROR",
+		"FATAL",
+	}
+}
+
 type Architecture string
 
 // Enum values for Architecture
@@ -253,6 +279,24 @@ func (LastUpdateStatusReasonCode) Values() []LastUpdateStatusReasonCode {
 		"InvalidRuntime",
 		"InvalidZipFileException",
 		"FunctionError",
+	}
+}
+
+type LogFormat string
+
+// Enum values for LogFormat
+const (
+	LogFormatJson LogFormat = "JSON"
+	LogFormatText LogFormat = "Text"
+)
+
+// Values returns all known values for LogFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LogFormat) Values() []LogFormat {
+	return []LogFormat{
+		"JSON",
+		"Text",
 	}
 }
 
@@ -565,6 +609,26 @@ func (StateReasonCode) Values() []StateReasonCode {
 		"InvalidRuntime",
 		"InvalidZipFileException",
 		"FunctionError",
+	}
+}
+
+type SystemLogLevel string
+
+// Enum values for SystemLogLevel
+const (
+	SystemLogLevelDebug SystemLogLevel = "DEBUG"
+	SystemLogLevelInfo  SystemLogLevel = "INFO"
+	SystemLogLevelWarn  SystemLogLevel = "WARN"
+)
+
+// Values returns all known values for SystemLogLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SystemLogLevel) Values() []SystemLogLevel {
+	return []SystemLogLevel{
+		"DEBUG",
+		"INFO",
+		"WARN",
 	}
 }
 

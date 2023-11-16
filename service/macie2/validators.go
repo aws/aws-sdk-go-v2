@@ -1383,6 +1383,21 @@ func validateSeverityLevelList(v []types.SeverityLevel) error {
 	}
 }
 
+func validateUpdateRetrievalConfiguration(v *types.UpdateRetrievalConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRetrievalConfiguration"}
+	if len(v.RetrievalMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RetrievalMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAcceptInvitationInput(v *AcceptInvitationInput) error {
 	if v == nil {
 		return nil
@@ -2145,6 +2160,11 @@ func validateOpUpdateRevealConfigurationInput(v *UpdateRevealConfigurationInput)
 	} else if v.Configuration != nil {
 		if err := validateRevealConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RetrievalConfiguration != nil {
+		if err := validateUpdateRetrievalConfiguration(v.RetrievalConfiguration); err != nil {
+			invalidParams.AddNested("RetrievalConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -8,6 +8,7 @@ type Engine string
 const (
 	EngineStandard Engine = "standard"
 	EngineNeural   Engine = "neural"
+	EngineLongForm Engine = "long-form"
 )
 
 // Values returns all known values for Engine. Note that this can be expanded in
@@ -17,6 +18,7 @@ func (Engine) Values() []Engine {
 	return []Engine{
 		"standard",
 		"neural",
+		"long-form",
 	}
 }
 

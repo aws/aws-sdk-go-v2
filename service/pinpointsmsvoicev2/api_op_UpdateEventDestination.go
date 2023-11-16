@@ -57,7 +57,8 @@ type UpdateEventDestinationInput struct {
 	// Kinesis Data Firehose.
 	KinesisFirehoseDestination *types.KinesisFirehoseDestination
 
-	// An array of event types that determine which events to log.
+	// An array of event types that determine which events to log. The TEXT_SENT event
+	// type is not supported.
 	MatchingEventTypes []types.EventType
 
 	// An object that contains information about an event destination that sends data

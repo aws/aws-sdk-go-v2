@@ -39,12 +39,15 @@ type CreateTimelineEventInput struct {
 	// This member is required.
 	EventData *string
 
-	// The time that the event occurred.
+	// The timestamp for when the event occurred.
 	//
 	// This member is required.
 	EventTime *time.Time
 
-	// The type of event. You can create timeline events of type Custom Event .
+	// The type of event. You can create timeline events of type Custom Event and Note
+	// . To make a Note-type event appear on the Incident notes panel in the console,
+	// specify eventType as Note and enter the Amazon Resource Name (ARN) of the
+	// incident as the value for eventReference .
 	//
 	// This member is required.
 	EventType *string

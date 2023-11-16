@@ -7,6 +7,239 @@ import (
 	"time"
 )
 
+// Object specifying a channel as a destination.
+type ChannelDestinationConfiguration struct {
+
+	// ARN of the channel to use for broadcasting. The channel and stage resources
+	// must be in the same AWS account and region. The channel must be offline (not
+	// broadcasting).
+	//
+	// This member is required.
+	ChannelArn *string
+
+	// ARN of the EncoderConfiguration resource. The encoder configuration and stage
+	// resources must be in the same AWS account and region.
+	EncoderConfigurationArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Object specifying a Composition resource.
+type Composition struct {
+
+	// ARN of the Composition resource.
+	//
+	// This member is required.
+	Arn *string
+
+	// Array of Destination objects. A Composition can contain either one destination (
+	// channel or s3 ) or two (one channel and one s3 ).
+	//
+	// This member is required.
+	Destinations []Destination
+
+	// Layout object to configure composition parameters.
+	//
+	// This member is required.
+	Layout *LayoutConfiguration
+
+	// ARN of the stage used as input
+	//
+	// This member is required.
+	StageArn *string
+
+	// State of the Composition.
+	//
+	// This member is required.
+	State CompositionState
+
+	// UTC time of the Composition end. This is an ISO 8601 timestamp; note that this
+	// is returned as a string.
+	EndTime *time.Time
+
+	// UTC time of the Composition start. This is an ISO 8601 timestamp; note that
+	// this is returned as a string.
+	StartTime *time.Time
+
+	// Tags attached to the resource. Array of maps, each of the form string:string
+	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for details, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no constraints on tags beyond what is
+	// documented there.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a Composition.
+type CompositionSummary struct {
+
+	// ARN of the Composition resource.
+	//
+	// This member is required.
+	Arn *string
+
+	// Array of Destination objects.
+	//
+	// This member is required.
+	Destinations []DestinationSummary
+
+	// ARN of the attached stage.
+	//
+	// This member is required.
+	StageArn *string
+
+	// State of the Composition resource.
+	//
+	// This member is required.
+	State CompositionState
+
+	// UTC time of the Composition end. This is an ISO 8601 timestamp; note that this
+	// is returned as a string.
+	EndTime *time.Time
+
+	// UTC time of the Composition start. This is an ISO 8601 timestamp; note that
+	// this is returned as a string.
+	StartTime *time.Time
+
+	// Tags attached to the resource. Array of maps, each of the form string:string
+	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for details, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no constraints on tags beyond what is
+	// documented there.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Object specifying the status of a Destination.
+type Destination struct {
+
+	// Configuration used to create this destination.
+	//
+	// This member is required.
+	Configuration *DestinationConfiguration
+
+	// Unique identifier for this destination, assigned by IVS.
+	//
+	// This member is required.
+	Id *string
+
+	// State of the Composition Destination.
+	//
+	// This member is required.
+	State DestinationState
+
+	// Optional details regarding the status of the destination.
+	Detail *DestinationDetail
+
+	// UTC time of the destination end. This is an ISO 8601 timestamp; note that this
+	// is returned as a string.
+	EndTime *time.Time
+
+	// UTC time of the destination start. This is an ISO 8601 timestamp; note that
+	// this is returned as a string.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Complex data type that defines destination-configuration objects.
+type DestinationConfiguration struct {
+
+	// An IVS channel to be used for broadcasting, for server-side composition. Either
+	// a channel or an s3 must be specified.
+	Channel *ChannelDestinationConfiguration
+
+	// Name that can be specified to help identify the destination.
+	Name *string
+
+	// An S3 storage configuration to be used for recording video data. Either a
+	// channel or an s3 must be specified.
+	S3 *S3DestinationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Complex data type that defines destination-detail objects.
+type DestinationDetail struct {
+
+	// An S3 detail object to return information about the S3 destination.
+	S3 *S3Detail
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a Destination.
+type DestinationSummary struct {
+
+	// Unique identifier for this destination, assigned by IVS.
+	//
+	// This member is required.
+	Id *string
+
+	// State of the Composition Destination.
+	//
+	// This member is required.
+	State DestinationState
+
+	// UTC time of the destination end. This is an ISO 8601 timestamp; note that this
+	// is returned as a string.
+	EndTime *time.Time
+
+	// UTC time of the destination start. This is an ISO 8601 timestamp; note that
+	// this is returned as a string.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Settings for transcoding.
+type EncoderConfiguration struct {
+
+	// ARN of the EncoderConfiguration resource.
+	//
+	// This member is required.
+	Arn *string
+
+	// Optional name to identify the resource.
+	Name *string
+
+	// Tags attached to the resource. Array of maps, each of the form string:string
+	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for details, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no constraints on tags beyond what is
+	// documented there.
+	Tags map[string]string
+
+	// Video configuration. Default: video resolution 1280x720, bitrate 2500 kbps, 30
+	// fps
+	Video *Video
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an EncoderConfiguration.
+type EncoderConfigurationSummary struct {
+
+	// ARN of the EncoderConfiguration resource.
+	//
+	// This member is required.
+	Arn *string
+
+	// Optional name to identify the resource.
+	Name *string
+
+	// Tags attached to the resource. Array of maps, each of the form string:string
+	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for details, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no constraints on tags beyond what is
+	// documented there.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // An occurrence during a stage session.
 type Event struct {
 
@@ -36,6 +269,28 @@ type Event struct {
 	// the publisher. For a publish or join event, this is null. This is assigned by
 	// IVS.
 	RemoteParticipantId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information specific to Grid layout, for server-side composition.
+// See "Layouts" in Server-Side Composition (https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/server-side-composition.html)
+// .
+type GridConfiguration struct {
+
+	// This attribute name identifies the featured slot. A participant with this
+	// attribute set to "true" (as a string value) in ParticipantTokenConfiguration is
+	// placed in the featured slot.
+	FeaturedParticipantAttribute *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information of supported layouts for server-side composition.
+type LayoutConfiguration struct {
+
+	// Configuration related to grid layout. Default: Grid layout.
+	Grid *GridConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -129,7 +384,7 @@ type ParticipantToken struct {
 
 	// Duration (in minutes), after which the participant token expires. Default: 720
 	// (12 hours).
-	Duration int32
+	Duration *int32
 
 	// ISO 8601 timestamp (returned as a string) for when this token expires.
 	ExpirationTime *time.Time
@@ -164,13 +419,70 @@ type ParticipantTokenConfiguration struct {
 
 	// Duration (in minutes), after which the corresponding participant token expires.
 	// Default: 720 (12 hours).
-	Duration int32
+	Duration *int32
 
 	// Customer-assigned name to help identify the token; this can be used to link a
 	// participant to a user in the customer’s own systems. This can be any UTF-8
 	// encoded text. This field is exposed to all stage participants and should not be
 	// used for personally identifying, confidential, or sensitive information.
 	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// An object representing a configuration to record a stage stream.
+type RecordingConfiguration struct {
+
+	// The recording format for storing a recording in Amazon S3.
+	Format RecordingConfigurationFormat
+
+	noSmithyDocumentSerde
+}
+
+// A complex type that describes an S3 location where recorded videos will be
+// stored.
+type S3DestinationConfiguration struct {
+
+	// ARNs of the EncoderConfiguration resource. The encoder configuration and stage
+	// resources must be in the same AWS account and region.
+	//
+	// This member is required.
+	EncoderConfigurationArns []string
+
+	// ARN of the StorageConfiguration where recorded videos will be stored.
+	//
+	// This member is required.
+	StorageConfigurationArn *string
+
+	// Array of maps, each of the form string:string (key:value) . This is an optional
+	// customer specification, currently used only to specify the recording format for
+	// storing a recording in Amazon S3.
+	RecordingConfiguration *RecordingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Complex data type that defines S3Detail objects.
+type S3Detail struct {
+
+	// The S3 bucket prefix under which the recording is stored.
+	//
+	// This member is required.
+	RecordingPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+// A complex type that describes an S3 location where recorded videos will be
+// stored.
+type S3StorageConfiguration struct {
+
+	// Location (S3 bucket name) where recorded videos will be stored. Note that the
+	// StorageConfiguration and S3 bucket must be in the same region as the
+	// Composition.
+	//
+	// This member is required.
+	BucketName *string
 
 	noSmithyDocumentSerde
 }
@@ -254,6 +566,76 @@ type StageSummary struct {
 	// and requirements"; Amazon IVS has no constraints on tags beyond what is
 	// documented there.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A complex type that describes a location where recorded videos will be stored.
+type StorageConfiguration struct {
+
+	// ARN of the storage configuration.
+	//
+	// This member is required.
+	Arn *string
+
+	// Name of the storage configuration.
+	Name *string
+
+	// An S3 destination configuration where recorded videos will be stored.
+	S3 *S3StorageConfiguration
+
+	// Tags attached to the resource. Array of maps, each of the form string:string
+	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for details, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no constraints on tags beyond what is
+	// documented there.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a storage configuration.
+type StorageConfigurationSummary struct {
+
+	// ARN of the storage configuration.
+	//
+	// This member is required.
+	Arn *string
+
+	// Name of the storage configuration.
+	Name *string
+
+	// An S3 destination configuration where recorded videos will be stored.
+	S3 *S3StorageConfiguration
+
+	// Tags attached to the resource. Array of maps, each of the form string:string
+	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for details, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no constraints on tags beyond what is
+	// documented there.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Settings for video.
+type Video struct {
+
+	// Bitrate for generated output, in bps. Default: 2500000.
+	Bitrate *int32
+
+	// Video frame rate, in fps. Default: 30.
+	Framerate *float32
+
+	// Video-resolution height. Note that the maximum value is determined by width
+	// times height , such that the maximum total pixels is 2073600 (1920x1080 or
+	// 1080x1920). Default: 720.
+	Height *int32
+
+	// Video-resolution width. Note that the maximum value is determined by width
+	// times height , such that the maximum total pixels is 2073600 (1920x1080 or
+	// 1080x1920). Default: 1280.
+	Width *int32
 
 	noSmithyDocumentSerde
 }

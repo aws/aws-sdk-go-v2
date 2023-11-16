@@ -3532,6 +3532,11 @@ func awsAwsjson11_serializeDocumentHomeDirectoryMapEntry(v *types.HomeDirectoryM
 		ok.String(*v.Target)
 	}
 
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }
 
@@ -3703,6 +3708,18 @@ func awsAwsjson11_serializeDocumentS3InputFileLocation(v *types.S3InputFileLocat
 	if v.Key != nil {
 		ok := object.Key("Key")
 		ok.String(*v.Key)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentS3StorageOptions(v *types.S3StorageOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DirectoryListingOptimization) > 0 {
+		ok := object.Key("DirectoryListingOptimization")
+		ok.String(string(v.DirectoryListingOptimization))
 	}
 
 	return nil
@@ -4217,6 +4234,13 @@ func awsAwsjson11_serializeOpDocumentCreateServerInput(v *CreateServerInput, val
 	if v.Protocols != nil {
 		ok := object.Key("Protocols")
 		if err := awsAwsjson11_serializeDocumentProtocols(v.Protocols, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3StorageOptions != nil {
+		ok := object.Key("S3StorageOptions")
+		if err := awsAwsjson11_serializeDocumentS3StorageOptions(v.S3StorageOptions, ok); err != nil {
 			return err
 		}
 	}
@@ -5426,6 +5450,13 @@ func awsAwsjson11_serializeOpDocumentUpdateServerInput(v *UpdateServerInput, val
 	if v.Protocols != nil {
 		ok := object.Key("Protocols")
 		if err := awsAwsjson11_serializeDocumentProtocols(v.Protocols, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3StorageOptions != nil {
+		ok := object.Key("S3StorageOptions")
+		if err := awsAwsjson11_serializeDocumentS3StorageOptions(v.S3StorageOptions, ok); err != nil {
 			return err
 		}
 	}

@@ -18,7 +18,7 @@ import (
 // includes information for only those phone numbers that meet the filter criteria.
 // If you don't specify phone number IDs or filters, the output includes
 // information for all phone numbers. If you specify a phone number ID that isn't
-// valid, an Error is returned.
+// valid, an error is returned.
 func (c *Client) DescribePhoneNumbers(ctx context.Context, params *DescribePhoneNumbersInput, optFns ...func(*Options)) (*DescribePhoneNumbersOutput, error) {
 	if params == nil {
 		params = &DescribePhoneNumbersInput{}

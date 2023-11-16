@@ -82,6 +82,9 @@ type CreateDevEnvironmentInput struct {
 	// Environment.
 	Repositories []types.RepositoryInput
 
+	// The name of the connection to use connect to a Amazon VPC.
+	VpcConnectionName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -101,6 +104,10 @@ type CreateDevEnvironmentOutput struct {
 	//
 	// This member is required.
 	SpaceName *string
+
+	// The name of the connection used to connect to Amazon VPC used when the Dev
+	// Environment was created, if any.
+	VpcConnectionName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

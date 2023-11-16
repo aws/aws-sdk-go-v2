@@ -20,7 +20,7 @@ import (
 // message type, opt-out list, two-way configuration, and self-managed opt-out
 // configuration. Deletion protection isn't inherited from the origination identity
 // and defaults to false. If the origination identity is a phone number and is
-// already associated with another pool, an Error is returned. A sender ID can be
+// already associated with another pool, an error is returned. A sender ID can be
 // associated with multiple pools.
 func (c *Client) CreatePool(ctx context.Context, params *CreatePoolInput, optFns ...func(*Options)) (*CreatePoolOutput, error) {
 	if params == nil {
@@ -120,6 +120,10 @@ type CreatePoolOutput struct {
 
 	// The Amazon Resource Name (ARN) of the two way channel.
 	TwoWayChannelArn *string
+
+	// An optional IAM Role Arn for a service to assume, to be able to post inbound
+	// SMS messages.
+	TwoWayChannelRole *string
 
 	// By default this is set to false. When set to true you can receive incoming text
 	// messages from your end recipients.

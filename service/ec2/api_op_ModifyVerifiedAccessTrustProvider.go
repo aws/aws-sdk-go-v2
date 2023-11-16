@@ -44,6 +44,10 @@ type ModifyVerifiedAccessTrustProviderInput struct {
 	// A description for the Verified Access trust provider.
 	Description *string
 
+	// The options for a device-based trust provider. This parameter is required when
+	// the provider type is device .
+	DeviceOptions *types.ModifyVerifiedAccessTrustProviderDeviceOptions
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation . Otherwise, it is

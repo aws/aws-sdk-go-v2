@@ -1302,6 +1302,71 @@ type ColumnStatisticsError struct {
 	noSmithyDocumentSerde
 }
 
+// The object that shows the details of the column stats run.
+type ColumnStatisticsTaskRun struct {
+
+	// The ID of the Data Catalog where the table resides. If none is supplied, the
+	// Amazon Web Services account ID is used by default.
+	CatalogID *string
+
+	// A list of the column names. If none is supplied, all column names for the table
+	// will be used by default.
+	ColumnNameList []string
+
+	// The identifier for the particular column statistics task run.
+	ColumnStatisticsTaskRunId *string
+
+	// The time that this task was created.
+	CreationTime *time.Time
+
+	// The Amazon Web Services account ID.
+	CustomerId *string
+
+	// The calculated DPU usage in seconds for all autoscaled workers.
+	DPUSeconds float64
+
+	// The database where the table resides.
+	DatabaseName *string
+
+	// The end time of the task.
+	EndTime *time.Time
+
+	// The error message for the job.
+	ErrorMessage *string
+
+	// The last point in time when this task was modified.
+	LastUpdated *time.Time
+
+	// The number of workers used to generate column statistics. The job is
+	// preconfigured to autoscale up to 25 instances.
+	NumberOfWorkers int32
+
+	// The IAM role that the service assumes to generate statistics.
+	Role *string
+
+	// The percentage of rows used to generate statistics. If none is supplied, the
+	// entire table will be used to generate stats.
+	SampleSize float64
+
+	// Name of the security configuration that is used to encrypt CloudWatch logs for
+	// the column stats task run.
+	SecurityConfiguration *string
+
+	// The start time of the task.
+	StartTime *time.Time
+
+	// The status of the task run.
+	Status ColumnStatisticsState
+
+	// The name of the table for which column statistics is generated.
+	TableName *string
+
+	// The type of workers being used for generating stats. The default is g.1x .
+	WorkerType *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines a condition under which a trigger fires.
 type Condition struct {
 

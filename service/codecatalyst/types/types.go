@@ -171,6 +171,10 @@ type DevEnvironmentSummary struct {
 	// The reason for the status.
 	StatusReason *string
 
+	// The name of the connection used to connect to Amazon VPC used when the Dev
+	// Environment was created, if any.
+	VpcConnectionName *string
+
 	noSmithyDocumentSerde
 }
 

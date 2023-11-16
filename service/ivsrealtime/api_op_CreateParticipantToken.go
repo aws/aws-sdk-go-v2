@@ -49,7 +49,7 @@ type CreateParticipantTokenInput struct {
 	Capabilities []types.ParticipantTokenCapability
 
 	// Duration (in minutes), after which the token expires. Default: 720 (12 hours).
-	Duration int32
+	Duration *int32
 
 	// Name that can be specified to help identify the token. This can be any UTF-8
 	// encoded text. This field is exposed to all stage participants and should not be

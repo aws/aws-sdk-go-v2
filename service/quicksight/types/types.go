@@ -209,9 +209,6 @@ type Analysis struct {
 	// The descriptive name of the analysis.
 	Name *string
 
-	// An array of analysis level configurations.
-	Options *AssetOptions
-
 	// A list of the associated sheets with the unique identifier and name of each
 	// sheet.
 	Sheets []Sheet
@@ -564,15 +561,17 @@ type AssetBundleCloudFormationOverridePropertyConfiguration struct {
 // CloudFormation template.
 type AssetBundleExportJobAnalysisOverrideProperties struct {
 
+	// The ARN of the specific Analysis resource whose override properties are
+	// configured in this structure.
+	//
+	// This member is required.
+	Arn *string
+
 	// A list of Analysis resource properties to generate variables for in the
 	// returned CloudFormation template.
 	//
 	// This member is required.
 	Properties []AssetBundleExportJobAnalysisPropertyToOverride
-
-	// The ARN of the specific Analysis resource whose override properties are
-	// configured in this structure.
-	Arn *string
 
 	noSmithyDocumentSerde
 }
@@ -581,15 +580,17 @@ type AssetBundleExportJobAnalysisOverrideProperties struct {
 // CloudFormation template.
 type AssetBundleExportJobDashboardOverrideProperties struct {
 
+	// The ARN of the specific Dashboard resource whose override properties are
+	// configured in this structure.
+	//
+	// This member is required.
+	Arn *string
+
 	// A list of Dashboard resource properties to generate variables for in the
 	// returned CloudFormation template.
 	//
 	// This member is required.
 	Properties []AssetBundleExportJobDashboardPropertyToOverride
-
-	// The ARN of the specific Dashboard resource whose override properties are
-	// configured in this structure.
-	Arn *string
 
 	noSmithyDocumentSerde
 }
@@ -598,15 +599,17 @@ type AssetBundleExportJobDashboardOverrideProperties struct {
 // CloudFormation template.
 type AssetBundleExportJobDataSetOverrideProperties struct {
 
+	// The ARN of the specific DataSet resource whose override properties are
+	// configured in this structure.
+	//
+	// This member is required.
+	Arn *string
+
 	// A list of DataSet resource properties to generate variables for in the returned
 	// CloudFormation template.
 	//
 	// This member is required.
 	Properties []AssetBundleExportJobDataSetPropertyToOverride
-
-	// The ARN of the specific DataSet resource whose override properties are
-	// configured in this structure.
-	Arn *string
 
 	noSmithyDocumentSerde
 }
@@ -615,15 +618,17 @@ type AssetBundleExportJobDataSetOverrideProperties struct {
 // CloudFormation template.
 type AssetBundleExportJobDataSourceOverrideProperties struct {
 
+	// The ARN of the specific DataSource resource whose override properties are
+	// configured in this structure.
+	//
+	// This member is required.
+	Arn *string
+
 	// A list of DataSource resource properties to generate variables for in the
 	// returned CloudFormation template.
 	//
 	// This member is required.
 	Properties []AssetBundleExportJobDataSourcePropertyToOverride
-
-	// The ARN of the specific DataSource resource whose override properties are
-	// configured in this structure.
-	Arn *string
 
 	noSmithyDocumentSerde
 }
@@ -647,15 +652,17 @@ type AssetBundleExportJobError struct {
 // returned CloudFormation template.
 type AssetBundleExportJobRefreshScheduleOverrideProperties struct {
 
+	// The ARN of the specific RefreshSchedule resource whose override properties are
+	// configured in this structure.
+	//
+	// This member is required.
+	Arn *string
+
 	// A list of RefreshSchedule resource properties to generate variables for in the
 	// returned CloudFormation template.
 	//
 	// This member is required.
 	Properties []AssetBundleExportJobRefreshSchedulePropertyToOverride
-
-	// The ARN of the specific RefreshSchedule resource whose override properties are
-	// configured in this structure.
-	Arn *string
 
 	noSmithyDocumentSerde
 }
@@ -691,6 +698,14 @@ type AssetBundleExportJobSummary struct {
 	// asset bundle.
 	IncludeAllDependencies bool
 
+	// The flag that determines the inclusion of permissions associated with each
+	// resource ARN.
+	IncludePermissions bool
+
+	// The flag that determines the inclusion of tags associated with each resource
+	// ARN.
+	IncludeTags bool
+
 	// The current status of the export job.
 	JobStatus AssetBundleExportJobStatus
 
@@ -701,15 +716,29 @@ type AssetBundleExportJobSummary struct {
 // CloudFormation template.
 type AssetBundleExportJobThemeOverrideProperties struct {
 
+	// The ARN of the specific Theme resource whose override properties are configured
+	// in this structure.
+	//
+	// This member is required.
+	Arn *string
+
 	// A list of Theme resource properties to generate variables for in the returned
 	// CloudFormation template.
 	//
 	// This member is required.
 	Properties []AssetBundleExportJobThemePropertyToOverride
 
-	// The ARN of the specific Theme resource whose override properties are configured
-	// in this structure.
-	Arn *string
+	noSmithyDocumentSerde
+}
+
+// The option to relax the validation that is required to export each asset. When
+// StrictModeForAllResource is set to true, validation is skipped for specific UI
+// errors.
+type AssetBundleExportJobValidationStrategy struct {
+
+	// A Boolean value that indicates whether to export resources under strict or
+	// lenient mode.
+	StrictModeForAllResources bool
 
 	noSmithyDocumentSerde
 }
@@ -718,15 +747,29 @@ type AssetBundleExportJobThemeOverrideProperties struct {
 // outputted CloudFormation template.
 type AssetBundleExportJobVPCConnectionOverrideProperties struct {
 
+	// The ARN of the specific VPCConnection resource whose override properties are
+	// configured in this structure.
+	//
+	// This member is required.
+	Arn *string
+
 	// A list of VPCConnection resource properties to generate variables for in the
 	// returned CloudFormation template.
 	//
 	// This member is required.
 	Properties []AssetBundleExportJobVPCConnectionPropertyToOverride
 
-	// The ARN of the specific VPCConnection resource whose override properties are
-	// configured in this structure.
+	noSmithyDocumentSerde
+}
+
+// Describes a warning that occurred during an Asset Bundle export job.
+type AssetBundleExportJobWarning struct {
+
+	// The ARN of the resource whose processing caused a warning.
 	Arn *string
+
+	// A description of the warning.
+	Message *string
 
 	noSmithyDocumentSerde
 }
@@ -745,6 +788,41 @@ type AssetBundleImportJobAnalysisOverrideParameters struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains a list of permissions to be applied to a list of
+// analysis IDs.
+type AssetBundleImportJobAnalysisOverridePermissions struct {
+
+	// A list of analysis IDs that you want to apply overrides to. You can use * to
+	// override all analyses in this asset bundle.
+	//
+	// This member is required.
+	AnalysisIds []string
+
+	// A list of permissions for the analyses that you want to apply overrides to.
+	//
+	// This member is required.
+	Permissions *AssetBundleResourcePermissions
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains a list of tags to be assigned to a list of analysis IDs.
+type AssetBundleImportJobAnalysisOverrideTags struct {
+
+	// A list of analysis IDs that you want to apply overrides to. You can use * to
+	// override all analyses in this asset bundle.
+	//
+	// This member is required.
+	AnalysisIds []string
+
+	// A list of tags for the analyses that you want to apply overrides to.
+	//
+	// This member is required.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
 // The override parameters for a single dashboard that is being imported.
 type AssetBundleImportJobDashboardOverrideParameters struct {
 
@@ -759,6 +837,44 @@ type AssetBundleImportJobDashboardOverrideParameters struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains a list of permissions to be applied to a list of
+// dashboard IDs.
+type AssetBundleImportJobDashboardOverridePermissions struct {
+
+	// A list of dashboard IDs that you want to apply overrides to. You can use * to
+	// override all dashboards in this asset bundle.
+	//
+	// This member is required.
+	DashboardIds []string
+
+	// A structure that contains the link sharing configurations that you want to
+	// apply overrides to.
+	LinkSharingConfiguration *AssetBundleResourceLinkSharingConfiguration
+
+	// A list of permissions for the dashboards that you want to apply overrides to.
+	Permissions *AssetBundleResourcePermissions
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains a list of tags to be assigned to a list of dashboard
+// IDs.
+type AssetBundleImportJobDashboardOverrideTags struct {
+
+	// A list of dashboard IDs that you want to apply overrides to. You can use * to
+	// override all dashboards in this asset bundle.
+	//
+	// This member is required.
+	DashboardIds []string
+
+	// A list of tags for the dashboards that you want to apply overrides to.
+	//
+	// This member is required.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
 // The override parameters for a single dataset that is being imported.
 type AssetBundleImportJobDataSetOverrideParameters struct {
 
@@ -769,6 +885,41 @@ type AssetBundleImportJobDataSetOverrideParameters struct {
 
 	// A new name for the dataset.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains a list of permissions to be applied to a list of
+// dataset IDs.
+type AssetBundleImportJobDataSetOverridePermissions struct {
+
+	// A list of dataset IDs that you want to apply overrides to. You can use * to
+	// override all datasets in this asset bundle.
+	//
+	// This member is required.
+	DataSetIds []string
+
+	// A list of permissions for the datasets that you want to apply overrides to.
+	//
+	// This member is required.
+	Permissions *AssetBundleResourcePermissions
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains a list of tags to be assigned to a list of dataset IDs.
+type AssetBundleImportJobDataSetOverrideTags struct {
+
+	// A list of dataset IDs that you want to apply overrides to. You can use * to
+	// override all datasets in this asset bundle.
+	//
+	// This member is required.
+	DataSetIds []string
+
+	// A list of tags for the datasets that you want to apply overrides to.
+	//
+	// This member is required.
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }
@@ -835,6 +986,42 @@ type AssetBundleImportJobDataSourceOverrideParameters struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains a list of permissions to be applied to a list of data
+// source IDs.
+type AssetBundleImportJobDataSourceOverridePermissions struct {
+
+	// A list of data source IDs that you want to apply overrides to. You can use * to
+	// override all data sources in this asset bundle.
+	//
+	// This member is required.
+	DataSourceIds []string
+
+	// A list of permissions for the data source that you want to apply overrides to.
+	//
+	// This member is required.
+	Permissions *AssetBundleResourcePermissions
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains a list of tags to be assigned to a list of data source
+// IDs.
+type AssetBundleImportJobDataSourceOverrideTags struct {
+
+	// A list of data source IDs that you want to apply overrides to. You can use * to
+	// override all data sources in this asset bundle.
+	//
+	// This member is required.
+	DataSourceIds []string
+
+	// A list of tags for the data source that you want to apply overrides to.
+	//
+	// This member is required.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
 // Describes an error that occurred within an Asset Bundle import execution.
 type AssetBundleImportJobError struct {
 
@@ -885,6 +1072,75 @@ type AssetBundleImportJobOverrideParameters struct {
 	// A list of overrides for any VPCConnection resources that are present in the
 	// asset bundle that is imported.
 	VPCConnections []AssetBundleImportJobVPCConnectionOverrideParameters
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the override permission configurations that modify
+// the permissions for specified resources before the resource is imported.
+type AssetBundleImportJobOverridePermissions struct {
+
+	// A list of permissions overrides for any Analysis resources that are present in
+	// the asset bundle that is imported.
+	Analyses []AssetBundleImportJobAnalysisOverridePermissions
+
+	// A list of permissions overrides for any Dashboard resources that are present in
+	// the asset bundle that is imported.
+	Dashboards []AssetBundleImportJobDashboardOverridePermissions
+
+	// A list of permissions overrides for any DataSet resources that are present in
+	// the asset bundle that is imported.
+	DataSets []AssetBundleImportJobDataSetOverridePermissions
+
+	// A list of permissions overrides for any DataSource resources that are present
+	// in the asset bundle that is imported.
+	DataSources []AssetBundleImportJobDataSourceOverridePermissions
+
+	// A list of permissions overrides for any Theme resources that are present in the
+	// asset bundle that is imported.
+	Themes []AssetBundleImportJobThemeOverridePermissions
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the override tag configuration that modify the tags
+// that are assigned to specified resources before the resource is imported.
+type AssetBundleImportJobOverrideTags struct {
+
+	// A list of tag overrides for any Analysis resources that are present in the
+	// asset bundle that is imported.
+	Analyses []AssetBundleImportJobAnalysisOverrideTags
+
+	// A list of tag overrides for any Dashboard resources that are present in the
+	// asset bundle that is imported.
+	Dashboards []AssetBundleImportJobDashboardOverrideTags
+
+	// A list of tag overrides for any DataSet resources that are present in the asset
+	// bundle that is imported.
+	DataSets []AssetBundleImportJobDataSetOverrideTags
+
+	// A list of tag overrides for any DataSource resources that are present in the
+	// asset bundle that is imported.
+	DataSources []AssetBundleImportJobDataSourceOverrideTags
+
+	// A list of tag overrides for any Theme resources that are present in the asset
+	// bundle that is imported.
+	Themes []AssetBundleImportJobThemeOverrideTags
+
+	// A list of tag overrides for any VPCConnection resources that are present in the
+	// asset bundle that is imported.
+	VPCConnections []AssetBundleImportJobVPCConnectionOverrideTags
+
+	noSmithyDocumentSerde
+}
+
+// An optional parameter that overrides the validation strategy for all analyses
+// and dashboards before the resource is imported.
+type AssetBundleImportJobOverrideValidationStrategy struct {
+
+	// A Boolean value that indicates whether to import all analyses and dashboards
+	// under strict or lenient mode.
+	StrictModeForAllResources bool
 
 	noSmithyDocumentSerde
 }
@@ -960,6 +1216,41 @@ type AssetBundleImportJobThemeOverrideParameters struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains a list of permissions to be applied to a list of theme
+// IDs.
+type AssetBundleImportJobThemeOverridePermissions struct {
+
+	// A list of permissions for the themes that you want to apply overrides to.
+	//
+	// This member is required.
+	Permissions *AssetBundleResourcePermissions
+
+	// A list of theme IDs that you want to apply overrides to. You can use * to
+	// override all themes in this asset bundle.
+	//
+	// This member is required.
+	ThemeIds []string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains a list of tags to be assigned to a list of theme IDs.
+type AssetBundleImportJobThemeOverrideTags struct {
+
+	// A list of tags for the themes that you want to apply overrides to.
+	//
+	// This member is required.
+	Tags []Tag
+
+	// A list of theme IDs that you want to apply overrides to. You can use * to
+	// override all themes in this asset bundle.
+	//
+	// This member is required.
+	ThemeIds []string
+
+	noSmithyDocumentSerde
+}
+
 // The override parameters for a single VPC connection that is imported.
 type AssetBundleImportJobVPCConnectionOverrideParameters struct {
 
@@ -986,6 +1277,24 @@ type AssetBundleImportJobVPCConnectionOverrideParameters struct {
 	// is required if you are importing the VPC connection from another Amazon Web
 	// Services account or Region.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains a list of tags to be assigned to a list of VPC
+// connection IDs.
+type AssetBundleImportJobVPCConnectionOverrideTags struct {
+
+	// A list of tags for the VPC connections that you want to apply overrides to.
+	//
+	// This member is required.
+	Tags []Tag
+
+	// A list of VPC connection IDs that you want to apply overrides to. You can use *
+	// to override all VPC connections in this asset bundle.
+	//
+	// This member is required.
+	VPCConnectionIds []string
 
 	noSmithyDocumentSerde
 }
@@ -1023,6 +1332,34 @@ type AssetBundleImportSourceDescription struct {
 
 	// The Amazon S3 URI that you provided at the start of the import job.
 	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the configuration of a shared link to an Amazon
+// QuickSight dashboard.
+type AssetBundleResourceLinkSharingConfiguration struct {
+
+	// A list of link sharing permissions for the dashboards that you want to apply
+	// overrides to.
+	Permissions *AssetBundleResourcePermissions
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the permissions for the resource that you want to
+// override in an asset bundle import job.
+type AssetBundleResourcePermissions struct {
+
+	// A list of IAM actions to grant permissions on.
+	//
+	// This member is required.
+	Actions []string
+
+	// A list of principals to grant permissions on.
+	//
+	// This member is required.
+	Principals []string
 
 	noSmithyDocumentSerde
 }
@@ -1428,6 +1765,20 @@ type BarChartVisual struct {
 
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
+
+	noSmithyDocumentSerde
+}
+
+// The parameters that are required to connect to a Google BigQuery data source.
+type BigQueryParameters struct {
+
+	// The Google Cloud Platform project ID where your datasource was created.
+	//
+	// This member is required.
+	ProjectId *string
+
+	// The storage location where you create a Google BigQuery data source.
+	DataSetRegion *string
 
 	noSmithyDocumentSerde
 }
@@ -2994,9 +3345,6 @@ type DashboardVersion struct {
 	// Errors associated with this dashboard version.
 	Errors []DashboardError
 
-	// An array of analysis level configurations.
-	Options *AssetOptions
-
 	// A list of the associated sheets with the unique identifier and name of each
 	// sheet.
 	Sheets []Sheet
@@ -3782,6 +4130,7 @@ type DataSourceErrorInfo struct {
 //	DataSourceParametersMemberAuroraParameters
 //	DataSourceParametersMemberAuroraPostgreSqlParameters
 //	DataSourceParametersMemberAwsIotAnalyticsParameters
+//	DataSourceParametersMemberBigQueryParameters
 //	DataSourceParametersMemberDatabricksParameters
 //	DataSourceParametersMemberExasolParameters
 //	DataSourceParametersMemberJiraParameters
@@ -3858,6 +4207,15 @@ type DataSourceParametersMemberAwsIotAnalyticsParameters struct {
 }
 
 func (*DataSourceParametersMemberAwsIotAnalyticsParameters) isDataSourceParameters() {}
+
+// The parameters that are required to connect to a Google BigQuery data source.
+type DataSourceParametersMemberBigQueryParameters struct {
+	Value BigQueryParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceParametersMemberBigQueryParameters) isDataSourceParameters() {}
 
 // The parameters that are required to connect to a Databricks data source.
 type DataSourceParametersMemberDatabricksParameters struct {
@@ -12212,9 +12570,6 @@ type TemplateVersion struct {
 	// Errors associated with this template version.
 	Errors []TemplateError
 
-	// An array of analysis level configurations.
-	Options *AssetOptions
-
 	// A list of the associated sheets with the unique identifier and name of each
 	// sheet.
 	Sheets []Sheet
@@ -13796,9 +14151,9 @@ type User struct {
 // value to LENIENT , validation is skipped for specific errors.
 type ValidationStrategy struct {
 
-	// The mode of validation for the asset to be creaed or updated. When you set this
-	// value to STRICT , strict validation for every error is enforced. When you set
-	// this value to LENIENT , validation is skipped for specific UI errors.
+	// The mode of validation for the asset to be created or updated. When you set
+	// this value to STRICT , strict validation for every error is enforced. When you
+	// set this value to LENIENT , validation is skipped for specific UI errors.
 	//
 	// This member is required.
 	Mode ValidationStrategyMode

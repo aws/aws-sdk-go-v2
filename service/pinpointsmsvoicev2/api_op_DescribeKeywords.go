@@ -18,7 +18,7 @@ import (
 // send to your number to elicit a response, such as an informational message or a
 // special offer. When your number receives a message that begins with a keyword,
 // Amazon Pinpoint responds with a customizable message. If you specify a keyword
-// that isn't valid, an Error is returned.
+// that isn't valid, an error is returned.
 func (c *Client) DescribeKeywords(ctx context.Context, params *DescribeKeywordsInput, optFns ...func(*Options)) (*DescribeKeywordsOutput, error) {
 	if params == nil {
 		params = &DescribeKeywordsInput{}

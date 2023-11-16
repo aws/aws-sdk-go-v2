@@ -31,20 +31,26 @@ func (c *Client) UpdateRevealConfiguration(ctx context.Context, params *UpdateRe
 
 type UpdateRevealConfigurationInput struct {
 
-	// The new configuration settings and the status of the configuration for the
-	// account.
+	// The KMS key to use to encrypt the sensitive data, and the status of the
+	// configuration for the Amazon Macie account.
 	//
 	// This member is required.
 	Configuration *types.RevealConfiguration
+
+	// The access method and settings to use to retrieve the sensitive data.
+	RetrievalConfiguration *types.UpdateRetrievalConfiguration
 
 	noSmithyDocumentSerde
 }
 
 type UpdateRevealConfigurationOutput struct {
 
-	// The new configuration settings and the status of the configuration for the
-	// account.
+	// The KMS key to use to encrypt the sensitive data, and the status of the
+	// configuration for the Amazon Macie account.
 	Configuration *types.RevealConfiguration
+
+	// The access method and settings to use to retrieve the sensitive data.
+	RetrievalConfiguration *types.RetrievalConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

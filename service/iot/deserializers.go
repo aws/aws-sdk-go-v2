@@ -46042,6 +46042,89 @@ func awsRestjson1_deserializeDocumentFleetMetricNameAndArnList(v *[]types.FleetM
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGeoLocationsFilter(v *[]types.GeoLocationTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GeoLocationTarget
+	if *v == nil {
+		cv = []types.GeoLocationTarget{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GeoLocationTarget
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentGeoLocationTarget(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeoLocationTarget(v **types.GeoLocationTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeoLocationTarget
+	if *v == nil {
+		sv = &types.GeoLocationTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetFieldName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "order":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetFieldOrder to be of type string, got %T instead", value)
+				}
+				sv.Order = types.TargetFieldOrder(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGroupNameAndArn(v **types.GroupNameAndArn, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -46407,6 +46490,11 @@ func awsRestjson1_deserializeDocumentIndexingFilter(v **types.IndexingFilter, va
 
 	for key, value := range shape {
 		switch key {
+		case "geoLocations":
+			if err := awsRestjson1_deserializeDocumentGeoLocationsFilter(&sv.GeoLocations, value); err != nil {
+				return err
+			}
+
 		case "namedShadowNames":
 			if err := awsRestjson1_deserializeDocumentNamedShadowNamesFilter(&sv.NamedShadowNames, value); err != nil {
 				return err

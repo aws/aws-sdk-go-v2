@@ -57,7 +57,7 @@ type ListParticipantsInput struct {
 	FilterByUserId *string
 
 	// Maximum number of results to return. Default: 50.
-	MaxResults int32
+	MaxResults *int32
 
 	// The first participant to retrieve. This is used for pagination; see the
 	// nextToken response field.
@@ -73,8 +73,8 @@ type ListParticipantsOutput struct {
 	// This member is required.
 	Participants []types.ParticipantSummary
 
-	// If there are more rooms than maxResults , use nextToken in the request to get
-	// the next set.
+	// If there are more participants than maxResults , use nextToken in the request
+	// to get the next set.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -196,8 +196,8 @@ func NewListParticipantsPaginator(client ListParticipantsAPIClient, params *List
 	}
 
 	options := ListParticipantsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -227,7 +227,11 @@ func (p *ListParticipantsPaginator) NextPage(ctx context.Context, optFns ...func
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListParticipants(ctx, &params, optFns...)
 	if err != nil {
