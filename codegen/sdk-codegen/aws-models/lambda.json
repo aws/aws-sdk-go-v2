@@ -1998,6 +1998,47 @@
                 "smithy.api#documentation": "<p>Specific configuration settings for an Amazon Managed Streaming for Apache Kafka (Amazon MSK) event source.</p>"
             }
         },
+        "com.amazonaws.lambda#ApplicationLogLevel": {
+            "type": "enum",
+            "members": {
+                "Trace": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRACE"
+                    }
+                },
+                "Debug": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEBUG"
+                    }
+                },
+                "Info": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFO"
+                    }
+                },
+                "Warn": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WARN"
+                    }
+                },
+                "Error": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "Fatal": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FATAL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lambda#Architecture": {
             "type": "enum",
             "members": {
@@ -2811,13 +2852,19 @@
                 "EphemeralStorage": {
                     "target": "com.amazonaws.lambda#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n      number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>"
+                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n      number between 512 and 10,240 MB.</p>"
                     }
                 },
                 "SnapStart": {
                     "target": "com.amazonaws.lambda#SnapStart",
                     "traits": {
                         "smithy.api#documentation": "<p>The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html\">SnapStart</a> setting.</p>"
+                    }
+                },
+                "LoggingConfig": {
+                    "target": "com.amazonaws.lambda#LoggingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function's Amazon CloudWatch Logs configuration settings.</p>"
                     }
                 }
             },
@@ -3855,7 +3902,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n  number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>"
+                "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but it can be any\n      whole number between 512 and 10,240 MB.</p>"
             }
         },
         "com.amazonaws.lambda#EphemeralStorageSize": {
@@ -4452,7 +4499,7 @@
                 "EphemeralStorage": {
                     "target": "com.amazonaws.lambda#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n  number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>"
+                        "smithy.api#documentation": "<p>The size of the function’s <code>/tmp</code> directory in MB. The default value is 512, but it can be any\n      whole number between 512 and 10,240 MB.</p>"
                     }
                 },
                 "SnapStart": {
@@ -4465,6 +4512,12 @@
                     "target": "com.amazonaws.lambda#RuntimeVersionConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the runtime and any errors that occured.</p>"
+                    }
+                },
+                "LoggingConfig": {
+                    "target": "com.amazonaws.lambda#LoggingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function's Amazon CloudWatch Logs configuration settings.</p>"
                     }
                 }
             },
@@ -6490,7 +6543,7 @@
             ],
             "traits": {
                 "smithy.api#deprecated": {},
-                "smithy.api#documentation": "<important>\n            <p>For asynchronous function invocation, use <a>Invoke</a>.</p>\n         </important>\n         <p>Invokes a function asynchronously.</p>\n         <note>\n            <p>If you do use the InvokeAsync action, note that it doesn't support the use of X-Ray active tracing. Trace ID is not \n        propagated to the function, even if X-Ray active tracing is turned on.</p>\n         </note>",
+                "smithy.api#documentation": "<important>\n            <p>For asynchronous function invocation, use <a>Invoke</a>.</p>\n         </important>\n         <p>Invokes a function asynchronously.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2014-11-13/functions/{FunctionName}/invoke-async",
@@ -8356,6 +8409,33 @@
                 "smithy.api#pattern": "^/mnt/[a-zA-Z0-9-_.]+$"
             }
         },
+        "com.amazonaws.lambda#LogFormat": {
+            "type": "enum",
+            "members": {
+                "Json": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                },
+                "Text": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Text"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lambda#LogGroup": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
+            }
+        },
         "com.amazonaws.lambda#LogType": {
             "type": "enum",
             "members": {
@@ -8371,6 +8451,38 @@
                         "smithy.api#enumValue": "Tail"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lambda#LoggingConfig": {
+            "type": "structure",
+            "members": {
+                "LogFormat": {
+                    "target": "com.amazonaws.lambda#LogFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format in which Lambda sends your function's application and system logs to CloudWatch. Select between \n    plain text and structured JSON.</p>"
+                    }
+                },
+                "ApplicationLogLevel": {
+                    "target": "com.amazonaws.lambda#ApplicationLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set this property to filter the application logs for your function that Lambda sends to CloudWatch. Lambda only sends application logs at the \n    selected level and lower.</p>"
+                    }
+                },
+                "SystemLogLevel": {
+                    "target": "com.amazonaws.lambda#SystemLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the \n      selected level and lower.</p>"
+                    }
+                },
+                "LogGroup": {
+                    "target": "com.amazonaws.lambda#LogGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon CloudWatch log group the function sends logs to. By default, Lambda functions send logs to a default \n      log group named <code>/aws/lambda/<function name></code>. To use a different log group, enter an existing log group or enter a new log group name.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The function's Amazon CloudWatch Logs configuration settings.</p>"
             }
         },
         "com.amazonaws.lambda#Long": {
@@ -10596,6 +10708,29 @@
                 }
             }
         },
+        "com.amazonaws.lambda#SystemLogLevel": {
+            "type": "enum",
+            "members": {
+                "Debug": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEBUG"
+                    }
+                },
+                "Info": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFO"
+                    }
+                },
+                "Warn": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WARN"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lambda#TagKey": {
             "type": "string"
         },
@@ -11496,13 +11631,19 @@
                 "EphemeralStorage": {
                     "target": "com.amazonaws.lambda#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n      number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>"
+                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n      number between 512 and 10,240 MB.</p>"
                     }
                 },
                 "SnapStart": {
                     "target": "com.amazonaws.lambda#SnapStart",
                     "traits": {
                         "smithy.api#documentation": "<p>The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html\">SnapStart</a> setting.</p>"
+                    }
+                },
+                "LoggingConfig": {
+                    "target": "com.amazonaws.lambda#LoggingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function's Amazon CloudWatch Logs configuration settings.</p>"
                     }
                 }
             },

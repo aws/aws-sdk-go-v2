@@ -88,7 +88,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> Specifies information about the archive storage tier retention period.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies only]</b> Specifies information about the archive storage tier retention period.</p>"
             }
         },
         "com.amazonaws.dlm#ArchiveRule": {
@@ -104,7 +104,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> Specifies a snapshot archiving rule for a schedule.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies only]</b> Specifies a snapshot archiving rule for a schedule.</p>"
             }
         },
         "com.amazonaws.dlm#AvailabilityZone": {
@@ -164,6 +164,14 @@
                 }
             }
         },
+        "com.amazonaws.dlm#CreateInterval": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.dlm#CreateLifecyclePolicy": {
             "type": "operation",
             "input": {
@@ -184,7 +192,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a policy to manage the lifecycle of the specified Amazon Web Services resources. You can\n\t\t\tcreate up to 100 lifecycle policies.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Data Lifecycle Manager lifecycle policy. Amazon Data Lifecycle Manager supports the following policy types:</p>\n         <ul>\n            <li>\n               <p>Custom EBS snapshot policy</p>\n            </li>\n            <li>\n               <p>Custom EBS-backed AMI policy</p>\n            </li>\n            <li>\n               <p>Cross-account copy event policy</p>\n            </li>\n            <li>\n               <p>Default policy for EBS snapshots</p>\n            </li>\n            <li>\n               <p>Default policy for EBS-backed AMIs</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/policy-differences.html\">\n\t\t\tDefault policies vs custom policies</a>.</p>\n         <important>\n            <p>If you create a default policy, you can specify the request parameters either in  \n\t\t\t\tthe request body, or in the PolicyDetails request structure, but not both.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/policies",
@@ -215,22 +223,62 @@
                     "target": "com.amazonaws.dlm#SettablePolicyStateValues",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The desired activation state of the lifecycle policy after creation.</p>",
+                        "smithy.api#documentation": "<p>The activation state of the lifecycle policy after creation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PolicyDetails": {
                     "target": "com.amazonaws.dlm#PolicyDetails",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The configuration details of the lifecycle policy.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The configuration details of the lifecycle policy.</p>\n         <important>\n            <p>If you create a default policy, you can specify the request parameters either in  \n\t\t\t\tthe request body, or in the PolicyDetails request structure, but not both.</p>\n         </important>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.dlm#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to apply to the lifecycle policy during creation.</p>"
+                    }
+                },
+                "DefaultPolicy": {
+                    "target": "com.amazonaws.dlm#DefaultPolicyTypeValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specify the type of default policy to create.</p>\n         <ul>\n            <li>\n               <p>To create a default policy for EBS snapshots, that creates snapshots of all volumes in the\n\t\t\t\t\tRegion that do not have recent backups, specify <code>VOLUME</code>.</p>\n            </li>\n            <li>\n               <p>To create a default policy for EBS-backed AMIs, that creates EBS-backed \n\t\t\t\t\tAMIs from all instances in the Region that do not have recent backups, specify \n\t\t\t\t\t<code>INSTANCE</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CreateInterval": {
+                    "target": "com.amazonaws.dlm#CreateInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specifies how often the policy should run and create snapshots or AMIs. \n\t\t\tThe creation frequency can range from 1 to 7 days. If you do not specify a value, the \n\t\t\tdefault is 1.</p>\n         <p>Default: 1</p>"
+                    }
+                },
+                "RetainInterval": {
+                    "target": "com.amazonaws.dlm#RetainInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specifies how long the policy should retain snapshots or AMIs before \n\t\t\tdeleting them. The retention period can range from 2 to 14 days, but it must be greater \n\t\t\tthan the creation frequency to ensure that the policy retains at least 1 snapshot or \n\t\t\tAMI at any given time. If you do not specify a value, the default is 7.</p>\n         <p>Default: 7</p>"
+                    }
+                },
+                "CopyTags": {
+                    "target": "com.amazonaws.dlm#CopyTagsNullable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Indicates whether the policy should copy tags from the source resource \n\t\t\tto the snapshot or AMI. If you do not specify a value, the default is <code>false</code>.</p>\n         <p>Default: false</p>"
+                    }
+                },
+                "ExtendDeletion": {
+                    "target": "com.amazonaws.dlm#ExtendDeletion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Defines the snapshot or AMI retention behavior for the policy if the \n\t\t\tsource volume or instance is deleted, or if the policy enters the error, disabled, or \n\t\t\tdeleted state.</p>\n         <p>By default (<b>ExtendDeletion=false</b>):</p>\n         <ul>\n            <li>\n               <p>If a source resource is deleted, Amazon Data Lifecycle Manager will continue to delete previously \n\t\t\t\tcreated snapshots or AMIs, up to but not including the last one, based on the \n\t\t\t\tspecified retention period. If you want Amazon Data Lifecycle Manager to delete all snapshots or AMIs, \n\t\t\t\tincluding the last one, specify <code>true</code>.</p>\n            </li>\n            <li>\n               <p>If a policy enters the error, disabled, or deleted state, Amazon Data Lifecycle Manager stops deleting \n\t\t\t\t\tsnapshots and AMIs. If you want Amazon Data Lifecycle Manager to continue deleting snapshots or AMIs, \n\t\t\t\t\tincluding the last one, if the policy enters one of these states, specify \n\t\t\t\t\t<code>true</code>.</p>\n            </li>\n         </ul>\n         <p>If you enable extended deletion (<b>ExtendDeletion=true</b>), \n\t\t\tyou override both default behaviors simultaneously.</p>\n         <p>If you do not specify a value, the default is <code>false</code>.</p>\n         <p>Default: false</p>"
+                    }
+                },
+                "CrossRegionCopyTargets": {
+                    "target": "com.amazonaws.dlm#CrossRegionCopyTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specifies destination Regions for snapshot or AMI copies. You can specify \n\t\t\tup to 3 destination Regions. If you do not want to create cross-Region copies, omit this \n\t\t\tparameter.</p>"
+                    }
+                },
+                "Exclusions": {
+                    "target": "com.amazonaws.dlm#Exclusions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specifies exclusion parameters for volumes or instances for which you \n\t\t\tdo not want to create snapshots or AMIs. The policy will not create snapshots or AMIs \n\t\t\tfor target resources that match any of the specified exclusion parameters.</p>"
                     }
                 }
             },
@@ -258,7 +306,7 @@
                 "Location": {
                     "target": "com.amazonaws.dlm#LocationValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> Specifies the destination for snapshots created by the policy. To create \n\t\t\tsnapshots in the same Region as the source resource, specify <code>CLOUD</code>. To create \n\t\t\tsnapshots on the same Outpost as the source resource, specify <code>OUTPOST_LOCAL</code>. \n\t\t\tIf you omit this parameter, <code>CLOUD</code> is used by default.</p>\n         <p>If the policy targets resources in an Amazon Web Services Region, then you must create \n\t\t\tsnapshots in the same Region as the source resource. If the policy targets resources on an \n\t\t\tOutpost, then you can create snapshots on the same Outpost as the source resource, or in \n\t\t\tthe Region of that Outpost.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies only]</b> Specifies the destination for snapshots created by the policy. To create \n\t\t\tsnapshots in the same Region as the source resource, specify <code>CLOUD</code>. To create \n\t\t\tsnapshots on the same Outpost as the source resource, specify <code>OUTPOST_LOCAL</code>. \n\t\t\tIf you omit this parameter, <code>CLOUD</code> is used by default.</p>\n         <p>If the policy targets resources in an Amazon Web Services Region, then you must create \n\t\t\tsnapshots in the same Region as the source resource. If the policy targets resources on an \n\t\t\tOutpost, then you can create snapshots on the same Outpost as the source resource, or in \n\t\t\tthe Region of that Outpost.</p>"
                     }
                 },
                 "Interval": {
@@ -288,12 +336,12 @@
                 "Scripts": {
                     "target": "com.amazonaws.dlm#ScriptsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies that target instances only]</b> Specifies pre and/or post scripts for a snapshot lifecycle policy \n\t\t\tthat targets instances. This is useful for creating application-consistent snapshots, or for \n\t\t\tperforming specific administrative tasks before or after Amazon Data Lifecycle Manager initiates snapshot creation.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/automate-app-consistent-backups.html\">Automating \n\t\t\t\tapplication-consistent snapshots with pre and post scripts</a>.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies that target instances only]</b> Specifies pre and/or post scripts for a snapshot lifecycle policy \n\t\t\tthat targets instances. This is useful for creating application-consistent snapshots, or for \n\t\t\tperforming specific administrative tasks before or after Amazon Data Lifecycle Manager initiates snapshot creation.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/automate-app-consistent-backups.html\">Automating \n\t\t\t\tapplication-consistent snapshots with pre and post scripts</a>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies when the policy should create snapshots or AMIs.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>You must specify either <b>CronExpression</b>, or \n\t\t\t\t\t\t<b>Interval</b>, <b>IntervalUnit</b>, \n\t\t\t\t\t\tand <b>Times</b>.</p>\n               </li>\n               <li>\n                  <p>If you need to specify an <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html\">ArchiveRule</a> \n\t\t\t\t\t\tfor the schedule, then you must specify a creation frequency of at least \n\t\t\t\t\t\t28 days.</p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>\n            <b>[Custom snapshot and AMI policies only]</b> Specifies when the policy should create snapshots or AMIs.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>You must specify either <b>CronExpression</b>, or \n\t\t\t\t\t\t<b>Interval</b>, <b>IntervalUnit</b>, \n\t\t\t\t\t\tand <b>Times</b>.</p>\n               </li>\n               <li>\n                  <p>If you need to specify an <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html\">ArchiveRule</a> \n\t\t\t\t\t\tfor the schedule, then you must specify a creation frequency of at least \n\t\t\t\t\t\t28 days.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.dlm#CronExpression": {
@@ -362,7 +410,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[AMI policies only]</b> Specifies an AMI deprecation rule for cross-Region AMI copies created by an AMI policy.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Custom AMI policies only]</b> Specifies an AMI deprecation rule for cross-Region AMI copies created by an AMI policy.</p>"
             }
         },
         "com.amazonaws.dlm#CrossRegionCopyRetainRule": {
@@ -391,13 +439,13 @@
                 "TargetRegion": {
                     "target": "com.amazonaws.dlm#TargetRegion",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>Use this parameter for AMI policies only. For snapshot policies, use \n\t\t\t\t<b>Target</b> instead. For snapshot policies \n\t\t\t\tcreated before the <b>Target</b> parameter \n\t\t\t\twas introduced, this parameter indicates the target Region for snapshot \n\t\t\t\tcopies.</p>\n            <p></p>\n         </note>\n         <p>\n            <b>[AMI policies only]</b> The target Region or the Amazon Resource Name (ARN) of the target Outpost for the \n\t\t\tsnapshot copies.</p>"
+                        "smithy.api#documentation": "<note>\n            <p>Use this parameter for AMI policies only. For snapshot policies, use \n\t\t\t\t<b>Target</b> instead. For snapshot policies \n\t\t\t\tcreated before the <b>Target</b> parameter \n\t\t\t\twas introduced, this parameter indicates the target Region for snapshot \n\t\t\t\tcopies.</p>\n            <p></p>\n         </note>\n         <p>\n            <b>[Custom AMI policies only]</b> The target Region or the Amazon Resource Name (ARN) of the target Outpost for the \n\t\t\tsnapshot copies.</p>"
                     }
                 },
                 "Target": {
                     "target": "com.amazonaws.dlm#Target",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>Use this parameter for snapshot policies only. For AMI policies, use \n\t\t\t\t<b>TargetRegion</b> instead.</p>\n         </note>\n         <p>\n            <b>[Snapshot policies only]</b> The target Region or the Amazon Resource Name (ARN) of the target Outpost for the \n\t\t\tsnapshot copies.</p>"
+                        "smithy.api#documentation": "<note>\n            <p>Use this parameter for snapshot policies only. For AMI policies, use \n\t\t\t\t<b>TargetRegion</b> instead.</p>\n         </note>\n         <p>\n            <b>[Custom snapshot policies only]</b> The target Region or the Amazon Resource Name (ARN) of the target Outpost for the \n\t\t\tsnapshot copies.</p>"
                     }
                 },
                 "Encrypted": {
@@ -429,12 +477,12 @@
                 "DeprecateRule": {
                     "target": "com.amazonaws.dlm#CrossRegionCopyDeprecateRule",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[AMI policies only]</b> The AMI deprecation rule for cross-Region AMI copies created by the rule.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom AMI policies only]</b> The AMI deprecation rule for cross-Region AMI copies created by the rule.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies a cross-Region copy rule for a snapshot and AMI policies.</p>\n         <note>\n            <p>To specify a cross-Region copy action for event-based polices, use \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_CrossRegionCopyAction.html\">CrossRegionCopyAction</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>\n            <b>[Custom snapshot and AMI policies only]</b> Specifies a cross-Region copy rule for a snapshot and AMI policies.</p>\n         <note>\n            <p>To specify a cross-Region copy action for event-based polices, use \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_CrossRegionCopyAction.html\">CrossRegionCopyAction</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.dlm#CrossRegionCopyRules": {
@@ -446,6 +494,75 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 3
+                }
+            }
+        },
+        "com.amazonaws.dlm#CrossRegionCopyTarget": {
+            "type": "structure",
+            "members": {
+                "TargetRegion": {
+                    "target": "com.amazonaws.dlm#TargetRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target Region, for example <code>us-east-1</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specifies a destination Region for cross-Region copy actions.</p>"
+            }
+        },
+        "com.amazonaws.dlm#CrossRegionCopyTargetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dlm#CrossRegionCopyTarget"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.dlm#DefaultPoliciesTypeValues": {
+            "type": "enum",
+            "members": {
+                "VOLUME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOLUME"
+                    }
+                },
+                "INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dlm#DefaultPolicy": {
+            "type": "boolean"
+        },
+        "com.amazonaws.dlm#DefaultPolicyTypeValues": {
+            "type": "enum",
+            "members": {
+                "VOLUME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOLUME"
+                    }
+                },
+                "INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE"
+                    }
                 }
             }
         },
@@ -523,7 +640,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[AMI policies only]</b> Specifies an AMI deprecation rule for AMIs created by an AMI lifecycle policy.</p>\n         <p>For age-based schedules, you must specify <b>Interval</b> and \n\t\t\t<b>IntervalUnit</b>. For count-based schedules, you must specify \n\t\t\t<b>Count</b>.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Custom AMI policies only]</b> Specifies an AMI deprecation rule for AMIs created by an AMI lifecycle policy.</p>\n         <p>For age-based schedules, you must specify <b>Interval</b> and \n\t\t\t<b>IntervalUnit</b>. For count-based schedules, you must specify \n\t\t\t<b>Count</b>.</p>"
             }
         },
         "com.amazonaws.dlm#DescriptionRegex": {
@@ -646,6 +763,9 @@
         "com.amazonaws.dlm#ExcludeBootVolume": {
             "type": "boolean"
         },
+        "com.amazonaws.dlm#ExcludeBootVolumes": {
+            "type": "boolean"
+        },
         "com.amazonaws.dlm#ExcludeDataVolumeTagList": {
             "type": "list",
             "member": {
@@ -656,6 +776,56 @@
                     "min": 0,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.dlm#ExcludeTagsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dlm#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.dlm#ExcludeVolumeTypesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dlm#VolumeTypeValues"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.dlm#Exclusions": {
+            "type": "structure",
+            "members": {
+                "ExcludeBootVolumes": {
+                    "target": "com.amazonaws.dlm#ExcludeBootVolumes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies for EBS snapshots only]</b> Indicates whether to exclude volumes that are attached to \n\t\t\tinstances as the boot volume. If you exclude boot volumes, only volumes attached as data \n\t\t\t(non-boot) volumes will be backed up by the policy. To exclude boot volumes, specify \n\t\t\t<code>true</code>.</p>"
+                    }
+                },
+                "ExcludeVolumeTypes": {
+                    "target": "com.amazonaws.dlm#ExcludeVolumeTypesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies for EBS snapshots only]</b> Specifies the volume types to exclude. Volumes of the specified \n\t\t\ttypes will not be targeted by the policy.</p>"
+                    }
+                },
+                "ExcludeTags": {
+                    "target": "com.amazonaws.dlm#ExcludeTagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies for EBS-backed AMIs only]</b> Specifies whether to exclude volumes that have specific tags. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specifies exclusion parameters for volumes or instances for which you \n\t\t\tdo not want to create snapshots or AMIs. The policy will not create snapshots or AMIs \n\t\t\tfor target resources that match any of the specified exclusion parameters.</p>"
             }
         },
         "com.amazonaws.dlm#ExecuteOperationOnScriptFailure": {
@@ -692,6 +862,9 @@
                 "smithy.api#pattern": "^arn:aws(-[a-z]{1,3}){0,2}:iam::\\d+:role/"
             }
         },
+        "com.amazonaws.dlm#ExtendDeletion": {
+            "type": "boolean"
+        },
         "com.amazonaws.dlm#FastRestoreRule": {
             "type": "structure",
             "members": {
@@ -723,7 +896,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> Specifies a rule for enabling fast snapshot restore for snapshots created by\n\t\t\tsnapshot policies. You can enable fast snapshot restore based on either a count or a\n\t\t\ttime interval.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies only]</b> Specifies a rule for enabling fast snapshot restore for snapshots created by\n\t\t\tsnapshot policies. You can enable fast snapshot restore based on either a count or a\n\t\t\ttime interval.</p>"
             }
         },
         "com.amazonaws.dlm#GetLifecyclePolicies": {
@@ -793,6 +966,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to add to objects created by the policy.</p>\n         <p>Tags are strings in the format <code>key=value</code>.</p>\n         <p>These user-defined tags are added in addition to the Amazon Web Services-added lifecycle tags.</p>",
                         "smithy.api#httpQuery": "tagsToAdd"
+                    }
+                },
+                "DefaultPolicyType": {
+                    "target": "com.amazonaws.dlm#DefaultPoliciesTypeValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specifies the type of default policy to get. Specify one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VOLUME</code> - To get only the default policy for EBS snapshots</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE</code> - To get only the default policy for EBS-backed AMIs</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALL</code> - To get all default policies</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "defaultPolicyType"
                     }
                 }
             },
@@ -1020,10 +1200,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the policy.</p>"
                     }
+                },
+                "DefaultPolicy": {
+                    "target": "com.amazonaws.dlm#DefaultPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> The type of default policy. Values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VOLUME</code> - Default policy for EBS snapshots</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE</code> - Default policy for EBS-backed AMIs</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[All policy types]</b> Detailed information about a snapshot, AMI, or event-based lifecycle policy.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Custom policies only]</b> Detailed information about a snapshot, AMI, or event-based lifecycle policy.</p>"
             }
         },
         "com.amazonaws.dlm#LifecyclePolicySummary": {
@@ -1057,6 +1243,12 @@
                     "target": "com.amazonaws.dlm#PolicyTypeValues",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of policy. <code>EBS_SNAPSHOT_MANAGEMENT</code> indicates that the policy \n\t\t\tmanages the lifecycle of Amazon EBS snapshots. <code>IMAGE_MANAGEMENT</code> \n\t\t\tindicates that the policy manages the lifecycle of EBS-backed AMIs. \n\t\t\t<code>EVENT_BASED_POLICY</code> indicates that the policy automates cross-account \n\t\t\tsnapshot copies for snapshots that are shared with your account.</p>"
+                    }
+                },
+                "DefaultPolicy": {
+                    "target": "com.amazonaws.dlm#DefaultPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> The type of default policy. Values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VOLUME</code> - Default policy for EBS snapshots</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE</code> - Default policy for EBS-backed AMIs</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1185,24 +1377,24 @@
                 "ExcludeBootVolume": {
                     "target": "com.amazonaws.dlm#ExcludeBootVolume",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies that target instances only]</b> Indicates whether to exclude the root volume from multi-volume \n\t\t\tsnapshot sets. The default is <code>false</code>. If you specify <code>true</code>, \n\t\t\tthen the root volumes attached to targeted instances will be excluded from the multi-volume \n\t\t\tsnapshot sets created by the policy.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies that target instances only]</b> Indicates whether to exclude the root volume from multi-volume \n\t\t\tsnapshot sets. The default is <code>false</code>. If you specify <code>true</code>, \n\t\t\tthen the root volumes attached to targeted instances will be excluded from the multi-volume \n\t\t\tsnapshot sets created by the policy.</p>"
                     }
                 },
                 "NoReboot": {
                     "target": "com.amazonaws.dlm#NoReboot",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[AMI policies only]</b> Indicates whether targeted instances are rebooted when the lifecycle policy \n\t\t\truns. <code>true</code> indicates that targeted instances are not rebooted when the policy \n\t\t\truns. <code>false</code> indicates that target instances are rebooted when the policy runs. \n\t\t\tThe default is <code>true</code> (instances are not rebooted).</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom AMI policies only]</b> Indicates whether targeted instances are rebooted when the lifecycle policy \n\t\t\truns. <code>true</code> indicates that targeted instances are not rebooted when the policy \n\t\t\truns. <code>false</code> indicates that target instances are rebooted when the policy runs. \n\t\t\tThe default is <code>true</code> (instances are not rebooted).</p>"
                     }
                 },
                 "ExcludeDataVolumeTags": {
                     "target": "com.amazonaws.dlm#ExcludeDataVolumeTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies that target instances only]</b> The tags used to identify data (non-root) volumes to exclude from \n\t\t\tmulti-volume snapshot sets.</p>\n         <p>If you create a snapshot lifecycle policy that targets instances and you specify tags for \n\t\t\tthis parameter, then data volumes with the specified tags that are attached to targeted \n\t\t\tinstances will be excluded from the multi-volume snapshot sets created by the policy.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies that target instances only]</b> The tags used to identify data (non-root) volumes to exclude from \n\t\t\tmulti-volume snapshot sets.</p>\n         <p>If you create a snapshot lifecycle policy that targets instances and you specify tags for \n\t\t\tthis parameter, then data volumes with the specified tags that are attached to targeted \n\t\t\tinstances will be excluded from the multi-volume snapshot sets created by the policy.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies optional parameters for snapshot and AMI policies. The \n\t\t\tset of valid parameters depends on the combination of policy type and target resource \n\t\t\ttype.</p>\n         <p>If you choose to exclude boot volumes and you specify tags that consequently exclude \n\t\t\tall of the additional data volumes attached to an instance, then Amazon Data Lifecycle Manager will not create \n\t\t\tany snapshots for the affected instance, and it will emit a <code>SnapshotsCreateFailed</code> \n\t\t\tAmazon CloudWatch metric. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-dlm-cw-metrics.html\">Monitor your policies \n\t\t\t\tusing Amazon CloudWatch</a>.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Custom snapshot and AMI policies only]</b> Specifies optional parameters for snapshot and AMI policies. The \n\t\t\tset of valid parameters depends on the combination of policy type and target resource \n\t\t\ttype.</p>\n         <p>If you choose to exclude boot volumes and you specify tags that consequently exclude \n\t\t\tall of the additional data volumes attached to an instance, then Amazon Data Lifecycle Manager will not create \n\t\t\tany snapshots for the affected instance, and it will emit a <code>SnapshotsCreateFailed</code> \n\t\t\tAmazon CloudWatch metric. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-dlm-cw-metrics.html\">Monitor your policies \n\t\t\t\tusing Amazon CloudWatch</a>.</p>"
             }
         },
         "com.amazonaws.dlm#PolicyArn": {
@@ -1231,37 +1423,37 @@
                 "PolicyType": {
                     "target": "com.amazonaws.dlm#PolicyTypeValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[All policy types]</b> The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> \n\t\t\tto create an event-based policy that performs specific actions when a defined event occurs in your Amazon Web Services account.</p>\n         <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom policies only]</b> The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> \n\t\t\tto create an event-based policy that performs specific actions when a defined event occurs in your Amazon Web Services account.</p>\n         <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>"
                     }
                 },
                 "ResourceTypes": {
                     "target": "com.amazonaws.dlm#ResourceTypeValuesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> The target resource type for snapshot and AMI lifecycle policies. Use <code>VOLUME </code>to \n\t\t\tcreate snapshots of individual volumes or use <code>INSTANCE</code> to create multi-volume \n\t\t\tsnapshots from the volumes for an instance.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies only]</b> The target resource type for snapshot and AMI lifecycle policies. Use <code>VOLUME </code>to \n\t\t\tcreate snapshots of individual volumes or use <code>INSTANCE</code> to create multi-volume \n\t\t\tsnapshots from the volumes for an instance.</p>"
                     }
                 },
                 "ResourceLocations": {
                     "target": "com.amazonaws.dlm#ResourceLocationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> The location of the resources to backup. If the source resources are located in an \n\t\t\tAmazon Web Services Region, specify <code>CLOUD</code>. If the source resources are located on an Outpost \n\t\t\tin your account, specify <code>OUTPOST</code>.</p>\n         <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources \n\t\t\t\tof the specified type with matching target tags across all of the Outposts in your account.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot and AMI policies only]</b> The location of the resources to backup. If the source resources are located in an \n\t\t\tAmazon Web Services Region, specify <code>CLOUD</code>. If the source resources are located on an Outpost \n\t\t\tin your account, specify <code>OUTPOST</code>.</p>\n         <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources \n\t\t\t\tof the specified type with matching target tags across all of the Outposts in your account.</p>"
                     }
                 },
                 "TargetTags": {
                     "target": "com.amazonaws.dlm#TargetTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> The single tag that identifies targeted resources for this policy.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot and AMI policies only]</b> The single tag that identifies targeted resources for this policy.</p>"
                     }
                 },
                 "Schedules": {
                     "target": "com.amazonaws.dlm#ScheduleList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> The schedules of policy-defined actions for snapshot and AMI lifecycle policies. A policy \n\t\t\tcan have up to four schedules—one mandatory schedule and up to three optional schedules.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot and AMI policies only]</b> The schedules of policy-defined actions for snapshot and AMI lifecycle policies. A policy \n\t\t\tcan have up to four schedules—one mandatory schedule and up to three optional schedules.</p>"
                     }
                 },
                 "Parameters": {
                     "target": "com.amazonaws.dlm#Parameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> A set of optional parameters for snapshot and AMI lifecycle policies. </p>\n         <note>\n            <p>If you are modifying a policy that was created or previously modified using the Amazon \n\t\t\t\tData Lifecycle Manager console, then you must include this parameter and specify either \n\t\t\t\tthe default values or the new values that you require. You can't omit this parameter or \n\t\t\t\tset its values to null.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot and AMI policies only]</b> A set of optional parameters for snapshot and AMI lifecycle policies. </p>\n         <note>\n            <p>If you are modifying a policy that was created or previously modified using the Amazon \n\t\t\t\tData Lifecycle Manager console, then you must include this parameter and specify either \n\t\t\t\tthe default values or the new values that you require. You can't omit this parameter or \n\t\t\t\tset its values to null.</p>\n         </note>"
                     }
                 },
                 "EventSource": {
@@ -1275,10 +1467,58 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            <b>[Event-based policies only]</b>  The actions to be performed when the  event-based policy is activated. You can specify \n\t\t\tonly one action per policy.</p>"
                     }
+                },
+                "PolicyLanguage": {
+                    "target": "com.amazonaws.dlm#PolicyLanguageValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of policy to create. Specify one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SIMPLIFIED</code> To create a default policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STANDARD</code> To create a custom policy.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.dlm#ResourceTypeValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specify the type of default policy to create.</p>\n         <ul>\n            <li>\n               <p>To create a default policy for EBS snapshots, that creates snapshots of all volumes in the\n\t\t\t\t\tRegion that do not have recent backups, specify <code>VOLUME</code>.</p>\n            </li>\n            <li>\n               <p>To create a default policy for EBS-backed AMIs, that creates EBS-backed \n\t\t\t\t\tAMIs from all instances in the Region that do not have recent backups, specify \n\t\t\t\t\t<code>INSTANCE</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CreateInterval": {
+                    "target": "com.amazonaws.dlm#CreateInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specifies how often the policy should run and create snapshots or AMIs. \n\t\t\tThe creation frequency can range from 1 to 7 days. If you do not specify a value, the \n\t\t\tdefault is 1.</p>\n         <p>Default: 1</p>"
+                    }
+                },
+                "RetainInterval": {
+                    "target": "com.amazonaws.dlm#RetainInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specifies how long the policy should retain snapshots or AMIs before \n\t\t\tdeleting them. The retention period can range from 2 to 14 days, but it must be greater \n\t\t\tthan the creation frequency to ensure that the policy retains at least 1 snapshot or \n\t\t\tAMI at any given time. If you do not specify a value, the default is 7.</p>\n         <p>Default: 7</p>"
+                    }
+                },
+                "CopyTags": {
+                    "target": "com.amazonaws.dlm#CopyTagsNullable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Indicates whether the policy should copy tags from the source resource \n\t\t\tto the snapshot or AMI. If you do not specify a value, the default is <code>false</code>.</p>\n         <p>Default: false</p>"
+                    }
+                },
+                "CrossRegionCopyTargets": {
+                    "target": "com.amazonaws.dlm#CrossRegionCopyTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specifies destination Regions for snapshot or AMI copies. You can specify \n\t\t\tup to 3 destination Regions. If you do not want to create cross-Region copies, omit this \n\t\t\tparameter.</p>"
+                    }
+                },
+                "ExtendDeletion": {
+                    "target": "com.amazonaws.dlm#ExtendDeletion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Defines the snapshot or AMI retention behavior for the policy if the \n\t\t\tsource volume or instance is deleted, or if the policy enters the error, disabled, or \n\t\t\tdeleted state.</p>\n         <p>By default (<b>ExtendDeletion=false</b>):</p>\n         <ul>\n            <li>\n               <p>If a source resource is deleted, Amazon Data Lifecycle Manager will continue to delete previously \n\t\t\t\t\tcreated snapshots or AMIs, up to but not including the last one, based on the \n\t\t\t\t\tspecified retention period. If you want Amazon Data Lifecycle Manager to delete all snapshots or AMIs, \n\t\t\t\t\tincluding the last one, specify <code>true</code>.</p>\n            </li>\n            <li>\n               <p>If a policy enters the error, disabled, or deleted state, Amazon Data Lifecycle Manager stops deleting \n\t\t\t\t\tsnapshots and AMIs. If you want Amazon Data Lifecycle Manager to continue deleting snapshots or AMIs, \n\t\t\t\t\tincluding the last one, if the policy enters one of these states, specify \n\t\t\t\t\t<code>true</code>.</p>\n            </li>\n         </ul>\n         <p>If you enable extended deletion (<b>ExtendDeletion=true</b>), \n\t\t\tyou override both default behaviors simultaneously.</p>\n         <p>If you do not specify a value, the default is <code>false</code>.</p>\n         <p>Default: false</p>"
+                    }
+                },
+                "Exclusions": {
+                    "target": "com.amazonaws.dlm#Exclusions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specifies exclusion parameters for volumes or instances for which you \n\t\t\tdo not want to create snapshots or AMIs. The policy will not create snapshots or AMIs \n\t\t\tfor target resources that match any of the specified exclusion parameters.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[All policy types]</b> Specifies the configuration of a lifecycle policy.</p>"
+                "smithy.api#documentation": "<p>Specifies the configuration of a lifecycle policy.</p>"
             }
         },
         "com.amazonaws.dlm#PolicyId": {
@@ -1288,13 +1528,30 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "^policy-[A-Za-z0-9]+$"
+                "smithy.api#pattern": "^policy-[a-f0-9]+$"
             }
         },
         "com.amazonaws.dlm#PolicyIdList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.dlm#PolicyId"
+            }
+        },
+        "com.amazonaws.dlm#PolicyLanguageValues": {
+            "type": "enum",
+            "members": {
+                "SIMPLIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIMPLIFIED"
+                    }
+                },
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                }
             }
         },
         "com.amazonaws.dlm#PolicyTypeValues": {
@@ -1406,6 +1663,14 @@
                 }
             }
         },
+        "com.amazonaws.dlm#RetainInterval": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.dlm#RetainRule": {
             "type": "structure",
             "members": {
@@ -1429,7 +1694,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies a retention rule for snapshots created by snapshot policies, or for AMIs \n\t\t\tcreated by AMI policies.</p>\n         <note>\n            <p>For snapshot policies that have an <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html\">ArchiveRule</a>, this retention rule\n\t\t\t\tapplies to standard tier retention. When the retention threshold is met, snapshots\n\t\t\t\tare moved from the standard to the archive tier.</p>\n            <p>For snapshot policies that do not have an <b>ArchiveRule</b>, snapshots \n\t\t\t\tare permanently deleted when this retention threshold is met.</p>\n         </note>\n         <p>You can retain snapshots based on either a count or a time interval.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Count-based retention</b>\n               </p>\n               <p>You must specify <b>Count</b>. \n\t\t\t\t\tIf you specify an <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html\">ArchiveRule</a> for the schedule, then you can specify a retention count of \n\t\t\t\t\t<code>0</code> to archive snapshots immediately after creation. If you specify a <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_FastRestoreRule.html\">FastRestoreRule</a>, \n\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ShareRule.html\">ShareRule</a>, or a \n\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_CrossRegionCopyRule.html\">CrossRegionCopyRule</a>, then you must specify a retention count \n\t\t\t\t\tof <code>1</code> or more.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Age-based retention</b>\n               </p>\n               <p>You must specify <b>Interval</b> \n\t\t\t\t\tand <b>IntervalUnit</b>. If you specify an <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html\">ArchiveRule</a> for the \n\t\t\t\t\tschedule, then you can specify a retention interval of <code>0</code> days to archive snapshots immediately \n\t\t\t\t\tafter creation. If you specify a <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_FastRestoreRule.html\">FastRestoreRule</a>, <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ShareRule.html\">ShareRule</a>, or a \n\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_CrossRegionCopyRule.html\">CrossRegionCopyRule</a>, \n\t\t\t\t\tthen you must specify a retention interval of <code>1</code> day or \n\t\t\t\t\tmore.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>\n            <b>[Custom snapshot and AMI policies only]</b> Specifies a retention rule for snapshots created by snapshot policies, or for AMIs \n\t\t\tcreated by AMI policies.</p>\n         <note>\n            <p>For snapshot policies that have an <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html\">ArchiveRule</a>, this retention rule\n\t\t\t\tapplies to standard tier retention. When the retention threshold is met, snapshots\n\t\t\t\tare moved from the standard to the archive tier.</p>\n            <p>For snapshot policies that do not have an <b>ArchiveRule</b>, snapshots \n\t\t\t\tare permanently deleted when this retention threshold is met.</p>\n         </note>\n         <p>You can retain snapshots based on either a count or a time interval.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Count-based retention</b>\n               </p>\n               <p>You must specify <b>Count</b>. \n\t\t\t\t\tIf you specify an <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html\">ArchiveRule</a> for the schedule, then you can specify a retention count of \n\t\t\t\t\t<code>0</code> to archive snapshots immediately after creation. If you specify a <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_FastRestoreRule.html\">FastRestoreRule</a>, \n\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ShareRule.html\">ShareRule</a>, or a \n\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_CrossRegionCopyRule.html\">CrossRegionCopyRule</a>, then you must specify a retention count \n\t\t\t\t\tof <code>1</code> or more.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Age-based retention</b>\n               </p>\n               <p>You must specify <b>Interval</b> \n\t\t\t\t\tand <b>IntervalUnit</b>. If you specify an <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ArchiveRule.html\">ArchiveRule</a> for the \n\t\t\t\t\tschedule, then you can specify a retention interval of <code>0</code> days to archive snapshots immediately \n\t\t\t\t\tafter creation. If you specify a <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_FastRestoreRule.html\">FastRestoreRule</a>, <a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_ShareRule.html\">ShareRule</a>, or a \n\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/dlm/latest/APIReference/API_CrossRegionCopyRule.html\">CrossRegionCopyRule</a>, \n\t\t\t\t\tthen you must specify a retention interval of <code>1</code> day or \n\t\t\t\t\tmore.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.dlm#RetentionArchiveTier": {
@@ -1455,7 +1720,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> Describes the retention rule for archived snapshots. Once the archive \n\t\t\tretention threshold is met, the snapshots are permanently deleted from the archive tier.</p>\n         <note>\n            <p>The archive retention rule must retain snapshots in the archive tier for a minimum \n\t\t\t\tof 90 days.</p>\n         </note>\n         <p>For <b>count-based schedules</b>, you must specify <b>Count</b>. For <b>age-based\n\t\t\t\tschedules</b>, you must specify <b>Interval</b> and\n\t\t\t\t<b> IntervalUnit</b>.</p>\n         <p>For more information about using snapshot archiving, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive\">Considerations for \n\t\t\tsnapshot lifecycle policies</a>.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies only]</b> Describes the retention rule for archived snapshots. Once the archive \n\t\t\tretention threshold is met, the snapshots are permanently deleted from the archive tier.</p>\n         <note>\n            <p>The archive retention rule must retain snapshots in the archive tier for a minimum \n\t\t\t\tof 90 days.</p>\n         </note>\n         <p>For <b>count-based schedules</b>, you must specify <b>Count</b>. For <b>age-based\n\t\t\t\tschedules</b>, you must specify <b>Interval</b> and\n\t\t\t\t<b> IntervalUnit</b>.</p>\n         <p>For more information about using snapshot archiving, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive\">Considerations for \n\t\t\tsnapshot lifecycle policies</a>.</p>"
             }
         },
         "com.amazonaws.dlm#RetentionIntervalUnitValues": {
@@ -1529,7 +1794,7 @@
                 "FastRestoreRule": {
                     "target": "com.amazonaws.dlm#FastRestoreRule",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> The rule for enabling fast snapshot restore.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies only]</b> The rule for enabling fast snapshot restore.</p>"
                     }
                 },
                 "CrossRegionCopyRules": {
@@ -1541,24 +1806,24 @@
                 "ShareRules": {
                     "target": "com.amazonaws.dlm#ShareRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> The rule for sharing snapshots with other Amazon Web Services accounts.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies only]</b> The rule for sharing snapshots with other Amazon Web Services accounts.</p>"
                     }
                 },
                 "DeprecateRule": {
                     "target": "com.amazonaws.dlm#DeprecateRule",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[AMI policies only]</b> The AMI deprecation rule for the schedule.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom AMI policies only]</b> The AMI deprecation rule for the schedule.</p>"
                     }
                 },
                 "ArchiveRule": {
                     "target": "com.amazonaws.dlm#ArchiveRule",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies that target volumes only]</b> The snapshot archiving rule for the schedule. When you specify an archiving \n\t\t\trule, snapshots are automatically moved from the standard tier to the archive tier once the schedule's \n\t\t\tretention threshold is met. Snapshots are then retained in the archive tier for the archive retention \n\t\t\tperiod that you specify. </p>\n         <p>For more information about using snapshot archiving, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive\">Considerations for \n\t\t\t\tsnapshot lifecycle policies</a>.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies that target volumes only]</b> The snapshot archiving rule for the schedule. When you specify an archiving \n\t\t\trule, snapshots are automatically moved from the standard tier to the archive tier once the schedule's \n\t\t\tretention threshold is met. Snapshots are then retained in the archive tier for the archive retention \n\t\t\tperiod that you specify. </p>\n         <p>For more information about using snapshot archiving, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive\">Considerations for \n\t\t\t\tsnapshot lifecycle policies</a>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies a schedule for a snapshot or AMI lifecycle policy.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Custom snapshot and AMI policies only]</b> Specifies a schedule for a snapshot or AMI lifecycle policy.</p>"
             }
         },
         "com.amazonaws.dlm#ScheduleList": {
@@ -1626,7 +1891,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot policies that target instances only]</b> Information about pre and/or post scripts for a \n\t\t\tsnapshot lifecycle policy that targets instances. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/automate-app-consistent-backups.html\">\n\t\t\t\tAutomating application-consistent snapshots with pre and post scripts</a>.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies that target instances only]</b> Information about pre and/or post scripts for a \n\t\t\tsnapshot lifecycle policy that targets instances. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/automate-app-consistent-backups.html\">\n\t\t\t\tAutomating application-consistent snapshots with pre and post scripts</a>.</p>"
             }
         },
         "com.amazonaws.dlm#ScriptExecutionTimeout": {
@@ -1701,7 +1966,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> Specifies a rule for sharing snapshots across Amazon Web Services accounts.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies only]</b> Specifies a rule for sharing snapshots across Amazon Web Services accounts.</p>"
             }
         },
         "com.amazonaws.dlm#ShareRules": {
@@ -2166,6 +2431,42 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of the lifecycle policy. You cannot update the policy type or the\n\t\t\tresource type.</p>"
                     }
+                },
+                "CreateInterval": {
+                    "target": "com.amazonaws.dlm#CreateInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specifies how often the policy should run and create snapshots or AMIs. \n\t\t\tThe creation frequency can range from 1 to 7 days.</p>"
+                    }
+                },
+                "RetainInterval": {
+                    "target": "com.amazonaws.dlm#RetainInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specifies how long the policy should retain snapshots or AMIs before \n\t\t\tdeleting them. The retention period can range from 2 to 14 days, but it must be greater \n\t\t\tthan the creation frequency to ensure that the policy retains at least 1 snapshot or \n\t\t\tAMI at any given time.</p>"
+                    }
+                },
+                "CopyTags": {
+                    "target": "com.amazonaws.dlm#CopyTagsNullable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Indicates whether the policy should copy tags from the source resource \n\t\t\tto the snapshot or AMI.</p>"
+                    }
+                },
+                "ExtendDeletion": {
+                    "target": "com.amazonaws.dlm#ExtendDeletion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Defines the snapshot or AMI retention behavior for the policy if the \n\t\t\tsource volume or instance is deleted, or if the policy enters the error, disabled, or \n\t\t\tdeleted state.</p>\n         <p>By default (<b>ExtendDeletion=false</b>):</p>\n         <ul>\n            <li>\n               <p>If a source resource is deleted, Amazon Data Lifecycle Manager will continue to delete previously \n\t\t\t\t\tcreated snapshots or AMIs, up to but not including the last one, based on the \n\t\t\t\t\tspecified retention period. If you want Amazon Data Lifecycle Manager to delete all snapshots or AMIs, \n\t\t\t\t\tincluding the last one, specify <code>true</code>.</p>\n            </li>\n            <li>\n               <p>If a policy enters the error, disabled, or deleted state, Amazon Data Lifecycle Manager stops deleting \n\t\t\t\t\tsnapshots and AMIs. If you want Amazon Data Lifecycle Manager to continue deleting snapshots or AMIs, \n\t\t\t\t\tincluding the last one, if the policy enters one of these states, specify \n\t\t\t\t\t<code>true</code>.</p>\n            </li>\n         </ul>\n         <p>If you enable extended deletion (<b>ExtendDeletion=true</b>), \n\t\t\tyou override both default behaviors simultaneously.</p>\n         <p>Default: false</p>"
+                    }
+                },
+                "CrossRegionCopyTargets": {
+                    "target": "com.amazonaws.dlm#CrossRegionCopyTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specifies destination Regions for snapshot or AMI copies. You can specify \n\t\t\tup to 3 destination Regions. If you do not want to create cross-Region copies, omit this \n\t\t\tparameter.</p>"
+                    }
+                },
+                "Exclusions": {
+                    "target": "com.amazonaws.dlm#Exclusions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> Specifies exclusion parameters for volumes or instances for which you \n\t\t\tdo not want to create snapshots or AMIs. The policy will not create snapshots or AMIs \n\t\t\tfor target resources that match any of the specified exclusion parameters.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2190,6 +2491,9 @@
                     "max": 45
                 }
             }
+        },
+        "com.amazonaws.dlm#VolumeTypeValues": {
+            "type": "string"
         },
         "com.amazonaws.dlm#dlm_20180112": {
             "type": "service",
@@ -3194,17 +3498,6 @@
                             "documentation": "Missing region",
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
-                            }
-                        },
-                        {
-                            "documentation": "Partition doesn't support DualStack",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         }
                     ],

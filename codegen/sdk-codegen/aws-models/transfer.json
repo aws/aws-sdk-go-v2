@@ -61,7 +61,7 @@
                     "min": 20,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^arn:"
+                "smithy.api#pattern": "^arn:\\S+$"
             }
         },
         "com.amazonaws.transfer#As2ConnectorConfig": {
@@ -888,6 +888,12 @@
                     "target": "com.amazonaws.transfer#StructuredLogDestinations",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the log groups to which your server logs are sent.</p>\n         <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p>\n         <p>\n            <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code>\n         </p>\n         <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code>\n         </p>\n         <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty\n        value for this parameter in an <code>update-server</code> call. For example:</p>\n         <p>\n            <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code>\n         </p>"
+                    }
+                },
+                "S3StorageOptions": {
+                    "target": "com.amazonaws.transfer#S3StorageOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default.</p>\n         <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code>\n            <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>"
                     }
                 }
             },
@@ -3027,6 +3033,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the log groups to which your server logs are sent.</p>\n         <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p>\n         <p>\n            <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code>\n         </p>\n         <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code>\n         </p>\n         <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty\n        value for this parameter in an <code>update-server</code> call. For example:</p>\n         <p>\n            <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code>\n         </p>"
                     }
+                },
+                "S3StorageOptions": {
+                    "target": "com.amazonaws.transfer#S3StorageOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default.</p>\n         <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code>\n            <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3165,6 +3177,26 @@
                     "max": 12
                 },
                 "smithy.api#pattern": "^d-[0-9a-f]{10}$"
+            }
+        },
+        "com.amazonaws.transfer#DirectoryListingOptimization": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Indicates whether optimization to directory listing on S3 servers is used. Disabled by default for compatibility."
             }
         },
         "com.amazonaws.transfer#Domain": {
@@ -3572,7 +3604,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^$|/"
+                "smithy.api#pattern": "^(|/.*)$"
             }
         },
         "com.amazonaws.transfer#HomeDirectoryMapEntry": {
@@ -3588,8 +3620,14 @@
                 "Target": {
                     "target": "com.amazonaws.transfer#MapTarget",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the map target that is used in a <code>HomeDirectorymapEntry</code>.</p>",
+                        "smithy.api#documentation": "<p>Represents the map target that is used in a <code>HomeDirectoryMapEntry</code>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.transfer#MapType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of mapping. Set the type to <code>FILE</code> if you want the mapping to point to a file, or <code>DIRECTORY</code> for the directory to point to a directory.</p>\n         <note>\n            <p>By default, home directory mappings have a <code>Type</code> of <code>DIRECTORY</code> when you create a Transfer Family server. You would need to explicitly\n        set <code>Type</code> to <code>FILE</code> if you want a mapping to have a file\n        target.</p>\n         </note>"
                     }
                 }
             },
@@ -3605,7 +3643,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 50
+                    "max": 50000
                 }
             }
         },
@@ -5563,7 +5601,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^/"
+                "smithy.api#pattern": "^/.*$"
             }
         },
         "com.amazonaws.transfer#MapTarget": {
@@ -5573,7 +5611,24 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^/"
+                "smithy.api#pattern": "^/.*$"
+            }
+        },
+        "com.amazonaws.transfer#MapType": {
+            "type": "enum",
+            "members": {
+                "FILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILE"
+                    }
+                },
+                "DIRECTORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECTORY"
+                    }
+                }
             }
         },
         "com.amazonaws.transfer#MaxResults": {
@@ -5672,7 +5727,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^$|arn:.*role/"
+                "smithy.api#pattern": "^(|arn:.*role/\\S+)$"
             }
         },
         "com.amazonaws.transfer#OnPartialUploadWorkflowDetails": {
@@ -5977,7 +6032,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:.*role/"
+                "smithy.api#pattern": "^arn:.*role/\\S+$"
             }
         },
         "com.amazonaws.transfer#S3Bucket": {
@@ -6060,6 +6115,20 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^[\\P{M}\\p{M}]*$"
+            }
+        },
+        "com.amazonaws.transfer#S3StorageOptions": {
+            "type": "structure",
+            "members": {
+                "DirectoryListingOptimization": {
+                    "target": "com.amazonaws.transfer#DirectoryListingOptimization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default.</p>\n         <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code>\n            <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 storage options that are configured for your server.</p>"
             }
         },
         "com.amazonaws.transfer#S3Tag": {
@@ -9015,6 +9084,12 @@
                     "target": "com.amazonaws.transfer#StructuredLogDestinations",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the log groups to which your server logs are sent.</p>\n         <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p>\n         <p>\n            <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code>\n         </p>\n         <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code>\n         </p>\n         <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty\n        value for this parameter in an <code>update-server</code> call. For example:</p>\n         <p>\n            <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code>\n         </p>"
+                    }
+                },
+                "S3StorageOptions": {
+                    "target": "com.amazonaws.transfer#S3StorageOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default.</p>\n         <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code>\n            <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>"
                     }
                 }
             },

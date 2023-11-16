@@ -1363,6 +1363,24 @@
                     "traits": {
                         "smithy.api#enumValue": "ml.p4de.24xlarge"
                     }
+                },
+                "ML_TRN1_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.trn1.2xlarge"
+                    }
+                },
+                "ML_TRN1_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.trn1.32xlarge"
+                    }
+                },
+                "ML_TRN1N_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.trn1n.32xlarge"
+                    }
                 }
             }
         },
@@ -16026,6 +16044,12 @@
                         "smithy.api#documentation": "<p>The IAM Identity Center managed application instance ID.</p>"
                     }
                 },
+                "SingleSignOnApplicationArn": {
+                    "target": "com.amazonaws.sagemaker#SingleSignOnApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the associated Amazon Web Services Single Sign-On application\n        for this Domain.</p>"
+                    }
+                },
                 "Status": {
                     "target": "com.amazonaws.sagemaker#DomainStatus",
                     "traits": {
@@ -22168,7 +22192,7 @@
                     "min": 1,
                     "max": 40
                 },
-                "smithy.api#pattern": "^[\\S\\s]+$"
+                "smithy.api#pattern": "^[-a-zA-Z0-9_.,;:! ]*$"
             }
         },
         "com.amazonaws.sagemaker#DeviceFleetArn": {
@@ -22184,7 +22208,7 @@
                     "min": 1,
                     "max": 800
                 },
-                "smithy.api#pattern": "^[\\S\\s]+$"
+                "smithy.api#pattern": "^[-a-zA-Z0-9_.,;:! ]*$"
             }
         },
         "com.amazonaws.sagemaker#DeviceFleetSummaries": {
@@ -38494,6 +38518,16 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#MaxPendingTimeInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Maximum job scheduler pending time in seconds.",
+                "smithy.api#range": {
+                    "min": 7200,
+                    "max": 2419200
+                }
+            }
+        },
         "com.amazonaws.sagemaker#MaxPercentageOfInputDatasetLabeled": {
             "type": "integer",
             "traits": {
@@ -40912,9 +40946,7 @@
                 "ModelPackageName": {
                     "target": "com.amazonaws.sagemaker#EntityName",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the model package.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the model package.</p>"
                     }
                 },
                 "ModelPackageGroupName": {
@@ -42076,7 +42108,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#MonitoringJobDefinitionSortKey": {
@@ -44794,7 +44826,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,255}$"
+                "smithy.api#pattern": "^[A-Za-z0-9\\-_]*$"
             }
         },
         "com.amazonaws.sagemaker#PipelineStatus": {
@@ -53189,6 +53221,12 @@
                 "smithy.api#documentation": "<p>A configuration for a shuffle option for input data in a channel. If you use\n                <code>S3Prefix</code> for <code>S3DataType</code>, the results of the S3 key prefix\n            matches are shuffled. If you use <code>ManifestFile</code>, the order of the S3 object\n            references in the <code>ManifestFile</code> is shuffled. If you use\n                <code>AugmentedManifestFile</code>, the order of the JSON lines in the\n                <code>AugmentedManifestFile</code> is shuffled. The shuffling order is determined\n            using the <code>Seed</code> value.</p>\n         <p>For Pipe input mode, when <code>ShuffleConfig</code> is specified shuffling is done at\n            the start of every epoch. With large datasets, this ensures that the order of the\n            training data is different for each epoch, and it helps reduce bias and possible\n            overfitting. In a multi-node training job when <code>ShuffleConfig</code> is combined\n            with <code>S3DataDistributionType</code> of <code>ShardedByS3Key</code>, the data is\n            shuffled across nodes so that the content sent to a particular node on the first epoch\n            might be sent to a different node on the second epoch.</p>"
             }
         },
+        "com.amazonaws.sagemaker#SingleSignOnApplicationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::[0-9]+:application\\/[a-zA-Z0-9-_.]+\\/apl-[a-zA-Z0-9]+$"
+            }
+        },
         "com.amazonaws.sagemaker#SingleSignOnUserIdentifier": {
             "type": "string",
             "traits": {
@@ -54708,6 +54746,12 @@
                     "target": "com.amazonaws.sagemaker#MaxWaitTimeInSeconds",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a managed Spot training job has to\n            complete. It is the amount of time spent waiting for Spot capacity plus the amount of\n            time the job can run. It must be equal to or greater than\n                <code>MaxRuntimeInSeconds</code>. If the job does not complete during this time,\n            SageMaker ends the job.</p>\n         <p>When <code>RetryStrategy</code> is specified in the job request,\n                <code>MaxWaitTimeInSeconds</code> specifies the maximum time for all of the attempts\n            in total, not each individual attempt.</p>"
+                    }
+                },
+                "MaxPendingTimeInSeconds": {
+                    "target": "com.amazonaws.sagemaker#MaxPendingTimeInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum pending time in seconds.</p>"
                     }
                 }
             },

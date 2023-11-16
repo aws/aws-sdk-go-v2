@@ -2965,7 +2965,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a Device Defender security profile with a thing group or this account. Each\n      thing group or account can have up to five security profiles associated with it.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachSecurityProfile</a> action.</p>",
+                "smithy.api#documentation": "<p>Associates a Device Defender security profile with a thing group or this account. Each \n        thing group or account can have up to five security profiles associated with it.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachSecurityProfile</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/security-profiles/{securityProfileName}/targets",
@@ -4855,7 +4855,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a mitigation action task that is in progress. If the task is not in progress, an\n      InvalidRequestException occurs.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CancelAuditMitigationActionsTask</a> action.</p>",
+                "smithy.api#documentation": "<p>Cancels a mitigation action task that is in progress. If the task\n      is not\n      in progress, an InvalidRequestException occurs.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CancelAuditMitigationActionsTask</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/audit/mitigationactions/tasks/{taskId}/cancel",
@@ -4909,7 +4909,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels an audit that is in progress. The audit can be either scheduled or on demand. If\n      the audit isn't in progress, an \"InvalidRequestException\" occurs.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CancelAuditTask</a> action.</p>",
+                "smithy.api#documentation": "<p>Cancels an audit that is in progress. The audit can be either scheduled or on demand. If the audit isn't in progress, an \"InvalidRequestException\" occurs.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CancelAuditTask</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/audit/tasks/{taskId}/cancel",
@@ -4923,7 +4923,7 @@
                 "taskId": {
                     "target": "com.amazonaws.iot#AuditTaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the audit you want to cancel. You can only cancel an audit that is\n      \"IN_PROGRESS\".</p>",
+                        "smithy.api#documentation": "<p>The ID of the audit you want to cancel. You can only cancel an\n              audit that is \"IN_PROGRESS\".</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5020,7 +5020,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Cancels a Device Defender ML Detect mitigation action. </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CancelDetectMitigationActionsTask</a> action.</p>",
+                "smithy.api#documentation": "<p>\n        Cancels a Device Defender ML Detect mitigation action.\n      </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CancelDetectMitigationActionsTask</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/detect/mitigationactions/tasks/{taskId}/cancel",
@@ -5034,7 +5034,7 @@
                 "taskId": {
                     "target": "com.amazonaws.iot#MitigationActionsTaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique identifier of the task. </p>",
+                        "smithy.api#documentation": "<p>\n      The unique identifier of the task.\n    </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6540,7 +6540,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Use this API to define a Custom Metric published by your devices to Device Defender. </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateCustomMetric</a> action.</p>",
+                "smithy.api#documentation": "<p> Use this API to define a\n      Custom\n      Metric\n      published by your devices to Device Defender. </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateCustomMetric</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/custom-metric/{metricName}",
@@ -6575,13 +6575,13 @@
                 "tags": {
                     "target": "com.amazonaws.iot#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p> Metadata that can be used to manage the custom metric. </p>"
+                        "smithy.api#documentation": "<p>\n      Metadata that can be used to manage the custom metric.\n    </p>"
                     }
                 },
                 "clientRequestToken": {
                     "target": "com.amazonaws.iot#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each custom metric must have a unique client request token. If you try to create a new\n      custom metric that already exists with a different token, an exception occurs. If you omit\n      this value, Amazon Web Services SDKs will automatically generate a unique client request. </p>",
+                        "smithy.api#documentation": "<p>Each custom\n      metric must have a unique client request token. If you try to create a new custom metric that\n      already exists with a different token,\n      an exception\n      occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request. </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -6597,7 +6597,7 @@
                 "metricName": {
                     "target": "com.amazonaws.iot#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the custom metric to be used in the metric report. </p>"
+                        "smithy.api#documentation": "<p>\n      The name of the custom metric to be used in the metric report.\n    </p>"
                     }
                 },
                 "metricArn": {
@@ -6637,7 +6637,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a dimension that you can use to limit the scope of a metric used in a security\n      profile for IoT Device Defender. For example, using a <code>TOPIC_FILTER</code> dimension, you can narrow\n      down the scope of the metric only to MQTT topics whose name match the pattern specified in the\n      dimension.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateDimension</a> action.</p>",
+                "smithy.api#documentation": "<p>Create a dimension that you can use to limit the scope of a metric used in a security profile for IoT Device Defender. \n      For example, using a <code>TOPIC_FILTER</code> dimension, you can narrow down the scope of the metric only to MQTT topics whose name match the pattern specified in the dimension.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateDimension</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/dimensions/{name}",
@@ -6651,7 +6651,7 @@
                 "name": {
                     "target": "com.amazonaws.iot#DimensionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the dimension. Choose something that describes the type and value\n      to make it easy to remember what it does.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the dimension. Choose something that describes the type and value to make it easy to remember what it does.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6666,7 +6666,7 @@
                 "stringValues": {
                     "target": "com.amazonaws.iot#DimensionStringValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the value or list of values for the dimension. For <code>TOPIC_FILTER</code>\n      dimensions, this is a pattern used to match the MQTT topic (for example, \"admin/#\").</p>",
+                        "smithy.api#documentation": "<p>Specifies the value or list of values for the dimension. For <code>TOPIC_FILTER</code> dimensions, this is a pattern used to match the MQTT topic (for example, \"admin/#\").</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6679,7 +6679,7 @@
                 "clientRequestToken": {
                     "target": "com.amazonaws.iot#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each dimension must have a unique client request token. If you try to create a new\n      dimension with the same token as a dimension that already exists, an exception occurs. If you\n      omit this value, Amazon Web Services SDKs will automatically generate a unique client request.</p>",
+                        "smithy.api#documentation": "<p>Each dimension must have a unique client request token. If you try to create a new dimension with the same token as a dimension that already exists, an exception occurs. \n      If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -6701,7 +6701,7 @@
                 "arn": {
                     "target": "com.amazonaws.iot#DimensionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created dimension.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name\n      (ARN)\n      of\n      the created dimension.</p>"
                     }
                 }
             },
@@ -7249,7 +7249,7 @@
                 "destinationPackageVersions": {
                     "target": "com.amazonaws.iot#DestinationPackageVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n        job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single string. \n        Up to five strings are allowed.</p>"
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n        job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n        Up to 25  package version ARNs are allowed.</p>"
                     }
                 }
             },
@@ -7389,7 +7389,7 @@
                 "destinationPackageVersions": {
                     "target": "com.amazonaws.iot#DestinationPackageVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single string. \n        Up to five strings are allowed.</p>"
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n            job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n            Up to 25  package version ARNs are allowed.</p>"
                     }
                 }
             },
@@ -7527,7 +7527,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Defines an action that can be applied to audit findings by using\n      StartAuditMitigationActionsTask. Only certain types of mitigation actions can be applied to\n      specific check names. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-mitigation-actions.html\">Mitigation\n        actions</a>. Each mitigation action can apply only one type of change.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateMitigationAction</a> action.</p>",
+                "smithy.api#documentation": "<p>Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Only certain types of mitigation actions can be applied to specific check names. \n      For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-mitigation-actions.html\">Mitigation actions</a>. Each mitigation action can apply only one type of change.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateMitigationAction</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/mitigationactions/actions/{actionName}",
@@ -7541,7 +7541,7 @@
                 "actionName": {
                     "target": "com.amazonaws.iot#MitigationActionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A friendly name for the action. Choose a friendly name that accurately describes the\n      action (for example, <code>EnableLoggingAction</code>).</p>",
+                        "smithy.api#documentation": "<p>A friendly name for the action. Choose a friendly name that accurately describes the action (for example, <code>EnableLoggingAction</code>).</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8640,7 +8640,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a scheduled audit that is run at a specified time interval.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateScheduledAudit</a> action.</p>",
+                "smithy.api#documentation": "<p>Creates a scheduled audit that is run at a specified \n          time interval.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateScheduledAudit</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/audit/scheduledaudits/{scheduledAuditName}",
@@ -8654,26 +8654,26 @@
                 "frequency": {
                     "target": "com.amazonaws.iot#AuditFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>How often the scheduled audit takes place, either <code>DAILY</code>, <code>WEEKLY</code>,\n        <code>BIWEEKLY</code> or <code>MONTHLY</code>. The start time of each audit is determined by\n      the system.</p>",
+                        "smithy.api#documentation": "<p>How often the scheduled audit takes\n      place, either\n      <code>DAILY</code>,\n      <code>WEEKLY</code>, <code>BIWEEKLY</code> or <code>MONTHLY</code>. The start time of each audit is\n      determined by the system.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "dayOfMonth": {
                     "target": "com.amazonaws.iot#DayOfMonth",
                     "traits": {
-                        "smithy.api#documentation": "<p>The day of the month on which the scheduled audit takes place. This can be \"1\" through\n      \"31\" or \"LAST\". This field is required if the \"frequency\" parameter is set to\n        <code>MONTHLY</code>. If days 29 to 31 are specified, and the month doesn't have that many\n      days, the audit takes place on the <code>LAST</code> day of the month.</p>"
+                        "smithy.api#documentation": "<p>The day of the month on which the scheduled audit takes place.\n      This\n      can be \"1\" through \"31\" or \"LAST\". This field is required if the \"frequency\"\n      parameter is set to <code>MONTHLY</code>. If days\n      29\n      to 31 are specified, and the month\n      doesn't\n      have that many days, the audit takes place on the <code>LAST</code> day of the month.</p>"
                     }
                 },
                 "dayOfWeek": {
                     "target": "com.amazonaws.iot#DayOfWeek",
                     "traits": {
-                        "smithy.api#documentation": "<p>The day of the week on which the scheduled audit takes place, either <code>SUN</code>,\n        <code>MON</code>, <code>TUE</code>, <code>WED</code>, <code>THU</code>, <code>FRI</code>, or\n        <code>SAT</code>. This field is required if the <code>frequency</code> parameter is set to\n        <code>WEEKLY</code> or <code>BIWEEKLY</code>.</p>"
+                        "smithy.api#documentation": "<p>The day of the week on which the scheduled audit takes\n      place,\n      either\n      <code>SUN</code>,\n      <code>MON</code>, <code>TUE</code>, <code>WED</code>, <code>THU</code>, <code>FRI</code>, or <code>SAT</code>. This field is required if the <code>frequency</code>\n      parameter is set to <code>WEEKLY</code> or <code>BIWEEKLY</code>.</p>"
                     }
                 },
                 "targetCheckNames": {
                     "target": "com.amazonaws.iot#TargetAuditCheckNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>Which checks are performed during the scheduled audit. Checks must be enabled for your\n      account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks,\n      including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select\n      which checks are enabled.)</p>",
+                        "smithy.api#documentation": "<p>Which checks are performed during the scheduled audit. Checks must be enabled \n            for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list\n            of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> \n            to select which checks are enabled.)</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8761,13 +8761,13 @@
                 "behaviors": {
                     "target": "com.amazonaws.iot#Behaviors",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the behaviors that, when violated by a device (thing), cause an\n      alert.</p>"
+                        "smithy.api#documentation": "<p>Specifies the behaviors that, when violated by a device (thing), cause an alert.</p>"
                     }
                 },
                 "alertTargets": {
                     "target": "com.amazonaws.iot#AlertTargets",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the destinations to which alerts are sent. (Alerts are always sent to the\n      console.) Alerts are generated when a device (thing) violates a behavior.</p>"
+                        "smithy.api#documentation": "<p>Specifies the destinations to which alerts are sent. (Alerts are always sent to the \n        console.) Alerts are generated when a device (thing) violates a behavior.</p>"
                     }
                 },
                 "additionalMetricsToRetain": {
@@ -8776,13 +8776,13 @@
                         "smithy.api#deprecated": {
                             "message": "Use additionalMetricsToRetainV2."
                         },
-                        "smithy.api#documentation": "<p>\n            <i>Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a>\n      instead.</i>\n         </p>\n         <p>A list of metrics whose data is retained (stored). By default, data is retained for any\n      metric used in the profile's <code>behaviors</code>, but it is also retained for any metric\n      specified here. Can be used with custom metrics; cannot be used with dimensions.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i>\n         </p>\n         <p>A list of metrics whose data is retained (stored). By default, data is retained \n        for any metric used in the profile's <code>behaviors</code>, but it is also retained for \n        any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>"
                     }
                 },
                 "additionalMetricsToRetainV2": {
                     "target": "com.amazonaws.iot#AdditionalMetricsToRetainV2List",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any\n      metric used in the profile's <code>behaviors</code>, but it is also retained for any metric\n      specified here. Can be used with custom metrics; cannot be used with dimensions.</p>"
+                        "smithy.api#documentation": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's <code>behaviors</code>, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>"
                     }
                 },
                 "tags": {
@@ -9551,7 +9551,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Restores the default settings for Device Defender audits for this account. Any\n      configuration data you entered is deleted and all audit checks are reset to disabled.\n      \n    </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteAccountAuditConfiguration</a> action.</p>",
+                "smithy.api#documentation": "<p>Restores the default settings for Device Defender audits for this account. Any\n          configuration data you entered is deleted and all audit checks are reset to \n          disabled.  </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteAccountAuditConfiguration</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/audit/configuration",
@@ -9948,7 +9948,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Deletes a Device Defender detect custom metric. </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteCustomMetric</a> action.</p>\n         <note>\n            <p>Before you can delete a custom metric, you must first remove the custom metric from all\n        security profiles it's a part of. The security profile associated with the custom metric can\n        be found using the <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_ListSecurityProfiles.html\">ListSecurityProfiles</a>\n        API with <code>metricName</code> set to your custom metric name.</p>\n         </note>",
+                "smithy.api#documentation": "<p>\n      Deletes a Device Defender detect custom metric.\n    </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteCustomMetric</a> action.</p>\n         <note>\n            <p>Before you can delete a custom metric, you must first remove the custom metric from all\n      security profiles it's a part of.\n      The\n      security\n      profile associated with the custom metric can be found using the <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_ListSecurityProfiles.html\">ListSecurityProfiles</a>\n      API with <code>metricName</code> set to your custom metric name.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/custom-metric/{metricName}",
@@ -9962,7 +9962,7 @@
                 "metricName": {
                     "target": "com.amazonaws.iot#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the custom metric. </p>",
+                        "smithy.api#documentation": "<p>\n      The name of the custom metric.\n    </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -11145,7 +11145,7 @@
                 "expectedVersion": {
                     "target": "com.amazonaws.iot#OptionalVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The expected version of the security profile. A new version is generated whenever the\n      security profile is updated. If you specify a value that is different from the actual version,\n      a <code>VersionConflictException</code> is thrown.</p>",
+                        "smithy.api#documentation": "<p>The expected version of the security profile. A new version is generated whenever\n        the security profile is updated. If you specify a value that is different from the actual\n        version, a <code>VersionConflictException</code> is thrown.</p>",
                         "smithy.api#httpQuery": "expectedVersion"
                     }
                 }
@@ -11697,7 +11697,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about the Device Defender audit settings for this account. Settings\n      include how audit notifications are sent and which audit checks are enabled or\n      disabled.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeAccountAuditConfiguration</a> action.</p>",
+                "smithy.api#documentation": "<p>Gets information about the Device Defender audit settings for this account.\n          Settings include how audit notifications are sent and which audit checks are\n          enabled or disabled.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeAccountAuditConfiguration</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/audit/configuration",
@@ -11718,13 +11718,13 @@
                 "roleArn": {
                     "target": "com.amazonaws.iot#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role that grants permission to IoT to access information about your\n      devices, policies, certificates, and other items as required when performing an audit.</p>\n         <p>On the first call to <code>UpdateAccountAuditConfiguration</code>, this parameter is\n      required.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the role that grants permission to IoT to access information\n            about your devices, policies, certificates, and other items as required when \n            performing an audit.</p>\n         <p>On the first call to <code>UpdateAccountAuditConfiguration</code>,\n            this parameter is required.</p>"
                     }
                 },
                 "auditNotificationTargetConfigurations": {
                     "target": "com.amazonaws.iot#AuditNotificationTargetConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the targets to which audit notifications are sent for this\n      account.</p>"
+                        "smithy.api#documentation": "<p>Information about the targets to which audit notifications are sent for \n            this account.</p>"
                     }
                 },
                 "auditCheckConfigurations": {
@@ -11761,7 +11761,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a single audit finding. Properties include the reason for\n      noncompliance, the severity of the issue, and the start time when the audit that returned the\n      finding.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeAuditFinding</a> action.</p>",
+                "smithy.api#documentation": "<p>Gets information about a single audit finding. Properties include the reason for\n      noncompliance, the severity of the issue,\n      and the start time\n      when the audit that returned the\n      finding.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeAuditFinding</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/audit/findings/{findingId}",
@@ -11775,7 +11775,7 @@
                 "findingId": {
                     "target": "com.amazonaws.iot#FindingId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for a single audit finding. You can use this identifier to apply\n      mitigation actions to the finding.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for a single audit finding. You can use this identifier to apply mitigation actions to the finding.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -11819,7 +11819,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about an audit mitigation task that is used to apply mitigation actions\n      to a set of audit findings. Properties include the actions being applied, the audit checks to\n      which they're being applied, the task status, and aggregated task statistics.</p>",
+                "smithy.api#documentation": "<p>Gets information about an audit mitigation task that is used to apply mitigation actions to a set of audit findings. Properties include the actions being applied, the audit checks to which they're being applied, the task status, and aggregated task statistics.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/audit/mitigationactions/tasks/{taskId}",
@@ -11867,13 +11867,13 @@
                 "taskStatistics": {
                     "target": "com.amazonaws.iot#AuditMitigationActionsTaskStatistics",
                     "traits": {
-                        "smithy.api#documentation": "<p>Aggregate counts of the results when the mitigation tasks were applied to the findings for\n      this audit mitigation actions task.</p>"
+                        "smithy.api#documentation": "<p>Aggregate counts of the results when the mitigation tasks were applied to the findings for this audit mitigation actions task.</p>"
                     }
                 },
                 "target": {
                     "target": "com.amazonaws.iot#AuditMitigationActionsTaskTarget",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the findings to which the mitigation actions are applied. This can be by audit\n      checks, by audit task, or a set of findings.</p>"
+                        "smithy.api#documentation": "<p>Identifies the findings to which the mitigation actions are applied. This can be by audit checks, by audit task, or a set of findings.</p>"
                     }
                 },
                 "auditCheckToActionsMapping": {
@@ -11885,7 +11885,7 @@
                 "actionsDefinition": {
                     "target": "com.amazonaws.iot#MitigationActionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mitigation actions and their parameters that are applied as part of this\n      task.</p>"
+                        "smithy.api#documentation": "<p>Specifies the mitigation actions and their parameters that are applied as part of this task.</p>"
                     }
                 }
             },
@@ -12029,7 +12029,7 @@
                 "taskStatus": {
                     "target": "com.amazonaws.iot#AuditTaskStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the audit: one of \"IN_PROGRESS\", \"COMPLETED\", \"FAILED\", or\n      \"CANCELED\".</p>"
+                        "smithy.api#documentation": "<p>The status of the audit: one of \"IN_PROGRESS\", \"COMPLETED\",\n            \"FAILED\", or \"CANCELED\".</p>"
                     }
                 },
                 "taskType": {
@@ -12393,7 +12393,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Gets information about a Device Defender detect custom metric. </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeCustomMetric</a> action.</p>",
+                "smithy.api#documentation": "<p>\n      Gets information about a Device Defender detect custom metric.\n    </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeCustomMetric</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/custom-metric/{metricName}",
@@ -12407,7 +12407,7 @@
                 "metricName": {
                     "target": "com.amazonaws.iot#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the custom metric. </p>",
+                        "smithy.api#documentation": "<p>\n      The name of the custom metric.\n    </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -12423,37 +12423,37 @@
                 "metricName": {
                     "target": "com.amazonaws.iot#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the custom metric. </p>"
+                        "smithy.api#documentation": "<p>\n      The name of the custom metric.\n    </p>"
                     }
                 },
                 "metricArn": {
                     "target": "com.amazonaws.iot#CustomMetricArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Number (ARN) of the custom metric. </p>"
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Number (ARN) of the custom metric.\n    </p>"
                     }
                 },
                 "metricType": {
                     "target": "com.amazonaws.iot#CustomMetricType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of the custom metric. </p>\n         <important>\n            <p>The type <code>number</code> only takes a single metric value as an input, but while\n        submitting the metrics value in the DeviceMetrics report, it must be passed as an array with\n        a single value.</p>\n         </important>"
+                        "smithy.api#documentation": "<p> The type of the custom metric. </p>\n         <important>\n            <p>The type <code>number</code> only takes a single metric value as an input, but while submitting the metrics value in the DeviceMetrics report, it must be passed as an array with a single value.</p>\n         </important>"
                     }
                 },
                 "displayName": {
                     "target": "com.amazonaws.iot#CustomMetricDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p> Field represents a friendly name in the console for the custom metric; doesn't have to be\n      unique. Don't use this name as the metric identifier in the device metric report. Can be\n      updated. </p>"
+                        "smithy.api#documentation": "<p>\n      Field represents a friendly name in the console for the custom metric; doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated.\n    </p>"
                     }
                 },
                 "creationDate": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> The creation date of the custom metric in milliseconds since epoch. </p>"
+                        "smithy.api#documentation": "<p>\n      The creation date of the custom metric in milliseconds since epoch.\n    </p>"
                     }
                 },
                 "lastModifiedDate": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> The time the custom metric was last modified in milliseconds since epoch. </p>"
+                        "smithy.api#documentation": "<p>\n      The time the custom metric was last modified in milliseconds since epoch.\n    </p>"
                     }
                 }
             },
@@ -12542,7 +12542,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Gets information about a Device Defender ML Detect mitigation action. </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeDetectMitigationActionsTask</a> action.</p>",
+                "smithy.api#documentation": "<p>\n      Gets information about a Device Defender ML Detect mitigation action.\n    </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeDetectMitigationActionsTask</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/detect/mitigationactions/tasks/{taskId}",
@@ -12556,7 +12556,7 @@
                 "taskId": {
                     "target": "com.amazonaws.iot#MitigationActionsTaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique identifier of the task. </p>",
+                        "smithy.api#documentation": "<p>\n      The unique identifier of the task.\n    </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -12572,7 +12572,7 @@
                 "taskSummary": {
                     "target": "com.amazonaws.iot#DetectMitigationActionsTaskSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p> The description of a task. </p>"
+                        "smithy.api#documentation": "<p>\n      The description of a task.\n    </p>"
                     }
                 }
             },
@@ -12639,7 +12639,7 @@
                 "arn": {
                     "target": "com.amazonaws.iot#DimensionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the dimension.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name\n      (ARN)\n      for\n      the dimension.</p>"
                     }
                 },
                 "type": {
@@ -12651,7 +12651,7 @@
                 "stringValues": {
                     "target": "com.amazonaws.iot#DimensionStringValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value or list of values used to scope the dimension. For example, for topic filters,\n      this is the pattern used to match the MQTT topic name.</p>"
+                        "smithy.api#documentation": "<p>The value or list of values used to scope the dimension. For example, for topic filters, this is the pattern used to match the MQTT topic name.</p>"
                     }
                 },
                 "creationDate": {
@@ -13387,7 +13387,7 @@
                 "destinationPackageVersions": {
                     "target": "com.amazonaws.iot#DestinationPackageVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single string. \n        Up to five strings are allowed.</p>"
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n            job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n            Up to 25  package version ARNs are allowed.</p>"
                     }
                 }
             },
@@ -13582,7 +13582,7 @@
                 "actionParams": {
                     "target": "com.amazonaws.iot#MitigationActionParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>Parameters that control how the mitigation action is applied, specific to the type of\n      mitigation action.</p>"
+                        "smithy.api#documentation": "<p>Parameters that control how the mitigation action is applied, specific to the type of mitigation action.</p>"
                     }
                 },
                 "creationDate": {
@@ -13938,25 +13938,25 @@
                 "frequency": {
                     "target": "com.amazonaws.iot#AuditFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>How often the scheduled audit takes place, either one of <code>DAILY</code>,\n        <code>WEEKLY</code>, <code>BIWEEKLY</code>, or <code>MONTHLY</code>. The start time of each\n      audit is determined by the system.</p>"
+                        "smithy.api#documentation": "<p>How often the scheduled audit takes\n      place, either\n      one of <code>DAILY</code>,\n            <code>WEEKLY</code>, <code>BIWEEKLY</code>, or <code>MONTHLY</code>. The start time of each audit is determined by the\n      system.</p>"
                     }
                 },
                 "dayOfMonth": {
                     "target": "com.amazonaws.iot#DayOfMonth",
                     "traits": {
-                        "smithy.api#documentation": "<p>The day of the month on which the scheduled audit takes place. This is will be\n        <code>1</code> through <code>31</code> or <code>LAST</code>. If days\n        <code>29</code>-<code>31</code> are specified, and the month does not have that many days,\n      the audit takes place on the <code>LAST</code> day of the month.</p>"
+                        "smithy.api#documentation": "<p>The day of the month on which the scheduled audit takes place.\n      This is\n      will be <code>1</code>\n            through <code>31</code> or <code>LAST</code>. If days\n      <code>29</code>-<code>31</code>\n      are specified, and the month does not have that many days, the audit takes place on the <code>LAST</code>\n      day of the month.</p>"
                     }
                 },
                 "dayOfWeek": {
                     "target": "com.amazonaws.iot#DayOfWeek",
                     "traits": {
-                        "smithy.api#documentation": "<p>The day of the week on which the scheduled audit takes place, either one of\n        <code>SUN</code>, <code>MON</code>, <code>TUE</code>, <code>WED</code>, <code>THU</code>,\n        <code>FRI</code>, or <code>SAT</code>.</p>"
+                        "smithy.api#documentation": "<p>The day of the week on which the scheduled audit takes\n      place,\n      either one of\n            <code>SUN</code>, <code>MON</code>, <code>TUE</code>, <code>WED</code>, <code>THU</code>, <code>FRI</code>, or <code>SAT</code>.</p>"
                     }
                 },
                 "targetCheckNames": {
                     "target": "com.amazonaws.iot#TargetAuditCheckNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>Which checks are performed during the scheduled audit. Checks must be enabled for your\n      account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks,\n      including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select\n      which checks are enabled.)</p>"
+                        "smithy.api#documentation": "<p>Which checks are performed during the scheduled audit. Checks must be \n            enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list\n            of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> \n            to select which checks are enabled.)</p>"
                     }
                 },
                 "scheduledAuditName": {
@@ -14013,7 +14013,7 @@
                 "securityProfileName": {
                     "target": "com.amazonaws.iot#SecurityProfileName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the security profile whose information you want to get.</p>",
+                        "smithy.api#documentation": "<p>The name of the security profile\n      whose information you want to get.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -14041,13 +14041,13 @@
                 "securityProfileDescription": {
                     "target": "com.amazonaws.iot#SecurityProfileDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the security profile (associated with the security profile when it was\n      created or updated).</p>"
+                        "smithy.api#documentation": "<p>A description of the security profile (associated with the security profile\n        when it was created or updated).</p>"
                     }
                 },
                 "behaviors": {
                     "target": "com.amazonaws.iot#Behaviors",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the behaviors that, when violated by a device (thing), cause an\n      alert.</p>"
+                        "smithy.api#documentation": "<p>Specifies the behaviors that, when violated by a device (thing), cause an alert.</p>"
                     }
                 },
                 "alertTargets": {
@@ -14062,20 +14062,20 @@
                         "smithy.api#deprecated": {
                             "message": "Use additionalMetricsToRetainV2."
                         },
-                        "smithy.api#documentation": "<p>\n            <i>Please use <a>DescribeSecurityProfileResponse$additionalMetricsToRetainV2</a>\n        instead.</i>\n         </p>\n         <p>A list of metrics whose data is retained (stored). By default, data is retained for any\n      metric used in the profile's <code>behaviors</code>, but it is also retained for any metric\n      specified here.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>Please use\n          <a>DescribeSecurityProfileResponse$additionalMetricsToRetainV2</a>\n        instead.</i>\n         </p>\n         <p>A list of metrics\n      whose data is retained (stored). By default, data is retained for any metric\n      used in the profile's <code>behaviors</code>, but\n      it is\n      also retained for any metric specified here.</p>"
                     }
                 },
                 "additionalMetricsToRetainV2": {
                     "target": "com.amazonaws.iot#AdditionalMetricsToRetainV2List",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any\n      metric used in the profile's behaviors, but it is also retained for any metric specified\n      here.</p>"
+                        "smithy.api#documentation": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any\n      metric used in the profile's behaviors, but\n      it is\n      also retained for any metric specified here.</p>"
                     }
                 },
                 "version": {
                     "target": "com.amazonaws.iot#Version",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The version of the security profile. A new version is generated whenever the security\n      profile is updated.</p>"
+                        "smithy.api#documentation": "<p>The version of the security profile. A new version is generated whenever the\n        security profile is updated.</p>"
                     }
                 },
                 "creationDate": {
@@ -14791,7 +14791,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates a Device Defender security profile from a thing group or from this\n      account.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DetachSecurityProfile</a> action.</p>",
+                "smithy.api#documentation": "<p>Disassociates a Device Defender security profile from a thing group or from this account.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DetachSecurityProfile</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/security-profiles/{securityProfileName}/targets",
@@ -16470,6 +16470,32 @@
         "com.amazonaws.iot#GenericLongValue": {
             "type": "long"
         },
+        "com.amazonaws.iot#GeoLocationTarget": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.iot#TargetFieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>name</code> of the geolocation target field. If the target field is part of a\n      named shadow, you must select the named shadow using the <code>namedShadow</code> filter.</p>"
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.iot#TargetFieldOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>order</code> of the geolocation target field. This field is optional. The\n      default value is <code>LatLon</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A geolocation target that you select to index. Each geolocation target contains a\n        <code>name</code> and <code>order</code> key-value pair that specifies the geolocation\n      target fields.</p>"
+            }
+        },
+        "com.amazonaws.iot#GeoLocationsFilter": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#GeoLocationTarget"
+            }
+        },
         "com.amazonaws.iot#GetBehaviorModelTrainingSummaries": {
             "type": "operation",
             "input": {
@@ -16493,7 +16519,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns a Device Defender's ML Detect Security Profile training model's status. </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetBehaviorModelTrainingSummaries</a> action.</p>",
+                "smithy.api#documentation": "<p>\n      Returns a Device Defender's ML Detect Security Profile training model's status.\n    </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetBehaviorModelTrainingSummaries</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/behavior-model-training/summaries",
@@ -16513,21 +16539,21 @@
                 "securityProfileName": {
                     "target": "com.amazonaws.iot#SecurityProfileName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the security profile. </p>",
+                        "smithy.api#documentation": "<p>\n      The name of the security profile.\n    </p>",
                         "smithy.api#httpQuery": "securityProfileName"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.iot#TinyMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> The maximum number of results to return at one time. The default is 10. </p>",
+                        "smithy.api#documentation": "<p>\n      The maximum number of results to return at one time. The default is 10.\n    </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token for the next set of results. </p>",
+                        "smithy.api#documentation": "<p>\n      The token for the next set of results.\n    </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -16542,13 +16568,13 @@
                 "summaries": {
                     "target": "com.amazonaws.iot#BehaviorModelTrainingSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of all ML Detect behaviors and their model status for a given Security Profile.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      A list of all ML Detect behaviors and their model status for a given Security Profile.\n    </p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A token that can be used to retrieve the next set of results, or <code>null</code> if\n      there are no additional results. </p>"
+                        "smithy.api#documentation": "<p>\n      A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.\n    </p>"
                     }
                 }
             },
@@ -18327,10 +18353,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The shadow names that you select to index. The default maximum number of shadow names for indexing is 10. To increase \n      the limit, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits\">Amazon Web Services IoT Device Management \n        Quotas</a> in the <i>Amazon Web Services General Reference</i>.\n    </p>"
                     }
+                },
+                "geoLocations": {
+                    "target": "com.amazonaws.iot#GeoLocationsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of geolocation targets that you select to index. The default maximum number of\n      geolocation targets for indexing is <code>1</code>. To increase the limit, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits\">Amazon Web Services IoT Device\n        Management Quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides additional filters for specific data sources. Named shadow is the only data source that currently supports and requires a filter.\n      To add named shadows to your fleet indexing configuration, set <code>namedShadowIndexingMode</code> to be <code>ON</code> and \n      specify your shadow names in <code>filter</code>.</p>"
+                "smithy.api#documentation": "<p>Provides additional selections for named shadows and geolocation data. </p>\n         <p>To add named shadows to your fleet indexing configuration, set <code>namedShadowIndexingMode</code> to\n      be ON and specify your shadow names in <code>namedShadowNames</code> filter.</p>\n         <p>To add geolocation data to your fleet indexing configuration: </p>\n         <ul>\n            <li>\n               <p>If you store geolocation data in a class/unnamed shadow, set\n            <code>thingIndexingMode</code> to be <code>REGISTRY_AND_SHADOW</code> and specify your\n          geolocation data in <code>geoLocations</code> filter. </p>\n            </li>\n            <li>\n               <p>If you store geolocation data in a named shadow, set\n            <code>namedShadowIndexingMode</code> to be <code>ON</code>, add the shadow name in\n            <code>namedShadowNames</code> filter, and specify your geolocation data in\n            <code>geoLocations</code> filter. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html\">Managing fleet\n            indexing</a>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.iot#InlineDocument": {
@@ -18776,7 +18808,7 @@
                 "destinationPackageVersions": {
                     "target": "com.amazonaws.iot#DestinationPackageVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single string. \n        Up to five strings are allowed.</p>"
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n            job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n            Up to 25  package version ARNs are allowed.</p>"
                     }
                 }
             },
@@ -19660,14 +19692,14 @@
                 "behaviorCriteriaType": {
                     "target": "com.amazonaws.iot#BehaviorCriteriaType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The criteria for a behavior. </p>",
+                        "smithy.api#documentation": "<p>\n      The criteria for a behavior.\n    </p>",
                         "smithy.api#httpQuery": "behaviorCriteriaType"
                     }
                 },
                 "listSuppressedAlerts": {
                     "target": "com.amazonaws.iot#ListSuppressedAlerts",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of all suppressed alerts. </p>",
+                        "smithy.api#documentation": "<p>\n      A list of all suppressed alerts.\n    </p>",
                         "smithy.api#httpQuery": "listSuppressedAlerts"
                     }
                 },
@@ -19709,7 +19741,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if\n      there are no additional results.</p>"
+                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, \n            or <code>null</code> if there are no additional results.</p>"
                     }
                 }
             },
@@ -19841,7 +19873,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the findings (results) of a Device Defender audit or of the audits performed during\n      a specified time period. (Findings are retained for 90 days.)</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListAuditFindings</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the findings (results) of a Device Defender audit or of the audits\n        performed during a specified time period. (Findings are retained for 90 days.)</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListAuditFindings</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/audit/findings",
@@ -19861,7 +19893,7 @@
                 "taskId": {
                     "target": "com.amazonaws.iot#AuditTaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter to limit results to the audit with the specified ID. You must specify either the\n      taskId or the startTime and endTime, but not both.</p>"
+                        "smithy.api#documentation": "<p>A filter to limit results to the audit with the specified ID. You must\n            specify either the taskId or the startTime and endTime, but not both.</p>"
                     }
                 },
                 "checkName": {
@@ -19891,13 +19923,13 @@
                 "startTime": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter to limit results to those found after the specified time. You must specify either\n      the startTime and endTime or the taskId, but not both.</p>"
+                        "smithy.api#documentation": "<p>A filter to limit results to those found after the specified time. You must\n            specify either the startTime and endTime or the taskId, but not both.</p>"
                     }
                 },
                 "endTime": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter to limit results to those found before the specified time. You must specify\n      either the startTime and endTime or the taskId, but not both.</p>"
+                        "smithy.api#documentation": "<p>A filter to limit results to those found before the specified time. You must\n            specify either the startTime and endTime or the taskId, but not both.</p>"
                     }
                 },
                 "listSuppressedFindings": {
@@ -19924,7 +19956,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if\n      there are no additional results.</p>"
+                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> \n            if there are no additional results.</p>"
                     }
                 }
             },
@@ -19952,7 +19984,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the status of audit mitigation action tasks that were executed.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListAuditMitigationActionsExecutions</a> action.</p>",
+                "smithy.api#documentation": "<p>Gets the status of audit mitigation action tasks that were\n      executed.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListAuditMitigationActionsExecutions</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/audit/mitigationactions/executions",
@@ -19972,7 +20004,7 @@
                 "taskId": {
                     "target": "com.amazonaws.iot#MitigationActionsTaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify this filter to limit results to actions for a specific audit mitigation actions\n      task.</p>",
+                        "smithy.api#documentation": "<p>Specify this filter to limit results to actions for a specific audit mitigation actions task.</p>",
                         "smithy.api#httpQuery": "taskId",
                         "smithy.api#required": {}
                     }
@@ -19987,7 +20019,7 @@
                 "findingId": {
                     "target": "com.amazonaws.iot#FindingId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify this filter to limit results to those that were applied to a specific audit\n      finding.</p>",
+                        "smithy.api#documentation": "<p>Specify this filter to limit results to those that were applied to a specific audit finding.</p>",
                         "smithy.api#httpQuery": "findingId",
                         "smithy.api#required": {}
                     }
@@ -20017,7 +20049,7 @@
                 "actionsExecutions": {
                     "target": "com.amazonaws.iot#AuditMitigationActionExecutionMetadataList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of task execution results based on the input parameters. Details include the\n      mitigation action applied, start time, and task status.</p>"
+                        "smithy.api#documentation": "<p>A set of task execution results based on the input parameters. Details include the mitigation action applied, start time, and task status.</p>"
                     }
                 },
                 "nextToken": {
@@ -20071,14 +20103,14 @@
                 "auditTaskId": {
                     "target": "com.amazonaws.iot#AuditTaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify this filter to limit results to tasks that were applied to results for a specific\n      audit.</p>",
+                        "smithy.api#documentation": "<p>Specify this filter to limit results to tasks that were applied to results for a specific audit.</p>",
                         "smithy.api#httpQuery": "auditTaskId"
                     }
                 },
                 "findingId": {
                     "target": "com.amazonaws.iot#FindingId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify this filter to limit results to tasks that were applied to a specific audit\n      finding.</p>",
+                        "smithy.api#documentation": "<p>Specify this filter to limit results to tasks that were applied to a specific audit finding.</p>",
                         "smithy.api#httpQuery": "findingId"
                     }
                 },
@@ -20106,7 +20138,7 @@
                 "startTime": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify this filter to limit results to tasks that began on or after a specific date and\n      time.</p>",
+                        "smithy.api#documentation": "<p>Specify this filter to limit results to tasks that began on or after a specific date and time.</p>",
                         "smithy.api#httpQuery": "startTime",
                         "smithy.api#required": {}
                     }
@@ -20114,7 +20146,7 @@
                 "endTime": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify this filter to limit results to tasks that were completed or canceled on or before\n      a specific date and time.</p>",
+                        "smithy.api#documentation": "<p>Specify this filter to limit results to tasks that were completed or canceled on or before a specific date and time.</p>",
                         "smithy.api#httpQuery": "endTime",
                         "smithy.api#required": {}
                     }
@@ -20251,7 +20283,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Device Defender audits that have been performed during a given time\n      period.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListAuditTasks</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the Device Defender audits that have been performed during a given\n          time period.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListAuditTasks</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/audit/tasks",
@@ -20271,7 +20303,7 @@
                 "startTime": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The beginning of the time period. Audit information is retained for a limited time (90\n      days). Requesting a start time prior to what is retained results in an\n      \"InvalidRequestException\".</p>",
+                        "smithy.api#documentation": "<p>The beginning of the time period. Audit information is retained for a \n              limited time (90 days). Requesting a start time prior to what is retained \n              results in an \"InvalidRequestException\".</p>",
                         "smithy.api#httpQuery": "startTime",
                         "smithy.api#required": {}
                     }
@@ -20287,14 +20319,14 @@
                 "taskType": {
                     "target": "com.amazonaws.iot#AuditTaskType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter to limit the output to the specified type of audit: can be one of\n      \"ON_DEMAND_AUDIT_TASK\" or \"SCHEDULED__AUDIT_TASK\".</p>",
+                        "smithy.api#documentation": "<p>A filter to limit the output to the specified type of audit: can be one of\n            \"ON_DEMAND_AUDIT_TASK\" or \"SCHEDULED__AUDIT_TASK\".</p>",
                         "smithy.api#httpQuery": "taskType"
                     }
                 },
                 "taskStatus": {
                     "target": "com.amazonaws.iot#AuditTaskStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter to limit the output to audits with the specified completion status: can be one of\n      \"IN_PROGRESS\", \"COMPLETED\", \"FAILED\", or \"CANCELED\".</p>",
+                        "smithy.api#documentation": "<p>A filter to limit the output to audits with the specified completion\n            status: can be one of \"IN_PROGRESS\", \"COMPLETED\", \"FAILED\", or \"CANCELED\".</p>",
                         "smithy.api#httpQuery": "taskStatus"
                     }
                 },
@@ -20329,7 +20361,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if\n      there are no additional results.</p>"
+                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> \n            if there are no additional results.</p>"
                     }
                 }
             },
@@ -20831,7 +20863,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Lists your Device Defender detect custom metrics. </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListCustomMetrics</a> action.</p>",
+                "smithy.api#documentation": "<p>\n      Lists your Device Defender detect custom metrics.\n    </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListCustomMetrics</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/custom-metrics",
@@ -20851,14 +20883,14 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token for the next set of results. </p>",
+                        "smithy.api#documentation": "<p>\n      The token for the next set of results.\n    </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.iot#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> The maximum number of results to return at one time. The default is 25. </p>",
+                        "smithy.api#documentation": "<p>\n      The maximum number of results to return at one time. The default is 25.\n    </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -20873,13 +20905,13 @@
                 "metricNames": {
                     "target": "com.amazonaws.iot#MetricNames",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the custom metric. </p>"
+                        "smithy.api#documentation": "<p>\n      The name of the custom metric.\n    </p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A token that can be used to retrieve the next set of results, or <code>null</code> if\n      there are no additional results. </p>"
+                        "smithy.api#documentation": "<p>\n      A token that can be used to retrieve the next set of results, \n      or <code>null</code> if there are no additional results.\n    </p>"
                     }
                 }
             },
@@ -20907,7 +20939,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Lists mitigation actions executions for a Device Defender ML Detect Security Profile. </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListDetectMitigationActionsExecutions</a> action.</p>",
+                "smithy.api#documentation": "<p>\n      Lists mitigation actions executions for a Device Defender ML Detect Security Profile.\n    </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListDetectMitigationActionsExecutions</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/detect/mitigationactions/executions",
@@ -20927,49 +20959,49 @@
                 "taskId": {
                     "target": "com.amazonaws.iot#MitigationActionsTaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique identifier of the task. </p>",
+                        "smithy.api#documentation": "<p>\n      The unique identifier of the task.\n    </p>",
                         "smithy.api#httpQuery": "taskId"
                     }
                 },
                 "violationId": {
                     "target": "com.amazonaws.iot#ViolationId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique identifier of the violation. </p>",
+                        "smithy.api#documentation": "<p>\n      The unique identifier of the violation.\n    </p>",
                         "smithy.api#httpQuery": "violationId"
                     }
                 },
                 "thingName": {
                     "target": "com.amazonaws.iot#DeviceDefenderThingName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the thing whose mitigation actions are listed. </p>",
+                        "smithy.api#documentation": "<p>\n      The name of the thing whose mitigation actions are listed.\n    </p>",
                         "smithy.api#httpQuery": "thingName"
                     }
                 },
                 "startTime": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> A filter to limit results to those found after the specified time. You must specify\n      either the startTime and endTime or the taskId, but not both. </p>",
+                        "smithy.api#documentation": "<p>\n      A filter to limit results to those found after the specified time. You must\n      specify either the startTime and endTime or the taskId, but not both.\n    </p>",
                         "smithy.api#httpQuery": "startTime"
                     }
                 },
                 "endTime": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> The end of the time period for which ML Detect mitigation actions executions are\n      returned. </p>",
+                        "smithy.api#documentation": "<p>\n      The end of the time period for which ML Detect mitigation actions executions are returned.\n    </p>",
                         "smithy.api#httpQuery": "endTime"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.iot#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> The maximum number of results to return at one time. The default is 25. </p>",
+                        "smithy.api#documentation": "<p>\n      The maximum number of results to return at one time. The default is 25.\n    </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token for the next set of results. </p>",
+                        "smithy.api#documentation": "<p>\n      The token for the next set of results.\n    </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -20984,13 +21016,13 @@
                 "actionsExecutions": {
                     "target": "com.amazonaws.iot#DetectMitigationActionExecutionList",
                     "traits": {
-                        "smithy.api#documentation": "<p> List of actions executions. </p>"
+                        "smithy.api#documentation": "<p>\n      List of actions executions.\n    </p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A token that can be used to retrieve the next set of results, or <code>null</code> if\n      there are no additional results. </p>"
+                        "smithy.api#documentation": "<p>\n      A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.\n    </p>"
                     }
                 }
             },
@@ -21018,7 +21050,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> List of Device Defender ML Detect mitigation actions tasks. </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListDetectMitigationActionsTasks</a> action.</p>",
+                "smithy.api#documentation": "<p>\n      List of Device Defender ML Detect mitigation actions tasks.\n    </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListDetectMitigationActionsTasks</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/detect/mitigationactions/tasks",
@@ -21045,14 +21077,14 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> The token for the next set of results. </p>",
+                        "smithy.api#documentation": "<p>\n      The token for the next set of results.\n    </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "startTime": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> A filter to limit results to those found after the specified time. You must specify\n      either the startTime and endTime or the taskId, but not both. </p>",
+                        "smithy.api#documentation": "<p>\n      A filter to limit results to those found after the specified time. You must\n      specify either the startTime and endTime or the taskId, but not both.\n    </p>",
                         "smithy.api#httpQuery": "startTime",
                         "smithy.api#required": {}
                     }
@@ -21060,7 +21092,7 @@
                 "endTime": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> The end of the time period for which ML Detect mitigation actions tasks are returned.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      The end of the time period for which ML Detect mitigation actions tasks are returned.\n    </p>",
                         "smithy.api#httpQuery": "endTime",
                         "smithy.api#required": {}
                     }
@@ -21076,13 +21108,13 @@
                 "tasks": {
                     "target": "com.amazonaws.iot#DetectMitigationActionsTaskSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The collection of ML Detect mitigation tasks that matched the filter criteria. </p>"
+                        "smithy.api#documentation": "<p>\n      The collection of ML Detect mitigation tasks that matched the filter criteria.\n    </p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A token that can be used to retrieve the next set of results, or <code>null</code> if\n      there are no additional results. </p>"
+                        "smithy.api#documentation": "<p>\n      A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.\n    </p>"
                     }
                 }
             },
@@ -21152,13 +21184,13 @@
                 "dimensionNames": {
                     "target": "com.amazonaws.iot#DimensionNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the names of the defined dimensions. Use <code>DescribeDimension</code> to get\n      details for a dimension.</p>"
+                        "smithy.api#documentation": "<p>A list of the names of the defined dimensions. Use <code>DescribeDimension</code> to get details for a dimension.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if\n      there are no additional results.</p>"
+                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.</p>"
                     }
                 }
             },
@@ -21920,7 +21952,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the values reported for an IoT Device Defender metric (device-side metric, cloud-side metric,\n      or custom metric) by the given thing during the specified time period.</p>",
+                "smithy.api#documentation": "<p>Lists the values reported for an IoT Device Defender metric (device-side metric, cloud-side metric, or custom metric) \n      by the given thing during the specified time period.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/metric-values",
@@ -22014,7 +22046,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if\n      there are no additional results.</p>"
+                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> \n        if there are no additional results.</p>"
                     }
                 }
             },
@@ -22062,7 +22094,7 @@
                 "actionType": {
                     "target": "com.amazonaws.iot#MitigationActionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify a value to limit the result to mitigation actions with a specific action\n      type.</p>",
+                        "smithy.api#documentation": "<p>Specify a value to limit the result to mitigation actions with a specific action type.</p>",
                         "smithy.api#httpQuery": "actionType"
                     }
                 },
@@ -23109,7 +23141,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The related resources of an Audit finding. The following resources can be returned from\n      calling this API:</p>\n         <ul>\n            <li>\n               <p>DEVICE_CERTIFICATE</p>\n            </li>\n            <li>\n               <p>CA_CERTIFICATE</p>\n            </li>\n            <li>\n               <p>IOT_POLICY</p>\n            </li>\n            <li>\n               <p>COGNITO_IDENTITY_POOL</p>\n            </li>\n            <li>\n               <p>CLIENT_ID</p>\n            </li>\n            <li>\n               <p>ACCOUNT_SETTINGS</p>\n            </li>\n            <li>\n               <p>ROLE_ALIAS</p>\n            </li>\n            <li>\n               <p>IAM_ROLE</p>\n            </li>\n            <li>\n               <p>ISSUER_CERTIFICATE</p>\n            </li>\n         </ul>\n         <note>\n            <p>This API is similar to DescribeAuditFinding's <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeAuditFinding.html\">RelatedResources</a> but\n        provides pagination and is not limited to 10 resources. When calling <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeAuditFinding.html\">DescribeAuditFinding</a> for the intermediate CA revoked for active device\n        certificates check, RelatedResources will not be populated. You must use this API,\n        ListRelatedResourcesForAuditFinding, to list the certificates.</p>\n         </note>",
+                "smithy.api#documentation": "<p>The related resources of an Audit finding. \n      The following resources can be returned from calling this API:</p>\n         <ul>\n            <li>\n               <p>DEVICE_CERTIFICATE</p>\n            </li>\n            <li>\n               <p>CA_CERTIFICATE</p>\n            </li>\n            <li>\n               <p>IOT_POLICY</p>\n            </li>\n            <li>\n               <p>COGNITO_IDENTITY_POOL</p>\n            </li>\n            <li>\n               <p>CLIENT_ID</p>\n            </li>\n            <li>\n               <p>ACCOUNT_SETTINGS</p>\n            </li>\n            <li>\n               <p>ROLE_ALIAS</p>\n            </li>\n            <li>\n               <p>IAM_ROLE</p>\n            </li>\n            <li>\n               <p>ISSUER_CERTIFICATE</p>\n            </li>\n         </ul>\n         <note>\n            <p>This API is similar to DescribeAuditFinding's <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeAuditFinding.html\">RelatedResources</a>    \n      but provides pagination and is not limited to 10 resources. \n      When calling <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeAuditFinding.html\">DescribeAuditFinding</a> for the intermediate CA revoked for \n      active device certificates check, RelatedResources will not be populated. You must use this API, ListRelatedResourcesForAuditFinding, to list the certificates.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/audit/relatedResources",
@@ -23137,7 +23169,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if\n      there are no additional results.</p>",
+                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, \n      or <code>null</code> if there are no additional results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -23165,7 +23197,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> for the\n      first API call.</p>"
+                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, \n      or <code>null</code> for the first API call.</p>"
                     }
                 }
             },
@@ -23331,7 +23363,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if\n      there are no additional results.</p>"
+                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, \n            or <code>null</code> if there are no additional results.</p>"
                     }
                 }
             },
@@ -23362,7 +23394,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Device Defender security profiles you've created. You can filter security\n      profiles by dimension or custom metric.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListSecurityProfiles</a> action.</p>\n         <note>\n            <p>\n               <code>dimensionName</code> and <code>metricName</code> cannot be used in the same\n        request.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists the Device Defender security profiles\n      you've\n      created. You can filter security profiles by dimension or custom metric.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListSecurityProfiles</a> action.</p>\n         <note>\n            <p>\n               <code>dimensionName</code> and <code>metricName</code> cannot be used in the same request.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/security-profiles",
@@ -23441,7 +23473,7 @@
                 "securityProfileTargetArn": {
                     "target": "com.amazonaws.iot#SecurityProfileTargetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the target (thing group) whose attached security profiles you want to\n      get.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the target (thing group) whose attached security profiles you want to get.</p>",
                         "smithy.api#httpQuery": "securityProfileTargetArn",
                         "smithy.api#required": {}
                     }
@@ -23463,7 +23495,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if\n      there are no additional results.</p>"
+                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if there are no\n        additional results.</p>"
                     }
                 }
             },
@@ -23491,14 +23523,14 @@
                 "dimensionName": {
                     "target": "com.amazonaws.iot#DimensionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter to limit results to the security profiles that use the defined dimension. Cannot\n      be used with <code>metricName</code>\n         </p>",
+                        "smithy.api#documentation": "<p>A filter to limit results to the security profiles that use the defined dimension.\n      Cannot be used with <code>metricName</code>\n         </p>",
                         "smithy.api#httpQuery": "dimensionName"
                     }
                 },
                 "metricName": {
                     "target": "com.amazonaws.iot#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the custom metric. Cannot be used with <code>dimensionName</code>. </p>",
+                        "smithy.api#documentation": "<p> The name of the custom metric.\n      Cannot be used with <code>dimensionName</code>. </p>",
                         "smithy.api#httpQuery": "metricName"
                     }
                 }
@@ -23519,7 +23551,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if\n      there are no additional results.</p>"
+                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if there are no\n        additional results.</p>"
                     }
                 }
             },
@@ -23824,7 +23856,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the targets (thing groups) associated with a given Device Defender security\n      profile.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListTargetsForSecurityProfile</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the targets (thing groups) associated with a given Device Defender security profile.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListTargetsForSecurityProfile</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/security-profiles/{securityProfileName}/targets",
@@ -23880,7 +23912,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if\n      there are no additional results.</p>"
+                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if there are no\n        additional results.</p>"
                     }
                 }
             },
@@ -25020,7 +25052,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Device Defender security profile violations discovered during the given time\n      period. You can use filters to limit the results to those alerts issued for a particular\n      security profile, behavior, or thing (device).</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListViolationEvents</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the Device Defender security profile violations discovered during the given time period. \n      You can use filters to limit the results to those alerts issued for a particular security profile, \n      behavior, or thing (device).</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListViolationEvents</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/violation-events",
@@ -25063,21 +25095,21 @@
                 "securityProfileName": {
                     "target": "com.amazonaws.iot#SecurityProfileName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter to limit results to those alerts generated by the specified security\n      profile.</p>",
+                        "smithy.api#documentation": "<p>A filter to limit results to those alerts generated by the specified security profile.</p>",
                         "smithy.api#httpQuery": "securityProfileName"
                     }
                 },
                 "behaviorCriteriaType": {
                     "target": "com.amazonaws.iot#BehaviorCriteriaType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The criteria for a behavior. </p>",
+                        "smithy.api#documentation": "<p>\n      The criteria for a behavior.\n    </p>",
                         "smithy.api#httpQuery": "behaviorCriteriaType"
                     }
                 },
                 "listSuppressedAlerts": {
                     "target": "com.amazonaws.iot#ListSuppressedAlerts",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of all suppressed alerts. </p>",
+                        "smithy.api#documentation": "<p>\n      A list of all suppressed alerts.\n    </p>",
                         "smithy.api#httpQuery": "listSuppressedAlerts"
                     }
                 },
@@ -25113,13 +25145,13 @@
                 "violationEvents": {
                     "target": "com.amazonaws.iot#ViolationEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>The security profile violation alerts issued for this account during the given time\n      period, potentially filtered by security profile, behavior violated, or thing (device)\n      violating.</p>"
+                        "smithy.api#documentation": "<p>The security profile violation alerts issued for this account during the given time period, \n      potentially filtered by security profile, behavior violated, or thing (device) violating.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if\n      there are no additional results.</p>"
+                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if there are no\n        additional results.</p>"
                     }
                 }
             },
@@ -29120,7 +29152,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.iot#QueryMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The response might contain fewer results but will never contain more.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page at one time. The response might\n      contain fewer results but will never contain more.</p>"
                     }
                 },
                 "queryVersion": {
@@ -29733,7 +29765,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
+                "smithy.api#pattern": "^[$a-zA-Z0-9:_-]+$"
             }
         },
         "com.amazonaws.iot#SigV4Authorization": {
@@ -29939,7 +29971,7 @@
                 "taskId": {
                     "target": "com.amazonaws.iot#MitigationActionsTaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the task. You can use this identifier to check the status of the\n      task or to cancel it.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the task. You can use this identifier to check the status of the task or to cancel it.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -29947,21 +29979,21 @@
                 "target": {
                     "target": "com.amazonaws.iot#AuditMitigationActionsTaskTarget",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the audit findings to which the mitigation actions are applied. You can apply\n      them to a type of audit check, to all findings from an audit, or to a specific set of\n      findings.</p>",
+                        "smithy.api#documentation": "<p>Specifies the audit findings to which the mitigation actions are applied. You can apply\n      them to a type of audit check, to all findings from an audit, or to a\n      specific set of\n      findings.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "auditCheckToActionsMapping": {
                     "target": "com.amazonaws.iot#AuditCheckToActionsMapping",
                     "traits": {
-                        "smithy.api#documentation": "<p>For an audit check, specifies which mitigation actions to apply. Those actions must be\n      defined in your Amazon Web Services accounts.</p>",
+                        "smithy.api#documentation": "<p>For an audit check, specifies which mitigation actions to apply. Those actions must be defined in your Amazon Web Services accounts.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clientRequestToken": {
                     "target": "com.amazonaws.iot#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each audit mitigation task must have a unique client request token. If you try to start a\n      new task with the same token as a task that already exists, an exception occurs. If you omit\n      this value, a unique client request token is generated automatically.</p>",
+                        "smithy.api#documentation": "<p>Each audit mitigation task must have a unique client request token. If you try to start a new task with the same token as a task that already exists, an exception occurs. If you omit this value, a unique client request token is generated automatically.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -29977,7 +30009,7 @@
                 "taskId": {
                     "target": "com.amazonaws.iot#MitigationActionsTaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the audit mitigation task. This matches the <code>taskId</code>\n      that you specified in the request.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier for the audit mitigation task. This matches the <code>taskId</code> that you specified in the request.</p>"
                     }
                 }
             },
@@ -30011,7 +30043,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Starts a Device Defender ML Detect mitigation actions task. </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">StartDetectMitigationActionsTask</a> action.</p>",
+                "smithy.api#documentation": "<p>\n      Starts a Device Defender ML Detect mitigation actions task.\n    </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">StartDetectMitigationActionsTask</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/detect/mitigationactions/tasks/{taskId}",
@@ -30025,7 +30057,7 @@
                 "taskId": {
                     "target": "com.amazonaws.iot#MitigationActionsTaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique identifier of the task. </p>",
+                        "smithy.api#documentation": "<p>\n      The unique identifier of the task.\n    </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -30033,39 +30065,39 @@
                 "target": {
                     "target": "com.amazonaws.iot#DetectMitigationActionsTaskTarget",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the ML Detect findings to which the mitigation actions are applied. </p>",
+                        "smithy.api#documentation": "<p>\n      Specifies the ML Detect findings to which the mitigation actions are applied.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "actions": {
                     "target": "com.amazonaws.iot#DetectMitigationActionsToExecuteList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The actions to be performed when a device has unexpected behavior. </p>",
+                        "smithy.api#documentation": "<p>\n      The actions to be performed when a device has unexpected behavior.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "violationEventOccurrenceRange": {
                     "target": "com.amazonaws.iot#ViolationEventOccurrenceRange",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the time period of which violation events occurred between. </p>"
+                        "smithy.api#documentation": "<p>\n      Specifies the time period of which violation events occurred between.\n    </p>"
                     }
                 },
                 "includeOnlyActiveViolations": {
                     "target": "com.amazonaws.iot#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies to list only active violations. </p>"
+                        "smithy.api#documentation": "<p>\n      Specifies to list only active violations.\n    </p>"
                     }
                 },
                 "includeSuppressedAlerts": {
                     "target": "com.amazonaws.iot#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies to include suppressed alerts. </p>"
+                        "smithy.api#documentation": "<p>\n      Specifies to include suppressed alerts.\n    </p>"
                     }
                 },
                 "clientRequestToken": {
                     "target": "com.amazonaws.iot#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> Each mitigation action task must have a unique client request token. If you try to create\n      a new task with the same token as a task that already exists, an exception occurs. If you omit\n      this value, Amazon Web Services SDKs will automatically generate a unique client request. </p>",
+                        "smithy.api#documentation": "<p>\n      Each mitigation action task must have a unique client request token. If you try to create a new task with the same token as a task that already exists, an exception occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request.\n    </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -30081,7 +30113,7 @@
                 "taskId": {
                     "target": "com.amazonaws.iot#MitigationActionsTaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique identifier of the task. </p>"
+                        "smithy.api#documentation": "<p>\n      The unique identifier of the task.\n    </p>"
                     }
                 }
             },
@@ -30126,7 +30158,7 @@
                 "targetCheckNames": {
                     "target": "com.amazonaws.iot#TargetAuditCheckNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>Which checks are performed during the audit. The checks you specify must be enabled for\n      your account or an exception occurs. Use <code>DescribeAccountAuditConfiguration</code> to see\n      the list of all checks, including those that are enabled or\n        <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.</p>",
+                        "smithy.api#documentation": "<p>Which checks are performed during the audit. The checks you specify must be enabled \n            for your account or an exception occurs. Use <code>DescribeAccountAuditConfiguration</code> \n            to see the list of all checks, including those that are enabled or \n            <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -30862,6 +30894,26 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iot#AuditCheckName"
+            }
+        },
+        "com.amazonaws.iot#TargetFieldName": {
+            "type": "string"
+        },
+        "com.amazonaws.iot#TargetFieldOrder": {
+            "type": "enum",
+            "members": {
+                "LatLon": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LatLon"
+                    }
+                },
+                "LonLat": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LonLat"
+                    }
+                }
             }
         },
         "com.amazonaws.iot#TargetSelection": {
@@ -31708,7 +31760,7 @@
                 "filter": {
                     "target": "com.amazonaws.iot#IndexingFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides additional filters for specific data sources. Named shadow is the only data source that currently supports and requires a filter.\n      To add named shadows to your fleet indexing configuration, set <code>namedShadowIndexingMode</code> to be <code>ON</code> and \n      specify your shadow names in <code>filter</code>.</p>"
+                        "smithy.api#documentation": "<p>Provides additional selections for named shadows and geolocation data. </p>\n         <p>To add named shadows to your fleet indexing configuration, set <code>namedShadowIndexingMode</code> to\n      be ON and specify your shadow names in <code>namedShadowNames</code> filter.</p>\n         <p>To add geolocation data to your fleet indexing configuration: </p>\n         <ul>\n            <li>\n               <p>If you store geolocation data in a class/unnamed shadow, set\n          <code>thingIndexingMode</code> to be <code>REGISTRY_AND_SHADOW</code> and specify your\n          geolocation data in <code>geoLocations</code> filter. </p>\n            </li>\n            <li>\n               <p>If you store geolocation data in a named shadow, set <code>namedShadowIndexingMode</code>\n          to be <code>ON</code>, add the shadow name in <code>namedShadowNames</code> filter, and\n          specify your geolocation data in <code>geoLocations</code> filter. For more information, see\n          <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html\">Managing fleet indexing</a>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -32697,7 +32749,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configures or reconfigures the Device Defender audit settings for this account. Settings\n      include how audit notifications are sent and which audit checks are enabled or\n      disabled.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateAccountAuditConfiguration</a> action.</p>",
+                "smithy.api#documentation": "<p>Configures or reconfigures the Device Defender audit settings for this account.\n          Settings include how audit notifications are sent and which audit checks are\n          enabled or disabled.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateAccountAuditConfiguration</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/audit/configuration",
@@ -32711,7 +32763,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.iot#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that grants permission to IoT to access\n      information about your devices, policies, certificates, and other items as required when\n      performing an audit.</p>"
+                        "smithy.api#documentation": "<p>The Amazon\n      Resource Name\n      (ARN)\n      of the role that grants permission\n      to\n      IoT to access information about your devices, policies,\n      certificates,\n      and other items as required when performing an audit.</p>"
                     }
                 },
                 "auditNotificationTargetConfigurations": {
@@ -32723,7 +32775,7 @@
                 "auditCheckConfigurations": {
                     "target": "com.amazonaws.iot#AuditCheckConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies which audit checks are enabled and disabled for this account. Use\n        <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including\n      those that are currently enabled.</p>\n         <p>Some data collection might start immediately when certain checks are enabled. When a check\n      is disabled, any data collected so far in relation to the check is deleted.</p>\n         <p>You cannot disable a check if it's used by any scheduled audit. You must first delete the\n      check from the scheduled audit or delete the scheduled audit itself.</p>\n         <p>On the first call to <code>UpdateAccountAuditConfiguration</code>, this parameter is\n      required and must specify at least one enabled check.</p>"
+                        "smithy.api#documentation": "<p>Specifies which audit checks are enabled and disabled for this account. Use \n            <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those \n            that are currently enabled.</p>\n         <p>Some data collection might start immediately when certain checks are enabled. \n            When a check is disabled, any data collected so far in relation to the check is deleted.</p>\n         <p>You\n      cannot\n      disable a check if\n      it's\n      used by any scheduled audit. You must first delete the check from the scheduled audit or\n      delete the scheduled audit itself.</p>\n         <p>On the first call to <code>UpdateAccountAuditConfiguration</code>,\n            this parameter is required and must specify at least one enabled check.</p>"
                     }
                 }
             },
@@ -33182,7 +33234,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a Device Defender detect custom metric. </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateCustomMetric</a> action.</p>",
+                "smithy.api#documentation": "<p>Updates a\n      Device Defender detect custom metric. </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateCustomMetric</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/custom-metric/{metricName}",
@@ -33196,7 +33248,7 @@
                 "metricName": {
                     "target": "com.amazonaws.iot#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the custom metric. Cannot be updated. </p>",
+                        "smithy.api#documentation": "<p> The name of the custom metric.\n      Cannot be updated. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -33204,7 +33256,7 @@
                 "displayName": {
                     "target": "com.amazonaws.iot#CustomMetricDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p> Field represents a friendly name in the console for the custom metric, it doesn't have to\n      be unique. Don't use this name as the metric identifier in the device metric report. Can be\n      updated. </p>",
+                        "smithy.api#documentation": "<p>\n      Field\n      represents a friendly name in the console for the custom metric,\n      it\n      doesn't have to be unique. Don't use this name as the metric identifier in\n      the device metric report.\n      Can\n      be updated. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -33219,37 +33271,37 @@
                 "metricName": {
                     "target": "com.amazonaws.iot#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the custom metric. </p>"
+                        "smithy.api#documentation": "<p>\n      The name of the custom metric.\n    </p>"
                     }
                 },
                 "metricArn": {
                     "target": "com.amazonaws.iot#CustomMetricArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Number (ARN) of the custom metric. </p>"
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Number (ARN) of the custom metric.\n    </p>"
                     }
                 },
                 "metricType": {
                     "target": "com.amazonaws.iot#CustomMetricType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of the custom metric. </p>\n         <important>\n            <p>The type <code>number</code> only takes a single metric value as an input, but while\n        submitting the metrics value in the DeviceMetrics report, it must be passed as an array with\n        a single value.</p>\n         </important>"
+                        "smithy.api#documentation": "<p> The type of the custom metric. </p>\n         <important>\n            <p>The type <code>number</code> only takes a single metric value as an input, but while submitting the metrics value in the DeviceMetrics report, it must be passed as an array with a single value.</p>\n         </important>"
                     }
                 },
                 "displayName": {
                     "target": "com.amazonaws.iot#CustomMetricDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p> A friendly name in the console for the custom metric </p>"
+                        "smithy.api#documentation": "<p>\n      A friendly name in the console for the custom metric\n    </p>"
                     }
                 },
                 "creationDate": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> The creation date of the custom metric in milliseconds since epoch. </p>"
+                        "smithy.api#documentation": "<p>\n      The creation date of the custom metric in milliseconds since epoch.\n    </p>"
                     }
                 },
                 "lastModifiedDate": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> The time the custom metric was last modified in milliseconds since epoch. </p>"
+                        "smithy.api#documentation": "<p>\n      The time the custom metric was last modified in milliseconds since epoch.\n    </p>"
                     }
                 }
             },
@@ -33295,7 +33347,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the definition for a dimension. You cannot change the type of a dimension after it\n      is created (you can delete it and recreate it).</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateDimension</a> action.</p>",
+                "smithy.api#documentation": "<p>Updates the definition for a dimension. You\n      cannot\n      change the type of a dimension after\n      it is created (you can delete it and\n      recreate\n      it).</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateDimension</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/dimensions/{name}",
@@ -33309,7 +33361,7 @@
                 "name": {
                     "target": "com.amazonaws.iot#DimensionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the dimension. Choose something that describes the type and value\n      to make it easy to remember what it does.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the dimension. Choose something that describes the type and value to make it easy to remember what it does.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -33317,7 +33369,7 @@
                 "stringValues": {
                     "target": "com.amazonaws.iot#DimensionStringValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the value or list of values for the dimension. For <code>TOPIC_FILTER</code>\n      dimensions, this is a pattern used to match the MQTT topic (for example, \"admin/#\").</p>",
+                        "smithy.api#documentation": "<p>Specifies the value or list of values for the dimension. For <code>TOPIC_FILTER</code> dimensions, this is a pattern used to match the MQTT topic (for example, \"admin/#\").</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -33338,7 +33390,7 @@
                 "arn": {
                     "target": "com.amazonaws.iot#DimensionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN)of the created dimension.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource\n      Name (ARN)of\n      the created dimension.</p>"
                     }
                 },
                 "type": {
@@ -33350,19 +33402,19 @@
                 "stringValues": {
                     "target": "com.amazonaws.iot#DimensionStringValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value or list of values used to scope the dimension. For example, for topic filters,\n      this is the pattern used to match the MQTT topic name.</p>"
+                        "smithy.api#documentation": "<p>The value or list of values used to scope the dimension. For example, for topic filters, this is the pattern used to match the MQTT topic name.</p>"
                     }
                 },
                 "creationDate": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in milliseconds since epoch, when the dimension was initially\n      created.</p>"
+                        "smithy.api#documentation": "<p>The date and time, in milliseconds since epoch, when the dimension was initially created.</p>"
                     }
                 },
                 "lastModifiedDate": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in milliseconds since epoch, when the dimension was most recently\n      updated.</p>"
+                        "smithy.api#documentation": "<p>The date and time, in milliseconds since epoch, when the dimension was most recently updated.</p>"
                     }
                 }
             },
@@ -33927,7 +33979,7 @@
                 "actionName": {
                     "target": "com.amazonaws.iot#MitigationActionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The friendly name for the mitigation action. You cannot change the name by using\n        <code>UpdateMitigationAction</code>. Instead, you must delete and recreate the mitigation\n      action with the new name.</p>",
+                        "smithy.api#documentation": "<p>The friendly name for the mitigation action. You cannot change the name by using\n        <code>UpdateMitigationAction</code>. Instead, you must delete and\n      recreate the\n      mitigation action with the new name.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -34399,7 +34451,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a scheduled audit, including which checks are performed and how often the audit\n      takes place.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateScheduledAudit</a> action.</p>",
+                "smithy.api#documentation": "<p>Updates a scheduled audit, including which checks are performed and\n          how often the audit takes place.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateScheduledAudit</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/audit/scheduledaudits/{scheduledAuditName}",
@@ -34413,25 +34465,25 @@
                 "frequency": {
                     "target": "com.amazonaws.iot#AuditFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>How often the scheduled audit takes place, either <code>DAILY</code>, <code>WEEKLY</code>,\n        <code>BIWEEKLY</code>, or <code>MONTHLY</code>. The start time of each audit is determined\n      by the system.</p>"
+                        "smithy.api#documentation": "<p>How often the scheduled audit takes\n      place,\n      either <code>DAILY</code>,\n      <code>WEEKLY</code>, <code>BIWEEKLY</code>, or <code>MONTHLY</code>. The start time of each audit is determined by the\n      system.</p>"
                     }
                 },
                 "dayOfMonth": {
                     "target": "com.amazonaws.iot#DayOfMonth",
                     "traits": {
-                        "smithy.api#documentation": "<p>The day of the month on which the scheduled audit takes place. This can be <code>1</code>\n      through <code>31</code> or <code>LAST</code>. This field is required if the\n        <code>frequency</code> parameter is set to <code>MONTHLY</code>. If days 29-31 are\n      specified, and the month does not have that many days, the audit takes place on the \"LAST\" day\n      of the month.</p>"
+                        "smithy.api#documentation": "<p>The day of the month on which the scheduled audit takes place.\n      This\n      can\n      be <code>1</code> through <code>31</code> or <code>LAST</code>. This field is required if the <code>frequency</code> parameter is set to\n            <code>MONTHLY</code>. If days 29-31 are specified, and the month does not have that many days, the audit\n      takes place on the \"LAST\" day of the month.</p>"
                     }
                 },
                 "dayOfWeek": {
                     "target": "com.amazonaws.iot#DayOfWeek",
                     "traits": {
-                        "smithy.api#documentation": "<p>The day of the week on which the scheduled audit takes place. This can be one of\n        <code>SUN</code>, <code>MON</code>, <code>TUE</code>, <code>WED</code>, <code>THU</code>,\n        <code>FRI</code>, or <code>SAT</code>. This field is required if the \"frequency\" parameter\n      is set to <code>WEEKLY</code> or <code>BIWEEKLY</code>.</p>"
+                        "smithy.api#documentation": "<p>The day of the week on which the scheduled audit takes place.\n      This\n      can\n      be one of <code>SUN</code>, <code>MON</code>, <code>TUE</code>, <code>WED</code>, <code>THU</code>, <code>FRI</code>, or <code>SAT</code>. This field is required if the\n            \"frequency\" parameter is set to <code>WEEKLY</code> or <code>BIWEEKLY</code>.</p>"
                     }
                 },
                 "targetCheckNames": {
                     "target": "com.amazonaws.iot#TargetAuditCheckNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>Which checks are performed during the scheduled audit. Checks must be enabled for your\n      account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks,\n      including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select\n      which checks are enabled.)</p>"
+                        "smithy.api#documentation": "<p>Which checks are performed during the scheduled audit. Checks must be enabled \n            for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list\n            of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> \n            to select which checks are enabled.)</p>"
                     }
                 },
                 "scheduledAuditName": {
@@ -34515,7 +34567,7 @@
                 "behaviors": {
                     "target": "com.amazonaws.iot#Behaviors",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the behaviors that, when violated by a device (thing), cause an\n      alert.</p>"
+                        "smithy.api#documentation": "<p>Specifies the behaviors that, when violated by a device (thing), cause an alert.</p>"
                     }
                 },
                 "alertTargets": {
@@ -34530,40 +34582,40 @@
                         "smithy.api#deprecated": {
                             "message": "Use additionalMetricsToRetainV2."
                         },
-                        "smithy.api#documentation": "<p>\n            <i>Please use <a>UpdateSecurityProfileRequest$additionalMetricsToRetainV2</a>\n      instead.</i>\n         </p>\n         <p>A list of metrics whose data is retained (stored). By default, data is retained for any\n      metric used in the profile's <code>behaviors</code>, but it is also retained for any metric\n      specified here. Can be used with custom metrics; cannot be used with dimensions.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>Please use\n          <a>UpdateSecurityProfileRequest$additionalMetricsToRetainV2</a>\n        instead.</i>\n         </p>\n         <p>A list of metrics\n     whose data is retained (stored). By default, data is retained for any metric\n      used in the profile's <code>behaviors</code>, but\n      it is\n      also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>"
                     }
                 },
                 "additionalMetricsToRetainV2": {
                     "target": "com.amazonaws.iot#AdditionalMetricsToRetainV2List",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any\n      metric used in the profile's behaviors, but it is also retained for any metric specified here.\n      Can be used with custom metrics; cannot be used with dimensions.</p>"
+                        "smithy.api#documentation": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>"
                     }
                 },
                 "deleteBehaviors": {
                     "target": "com.amazonaws.iot#DeleteBehaviors",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>If true, delete all <code>behaviors</code> defined for this security profile. If any\n        <code>behaviors</code> are defined in the current invocation, an exception occurs.</p>"
+                        "smithy.api#documentation": "<p>If true, delete all <code>behaviors</code> defined for this security profile. \n        If any <code>behaviors</code> are defined in the current invocation, an exception occurs.</p>"
                     }
                 },
                 "deleteAlertTargets": {
                     "target": "com.amazonaws.iot#DeleteAlertTargets",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>If true, delete all <code>alertTargets</code> defined for this security profile. If any\n        <code>alertTargets</code> are defined in the current invocation, an exception\n      occurs.</p>"
+                        "smithy.api#documentation": "<p>If true, delete all <code>alertTargets</code> defined for this security profile. \n        If any <code>alertTargets</code> are defined in the current invocation, an exception occurs.</p>"
                     }
                 },
                 "deleteAdditionalMetricsToRetain": {
                     "target": "com.amazonaws.iot#DeleteAdditionalMetricsToRetain",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>If true, delete all <code>additionalMetricsToRetain</code> defined for this security\n      profile. If any <code>additionalMetricsToRetain</code> are defined in the current invocation,\n      an exception occurs.</p>"
+                        "smithy.api#documentation": "<p>If true, delete all <code>additionalMetricsToRetain</code> defined for this \n        security profile. If any <code>additionalMetricsToRetain</code> are defined in the current \n        invocation, an exception occurs.</p>"
                     }
                 },
                 "expectedVersion": {
                     "target": "com.amazonaws.iot#OptionalVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The expected version of the security profile. A new version is generated whenever the\n      security profile is updated. If you specify a value that is different from the actual version,\n      a <code>VersionConflictException</code> is thrown.</p>",
+                        "smithy.api#documentation": "<p>The expected version of the security profile. A new version is generated whenever\n        the security profile is updated. If you specify a value that is different from the actual\n        version, a <code>VersionConflictException</code> is thrown.</p>",
                         "smithy.api#httpQuery": "expectedVersion"
                     }
                 },
@@ -34609,7 +34661,7 @@
                 "behaviors": {
                     "target": "com.amazonaws.iot#Behaviors",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the behaviors that, when violated by a device (thing), cause an\n      alert.</p>"
+                        "smithy.api#documentation": "<p>Specifies the behaviors that, when violated by a device (thing), cause an alert.</p>"
                     }
                 },
                 "alertTargets": {
@@ -34624,13 +34676,13 @@
                         "smithy.api#deprecated": {
                             "message": "Use additionalMetricsToRetainV2."
                         },
-                        "smithy.api#documentation": "<p>\n            <i>Please use <a>UpdateSecurityProfileResponse$additionalMetricsToRetainV2</a>\n      instead.</i>\n         </p>\n         <p>A list of metrics whose data is retained (stored). By default, data is retained for any\n      metric used in the security profile's <code>behaviors</code>, but it is also retained for any\n      metric specified here.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>Please use\n          <a>UpdateSecurityProfileResponse$additionalMetricsToRetainV2</a>\n        instead.</i>\n         </p>\n         <p>A list of metrics\n      whose data is retained (stored). By default, data is retained for any metric\n      used in the security profile's <code>behaviors</code>, but\n      it is\n      also retained for any metric specified here.</p>"
                     }
                 },
                 "additionalMetricsToRetainV2": {
                     "target": "com.amazonaws.iot#AdditionalMetricsToRetainV2List",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any\n      metric used in the profile's behaviors, but it is also retained for any metric specified here.\n      Can be used with custom metrics; cannot be used with dimensions.</p>"
+                        "smithy.api#documentation": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>"
                     }
                 },
                 "version": {
@@ -35172,7 +35224,7 @@
                 "behaviors": {
                     "target": "com.amazonaws.iot#Behaviors",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the behaviors that, when violated by a device (thing), cause an\n      alert.</p>",
+                        "smithy.api#documentation": "<p>Specifies the behaviors that, when violated by a device (thing), cause an alert.</p>",
                         "smithy.api#required": {}
                     }
                 }

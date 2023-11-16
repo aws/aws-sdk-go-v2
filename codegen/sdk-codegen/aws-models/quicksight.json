@@ -422,9 +422,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>"
                     }
-                },
-                "Options": {
-                    "target": "com.amazonaws.quicksight#AssetOptions"
                 }
             },
             "traits": {
@@ -1128,7 +1125,8 @@
                 "Arn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the specific <code>Analysis</code> resource whose override properties are configured in this structure.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the specific <code>Analysis</code> resource whose override properties are configured in this structure.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "Properties": {
@@ -1184,7 +1182,8 @@
                 "Arn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the specific <code>Dashboard</code> resource whose override properties are configured in this structure.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the specific <code>Dashboard</code> resource whose override properties are configured in this structure.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "Properties": {
@@ -1240,7 +1239,8 @@
                 "Arn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the specific <code>DataSet</code> resource whose override properties are configured in this structure.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the specific <code>DataSet</code> resource whose override properties are configured in this structure.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "Properties": {
@@ -1296,7 +1296,8 @@
                 "Arn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the specific <code>DataSource</code> resource whose override properties are configured in this structure.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the specific <code>DataSource</code> resource whose override properties are configured in this structure.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "Properties": {
@@ -1480,7 +1481,8 @@
                 "Arn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the specific <code>RefreshSchedule</code> resource whose override properties are configured in this structure.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the specific <code>RefreshSchedule</code> resource whose override properties are configured in this structure.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "Properties": {
@@ -1613,6 +1615,20 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The format for the export job.</p>"
                     }
+                },
+                "IncludePermissions": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The flag that determines the inclusion of permissions associated with each resource ARN.</p>"
+                    }
+                },
+                "IncludeTags": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The flag that determines the inclusion of tags associated with each resource ARN.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1631,7 +1647,8 @@
                 "Arn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the specific <code>Theme</code> resource whose override properties are configured in this structure.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the specific <code>Theme</code> resource whose override properties are configured in this structure.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "Properties": {
@@ -1687,7 +1704,8 @@
                 "Arn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the specific <code>VPCConnection</code> resource whose override properties are configured in this structure.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the specific <code>VPCConnection</code> resource whose override properties are configured in this structure.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "Properties": {
@@ -1747,6 +1765,47 @@
                     "min": 1,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobValidationStrategy": {
+            "type": "structure",
+            "members": {
+                "StrictModeForAllResources": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether to export resources under strict or lenient mode.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The option to relax the validation that is required to export each asset. When <code>StrictModeForAllResource</code> is set to true, validation is skipped for specific UI errors.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobWarning": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource whose processing caused a warning.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the warning.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a warning that occurred during an Asset Bundle export job.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobWarningList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobWarning"
             }
         },
         "com.amazonaws.quicksight#AssetBundleImportBodyBlob": {
@@ -1809,6 +1868,74 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#AssetBundleImportJobAnalysisOverridePermissions": {
+            "type": "structure",
+            "members": {
+                "AnalysisIds": {
+                    "target": "com.amazonaws.quicksight#AssetBundleRestrictiveResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of analysis IDs that you want to apply overrides to. You can use <code>*</code> to override all analyses in this asset bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#AssetBundleResourcePermissions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of permissions for the analyses that you want to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a list of permissions to be applied to a list of analysis IDs.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobAnalysisOverridePermissionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobAnalysisOverridePermissions"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobAnalysisOverrideTags": {
+            "type": "structure",
+            "members": {
+                "AnalysisIds": {
+                    "target": "com.amazonaws.quicksight#AssetBundleRestrictiveResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of analysis IDs that you want to apply overrides to. You can use <code>*</code> to override all analyses in this asset bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.quicksight#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags for the analyses that you want to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a list of tags to be assigned to a list of analysis IDs.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobAnalysisOverrideTagsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobAnalysisOverrideTags"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.quicksight#AssetBundleImportJobDashboardOverrideParameters": {
             "type": "structure",
             "members": {
@@ -1842,6 +1969,79 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#AssetBundleImportJobDashboardOverridePermissions": {
+            "type": "structure",
+            "members": {
+                "DashboardIds": {
+                    "target": "com.amazonaws.quicksight#AssetBundleRestrictiveResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of dashboard IDs that you want to apply overrides to. You can use <code>*</code> to override all dashboards in this asset bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#AssetBundleResourcePermissions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of permissions for the dashboards that you want to apply overrides to.</p>"
+                    }
+                },
+                "LinkSharingConfiguration": {
+                    "target": "com.amazonaws.quicksight#AssetBundleResourceLinkSharingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the link sharing configurations that you want to apply overrides to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a list of permissions to be applied to a list of dashboard IDs.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDashboardOverridePermissionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobDashboardOverridePermissions"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDashboardOverrideTags": {
+            "type": "structure",
+            "members": {
+                "DashboardIds": {
+                    "target": "com.amazonaws.quicksight#AssetBundleRestrictiveResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of dashboard IDs that you want to apply overrides to. You can use <code>*</code> to override all dashboards in this asset bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.quicksight#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags for the dashboards that you want to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a list of tags to be assigned to a list of dashboard IDs.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDashboardOverrideTagsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobDashboardOverrideTags"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.quicksight#AssetBundleImportJobDataSetOverrideParameters": {
             "type": "structure",
             "members": {
@@ -1872,6 +2072,74 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDataSetOverridePermissions": {
+            "type": "structure",
+            "members": {
+                "DataSetIds": {
+                    "target": "com.amazonaws.quicksight#AssetBundleRestrictiveResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of dataset IDs that you want to apply overrides to. You can use <code>*</code> to override all datasets in this asset bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#AssetBundleResourcePermissions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of permissions for the datasets that you want to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a list of permissions to be applied to a list of dataset IDs.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDataSetOverridePermissionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobDataSetOverridePermissions"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDataSetOverrideTags": {
+            "type": "structure",
+            "members": {
+                "DataSetIds": {
+                    "target": "com.amazonaws.quicksight#AssetBundleRestrictiveResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of dataset IDs that you want to apply overrides to. You can use <code>*</code> to override all datasets in this asset bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.quicksight#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags for the datasets that you want to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a list of tags to be assigned to a list of dataset IDs.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDataSetOverrideTagsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobDataSetOverrideTags"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
                 }
             }
         },
@@ -1966,6 +2234,74 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#AssetBundleImportJobDataSourceOverridePermissions": {
+            "type": "structure",
+            "members": {
+                "DataSourceIds": {
+                    "target": "com.amazonaws.quicksight#AssetBundleRestrictiveResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of data source IDs that you want to apply overrides to. You can use <code>*</code> to override all data sources in this asset bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#AssetBundleResourcePermissions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of permissions for the data source that you want to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a list of permissions to be applied to a list of data source IDs.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDataSourceOverridePermissionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobDataSourceOverridePermissions"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDataSourceOverrideTags": {
+            "type": "structure",
+            "members": {
+                "DataSourceIds": {
+                    "target": "com.amazonaws.quicksight#AssetBundleRestrictiveResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of data source IDs that you want to apply overrides to. You can use <code>*</code> to override all data sources in this asset bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.quicksight#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags for the data source that you want to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a list of tags to be assigned to a list of data source IDs.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDataSourceOverrideTagsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobDataSourceOverrideTags"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.quicksight#AssetBundleImportJobError": {
             "type": "structure",
             "members": {
@@ -2052,6 +2388,103 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A list of overrides that modify the asset bundle resource configuration before the resource is imported.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobOverridePermissions": {
+            "type": "structure",
+            "members": {
+                "DataSources": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobDataSourceOverridePermissionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of permissions overrides for any <code>DataSource</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "DataSets": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobDataSetOverridePermissionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of permissions overrides for any <code>DataSet</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "Themes": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobThemeOverridePermissionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of permissions overrides for any <code>Theme</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "Analyses": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobAnalysisOverridePermissionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of permissions overrides for any <code>Analysis</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "Dashboards": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobDashboardOverridePermissionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of permissions overrides for any <code>Dashboard</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the override permission configurations that modify the permissions for specified resources before the resource is imported.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobOverrideTags": {
+            "type": "structure",
+            "members": {
+                "VPCConnections": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobVPCConnectionOverrideTagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag overrides for any <code>VPCConnection</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "DataSources": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobDataSourceOverrideTagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag overrides for any <code>DataSource</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "DataSets": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobDataSetOverrideTagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag overrides for any <code>DataSet</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "Themes": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobThemeOverrideTagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag overrides for any <code>Theme</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "Analyses": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobAnalysisOverrideTagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag overrides for any <code>Analysis</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "Dashboards": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobDashboardOverrideTagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag overrides for any <code>Dashboard</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the override tag configuration that modify the tags that are assigned to specified resources before the resource is imported.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobOverrideValidationStrategy": {
+            "type": "structure",
+            "members": {
+                "StrictModeForAllResources": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether to import all analyses and dashboards under strict or lenient mode.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An optional parameter that overrides the validation strategy for all analyses and dashboards before the resource is imported.</p>"
             }
         },
         "com.amazonaws.quicksight#AssetBundleImportJobRefreshScheduleOverrideParameters": {
@@ -2232,6 +2665,74 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#AssetBundleImportJobThemeOverridePermissions": {
+            "type": "structure",
+            "members": {
+                "ThemeIds": {
+                    "target": "com.amazonaws.quicksight#AssetBundleRestrictiveResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of theme IDs that you want to apply overrides to. You can use <code>*</code> to override all themes in this asset bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#AssetBundleResourcePermissions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of permissions for the themes that you want to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a list of permissions to be applied to a list of theme IDs.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobThemeOverridePermissionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobThemeOverridePermissions"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobThemeOverrideTags": {
+            "type": "structure",
+            "members": {
+                "ThemeIds": {
+                    "target": "com.amazonaws.quicksight#AssetBundleRestrictiveResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of theme IDs that you want to apply overrides to. You can use <code>*</code> to override all themes in this asset bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.quicksight#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags for the themes that you want to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a list of tags to be assigned to a list of theme IDs.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobThemeOverrideTagsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobThemeOverrideTags"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.quicksight#AssetBundleImportJobVPCConnectionOverrideParameters": {
             "type": "structure",
             "members": {
@@ -2289,6 +2790,40 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#AssetBundleImportJobVPCConnectionOverrideTags": {
+            "type": "structure",
+            "members": {
+                "VPCConnectionIds": {
+                    "target": "com.amazonaws.quicksight#AssetBundleRestrictiveResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC connection IDs that you want to apply overrides to. You can use <code>*</code> to override all VPC connections in this asset bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.quicksight#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags for the VPC connections that you want to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a list of tags to be assigned to a list of VPC connection IDs.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobVPCConnectionOverrideTagsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobVPCConnectionOverrideTags"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.quicksight#AssetBundleImportSource": {
             "type": "structure",
             "members": {
@@ -2313,7 +2848,7 @@
             "type": "structure",
             "members": {
                 "Body": {
-                    "target": "com.amazonaws.quicksight#String",
+                    "target": "com.amazonaws.quicksight#SensitiveS3Uri",
                     "traits": {
                         "smithy.api#documentation": "<p>An HTTPS download URL for the provided asset bundle that you optionally provided at the start of the import job. This URL is valid for five minutes after issuance. Call <code>DescribeAssetBundleExportJob</code> again for a fresh URL if needed. The downloaded asset bundle is a <code>.qs</code> zip file.</p>"
                     }
@@ -2329,6 +2864,18 @@
                 "smithy.api#documentation": "<p>A description of the import source that you provide at the start of an import job. This value is set to either <code>Body</code> or <code>S3Uri</code>, depending on how the <code>StartAssetBundleImportJobRequest</code> is configured.</p>"
             }
         },
+        "com.amazonaws.quicksight#AssetBundlePrincipalList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Principal"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.quicksight#AssetBundleResourceArns": {
             "type": "list",
             "member": {
@@ -2338,6 +2885,60 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleResourceLinkSharingConfiguration": {
+            "type": "structure",
+            "members": {
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#AssetBundleResourcePermissions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of link sharing permissions for the dashboards that you want to apply overrides to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the configuration of a shared link to an Amazon QuickSight dashboard.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleResourcePermissions": {
+            "type": "structure",
+            "members": {
+                "Principals": {
+                    "target": "com.amazonaws.quicksight#AssetBundlePrincipalList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of principals to grant permissions on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Actions": {
+                    "target": "com.amazonaws.quicksight#ActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IAM actions to grant permissions on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the permissions for the resource that you want to override in an asset bundle import job.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleRestrictiveResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\*|[\\w\\-]{1,2048}$"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleRestrictiveResourceIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleRestrictiveResourceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
                 }
             }
         },
@@ -3199,6 +3800,27 @@
                         "smithy.api#enumValue": "IMAGERY"
                     }
                 }
+            }
+        },
+        "com.amazonaws.quicksight#BigQueryParameters": {
+            "type": "structure",
+            "members": {
+                "ProjectId": {
+                    "target": "com.amazonaws.quicksight#ProjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Google Cloud Platform project ID where your datasource was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSetRegion": {
+                    "target": "com.amazonaws.quicksight#DataSetRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage location where you create a Google BigQuery data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The parameters that are required to connect to a Google BigQuery data source.</p>"
             }
         },
         "com.amazonaws.quicksight#BinCountLimit": {
@@ -5877,7 +6499,7 @@
                 "AuthenticationMethod": {
                     "target": "com.amazonaws.quicksight#AuthenticationMethodOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method that you want to use to authenticate your Amazon QuickSight account. Currently, the valid values for this parameter are <code>IAM_AND_QUICKSIGHT</code>, <code>IAM_ONLY</code>, and <code>ACTIVE_DIRECTORY</code>.</p>\n         <p>If you choose <code>ACTIVE_DIRECTORY</code>, provide an <code>ActiveDirectoryName</code>\n            and an <code>AdminGroup</code> associated with your Active Directory.</p>",
+                        "smithy.api#documentation": "<p>The method that you want to use to authenticate your Amazon QuickSight account.</p>\n         <p>If you choose <code>ACTIVE_DIRECTORY</code>, provide an <code>ActiveDirectoryName</code>\n            and an <code>AdminGroup</code> associated with your Active Directory.</p>\n         <p>If you choose <code>IAM_IDENTITY_CENTER</code>, provide an <code>AdminGroup</code> associated with your IAM Identity Center account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5924,19 +6546,19 @@
                 "AdminGroup": {
                     "target": "com.amazonaws.quicksight#GroupsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The admin group associated with your Active Directory. This field is required if <code>ACTIVE_DIRECTORY</code> is the selected authentication method of the new Amazon QuickSight account. For more information about using\n            Active Directory in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html\">Using Active Directory with\n                    Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight\n                User Guide.</p>"
+                        "smithy.api#documentation": "<p>The admin group associated with your Active Directory or IAM Identity Center account. This field is required if <code>ACTIVE_DIRECTORY</code> or <code>IAM_IDENTITY_CENTER</code> is the selected authentication method of the new Amazon QuickSight account.</p>\n         <p>For more information about using IAM Identity Center in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html\">Using IAM Identity Center with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html\">Using Active Directory with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide.</p>"
                     }
                 },
                 "AuthorGroup": {
                     "target": "com.amazonaws.quicksight#GroupsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The author group associated with your Active Directory. For more information about using\n            Active Directory in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html\">Using Active Directory with\n                    Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight\n                User Guide.</p>"
+                        "smithy.api#documentation": "<p>The author group associated with your Active Directory or IAM Identity Center account.</p>\n         <p>For more information about using IAM Identity Center in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html\">Using IAM Identity Center with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html\">Using Active Directory with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide.</p>"
                     }
                 },
                 "ReaderGroup": {
                     "target": "com.amazonaws.quicksight#GroupsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reader group associated with your Active Direcrtory. For more information about\n            using Active Directory in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html\">Using Active Directory with\n                    Amazon QuickSight Enterprise Edition</a> in the <i>Amazon QuickSight\n                User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The reader group associated with your Active Directory or IAM Identity Center account.</p>\n         <p>For more information about using IAM Identity Center in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html\">Using IAM Identity Center with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html\">Using Active Directory with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide.</p>"
                     }
                 },
                 "FirstName": {
@@ -6300,6 +6922,12 @@
                     "target": "com.amazonaws.quicksight#FolderArnList",
                     "traits": {
                         "smithy.api#documentation": "<p>When you create the dashboard, Amazon QuickSight adds the dashboard to these folders.</p>"
+                    }
+                },
+                "LinkSharingConfiguration": {
+                    "target": "com.amazonaws.quicksight#LinkSharingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the permissions of a shareable link to the dashboard.</p>"
                     }
                 }
             },
@@ -7683,6 +8311,108 @@
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the refresh schedule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#CreateRoleMembership": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#CreateRoleMembershipRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#CreateRoleMembershipResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use <code>CreateRoleMembership</code> to add an existing Amazon QuickSight group to an existing role.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/roles/{Role}/members/{MemberName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateRoleMembershipRequest": {
+            "type": "structure",
+            "members": {
+                "MemberName": {
+                    "target": "com.amazonaws.quicksight#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the group that you want to add to the role.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace that the role belongs to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.quicksight#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role that you want to add a group to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#CreateRoleMembershipResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
                     }
                 }
             },
@@ -9676,9 +10406,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>"
                     }
-                },
-                "Options": {
-                    "target": "com.amazonaws.quicksight#AssetOptions"
                 }
             },
             "traits": {
@@ -10666,6 +11393,15 @@
                 "smithy.api#documentation": "<p>The refresh properties of a dataset.</p>"
             }
         },
+        "com.amazonaws.quicksight#DataSetRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.quicksight#DataSetSchema": {
             "type": "structure",
             "members": {
@@ -11186,6 +11922,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The parameters that are required to connect to a Trino data source.</p>"
                     }
+                },
+                "BigQueryParameters": {
+                    "target": "com.amazonaws.quicksight#BigQueryParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters that are required to connect to a Google BigQuery data source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11452,6 +12194,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DATABRICKS"
+                    }
+                },
+                "STARBURST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARBURST"
+                    }
+                },
+                "TRINO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRINO"
+                    }
+                },
+                "BIGQUERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BIGQUERY"
                     }
                 }
             }
@@ -13934,6 +14694,201 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DeleteRoleCustomPermission": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteRoleCustomPermissionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteRoleCustomPermissionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes custom permissions from the role.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/roles/{Role}/custom-permission",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteRoleCustomPermissionRequest": {
+            "type": "structure",
+            "members": {
+                "Role": {
+                    "target": "com.amazonaws.quicksight#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role that you want to remove permissions from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the\n            Amazon Web Services account that contains your Amazon QuickSight account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace that includes the role.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteRoleCustomPermissionResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteRoleMembership": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteRoleMembershipRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteRoleMembershipResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a group from a role.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/roles/{Role}/members/{MemberName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteRoleMembershipRequest": {
+            "type": "structure",
+            "members": {
+                "MemberName": {
+                    "target": "com.amazonaws.quicksight#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the group.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.quicksight#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role that you want to remove permissions from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace that contains the role.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteRoleMembershipResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DeleteTemplate": {
             "type": "operation",
             "input": {
@@ -15527,7 +16482,7 @@
                     }
                 },
                 "DownloadUrl": {
-                    "target": "com.amazonaws.quicksight#String",
+                    "target": "com.amazonaws.quicksight#SensitiveS3Uri",
                     "traits": {
                         "smithy.api#documentation": "<p>The URL to download the exported asset bundle data from.</p>\n         <p>This URL is available only after the job has succeeded. This URL is valid for 5 minutes after issuance. Call <code>DescribeAssetBundleExportJob</code> again for a fresh URL if needed.</p>\n         <p>The downloaded asset bundle is a zip file named <code>assetbundle-{jobId}.qs</code>. The file has a <code>.qs</code> extension.</p>\n         <p>This URL can't be used in a <code>StartAssetBundleImportJob</code> API call and should only be used for download purposes.</p>"
                     }
@@ -15599,6 +16554,32 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the response.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "IncludePermissions": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The include permissions flag.</p>"
+                    }
+                },
+                "IncludeTags": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The include tags flag.</p>"
+                    }
+                },
+                "ValidationStrategy": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobValidationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validation strategy that is used to export the analysis or dashboard.</p>"
+                    }
+                },
+                "Warnings": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobWarningList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of warning records that describe the analysis or dashboard that is exported. This array includes UI errors that can be skipped during the validation process.</p>\n         <p>This property only appears if <code>StrictModeForAllResources</code> in <code>ValidationStrategy</code> is set to <code>FALSE</code>.</p>"
                     }
                 }
             },
@@ -15712,7 +16693,7 @@
                 "OverrideParameters": {
                     "target": "com.amazonaws.quicksight#AssetBundleImportJobOverrideParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional overrides to be applied to the resource configuration before import.</p>"
+                        "smithy.api#documentation": "<p>Optional overrides that are applied to the resource configuration before import.</p>"
                     }
                 },
                 "FailureAction": {
@@ -15733,6 +16714,24 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the response.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "OverridePermissions": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobOverridePermissions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional permission overrides that are applied to the resource configuration before import.</p>"
+                    }
+                },
+                "OverrideTags": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobOverrideTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional tag overrides that are applied to the resource configuration before import.</p>"
+                    }
+                },
+                "OverrideValidationStrategy": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobOverrideValidationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional validation strategy override for all analyses and dashboards to be applied to the resource configuration before import.</p>"
                     }
                 }
             },
@@ -17860,6 +18859,105 @@
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the refresh schedule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeRoleCustomPermission": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeRoleCustomPermissionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeRoleCustomPermissionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes all custom permissions that are  mapped to a role.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/roles/{Role}/custom-permission",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeRoleCustomPermissionRequest": {
+            "type": "structure",
+            "members": {
+                "Role": {
+                    "target": "com.amazonaws.quicksight#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the role whose permissions you want described.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace that contains the role.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeRoleCustomPermissionResponse": {
+            "type": "structure",
+            "members": {
+                "CustomPermissionsName": {
+                    "target": "com.amazonaws.quicksight#RoleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom permission that is described.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>"
                     }
                 }
             },
@@ -28661,6 +29759,138 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#ListRoleMemberships": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListRoleMembershipsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListRoleMembershipsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all groups that are associated with a role.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/roles/{Role}/members",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "MembersList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListRoleMembershipsRequest": {
+            "type": "structure",
+            "members": {
+                "Role": {
+                    "target": "com.amazonaws.quicksight#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the role.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that can be used in a subsequent request.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace that includes the role.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListRoleMembershipsResponse": {
+            "type": "structure",
+            "members": {
+                "MembersList": {
+                    "target": "com.amazonaws.quicksight#GroupsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of groups associated with a role</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that can be used in a subsequent request.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -34100,6 +35330,15 @@
                 "smithy.api#documentation": "<p>The options that determine the presentation of the progress bar of a KPI visual.</p>"
             }
         },
+        "com.amazonaws.quicksight#ProjectId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.quicksight#ProjectOperation": {
             "type": "structure",
             "members": {
@@ -34363,6 +35602,9 @@
                     "target": "com.amazonaws.quicksight#CreateRefreshSchedule"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#CreateRoleMembership"
+                },
+                {
                     "target": "com.amazonaws.quicksight#CreateTemplate"
                 },
                 {
@@ -34424,6 +35666,12 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteRefreshSchedule"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DeleteRoleCustomPermission"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DeleteRoleMembership"
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteTemplate"
@@ -34537,6 +35785,9 @@
                     "target": "com.amazonaws.quicksight#DescribeRefreshSchedule"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DescribeRoleCustomPermission"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DescribeTemplate"
                 },
                 {
@@ -34634,6 +35885,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListRefreshSchedules"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ListRoleMemberships"
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListTagsForResource"
@@ -34766,6 +36020,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateRefreshSchedule"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateRoleCustomPermission"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateTemplate"
@@ -37422,6 +38679,29 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[\\w\\-]+$"
+            }
+        },
+        "com.amazonaws.quicksight#Role": {
+            "type": "enum",
+            "members": {
+                "ADMIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADMIN"
+                    }
+                },
+                "AUTHOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTHOR"
+                    }
+                },
+                "READER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READER"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#RoleArn": {
@@ -41141,6 +42421,26 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An optional collection of structures that generate CloudFormation parameters to override the existing resource property values when the resource is exported to a new CloudFormation template.</p>\n         <p>Use this field if the <code>ExportFormat</code> field of a <code>StartAssetBundleExportJobRequest</code> API call is set to <code>CLOUDFORMATION_JSON</code>.</p>"
                     }
+                },
+                "IncludePermissions": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A Boolean that determines whether all permissions for each resource ARN are exported with the job. If you set <code>IncludePermissions</code> to <code>TRUE</code>, any permissions associated with each resource are exported.\n      </p>"
+                    }
+                },
+                "IncludeTags": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p> A Boolean that determines whether all tags for each resource ARN are exported with the job. If you set <code>IncludeTags</code> to <code>TRUE</code>, any tags associated with each resource are exported.</p>"
+                    }
+                },
+                "ValidationStrategy": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobValidationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that determines which validation strategy to use for the export job. If <code>StrictModeForAllResources</code> is set to <code>TRUE</code>, strict validation for every error is enforced. If it is set to <code>FALSE</code>, validation is skipped for specific UI errors that are shown as warnings. The default value for <code>StrictModeForAllResources</code> is <code>FALSE</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -41249,13 +42549,31 @@
                 "OverrideParameters": {
                     "target": "com.amazonaws.quicksight#AssetBundleImportJobOverrideParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional overrides to be applied to the resource configuration before import.</p>"
+                        "smithy.api#documentation": "<p>Optional overrides that are applied to the resource configuration before import.</p>"
                     }
                 },
                 "FailureAction": {
                     "target": "com.amazonaws.quicksight#AssetBundleImportFailureAction",
                     "traits": {
                         "smithy.api#documentation": "<p>The failure action for the import job.</p>\n         <p>If you choose <code>ROLLBACK</code>, failed  import jobs will attempt to  undo any asset changes caused by the failed job.</p>\n         <p>If you choose <code>DO_NOTHING</code>, failed import jobs will not attempt to roll back\n         any asset changes caused by the failed job, possibly keeping the Amazon QuickSight account in an inconsistent state.</p>"
+                    }
+                },
+                "OverridePermissions": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobOverridePermissions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional permission overrides that are applied to the resource configuration before import.</p>"
+                    }
+                },
+                "OverrideTags": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobOverrideTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional tag overrides that are applied to the resource configuration before import.</p>"
+                    }
+                },
+                "OverrideValidationStrategy": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobOverrideValidationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional validation strategy override for all analyses and dashboards that is applied to the resource configuration before import. </p>"
                     }
                 }
             },
@@ -43160,9 +44478,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>"
                     }
-                },
-                "Options": {
-                    "target": "com.amazonaws.quicksight#AssetOptions"
                 }
             },
             "traits": {
@@ -48133,7 +49448,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 2
+                    "max": 100
                 }
             }
         },
@@ -48334,6 +49649,106 @@
                     "min": 0,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateRoleCustomPermission": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateRoleCustomPermissionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateRoleCustomPermissionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the custom permissions that are associated with a role.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/roles/{Role}/custom-permission",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateRoleCustomPermissionRequest": {
+            "type": "structure",
+            "members": {
+                "CustomPermissionsName": {
+                    "target": "com.amazonaws.quicksight#RoleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom permission that you want to update the role with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.quicksight#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of role tht you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace that contains the role that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateRoleCustomPermissionResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateTemplate": {
@@ -50141,7 +51556,7 @@
                 "Mode": {
                     "target": "com.amazonaws.quicksight#ValidationStrategyMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mode of validation for the asset to be creaed or updated. When you set this value to <code>STRICT</code>, strict validation for every error is enforced. When you set this value to <code>LENIENT</code>, validation is skipped for specific UI errors.</p>",
+                        "smithy.api#documentation": "<p>The mode of validation for the asset to be created or updated. When you set this value to <code>STRICT</code>, strict validation for every error is enforced. When you set this value to <code>LENIENT</code>, validation is skipped for specific UI errors.</p>",
                         "smithy.api#required": {}
                     }
                 }

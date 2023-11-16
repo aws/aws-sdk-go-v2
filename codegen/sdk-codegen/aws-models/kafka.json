@@ -791,6 +791,13 @@
                         "smithy.api#documentation": "<p>This controls storage mode for supported storage tiers.</p>",
                         "smithy.api#jsonName": "storageMode"
                     }
+                },
+                "CustomerActionStatus": {
+                    "target": "com.amazonaws.kafka#CustomerActionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines if there is an action required from the customer.</p>",
+                        "smithy.api#jsonName": "customerActionStatus"
+                    }
                 }
             },
             "traits": {
@@ -2189,6 +2196,32 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#CustomerActionStatus": {
+            "type": "enum",
+            "members": {
+                "CRITICAL_ACTION_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CRITICAL_ACTION_REQUIRED"
+                    }
+                },
+                "ACTION_RECOMMENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTION_RECOMMENDED"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A type of an action required from the customer.</p>"
             }
         },
         "com.amazonaws.kafka#DeleteCluster": {
@@ -6630,6 +6663,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This controls storage mode for supported storage tiers.</p>",
                         "smithy.api#jsonName": "storageMode"
+                    }
+                },
+                "CustomerActionStatus": {
+                    "target": "com.amazonaws.kafka#CustomerActionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines if there is an action required from the customer.</p>",
+                        "smithy.api#jsonName": "customerActionStatus"
                     }
                 }
             },

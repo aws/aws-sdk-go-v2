@@ -311,13 +311,93 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token that was used for this request.</p>"
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
                     }
                 },
                 "imageBuildVersionArn": {
                     "target": "com.amazonaws.imagebuilder#ImageBuildVersionArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the image whose creation this request canceled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#CancelLifecycleExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#CancelLifecycleExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#CancelLifecycleExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancel a specific image lifecycle policy runtime instance.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/CancelLifecycleExecution",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#CancelLifecycleExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "lifecycleExecutionId": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the specific runtime instance of the image lifecycle to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.imagebuilder#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#CancelLifecycleExecutionResponse": {
+            "type": "structure",
+            "members": {
+                "lifecycleExecutionId": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the image lifecycle runtime instance that was canceled.</p>"
                     }
                 }
             },
@@ -1235,7 +1315,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token of the component.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -1257,13 +1337,13 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>"
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
                     }
                 },
                 "componentBuildVersionArn": {
                     "target": "com.amazonaws.imagebuilder#ComponentBuildVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the component that this request created.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the component that the request created.</p>"
                     }
                 }
             },
@@ -1425,7 +1505,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The client token used to make this request idempotent.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -1447,7 +1527,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The client token used to make this request idempotent.</p>"
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
                     }
                 },
                 "containerRecipeArn": {
@@ -1545,7 +1625,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token of the distribution configuration.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -1567,7 +1647,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>"
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
                     }
                 },
                 "distributionConfigurationArn": {
@@ -1750,7 +1830,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -1778,7 +1858,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>"
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
                     }
                 },
                 "imagePipelineArn": {
@@ -1908,7 +1988,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -1930,7 +2010,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>"
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
                     }
                 },
                 "imageRecipeArn": {
@@ -1993,7 +2073,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -2021,13 +2101,13 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>"
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
                     }
                 },
                 "imageBuildVersionArn": {
                     "target": "com.amazonaws.imagebuilder#ImageBuildVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image that this request created.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image that the request created.</p>"
                     }
                 }
             },
@@ -2170,7 +2250,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -2192,13 +2272,151 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>"
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
                     }
                 },
                 "infrastructureConfigurationArn": {
                     "target": "com.amazonaws.imagebuilder#InfrastructureConfigurationArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the infrastructure configuration that was created by\n\t\t\tthis request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#CreateLifecyclePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#CreateLifecyclePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#CreateLifecyclePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a lifecycle policy resource.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/CreateLifecyclePolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#CreateLifecyclePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the  lifecycle policy to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional description for the lifecycle policy.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the lifecycle policy resource is enabled.</p>"
+                    }
+                },
+                "executionRole": {
+                    "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role name or Amazon Resource Name (ARN) for the IAM role that grants \n\t\t\tImage Builder access to run lifecycle actions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Image Builder resource that the lifecycle policy applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyDetails": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration details for the lifecycle policy rules.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceSelection": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyResourceSelection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Selection criteria for the resources that the lifecycle policy applies to. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to apply to the lifecycle policy resource.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.imagebuilder#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#CreateLifecyclePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.imagebuilder#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
+                    }
+                },
+                "lifecyclePolicyArn": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lifecycle policy that the request created.</p>"
                     }
                 }
             },
@@ -2845,6 +3063,76 @@
                     "target": "com.amazonaws.imagebuilder#InfrastructureConfigurationArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the infrastructure configuration that was\n\t\t\tdeleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#DeleteLifecyclePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#DeleteLifecyclePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#DeleteLifecyclePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceDependencyException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete the specified lifecycle policy resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/DeleteLifecyclePolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#DeleteLifecyclePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "lifecyclePolicyArn": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lifecycle policy resource to delete.</p>",
+                        "smithy.api#httpQuery": "lifecyclePolicyArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#DeleteLifecyclePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "lifecyclePolicyArn": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the lifecycle policy that was deleted.</p>"
                     }
                 }
             },
@@ -4191,6 +4479,140 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.imagebuilder#GetLifecycleExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#GetLifecycleExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#GetLifecycleExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the runtime information that was logged for a specific runtime instance of the lifecycle policy.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/GetLifecycleExecution",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#GetLifecycleExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "lifecycleExecutionId": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the unique identifier for a runtime instance of the lifecycle policy to get runtime details.</p>",
+                        "smithy.api#httpQuery": "lifecycleExecutionId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#GetLifecycleExecutionResponse": {
+            "type": "structure",
+            "members": {
+                "lifecycleExecution": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Runtime details for the specified runtime instance of the lifecycle policy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#GetLifecyclePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#GetLifecyclePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#GetLifecyclePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get details for the specified image lifecycle policy.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/GetLifecyclePolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#GetLifecyclePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "lifecyclePolicyArn": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the image lifecycle policy resource to get.</p>",
+                        "smithy.api#httpQuery": "lifecyclePolicyArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#GetLifecyclePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "lifecyclePolicy": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the image lifecycle policy resource that was returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.imagebuilder#GetWorkflowExecution": {
             "type": "operation",
             "input": {
@@ -4659,6 +5081,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains settings for vulnerability scans.</p>"
                     }
+                },
+                "deprecationTime": {
+                    "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when deprecation occurs for an image resource. This can be a past or future date.</p>"
+                    }
+                },
+                "lifecycleExecutionId": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the last runtime instance of the lifecycle policy to take action on the image.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4703,7 +5137,7 @@
         "com.amazonaws.imagebuilder#ImageBuilderArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline|workflow\\/(?:build|test|distribution))/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\\.(?:x|[0-9]+)\\.(?:x|[0-9]+))(?:/[0-9]+)?)?$"
+                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline|lifecycle-policy|workflow\\/(?:build|test|distribution))/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\\.(?:x|[0-9]+)\\.(?:x|[0-9]+))(?:/[0-9]+)?)?$"
             }
         },
         "com.amazonaws.imagebuilder#ImagePackage": {
@@ -5424,6 +5858,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DELETED"
                     }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
                 }
             }
         },
@@ -5506,6 +5946,18 @@
                     "target": "com.amazonaws.imagebuilder#ImageSource",
                     "traits": {
                         "smithy.api#documentation": "<p>The origin of the base image that Image Builder used to build this image.</p>"
+                    }
+                },
+                "deprecationTime": {
+                    "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when deprecation occurs for an image resource. This can be a past or future date.</p>"
+                    }
+                },
+                "lifecycleExecutionId": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the last runtime instance of the lifecycle policy to take action on the image.</p>"
                     }
                 }
             },
@@ -5777,7 +6229,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token of the component.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -5799,7 +6251,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>"
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
                     }
                 },
                 "componentBuildVersionArn": {
@@ -5921,7 +6373,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token that was used for this request.</p>"
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
                     }
                 }
             },
@@ -6412,6 +6864,865 @@
                 }
             }
         },
+        "com.amazonaws.imagebuilder#LifecycleExecution": {
+            "type": "structure",
+            "members": {
+                "lifecycleExecutionId": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the lifecycle policy runtime instance.</p>"
+                    }
+                },
+                "lifecyclePolicyArn": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lifecycle policy that ran.</p>"
+                    }
+                },
+                "resourcesImpactedSummary": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionResourcesImpactedSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about associated resources that are identified for action by \n\t\t\tthe runtime instance of the lifecycle policy.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Runtime state that reports if the policy action ran successfully, \n\t\t\tfailed, or was skipped.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the lifecycle runtime instance started.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the lifecycle runtime instance completed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata from a runtime instance of a lifecycle policy.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecycleExecutionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^lce-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecycleExecutionResource": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account that owns the impacted resource.</p>"
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the impacted resource. The resource ID depends on the type of \n\t\t\tresource, as follows.</p>\n         <ul>\n            <li>\n               <p>Image Builder image resources: Amazon Resource Name (ARN)</p>\n            </li>\n            <li>\n               <p>Distributed AMIs: AMI ID</p>\n            </li>\n            <li>\n               <p>Container images distributed to an ECR repository: image URI or SHA Digest</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionResourceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime state for the lifecycle execution.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionResourceAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take for the identified resource.</p>"
+                    }
+                },
+                "region": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the lifecycle execution resource is stored.</p>"
+                    }
+                },
+                "snapshots": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionSnapshotResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of associated resource snapshots for the impacted resource if \n\t\t\tit’s an AMI.</p>"
+                    }
+                },
+                "imageUris": {
+                    "target": "com.amazonaws.imagebuilder#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For an impacted container image, this identifies a list of URIs for associated \n\t\t\tcontainer images distributed to ECR repositories.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details for a resource that the runtime instance of the \n\t\t\tlifecycle policy identified for action.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecycleExecutionResourceAction": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionResourceActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource that was identified for a lifecycle policy action.</p>"
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why the lifecycle policy action is taken.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The lifecycle policy action that was identified for the impacted resource.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecycleExecutionResourceActionName": {
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE"
+                    }
+                },
+                "DEPRECATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPRECATE"
+                    }
+                },
+                "DISABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecycleExecutionResourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#LifecycleExecutionResource"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecycleExecutionResourceState": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime status of the lifecycle action taken for the \n\t\t\timpacted resource.</p>"
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Messaging that clarifies the reason for the assigned status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the state of an impacted resource that the runtime instance \n\t\t\tof the lifecycle policy identified for action.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecycleExecutionResourceStatus": {
+            "type": "enum",
+            "members": {
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "SKIPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIPPED"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecycleExecutionResourcesImpactedSummary": {
+            "type": "structure",
+            "members": {
+                "hasImpactedResources": {
+                    "target": "com.amazonaws.imagebuilder#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether an image resource that was identified for a lifecycle action has \n\t\t\tassociated resources that are also impacted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details for an image resource that was identified for a lifecycle action.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecycleExecutionSnapshotResource": {
+            "type": "structure",
+            "members": {
+                "snapshotId": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the impacted snapshot resource.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionResourceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime status of the lifecycle action taken for the snapshot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the state of an impacted snapshot resource that the runtime \n\t\t\tinstance of the lifecycle policy identified for action.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecycleExecutionSnapshotResourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#LifecycleExecutionSnapshotResource"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecycleExecutionState": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime status of the lifecycle execution.</p>"
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The current state of the runtime instance of the lifecycle policy.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecycleExecutionStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "CANCELLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecycleExecutionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#LifecycleExecution"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicy": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lifecycle policy resource.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the lifecycle policy.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional description for the lifecycle policy.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the lifecycle policy resource is enabled.</p>"
+                    }
+                },
+                "executionRole": {
+                    "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the IAM role that Image Builder uses to run the lifecycle policy. \n\t\t\tThis is a custom role that you create.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resources the lifecycle policy targets.</p>"
+                    }
+                },
+                "policyDetails": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details for a lifecycle policy resource.</p>"
+                    }
+                },
+                "resourceSelection": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyResourceSelection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource selection criteria used to run the lifecycle policy.</p>"
+                    }
+                },
+                "dateCreated": {
+                    "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when Image Builder created the lifecycle policy resource.</p>"
+                    }
+                },
+                "dateUpdated": {
+                    "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when Image Builder updated the lifecycle policy resource.</p>"
+                    }
+                },
+                "dateLastRun": {
+                    "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for the last time Image Builder ran the lifecycle policy.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To help manage your lifecycle policy resources, you can assign your own \n\t\t\tmetadata to each resource in the form of tags. Each tag consists of a key and \n\t\t\tan optional value, both of which you define.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for a lifecycle policy resource.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws):lifecycle-policy/[a-z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyDetail": {
+            "type": "structure",
+            "members": {
+                "action": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetailAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration details for the policy action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetailFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the resources that the lifecycle policy applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "exclusionRules": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetailExclusionRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional rules to specify resources that should be exempt from policy actions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for a lifecycle policy resource.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyDetailAction": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetailActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the lifecycle action to take.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "includeResources": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetailActionIncludeResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the resources that the lifecycle policy applies to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains selection criteria for the lifecycle policy.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyDetailActionIncludeResources": {
+            "type": "structure",
+            "members": {
+                "amis": {
+                    "target": "com.amazonaws.imagebuilder#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether the lifecycle action should apply to distributed AMIs.</p>"
+                    }
+                },
+                "snapshots": {
+                    "target": "com.amazonaws.imagebuilder#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether the lifecycle action should apply to snapshots associated with distributed AMIs.</p>"
+                    }
+                },
+                "containers": {
+                    "target": "com.amazonaws.imagebuilder#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether the lifecycle action should apply to distributed containers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies how the lifecycle policy should apply actions to selected resources.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyDetailActionType": {
+            "type": "enum",
+            "members": {
+                "DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE"
+                    }
+                },
+                "DEPRECATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPRECATE"
+                    }
+                },
+                "DISABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyDetailExclusionRules": {
+            "type": "structure",
+            "members": {
+                "tagMap": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a list of tags that Image Builder uses to skip lifecycle actions for AMIs that have them.</p>"
+                    }
+                },
+                "amis": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetailExclusionRulesAmis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists configuration values that apply to AMIs that Image Builder should exclude \n\t\t\tfrom the lifecycle action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies resources that lifecycle policy actions should not apply to.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyDetailExclusionRulesAmis": {
+            "type": "structure",
+            "members": {
+                "isPublic": {
+                    "target": "com.amazonaws.imagebuilder#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Configures whether public AMIs are excluded from the lifecycle action.</p>"
+                    }
+                },
+                "regions": {
+                    "target": "com.amazonaws.imagebuilder#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies Amazon Web Services accounts whose resources are excluded from the lifecycle action.</p>"
+                    }
+                },
+                "sharedAccounts": {
+                    "target": "com.amazonaws.imagebuilder#AccountList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration details for Image Builder to exclude the most recent resources \n\t\t\tfrom lifecycle actions.</p>"
+                    }
+                },
+                "lastLaunched": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetailExclusionRulesAmisLastLaunched",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures Amazon Web Services Regions that are excluded from the lifecycle action.</p>"
+                    }
+                },
+                "tagMap": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists tags that should be excluded from lifecycle actions for the AMIs that have them.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines criteria for AMIs that are excluded from lifecycle actions.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyDetailExclusionRulesAmisLastLaunched": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetailExclusionRulesAmisLastLaunchedValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The integer number of units for the time period. For example <code>6</code> (months).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "unit": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyTimeUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the unit of time that the lifecycle policy uses to calculate elapsed time \n\t\t\tsince the last instance launched from the AMI. For example: days, weeks, months, or years.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines criteria to exclude AMIs from lifecycle actions based on the last \n\t\t\ttime they were used to launch an instance.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyDetailExclusionRulesAmisLastLaunchedValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 365
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyDetailFilter": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetailFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter resources based on either <code>age</code> or <code>count</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetailFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of units for the time period or for the count. For example, a value of \n\t\t\t<code>6</code> might refer to six months or six AMIs.</p>\n         <note>\n            <p>For count-based filters, this value represents the minimum number of resources \n\t\t\t\tto keep on hand. If you have fewer resources than this number, the resource is \n\t\t\t\texcluded from lifecycle actions.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "unit": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyTimeUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the unit of time that the lifecycle policy uses to determine impacted \n\t\t\tresources. This is required for age-based rules.</p>"
+                    }
+                },
+                "retainAtLeast": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetailFilterRetainAtLeast",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For age-based filters, this is the number of resources to keep on hand after the lifecycle \n\t\t\t<code>DELETE</code> action is applied. Impacted resources are only deleted if you have more than \n\t\t\tthis number of resources. If you have fewer resources than this number, the impacted resource \n\t\t\tis not deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines filters that the lifecycle policy uses to determine impacted resource.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyDetailFilterRetainAtLeast": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyDetailFilterType": {
+            "type": "enum",
+            "members": {
+                "AGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGE"
+                    }
+                },
+                "COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COUNT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyDetailFilterValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetail"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyResourceSelection": {
+            "type": "structure",
+            "members": {
+                "recipes": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyResourceSelectionRecipes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of recipes that are used as selection criteria for the output \n\t\t\timages that the lifecycle policy applies to.</p>"
+                    }
+                },
+                "tagMap": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags that are used as selection criteria for the resources \n\t\t\tthat the lifecycle policy applies to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Resource selection criteria for the lifecycle policy.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyResourceSelectionRecipe": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an Image Builder recipe that the lifecycle policy uses for resource selection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "semanticVersion": {
+                    "target": "com.amazonaws.imagebuilder#VersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Image Builder recipe specified by the <code>name</code> field.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an Image Builder recipe that the lifecycle policy uses for resource selection.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyResourceSelectionRecipes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#LifecyclePolicyResourceSelectionRecipe"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyResourceType": {
+            "type": "enum",
+            "members": {
+                "AMI_IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMI_IMAGE"
+                    }
+                },
+                "CONTAINER_IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINER_IMAGE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyStatus": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicySummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lifecycle policy summary resource.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the lifecycle policy.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional description for the lifecycle policy.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle policy resource status.</p>"
+                    }
+                },
+                "executionRole": {
+                    "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the IAM role that Image Builder uses to run the lifecycle policy.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resources the lifecycle policy targets.</p>"
+                    }
+                },
+                "dateCreated": {
+                    "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when Image Builder created the lifecycle policy resource.</p>"
+                    }
+                },
+                "dateUpdated": {
+                    "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when Image Builder updated the lifecycle policy resource.</p>"
+                    }
+                },
+                "dateLastRun": {
+                    "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for the last time Image Builder ran the lifecycle policy.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To help manage your lifecycle policy resources, you can assign your own \n\t\t\tmetadata to each resource in the form of tags. Each tag consists of a key and \n\t\t\tan optional value, both of which you define.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a summary of lifecycle policy resources.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicySummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#LifecyclePolicySummary"
+            }
+        },
+        "com.amazonaws.imagebuilder#LifecyclePolicyTimeUnit": {
+            "type": "enum",
+            "members": {
+                "DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAYS"
+                    }
+                },
+                "WEEKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEEKS"
+                    }
+                },
+                "MONTHS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHS"
+                    }
+                },
+                "YEARS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YEARS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.imagebuilder#ListComponentBuildVersions": {
             "type": "operation",
             "input": {
@@ -6477,7 +7788,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken \n\tfrom a previously truncated response.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 }
             },
@@ -6503,7 +7814,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service has'ot included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
             },
@@ -6588,7 +7899,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken \n\tfrom a previously truncated response.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 }
             },
@@ -6614,7 +7925,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service has'ot included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
             },
@@ -6692,7 +8003,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken \n\tfrom a previously truncated response.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 }
             },
@@ -6718,7 +8029,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service has'ot included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
             },
@@ -6790,7 +8101,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken \n\tfrom a previously truncated response.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 }
             },
@@ -6816,7 +8127,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service has'ot included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
             },
@@ -6895,7 +8206,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken \n\tfrom a previously truncated response.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 }
             },
@@ -6921,7 +8232,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service has'ot included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
             },
@@ -6997,7 +8308,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken \n\tfrom a previously truncated response.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 }
             },
@@ -7023,7 +8334,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service has'ot included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
             },
@@ -7105,7 +8416,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken \n\tfrom a previously truncated response.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 }
             },
@@ -7131,7 +8442,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service has'ot included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
             },
@@ -7203,7 +8514,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken \n\tfrom a previously truncated response.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 }
             },
@@ -7229,7 +8540,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service has'ot included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
             },
@@ -7307,7 +8618,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken \n\tfrom a previously truncated response.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 }
             },
@@ -7333,7 +8644,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service has'ot included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
             },
@@ -7395,7 +8706,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken \n\tfrom a previously truncated response.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 }
             },
@@ -7427,7 +8738,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service has'ot included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
             },
@@ -7499,7 +8810,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken \n\tfrom a previously truncated response.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 }
             },
@@ -7525,7 +8836,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service has'ot included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
             },
@@ -7610,7 +8921,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken \n\tfrom a previously truncated response.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 },
                 "includeDeprecated": {
@@ -7642,7 +8953,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service has'ot included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
             },
@@ -7714,7 +9025,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken \n\tfrom a previously truncated response.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 }
             },
@@ -7740,7 +9051,303 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service has'ot included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#ListLifecycleExecutionResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#ListLifecycleExecutionResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#ListLifecycleExecutionResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidPaginationTokenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List resources that the runtime instance of the image lifecycle identified for lifecycle actions.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListLifecycleExecutionResources",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "resources",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#ListLifecycleExecutionResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "lifecycleExecutionId": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the unique identifier for a runtime instance of the lifecycle policy to get runtime details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parentResourceId": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can  leave this empty to get a list of Image Builder resources that were identified for lifecycle actions.</p>\n         <p>To get a list of associated resources that are impacted for an individual resource (the parent), specify \n\t\t\tits Amazon Resource Name (ARN). Associated resources are produced from your image and distributed when you run a build, such as \n\t\t\tAMIs or container images stored in ECR repositories.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.imagebuilder#RestrictedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.imagebuilder#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#ListLifecycleExecutionResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "lifecycleExecutionId": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Runtime details for the specified runtime instance of the lifecycle policy.</p>"
+                    }
+                },
+                "lifecycleExecutionState": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the lifecycle runtime instance.</p>"
+                    }
+                },
+                "resources": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of resources that were identified for lifecycle actions.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.imagebuilder#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#ListLifecycleExecutions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#ListLifecycleExecutionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#ListLifecycleExecutionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidPaginationTokenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the lifecycle runtime history for the specified resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListLifecycleExecutions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "lifecycleExecutions",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#ListLifecycleExecutionsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.imagebuilder#RestrictedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.imagebuilder#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
+                    }
+                },
+                "resourceArn": {
+                    "target": "com.amazonaws.imagebuilder#ImageBuilderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which to get a list of lifecycle runtime instances.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#ListLifecycleExecutionsResponse": {
+            "type": "structure",
+            "members": {
+                "lifecycleExecutions": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of lifecycle runtime instances for the specified resource.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.imagebuilder#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#ListLifecyclePolicies": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#ListLifecyclePoliciesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#ListLifecyclePoliciesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidPaginationTokenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get a list of lifecycle policies in your Amazon Web Services account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListLifecyclePolicies",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "lifecyclePolicySummaryList",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#ListLifecyclePoliciesRequest": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.imagebuilder#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Streamline results based on one of the following values: <code>Name</code>, \n\t\t\t<code>Status</code>.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.imagebuilder#RestrictedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.imagebuilder#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#ListLifecyclePoliciesResponse": {
+            "type": "structure",
+            "members": {
+                "lifecyclePolicySummaryList": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicySummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of lifecycle policies in your Amazon Web Services account that meet the criteria \n\t\t\tspecified in the request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.imagebuilder#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
             },
@@ -7864,7 +9471,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken \n\tfrom a previously truncated response.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 },
                 "imageBuildVersionArn": {
@@ -7909,7 +9516,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service has'ot included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
             },
@@ -7975,7 +9582,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken \n\tfrom a previously truncated response.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 },
                 "workflowExecutionId": {
@@ -8032,7 +9639,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service has'ot included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
             },
@@ -8058,8 +9665,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1,
-                    "max": 10000
+                    "min": 1
                 }
             }
         },
@@ -8781,6 +10387,89 @@
                 }
             }
         },
+        "com.amazonaws.imagebuilder#ResourceState": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.imagebuilder#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the current lifecycle policy action that was applied to an impacted resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The current state of an impacted resource.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#ResourceStateUpdateExclusionRules": {
+            "type": "structure",
+            "members": {
+                "amis": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetailExclusionRulesAmis"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Additional rules to specify resources that should be exempt from ad-hoc lifecycle actions.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#ResourceStateUpdateIncludeResources": {
+            "type": "structure",
+            "members": {
+                "amis": {
+                    "target": "com.amazonaws.imagebuilder#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether the lifecycle action should apply to distributed AMIs</p>"
+                    }
+                },
+                "snapshots": {
+                    "target": "com.amazonaws.imagebuilder#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether the lifecycle action should apply to snapshots associated with distributed AMIs.</p>"
+                    }
+                },
+                "containers": {
+                    "target": "com.amazonaws.imagebuilder#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether the lifecycle action should apply to distributed containers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies if the lifecycle policy should apply actions to selected resources.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#ResourceStatus": {
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                },
+                "DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPRECATED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.imagebuilder#ResourceTagMap": {
             "type": "map",
             "key": {
@@ -8803,6 +10492,16 @@
                     "min": 1,
                     "max": 25
                 }
+            }
+        },
+        "com.amazonaws.imagebuilder#RoleNameOrArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(?:arn:aws(?:-[a-z]+)*:iam::[0-9]{12}:role/)?[a-zA-Z_0-9+=,.@\\-_/]+$"
             }
         },
         "com.amazonaws.imagebuilder#S3ExportConfiguration": {
@@ -9034,7 +10733,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -9056,13 +10755,133 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>"
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
                     }
                 },
                 "imageBuildVersionArn": {
                     "target": "com.amazonaws.imagebuilder#ImageBuildVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image that was created by this request.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image that the request created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#StartResourceStateUpdate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#StartResourceStateUpdateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#StartResourceStateUpdateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Begin asynchronous resource state update for lifecycle changes to the \n\t\t\tspecified image resources.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/StartResourceStateUpdate",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#StartResourceStateUpdateRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.imagebuilder#ImageBuildVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Image Builder resource that is updated. The state update might also \n\t\t\timpact associated resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.imagebuilder#ResourceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the lifecycle action to take for this request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "executionRole": {
+                    "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the IAM role that’s used to update image state.</p>"
+                    }
+                },
+                "includeResources": {
+                    "target": "com.amazonaws.imagebuilder#ResourceStateUpdateIncludeResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of image resources to update state for.</p>"
+                    }
+                },
+                "exclusionRules": {
+                    "target": "com.amazonaws.imagebuilder#ResourceStateUpdateExclusionRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Skip action on the image resource and associated resources if specified \n\t\t\texclusion rules are met.</p>"
+                    }
+                },
+                "updateAt": {
+                    "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that indicates when resources are updated by a lifecycle action.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.imagebuilder#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#StartResourceStateUpdateResponse": {
+            "type": "structure",
+            "members": {
+                "lifecycleExecutionId": {
+                    "target": "com.amazonaws.imagebuilder#LifecycleExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the lifecycle runtime instance that started the resource \n\t\t\tstate update.</p>"
+                    }
+                },
+                "resourceArn": {
+                    "target": "com.amazonaws.imagebuilder#ImageBuildVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested ARN of the Image Builder resource for the asynchronous update.</p>"
                     }
                 }
             },
@@ -9366,7 +11185,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token of the distribution configuration.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -9388,7 +11207,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>"
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
                     }
                 },
                 "distributionConfigurationArn": {
@@ -9513,7 +11332,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -9541,7 +11360,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>"
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
                     }
                 },
                 "imagePipelineArn": {
@@ -9666,7 +11485,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -9700,13 +11519,136 @@
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token used to make this request idempotent.</p>"
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
                     }
                 },
                 "infrastructureConfigurationArn": {
                     "target": "com.amazonaws.imagebuilder#InfrastructureConfigurationArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the infrastructure configuration that was updated by\n\t\t\tthis request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#UpdateLifecyclePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#UpdateLifecyclePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#UpdateLifecyclePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the specified lifecycle policy.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/UpdateLifecyclePolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#UpdateLifecyclePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "lifecyclePolicyArn": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lifecycle policy resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional description for the lifecycle policy.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the lifecycle policy resource is enabled.</p>"
+                    }
+                },
+                "executionRole": {
+                    "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the IAM role that Image Builder should use to update the \n\t\t\tlifecycle policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of image resource that the lifecycle policy applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyDetails": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details for a lifecycle policy resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceSelection": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyResourceSelection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Selection criteria for resources that the lifecycle policy applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.imagebuilder#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#UpdateLifecyclePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "lifecyclePolicyArn": {
+                    "target": "com.amazonaws.imagebuilder#LifecyclePolicyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the image lifecycle policy resource that was updated.</p>"
                     }
                 }
             },
@@ -10224,6 +12166,9 @@
                     "target": "com.amazonaws.imagebuilder#CancelImageCreation"
                 },
                 {
+                    "target": "com.amazonaws.imagebuilder#CancelLifecycleExecution"
+                },
+                {
                     "target": "com.amazonaws.imagebuilder#CreateComponent"
                 },
                 {
@@ -10245,6 +12190,9 @@
                     "target": "com.amazonaws.imagebuilder#CreateInfrastructureConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.imagebuilder#CreateLifecyclePolicy"
+                },
+                {
                     "target": "com.amazonaws.imagebuilder#DeleteComponent"
                 },
                 {
@@ -10264,6 +12212,9 @@
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#DeleteInfrastructureConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#DeleteLifecyclePolicy"
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#GetComponent"
@@ -10297,6 +12248,12 @@
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#GetInfrastructureConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#GetLifecycleExecution"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#GetLifecyclePolicy"
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#GetWorkflowExecution"
@@ -10350,6 +12307,15 @@
                     "target": "com.amazonaws.imagebuilder#ListInfrastructureConfigurations"
                 },
                 {
+                    "target": "com.amazonaws.imagebuilder#ListLifecycleExecutionResources"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ListLifecycleExecutions"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ListLifecyclePolicies"
+                },
+                {
                     "target": "com.amazonaws.imagebuilder#ListTagsForResource"
                 },
                 {
@@ -10374,6 +12340,9 @@
                     "target": "com.amazonaws.imagebuilder#StartImagePipelineExecution"
                 },
                 {
+                    "target": "com.amazonaws.imagebuilder#StartResourceStateUpdate"
+                },
+                {
                     "target": "com.amazonaws.imagebuilder#TagResource"
                 },
                 {
@@ -10387,6 +12356,9 @@
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#UpdateInfrastructureConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#UpdateLifecyclePolicy"
                 }
             ],
             "traits": {
