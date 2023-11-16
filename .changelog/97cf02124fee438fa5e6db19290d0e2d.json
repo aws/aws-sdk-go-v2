@@ -1,8 +1,0 @@
-{
-    "id": "97cf0212-4fee-438f-a5e6-db19290d0e2d",
-    "type": "feature",
-    "description": "Amazon SageMaker Studio now supports Trainium instance types - trn1.2xlarge, trn1.32xlarge, trn1n.32xlarge.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

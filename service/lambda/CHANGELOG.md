@@ -1,3 +1,7 @@
+# v1.48.0 (2023-11-16)
+
+* **Feature**: Adds support for logging configuration in Lambda Functions. Customers will have more control how their function logs are captured and to which cloud watch log group they are delivered also.
+
 # v1.47.0 (2023-11-15)
 
 * **Feature**: Add Java 21 (java21) support to AWS Lambda

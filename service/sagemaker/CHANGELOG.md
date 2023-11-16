@@ -1,3 +1,7 @@
+# v1.117.0 (2023-11-16)
+
+* **Feature**: Amazon SageMaker Studio now supports Trainium instance types - trn1.2xlarge, trn1.32xlarge, trn1n.32xlarge.
+
 # v1.116.1 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

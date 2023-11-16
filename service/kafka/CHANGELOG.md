@@ -1,3 +1,7 @@
+# v1.27.0 (2023-11-16)
+
+* **Feature**: Added a new API response field which determines if there is an action required from the customer regarding their cluster.
+
 # v1.26.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

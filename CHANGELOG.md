@@ -1,3 +1,52 @@
+# Release (2023-11-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/internal/ini`: [v1.7.1](internal/ini/CHANGELOG.md#v171-2023-11-16)
+  * **Bug Fix**: Fix recognition of trailing comments in shared config properties. # or ; separators that aren't preceded by whitespace at the end of a property value should be considered part of it.
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.9.0](service/codecatalyst/CHANGELOG.md#v190-2023-11-16)
+  * **Feature**: This release includes updates to the Dev Environment APIs to include an optional vpcConnectionName parameter that supports using Dev Environments with Amazon VPC.
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.21.0](service/dlm/CHANGELOG.md#v1210-2023-11-16)
+  * **Feature**: This release adds support for Amazon Data Lifecycle Manager default policies for EBS snapshots and EBS-backed AMIs.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.135.0](service/ec2/CHANGELOG.md#v11350-2023-11-16)
+  * **Feature**: Enable use of tenant-specific PublicSigningKeyUrl from device trust providers and onboard jumpcloud as a new device trust provider.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.37.0](service/fsx/CHANGELOG.md#v1370-2023-11-16)
+  * **Feature**: Enables customers to update their PerUnitStorageThroughput on their Lustre file systems.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.69.0](service/glue/CHANGELOG.md#v1690-2023-11-16)
+  * **Feature**: Introduces new column statistics APIs to support statistics generation for tables within the Glue Data Catalog.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.28.0](service/imagebuilder/CHANGELOG.md#v1280-2023-11-16)
+  * **Feature**: This release adds the Image Lifecycle Management feature to automate the process of deprecating, disabling and deleting outdated images and their associated resources.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.45.0](service/iot/CHANGELOG.md#v1450-2023-11-16)
+  * **Feature**: GA release the ability to index and search devices based on their GeoLocation data. With GeoQueries you can narrow your search to retrieve devices located in the desired geographic boundary.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.8.0](service/ivsrealtime/CHANGELOG.md#v180-2023-11-16)
+  * **Feature**: This release introduces server side composition and recording for stages.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.27.0](service/kafka/CHANGELOG.md#v1270-2023-11-16)
+  * **Feature**: Added a new API response field which determines if there is an action required from the customer regarding their cluster.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.48.0](service/lambda/CHANGELOG.md#v1480-2023-11-16)
+  * **Feature**: Adds support for logging configuration in Lambda Functions. Customers will have more control how their function logs are captured and to which cloud watch log group they are delivered also.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.33.0](service/macie2/CHANGELOG.md#v1330-2023-11-16)
+  * **Feature**: This release adds support for configuring Macie to assume an IAM role when retrieving sample occurrences of sensitive data reported by findings.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.27.0](service/mediapackage/CHANGELOG.md#v1270-2023-11-16)
+  * **Feature**: DRM_TOP_LEVEL_COMPACT allows placing content protection elements at the MPD level and referenced at the AdaptationSet level
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.6.0](service/pinpointsmsvoicev2/CHANGELOG.md#v160-2023-11-16)
+  * **Feature**: Amazon Pinpoint now offers additional operations as part of version 2 of the SMS and voice APIs. This release includes 26 new APIs to create and manage phone number registrations, add verified destination numbers, and request sender IDs.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.35.0](service/polly/CHANGELOG.md#v1350-2023-11-16)
+  * **Feature**: Add new engine - long-form - dedicated for longer content, such as news articles, training materials, or marketing videos.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.51.0](service/quicksight/CHANGELOG.md#v1510-2023-11-16)
+  * **Feature**: Custom permission support for QuickSight roles; Three new datasources STARBURST, TRINO, BIGQUERY; Lenient mode changes the default behavior to allow for exporting and importing with certain UI allowed errors, Support for permissions and tags export and import.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.117.0](service/sagemaker/CHANGELOG.md#v11170-2023-11-16)
+  * **Feature**: Amazon SageMaker Studio now supports Trainium instance types - trn1.2xlarge, trn1.32xlarge, trn1n.32xlarge.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.43.0](service/ssm/CHANGELOG.md#v1430-2023-11-16)
+  * **Feature**: This release introduces the ability to filter automation execution steps which have parent steps. In addition, runbook variable information is returned by GetAutomationExecution and parent step information is returned by the DescribeAutomationStepExecutions API.
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.26.0](service/ssmincidents/CHANGELOG.md#v1260-2023-11-16)
+  * **Feature**: Introduces new APIs ListIncidentFindings and BatchGetIncidentFindings to use findings related to an incident.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.21.0](service/ssoadmin/CHANGELOG.md#v1210-2023-11-16)
+  * **Feature**: Instances bound to a single AWS account, API operations for managing instances and applications, and assignments to applications are now supported. Trusted identity propagation is also supported, with new API operations for managing trusted token issuers and application grants and scopes.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.38.0](service/transfer/CHANGELOG.md#v1380-2023-11-16)
+  * **Feature**: Introduced S3StorageOptions for servers to enable directory listing optimizations and added Type fields to logical directory mappings.
+
 # Release (2023-11-15)
 
 ## General Highlights

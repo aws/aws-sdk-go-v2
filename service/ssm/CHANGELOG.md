@@ -1,3 +1,7 @@
+# v1.43.0 (2023-11-16)
+
+* **Feature**: This release introduces the ability to filter automation execution steps which have parent steps. In addition, runbook variable information is returned by GetAutomationExecution and parent step information is returned by the DescribeAutomationStepExecutions API.
+
 # v1.42.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

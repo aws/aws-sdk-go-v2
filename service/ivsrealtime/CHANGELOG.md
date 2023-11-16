@@ -1,3 +1,7 @@
+# v1.8.0 (2023-11-16)
+
+* **Feature**: This release introduces server side composition and recording for stages.
+
 # v1.7.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

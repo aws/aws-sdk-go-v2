@@ -1,3 +1,7 @@
+# v1.69.0 (2023-11-16)
+
+* **Feature**: Introduces new column statistics APIs to support statistics generation for tables within the Glue Data Catalog.
+
 # v1.68.1 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

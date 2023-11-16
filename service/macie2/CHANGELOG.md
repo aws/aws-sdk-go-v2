@@ -1,3 +1,7 @@
+# v1.33.0 (2023-11-16)
+
+* **Feature**: This release adds support for configuring Macie to assume an IAM role when retrieving sample occurrences of sensitive data reported by findings.
+
 # v1.32.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

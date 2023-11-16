@@ -1,3 +1,7 @@
+# v1.21.0 (2023-11-16)
+
+* **Feature**: Instances bound to a single AWS account, API operations for managing instances and applications, and assignments to applications are now supported. Trusted identity propagation is also supported, with new API operations for managing trusted token issuers and application grants and scopes.
+
 # v1.20.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

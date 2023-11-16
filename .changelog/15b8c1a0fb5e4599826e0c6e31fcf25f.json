@@ -1,8 +1,0 @@
-{
-    "id": "15b8c1a0-fb5e-4599-826e-0c6e31fcf25f",
-    "type": "feature",
-    "description": "This release adds support for Amazon Data Lifecycle Manager default policies for EBS snapshots and EBS-backed AMIs.",
-    "modules": [
-        "service/dlm"
-    ]
-}

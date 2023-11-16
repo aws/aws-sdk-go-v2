@@ -1,8 +1,0 @@
-{
-    "id": "11029f3f-96ba-4fd5-ae52-5848dc2233f7",
-    "type": "feature",
-    "description": "Custom permission support for QuickSight roles; Three new datasources STARBURST, TRINO, BIGQUERY; Lenient mode changes the default behavior to allow for exporting and importing with certain UI allowed errors, Support for permissions and tags export and import.",
-    "modules": [
-        "service/quicksight"
-    ]
-}

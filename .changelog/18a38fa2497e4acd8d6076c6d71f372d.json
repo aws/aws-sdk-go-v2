@@ -1,8 +1,0 @@
-{
-    "id": "18a38fa2-497e-4acd-8d60-76c6d71f372d",
-    "type": "feature",
-    "description": "Instances bound to a single AWS account, API operations for managing instances and applications, and assignments to applications are now supported. Trusted identity propagation is also supported, with new API operations for managing trusted token issuers and application grants and scopes.",
-    "modules": [
-        "service/ssoadmin"
-    ]
-}

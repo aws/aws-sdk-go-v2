@@ -1,3 +1,7 @@
+# v1.27.0 (2023-11-16)
+
+* **Feature**: DRM_TOP_LEVEL_COMPACT allows placing content protection elements at the MPD level and referenced at the AdaptationSet level
+
 # v1.26.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

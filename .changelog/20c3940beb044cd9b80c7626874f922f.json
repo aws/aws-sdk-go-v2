@@ -1,8 +1,0 @@
-{
-    "id": "20c3940b-eb04-4cd9-b80c-7626874f922f",
-    "type": "feature",
-    "description": "Enable use of tenant-specific PublicSigningKeyUrl from device trust providers and onboard jumpcloud as a new device trust provider.",
-    "modules": [
-        "service/ec2"
-    ]
-}

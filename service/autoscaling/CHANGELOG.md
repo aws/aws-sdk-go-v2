@@ -1,3 +1,7 @@
+# v1.35.1 (2023-11-16)
+
+* No change notes available for this release.
+
 # v1.35.0 (2023-11-15)
 
 * **Feature**: This release introduces Instance Maintenance Policy, a new EC2 Auto Scaling capability that allows customers to define whether instances are launched before or after existing instances are terminated during instance replacement operations.

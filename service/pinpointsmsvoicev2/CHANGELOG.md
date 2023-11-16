@@ -1,3 +1,7 @@
+# v1.6.0 (2023-11-16)
+
+* **Feature**: Amazon Pinpoint now offers additional operations as part of version 2 of the SMS and voice APIs. This release includes 26 new APIs to create and manage phone number registrations, add verified destination numbers, and request sender IDs.
+
 # v1.5.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

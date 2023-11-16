@@ -1,3 +1,7 @@
+# v1.21.0 (2023-11-16)
+
+* **Feature**: This release adds support for Amazon Data Lifecycle Manager default policies for EBS snapshots and EBS-backed AMIs.
+
 # v1.20.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

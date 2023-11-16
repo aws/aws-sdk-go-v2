@@ -1,3 +1,7 @@
+# v1.28.0 (2023-11-16)
+
+* **Feature**: This release adds the Image Lifecycle Management feature to automate the process of deprecating, disabling and deleting outdated images and their associated resources.
+
 # v1.27.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions
