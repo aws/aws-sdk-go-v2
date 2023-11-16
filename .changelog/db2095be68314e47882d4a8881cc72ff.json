@@ -1,0 +1,8 @@
+{
+    "id": "db2095be-6831-4e47-882d-4a8881cc72ff",
+    "type": "bugfix",
+    "description": "Fix recognition of trailing comments in shared config properties. # or ; separators that aren't preceded by whitespace at the end of a property value should be considered part of it.",
+    "modules": [
+        "internal/ini"
+    ]
+}
