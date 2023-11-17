@@ -94,7 +94,7 @@ type GetMonitorOutput struct {
 	// provider (ISP), that clients access the resources through. This limit can help
 	// control billing costs. To learn more, see Choosing a city-network maximum value  (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
-	MaxCityNetworksToMonitor int32
+	MaxCityNetworksToMonitor *int32
 
 	// The health of the data processing for the monitor.
 	ProcessingStatus types.MonitorProcessingStatusCode
@@ -110,7 +110,7 @@ type GetMonitorOutput struct {
 	// traffic percentage that you set. To learn more, see Choosing an application
 	// traffic percentage to monitor  (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
-	TrafficPercentageToMonitor int32
+	TrafficPercentageToMonitor *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -45,6 +45,9 @@ type CreateNetworkInterfaceInput struct {
 	// .
 	ClientToken *string
 
+	// A connection tracking specification for the network interface.
+	ConnectionTrackingSpecification *types.ConnectionTrackingSpecificationRequest
+
 	// A description for the network interface.
 	Description *string
 

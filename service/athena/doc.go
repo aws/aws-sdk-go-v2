@@ -14,7 +14,5 @@
 // use version 1.1.0 of the driver or later with the Amazon Athena API. Earlier
 // version drivers do not support the API. For more information and to download the
 // driver, see Accessing Amazon Athena with JDBC (https://docs.aws.amazon.com/athena/latest/ug/connect-with-jdbc.html)
-// . For code samples using the Amazon Web Services SDK for Java, see Examples and
-// Code Samples (https://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in
-// the Amazon Athena User Guide.
+// .
 package athena

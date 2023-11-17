@@ -1,0 +1,8 @@
+{
+    "id": "9660ef8a-8ecb-45c2-ae8b-14d0405109a3",
+    "type": "feature",
+    "description": "Documentation and operational updates for Amazon ECR, adding support for pull through cache rules for upstream registries that require authentication.",
+    "modules": [
+        "service/ecr"
+    ]
+}

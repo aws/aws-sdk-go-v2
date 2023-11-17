@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API action is currently in limited preview only. If you are interested in
-// using this feature, contact your account manager. Removes an association between
-// a branch network interface with a trunk network interface.
+// Removes an association between a branch network interface with a trunk network
+// interface.
 func (c *Client) DisassociateTrunkInterface(ctx context.Context, params *DisassociateTrunkInterfaceInput, optFns ...func(*Options)) (*DisassociateTrunkInterfaceOutput, error) {
 	if params == nil {
 		params = &DisassociateTrunkInterfaceInput{}

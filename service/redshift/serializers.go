@@ -1424,6 +1424,70 @@ func (m *awsAwsquery_serializeOpCreateHsmConfiguration) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpCreateRedshiftIdcApplication struct {
+}
+
+func (*awsAwsquery_serializeOpCreateRedshiftIdcApplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpCreateRedshiftIdcApplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateRedshiftIdcApplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CreateRedshiftIdcApplication")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentCreateRedshiftIdcApplicationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpCreateScheduledAction struct {
 }
 
@@ -2556,6 +2620,70 @@ func (m *awsAwsquery_serializeOpDeletePartner) HandleSerialize(ctx context.Conte
 	body.Key("Version").String("2012-12-01")
 
 	if err := awsAwsquery_serializeOpDocumentDeletePartnerInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDeleteRedshiftIdcApplication struct {
+}
+
+func (*awsAwsquery_serializeOpDeleteRedshiftIdcApplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDeleteRedshiftIdcApplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteRedshiftIdcApplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeleteRedshiftIdcApplication")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentDeleteRedshiftIdcApplicationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4732,6 +4860,70 @@ func (m *awsAwsquery_serializeOpDescribePartners) HandleSerialize(ctx context.Co
 	body.Key("Version").String("2012-12-01")
 
 	if err := awsAwsquery_serializeOpDocumentDescribePartnersInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDescribeRedshiftIdcApplications struct {
+}
+
+func (*awsAwsquery_serializeOpDescribeRedshiftIdcApplications) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDescribeRedshiftIdcApplications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeRedshiftIdcApplicationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeRedshiftIdcApplications")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentDescribeRedshiftIdcApplicationsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -6988,6 +7180,70 @@ func (m *awsAwsquery_serializeOpModifyEventSubscription) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpModifyRedshiftIdcApplication struct {
+}
+
+func (*awsAwsquery_serializeOpModifyRedshiftIdcApplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpModifyRedshiftIdcApplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyRedshiftIdcApplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyRedshiftIdcApplication")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentModifyRedshiftIdcApplicationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpModifyScheduledAction struct {
 }
 
@@ -8213,6 +8469,47 @@ func awsAwsquery_serializeDocumentAttributeNameList(v []string, value query.Valu
 	return nil
 }
 
+func awsAwsquery_serializeDocumentAuthorizedAudienceList(v []string, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentAuthorizedTokenIssuer(v *types.AuthorizedTokenIssuer, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AuthorizedAudiencesList != nil {
+		objectKey := object.Key("AuthorizedAudiencesList")
+		if err := awsAwsquery_serializeDocumentAuthorizedAudienceList(v.AuthorizedAudiencesList, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.TrustedTokenIssuerArn != nil {
+		objectKey := object.Key("TrustedTokenIssuerArn")
+		objectKey.String(*v.TrustedTokenIssuerArn)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentAuthorizedTokenIssuerList(v []types.AuthorizedTokenIssuer, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentAuthorizedTokenIssuer(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentClusterSecurityGroupNameList(v []string, value query.Value) error {
 	array := value.Array("ClusterSecurityGroupName")
 
@@ -8278,6 +8575,50 @@ func awsAwsquery_serializeDocumentIamRoleArnList(v []string, value query.Value) 
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentLakeFormationQuery(v *types.LakeFormationQuery, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.Authorization) > 0 {
+		objectKey := object.Key("Authorization")
+		objectKey.String(string(v.Authorization))
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentLakeFormationScopeUnion(v types.LakeFormationScopeUnion, value query.Value) error {
+	object := value.Object()
+
+	switch uv := v.(type) {
+	case *types.LakeFormationScopeUnionMemberLakeFormationQuery:
+		objectKey := object.Key("LakeFormationQuery")
+		if err := awsAwsquery_serializeDocumentLakeFormationQuery(&uv.Value, objectKey); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentLakeFormationServiceIntegrations(v []types.LakeFormationScopeUnion, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentLakeFormationScopeUnion(v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -8523,6 +8864,38 @@ func awsAwsquery_serializeDocumentScheduleDefinitionList(v []string, value query
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentServiceIntegrationList(v []types.ServiceIntegrationsUnion, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentServiceIntegrationsUnion(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentServiceIntegrationsUnion(v types.ServiceIntegrationsUnion, value query.Value) error {
+	object := value.Object()
+
+	switch uv := v.(type) {
+	case *types.ServiceIntegrationsUnionMemberLakeFormation:
+		objectKey := object.Key("LakeFormation")
+		if err := awsAwsquery_serializeDocumentLakeFormationServiceIntegrations(uv.Value, objectKey); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }
@@ -9108,6 +9481,11 @@ func awsAwsquery_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, va
 		objectKey.Boolean(*v.PubliclyAccessible)
 	}
 
+	if v.RedshiftIdcApplicationArn != nil {
+		objectKey := object.Key("RedshiftIdcApplicationArn")
+		objectKey.String(*v.RedshiftIdcApplicationArn)
+	}
+
 	if v.SnapshotScheduleIdentifier != nil {
 		objectKey := object.Key("SnapshotScheduleIdentifier")
 		objectKey.String(*v.SnapshotScheduleIdentifier)
@@ -9408,6 +9786,52 @@ func awsAwsquery_serializeOpDocumentCreateHsmConfigurationInput(v *CreateHsmConf
 	if v.Tags != nil {
 		objectKey := object.Key("Tags")
 		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentCreateRedshiftIdcApplicationInput(v *CreateRedshiftIdcApplicationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AuthorizedTokenIssuerList != nil {
+		objectKey := object.Key("AuthorizedTokenIssuerList")
+		if err := awsAwsquery_serializeDocumentAuthorizedTokenIssuerList(v.AuthorizedTokenIssuerList, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.IamRoleArn != nil {
+		objectKey := object.Key("IamRoleArn")
+		objectKey.String(*v.IamRoleArn)
+	}
+
+	if v.IdcDisplayName != nil {
+		objectKey := object.Key("IdcDisplayName")
+		objectKey.String(*v.IdcDisplayName)
+	}
+
+	if v.IdcInstanceArn != nil {
+		objectKey := object.Key("IdcInstanceArn")
+		objectKey.String(*v.IdcInstanceArn)
+	}
+
+	if v.IdentityNamespace != nil {
+		objectKey := object.Key("IdentityNamespace")
+		objectKey.String(*v.IdentityNamespace)
+	}
+
+	if v.RedshiftIdcApplicationName != nil {
+		objectKey := object.Key("RedshiftIdcApplicationName")
+		objectKey.String(*v.RedshiftIdcApplicationName)
+	}
+
+	if v.ServiceIntegrations != nil {
+		objectKey := object.Key("ServiceIntegrations")
+		if err := awsAwsquery_serializeDocumentServiceIntegrationList(v.ServiceIntegrations, objectKey); err != nil {
 			return err
 		}
 	}
@@ -9788,6 +10212,18 @@ func awsAwsquery_serializeOpDocumentDeletePartnerInput(v *DeletePartnerInput, va
 	if v.PartnerName != nil {
 		objectKey := object.Key("PartnerName")
 		objectKey.String(*v.PartnerName)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDeleteRedshiftIdcApplicationInput(v *DeleteRedshiftIdcApplicationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.RedshiftIdcApplicationArn != nil {
+		objectKey := object.Key("RedshiftIdcApplicationArn")
+		objectKey.String(*v.RedshiftIdcApplicationArn)
 	}
 
 	return nil
@@ -10711,6 +11147,28 @@ func awsAwsquery_serializeOpDocumentDescribePartnersInput(v *DescribePartnersInp
 	if v.PartnerName != nil {
 		objectKey := object.Key("PartnerName")
 		objectKey.String(*v.PartnerName)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDescribeRedshiftIdcApplicationsInput(v *DescribeRedshiftIdcApplicationsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.MaxRecords != nil {
+		objectKey := object.Key("MaxRecords")
+		objectKey.Integer(*v.MaxRecords)
+	}
+
+	if v.RedshiftIdcApplicationArn != nil {
+		objectKey := object.Key("RedshiftIdcApplicationArn")
+		objectKey.String(*v.RedshiftIdcApplicationArn)
 	}
 
 	return nil
@@ -11749,6 +12207,47 @@ func awsAwsquery_serializeOpDocumentModifyEventSubscriptionInput(v *ModifyEventS
 	if v.SubscriptionName != nil {
 		objectKey := object.Key("SubscriptionName")
 		objectKey.String(*v.SubscriptionName)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentModifyRedshiftIdcApplicationInput(v *ModifyRedshiftIdcApplicationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AuthorizedTokenIssuerList != nil {
+		objectKey := object.Key("AuthorizedTokenIssuerList")
+		if err := awsAwsquery_serializeDocumentAuthorizedTokenIssuerList(v.AuthorizedTokenIssuerList, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.IamRoleArn != nil {
+		objectKey := object.Key("IamRoleArn")
+		objectKey.String(*v.IamRoleArn)
+	}
+
+	if v.IdcDisplayName != nil {
+		objectKey := object.Key("IdcDisplayName")
+		objectKey.String(*v.IdcDisplayName)
+	}
+
+	if v.IdentityNamespace != nil {
+		objectKey := object.Key("IdentityNamespace")
+		objectKey.String(*v.IdentityNamespace)
+	}
+
+	if v.RedshiftIdcApplicationArn != nil {
+		objectKey := object.Key("RedshiftIdcApplicationArn")
+		objectKey.String(*v.RedshiftIdcApplicationArn)
+	}
+
+	if v.ServiceIntegrations != nil {
+		objectKey := object.Key("ServiceIntegrations")
+		if err := awsAwsquery_serializeDocumentServiceIntegrationList(v.ServiceIntegrations, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil

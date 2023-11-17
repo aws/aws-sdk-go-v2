@@ -16,7 +16,7 @@ import (
 // Get the information about an existing global endpoint. For more information
 // about global endpoints, see Making applications Regional-fault tolerant with
 // global endpoints and event replication (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html)
-// in the Amazon EventBridge User Guide..
+// in the Amazon EventBridge User Guide.
 func (c *Client) DescribeEndpoint(ctx context.Context, params *DescribeEndpointInput, optFns ...func(*Options)) (*DescribeEndpointOutput, error) {
 	if params == nil {
 		params = &DescribeEndpointInput{}

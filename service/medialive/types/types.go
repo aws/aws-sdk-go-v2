@@ -1626,6 +1626,11 @@ type FeatureActivations struct {
 	// from the schedule.
 	InputPrepareScheduleActions FeatureActivationsInputPrepareScheduleActions
 
+	// Enables the output static image overlay feature. Enabling this feature allows
+	// you to send channel schedule updates to display/clear/modify image overlays on
+	// an output-by-output bases.
+	OutputStaticImageOverlayScheduleActions FeatureActivationsOutputStaticImageOverlayScheduleActions
+
 	noSmithyDocumentSerde
 }
 
@@ -5072,6 +5077,12 @@ type ScheduleActionSettings struct {
 	// Action to deactivate a static image overlay
 	StaticImageDeactivateSettings *StaticImageDeactivateScheduleActionSettings
 
+	// Action to activate a static image overlay in one or more specified outputs
+	StaticImageOutputActivateSettings *StaticImageOutputActivateScheduleActionSettings
+
+	// Action to deactivate a static image overlay in one or more specified outputs
+	StaticImageOutputDeactivateSettings *StaticImageOutputDeactivateScheduleActionSettings
+
 	noSmithyDocumentSerde
 }
 
@@ -5446,6 +5457,86 @@ type StaticImageDeactivateScheduleActionSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Settings for the action to activate a static image.
+type StaticImageOutputActivateScheduleActionSettings struct {
+
+	// The location and filename of the image file to overlay on the video. The file
+	// must be a 32-bit BMP, PNG, or TGA file, and must not be larger (in pixels) than
+	// the input video.
+	//
+	// This member is required.
+	Image *InputLocation
+
+	// The name(s) of the output(s) the activation should apply to.
+	//
+	// This member is required.
+	OutputNames []string
+
+	// The duration in milliseconds for the image to remain on the video. If omitted
+	// or set to 0 the duration is unlimited and the image will remain until it is
+	// explicitly deactivated.
+	Duration *int32
+
+	// The time in milliseconds for the image to fade in. The fade-in starts at the
+	// start time of the overlay. Default is 0 (no fade-in).
+	FadeIn *int32
+
+	// Applies only if a duration is specified. The time in milliseconds for the image
+	// to fade out. The fade-out starts when the duration time is hit, so it
+	// effectively extends the duration. Default is 0 (no fade-out).
+	FadeOut *int32
+
+	// The height of the image when inserted into the video, in pixels. The overlay
+	// will be scaled up or down to the specified height. Leave blank to use the native
+	// height of the overlay.
+	Height *int32
+
+	// Placement of the left edge of the overlay relative to the left edge of the
+	// video frame, in pixels. 0 (the default) is the left edge of the frame. If the
+	// placement causes the overlay to extend beyond the right edge of the underlying
+	// video, then the overlay is cropped on the right.
+	ImageX *int32
+
+	// Placement of the top edge of the overlay relative to the top edge of the video
+	// frame, in pixels. 0 (the default) is the top edge of the frame. If the placement
+	// causes the overlay to extend beyond the bottom edge of the underlying video,
+	// then the overlay is cropped on the bottom.
+	ImageY *int32
+
+	// The number of the layer, 0 to 7. There are 8 layers that can be overlaid on the
+	// video, each layer with a different image. The layers are in Z order, which means
+	// that overlays with higher values of layer are inserted on top of overlays with
+	// lower values of layer. Default is 0.
+	Layer *int32
+
+	// Opacity of image where 0 is transparent and 100 is fully opaque. Default is 100.
+	Opacity *int32
+
+	// The width of the image when inserted into the video, in pixels. The overlay
+	// will be scaled up or down to the specified width. Leave blank to use the native
+	// width of the overlay.
+	Width *int32
+
+	noSmithyDocumentSerde
+}
+
+// Settings for the action to deactivate the image in a specific layer.
+type StaticImageOutputDeactivateScheduleActionSettings struct {
+
+	// The name(s) of the output(s) the deactivation should apply to.
+	//
+	// This member is required.
+	OutputNames []string
+
+	// The time in milliseconds for the image to fade out. Default is 0 (no fade-out).
+	FadeOut *int32
+
+	// The image overlay layer to deactivate, 0 to 7. Default is 0.
+	Layer *int32
+
+	noSmithyDocumentSerde
+}
+
 // Static Key Settings
 type StaticKeySettings struct {
 
@@ -5533,7 +5624,9 @@ type Thumbnail struct {
 // Thumbnail Configuration
 type ThumbnailConfiguration struct {
 
-	// Whether Thumbnail is enabled.
+	// Enables the thumbnail feature. The feature generates thumbnails of the incoming
+	// video in each pipeline in the channel. AUTO turns the feature on, DISABLE turns
+	// the feature off.
 	//
 	// This member is required.
 	State ThumbnailState

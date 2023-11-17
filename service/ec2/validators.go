@@ -370,6 +370,26 @@ func (m *validateOpAssociateInstanceEventWindow) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateIpamByoasn struct {
+}
+
+func (*validateOpAssociateIpamByoasn) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateIpamByoasn) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateIpamByoasnInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateIpamByoasnInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateIpamResourceDiscovery struct {
 }
 
@@ -3790,6 +3810,26 @@ func (m *validateOpDeprovisionByoipCidr) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeprovisionIpamByoasn struct {
+}
+
+func (*validateOpDeprovisionIpamByoasn) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeprovisionIpamByoasn) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeprovisionIpamByoasnInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeprovisionIpamByoasnInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeprovisionIpamPoolCidr struct {
 }
 
@@ -4690,6 +4730,26 @@ func (m *validateOpDisassociateInstanceEventWindow) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateIpamByoasn struct {
+}
+
+func (*validateOpDisassociateIpamByoasn) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateIpamByoasn) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateIpamByoasnInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateIpamByoasnInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateIpamResourceDiscovery struct {
 }
 
@@ -5465,6 +5525,26 @@ func (m *validateOpGetIpamDiscoveredAccounts) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetIpamDiscoveredAccountsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetIpamDiscoveredPublicAddresses struct {
+}
+
+func (*validateOpGetIpamDiscoveredPublicAddresses) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIpamDiscoveredPublicAddresses) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIpamDiscoveredPublicAddressesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIpamDiscoveredPublicAddressesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -7410,6 +7490,26 @@ func (m *validateOpProvisionByoipCidr) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpProvisionIpamByoasn struct {
+}
+
+func (*validateOpProvisionIpamByoasn) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpProvisionIpamByoasn) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ProvisionIpamByoasnInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpProvisionIpamByoasnInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpProvisionIpamPoolCidr struct {
 }
 
@@ -8662,6 +8762,10 @@ func addOpAssociateInstanceEventWindowValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpAssociateInstanceEventWindow{}, middleware.After)
 }
 
+func addOpAssociateIpamByoasnValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateIpamByoasn{}, middleware.After)
+}
+
 func addOpAssociateIpamResourceDiscoveryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateIpamResourceDiscovery{}, middleware.After)
 }
@@ -9346,6 +9450,10 @@ func addOpDeprovisionByoipCidrValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDeprovisionByoipCidr{}, middleware.After)
 }
 
+func addOpDeprovisionIpamByoasnValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeprovisionIpamByoasn{}, middleware.After)
+}
+
 func addOpDeprovisionIpamPoolCidrValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeprovisionIpamPoolCidr{}, middleware.After)
 }
@@ -9526,6 +9634,10 @@ func addOpDisassociateInstanceEventWindowValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpDisassociateInstanceEventWindow{}, middleware.After)
 }
 
+func addOpDisassociateIpamByoasnValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateIpamByoasn{}, middleware.After)
+}
+
 func addOpDisassociateIpamResourceDiscoveryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateIpamResourceDiscovery{}, middleware.After)
 }
@@ -9680,6 +9792,10 @@ func addOpGetIpamAddressHistoryValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetIpamDiscoveredAccountsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIpamDiscoveredAccounts{}, middleware.After)
+}
+
+func addOpGetIpamDiscoveredPublicAddressesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIpamDiscoveredPublicAddresses{}, middleware.After)
 }
 
 func addOpGetIpamDiscoveredResourceCidrsValidationMiddleware(stack *middleware.Stack) error {
@@ -10070,6 +10186,10 @@ func addOpProvisionByoipCidrValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpProvisionByoipCidr{}, middleware.After)
 }
 
+func addOpProvisionIpamByoasnValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpProvisionIpamByoasn{}, middleware.After)
+}
+
 func addOpProvisionIpamPoolCidrValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpProvisionIpamPoolCidr{}, middleware.After)
 }
@@ -10330,6 +10450,24 @@ func validateAddPrefixListEntry(v *types.AddPrefixListEntry) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AddPrefixListEntry"}
 	if v.Cidr == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Cidr"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAsnAuthorizationContext(v *types.AsnAuthorizationContext) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AsnAuthorizationContext"}
+	if v.Message == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Message"))
+	}
+	if v.Signature == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Signature"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11476,6 +11614,24 @@ func validateOpAssociateInstanceEventWindowInput(v *AssociateInstanceEventWindow
 	}
 }
 
+func validateOpAssociateIpamByoasnInput(v *AssociateIpamByoasnInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateIpamByoasnInput"}
+	if v.Asn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Asn"))
+	}
+	if v.Cidr == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Cidr"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateIpamResourceDiscoveryInput(v *AssociateIpamResourceDiscoveryInput) error {
 	if v == nil {
 		return nil
@@ -11532,9 +11688,6 @@ func validateOpAssociateSubnetCidrBlockInput(v *AssociateSubnetCidrBlockInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateSubnetCidrBlockInput"}
-	if v.Ipv6CidrBlock == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Ipv6CidrBlock"))
-	}
 	if v.SubnetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
 	}
@@ -14364,6 +14517,24 @@ func validateOpDeprovisionByoipCidrInput(v *DeprovisionByoipCidrInput) error {
 	}
 }
 
+func validateOpDeprovisionIpamByoasnInput(v *DeprovisionIpamByoasnInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeprovisionIpamByoasnInput"}
+	if v.IpamId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamId"))
+	}
+	if v.Asn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Asn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeprovisionIpamPoolCidrInput(v *DeprovisionIpamPoolCidrInput) error {
 	if v == nil {
 		return nil
@@ -15106,6 +15277,24 @@ func validateOpDisassociateInstanceEventWindowInput(v *DisassociateInstanceEvent
 	}
 }
 
+func validateOpDisassociateIpamByoasnInput(v *DisassociateIpamByoasnInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateIpamByoasnInput"}
+	if v.Asn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Asn"))
+	}
+	if v.Cidr == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Cidr"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateIpamResourceDiscoveryInput(v *DisassociateIpamResourceDiscoveryInput) error {
 	if v == nil {
 		return nil
@@ -15757,6 +15946,24 @@ func validateOpGetIpamDiscoveredAccountsInput(v *GetIpamDiscoveredAccountsInput)
 	}
 	if v.DiscoveryRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DiscoveryRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIpamDiscoveredPublicAddressesInput(v *GetIpamDiscoveredPublicAddressesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIpamDiscoveredPublicAddressesInput"}
+	if v.IpamResourceDiscoveryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamResourceDiscoveryId"))
+	}
+	if v.AddressRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AddressRegion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17364,6 +17571,31 @@ func validateOpProvisionByoipCidrInput(v *ProvisionByoipCidrInput) error {
 	if v.CidrAuthorizationContext != nil {
 		if err := validateCidrAuthorizationContext(v.CidrAuthorizationContext); err != nil {
 			invalidParams.AddNested("CidrAuthorizationContext", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpProvisionIpamByoasnInput(v *ProvisionIpamByoasnInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProvisionIpamByoasnInput"}
+	if v.IpamId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamId"))
+	}
+	if v.Asn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Asn"))
+	}
+	if v.AsnAuthorizationContext == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AsnAuthorizationContext"))
+	} else if v.AsnAuthorizationContext != nil {
+		if err := validateAsnAuthorizationContext(v.AsnAuthorizationContext); err != nil {
+			invalidParams.AddNested("AsnAuthorizationContext", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

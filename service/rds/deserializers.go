@@ -1825,6 +1825,9 @@ func awsAwsquery_deserializeOpErrorCreateDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
 
+	case strings.EqualFold("InvalidDBSubnetGroupFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBSubnetGroupFault(response, errorBody)
+
 	case strings.EqualFold("InvalidDBSubnetGroupStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBSubnetGroupStateFault(response, errorBody)
 
@@ -1839,6 +1842,9 @@ func awsAwsquery_deserializeOpErrorCreateDBCluster(response *smithyhttp.Response
 
 	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
 		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
+
+	case strings.EqualFold("OptionGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorOptionGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("StorageQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorStorageQuotaExceededFault(response, errorBody)
@@ -11732,6 +11738,9 @@ func awsAwsquery_deserializeOpErrorModifyDBCluster(response *smithyhttp.Response
 
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response, errorBody)
+
+	case strings.EqualFold("OptionGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorOptionGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("StorageQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorStorageQuotaExceededFault(response, errorBody)
@@ -26840,6 +26849,12 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				sv.Status = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("StatusInfos", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentDBClusterStatusInfoList(&sv.StatusInfos, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("StorageEncrypted", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -29751,6 +29766,165 @@ func awsAwsquery_deserializeDocumentDBClusterSnapshotNotFoundFault(v **types.DBC
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentDBClusterStatusInfo(v **types.DBClusterStatusInfo, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DBClusterStatusInfo
+	if *v == nil {
+		sv = &types.DBClusterStatusInfo{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Normal", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.Normal = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("StatusType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StatusType = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDBClusterStatusInfoList(v *[]types.DBClusterStatusInfo, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.DBClusterStatusInfo
+	if *v == nil {
+		sv = make([]types.DBClusterStatusInfo, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("DBClusterStatusInfo", t.Name.Local):
+			var col types.DBClusterStatusInfo
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentDBClusterStatusInfo(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDBClusterStatusInfoListUnwrapped(v *[]types.DBClusterStatusInfo, decoder smithyxml.NodeDecoder) error {
+	var sv []types.DBClusterStatusInfo
+	if *v == nil {
+		sv = make([]types.DBClusterStatusInfo, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.DBClusterStatusInfo
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentDBClusterStatusInfo(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentDBEngineVersion(v **types.DBEngineVersion, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -46058,6 +46232,19 @@ func awsAwsquery_deserializeDocumentRdsCustomClusterConfiguration(v **types.RdsC
 			{
 				xtv := string(val)
 				sv.InterconnectSubnetId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ReplicaMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ReplicaMode = types.ReplicaMode(xtv)
 			}
 
 		case strings.EqualFold("TransitGatewayMulticastDomainId", t.Name.Local):

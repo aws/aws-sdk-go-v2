@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get account configuration
+// Describe account configuration
 func (c *Client) DescribeAccountConfiguration(ctx context.Context, params *DescribeAccountConfigurationInput, optFns ...func(*Options)) (*DescribeAccountConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeAccountConfigurationInput{}

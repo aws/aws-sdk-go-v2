@@ -48,7 +48,7 @@ type PutSourceServerActionInput struct {
 	// Source server post migration custom action order.
 	//
 	// This member is required.
-	Order int32
+	Order *int32
 
 	// Source server ID.
 	//
@@ -80,7 +80,7 @@ type PutSourceServerActionInput struct {
 	Parameters map[string][]types.SsmParameterStoreParameter
 
 	// Source server post migration custom action timeout in seconds.
-	TimeoutSeconds int32
+	TimeoutSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -115,13 +115,13 @@ type PutSourceServerActionOutput struct {
 	MustSucceedForCutover *bool
 
 	// Source server post migration custom action order.
-	Order int32
+	Order *int32
 
 	// Source server post migration custom action parameters.
 	Parameters map[string][]types.SsmParameterStoreParameter
 
 	// Source server post migration custom action timeout in seconds.
-	TimeoutSeconds int32
+	TimeoutSeconds *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

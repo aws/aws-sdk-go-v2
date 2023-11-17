@@ -10847,6 +10847,26 @@ loop:
 			uv = &types.GrantMemberJwtBearer{Value: mv}
 			break loop
 
+		case "RefreshToken":
+			var mv types.RefreshTokenGrant
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentRefreshTokenGrant(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.GrantMemberRefreshToken{Value: mv}
+			break loop
+
+		case "TokenExchange":
+			var mv types.TokenExchangeGrant
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentTokenExchangeGrant(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.GrantMemberTokenExchange{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -11722,6 +11742,37 @@ func awsAwsjson11_deserializeDocumentRedirectUris(v *[]string, value interface{}
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRefreshTokenGrant(v **types.RefreshTokenGrant, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RefreshTokenGrant
+	if *v == nil {
+		sv = &types.RefreshTokenGrant{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12200,6 +12251,37 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				sv.Message = ptr.String(jtv)
 			}
 
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTokenExchangeGrant(v **types.TokenExchangeGrant, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TokenExchangeGrant
+	if *v == nil {
+		sv = &types.TokenExchangeGrant{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
 		default:
 			_, _ = key, value
 

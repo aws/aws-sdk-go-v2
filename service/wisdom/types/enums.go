@@ -88,6 +88,22 @@ func (ContentStatus) Values() []ContentStatus {
 	}
 }
 
+type ExternalSource string
+
+// Enum values for ExternalSource
+const (
+	ExternalSourceAmazonConnect ExternalSource = "AMAZON_CONNECT"
+)
+
+// Values returns all known values for ExternalSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExternalSource) Values() []ExternalSource {
+	return []ExternalSource{
+		"AMAZON_CONNECT",
+	}
+}
+
 type FilterField string
 
 // Enum values for FilterField
@@ -117,6 +133,48 @@ const (
 func (FilterOperator) Values() []FilterOperator {
 	return []FilterOperator{
 		"EQUALS",
+	}
+}
+
+type ImportJobStatus string
+
+// Enum values for ImportJobStatus
+const (
+	ImportJobStatusStartInProgress  ImportJobStatus = "START_IN_PROGRESS"
+	ImportJobStatusFailed           ImportJobStatus = "FAILED"
+	ImportJobStatusComplete         ImportJobStatus = "COMPLETE"
+	ImportJobStatusDeleteInProgress ImportJobStatus = "DELETE_IN_PROGRESS"
+	ImportJobStatusDeleteFailed     ImportJobStatus = "DELETE_FAILED"
+	ImportJobStatusDeleted          ImportJobStatus = "DELETED"
+)
+
+// Values returns all known values for ImportJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImportJobStatus) Values() []ImportJobStatus {
+	return []ImportJobStatus{
+		"START_IN_PROGRESS",
+		"FAILED",
+		"COMPLETE",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
+		"DELETED",
+	}
+}
+
+type ImportJobType string
+
+// Enum values for ImportJobType
+const (
+	ImportJobTypeQuickResponses ImportJobType = "QUICK_RESPONSES"
+)
+
+// Values returns all known values for ImportJobType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImportJobType) Values() []ImportJobType {
+	return []ImportJobType{
+		"QUICK_RESPONSES",
 	}
 }
 
@@ -150,8 +208,9 @@ type KnowledgeBaseType string
 
 // Enum values for KnowledgeBaseType
 const (
-	KnowledgeBaseTypeExternal KnowledgeBaseType = "EXTERNAL"
-	KnowledgeBaseTypeCustom   KnowledgeBaseType = "CUSTOM"
+	KnowledgeBaseTypeExternal       KnowledgeBaseType = "EXTERNAL"
+	KnowledgeBaseTypeCustom         KnowledgeBaseType = "CUSTOM"
+	KnowledgeBaseTypeQuickResponses KnowledgeBaseType = "QUICK_RESPONSES"
 )
 
 // Values returns all known values for KnowledgeBaseType. Note that this can be
@@ -161,6 +220,111 @@ func (KnowledgeBaseType) Values() []KnowledgeBaseType {
 	return []KnowledgeBaseType{
 		"EXTERNAL",
 		"CUSTOM",
+		"QUICK_RESPONSES",
+	}
+}
+
+type Order string
+
+// Enum values for Order
+const (
+	OrderAsc  Order = "ASC"
+	OrderDesc Order = "DESC"
+)
+
+// Values returns all known values for Order. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Order) Values() []Order {
+	return []Order{
+		"ASC",
+		"DESC",
+	}
+}
+
+type Priority string
+
+// Enum values for Priority
+const (
+	PriorityHigh   Priority = "HIGH"
+	PriorityMedium Priority = "MEDIUM"
+	PriorityLow    Priority = "LOW"
+)
+
+// Values returns all known values for Priority. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Priority) Values() []Priority {
+	return []Priority{
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+	}
+}
+
+type QuickResponseFilterOperator string
+
+// Enum values for QuickResponseFilterOperator
+const (
+	QuickResponseFilterOperatorEquals QuickResponseFilterOperator = "EQUALS"
+	QuickResponseFilterOperatorPrefix QuickResponseFilterOperator = "PREFIX"
+)
+
+// Values returns all known values for QuickResponseFilterOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuickResponseFilterOperator) Values() []QuickResponseFilterOperator {
+	return []QuickResponseFilterOperator{
+		"EQUALS",
+		"PREFIX",
+	}
+}
+
+type QuickResponseQueryOperator string
+
+// Enum values for QuickResponseQueryOperator
+const (
+	QuickResponseQueryOperatorContains          QuickResponseQueryOperator = "CONTAINS"
+	QuickResponseQueryOperatorContainsAndPrefix QuickResponseQueryOperator = "CONTAINS_AND_PREFIX"
+)
+
+// Values returns all known values for QuickResponseQueryOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuickResponseQueryOperator) Values() []QuickResponseQueryOperator {
+	return []QuickResponseQueryOperator{
+		"CONTAINS",
+		"CONTAINS_AND_PREFIX",
+	}
+}
+
+type QuickResponseStatus string
+
+// Enum values for QuickResponseStatus
+const (
+	QuickResponseStatusCreateInProgress QuickResponseStatus = "CREATE_IN_PROGRESS"
+	QuickResponseStatusCreateFailed     QuickResponseStatus = "CREATE_FAILED"
+	QuickResponseStatusCreated          QuickResponseStatus = "CREATED"
+	QuickResponseStatusDeleteInProgress QuickResponseStatus = "DELETE_IN_PROGRESS"
+	QuickResponseStatusDeleteFailed     QuickResponseStatus = "DELETE_FAILED"
+	QuickResponseStatusDeleted          QuickResponseStatus = "DELETED"
+	QuickResponseStatusUpdateInProgress QuickResponseStatus = "UPDATE_IN_PROGRESS"
+	QuickResponseStatusUpdateFailed     QuickResponseStatus = "UPDATE_FAILED"
+)
+
+// Values returns all known values for QuickResponseStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QuickResponseStatus) Values() []QuickResponseStatus {
+	return []QuickResponseStatus{
+		"CREATE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"CREATED",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
+		"DELETED",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_FAILED",
 	}
 }
 

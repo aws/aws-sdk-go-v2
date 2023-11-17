@@ -12,9 +12,7 @@ import (
 )
 
 // Creates a named query in the specified workgroup. Requires that you have access
-// to the workgroup. For code samples using the Amazon Web Services SDK for Java,
-// see Examples and Code Samples (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html)
-// in the Amazon Athena User Guide.
+// to the workgroup.
 func (c *Client) CreateNamedQuery(ctx context.Context, params *CreateNamedQueryInput, optFns ...func(*Options)) (*CreateNamedQueryOutput, error) {
 	if params == nil {
 		params = &CreateNamedQueryInput{}

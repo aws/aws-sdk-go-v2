@@ -777,14 +777,15 @@ type IntegrationType string
 
 // Enum values for IntegrationType
 const (
-	IntegrationTypeEvent               IntegrationType = "EVENT"
-	IntegrationTypeVoiceId             IntegrationType = "VOICE_ID"
-	IntegrationTypePinpointApp         IntegrationType = "PINPOINT_APP"
-	IntegrationTypeWisdomAssistant     IntegrationType = "WISDOM_ASSISTANT"
-	IntegrationTypeWisdomKnowledgeBase IntegrationType = "WISDOM_KNOWLEDGE_BASE"
-	IntegrationTypeCasesDomain         IntegrationType = "CASES_DOMAIN"
-	IntegrationTypeApplication         IntegrationType = "APPLICATION"
-	IntegrationTypeFileScanner         IntegrationType = "FILE_SCANNER"
+	IntegrationTypeEvent                IntegrationType = "EVENT"
+	IntegrationTypeVoiceId              IntegrationType = "VOICE_ID"
+	IntegrationTypePinpointApp          IntegrationType = "PINPOINT_APP"
+	IntegrationTypeWisdomAssistant      IntegrationType = "WISDOM_ASSISTANT"
+	IntegrationTypeWisdomKnowledgeBase  IntegrationType = "WISDOM_KNOWLEDGE_BASE"
+	IntegrationTypeWisdomQuickResponses IntegrationType = "WISDOM_QUICK_RESPONSES"
+	IntegrationTypeCasesDomain          IntegrationType = "CASES_DOMAIN"
+	IntegrationTypeApplication          IntegrationType = "APPLICATION"
+	IntegrationTypeFileScanner          IntegrationType = "FILE_SCANNER"
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
@@ -797,6 +798,7 @@ func (IntegrationType) Values() []IntegrationType {
 		"PINPOINT_APP",
 		"WISDOM_ASSISTANT",
 		"WISDOM_KNOWLEDGE_BASE",
+		"WISDOM_QUICK_RESPONSES",
 		"CASES_DOMAIN",
 		"APPLICATION",
 		"FILE_SCANNER",
@@ -851,7 +853,6 @@ type ListFlowAssociationResourceType string
 
 // Enum values for ListFlowAssociationResourceType
 const (
-	ListFlowAssociationResourceTypeSmsPhoneNumber   ListFlowAssociationResourceType = "SMS_PHONE_NUMBER"
 	ListFlowAssociationResourceTypeVoicePhoneNumber ListFlowAssociationResourceType = "VOICE_PHONE_NUMBER"
 )
 
@@ -861,7 +862,6 @@ const (
 // updates.
 func (ListFlowAssociationResourceType) Values() []ListFlowAssociationResourceType {
 	return []ListFlowAssociationResourceType{
-		"SMS_PHONE_NUMBER",
 		"VOICE_PHONE_NUMBER",
 	}
 }

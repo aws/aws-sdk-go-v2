@@ -81,6 +81,20 @@ func awsRestjson1_serializeOpDocumentCreatePipelineInput(v *CreatePipelineInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.BufferOptions != nil {
+		ok := object.Key("BufferOptions")
+		if err := awsRestjson1_serializeDocumentBufferOptions(v.BufferOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EncryptionAtRestOptions != nil {
+		ok := object.Key("EncryptionAtRestOptions")
+		if err := awsRestjson1_serializeDocumentEncryptionAtRestOptions(v.EncryptionAtRestOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LogPublishingOptions != nil {
 		ok := object.Key("LogPublishingOptions")
 		if err := awsRestjson1_serializeDocumentLogPublishingOptions(v.LogPublishingOptions, ok); err != nil {
@@ -941,6 +955,20 @@ func awsRestjson1_serializeOpDocumentUpdatePipelineInput(v *UpdatePipelineInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.BufferOptions != nil {
+		ok := object.Key("BufferOptions")
+		if err := awsRestjson1_serializeDocumentBufferOptions(v.BufferOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EncryptionAtRestOptions != nil {
+		ok := object.Key("EncryptionAtRestOptions")
+		if err := awsRestjson1_serializeDocumentEncryptionAtRestOptions(v.EncryptionAtRestOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LogPublishingOptions != nil {
 		ok := object.Key("LogPublishingOptions")
 		if err := awsRestjson1_serializeDocumentLogPublishingOptions(v.LogPublishingOptions, ok); err != nil {
@@ -1041,6 +1069,18 @@ func awsRestjson1_serializeOpDocumentValidatePipelineInput(v *ValidatePipelineIn
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBufferOptions(v *types.BufferOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PersistentBufferEnabled != nil {
+		ok := object.Key("PersistentBufferEnabled")
+		ok.Boolean(*v.PersistentBufferEnabled)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCloudWatchLogDestination(v *types.CloudWatchLogDestination, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1048,6 +1088,18 @@ func awsRestjson1_serializeDocumentCloudWatchLogDestination(v *types.CloudWatchL
 	if v.LogGroup != nil {
 		ok := object.Key("LogGroup")
 		ok.String(*v.LogGroup)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEncryptionAtRestOptions(v *types.EncryptionAtRestOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
 	}
 
 	return nil

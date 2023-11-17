@@ -1512,6 +1512,44 @@ func validatePipelineVariableList(v []types.PipelineVariable) error {
 	}
 }
 
+func validateSourceRevisionOverride(v *types.SourceRevisionOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceRevisionOverride"}
+	if v.ActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
+	}
+	if len(v.RevisionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionType"))
+	}
+	if v.RevisionValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceRevisionOverrideList(v []types.SourceRevisionOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceRevisionOverrideList"}
+	for i := range v {
+		if err := validateSourceRevisionOverride(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateStageActionDeclarationList(v []types.ActionDeclaration) error {
 	if v == nil {
 		return nil
@@ -2274,6 +2312,11 @@ func validateOpStartPipelineExecutionInput(v *StartPipelineExecutionInput) error
 	if v.Variables != nil {
 		if err := validatePipelineVariableList(v.Variables); err != nil {
 			invalidParams.AddNested("Variables", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceRevisions != nil {
+		if err := validateSourceRevisionOverrideList(v.SourceRevisions); err != nil {
+			invalidParams.AddNested("SourceRevisions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -115,7 +115,7 @@ func serviceAuthOptions(params *AuthResolverParameters) []*smithyauth.Option {
 			SchemeID: smithyauth.SchemeIDSigV4,
 			SignerProperties: func() smithy.Properties {
 				var props smithy.Properties
-				smithyhttp.SetSigV4SigningName(&props, "awsssooidc")
+				smithyhttp.SetSigV4SigningName(&props, "sso-oauth")
 				smithyhttp.SetSigV4SigningRegion(&props, params.Region)
 				return props
 			}(),

@@ -1,0 +1,8 @@
+{
+    "id": "b8e1ec02-a95f-40f7-814f-e198d25cea68",
+    "type": "feature",
+    "description": "Add support for enabling a persistent buffer when creating or updating an OpenSearch Ingestion pipeline. Add tags to Pipeline and PipelineSummary response models.",
+    "modules": [
+        "service/osis"
+    ]
+}

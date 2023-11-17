@@ -1,0 +1,8 @@
+{
+    "id": "a294cf4c-6135-43eb-b50b-79555c9747dc",
+    "type": "feature",
+    "description": "MediaLive has now added support for per-output static image overlay.",
+    "modules": [
+        "service/medialive"
+    ]
+}

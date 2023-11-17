@@ -49,6 +49,10 @@ type DeletePullThroughCacheRuleOutput struct {
 	// The timestamp associated with the pull through cache rule.
 	CreatedAt *time.Time
 
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret associated with the pull through cache rule.
+	CredentialArn *string
+
 	// The Amazon ECR repository prefix associated with the request.
 	EcrRepositoryPrefix *string
 

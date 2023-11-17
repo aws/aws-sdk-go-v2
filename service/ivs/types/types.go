@@ -581,7 +581,7 @@ type ThumbnailConfiguration struct {
 	// targetIntervalSeconds value. See  Amazon IVS Streaming Configuration (https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html)
 	// for information on setting IDR/Keyframe to the recommended value in
 	// video-encoder settings.
-	TargetIntervalSeconds int64
+	TargetIntervalSeconds *int64
 
 	noSmithyDocumentSerde
 }

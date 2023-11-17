@@ -130,6 +130,15 @@ type CreateChangeSetInput struct {
 	// A description to help you identify this change set.
 	Description *string
 
+	// Indicates if the stack set imports resources that already exist. This parameter
+	// can only import resources that have custom names in templates. For more
+	// information, see name type (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html)
+	// in the CloudFormation User Guide. To import resources that do not accept custom
+	// names, such as EC2 instances, use the resource import feature instead. For more
+	// information, see Bringing existing resources into CloudFormation management (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html)
+	// in the CloudFormation User Guide.
+	ImportExistingResources *bool
+
 	// Creates a change set for the all nested stacks specified in the template. The
 	// default behavior of this action is set to False . To include nested sets in a
 	// change set, specify True .

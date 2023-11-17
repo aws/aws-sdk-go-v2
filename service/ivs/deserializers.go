@@ -6816,7 +6816,7 @@ func awsRestjson1_deserializeDocumentThumbnailConfiguration(v **types.ThumbnailC
 				if err != nil {
 					return err
 				}
-				sv.TargetIntervalSeconds = i64
+				sv.TargetIntervalSeconds = ptr.Int64(i64)
 			}
 
 		default:

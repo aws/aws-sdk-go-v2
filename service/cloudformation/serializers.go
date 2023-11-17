@@ -5192,6 +5192,11 @@ func awsAwsquery_serializeOpDocumentCreateChangeSetInput(v *CreateChangeSetInput
 		objectKey.String(*v.Description)
 	}
 
+	if v.ImportExistingResources != nil {
+		objectKey := object.Key("ImportExistingResources")
+		objectKey.Boolean(*v.ImportExistingResources)
+	}
+
 	if v.IncludeNestedStacks != nil {
 		objectKey := object.Key("IncludeNestedStacks")
 		objectKey.Boolean(*v.IncludeNestedStacks)

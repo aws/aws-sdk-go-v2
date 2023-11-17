@@ -7466,6 +7466,11 @@ func awsRestjson1_serializeDocumentFeatureActivations(v *types.FeatureActivation
 		ok.String(string(v.InputPrepareScheduleActions))
 	}
 
+	if len(v.OutputStaticImageOverlayScheduleActions) > 0 {
+		ok := object.Key("outputStaticImageOverlayScheduleActions")
+		ok.String(string(v.OutputStaticImageOverlayScheduleActions))
+	}
+
 	return nil
 }
 
@@ -10929,6 +10934,20 @@ func awsRestjson1_serializeDocumentScheduleActionSettings(v *types.ScheduleActio
 		}
 	}
 
+	if v.StaticImageOutputActivateSettings != nil {
+		ok := object.Key("staticImageOutputActivateSettings")
+		if err := awsRestjson1_serializeDocumentStaticImageOutputActivateScheduleActionSettings(v.StaticImageOutputActivateSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StaticImageOutputDeactivateSettings != nil {
+		ok := object.Key("staticImageOutputDeactivateSettings")
+		if err := awsRestjson1_serializeDocumentStaticImageOutputDeactivateScheduleActionSettings(v.StaticImageOutputDeactivateSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -11340,6 +11359,96 @@ func awsRestjson1_serializeDocumentStaticImageDeactivateScheduleActionSettings(v
 	if v.Layer != nil {
 		ok := object.Key("layer")
 		ok.Integer(*v.Layer)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStaticImageOutputActivateScheduleActionSettings(v *types.StaticImageOutputActivateScheduleActionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Duration != nil {
+		ok := object.Key("duration")
+		ok.Integer(*v.Duration)
+	}
+
+	if v.FadeIn != nil {
+		ok := object.Key("fadeIn")
+		ok.Integer(*v.FadeIn)
+	}
+
+	if v.FadeOut != nil {
+		ok := object.Key("fadeOut")
+		ok.Integer(*v.FadeOut)
+	}
+
+	if v.Height != nil {
+		ok := object.Key("height")
+		ok.Integer(*v.Height)
+	}
+
+	if v.Image != nil {
+		ok := object.Key("image")
+		if err := awsRestjson1_serializeDocumentInputLocation(v.Image, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ImageX != nil {
+		ok := object.Key("imageX")
+		ok.Integer(*v.ImageX)
+	}
+
+	if v.ImageY != nil {
+		ok := object.Key("imageY")
+		ok.Integer(*v.ImageY)
+	}
+
+	if v.Layer != nil {
+		ok := object.Key("layer")
+		ok.Integer(*v.Layer)
+	}
+
+	if v.Opacity != nil {
+		ok := object.Key("opacity")
+		ok.Integer(*v.Opacity)
+	}
+
+	if v.OutputNames != nil {
+		ok := object.Key("outputNames")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.OutputNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Width != nil {
+		ok := object.Key("width")
+		ok.Integer(*v.Width)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStaticImageOutputDeactivateScheduleActionSettings(v *types.StaticImageOutputDeactivateScheduleActionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FadeOut != nil {
+		ok := object.Key("fadeOut")
+		ok.Integer(*v.FadeOut)
+	}
+
+	if v.Layer != nil {
+		ok := object.Key("layer")
+		ok.Integer(*v.Layer)
+	}
+
+	if v.OutputNames != nil {
+		ok := object.Key("outputNames")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.OutputNames, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

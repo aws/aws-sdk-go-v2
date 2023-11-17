@@ -330,8 +330,9 @@ type RuleState string
 
 // Enum values for RuleState
 const (
-	RuleStateEnabled  RuleState = "ENABLED"
-	RuleStateDisabled RuleState = "DISABLED"
+	RuleStateEnabled                                  RuleState = "ENABLED"
+	RuleStateDisabled                                 RuleState = "DISABLED"
+	RuleStateEnabledWithAllCloudtrailManagementEvents RuleState = "ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS"
 )
 
 // Values returns all known values for RuleState. Note that this can be expanded
@@ -341,5 +342,6 @@ func (RuleState) Values() []RuleState {
 	return []RuleState{
 		"ENABLED",
 		"DISABLED",
+		"ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS",
 	}
 }

@@ -47,6 +47,9 @@ type AdvertiseByoipCidrInput struct {
 	// This member is required.
 	Cidr *string
 
+	// The public 2-byte or 4-byte ASN that you want to advertise.
+	Asn *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation . Otherwise, it is

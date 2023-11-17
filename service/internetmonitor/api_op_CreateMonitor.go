@@ -76,7 +76,7 @@ type CreateMonitorInput struct {
 	// can help control billing costs. To learn more, see Choosing a city-network
 	// maximum value  (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
-	MaxCityNetworksToMonitor int32
+	MaxCityNetworksToMonitor *int32
 
 	// The resources to include in a monitor, which you provide as a set of Amazon
 	// Resource Names (ARNs). Resources can be VPCs, NLBs, Amazon CloudFront
@@ -96,7 +96,7 @@ type CreateMonitorInput struct {
 	// limit overrides the traffic percentage that you set. To learn more, see
 	// Choosing an application traffic percentage to monitor  (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
-	TrafficPercentageToMonitor int32
+	TrafficPercentageToMonitor *int32
 
 	noSmithyDocumentSerde
 }

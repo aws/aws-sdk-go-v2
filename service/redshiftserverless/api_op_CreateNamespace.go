@@ -72,6 +72,9 @@ type CreateNamespaceInput struct {
 	// for the admin user account's password.
 	ManageAdminPassword *bool
 
+	// The ARN for the Redshift application that integrates with IAM Identity Center.
+	RedshiftIdcApplicationArn *string
+
 	// A list of tag instances.
 	Tags []types.Tag
 

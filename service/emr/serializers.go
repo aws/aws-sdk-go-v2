@@ -4771,9 +4771,24 @@ func awsAwsjson11_serializeOpDocumentCreateStudioInput(v *CreateStudioInput, val
 		ok.String(*v.Description)
 	}
 
+	if v.EncryptionKeyArn != nil {
+		ok := object.Key("EncryptionKeyArn")
+		ok.String(*v.EncryptionKeyArn)
+	}
+
 	if v.EngineSecurityGroupId != nil {
 		ok := object.Key("EngineSecurityGroupId")
 		ok.String(*v.EngineSecurityGroupId)
+	}
+
+	if v.IdcInstanceArn != nil {
+		ok := object.Key("IdcInstanceArn")
+		ok.String(*v.IdcInstanceArn)
+	}
+
+	if len(v.IdcUserAssignment) > 0 {
+		ok := object.Key("IdcUserAssignment")
+		ok.String(string(v.IdcUserAssignment))
 	}
 
 	if v.IdpAuthUrl != nil {
@@ -4808,6 +4823,11 @@ func awsAwsjson11_serializeOpDocumentCreateStudioInput(v *CreateStudioInput, val
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.TrustedIdentityPropagationEnabled != nil {
+		ok := object.Key("TrustedIdentityPropagationEnabled")
+		ok.Boolean(*v.TrustedIdentityPropagationEnabled)
 	}
 
 	if v.UserRole != nil {
@@ -5915,6 +5935,11 @@ func awsAwsjson11_serializeOpDocumentUpdateStudioInput(v *UpdateStudioInput, val
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.EncryptionKeyArn != nil {
+		ok := object.Key("EncryptionKeyArn")
+		ok.String(*v.EncryptionKeyArn)
 	}
 
 	if v.Name != nil {

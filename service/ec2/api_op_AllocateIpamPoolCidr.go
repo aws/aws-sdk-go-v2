@@ -42,6 +42,10 @@ type AllocateIpamPoolCidrInput struct {
 	// This member is required.
 	IpamPoolId *string
 
+	// Include a particular CIDR range that can be returned by the pool. Allowed CIDRs
+	// are only allowed if using netmask length for allocation.
+	AllowedCidrs []string
+
 	// The CIDR you would like to allocate from the IPAM pool. Note the following:
 	//   - If there is no DefaultNetmaskLength allocation rule set on the pool, you
 	//   must specify either the NetmaskLength or the CIDR.

@@ -1,0 +1,8 @@
+{
+    "id": "43bd0dfd-b219-418e-bce3-9a10eb85d448",
+    "type": "feature",
+    "description": "This release adds WISDOM_QUICK_RESPONSES as new IntegrationType of Connect IntegrationAssociation resource and bug fixes.",
+    "modules": [
+        "service/connect"
+    ]
+}

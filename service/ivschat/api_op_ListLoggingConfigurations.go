@@ -32,7 +32,7 @@ func (c *Client) ListLoggingConfigurations(ctx context.Context, params *ListLogg
 type ListLoggingConfigurationsInput struct {
 
 	// Maximum number of logging configurations to return. Default: 50.
-	MaxResults int32
+	MaxResults *int32
 
 	// The first logging configurations to retrieve. This is used for pagination; see
 	// the nextToken response field.
@@ -172,8 +172,8 @@ func NewListLoggingConfigurationsPaginator(client ListLoggingConfigurationsAPICl
 	}
 
 	options := ListLoggingConfigurationsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -203,7 +203,11 @@ func (p *ListLoggingConfigurationsPaginator) NextPage(ctx context.Context, optFn
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListLoggingConfigurations(ctx, &params, optFns...)
 	if err != nil {

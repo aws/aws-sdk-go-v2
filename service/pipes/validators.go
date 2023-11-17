@@ -419,6 +419,9 @@ func validateEcsEphemeralStorage(v *types.EcsEphemeralStorage) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EcsEphemeralStorage"}
+	if v.SizeInGiB == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SizeInGiB"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

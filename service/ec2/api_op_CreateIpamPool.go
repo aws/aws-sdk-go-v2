@@ -129,6 +129,9 @@ type CreateIpamPoolInput struct {
 	// pool must be available in the source pool's CIDR range.
 	SourceIpamPoolId *string
 
+	// The resource used to provision CIDRs to a resource planning pool.
+	SourceResource *types.IpamPoolSourceResourceRequest
+
 	// The key/value combination of a tag assigned to the resource. Use the tag key in
 	// the filter name and the tag value as the filter value. For example, to find all
 	// resources that have a tag with the key Owner and the value TeamA , specify

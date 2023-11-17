@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Copies the specified DB parameter group.
+// Copies the specified DB parameter group. You can't copy a default DB parameter
+// group. Instead, create a new custom DB parameter group, which copies the default
+// parameters and values for the specified DB parameter group family.
 func (c *Client) CopyDBParameterGroup(ctx context.Context, params *CopyDBParameterGroupInput, optFns ...func(*Options)) (*CopyDBParameterGroupOutput, error) {
 	if params == nil {
 		params = &CopyDBParameterGroupInput{}

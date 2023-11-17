@@ -37,11 +37,11 @@ type CreateRoomInput struct {
 	// Maximum number of characters in a single message. Messages are expected to be
 	// UTF-8 encoded and this limit applies specifically to rune/code-point count, not
 	// number of bytes. Default: 500.
-	MaximumMessageLength int32
+	MaximumMessageLength *int32
 
 	// Maximum number of messages per second that can be sent to the room (by all
 	// clients). Default: 10.
-	MaximumMessageRatePerSecond int32
+	MaximumMessageRatePerSecond *int32
 
 	// Configuration information for optional review of messages.
 	MessageReviewHandler *types.MessageReviewHandler
@@ -78,11 +78,11 @@ type CreateRoomOutput struct {
 
 	// Maximum number of characters in a single message, from the request (if
 	// specified).
-	MaximumMessageLength int32
+	MaximumMessageLength *int32
 
 	// Maximum number of messages per second that can be sent to the room (by all
 	// clients), from the request (if specified).
-	MaximumMessageRatePerSecond int32
+	MaximumMessageRatePerSecond *int32
 
 	// Configuration information for optional review of messages.
 	MessageReviewHandler *types.MessageReviewHandler

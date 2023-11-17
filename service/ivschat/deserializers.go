@@ -629,7 +629,7 @@ func awsRestjson1_deserializeOpDocumentCreateRoomOutput(v **CreateRoomOutput, va
 				if err != nil {
 					return err
 				}
-				sv.MaximumMessageLength = int32(i64)
+				sv.MaximumMessageLength = ptr.Int32(int32(i64))
 			}
 
 		case "maximumMessageRatePerSecond":
@@ -642,7 +642,7 @@ func awsRestjson1_deserializeOpDocumentCreateRoomOutput(v **CreateRoomOutput, va
 				if err != nil {
 					return err
 				}
-				sv.MaximumMessageRatePerSecond = int32(i64)
+				sv.MaximumMessageRatePerSecond = ptr.Int32(int32(i64))
 			}
 
 		case "messageReviewHandler":
@@ -1548,7 +1548,7 @@ func awsRestjson1_deserializeOpDocumentGetRoomOutput(v **GetRoomOutput, value in
 				if err != nil {
 					return err
 				}
-				sv.MaximumMessageLength = int32(i64)
+				sv.MaximumMessageLength = ptr.Int32(int32(i64))
 			}
 
 		case "maximumMessageRatePerSecond":
@@ -1561,7 +1561,7 @@ func awsRestjson1_deserializeOpDocumentGetRoomOutput(v **GetRoomOutput, value in
 				if err != nil {
 					return err
 				}
-				sv.MaximumMessageRatePerSecond = int32(i64)
+				sv.MaximumMessageRatePerSecond = ptr.Int32(int32(i64))
 			}
 
 		case "messageReviewHandler":
@@ -2834,7 +2834,7 @@ func awsRestjson1_deserializeOpDocumentUpdateRoomOutput(v **UpdateRoomOutput, va
 				if err != nil {
 					return err
 				}
-				sv.MaximumMessageLength = int32(i64)
+				sv.MaximumMessageLength = ptr.Int32(int32(i64))
 			}
 
 		case "maximumMessageRatePerSecond":
@@ -2847,7 +2847,7 @@ func awsRestjson1_deserializeOpDocumentUpdateRoomOutput(v **UpdateRoomOutput, va
 				if err != nil {
 					return err
 				}
-				sv.MaximumMessageRatePerSecond = int32(i64)
+				sv.MaximumMessageRatePerSecond = ptr.Int32(int32(i64))
 			}
 
 		case "messageReviewHandler":

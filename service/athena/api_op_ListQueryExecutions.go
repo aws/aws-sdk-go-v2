@@ -12,11 +12,9 @@ import (
 )
 
 // Provides a list of available query execution IDs for the queries in the
-// specified workgroup. If a workgroup is not specified, returns a list of query
-// execution IDs for the primary workgroup. Requires you to have access to the
-// workgroup in which the queries ran. For code samples using the Amazon Web
-// Services SDK for Java, see Examples and Code Samples (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html)
-// in the Amazon Athena User Guide.
+// specified workgroup. Athena keeps a query history for 45 days. If a workgroup is
+// not specified, returns a list of query execution IDs for the primary workgroup.
+// Requires you to have access to the workgroup in which the queries ran.
 func (c *Client) ListQueryExecutions(ctx context.Context, params *ListQueryExecutionsInput, optFns ...func(*Options)) (*ListQueryExecutionsOutput, error) {
 	if params == nil {
 		params = &ListQueryExecutionsInput{}

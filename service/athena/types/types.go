@@ -294,11 +294,13 @@ type ColumnInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the KMS key that is used to encrypt the user's data stores in Athena.
-// This setting does not apply to Athena SQL workgroups.
+// Specifies the customer managed KMS key that is used to encrypt the user's data
+// stores in Athena. When an Amazon Web Services managed key is used, this value is
+// null. This setting does not apply to Athena SQL workgroups.
 type CustomerContentEncryptionConfiguration struct {
 
-	// The KMS key that is used to encrypt the user's data stores in Athena.
+	// The customer managed KMS key that is used to encrypt the user's data stores in
+	// Athena.
 	//
 	// This member is required.
 	KmsKey *string
@@ -365,8 +367,6 @@ type DataCatalog struct {
 	//   - The GLUE data catalog type also applies to the default AwsDataCatalog that
 	//   already exists in your account, of which you can have only one and cannot
 	//   modify.
-	//   - Queries that specify a Glue Data Catalog other than the default
-	//   AwsDataCatalog must be run on Athena engine version 2.
 	Parameters map[string]string
 
 	noSmithyDocumentSerde
@@ -711,6 +711,10 @@ type QueryExecutionStatistics struct {
 	// query.
 	ResultReuseInformation *ResultReuseInformation
 
+	// The number of milliseconds that Athena took to preprocess the query before
+	// submitting the query to the query engine.
+	ServicePreProcessingTimeInMillis *int64
+
 	// The number of milliseconds that Athena took to finalize and publish the query
 	// results after the query engine finished running the query.
 	ServiceProcessingTimeInMillis *int64
@@ -805,6 +809,10 @@ type QueryRuntimeStatisticsTimeline struct {
 	// resources. Note that if transient errors occur, Athena might automatically add
 	// the query back to the queue.
 	QueryQueueTimeInMillis *int64
+
+	// The number of milliseconds that Athena spends on preprocessing before it
+	// submits the query to the engine.
+	ServicePreProcessingTimeInMillis *int64
 
 	// The number of milliseconds that Athena took to finalize and publish the query
 	// results after the query engine finished running the query.
@@ -1081,7 +1089,8 @@ type SessionConfiguration struct {
 	// encryption option used (for example, SSE_KMS or CSE_KMS ) and key information.
 	EncryptionConfiguration *EncryptionConfiguration
 
-	// The ARN of the execution role used for the session.
+	// The ARN of the execution role used in a Spark session to access user resources.
+	// This property applies only to Spark-enabled workgroups.
 	ExecutionRole *string
 
 	// The idle timeout in seconds for the session.
@@ -1348,7 +1357,8 @@ type WorkGroupConfiguration struct {
 	// regardless of this setting.
 	EngineVersion *EngineVersion
 
-	// Role used in a session for accessing the user's resources.
+	// Role used in a Spark session for accessing the user's resources. This property
+	// applies only to Spark-enabled workgroups.
 	ExecutionRole *string
 
 	// Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
@@ -1391,8 +1401,9 @@ type WorkGroupConfigurationUpdates struct {
 	// is allowed to scan.
 	BytesScannedCutoffPerQuery *int64
 
-	// Specifies the KMS key that is used to encrypt the user's data stores in Athena.
-	// This setting does not apply to Athena SQL workgroups.
+	// Specifies the customer managed KMS key that is used to encrypt the user's data
+	// stores in Athena. When an Amazon Web Services managed key is used, this value is
+	// null. This setting does not apply to Athena SQL workgroups.
 	CustomerContentEncryptionConfiguration *CustomerContentEncryptionConfiguration
 
 	// Enforces a minimal level of encryption for the workgroup for query and
@@ -1418,7 +1429,8 @@ type WorkGroupConfigurationUpdates struct {
 	// of this setting.
 	EngineVersion *EngineVersion
 
-	// Contains the ARN of the execution role for the workgroup
+	// The ARN of the execution role used to access user resources. This property
+	// applies only to Spark-enabled workgroups.
 	ExecutionRole *string
 
 	// Indicates whether this workgroup enables publishing metrics to Amazon

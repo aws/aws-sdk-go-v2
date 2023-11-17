@@ -12,10 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is related to WebRTC Ingestion (https://docs.aws.amazon.com/kinesisvideostreams-webrtc-dg/latest/devguide/webrtc-ingestion.html)
-// and is only available in the us-west-2 region. Returns the most current
-// information about the channel. Specify the ChannelName or ChannelARN in the
-// input.
+// Returns the most current information about the channel. Specify the ChannelName
+// or ChannelARN in the input.
 func (c *Client) DescribeMediaStorageConfiguration(ctx context.Context, params *DescribeMediaStorageConfigurationInput, optFns ...func(*Options)) (*DescribeMediaStorageConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeMediaStorageConfigurationInput{}

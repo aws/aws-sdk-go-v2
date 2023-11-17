@@ -39,7 +39,7 @@ type DescribeJobLogItemsInput struct {
 	AccountID *string
 
 	// Request to describe Job log item maximum results.
-	MaxResults int32
+	MaxResults *int32
 
 	// Request to describe Job log next token.
 	NextToken *string
@@ -175,8 +175,8 @@ func NewDescribeJobLogItemsPaginator(client DescribeJobLogItemsAPIClient, params
 	}
 
 	options := DescribeJobLogItemsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -206,7 +206,11 @@ func (p *DescribeJobLogItemsPaginator) NextPage(ctx context.Context, optFns ...f
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeJobLogItems(ctx, &params, optFns...)
 	if err != nil {

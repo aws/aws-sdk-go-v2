@@ -32,7 +32,7 @@ func (c *Client) StopInputDevice(ctx context.Context, params *StopInputDeviceInp
 // Placeholder documentation for StopInputDeviceRequest
 type StopInputDeviceInput struct {
 
-	// The unique ID of the input device to reboot. For example, hd-123456789abcdef.
+	// The unique ID of the input device to stop. For example, hd-123456789abcdef.
 	//
 	// This member is required.
 	InputDeviceId *string

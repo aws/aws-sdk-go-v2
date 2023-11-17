@@ -1,0 +1,8 @@
+{
+    "id": "ee5d39fd-9072-4652-9b02-a449581344b6",
+    "type": "feature",
+    "description": "This release adds support for option groups and replica enhancements to Amazon RDS Custom.",
+    "modules": [
+        "service/rds"
+    ]
+}

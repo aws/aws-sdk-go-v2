@@ -1706,9 +1706,9 @@ func awsRestjson1_serializeOpDocumentDescribeJobLogItemsInput(v *DescribeJobLogI
 		ok.String(*v.JobID)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1798,9 +1798,9 @@ func awsRestjson1_serializeOpDocumentDescribeJobsInput(v *DescribeJobsInput, val
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1885,9 +1885,9 @@ func awsRestjson1_serializeOpDocumentDescribeLaunchConfigurationTemplatesInput(v
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1965,9 +1965,9 @@ func awsRestjson1_serializeOpDocumentDescribeReplicationConfigurationTemplatesIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2064,9 +2064,9 @@ func awsRestjson1_serializeOpDocumentDescribeSourceServersInput(v *DescribeSourc
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2130,8 +2130,8 @@ func awsRestjson1_serializeOpHttpBindingsDescribeVcenterClientsInput(v *Describe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2766,9 +2766,9 @@ func awsRestjson1_serializeOpDocumentListApplicationsInput(v *ListApplicationsIn
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2853,9 +2853,9 @@ func awsRestjson1_serializeOpDocumentListConnectorsInput(v *ListConnectorsInput,
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2938,9 +2938,9 @@ func awsRestjson1_serializeOpDocumentListExportErrorsInput(v *ListExportErrorsIn
 		ok.String(*v.ExportID)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3025,9 +3025,9 @@ func awsRestjson1_serializeOpDocumentListExportsInput(v *ListExportsInput, value
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3110,9 +3110,9 @@ func awsRestjson1_serializeOpDocumentListImportErrorsInput(v *ListImportErrorsIn
 		ok.String(*v.ImportID)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3197,9 +3197,9 @@ func awsRestjson1_serializeOpDocumentListImportsInput(v *ListImportsInput, value
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3277,9 +3277,9 @@ func awsRestjson1_serializeOpDocumentListManagedAccountsInput(v *ListManagedAcco
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3369,9 +3369,9 @@ func awsRestjson1_serializeOpDocumentListSourceServerActionsInput(v *ListSourceS
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3531,9 +3531,9 @@ func awsRestjson1_serializeOpDocumentListTemplateActionsInput(v *ListTemplateAct
 		ok.String(*v.LaunchConfigurationTemplateID)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3623,9 +3623,9 @@ func awsRestjson1_serializeOpDocumentListWavesInput(v *ListWavesInput, value smi
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3915,9 +3915,9 @@ func awsRestjson1_serializeOpDocumentPutSourceServerActionInput(v *PutSourceServ
 		ok.Boolean(*v.MustSucceedForCutover)
 	}
 
-	{
+	if v.Order != nil {
 		ok := object.Key("order")
-		ok.Integer(v.Order)
+		ok.Integer(*v.Order)
 	}
 
 	if v.Parameters != nil {
@@ -3932,9 +3932,9 @@ func awsRestjson1_serializeOpDocumentPutSourceServerActionInput(v *PutSourceServ
 		ok.String(*v.SourceServerID)
 	}
 
-	if v.TimeoutSeconds != 0 {
+	if v.TimeoutSeconds != nil {
 		ok := object.Key("timeoutSeconds")
-		ok.Integer(v.TimeoutSeconds)
+		ok.Integer(*v.TimeoutSeconds)
 	}
 
 	return nil
@@ -4064,9 +4064,9 @@ func awsRestjson1_serializeOpDocumentPutTemplateActionInput(v *PutTemplateAction
 		ok.String(*v.OperatingSystem)
 	}
 
-	{
+	if v.Order != nil {
 		ok := object.Key("order")
-		ok.Integer(v.Order)
+		ok.Integer(*v.Order)
 	}
 
 	if v.Parameters != nil {
@@ -4076,9 +4076,9 @@ func awsRestjson1_serializeOpDocumentPutTemplateActionInput(v *PutTemplateAction
 		}
 	}
 
-	if v.TimeoutSeconds != 0 {
+	if v.TimeoutSeconds != nil {
 		ok := object.Key("timeoutSeconds")
-		ok.Integer(v.TimeoutSeconds)
+		ok.Integer(*v.TimeoutSeconds)
 	}
 
 	return nil
@@ -6583,14 +6583,14 @@ func awsRestjson1_serializeDocumentLaunchTemplateDiskConf(v *types.LaunchTemplat
 	object := value.Object()
 	defer object.Close()
 
-	if v.Iops != 0 {
+	if v.Iops != nil {
 		ok := object.Key("iops")
-		ok.Long(v.Iops)
+		ok.Long(*v.Iops)
 	}
 
-	if v.Throughput != 0 {
+	if v.Throughput != nil {
 		ok := object.Key("throughput")
-		ok.Long(v.Throughput)
+		ok.Long(*v.Throughput)
 	}
 
 	if len(v.VolumeType) > 0 {
@@ -6920,9 +6920,9 @@ func awsRestjson1_serializeDocumentSsmDocument(v *types.SsmDocument, value smith
 		ok.String(*v.SsmDocumentName)
 	}
 
-	if v.TimeoutSeconds != 0 {
+	if v.TimeoutSeconds != nil {
 		ok := object.Key("timeoutSeconds")
-		ok.Integer(v.TimeoutSeconds)
+		ok.Integer(*v.TimeoutSeconds)
 	}
 
 	return nil

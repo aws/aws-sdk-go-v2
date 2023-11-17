@@ -37,7 +37,7 @@ func (c *Client) GetHealthEvent(ctx context.Context, params *GetHealthEventInput
 
 type GetHealthEventInput struct {
 
-	// The internally generated identifier of a health event. Because EventID contains
+	// The internally-generated identifier of a health event. Because EventID contains
 	// the forward slash (“/”) character, you must URL-encode the EventID field in the
 	// request URL.
 	//
@@ -59,7 +59,7 @@ type GetHealthEventOutput struct {
 	// This member is required.
 	EventArn *string
 
-	// The internally generated identifier of a health event.
+	// The internally-generated identifier of a health event.
 	//
 	// This member is required.
 	EventId *string

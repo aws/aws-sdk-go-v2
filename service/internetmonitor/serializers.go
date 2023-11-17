@@ -102,9 +102,9 @@ func awsRestjson1_serializeOpDocumentCreateMonitorInput(v *CreateMonitorInput, v
 		}
 	}
 
-	if v.MaxCityNetworksToMonitor != 0 {
+	if v.MaxCityNetworksToMonitor != nil {
 		ok := object.Key("MaxCityNetworksToMonitor")
-		ok.Integer(v.MaxCityNetworksToMonitor)
+		ok.Integer(*v.MaxCityNetworksToMonitor)
 	}
 
 	if v.MonitorName != nil {
@@ -126,9 +126,9 @@ func awsRestjson1_serializeOpDocumentCreateMonitorInput(v *CreateMonitorInput, v
 		}
 	}
 
-	if v.TrafficPercentageToMonitor != 0 {
+	if v.TrafficPercentageToMonitor != nil {
 		ok := object.Key("TrafficPercentageToMonitor")
-		ok.Integer(v.TrafficPercentageToMonitor)
+		ok.Integer(*v.TrafficPercentageToMonitor)
 	}
 
 	return nil
@@ -338,6 +338,162 @@ func awsRestjson1_serializeOpHttpBindingsGetMonitorInput(v *GetMonitorInput, enc
 	return nil
 }
 
+type awsRestjson1_serializeOpGetQueryResults struct {
+}
+
+func (*awsRestjson1_serializeOpGetQueryResults) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetQueryResults) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetQueryResultsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v20210603/Monitors/{MonitorName}/Queries/{QueryId}/Results")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetQueryResultsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetQueryResultsInput(v *GetQueryResultsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
+	}
+
+	if v.MonitorName == nil || len(*v.MonitorName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MonitorName must not be empty")}
+	}
+	if v.MonitorName != nil {
+		if err := encoder.SetURI("MonitorName").String(*v.MonitorName); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	if v.QueryId == nil || len(*v.QueryId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member QueryId must not be empty")}
+	}
+	if v.QueryId != nil {
+		if err := encoder.SetURI("QueryId").String(*v.QueryId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetQueryStatus struct {
+}
+
+func (*awsRestjson1_serializeOpGetQueryStatus) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetQueryStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetQueryStatusInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v20210603/Monitors/{MonitorName}/Queries/{QueryId}/Status")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetQueryStatusInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetQueryStatusInput(v *GetQueryStatusInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MonitorName == nil || len(*v.MonitorName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MonitorName must not be empty")}
+	}
+	if v.MonitorName != nil {
+		if err := encoder.SetURI("MonitorName").String(*v.MonitorName); err != nil {
+			return err
+		}
+	}
+
+	if v.QueryId == nil || len(*v.QueryId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member QueryId must not be empty")}
+	}
+	if v.QueryId != nil {
+		if err := encoder.SetURI("QueryId").String(*v.QueryId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListHealthEvents struct {
 }
 
@@ -399,8 +555,8 @@ func awsRestjson1_serializeOpHttpBindingsListHealthEventsInput(v *ListHealthEven
 		encoder.SetQuery("EventStatus").String(string(v.EventStatus))
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.MonitorName == nil || len(*v.MonitorName) == 0 {
@@ -476,8 +632,8 @@ func awsRestjson1_serializeOpHttpBindingsListMonitorsInput(v *ListMonitorsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.MonitorStatus != nil {
@@ -549,6 +705,185 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 	}
 	if v.ResourceArn != nil {
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStartQuery struct {
+}
+
+func (*awsRestjson1_serializeOpStartQuery) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartQuery) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartQueryInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v20210603/Monitors/{MonitorName}/Queries")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartQueryInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartQueryInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartQueryInput(v *StartQueryInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MonitorName == nil || len(*v.MonitorName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MonitorName must not be empty")}
+	}
+	if v.MonitorName != nil {
+		if err := encoder.SetURI("MonitorName").String(*v.MonitorName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartQueryInput(v *StartQueryInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTime != nil {
+		ok := object.Key("EndTime")
+		ok.String(smithytime.FormatDateTime(*v.EndTime))
+	}
+
+	if v.FilterParameters != nil {
+		ok := object.Key("FilterParameters")
+		if err := awsRestjson1_serializeDocumentFilterParameters(v.FilterParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.QueryType) > 0 {
+		ok := object.Key("QueryType")
+		ok.String(string(v.QueryType))
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("StartTime")
+		ok.String(smithytime.FormatDateTime(*v.StartTime))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStopQuery struct {
+}
+
+func (*awsRestjson1_serializeOpStopQuery) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStopQuery) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StopQueryInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v20210603/Monitors/{MonitorName}/Queries/{QueryId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStopQueryInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStopQueryInput(v *StopQueryInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MonitorName == nil || len(*v.MonitorName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MonitorName must not be empty")}
+	}
+	if v.MonitorName != nil {
+		if err := encoder.SetURI("MonitorName").String(*v.MonitorName); err != nil {
+			return err
+		}
+	}
+
+	if v.QueryId == nil || len(*v.QueryId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member QueryId must not be empty")}
+	}
+	if v.QueryId != nil {
+		if err := encoder.SetURI("QueryId").String(*v.QueryId); err != nil {
 			return err
 		}
 	}
@@ -816,9 +1151,9 @@ func awsRestjson1_serializeOpDocumentUpdateMonitorInput(v *UpdateMonitorInput, v
 		}
 	}
 
-	if v.MaxCityNetworksToMonitor != 0 {
+	if v.MaxCityNetworksToMonitor != nil {
 		ok := object.Key("MaxCityNetworksToMonitor")
-		ok.Integer(v.MaxCityNetworksToMonitor)
+		ok.Integer(*v.MaxCityNetworksToMonitor)
 	}
 
 	if v.ResourcesToAdd != nil {
@@ -840,11 +1175,59 @@ func awsRestjson1_serializeOpDocumentUpdateMonitorInput(v *UpdateMonitorInput, v
 		ok.String(string(v.Status))
 	}
 
-	if v.TrafficPercentageToMonitor != 0 {
+	if v.TrafficPercentageToMonitor != nil {
 		ok := object.Key("TrafficPercentageToMonitor")
-		ok.Integer(v.TrafficPercentageToMonitor)
+		ok.Integer(*v.TrafficPercentageToMonitor)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFilterList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFilterParameter(v *types.FilterParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Field != nil {
+		ok := object.Key("Field")
+		ok.String(*v.Field)
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("Operator")
+		ok.String(string(v.Operator))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsRestjson1_serializeDocumentFilterList(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFilterParameters(v []types.FilterParameter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFilterParameter(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

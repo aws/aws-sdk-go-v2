@@ -244,6 +244,24 @@ func (ExecutionEngineType) Values() []ExecutionEngineType {
 	}
 }
 
+type IdcUserAssignment string
+
+// Enum values for IdcUserAssignment
+const (
+	IdcUserAssignmentRequired IdcUserAssignment = "REQUIRED"
+	IdcUserAssignmentOptional IdcUserAssignment = "OPTIONAL"
+)
+
+// Values returns all known values for IdcUserAssignment. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IdcUserAssignment) Values() []IdcUserAssignment {
+	return []IdcUserAssignment{
+		"REQUIRED",
+		"OPTIONAL",
+	}
+}
+
 type IdentityType string
 
 // Enum values for IdentityType

@@ -2112,6 +2112,9 @@ func validateOpPutSourceServerActionInput(v *PutSourceServerActionInput) error {
 	if v.DocumentIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DocumentIdentifier"))
 	}
+	if v.Order == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Order"))
+	}
 	if v.ActionID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionID"))
 	}
@@ -2140,6 +2143,9 @@ func validateOpPutTemplateActionInput(v *PutTemplateActionInput) error {
 	}
 	if v.DocumentIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DocumentIdentifier"))
+	}
+	if v.Order == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Order"))
 	}
 	if v.ActionID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionID"))

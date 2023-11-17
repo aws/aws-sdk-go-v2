@@ -8,9 +8,10 @@ import (
 )
 
 // Contains information about an action for a request for which an authorization
-// decision is made. This data type is used as an request parameter to the
+// decision is made. This data type is used as a request parameter to the
 // IsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html)
-// and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
+// , BatchIsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html)
+// , and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
 // operations. Example: { "actionId": "<action name>", "actionType": "Action" }
 type ActionIdentifier struct {
 
@@ -31,7 +32,8 @@ type ActionIdentifier struct {
 // request for which an authorization decision is made. This data type is used as a
 // member of the ContextDefinition (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ContextDefinition.html)
 // structure which is uses as a request parameter for the IsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html)
-// and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
+// , BatchIsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html)
+// , and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
 // operations.
 //
 // The following types satisfy this interface:
@@ -107,6 +109,61 @@ type AttributeValueMemberString struct {
 
 func (*AttributeValueMemberString) isAttributeValue() {}
 
+// An authorization request that you include in a BatchIsAuthorized API request.
+type BatchIsAuthorizedInputItem struct {
+
+	// Specifies the requested action to be authorized. For example, is the principal
+	// authorized to perform this action on the resource?
+	Action *ActionIdentifier
+
+	// Specifies additional context that can be used to make more granular
+	// authorization decisions.
+	Context ContextDefinition
+
+	// Specifies the principal for which the authorization decision is to be made.
+	Principal *EntityIdentifier
+
+	// Specifies the resource for which the authorization decision is to be made.
+	Resource *EntityIdentifier
+
+	noSmithyDocumentSerde
+}
+
+// The decision, based on policy evaluation, from an individual authorization
+// request in a BatchIsAuthorized API request.
+type BatchIsAuthorizedOutputItem struct {
+
+	// An authorization decision that indicates if the authorization request should be
+	// allowed or denied.
+	//
+	// This member is required.
+	Decision Decision
+
+	// The list of determining policies used to make the authorization decision. For
+	// example, if there are two matching policies, where one is a forbid and the other
+	// is a permit, then the forbid policy will be the determining policy. In the case
+	// of multiple matching permit policies then there would be multiple determining
+	// policies. In the case that no policies match, and hence the response is DENY,
+	// there would be no determining policies.
+	//
+	// This member is required.
+	DeterminingPolicies []DeterminingPolicyItem
+
+	// Errors that occurred while making an authorization decision, for example, a
+	// policy references an Entity or entity Attribute that does not exist in the
+	// slice.
+	//
+	// This member is required.
+	Errors []EvaluationErrorItem
+
+	// The authorization request that initiated the decision.
+	//
+	// This member is required.
+	Request *BatchIsAuthorizedInputItem
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for an identity source that represents a connection to an
 // Amazon Cognito user pool used as an identity provider for Verified Permissions.
 // This data type is used as a field that is part of an Configuration (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html)
@@ -162,9 +219,10 @@ func (*ConfigurationMemberCognitoUserPoolConfiguration) isConfiguration() {}
 // Permissions evaluates this information in an authorization request as part of
 // the when and unless clauses in a policy. This data type is used as a request
 // parameter for the IsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html)
-// and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
+// , BatchIsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html)
+// , and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
 // operations. Example:
-// "context":{"Context":{"<KeyName1>":{"boolean":true},"<KeyName2>":{"long":1234}}}
+// "context":{"contextMap":{"<KeyName1>":{"boolean":true},"<KeyName2>":{"long":1234}}}
 //
 // The following types satisfy this interface:
 //
@@ -176,7 +234,7 @@ type ContextDefinition interface {
 // An list of attributes that are needed to successfully evaluate an authorization
 // request. Each attribute in this array must include a map of a data type and its
 // value. Example:
-// "Context":{"<KeyName1>":{"boolean":true},"<KeyName2>":{"long":1234}}
+// "contextMap":{"<KeyName1>":{"boolean":true},"<KeyName2>":{"long":1234}}
 type ContextDefinitionMemberContextMap struct {
 	Value map[string]AttributeValue
 
@@ -188,7 +246,8 @@ func (*ContextDefinitionMemberContextMap) isContextDefinition() {}
 // Contains information about one of the policies that determined an authorization
 // decision. This data type is used as an element in a response parameter for the
 // IsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html)
-// and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
+// , BatchIsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html)
+// , and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
 // operations. Example:
 // "determiningPolicies":[{"policyId":"SPEXAMPLEabcdefg111111"}]
 type DeterminingPolicyItem struct {
@@ -303,9 +362,10 @@ type EntityReferenceMemberUnspecified struct {
 
 func (*EntityReferenceMemberUnspecified) isEntityReference() {}
 
-// Contains a description of an evaluation error. This data type is used as a
-// request parameter in the IsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html)
-// and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
+// Contains a description of an evaluation error. This data type is a response
+// parameter of the IsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html)
+// , BatchIsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html)
+// , and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
 // operations.
 type EvaluationErrorItem struct {
 

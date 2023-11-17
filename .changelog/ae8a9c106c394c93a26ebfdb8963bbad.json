@@ -1,0 +1,8 @@
+{
+    "id": "ae8a9c10-6c39-4c93-a26e-bfdb8963bbad",
+    "type": "feature",
+    "description": "This release adds QuickResponse as a new Wisdom resource and Wisdom APIs for import, create, read, search, update and delete QuickResponse resources.",
+    "modules": [
+        "service/wisdom"
+    ]
+}

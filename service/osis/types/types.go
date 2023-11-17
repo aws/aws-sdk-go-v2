@@ -7,6 +7,18 @@ import (
 	"time"
 )
 
+// Options that specify the configuration of a persistent buffer. To configure how
+// OpenSearch Ingestion encrypts this data, set the EncryptionAtRestOptions.
+type BufferOptions struct {
+
+	// Whether persistent buffering should be enabled.
+	//
+	// This member is required.
+	PersistentBufferEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // Progress details for a specific stage of a pipeline configuration change.
 type ChangeProgressStage struct {
 
@@ -57,6 +69,18 @@ type CloudWatchLogDestination struct {
 	noSmithyDocumentSerde
 }
 
+// Options to control how OpenSearch encrypts all data-at-rest.
+type EncryptionAtRestOptions struct {
+
+	// The ARN of the KMS key used to encrypt data-at-rest in OpenSearch Ingestion. By
+	// default, data is encrypted using an AWS owned key.
+	//
+	// This member is required.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Container for the values required to configure logging for the pipeline. If you
 // don't specify these values, OpenSearch Ingestion will not publish logs from your
 // application to CloudWatch Logs.
@@ -75,8 +99,15 @@ type LogPublishingOptions struct {
 // Information about an existing OpenSearch Ingestion pipeline.
 type Pipeline struct {
 
+	// Options that specify the configuration of a persistent buffer. To configure how
+	// OpenSearch Ingestion encrypts this data, set the EncryptionAtRestOptions.
+	BufferOptions *BufferOptions
+
 	// The date and time when the pipeline was created.
 	CreatedAt *time.Time
+
+	// Options to control how OpenSearch encrypts all data-at-rest.
+	EncryptionAtRestOptions *EncryptionAtRestOptions
 
 	// The ingestion endpoints for the pipeline, which you can send data to.
 	IngestEndpointUrls []string
@@ -102,11 +133,18 @@ type Pipeline struct {
 	// The name of the pipeline.
 	PipelineName *string
 
+	// A list of VPC endpoints that OpenSearch Ingestion has created to other AWS
+	// services.
+	ServiceVpcEndpoints []ServiceVpcEndpoint
+
 	// The current status of the pipeline.
 	Status PipelineStatus
 
 	// The reason for the current status of the pipeline.
 	StatusReason *PipelineStatusReason
+
+	// A list of tags associated with the given pipeline.
+	Tags []Tag
 
 	// The VPC interface endpoints that have access to the pipeline.
 	VpcEndpoints []VpcEndpoint
@@ -170,6 +208,22 @@ type PipelineSummary struct {
 
 	// Information about a pipeline's current status.
 	StatusReason *PipelineStatusReason
+
+	// A list of tags associated with the given pipeline.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// A container for information about VPC endpoints that were created to other
+// services
+type ServiceVpcEndpoint struct {
+
+	// The name of the service for which a VPC endpoint was created.
+	ServiceName VpcEndpointServiceName
+
+	// The ID of the VPC endpoint that was created.
+	VpcEndpointId *string
 
 	noSmithyDocumentSerde
 }

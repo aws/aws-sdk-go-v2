@@ -1466,9 +1466,9 @@ func awsRestjson1_serializeOpDocumentListChannelsInput(v *ListChannelsInput, val
 		ok.String(*v.FilterByRecordingConfigurationArn)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1546,9 +1546,9 @@ func awsRestjson1_serializeOpDocumentListPlaybackKeyPairsInput(v *ListPlaybackKe
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1626,9 +1626,9 @@ func awsRestjson1_serializeOpDocumentListRecordingConfigurationsInput(v *ListRec
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1711,9 +1711,9 @@ func awsRestjson1_serializeOpDocumentListStreamKeysInput(v *ListStreamKeysInput,
 		ok.String(*v.ChannelArn)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1798,9 +1798,9 @@ func awsRestjson1_serializeOpDocumentListStreamsInput(v *ListStreamsInput, value
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1883,9 +1883,9 @@ func awsRestjson1_serializeOpDocumentListStreamSessionsInput(v *ListStreamSessio
 		ok.String(*v.ChannelArn)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2629,9 +2629,9 @@ func awsRestjson1_serializeDocumentThumbnailConfiguration(v *types.ThumbnailConf
 		}
 	}
 
-	if v.TargetIntervalSeconds != 0 {
+	if v.TargetIntervalSeconds != nil {
 		ok := object.Key("targetIntervalSeconds")
-		ok.Long(v.TargetIntervalSeconds)
+		ok.Long(*v.TargetIntervalSeconds)
 	}
 
 	return nil

@@ -2756,6 +2756,11 @@ func awsAwsjson11_serializeOpDocumentCreateNamespaceInput(v *CreateNamespaceInpu
 		ok.String(*v.NamespaceName)
 	}
 
+	if v.RedshiftIdcApplicationArn != nil {
+		ok := object.Key("redshiftIdcApplicationArn")
+		ok.String(*v.RedshiftIdcApplicationArn)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {

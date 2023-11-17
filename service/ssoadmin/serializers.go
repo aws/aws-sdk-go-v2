@@ -4201,6 +4201,18 @@ func awsAwsjson11_serializeDocumentGrant(v types.Grant, value smithyjson.Value) 
 			return err
 		}
 
+	case *types.GrantMemberRefreshToken:
+		av := object.Key("RefreshToken")
+		if err := awsAwsjson11_serializeDocumentRefreshTokenGrant(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.GrantMemberTokenExchange:
+		av := object.Key("TokenExchange")
+		if err := awsAwsjson11_serializeDocumentTokenExchangeGrant(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -4401,6 +4413,13 @@ func awsAwsjson11_serializeDocumentRedirectUris(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRefreshTokenGrant(v *types.RefreshTokenGrant, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentScopeTargets(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4467,6 +4486,13 @@ func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTokenExchangeGrant(v *types.TokenExchangeGrant, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	return nil
 }
 

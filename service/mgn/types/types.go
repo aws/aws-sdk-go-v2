@@ -657,10 +657,10 @@ type LaunchedInstance struct {
 type LaunchTemplateDiskConf struct {
 
 	// Launch template disk iops configuration.
-	Iops int64
+	Iops *int64
 
 	// Launch template disk throughput configuration.
-	Throughput int64
+	Throughput *int64
 
 	// Launch template disk volume type configuration.
 	VolumeType VolumeType
@@ -1138,13 +1138,13 @@ type SourceServerActionDocument struct {
 	MustSucceedForCutover *bool
 
 	// Source server post migration custom action order.
-	Order int32
+	Order *int32
 
 	// Source server post migration custom action parameters.
 	Parameters map[string][]SsmParameterStoreParameter
 
 	// Source server post migration custom action timeout in seconds.
-	TimeoutSeconds int32
+	TimeoutSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -1193,7 +1193,7 @@ type SsmDocument struct {
 	Parameters map[string][]SsmParameterStoreParameter
 
 	// AWS Systems Manager Document timeout seconds.
-	TimeoutSeconds int32
+	TimeoutSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -1265,13 +1265,13 @@ type TemplateActionDocument struct {
 	OperatingSystem *string
 
 	// Template post migration custom action order.
-	Order int32
+	Order *int32
 
 	// Template post migration custom action parameters.
 	Parameters map[string][]SsmParameterStoreParameter
 
 	// Template post migration custom action timeout in seconds.
-	TimeoutSeconds int32
+	TimeoutSeconds *int32
 
 	noSmithyDocumentSerde
 }

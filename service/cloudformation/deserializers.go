@@ -9916,6 +9916,22 @@ func awsAwsquery_deserializeDocumentChangeSetSummary(v **types.ChangeSetSummary,
 				sv.ExecutionStatus = types.ExecutionStatus(xtv)
 			}
 
+		case strings.EqualFold("ImportExistingResources", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected ImportExistingResources to be of type *bool, got %T instead", val)
+				}
+				sv.ImportExistingResources = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("IncludeNestedStacks", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -20120,6 +20136,22 @@ func awsAwsquery_deserializeOpDocumentDescribeChangeSetOutput(v **DescribeChange
 			{
 				xtv := string(val)
 				sv.ExecutionStatus = types.ExecutionStatus(xtv)
+			}
+
+		case strings.EqualFold("ImportExistingResources", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected ImportExistingResources to be of type *bool, got %T instead", val)
+				}
+				sv.ImportExistingResources = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("IncludeNestedStacks", t.Name.Local):

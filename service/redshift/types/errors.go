@@ -891,6 +891,32 @@ func (e *CustomDomainAssociationNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// A dependent service denied access for the integration.
+type DependentServiceAccessDeniedFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DependentServiceAccessDeniedFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DependentServiceAccessDeniedFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DependentServiceAccessDeniedFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DependentServiceAccessDenied"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DependentServiceAccessDeniedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request cannot be completed because a dependent service is throttling
 // requests made by Amazon Redshift on your behalf. Wait and retry the request.
 type DependentServiceRequestThrottlingFault struct {
@@ -2448,6 +2474,90 @@ func (e *PartnerNotFoundFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PartnerNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The application you attempted to add already exists.
+type RedshiftIdcApplicationAlreadyExistsFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RedshiftIdcApplicationAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RedshiftIdcApplicationAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RedshiftIdcApplicationAlreadyExistsFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RedshiftIdcApplicationAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RedshiftIdcApplicationAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The application you attempted to find doesn't exist.
+type RedshiftIdcApplicationNotExistsFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RedshiftIdcApplicationNotExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RedshiftIdcApplicationNotExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RedshiftIdcApplicationNotExistsFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RedshiftIdcApplicationNotExists"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RedshiftIdcApplicationNotExistsFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The maximum number of Redshift IAM Identity Center applications was exceeded.
+type RedshiftIdcApplicationQuotaExceededFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RedshiftIdcApplicationQuotaExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RedshiftIdcApplicationQuotaExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RedshiftIdcApplicationQuotaExceededFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RedshiftIdcApplicationQuotaExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RedshiftIdcApplicationQuotaExceededFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // User already has a reservation with the given identifier.
 type ReservedNodeAlreadyExistsFault struct {

@@ -15,6 +15,61 @@ import (
 	"path"
 )
 
+type awsAwsjson10_serializeOpBatchIsAuthorized struct {
+}
+
+func (*awsAwsjson10_serializeOpBatchIsAuthorized) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpBatchIsAuthorized) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchIsAuthorizedInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("VerifiedPermissions.BatchIsAuthorized")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentBatchIsAuthorizedInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpCreateIdentitySource struct {
 }
 
@@ -1393,6 +1448,54 @@ func awsAwsjson10_serializeDocumentAttributeValue(v types.AttributeValue, value 
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentBatchIsAuthorizedInputItem(v *types.BatchIsAuthorizedInputItem, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Action != nil {
+		ok := object.Key("action")
+		if err := awsAwsjson10_serializeDocumentActionIdentifier(v.Action, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Context != nil {
+		ok := object.Key("context")
+		if err := awsAwsjson10_serializeDocumentContextDefinition(v.Context, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Principal != nil {
+		ok := object.Key("principal")
+		if err := awsAwsjson10_serializeDocumentEntityIdentifier(v.Principal, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Resource != nil {
+		ok := object.Key("resource")
+		if err := awsAwsjson10_serializeDocumentEntityIdentifier(v.Resource, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBatchIsAuthorizedInputList(v []types.BatchIsAuthorizedInputItem, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentBatchIsAuthorizedInputItem(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentClientIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1852,6 +1955,32 @@ func awsAwsjson10_serializeDocumentValidationSettings(v *types.ValidationSetting
 	if len(v.Mode) > 0 {
 		ok := object.Key("mode")
 		ok.String(string(v.Mode))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentBatchIsAuthorizedInput(v *BatchIsAuthorizedInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Entities != nil {
+		ok := object.Key("entities")
+		if err := awsAwsjson10_serializeDocumentEntitiesDefinition(v.Entities, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PolicyStoreId != nil {
+		ok := object.Key("policyStoreId")
+		ok.String(*v.PolicyStoreId)
+	}
+
+	if v.Requests != nil {
+		ok := object.Key("requests")
+		if err := awsAwsjson10_serializeDocumentBatchIsAuthorizedInputList(v.Requests, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

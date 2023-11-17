@@ -307,6 +307,26 @@ func (PipelineType) Values() []PipelineType {
 	}
 }
 
+type SourceRevisionType string
+
+// Enum values for SourceRevisionType
+const (
+	SourceRevisionTypeCommitId          SourceRevisionType = "COMMIT_ID"
+	SourceRevisionTypeImageDigest       SourceRevisionType = "IMAGE_DIGEST"
+	SourceRevisionTypeS3ObjectVersionId SourceRevisionType = "S3_OBJECT_VERSION_ID"
+)
+
+// Values returns all known values for SourceRevisionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SourceRevisionType) Values() []SourceRevisionType {
+	return []SourceRevisionType{
+		"COMMIT_ID",
+		"IMAGE_DIGEST",
+		"S3_OBJECT_VERSION_ID",
+	}
+}
+
 type StageExecutionStatus string
 
 // Enum values for StageExecutionStatus

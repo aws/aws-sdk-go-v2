@@ -63,6 +63,11 @@ type CreateIpamInput struct {
 	// tag:Owner for the filter name and TeamA for the filter value.
 	TagSpecifications []types.TagSpecification
 
+	// IPAM is offered in a Free Tier and an Advanced Tier. For more information about
+	// the features available in each tier and the costs associated with the tiers, see
+	// Amazon VPC pricing > IPAM tab (http://aws.amazon.com/vpc/pricing/) .
+	Tier types.IpamTier
+
 	noSmithyDocumentSerde
 }
 

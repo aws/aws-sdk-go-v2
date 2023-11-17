@@ -288,10 +288,12 @@ type AuthenticationMethodItem struct {
 	noSmithyDocumentSerde
 }
 
-// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+// A structure that defines configuration settings for an application that
+// supports the OAuth 2.0 Authorization Code Grant.
 type AuthorizationCodeGrant struct {
 
-	// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+	// A list of URIs that are valid locations to redirect a user's browser after the
+	// user is authorized.
 	RedirectUris []string
 
 	noSmithyDocumentSerde
@@ -346,17 +348,21 @@ type DisplayData struct {
 	noSmithyDocumentSerde
 }
 
-// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+// The Grant union represents the set of possible configuration options for the
+// selected grant type. Exactly one member of the union must be specified, and must
+// match the grant type selected.
 //
 // The following types satisfy this interface:
 //
 //	GrantMemberAuthorizationCode
 //	GrantMemberJwtBearer
+//	GrantMemberRefreshToken
+//	GrantMemberTokenExchange
 type Grant interface {
 	isGrant()
 }
 
-// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+// Configuration options for the authorization_code grant type.
 type GrantMemberAuthorizationCode struct {
 	Value AuthorizationCodeGrant
 
@@ -365,7 +371,8 @@ type GrantMemberAuthorizationCode struct {
 
 func (*GrantMemberAuthorizationCode) isGrant() {}
 
-// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+// Configuration options for the urn:ietf:params:oauth:grant-type:jwt-bearer grant
+// type.
 type GrantMemberJwtBearer struct {
 	Value JwtBearerGrant
 
@@ -374,15 +381,34 @@ type GrantMemberJwtBearer struct {
 
 func (*GrantMemberJwtBearer) isGrant() {}
 
-// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+// Configuration options for the refresh_token grant type.
+type GrantMemberRefreshToken struct {
+	Value RefreshTokenGrant
+
+	noSmithyDocumentSerde
+}
+
+func (*GrantMemberRefreshToken) isGrant() {}
+
+// Configuration options for the urn:ietf:params:oauth:grant-type:token-exchange
+// grant type.
+type GrantMemberTokenExchange struct {
+	Value TokenExchangeGrant
+
+	noSmithyDocumentSerde
+}
+
+func (*GrantMemberTokenExchange) isGrant() {}
+
+// A structure that defines a single grant and its configuration.
 type GrantItem struct {
 
-	// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+	// The configuration structure for the selected grant.
 	//
 	// This member is required.
 	Grant Grant
 
-	// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+	// The type of the selected grant.
 	//
 	// This member is required.
 	GrantType GrantType
@@ -443,10 +469,12 @@ type InstanceMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+// A structure that defines configuration settings for an application that
+// supports the JWT Bearer Token Authorization Grant.
 type JwtBearerGrant struct {
 
-	// ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+	// A list of allowed token issuers trusted by the Identity Center instances for
+	// this application.
 	AuthorizedTokenIssuers []AuthorizedTokenIssuer
 
 	noSmithyDocumentSerde
@@ -664,6 +692,12 @@ type PortalOptions struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that defines configuration settings for an application that
+// supports the OAuth 2.0 Refresh Token Grant.
+type RefreshTokenGrant struct {
+	noSmithyDocumentSerde
+}
+
 // A structure that describes the configuration of a resource server.
 type ResourceServerConfig struct {
 
@@ -740,6 +774,12 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that defines configuration settings for an application that
+// supports the OAuth 2.0 Token Exchange Grant.
+type TokenExchangeGrant struct {
+	noSmithyDocumentSerde
+}
+
 // A structure that describes the configuration of a trusted token issuer. The
 // structure and available settings are determined by the type of the trusted token
 // issuer.
@@ -801,6 +841,8 @@ type TrustedTokenIssuerUpdateConfigurationMemberOidcJwtConfiguration struct {
 func (*TrustedTokenIssuerUpdateConfigurationMemberOidcJwtConfiguration) isTrustedTokenIssuerUpdateConfiguration() {
 }
 
+// A structure that describes the options for the access portal associated with an
+// application that can be updated.
 type UpdateApplicationPortalOptions struct {
 
 	// A structure that describes the sign-in options for an application portal.

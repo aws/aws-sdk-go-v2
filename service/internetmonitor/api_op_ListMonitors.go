@@ -32,7 +32,7 @@ func (c *Client) ListMonitors(ctx context.Context, params *ListMonitorsInput, op
 type ListMonitorsInput struct {
 
 	// The number of monitor objects that you want to return with this call.
-	MaxResults int32
+	MaxResults *int32
 
 	// The status of a monitor. This includes the status of the data processing for
 	// the monitor and the status of the monitor itself. For information about the
@@ -173,8 +173,8 @@ func NewListMonitorsPaginator(client ListMonitorsAPIClient, params *ListMonitors
 	}
 
 	options := ListMonitorsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -204,7 +204,11 @@ func (p *ListMonitorsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListMonitors(ctx, &params, optFns...)
 	if err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "e2c8f56c-c741-4153-aa61-1284bd7e1ec5",
+    "type": "feature",
+    "description": "AWS Trusted Advisor introduces new APIs to enable you to programmatically access Trusted Advisor best practice checks, recommendations, and prioritized recommendations. Trusted Advisor APIs enable you to integrate Trusted Advisor with your operational tools to automate your workloads.",
+    "modules": [
+        "service/trustedadvisor"
+    ]
+}

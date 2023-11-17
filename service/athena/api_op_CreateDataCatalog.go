@@ -69,10 +69,6 @@ type CreateDataCatalogInput struct {
 	//   - The GLUE data catalog type also applies to the default AwsDataCatalog that
 	//   already exists in your account, of which you can have only one and cannot
 	//   modify.
-	//   - Queries that specify a Glue Data Catalog other than the default
-	//   AwsDataCatalog must be run on Athena engine version 2.
-	//   - In Regions where Athena engine version 2 is not available, creating new
-	//   Glue data catalogs results in an INVALID_INPUT error.
 	Parameters map[string]string
 
 	// A list of comma separated tags to add to the data catalog that is created.

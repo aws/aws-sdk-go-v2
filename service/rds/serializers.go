@@ -10169,6 +10169,11 @@ func awsAwsquery_serializeDocumentRdsCustomClusterConfiguration(v *types.RdsCust
 		objectKey.String(*v.InterconnectSubnetId)
 	}
 
+	if len(v.ReplicaMode) > 0 {
+		objectKey := object.Key("ReplicaMode")
+		objectKey.String(string(v.ReplicaMode))
+	}
+
 	if v.TransitGatewayMulticastDomainId != nil {
 		objectKey := object.Key("TransitGatewayMulticastDomainId")
 		objectKey.String(*v.TransitGatewayMulticastDomainId)

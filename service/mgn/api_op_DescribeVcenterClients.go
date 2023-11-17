@@ -31,7 +31,7 @@ func (c *Client) DescribeVcenterClients(ctx context.Context, params *DescribeVce
 type DescribeVcenterClientsInput struct {
 
 	// Maximum results to be returned in DescribeVcenterClients.
-	MaxResults int32
+	MaxResults *int32
 
 	// Next pagination token to be provided for DescribeVcenterClients.
 	NextToken *string
@@ -164,8 +164,8 @@ func NewDescribeVcenterClientsPaginator(client DescribeVcenterClientsAPIClient, 
 	}
 
 	options := DescribeVcenterClientsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -195,7 +195,11 @@ func (p *DescribeVcenterClientsPaginator) NextPage(ctx context.Context, optFns .
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeVcenterClients(ctx, &params, optFns...)
 	if err != nil {

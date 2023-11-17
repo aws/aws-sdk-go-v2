@@ -104,7 +104,8 @@ type AssistantAssociationInputData interface {
 	isAssistantAssociationInputData()
 }
 
-// The identifier of the knowledge base.
+// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
+// knowledge base if you're storing Wisdom Content resource to it.
 type AssistantAssociationInputDataMemberKnowledgeBaseId struct {
 	Value string
 
@@ -206,12 +207,13 @@ type AssistantData struct {
 	IntegrationConfiguration *AssistantIntegrationConfiguration
 
 	// The configuration information for the customer managed key used for encryption.
-	// This KMS key must have a policy that allows kms:CreateGrant and kms:DescribeKey
-	// permissions to the IAM identity using the key to invoke Wisdom. To use Wisdom
-	// with chat, the key policy must also allow kms:Decrypt , kms:GenerateDataKey* ,
-	// and kms:DescribeKey permissions to the connect.amazonaws.com service principal.
-	// For more information about setting up a customer managed key for Wisdom, see
-	// Enable Amazon Connect Wisdom for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html)
+	// This KMS key must have a policy that allows kms:CreateGrant , kms:DescribeKey ,
+	// and kms:Decrypt/kms:GenerateDataKey permissions to the IAM identity using the
+	// key to invoke Wisdom. To use Wisdom with chat, the key policy must also allow
+	// kms:Decrypt , kms:GenerateDataKey* , and kms:DescribeKey permissions to the
+	// connect.amazonaws.com service principal. For more information about setting up a
+	// customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your
+	// instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html)
 	// .
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
 
@@ -266,17 +268,46 @@ type AssistantSummary struct {
 	IntegrationConfiguration *AssistantIntegrationConfiguration
 
 	// The configuration information for the customer managed key used for encryption.
-	// This KMS key must have a policy that allows kms:CreateGrant and kms:DescribeKey
-	// permissions to the IAM identity using the key to invoke Wisdom. To use Wisdom
-	// with chat, the key policy must also allow kms:Decrypt , kms:GenerateDataKey* ,
-	// and kms:DescribeKey permissions to the connect.amazonaws.com service principal.
-	// For more information about setting up a customer managed key for Wisdom, see
-	// Enable Amazon Connect Wisdom for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html)
+	// This KMS key must have a policy that allows kms:CreateGrant , kms:DescribeKey ,
+	// and kms:Decrypt/kms:GenerateDataKey permissions to the IAM identity using the
+	// key to invoke Wisdom. To use Wisdom with chat, the key policy must also allow
+	// kms:Decrypt , kms:GenerateDataKey* , and kms:DescribeKey permissions to the
+	// connect.amazonaws.com service principal. For more information about setting up a
+	// customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your
+	// instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html)
 	// .
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration information of the external data source.
+//
+// The following types satisfy this interface:
+//
+//	ConfigurationMemberConnectConfiguration
+type Configuration interface {
+	isConfiguration()
+}
+
+// The configuration information of the Amazon Connect data source.
+type ConfigurationMemberConnectConfiguration struct {
+	Value ConnectConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationMemberConnectConfiguration) isConfiguration() {}
+
+// The configuration information of the Amazon Connect data source.
+type ConnectConfiguration struct {
+
+	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// the ARN of the instance.
+	InstanceId *string
 
 	noSmithyDocumentSerde
 }
@@ -304,7 +335,8 @@ type ContentData struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The identifier of the knowledge base.
+	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
+	// knowledge base if you're storing Wisdom Content resource to it.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -368,7 +400,8 @@ type ContentReference struct {
 	// The Amazon Resource Name (ARN) of the knowledge base.
 	KnowledgeBaseArn *string
 
-	// The identifier of the knowledge base.
+	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
+	// knowledge base if you're storing Wisdom Content resource to it.
 	KnowledgeBaseId *string
 
 	noSmithyDocumentSerde
@@ -397,7 +430,8 @@ type ContentSummary struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The identifier of the knowledge base.
+	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
+	// knowledge base if you're storing Wisdom Content resource to it.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -465,6 +499,22 @@ type DocumentText struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration information of the external data source.
+type ExternalSourceConfiguration struct {
+
+	// The configuration information of the external data source.
+	//
+	// This member is required.
+	Configuration Configuration
+
+	// The type of the external data source.
+	//
+	// This member is required.
+	Source ExternalSource
+
+	noSmithyDocumentSerde
+}
+
 // A search filter.
 type Filter struct {
 
@@ -486,6 +536,27 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration information of the grouping of Wisdom users.
+type GroupingConfiguration struct {
+
+	// The criteria used for grouping Wisdom users. The following is the list of
+	// supported criteria values.
+	//   - RoutingProfileArn : Grouping the users by their Amazon Connect routing
+	//   profile ARN (https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html)
+	//   . User should have SearchRoutingProfile (https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchRoutingProfiles.html)
+	//   and DescribeRoutingProfile (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeRoutingProfile.html)
+	//   permissions when setting criteria to this value.
+	Criteria *string
+
+	// The list of values that define different groups of Wisdom users.
+	//   - When setting criteria to RoutingProfileArn , you need to provide a list of
+	//   ARNs of Amazon Connect routing profiles (https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html)
+	//   as values of this parameter.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // Offset specification to describe highlighting of document excerpts for
 // rendering search results and recommendations.
 type Highlight struct {
@@ -499,13 +570,137 @@ type Highlight struct {
 	noSmithyDocumentSerde
 }
 
+// Summary information about the import job.
+type ImportJobData struct {
+
+	// The timestamp when the import job was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The identifier of the import job.
+	//
+	// This member is required.
+	ImportJobId *string
+
+	// The type of the import job.
+	//
+	// This member is required.
+	ImportJobType ImportJobType
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
+	// knowledge base if you're storing Wisdom Content resource to it.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The timestamp when the import job data was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The status of the import job.
+	//
+	// This member is required.
+	Status ImportJobStatus
+
+	// A pointer to the uploaded asset. This value is returned by StartContentUpload (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html)
+	// .
+	//
+	// This member is required.
+	UploadId *string
+
+	// The download link to the resource file that is uploaded to the import job.
+	//
+	// This member is required.
+	Url *string
+
+	// The expiration time of the URL as an epoch timestamp.
+	//
+	// This member is required.
+	UrlExpiry *time.Time
+
+	// The configuration information of the external data source.
+	ExternalSourceConfiguration *ExternalSourceConfiguration
+
+	// The link to donwload the information of resource data that failed to be
+	// imported.
+	FailedRecordReport *string
+
+	// The metadata fields of the imported Wisdom resources.
+	Metadata map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about the import job.
+type ImportJobSummary struct {
+
+	// The timestamp when the import job was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The identifier of the import job.
+	//
+	// This member is required.
+	ImportJobId *string
+
+	// The type of import job.
+	//
+	// This member is required.
+	ImportJobType ImportJobType
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
+	// knowledge base if you're storing Wisdom Content resource to it.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The timestamp when the import job was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The status of the import job.
+	//
+	// This member is required.
+	Status ImportJobStatus
+
+	// A pointer to the uploaded asset. This value is returned by StartContentUpload (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html)
+	// .
+	//
+	// This member is required.
+	UploadId *string
+
+	// The configuration information of the external source that the resource data are
+	// imported from.
+	ExternalSourceConfiguration *ExternalSourceConfiguration
+
+	// The metadata fields of the imported Wisdom resources.
+	Metadata map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Association information about the knowledge base.
 type KnowledgeBaseAssociationData struct {
 
 	// The Amazon Resource Name (ARN) of the knowledge base.
 	KnowledgeBaseArn *string
 
-	// The identifier of the knowledge base.
+	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
+	// knowledge base if you're storing Wisdom Content resource to it.
 	KnowledgeBaseId *string
 
 	noSmithyDocumentSerde
@@ -519,7 +714,8 @@ type KnowledgeBaseData struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The identifier of the knowledge base.
+	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
+	// knowledge base if you're storing Wisdom Content resource to it.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -550,10 +746,10 @@ type KnowledgeBaseData struct {
 	RenderingConfiguration *RenderingConfiguration
 
 	// The configuration information for the customer managed key used for encryption.
-	// This KMS key must have a policy that allows kms:CreateGrant and kms:DescribeKey
-	// permissions to the IAM identity using the key to invoke Wisdom. For more
-	// information about setting up a customer managed key for Wisdom, see Enable
-	// Amazon Connect Wisdom for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html)
+	// This KMS key must have a policy that allows kms:CreateGrant , kms:DescribeKey ,
+	// and kms:Decrypt/kms:GenerateDataKey permissions to the IAM identity using the
+	// key to invoke Wisdom. For more information about setting up a customer managed
+	// key for Wisdom, see Enable Amazon Connect Wisdom for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html)
 	// .
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
 
@@ -574,7 +770,8 @@ type KnowledgeBaseSummary struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The identifier of the knowledge base.
+	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
+	// knowledge base if you're storing Wisdom Content resource to it.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -601,10 +798,10 @@ type KnowledgeBaseSummary struct {
 	RenderingConfiguration *RenderingConfiguration
 
 	// The configuration information for the customer managed key used for encryption.
-	// This KMS key must have a policy that allows kms:CreateGrant and kms:DescribeKey
-	// permissions to the IAM identity using the key to invoke Wisdom. For more
-	// information about setting up a customer managed key for Wisdom, see Enable
-	// Amazon Connect Wisdom for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html)
+	// This KMS key must have a policy that allows kms:CreateGrant , kms:DescribeKey ,
+	// kms:Decrypt/kms:GenerateDataKey permissions to the IAM identity using the key to
+	// invoke Wisdom. For more information about setting up a customer managed key for
+	// Wisdom, see Enable Amazon Connect Wisdom for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html)
 	// .
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
 
@@ -634,6 +831,427 @@ type QueryRecommendationTriggerData struct {
 
 	// The text associated with the recommendation trigger.
 	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// The container quick response content.
+//
+// The following types satisfy this interface:
+//
+//	QuickResponseContentProviderMemberContent
+type QuickResponseContentProvider interface {
+	isQuickResponseContentProvider()
+}
+
+// The content of the quick response.
+type QuickResponseContentProviderMemberContent struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*QuickResponseContentProviderMemberContent) isQuickResponseContentProvider() {}
+
+// The content of the quick response stored in different media types.
+type QuickResponseContents struct {
+
+	// The container quick response content.
+	Markdown QuickResponseContentProvider
+
+	// The container quick response content.
+	PlainText QuickResponseContentProvider
+
+	noSmithyDocumentSerde
+}
+
+// Information about the quick response.
+type QuickResponseData struct {
+
+	// The media type of the quick response content.
+	//   - Use application/x.quickresponse;format=plain for quick response written in
+	//   plain text.
+	//   - Use application/x.quickresponse;format=markdown for quick response written
+	//   in richtext.
+	//
+	// This member is required.
+	ContentType *string
+
+	// The timestamp when the quick response was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
+	// knowledge base if you're storing Wisdom Content resource to it. Can be either
+	// the ID or the ARN. URLs cannot contain the ARN.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The timestamp when the quick response data was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The name of the quick response.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the quick response.
+	//
+	// This member is required.
+	QuickResponseArn *string
+
+	// The identifier of the quick response.
+	//
+	// This member is required.
+	QuickResponseId *string
+
+	// The status of the quick response data.
+	//
+	// This member is required.
+	Status QuickResponseStatus
+
+	// The Amazon Connect contact channels this quick response applies to. The
+	// supported contact channel types include Chat .
+	Channels []string
+
+	// The contents of the quick response.
+	Contents *QuickResponseContents
+
+	// The description of the quick response.
+	Description *string
+
+	// The configuration information of the user groups that the quick response is
+	// accessible to.
+	GroupingConfiguration *GroupingConfiguration
+
+	// Whether the quick response is active.
+	IsActive *bool
+
+	// The language code value for the language in which the quick response is written.
+	Language *string
+
+	// The Amazon Resource Name (ARN) of the user who last updated the quick response
+	// data.
+	LastModifiedBy *string
+
+	// The shortcut key of the quick response. The value should be unique across the
+	// knowledge base.
+	ShortcutKey *string
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The container of quick response data.
+//
+// The following types satisfy this interface:
+//
+//	QuickResponseDataProviderMemberContent
+type QuickResponseDataProvider interface {
+	isQuickResponseDataProvider()
+}
+
+// The content of the quick response.
+type QuickResponseDataProviderMemberContent struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*QuickResponseDataProviderMemberContent) isQuickResponseDataProvider() {}
+
+// The quick response fields to filter the quick response query results by. The
+// following is the list of supported field names.
+//   - name
+//   - description
+//   - shortcutKey
+//   - isActive
+//   - channels
+//   - language
+//   - contentType
+//   - createdTime
+//   - lastModifiedTime
+//   - lastModifiedBy
+//   - groupingConfiguration.criteria
+//   - groupingConfiguration.values
+type QuickResponseFilterField struct {
+
+	// The name of the attribute field to filter the quick responses by.
+	//
+	// This member is required.
+	Name *string
+
+	// The operator to use for filtering.
+	//
+	// This member is required.
+	Operator QuickResponseFilterOperator
+
+	// Whether to treat null value as a match for the attribute field.
+	IncludeNoExistence *bool
+
+	// The values of attribute field to filter the quick response by.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// The quick response fields to order the quick response query results by. The
+// following is the list of supported field names.
+//   - name
+//   - description
+//   - shortcutKey
+//   - isActive
+//   - channels
+//   - language
+//   - contentType
+//   - createdTime
+//   - lastModifiedTime
+//   - lastModifiedBy
+//   - groupingConfiguration.criteria
+//   - groupingConfiguration.values
+type QuickResponseOrderField struct {
+
+	// The name of the attribute to order the quick response query results by.
+	//
+	// This member is required.
+	Name *string
+
+	// The order at which the quick responses are sorted by.
+	Order Order
+
+	noSmithyDocumentSerde
+}
+
+// The quick response fields to query quick responses by. The following is the
+// list of supported field names.
+//   - content
+//   - name
+//   - description
+//   - shortcutKey
+type QuickResponseQueryField struct {
+
+	// The name of the attribute to query the quick responses by.
+	//
+	// This member is required.
+	Name *string
+
+	// The operator to use for matching attribute field values in the query.
+	//
+	// This member is required.
+	Operator QuickResponseQueryOperator
+
+	// The values of the attribute to query the quick responses by.
+	//
+	// This member is required.
+	Values []string
+
+	// Whether the query expects only exact matches on the attribute field values. The
+	// results of the query will only include exact matches if this parameter is set to
+	// false.
+	AllowFuzziness *bool
+
+	// The importance of the attribute field when calculating query result relevancy
+	// scores. The value set for this parameter affects the ordering of search results.
+	Priority Priority
+
+	noSmithyDocumentSerde
+}
+
+// Information about the import job.
+type QuickResponseSearchExpression struct {
+
+	// The configuration of filtering rules applied to quick response query results.
+	Filters []QuickResponseFilterField
+
+	// The quick response attribute fields on which the query results are ordered.
+	OrderOnField *QuickResponseOrderField
+
+	// The quick response query expressions.
+	Queries []QuickResponseQueryField
+
+	noSmithyDocumentSerde
+}
+
+// The result of quick response search.
+type QuickResponseSearchResultData struct {
+
+	// The media type of the quick response content.
+	//   - Use application/x.quickresponse;format=plain for quick response written in
+	//   plain text.
+	//   - Use application/x.quickresponse;format=markdown for quick response written
+	//   in richtext.
+	//
+	// This member is required.
+	ContentType *string
+
+	// The contents of the quick response.
+	//
+	// This member is required.
+	Contents *QuickResponseContents
+
+	// The timestamp when the quick response was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// Whether the quick response is active.
+	//
+	// This member is required.
+	IsActive *bool
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
+	// knowledge base if you're storing Wisdom Content resource to it. Can be either
+	// the ID or the ARN. URLs cannot contain the ARN.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The timestamp when the quick response search result data was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The name of the quick response.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the quick response.
+	//
+	// This member is required.
+	QuickResponseArn *string
+
+	// The identifier of the quick response.
+	//
+	// This member is required.
+	QuickResponseId *string
+
+	// The resource status of the quick response.
+	//
+	// This member is required.
+	Status QuickResponseStatus
+
+	// The user defined contact attributes that are resolved when the search result is
+	// returned.
+	AttributesInterpolated []string
+
+	// The user defined contact attributes that are not resolved when the search
+	// result is returned.
+	AttributesNotInterpolated []string
+
+	// The Amazon Connect contact channels this quick response applies to. The
+	// supported contact channel types include Chat .
+	Channels []string
+
+	// The description of the quick response.
+	Description *string
+
+	// The configuration information of the user groups that the quick response is
+	// accessible to.
+	GroupingConfiguration *GroupingConfiguration
+
+	// The language code value for the language in which the quick response is written.
+	Language *string
+
+	// The Amazon Resource Name (ARN) of the user who last updated the quick response
+	// search result data.
+	LastModifiedBy *string
+
+	// The shortcut key of the quick response. The value should be unique across the
+	// knowledge base.
+	ShortcutKey *string
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The summary information about the quick response.
+type QuickResponseSummary struct {
+
+	// The media type of the quick response content.
+	//   - Use application/x.quickresponse;format=plain for quick response written in
+	//   plain text.
+	//   - Use application/x.quickresponse;format=markdown for quick response written
+	//   in richtext.
+	//
+	// This member is required.
+	ContentType *string
+
+	// The timestamp when the quick response was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
+	// knowledge base if you're storing Wisdom Content resource to it.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The timestamp when the quick response summary was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The name of the quick response.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the quick response.
+	//
+	// This member is required.
+	QuickResponseArn *string
+
+	// The identifier of the quick response.
+	//
+	// This member is required.
+	QuickResponseId *string
+
+	// The resource status of the quick response.
+	//
+	// This member is required.
+	Status QuickResponseStatus
+
+	// The Amazon Connect contact channels this quick response applies to. The
+	// supported contact channel types include Chat .
+	Channels []string
+
+	// The description of the quick response.
+	Description *string
+
+	// Whether the quick response is active.
+	IsActive *bool
+
+	// The Amazon Resource Name (ARN) of the user who last updated the quick response
+	// data.
+	LastModifiedBy *string
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -878,5 +1496,8 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAssistantAssociationInputData()  {}
 func (*UnknownUnionMember) isAssistantAssociationOutputData() {}
+func (*UnknownUnionMember) isConfiguration()                  {}
+func (*UnknownUnionMember) isQuickResponseContentProvider()   {}
+func (*UnknownUnionMember) isQuickResponseDataProvider()      {}
 func (*UnknownUnionMember) isRecommendationTriggerData()      {}
 func (*UnknownUnionMember) isSourceConfiguration()            {}

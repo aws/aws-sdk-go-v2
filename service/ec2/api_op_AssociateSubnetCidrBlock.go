@@ -13,8 +13,7 @@ import (
 )
 
 // Associates a CIDR block with your subnet. You can only associate a single IPv6
-// CIDR block with your subnet. An IPv6 CIDR block must have a prefix length of
-// /64.
+// CIDR block with your subnet.
 func (c *Client) AssociateSubnetCidrBlock(ctx context.Context, params *AssociateSubnetCidrBlockInput, optFns ...func(*Options)) (*AssociateSubnetCidrBlockOutput, error) {
 	if params == nil {
 		params = &AssociateSubnetCidrBlockInput{}
@@ -32,15 +31,19 @@ func (c *Client) AssociateSubnetCidrBlock(ctx context.Context, params *Associate
 
 type AssociateSubnetCidrBlockInput struct {
 
-	// The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.
-	//
-	// This member is required.
-	Ipv6CidrBlock *string
-
 	// The ID of your subnet.
 	//
 	// This member is required.
 	SubnetId *string
+
+	// The IPv6 CIDR block for your subnet.
+	Ipv6CidrBlock *string
+
+	// An IPv6 IPAM pool ID.
+	Ipv6IpamPoolId *string
+
+	// An IPv6 netmask length.
+	Ipv6NetmaskLength *int32
 
 	noSmithyDocumentSerde
 }

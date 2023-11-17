@@ -20,7 +20,8 @@ import (
 // Allow a short period of time for changes to take effect. This action can
 // partially fail if too many requests are made at the same time. If that happens,
 // FailedEntryCount is non-zero in the response and each entry in FailedEntries
-// provides the ID of the failed target and the error code.
+// provides the ID of the failed target and the error code. The maximum number of
+// entries per request is 10.
 func (c *Client) RemoveTargets(ctx context.Context, params *RemoveTargetsInput, optFns ...func(*Options)) (*RemoveTargetsOutput, error) {
 	if params == nil {
 		params = &RemoveTargetsInput{}

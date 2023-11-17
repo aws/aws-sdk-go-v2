@@ -90,6 +90,26 @@ func (m *validateOpCreateKnowledgeBase) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateQuickResponse struct {
+}
+
+func (*validateOpCreateQuickResponse) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateQuickResponse) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateQuickResponseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateQuickResponseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateSession struct {
 }
 
@@ -170,6 +190,26 @@ func (m *validateOpDeleteContent) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteImportJob struct {
+}
+
+func (*validateOpDeleteImportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteImportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteImportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteImportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteKnowledgeBase struct {
 }
 
@@ -185,6 +225,26 @@ func (m *validateOpDeleteKnowledgeBase) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteKnowledgeBaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteQuickResponse struct {
+}
+
+func (*validateOpDeleteQuickResponse) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteQuickResponse) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteQuickResponseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteQuickResponseInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -270,6 +330,26 @@ func (m *validateOpGetContentSummary) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetImportJob struct {
+}
+
+func (*validateOpGetImportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetImportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetImportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetImportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetKnowledgeBase struct {
 }
 
@@ -285,6 +365,26 @@ func (m *validateOpGetKnowledgeBase) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetKnowledgeBaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetQuickResponse struct {
+}
+
+func (*validateOpGetQuickResponse) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQuickResponse) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQuickResponseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQuickResponseInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -365,6 +465,46 @@ func (m *validateOpListContents) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListContentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListImportJobs struct {
+}
+
+func (*validateOpListImportJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListImportJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListImportJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListImportJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListQuickResponses struct {
+}
+
+func (*validateOpListQuickResponses) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListQuickResponses) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListQuickResponsesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListQuickResponsesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -470,6 +610,26 @@ func (m *validateOpSearchContent) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchQuickResponses struct {
+}
+
+func (*validateOpSearchQuickResponses) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchQuickResponses) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchQuickResponsesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchQuickResponsesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSearchSessions struct {
 }
 
@@ -505,6 +665,26 @@ func (m *validateOpStartContentUpload) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartContentUploadInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartImportJob struct {
+}
+
+func (*validateOpStartImportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartImportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartImportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartImportJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -590,6 +770,26 @@ func (m *validateOpUpdateKnowledgeBaseTemplateUri) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateQuickResponse struct {
+}
+
+func (*validateOpUpdateQuickResponse) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQuickResponse) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQuickResponseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQuickResponseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateAssistantAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAssistantAssociation{}, middleware.After)
 }
@@ -604,6 +804,10 @@ func addOpCreateContentValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateKnowledgeBase{}, middleware.After)
+}
+
+func addOpCreateQuickResponseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateQuickResponse{}, middleware.After)
 }
 
 func addOpCreateSessionValidationMiddleware(stack *middleware.Stack) error {
@@ -622,8 +826,16 @@ func addOpDeleteContentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteContent{}, middleware.After)
 }
 
+func addOpDeleteImportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteImportJob{}, middleware.After)
+}
+
 func addOpDeleteKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteKnowledgeBase{}, middleware.After)
+}
+
+func addOpDeleteQuickResponseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteQuickResponse{}, middleware.After)
 }
 
 func addOpGetAssistantAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -642,8 +854,16 @@ func addOpGetContentSummaryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetContentSummary{}, middleware.After)
 }
 
+func addOpGetImportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetImportJob{}, middleware.After)
+}
+
 func addOpGetKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetKnowledgeBase{}, middleware.After)
+}
+
+func addOpGetQuickResponseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQuickResponse{}, middleware.After)
 }
 
 func addOpGetRecommendationsValidationMiddleware(stack *middleware.Stack) error {
@@ -660,6 +880,14 @@ func addOpListAssistantAssociationsValidationMiddleware(stack *middleware.Stack)
 
 func addOpListContentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListContents{}, middleware.After)
+}
+
+func addOpListImportJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListImportJobs{}, middleware.After)
+}
+
+func addOpListQuickResponsesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListQuickResponses{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -682,12 +910,20 @@ func addOpSearchContentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchContent{}, middleware.After)
 }
 
+func addOpSearchQuickResponsesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchQuickResponses{}, middleware.After)
+}
+
 func addOpSearchSessionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchSessions{}, middleware.After)
 }
 
 func addOpStartContentUploadValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartContentUpload{}, middleware.After)
+}
+
+func addOpStartImportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartImportJob{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -706,6 +942,10 @@ func addOpUpdateKnowledgeBaseTemplateUriValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpUpdateKnowledgeBaseTemplateUri{}, middleware.After)
 }
 
+func addOpUpdateQuickResponseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQuickResponse{}, middleware.After)
+}
+
 func validateAppIntegrationsConfiguration(v *types.AppIntegrationsConfiguration) error {
 	if v == nil {
 		return nil
@@ -713,6 +953,24 @@ func validateAppIntegrationsConfiguration(v *types.AppIntegrationsConfiguration)
 	invalidParams := smithy.InvalidParamsError{Context: "AppIntegrationsConfiguration"}
 	if v.AppIntegrationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppIntegrationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExternalSourceConfiguration(v *types.ExternalSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExternalSourceConfiguration"}
+	if len(v.Source) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -750,6 +1008,121 @@ func validateFilterList(v []types.Filter) error {
 	for i := range v {
 		if err := validateFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuickResponseFilterField(v *types.QuickResponseFilterField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuickResponseFilterField"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuickResponseFilterFieldList(v []types.QuickResponseFilterField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuickResponseFilterFieldList"}
+	for i := range v {
+		if err := validateQuickResponseFilterField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuickResponseOrderField(v *types.QuickResponseOrderField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuickResponseOrderField"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuickResponseQueryField(v *types.QuickResponseQueryField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuickResponseQueryField"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuickResponseQueryFieldList(v []types.QuickResponseQueryField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuickResponseQueryFieldList"}
+	for i := range v {
+		if err := validateQuickResponseQueryField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuickResponseSearchExpression(v *types.QuickResponseSearchExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuickResponseSearchExpression"}
+	if v.Queries != nil {
+		if err := validateQuickResponseQueryFieldList(v.Queries); err != nil {
+			invalidParams.AddNested("Queries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filters != nil {
+		if err := validateQuickResponseFilterFieldList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OrderOnField != nil {
+		if err := validateQuickResponseOrderField(v.OrderOnField); err != nil {
+			invalidParams.AddNested("OrderOnField", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -880,6 +1253,27 @@ func validateOpCreateKnowledgeBaseInput(v *CreateKnowledgeBaseInput) error {
 	}
 }
 
+func validateOpCreateQuickResponseInput(v *CreateQuickResponseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateQuickResponseInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateSessionInput(v *CreateSessionInput) error {
 	if v == nil {
 		return nil
@@ -949,6 +1343,24 @@ func validateOpDeleteContentInput(v *DeleteContentInput) error {
 	}
 }
 
+func validateOpDeleteImportJobInput(v *DeleteImportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteImportJobInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.ImportJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteKnowledgeBaseInput(v *DeleteKnowledgeBaseInput) error {
 	if v == nil {
 		return nil
@@ -956,6 +1368,24 @@ func validateOpDeleteKnowledgeBaseInput(v *DeleteKnowledgeBaseInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteKnowledgeBaseInput"}
 	if v.KnowledgeBaseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteQuickResponseInput(v *DeleteQuickResponseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteQuickResponseInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.QuickResponseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuickResponseId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1033,11 +1463,47 @@ func validateOpGetContentSummaryInput(v *GetContentSummaryInput) error {
 	}
 }
 
+func validateOpGetImportJobInput(v *GetImportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetImportJobInput"}
+	if v.ImportJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportJobId"))
+	}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetKnowledgeBaseInput(v *GetKnowledgeBaseInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetKnowledgeBaseInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetQuickResponseInput(v *GetQuickResponseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQuickResponseInput"}
+	if v.QuickResponseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuickResponseId"))
+	}
 	if v.KnowledgeBaseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
 	}
@@ -1104,6 +1570,36 @@ func validateOpListContentsInput(v *ListContentsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListContentsInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListImportJobsInput(v *ListImportJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListImportJobsInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListQuickResponsesInput(v *ListQuickResponsesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListQuickResponsesInput"}
 	if v.KnowledgeBaseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
 	}
@@ -1205,6 +1701,28 @@ func validateOpSearchContentInput(v *SearchContentInput) error {
 	}
 }
 
+func validateOpSearchQuickResponsesInput(v *SearchQuickResponsesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchQuickResponsesInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.SearchExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SearchExpression"))
+	} else if v.SearchExpression != nil {
+		if err := validateQuickResponseSearchExpression(v.SearchExpression); err != nil {
+			invalidParams.AddNested("SearchExpression", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSearchSessionsInput(v *SearchSessionsInput) error {
 	if v == nil {
 		return nil
@@ -1237,6 +1755,32 @@ func validateOpStartContentUploadInput(v *StartContentUploadInput) error {
 	}
 	if v.ContentType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartImportJobInput(v *StartImportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartImportJobInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if len(v.ImportJobType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportJobType"))
+	}
+	if v.UploadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
+	}
+	if v.ExternalSourceConfiguration != nil {
+		if err := validateExternalSourceConfiguration(v.ExternalSourceConfiguration); err != nil {
+			invalidParams.AddNested("ExternalSourceConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1309,6 +1853,24 @@ func validateOpUpdateKnowledgeBaseTemplateUriInput(v *UpdateKnowledgeBaseTemplat
 	}
 	if v.TemplateUri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQuickResponseInput(v *UpdateQuickResponseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQuickResponseInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.QuickResponseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuickResponseId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -10967,6 +10967,19 @@ func awsAwsjson11_deserializeDocumentQueryExecutionStatistics(v **types.QueryExe
 				return err
 			}
 
+		case "ServicePreProcessingTimeInMillis":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ServicePreProcessingTimeInMillis = ptr.Int64(i64)
+			}
+
 		case "ServiceProcessingTimeInMillis":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11276,6 +11289,19 @@ func awsAwsjson11_deserializeDocumentQueryRuntimeStatisticsTimeline(v **types.Qu
 					return err
 				}
 				sv.QueryQueueTimeInMillis = ptr.Int64(i64)
+			}
+
+		case "ServicePreProcessingTimeInMillis":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ServicePreProcessingTimeInMillis = ptr.Int64(i64)
 			}
 
 		case "ServiceProcessingTimeInMillis":

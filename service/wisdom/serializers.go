@@ -465,6 +465,152 @@ func awsRestjson1_serializeOpDocumentCreateKnowledgeBaseInput(v *CreateKnowledge
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateQuickResponse struct {
+}
+
+func (*awsRestjson1_serializeOpCreateQuickResponse) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateQuickResponse) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateQuickResponseInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/knowledgeBases/{knowledgeBaseId}/quickResponses")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateQuickResponseInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateQuickResponseInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateQuickResponseInput(v *CreateQuickResponseInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.KnowledgeBaseId == nil || len(*v.KnowledgeBaseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member knowledgeBaseId must not be empty")}
+	}
+	if v.KnowledgeBaseId != nil {
+		if err := encoder.SetURI("knowledgeBaseId").String(*v.KnowledgeBaseId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateQuickResponseInput(v *CreateQuickResponseInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Channels != nil {
+		ok := object.Key("channels")
+		if err := awsRestjson1_serializeDocumentChannels(v.Channels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Content != nil {
+		ok := object.Key("content")
+		if err := awsRestjson1_serializeDocumentQuickResponseDataProvider(v.Content, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContentType != nil {
+		ok := object.Key("contentType")
+		ok.String(*v.ContentType)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.GroupingConfiguration != nil {
+		ok := object.Key("groupingConfiguration")
+		if err := awsRestjson1_serializeDocumentGroupingConfiguration(v.GroupingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IsActive != nil {
+		ok := object.Key("isActive")
+		ok.Boolean(*v.IsActive)
+	}
+
+	if v.Language != nil {
+		ok := object.Key("language")
+		ok.String(*v.Language)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.ShortcutKey != nil {
+		ok := object.Key("shortcutKey")
+		ok.String(*v.ShortcutKey)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateSession struct {
 }
 
@@ -783,6 +929,80 @@ func awsRestjson1_serializeOpHttpBindingsDeleteContentInput(v *DeleteContentInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteImportJob struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteImportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteImportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteImportJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/knowledgeBases/{knowledgeBaseId}/importJobs/{importJobId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteImportJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteImportJobInput(v *DeleteImportJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ImportJobId == nil || len(*v.ImportJobId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member importJobId must not be empty")}
+	}
+	if v.ImportJobId != nil {
+		if err := encoder.SetURI("importJobId").String(*v.ImportJobId); err != nil {
+			return err
+		}
+	}
+
+	if v.KnowledgeBaseId == nil || len(*v.KnowledgeBaseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member knowledgeBaseId must not be empty")}
+	}
+	if v.KnowledgeBaseId != nil {
+		if err := encoder.SetURI("knowledgeBaseId").String(*v.KnowledgeBaseId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteKnowledgeBase struct {
 }
 
@@ -841,6 +1061,80 @@ func awsRestjson1_serializeOpHttpBindingsDeleteKnowledgeBaseInput(v *DeleteKnowl
 	}
 	if v.KnowledgeBaseId != nil {
 		if err := encoder.SetURI("knowledgeBaseId").String(*v.KnowledgeBaseId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteQuickResponse struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteQuickResponse) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteQuickResponse) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteQuickResponseInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/knowledgeBases/{knowledgeBaseId}/quickResponses/{quickResponseId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteQuickResponseInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteQuickResponseInput(v *DeleteQuickResponseInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.KnowledgeBaseId == nil || len(*v.KnowledgeBaseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member knowledgeBaseId must not be empty")}
+	}
+	if v.KnowledgeBaseId != nil {
+		if err := encoder.SetURI("knowledgeBaseId").String(*v.KnowledgeBaseId); err != nil {
+			return err
+		}
+	}
+
+	if v.QuickResponseId == nil || len(*v.QuickResponseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member quickResponseId must not be empty")}
+	}
+	if v.QuickResponseId != nil {
+		if err := encoder.SetURI("quickResponseId").String(*v.QuickResponseId); err != nil {
 			return err
 		}
 	}
@@ -1135,6 +1429,80 @@ func awsRestjson1_serializeOpHttpBindingsGetContentSummaryInput(v *GetContentSum
 	return nil
 }
 
+type awsRestjson1_serializeOpGetImportJob struct {
+}
+
+func (*awsRestjson1_serializeOpGetImportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetImportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetImportJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/knowledgeBases/{knowledgeBaseId}/importJobs/{importJobId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetImportJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetImportJobInput(v *GetImportJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ImportJobId == nil || len(*v.ImportJobId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member importJobId must not be empty")}
+	}
+	if v.ImportJobId != nil {
+		if err := encoder.SetURI("importJobId").String(*v.ImportJobId); err != nil {
+			return err
+		}
+	}
+
+	if v.KnowledgeBaseId == nil || len(*v.KnowledgeBaseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member knowledgeBaseId must not be empty")}
+	}
+	if v.KnowledgeBaseId != nil {
+		if err := encoder.SetURI("knowledgeBaseId").String(*v.KnowledgeBaseId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetKnowledgeBase struct {
 }
 
@@ -1193,6 +1561,80 @@ func awsRestjson1_serializeOpHttpBindingsGetKnowledgeBaseInput(v *GetKnowledgeBa
 	}
 	if v.KnowledgeBaseId != nil {
 		if err := encoder.SetURI("knowledgeBaseId").String(*v.KnowledgeBaseId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetQuickResponse struct {
+}
+
+func (*awsRestjson1_serializeOpGetQuickResponse) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetQuickResponse) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetQuickResponseInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/knowledgeBases/{knowledgeBaseId}/quickResponses/{quickResponseId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetQuickResponseInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetQuickResponseInput(v *GetQuickResponseInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.KnowledgeBaseId == nil || len(*v.KnowledgeBaseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member knowledgeBaseId must not be empty")}
+	}
+	if v.KnowledgeBaseId != nil {
+		if err := encoder.SetURI("knowledgeBaseId").String(*v.KnowledgeBaseId); err != nil {
+			return err
+		}
+	}
+
+	if v.QuickResponseId == nil || len(*v.QuickResponseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member quickResponseId must not be empty")}
+	}
+	if v.QuickResponseId != nil {
+		if err := encoder.SetURI("quickResponseId").String(*v.QuickResponseId); err != nil {
 			return err
 		}
 	}
@@ -1566,6 +2008,79 @@ func awsRestjson1_serializeOpHttpBindingsListContentsInput(v *ListContentsInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpListImportJobs struct {
+}
+
+func (*awsRestjson1_serializeOpListImportJobs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListImportJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListImportJobsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/knowledgeBases/{knowledgeBaseId}/importJobs")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListImportJobsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListImportJobsInput(v *ListImportJobsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.KnowledgeBaseId == nil || len(*v.KnowledgeBaseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member knowledgeBaseId must not be empty")}
+	}
+	if v.KnowledgeBaseId != nil {
+		if err := encoder.SetURI("knowledgeBaseId").String(*v.KnowledgeBaseId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListKnowledgeBases struct {
 }
 
@@ -1617,6 +2132,79 @@ func (m *awsRestjson1_serializeOpListKnowledgeBases) HandleSerialize(ctx context
 func awsRestjson1_serializeOpHttpBindingsListKnowledgeBasesInput(v *ListKnowledgeBasesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListQuickResponses struct {
+}
+
+func (*awsRestjson1_serializeOpListQuickResponses) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListQuickResponses) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListQuickResponsesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/knowledgeBases/{knowledgeBaseId}/quickResponses")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListQuickResponsesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListQuickResponsesInput(v *ListQuickResponsesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.KnowledgeBaseId == nil || len(*v.KnowledgeBaseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member knowledgeBaseId must not be empty")}
+	}
+	if v.KnowledgeBaseId != nil {
+		if err := encoder.SetURI("knowledgeBaseId").String(*v.KnowledgeBaseId); err != nil {
+			return err
+		}
 	}
 
 	if v.MaxResults != nil {
@@ -2055,6 +2643,111 @@ func awsRestjson1_serializeOpDocumentSearchContentInput(v *SearchContentInput, v
 	return nil
 }
 
+type awsRestjson1_serializeOpSearchQuickResponses struct {
+}
+
+func (*awsRestjson1_serializeOpSearchQuickResponses) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSearchQuickResponses) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SearchQuickResponsesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/knowledgeBases/{knowledgeBaseId}/search/quickResponses")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsSearchQuickResponsesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSearchQuickResponsesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSearchQuickResponsesInput(v *SearchQuickResponsesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.KnowledgeBaseId == nil || len(*v.KnowledgeBaseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member knowledgeBaseId must not be empty")}
+	}
+	if v.KnowledgeBaseId != nil {
+		if err := encoder.SetURI("knowledgeBaseId").String(*v.KnowledgeBaseId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSearchQuickResponsesInput(v *SearchQuickResponsesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Attributes != nil {
+		ok := object.Key("attributes")
+		if err := awsRestjson1_serializeDocumentContactAttributes(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SearchExpression != nil {
+		ok := object.Key("searchExpression")
+		if err := awsRestjson1_serializeDocumentQuickResponseSearchExpression(v.SearchExpression, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpSearchSessions struct {
 }
 
@@ -2236,6 +2929,123 @@ func awsRestjson1_serializeOpDocumentStartContentUploadInput(v *StartContentUplo
 	if v.ContentType != nil {
 		ok := object.Key("contentType")
 		ok.String(*v.ContentType)
+	}
+
+	if v.PresignedUrlTimeToLive != nil {
+		ok := object.Key("presignedUrlTimeToLive")
+		ok.Integer(*v.PresignedUrlTimeToLive)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStartImportJob struct {
+}
+
+func (*awsRestjson1_serializeOpStartImportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartImportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartImportJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/knowledgeBases/{knowledgeBaseId}/importJobs")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartImportJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartImportJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartImportJobInput(v *StartImportJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.KnowledgeBaseId == nil || len(*v.KnowledgeBaseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member knowledgeBaseId must not be empty")}
+	}
+	if v.KnowledgeBaseId != nil {
+		if err := encoder.SetURI("knowledgeBaseId").String(*v.KnowledgeBaseId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartImportJobInput(v *StartImportJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.ExternalSourceConfiguration != nil {
+		ok := object.Key("externalSourceConfiguration")
+		if err := awsRestjson1_serializeDocumentExternalSourceConfiguration(v.ExternalSourceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ImportJobType) > 0 {
+		ok := object.Key("importJobType")
+		ok.String(string(v.ImportJobType))
+	}
+
+	if v.Metadata != nil {
+		ok := object.Key("metadata")
+		if err := awsRestjson1_serializeDocumentContentMetadata(v.Metadata, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UploadId != nil {
+		ok := object.Key("uploadId")
+		ok.String(*v.UploadId)
 	}
 
 	return nil
@@ -2614,6 +3424,164 @@ func awsRestjson1_serializeOpDocumentUpdateKnowledgeBaseTemplateUriInput(v *Upda
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateQuickResponse struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateQuickResponse) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateQuickResponse) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateQuickResponseInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/knowledgeBases/{knowledgeBaseId}/quickResponses/{quickResponseId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateQuickResponseInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateQuickResponseInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateQuickResponseInput(v *UpdateQuickResponseInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.KnowledgeBaseId == nil || len(*v.KnowledgeBaseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member knowledgeBaseId must not be empty")}
+	}
+	if v.KnowledgeBaseId != nil {
+		if err := encoder.SetURI("knowledgeBaseId").String(*v.KnowledgeBaseId); err != nil {
+			return err
+		}
+	}
+
+	if v.QuickResponseId == nil || len(*v.QuickResponseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member quickResponseId must not be empty")}
+	}
+	if v.QuickResponseId != nil {
+		if err := encoder.SetURI("quickResponseId").String(*v.QuickResponseId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateQuickResponseInput(v *UpdateQuickResponseInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Channels != nil {
+		ok := object.Key("channels")
+		if err := awsRestjson1_serializeDocumentChannels(v.Channels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Content != nil {
+		ok := object.Key("content")
+		if err := awsRestjson1_serializeDocumentQuickResponseDataProvider(v.Content, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContentType != nil {
+		ok := object.Key("contentType")
+		ok.String(*v.ContentType)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.GroupingConfiguration != nil {
+		ok := object.Key("groupingConfiguration")
+		if err := awsRestjson1_serializeDocumentGroupingConfiguration(v.GroupingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IsActive != nil {
+		ok := object.Key("isActive")
+		ok.Boolean(*v.IsActive)
+	}
+
+	if v.Language != nil {
+		ok := object.Key("language")
+		ok.String(*v.Language)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.RemoveDescription != nil {
+		ok := object.Key("removeDescription")
+		ok.Boolean(*v.RemoveDescription)
+	}
+
+	if v.RemoveGroupingConfiguration != nil {
+		ok := object.Key("removeGroupingConfiguration")
+		ok.Boolean(*v.RemoveGroupingConfiguration)
+	}
+
+	if v.RemoveShortcutKey != nil {
+		ok := object.Key("removeShortcutKey")
+		ok.Boolean(*v.RemoveShortcutKey)
+	}
+
+	if v.ShortcutKey != nil {
+		ok := object.Key("shortcutKey")
+		ok.String(*v.ShortcutKey)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAppIntegrationsConfiguration(v *types.AppIntegrationsConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2649,6 +3617,58 @@ func awsRestjson1_serializeDocumentAssistantAssociationInputData(v types.Assista
 	return nil
 }
 
+func awsRestjson1_serializeDocumentChannels(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConfiguration(v types.Configuration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ConfigurationMemberConnectConfiguration:
+		av := object.Key("connectConfiguration")
+		if err := awsRestjson1_serializeDocumentConnectConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConnectConfiguration(v *types.ConnectConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceId != nil {
+		ok := object.Key("instanceId")
+		ok.String(*v.InstanceId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentContactAttributes(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentContentMetadata(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2657,6 +3677,25 @@ func awsRestjson1_serializeDocumentContentMetadata(v map[string]string, value sm
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExternalSourceConfiguration(v *types.ExternalSourceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Configuration != nil {
+		ok := object.Key("configuration")
+		if err := awsRestjson1_serializeDocumentConfiguration(v.Configuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Source) > 0 {
+		ok := object.Key("source")
+		ok.String(string(v.Source))
+	}
+
 	return nil
 }
 
@@ -2695,6 +3734,36 @@ func awsRestjson1_serializeDocumentFilterList(v []types.Filter, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGroupingConfiguration(v *types.GroupingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Criteria != nil {
+		ok := object.Key("criteria")
+		ok.String(*v.Criteria)
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsRestjson1_serializeDocumentGroupingValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGroupingValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentObjectFieldsList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2703,6 +3772,178 @@ func awsRestjson1_serializeDocumentObjectFieldsList(v []string, value smithyjson
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQuickResponseDataProvider(v types.QuickResponseDataProvider, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.QuickResponseDataProviderMemberContent:
+		av := object.Key("content")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQuickResponseFilterField(v *types.QuickResponseFilterField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IncludeNoExistence != nil {
+		ok := object.Key("includeNoExistence")
+		ok.Boolean(*v.IncludeNoExistence)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("operator")
+		ok.String(string(v.Operator))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsRestjson1_serializeDocumentQuickResponseFilterValueList(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQuickResponseFilterFieldList(v []types.QuickResponseFilterField, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentQuickResponseFilterField(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQuickResponseFilterValueList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQuickResponseOrderField(v *types.QuickResponseOrderField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Order) > 0 {
+		ok := object.Key("order")
+		ok.String(string(v.Order))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQuickResponseQueryField(v *types.QuickResponseQueryField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowFuzziness != nil {
+		ok := object.Key("allowFuzziness")
+		ok.Boolean(*v.AllowFuzziness)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("operator")
+		ok.String(string(v.Operator))
+	}
+
+	if len(v.Priority) > 0 {
+		ok := object.Key("priority")
+		ok.String(string(v.Priority))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsRestjson1_serializeDocumentQuickResponseQueryValueList(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQuickResponseQueryFieldList(v []types.QuickResponseQueryField, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentQuickResponseQueryField(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQuickResponseQueryValueList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQuickResponseSearchExpression(v *types.QuickResponseSearchExpression, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("filters")
+		if err := awsRestjson1_serializeDocumentQuickResponseFilterFieldList(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrderOnField != nil {
+		ok := object.Key("orderOnField")
+		if err := awsRestjson1_serializeDocumentQuickResponseOrderField(v.OrderOnField, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Queries != nil {
+		ok := object.Key("queries")
+		if err := awsRestjson1_serializeDocumentQuickResponseQueryFieldList(v.Queries, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

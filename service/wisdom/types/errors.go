@@ -89,6 +89,35 @@ func (e *PreconditionFailedException) ErrorCode() string {
 }
 func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request reached the service more than 15 minutes after the date stamp on
+// the request or more than 15 minutes after the request expiration date (such as
+// for pre-signed URLs), or the date stamp on the request is more than 15 minutes
+// in the future.
+type RequestTimeoutException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RequestTimeoutException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RequestTimeoutException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RequestTimeoutException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RequestTimeoutException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RequestTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
 	Message *string

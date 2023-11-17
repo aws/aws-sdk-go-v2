@@ -35,7 +35,7 @@ type ListExportsInput struct {
 	Filters *types.ListExportsRequestFilters
 
 	// List export request max results.
-	MaxResults int32
+	MaxResults *int32
 
 	// List export request next token.
 	NextToken *string
@@ -167,8 +167,8 @@ func NewListExportsPaginator(client ListExportsAPIClient, params *ListExportsInp
 	}
 
 	options := ListExportsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -198,7 +198,11 @@ func (p *ListExportsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListExports(ctx, &params, optFns...)
 	if err != nil {

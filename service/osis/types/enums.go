@@ -79,3 +79,19 @@ func (PipelineStatus) Values() []PipelineStatus {
 		"STOPPED",
 	}
 }
+
+type VpcEndpointServiceName string
+
+// Enum values for VpcEndpointServiceName
+const (
+	VpcEndpointServiceNameOpensearchServerless VpcEndpointServiceName = "OPENSEARCH_SERVERLESS"
+)
+
+// Values returns all known values for VpcEndpointServiceName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VpcEndpointServiceName) Values() []VpcEndpointServiceName {
+	return []VpcEndpointServiceName{
+		"OPENSEARCH_SERVERLESS",
+	}
+}

@@ -14,53 +14,31 @@ import (
 
 // Adds the specified targets to the specified rule, or updates the targets if
 // they are already associated with the rule. Targets are the resources that are
-// invoked when a rule is triggered. Each rule can have up to five (5) targets
-// associated with it at one time. You can configure the following as targets for
-// Events:
-//   - API destination (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html)
-//   - API Gateway (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-gateway-target.html)
-//   - Batch job queue
-//   - CloudWatch group
-//   - CodeBuild project
-//   - CodePipeline
-//   - EC2 CreateSnapshot API call
-//   - EC2 Image Builder
-//   - EC2 RebootInstances API call
-//   - EC2 StopInstances API call
-//   - EC2 TerminateInstances API call
-//   - ECS task
-//   - Event bus in a different account or Region (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-cross-account.html)
-//   - Event bus in the same account and Region (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-bus-to-bus.html)
-//   - Firehose delivery stream
-//   - Glue workflow
-//   - Incident Manager response plan (https://docs.aws.amazon.com/incident-manager/latest/userguide/incident-creation.html#incident-tracking-auto-eventbridge)
-//   - Inspector assessment template
-//   - Kinesis stream
-//   - Lambda function
-//   - Redshift cluster
-//   - Redshift Serverless workgroup
-//   - SageMaker Pipeline
-//   - SNS topic
-//   - SQS queue
-//   - Step Functions state machine
-//   - Systems Manager Automation
-//   - Systems Manager OpsItem
-//   - Systems Manager Run Command
+// invoked when a rule is triggered. The maximum number of entries per request is
+// 10. Each rule can have up to five (5) targets associated with it at one time.
+// For a list of services you can configure as targets for events, see EventBridge
+// targets (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-targets.html)
+// in the Amazon EventBridge User Guide. Creating rules with built-in targets is
+// supported only in the Amazon Web Services Management Console. The built-in
+// targets are:
+//   - Amazon EBS CreateSnapshot API call
+//   - Amazon EC2 RebootInstances API call
+//   - Amazon EC2 StopInstances API call
+//   - Amazon EC2 TerminateInstances API call
 //
-// Creating rules with built-in targets is supported only in the Amazon Web
-// Services Management Console. The built-in targets are EC2 CreateSnapshot API
-// call , EC2 RebootInstances API call , EC2 StopInstances API call , and EC2
-// TerminateInstances API call . For some target types, PutTargets provides
-// target-specific parameters. If the target is a Kinesis data stream, you can
-// optionally specify which shard the event goes to by using the KinesisParameters
-// argument. To invoke a command on multiple EC2 instances with one rule, you can
-// use the RunCommandParameters field. To be able to make API calls against the
-// resources that you own, Amazon EventBridge needs the appropriate permissions.
-// For Lambda and Amazon SNS resources, EventBridge relies on resource-based
-// policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines
-// and API Gateway APIs, EventBridge relies on IAM roles that you specify in the
-// RoleARN argument in PutTargets . For more information, see Authentication and
-// Access Control (https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html)
+// For some target types, PutTargets provides target-specific parameters. If the
+// target is a Kinesis data stream, you can optionally specify which shard the
+// event goes to by using the KinesisParameters argument. To invoke a command on
+// multiple EC2 instances with one rule, you can use the RunCommandParameters
+// field. To be able to make API calls against the resources that you own, Amazon
+// EventBridge needs the appropriate permissions:
+//   - For Lambda and Amazon SNS resources, EventBridge relies on resource-based
+//     policies.
+//   - For EC2 instances, Kinesis Data Streams, Step Functions state machines and
+//     API Gateway APIs, EventBridge relies on IAM roles that you specify in the
+//     RoleARN argument in PutTargets .
+//
+// For more information, see Authentication and Access Control (https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html)
 // in the Amazon EventBridge User Guide. If another Amazon Web Services account is
 // in the same region and has granted you permission (using PutPermission ), you
 // can send events to that account. Set that account's event bus as a target of the
@@ -77,7 +55,9 @@ import (
 // account ID, then you must specify a RoleArn with proper permissions in the
 // Target structure. For more information, see Sending and Receiving Events
 // Between Amazon Web Services Accounts (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html)
-// in the Amazon EventBridge User Guide. For more information about enabling
+// in the Amazon EventBridge User Guide. If you have an IAM role on a cross-account
+// event bus target, a PutTargets call without a role on the same target (same Id
+// and Arn ) will not remove the role. For more information about enabling
 // cross-account events, see PutPermission (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html)
 // . Input, InputPath, and InputTransformer are mutually exclusive and optional
 // parameters of a target. When a rule is triggered due to a matched event:

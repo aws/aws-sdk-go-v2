@@ -4228,9 +4228,9 @@ func awsRestjson1_serializeDocumentHealthCheckPolicy(v *types.HealthCheckPolicy,
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.HealthyThreshold != nil {
 		ok := object.Key("healthyThreshold")
-		ok.Integer(v.HealthyThreshold)
+		ok.Integer(*v.HealthyThreshold)
 	}
 
 	if v.IntervalMillis != nil {
@@ -4243,9 +4243,9 @@ func awsRestjson1_serializeDocumentHealthCheckPolicy(v *types.HealthCheckPolicy,
 		ok.String(*v.Path)
 	}
 
-	if v.Port != 0 {
+	if v.Port != nil {
 		ok := object.Key("port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -4258,9 +4258,9 @@ func awsRestjson1_serializeDocumentHealthCheckPolicy(v *types.HealthCheckPolicy,
 		ok.Long(*v.TimeoutMillis)
 	}
 
-	{
+	if v.UnhealthyThreshold != nil {
 		ok := object.Key("unhealthyThreshold")
-		ok.Integer(v.UnhealthyThreshold)
+		ok.Integer(*v.UnhealthyThreshold)
 	}
 
 	return nil
@@ -5091,9 +5091,9 @@ func awsRestjson1_serializeDocumentPortMapping(v *types.PortMapping, value smith
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.Port != nil {
 		ok := object.Key("port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -5606,9 +5606,9 @@ func awsRestjson1_serializeDocumentVirtualGatewayGrpcConnectionPool(v *types.Vir
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxRequests != nil {
 		ok := object.Key("maxRequests")
-		ok.Integer(v.MaxRequests)
+		ok.Integer(*v.MaxRequests)
 	}
 
 	return nil
@@ -5618,9 +5618,9 @@ func awsRestjson1_serializeDocumentVirtualGatewayHealthCheckPolicy(v *types.Virt
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.HealthyThreshold != nil {
 		ok := object.Key("healthyThreshold")
-		ok.Integer(v.HealthyThreshold)
+		ok.Integer(*v.HealthyThreshold)
 	}
 
 	if v.IntervalMillis != nil {
@@ -5633,9 +5633,9 @@ func awsRestjson1_serializeDocumentVirtualGatewayHealthCheckPolicy(v *types.Virt
 		ok.String(*v.Path)
 	}
 
-	if v.Port != 0 {
+	if v.Port != nil {
 		ok := object.Key("port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -5648,9 +5648,9 @@ func awsRestjson1_serializeDocumentVirtualGatewayHealthCheckPolicy(v *types.Virt
 		ok.Long(*v.TimeoutMillis)
 	}
 
-	{
+	if v.UnhealthyThreshold != nil {
 		ok := object.Key("unhealthyThreshold")
-		ok.Integer(v.UnhealthyThreshold)
+		ok.Integer(*v.UnhealthyThreshold)
 	}
 
 	return nil
@@ -5660,9 +5660,9 @@ func awsRestjson1_serializeDocumentVirtualGatewayHttp2ConnectionPool(v *types.Vi
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxRequests != nil {
 		ok := object.Key("maxRequests")
-		ok.Integer(v.MaxRequests)
+		ok.Integer(*v.MaxRequests)
 	}
 
 	return nil
@@ -5672,9 +5672,9 @@ func awsRestjson1_serializeDocumentVirtualGatewayHttpConnectionPool(v *types.Vir
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxConnections != nil {
 		ok := object.Key("maxConnections")
-		ok.Integer(v.MaxConnections)
+		ok.Integer(*v.MaxConnections)
 	}
 
 	if v.MaxPendingRequests != nil {
@@ -5893,9 +5893,9 @@ func awsRestjson1_serializeDocumentVirtualGatewayPortMapping(v *types.VirtualGat
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.Port != nil {
 		ok := object.Key("port")
-		ok.Integer(v.Port)
+		ok.Integer(*v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -6063,9 +6063,9 @@ func awsRestjson1_serializeDocumentVirtualNodeGrpcConnectionPool(v *types.Virtua
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxRequests != nil {
 		ok := object.Key("maxRequests")
-		ok.Integer(v.MaxRequests)
+		ok.Integer(*v.MaxRequests)
 	}
 
 	return nil
@@ -6075,9 +6075,9 @@ func awsRestjson1_serializeDocumentVirtualNodeHttp2ConnectionPool(v *types.Virtu
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxRequests != nil {
 		ok := object.Key("maxRequests")
-		ok.Integer(v.MaxRequests)
+		ok.Integer(*v.MaxRequests)
 	}
 
 	return nil
@@ -6087,9 +6087,9 @@ func awsRestjson1_serializeDocumentVirtualNodeHttpConnectionPool(v *types.Virtua
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxConnections != nil {
 		ok := object.Key("maxConnections")
-		ok.Integer(v.MaxConnections)
+		ok.Integer(*v.MaxConnections)
 	}
 
 	if v.MaxPendingRequests != nil {
@@ -6158,9 +6158,9 @@ func awsRestjson1_serializeDocumentVirtualNodeTcpConnectionPool(v *types.Virtual
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxConnections != nil {
 		ok := object.Key("maxConnections")
-		ok.Integer(v.MaxConnections)
+		ok.Integer(*v.MaxConnections)
 	}
 
 	return nil

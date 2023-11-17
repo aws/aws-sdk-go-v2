@@ -64,7 +64,7 @@ type CreateChatTokenInput struct {
 
 	// Session duration (in minutes), after which the session expires. Default: 60 (1
 	// hour).
-	SessionDurationInMinutes int32
+	SessionDurationInMinutes *int32
 
 	noSmithyDocumentSerde
 }

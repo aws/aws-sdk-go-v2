@@ -55,6 +55,11 @@ type ModifyIpamInput struct {
 	// The operating Regions to remove.
 	RemoveOperatingRegions []types.RemoveIpamOperatingRegion
 
+	// IPAM is offered in a Free Tier and an Advanced Tier. For more information about
+	// the features available in each tier and the costs associated with the tiers, see
+	// Amazon VPC pricing > IPAM tab (http://aws.amazon.com/vpc/pricing/) .
+	Tier types.IpamTier
+
 	noSmithyDocumentSerde
 }
 

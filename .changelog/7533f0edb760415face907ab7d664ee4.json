@@ -1,0 +1,8 @@
+{
+    "id": "7533f0ed-b760-415f-ace9-07ab7d664ee4",
+    "type": "documentation",
+    "description": "Docs only build to bring up-to-date with public docs.",
+    "modules": [
+        "service/kinesisvideo"
+    ]
+}

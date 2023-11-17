@@ -127,6 +127,68 @@ func (MonitorProcessingStatusCode) Values() []MonitorProcessingStatusCode {
 	}
 }
 
+type Operator string
+
+// Enum values for Operator
+const (
+	OperatorEquals    Operator = "EQUALS"
+	OperatorNotEquals Operator = "NOT_EQUALS"
+)
+
+// Values returns all known values for Operator. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Operator) Values() []Operator {
+	return []Operator{
+		"EQUALS",
+		"NOT_EQUALS",
+	}
+}
+
+type QueryStatus string
+
+// Enum values for QueryStatus
+const (
+	QueryStatusQueued    QueryStatus = "QUEUED"
+	QueryStatusRunning   QueryStatus = "RUNNING"
+	QueryStatusSucceeded QueryStatus = "SUCCEEDED"
+	QueryStatusFailed    QueryStatus = "FAILED"
+	QueryStatusCanceled  QueryStatus = "CANCELED"
+)
+
+// Values returns all known values for QueryStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (QueryStatus) Values() []QueryStatus {
+	return []QueryStatus{
+		"QUEUED",
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+		"CANCELED",
+	}
+}
+
+type QueryType string
+
+// Enum values for QueryType
+const (
+	QueryTypeMeasurements       QueryType = "MEASUREMENTS"
+	QueryTypeTopLocations       QueryType = "TOP_LOCATIONS"
+	QueryTypeTopLocationDetails QueryType = "TOP_LOCATION_DETAILS"
+)
+
+// Values returns all known values for QueryType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (QueryType) Values() []QueryType {
+	return []QueryType{
+		"MEASUREMENTS",
+		"TOP_LOCATIONS",
+		"TOP_LOCATION_DETAILS",
+	}
+}
+
 type TriangulationEventType string
 
 // Enum values for TriangulationEventType

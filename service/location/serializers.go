@@ -4108,9 +4108,9 @@ func awsRestjson1_serializeOpDocumentSearchPlaceIndexForPositionInput(v *SearchP
 		ok.String(*v.Language)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.Position != nil {
@@ -4370,9 +4370,9 @@ func awsRestjson1_serializeOpDocumentSearchPlaceIndexForTextInput(v *SearchPlace
 		ok.String(*v.Language)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.Text != nil {

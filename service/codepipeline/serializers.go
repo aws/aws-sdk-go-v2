@@ -3185,6 +3185,41 @@ func awsAwsjson11_serializeDocumentQueryParamMap(v map[string]string, value smit
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSourceRevisionOverride(v *types.SourceRevisionOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ActionName != nil {
+		ok := object.Key("actionName")
+		ok.String(*v.ActionName)
+	}
+
+	if len(v.RevisionType) > 0 {
+		ok := object.Key("revisionType")
+		ok.String(string(v.RevisionType))
+	}
+
+	if v.RevisionValue != nil {
+		ok := object.Key("revisionValue")
+		ok.String(*v.RevisionValue)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSourceRevisionOverrideList(v []types.SourceRevisionOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentSourceRevisionOverride(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentStageActionDeclarationList(v []types.ActionDeclaration, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4118,6 +4153,13 @@ func awsAwsjson11_serializeOpDocumentStartPipelineExecutionInput(v *StartPipelin
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.SourceRevisions != nil {
+		ok := object.Key("sourceRevisions")
+		if err := awsAwsjson11_serializeDocumentSourceRevisionOverrideList(v.SourceRevisions, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Variables != nil {

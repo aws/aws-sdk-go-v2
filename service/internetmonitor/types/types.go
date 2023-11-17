@@ -59,6 +59,37 @@ type AvailabilityMeasurement struct {
 	noSmithyDocumentSerde
 }
 
+// A filter that you use with the results of a Amazon CloudWatch Internet Monitor
+// query that you created and ran. The query sets up a repository of data that is a
+// subset of your application's Internet Monitor data. FilterParameter is a string
+// that defines how you want to filter the repository of data to return a set of
+// results, based on your criteria. The filter parameters that you can specify
+// depend on the query type that you used to create the repository, since each
+// query type returns a different set of Internet Monitor data. For each filter,
+// you specify a field (such as city ), an operator (such as not_equals , and a
+// value or array of values (such as ["Seattle", "Redmond"] ). Separate values in
+// the array with commas. For more information about specifying filter parameters,
+// see Using the Amazon CloudWatch Internet Monitor query interface (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html)
+// in the Amazon CloudWatch Internet Monitor User Guide.
+type FilterParameter struct {
+
+	// A data field that you want to filter, to further scope your application's
+	// Internet Monitor data in a repository that you created by running a query. A
+	// field might be city , for example. The field must be one of the fields that was
+	// returned by the specific query that you used to create the repository.
+	Field *string
+
+	// The operator to use with the filter field and a value, such as not_equals .
+	Operator Operator
+
+	// One or more values to be used, together with the specified operator, to filter
+	// data for a query. For example, you could specify an array of values such as
+	// ["Seattle", "Redmond"] . Values in the array are separated by commas.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a health event created in a monitor in Amazon CloudWatch
 // Internet Monitor.
 type HealthEvent struct {
@@ -68,7 +99,7 @@ type HealthEvent struct {
 	// This member is required.
 	EventArn *string
 
-	// The internally generated identifier of a specific network traffic impairment
+	// The internally-generated identifier of a specific network traffic impairment
 	// health event.
 	//
 	// This member is required.
@@ -278,7 +309,8 @@ type InternetMeasurementsLogDelivery struct {
 // Internet Monitor creates a health event. Also defines whether a local threshold
 // is enabled or disabled, and the minimum percentage of overall traffic that must
 // be impacted by an issue before Internet Monitor creates an event when a
-// threshold is crossed for a local health score. For more information, see Change
+// threshold is crossed for a local health score. If you don't set a local health
+// event threshold, the default value is 60%. For more information, see Change
 // health event thresholds (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview)
 // in the Internet Monitor section of the CloudWatch User Guide.
 type LocalHealthEventsConfig struct {
@@ -288,7 +320,8 @@ type LocalHealthEventsConfig struct {
 
 	// The minimum percentage of overall traffic for an application that must be
 	// impacted by an issue before Internet Monitor creates an event when a threshold
-	// is crossed for a local health score.
+	// is crossed for a local health score. If you don't set a minimum traffic impact
+	// threshold, the default value is 0.01%.
 	MinTrafficImpact float64
 
 	// The status of whether Internet Monitor creates a health event based on a
@@ -416,6 +449,24 @@ type PerformanceMeasurement struct {
 	// information, see When Amazon Web Services creates and resolves health events (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 	RoundTripTime *RoundTripTime
+
+	noSmithyDocumentSerde
+}
+
+// Defines a field to query for your application's Amazon CloudWatch Internet
+// Monitor data. You create a data repository by running a query of a specific
+// type. Each QueryType includes a specific set of fields and datatypes to
+// retrieve data for.
+type QueryField struct {
+
+	// The name of a field to query your application's Amazon CloudWatch Internet
+	// Monitor data for, such as availability_score .
+	Name *string
+
+	// The data type for a query field, which must correspond to the field you're
+	// defining for QueryField . For example, if the query field name is
+	// availability_score , the data type is float .
+	Type *string
 
 	noSmithyDocumentSerde
 }

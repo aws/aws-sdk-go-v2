@@ -13,7 +13,10 @@ import (
 )
 
 // This is used by SaaS partners to write events to a customer's partner event
-// bus. Amazon Web Services customers do not use this operation.
+// bus. Amazon Web Services customers do not use this operation. For information on
+// calculating event batch size, see Calculating EventBridge PutEvents event entry
+// size (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-putevent-size.html)
+// in the EventBridge User Guide.
 func (c *Client) PutPartnerEvents(ctx context.Context, params *PutPartnerEventsInput, optFns ...func(*Options)) (*PutPartnerEventsOutput, error) {
 	if params == nil {
 		params = &PutPartnerEventsInput{}
@@ -41,8 +44,11 @@ type PutPartnerEventsInput struct {
 
 type PutPartnerEventsOutput struct {
 
-	// The list of events from this operation that were successfully written to the
-	// partner event bus.
+	// The results for each event entry the partner submitted in this request. If the
+	// event was successfully submitted, the entry has the event ID in it. Otherwise,
+	// you can use the error code and error message to identify the problem with the
+	// entry. For each record, the index of the response element is the same as the
+	// index in the request array.
 	Entries []types.PutPartnerEventsResultEntry
 
 	// The number of events from this operation that could not be written to the

@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a repository. If the repository contains images, you must either delete
-// all images in the repository or use the force option to delete the repository.
+// Deletes a repository. If the repository isn't empty, you must either delete the
+// contents of the repository or use the force option to delete the repository and
+// have Amazon ECR delete all of its contents on your behalf.
 func (c *Client) DeleteRepository(ctx context.Context, params *DeleteRepositoryInput, optFns ...func(*Options)) (*DeleteRepositoryOutput, error) {
 	if params == nil {
 		params = &DeleteRepositoryInput{}
@@ -36,7 +37,8 @@ type DeleteRepositoryInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// If a repository contains images, forces the deletion.
+	// If true, deleting the repository force deletes the contents of the repository.
+	// If false, the repository must be empty before attempting to delete it.
 	Force bool
 
 	// The Amazon Web Services account ID associated with the registry that contains

@@ -14,9 +14,6 @@ import (
 // Provides a list of available query IDs only for queries saved in the specified
 // workgroup. Requires that you have access to the specified workgroup. If a
 // workgroup is not specified, lists the saved queries for the primary workgroup.
-// For code samples using the Amazon Web Services SDK for Java, see Examples and
-// Code Samples (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in
-// the Amazon Athena User Guide.
 func (c *Client) ListNamedQueries(ctx context.Context, params *ListNamedQueriesInput, optFns ...func(*Options)) (*ListNamedQueriesOutput, error) {
 	if params == nil {
 		params = &ListNamedQueriesInput{}

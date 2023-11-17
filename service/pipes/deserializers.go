@@ -2262,7 +2262,7 @@ func awsRestjson1_deserializeDocumentBatchArrayProperties(v **types.BatchArrayPr
 				if err != nil {
 					return err
 				}
-				sv.Size = int32(i64)
+				sv.Size = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -2646,7 +2646,7 @@ func awsRestjson1_deserializeDocumentBatchRetryStrategy(v **types.BatchRetryStra
 				if err != nil {
 					return err
 				}
-				sv.Attempts = int32(i64)
+				sv.Attempts = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -3227,7 +3227,7 @@ func awsRestjson1_deserializeDocumentEcsEphemeralStorage(v **types.EcsEphemeralS
 				if err != nil {
 					return err
 				}
-				sv.SizeInGiB = int32(i64)
+				sv.SizeInGiB = ptr.Int32(int32(i64))
 			}
 
 		default:

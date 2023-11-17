@@ -137,7 +137,7 @@ type ServiceQuotaExceededException struct {
 	ResourceType *string
 	ServiceCode  *string
 	QuotaCode    *string
-	QuotaValue   int32
+	QuotaValue   *int32
 
 	noSmithyDocumentSerde
 }

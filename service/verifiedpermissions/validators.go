@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchIsAuthorized struct {
+}
+
+func (*validateOpBatchIsAuthorized) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchIsAuthorized) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchIsAuthorizedInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchIsAuthorizedInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateIdentitySource struct {
 }
 
@@ -470,6 +490,10 @@ func (m *validateOpUpdatePolicyTemplate) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchIsAuthorizedValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchIsAuthorized{}, middleware.After)
+}
+
 func addOpCreateIdentitySourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIdentitySource{}, middleware.After)
 }
@@ -601,6 +625,55 @@ func validateAttributeValue(v types.AttributeValue) error {
 			invalidParams.AddNested("[set]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchIsAuthorizedInputItem(v *types.BatchIsAuthorizedInputItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchIsAuthorizedInputItem"}
+	if v.Principal != nil {
+		if err := validateEntityIdentifier(v.Principal); err != nil {
+			invalidParams.AddNested("Principal", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Action != nil {
+		if err := validateActionIdentifier(v.Action); err != nil {
+			invalidParams.AddNested("Action", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Resource != nil {
+		if err := validateEntityIdentifier(v.Resource); err != nil {
+			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Context != nil {
+		if err := validateContextDefinition(v.Context); err != nil {
+			invalidParams.AddNested("Context", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchIsAuthorizedInputList(v []types.BatchIsAuthorizedInputItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchIsAuthorizedInputList"}
+	for i := range v {
+		if err := validateBatchIsAuthorizedInputItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1010,6 +1083,33 @@ func validateValidationSettings(v *types.ValidationSettings) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ValidationSettings"}
 	if len(v.Mode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchIsAuthorizedInput(v *BatchIsAuthorizedInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchIsAuthorizedInput"}
+	if v.PolicyStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyStoreId"))
+	}
+	if v.Entities != nil {
+		if err := validateEntitiesDefinition(v.Entities); err != nil {
+			invalidParams.AddNested("Entities", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Requests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Requests"))
+	} else if v.Requests != nil {
+		if err := validateBatchIsAuthorizedInputList(v.Requests); err != nil {
+			invalidParams.AddNested("Requests", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

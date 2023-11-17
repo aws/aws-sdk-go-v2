@@ -39,7 +39,7 @@ type AwsVpcConfiguration struct {
 type BatchArrayProperties struct {
 
 	// The size of the array, if this is an array batch job.
-	Size int32
+	Size *int32
 
 	noSmithyDocumentSerde
 }
@@ -180,7 +180,7 @@ type BatchRetryStrategy struct {
 	// The number of times to move a job to the RUNNABLE status. If the value of
 	// attempts is greater than one, the job is retried on failure the same number of
 	// attempts as the value.
-	Attempts int32
+	Attempts *int32
 
 	noSmithyDocumentSerde
 }
@@ -350,7 +350,7 @@ type EcsEphemeralStorage struct {
 	// supported value is 21 GiB and the maximum supported value is 200 GiB.
 	//
 	// This member is required.
-	SizeInGiB int32
+	SizeInGiB *int32
 
 	noSmithyDocumentSerde
 }

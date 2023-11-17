@@ -34,7 +34,7 @@ type ListPlaybackKeyPairsInput struct {
 
 	// Maximum number of key pairs to return. Default: your service quota or 100,
 	// whichever is smaller.
-	MaxResults int32
+	MaxResults *int32
 
 	// The first key pair to retrieve. This is used for pagination; see the nextToken
 	// response field.
@@ -172,8 +172,8 @@ func NewListPlaybackKeyPairsPaginator(client ListPlaybackKeyPairsAPIClient, para
 	}
 
 	options := ListPlaybackKeyPairsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -203,7 +203,11 @@ func (p *ListPlaybackKeyPairsPaginator) NextPage(ctx context.Context, optFns ...
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListPlaybackKeyPairs(ctx, &params, optFns...)
 	if err != nil {

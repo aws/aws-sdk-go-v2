@@ -19,6 +19,129 @@ import (
 	"strings"
 )
 
+type awsAwsjson10_deserializeOpBatchIsAuthorized struct {
+}
+
+func (*awsAwsjson10_deserializeOpBatchIsAuthorized) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpBatchIsAuthorized) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorBatchIsAuthorized(response, &metadata)
+	}
+	output := &BatchIsAuthorizedOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentBatchIsAuthorizedOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorBatchIsAuthorized(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson10_deserializeOpCreateIdentitySource struct {
 }
 
@@ -3301,6 +3424,291 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentActionIdentifier(v **types.ActionIdentifier, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ActionIdentifier
+	if *v == nil {
+		sv = &types.ActionIdentifier{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "actionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActionId to be of type string, got %T instead", value)
+				}
+				sv.ActionId = ptr.String(jtv)
+			}
+
+		case "actionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActionType to be of type string, got %T instead", value)
+				}
+				sv.ActionType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentAttributeValue(v *types.AttributeValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.AttributeValue
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "boolean":
+			var mv bool
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanAttribute to be of type *bool, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.AttributeValueMemberBoolean{Value: mv}
+			break loop
+
+		case "entityIdentifier":
+			var mv types.EntityIdentifier
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentEntityIdentifier(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AttributeValueMemberEntityIdentifier{Value: mv}
+			break loop
+
+		case "long":
+			var mv int64
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongAttribute to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				mv = i64
+			}
+			uv = &types.AttributeValueMemberLong{Value: mv}
+			break loop
+
+		case "record":
+			var mv map[string]types.AttributeValue
+			if err := awsAwsjson10_deserializeDocumentRecordAttribute(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.AttributeValueMemberRecord{Value: mv}
+			break loop
+
+		case "set":
+			var mv []types.AttributeValue
+			if err := awsAwsjson10_deserializeDocumentSetAttribute(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.AttributeValueMemberSet{Value: mv}
+			break loop
+
+		case "string":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringAttribute to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.AttributeValueMemberString{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentBatchIsAuthorizedInputItem(v **types.BatchIsAuthorizedInputItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchIsAuthorizedInputItem
+	if *v == nil {
+		sv = &types.BatchIsAuthorizedInputItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "action":
+			if err := awsAwsjson10_deserializeDocumentActionIdentifier(&sv.Action, value); err != nil {
+				return err
+			}
+
+		case "context":
+			if err := awsAwsjson10_deserializeDocumentContextDefinition(&sv.Context, value); err != nil {
+				return err
+			}
+
+		case "principal":
+			if err := awsAwsjson10_deserializeDocumentEntityIdentifier(&sv.Principal, value); err != nil {
+				return err
+			}
+
+		case "resource":
+			if err := awsAwsjson10_deserializeDocumentEntityIdentifier(&sv.Resource, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentBatchIsAuthorizedOutputItem(v **types.BatchIsAuthorizedOutputItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchIsAuthorizedOutputItem
+	if *v == nil {
+		sv = &types.BatchIsAuthorizedOutputItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "decision":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Decision to be of type string, got %T instead", value)
+				}
+				sv.Decision = types.Decision(jtv)
+			}
+
+		case "determiningPolicies":
+			if err := awsAwsjson10_deserializeDocumentDeterminingPolicyList(&sv.DeterminingPolicies, value); err != nil {
+				return err
+			}
+
+		case "errors":
+			if err := awsAwsjson10_deserializeDocumentEvaluationErrorList(&sv.Errors, value); err != nil {
+				return err
+			}
+
+		case "request":
+			if err := awsAwsjson10_deserializeDocumentBatchIsAuthorizedInputItem(&sv.Request, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentBatchIsAuthorizedOutputList(v *[]types.BatchIsAuthorizedOutputItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchIsAuthorizedOutputItem
+	if *v == nil {
+		cv = []types.BatchIsAuthorizedOutputItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchIsAuthorizedOutputItem
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentBatchIsAuthorizedOutputItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentClientIds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3379,6 +3787,78 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentContextDefinition(v *types.ContextDefinition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ContextDefinition
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "contextMap":
+			var mv map[string]types.AttributeValue
+			if err := awsAwsjson10_deserializeDocumentContextMap(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.ContextDefinitionMemberContextMap{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentContextMap(v *map[string]types.AttributeValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.AttributeValue
+	if *v == nil {
+		mv = map[string]types.AttributeValue{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.AttributeValue
+		mapVar := parsedVal
+		if err := awsAwsjson10_deserializeDocumentAttributeValue(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -4351,6 +4831,40 @@ func awsAwsjson10_deserializeDocumentPolicyTemplatesList(v *[]types.PolicyTempla
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentRecordAttribute(v *map[string]types.AttributeValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.AttributeValue
+	if *v == nil {
+		mv = map[string]types.AttributeValue{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.AttributeValue
+		mapVar := parsedVal
+		if err := awsAwsjson10_deserializeDocumentAttributeValue(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentResourceConflict(v **types.ResourceConflict, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4565,6 +5079,38 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentSetAttribute(v *[]types.AttributeValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AttributeValue
+	if *v == nil {
+		cv = []types.AttributeValue{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AttributeValue
+		if err := awsAwsjson10_deserializeDocumentAttributeValue(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -4972,6 +5518,42 @@ func awsAwsjson10_deserializeDocumentValidationSettings(v **types.ValidationSett
 					return fmt.Errorf("expected ValidationMode to be of type string, got %T instead", value)
 				}
 				sv.Mode = types.ValidationMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeOpDocumentBatchIsAuthorizedOutput(v **BatchIsAuthorizedOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *BatchIsAuthorizedOutput
+	if *v == nil {
+		sv = &BatchIsAuthorizedOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "results":
+			if err := awsAwsjson10_deserializeDocumentBatchIsAuthorizedOutputList(&sv.Results, value); err != nil {
+				return err
 			}
 
 		default:

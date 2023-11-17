@@ -8833,7 +8833,7 @@ func awsRestjson1_deserializeDocumentHealthCheckPolicy(v **types.HealthCheckPoli
 				if err != nil {
 					return err
 				}
-				sv.HealthyThreshold = int32(i64)
+				sv.HealthyThreshold = ptr.Int32(int32(i64))
 			}
 
 		case "intervalMillis":
@@ -8868,7 +8868,7 @@ func awsRestjson1_deserializeDocumentHealthCheckPolicy(v **types.HealthCheckPoli
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case "protocol":
@@ -8903,7 +8903,7 @@ func awsRestjson1_deserializeDocumentHealthCheckPolicy(v **types.HealthCheckPoli
 				if err != nil {
 					return err
 				}
-				sv.UnhealthyThreshold = int32(i64)
+				sv.UnhealthyThreshold = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -11089,7 +11089,7 @@ func awsRestjson1_deserializeDocumentPortMapping(v **types.PortMapping, value in
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case "protocol":
@@ -12913,7 +12913,7 @@ func awsRestjson1_deserializeDocumentVirtualGatewayGrpcConnectionPool(v **types.
 				if err != nil {
 					return err
 				}
-				sv.MaxRequests = int32(i64)
+				sv.MaxRequests = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -12957,7 +12957,7 @@ func awsRestjson1_deserializeDocumentVirtualGatewayHealthCheckPolicy(v **types.V
 				if err != nil {
 					return err
 				}
-				sv.HealthyThreshold = int32(i64)
+				sv.HealthyThreshold = ptr.Int32(int32(i64))
 			}
 
 		case "intervalMillis":
@@ -12992,7 +12992,7 @@ func awsRestjson1_deserializeDocumentVirtualGatewayHealthCheckPolicy(v **types.V
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case "protocol":
@@ -13027,7 +13027,7 @@ func awsRestjson1_deserializeDocumentVirtualGatewayHealthCheckPolicy(v **types.V
 				if err != nil {
 					return err
 				}
-				sv.UnhealthyThreshold = int32(i64)
+				sv.UnhealthyThreshold = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -13071,7 +13071,7 @@ func awsRestjson1_deserializeDocumentVirtualGatewayHttp2ConnectionPool(v **types
 				if err != nil {
 					return err
 				}
-				sv.MaxRequests = int32(i64)
+				sv.MaxRequests = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -13115,7 +13115,7 @@ func awsRestjson1_deserializeDocumentVirtualGatewayHttpConnectionPool(v **types.
 				if err != nil {
 					return err
 				}
-				sv.MaxConnections = int32(i64)
+				sv.MaxConnections = ptr.Int32(int32(i64))
 			}
 
 		case "maxPendingRequests":
@@ -13657,7 +13657,7 @@ func awsRestjson1_deserializeDocumentVirtualGatewayPortMapping(v **types.Virtual
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case "protocol":
@@ -14268,7 +14268,7 @@ func awsRestjson1_deserializeDocumentVirtualNodeGrpcConnectionPool(v **types.Vir
 				if err != nil {
 					return err
 				}
-				sv.MaxRequests = int32(i64)
+				sv.MaxRequests = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -14312,7 +14312,7 @@ func awsRestjson1_deserializeDocumentVirtualNodeHttp2ConnectionPool(v **types.Vi
 				if err != nil {
 					return err
 				}
-				sv.MaxRequests = int32(i64)
+				sv.MaxRequests = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -14356,7 +14356,7 @@ func awsRestjson1_deserializeDocumentVirtualNodeHttpConnectionPool(v **types.Vir
 				if err != nil {
 					return err
 				}
-				sv.MaxConnections = int32(i64)
+				sv.MaxConnections = ptr.Int32(int32(i64))
 			}
 
 		case "maxPendingRequests":
@@ -14704,7 +14704,7 @@ func awsRestjson1_deserializeDocumentVirtualNodeTcpConnectionPool(v **types.Virt
 				if err != nil {
 					return err
 				}
-				sv.MaxConnections = int32(i64)
+				sv.MaxConnections = ptr.Int32(int32(i64))
 			}
 
 		default:

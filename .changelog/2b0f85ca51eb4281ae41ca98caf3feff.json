@@ -1,0 +1,8 @@
+{
+    "id": "2b0f85ca-51eb-4281-ae41-ca98caf3feff",
+    "type": "feature",
+    "description": "type \u0026 defaulting refinement to various range properties",
+    "modules": [
+        "service/ivschat"
+    ]
+}

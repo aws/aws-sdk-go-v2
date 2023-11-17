@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// With Amazon EMR release version 4.0 and higher, the only accepted parameter is
+// With Amazon EMR release version 4.0 and later, the only accepted parameter is
 // the application name. To pass arguments to applications, you use configuration
 // classifications specified using configuration JSON objects. For more
 // information, see Configuring Applications (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html)
@@ -201,7 +201,7 @@ type BootstrapActionDetail struct {
 }
 
 // Specification of the status of a CancelSteps request. Available only in Amazon
-// EMR version 4.8.0 and higher, excluding version 5.0.0.
+// EMR version 4.8.0 and later, excluding version 5.0.0.
 type CancelStepsInfo struct {
 
 	// The reason for the failure if the CancelSteps request fails.
@@ -286,25 +286,26 @@ type Cluster struct {
 	// The Amazon Resource Name of the cluster.
 	ClusterArn *string
 
-	// Applies only to Amazon EMR releases 4.x and higher. The list of configurations
+	// Applies only to Amazon EMR releases 4.x and later. The list of configurations
 	// that are supplied to the Amazon EMR cluster.
 	Configurations []Configuration
 
-	// Available only in Amazon EMR releases 5.7.0 and higher. The ID of a custom
+	// Available only in Amazon EMR releases 5.7.0 and later. The ID of a custom
 	// Amazon EBS-backed Linux AMI if the cluster uses a custom AMI.
 	CustomAmiId *string
 
-	// The IOPS, of the Amazon EBS root device volume for the Linux AMI that each
-	// Amazon EC2 instance uses. Available in Amazon EMR releases 6.15.0 and higher.
+	// The IOPS, of the Amazon EBS root device volume of the Linux AMI that is used
+	// for each Amazon EC2 instance. Available in Amazon EMR releases 6.15.0 and later.
 	EbsRootVolumeIops *int32
 
-	// The size, in GiB, of the Amazon EBS root device volume for the Linux AMI that
-	// each Amazon EC2 instance uses. Available in Amazon EMR releases 4.x and higher.
+	// The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is
+	// used for each Amazon EC2 instance. Available in Amazon EMR releases 4.x and
+	// later.
 	EbsRootVolumeSize *int32
 
-	// The throughput, in MiB/s, of the Amazon EBS root device volume for the Linux
-	// AMI that each Amazon EC2 instance uses. Available in Amazon EMR releases 6.15.0
-	// and higher.
+	// The throughput, in MiB/s, of the Amazon EBS root device volume of the Linux AMI
+	// that is used for each Amazon EC2 instance. Available in Amazon EMR releases
+	// 6.15.0 and later.
 	EbsRootVolumeThroughput *int32
 
 	// Provides information about the Amazon EC2 instances in a cluster grouped by
@@ -315,7 +316,7 @@ type Cluster struct {
 	Id *string
 
 	// The instance fleet configuration is available only in Amazon EMR releases 4.8.0
-	// and higher, excluding 5.0.x versions. The instance group configuration of the
+	// and later, excluding 5.0.x versions. The instance group configuration of the
 	// cluster. A value of INSTANCE_GROUP indicates a uniform instance group
 	// configuration. A value of INSTANCE_FLEET indicates an instance fleets
 	// configuration.
@@ -328,7 +329,7 @@ type Cluster struct {
 	KerberosAttributes *KerberosAttributes
 
 	// The KMS key used for encrypting log files. This attribute is only available
-	// with Amazon EMR 5.30.0 and higher, excluding Amazon EMR 6.0.0.
+	// with Amazon EMR 5.30.0 and later, excluding Amazon EMR 6.0.0.
 	LogEncryptionKmsKeyId *string
 
 	// The path to the Amazon S3 location where logs for this cluster are stored.
@@ -365,7 +366,7 @@ type Cluster struct {
 	// emr-x.x.x , where x.x.x is an Amazon EMR release version such as emr-5.14.0 .
 	// For more information about Amazon EMR release versions and included application
 	// versions and features, see https://docs.aws.amazon.com/emr/latest/ReleaseGuide/ (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/)
-	// . The release label applies only to Amazon EMR releases version 4.0 and higher.
+	// . The release label applies only to Amazon EMR releases version 4.0 and later.
 	// Earlier versions use AmiVersion .
 	ReleaseLabel *string
 
@@ -384,14 +385,14 @@ type Cluster struct {
 	// scale-in activity occurs or an instance group is resized.
 	// TERMINATE_AT_INSTANCE_HOUR indicates that Amazon EMR terminates nodes at the
 	// instance-hour boundary, regardless of when the request to terminate the instance
-	// was submitted. This option is only available with Amazon EMR 5.1.0 and higher
-	// and is the default for clusters created using that version.
+	// was submitted. This option is only available with Amazon EMR 5.1.0 and later and
+	// is the default for clusters created using that version.
 	// TERMINATE_AT_TASK_COMPLETION indicates that Amazon EMR adds nodes to a deny list
 	// and drains tasks from nodes before terminating the Amazon EC2 instances,
 	// regardless of the instance-hour boundary. With either behavior, Amazon EMR
 	// removes the least active nodes first and blocks instance termination if it could
 	// lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION is available only in
-	// Amazon EMR releases 4.1.0 and higher, and is the default for versions of Amazon
+	// Amazon EMR releases 4.1.0 and later, and is the default for versions of Amazon
 	// EMR earlier than 5.1.0.
 	ScaleDownBehavior ScaleDownBehavior
 
@@ -568,13 +569,13 @@ type ComputeLimits struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon EMR releases 4.x or higher. An optional configuration specification to
-// be used when provisioning cluster instances, which can include configurations
-// for applications and software bundled with Amazon EMR. A configuration consists
-// of a classification, properties, and optional nested configurations. A
-// classification refers to an application-specific configuration file. Properties
-// are the settings you want to change in that file. For more information, see
-// Configuring Applications (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html)
+// Amazon EMR releases 4.x or later. An optional configuration specification to be
+// used when provisioning cluster instances, which can include configurations for
+// applications and software bundled with Amazon EMR. A configuration consists of a
+// classification, properties, and optional nested configurations. A classification
+// refers to an application-specific configuration file. Properties are the
+// settings you want to change in that file. For more information, see Configuring
+// Applications (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html)
 // .
 type Configuration struct {
 
@@ -885,7 +886,7 @@ type Instance struct {
 // a particular node type (master, core, or task) in an Amazon EMR cluster.
 // Instance fleets can consist of a mix of instance types and On-Demand and Spot
 // Instances, which are provisioned to meet a defined target capacity. The instance
-// fleet configuration is available only in Amazon EMR releases 4.8.0 and higher,
+// fleet configuration is available only in Amazon EMR releases 4.8.0 and later,
 // excluding 5.0.x versions.
 type InstanceFleet struct {
 
@@ -963,7 +964,7 @@ type InstanceFleet struct {
 }
 
 // The configuration that defines an instance fleet. The instance fleet
-// configuration is available only in Amazon EMR releases 4.8.0 and higher,
+// configuration is available only in Amazon EMR releases 4.8.0 and later,
 // excluding 5.0.x versions.
 type InstanceFleetConfig struct {
 
@@ -1024,7 +1025,7 @@ type InstanceFleetConfig struct {
 
 // Configuration parameters for an instance fleet modification request. The
 // instance fleet configuration is available only in Amazon EMR releases 4.8.0 and
-// higher, excluding 5.0.x versions.
+// later, excluding 5.0.x versions.
 type InstanceFleetModifyConfig struct {
 
 	// A unique identifier for the instance fleet.
@@ -1049,15 +1050,15 @@ type InstanceFleetModifyConfig struct {
 // The launch specification for Spot Instances in the fleet, which determines the
 // defined duration, provisioning timeout behavior, and allocation strategy. The
 // instance fleet configuration is available only in Amazon EMR releases 4.8.0 and
-// higher, excluding 5.0.x versions. On-Demand and Spot instance allocation
-// strategies are available in Amazon EMR releases 5.12.1 and higher.
+// later, excluding 5.0.x versions. On-Demand and Spot instance allocation
+// strategies are available in Amazon EMR releases 5.12.1 and later.
 type InstanceFleetProvisioningSpecifications struct {
 
 	// The launch specification for On-Demand Instances in the instance fleet, which
 	// determines the allocation strategy. The instance fleet configuration is
-	// available only in Amazon EMR releases 4.8.0 and higher, excluding 5.0.x
-	// versions. On-Demand Instances allocation strategy is available in Amazon EMR
-	// releases 5.12.1 and higher.
+	// available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.
+	// On-Demand Instances allocation strategy is available in Amazon EMR releases
+	// 5.12.1 and later.
 	OnDemandSpecification *OnDemandProvisioningSpecification
 
 	// The launch specification for Spot instances in the fleet, which determines the
@@ -1082,7 +1083,7 @@ type InstanceFleetResizingSpecifications struct {
 }
 
 // Provides status change reason details for the instance fleet. The instance
-// fleet configuration is available only in Amazon EMR releases 4.8.0 and higher,
+// fleet configuration is available only in Amazon EMR releases 4.8.0 and later,
 // excluding 5.0.x versions.
 type InstanceFleetStateChangeReason struct {
 
@@ -1096,7 +1097,7 @@ type InstanceFleetStateChangeReason struct {
 }
 
 // The status of the instance fleet. The instance fleet configuration is available
-// only in Amazon EMR releases 4.8.0 and higher, excluding 5.0.x versions.
+// only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.
 type InstanceFleetStatus struct {
 
 	// A code representing the instance fleet status.
@@ -1128,7 +1129,7 @@ type InstanceFleetStatus struct {
 // Provides historical timestamps for the instance fleet, including the time of
 // creation, the time it became ready to run jobs, and the time of termination. The
 // instance fleet configuration is available only in Amazon EMR releases 4.8.0 and
-// higher, excluding 5.0.x versions.
+// later, excluding 5.0.x versions.
 type InstanceFleetTimeline struct {
 
 	// The time and date the instance fleet was created.
@@ -1159,7 +1160,7 @@ type InstanceGroup struct {
 	// amount in USD.
 	BidPrice *string
 
-	// Amazon EMR releases 4.x or higher. The list of configurations supplied for an
+	// Amazon EMR releases 4.x or later. The list of configurations supplied for an
 	// Amazon EMR cluster instance group. You can specify a separate configuration for
 	// each instance group (master, core, and task).
 	Configurations []Configuration
@@ -1248,7 +1249,7 @@ type InstanceGroupConfig struct {
 	// amount in USD.
 	BidPrice *string
 
-	// Amazon EMR releases 4.x or higher. The list of configurations supplied for an
+	// Amazon EMR releases 4.x or later. The list of configurations supplied for an
 	// Amazon EMR cluster instance group. You can specify a separate configuration for
 	// each instance group (master, core, and task).
 	Configurations []Configuration
@@ -1474,7 +1475,7 @@ type InstanceTimeline struct {
 // Configure Instance Fleets (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-fleet.html)
 // . Without an allocation strategy, you may specify a maximum of five instance
 // type configurations for a fleet. The instance fleet configuration is available
-// only in Amazon EMR releases 4.8.0 and higher, excluding 5.0.x versions.
+// only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.
 type InstanceTypeConfig struct {
 
 	// An Amazon EC2 instance type, such as m3.xlarge .
@@ -1516,7 +1517,7 @@ type InstanceTypeConfig struct {
 
 // The configuration specification for each instance type in an instance fleet.
 // The instance fleet configuration is available only in Amazon EMR releases 4.8.0
-// and higher, excluding 5.0.x versions.
+// and later, excluding 5.0.x versions.
 type InstanceTypeSpecification struct {
 
 	// The bid price for each Amazon EC2 Spot Instance type as defined by InstanceType
@@ -1579,7 +1580,7 @@ type JobFlowDetail struct {
 	Name *string
 
 	// Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases
-	// 4.0 and higher, ReleaseLabel is used. To specify a custom AMI, use CustomAmiID .
+	// 4.0 and later, ReleaseLabel is used. To specify a custom AMI, use CustomAmiID .
 	AmiVersion *string
 
 	// An IAM role for automatic scaling policies. The default role is
@@ -1596,7 +1597,7 @@ type JobFlowDetail struct {
 	JobFlowRole *string
 
 	// The KMS key used for encrypting log files. This attribute is only available
-	// with Amazon EMR 5.30.0 and higher, excluding 6.0.0.
+	// with Amazon EMR 5.30.0 and later, excluding 6.0.0.
 	LogEncryptionKmsKeyId *string
 
 	// The location in Amazon S3 where log files for the job are stored.
@@ -1606,14 +1607,14 @@ type JobFlowDetail struct {
 	// scale-in activity occurs or an instance group is resized.
 	// TERMINATE_AT_INSTANCE_HOUR indicates that Amazon EMR terminates nodes at the
 	// instance-hour boundary, regardless of when the request to terminate the instance
-	// was submitted. This option is only available with Amazon EMR 5.1.0 and higher
-	// and is the default for clusters created using that version.
+	// was submitted. This option is only available with Amazon EMR 5.1.0 and later and
+	// is the default for clusters created using that version.
 	// TERMINATE_AT_TASK_COMPLETION indicates that Amazon EMR adds nodes to a deny list
 	// and drains tasks from nodes before terminating the Amazon EC2 instances,
 	// regardless of the instance-hour boundary. With either behavior, Amazon EMR
 	// removes the least active nodes first and blocks instance termination if it could
 	// lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION available only in Amazon
-	// EMR releases 4.1.0 and higher, and is the default for releases of Amazon EMR
+	// EMR releases 4.1.0 and later, and is the default for releases of Amazon EMR
 	// earlier than 5.1.0.
 	ScaleDownBehavior ScaleDownBehavior
 
@@ -1699,7 +1700,7 @@ type JobFlowInstancesConfig struct {
 	// Applies to clusters that use the instance fleet configuration. When multiple
 	// Amazon EC2 subnet IDs are specified, Amazon EMR evaluates them and launches
 	// instances in the optimal subnet. The instance fleet configuration is available
-	// only in Amazon EMR releases 4.8.0 and higher, excluding 5.0.x versions.
+	// only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.
 	Ec2SubnetIds []string
 
 	// The identifier of the Amazon EC2 security group for the master node. If you
@@ -1724,7 +1725,7 @@ type JobFlowInstancesConfig struct {
 	InstanceCount *int32
 
 	// The instance fleet configuration is available only in Amazon EMR releases 4.8.0
-	// and higher, excluding 5.0.x versions. Describes the Amazon EC2 instances and
+	// and later, excluding 5.0.x versions. Describes the Amazon EC2 instances and
 	// instance configurations for clusters that use the instance fleet configuration.
 	InstanceFleets []InstanceFleetConfig
 
@@ -2083,9 +2084,9 @@ type OnDemandCapacityReservationOptions struct {
 
 // The launch specification for On-Demand Instances in the instance fleet, which
 // determines the allocation strategy. The instance fleet configuration is
-// available only in Amazon EMR releases 4.8.0 and higher, excluding 5.0.x
-// versions. On-Demand Instances allocation strategy is available in Amazon EMR
-// releases 5.12.1 and higher.
+// available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.
+// On-Demand Instances allocation strategy is available in Amazon EMR releases
+// 5.12.1 and later.
 type OnDemandProvisioningSpecification struct {
 
 	// Specifies the strategy to use in launching On-Demand instance fleets.
@@ -2187,7 +2188,7 @@ type PlacementType struct {
 	// launches instances in the optimal Availability Zone. AvailabilityZones is used
 	// for instance fleets, while AvailabilityZone (singular) is used for uniform
 	// instance groups. The instance fleet configuration is available only in Amazon
-	// EMR releases 4.8.0 and higher, excluding 5.0.x versions.
+	// EMR releases 4.8.0 and later, excluding 5.0.x versions.
 	AvailabilityZones []string
 
 	noSmithyDocumentSerde
@@ -2455,8 +2456,8 @@ type SimplifiedApplication struct {
 // The launch specification for Spot Instances in the instance fleet, which
 // determines the defined duration, provisioning timeout behavior, and allocation
 // strategy. The instance fleet configuration is available only in Amazon EMR
-// releases 4.8.0 and higher, excluding 5.0.x versions. Spot Instance allocation
-// strategy is available in Amazon EMR releases 5.12.1 and higher. Spot Instances
+// releases 4.8.0 and later, excluding 5.0.x versions. Spot Instance allocation
+// strategy is available in Amazon EMR releases 5.12.1 and later. Spot Instances
 // with a defined duration (also known as Spot blocks) are no longer available to
 // new customers from July 1, 2021. For customers who have previously used the
 // feature, we will continue to support Spot Instances with a defined duration
@@ -2726,10 +2727,22 @@ type Studio struct {
 	// The detailed description of the Amazon EMR Studio.
 	Description *string
 
+	// The KMS key identifier (ARN) used to encrypt Amazon EMR Studio workspace and
+	// notebook files when backed up to Amazon S3.
+	EncryptionKeyArn *string
+
 	// The ID of the Engine security group associated with the Amazon EMR Studio. The
 	// Engine security group allows inbound network traffic from resources in the
 	// Workspace security group.
 	EngineSecurityGroupId *string
+
+	// The ARN of the IAM Identity Center instance the Studio application belongs to.
+	IdcInstanceArn *string
+
+	// Indicates whether the Studio has REQUIRED or OPTIONAL IAM Identity Center user
+	// assignment. If the value is set to REQUIRED , users must be explicitly assigned
+	// to the Studio application to access the Studio.
+	IdcUserAssignment IdcUserAssignment
 
 	// Your identity provider's authentication endpoint. Amazon EMR Studio redirects
 	// federated users to this endpoint for authentication when logging in to a Studio
@@ -2757,6 +2770,10 @@ type Studio struct {
 	// A list of tags associated with the Amazon EMR Studio.
 	Tags []Tag
 
+	// Indicates whether the Studio has Trusted identity propagation enabled. The
+	// default value is false .
+	TrustedIdentityPropagationEnabled *bool
+
 	// The unique access URL of the Amazon EMR Studio.
 	Url *string
 
@@ -2775,9 +2792,9 @@ type Studio struct {
 	noSmithyDocumentSerde
 }
 
-// Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. The
-// details do not include subnets, IAM roles, security groups, or tags associated
-// with the Studio.
+// Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. To
+// fetch additional details such as subnets, IAM roles, security groups, and tags
+// for the Studio, use the DescribeStudio API.
 type StudioSummary struct {
 
 	// Specifies whether the Studio authenticates users using IAM or IAM Identity

@@ -15,7 +15,7 @@ import (
 // List the global endpoints associated with this account. For more information
 // about global endpoints, see Making applications Regional-fault tolerant with
 // global endpoints and event replication (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html)
-// in the Amazon EventBridge User Guide..
+// in the Amazon EventBridge User Guide.
 func (c *Client) ListEndpoints(ctx context.Context, params *ListEndpointsInput, optFns ...func(*Options)) (*ListEndpointsOutput, error) {
 	if params == nil {
 		params = &ListEndpointsInput{}

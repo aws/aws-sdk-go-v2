@@ -1,0 +1,8 @@
+{
+    "id": "ffdfdb3a-e634-44d6-96fb-3d9dfc485448",
+    "type": "feature",
+    "description": "Adds new querying capabilities for running data queries on a monitor",
+    "modules": [
+        "service/internetmonitor"
+    ]
+}

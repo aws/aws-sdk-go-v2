@@ -63,7 +63,7 @@ type UpdateMonitorInput struct {
 	// resources from and the ASN or network provider, such as an internet service
 	// provider (ISP), that clients access the resources through. Setting this limit
 	// can help control billing costs.
-	MaxCityNetworksToMonitor int32
+	MaxCityNetworksToMonitor *int32
 
 	// The resources to include in a monitor, which you provide as a set of Amazon
 	// Resource Names (ARNs). Resources can be VPCs, NLBs, Amazon CloudFront
@@ -89,7 +89,7 @@ type UpdateMonitorInput struct {
 	// limit overrides the traffic percentage that you set. To learn more, see
 	// Choosing an application traffic percentage to monitor  (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
-	TrafficPercentageToMonitor int32
+	TrafficPercentageToMonitor *int32
 
 	noSmithyDocumentSerde
 }

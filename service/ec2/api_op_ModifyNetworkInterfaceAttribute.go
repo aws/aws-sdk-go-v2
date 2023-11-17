@@ -42,6 +42,9 @@ type ModifyNetworkInterfaceAttributeInput struct {
 	// termination attribute, you must specify the ID of the interface attachment.
 	Attachment *types.NetworkInterfaceAttachmentChanges
 
+	// A connection tracking specification.
+	ConnectionTrackingSpecification *types.ConnectionTrackingSpecificationRequest
+
 	// A description for the network interface.
 	Description *types.AttributeValue
 

@@ -47,7 +47,7 @@ type ListHealthEventsInput struct {
 	EventStatus types.HealthEventStatus
 
 	// The number of health event objects that you want to return with this call.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token for the next set of results. You receive this token from a previous
 	// call.
@@ -189,8 +189,8 @@ func NewListHealthEventsPaginator(client ListHealthEventsAPIClient, params *List
 	}
 
 	options := ListHealthEventsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -220,7 +220,11 @@ func (p *ListHealthEventsPaginator) NextPage(ctx context.Context, optFns ...func
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListHealthEvents(ctx, &params, optFns...)
 	if err != nil {

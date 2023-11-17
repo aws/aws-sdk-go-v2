@@ -15,11 +15,10 @@ import (
 // Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR
 // block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6
 // address pool that you provisioned through bring your own IP addresses ( BYOIP (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html)
-// ). The IPv6 CIDR block size is fixed at /56. You must specify one of the
-// following in the request: an IPv4 CIDR block, an IPv6 pool, or an
-// Amazon-provided IPv6 CIDR block. For more information about associating CIDR
-// blocks with your VPC and applicable restrictions, see IP addressing for your
-// VPCs and subnets (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html)
+// ). You must specify one of the following in the request: an IPv4 CIDR block, an
+// IPv6 pool, or an Amazon-provided IPv6 CIDR block. For more information about
+// associating CIDR blocks with your VPC and applicable restrictions, see IP
+// addressing for your VPCs and subnets (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html)
 // in the Amazon VPC User Guide.
 func (c *Client) AssociateVpcCidrBlock(ctx context.Context, params *AssociateVpcCidrBlockInput, optFns ...func(*Options)) (*AssociateVpcCidrBlockOutput, error) {
 	if params == nil {
@@ -44,7 +43,7 @@ type AssociateVpcCidrBlockInput struct {
 	VpcId *string
 
 	// Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the
-	// VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR
+	// VPC. You cannot specify the range of IPv6 addresses or the size of the CIDR
 	// block.
 	AmazonProvidedIpv6CidrBlock *bool
 

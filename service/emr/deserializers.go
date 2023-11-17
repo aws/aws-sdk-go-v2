@@ -13378,6 +13378,15 @@ func awsAwsjson11_deserializeDocumentStudio(v **types.Studio, value interface{})
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "EncryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlString to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
 		case "EngineSecurityGroupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13385,6 +13394,24 @@ func awsAwsjson11_deserializeDocumentStudio(v **types.Studio, value interface{})
 					return fmt.Errorf("expected XmlStringMaxLen256 to be of type string, got %T instead", value)
 				}
 				sv.EngineSecurityGroupId = ptr.String(jtv)
+			}
+
+		case "IdcInstanceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
+				}
+				sv.IdcInstanceArn = ptr.String(jtv)
+			}
+
+		case "IdcUserAssignment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdcUserAssignment to be of type string, got %T instead", value)
+				}
+				sv.IdcUserAssignment = types.IdcUserAssignment(jtv)
 			}
 
 		case "IdpAuthUrl":
@@ -13449,6 +13476,15 @@ func awsAwsjson11_deserializeDocumentStudio(v **types.Studio, value interface{})
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		case "TrustedIdentityPropagationEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.TrustedIdentityPropagationEnabled = ptr.Bool(jtv)
 			}
 
 		case "Url":

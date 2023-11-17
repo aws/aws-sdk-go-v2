@@ -88,6 +88,21 @@ type AuthenticationProfile struct {
 	noSmithyDocumentSerde
 }
 
+// The authorized token issuer for the Amazon Redshift IAM Identity Center
+// application.
+type AuthorizedTokenIssuer struct {
+
+	// The list of audiences for the authorized token issuer for integrating Amazon
+	// Redshift with IDC Identity Center.
+	AuthorizedAudiencesList []string
+
+	// The ARN for the authorized token issuer for integrating Amazon Redshift with
+	// IDC Identity Center.
+	TrustedTokenIssuerArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes an availability zone.
 type AvailabilityZone struct {
 
@@ -1073,6 +1088,35 @@ type IPRange struct {
 	noSmithyDocumentSerde
 }
 
+// The Lake Formation scope.
+type LakeFormationQuery struct {
+
+	// Determines whether the query scope is enabled or disabled.
+	//
+	// This member is required.
+	Authorization ServiceAuthorization
+
+	noSmithyDocumentSerde
+}
+
+// A list of scopes set up for Lake Formation integration.
+//
+// The following types satisfy this interface:
+//
+//	LakeFormationScopeUnionMemberLakeFormationQuery
+type LakeFormationScopeUnion interface {
+	isLakeFormationScopeUnion()
+}
+
+// The Lake Formation scope.
+type LakeFormationScopeUnionMemberLakeFormationQuery struct {
+	Value LakeFormationQuery
+
+	noSmithyDocumentSerde
+}
+
+func (*LakeFormationScopeUnionMemberLakeFormationQuery) isLakeFormationScopeUnion() {}
+
 // Defines a maintenance track that determines which Amazon Redshift version to
 // apply during a maintenance window. If the value for MaintenanceTrack is current
 // , the cluster is updated to the most recently certified maintenance release. If
@@ -1300,6 +1344,46 @@ type RecurringCharge struct {
 
 	// The frequency at which the recurring charge amount is applied.
 	RecurringChargeFrequency *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains properties for the Redshift IDC application.
+type RedshiftIdcApplication struct {
+
+	// The authorized token issuer list for the Amazon Redshift IAM Identity Center
+	// application.
+	AuthorizedTokenIssuerList []AuthorizedTokenIssuer
+
+	// The ARN for the Amazon Redshift IAM Identity Center application. It has the
+	// required permissions to be assumed and invoke the IDC Identity Center API.
+	IamRoleArn *string
+
+	// The display name for the Amazon Redshift IAM Identity Center application. It
+	// appears on the console.
+	IdcDisplayName *string
+
+	// The ARN for the IAM Identity Center instance that Redshift integrates with.
+	IdcInstanceArn *string
+
+	// The ARN for the Amazon Redshift IAM Identity Center application.
+	IdcManagedApplicationArn *string
+
+	// The onboarding status for the Amazon Redshift IAM Identity Center application.
+	IdcOnboardStatus *string
+
+	// The identity namespace for the Amazon Redshift IAM Identity Center application.
+	// It determines which managed application verifies the connection token.
+	IdentityNamespace *string
+
+	// The ARN for the Redshift application that integrates with IAM Identity Center.
+	RedshiftIdcApplicationArn *string
+
+	// The name of the Redshift application in IAM Identity Center.
+	RedshiftIdcApplicationName *string
+
+	// A list of service integrations for the Redshift IAM Identity Center application.
+	ServiceIntegrations []ServiceIntegrationsUnion
 
 	noSmithyDocumentSerde
 }
@@ -1668,6 +1752,24 @@ type SecondaryClusterInfo struct {
 
 	noSmithyDocumentSerde
 }
+
+// A list of service integrations.
+//
+// The following types satisfy this interface:
+//
+//	ServiceIntegrationsUnionMemberLakeFormation
+type ServiceIntegrationsUnion interface {
+	isServiceIntegrationsUnion()
+}
+
+// A list of scopes set up for Lake Formation integration.
+type ServiceIntegrationsUnionMemberLakeFormation struct {
+	Value []LakeFormationScopeUnion
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceIntegrationsUnionMemberLakeFormation) isServiceIntegrationsUnion() {}
 
 // Describes a snapshot.
 type Snapshot struct {
@@ -2098,3 +2200,15 @@ type VpcSecurityGroupMembership struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isLakeFormationScopeUnion()  {}
+func (*UnknownUnionMember) isServiceIntegrationsUnion() {}

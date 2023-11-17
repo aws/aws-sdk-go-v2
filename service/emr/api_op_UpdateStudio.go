@@ -42,6 +42,10 @@ type UpdateStudioInput struct {
 	// A detailed description to assign to the Amazon EMR Studio.
 	Description *string
 
+	// The KMS key identifier (ARN) used to encrypt Amazon EMR Studio workspace and
+	// notebook files when backed up to Amazon S3.
+	EncryptionKeyArn *string
+
 	// A descriptive name for the Amazon EMR Studio.
 	Name *string
 

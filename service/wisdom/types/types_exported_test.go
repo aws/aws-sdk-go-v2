@@ -43,6 +43,60 @@ func ExampleAssistantAssociationOutputData_outputUsage() {
 
 var _ *types.KnowledgeBaseAssociationData
 
+func ExampleConfiguration_outputUsage() {
+	var union types.Configuration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConfigurationMemberConnectConfiguration:
+		_ = v.Value // Value is types.ConnectConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ConnectConfiguration
+
+func ExampleQuickResponseContentProvider_outputUsage() {
+	var union types.QuickResponseContentProvider
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.QuickResponseContentProviderMemberContent:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleQuickResponseDataProvider_outputUsage() {
+	var union types.QuickResponseDataProvider
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.QuickResponseDataProviderMemberContent:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleRecommendationTriggerData_outputUsage() {
 	var union types.RecommendationTriggerData
 	// type switches can be used to check the union value

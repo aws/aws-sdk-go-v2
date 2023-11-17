@@ -129,6 +129,9 @@ func awsRestjson1_deserializeOpErrorCreatePipeline(response *smithyhttp.Response
 	case strings.EqualFold("ResourceAlreadyExistsException", errorCode):
 		return awsRestjson1_deserializeErrorResourceAlreadyExistsException(response, errorBody)
 
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
 
@@ -2372,6 +2375,46 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBufferOptions(v **types.BufferOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BufferOptions
+	if *v == nil {
+		sv = &types.BufferOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PersistentBufferEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.PersistentBufferEnabled = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentChangeProgressStage(v **types.ChangeProgressStage, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2668,6 +2711,46 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEncryptionAtRestOptions(v **types.EncryptionAtRestOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EncryptionAtRestOptions
+	if *v == nil {
+		sv = &types.EncryptionAtRestOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIngestEndpointUrlsList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2891,6 +2974,11 @@ func awsRestjson1_deserializeDocumentPipeline(v **types.Pipeline, value interfac
 
 	for key, value := range shape {
 		switch key {
+		case "BufferOptions":
+			if err := awsRestjson1_deserializeDocumentBufferOptions(&sv.BufferOptions, value); err != nil {
+				return err
+			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2905,6 +2993,11 @@ func awsRestjson1_deserializeDocumentPipeline(v **types.Pipeline, value interfac
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "EncryptionAtRestOptions":
+			if err := awsRestjson1_deserializeDocumentEncryptionAtRestOptions(&sv.EncryptionAtRestOptions, value); err != nil {
+				return err
 			}
 
 		case "IngestEndpointUrls":
@@ -2986,6 +3079,11 @@ func awsRestjson1_deserializeDocumentPipeline(v **types.Pipeline, value interfac
 				sv.PipelineName = ptr.String(jtv)
 			}
 
+		case "ServiceVpcEndpoints":
+			if err := awsRestjson1_deserializeDocumentServiceVpcEndpointsList(&sv.ServiceVpcEndpoints, value); err != nil {
+				return err
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2997,6 +3095,11 @@ func awsRestjson1_deserializeDocumentPipeline(v **types.Pipeline, value interfac
 
 		case "StatusReason":
 			if err := awsRestjson1_deserializeDocumentPipelineStatusReason(&sv.StatusReason, value); err != nil {
+				return err
+			}
+
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
 
@@ -3289,6 +3392,11 @@ func awsRestjson1_deserializeDocumentPipelineSummary(v **types.PipelineSummary, 
 				return err
 			}
 
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -3441,6 +3549,89 @@ func awsRestjson1_deserializeDocumentSecurityGroupIds(v *[]string, value interfa
 			}
 			col = jtv
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceVpcEndpoint(v **types.ServiceVpcEndpoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceVpcEndpoint
+	if *v == nil {
+		sv = &types.ServiceVpcEndpoint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ServiceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VpcEndpointServiceName to be of type string, got %T instead", value)
+				}
+				sv.ServiceName = types.VpcEndpointServiceName(jtv)
+			}
+
+		case "VpcEndpointId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.VpcEndpointId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceVpcEndpointsList(v *[]types.ServiceVpcEndpoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ServiceVpcEndpoint
+	if *v == nil {
+		cv = []types.ServiceVpcEndpoint{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ServiceVpcEndpoint
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentServiceVpcEndpoint(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}

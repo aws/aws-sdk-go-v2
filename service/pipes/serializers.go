@@ -899,9 +899,9 @@ func awsRestjson1_serializeDocumentBatchArrayProperties(v *types.BatchArrayPrope
 	object := value.Object()
 	defer object.Close()
 
-	if v.Size != 0 {
+	if v.Size != nil {
 		ok := object.Key("Size")
-		ok.Integer(v.Size)
+		ok.Integer(*v.Size)
 	}
 
 	return nil
@@ -1045,9 +1045,9 @@ func awsRestjson1_serializeDocumentBatchRetryStrategy(v *types.BatchRetryStrateg
 	object := value.Object()
 	defer object.Close()
 
-	if v.Attempts != 0 {
+	if v.Attempts != nil {
 		ok := object.Key("Attempts")
-		ok.Integer(v.Attempts)
+		ok.Integer(*v.Attempts)
 	}
 
 	return nil
@@ -1244,9 +1244,9 @@ func awsRestjson1_serializeDocumentEcsEphemeralStorage(v *types.EcsEphemeralStor
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.SizeInGiB != nil {
 		ok := object.Key("sizeInGiB")
-		ok.Integer(v.SizeInGiB)
+		ok.Integer(*v.SizeInGiB)
 	}
 
 	return nil

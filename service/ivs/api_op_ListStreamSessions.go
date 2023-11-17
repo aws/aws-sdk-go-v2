@@ -37,7 +37,7 @@ type ListStreamSessionsInput struct {
 	ChannelArn *string
 
 	// Maximum number of streams to return. Default: 100.
-	MaxResults int32
+	MaxResults *int32
 
 	// The first stream to retrieve. This is used for pagination; see the nextToken
 	// response field.
@@ -177,8 +177,8 @@ func NewListStreamSessionsPaginator(client ListStreamSessionsAPIClient, params *
 	}
 
 	options := ListStreamSessionsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -208,7 +208,11 @@ func (p *ListStreamSessionsPaginator) NextPage(ctx context.Context, optFns ...fu
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListStreamSessions(ctx, &params, optFns...)
 	if err != nil {

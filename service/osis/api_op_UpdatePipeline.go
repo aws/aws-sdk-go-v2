@@ -37,6 +37,13 @@ type UpdatePipelineInput struct {
 	// This member is required.
 	PipelineName *string
 
+	// Key-value pairs to configure persistent buffering for the pipeline.
+	BufferOptions *types.BufferOptions
+
+	// Key-value pairs to configure encryption for data that is written to a
+	// persistent buffer.
+	EncryptionAtRestOptions *types.EncryptionAtRestOptions
+
 	// Key-value pairs to configure log publishing.
 	LogPublishingOptions *types.LogPublishingOptions
 

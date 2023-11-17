@@ -443,7 +443,7 @@ type GrpcGatewayRouteMatch struct {
 	// The gateway route metadata to be matched on.
 	Metadata []GrpcGatewayRouteMetadata
 
-	// The port number to match from the request.
+	// The gateway route port to be matched on.
 	Port *int32
 
 	// The fully qualified domain name for the service to match from the request.
@@ -789,7 +789,7 @@ type HealthCheckPolicy struct {
 	// declaring listener healthy.
 	//
 	// This member is required.
-	HealthyThreshold int32
+	HealthyThreshold *int32
 
 	// The time period in milliseconds between each health check execution.
 	//
@@ -813,7 +813,7 @@ type HealthCheckPolicy struct {
 	// a virtual node unhealthy.
 	//
 	// This member is required.
-	UnhealthyThreshold int32
+	UnhealthyThreshold *int32
 
 	// The destination path for the health check request. This value is only used if
 	// the specified protocol is HTTP or HTTP/2. For any other protocol, this value is
@@ -822,7 +822,7 @@ type HealthCheckPolicy struct {
 
 	// The destination port for the health check request. This port must match the
 	// port defined in the PortMapping for the listener.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -1553,7 +1553,7 @@ type PortMapping struct {
 	// The port used for the port mapping.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	// The protocol used for the port mapping. Specify one protocol.
 	//
@@ -2167,7 +2167,7 @@ type VirtualGatewayGrpcConnectionPool struct {
 	// in upstream cluster.
 	//
 	// This member is required.
-	MaxRequests int32
+	MaxRequests *int32
 
 	noSmithyDocumentSerde
 }
@@ -2180,7 +2180,7 @@ type VirtualGatewayHealthCheckPolicy struct {
 	// declaring the listener healthy.
 	//
 	// This member is required.
-	HealthyThreshold int32
+	HealthyThreshold *int32
 
 	// The time period in milliseconds between each health check execution.
 	//
@@ -2204,7 +2204,7 @@ type VirtualGatewayHealthCheckPolicy struct {
 	// a virtual gateway unhealthy.
 	//
 	// This member is required.
-	UnhealthyThreshold int32
+	UnhealthyThreshold *int32
 
 	// The destination path for the health check request. This value is only used if
 	// the specified protocol is HTTP or HTTP/2. For any other protocol, this value is
@@ -2213,7 +2213,7 @@ type VirtualGatewayHealthCheckPolicy struct {
 
 	// The destination port for the health check request. This port must match the
 	// port defined in the PortMapping for the listener.
-	Port int32
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -2225,7 +2225,7 @@ type VirtualGatewayHttp2ConnectionPool struct {
 	// in upstream cluster.
 	//
 	// This member is required.
-	MaxRequests int32
+	MaxRequests *int32
 
 	noSmithyDocumentSerde
 }
@@ -2237,7 +2237,7 @@ type VirtualGatewayHttpConnectionPool struct {
 	// with all hosts in upstream cluster.
 	//
 	// This member is required.
-	MaxConnections int32
+	MaxConnections *int32
 
 	// Number of overflowing requests after max_connections Envoy will queue to
 	// upstream cluster.
@@ -2447,7 +2447,7 @@ type VirtualGatewayPortMapping struct {
 	// The port used for the port mapping. Specify one protocol.
 	//
 	// This member is required.
-	Port int32
+	Port *int32
 
 	// The protocol used for the port mapping.
 	//
@@ -2733,7 +2733,7 @@ type VirtualNodeGrpcConnectionPool struct {
 	// in upstream cluster.
 	//
 	// This member is required.
-	MaxRequests int32
+	MaxRequests *int32
 
 	noSmithyDocumentSerde
 }
@@ -2745,7 +2745,7 @@ type VirtualNodeHttp2ConnectionPool struct {
 	// in upstream cluster.
 	//
 	// This member is required.
-	MaxRequests int32
+	MaxRequests *int32
 
 	noSmithyDocumentSerde
 }
@@ -2757,7 +2757,7 @@ type VirtualNodeHttpConnectionPool struct {
 	// with all hosts in upstream cluster.
 	//
 	// This member is required.
-	MaxConnections int32
+	MaxConnections *int32
 
 	// Number of overflowing requests after max_connections Envoy will queue to
 	// upstream cluster.
@@ -2874,7 +2874,7 @@ type VirtualNodeTcpConnectionPool struct {
 	// with all hosts in upstream cluster.
 	//
 	// This member is required.
-	MaxConnections int32
+	MaxConnections *int32
 
 	noSmithyDocumentSerde
 }

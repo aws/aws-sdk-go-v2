@@ -40,6 +40,13 @@ type DeleteIpamPoolInput struct {
 	// This member is required.
 	IpamPoolId *string
 
+	// Enables you to quickly delete an IPAM pool and all resources within that pool,
+	// including provisioned CIDRs, allocations, and other pools. You can only use this
+	// option to delete pools in the private scope or pools in the public scope with a
+	// source resource. A source resource is a resource used to provision CIDRs to a
+	// resource planning pool.
+	Cascade *bool
+
 	// A check for whether you have the required permissions for the action without
 	// actually making the request and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation . Otherwise, it is

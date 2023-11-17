@@ -37,7 +37,7 @@ type ListWavesInput struct {
 	Filters *types.ListWavesRequestFilters
 
 	// Maximum results to return when listing waves.
-	MaxResults int32
+	MaxResults *int32
 
 	// Request next token.
 	NextToken *string
@@ -168,8 +168,8 @@ func NewListWavesPaginator(client ListWavesAPIClient, params *ListWavesInput, op
 	}
 
 	options := ListWavesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -199,7 +199,11 @@ func (p *ListWavesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListWaves(ctx, &params, optFns...)
 	if err != nil {

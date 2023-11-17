@@ -35,6 +35,12 @@ func ExampleGrant_outputUsage() {
 	case *types.GrantMemberJwtBearer:
 		_ = v.Value // Value is types.JwtBearerGrant
 
+	case *types.GrantMemberRefreshToken:
+		_ = v.Value // Value is types.RefreshTokenGrant
+
+	case *types.GrantMemberTokenExchange:
+		_ = v.Value // Value is types.TokenExchangeGrant
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -46,6 +52,8 @@ func ExampleGrant_outputUsage() {
 
 var _ *types.JwtBearerGrant
 var _ *types.AuthorizationCodeGrant
+var _ *types.RefreshTokenGrant
+var _ *types.TokenExchangeGrant
 
 func ExampleTrustedTokenIssuerConfiguration_outputUsage() {
 	var union types.TrustedTokenIssuerConfiguration

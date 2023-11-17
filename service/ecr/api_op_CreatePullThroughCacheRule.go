@@ -7,14 +7,16 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
 // Creates a pull through cache rule. A pull through cache rule provides a way to
-// cache images from an external public registry in your Amazon ECR private
-// registry.
+// cache images from an upstream registry source in your Amazon ECR private
+// registry. For more information, see Using pull through cache rules (https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html)
+// in the Amazon Elastic Container Registry User Guide.
 func (c *Client) CreatePullThroughCacheRule(ctx context.Context, params *CreatePullThroughCacheRuleInput, optFns ...func(*Options)) (*CreatePullThroughCacheRuleOutput, error) {
 	if params == nil {
 		params = &CreatePullThroughCacheRuleInput{}
@@ -38,15 +40,30 @@ type CreatePullThroughCacheRuleInput struct {
 	EcrRepositoryPrefix *string
 
 	// The registry URL of the upstream public registry to use as the source for the
-	// pull through cache rule.
+	// pull through cache rule. The following is the syntax to use for each supported
+	// upstream registry.
+	//   - Amazon ECR Public ( ecr-public ) - public.ecr.aws
+	//   - Docker Hub ( docker-hub ) - registry-1.docker.io
+	//   - Quay ( quay ) - quay.io
+	//   - Kubernetes ( k8s ) - registry.k8s.io
+	//   - GitHub Container Registry ( github-container-registry ) - ghcr.io
+	//   - Microsoft Azure Container Registry ( azure-container-registry ) -
+	//   .azurecr.io
 	//
 	// This member is required.
 	UpstreamRegistryUrl *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret that identifies the credentials to authenticate to the upstream registry.
+	CredentialArn *string
 
 	// The Amazon Web Services account ID associated with the registry to create the
 	// pull through cache rule for. If you do not specify a registry, the default
 	// registry is assumed.
 	RegistryId *string
+
+	// The name of the upstream registry.
+	UpstreamRegistry types.UpstreamRegistry
 
 	noSmithyDocumentSerde
 }
@@ -57,11 +74,18 @@ type CreatePullThroughCacheRuleOutput struct {
 	// was created.
 	CreatedAt *time.Time
 
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret associated with the pull through cache rule.
+	CredentialArn *string
+
 	// The Amazon ECR repository prefix associated with the pull through cache rule.
 	EcrRepositoryPrefix *string
 
 	// The registry ID associated with the request.
 	RegistryId *string
+
+	// The name of the upstream registry associated with the pull through cache rule.
+	UpstreamRegistry types.UpstreamRegistry
 
 	// The upstream registry URL associated with the pull through cache rule.
 	UpstreamRegistryUrl *string

@@ -43,7 +43,7 @@ type ListSourceServerActionsInput struct {
 
 	// Maximum amount of items to return when listing source server post migration
 	// custom actions.
-	MaxResults int32
+	MaxResults *int32
 
 	// Next token to use when listing source server post migration custom actions.
 	NextToken *string
@@ -181,8 +181,8 @@ func NewListSourceServerActionsPaginator(client ListSourceServerActionsAPIClient
 	}
 
 	options := ListSourceServerActionsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -212,7 +212,11 @@ func (p *ListSourceServerActionsPaginator) NextPage(ctx context.Context, optFns 
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListSourceServerActions(ctx, &params, optFns...)
 	if err != nil {

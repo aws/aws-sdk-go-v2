@@ -450,6 +450,26 @@ func (m *validateOpCreateHsmConfiguration) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRedshiftIdcApplication struct {
+}
+
+func (*validateOpCreateRedshiftIdcApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRedshiftIdcApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRedshiftIdcApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRedshiftIdcApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateScheduledAction struct {
 }
 
@@ -785,6 +805,26 @@ func (m *validateOpDeletePartner) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeletePartnerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRedshiftIdcApplication struct {
+}
+
+func (*validateOpDeleteRedshiftIdcApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRedshiftIdcApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRedshiftIdcApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRedshiftIdcApplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1530,6 +1570,26 @@ func (m *validateOpModifyEventSubscription) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyRedshiftIdcApplication struct {
+}
+
+func (*validateOpModifyRedshiftIdcApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyRedshiftIdcApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyRedshiftIdcApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyRedshiftIdcApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyScheduledAction struct {
 }
 
@@ -1978,6 +2038,10 @@ func addOpCreateHsmConfigurationValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateHsmConfiguration{}, middleware.After)
 }
 
+func addOpCreateRedshiftIdcApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRedshiftIdcApplication{}, middleware.After)
+}
+
 func addOpCreateScheduledActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateScheduledAction{}, middleware.After)
 }
@@ -2044,6 +2108,10 @@ func addOpDeleteHsmConfigurationValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDeletePartnerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePartner{}, middleware.After)
+}
+
+func addOpDeleteRedshiftIdcApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRedshiftIdcApplication{}, middleware.After)
 }
 
 func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -2194,6 +2262,10 @@ func addOpModifyEventSubscriptionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpModifyEventSubscription{}, middleware.After)
 }
 
+func addOpModifyRedshiftIdcApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyRedshiftIdcApplication{}, middleware.After)
+}
+
 func addOpModifyScheduledActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyScheduledAction{}, middleware.After)
 }
@@ -2288,6 +2360,57 @@ func validateDeleteClusterSnapshotMessageList(v []types.DeleteClusterSnapshotMes
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteClusterSnapshotMessageList"}
 	for i := range v {
 		if err := validateDeleteClusterSnapshotMessage(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLakeFormationQuery(v *types.LakeFormationQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LakeFormationQuery"}
+	if len(v.Authorization) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Authorization"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLakeFormationScopeUnion(v types.LakeFormationScopeUnion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LakeFormationScopeUnion"}
+	switch uv := v.(type) {
+	case *types.LakeFormationScopeUnionMemberLakeFormationQuery:
+		if err := validateLakeFormationQuery(&uv.Value); err != nil {
+			invalidParams.AddNested("[LakeFormationQuery]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLakeFormationServiceIntegrations(v []types.LakeFormationScopeUnion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LakeFormationServiceIntegrations"}
+	for i := range v {
+		if err := validateLakeFormationScopeUnion(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2397,6 +2520,42 @@ func validateScheduledActionType(v *types.ScheduledActionType) error {
 		if err := validateResumeClusterMessage(v.ResumeCluster); err != nil {
 			invalidParams.AddNested("ResumeCluster", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServiceIntegrationList(v []types.ServiceIntegrationsUnion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceIntegrationList"}
+	for i := range v {
+		if err := validateServiceIntegrationsUnion(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServiceIntegrationsUnion(v types.ServiceIntegrationsUnion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceIntegrationsUnion"}
+	switch uv := v.(type) {
+	case *types.ServiceIntegrationsUnionMemberLakeFormation:
+		if err := validateLakeFormationServiceIntegrations(uv.Value); err != nil {
+			invalidParams.AddNested("[LakeFormation]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2843,6 +3002,35 @@ func validateOpCreateHsmConfigurationInput(v *CreateHsmConfigurationInput) error
 	}
 }
 
+func validateOpCreateRedshiftIdcApplicationInput(v *CreateRedshiftIdcApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRedshiftIdcApplicationInput"}
+	if v.IdcInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdcInstanceArn"))
+	}
+	if v.RedshiftIdcApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RedshiftIdcApplicationName"))
+	}
+	if v.IdcDisplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdcDisplayName"))
+	}
+	if v.IamRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
+	}
+	if v.ServiceIntegrations != nil {
+		if err := validateServiceIntegrationList(v.ServiceIntegrations); err != nil {
+			invalidParams.AddNested("ServiceIntegrations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateScheduledActionInput(v *CreateScheduledActionInput) error {
 	if v == nil {
 		return nil
@@ -3130,6 +3318,21 @@ func validateOpDeletePartnerInput(v *DeletePartnerInput) error {
 	}
 	if v.PartnerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PartnerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRedshiftIdcApplicationInput(v *DeleteRedshiftIdcApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRedshiftIdcApplicationInput"}
+	if v.RedshiftIdcApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RedshiftIdcApplicationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3716,6 +3919,26 @@ func validateOpModifyEventSubscriptionInput(v *ModifyEventSubscriptionInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyEventSubscriptionInput"}
 	if v.SubscriptionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyRedshiftIdcApplicationInput(v *ModifyRedshiftIdcApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyRedshiftIdcApplicationInput"}
+	if v.RedshiftIdcApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RedshiftIdcApplicationArn"))
+	}
+	if v.ServiceIntegrations != nil {
+		if err := validateServiceIntegrationList(v.ServiceIntegrations); err != nil {
+			invalidParams.AddNested("ServiceIntegrations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

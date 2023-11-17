@@ -889,26 +889,39 @@ type Primary struct {
 type PutEventsRequestEntry struct {
 
 	// A valid JSON object. There is no other schema imposed. The JSON object may
-	// contain fields and nested subobjects.
+	// contain fields and nested sub-objects. Detail , DetailType , and Source are
+	// required for EventBridge to successfully send an event to an event bus. If you
+	// include event entries in a request that do not include each of those properties,
+	// EventBridge fails that entry. If you submit a request in which none of the
+	// entries have each of these properties, EventBridge fails the entire request.
 	Detail *string
 
 	// Free-form string, with a maximum of 128 characters, used to decide what fields
-	// to expect in the event detail.
+	// to expect in the event detail. Detail , DetailType , and Source are required
+	// for EventBridge to successfully send an event to an event bus. If you include
+	// event entries in a request that do not include each of those properties,
+	// EventBridge fails that entry. If you submit a request in which none of the
+	// entries have each of these properties, EventBridge fails the entire request.
 	DetailType *string
 
 	// The name or ARN of the event bus to receive the event. Only the rules that are
 	// associated with this event bus are used to match the event. If you omit this,
 	// the default event bus is used. If you're using a global endpoint with a custom
-	// bus, you must enter the name, not the ARN, of the event bus in either the
-	// primary or secondary Region here and the corresponding event bus in the other
-	// Region will be determined based on the endpoint referenced by the EndpointId .
+	// bus, you can enter either the name or Amazon Resource Name (ARN) of the event
+	// bus in either the primary or secondary Region here. EventBridge then determines
+	// the corresponding event bus in the other Region based on the endpoint referenced
+	// by the EndpointId . Specifying the event bus ARN is preferred.
 	EventBusName *string
 
 	// Amazon Web Services resources, identified by Amazon Resource Name (ARN), which
 	// the event primarily concerns. Any number, including zero, may be present.
 	Resources []string
 
-	// The source of the event.
+	// The source of the event. Detail , DetailType , and Source are required for
+	// EventBridge to successfully send an event to an event bus. If you include event
+	// entries in a request that do not include each of those properties, EventBridge
+	// fails that entry. If you submit a request in which none of the entries have each
+	// of these properties, EventBridge fails the entire request.
 	Source *string
 
 	// The time stamp of the event, per RFC3339 (https://www.rfc-editor.org/rfc/rfc3339.txt)
@@ -925,12 +938,31 @@ type PutEventsRequestEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an event that failed to be submitted. For information about the
-// errors that are common to all actions, see Common Errors (https://docs.aws.amazon.com/eventbridge/latest/APIReference/CommonErrors.html)
+// Represents the results of an event submitted to an event bus. If the submission
+// was successful, the entry has the event ID in it. Otherwise, you can use the
+// error code and error message to identify the problem with the entry. For
+// information about the errors that are common to all actions, see Common Errors (https://docs.aws.amazon.com/eventbridge/latest/APIReference/CommonErrors.html)
 // .
 type PutEventsResultEntry struct {
 
-	// The error code that indicates why the event submission failed.
+	// The error code that indicates why the event submission failed. Retryable errors
+	// include:
+	//   - InternalFailure (https://docs.aws.amazon.com/eventbridge/latest/APIReference/CommonErrors.html)
+	//   The request processing has failed because of an unknown error, exception or
+	//   failure.
+	//   - ThrottlingException (https://docs.aws.amazon.com/eventbridge/latest/APIReference/CommonErrors.html)
+	//   The request was denied due to request throttling.
+	// Non-retryable errors include:
+	//   - AccessDeniedException (https://docs.aws.amazon.com/eventbridge/latest/APIReference/CommonErrors.html)
+	//   You do not have sufficient access to perform this action.
+	//   - InvalidAccountIdException The account ID provided is not valid.
+	//   - InvalidArgument A specified parameter is not valid.
+	//   - MalformedDetail The JSON provided is not valid.
+	//   - RedactionFailure Redacting the CloudTrail event failed.
+	//   - NotAuthorizedForSourceException You do not have permissions to publish
+	//   events with this source onto this event bus.
+	//   - NotAuthorizedForDetailTypeException You do not have permissions to publish
+	//   events with this detail type onto this event bus.
 	ErrorCode *string
 
 	// The error message that explains why the event submission failed.
@@ -946,18 +978,31 @@ type PutEventsResultEntry struct {
 type PutPartnerEventsRequestEntry struct {
 
 	// A valid JSON string. There is no other schema imposed. The JSON string may
-	// contain fields and nested subobjects.
+	// contain fields and nested sub-objects. Detail , DetailType , and Source are
+	// required for EventBridge to successfully send an event to an event bus. If you
+	// include event entries in a request that do not include each of those properties,
+	// EventBridge fails that entry. If you submit a request in which none of the
+	// entries have each of these properties, EventBridge fails the entire request.
 	Detail *string
 
 	// A free-form string, with a maximum of 128 characters, used to decide what
-	// fields to expect in the event detail.
+	// fields to expect in the event detail. Detail , DetailType , and Source are
+	// required for EventBridge to successfully send an event to an event bus. If you
+	// include event entries in a request that do not include each of those properties,
+	// EventBridge fails that entry. If you submit a request in which none of the
+	// entries have each of these properties, EventBridge fails the entire request.
 	DetailType *string
 
 	// Amazon Web Services resources, identified by Amazon Resource Name (ARN), which
 	// the event primarily concerns. Any number, including zero, may be present.
 	Resources []string
 
-	// The event source that is generating the entry.
+	// The event source that is generating the entry. Detail , DetailType , and Source
+	// are required for EventBridge to successfully send an event to an event bus. If
+	// you include event entries in a request that do not include each of those
+	// properties, EventBridge fails that entry. If you submit a request in which none
+	// of the entries have each of these properties, EventBridge fails the entire
+	// request.
 	Source *string
 
 	// The date and time of the event.
@@ -966,7 +1011,10 @@ type PutPartnerEventsRequestEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an event that a partner tried to generate, but failed.
+// The result of an event entry the partner submitted in this request. If the
+// event was successfully submitted, the entry has the event ID in it. Otherwise,
+// you can use the error code and error message to identify the problem with the
+// entry.
 type PutPartnerEventsResultEntry struct {
 
 	// The error code that indicates why the event submission failed.
@@ -998,8 +1046,8 @@ type PutTargetsResultEntry struct {
 }
 
 // These are custom parameters to be used when the target is a Amazon Redshift
-// cluster or Redshift Serverless workgroup to invoke the Amazon Redshift Data API
-// ExecuteStatement based on EventBridge events.
+// cluster to invoke the Amazon Redshift Data API ExecuteStatement based on
+// EventBridge events.
 type RedshiftDataParameters struct {
 
 	// The name of the database. Required when authenticating using temporary
@@ -1009,8 +1057,7 @@ type RedshiftDataParameters struct {
 	Database *string
 
 	// The database user name. Required when authenticating using temporary
-	// credentials. Do not provide this parameter when connecting to a Redshift
-	// Serverless workgroup.
+	// credentials.
 	DbUser *string
 
 	// The name or ARN of the secret that enables access to the database. Required
@@ -1020,7 +1067,11 @@ type RedshiftDataParameters struct {
 	// The SQL statement text to run.
 	Sql *string
 
-	// A list of SQLs.
+	// One or more SQL statements to run. The SQL statements are run as a single
+	// transaction. They run serially in the order of the array. Subsequent SQL
+	// statements don't start until the previous statement in the array completes. If
+	// any SQL statement fails, then because they are run as one transaction, all work
+	// is rolled back.
 	Sqls []string
 
 	// The name of the SQL statement. You can name the SQL statement when you create
@@ -1175,7 +1226,24 @@ type Rule struct {
 	// .
 	ScheduleExpression *string
 
-	// The state of the rule.
+	// The state of the rule. Valid values include:
+	//   - DISABLED : The rule is disabled. EventBridge does not match any events
+	//   against the rule.
+	//   - ENABLED : The rule is enabled. EventBridge matches events against the rule,
+	//   except for Amazon Web Services management events delivered through CloudTrail.
+	//   - ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS : The rule is enabled for all
+	//   events, including Amazon Web Services management events delivered through
+	//   CloudTrail. Management events provide visibility into management operations that
+	//   are performed on resources in your Amazon Web Services account. These are also
+	//   known as control plane operations. For more information, see Logging
+	//   management events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html#logging-management-events)
+	//   in the CloudTrail User Guide, and Filtering management events from Amazon Web
+	//   Services services (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-cloudtrail)
+	//   in the Amazon EventBridge User Guide. This value is only valid for rules on the
+	//   default (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses)
+	//   event bus or custom event buses (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html)
+	//   . It does not apply to partner event buses (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html)
+	//   .
 	State RuleState
 
 	noSmithyDocumentSerde

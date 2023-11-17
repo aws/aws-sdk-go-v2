@@ -931,7 +931,11 @@ type FailureDetails struct {
 
 // A type of trigger configuration for Git-based source actions. You can specify
 // the Git configuration trigger type for all third-party Git-based source actions
-// that are supported by the CodeStarSourceConnection action type.
+// that are supported by the CodeStarSourceConnection action type. V2 type
+// pipelines, along with triggers on Git tags and pipeline-level variables, are not
+// currently supported for CloudFormation and CDK resources in CodePipeline. For
+// more information about V2 type pipelines, see Pipeline types (https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html)
+// in the CodePipeline User Guide.
 type GitConfiguration struct {
 
 	// The name of the pipeline source action where the trigger configuration, such as
@@ -1220,7 +1224,10 @@ type PipelineDeclaration struct {
 	// CodePipeline, see Pricing (https://aws.amazon.com/codepipeline/pricing/) . For
 	// information about which type of pipeline to choose, see What type of pipeline
 	// is right for me? (https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html)
-	// .
+	// . V2 type pipelines, along with triggers on Git tags and pipeline-level
+	// variables, are not currently supported for CloudFormation and CDK resources in
+	// CodePipeline. For more information about V2 type pipelines, see Pipeline types (https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html)
+	// in the CodePipeline User Guide.
 	PipelineType PipelineType
 
 	// The trigger configuration specifying a type of event, such as Git tags, that
@@ -1375,7 +1382,10 @@ type PipelineSummary struct {
 	// CodePipeline, see Pricing (https://aws.amazon.com/codepipeline/pricing/) . For
 	// information about which type of pipeline to choose, see What type of pipeline
 	// is right for me? (https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html)
-	// .
+	// . V2 type pipelines, along with triggers on Git tags and pipeline-level
+	// variables, are not currently supported for CloudFormation and CDK resources in
+	// CodePipeline. For more information about V2 type pipelines, see Pipeline types (https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html)
+	// in the CodePipeline User Guide.
 	PipelineType PipelineType
 
 	// The date and time of the last update to the pipeline, in timestamp format.
@@ -1391,7 +1401,11 @@ type PipelineSummary struct {
 // filter criteria and the source stage for the action that contains the trigger.
 // This is only supported for the CodeStarSourceConnection action type. When a
 // trigger configuration is specified, default change detection for repository and
-// branch commits is disabled.
+// branch commits is disabled. V2 type pipelines, along with triggers on Git tags
+// and pipeline-level variables, are not currently supported for CloudFormation and
+// CDK resources in CodePipeline. For more information about V2 type pipelines, see
+// Pipeline types (https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html)
+// in the CodePipeline User Guide.
 type PipelineTriggerDeclaration struct {
 
 	// Provides the filter criteria and the source stage for the repository event that
@@ -1409,7 +1423,11 @@ type PipelineTriggerDeclaration struct {
 	noSmithyDocumentSerde
 }
 
-// A pipeline-level variable used for a pipeline execution.
+// A pipeline-level variable used for a pipeline execution. V2 type pipelines,
+// along with triggers on Git tags and pipeline-level variables, are not currently
+// supported for CloudFormation and CDK resources in CodePipeline. For more
+// information about V2 type pipelines, see Pipeline types (https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html)
+// in the CodePipeline User Guide.
 type PipelineVariable struct {
 
 	// The name of a pipeline-level variable.
@@ -1425,7 +1443,11 @@ type PipelineVariable struct {
 	noSmithyDocumentSerde
 }
 
-// A variable declared at the pipeline level.
+// A variable declared at the pipeline level. V2 type pipelines, along with
+// triggers on Git tags and pipeline-level variables, are not currently supported
+// for CloudFormation and CDK resources in CodePipeline. For more information about
+// V2 type pipelines, see Pipeline types (https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html)
+// in the CodePipeline User Guide.
 type PipelineVariableDeclaration struct {
 
 	// The name of a pipeline-level variable.
@@ -1506,6 +1528,32 @@ type SourceRevision struct {
 	// The commit ID for the artifact revision. For artifacts stored in GitHub or
 	// CodeCommit repositories, the commit ID is linked to a commit details page.
 	RevisionUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// A list that allows you to specify, or override, the source revision for a
+// pipeline execution that's being started. A source revision is the version with
+// all the changes to your application code, or source artifact, for the pipeline
+// execution.
+type SourceRevisionOverride struct {
+
+	// The name of the action where the override will be applied.
+	//
+	// This member is required.
+	ActionName *string
+
+	// The type of source revision, based on the source provider. For example, the
+	// revision type for the CodeCommit action provider is the commit ID.
+	//
+	// This member is required.
+	RevisionType SourceRevisionType
+
+	// The source revision, or version of your source artifact, with the changes that
+	// you want to run in the pipeline execution.
+	//
+	// This member is required.
+	RevisionValue *string
 
 	noSmithyDocumentSerde
 }

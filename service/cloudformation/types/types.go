@@ -209,6 +209,9 @@ type ChangeSetSummary struct {
 	// creating it or in an OBSOLETE state because the stack was already updated.
 	ExecutionStatus ExecutionStatus
 
+	// Indicates if the stack set imports resources that already exist.
+	ImportExistingResources *bool
+
 	// Specifies the current setting of IncludeNestedStacks for the change set.
 	IncludeNestedStacks *bool
 
@@ -1798,15 +1801,17 @@ type StackSetOperation struct {
 type StackSetOperationPreferences struct {
 
 	// Specifies how the concurrency level behaves during the operation execution.
-	//   - STRICT_FAILURE_TOLERANCE : Dynamically lowers the concurrency level to
-	//   ensure the number of failed accounts never exceeds the FailureToleranceCount
-	//   +1. StackSets will set the actual concurrency of your deployment as the minimum
-	//   value between the MaxConcurrentCount and the FailureToleranceCount +1. This is
-	//   the default behavior. If failure tolerance or Maximum concurrent accounts are
-	//   set to percentages, the behavior is similar.
-	//   - SOFT_FAILURE_TOLERANCE : Always run at the concurrency level set by the user
-	//   in the MaxConcurrentCount or MaxConcurrentPercentage , regardless of the
-	//   number of failures.
+	//   - STRICT_FAILURE_TOLERANCE : This option dynamically lowers the concurrency
+	//   level to ensure the number of failed accounts never exceeds the value of
+	//   FailureToleranceCount +1. The initial actual concurrency is set to the lower
+	//   of either the value of the MaxConcurrentCount , or the value of
+	//   MaxConcurrentCount +1. The actual concurrency is then reduced proportionally
+	//   by the number of failures. This is the default behavior. If failure tolerance or
+	//   Maximum concurrent accounts are set to percentages, the behavior is similar.
+	//   - SOFT_FAILURE_TOLERANCE : This option decouples FailureToleranceCount from
+	//   the actual concurrency. This allows stack set operations to run at the
+	//   concurrency level set by the MaxConcurrentCount value, or
+	//   MaxConcurrentPercentage , regardless of the number of failures.
 	ConcurrencyMode ConcurrencyMode
 
 	// The number of accounts, per Region, for which this operation can fail before

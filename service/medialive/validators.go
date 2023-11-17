@@ -3081,6 +3081,16 @@ func validateScheduleActionSettings(v *types.ScheduleActionSettings) error {
 			invalidParams.AddNested("StaticImageActivateSettings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.StaticImageOutputActivateSettings != nil {
+		if err := validateStaticImageOutputActivateScheduleActionSettings(v.StaticImageOutputActivateSettings); err != nil {
+			invalidParams.AddNested("StaticImageOutputActivateSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StaticImageOutputDeactivateSettings != nil {
+		if err := validateStaticImageOutputDeactivateScheduleActionSettings(v.StaticImageOutputDeactivateSettings); err != nil {
+			invalidParams.AddNested("StaticImageOutputDeactivateSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3285,6 +3295,43 @@ func validateStaticImageActivateScheduleActionSettings(v *types.StaticImageActiv
 		if err := validateInputLocation(v.Image); err != nil {
 			invalidParams.AddNested("Image", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStaticImageOutputActivateScheduleActionSettings(v *types.StaticImageOutputActivateScheduleActionSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StaticImageOutputActivateScheduleActionSettings"}
+	if v.Image == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Image"))
+	} else if v.Image != nil {
+		if err := validateInputLocation(v.Image); err != nil {
+			invalidParams.AddNested("Image", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStaticImageOutputDeactivateScheduleActionSettings(v *types.StaticImageOutputDeactivateScheduleActionSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StaticImageOutputDeactivateScheduleActionSettings"}
+	if v.OutputNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

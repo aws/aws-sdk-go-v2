@@ -101,7 +101,7 @@ type SearchPlaceIndexForTextInput struct {
 
 	// An optional parameter. The maximum number of results returned per request. The
 	// default: 50
-	MaxResults int32
+	MaxResults *int32
 
 	noSmithyDocumentSerde
 }

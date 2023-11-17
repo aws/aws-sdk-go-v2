@@ -89,6 +89,46 @@ func (m *validateOpGetMonitor) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetQueryResults struct {
+}
+
+func (*validateOpGetQueryResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQueryResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQueryResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQueryResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetQueryStatus struct {
+}
+
+func (*validateOpGetQueryStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQueryStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQueryStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQueryStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListHealthEvents struct {
 }
 
@@ -124,6 +164,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartQuery struct {
+}
+
+func (*validateOpStartQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopQuery struct {
+}
+
+func (*validateOpStopQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopQueryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -205,12 +285,28 @@ func addOpGetMonitorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMonitor{}, middleware.After)
 }
 
+func addOpGetQueryResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQueryResults{}, middleware.After)
+}
+
+func addOpGetQueryStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQueryStatus{}, middleware.After)
+}
+
 func addOpListHealthEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListHealthEvents{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpStartQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartQuery{}, middleware.After)
+}
+
+func addOpStopQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopQuery{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -288,6 +384,42 @@ func validateOpGetMonitorInput(v *GetMonitorInput) error {
 	}
 }
 
+func validateOpGetQueryResultsInput(v *GetQueryResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQueryResultsInput"}
+	if v.MonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
+	}
+	if v.QueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetQueryStatusInput(v *GetQueryStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQueryStatusInput"}
+	if v.MonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
+	}
+	if v.QueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListHealthEventsInput(v *ListHealthEventsInput) error {
 	if v == nil {
 		return nil
@@ -310,6 +442,48 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartQueryInput(v *StartQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartQueryInput"}
+	if v.MonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if len(v.QueryType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopQueryInput(v *StopQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopQueryInput"}
+	if v.MonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
+	}
+	if v.QueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

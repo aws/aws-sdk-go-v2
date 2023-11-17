@@ -100,9 +100,9 @@ func awsRestjson1_serializeOpDocumentCreateChatTokenInput(v *CreateChatTokenInpu
 		ok.String(*v.RoomIdentifier)
 	}
 
-	if v.SessionDurationInMinutes != 0 {
+	if v.SessionDurationInMinutes != nil {
 		ok := object.Key("sessionDurationInMinutes")
-		ok.Integer(v.SessionDurationInMinutes)
+		ok.Integer(*v.SessionDurationInMinutes)
 	}
 
 	if v.UserId != nil {
@@ -276,14 +276,14 @@ func awsRestjson1_serializeOpDocumentCreateRoomInput(v *CreateRoomInput, value s
 		}
 	}
 
-	if v.MaximumMessageLength != 0 {
+	if v.MaximumMessageLength != nil {
 		ok := object.Key("maximumMessageLength")
-		ok.Integer(v.MaximumMessageLength)
+		ok.Integer(*v.MaximumMessageLength)
 	}
 
-	if v.MaximumMessageRatePerSecond != 0 {
+	if v.MaximumMessageRatePerSecond != nil {
 		ok := object.Key("maximumMessageRatePerSecond")
-		ok.Integer(v.MaximumMessageRatePerSecond)
+		ok.Integer(*v.MaximumMessageRatePerSecond)
 	}
 
 	if v.MessageReviewHandler != nil {
@@ -845,9 +845,9 @@ func awsRestjson1_serializeOpDocumentListLoggingConfigurationsInput(v *ListLoggi
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -930,9 +930,9 @@ func awsRestjson1_serializeOpDocumentListRoomsInput(v *ListRoomsInput, value smi
 		ok.String(*v.LoggingConfigurationIdentifier)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.MessageReviewHandlerUri != nil {
@@ -1432,14 +1432,14 @@ func awsRestjson1_serializeOpDocumentUpdateRoomInput(v *UpdateRoomInput, value s
 		}
 	}
 
-	if v.MaximumMessageLength != 0 {
+	if v.MaximumMessageLength != nil {
 		ok := object.Key("maximumMessageLength")
-		ok.Integer(v.MaximumMessageLength)
+		ok.Integer(*v.MaximumMessageLength)
 	}
 
-	if v.MaximumMessageRatePerSecond != 0 {
+	if v.MaximumMessageRatePerSecond != nil {
 		ok := object.Key("maximumMessageRatePerSecond")
-		ok.Integer(v.MaximumMessageRatePerSecond)
+		ok.Integer(*v.MaximumMessageRatePerSecond)
 	}
 
 	if v.MessageReviewHandler != nil {

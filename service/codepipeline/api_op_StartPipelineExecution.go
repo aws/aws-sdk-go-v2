@@ -40,6 +40,12 @@ type StartPipelineExecutionInput struct {
 	// The system-generated unique ID used to identify a unique execution request.
 	ClientRequestToken *string
 
+	// A list that allows you to specify, or override, the source revision for a
+	// pipeline execution that's being started. A source revision is the version with
+	// all the changes to your application code, or source artifact, for the pipeline
+	// execution.
+	SourceRevisions []types.SourceRevisionOverride
+
 	// A list that overrides pipeline variables for a pipeline execution that's being
 	// started. Variable names must match [A-Za-z0-9@\-_]+ , and the values can be
 	// anything except an empty string.

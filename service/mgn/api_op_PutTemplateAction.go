@@ -53,7 +53,7 @@ type PutTemplateActionInput struct {
 	// Template post migration custom action order.
 	//
 	// This member is required.
-	Order int32
+	Order *int32
 
 	// Template post migration custom action active status.
 	Active *bool
@@ -80,7 +80,7 @@ type PutTemplateActionInput struct {
 	Parameters map[string][]types.SsmParameterStoreParameter
 
 	// Template post migration custom action timeout in seconds.
-	TimeoutSeconds int32
+	TimeoutSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -118,13 +118,13 @@ type PutTemplateActionOutput struct {
 	OperatingSystem *string
 
 	// Template post migration custom action order.
-	Order int32
+	Order *int32
 
 	// Template post migration custom action parameters.
 	Parameters map[string][]types.SsmParameterStoreParameter
 
 	// Template post migration custom action timeout in seconds.
-	TimeoutSeconds int32
+	TimeoutSeconds *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

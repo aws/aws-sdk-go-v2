@@ -32,7 +32,7 @@ func (c *Client) StartInputDevice(ctx context.Context, params *StartInputDeviceI
 // Placeholder documentation for StartInputDeviceRequest
 type StartInputDeviceInput struct {
 
-	// The unique ID of the input device to reboot. For example, hd-123456789abcdef.
+	// The unique ID of the input device to start. For example, hd-123456789abcdef.
 	//
 	// This member is required.
 	InputDeviceId *string

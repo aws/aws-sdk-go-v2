@@ -18320,6 +18320,15 @@ func awsRestjson1_deserializeDocumentFeatureActivations(v **types.FeatureActivat
 				sv.InputPrepareScheduleActions = types.FeatureActivationsInputPrepareScheduleActions(jtv)
 			}
 
+		case "outputStaticImageOverlayScheduleActions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FeatureActivationsOutputStaticImageOverlayScheduleActions to be of type string, got %T instead", value)
+				}
+				sv.OutputStaticImageOverlayScheduleActions = types.FeatureActivationsOutputStaticImageOverlayScheduleActions(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -28095,6 +28104,16 @@ func awsRestjson1_deserializeDocumentScheduleActionSettings(v **types.ScheduleAc
 				return err
 			}
 
+		case "staticImageOutputActivateSettings":
+			if err := awsRestjson1_deserializeDocumentStaticImageOutputActivateScheduleActionSettings(&sv.StaticImageOutputActivateSettings, value); err != nil {
+				return err
+			}
+
+		case "staticImageOutputDeactivateSettings":
+			if err := awsRestjson1_deserializeDocumentStaticImageOutputDeactivateScheduleActionSettings(&sv.StaticImageOutputDeactivateSettings, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -29240,6 +29259,226 @@ func awsRestjson1_deserializeDocumentStaticImageDeactivateScheduleActionSettings
 					return err
 				}
 				sv.Layer = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStaticImageOutputActivateScheduleActionSettings(v **types.StaticImageOutputActivateScheduleActionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StaticImageOutputActivateScheduleActionSettings
+	if *v == nil {
+		sv = &types.StaticImageOutputActivateScheduleActionSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int32(int32(i64))
+			}
+
+		case "fadeIn":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FadeIn = ptr.Int32(int32(i64))
+			}
+
+		case "fadeOut":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FadeOut = ptr.Int32(int32(i64))
+			}
+
+		case "height":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Height = ptr.Int32(int32(i64))
+			}
+
+		case "image":
+			if err := awsRestjson1_deserializeDocumentInputLocation(&sv.Image, value); err != nil {
+				return err
+			}
+
+		case "imageX":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ImageX = ptr.Int32(int32(i64))
+			}
+
+		case "imageY":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ImageY = ptr.Int32(int32(i64))
+			}
+
+		case "layer":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max7 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Layer = ptr.Int32(int32(i64))
+			}
+
+		case "opacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max100 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Opacity = ptr.Int32(int32(i64))
+			}
+
+		case "outputNames":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.OutputNames, value); err != nil {
+				return err
+			}
+
+		case "width":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Width = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStaticImageOutputDeactivateScheduleActionSettings(v **types.StaticImageOutputDeactivateScheduleActionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StaticImageOutputDeactivateScheduleActionSettings
+	if *v == nil {
+		sv = &types.StaticImageOutputDeactivateScheduleActionSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fadeOut":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FadeOut = ptr.Int32(int32(i64))
+			}
+
+		case "layer":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max7 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Layer = ptr.Int32(int32(i64))
+			}
+
+		case "outputNames":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.OutputNames, value); err != nil {
+				return err
 			}
 
 		default:

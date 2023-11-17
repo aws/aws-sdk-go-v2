@@ -750,6 +750,9 @@ type DBCluster struct {
 	// The current state of this DB cluster.
 	Status *string
 
+	// Reserved for future use.
+	StatusInfos []DBClusterStatusInfo
+
 	// Indicates whether the DB cluster is encrypted.
 	StorageEncrypted *bool
 
@@ -1161,6 +1164,24 @@ type DBClusterSnapshotAttributesResult struct {
 
 	// The identifier of the manual DB cluster snapshot that the attributes apply to.
 	DBClusterSnapshotIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Reserved for future use.
+type DBClusterStatusInfo struct {
+
+	// Reserved for future use.
+	Message *string
+
+	// Reserved for future use.
+	Normal *bool
+
+	// Reserved for future use.
+	Status *string
+
+	// Reserved for future use.
+	StatusType *string
 
 	noSmithyDocumentSerde
 }
@@ -3605,6 +3626,9 @@ type RdsCustomClusterConfiguration struct {
 
 	// Reserved for future use.
 	InterconnectSubnetId *string
+
+	// Reserved for future use.
+	ReplicaMode ReplicaMode
 
 	// Reserved for future use.
 	TransitGatewayMulticastDomainId *string

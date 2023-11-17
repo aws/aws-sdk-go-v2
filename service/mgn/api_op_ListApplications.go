@@ -37,7 +37,7 @@ type ListApplicationsInput struct {
 	Filters *types.ListApplicationsRequestFilters
 
 	// Maximum results to return when listing applications.
-	MaxResults int32
+	MaxResults *int32
 
 	// Request next token.
 	NextToken *string
@@ -169,8 +169,8 @@ func NewListApplicationsPaginator(client ListApplicationsAPIClient, params *List
 	}
 
 	options := ListApplicationsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -200,7 +200,11 @@ func (p *ListApplicationsPaginator) NextPage(ctx context.Context, optFns ...func
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListApplications(ctx, &params, optFns...)
 	if err != nil {

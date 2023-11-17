@@ -1266,7 +1266,7 @@ type SearchPlaceIndexForPositionSummary struct {
 
 	// Contains the optional result count limit that is specified in the request.
 	// Default value: 50
-	MaxResults int32
+	MaxResults *int32
 
 	noSmithyDocumentSerde
 }
@@ -1360,7 +1360,7 @@ type SearchPlaceIndexForTextSummary struct {
 	Language *string
 
 	// Contains the optional result count limit specified in the request.
-	MaxResults int32
+	MaxResults *int32
 
 	// The bounding box that fully contains all search results. If you specified the
 	// optional FilterBBox parameter in the request, ResultBBox is contained within

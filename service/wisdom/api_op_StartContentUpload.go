@@ -40,11 +40,16 @@ type StartContentUploadInput struct {
 	// This member is required.
 	ContentType *string
 
-	// The identifier of the knowledge base. Can be either the ID or the ARN. URLs
-	// cannot contain the ARN.
+	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
+	// knowledge base if you're storing Wisdom Content resource to it. Can be either
+	// the ID or the ARN. URLs cannot contain the ARN.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
+
+	// The expected expiration time of the generated presigned URL, specified in
+	// minutes.
+	PresignedUrlTimeToLive *int32
 
 	noSmithyDocumentSerde
 }

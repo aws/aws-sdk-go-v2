@@ -1496,6 +1496,12 @@ func validateHealthCheckPolicy(v *types.HealthCheckPolicy) error {
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
 	}
+	if v.HealthyThreshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HealthyThreshold"))
+	}
+	if v.UnhealthyThreshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UnhealthyThreshold"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2109,6 +2115,9 @@ func validatePortMapping(v *types.PortMapping) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PortMapping"}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
 	}
@@ -2535,6 +2544,9 @@ func validateVirtualGatewayGrpcConnectionPool(v *types.VirtualGatewayGrpcConnect
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayGrpcConnectionPool"}
+	if v.MaxRequests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxRequests"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2556,6 +2568,12 @@ func validateVirtualGatewayHealthCheckPolicy(v *types.VirtualGatewayHealthCheckP
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
 	}
+	if v.HealthyThreshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HealthyThreshold"))
+	}
+	if v.UnhealthyThreshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UnhealthyThreshold"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2568,6 +2586,9 @@ func validateVirtualGatewayHttp2ConnectionPool(v *types.VirtualGatewayHttp2Conne
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayHttp2ConnectionPool"}
+	if v.MaxRequests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxRequests"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2580,6 +2601,9 @@ func validateVirtualGatewayHttpConnectionPool(v *types.VirtualGatewayHttpConnect
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayHttpConnectionPool"}
+	if v.MaxConnections == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxConnections"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2812,6 +2836,9 @@ func validateVirtualGatewayPortMapping(v *types.VirtualGatewayPortMapping) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayPortMapping"}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
 	}
@@ -2988,6 +3015,9 @@ func validateVirtualNodeGrpcConnectionPool(v *types.VirtualNodeGrpcConnectionPoo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VirtualNodeGrpcConnectionPool"}
+	if v.MaxRequests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxRequests"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3000,6 +3030,9 @@ func validateVirtualNodeHttp2ConnectionPool(v *types.VirtualNodeHttp2ConnectionP
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VirtualNodeHttp2ConnectionPool"}
+	if v.MaxRequests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxRequests"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3012,6 +3045,9 @@ func validateVirtualNodeHttpConnectionPool(v *types.VirtualNodeHttpConnectionPoo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VirtualNodeHttpConnectionPool"}
+	if v.MaxConnections == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxConnections"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3076,6 +3112,9 @@ func validateVirtualNodeTcpConnectionPool(v *types.VirtualNodeTcpConnectionPool)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VirtualNodeTcpConnectionPool"}
+	if v.MaxConnections == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxConnections"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

@@ -415,6 +415,24 @@ func (ScheduleState) Values() []ScheduleState {
 	}
 }
 
+type ServiceAuthorization string
+
+// Enum values for ServiceAuthorization
+const (
+	ServiceAuthorizationEnabled  ServiceAuthorization = "Enabled"
+	ServiceAuthorizationDisabled ServiceAuthorization = "Disabled"
+)
+
+// Values returns all known values for ServiceAuthorization. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceAuthorization) Values() []ServiceAuthorization {
+	return []ServiceAuthorization{
+		"Enabled",
+		"Disabled",
+	}
+}
+
 type SnapshotAttributeToSortBy string
 
 // Enum values for SnapshotAttributeToSortBy

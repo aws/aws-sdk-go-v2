@@ -7581,7 +7581,7 @@ func awsRestjson1_deserializeOpDocumentPutSourceServerActionOutput(v **PutSource
 				if err != nil {
 					return err
 				}
-				sv.Order = int32(i64)
+				sv.Order = ptr.Int32(int32(i64))
 			}
 
 		case "parameters":
@@ -7599,7 +7599,7 @@ func awsRestjson1_deserializeOpDocumentPutSourceServerActionOutput(v **PutSource
 				if err != nil {
 					return err
 				}
-				sv.TimeoutSeconds = int32(i64)
+				sv.TimeoutSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -7849,7 +7849,7 @@ func awsRestjson1_deserializeOpDocumentPutTemplateActionOutput(v **PutTemplateAc
 				if err != nil {
 					return err
 				}
-				sv.Order = int32(i64)
+				sv.Order = ptr.Int32(int32(i64))
 			}
 
 		case "parameters":
@@ -7867,7 +7867,7 @@ func awsRestjson1_deserializeOpDocumentPutTemplateActionOutput(v **PutTemplateAc
 				if err != nil {
 					return err
 				}
-				sv.TimeoutSeconds = int32(i64)
+				sv.TimeoutSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -15999,7 +15999,7 @@ func awsRestjson1_deserializeDocumentLaunchTemplateDiskConf(v **types.LaunchTemp
 				if err != nil {
 					return err
 				}
-				sv.Iops = i64
+				sv.Iops = ptr.Int64(i64)
 			}
 
 		case "throughput":
@@ -16012,7 +16012,7 @@ func awsRestjson1_deserializeDocumentLaunchTemplateDiskConf(v **types.LaunchTemp
 				if err != nil {
 					return err
 				}
-				sv.Throughput = i64
+				sv.Throughput = ptr.Int64(i64)
 			}
 
 		case "volumeType":
@@ -17498,7 +17498,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				if err != nil {
 					return err
 				}
-				sv.QuotaValue = int32(i64)
+				sv.QuotaValue = ptr.Int32(int32(i64))
 			}
 
 		case "resourceId":
@@ -17866,7 +17866,7 @@ func awsRestjson1_deserializeDocumentSourceServerActionDocument(v **types.Source
 				if err != nil {
 					return err
 				}
-				sv.Order = int32(i64)
+				sv.Order = ptr.Int32(int32(i64))
 			}
 
 		case "parameters":
@@ -17884,7 +17884,7 @@ func awsRestjson1_deserializeDocumentSourceServerActionDocument(v **types.Source
 				if err != nil {
 					return err
 				}
-				sv.TimeoutSeconds = int32(i64)
+				sv.TimeoutSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -18082,7 +18082,7 @@ func awsRestjson1_deserializeDocumentSsmDocument(v **types.SsmDocument, value in
 				if err != nil {
 					return err
 				}
-				sv.TimeoutSeconds = int32(i64)
+				sv.TimeoutSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -18475,7 +18475,7 @@ func awsRestjson1_deserializeDocumentTemplateActionDocument(v **types.TemplateAc
 				if err != nil {
 					return err
 				}
-				sv.Order = int32(i64)
+				sv.Order = ptr.Int32(int32(i64))
 			}
 
 		case "parameters":
@@ -18493,7 +18493,7 @@ func awsRestjson1_deserializeDocumentTemplateActionDocument(v **types.TemplateAc
 				if err != nil {
 					return err
 				}
-				sv.TimeoutSeconds = int32(i64)
+				sv.TimeoutSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:

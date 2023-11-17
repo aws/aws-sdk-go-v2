@@ -261,6 +261,10 @@ type CreateClusterInput struct {
 	// If true , the cluster can be accessed from a public network.
 	PubliclyAccessible *bool
 
+	// The Amazon resource name (ARN) of the Amazon Redshift IAM Identity Center
+	// application.
+	RedshiftIdcApplicationArn *string
+
 	// A unique identifier for the snapshot schedule.
 	SnapshotScheduleIdentifier *string
 

@@ -1467,6 +1467,25 @@ func (FeatureActivationsInputPrepareScheduleActions) Values() []FeatureActivatio
 	}
 }
 
+type FeatureActivationsOutputStaticImageOverlayScheduleActions string
+
+// Enum values for FeatureActivationsOutputStaticImageOverlayScheduleActions
+const (
+	FeatureActivationsOutputStaticImageOverlayScheduleActionsDisabled FeatureActivationsOutputStaticImageOverlayScheduleActions = "DISABLED"
+	FeatureActivationsOutputStaticImageOverlayScheduleActionsEnabled  FeatureActivationsOutputStaticImageOverlayScheduleActions = "ENABLED"
+)
+
+// Values returns all known values for
+// FeatureActivationsOutputStaticImageOverlayScheduleActions. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureActivationsOutputStaticImageOverlayScheduleActions) Values() []FeatureActivationsOutputStaticImageOverlayScheduleActions {
+	return []FeatureActivationsOutputStaticImageOverlayScheduleActions{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type FecOutputIncludeFec string
 
 // Enum values for FecOutputIncludeFec

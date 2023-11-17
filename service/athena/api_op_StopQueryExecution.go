@@ -12,9 +12,7 @@ import (
 )
 
 // Stops a query execution. Requires you to have access to the workgroup in which
-// the query ran. For code samples using the Amazon Web Services SDK for Java, see
-// Examples and Code Samples (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html)
-// in the Amazon Athena User Guide.
+// the query ran.
 func (c *Client) StopQueryExecution(ctx context.Context, params *StopQueryExecutionInput, optFns ...func(*Options)) (*StopQueryExecutionOutput, error) {
 	if params == nil {
 		params = &StopQueryExecutionInput{}

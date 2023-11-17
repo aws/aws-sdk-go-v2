@@ -13878,7 +13878,7 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForPositionSummary(v **type
 				if err != nil {
 					return err
 				}
-				sv.MaxResults = int32(i64)
+				sv.MaxResults = ptr.Int32(int32(i64))
 			}
 
 		case "Position":
@@ -14056,7 +14056,7 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForTextSummary(v **types.Se
 				if err != nil {
 					return err
 				}
-				sv.MaxResults = int32(i64)
+				sv.MaxResults = ptr.Int32(int32(i64))
 			}
 
 		case "ResultBBox":

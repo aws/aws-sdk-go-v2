@@ -36,7 +36,7 @@ type DescribeLaunchConfigurationTemplatesInput struct {
 	LaunchConfigurationTemplateIDs []string
 
 	// Maximum results to be returned in DescribeLaunchConfigurationTemplates.
-	MaxResults int32
+	MaxResults *int32
 
 	// Next pagination token returned from DescribeLaunchConfigurationTemplates.
 	NextToken *string
@@ -171,8 +171,8 @@ func NewDescribeLaunchConfigurationTemplatesPaginator(client DescribeLaunchConfi
 	}
 
 	options := DescribeLaunchConfigurationTemplatesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -202,7 +202,11 @@ func (p *DescribeLaunchConfigurationTemplatesPaginator) NextPage(ctx context.Con
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeLaunchConfigurationTemplates(ctx, &params, optFns...)
 	if err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "82eafa53-9637-4425-afca-8f7e2d6081f1",
+    "type": "feature",
+    "description": "Updated SDK for Amazon Redshift, which you can use to configure a connection with IAM Identity Center to manage access to databases. With these, you can create a connection through a managed application. You can also change a managed application, delete it, or get information about an existing one.",
+    "modules": [
+        "service/redshift"
+    ]
+}

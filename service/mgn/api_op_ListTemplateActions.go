@@ -40,7 +40,7 @@ type ListTemplateActionsInput struct {
 
 	// Maximum amount of items to return when listing template post migration custom
 	// actions.
-	MaxResults int32
+	MaxResults *int32
 
 	// Next token to use when listing template post migration custom actions.
 	NextToken *string
@@ -177,8 +177,8 @@ func NewListTemplateActionsPaginator(client ListTemplateActionsAPIClient, params
 	}
 
 	options := ListTemplateActionsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -208,7 +208,11 @@ func (p *ListTemplateActionsPaginator) NextPage(ctx context.Context, optFns ...f
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListTemplateActions(ctx, &params, optFns...)
 	if err != nil {

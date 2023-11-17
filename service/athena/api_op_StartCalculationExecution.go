@@ -13,7 +13,11 @@ import (
 )
 
 // Submits calculations for execution within a session. You can supply the code to
-// run as an inline code block within the request.
+// run as an inline code block within the request. The request syntax requires the
+// StartCalculationExecutionRequest$CodeBlock parameter or the
+// CalculationConfiguration$CodeBlock parameter, but not both. Because
+// CalculationConfiguration$CodeBlock is deprecated, use the
+// StartCalculationExecutionRequest$CodeBlock parameter instead.
 func (c *Client) StartCalculationExecution(ctx context.Context, params *StartCalculationExecutionInput, optFns ...func(*Options)) (*StartCalculationExecutionOutput, error) {
 	if params == nil {
 		params = &StartCalculationExecutionInput{}
@@ -51,7 +55,8 @@ type StartCalculationExecutionInput struct {
 	// Services CLI, you must provide this token or the action will fail.
 	ClientRequestToken *string
 
-	// A string that contains the code of the calculation.
+	// A string that contains the code of the calculation. Use this parameter instead
+	// of CalculationConfiguration$CodeBlock , which is deprecated.
 	CodeBlock *string
 
 	// A description of the calculation.

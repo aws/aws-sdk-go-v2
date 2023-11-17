@@ -37,7 +37,7 @@ type ListImportErrorsInput struct {
 	ImportID *string
 
 	// List import errors request max results.
-	MaxResults int32
+	MaxResults *int32
 
 	// List import errors request next token.
 	NextToken *string
@@ -173,8 +173,8 @@ func NewListImportErrorsPaginator(client ListImportErrorsAPIClient, params *List
 	}
 
 	options := ListImportErrorsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -204,7 +204,11 @@ func (p *ListImportErrorsPaginator) NextPage(ctx context.Context, optFns ...func
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListImportErrors(ctx, &params, optFns...)
 	if err != nil {
