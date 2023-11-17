@@ -149,7 +149,6 @@
                 "MaxCityNetworksToMonitor": {
                     "target": "com.amazonaws.internetmonitor#MaxCityNetworksToMonitor",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of city-networks to monitor for your resources. A city-network is the location (city) where clients access your \n\t\t\tapplication resources from and the ASN or network provider, such as an internet service provider (ISP), that clients access the resources \n\t\t\tthrough. Setting this limit can help control billing costs.</p>\n         <p>To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html\">Choosing a city-network maximum value\n\t\t</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
                     }
                 },
@@ -162,7 +161,6 @@
                 "TrafficPercentageToMonitor": {
                     "target": "com.amazonaws.internetmonitor#TrafficPercentageToMonitor",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of the internet-facing traffic for your application that you want to monitor with this monitor. If you set a city-networks\n\t\t\tmaximum, that limit overrides the traffic percentage that you set.</p>\n         <p>To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html\">Choosing an application traffic percentage to monitor\n\t\t</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
                     }
                 },
@@ -172,6 +170,9 @@
                         "smithy.api#documentation": "<p>Defines the threshold percentages and other configuration information for when Amazon CloudWatch Internet Monitor creates a health event. Internet Monitor creates a\n\t\t\thealth event when an internet issue that affects your application end users has a health score percentage that is at or below a \n\t\t\tspecific threshold, and, sometimes, when other criteria are met.</p>\n         <p>If you don't set a health event threshold, the default value is 95%.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview\">\n\t\t\tChange health event thresholds</a> in the Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.internetmonitor#CreateMonitorOutput": {
@@ -191,6 +192,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.internetmonitor#DeleteMonitor": {
@@ -235,11 +239,55 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.internetmonitor#DeleteMonitorOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#FilterList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.internetmonitor#FilterParameter": {
+            "type": "structure",
+            "members": {
+                "Field": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A data field that you want to filter, to further scope your application's Internet Monitor data in a repository that you \n\t\t\tcreated by running a query. A field might be <code>city</code>, for example. The field must be one of the fields\n\t\t\tthat was returned by the specific query that you used to create the repository.</p>"
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.internetmonitor#Operator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use with the filter field and a value, such as <code>not_equals</code>.</p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.internetmonitor#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more values to be used, together with the specified operator, to filter data for a query.\n\t\t\tFor example, you could specify an array of values such as <code>[\"Seattle\", \"Redmond\"]</code>. Values in the array are separated by\n\t\t\tcommas.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that you use with the results of a Amazon CloudWatch Internet Monitor query that you created and ran. The query sets up a \n\t\t\trepository of data that is a subset of your application's Internet Monitor data. <code>FilterParameter</code> is a string \n\t\t\tthat defines how you want to filter the repository of data to return a set of results, based on your criteria.</p>\n         <p>The filter parameters that you can specify depend on the query type that you used to create the repository, since \n\t\t\teach query type returns a different set of Internet Monitor data.</p>\n         <p>For each filter, you specify a field (such as <code>city</code>), an operator (such as <code>not_equals</code>,\n\t\t\tand a value or array of values (such as <code>[\"Seattle\", \"Redmond\"]</code>). Separate values in the array with\n\t\t\tcommas.</p>\n         <p>For more information about specifying filter parameters, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html\">Using the Amazon CloudWatch Internet Monitor query interface</a>\n\t\t\tin the Amazon CloudWatch Internet Monitor User Guide.</p>"
+            }
+        },
+        "com.amazonaws.internetmonitor#FilterParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.internetmonitor#FilterParameter"
+            }
         },
         "com.amazonaws.internetmonitor#GetHealthEvent": {
             "type": "operation",
@@ -286,7 +334,7 @@
                 "EventId": {
                     "target": "com.amazonaws.internetmonitor#HealthEventName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The internally generated identifier of a health event. Because <code>EventID</code> contains the forward slash (“/”) character, you must \n\t\t\tURL-encode the <code>EventID</code> field in the request URL.</p>",
+                        "smithy.api#documentation": "<p>The internally-generated identifier of a health event. Because <code>EventID</code> contains the forward slash (“/”) character, you must \n\t\t\tURL-encode the <code>EventID</code> field in the request URL.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -306,7 +354,7 @@
                 "EventId": {
                     "target": "com.amazonaws.internetmonitor#HealthEventName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The internally generated identifier of a health event.</p>",
+                        "smithy.api#documentation": "<p>The internally-generated identifier of a health event.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -418,6 +466,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.internetmonitor#GetMonitorOutput": {
@@ -488,7 +539,6 @@
                 "MaxCityNetworksToMonitor": {
                     "target": "com.amazonaws.internetmonitor#MaxCityNetworksToMonitor",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of city-networks to monitor for your resources. A city-network is the location (city) where clients access your \n\t\t\tapplication resources from and the ASN or network provider, such as an internet service provider (ISP), that clients access the resources \n\t\t\tthrough. This limit can help control billing costs.</p>\n         <p>To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html\">Choosing a city-network maximum value\n\t\t</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
                     }
                 },
@@ -501,7 +551,6 @@
                 "TrafficPercentageToMonitor": {
                     "target": "com.amazonaws.internetmonitor#TrafficPercentageToMonitor",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of the internet-facing traffic for your application to monitor with this monitor. If you set a city-networks\n\t\t\tmaximum, that limit overrides the traffic percentage that you set.</p>\n         <p>To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html\">Choosing an application traffic percentage to monitor\n\t\t</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
                     }
                 },
@@ -511,6 +560,187 @@
                         "smithy.api#documentation": "<p>The list of health event threshold configurations. The threshold percentage for a health score determines, along with other configuration \n\t\t\tinformation, when Internet Monitor creates a health event when there's an internet issue that affects your application end users.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview\">\n\t\t\tChange health event thresholds</a> in the Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#GetQueryResults": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#GetQueryResultsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#GetQueryResultsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Return the data for a query with the Amazon CloudWatch Internet Monitor query interface. Specify the query that you want to return results for by providing \n\t\t\ta <code>QueryId</code> and a monitor name.</p>\n         <p>For more information about using the query interface, including examples, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html\">Using the Amazon CloudWatch Internet Monitor query interface</a>\n\t\t\tin the Amazon CloudWatch Internet Monitor User Guide.</p>",
+                "smithy.api#http": {
+                    "uri": "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}/Results",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#GetQueryResultsInput": {
+            "type": "structure",
+            "members": {
+                "MonitorName": {
+                    "target": "com.amazonaws.internetmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor to return data for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the query that you want to return data results for. A <code>QueryId</code> is an \n\t\t\tinternally-generated identifier for a specific query.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. You receive this token from a previous call.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.internetmonitor#QueryMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of query results that you want to return with this call.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#GetQueryResultsOutput": {
+            "type": "structure",
+            "members": {
+                "Fields": {
+                    "target": "com.amazonaws.internetmonitor#QueryFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fields that the query returns data for. Fields are name-data type pairs, such as \n\t\t\t<code>availability_score</code>-<code>float</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Data": {
+                    "target": "com.amazonaws.internetmonitor#QueryData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data results that the query returns. Data is returned in arrays, aligned with the <code>Fields</code>\n\t\tfor the query, which creates a repository of Amazon CloudWatch Internet Monitor information for your application. Then, you can filter\n\t\tthe information in the repository by using <code>FilterParameters</code> that you define.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. You receive this token from a previous call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#GetQueryStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#GetQueryStatusInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#GetQueryStatusOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the current status of a query for the Amazon CloudWatch Internet Monitor query interface, for a specified query ID and monitor. \n\t\t\tWhen you run a query, check the status to make sure that the query has <code>SUCCEEDED</code> before you review the results.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>QUEUED</code>: The query is scheduled to run.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>: The query is in progress but not complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The query completed sucessfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The query failed due to an error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELED</code>: The query was canceled.</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "uri": "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}/Status",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#GetQueryStatusInput": {
+            "type": "structure",
+            "members": {
+                "MonitorName": {
+                    "target": "com.amazonaws.internetmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the query that you want to return the status for. A <code>QueryId</code> is an internally-generated \n\t\t\tdentifier for a specific query.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#GetQueryStatusOutput": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.internetmonitor#QueryStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status for a query.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.internetmonitor#HealthEvent": {
@@ -526,7 +756,7 @@
                 "EventId": {
                     "target": "com.amazonaws.internetmonitor#HealthEventName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The internally generated identifier of a specific network traffic impairment health event.</p>",
+                        "smithy.api#documentation": "<p>The internally-generated identifier of a specific network traffic impairment health event.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -977,7 +1207,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1020,7 +1249,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -1033,7 +1263,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1047,7 +1276,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -1070,7 +1298,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -1105,7 +1332,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1116,14 +1342,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1137,14 +1365,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -1153,11 +1379,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1168,14 +1394,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1189,7 +1417,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -1209,7 +1436,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1220,14 +1446,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -1238,9 +1466,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1652,7 +1882,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.internetmonitor#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of health event objects that you want to return with this call. </p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
@@ -1734,7 +1963,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.internetmonitor#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of monitor objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
@@ -1746,6 +1974,9 @@
                         "smithy.api#httpQuery": "MonitorStatus"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.internetmonitor#ListMonitorsOutput": {
@@ -1764,6 +1995,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of results. You receive this token from a previous call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.internetmonitor#ListTagsForResource": {
@@ -1854,12 +2088,12 @@
                     "target": "com.amazonaws.internetmonitor#Percentage",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The minimum percentage of overall traffic for an application that must be impacted by an issue before Internet Monitor creates an event when a\n\t\t\tthreshold is crossed for a local health score.</p>"
+                        "smithy.api#documentation": "<p>The minimum percentage of overall traffic for an application that must be impacted by an issue before Internet Monitor creates an event when a\n\t\t\tthreshold is crossed for a local health score.</p>\n         <p>If you don't set a minimum traffic impact threshold, the default value is 0.01%.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type with the configuration information that determines the threshold and other conditions for when Internet Monitor creates a health event \n\t\t\tfor a local performance or availability issue, when scores cross a threshold for one or more city-networks.</p>\n         <p>Defines the percentages, for performance scores or availability scores, that are the local thresholds\n\t\t\tfor when Amazon CloudWatch Internet Monitor creates a health event. Also defines whether a local threshold is enabled or disabled, and the minimum percentage\n\t\t\tof overall traffic that must be impacted by an issue before Internet Monitor creates an event when a\tthreshold is crossed for a local health score.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview\">\n\t\t\tChange health event thresholds</a> in the Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A complex type with the configuration information that determines the threshold and other conditions for when Internet Monitor creates a health event \n\t\t\tfor a local performance or availability issue, when scores cross a threshold for one or more city-networks.</p>\n         <p>Defines the percentages, for performance scores or availability scores, that are the local thresholds\n\t\t\tfor when Amazon CloudWatch Internet Monitor creates a health event. Also defines whether a local threshold is enabled or disabled, and the minimum percentage\n\t\t\tof overall traffic that must be impacted by an issue before Internet Monitor creates an event when a\tthreshold is crossed for a local health score.</p>\n         <p>If you don't set a local health event threshold, the default value is 60%.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview\">\n\t\t\tChange health event thresholds</a> in the Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
             }
         },
         "com.amazonaws.internetmonitor#LocalHealthEventsConfigStatus": {
@@ -1895,7 +2129,6 @@
         "com.amazonaws.internetmonitor#MaxCityNetworksToMonitor": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 500000
@@ -1905,7 +2138,6 @@
         "com.amazonaws.internetmonitor#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 25
@@ -2039,6 +2271,20 @@
             "list": {
                 "target": "com.amazonaws.internetmonitor#ListMonitors"
             },
+            "operations": [
+                {
+                    "target": "com.amazonaws.internetmonitor#GetQueryResults"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#GetQueryStatus"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#StartQuery"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#StopQuery"
+                }
+            ],
             "resources": [
                 {
                     "target": "com.amazonaws.internetmonitor#HealthEventResource"
@@ -2127,6 +2373,21 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.internetmonitor#Operator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "EQUALS",
+                        "value": "EQUALS"
+                    },
+                    {
+                        "name": "NOT_EQUALS",
+                        "value": "NOT_EQUALS"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.internetmonitor#Percentage": {
             "type": "double",
             "traits": {
@@ -2167,6 +2428,99 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Amazon CloudWatch Internet Monitor calculates measurements about the performance for your application's internet traffic between client locations and Amazon Web Services. \n\t\t\tAmazon Web Services has substantial historical data about internet\n\t\t\tperformance and availability between Amazon Web Services services and different network providers and geographies. By applying statistical analysis to the data, Internet Monitor\n\t\t\tcan detect when the performance and availability for your application has dropped, compared to an estimated baseline that's already calculated. To make it\n\t\t\teasier to see those drops, we report that information to you in the form of health scores: a performance score and an availability score.</p>\n         <p>Performance in Internet Monitor represents the estimated percentage of traffic that is not seeing a performance drop. For example, a performance score of 99% for\n\t\t\tan end user and service location pair is equivalent to 1% of the traffic experiencing a performance drop for that pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores\">How Internet Monitor calculates performance and availability\n\t\t\tscores</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.internetmonitor#QueryData": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.internetmonitor#QueryRow"
+            }
+        },
+        "com.amazonaws.internetmonitor#QueryField": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a field to query your application's Amazon CloudWatch Internet Monitor data for, such as <code>availability_score</code>.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type for a query field, which must correspond to the field you're defining for <code>QueryField</code>. For example, if the query \n\t\t\tfield name is <code>availability_score</code>, the data type is <code>float</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a field to query for your application's Amazon CloudWatch Internet Monitor data. You create a data repository by running a query of a specific\n\t\t\ttype. Each <code>QueryType</code> includes a specific set of fields and datatypes to retrieve data for. </p>"
+            }
+        },
+        "com.amazonaws.internetmonitor#QueryFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.internetmonitor#QueryField"
+            }
+        },
+        "com.amazonaws.internetmonitor#QueryMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#QueryRow": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.internetmonitor#QueryStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "QUEUED",
+                        "value": "QUEUED"
+                    },
+                    {
+                        "name": "RUNNING",
+                        "value": "RUNNING"
+                    },
+                    {
+                        "name": "SUCCEEDED",
+                        "value": "SUCCEEDED"
+                    },
+                    {
+                        "name": "FAILED",
+                        "value": "FAILED"
+                    },
+                    {
+                        "name": "CANCELED",
+                        "value": "CANCELED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.internetmonitor#QueryType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "MEASUREMENTS",
+                        "value": "MEASUREMENTS"
+                    },
+                    {
+                        "name": "TOP_LOCATIONS",
+                        "value": "TOP_LOCATIONS"
+                    },
+                    {
+                        "name": "TOP_LOCATION_DETAILS",
+                        "value": "TOP_LOCATION_DETAILS"
+                    }
+                ]
             }
         },
         "com.amazonaws.internetmonitor#ResourceName": {
@@ -2251,6 +2605,165 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.internetmonitor#Arn"
+            }
+        },
+        "com.amazonaws.internetmonitor#StartQuery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#StartQueryInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#StartQueryOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Start a query to return data for a specific query type for the Amazon CloudWatch Internet Monitor query interface. Specify a time period\n\t\t\tfor the data that you want returned by using <code>StartTime</code> and <code>EndTime</code>. You filter the query \n\t\t\tresults to return by providing parameters that you specify with <code>FilterParameters</code>.</p>\n         <p>For more information about using the query interface, including examples, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html\">Using the Amazon CloudWatch Internet Monitor query interface</a>\n\t\tin the Amazon CloudWatch Internet Monitor User Guide.</p>",
+                "smithy.api#http": {
+                    "uri": "/v20210603/Monitors/{MonitorName}/Queries",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#StartQueryInput": {
+            "type": "structure",
+            "members": {
+                "MonitorName": {
+                    "target": "com.amazonaws.internetmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor to query.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that is the beginning of the period that you want to retrieve data for with your query.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "EndTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that is the end of the period that you want to retrieve data for with your query.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "QueryType": {
+                    "target": "com.amazonaws.internetmonitor#QueryType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of query to run. The following are the three types of queries that you can run using the Internet Monitor query interface:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MEASUREMENTS</code>: TBD definition</p>\n            </li>\n            <li>\n               <p>\n                  <code>TOP_LOCATIONS</code>: TBD definition</p>\n            </li>\n            <li>\n               <p>\n                  <code>TOP_LOCATION_DETAILS</code>: TBD definition</p>\n            </li>\n         </ul>\n         <p>For lists of the fields returned with each query type and more information about how each type of query is\n\t\t\tperformed, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html\">\n\t\t\t\tUsing the Amazon CloudWatch Internet Monitor query interface</a> in the Amazon CloudWatch Internet Monitor User Guide.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FilterParameters": {
+                    "target": "com.amazonaws.internetmonitor#FilterParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>FilterParameters</code> field that you use with Amazon CloudWatch Internet Monitor queries is a string the defines \n\t\t\thow you want a query to be filtered. The filter parameters that you can specify depend on the query type, since \n\t\t\teach query type returns a different set of Internet Monitor data.</p>\n         <p>For more information about specifying filter parameters, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html\">Using the Amazon CloudWatch Internet Monitor query interface</a>\n\t\t\tin the Amazon CloudWatch Internet Monitor User Guide.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#StartQueryOutput": {
+            "type": "structure",
+            "members": {
+                "QueryId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The internally-generated identifier of a specific query.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#StopQuery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#StopQueryInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#StopQueryOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stop a query that is progress for a specific monitor.</p>",
+                "smithy.api#http": {
+                    "uri": "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}",
+                    "method": "DELETE"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#StopQueryInput": {
+            "type": "structure",
+            "members": {
+                "MonitorName": {
+                    "target": "com.amazonaws.internetmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the query that you want to stop. A <code>QueryId</code> is an internally-generated identifier for a specific query.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#StopQueryOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.internetmonitor#TagKey": {
@@ -2407,7 +2920,6 @@
         "com.amazonaws.internetmonitor#TrafficPercentageToMonitor": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -2579,7 +3091,6 @@
                 "MaxCityNetworksToMonitor": {
                     "target": "com.amazonaws.internetmonitor#MaxCityNetworksToMonitor",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of city-networks to monitor for your application. A city-network is the location (city) where clients access your \n\t\t\tapplication resources from and the ASN or network provider, such as an internet service provider (ISP), that clients access the resources \n\t\t\tthrough. Setting this limit can help control billing costs.</p>"
                     }
                 },
@@ -2592,7 +3103,6 @@
                 "TrafficPercentageToMonitor": {
                     "target": "com.amazonaws.internetmonitor#TrafficPercentageToMonitor",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of the internet-facing traffic for your application that you want to monitor with this monitor. If you set a city-networks\n\t\t\tmaximum, that limit overrides the traffic percentage that you set.</p>\n         <p>To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html\">Choosing an application traffic percentage to monitor\n\t\t</a> in the Amazon CloudWatch Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
                     }
                 },
@@ -2602,6 +3112,9 @@
                         "smithy.api#documentation": "<p>The list of health score thresholds. A threshold percentage for health scores, along with other configuration information,\n\t\t\tdetermines when Internet Monitor creates a health event when there's an internet issue that affects your application end users.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview\">\n\t\t\tChange health event thresholds</a> in the Internet Monitor section of the <i>CloudWatch User Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.internetmonitor#UpdateMonitorOutput": {
@@ -2621,6 +3134,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.internetmonitor#ValidationException": {

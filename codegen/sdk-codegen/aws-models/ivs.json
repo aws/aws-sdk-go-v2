@@ -186,7 +186,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -229,7 +228,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -242,7 +242,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -256,7 +255,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -279,7 +277,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -314,7 +311,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -325,14 +321,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -346,14 +344,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -362,11 +358,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -377,14 +373,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -398,7 +396,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -418,7 +415,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -429,14 +425,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -447,9 +445,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -2374,7 +2374,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.ivs#MaxChannelResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of channels to return. Default: 100.</p>"
                     }
                 }
@@ -2440,7 +2439,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.ivs#MaxPlaybackKeyPairResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of key pairs to return. Default: your service quota or 100, whichever is\n      smaller.</p>"
                     }
                 }
@@ -2509,7 +2507,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.ivs#MaxRecordingConfigurationResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of recording configurations to return. Default: your service quota or 100,\n      whichever is smaller. </p>"
                     }
                 }
@@ -2585,7 +2582,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.ivs#MaxStreamKeyResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of streamKeys to return. Default: 1.</p>"
                     }
                 }
@@ -2661,7 +2657,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.ivs#MaxStreamResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of streams to return. Default: 100.</p>"
                     }
                 }
@@ -2733,7 +2728,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.ivs#MaxStreamResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of streams to return. Default: 100.</p>"
                     }
                 }
@@ -2813,7 +2807,6 @@
         "com.amazonaws.ivs#MaxChannelResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -2823,7 +2816,6 @@
         "com.amazonaws.ivs#MaxPlaybackKeyPairResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -2833,7 +2825,6 @@
         "com.amazonaws.ivs#MaxRecordingConfigurationResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -2843,7 +2834,6 @@
         "com.amazonaws.ivs#MaxStreamKeyResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -2853,7 +2843,6 @@
         "com.amazonaws.ivs#MaxStreamResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3976,7 +3965,6 @@
         "com.amazonaws.ivs#TargetIntervalSeconds": {
             "type": "long",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 60
@@ -4011,7 +3999,6 @@
                 "targetIntervalSeconds": {
                     "target": "com.amazonaws.ivs#TargetIntervalSeconds",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The targeted thumbnail-generation interval in seconds. This is configurable (and required)\n      only if <code>recordingMode</code> is <code>INTERVAL</code>. Default: 60.</p>\n         <p>\n            <b>Important:</b> For the <code>BASIC</code> channel type,\n      setting a value for <code>targetIntervalSeconds</code> does not guarantee that thumbnails are\n      generated at the specified interval. For thumbnails to be generated at the\n        <code>targetIntervalSeconds</code> interval, the <code>IDR/Keyframe</code> value for the\n      input video must be less than the <code>targetIntervalSeconds</code> value. See <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html\"> Amazon IVS Streaming\n        Configuration</a> for information on setting <code>IDR/Keyframe</code> to the\n      recommended value in video-encoder settings.</p>"
                     }
                 },

@@ -834,12 +834,12 @@
                 "RedirectUris": {
                     "target": "com.amazonaws.ssoadmin#RedirectUris",
                     "traits": {
-                        "smithy.api#documentation": "<p>~~~[ TODO: ADD DESCRIPTION HERE ]~~~</p>"
+                        "smithy.api#documentation": "<p>A list of URIs that are valid locations to redirect a user's browser after the user is authorized.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>~~~[ TODO: ADD DESCRIPTION HERE ]~~~</p>"
+                "smithy.api#documentation": "<p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Authorization Code Grant.</p>"
             }
         },
         "com.amazonaws.ssoadmin#AuthorizedTokenIssuer": {
@@ -3628,18 +3628,30 @@
                 "AuthorizationCode": {
                     "target": "com.amazonaws.ssoadmin#AuthorizationCodeGrant",
                     "traits": {
-                        "smithy.api#documentation": "<p>~~~[ TODO: ADD DESCRIPTION HERE ]~~~</p>"
+                        "smithy.api#documentation": "<p>Configuration options for the <code>authorization_code</code> grant type.</p>"
                     }
                 },
                 "JwtBearer": {
                     "target": "com.amazonaws.ssoadmin#JwtBearerGrant",
                     "traits": {
-                        "smithy.api#documentation": "<p>~~~[ TODO: ADD DESCRIPTION HERE ]~~~</p>"
+                        "smithy.api#documentation": "<p>Configuration options for the <code>urn:ietf:params:oauth:grant-type:jwt-bearer</code> grant type.</p>"
+                    }
+                },
+                "RefreshToken": {
+                    "target": "com.amazonaws.ssoadmin#RefreshTokenGrant",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration options for the <code>refresh_token</code> grant type.</p>"
+                    }
+                },
+                "TokenExchange": {
+                    "target": "com.amazonaws.ssoadmin#TokenExchangeGrant",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration options for the <code>urn:ietf:params:oauth:grant-type:token-exchange</code> grant type.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>~~~[ TODO: ADD DESCRIPTION HERE ]~~~</p>"
+                "smithy.api#documentation": "<p>The Grant union represents the set of possible configuration options for the selected grant type. Exactly one member of the union must be specified, and must match the grant type selected.</p>"
             }
         },
         "com.amazonaws.ssoadmin#GrantItem": {
@@ -3648,20 +3660,20 @@
                 "GrantType": {
                     "target": "com.amazonaws.ssoadmin#GrantType",
                     "traits": {
-                        "smithy.api#documentation": "<p>~~~[ TODO: ADD DESCRIPTION HERE ]~~~</p>",
+                        "smithy.api#documentation": "<p>The type of the selected grant.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Grant": {
                     "target": "com.amazonaws.ssoadmin#Grant",
                     "traits": {
-                        "smithy.api#documentation": "<p>~~~[ TODO: ADD DESCRIPTION HERE ]~~~</p>",
+                        "smithy.api#documentation": "<p>The configuration structure for the selected grant.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>~~~[ TODO: ADD DESCRIPTION HERE ]~~~</p>"
+                "smithy.api#documentation": "<p>A structure that defines a single grant and its configuration.</p>"
             }
         },
         "com.amazonaws.ssoadmin#GrantType": {
@@ -3907,12 +3919,12 @@
                 "AuthorizedTokenIssuers": {
                     "target": "com.amazonaws.ssoadmin#AuthorizedTokenIssuers",
                     "traits": {
-                        "smithy.api#documentation": "<p>~~~[ TODO: ADD DESCRIPTION HERE ]~~~</p>"
+                        "smithy.api#documentation": "<p>A list of allowed token issuers trusted by the Identity Center instances for this application.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>~~~[ TODO: ADD DESCRIPTION HERE ]~~~</p>"
+                "smithy.api#documentation": "<p>A structure that defines configuration settings for an application that supports the JWT Bearer Token Authorization Grant.</p>"
             }
         },
         "com.amazonaws.ssoadmin#ListAccountAssignmentCreationStatus": {
@@ -6582,6 +6594,13 @@
                 }
             }
         },
+        "com.amazonaws.ssoadmin#RefreshTokenGrant": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Refresh Token Grant.</p>"
+            }
+        },
         "com.amazonaws.ssoadmin#RelayState": {
             "type": "string",
             "traits": {
@@ -8123,6 +8142,13 @@
                 "smithy.api#pattern": "^[-a-zA-Z0-9+=/_]*$"
             }
         },
+        "com.amazonaws.ssoadmin#TokenExchangeGrant": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Token Exchange Grant.</p>"
+            }
+        },
         "com.amazonaws.ssoadmin#TokenIssuerAudience": {
             "type": "string",
             "traits": {
@@ -8365,7 +8391,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p>A structure that describes the options for the access portal associated with an application that can be updated.</p>"
             }
         },
         "com.amazonaws.ssoadmin#UpdateApplicationRequest": {

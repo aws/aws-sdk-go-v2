@@ -15340,6 +15340,12 @@
                         "smithy.api#enumValue": "WISDOM_KNOWLEDGE_BASE"
                     }
                 },
+                "WISDOM_QUICK_RESPONSES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WISDOM_QUICK_RESPONSES"
+                    }
+                },
                 "CASES_DOMAIN": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -16651,12 +16657,6 @@
         "com.amazonaws.connect#ListFlowAssociationResourceType": {
             "type": "enum",
             "members": {
-                "SMS_PHONE_NUMBER": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "SMS_PHONE_NUMBER"
-                    }
-                },
                 "VOICE_PHONE_NUMBER": {
                     "target": "smithy.api#Unit",
                     "traits": {

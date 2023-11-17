@@ -48,8 +48,7 @@
                     "sdkId": "App Mesh",
                     "arnNamespace": "appmesh",
                     "cloudFormationName": "AppMesh",
-                    "cloudTrailEventSource": "appmesh.amazonaws.com",
-                    "endpointPrefix": "appmesh"
+                    "cloudTrailEventSource": "appmesh.amazonaws.com"
                 },
                 "aws.auth#sigv4": {
                     "name": "appmesh"
@@ -100,7 +99,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -143,7 +141,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -156,7 +155,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -170,7 +168,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -193,7 +190,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -228,7 +224,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -239,14 +234,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -260,14 +257,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -276,11 +271,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -291,14 +286,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -312,7 +309,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -332,7 +328,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -343,14 +338,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -361,9 +358,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1479,9 +1478,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a gateway route.</p>\n         <p>A gateway route is attached to a virtual gateway and routes traffic to an existing\n         virtual service. If a route matches a request, it can distribute traffic to a target\n         virtual service.</p>\n         <p>For more information about gateway routes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/gateway-routes.html\">Gateway routes</a>.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1591,9 +1589,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a service mesh.</p>\n         <p> A service mesh is a logical boundary for network traffic between services that are\n         represented by resources within the mesh. After you create your service mesh, you can\n         create virtual services, virtual nodes, virtual routers, and routes to distribute traffic\n         between the applications in your mesh.</p>\n         <p>For more information about service meshes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/meshes.html\">Service meshes</a>.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/meshes",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1688,9 +1685,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a route that is associated with a virtual router.</p>\n         <p> You can route several different protocols and define a retry policy for a route.\n         Traffic can be routed to one or more virtual nodes.</p>\n         <p>For more information about routes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/routes.html\">Routes</a>.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1809,9 +1805,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a virtual gateway.</p>\n         <p>A virtual gateway allows resources outside your mesh to communicate to resources that\n         are inside your mesh. The virtual gateway represents an Envoy proxy running in an Amazon ECS task, in a Kubernetes service, or on an Amazon EC2 instance. Unlike a\n         virtual node, which represents an Envoy running with an application, a virtual gateway\n         represents Envoy deployed by itself.</p>\n         <p>For more information about virtual gateways, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_gateways.html\">Virtual gateways</a>. </p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}/virtualGateways",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1913,9 +1908,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a virtual node within a service mesh.</p>\n         <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can\n         specify the service discovery information for your task group, and whether the proxy\n         running in a task group will communicate with other proxies using Transport Layer Security\n         (TLS).</p>\n         <p>You define a <code>listener</code> for any inbound traffic that your virtual node\n         expects. Any virtual service that your virtual node expects to communicate to is specified\n         as a <code>backend</code>.</p>\n         <p>The response metadata for your new virtual node contains the <code>arn</code> that is\n         associated with the virtual node. Set this value to the full ARN; for example,\n            <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>)\n         as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group's Envoy\n         proxy container in your task definition or pod spec. This is then mapped to the\n            <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n         <note>\n            <p>By default, App Mesh uses the name of the resource you specified in\n               <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and\n            traces. You can override this behavior by setting the\n               <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p>\n         </note>\n         <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html\">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when\n         setting these variables. For more information aboutApp Mesh Envoy variables, see\n            <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html\">Envoy\n            image</a> in the App Mesh User Guide.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}/virtualNodes",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -2026,9 +2020,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a virtual router within a service mesh.</p>\n         <p>Specify a <code>listener</code> for any inbound traffic that your virtual router\n         receives. Create a virtual router for each protocol and port that you need to route.\n         Virtual routers handle traffic for one or more virtual services within your mesh. After you\n         create your virtual router, create and associate routes for your virtual router that direct\n         incoming requests to different virtual nodes.</p>\n         <p>For more information about virtual routers, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html\">Virtual routers</a>.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}/virtualRouters",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -2139,9 +2132,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a virtual service within a service mesh.</p>\n         <p>A virtual service is an abstraction of a real service that is provided by a virtual node\n         directly or indirectly by means of a virtual router. Dependent services call your virtual\n         service by its <code>virtualServiceName</code>, and those requests are routed to the\n         virtual node or virtual router that is specified as the provider for the virtual\n         service.</p>\n         <p>For more information about virtual services, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html\">Virtual services</a>.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}/virtualServices",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -2264,9 +2256,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an existing gateway route.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}",
-                    "code": 200
+                    "method": "DELETE"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -2354,9 +2345,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an existing service mesh.</p>\n         <p>You must delete all resources (virtual services, routes, virtual routers, and virtual\n         nodes) in the service mesh before you can delete the mesh itself.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/v20190125/meshes/{meshName}",
-                    "code": 200
+                    "method": "DELETE"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -2427,9 +2417,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an existing route.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}",
-                    "code": 200
+                    "method": "DELETE"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -2523,9 +2512,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an existing virtual gateway. You cannot delete a virtual gateway if any gateway\n         routes are associated to it.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}",
-                    "code": 200
+                    "method": "DELETE"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -2605,9 +2593,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an existing virtual node.</p>\n         <p>You must delete any virtual services that list a virtual node as a service provider\n         before you can delete the virtual node itself.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}",
-                    "code": 200
+                    "method": "DELETE"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -2693,9 +2680,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an existing virtual router.</p>\n         <p>You must delete any routes associated with the virtual router before you can delete the\n         router itself.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}",
-                    "code": 200
+                    "method": "DELETE"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -2781,9 +2767,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an existing virtual service.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}",
-                    "code": 200
+                    "method": "DELETE"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -2866,9 +2851,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Describes an existing gateway route.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2953,9 +2937,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Describes an existing service mesh.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/v20190125/meshes/{meshName}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3030,9 +3013,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Describes an existing route.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3123,9 +3105,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Describes an existing virtual gateway.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3202,9 +3183,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Describes an existing virtual node.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3287,9 +3267,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Describes an existing virtual router.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3372,9 +3351,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Describes an existing virtual service.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3556,7 +3534,7 @@
                 "path": {
                     "target": "com.amazonaws.appmesh#FilePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send\n         access logs to standard out and configure your Envoy container to use a log driver, such as\n            <code>awslogs</code>, to export the access logs to a log storage service such as Amazon\n         CloudWatch Logs. You can also specify a path in the Envoy container's file system to write\n         the files to disk.</p>\n      \n         <note>\n            <p>The Envoy process must have write permissions to the path that you specify here.\n            Otherwise, Envoy fails to bootstrap properly.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send\n         access logs to standard out and configure your Envoy container to use a log driver, such as\n            <code>awslogs</code>, to export the access logs to a log storage service such as Amazon\n         CloudWatch Logs. You can also specify a path in the Envoy container's file system to write\n         the files to disk.</p>\n         <note>\n            <p>The Envoy process must have write permissions to the path that you specify here.\n            Otherwise, Envoy fails to bootstrap properly.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3623,10 +3601,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "mesh/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoute/{gatewayRouteName}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "mesh/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoute/{gatewayRouteName}"
                 }
             }
         },
@@ -3973,7 +3948,7 @@
                 "port": {
                     "target": "com.amazonaws.appmesh#ListenerPort",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number to match from the request.</p>"
+                        "smithy.api#documentation": "<p>The gateway route port to be matched on.</p>"
                     }
                 }
             },
@@ -4418,7 +4393,6 @@
                 "port": {
                     "target": "com.amazonaws.appmesh#PortNumber",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The destination port for the health check request. This port must match the port defined\n         in the <a>PortMapping</a> for the listener.</p>"
                     }
                 },
@@ -4431,7 +4405,6 @@
                 "healthyThreshold": {
                     "target": "com.amazonaws.appmesh#HealthCheckThreshold",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of consecutive successful health checks that must occur before declaring\n         listener healthy.</p>",
                         "smithy.api#required": {}
                     }
@@ -4439,7 +4412,6 @@
                 "unhealthyThreshold": {
                     "target": "com.amazonaws.appmesh#HealthCheckThreshold",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of consecutive failed health checks that must occur before declaring a\n         virtual node unhealthy. </p>",
                         "smithy.api#required": {}
                     }
@@ -4452,7 +4424,6 @@
         "com.amazonaws.appmesh#HealthCheckThreshold": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 2,
                     "max": 10
@@ -5141,15 +5112,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of existing gateway routes that are associated to a virtual\n         gateway.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "gatewayRoutes",
-                    "pageSize": "limit"
+                    "pageSize": "limit",
+                    "items": "gatewayRoutes"
                 },
                 "smithy.api#readonly": {}
             }
@@ -5254,15 +5224,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of existing service meshes.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/v20190125/meshes",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "meshes",
-                    "pageSize": "limit"
+                    "pageSize": "limit",
+                    "items": "meshes"
                 },
                 "smithy.api#readonly": {}
             }
@@ -5273,7 +5242,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListMeshes</code> request where <code>limit</code> was used and the results\n         exceeded the value of that parameter. Pagination continues from the end of the previous\n         results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListMeshes</code> request where <code>limit</code> was used and the results\n         exceeded the value of that parameter. Pagination continues from the end of the previous\n         results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -5350,15 +5319,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of existing routes in a service mesh.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "routes",
-                    "pageSize": "limit"
+                    "pageSize": "limit",
+                    "items": "routes"
                 },
                 "smithy.api#readonly": {}
             }
@@ -5469,15 +5437,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>List the tags for an App Mesh resource.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/v20190125/tags",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "tags",
-                    "pageSize": "limit"
+                    "pageSize": "limit",
+                    "items": "tags"
                 },
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
@@ -5567,15 +5534,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of existing virtual gateways in a service mesh.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/v20190125/meshes/{meshName}/virtualGateways",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "virtualGateways",
-                    "pageSize": "limit"
+                    "pageSize": "limit",
+                    "items": "virtualGateways"
                 },
                 "smithy.api#readonly": {}
             }
@@ -5672,15 +5638,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of existing virtual nodes.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/v20190125/meshes/{meshName}/virtualNodes",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "virtualNodes",
-                    "pageSize": "limit"
+                    "pageSize": "limit",
+                    "items": "virtualNodes"
                 },
                 "smithy.api#readonly": {}
             }
@@ -5783,15 +5748,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of existing virtual routers in a service mesh.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/v20190125/meshes/{meshName}/virtualRouters",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "virtualRouters",
-                    "pageSize": "limit"
+                    "pageSize": "limit",
+                    "items": "virtualRouters"
                 },
                 "smithy.api#readonly": {}
             }
@@ -5894,15 +5858,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of existing virtual services in a service mesh.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/v20190125/meshes/{meshName}/virtualServices",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "virtualServices",
-                    "pageSize": "limit"
+                    "pageSize": "limit",
+                    "items": "virtualServices"
                 },
                 "smithy.api#readonly": {}
             }
@@ -6291,7 +6254,6 @@
         "com.amazonaws.appmesh#MaxConnections": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -6300,7 +6262,6 @@
         "com.amazonaws.appmesh#MaxPendingRequests": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -6309,7 +6270,6 @@
         "com.amazonaws.appmesh#MaxRequests": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -6361,10 +6321,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "mesh/{meshName}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "mesh/{meshName}"
                 }
             }
         },
@@ -6627,7 +6584,6 @@
                 "port": {
                     "target": "com.amazonaws.appmesh#PortNumber",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port used for the port mapping.</p>",
                         "smithy.api#required": {}
                     }
@@ -6647,7 +6603,6 @@
         "com.amazonaws.appmesh#PortNumber": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 65535
@@ -6812,10 +6767,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "mesh/{meshName}/virtualRouter/{virtualRouterName}/route/{routeName}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "mesh/{meshName}/virtualRouter/{virtualRouterName}/route/{routeName}"
                 }
             }
         },
@@ -7215,9 +7167,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Associates the specified tags to a resource with the specified <code>resourceArn</code>.\n         If existing tags on a resource aren't specified in the request parameters, they aren't\n         changed. When a resource is deleted, the tags associated with that resource are also\n         deleted.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/tag",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
@@ -7527,9 +7478,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes specified tags from a resource.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/untag",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
@@ -7604,9 +7554,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates an existing gateway route that is associated to a specified virtual gateway in a\n         service mesh.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -7708,9 +7657,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates an existing service mesh.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -7796,9 +7744,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates an existing route for a specified service mesh and virtual router.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -7909,9 +7856,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates an existing virtual gateway in a specified service mesh.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -8008,9 +7954,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates an existing virtual node in a specified service mesh.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -8113,9 +8058,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates an existing virtual router in a specified service mesh.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -8218,9 +8162,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates an existing virtual service in a specified service mesh.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}",
-                    "code": 200
+                    "method": "PUT"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -8318,10 +8261,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "mesh/{meshName}/virtualGateway/{virtualGatewayName}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "mesh/{meshName}/virtualGateway/{virtualGatewayName}"
                 }
             }
         },
@@ -8533,7 +8473,6 @@
                 "maxRequests": {
                     "target": "com.amazonaws.appmesh#MaxRequests",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in\n         upstream cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -8579,7 +8518,6 @@
                 "port": {
                     "target": "com.amazonaws.appmesh#PortNumber",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The destination port for the health check request. This port must match the port defined\n         in the <a>PortMapping</a> for the listener.</p>"
                     }
                 },
@@ -8592,7 +8530,6 @@
                 "healthyThreshold": {
                     "target": "com.amazonaws.appmesh#VirtualGatewayHealthCheckThreshold",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of consecutive successful health checks that must occur before declaring the\n         listener healthy.</p>",
                         "smithy.api#required": {}
                     }
@@ -8600,7 +8537,6 @@
                 "unhealthyThreshold": {
                     "target": "com.amazonaws.appmesh#VirtualGatewayHealthCheckThreshold",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of consecutive failed health checks that must occur before declaring a\n         virtual gateway unhealthy.</p>",
                         "smithy.api#required": {}
                     }
@@ -8613,7 +8549,6 @@
         "com.amazonaws.appmesh#VirtualGatewayHealthCheckThreshold": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 2,
                     "max": 10
@@ -8635,7 +8570,6 @@
                 "maxRequests": {
                     "target": "com.amazonaws.appmesh#MaxRequests",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in\n         upstream cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -8651,7 +8585,6 @@
                 "maxConnections": {
                     "target": "com.amazonaws.appmesh#MaxConnections",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of outbound TCP connections Envoy can establish concurrently with all\n         hosts in upstream cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -8899,7 +8832,6 @@
                 "port": {
                     "target": "com.amazonaws.appmesh#PortNumber",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port used for the port mapping. Specify one protocol.</p>",
                         "smithy.api#required": {}
                     }
@@ -9179,10 +9111,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "mesh/{meshName}/virtualNode/{virtualNodeName}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "mesh/{meshName}/virtualNode/{virtualNodeName}"
                 }
             }
         },
@@ -9272,7 +9201,6 @@
                 "maxRequests": {
                     "target": "com.amazonaws.appmesh#MaxRequests",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in\n         upstream cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -9288,7 +9216,6 @@
                 "maxRequests": {
                     "target": "com.amazonaws.appmesh#MaxRequests",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in\n         upstream cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -9304,7 +9231,6 @@
                 "maxConnections": {
                     "target": "com.amazonaws.appmesh#MaxConnections",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of outbound TCP connections Envoy can establish concurrently with all\n         hosts in upstream cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -9484,7 +9410,6 @@
                 "maxConnections": {
                     "target": "com.amazonaws.appmesh#MaxConnections",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of outbound TCP connections Envoy can establish concurrently with all\n         hosts in upstream cluster.</p>",
                         "smithy.api#required": {}
                     }
@@ -9526,10 +9451,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "mesh/{meshName}/virtualRouter/{virtualRouterName}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "mesh/{meshName}/virtualRouter/{virtualRouterName}"
                 }
             }
         },
@@ -9761,10 +9683,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "mesh/{meshName}/virtualService/{virtualServiceName}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "mesh/{meshName}/virtualService/{virtualServiceName}"
                 }
             }
         },

@@ -173,7 +173,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -624,7 +623,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -637,7 +637,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -680,7 +679,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -693,7 +693,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -707,7 +706,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -730,7 +728,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -765,7 +762,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -776,14 +772,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -797,14 +795,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -813,18 +809,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -833,7 +828,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -853,14 +849,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -874,7 +872,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -894,7 +891,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -905,14 +901,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -950,9 +948,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1665,9 +1665,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -1684,10 +1684,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -1697,9 +1697,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -1716,10 +1716,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -1729,9 +1729,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -1748,10 +1748,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -1761,9 +1761,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -1780,10 +1780,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -1793,9 +1793,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -1812,10 +1812,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "aws-global",
                                 "UseFIPS": false,
-                                "Region": "aws-global"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -1825,9 +1825,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -1844,10 +1844,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -1857,9 +1857,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -1876,10 +1876,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -1889,9 +1889,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -1908,10 +1908,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "eu-north-1",
                                 "UseFIPS": false,
-                                "Region": "eu-north-1"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -1921,9 +1921,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -1940,10 +1940,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -1953,9 +1953,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -1972,10 +1972,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "eu-west-2",
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -1985,9 +1985,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -2004,10 +2004,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "eu-west-3",
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -2017,9 +2017,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -2036,10 +2036,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "sa-east-1",
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -2049,9 +2049,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -2068,10 +2068,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -2081,9 +2081,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -2100,10 +2100,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -2113,9 +2113,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -2132,10 +2132,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -2145,9 +2145,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -2164,10 +2164,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -2177,9 +2177,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingRegion": "us-east-3",
+                                                "name": "sigv4",
                                                 "signingName": "sts",
-                                                "name": "sigv4"
+                                                "signingRegion": "us-east-3"
                                             }
                                         ]
                                     },
@@ -2196,10 +2196,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
+                                "Region": "us-east-3",
                                 "UseFIPS": false,
-                                "Region": "us-east-3"
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true
                             }
                         },
                         {
@@ -2220,10 +2220,10 @@
                                 }
                             ],
                             "params": {
-                                "UseGlobalEndpoint": true,
-                                "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2235,9 +2235,9 @@
                                 }
                             },
                             "params": {
-                                "UseGlobalEndpoint": false,
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
+                                "UseGlobalEndpoint": false,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -2389,7 +2389,7 @@
                 "ProvidedContexts": {
                     "target": "com.amazonaws.sts#ProvidedContextsListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                        "smithy.api#documentation": "<p>A list of previously acquired trusted context assertions in the format of a JSON array.\n         The trusted context assertion is signed and encrypted by Amazon Web Services STS.</p>\n         <p>The following is an example of a <code>ProvidedContext</code> value that includes a\n         single trusted context assertion and the ARN of the context provider from which the trusted\n         context assertion was generated.</p>\n         <p>\n            <code>[{\"ProviderArn\":\"arn:aws:iam::aws:contextProvider/identitycenter\",\"ContextAssertion\":\"trusted-context-assertion\"}]</code>\n         </p>"
                     }
                 }
             },
@@ -3356,18 +3356,18 @@
                 "ProviderArn": {
                     "target": "com.amazonaws.sts#arnType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                        "smithy.api#documentation": "<p>The context provider ARN from which the trusted context assertion was generated.</p>"
                     }
                 },
                 "ContextAssertion": {
                     "target": "com.amazonaws.sts#contextAssertionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                        "smithy.api#documentation": "<p>The signed and encrypted trusted context assertion generated by the context provider.\n         The trusted context assertion is signed and encrypted by Amazon Web Services STS.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                "smithy.api#documentation": "<p>Contains information about the provided context. This includes the signed and encrypted\n         trusted context assertion and the context provider ARN from which the trusted context\n         assertion was generated.</p>"
             }
         },
         "com.amazonaws.sts#ProvidedContextsListType": {

@@ -154,7 +154,13 @@
                     "target": "com.amazonaws.ecr#UntagResource"
                 },
                 {
+                    "target": "com.amazonaws.ecr#UpdatePullThroughCacheRule"
+                },
+                {
                     "target": "com.amazonaws.ecr#UploadLayerPart"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidatePullThroughCacheRule"
                 }
             ],
             "traits": {
@@ -216,7 +222,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -259,7 +264,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -272,7 +278,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -286,7 +291,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -309,7 +313,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -344,7 +347,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -355,14 +357,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -376,14 +380,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -392,18 +394,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -412,7 +413,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws"
                                                                     ]
                                                                 }
                                                             ],
@@ -428,7 +430,6 @@
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -437,7 +438,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -457,14 +459,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -478,7 +482,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -498,7 +501,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -509,14 +511,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -527,9 +531,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1557,10 +1563,16 @@
                     "target": "com.amazonaws.ecr#InvalidParameterException"
                 },
                 {
+                    "target": "com.amazonaws.ecr#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.ecr#RepositoryNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#UnableToGetUpstreamImageException"
                 }
             ],
             "traits": {
@@ -1858,7 +1870,16 @@
                     "target": "com.amazonaws.ecr#PullThroughCacheRuleAlreadyExistsException"
                 },
                 {
+                    "target": "com.amazonaws.ecr#SecretNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#UnableToAccessSecretException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#UnableToDecryptSecretValueException"
                 },
                 {
                     "target": "com.amazonaws.ecr#UnsupportedUpstreamRegistryException"
@@ -1868,7 +1889,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a pull through cache rule. A pull through cache rule provides a way to cache\n            images from an external public registry in your Amazon ECR private registry.</p>"
+                "smithy.api#documentation": "<p>Creates a pull through cache rule. A pull through cache rule provides a way to cache\n            images from an upstream registry source in your Amazon ECR private registry. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html\">Using pull through cache\n                rules</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecr#CreatePullThroughCacheRuleRequest": {
@@ -1884,7 +1905,7 @@
                 "upstreamRegistryUrl": {
                     "target": "com.amazonaws.ecr#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registry URL of the upstream public registry to use as the source for the pull\n            through cache rule.</p>",
+                        "smithy.api#documentation": "<p>The registry URL of the upstream public registry to use as the source for the pull\n            through cache rule. The following is the syntax to use for each supported upstream\n            registry.</p>\n         <ul>\n            <li>\n               <p>Amazon ECR Public (<code>ecr-public</code>) - <code>public.ecr.aws</code>\n               </p>\n            </li>\n            <li>\n               <p>Docker Hub (<code>docker-hub</code>) -\n                    <code>registry-1.docker.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Quay (<code>quay</code>) - <code>quay.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Kubernetes (<code>k8s</code>) - <code>registry.k8s.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitHub Container Registry (<code>github-container-registry</code>) -\n                        <code>ghcr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Microsoft Azure Container Registry (<code>azure-container-registry</code>) -\n                        <code><custom>.azurecr.io</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1892,6 +1913,18 @@
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry to create the pull through cache\n            rule for. If you do not specify a registry, the default registry is assumed.</p>"
+                    }
+                },
+                "upstreamRegistry": {
+                    "target": "com.amazonaws.ecr#UpstreamRegistry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the upstream registry.</p>"
+                    }
+                },
+                "credentialArn": {
+                    "target": "com.amazonaws.ecr#CredentialArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that identifies the credentials to authenticate\n            to the upstream registry.</p>"
                     }
                 }
             },
@@ -1924,6 +1957,18 @@
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
                         "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                    }
+                },
+                "upstreamRegistry": {
+                    "target": "com.amazonaws.ecr#UpstreamRegistry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the upstream registry associated with the pull through cache rule.</p>"
+                    }
+                },
+                "credentialArn": {
+                    "target": "com.amazonaws.ecr#CredentialArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret associated with the pull through cache\n            rule.</p>"
                     }
                 }
             },
@@ -2043,6 +2088,16 @@
         },
         "com.amazonaws.ecr#CreationTimestamp": {
             "type": "timestamp"
+        },
+        "com.amazonaws.ecr#CredentialArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 50,
+                    "max": 612
+                },
+                "smithy.api#pattern": "^arn:aws:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$"
+            }
         },
         "com.amazonaws.ecr#CvssScore": {
             "type": "structure",
@@ -2306,6 +2361,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
                     }
+                },
+                "credentialArn": {
+                    "target": "com.amazonaws.ecr#CredentialArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret associated with the pull through cache\n            rule.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2391,7 +2452,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a repository. If the repository contains images, you must either delete all\n            images in the repository or use the <code>force</code> option to delete the\n            repository.</p>",
+                "smithy.api#documentation": "<p>Deletes a repository. If the repository isn't empty, you must either delete the\n            contents of the repository or use the <code>force</code> option to delete the repository\n            and have Amazon ECR delete all of its contents on your behalf.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To force delete a repository",
@@ -2518,7 +2579,7 @@
                     "target": "com.amazonaws.ecr#ForceFlag",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p> If a repository contains images, forces the deletion.</p>"
+                        "smithy.api#documentation": "<p>If true, deleting the repository force deletes the contents of the repository. If\n            false, the repository must be empty before attempting to delete it.</p>"
                     }
                 }
             },
@@ -3434,6 +3495,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#UnableToGetUpstreamLayerException"
                 }
             ],
             "traits": {
@@ -4155,6 +4219,24 @@
                     "traits": {
                         "smithy.api#enumValue": "KmsError"
                     }
+                },
+                "UpstreamAccessDenied": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpstreamAccessDenied"
+                    }
+                },
+                "UpstreamTooManyRequests": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpstreamTooManyRequests"
+                    }
+                },
+                "UpstreamUnavailable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpstreamUnavailable"
+                    }
                 }
             }
         },
@@ -4606,6 +4688,12 @@
             "traits": {
                 "smithy.api#documentation": "<p>An invalid parameter has been specified. Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#IsPTCRuleValid": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.ecr#KmsError": {
@@ -5228,6 +5316,9 @@
         "com.amazonaws.ecr#NextToken": {
             "type": "string"
         },
+        "com.amazonaws.ecr#PTCValidateFailure": {
+            "type": "string"
+        },
         "com.amazonaws.ecr#PackageManager": {
             "type": "string"
         },
@@ -5339,6 +5430,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry the pull through cache rule is\n            associated with.</p>"
                     }
+                },
+                "credentialArn": {
+                    "target": "com.amazonaws.ecr#CredentialArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Secrets Manager secret associated with the pull through cache rule.</p>"
+                    }
+                },
+                "upstreamRegistry": {
+                    "target": "com.amazonaws.ecr#UpstreamRegistry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the upstream source registry associated with the pull through cache\n            rule.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecr#UpdatedTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in JavaScript date format, when the pull through cache rule was\n            last updated.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5380,9 +5489,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 2,
-                    "max": 20
+                    "max": 30
                 },
-                "smithy.api#pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+                "smithy.api#pattern": "^(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*$"
             }
         },
         "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefixList": {
@@ -6738,6 +6847,18 @@
         "com.amazonaws.ecr#ScoringVector": {
             "type": "string"
         },
+        "com.amazonaws.ecr#SecretNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ARN of the secret specified in the pull through cache rule was not found. Update\n            the pull through cache rule with a valid secret ARN and try again.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.ecr#ServerException": {
             "type": "structure",
             "members": {
@@ -7187,6 +7308,54 @@
         "com.amazonaws.ecr#Type": {
             "type": "string"
         },
+        "com.amazonaws.ecr#UnableToAccessSecretException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The secret is unable to be accessed. Verify the resource permissions for the secret\n            and try again.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#UnableToDecryptSecretValueException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The secret is accessible but is unable to be decrypted. Verify the resource\n            permisisons and try again.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#UnableToGetUpstreamImageException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The image or images were unable to be pulled using the pull through cache rule. This\n            is usually caused because of an issue with the Secrets Manager secret containing the credentials\n            for the upstream registry.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#UnableToGetUpstreamLayerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There was an issue getting the upstream layer matching the pull through cache\n            rule.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.ecr#UnsupportedImageTypeException": {
             "type": "structure",
             "members": {
@@ -7268,6 +7437,104 @@
             "traits": {
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.ecr#UpdatePullThroughCacheRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#UpdatePullThroughCacheRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#UpdatePullThroughCacheRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#PullThroughCacheRuleNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#SecretNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#UnableToAccessSecretException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#UnableToDecryptSecretValueException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing pull through cache rule.</p>"
+            }
+        },
+        "com.amazonaws.ecr#UpdatePullThroughCacheRuleRequest": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry associated with the pull through\n            cache rule. If you do not specify a registry, the default registry is assumed.</p>"
+                    }
+                },
+                "ecrRepositoryPrefix": {
+                    "target": "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository name prefix to use when caching images from the source registry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "credentialArn": {
+                    "target": "com.amazonaws.ecr#CredentialArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that identifies the credentials to authenticate\n            to the upstream registry.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#UpdatePullThroughCacheRuleResponse": {
+            "type": "structure",
+            "members": {
+                "ecrRepositoryPrefix": {
+                    "target": "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon ECR repository prefix associated with the pull through cache rule.</p>"
+                    }
+                },
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecr#UpdatedTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in JavaScript date format, when the pull through cache rule was\n            updated.</p>"
+                    }
+                },
+                "credentialArn": {
+                    "target": "com.amazonaws.ecr#CredentialArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret associated with the pull through cache\n            rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecr#UpdatedTimestamp": {
+            "type": "timestamp"
         },
         "com.amazonaws.ecr#UploadId": {
             "type": "string",
@@ -7406,8 +7673,141 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.ecr#UpstreamRegistry": {
+            "type": "enum",
+            "members": {
+                "EcrPublic": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ecr-public"
+                    }
+                },
+                "Quay": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "quay"
+                    }
+                },
+                "K8s": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "k8s"
+                    }
+                },
+                "DockerHub": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "docker-hub"
+                    }
+                },
+                "GitHubContainerRegistry": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "github-container-registry"
+                    }
+                },
+                "AzureContainerRegistry": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "azure-container-registry"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ecr#Url": {
             "type": "string"
+        },
+        "com.amazonaws.ecr#ValidatePullThroughCacheRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#ValidatePullThroughCacheRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#ValidatePullThroughCacheRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#PullThroughCacheRuleNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Validates an existing pull through cache rule for an upstream registry that requires\n            authentication. This will retrieve the contents of the Amazon Web Services Secrets Manager secret, verify the\n            syntax, and then validate that authentication to the upstream registry is\n            successful.</p>"
+            }
+        },
+        "com.amazonaws.ecr#ValidatePullThroughCacheRuleRequest": {
+            "type": "structure",
+            "members": {
+                "ecrRepositoryPrefix": {
+                    "target": "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository name prefix associated with the pull through cache rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry ID associated with the pull through cache rule.\n            If you do not specify a registry, the default registry is assumed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#ValidatePullThroughCacheRuleResponse": {
+            "type": "structure",
+            "members": {
+                "ecrRepositoryPrefix": {
+                    "target": "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon ECR repository prefix associated with the pull through cache rule.</p>"
+                    }
+                },
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                    }
+                },
+                "upstreamRegistryUrl": {
+                    "target": "com.amazonaws.ecr#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upstream registry URL associated with the pull through cache rule.</p>"
+                    }
+                },
+                "credentialArn": {
+                    "target": "com.amazonaws.ecr#CredentialArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret associated with the pull through cache\n            rule.</p>"
+                    }
+                },
+                "isValid": {
+                    "target": "com.amazonaws.ecr#IsPTCRuleValid",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether or not the pull through cache rule was validated. If <code>true</code>, Amazon ECR\n            was able to reach the upstream registry and authentication was successful. If\n                <code>false</code>, there was an issue and validation failed. The\n                <code>failure</code> reason indicates the cause.</p>"
+                    }
+                },
+                "failure": {
+                    "target": "com.amazonaws.ecr#PTCValidateFailure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the validation failed. For more details about possible causes and how to\n            address them, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html\">Using pull through cache\n                rules</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ecr#ValidationException": {
             "type": "structure",

@@ -86,6 +86,9 @@
                 "aws.api#arn": {
                     "template": "api-key/{KeyName}"
                 },
+                "aws.cloudformation#cfnResource": {
+                    "name": "APIKey"
+                },
                 "aws.iam#disableConditionKeyInference": {}
             }
         },
@@ -1587,6 +1590,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.location#KmsKeyId",
                     "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read",
                         "smithy.api#documentation": "<p>A key identifier for an \n            <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html\">Amazon Web Services \n                KMS customer managed key</a>. Enter a key ID, key ARN, alias name, or alias ARN.\n\t</p>"
                     }
                 }
@@ -1780,6 +1784,7 @@
                 "MapName": {
                     "target": "com.amazonaws.location#ResourceName",
                     "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read",
                         "smithy.api#documentation": "<p>The name for the map resource.</p>\n         <p>Requirements:</p>\n         <ul>\n            <li>\n               <p>Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and underscores (_). </p>\n            </li>\n            <li>\n               <p>Must be a unique map resource name. </p>\n            </li>\n            <li>\n               <p>No spaces allowed. For example, <code>ExampleMap</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -1787,6 +1792,7 @@
                 "Configuration": {
                     "target": "com.amazonaws.location#MapConfiguration",
                     "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read",
                         "smithy.api#documentation": "<p>Specifies the <code>MapConfiguration</code>, including the map style, for the \n            map resource that you create. The map style defines the look of maps and the data \n            provider for your map resource.</p>",
                         "smithy.api#required": {}
                     }
@@ -1894,6 +1900,7 @@
                 "DataSource": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read",
                         "smithy.api#documentation": "<p>Specifies the geospatial data provider for the new place index.</p>\n         <note>\n            <p>This field is case-sensitive. Enter the valid values as shown. For example,\n                entering <code>HERE</code> returns an error.</p>\n         </note>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Esri</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a>'s coverage in your region of interest, see <a href=\"https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm\">Esri details on geocoding coverage</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Grab</code> – Grab provides place index functionality for Southeast \n                    Asia. For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html\">GrabMaps</a>' coverage, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area\">GrabMaps countries and areas covered</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Here</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                        Technologies</a>' coverage in your region of interest, see <a href=\"https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html\">HERE details on goecoding coverage</a>.</p>\n               <important>\n                  <p>If you specify HERE Technologies (<code>Here</code>) as the data provider,\n                        you may not <a href=\"https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html\">store results</a> for locations in Japan. For more information, see\n                        the <a href=\"http://aws.amazon.com/service-terms/\">Amazon Web Services Service\n                            Terms</a> for Amazon Location Service.</p>\n               </important>\n            </li>\n         </ul>\n         <p>For additional information , see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Data\n                providers</a> on the <i>Amazon Location Service Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2007,6 +2014,7 @@
                 "DataSource": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read",
                         "smithy.api#documentation": "<p>Specifies the data provider of traffic and road network data.</p>\n         <note>\n            <p>This field is case-sensitive. Enter the valid values as shown. For example,\n                entering <code>HERE</code> returns an error.</p>\n         </note>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Esri</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a>'s coverage in your region of interest, see <a href=\"https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm\">Esri details on street networks and traffic coverage</a>.</p>\n               <p>Route calculators that use Esri as a\n                    data source only calculate routes that are shorter than 400 km.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Grab</code> – Grab provides routing functionality for Southeast Asia.\n                    For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html\">GrabMaps</a>' coverage,\n                    see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area\">GrabMaps\n                        countries and areas covered</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Here</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                        Technologies</a>' coverage in your region of interest, see <a href=\"https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html\">HERE car routing coverage</a> and <a href=\"https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html\">HERE truck routing coverage</a>.</p>\n            </li>\n         </ul>\n         <p>For additional information , see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Data\n                providers</a> on the <i>Amazon Location Service Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
@@ -2124,6 +2132,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.location#KmsKeyId",
                     "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read",
                         "smithy.api#documentation": "<p>A key identifier for an \n           <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html\">Amazon Web Services \n               KMS customer managed key</a>. Enter a key ID, key ARN, alias name, or alias ARN.</p>"
                     }
                 },
@@ -2659,6 +2668,7 @@
                 "GeofenceCount": {
                     "target": "smithy.api#Integer",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The number of geofences in the geofence collection.</p>",
                         "smithy.api#range": {
                             "min": 0
@@ -2723,6 +2733,7 @@
                 "Key": {
                     "target": "com.amazonaws.location#ApiKey",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The key value/string of an API key.</p>",
                         "smithy.api#required": {}
                     }
@@ -2862,6 +2873,7 @@
                 "DataSource": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>Specifies the data provider for the associated map tiles.</p>",
                         "smithy.api#required": {}
                     }
@@ -3232,6 +3244,7 @@
                 "Tags": {
                     "target": "com.amazonaws.location#TagMap",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The tags associated with the tracker resource.</p>"
                     }
                 },
@@ -3565,6 +3578,9 @@
                 "aws.api#arn": {
                     "template": "geofence-collection/{CollectionName}"
                 },
+                "aws.cloudformation#cfnResource": {
+                    "name": "GeofenceCollection"
+                },
                 "aws.iam#disableConditionKeyInference": {}
             }
         },
@@ -3708,6 +3724,7 @@
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>An optional limit for the number of device positions returned in a single call.</p>\n         <p>Default value: <code>100</code>\n         </p>",
                         "smithy.api#range": {
                             "min": 1,
@@ -4616,6 +4633,7 @@
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>An optional limit for the number of entries returned in a single call.</p>\n         <p>Default value: <code>100</code>\n         </p>",
                         "smithy.api#range": {
                             "min": 1,
@@ -4748,6 +4766,7 @@
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>An optional limit for the number of resources returned in a single call. </p>\n         <p>Default value: <code>100</code>\n         </p>",
                         "smithy.api#range": {
                             "min": 1,
@@ -4961,6 +4980,7 @@
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>An optional limit for the number of geofences returned in a single call. </p>\n         <p>Default value: <code>100</code>\n         </p>",
                         "smithy.api#range": {
                             "min": 1,
@@ -5034,6 +5054,7 @@
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>An optional limit for the number of resources returned in a single call. </p>\n         <p>Default value: <code>100</code>\n         </p>",
                         "smithy.api#range": {
                             "min": 1,
@@ -5173,6 +5194,7 @@
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>An optional limit for the number of resources returned in a single call. </p>\n         <p>Default value: <code>100</code>\n         </p>",
                         "smithy.api#range": {
                             "min": 1,
@@ -5311,6 +5333,7 @@
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>An optional limit for the maximum number of results returned in a single call.</p>\n         <p>Default value: <code>100</code>\n         </p>",
                         "smithy.api#range": {
                             "min": 1,
@@ -5449,6 +5472,7 @@
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>An optional maximum number of results returned in a single call.</p>\n         <p>Default Value: <code>100</code>\n         </p>",
                         "smithy.api#range": {
                             "min": 1,
@@ -5659,6 +5683,7 @@
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>An optional limit for the number of resources returned in a single call. </p>\n         <p>Default value: <code>100</code>\n         </p>",
                         "smithy.api#range": {
                             "min": 1,
@@ -5738,6 +5763,7 @@
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>An optional limit for the number of resources returned in a single call. </p>\n         <p>Default value: <code>100</code>\n         </p>",
                         "smithy.api#range": {
                             "min": 1,
@@ -5912,7 +5938,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -5955,7 +5980,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -5968,7 +5994,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -5982,7 +6007,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -6005,7 +6029,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -6040,7 +6063,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -6051,14 +6073,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -6072,14 +6096,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -6088,11 +6110,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -6103,14 +6125,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -6124,7 +6148,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -6144,7 +6167,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -6155,14 +6177,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -6173,9 +6197,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -6575,6 +6601,9 @@
                 "aws.api#arn": {
                     "template": "map/{MapName}"
                 },
+                "aws.cloudformation#cfnResource": {
+                    "name": "Map"
+                },
                 "aws.iam#disableConditionKeyInference": {}
             }
         },
@@ -6769,13 +6798,15 @@
                 "aws.api#arn": {
                     "template": "place-index/{IndexName}"
                 },
+                "aws.cloudformation#cfnResource": {
+                    "name": "PlaceIndex"
+                },
                 "aws.iam#disableConditionKeyInference": {}
             }
         },
         "com.amazonaws.location#PlaceIndexSearchResultLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -7093,6 +7124,9 @@
                 "aws.api#arn": {
                     "template": "route-calculator/{CalculatorName}"
                 },
+                "aws.cloudformation#cfnResource": {
+                    "name": "RouteCalculator"
+                },
                 "aws.iam#disableConditionKeyInference": {}
             }
         },
@@ -7366,7 +7400,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.location#PlaceIndexSearchResultLimit",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>An optional parameter. The maximum number of results returned per request.</p>\n         <p>Default value: <code>50</code>\n         </p>"
                     }
                 },
@@ -7417,7 +7450,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.location#PlaceIndexSearchResultLimit",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Contains the optional result count limit that is specified in the request.</p>\n         <p>Default value: <code>50</code>\n         </p>"
                     }
                 },
@@ -7519,6 +7551,7 @@
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>An optional parameter. The maximum number of results returned per request. </p>\n         <p>The default: <code>5</code>\n         </p>",
                         "smithy.api#range": {
                             "min": 1,
@@ -7704,7 +7737,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.location#PlaceIndexSearchResultLimit",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>An optional parameter. The maximum number of results returned per request. </p>\n         <p>The default: <code>50</code>\n         </p>"
                     }
                 },
@@ -7779,7 +7811,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.location#PlaceIndexSearchResultLimit",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Contains the optional result count limit specified in the request.</p>"
                     }
                 },
@@ -8437,6 +8468,7 @@
                 "KeyName": {
                     "target": "com.amazonaws.location#ResourceName",
                     "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read",
                         "smithy.api#documentation": "<p>The name of the API key resource to update.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
@@ -8567,6 +8599,7 @@
                 "ConfigurationUpdate": {
                     "target": "com.amazonaws.location#MapConfigurationUpdate",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>Updates the parts of the map configuration that can be updated, including the\n            political view.</p>"
                     }
                 }

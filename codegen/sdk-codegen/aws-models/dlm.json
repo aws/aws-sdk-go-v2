@@ -1860,14 +1860,14 @@
                 "ExecutionHandlerService": {
                     "target": "com.amazonaws.dlm#ExecutionHandlerServiceValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the service used to execute the pre and/or post scripts.</p>\n         <ul>\n            <li>\n               <p>If you are using custom SSM documents, specify \n\t\t\t\t\t<code>AWS_SYSTEMS_MANAGER</code>.</p>\n            </li>\n            <li>\n               <p>If you are automating VSS Backups, omit this parameter.</p>\n            </li>\n         </ul>\n         <p>Default: AWS_SYSTEMS_MANAGER</p>"
+                        "smithy.api#documentation": "<p>Indicates the service used to execute the pre and/or post scripts.</p>\n         <ul>\n            <li>\n               <p>If you are using custom SSM documents or automating \n\t\t\t\t\tapplication-consistent snapshots of SAP HANA workloads, specify \n\t\t\t\t\t<code>AWS_SYSTEMS_MANAGER</code>.</p>\n            </li>\n            <li>\n               <p>If you are automating VSS Backups, omit this parameter.</p>\n            </li>\n         </ul>\n         <p>Default: AWS_SYSTEMS_MANAGER</p>"
                     }
                 },
                 "ExecutionHandler": {
                     "target": "com.amazonaws.dlm#ExecutionHandler",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The SSM document that includes the pre and/or post scripts to run.</p>\n         <ul>\n            <li>\n               <p>If you are automating VSS backups, specify <code>AWS_VSS_BACKUP</code>. \n\t\t\t\t\tIn this case, Amazon Data Lifecycle Manager automatically uses the <code>AWSEC2-CreateVssSnapshot</code> \n\t\t\t\t\tSSM document.</p>\n            </li>\n            <li>\n               <p>If you are using a custom SSM document that you own, specify either \n\t\t\t\t\tthe name or ARN of the SSM document. If you are using a custom SSM \n\t\t\t\t\tdocument that is shared with you, specify the ARN of the SSM document.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The SSM document that includes the pre and/or post scripts to run.</p>\n         <ul>\n            <li>\n               <p>If you are automating VSS backups, specify <code>AWS_VSS_BACKUP</code>. \n\t\t\t\t\tIn this case, Amazon Data Lifecycle Manager automatically uses the <code>AWSEC2-CreateVssSnapshot</code> \n\t\t\t\t\tSSM document.</p>\n            </li>\n            <li>\n               <p>If you are automating application-consistent snapshots for SAP HANA \n\t\t\t\t\tworkloads, specify <code>AWSSystemsManagerSAP-CreateDLMSnapshotForSAPHANA</code>.</p>\n            </li>\n            <li>\n               <p>If you are using a custom SSM document that you own, specify either \n\t\t\t\t\tthe name or ARN of the SSM document. If you are using a custom SSM \n\t\t\t\t\tdocument that is shared with you, specify the ARN of the SSM document.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },

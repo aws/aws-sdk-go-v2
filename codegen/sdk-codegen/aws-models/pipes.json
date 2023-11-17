@@ -79,7 +79,6 @@
                 "Size": {
                     "target": "com.amazonaws.pipes#BatchArraySize",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the array, if this is an array batch job.</p>"
                     }
                 }
@@ -91,7 +90,6 @@
         "com.amazonaws.pipes#BatchArraySize": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 2,
                     "max": 10000
@@ -262,7 +260,6 @@
         "com.amazonaws.pipes#BatchRetryAttempts": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 10
@@ -275,7 +272,6 @@
                 "Attempts": {
                     "target": "com.amazonaws.pipes#BatchRetryAttempts",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of times to move a job to the <code>RUNNABLE</code> status. If the value of <code>attempts</code> is greater than one, the job is retried on \n         failure the same number of attempts as the value.</p>"
                     }
                 }
@@ -1057,7 +1053,6 @@
                 "sizeInGiB": {
                     "target": "com.amazonaws.pipes#EphemeralStorageSize",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total amount, in GiB, of ephemeral storage to set for the task. The minimum\n         supported value is <code>21</code> GiB and the maximum supported value is\n         <code>200</code> GiB.</p>",
                         "smithy.api#required": {}
                     }
@@ -1200,7 +1195,6 @@
         "com.amazonaws.pipes#EphemeralStorageSize": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 21,
                     "max": 200

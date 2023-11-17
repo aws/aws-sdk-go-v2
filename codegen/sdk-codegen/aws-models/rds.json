@@ -3045,7 +3045,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Copies the specified DB cluster parameter group.</p>",
+                "smithy.api#documentation": "<p>Copies the specified DB cluster parameter group.</p>\n         <note>\n            <p>You can't copy a default DB cluster parameter group. Instead, create a new custom DB cluster parameter group, which copies\n                the default parameters and values for the specified DB cluster parameter group family.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "To copy a DB cluster parameter group",
@@ -3260,7 +3260,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Copies the specified DB parameter group.</p>",
+                "smithy.api#documentation": "<p>Copies the specified DB parameter group.</p>\n         <note>\n            <p>You can't copy a default DB parameter group. Instead, create a new custom DB parameter group, which copies the default\n                parameters and values for the specified DB parameter group family.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "To copy a DB parameter group",
@@ -3852,6 +3852,9 @@
                     "target": "com.amazonaws.rds#InvalidDBInstanceStateFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#InvalidDBSubnetGroupFault"
+                },
+                {
                     "target": "com.amazonaws.rds#InvalidDBSubnetGroupStateFault"
                 },
                 {
@@ -3865,6 +3868,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#KMSKeyNotAccessibleFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#OptionGroupNotFoundFault"
                 },
                 {
                     "target": "com.amazonaws.rds#StorageQuotaExceededFault"
@@ -6947,6 +6953,12 @@
                         "smithy.api#documentation": "<p>Contains one or more identifiers of the read replicas associated with this DB\n            cluster.</p>"
                     }
                 },
+                "StatusInfos": {
+                    "target": "com.amazonaws.rds#DBClusterStatusInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
+                },
                 "DBClusterMembers": {
                     "target": "com.amazonaws.rds#DBClusterMemberList",
                     "traits": {
@@ -8349,6 +8361,47 @@
                 "smithy.api#documentation": "<p>\n            <code>DBClusterSnapshotIdentifier</code> doesn't refer to an existing DB cluster snapshot.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.rds#DBClusterStatusInfo": {
+            "type": "structure",
+            "members": {
+                "StatusType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
+                },
+                "Normal": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Reserved for future use.</p>"
+            }
+        },
+        "com.amazonaws.rds#DBClusterStatusInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#DBClusterStatusInfo",
+                "traits": {
+                    "smithy.api#xmlName": "DBClusterStatusInfo"
+                }
             }
         },
         "com.amazonaws.rds#DBEngineVersion": {
@@ -20053,6 +20106,9 @@
                     "target": "com.amazonaws.rds#InvalidVPCNetworkStateFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#OptionGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.rds#StorageQuotaExceededFault"
                 },
                 {
@@ -23745,6 +23801,12 @@
                 },
                 "TransitGatewayMulticastDomainId": {
                     "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
+                },
+                "ReplicaMode": {
+                    "target": "com.amazonaws.rds#ReplicaMode",
                     "traits": {
                         "smithy.api#documentation": "<p>Reserved for future use.</p>"
                     }

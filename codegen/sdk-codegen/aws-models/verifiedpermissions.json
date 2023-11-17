@@ -47,7 +47,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about an action for a request for which an authorization decision\n            is made.</p>\n         <p>This data type is used as an request parameter to the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a> and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a> operations.</p>\n         <p>Example: <code>{ \"actionId\": \"&lt;action name&gt;\", \"actionType\": \"Action\"\n            }</code>\n         </p>"
+                "smithy.api#documentation": "<p>Contains information about an action for a request for which an authorization decision\n            is made.</p>\n         <p>This data type is used as a request parameter to the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a>, <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html\">BatchIsAuthorized</a>, and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a>\n            operations.</p>\n         <p>Example: <code>{ \"actionId\": \"&lt;action name&gt;\", \"actionType\": \"Action\"\n            }</code>\n         </p>"
             }
         },
         "com.amazonaws.verifiedpermissions#ActionType": {
@@ -67,7 +67,7 @@
                 "boolean": {
                     "target": "com.amazonaws.verifiedpermissions#BooleanAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#boolean\">Boolean</a> type.</p>\n         <p>Example: <code>{\"boolean\": true}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#boolean\">Boolean</a>\n            type.</p>\n         <p>Example: <code>{\"boolean\": true}</code>\n         </p>"
                     }
                 },
                 "entityIdentifier": {
@@ -85,7 +85,7 @@
                 "string": {
                     "target": "com.amazonaws.verifiedpermissions#StringAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#string\">String</a> type.</p>\n         <p>Example: <code>{\"string\": \"abc\"}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#string\">String</a>\n            type.</p>\n         <p>Example: <code>{\"string\": \"abc\"}</code>\n         </p>"
                     }
                 },
                 "set": {
@@ -97,12 +97,160 @@
                 "record": {
                     "target": "com.amazonaws.verifiedpermissions#RecordAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#record\">Record</a> type.</p>\n         <p>Example: <code>{\"record\": { \"keyName\": {} } }</code>\n         </p>"
+                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#record\">Record</a>\n            type.</p>\n         <p>Example: <code>{\"record\": { \"keyName\": {} } }</code>\n         </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The value of an attribute.</p>\n         <p>Contains information about the runtime context for a request for which an\n            authorization decision is made. </p>\n         <p>This data type is used as a member of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ContextDefinition.html\">ContextDefinition</a> structure\n            which is uses as a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a> and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a> operations.</p>"
+                "smithy.api#documentation": "<p>The value of an attribute.</p>\n         <p>Contains information about the runtime context for a request for which an\n            authorization decision is made. </p>\n         <p>This data type is used as a member of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ContextDefinition.html\">ContextDefinition</a> structure\n            which is uses as a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a>, <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html\">BatchIsAuthorized</a>, and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a>\n            operations.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#BatchIsAuthorized": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.verifiedpermissions#BatchIsAuthorizedInput"
+            },
+            "output": {
+                "target": "com.amazonaws.verifiedpermissions#BatchIsAuthorizedOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.verifiedpermissions#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionName": "IsAuthorized",
+                "aws.iam#actionPermissionDescription": "Grants permission to make a batch authorization decision about a service request described in the parameters",
+                "smithy.api#documentation": "<p>Makes a series of decisions about multiple authorization requests for one principal or\n            resource. Each request contains the equivalent content of an <code>IsAuthorized</code>\n            request: principal, action, resource, and context. Either the <code>principal</code> or\n            the <code>resource</code> parameter must be identical across all requests. For example,\n            Verified Permissions won't evaluate a pair of requests where <code>bob</code> views\n                <code>photo1</code> and <code>alice</code> views <code>photo2</code>. Authorization\n            of <code>bob</code> to view <code>photo1</code> and <code>photo2</code>, or\n                <code>bob</code> and <code>alice</code> to view <code>photo1</code>, are valid\n            batches. </p>\n         <p>The request is evaluated against all policies in the specified policy store that match the\n            entities that you declare. The result of the decisions is a series of <code>Allow</code>\n            or <code>Deny</code> responses, along with the IDs of the policies that produced each\n            decision.</p>\n         <p>The <code>entities</code> of a <code>BatchIsAuthorized</code> API request can contain up to 100 principals and up\n            to 100 resources. The <code>requests</code> of a <code>BatchIsAuthorized</code> API request can contain up to 30\n            requests.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.verifiedpermissions#BatchIsAuthorizedInput": {
+            "type": "structure",
+            "members": {
+                "policyStoreId": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store. Policies in this policy store will be used to make the\n            authorization decisions for the input.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entities": {
+                    "target": "com.amazonaws.verifiedpermissions#EntitiesDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the list of resources and principals and their associated attributes that\n            Verified Permissions can examine when evaluating the policies. </p>\n         <note>\n            <p>You can include only principal and resource entities in this parameter; you can't\n                include actions. You must specify actions in the schema.</p>\n         </note>"
+                    }
+                },
+                "requests": {
+                    "target": "com.amazonaws.verifiedpermissions#BatchIsAuthorizedInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of up to 30 requests that you want Verified Permissions to evaluate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.verifiedpermissions#BatchIsAuthorizedInputItem": {
+            "type": "structure",
+            "members": {
+                "principal": {
+                    "target": "com.amazonaws.verifiedpermissions#EntityIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the principal for which the authorization decision is to be made.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.verifiedpermissions#ActionIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the requested action to be authorized. For example, is the principal\n            authorized to perform this action on the resource?</p>"
+                    }
+                },
+                "resource": {
+                    "target": "com.amazonaws.verifiedpermissions#EntityIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the resource for which the authorization decision is to be made.</p>"
+                    }
+                },
+                "context": {
+                    "target": "com.amazonaws.verifiedpermissions#ContextDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies additional context that can be used to make more granular authorization\n            decisions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An authorization request that you include in a <code>BatchIsAuthorized</code> API\n            request.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#BatchIsAuthorizedInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.verifiedpermissions#BatchIsAuthorizedInputItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.verifiedpermissions#BatchIsAuthorizedOutput": {
+            "type": "structure",
+            "members": {
+                "results": {
+                    "target": "com.amazonaws.verifiedpermissions#BatchIsAuthorizedOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A series of <code>Allow</code> or <code>Deny</code> decisions for each request, and\n            the policies that produced them.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.verifiedpermissions#BatchIsAuthorizedOutputItem": {
+            "type": "structure",
+            "members": {
+                "request": {
+                    "target": "com.amazonaws.verifiedpermissions#BatchIsAuthorizedInputItem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization request that initiated the decision.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "decision": {
+                    "target": "com.amazonaws.verifiedpermissions#Decision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An authorization decision that indicates if the authorization request should be\n            allowed or denied.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "determiningPolicies": {
+                    "target": "com.amazonaws.verifiedpermissions#DeterminingPolicyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of determining policies used to make the authorization decision. For example,\n            if there are two matching policies, where one is a forbid and the other is a permit,\n            then the forbid policy will be the determining policy. In the case of multiple matching\n            permit policies then there would be multiple determining policies. In the case that no\n            policies match, and hence the response is DENY, there would be no determining\n            policies.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.verifiedpermissions#EvaluationErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Errors that occurred while making an authorization decision, for example, a policy\n            references an Entity or entity Attribute that does not exist in the slice.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The decision, based on policy evaluation, from an individual authorization request in\n            a <code>BatchIsAuthorized</code> API request.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#BatchIsAuthorizedOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.verifiedpermissions#BatchIsAuthorizedOutputItem"
             }
         },
         "com.amazonaws.verifiedpermissions#BooleanAttribute": {
@@ -198,12 +346,12 @@
                 "contextMap": {
                     "target": "com.amazonaws.verifiedpermissions#ContextMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>An list of attributes that are needed to successfully evaluate an authorization\n            request. Each attribute in this array must include a map of a data type and its\n            value.</p>\n         <p>Example:\n                <code>\"Context\":{\"&lt;KeyName1&gt;\":{\"boolean\":true},\"&lt;KeyName2&gt;\":{\"long\":1234}}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>An list of attributes that are needed to successfully evaluate an authorization\n            request. Each attribute in this array must include a map of a data type and its\n            value.</p>\n         <p>Example:\n                <code>\"contextMap\":{\"&lt;KeyName1&gt;\":{\"boolean\":true},\"&lt;KeyName2&gt;\":{\"long\":1234}}</code>\n         </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains additional details about the context of the request. Verified Permissions evaluates this\n            information in an authorization request as part of the <code>when</code> and\n                <code>unless</code> clauses in a policy.</p>\n         <p>This data type is used as a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a> and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a> operations.</p>\n         <p>Example:\n                <code>\"context\":{\"Context\":{\"&lt;KeyName1&gt;\":{\"boolean\":true},\"&lt;KeyName2&gt;\":{\"long\":1234}}}</code>\n         </p>"
+                "smithy.api#documentation": "<p>Contains additional details about the context of the request. Verified Permissions evaluates this\n            information in an authorization request as part of the <code>when</code> and\n                <code>unless</code> clauses in a policy.</p>\n         <p>This data type is used as a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a>, <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html\">BatchIsAuthorized</a>, and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a>\n            operations.</p>\n         <p>Example:\n                <code>\"context\":{\"contextMap\":{\"&lt;KeyName1&gt;\":{\"boolean\":true},\"&lt;KeyName2&gt;\":{\"long\":1234}}}</code>\n         </p>"
             }
         },
         "com.amazonaws.verifiedpermissions#ContextMap": {
@@ -814,7 +962,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about one of the policies that determined an authorization\n            decision.</p>\n         <p>This data type is used as an element in a response parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a>\n            and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a> operations.</p>\n         <p>Example: <code>\"determiningPolicies\":[{\"policyId\":\"SPEXAMPLEabcdefg111111\"}]</code>\n         </p>"
+                "smithy.api#documentation": "<p>Contains information about one of the policies that determined an authorization\n            decision.</p>\n         <p>This data type is used as an element in a response parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a>, <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html\">BatchIsAuthorized</a>, and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a>\n            operations.</p>\n         <p>Example: <code>\"determiningPolicies\":[{\"policyId\":\"SPEXAMPLEabcdefg111111\"}]</code>\n         </p>"
             }
         },
         "com.amazonaws.verifiedpermissions#DeterminingPolicyList": {
@@ -968,7 +1116,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains a description of an evaluation error.</p>\n         <p>This data type is used as a request parameter in the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a> and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a> operations.</p>",
+                "smithy.api#documentation": "<p>Contains a description of an evaluation error.</p>\n         <p>This data type is a response parameter of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a>, <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html\">BatchIsAuthorized</a>, and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a> operations.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -2426,6 +2574,9 @@
             },
             "operations": [
                 {
+                    "target": "com.amazonaws.verifiedpermissions#BatchIsAuthorized"
+                },
+                {
                     "target": "com.amazonaws.verifiedpermissions#GetSchema"
                 },
                 {
@@ -2847,7 +2998,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 10000
+                    "max": 100000
                 },
                 "smithy.api#sensitive": {}
             }

@@ -859,6 +859,38 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshift#AuthorizedAudienceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#String"
+            }
+        },
+        "com.amazonaws.redshift#AuthorizedTokenIssuer": {
+            "type": "structure",
+            "members": {
+                "TrustedTokenIssuerArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the authorized token issuer for integrating Amazon Redshift with IDC Identity Center.</p>"
+                    }
+                },
+                "AuthorizedAudiencesList": {
+                    "target": "com.amazonaws.redshift#AuthorizedAudienceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of audiences for the authorized token issuer for integrating Amazon Redshift \n            with IDC Identity Center.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The authorized token issuer for the Amazon Redshift IAM Identity Center application.</p>"
+            }
+        },
+        "com.amazonaws.redshift#AuthorizedTokenIssuerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#AuthorizedTokenIssuer"
+            }
+        },
         "com.amazonaws.redshift#AvailabilityZone": {
             "type": "structure",
             "members": {
@@ -2724,6 +2756,9 @@
                     "target": "com.amazonaws.redshift#NumberOfNodesQuotaExceededFault"
                 },
                 {
+                    "target": "com.amazonaws.redshift#RedshiftIdcApplicationNotExistsFault"
+                },
+                {
                     "target": "com.amazonaws.redshift#SnapshotScheduleNotFoundFault"
                 },
                 {
@@ -2975,6 +3010,12 @@
                     "target": "com.amazonaws.redshift#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>If true, Amazon Redshift will deploy the cluster in two Availability Zones (AZ).</p>"
+                    }
+                },
+                "RedshiftIdcApplicationArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the Amazon Redshift IAM Identity Center application.</p>"
                     }
                 }
             },
@@ -3755,6 +3796,104 @@
             "members": {
                 "HsmConfiguration": {
                     "target": "com.amazonaws.redshift#HsmConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshift#CreateRedshiftIdcApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#CreateRedshiftIdcApplicationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#CreateRedshiftIdcApplicationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#DependentServiceAccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DependentServiceUnavailableFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#RedshiftIdcApplicationAlreadyExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#RedshiftIdcApplicationQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Amazon Redshift application for use with IAM Identity Center.</p>"
+            }
+        },
+        "com.amazonaws.redshift#CreateRedshiftIdcApplicationMessage": {
+            "type": "structure",
+            "members": {
+                "IdcInstanceArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the IAM Identity Center instance where Amazon Redshift creates a new managed application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RedshiftIdcApplicationName": {
+                    "target": "com.amazonaws.redshift#RedshiftIdcApplicationName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the Redshift application in IAM Identity Center.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityNamespace": {
+                    "target": "com.amazonaws.redshift#IdentityNamespaceString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace for the Amazon Redshift IAM Identity Center application instance. It determines which managed application \n            verifies the connection token.</p>"
+                    }
+                },
+                "IdcDisplayName": {
+                    "target": "com.amazonaws.redshift#IdcDisplayNameString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The display name for the Amazon Redshift IAM Identity Center application instance. It appears in the console.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The IAM role ARN for the Amazon Redshift IAM Identity Center application instance. It has the required permissions \n            to be assumed and invoke the IDC Identity Center API.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AuthorizedTokenIssuerList": {
+                    "target": "com.amazonaws.redshift#AuthorizedTokenIssuerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token issuer list for the Amazon Redshift IAM Identity Center application instance.</p>"
+                    }
+                },
+                "ServiceIntegrations": {
+                    "target": "com.amazonaws.redshift#ServiceIntegrationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of service integrations for the Redshift IAM Identity Center application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshift#CreateRedshiftIdcApplicationResult": {
+            "type": "structure",
+            "members": {
+                "RedshiftIdcApplication": {
+                    "target": "com.amazonaws.redshift#RedshiftIdcApplication"
                 }
             },
             "traits": {
@@ -5115,6 +5254,48 @@
                 "smithy.api#documentation": "<p>Deletes a partner integration from a cluster. Data can still flow to the cluster until the integration is deleted at the partner's website.</p>"
             }
         },
+        "com.amazonaws.redshift#DeleteRedshiftIdcApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#DeleteRedshiftIdcApplicationMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#DependentServiceAccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DependentServiceUnavailableFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#RedshiftIdcApplicationNotExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Amazon Redshift IAM Identity Center application.</p>"
+            }
+        },
+        "com.amazonaws.redshift#DeleteRedshiftIdcApplicationMessage": {
+            "type": "structure",
+            "members": {
+                "RedshiftIdcApplicationArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN for a deleted Amazon Redshift IAM Identity Center application.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.redshift#DeleteResourcePolicy": {
             "type": "operation",
             "input": {
@@ -5339,6 +5520,23 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshift#DependentServiceAccessDeniedFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DependentServiceAccessDenied",
+                    "httpResponseCode": 403
+                },
+                "smithy.api#documentation": "<p>A dependent service denied access for the integration.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
             }
         },
         "com.amazonaws.redshift#DependentServiceRequestThrottlingFault": {
@@ -7242,6 +7440,84 @@
                     "target": "com.amazonaws.redshift#PartnerIntegrationInfoList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of partner integrations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshift#DescribeRedshiftIdcApplications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#DescribeRedshiftIdcApplicationsMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#DescribeRedshiftIdcApplicationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#DependentServiceAccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DependentServiceUnavailableFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#RedshiftIdcApplicationNotExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the Amazon Redshift IAM Identity Center applications.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "RedshiftIdcApplications",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.redshift#DescribeRedshiftIdcApplicationsMessage": {
+            "type": "structure",
+            "members": {
+                "RedshiftIdcApplicationArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the Redshift application that integrates with IAM Identity Center.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.redshift#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of response records to return in each call. If the number of remaining response records \n            exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve \n            the next set of records by retrying the command with the returned marker value.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. If a \n            value is returned in a response, you can retrieve the next set\n            of records by providing this returned marker value in the Marker parameter\n            and retrying the command. If the Marker field is empty, all response\n            records have been retrieved for the request.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshift#DescribeRedshiftIdcApplicationsResult": {
+            "type": "structure",
+            "members": {
+                "RedshiftIdcApplications": {
+                    "target": "com.amazonaws.redshift#RedshiftIdcApplicationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Amazon Redshift IAM Identity Center applications.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent \n            request. If a value is returned in a response, you can retrieve the next set\n            of records by providing this returned marker value in the Marker parameter\n            and retrying the command. If the Marker field is empty, all response\n            records have been retrieved for the request.\n        </p>"
                     }
                 }
             },
@@ -9664,6 +9940,26 @@
                 }
             }
         },
+        "com.amazonaws.redshift#IdcDisplayNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 127
+                },
+                "smithy.api#pattern": "^[\\w+=,.@-]+$"
+            }
+        },
+        "com.amazonaws.redshift#IdentityNamespaceString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 127
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_+.#@$-]+$"
+            }
+        },
         "com.amazonaws.redshift#ImportTablesCompleted": {
             "type": "list",
             "member": {
@@ -10419,6 +10715,42 @@
                 "smithy.api#documentation": "<p>There are no subnets in your VPC with associated IPv6 CIDR blocks. To use dual-stack mode,\n            associate an IPv6 CIDR block with each subnet in your VPC.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshift#LakeFormationQuery": {
+            "type": "structure",
+            "members": {
+                "Authorization": {
+                    "target": "com.amazonaws.redshift#ServiceAuthorization",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Determines whether the query scope is enabled or disabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Lake Formation scope.</p>"
+            }
+        },
+        "com.amazonaws.redshift#LakeFormationScopeUnion": {
+            "type": "union",
+            "members": {
+                "LakeFormationQuery": {
+                    "target": "com.amazonaws.redshift#LakeFormationQuery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Lake Formation scope.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of scopes set up for Lake Formation integration.</p>"
+            }
+        },
+        "com.amazonaws.redshift#LakeFormationServiceIntegrations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#LakeFormationScopeUnion"
             }
         },
         "com.amazonaws.redshift#LimitExceededFault": {
@@ -11653,6 +11985,89 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshift#ModifyRedshiftIdcApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#ModifyRedshiftIdcApplicationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#ModifyRedshiftIdcApplicationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#DependentServiceAccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DependentServiceUnavailableFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#RedshiftIdcApplicationNotExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Changes an existing Amazon Redshift IAM Identity Center application.</p>"
+            }
+        },
+        "com.amazonaws.redshift#ModifyRedshiftIdcApplicationMessage": {
+            "type": "structure",
+            "members": {
+                "RedshiftIdcApplicationArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN for the Redshift application that integrates with IAM Identity Center.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityNamespace": {
+                    "target": "com.amazonaws.redshift#IdentityNamespaceString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace for the Amazon Redshift IAM Identity Center application to change. It determines which managed application \n            verifies the connection token.</p>"
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role ARN associated with the Amazon Redshift IAM Identity Center application to change. It has the required permissions \n            to be assumed and invoke the IDC Identity Center API.</p>"
+                    }
+                },
+                "IdcDisplayName": {
+                    "target": "com.amazonaws.redshift#IdcDisplayNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name for the Amazon Redshift IAM Identity Center application to change. It appears on the console.</p>"
+                    }
+                },
+                "AuthorizedTokenIssuerList": {
+                    "target": "com.amazonaws.redshift#AuthorizedTokenIssuerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorized token issuer list for the Amazon Redshift IAM Identity Center application to change.</p>"
+                    }
+                },
+                "ServiceIntegrations": {
+                    "target": "com.amazonaws.redshift#ServiceIntegrationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of service integrations associated with the application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshift#ModifyRedshiftIdcApplicationResult": {
+            "type": "structure",
+            "members": {
+                "RedshiftIdcApplication": {
+                    "target": "com.amazonaws.redshift#RedshiftIdcApplication"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.redshift#ModifyScheduledAction": {
             "type": "operation",
             "input": {
@@ -12862,6 +13277,141 @@
                 }
             }
         },
+        "com.amazonaws.redshift#RedshiftIdcApplication": {
+            "type": "structure",
+            "members": {
+                "IdcInstanceArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the IAM Identity Center instance that Redshift integrates with.</p>"
+                    }
+                },
+                "RedshiftIdcApplicationName": {
+                    "target": "com.amazonaws.redshift#RedshiftIdcApplicationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Redshift application in IAM Identity Center.</p>"
+                    }
+                },
+                "RedshiftIdcApplicationArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the Redshift application that integrates with IAM Identity Center.</p>"
+                    }
+                },
+                "IdentityNamespace": {
+                    "target": "com.amazonaws.redshift#IdentityNamespaceString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity namespace for the Amazon Redshift IAM Identity Center application. It determines which managed application verifies the connection token.</p>"
+                    }
+                },
+                "IdcDisplayName": {
+                    "target": "com.amazonaws.redshift#IdcDisplayNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name for the Amazon Redshift IAM Identity Center application. It appears on the console.</p>"
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the Amazon Redshift IAM Identity Center application. It has the required permissions to be assumed and invoke the IDC Identity Center API.</p>"
+                    }
+                },
+                "IdcManagedApplicationArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the Amazon Redshift IAM Identity Center application.</p>"
+                    }
+                },
+                "IdcOnboardStatus": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The onboarding status for the Amazon Redshift IAM Identity Center application.</p>"
+                    }
+                },
+                "AuthorizedTokenIssuerList": {
+                    "target": "com.amazonaws.redshift#AuthorizedTokenIssuerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorized token issuer list for the Amazon Redshift IAM Identity Center application.</p>"
+                    }
+                },
+                "ServiceIntegrations": {
+                    "target": "com.amazonaws.redshift#ServiceIntegrationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of service integrations for the Redshift IAM Identity Center application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains properties for the Redshift IDC application.</p>"
+            }
+        },
+        "com.amazonaws.redshift#RedshiftIdcApplicationAlreadyExistsFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "RedshiftIdcApplicationAlreadyExists",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The application you attempted to add already exists.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshift#RedshiftIdcApplicationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#RedshiftIdcApplication"
+            }
+        },
+        "com.amazonaws.redshift#RedshiftIdcApplicationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+            }
+        },
+        "com.amazonaws.redshift#RedshiftIdcApplicationNotExistsFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "RedshiftIdcApplicationNotExists",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The application you attempted to find doesn't exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.redshift#RedshiftIdcApplicationQuotaExceededFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "RedshiftIdcApplicationQuotaExceeded",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The maximum number of Redshift IAM Identity Center applications was exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.redshift#RedshiftServiceVersion20121201": {
             "type": "service",
             "version": "2012-12-01",
@@ -12933,6 +13483,9 @@
                     "target": "com.amazonaws.redshift#CreateHsmConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.redshift#CreateRedshiftIdcApplication"
+                },
+                {
                     "target": "com.amazonaws.redshift#CreateScheduledAction"
                 },
                 {
@@ -12985,6 +13538,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#DeletePartner"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DeleteRedshiftIdcApplication"
                 },
                 {
                     "target": "com.amazonaws.redshift#DeleteResourcePolicy"
@@ -13087,6 +13643,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#DescribePartners"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DescribeRedshiftIdcApplications"
                 },
                 {
                     "target": "com.amazonaws.redshift#DescribeReservedNodeExchangeStatus"
@@ -13192,6 +13751,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#ModifyEventSubscription"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ModifyRedshiftIdcApplication"
                 },
                 {
                     "target": "com.amazonaws.redshift#ModifyScheduledAction"
@@ -16463,6 +17025,43 @@
             "type": "string",
             "traits": {
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.redshift#ServiceAuthorization": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Enabled"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disabled"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#ServiceIntegrationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#ServiceIntegrationsUnion"
+            }
+        },
+        "com.amazonaws.redshift#ServiceIntegrationsUnion": {
+            "type": "union",
+            "members": {
+                "LakeFormation": {
+                    "target": "com.amazonaws.redshift#LakeFormationServiceIntegrations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of scopes set up for Lake Formation integration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of service integrations.</p>"
             }
         },
         "com.amazonaws.redshift#Snapshot": {

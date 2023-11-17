@@ -4036,7 +4036,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A type of trigger configuration for Git-based source actions.</p>\n         <note>\n            <p>You can specify the Git configuration trigger type for all third-party\n                Git-based source actions that are supported by the\n                    <code>CodeStarSourceConnection</code> action type.</p>\n         </note>"
+                "smithy.api#documentation": "<p>A type of trigger configuration for Git-based source actions.</p>\n         <note>\n            <p>You can specify the Git configuration trigger type for all third-party\n                Git-based source actions that are supported by the\n                    <code>CodeStarSourceConnection</code> action type.</p>\n         </note>\n         <note>\n            <p>V2 type pipelines, along with triggers on Git tags and pipeline-level variables,\n                are not currently supported for CloudFormation and CDK resources in CodePipeline. For more information about V2 type pipelines, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html\">Pipeline types</a>\n                in the <i>CodePipeline User Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.codepipeline#GitPushFilter": {
@@ -5374,7 +5374,7 @@
                 "pipelineType": {
                     "target": "com.amazonaws.codepipeline#PipelineType",
                     "traits": {
-                        "smithy.api#documentation": "<p>CodePipeline provides the following pipeline types, which differ in characteristics and\n            price, so that you can tailor your pipeline features and cost to the needs of your\n            applications.</p>\n         <ul>\n            <li>\n               <p>V1 type pipelines have a JSON structure that contains standard pipeline,\n                    stage, and action-level parameters.</p>\n            </li>\n            <li>\n               <p>V2 type pipelines have the same structure as a V1 type, along with additional\n                    parameters for release safety and trigger configuration.</p>\n            </li>\n         </ul>\n         <important>\n            <p>Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when\n                creating or updating a pipeline will result in the pipeline having the V2 type of\n                pipeline and the associated costs.</p>\n         </important>\n         <p>For information about pricing for CodePipeline, see <a href=\"https://aws.amazon.com/codepipeline/pricing/\">Pricing</a>.</p>\n         <p>\n            For information about which type of pipeline to choose, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html\">What type of pipeline is right for me?</a>.</p>"
+                        "smithy.api#documentation": "<p>CodePipeline provides the following pipeline types, which differ in characteristics and\n            price, so that you can tailor your pipeline features and cost to the needs of your\n            applications.</p>\n         <ul>\n            <li>\n               <p>V1 type pipelines have a JSON structure that contains standard pipeline,\n                    stage, and action-level parameters.</p>\n            </li>\n            <li>\n               <p>V2 type pipelines have the same structure as a V1 type, along with additional\n                    parameters for release safety and trigger configuration.</p>\n            </li>\n         </ul>\n         <important>\n            <p>Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when\n                creating or updating a pipeline will result in the pipeline having the V2 type of\n                pipeline and the associated costs.</p>\n         </important>\n         <p>For information about pricing for CodePipeline, see <a href=\"https://aws.amazon.com/codepipeline/pricing/\">Pricing</a>.</p>\n         <p>\n            For information about which type of pipeline to choose, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html\">What type of pipeline is right for me?</a>.</p>\n         <note>\n            <p>V2 type pipelines, along with triggers on Git tags and pipeline-level variables,\n                are not currently supported for CloudFormation and CDK resources in CodePipeline. For more information about V2 type pipelines, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html\">Pipeline types</a>\n                in the <i>CodePipeline User Guide</i>.</p>\n         </note>"
                     }
                 },
                 "triggers": {
@@ -5688,7 +5688,7 @@
                 "pipelineType": {
                     "target": "com.amazonaws.codepipeline#PipelineType",
                     "traits": {
-                        "smithy.api#documentation": "<p>CodePipeline provides the following pipeline types, which differ in characteristics and\n            price, so that you can tailor your pipeline features and cost to the needs of your\n            applications.</p>\n         <ul>\n            <li>\n               <p>V1 type pipelines have a JSON structure that contains standard pipeline,\n                    stage, and action-level parameters.</p>\n            </li>\n            <li>\n               <p>V2 type pipelines have the same structure as a V1 type, along with additional\n                    parameters for release safety and trigger configuration.</p>\n            </li>\n         </ul>\n         <important>\n            <p>Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when\n                creating or updating a pipeline will result in the pipeline having the V2 type of\n                pipeline and the associated costs.</p>\n         </important>\n         <p>For information about pricing for CodePipeline, see <a href=\"https://aws.amazon.com/codepipeline/pricing/\">Pricing</a>.</p>\n         <p>\n            For information about which type of pipeline to choose, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html\">What type of pipeline is right for me?</a>.</p>"
+                        "smithy.api#documentation": "<p>CodePipeline provides the following pipeline types, which differ in characteristics and\n            price, so that you can tailor your pipeline features and cost to the needs of your\n            applications.</p>\n         <ul>\n            <li>\n               <p>V1 type pipelines have a JSON structure that contains standard pipeline,\n                    stage, and action-level parameters.</p>\n            </li>\n            <li>\n               <p>V2 type pipelines have the same structure as a V1 type, along with additional\n                    parameters for release safety and trigger configuration.</p>\n            </li>\n         </ul>\n         <important>\n            <p>Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when\n                creating or updating a pipeline will result in the pipeline having the V2 type of\n                pipeline and the associated costs.</p>\n         </important>\n         <p>For information about pricing for CodePipeline, see <a href=\"https://aws.amazon.com/codepipeline/pricing/\">Pricing</a>.</p>\n         <p>\n            For information about which type of pipeline to choose, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html\">What type of pipeline is right for me?</a>.</p>\n         <note>\n            <p>V2 type pipelines, along with triggers on Git tags and pipeline-level variables,\n                are not currently supported for CloudFormation and CDK resources in CodePipeline. For more information about V2 type pipelines, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html\">Pipeline types</a>\n                in the <i>CodePipeline User Guide</i>.</p>\n         </note>"
                     }
                 },
                 "created": {
@@ -5727,7 +5727,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents information about the specified trigger configuration, such as the\n            filter criteria and the source stage for the action that contains the trigger.</p>\n         <note>\n            <p>This is only supported for the <code>CodeStarSourceConnection</code> action\n                type.</p>\n         </note>\n         <note>\n            <p>When a trigger configuration is specified, default change detection for\n                repository and branch commits is disabled.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Represents information about the specified trigger configuration, such as the\n            filter criteria and the source stage for the action that contains the trigger.</p>\n         <note>\n            <p>This is only supported for the <code>CodeStarSourceConnection</code> action\n                type.</p>\n         </note>\n         <note>\n            <p>When a trigger configuration is specified, default change detection for\n                repository and branch commits is disabled.</p>\n         </note>\n         <note>\n            <p>V2 type pipelines, along with triggers on Git tags and pipeline-level variables,\n                are not currently supported for CloudFormation and CDK resources in CodePipeline. For more information about V2 type pipelines, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html\">Pipeline types</a>\n                in the <i>CodePipeline User Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.codepipeline#PipelineTriggerDeclarationList": {
@@ -5789,7 +5789,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A pipeline-level variable used for a pipeline execution.</p>"
+                "smithy.api#documentation": "<p>A pipeline-level variable used for a pipeline execution.</p>\n         <note>\n            <p>V2 type pipelines, along with triggers on Git tags and pipeline-level variables,\n                are not currently supported for CloudFormation and CDK resources in CodePipeline. For more information about V2 type pipelines, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html\">Pipeline types</a>\n                in the <i>CodePipeline User Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.codepipeline#PipelineVariableDeclaration": {
@@ -5816,7 +5816,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A variable declared at the pipeline level.</p>"
+                "smithy.api#documentation": "<p>A variable declared at the pipeline level.</p>\n         <note>\n            <p>V2 type pipelines, along with triggers on Git tags and pipeline-level variables,\n                are not currently supported for CloudFormation and CDK resources in CodePipeline. For more information about V2 type pipelines, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types.html\">Pipeline types</a>\n                in the <i>CodePipeline User Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.codepipeline#PipelineVariableDeclarationList": {
@@ -6913,6 +6913,70 @@
                 "target": "com.amazonaws.codepipeline#SourceRevision"
             }
         },
+        "com.amazonaws.codepipeline#SourceRevisionOverride": {
+            "type": "structure",
+            "members": {
+                "actionName": {
+                    "target": "com.amazonaws.codepipeline#ActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the action where the override will be applied.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "revisionType": {
+                    "target": "com.amazonaws.codepipeline#SourceRevisionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of source revision, based on the source provider. For example, the revision\n            type for the CodeCommit action provider is the commit ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "revisionValue": {
+                    "target": "com.amazonaws.codepipeline#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source revision, or version of your source artifact, with the changes that you\n            want to run in the pipeline execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list that allows you to specify, or override, the source revision for a pipeline\n            execution that's being started. A source revision is the version with all the changes to\n            your application code, or source artifact, for the pipeline execution.</p>"
+            }
+        },
+        "com.amazonaws.codepipeline#SourceRevisionOverrideList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codepipeline#SourceRevisionOverride"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#SourceRevisionType": {
+            "type": "enum",
+            "members": {
+                "COMMIT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMMIT_ID"
+                    }
+                },
+                "IMAGE_DIGEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE_DIGEST"
+                    }
+                },
+                "S3_OBJECT_VERSION_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3_OBJECT_VERSION_ID"
+                    }
+                }
+            }
+        },
         "com.amazonaws.codepipeline#StageActionDeclarationList": {
             "type": "list",
             "member": {
@@ -7189,6 +7253,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The system-generated unique ID used to identify a unique execution\n            request.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "sourceRevisions": {
+                    "target": "com.amazonaws.codepipeline#SourceRevisionOverrideList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that allows you to specify, or override, the source revision for a pipeline execution that's being started. A source revision is the version with all the changes to your application code, or source artifact, for the pipeline execution.</p>"
                     }
                 }
             },

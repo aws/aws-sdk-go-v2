@@ -148,7 +148,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -167,7 +166,6 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -195,13 +193,14 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -214,7 +213,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -228,7 +226,6 @@
                                                     "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -251,7 +248,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -286,11 +282,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -301,16 +295,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -324,14 +321,12 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -340,15 +335,14 @@
                                                                                 },
                                                                                 "supportsFIPS"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        true
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -359,16 +353,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -382,7 +379,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -402,11 +398,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -417,20 +411,22 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "DualStack is enabled but this partition does not support DualStack",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -441,18 +437,22 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
                                     "error": "Invalid Configuration: Missing Region",
                                     "type": "error"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
@@ -775,6 +775,21 @@
         "com.amazonaws.osis#Boolean": {
             "type": "boolean"
         },
+        "com.amazonaws.osis#BufferOptions": {
+            "type": "structure",
+            "members": {
+                "PersistentBufferEnabled": {
+                    "target": "com.amazonaws.osis#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether persistent buffering should be enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Options that specify the configuration of a persistent buffer.\n   To configure how OpenSearch Ingestion encrypts this data, set the EncryptionAtRestOptions.</p>"
+            }
+        },
         "com.amazonaws.osis#ChangeProgressStage": {
             "type": "structure",
             "members": {
@@ -960,6 +975,9 @@
                     "target": "com.amazonaws.osis#ResourceAlreadyExistsException"
                 },
                 {
+                    "target": "com.amazonaws.osis#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.osis#ValidationException"
                 }
             ],
@@ -1013,6 +1031,18 @@
                     "target": "com.amazonaws.osis#VpcOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Container for the values required to configure VPC access for the pipeline. If you don't specify\n   these values, OpenSearch Ingestion creates the pipeline with a public endpoint.</p>"
+                    }
+                },
+                "BufferOptions": {
+                    "target": "com.amazonaws.osis#BufferOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs to configure persistent buffering for the pipeline.</p>"
+                    }
+                },
+                "EncryptionAtRestOptions": {
+                    "target": "com.amazonaws.osis#EncryptionAtRestOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs to configure encryption for data that is written to a persistent buffer.</p>"
                     }
                 },
                 "Tags": {
@@ -1095,6 +1125,21 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#EncryptionAtRestOptions": {
+            "type": "structure",
+            "members": {
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.osis#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the KMS key used to encrypt data-at-rest in OpenSearch Ingestion.\n   By default, data is encrypted using an AWS owned key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Options to control how OpenSearch encrypts all data-at-rest.</p>"
             }
         },
         "com.amazonaws.osis#ErrorMessage": {
@@ -1319,6 +1364,15 @@
                 "smithy.api#documentation": "<p>An invalid pagination token provided in the request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.osis#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 7,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.osis#LimitExceededException": {
@@ -1650,6 +1704,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The VPC interface endpoints that have access to the pipeline.</p>"
                     }
+                },
+                "BufferOptions": {
+                    "target": "com.amazonaws.osis#BufferOptions"
+                },
+                "EncryptionAtRestOptions": {
+                    "target": "com.amazonaws.osis#EncryptionAtRestOptions"
+                },
+                "ServiceVpcEndpoints": {
+                    "target": "com.amazonaws.osis#ServiceVpcEndpointsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC endpoints that OpenSearch Ingestion has created to other AWS services.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.osis#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags associated with the given pipeline.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1851,6 +1923,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the pipeline was last updated.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.osis#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags associated with the given pipeline.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1867,8 +1945,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1,
-                    "max": 96
+                    "min": 1
                 }
             }
         },
@@ -1918,6 +1995,32 @@
                     "min": 1,
                     "max": 12
                 }
+            }
+        },
+        "com.amazonaws.osis#ServiceVpcEndpoint": {
+            "type": "structure",
+            "members": {
+                "ServiceName": {
+                    "target": "com.amazonaws.osis#VpcEndpointServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service for which a VPC endpoint was created.</p>"
+                    }
+                },
+                "VpcEndpointId": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC endpoint that was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container for information about VPC endpoints that were created to other services</p>"
+            }
+        },
+        "com.amazonaws.osis#ServiceVpcEndpointsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#ServiceVpcEndpoint"
             }
         },
         "com.amazonaws.osis#StartPipeline": {
@@ -2317,6 +2420,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs to configure log publishing.</p>"
                     }
+                },
+                "BufferOptions": {
+                    "target": "com.amazonaws.osis#BufferOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs to configure persistent buffering for the pipeline.</p>"
+                    }
+                },
+                "EncryptionAtRestOptions": {
+                    "target": "com.amazonaws.osis#EncryptionAtRestOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs to configure encryption for data that is written to a persistent buffer.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2457,6 +2572,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An OpenSearch Ingestion-managed VPC endpoint that will access one or more\n   pipelines.</p>"
+            }
+        },
+        "com.amazonaws.osis#VpcEndpointServiceName": {
+            "type": "enum",
+            "members": {
+                "OPENSEARCH_SERVERLESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPENSEARCH_SERVERLESS"
+                    }
+                }
             }
         },
         "com.amazonaws.osis#VpcEndpointsList": {

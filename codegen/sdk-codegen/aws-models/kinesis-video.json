@@ -1014,7 +1014,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<important>\n            <p>This API is related to <a href=\"https://docs.aws.amazon.com/kinesisvideostreams-webrtc-dg/latest/devguide/webrtc-ingestion.html\">WebRTC Ingestion</a> and is only available in the <code>us-west-2</code> region.</p>\n         </important>\n         <p>Returns the most current information about the channel. Specify the <code>ChannelName</code>\n            or <code>ChannelARN</code> in the input.</p>",
+                "smithy.api#documentation": "<p>Returns the most current information about the channel. Specify the <code>ChannelName</code>\n            or <code>ChannelARN</code> in the input.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeMediaStorageConfiguration",
@@ -1882,7 +1882,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1925,7 +1924,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -1938,7 +1938,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1952,7 +1951,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -1975,7 +1973,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2010,7 +2007,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2021,14 +2017,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2042,14 +2040,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -2058,11 +2054,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2073,14 +2069,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2094,7 +2092,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2114,7 +2111,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2125,14 +2121,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -2143,9 +2141,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -3310,7 +3310,7 @@
                 "StreamARN": {
                     "target": "com.amazonaws.kinesisvideo#ResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream. </p>"
                     }
                 },
                 "Status": {
@@ -3322,7 +3322,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that encapsulates, or contains, the media storage configuration properties.</p>"
+                "smithy.api#documentation": "<p>A structure that encapsulates, or contains, the media storage configuration\n            properties.</p>\n         <ul>\n            <li>\n               <p>If <code>StorageStatus</code> is enabled, the data will be stored in the\n                        <code>StreamARN</code> provided. In order for WebRTC Ingestion to work, the stream must have data retention\n                    enabled.</p>\n            </li>\n            <li>\n               <p>If <code>StorageStatus</code> is disabled, no data will be stored, and the\n                        <code>StreamARN</code> parameter will not be needed. </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.kinesisvideo#MediaStorageConfigurationStatus": {
@@ -4361,7 +4361,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Increases or decreases the stream's data retention period by the value that you\n            specify. To indicate whether you want to increase or decrease the data retention period,\n            specify the <code>Operation</code> parameter in the request body. In the request, you\n            must specify either the <code>StreamName</code> or the <code>StreamARN</code>. </p>\n         <note>\n            <p>The retention period that you specify replaces the current value.</p>\n         </note>\n         <p>This operation requires permission for the\n                <code>KinesisVideo:UpdateDataRetention</code> action.</p>\n         <p>Changing the data retention period affects the data in the stream as\n            follows:</p>\n         <ul>\n            <li>\n               <p>If the data retention period is increased, existing data is retained for\n                    the new retention period. For example, if the data retention period is increased\n                    from one hour to seven hours, all existing data is retained for seven\n                    hours.</p>\n            </li>\n            <li>\n               <p>If the data retention period is decreased, existing data is retained for\n                    the new retention period. For example, if the data retention period is decreased\n                    from seven hours to one hour, all existing data is retained for one hour, and\n                    any data older than one hour is deleted immediately.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Increases or decreases the stream's data retention period by the value that you\n            specify. To indicate whether you want to increase or decrease the data retention period,\n            specify the <code>Operation</code> parameter in the request body. In the request, you\n            must specify either the <code>StreamName</code> or the <code>StreamARN</code>. </p>\n         <p>This operation requires permission for the\n                <code>KinesisVideo:UpdateDataRetention</code> action.</p>\n         <p>Changing the data retention period affects the data in the stream as\n            follows:</p>\n         <ul>\n            <li>\n               <p>If the data retention period is increased, existing data is retained for\n                    the new retention period. For example, if the data retention period is increased\n                    from one hour to seven hours, all existing data is retained for seven\n                    hours.</p>\n            </li>\n            <li>\n               <p>If the data retention period is decreased, existing data is retained for\n                    the new retention period. For example, if the data retention period is decreased\n                    from seven hours to one hour, all existing data is retained for one hour, and\n                    any data older than one hour is deleted immediately.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/updateDataRetention",
@@ -4401,7 +4401,7 @@
                 "DataRetentionChangeInHours": {
                     "target": "com.amazonaws.kinesisvideo#DataRetentionChangeInHours",
                     "traits": {
-                        "smithy.api#documentation": "<p>The retention period, in hours. The value you specify replaces the current value.\n            The maximum value for this parameter is 87600 (ten years).</p>",
+                        "smithy.api#documentation": "<p>The number of hours to adjust the current retention by. The value you specify is added to or subtracted from the current value, depending on the <code>operation</code>.</p>\n         <p>The minimum value for data retention is 0 and the maximum value is 87600 (ten years).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4533,7 +4533,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<important>\n            <p>This API is related to <a href=\"https://docs.aws.amazon.com/kinesisvideostreams-webrtc-dg/latest/devguide/webrtc-ingestion.html\">WebRTC Ingestion</a> and is only available in the <code>us-west-2</code> region.</p>\n         </important>\n         <p>Associates a <code>SignalingChannel</code> to a stream to store the media. There are two signaling modes that \n            can specified :</p>\n         <ul>\n            <li>\n               <p>If the <code>StorageStatus</code> is disabled, no data will be stored,\n                and the <code>StreamARN</code> parameter will not be needed. </p>\n            </li>\n            <li>\n               <p>If the <code>StorageStatus</code> is enabled, the data will be stored in the \n                <code>StreamARN</code> provided. </p>\n            </li>\n         </ul>\n         <important>\n            <p>If <code>StorageStatus</code> is enabled, direct peer-to-peer (master-viewer) connections no\n                longer occur. Peers connect directly to the storage session. You must call the\n                    <code>JoinStorageSession</code> API to trigger an SDP offer send and establish a\n                connection between a peer and the storage session. </p>\n         </important>",
+                "smithy.api#documentation": "<p>Associates a <code>SignalingChannel</code> to a stream to store the media. There are\n            two signaling modes that you can specify :</p>\n         <ul>\n            <li>\n               <p>If <code>StorageStatus</code> is enabled, the data will be stored in the\n                        <code>StreamARN</code> provided. In order for WebRTC Ingestion to work, the stream must have data retention\n                    enabled.</p>\n            </li>\n            <li>\n               <p>If <code>StorageStatus</code> is disabled, no data will be stored, and the\n                        <code>StreamARN</code> parameter will not be needed. </p>\n            </li>\n         </ul>\n         <important>\n            <p>If <code>StorageStatus</code> is enabled, direct peer-to-peer (master-viewer) connections no\n                longer occur. Peers connect directly to the storage session. You must call the\n                    <code>JoinStorageSession</code> API to trigger an SDP offer send and establish a\n                connection between a peer and the storage session. </p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/updateMediaStorageConfiguration",
