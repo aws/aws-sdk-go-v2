@@ -88,7 +88,7 @@ type ListPartsInput struct {
 	ExpectedBucketOwner *string
 
 	// Sets the maximum number of parts to return.
-	MaxParts int32
+	MaxParts *int32
 
 	// Specifies the part after which listing should begin. Only parts with higher
 	// part numbers will be listed.
@@ -162,13 +162,13 @@ type ListPartsOutput struct {
 	// Indicates whether the returned list of parts is truncated. A true value
 	// indicates that the list was truncated. A list can be truncated if the number of
 	// parts exceeds the limit returned in the MaxParts element.
-	IsTruncated bool
+	IsTruncated *bool
 
 	// Object key for which the multipart upload was initiated.
 	Key *string
 
 	// Maximum number of parts that were allowed in the response.
-	MaxParts int32
+	MaxParts *int32
 
 	// When a list is truncated, this element specifies the last part in the list, as
 	// well as the value to use for the part-number-marker request parameter in a
@@ -337,8 +337,8 @@ func NewListPartsPaginator(client ListPartsAPIClient, params *ListPartsInput, op
 	}
 
 	options := ListPartsPaginatorOptions{}
-	if params.MaxParts != 0 {
-		options.Limit = params.MaxParts
+	if params.MaxParts != nil {
+		options.Limit = *params.MaxParts
 	}
 
 	for _, fn := range optFns {
@@ -368,7 +368,11 @@ func (p *ListPartsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	params := *p.params
 	params.PartNumberMarker = p.nextToken
 
-	params.MaxParts = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxParts = limit
 
 	result, err := p.client.ListParts(ctx, &params, optFns...)
 	if err != nil {
@@ -378,7 +382,7 @@ func (p *ListPartsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	prevToken := p.nextToken
 	p.nextToken = nil
-	if result.IsTruncated {
+	if result.IsTruncated != nil && *result.IsTruncated {
 		p.nextToken = result.NextPartNumberMarker
 	}
 

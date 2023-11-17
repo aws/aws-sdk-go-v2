@@ -156,7 +156,7 @@ func CleanupBucket(client *s3.Client, bucketName string) error {
 				errs = append(errs, fmt.Errorf("failed to delete %s, %s", aws.ToString(deleteError.Key), aws.ToString(deleteError.Message)))
 			}
 
-			if listObjectsV2.IsTruncated {
+			if aws.ToBool(listObjectsV2.IsTruncated) {
 				input.ContinuationToken = listObjectsV2.NextContinuationToken
 			} else {
 				break
@@ -182,7 +182,7 @@ func CleanupBucket(client *s3.Client, bucketName string) error {
 				})
 			}
 
-			if uploads.IsTruncated {
+			if aws.ToBool(uploads.IsTruncated) {
 				input.KeyMarker = uploads.NextKeyMarker
 				input.UploadIdMarker = uploads.NextUploadIdMarker
 			} else {

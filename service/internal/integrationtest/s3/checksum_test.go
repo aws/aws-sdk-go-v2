@@ -104,7 +104,7 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 			"content length preset": {
 				params: &s3.PutObjectInput{
 					Body:              strings.NewReader("hello world"),
-					ContentLength:     11,
+					ContentLength:     aws.Int64(11),
 					ChecksumAlgorithm: s3types.ChecksumAlgorithmCrc32c,
 				},
 				getObjectChecksumMode: s3types.ChecksumModeEnabled,
@@ -198,7 +198,7 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 			"content length preset": {
 				params: &s3.PutObjectInput{
 					Body:              ioutil.NopCloser(strings.NewReader("hello world")),
-					ContentLength:     11,
+					ContentLength:     aws.Int64(11),
 					ChecksumAlgorithm: s3types.ChecksumAlgorithmCrc32c,
 				},
 				getObjectChecksumMode: s3types.ChecksumModeEnabled,
@@ -449,7 +449,7 @@ func TestInteg_RequireChecksum(t *testing.T) {
 					Objects: []s3types.ObjectIdentifier{
 						{Key: aws.String(t.Name())},
 					},
-					Quiet: true,
+					Quiet: aws.Bool(true),
 				},
 				ChecksumAlgorithm: c.checksumAlgorithm,
 			})

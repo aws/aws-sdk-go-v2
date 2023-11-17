@@ -89,7 +89,7 @@ func TestUploadOrderMulti(t *testing.T) {
 		num := parts[i].PartNumber
 		etag := aws.ToString(parts[i].ETag)
 
-		if int32(i+1) != num {
+		if int32(i+1) != aws.ToInt32(num) {
 			t.Errorf("expect %d, got %d", i+1, num)
 		}
 

@@ -89,7 +89,7 @@ type WriteGetObjectResponseInput struct {
 
 	// Indicates whether the object stored in Amazon S3 uses an S3 bucket key for
 	// server-side encryption with Amazon Web Services KMS (SSE-KMS).
-	BucketKeyEnabled bool
+	BucketKeyEnabled *bool
 
 	// Specifies caching behavior along the request/reply chain.
 	CacheControl *string
@@ -150,7 +150,7 @@ type WriteGetObjectResponseInput struct {
 	ContentLanguage *string
 
 	// The size of the content body in bytes.
-	ContentLength int64
+	ContentLength *int64
 
 	// The portion of the object returned in the response.
 	ContentRange *string
@@ -160,7 +160,7 @@ type WriteGetObjectResponseInput struct {
 
 	// Specifies whether an object stored in Amazon S3 is ( true ) or is not ( false )
 	// a delete marker.
-	DeleteMarker bool
+	DeleteMarker *bool
 
 	// An opaque identifier assigned by a web server to a specific version of a
 	// resource found at a URL.
@@ -198,7 +198,7 @@ type WriteGetObjectResponseInput struct {
 	// can happen if you create metadata using an API like SOAP that supports more
 	// flexible metadata than the REST API. For example, using SOAP, you can create
 	// metadata whose values are not legal HTTP headers.
-	MissingMeta int32
+	MissingMeta *int32
 
 	// Indicates whether an object stored in Amazon S3 has an active legal hold.
 	ObjectLockLegalHoldStatus types.ObjectLockLegalHoldStatus
@@ -212,7 +212,7 @@ type WriteGetObjectResponseInput struct {
 	ObjectLockRetainUntilDate *time.Time
 
 	// The count of parts this object has.
-	PartsCount int32
+	PartsCount *int32
 
 	// Indicates if request involves bucket that is either a source or destination in
 	// a Replication rule. For more information about S3 Replication, see Replication (https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html)
@@ -262,7 +262,7 @@ type WriteGetObjectResponseInput struct {
 	//   - 416 - Range Not Satisfiable
 	//   - 500 - Internal Server Error
 	//   - 503 - Service Unavailable
-	StatusCode int32
+	StatusCode *int32
 
 	// Provides storage class information of the object. Amazon S3 returns this header
 	// for all objects except for S3 Standard storage class objects. For more
@@ -271,7 +271,7 @@ type WriteGetObjectResponseInput struct {
 	StorageClass types.StorageClass
 
 	// The number of tags, if any, on the object.
-	TagCount int32
+	TagCount *int32
 
 	// An ID used to reference a specific version of the object.
 	VersionId *string

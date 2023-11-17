@@ -127,7 +127,7 @@ type GetObjectAttributesInput struct {
 	ExpectedBucketOwner *string
 
 	// Sets the maximum number of parts to return.
-	MaxParts int32
+	MaxParts *int32
 
 	// Specifies the part after which listing should begin. Only parts with higher
 	// part numbers will be listed.
@@ -175,7 +175,7 @@ type GetObjectAttributesOutput struct {
 
 	// Specifies whether the object retrieved was ( true ) or was not ( false ) a
 	// delete marker. If false , this response header does not appear in the response.
-	DeleteMarker bool
+	DeleteMarker *bool
 
 	// An ETag is an opaque identifier assigned by a web server to a specific version
 	// of a resource found at a URL.
@@ -188,7 +188,7 @@ type GetObjectAttributesOutput struct {
 	ObjectParts *types.GetObjectAttributesParts
 
 	// The size of the object in bytes.
-	ObjectSize int64
+	ObjectSize *int64
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.

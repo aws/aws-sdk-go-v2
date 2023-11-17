@@ -82,7 +82,7 @@ type PutBucketNotificationConfigurationInput struct {
 
 	// Skips validation of Amazon SQS, Amazon SNS, and Lambda destinations. True or
 	// false value.
-	SkipDestinationValidation bool
+	SkipDestinationValidation *bool
 
 	noSmithyDocumentSerde
 }

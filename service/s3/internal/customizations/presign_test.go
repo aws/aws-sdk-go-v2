@@ -130,7 +130,7 @@ func TestPutObject_PresignURL(t *testing.T) {
 			input: s3.PutObjectInput{
 				Bucket:        aws.String("mock-bucket"),
 				Key:           aws.String("mockkey"),
-				ContentLength: 100,
+				ContentLength: aws.Int64(100),
 			},
 			expectPresignedURLHost: "https://mock-bucket.s3.us-west-2.amazonaws.com/mockkey?",
 			expectRequestURIQuery: []string{
@@ -299,7 +299,7 @@ func TestUploadPart_PresignURL(t *testing.T) {
 			input: s3.UploadPartInput{
 				Bucket:     aws.String("mock-bucket"),
 				Key:        aws.String("mockkey"),
-				PartNumber: 1,
+				PartNumber: aws.Int32(1),
 				UploadId:   aws.String("123456"),
 				Body:       strings.NewReader("hello-world"),
 			},
@@ -324,7 +324,7 @@ func TestUploadPart_PresignURL(t *testing.T) {
 			input: s3.UploadPartInput{
 				Bucket:     aws.String("mock-bucket"),
 				Key:        aws.String("mockkey"),
-				PartNumber: 1,
+				PartNumber: aws.Int32(1),
 				UploadId:   aws.String("123456"),
 				Body:       bytes.NewReader([]byte("hello-world")),
 			},
@@ -350,7 +350,7 @@ func TestUploadPart_PresignURL(t *testing.T) {
 			input: s3.UploadPartInput{
 				Bucket:     aws.String("mock-bucket"),
 				Key:        aws.String("mockkey"),
-				PartNumber: 1,
+				PartNumber: aws.Int32(1),
 				UploadId:   aws.String("123456"),
 				Body:       bytes.NewBuffer([]byte(`hello-world`)),
 			},
@@ -375,7 +375,7 @@ func TestUploadPart_PresignURL(t *testing.T) {
 			input: s3.UploadPartInput{
 				Bucket:     aws.String("mock-bucket"),
 				Key:        aws.String("mockkey"),
-				PartNumber: 1,
+				PartNumber: aws.Int32(1),
 				UploadId:   aws.String("123456"),
 				Body:       bytes.NewReader([]byte(``)),
 			},
@@ -398,7 +398,7 @@ func TestUploadPart_PresignURL(t *testing.T) {
 			input: s3.UploadPartInput{
 				Bucket:     aws.String("mock-bucket"),
 				Key:        aws.String("mockkey"),
-				PartNumber: 1,
+				PartNumber: aws.Int32(1),
 				UploadId:   aws.String("123456"),
 			},
 			expectPresignedURLHost: "https://mock-bucket.s3.us-west-2.amazonaws.com/mockkey?",

@@ -5,13 +5,14 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/google/go-cmp/cmp"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/google/go-cmp/cmp"
 )
 
 type readSeeker struct {
@@ -152,7 +153,7 @@ func TestWriteGetObjectResponse(t *testing.T) {
 				RequestRoute:  aws.String("route"),
 				RequestToken:  aws.String("token"),
 				Body:          &readOnlyReader{bytes.NewReader([]byte("test input"))},
-				ContentLength: 10,
+				ContentLength: aws.Int64(10),
 			},
 		},
 		"Content-Length Not Provided": {

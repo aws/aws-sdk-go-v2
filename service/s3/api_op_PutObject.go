@@ -137,7 +137,7 @@ type PutObjectInput struct {
 	// Setting this header to true causes Amazon S3 to use an S3 Bucket Key for object
 	// encryption with SSE-KMS. Specifying this header with a PUT action doesn’t affect
 	// bucket-level settings for S3 Bucket Key.
-	BucketKeyEnabled bool
+	BucketKeyEnabled *bool
 
 	// Can be used to specify caching behavior along the request/reply chain. For more
 	// information, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9 (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)
@@ -201,7 +201,7 @@ type PutObjectInput struct {
 	// cannot be determined automatically. For more information, see
 	// https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length (https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length)
 	// .
-	ContentLength int64
+	ContentLength *int64
 
 	// The base64-encoded 128-bit MD5 digest of the message (without the headers)
 	// according to RFC 1864. This header can be used as a message integrity check to
@@ -343,7 +343,7 @@ type PutObjectOutput struct {
 
 	// Indicates whether the uploaded object uses an S3 Bucket Key for server-side
 	// encryption with Key Management Service (KMS) keys (SSE-KMS).
-	BucketKeyEnabled bool
+	BucketKeyEnabled *bool
 
 	// The base64-encoded, 32-bit CRC32 checksum of the object. This will only be
 	// present if it was uploaded with the object. With multipart uploads, this may not

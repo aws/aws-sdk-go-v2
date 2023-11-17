@@ -207,7 +207,7 @@ type CompleteMultipartUploadOutput struct {
 
 	// Indicates whether the multipart upload uses an S3 Bucket Key for server-side
 	// encryption with Key Management Service (KMS) keys (SSE-KMS).
-	BucketKeyEnabled bool
+	BucketKeyEnabled *bool
 
 	// The base64-encoded, 32-bit CRC32 checksum of the object. This will only be
 	// present if it was uploaded with the object. With multipart uploads, this may not

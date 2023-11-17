@@ -71,7 +71,7 @@ type PutBucketPolicyInput struct {
 
 	// Set this parameter to true to confirm that you want to remove your permissions
 	// to change this bucket policy in the future.
-	ConfirmRemoveSelfBucketAccess bool
+	ConfirmRemoveSelfBucketAccess *bool
 
 	// The MD5 hash of the request body. For requests made using the Amazon Web
 	// Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is

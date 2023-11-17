@@ -143,7 +143,7 @@ type HeadObjectInput struct {
 	// 10,000. Effectively performs a 'ranged' HEAD request for the part specified.
 	// Useful querying about the size of the part and the number of parts in this
 	// object.
-	PartNumber int32
+	PartNumber *int32
 
 	// HeadObject returns only the metadata for an object. If the Range is
 	// satisfiable, only the ContentLength is affected in the response. If the Range
@@ -196,7 +196,7 @@ type HeadObjectOutput struct {
 
 	// Indicates whether the object uses an S3 Bucket Key for server-side encryption
 	// with Key Management Service (KMS) keys (SSE-KMS).
-	BucketKeyEnabled bool
+	BucketKeyEnabled *bool
 
 	// Specifies caching behavior along the request/reply chain.
 	CacheControl *string
@@ -241,14 +241,14 @@ type HeadObjectOutput struct {
 	ContentLanguage *string
 
 	// Size of the body in bytes.
-	ContentLength int64
+	ContentLength *int64
 
 	// A standard MIME type describing the format of the object data.
 	ContentType *string
 
 	// Specifies whether the object retrieved was (true) or was not (false) a Delete
 	// Marker. If false, this response header does not appear in the response.
-	DeleteMarker bool
+	DeleteMarker *bool
 
 	// An entity tag (ETag) is an opaque identifier assigned by a web server to a
 	// specific version of a resource found at a URL.
@@ -275,7 +275,7 @@ type HeadObjectOutput struct {
 	// headers. This can happen if you create metadata using an API like SOAP that
 	// supports more flexible metadata than the REST API. For example, using SOAP, you
 	// can create metadata whose values are not legal HTTP headers.
-	MissingMeta int32
+	MissingMeta *int32
 
 	// Specifies whether a legal hold is in effect for this object. This header is
 	// only returned if the requester has the s3:GetObjectLegalHold permission. This
@@ -296,7 +296,7 @@ type HeadObjectOutput struct {
 
 	// The count of parts this object has. This value is only returned if you specify
 	// partNumber in your request and the object was uploaded as a multipart upload.
-	PartsCount int32
+	PartsCount *int32
 
 	// Amazon S3 can return this header if your request involves a bucket that is
 	// either a source or a destination in a replication rule. In replication, you have

@@ -85,7 +85,7 @@ type ListObjectsInput struct {
 	// Sets the maximum number of keys returned in the response. By default, the
 	// action returns up to 1,000 key names. The response might contain fewer keys but
 	// will never contain more.
-	MaxKeys int32
+	MaxKeys *int32
 
 	// Specifies the optional fields that you want returned in the response. Fields
 	// that you do not specify are not returned.
@@ -135,14 +135,14 @@ type ListObjectsOutput struct {
 
 	// A flag that indicates whether Amazon S3 returned all of the results that
 	// satisfied the search criteria.
-	IsTruncated bool
+	IsTruncated *bool
 
 	// Indicates where in the bucket listing begins. Marker is included in the
 	// response if it was sent with the request.
 	Marker *string
 
 	// The maximum number of keys returned in the response body.
-	MaxKeys int32
+	MaxKeys *int32
 
 	// The bucket name.
 	Name *string

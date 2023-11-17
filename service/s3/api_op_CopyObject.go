@@ -234,7 +234,7 @@ type CopyObjectInput struct {
 	// Setting this header to true causes Amazon S3 to use an S3 Bucket Key for object
 	// encryption with SSE-KMS. Specifying this header with a COPY action doesn’t
 	// affect bucket-level settings for S3 Bucket Key.
-	BucketKeyEnabled bool
+	BucketKeyEnabled *bool
 
 	// Specifies caching behavior along the request/reply chain.
 	CacheControl *string
@@ -407,7 +407,7 @@ type CopyObjectOutput struct {
 
 	// Indicates whether the copied object uses an S3 Bucket Key for server-side
 	// encryption with Key Management Service (KMS) keys (SSE-KMS).
-	BucketKeyEnabled bool
+	BucketKeyEnabled *bool
 
 	// Container for all response elements.
 	CopyObjectResult *types.CopyObjectResult

@@ -224,7 +224,7 @@ type CreateMultipartUploadInput struct {
 	// Setting this header to true causes Amazon S3 to use an S3 Bucket Key for object
 	// encryption with SSE-KMS. Specifying this header with an object action doesn’t
 	// affect bucket-level settings for S3 Bucket Key.
-	BucketKeyEnabled bool
+	BucketKeyEnabled *bool
 
 	// Specifies caching behavior along the request/reply chain.
 	CacheControl *string
@@ -388,7 +388,7 @@ type CreateMultipartUploadOutput struct {
 
 	// Indicates whether the multipart upload uses an S3 Bucket Key for server-side
 	// encryption with Key Management Service (KMS) keys (SSE-KMS).
-	BucketKeyEnabled bool
+	BucketKeyEnabled *bool
 
 	// The algorithm that was used to create a checksum of the object.
 	ChecksumAlgorithm types.ChecksumAlgorithm

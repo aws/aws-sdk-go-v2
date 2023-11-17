@@ -70,7 +70,7 @@ func newDownloadRangeClient(data []byte) (*downloadCaptureClient, *int, *[]strin
 		return &s3.GetObjectOutput{
 			Body:          ioutil.NopCloser(bytes.NewReader(bodyBytes)),
 			ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, fin-1, len(data))),
-			ContentLength: int64(len(bodyBytes)),
+			ContentLength: aws.Int64(int64(len(bodyBytes))),
 		}, nil
 	}
 
@@ -83,7 +83,7 @@ func newDownloadNonRangeClient(data []byte) (*downloadCaptureClient, *int) {
 	capture.GetObjectFn = func(_ context.Context, params *s3.GetObjectInput, _ ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
 		return &s3.GetObjectOutput{
 			Body:          ioutil.NopCloser(bytes.NewReader(data[:])),
-			ContentLength: int64(len(data)),
+			ContentLength: aws.Int64(int64(len(data))),
 		}, nil
 	}
 
@@ -139,7 +139,7 @@ func newDownloadWithErrReaderClient(cases []testErrReader) (*downloadCaptureClie
 		out := &s3.GetObjectOutput{
 			Body:          ioutil.NopCloser(&c),
 			ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", 0, c.Len-1, c.Len)),
-			ContentLength: c.Len,
+			ContentLength: aws.Int64(c.Len),
 		}
 		index++
 		return out, nil
@@ -542,7 +542,7 @@ func TestDownload_WithFailure(t *testing.T) {
 			body := bytes.NewReader(make([]byte, manager.DefaultDownloadPartSize))
 			out = &s3.GetObjectOutput{
 				Body:          ioutil.NopCloser(body),
-				ContentLength: int64(body.Len()),
+				ContentLength: aws.Int64(int64(body.Len())),
 				ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", startingByte, body.Len()-1, body.Len()*10)),
 			}
 

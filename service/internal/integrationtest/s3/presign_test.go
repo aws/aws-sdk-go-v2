@@ -192,7 +192,7 @@ func TestInteg_MultipartPresignURL(t *testing.T) {
 			uploadPartInput := &s3.UploadPartInput{
 				Bucket:     &setupMetadata.Buckets.Source.Name,
 				Key:        &key,
-				PartNumber: 1,
+				PartNumber: aws.Int32(1),
 				UploadId:   multipartUpload.UploadId,
 				Body:       c.body,
 			}

@@ -177,7 +177,7 @@ type GetObjectInput struct {
 	// Part number of the object being read. This is a positive integer between 1 and
 	// 10,000. Effectively performs a 'ranged' GET request for the part specified.
 	// Useful for downloading just a part of an object.
-	PartNumber int32
+	PartNumber *int32
 
 	// Downloads the specified range bytes of an object. For more information about
 	// the HTTP Range header, see
@@ -249,7 +249,7 @@ type GetObjectOutput struct {
 
 	// Indicates whether the object uses an S3 Bucket Key for server-side encryption
 	// with Key Management Service (KMS) keys (SSE-KMS).
-	BucketKeyEnabled bool
+	BucketKeyEnabled *bool
 
 	// Specifies caching behavior along the request/reply chain.
 	CacheControl *string
@@ -294,7 +294,7 @@ type GetObjectOutput struct {
 	ContentLanguage *string
 
 	// Size of the body in bytes.
-	ContentLength int64
+	ContentLength *int64
 
 	// The portion of the object returned in the response.
 	ContentRange *string
@@ -304,7 +304,7 @@ type GetObjectOutput struct {
 
 	// Specifies whether the object retrieved was (true) or was not (false) a Delete
 	// Marker. If false, this response header does not appear in the response.
-	DeleteMarker bool
+	DeleteMarker *bool
 
 	// An entity tag (ETag) is an opaque identifier assigned by a web server to a
 	// specific version of a resource found at a URL.
@@ -331,7 +331,7 @@ type GetObjectOutput struct {
 	// headers. This can happen if you create metadata using an API like SOAP that
 	// supports more flexible metadata than the REST API. For example, using SOAP, you
 	// can create metadata whose values are not legal HTTP headers.
-	MissingMeta int32
+	MissingMeta *int32
 
 	// Indicates whether this object has an active legal hold. This field is only
 	// returned if you have permission to view an object's legal hold status.
@@ -345,7 +345,7 @@ type GetObjectOutput struct {
 
 	// The count of parts this object has. This value is only returned if you specify
 	// partNumber in your request and the object was uploaded as a multipart upload.
-	PartsCount int32
+	PartsCount *int32
 
 	// Amazon S3 can return this if your request involves a bucket that is either a
 	// source or destination in a replication rule.
@@ -382,7 +382,7 @@ type GetObjectOutput struct {
 	StorageClass types.StorageClass
 
 	// The number of tags, if any, on the object.
-	TagCount int32
+	TagCount *int32
 
 	// Version of the object.
 	VersionId *string

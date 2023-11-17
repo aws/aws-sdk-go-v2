@@ -88,7 +88,7 @@ type DeleteObjectsInput struct {
 	// Specifies whether you want to delete this object even if it has a
 	// Governance-type Object Lock in place. To use this header, you must have the
 	// s3:BypassGovernanceRetention permission.
-	BypassGovernanceRetention bool
+	BypassGovernanceRetention *bool
 
 	// Indicates the algorithm used to create the checksum for the object when using
 	// the SDK. This header will not provide any additional functionality if not using

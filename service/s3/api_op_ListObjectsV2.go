@@ -89,12 +89,12 @@ type ListObjectsV2Input struct {
 	// The owner field is not present in ListObjectsV2 by default. If you want to
 	// return the owner field with each key in the result, then set the FetchOwner
 	// field to true .
-	FetchOwner bool
+	FetchOwner *bool
 
 	// Sets the maximum number of keys returned in the response. By default, the
 	// action returns up to 1,000 key names. The response might contain fewer keys but
 	// will never contain more.
-	MaxKeys int32
+	MaxKeys *int32
 
 	// Specifies the optional fields that you want returned in the response. Fields
 	// that you do not specify are not returned.
@@ -155,17 +155,17 @@ type ListObjectsV2Output struct {
 	// Set to false if all of the results were returned. Set to true if more keys are
 	// available to return. If the number of results exceeds that specified by MaxKeys
 	// , all of the results might not be returned.
-	IsTruncated bool
+	IsTruncated *bool
 
 	// KeyCount is the number of keys returned with this request. KeyCount will always
 	// be less than or equal to the MaxKeys field. For example, if you ask for 50
 	// keys, your result will include 50 keys or fewer.
-	KeyCount int32
+	KeyCount *int32
 
 	// Sets the maximum number of keys returned in the response. By default, the
 	// action returns up to 1,000 key names. The response might contain fewer keys but
 	// will never contain more.
-	MaxKeys int32
+	MaxKeys *int32
 
 	// The bucket name. When using this action with an access point, you must direct
 	// requests to the access point hostname. The access point hostname takes the form
@@ -338,8 +338,8 @@ func NewListObjectsV2Paginator(client ListObjectsV2APIClient, params *ListObject
 	}
 
 	options := ListObjectsV2PaginatorOptions{}
-	if params.MaxKeys != 0 {
-		options.Limit = params.MaxKeys
+	if params.MaxKeys != nil {
+		options.Limit = *params.MaxKeys
 	}
 
 	for _, fn := range optFns {
@@ -369,7 +369,11 @@ func (p *ListObjectsV2Paginator) NextPage(ctx context.Context, optFns ...func(*O
 	params := *p.params
 	params.ContinuationToken = p.nextToken
 
-	params.MaxKeys = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxKeys = limit
 
 	result, err := p.client.ListObjectsV2(ctx, &params, optFns...)
 	if err != nil {
@@ -379,7 +383,7 @@ func (p *ListObjectsV2Paginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	prevToken := p.nextToken
 	p.nextToken = nil
-	if result.IsTruncated {
+	if result.IsTruncated != nil && *result.IsTruncated {
 		p.nextToken = result.NextContinuationToken
 	}
 

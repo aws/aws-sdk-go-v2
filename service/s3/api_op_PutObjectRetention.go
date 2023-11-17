@@ -56,7 +56,7 @@ type PutObjectRetentionInput struct {
 	Key *string
 
 	// Indicates whether this action should bypass Governance-mode restrictions.
-	BypassGovernanceRetention bool
+	BypassGovernanceRetention *bool
 
 	// Indicates the algorithm used to create the checksum for the object when using
 	// the SDK. This header will not provide any additional functionality if not using

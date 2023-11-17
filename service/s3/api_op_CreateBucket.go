@@ -122,7 +122,7 @@ type CreateBucketInput struct {
 	GrantWriteACP *string
 
 	// Specifies whether you want S3 Object Lock to be enabled for the new bucket.
-	ObjectLockEnabledForBucket bool
+	ObjectLockEnabledForBucket *bool
 
 	// The container element for object ownership for a bucket's ownership controls.
 	// BucketOwnerPreferred - Objects uploaded to the bucket change ownership to the

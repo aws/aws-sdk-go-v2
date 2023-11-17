@@ -84,7 +84,7 @@ type ListBucketMetricsConfigurationsOutput struct {
 	// Indicates whether the returned list of metrics configurations is complete. A
 	// value of true indicates that the list is not complete and the
 	// NextContinuationToken will be provided for a subsequent request.
-	IsTruncated bool
+	IsTruncated *bool
 
 	// The list of metrics configurations for a bucket.
 	MetricsConfigurationList []types.MetricsConfiguration

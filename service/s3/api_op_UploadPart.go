@@ -132,7 +132,7 @@ type UploadPartInput struct {
 	// 10,000.
 	//
 	// This member is required.
-	PartNumber int32
+	PartNumber *int32
 
 	// Upload ID identifying the multipart upload whose part is being uploaded.
 	//
@@ -184,7 +184,7 @@ type UploadPartInput struct {
 
 	// Size of the body in bytes. This parameter is useful when the size of the body
 	// cannot be determined automatically.
-	ContentLength int64
+	ContentLength *int64
 
 	// The base64-encoded 128-bit MD5 digest of the part data. This parameter is
 	// auto-populated when using the command from the CLI. This parameter is required
@@ -234,7 +234,7 @@ type UploadPartOutput struct {
 
 	// Indicates whether the multipart upload uses an S3 Bucket Key for server-side
 	// encryption with Key Management Service (KMS) keys (SSE-KMS).
-	BucketKeyEnabled bool
+	BucketKeyEnabled *bool
 
 	// The base64-encoded, 32-bit CRC32 checksum of the object. This will only be
 	// present if it was uploaded with the object. With multipart uploads, this may not

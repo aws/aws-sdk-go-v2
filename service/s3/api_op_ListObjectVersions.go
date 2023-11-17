@@ -76,7 +76,7 @@ type ListObjectVersionsInput struct {
 	// will never contain more. If additional keys satisfy the search criteria, but
 	// were not returned because max-keys was exceeded, the response contains true . To
 	// return the additional keys, see key-marker and version-id-marker .
-	MaxKeys int32
+	MaxKeys *int32
 
 	// Specifies the optional fields that you want returned in the response. Fields
 	// that you do not specify are not returned.
@@ -136,13 +136,13 @@ type ListObjectVersionsOutput struct {
 	// follow-up paginated request by using the NextKeyMarker and NextVersionIdMarker
 	// response parameters as a starting place in another request to return the rest of
 	// the results.
-	IsTruncated bool
+	IsTruncated *bool
 
 	// Marks the last key returned in a truncated response.
 	KeyMarker *string
 
 	// Specifies the maximum number of objects to return.
-	MaxKeys int32
+	MaxKeys *int32
 
 	// The bucket name.
 	Name *string
