@@ -1,0 +1,9 @@
+{
+    "id": "637d44ac-7383-4b40-9351-f2497d3eca97",
+    "type": "feature",
+    "collapse": true,
+    "description": "Remove macie service",
+    "modules": [
+        "."
+    ]
+}
