@@ -1,8 +1,0 @@
-{
-    "id": "613883c6-87bc-4a01-bab9-4743db388839",
-    "type": "feature",
-    "description": "This release adds new features for Amazon VPC IP Address Manager (IPAM) Allowing a choice between Free and Advanced Tiers, viewing public IP address insights across regions and in Amazon Cloudwatch, use IPAM to plan your subnet IPs within a VPC and bring your own autonomous system number to IPAM.",
-    "modules": [
-        "service/ec2"
-    ]
-}

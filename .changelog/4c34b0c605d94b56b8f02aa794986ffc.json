@@ -1,8 +1,0 @@
-{
-    "id": "4c34b0c6-05d9-4b56-b8f0-2aa794986ffc",
-    "type": "feature",
-    "description": "Removes all default 0 values for numbers and false values for booleans",
-    "modules": [
-        "service/s3"
-    ]
-}

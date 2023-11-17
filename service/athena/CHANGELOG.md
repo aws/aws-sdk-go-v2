@@ -1,3 +1,7 @@
+# v1.35.0 (2023-11-17)
+
+* **Feature**: Adding SerivicePreProcessing time metric
+
 # v1.34.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.63.0 (2023-11-17)
+
+* **Feature**: This release adds support for option groups and replica enhancements to Amazon RDS Custom.
+
 # v1.62.4 (2023-11-15)
 
 * **Documentation**: Updates Amazon RDS documentation for support for upgrading RDS for MySQL snapshots from version 5.7 to version 8.0.

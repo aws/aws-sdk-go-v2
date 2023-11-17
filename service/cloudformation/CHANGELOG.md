@@ -1,3 +1,7 @@
+# v1.40.0 (2023-11-17)
+
+* **Feature**: This release adds a new flag ImportExistingResources to CreateChangeSet. Specify this parameter on a CREATE- or UPDATE-type change set to import existing resources with custom names instead of recreating them.
+
 # v1.39.1 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

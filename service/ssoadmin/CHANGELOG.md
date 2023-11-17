@@ -1,3 +1,7 @@
+# v1.22.0 (2023-11-17)
+
+* **Feature**: Improves support for configuring RefreshToken and TokenExchange grants on applications.
+
 # v1.21.0 (2023-11-16)
 
 * **Feature**: Instances bound to a single AWS account, API operations for managing instances and applications, and assignments to applications are now supported. Trusted identity propagation is also supported, with new API operations for managing trusted token issuers and application grants and scopes.

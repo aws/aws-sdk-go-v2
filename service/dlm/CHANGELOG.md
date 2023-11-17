@@ -1,3 +1,7 @@
+# v1.21.1 (2023-11-17)
+
+* **Documentation**: Added support for SAP HANA in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies with pre and post scripts.
+
 # v1.21.0 (2023-11-16)
 
 * **Feature**: This release adds support for Amazon Data Lifecycle Manager default policies for EBS snapshots and EBS-backed AMIs.

@@ -1,8 +1,0 @@
-{
-    "id": "9b35722f-0b39-4296-bf5a-e86bb534c833",
-    "type": "feature",
-    "description": "Change the default value of these fields from 0 to null: MaxConnections, MaxPendingRequests, MaxRequests, HealthCheckThreshold, PortNumber, and HealthCheckPolicy -\u003e port. Users are not expected to perceive the change, except that badRequestException is thrown when required fields missing configured.",
-    "modules": [
-        "service/appmesh"
-    ]
-}

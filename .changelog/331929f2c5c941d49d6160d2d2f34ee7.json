@@ -1,9 +1,0 @@
-{
-    "id": "331929f2-c5c9-41d4-9d61-60d2d2f34ee7",
-    "type": "feature",
-    "description": "**BREAKING CHANGE** Correct nullability of a large number of S3 structure fields. See https://github.com/aws/aws-sdk-go-v2/issues/2162.",
-    "modules": [
-        "feature/s3/manager",
-        "service/s3"
-    ]
-}

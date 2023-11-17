@@ -1,3 +1,7 @@
+# v1.31.0 (2023-11-17)
+
+* **Feature**: Remove default value and allow nullable for request parameters having minimum value larger than zero.
+
 # v1.30.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

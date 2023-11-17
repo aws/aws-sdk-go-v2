@@ -1,3 +1,76 @@
+# Release (2023-11-17)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.14.0](feature/s3/manager/CHANGELOG.md#v1140-2023-11-17)
+  * **Feature**: **BREAKING CHANGE** Correct nullability of a large number of S3 structure fields. See https://github.com/aws/aws-sdk-go-v2/issues/2162.
+* `github.com/aws/aws-sdk-go-v2/service/appmesh`: [v1.22.0](service/appmesh/CHANGELOG.md#v1220-2023-11-17)
+  * **Feature**: Change the default value of these fields from 0 to null: MaxConnections, MaxPendingRequests, MaxRequests, HealthCheckThreshold, PortNumber, and HealthCheckPolicy -> port. Users are not expected to perceive the change, except that badRequestException is thrown when required fields missing configured.
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.35.0](service/athena/CHANGELOG.md#v1350-2023-11-17)
+  * **Feature**: Adding SerivicePreProcessing time metric
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.20.3](service/cloud9/CHANGELOG.md#v1203-2023-11-17)
+  * **Documentation**: A minor doc only update related to changing the date of an API change.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.40.0](service/cloudformation/CHANGELOG.md#v1400-2023-11-17)
+  * **Feature**: This release adds a new flag ImportExistingResources to CreateChangeSet. Specify this parameter on a CREATE- or UPDATE-type change set to import existing resources with custom names instead of recreating them.
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.21.0](service/codepipeline/CHANGELOG.md#v1210-2023-11-17)
+  * **Feature**: CodePipeline now supports overriding source revisions to achieve manual re-deploy of a past revision
+* `github.com/aws/aws-sdk-go-v2/service/codestarconnections`: [v1.18.0](service/codestarconnections/CHANGELOG.md#v1180-2023-11-17)
+  * **Feature**: This release adds support for the CloudFormation Git sync feature. Git sync enables updating a CloudFormation stack from a template stored in a Git repository.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.81.0](service/connect/CHANGELOG.md#v1810-2023-11-17)
+  * **Feature**: This release adds WISDOM_QUICK_RESPONSES as new IntegrationType of Connect IntegrationAssociation resource and bug fixes.
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.21.1](service/dlm/CHANGELOG.md#v1211-2023-11-17)
+  * **Documentation**: Added support for SAP HANA in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies with pre and post scripts.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.136.0](service/ec2/CHANGELOG.md#v11360-2023-11-17)
+  * **Feature**: This release adds new features for Amazon VPC IP Address Manager (IPAM) Allowing a choice between Free and Advanced Tiers, viewing public IP address insights across regions and in Amazon Cloudwatch, use IPAM to plan your subnet IPs within a VPC and bring your own autonomous system number to IPAM.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.23.0](service/ecr/CHANGELOG.md#v1230-2023-11-17)
+  * **Feature**: Documentation and operational updates for Amazon ECR, adding support for pull through cache rules for upstream registries that require authentication.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.34.0](service/emr/CHANGELOG.md#v1340-2023-11-17)
+  * **Feature**: Launch support for IAM Identity Center Trusted Identity Propagation and workspace storage encryption using AWS KMS in EMR Studio
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.25.0](service/eventbridge/CHANGELOG.md#v1250-2023-11-17)
+  * **Feature**: Introduces a new rule state ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS for matching with Get, List and Describe AWS API call events from CloudTrail.
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.9.0](service/internetmonitor/CHANGELOG.md#v190-2023-11-17)
+  * **Feature**: Adds new querying capabilities for running data queries on a monitor
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.29.0](service/ivs/CHANGELOG.md#v1290-2023-11-17)
+  * **Feature**: type & defaulting refinement to various range properties
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.9.0](service/ivschat/CHANGELOG.md#v190-2023-11-17)
+  * **Feature**: type & defaulting refinement to various range properties
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.20.3](service/kinesisvideo/CHANGELOG.md#v1203-2023-11-17)
+  * **Documentation**: Docs only build to bring up-to-date with public docs.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.31.0](service/location/CHANGELOG.md#v1310-2023-11-17)
+  * **Feature**: Remove default value and allow nullable for request parameters having minimum value larger than zero.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.41.0](service/medialive/CHANGELOG.md#v1410-2023-11-17)
+  * **Feature**: MediaLive has now added support for per-output static image overlay.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.24.0](service/mgn/CHANGELOG.md#v1240-2023-11-17)
+  * **Feature**: Removed invalid and unnecessary default values.
+* `github.com/aws/aws-sdk-go-v2/service/osis`: [v1.5.0](service/osis/CHANGELOG.md#v150-2023-11-17)
+  * **Feature**: Add support for enabling a persistent buffer when creating or updating an OpenSearch Ingestion pipeline. Add tags to Pipeline and PipelineSummary response models.
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.8.0](service/pipes/CHANGELOG.md#v180-2023-11-17)
+  * **Feature**: TargetParameters now properly supports BatchJobParameters.ArrayProperties.Size and BatchJobParameters.RetryStrategy.Attempts being optional, and EcsTaskParameters.Overrides.EphemeralStorage.SizeInGiB now properly required when setting EphemeralStorage
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.63.0](service/rds/CHANGELOG.md#v1630-2023-11-17)
+  * **Feature**: This release adds support for option groups and replica enhancements to Amazon RDS Custom.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.37.0](service/redshift/CHANGELOG.md#v1370-2023-11-17)
+  * **Feature**: Updated SDK for Amazon Redshift, which you can use to configure a connection with IAM Identity Center to manage access to databases. With these, you can create a connection through a managed application. You can also change a managed application, delete it, or get information about an existing one.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.13.0](service/redshiftserverless/CHANGELOG.md#v1130-2023-11-17)
+  * **Feature**: Updated SDK for Amazon Redshift Serverless, which provides the ability to configure a connection with IAM Identity Center to manage user and group access to databases.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.43.0](service/s3/CHANGELOG.md#v1430-2023-11-17)
+  * **Feature**: **BREAKING CHANGE** Correct nullability of a large number of S3 structure fields. See https://github.com/aws/aws-sdk-go-v2/issues/2162.
+  * **Feature**: Removes all default 0 values for numbers and false values for booleans
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.22.0](service/ssoadmin/CHANGELOG.md#v1220-2023-11-17)
+  * **Feature**: Improves support for configuring RefreshToken and TokenExchange grants on applications.
+* `github.com/aws/aws-sdk-go-v2/service/ssooidc`: [v1.20.0](service/ssooidc/CHANGELOG.md#v1200-2023-11-17)
+  * **Feature**: Adding support for `sso-oauth:CreateTokenWithIAM`.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.25.3](service/sts/CHANGELOG.md#v1253-2023-11-17)
+  * **Documentation**: API updates for the AWS Security Token Service
+* `github.com/aws/aws-sdk-go-v2/service/trustedadvisor`: [v1.0.0](service/trustedadvisor/CHANGELOG.md#v100-2023-11-17)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Trusted Advisor introduces new APIs to enable you to programmatically access Trusted Advisor best practice checks, recommendations, and prioritized recommendations. Trusted Advisor APIs enable you to integrate Trusted Advisor with your operational tools to automate your workloads.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.6.0](service/verifiedpermissions/CHANGELOG.md#v160-2023-11-17)
+  * **Feature**: Adding BatchIsAuthorized API which supports multiple authorization requests against a PolicyStore
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.19.0](service/wisdom/CHANGELOG.md#v1190-2023-11-17)
+  * **Feature**: This release adds QuickResponse as a new Wisdom resource and Wisdom APIs for import, create, read, search, update and delete QuickResponse resources.
+
 # Release (2023-11-16)
 
 ## General Highlights

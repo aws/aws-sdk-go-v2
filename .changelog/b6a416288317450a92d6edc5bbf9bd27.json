@@ -1,8 +1,0 @@
-{
-    "id": "b6a41628-8317-450a-92d6-edc5bbf9bd27",
-    "type": "feature",
-    "description": "Adding BatchIsAuthorized API which supports multiple authorization requests against a PolicyStore",
-    "modules": [
-        "service/verifiedpermissions"
-    ]
-}

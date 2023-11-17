@@ -1,8 +1,0 @@
-{
-    "id": "ef758d19-2276-4ee1-ad30-13fd04a72d6f",
-    "type": "documentation",
-    "description": "Added support for SAP HANA in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies with pre and post scripts.",
-    "modules": [
-        "service/dlm"
-    ]
-}

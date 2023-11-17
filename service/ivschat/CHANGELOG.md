@@ -1,3 +1,7 @@
+# v1.9.0 (2023-11-17)
+
+* **Feature**: type & defaulting refinement to various range properties
+
 # v1.8.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "5812092b-9e68-4c59-8ce9-510281ab2473",
-    "type": "feature",
-    "description": "Improves support for configuring RefreshToken and TokenExchange grants on applications.",
-    "modules": [
-        "service/ssoadmin"
-    ]
-}

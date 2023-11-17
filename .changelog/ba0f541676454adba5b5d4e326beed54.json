@@ -1,8 +1,0 @@
-{
-    "id": "ba0f5416-7645-4adb-a5b5-d4e326beed54",
-    "type": "feature",
-    "description": "Removed invalid and unnecessary default values.",
-    "modules": [
-        "service/mgn"
-    ]
-}

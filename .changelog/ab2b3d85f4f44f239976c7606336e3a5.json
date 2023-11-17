@@ -1,8 +1,0 @@
-{
-    "id": "ab2b3d85-f4f4-4f23-9976-c7606336e3a5",
-    "type": "feature",
-    "description": "Remove default value and allow nullable for request parameters having minimum value larger than zero.",
-    "modules": [
-        "service/location"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "b0bd8549-19fe-4036-8f55-18f7ee549482",
-    "type": "feature",
-    "description": "type \u0026 defaulting refinement to various range properties",
-    "modules": [
-        "service/ivs"
-    ]
-}

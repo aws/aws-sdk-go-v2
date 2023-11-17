@@ -1,8 +1,0 @@
-{
-    "id": "21845a26-2847-4bd1-aed7-34d74cecbf07",
-    "type": "feature",
-    "description": "Adding support for `sso-oauth:CreateTokenWithIAM`.",
-    "modules": [
-        "service/ssooidc"
-    ]
-}

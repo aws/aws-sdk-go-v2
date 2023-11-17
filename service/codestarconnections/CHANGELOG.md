@@ -1,3 +1,7 @@
+# v1.18.0 (2023-11-17)
+
+* **Feature**: This release adds support for the CloudFormation Git sync feature. Git sync enables updating a CloudFormation stack from a template stored in a Git repository.
+
 # v1.17.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

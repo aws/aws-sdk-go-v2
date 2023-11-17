@@ -1,3 +1,7 @@
+# v1.41.0 (2023-11-17)
+
+* **Feature**: MediaLive has now added support for per-output static image overlay.
+
 # v1.40.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.5.0 (2023-11-17)
+
+* **Feature**: Add support for enabling a persistent buffer when creating or updating an OpenSearch Ingestion pipeline. Add tags to Pipeline and PipelineSummary response models.
+
 # v1.4.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

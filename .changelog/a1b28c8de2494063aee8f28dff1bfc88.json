@@ -1,8 +1,0 @@
-{
-    "id": "a1b28c8d-e249-4063-aee8-f28dff1bfc88",
-    "type": "feature",
-    "description": "CodePipeline now supports overriding source revisions to achieve manual re-deploy of a past revision",
-    "modules": [
-        "service/codepipeline"
-    ]
-}

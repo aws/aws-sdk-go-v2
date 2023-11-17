@@ -1,3 +1,8 @@
+# v1.14.0 (2023-11-17)
+
+* **Feature**: **BREAKING CHANGE** Correct nullability of a large number of S3 structure fields. See https://github.com/aws/aws-sdk-go-v2/issues/2162.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.9 (2023-11-16)
 
 * **Dependency Update**: Updated to the latest SDK module versions

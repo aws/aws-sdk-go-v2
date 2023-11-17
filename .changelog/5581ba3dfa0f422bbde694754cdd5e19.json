@@ -1,8 +1,0 @@
-{
-    "id": "5581ba3d-fa0f-422b-bde6-94754cdd5e19",
-    "type": "feature",
-    "description": "Adding SerivicePreProcessing time metric",
-    "modules": [
-        "service/athena"
-    ]
-}
