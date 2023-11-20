@@ -1,0 +1,8 @@
+{
+    "id": "4c5565e3-3b37-4494-8844-29e00bc1dc6b",
+    "type": "bugfix",
+    "description": "Mark v4.SignHTTPRequestMiddleware as deprecated, this middleware is no longer used by the SDK.",
+    "modules": [
+        "."
+    ]
+}
