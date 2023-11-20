@@ -111,6 +111,9 @@ func (c *Client) addOperationResetJobBookmarkMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpResetJobBookmarkValidationMiddleware(stack); err != nil {
 		return err
 	}

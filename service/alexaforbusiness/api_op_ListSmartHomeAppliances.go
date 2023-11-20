@@ -115,6 +115,9 @@ func (c *Client) addOperationListSmartHomeAppliancesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSmartHomeAppliancesValidationMiddleware(stack); err != nil {
 		return err
 	}

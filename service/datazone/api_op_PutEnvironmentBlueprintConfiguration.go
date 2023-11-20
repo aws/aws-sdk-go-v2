@@ -149,6 +149,9 @@ func (c *Client) addOperationPutEnvironmentBlueprintConfigurationMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutEnvironmentBlueprintConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

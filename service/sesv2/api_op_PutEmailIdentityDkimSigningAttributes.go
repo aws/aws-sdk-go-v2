@@ -160,6 +160,9 @@ func (c *Client) addOperationPutEmailIdentityDkimSigningAttributesMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutEmailIdentityDkimSigningAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -115,6 +115,9 @@ func (c *Client) addOperationEnableStageTransitionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpEnableStageTransitionValidationMiddleware(stack); err != nil {
 		return err
 	}

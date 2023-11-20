@@ -107,6 +107,9 @@ func (c *Client) addOperationDisassociateWebsiteCertificateAuthorityMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateWebsiteCertificateAuthorityValidationMiddleware(stack); err != nil {
 		return err
 	}

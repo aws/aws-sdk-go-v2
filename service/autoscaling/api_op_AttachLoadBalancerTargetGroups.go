@@ -127,6 +127,9 @@ func (c *Client) addOperationAttachLoadBalancerTargetGroupsMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAttachLoadBalancerTargetGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}

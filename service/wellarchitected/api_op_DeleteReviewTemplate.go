@@ -114,6 +114,9 @@ func (c *Client) addOperationDeleteReviewTemplateMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteReviewTemplateMiddleware(stack, options); err != nil {
 		return err
 	}

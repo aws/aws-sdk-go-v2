@@ -121,6 +121,9 @@ func (c *Client) addOperationTerminateWorkspacesMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpTerminateWorkspacesValidationMiddleware(stack); err != nil {
 		return err
 	}

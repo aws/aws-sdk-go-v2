@@ -118,6 +118,9 @@ func (c *Client) addOperationGetLFTagMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetLFTagValidationMiddleware(stack); err != nil {
 		return err
 	}

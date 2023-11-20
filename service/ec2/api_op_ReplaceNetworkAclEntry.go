@@ -151,6 +151,9 @@ func (c *Client) addOperationReplaceNetworkAclEntryMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpReplaceNetworkAclEntryValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -99,6 +99,9 @@ func (c *Client) addOperationDeleteMetricAttributionMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteMetricAttributionValidationMiddleware(stack); err != nil {
 		return err
 	}

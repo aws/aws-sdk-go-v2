@@ -137,6 +137,9 @@ func (c *Client) addOperationMergeDeveloperIdentitiesMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpMergeDeveloperIdentitiesValidationMiddleware(stack); err != nil {
 		return err
 	}

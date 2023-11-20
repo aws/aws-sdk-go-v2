@@ -106,6 +106,9 @@ func (c *Client) addOperationGetImagePolicyMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetImagePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

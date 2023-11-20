@@ -128,6 +128,9 @@ func (c *Client) addOperationBatchPutAssetPropertyValueMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opBatchPutAssetPropertyValueMiddleware(stack); err != nil {
 		return err
 	}

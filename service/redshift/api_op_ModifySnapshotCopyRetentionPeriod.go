@@ -134,6 +134,9 @@ func (c *Client) addOperationModifySnapshotCopyRetentionPeriodMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpModifySnapshotCopyRetentionPeriodValidationMiddleware(stack); err != nil {
 		return err
 	}

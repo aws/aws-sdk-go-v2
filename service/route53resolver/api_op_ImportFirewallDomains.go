@@ -134,6 +134,9 @@ func (c *Client) addOperationImportFirewallDomainsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpImportFirewallDomainsValidationMiddleware(stack); err != nil {
 		return err
 	}

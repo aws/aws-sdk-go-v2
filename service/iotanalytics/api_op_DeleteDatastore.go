@@ -99,6 +99,9 @@ func (c *Client) addOperationDeleteDatastoreMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteDatastoreValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeInstanceAccessControlAttributeConfiguration
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeInstanceAccessControlAttributeConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

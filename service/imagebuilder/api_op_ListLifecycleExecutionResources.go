@@ -132,6 +132,9 @@ func (c *Client) addOperationListLifecycleExecutionResourcesMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLifecycleExecutionResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}

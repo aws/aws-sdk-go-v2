@@ -120,6 +120,9 @@ func (c *Client) addOperationListDecoderManifestSignalsMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDecoderManifestSignalsValidationMiddleware(stack); err != nil {
 		return err
 	}

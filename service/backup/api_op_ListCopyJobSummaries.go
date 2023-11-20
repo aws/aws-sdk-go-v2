@@ -162,6 +162,9 @@ func (c *Client) addOperationListCopyJobSummariesMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCopyJobSummaries(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -118,6 +118,9 @@ func (c *Client) addOperationDescribeContinuousBackupsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeContinuousBackupsValidationMiddleware(stack); err != nil {
 		return err
 	}

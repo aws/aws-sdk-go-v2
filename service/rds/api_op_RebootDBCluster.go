@@ -127,6 +127,9 @@ func (c *Client) addOperationRebootDBClusterMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRebootDBClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

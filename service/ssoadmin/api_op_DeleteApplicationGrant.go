@@ -105,6 +105,9 @@ func (c *Client) addOperationDeleteApplicationGrantMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteApplicationGrantValidationMiddleware(stack); err != nil {
 		return err
 	}

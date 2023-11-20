@@ -102,6 +102,9 @@ func (c *Client) addOperationRegisterDataLakeDelegatedAdministratorMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRegisterDataLakeDelegatedAdministratorValidationMiddleware(stack); err != nil {
 		return err
 	}

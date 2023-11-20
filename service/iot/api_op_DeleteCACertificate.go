@@ -104,6 +104,9 @@ func (c *Client) addOperationDeleteCACertificateMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteCACertificateValidationMiddleware(stack); err != nil {
 		return err
 	}

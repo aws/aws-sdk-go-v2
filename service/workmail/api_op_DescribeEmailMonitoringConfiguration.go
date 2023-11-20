@@ -110,6 +110,9 @@ func (c *Client) addOperationDescribeEmailMonitoringConfigurationMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeEmailMonitoringConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

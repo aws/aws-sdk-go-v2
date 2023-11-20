@@ -126,6 +126,9 @@ func (c *Client) addOperationListJournalS3ExportsForLedgerMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListJournalS3ExportsForLedgerValidationMiddleware(stack); err != nil {
 		return err
 	}

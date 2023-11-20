@@ -104,6 +104,9 @@ func (c *Client) addOperationDescribeEksAnywhereSubscriptionMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeEksAnywhereSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

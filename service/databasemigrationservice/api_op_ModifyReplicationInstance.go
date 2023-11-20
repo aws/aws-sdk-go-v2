@@ -170,6 +170,9 @@ func (c *Client) addOperationModifyReplicationInstanceMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpModifyReplicationInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -150,6 +150,9 @@ func (c *Client) addOperationListRetirableGrantsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRetirableGrantsValidationMiddleware(stack); err != nil {
 		return err
 	}

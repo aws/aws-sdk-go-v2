@@ -57,6 +57,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"sync/atomic"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -107,9 +108,13 @@ type SignerOptions struct {
 
 // Signer applies AWS v4 signing to given request. Use this to sign requests
 // that need to be signed with AWS V4 Signatures.
+//
+// AWS SDK service clients use this signer by default and will detect and apply
+// clock skew for signing operations.
 type Signer struct {
 	options      SignerOptions
 	keyDerivator keyDerivator
+	clockSkew    atomic.Int64
 }
 
 // NewSigner returns a new SigV4 Signer
@@ -275,13 +280,14 @@ func (s Signer) SignHTTP(ctx context.Context, credentials aws.Credentials, r *ht
 		fn(&options)
 	}
 
+	skew := time.Duration(s.clockSkew.Load())
 	signer := &httpSigner{
 		Request:                r,
 		PayloadHash:            payloadHash,
 		ServiceName:            service,
 		Region:                 region,
 		Credentials:            credentials,
-		Time:                   v4Internal.NewSigningTime(signingTime.UTC()),
+		Time:                   v4Internal.NewSigningTime(signingTime.Add(skew).UTC()),
 		DisableHeaderHoisting:  options.DisableHeaderHoisting,
 		DisableURIPathEscaping: options.DisableURIPathEscaping,
 		KeyDerivator:           s.keyDerivator,
@@ -350,13 +356,14 @@ func (s *Signer) PresignHTTP(
 		fn(&options)
 	}
 
+	skew := time.Duration(s.clockSkew.Load())
 	signer := &httpSigner{
 		Request:                r.Clone(r.Context()),
 		PayloadHash:            payloadHash,
 		ServiceName:            service,
 		Region:                 region,
 		Credentials:            credentials,
-		Time:                   v4Internal.NewSigningTime(signingTime.UTC()),
+		Time:                   v4Internal.NewSigningTime(signingTime.Add(skew).UTC()),
 		IsPreSign:              true,
 		DisableHeaderHoisting:  options.DisableHeaderHoisting,
 		DisableURIPathEscaping: options.DisableURIPathEscaping,

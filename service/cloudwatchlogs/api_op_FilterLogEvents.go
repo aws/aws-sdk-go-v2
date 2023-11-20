@@ -184,6 +184,9 @@ func (c *Client) addOperationFilterLogEventsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opFilterLogEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}

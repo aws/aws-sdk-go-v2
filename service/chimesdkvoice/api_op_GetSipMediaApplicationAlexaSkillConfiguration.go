@@ -104,6 +104,9 @@ func (c *Client) addOperationGetSipMediaApplicationAlexaSkillConfigurationMiddle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSipMediaApplicationAlexaSkillConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

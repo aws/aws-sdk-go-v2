@@ -143,6 +143,9 @@ func (c *Client) addOperationGetApplicationDateRangeKpiMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetApplicationDateRangeKpiValidationMiddleware(stack); err != nil {
 		return err
 	}

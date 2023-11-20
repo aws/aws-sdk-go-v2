@@ -162,6 +162,9 @@ func (c *Client) addOperationPutObjectLegalHoldMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutObjectLegalHoldValidationMiddleware(stack); err != nil {
 		return err
 	}

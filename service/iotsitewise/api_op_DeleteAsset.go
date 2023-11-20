@@ -116,6 +116,9 @@ func (c *Client) addOperationDeleteAssetMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteAssetMiddleware(stack); err != nil {
 		return err
 	}

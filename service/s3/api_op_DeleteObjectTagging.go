@@ -144,6 +144,9 @@ func (c *Client) addOperationDeleteObjectTaggingMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteObjectTaggingValidationMiddleware(stack); err != nil {
 		return err
 	}

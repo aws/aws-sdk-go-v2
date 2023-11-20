@@ -128,6 +128,9 @@ func (c *Client) addOperationUploadSSHPublicKeyMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUploadSSHPublicKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -112,6 +112,9 @@ func (c *Client) addOperationListServiceTemplatesMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}

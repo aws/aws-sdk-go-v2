@@ -141,6 +141,9 @@ func (c *Client) addOperationPutGatewayResponseMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutGatewayResponseValidationMiddleware(stack); err != nil {
 		return err
 	}

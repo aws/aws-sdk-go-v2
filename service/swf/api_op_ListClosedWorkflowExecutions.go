@@ -190,6 +190,9 @@ func (c *Client) addOperationListClosedWorkflowExecutionsMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListClosedWorkflowExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}

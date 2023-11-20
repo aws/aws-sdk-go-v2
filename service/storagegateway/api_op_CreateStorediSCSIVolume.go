@@ -181,6 +181,9 @@ func (c *Client) addOperationCreateStorediSCSIVolumeMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateStorediSCSIVolumeValidationMiddleware(stack); err != nil {
 		return err
 	}

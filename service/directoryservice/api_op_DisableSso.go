@@ -115,6 +115,9 @@ func (c *Client) addOperationDisableSsoMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisableSsoValidationMiddleware(stack); err != nil {
 		return err
 	}

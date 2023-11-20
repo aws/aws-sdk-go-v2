@@ -108,6 +108,9 @@ func (c *Client) addOperationListQueueTagsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListQueueTagsValidationMiddleware(stack); err != nil {
 		return err
 	}

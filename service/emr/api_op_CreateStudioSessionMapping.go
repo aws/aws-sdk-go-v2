@@ -134,6 +134,9 @@ func (c *Client) addOperationCreateStudioSessionMappingMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateStudioSessionMappingValidationMiddleware(stack); err != nil {
 		return err
 	}

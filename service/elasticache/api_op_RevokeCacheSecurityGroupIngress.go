@@ -121,6 +121,9 @@ func (c *Client) addOperationRevokeCacheSecurityGroupIngressMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRevokeCacheSecurityGroupIngressValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -112,6 +112,9 @@ func (c *Client) addOperationDeregisterTargetsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeregisterTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}

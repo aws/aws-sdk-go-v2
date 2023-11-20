@@ -138,6 +138,9 @@ func (c *Client) addOperationGetCalculatedAttributeDefinitionMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCalculatedAttributeDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

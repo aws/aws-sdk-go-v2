@@ -133,6 +133,9 @@ func (c *Client) addOperationUpdateInferenceExperimentMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateInferenceExperimentValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -143,6 +143,9 @@ func (c *Client) addOperationSubscribeToShardMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSubscribeToShardValidationMiddleware(stack); err != nil {
 		return err
 	}

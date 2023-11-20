@@ -141,6 +141,9 @@ func (c *Client) addOperationStartReadSetImportJobMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opStartReadSetImportJobMiddleware(stack); err != nil {
 		return err
 	}

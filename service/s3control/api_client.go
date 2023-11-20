@@ -436,6 +436,21 @@ func resolveUseFIPSEndpoint(cfg aws.Config, o *Options) error {
 	return nil
 }
 
+func addV4DetectSkewMiddleware(stack *middleware.Stack, options Options) error {
+	signer, ok := options.HTTPSignerV4.(*v4.Signer)
+	if !ok {
+		return nil
+	}
+
+	m := &v4.DetectSkewMiddleware{
+		Signer: signer,
+	}
+	if err := stack.Finalize.Insert(m, "Signing", middleware.After); err != nil {
+		return fmt.Errorf("add aws.signer.v4#DetectSkew: %v", err)
+	}
+	return nil
+}
+
 // IdempotencyTokenProvider interface for providing idempotency token
 type IdempotencyTokenProvider interface {
 	GetIdempotencyToken() (string, error)

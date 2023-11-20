@@ -110,6 +110,9 @@ func (c *Client) addOperationDeleteTransitGatewayVpcAttachmentMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteTransitGatewayVpcAttachmentValidationMiddleware(stack); err != nil {
 		return err
 	}

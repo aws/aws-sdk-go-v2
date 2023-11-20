@@ -125,6 +125,9 @@ func (c *Client) addOperationListAnomalyGroupRelatedMetricsMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAnomalyGroupRelatedMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}

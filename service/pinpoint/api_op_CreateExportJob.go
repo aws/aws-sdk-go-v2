@@ -116,6 +116,9 @@ func (c *Client) addOperationCreateExportJobMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateExportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

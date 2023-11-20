@@ -99,6 +99,9 @@ func (c *Client) addOperationCancelDataQualityRuleRecommendationRunMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCancelDataQualityRuleRecommendationRunValidationMiddleware(stack); err != nil {
 		return err
 	}

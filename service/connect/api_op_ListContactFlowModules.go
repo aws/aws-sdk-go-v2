@@ -119,6 +119,9 @@ func (c *Client) addOperationListContactFlowModulesMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListContactFlowModulesValidationMiddleware(stack); err != nil {
 		return err
 	}

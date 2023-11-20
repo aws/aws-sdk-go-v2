@@ -119,6 +119,9 @@ func (c *Client) addOperationCreateDataSetImportTaskMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateDataSetImportTaskMiddleware(stack, options); err != nil {
 		return err
 	}

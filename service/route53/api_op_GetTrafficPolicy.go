@@ -116,6 +116,9 @@ func (c *Client) addOperationGetTrafficPolicyMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTrafficPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

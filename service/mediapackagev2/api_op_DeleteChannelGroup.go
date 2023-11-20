@@ -103,6 +103,9 @@ func (c *Client) addOperationDeleteChannelGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteChannelGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

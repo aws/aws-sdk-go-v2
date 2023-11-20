@@ -117,6 +117,9 @@ func (c *Client) addOperationUpdatePublicKeyMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdatePublicKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

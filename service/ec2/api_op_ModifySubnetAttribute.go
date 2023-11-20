@@ -160,6 +160,9 @@ func (c *Client) addOperationModifySubnetAttributeMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpModifySubnetAttributeValidationMiddleware(stack); err != nil {
 		return err
 	}

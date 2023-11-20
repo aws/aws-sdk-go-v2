@@ -104,6 +104,9 @@ func (c *Client) addOperationDeleteNotificationSubscriptionMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteNotificationSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -112,6 +112,9 @@ func (c *Client) addOperationCreateWirelessGatewayTaskMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateWirelessGatewayTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

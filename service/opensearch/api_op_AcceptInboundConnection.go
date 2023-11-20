@@ -109,6 +109,9 @@ func (c *Client) addOperationAcceptInboundConnectionMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAcceptInboundConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

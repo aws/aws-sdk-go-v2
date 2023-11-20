@@ -111,6 +111,9 @@ func (c *Client) addOperationGetCloudFrontOriginAccessIdentityConfigMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCloudFrontOriginAccessIdentityConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

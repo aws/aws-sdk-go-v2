@@ -106,6 +106,9 @@ func (c *Client) addOperationDescribeDetectMitigationActionsTaskMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDetectMitigationActionsTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

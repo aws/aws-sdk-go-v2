@@ -168,6 +168,9 @@ func (c *Client) addOperationStartOutboundVoiceContactMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartOutboundVoiceContactMiddleware(stack, options); err != nil {
 		return err
 	}

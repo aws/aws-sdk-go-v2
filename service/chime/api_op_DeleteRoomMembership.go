@@ -109,6 +109,9 @@ func (c *Client) addOperationDeleteRoomMembershipMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteRoomMembershipValidationMiddleware(stack); err != nil {
 		return err
 	}

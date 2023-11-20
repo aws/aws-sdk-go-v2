@@ -102,6 +102,9 @@ func (c *Client) addOperationAcceptInputDeviceTransferMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAcceptInputDeviceTransferValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -117,6 +117,9 @@ func (c *Client) addOperationCreateOriginAccessControlMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateOriginAccessControlValidationMiddleware(stack); err != nil {
 		return err
 	}

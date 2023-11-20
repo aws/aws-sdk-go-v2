@@ -114,6 +114,9 @@ func (c *Client) addOperationDisassociateDelegationSignerFromDomainMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateDelegationSignerFromDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

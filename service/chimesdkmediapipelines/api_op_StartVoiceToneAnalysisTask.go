@@ -124,6 +124,9 @@ func (c *Client) addOperationStartVoiceToneAnalysisTaskMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartVoiceToneAnalysisTaskMiddleware(stack, options); err != nil {
 		return err
 	}

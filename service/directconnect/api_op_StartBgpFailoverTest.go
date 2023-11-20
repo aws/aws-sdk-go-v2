@@ -118,6 +118,9 @@ func (c *Client) addOperationStartBgpFailoverTestMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartBgpFailoverTestValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -243,6 +243,9 @@ func (c *Client) addOperationStartExportTaskMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartExportTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

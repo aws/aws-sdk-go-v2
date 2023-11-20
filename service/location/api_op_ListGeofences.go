@@ -119,6 +119,9 @@ func (c *Client) addOperationListGeofencesMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListGeofencesMiddleware(stack); err != nil {
 		return err
 	}

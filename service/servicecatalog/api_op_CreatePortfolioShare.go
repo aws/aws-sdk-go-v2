@@ -153,6 +153,9 @@ func (c *Client) addOperationCreatePortfolioShareMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreatePortfolioShareValidationMiddleware(stack); err != nil {
 		return err
 	}

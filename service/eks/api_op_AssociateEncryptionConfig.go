@@ -115,6 +115,9 @@ func (c *Client) addOperationAssociateEncryptionConfigMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opAssociateEncryptionConfigMiddleware(stack, options); err != nil {
 		return err
 	}

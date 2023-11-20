@@ -112,6 +112,9 @@ func (c *Client) addOperationDisableAddressTransferMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisableAddressTransferValidationMiddleware(stack); err != nil {
 		return err
 	}

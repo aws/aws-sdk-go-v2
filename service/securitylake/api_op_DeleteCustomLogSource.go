@@ -104,6 +104,9 @@ func (c *Client) addOperationDeleteCustomLogSourceMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteCustomLogSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

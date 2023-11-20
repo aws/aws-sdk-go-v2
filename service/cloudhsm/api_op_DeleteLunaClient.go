@@ -114,6 +114,9 @@ func (c *Client) addOperationDeleteLunaClientMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteLunaClientValidationMiddleware(stack); err != nil {
 		return err
 	}

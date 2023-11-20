@@ -112,6 +112,9 @@ func (c *Client) addOperationGetQueryLoggingConfigMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetQueryLoggingConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

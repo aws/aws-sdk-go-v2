@@ -104,6 +104,9 @@ func (c *Client) addOperationAssociateWirelessDeviceWithMulticastGroupMiddleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateWirelessDeviceWithMulticastGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeLocationFsxLustreMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeLocationFsxLustreValidationMiddleware(stack); err != nil {
 		return err
 	}

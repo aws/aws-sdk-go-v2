@@ -107,6 +107,9 @@ func (c *Client) addOperationUntagStreamMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUntagStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

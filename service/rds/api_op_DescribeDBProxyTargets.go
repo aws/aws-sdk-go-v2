@@ -127,6 +127,9 @@ func (c *Client) addOperationDescribeDBProxyTargetsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBProxyTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}

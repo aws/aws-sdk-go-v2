@@ -131,6 +131,9 @@ func (c *Client) addOperationAssociateClientVpnTargetNetworkMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opAssociateClientVpnTargetNetworkMiddleware(stack, options); err != nil {
 		return err
 	}

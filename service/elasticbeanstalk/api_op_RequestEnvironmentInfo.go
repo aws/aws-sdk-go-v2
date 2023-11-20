@@ -123,6 +123,9 @@ func (c *Client) addOperationRequestEnvironmentInfoMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRequestEnvironmentInfoValidationMiddleware(stack); err != nil {
 		return err
 	}

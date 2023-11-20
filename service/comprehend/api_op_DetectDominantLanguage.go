@@ -113,6 +113,9 @@ func (c *Client) addOperationDetectDominantLanguageMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDetectDominantLanguageValidationMiddleware(stack); err != nil {
 		return err
 	}

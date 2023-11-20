@@ -101,6 +101,9 @@ func (c *Client) addOperationStopAccessLoggingMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopAccessLoggingValidationMiddleware(stack); err != nil {
 		return err
 	}

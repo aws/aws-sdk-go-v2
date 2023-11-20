@@ -138,6 +138,9 @@ func (c *Client) addOperationDescribeFolderContentsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFolderContentsValidationMiddleware(stack); err != nil {
 		return err
 	}

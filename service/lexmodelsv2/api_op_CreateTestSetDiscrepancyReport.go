@@ -119,6 +119,9 @@ func (c *Client) addOperationCreateTestSetDiscrepancyReportMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateTestSetDiscrepancyReportValidationMiddleware(stack); err != nil {
 		return err
 	}

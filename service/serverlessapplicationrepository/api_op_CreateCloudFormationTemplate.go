@@ -128,6 +128,9 @@ func (c *Client) addOperationCreateCloudFormationTemplateMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateCloudFormationTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

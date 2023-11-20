@@ -108,6 +108,9 @@ func (c *Client) addOperationListDocumentClassifierSummariesMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDocumentClassifierSummaries(options.Region), middleware.Before); err != nil {
 		return err
 	}

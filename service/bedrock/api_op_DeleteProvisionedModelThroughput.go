@@ -101,6 +101,9 @@ func (c *Client) addOperationDeleteProvisionedModelThroughputMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteProvisionedModelThroughputValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -113,6 +113,9 @@ func (c *Client) addOperationRegisterInstanceEventNotificationAttributesMiddlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRegisterInstanceEventNotificationAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

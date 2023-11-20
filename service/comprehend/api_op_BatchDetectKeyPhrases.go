@@ -125,6 +125,9 @@ func (c *Client) addOperationBatchDetectKeyPhrasesMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchDetectKeyPhrasesValidationMiddleware(stack); err != nil {
 		return err
 	}

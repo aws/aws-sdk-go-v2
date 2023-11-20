@@ -118,6 +118,9 @@ func (c *Client) addOperationGetPartitionMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPartitionValidationMiddleware(stack); err != nil {
 		return err
 	}

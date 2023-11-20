@@ -119,6 +119,9 @@ func (c *Client) addOperationGetArchitectureRecommendationsMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetArchitectureRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}

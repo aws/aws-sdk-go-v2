@@ -111,6 +111,9 @@ func (c *Client) addOperationRejectEnvironmentAccountConnectionMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRejectEnvironmentAccountConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

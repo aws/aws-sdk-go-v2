@@ -104,6 +104,9 @@ func (c *Client) addOperationStopColumnStatisticsTaskRunMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopColumnStatisticsTaskRunValidationMiddleware(stack); err != nil {
 		return err
 	}

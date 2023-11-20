@@ -111,6 +111,9 @@ func (c *Client) addOperationSetLogDeliveryConfigurationMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSetLogDeliveryConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -130,6 +130,9 @@ func (c *Client) addOperationDeleteBucketMetricsConfigurationMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteBucketMetricsConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

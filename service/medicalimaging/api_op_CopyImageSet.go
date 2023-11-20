@@ -126,6 +126,9 @@ func (c *Client) addOperationCopyImageSetMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCopyImageSetMiddleware(stack); err != nil {
 		return err
 	}

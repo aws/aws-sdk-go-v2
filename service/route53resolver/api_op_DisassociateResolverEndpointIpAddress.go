@@ -114,6 +114,9 @@ func (c *Client) addOperationDisassociateResolverEndpointIpAddressMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateResolverEndpointIpAddressValidationMiddleware(stack); err != nil {
 		return err
 	}

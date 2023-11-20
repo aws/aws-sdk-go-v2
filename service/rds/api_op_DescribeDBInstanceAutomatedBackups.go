@@ -155,6 +155,9 @@ func (c *Client) addOperationDescribeDBInstanceAutomatedBackupsMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBInstanceAutomatedBackupsValidationMiddleware(stack); err != nil {
 		return err
 	}

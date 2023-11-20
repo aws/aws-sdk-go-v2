@@ -151,6 +151,9 @@ func (c *Client) addOperationCreateAdapterVersionMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAdapterVersionMiddleware(stack, options); err != nil {
 		return err
 	}

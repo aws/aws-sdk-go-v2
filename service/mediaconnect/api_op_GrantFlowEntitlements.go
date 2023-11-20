@@ -113,6 +113,9 @@ func (c *Client) addOperationGrantFlowEntitlementsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGrantFlowEntitlementsValidationMiddleware(stack); err != nil {
 		return err
 	}

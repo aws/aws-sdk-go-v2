@@ -104,6 +104,9 @@ func (c *Client) addOperationDisableVpcClassicLinkDnsSupportMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableVpcClassicLinkDnsSupport(options.Region), middleware.Before); err != nil {
 		return err
 	}

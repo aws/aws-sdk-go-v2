@@ -120,6 +120,9 @@ func (c *Client) addOperationDeleteAccessPointPolicyForObjectLambdaMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteAccessPointPolicyForObjectLambdaMiddleware(stack); err != nil {
 		return err
 	}

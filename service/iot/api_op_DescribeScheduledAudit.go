@@ -128,6 +128,9 @@ func (c *Client) addOperationDescribeScheduledAuditMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeScheduledAuditValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -140,6 +140,9 @@ func (c *Client) addOperationPutQueryDefinitionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opPutQueryDefinitionMiddleware(stack, options); err != nil {
 		return err
 	}

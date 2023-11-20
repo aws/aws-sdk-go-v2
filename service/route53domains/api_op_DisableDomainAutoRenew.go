@@ -100,6 +100,9 @@ func (c *Client) addOperationDisableDomainAutoRenewMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisableDomainAutoRenewValidationMiddleware(stack); err != nil {
 		return err
 	}

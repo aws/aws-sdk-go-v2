@@ -136,6 +136,9 @@ func (c *Client) addOperationGetCoipPoolUsageMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCoipPoolUsageValidationMiddleware(stack); err != nil {
 		return err
 	}

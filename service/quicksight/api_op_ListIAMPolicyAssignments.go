@@ -128,6 +128,9 @@ func (c *Client) addOperationListIAMPolicyAssignmentsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIAMPolicyAssignmentsValidationMiddleware(stack); err != nil {
 		return err
 	}

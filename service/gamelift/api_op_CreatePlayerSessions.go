@@ -127,6 +127,9 @@ func (c *Client) addOperationCreatePlayerSessionsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreatePlayerSessionsValidationMiddleware(stack); err != nil {
 		return err
 	}

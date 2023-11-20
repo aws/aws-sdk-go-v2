@@ -112,6 +112,9 @@ func (c *Client) addOperationDeleteProjectPolicyMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteProjectPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -104,6 +104,9 @@ func (c *Client) addOperationDeregisterAppInstanceUserEndpointMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeregisterAppInstanceUserEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -118,6 +118,9 @@ func (c *Client) addOperationGetImageSetMetadataMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetImageSetMetadataMiddleware(stack); err != nil {
 		return err
 	}

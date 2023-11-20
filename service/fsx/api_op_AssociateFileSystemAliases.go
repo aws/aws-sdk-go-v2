@@ -141,6 +141,9 @@ func (c *Client) addOperationAssociateFileSystemAliasesMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opAssociateFileSystemAliasesMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -114,6 +114,9 @@ func (c *Client) addOperationListEventIntegrationAssociationsMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEventIntegrationAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}

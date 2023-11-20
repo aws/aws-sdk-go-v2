@@ -110,6 +110,9 @@ func (c *Client) addOperationDisassociateProductFromPortfolioMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateProductFromPortfolioValidationMiddleware(stack); err != nil {
 		return err
 	}

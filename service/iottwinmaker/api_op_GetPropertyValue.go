@@ -140,6 +140,9 @@ func (c *Client) addOperationGetPropertyValueMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetPropertyValueMiddleware(stack); err != nil {
 		return err
 	}

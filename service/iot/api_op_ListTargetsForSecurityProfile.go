@@ -117,6 +117,9 @@ func (c *Client) addOperationListTargetsForSecurityProfileMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTargetsForSecurityProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

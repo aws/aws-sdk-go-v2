@@ -115,6 +115,9 @@ func (c *Client) addOperationListHypervisorsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHypervisors(options.Region), middleware.Before); err != nil {
 		return err
 	}

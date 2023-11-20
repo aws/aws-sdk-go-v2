@@ -136,6 +136,9 @@ func (c *Client) addOperationDescribeEphemerisMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeEphemerisValidationMiddleware(stack); err != nil {
 		return err
 	}

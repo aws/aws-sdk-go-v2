@@ -105,6 +105,9 @@ func (c *Client) addOperationStartMulticastGroupSessionMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartMulticastGroupSessionValidationMiddleware(stack); err != nil {
 		return err
 	}

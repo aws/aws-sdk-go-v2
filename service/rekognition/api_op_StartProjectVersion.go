@@ -123,6 +123,9 @@ func (c *Client) addOperationStartProjectVersionMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartProjectVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -106,6 +106,9 @@ func (c *Client) addOperationDeleteImageRecipeMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteImageRecipeValidationMiddleware(stack); err != nil {
 		return err
 	}

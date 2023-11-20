@@ -142,6 +142,9 @@ func (c *Client) addOperationAssignIpv6AddressesMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssignIpv6AddressesValidationMiddleware(stack); err != nil {
 		return err
 	}

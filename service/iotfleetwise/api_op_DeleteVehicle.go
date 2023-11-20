@@ -112,6 +112,9 @@ func (c *Client) addOperationDeleteVehicleMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteVehicleValidationMiddleware(stack); err != nil {
 		return err
 	}

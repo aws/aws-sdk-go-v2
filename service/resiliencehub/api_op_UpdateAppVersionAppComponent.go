@@ -140,6 +140,9 @@ func (c *Client) addOperationUpdateAppVersionAppComponentMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateAppVersionAppComponentValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -149,6 +149,9 @@ func (c *Client) addOperationCreatePackagingConfigurationMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreatePackagingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

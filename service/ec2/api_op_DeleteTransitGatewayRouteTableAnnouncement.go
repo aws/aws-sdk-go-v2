@@ -110,6 +110,9 @@ func (c *Client) addOperationDeleteTransitGatewayRouteTableAnnouncementMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteTransitGatewayRouteTableAnnouncementValidationMiddleware(stack); err != nil {
 		return err
 	}

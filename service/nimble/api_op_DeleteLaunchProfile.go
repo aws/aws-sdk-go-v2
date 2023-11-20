@@ -115,6 +115,9 @@ func (c *Client) addOperationDeleteLaunchProfileMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteLaunchProfileMiddleware(stack, options); err != nil {
 		return err
 	}

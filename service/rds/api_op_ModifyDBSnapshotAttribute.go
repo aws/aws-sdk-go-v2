@@ -147,6 +147,9 @@ func (c *Client) addOperationModifyDBSnapshotAttributeMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpModifyDBSnapshotAttributeValidationMiddleware(stack); err != nil {
 		return err
 	}

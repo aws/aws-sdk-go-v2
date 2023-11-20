@@ -113,6 +113,9 @@ func (c *Client) addOperationDescribeFHIRImportJobMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFHIRImportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

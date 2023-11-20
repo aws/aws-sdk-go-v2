@@ -105,6 +105,9 @@ func (c *Client) addOperationDeleteDataLakeOrganizationConfigurationMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteDataLakeOrganizationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

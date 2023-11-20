@@ -112,6 +112,9 @@ func (c *Client) addOperationDeleteNatGatewayMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteNatGatewayValidationMiddleware(stack); err != nil {
 		return err
 	}

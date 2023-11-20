@@ -401,6 +401,9 @@ func (c *Client) addOperationRestoreDBInstanceToPointInTimeMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRestoreDBInstanceToPointInTimeValidationMiddleware(stack); err != nil {
 		return err
 	}

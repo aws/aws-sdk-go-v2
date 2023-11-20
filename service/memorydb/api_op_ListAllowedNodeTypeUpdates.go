@@ -111,6 +111,9 @@ func (c *Client) addOperationListAllowedNodeTypeUpdatesMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAllowedNodeTypeUpdatesValidationMiddleware(stack); err != nil {
 		return err
 	}

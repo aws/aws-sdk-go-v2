@@ -108,6 +108,9 @@ func (c *Client) addOperationRegisterDefaultPatchBaselineMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRegisterDefaultPatchBaselineValidationMiddleware(stack); err != nil {
 		return err
 	}

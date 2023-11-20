@@ -109,6 +109,9 @@ func (c *Client) addOperationCreateDatasetContentMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateDatasetContentValidationMiddleware(stack); err != nil {
 		return err
 	}

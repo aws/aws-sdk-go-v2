@@ -106,6 +106,9 @@ func (c *Client) addOperationUpdateDefaultMailDomainMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateDefaultMailDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

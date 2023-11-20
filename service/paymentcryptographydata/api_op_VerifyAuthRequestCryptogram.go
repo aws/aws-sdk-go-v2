@@ -177,6 +177,9 @@ func (c *Client) addOperationVerifyAuthRequestCryptogramMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpVerifyAuthRequestCryptogramValidationMiddleware(stack); err != nil {
 		return err
 	}

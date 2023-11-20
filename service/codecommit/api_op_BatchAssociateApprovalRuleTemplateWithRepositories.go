@@ -120,6 +120,9 @@ func (c *Client) addOperationBatchAssociateApprovalRuleTemplateWithRepositoriesM
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchAssociateApprovalRuleTemplateWithRepositoriesValidationMiddleware(stack); err != nil {
 		return err
 	}

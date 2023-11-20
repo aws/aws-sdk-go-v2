@@ -114,6 +114,9 @@ func (c *Client) addOperationGetHypervisorPropertyMappingsMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetHypervisorPropertyMappingsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -145,6 +145,9 @@ func (c *Client) addOperationDescribeBotMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBotValidationMiddleware(stack); err != nil {
 		return err
 	}

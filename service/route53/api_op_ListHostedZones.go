@@ -156,6 +156,9 @@ func (c *Client) addOperationListHostedZonesMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHostedZones(options.Region), middleware.Before); err != nil {
 		return err
 	}

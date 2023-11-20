@@ -214,6 +214,9 @@ func (c *Client) addOperationRequestPhoneNumberMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opRequestPhoneNumberMiddleware(stack, options); err != nil {
 		return err
 	}

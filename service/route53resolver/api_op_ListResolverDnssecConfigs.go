@@ -126,6 +126,9 @@ func (c *Client) addOperationListResolverDnssecConfigsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResolverDnssecConfigs(options.Region), middleware.Before); err != nil {
 		return err
 	}

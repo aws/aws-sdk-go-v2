@@ -129,6 +129,9 @@ func (c *Client) addOperationPutAutoScalingPolicyMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutAutoScalingPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

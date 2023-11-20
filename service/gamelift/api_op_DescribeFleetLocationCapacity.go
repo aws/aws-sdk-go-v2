@@ -121,6 +121,9 @@ func (c *Client) addOperationDescribeFleetLocationCapacityMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFleetLocationCapacityValidationMiddleware(stack); err != nil {
 		return err
 	}

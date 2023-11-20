@@ -124,6 +124,9 @@ func (c *Client) addOperationDescribeDBSubnetGroupsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBSubnetGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}

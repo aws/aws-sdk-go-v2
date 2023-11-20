@@ -104,6 +104,9 @@ func (c *Client) addOperationDeleteCustomDomainAssociationMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteCustomDomainAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -124,6 +124,9 @@ func (c *Client) addOperationListBatchJobDefinitionsMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListBatchJobDefinitionsValidationMiddleware(stack); err != nil {
 		return err
 	}

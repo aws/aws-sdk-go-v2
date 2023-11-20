@@ -110,6 +110,9 @@ func (c *Client) addOperationUpdateFailbackReplicationConfigurationMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateFailbackReplicationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

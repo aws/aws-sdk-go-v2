@@ -100,6 +100,9 @@ func (c *Client) addOperationDeleteClusterPolicyMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteClusterPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

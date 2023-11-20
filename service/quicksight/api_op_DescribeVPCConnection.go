@@ -118,6 +118,9 @@ func (c *Client) addOperationDescribeVPCConnectionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeVPCConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -127,6 +127,9 @@ func (c *Client) addOperationListSqlInjectionMatchSetsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSqlInjectionMatchSets(options.Region), middleware.Before); err != nil {
 		return err
 	}

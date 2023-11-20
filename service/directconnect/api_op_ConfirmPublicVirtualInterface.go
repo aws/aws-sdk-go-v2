@@ -125,6 +125,9 @@ func (c *Client) addOperationConfirmPublicVirtualInterfaceMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpConfirmPublicVirtualInterfaceValidationMiddleware(stack); err != nil {
 		return err
 	}

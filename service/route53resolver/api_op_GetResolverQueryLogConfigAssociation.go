@@ -108,6 +108,9 @@ func (c *Client) addOperationGetResolverQueryLogConfigAssociationMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetResolverQueryLogConfigAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

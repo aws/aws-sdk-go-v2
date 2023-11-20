@@ -120,6 +120,9 @@ func (c *Client) addOperationAdminDeleteUserAttributesMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAdminDeleteUserAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

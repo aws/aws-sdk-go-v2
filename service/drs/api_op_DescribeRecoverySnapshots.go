@@ -119,6 +119,9 @@ func (c *Client) addOperationDescribeRecoverySnapshotsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRecoverySnapshotsValidationMiddleware(stack); err != nil {
 		return err
 	}

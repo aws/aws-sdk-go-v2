@@ -114,6 +114,9 @@ func (c *Client) addOperationGetEvidenceFoldersByAssessmentMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetEvidenceFoldersByAssessmentValidationMiddleware(stack); err != nil {
 		return err
 	}

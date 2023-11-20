@@ -127,6 +127,9 @@ func (c *Client) addOperationCreateVirtualClusterMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateVirtualClusterMiddleware(stack, options); err != nil {
 		return err
 	}

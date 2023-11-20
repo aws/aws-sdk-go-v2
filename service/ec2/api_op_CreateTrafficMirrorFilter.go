@@ -126,6 +126,9 @@ func (c *Client) addOperationCreateTrafficMirrorFilterMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateTrafficMirrorFilterMiddleware(stack, options); err != nil {
 		return err
 	}

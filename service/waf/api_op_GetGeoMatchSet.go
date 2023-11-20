@@ -111,6 +111,9 @@ func (c *Client) addOperationGetGeoMatchSetMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetGeoMatchSetValidationMiddleware(stack); err != nil {
 		return err
 	}

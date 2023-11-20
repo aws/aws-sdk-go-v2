@@ -129,6 +129,9 @@ func (c *Client) addOperationGetMLModelTrainingJobMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetMLModelTrainingJobValidationMiddleware(stack); err != nil {
 		return err
 	}

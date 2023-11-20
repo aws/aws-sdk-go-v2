@@ -161,6 +161,9 @@ func (c *Client) addOperationAssociateVpcCidrBlockMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateVpcCidrBlockValidationMiddleware(stack); err != nil {
 		return err
 	}

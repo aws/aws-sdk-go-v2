@@ -110,6 +110,9 @@ func (c *Client) addOperationGetDevicesInPlacementMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetDevicesInPlacementValidationMiddleware(stack); err != nil {
 		return err
 	}

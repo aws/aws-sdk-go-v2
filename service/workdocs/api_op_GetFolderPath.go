@@ -122,6 +122,9 @@ func (c *Client) addOperationGetFolderPathMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFolderPathValidationMiddleware(stack); err != nil {
 		return err
 	}

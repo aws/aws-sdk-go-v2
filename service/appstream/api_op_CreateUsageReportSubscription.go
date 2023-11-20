@@ -107,6 +107,9 @@ func (c *Client) addOperationCreateUsageReportSubscriptionMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUsageReportSubscription(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -117,6 +117,9 @@ func (c *Client) addOperationDeleteAutoScalingGroupMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteAutoScalingGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

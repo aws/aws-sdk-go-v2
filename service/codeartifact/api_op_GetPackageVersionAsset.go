@@ -157,6 +157,9 @@ func (c *Client) addOperationGetPackageVersionAssetMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPackageVersionAssetValidationMiddleware(stack); err != nil {
 		return err
 	}

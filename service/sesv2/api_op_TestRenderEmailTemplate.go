@@ -118,6 +118,9 @@ func (c *Client) addOperationTestRenderEmailTemplateMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpTestRenderEmailTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -141,6 +141,9 @@ func (c *Client) addOperationCreateSchemaMappingMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateSchemaMappingValidationMiddleware(stack); err != nil {
 		return err
 	}

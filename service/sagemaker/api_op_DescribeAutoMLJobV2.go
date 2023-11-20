@@ -196,6 +196,9 @@ func (c *Client) addOperationDescribeAutoMLJobV2Middlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAutoMLJobV2ValidationMiddleware(stack); err != nil {
 		return err
 	}

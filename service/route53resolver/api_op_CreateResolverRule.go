@@ -146,6 +146,9 @@ func (c *Client) addOperationCreateResolverRuleMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateResolverRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

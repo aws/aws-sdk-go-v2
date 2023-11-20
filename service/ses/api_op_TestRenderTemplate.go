@@ -113,6 +113,9 @@ func (c *Client) addOperationTestRenderTemplateMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpTestRenderTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

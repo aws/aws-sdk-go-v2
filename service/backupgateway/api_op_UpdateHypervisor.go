@@ -122,6 +122,9 @@ func (c *Client) addOperationUpdateHypervisorMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateHypervisorValidationMiddleware(stack); err != nil {
 		return err
 	}

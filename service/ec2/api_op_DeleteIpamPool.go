@@ -122,6 +122,9 @@ func (c *Client) addOperationDeleteIpamPoolMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteIpamPoolValidationMiddleware(stack); err != nil {
 		return err
 	}

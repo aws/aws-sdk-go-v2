@@ -169,6 +169,9 @@ func (c *Client) addOperationCreateElasticsearchDomainMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateElasticsearchDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

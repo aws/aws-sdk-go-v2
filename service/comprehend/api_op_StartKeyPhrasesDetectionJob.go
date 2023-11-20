@@ -168,6 +168,9 @@ func (c *Client) addOperationStartKeyPhrasesDetectionJobMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartKeyPhrasesDetectionJobMiddleware(stack, options); err != nil {
 		return err
 	}

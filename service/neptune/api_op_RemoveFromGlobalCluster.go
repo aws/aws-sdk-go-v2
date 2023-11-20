@@ -116,6 +116,9 @@ func (c *Client) addOperationRemoveFromGlobalClusterMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRemoveFromGlobalClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

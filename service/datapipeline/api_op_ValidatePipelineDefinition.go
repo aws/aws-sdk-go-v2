@@ -160,6 +160,9 @@ func (c *Client) addOperationValidatePipelineDefinitionMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpValidatePipelineDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

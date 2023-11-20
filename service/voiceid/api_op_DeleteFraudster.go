@@ -105,6 +105,9 @@ func (c *Client) addOperationDeleteFraudsterMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteFraudsterValidationMiddleware(stack); err != nil {
 		return err
 	}

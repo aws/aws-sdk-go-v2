@@ -117,6 +117,9 @@ func (c *Client) addOperationGetXssMatchSetMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetXssMatchSetValidationMiddleware(stack); err != nil {
 		return err
 	}

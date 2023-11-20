@@ -102,6 +102,9 @@ func (c *Client) addOperationDeletePlaybackKeyPairMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeletePlaybackKeyPairValidationMiddleware(stack); err != nil {
 		return err
 	}

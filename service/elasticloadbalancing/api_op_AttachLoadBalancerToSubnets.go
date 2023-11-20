@@ -115,6 +115,9 @@ func (c *Client) addOperationAttachLoadBalancerToSubnetsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAttachLoadBalancerToSubnetsValidationMiddleware(stack); err != nil {
 		return err
 	}

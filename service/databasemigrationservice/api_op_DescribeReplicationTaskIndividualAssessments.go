@@ -122,6 +122,9 @@ func (c *Client) addOperationDescribeReplicationTaskIndividualAssessmentsMiddlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeReplicationTaskIndividualAssessmentsValidationMiddleware(stack); err != nil {
 		return err
 	}

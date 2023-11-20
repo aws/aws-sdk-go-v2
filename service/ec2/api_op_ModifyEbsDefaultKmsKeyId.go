@@ -131,6 +131,9 @@ func (c *Client) addOperationModifyEbsDefaultKmsKeyIdMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpModifyEbsDefaultKmsKeyIdValidationMiddleware(stack); err != nil {
 		return err
 	}

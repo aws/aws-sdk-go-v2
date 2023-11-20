@@ -115,6 +115,9 @@ func (c *Client) addOperationEnableAvailabilityZonesForLoadBalancerMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpEnableAvailabilityZonesForLoadBalancerValidationMiddleware(stack); err != nil {
 		return err
 	}

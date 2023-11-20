@@ -114,6 +114,9 @@ func (c *Client) addOperationBatchDeleteFeaturedResultsSetMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchDeleteFeaturedResultsSetValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -115,6 +115,9 @@ func (c *Client) addOperationPutResourceLogLevelMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutResourceLogLevelValidationMiddleware(stack); err != nil {
 		return err
 	}

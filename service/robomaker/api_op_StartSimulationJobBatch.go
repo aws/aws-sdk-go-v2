@@ -167,6 +167,9 @@ func (c *Client) addOperationStartSimulationJobBatchMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartSimulationJobBatchMiddleware(stack, options); err != nil {
 		return err
 	}

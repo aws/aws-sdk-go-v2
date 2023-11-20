@@ -114,6 +114,9 @@ func (c *Client) addOperationDeleteNamespaceMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteNamespaceValidationMiddleware(stack); err != nil {
 		return err
 	}

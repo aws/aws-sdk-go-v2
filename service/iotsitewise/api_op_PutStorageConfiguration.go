@@ -160,6 +160,9 @@ func (c *Client) addOperationPutStorageConfigurationMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opPutStorageConfigurationMiddleware(stack); err != nil {
 		return err
 	}

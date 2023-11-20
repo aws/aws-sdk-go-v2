@@ -112,6 +112,9 @@ func (c *Client) addOperationBatchDeleteDevicePositionHistoryMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opBatchDeleteDevicePositionHistoryMiddleware(stack); err != nil {
 		return err
 	}

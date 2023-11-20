@@ -102,6 +102,9 @@ func (c *Client) addOperationDeleteDirectoryRegistrationMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteDirectoryRegistrationValidationMiddleware(stack); err != nil {
 		return err
 	}

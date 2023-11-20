@@ -99,6 +99,9 @@ func (c *Client) addOperationCancelAnnotationImportJobMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCancelAnnotationImportJobMiddleware(stack); err != nil {
 		return err
 	}

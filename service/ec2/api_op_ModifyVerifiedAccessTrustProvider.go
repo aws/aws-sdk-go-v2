@@ -129,6 +129,9 @@ func (c *Client) addOperationModifyVerifiedAccessTrustProviderMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opModifyVerifiedAccessTrustProviderMiddleware(stack, options); err != nil {
 		return err
 	}

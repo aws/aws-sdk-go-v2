@@ -105,6 +105,9 @@ func (c *Client) addOperationDeregisterElasticIpMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeregisterElasticIpValidationMiddleware(stack); err != nil {
 		return err
 	}

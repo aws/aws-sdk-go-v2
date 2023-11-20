@@ -161,6 +161,9 @@ func (c *Client) addOperationDescribeTrialComponentMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTrialComponentValidationMiddleware(stack); err != nil {
 		return err
 	}

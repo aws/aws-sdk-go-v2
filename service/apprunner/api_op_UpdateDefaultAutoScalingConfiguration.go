@@ -112,6 +112,9 @@ func (c *Client) addOperationUpdateDefaultAutoScalingConfigurationMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateDefaultAutoScalingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

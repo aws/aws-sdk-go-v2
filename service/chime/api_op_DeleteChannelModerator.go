@@ -117,6 +117,9 @@ func (c *Client) addOperationDeleteChannelModeratorMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteChannelModeratorMiddleware(stack); err != nil {
 		return err
 	}

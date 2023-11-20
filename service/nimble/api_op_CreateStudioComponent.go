@@ -152,6 +152,9 @@ func (c *Client) addOperationCreateStudioComponentMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateStudioComponentMiddleware(stack, options); err != nil {
 		return err
 	}

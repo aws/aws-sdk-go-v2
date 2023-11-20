@@ -120,6 +120,9 @@ func (c *Client) addOperationListResourcesForTagOptionMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListResourcesForTagOptionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -123,6 +123,9 @@ func (c *Client) addOperationCreateDataflowEndpointGroupMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateDataflowEndpointGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

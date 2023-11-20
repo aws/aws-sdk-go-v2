@@ -110,6 +110,9 @@ func (c *Client) addOperationRejectInboundCrossClusterSearchConnectionMiddleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRejectInboundCrossClusterSearchConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

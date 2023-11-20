@@ -114,6 +114,9 @@ func (c *Client) addOperationGetAutoSnapshotsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetAutoSnapshotsValidationMiddleware(stack); err != nil {
 		return err
 	}

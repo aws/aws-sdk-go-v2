@@ -103,6 +103,9 @@ func (c *Client) addOperationDeleteBlueprintMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteBlueprintValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -103,6 +103,9 @@ func (c *Client) addOperationDeleteStorageConfigurationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteStorageConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

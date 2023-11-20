@@ -133,6 +133,9 @@ func (c *Client) addOperationCreateWorkerFleetMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateWorkerFleetMiddleware(stack, options); err != nil {
 		return err
 	}

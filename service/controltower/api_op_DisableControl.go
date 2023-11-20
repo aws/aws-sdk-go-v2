@@ -120,6 +120,9 @@ func (c *Client) addOperationDisableControlMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisableControlValidationMiddleware(stack); err != nil {
 		return err
 	}

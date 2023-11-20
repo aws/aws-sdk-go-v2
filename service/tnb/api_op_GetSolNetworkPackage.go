@@ -161,6 +161,9 @@ func (c *Client) addOperationGetSolNetworkPackageMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSolNetworkPackageValidationMiddleware(stack); err != nil {
 		return err
 	}

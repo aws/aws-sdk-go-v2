@@ -119,6 +119,9 @@ func (c *Client) addOperationNotifyTerminateProvisionedProductEngineWorkflowResu
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opNotifyTerminateProvisionedProductEngineWorkflowResultMiddleware(stack, options); err != nil {
 		return err
 	}

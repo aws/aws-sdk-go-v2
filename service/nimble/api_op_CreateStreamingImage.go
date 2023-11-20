@@ -127,6 +127,9 @@ func (c *Client) addOperationCreateStreamingImageMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateStreamingImageMiddleware(stack, options); err != nil {
 		return err
 	}

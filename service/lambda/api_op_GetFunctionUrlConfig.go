@@ -155,6 +155,9 @@ func (c *Client) addOperationGetFunctionUrlConfigMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFunctionUrlConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

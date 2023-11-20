@@ -134,6 +134,9 @@ func (c *Client) addOperationSearchInsightsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchInsightsValidationMiddleware(stack); err != nil {
 		return err
 	}

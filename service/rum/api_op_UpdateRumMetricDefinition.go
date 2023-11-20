@@ -130,6 +130,9 @@ func (c *Client) addOperationUpdateRumMetricDefinitionMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateRumMetricDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

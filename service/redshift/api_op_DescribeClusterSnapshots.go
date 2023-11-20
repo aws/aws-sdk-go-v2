@@ -202,6 +202,9 @@ func (c *Client) addOperationDescribeClusterSnapshotsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeClusterSnapshotsValidationMiddleware(stack); err != nil {
 		return err
 	}

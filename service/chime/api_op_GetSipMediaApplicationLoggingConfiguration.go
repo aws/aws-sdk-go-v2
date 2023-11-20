@@ -113,6 +113,9 @@ func (c *Client) addOperationGetSipMediaApplicationLoggingConfigurationMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSipMediaApplicationLoggingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

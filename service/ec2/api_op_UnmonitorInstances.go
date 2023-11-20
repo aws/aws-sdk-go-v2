@@ -112,6 +112,9 @@ func (c *Client) addOperationUnmonitorInstancesMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUnmonitorInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -114,6 +114,9 @@ func (c *Client) addOperationDeleteStorageVirtualMachineMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteStorageVirtualMachineMiddleware(stack, options); err != nil {
 		return err
 	}

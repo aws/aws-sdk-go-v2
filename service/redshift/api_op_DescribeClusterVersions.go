@@ -136,6 +136,9 @@ func (c *Client) addOperationDescribeClusterVersionsMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusterVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}

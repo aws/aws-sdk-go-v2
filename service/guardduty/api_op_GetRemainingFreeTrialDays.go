@@ -113,6 +113,9 @@ func (c *Client) addOperationGetRemainingFreeTrialDaysMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRemainingFreeTrialDaysValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -116,6 +116,9 @@ func (c *Client) addOperationDeletePublicAccessBlockMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeletePublicAccessBlockMiddleware(stack); err != nil {
 		return err
 	}

@@ -146,6 +146,9 @@ func (c *Client) addOperationUpdateNamespaceMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateNamespaceValidationMiddleware(stack); err != nil {
 		return err
 	}

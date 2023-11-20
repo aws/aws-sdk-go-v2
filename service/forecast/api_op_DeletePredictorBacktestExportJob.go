@@ -99,6 +99,9 @@ func (c *Client) addOperationDeletePredictorBacktestExportJobMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeletePredictorBacktestExportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

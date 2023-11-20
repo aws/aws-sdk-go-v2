@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteReceiptRuleSetMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteReceiptRuleSetValidationMiddleware(stack); err != nil {
 		return err
 	}

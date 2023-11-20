@@ -106,6 +106,9 @@ func (c *Client) addOperationGetOnPremisesInstanceMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetOnPremisesInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

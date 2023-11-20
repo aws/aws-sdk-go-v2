@@ -105,6 +105,9 @@ func (c *Client) addOperationFlushStageCacheMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpFlushStageCacheValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -125,6 +125,9 @@ func (c *Client) addOperationSubmitContainerStateChangeMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSubmitContainerStateChange(options.Region), middleware.Before); err != nil {
 		return err
 	}

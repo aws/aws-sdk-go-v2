@@ -129,6 +129,9 @@ func (c *Client) addOperationCopyWorkspaceImageMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCopyWorkspaceImageValidationMiddleware(stack); err != nil {
 		return err
 	}

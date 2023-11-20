@@ -118,6 +118,9 @@ func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateProjectMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -104,6 +104,9 @@ func (c *Client) addOperationRestorePhoneNumberMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRestorePhoneNumberValidationMiddleware(stack); err != nil {
 		return err
 	}

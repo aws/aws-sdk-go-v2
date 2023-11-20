@@ -108,6 +108,9 @@ func (c *Client) addOperationSignOutUserMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSignOutUserValidationMiddleware(stack); err != nil {
 		return err
 	}

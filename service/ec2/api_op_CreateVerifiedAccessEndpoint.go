@@ -168,6 +168,9 @@ func (c *Client) addOperationCreateVerifiedAccessEndpointMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateVerifiedAccessEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

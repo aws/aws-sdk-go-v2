@@ -113,6 +113,9 @@ func (c *Client) addOperationModifyMountTargetSecurityGroupsMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpModifyMountTargetSecurityGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}

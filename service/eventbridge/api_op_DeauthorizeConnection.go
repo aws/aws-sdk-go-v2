@@ -119,6 +119,9 @@ func (c *Client) addOperationDeauthorizeConnectionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeauthorizeConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

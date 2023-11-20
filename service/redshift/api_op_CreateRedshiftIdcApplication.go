@@ -135,6 +135,9 @@ func (c *Client) addOperationCreateRedshiftIdcApplicationMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateRedshiftIdcApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

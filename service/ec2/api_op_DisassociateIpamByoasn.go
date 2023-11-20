@@ -119,6 +119,9 @@ func (c *Client) addOperationDisassociateIpamByoasnMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateIpamByoasnValidationMiddleware(stack); err != nil {
 		return err
 	}

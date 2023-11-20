@@ -101,6 +101,9 @@ func (c *Client) addOperationDeleteRecommenderMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteRecommenderValidationMiddleware(stack); err != nil {
 		return err
 	}

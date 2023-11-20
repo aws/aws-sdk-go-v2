@@ -121,6 +121,9 @@ func (c *Client) addOperationGetRelationalDatabaseEventsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRelationalDatabaseEventsValidationMiddleware(stack); err != nil {
 		return err
 	}

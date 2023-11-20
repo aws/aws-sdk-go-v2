@@ -141,6 +141,9 @@ func (c *Client) addOperationListInstanceProfilesForRoleMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListInstanceProfilesForRoleValidationMiddleware(stack); err != nil {
 		return err
 	}

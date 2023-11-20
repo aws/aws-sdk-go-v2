@@ -224,6 +224,9 @@ func (c *Client) addOperationCreatePrivateVirtualInterfaceMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreatePrivateVirtualInterfaceValidationMiddleware(stack); err != nil {
 		return err
 	}

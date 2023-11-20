@@ -110,6 +110,9 @@ func (c *Client) addOperationAssociateIamInstanceProfileMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateIamInstanceProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

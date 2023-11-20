@@ -132,6 +132,9 @@ func (c *Client) addOperationStartReadSetActivationJobMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opStartReadSetActivationJobMiddleware(stack); err != nil {
 		return err
 	}

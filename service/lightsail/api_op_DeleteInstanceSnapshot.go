@@ -110,6 +110,9 @@ func (c *Client) addOperationDeleteInstanceSnapshotMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteInstanceSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}

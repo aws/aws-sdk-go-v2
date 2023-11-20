@@ -104,6 +104,9 @@ func (c *Client) addOperationAssociateBudgetWithResourceMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateBudgetWithResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

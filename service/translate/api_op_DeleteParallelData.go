@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteParallelDataMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteParallelDataValidationMiddleware(stack); err != nil {
 		return err
 	}

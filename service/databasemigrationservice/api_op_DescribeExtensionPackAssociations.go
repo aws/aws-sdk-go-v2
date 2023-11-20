@@ -135,6 +135,9 @@ func (c *Client) addOperationDescribeExtensionPackAssociationsMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeExtensionPackAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}

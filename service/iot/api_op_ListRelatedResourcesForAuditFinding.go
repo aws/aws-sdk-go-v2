@@ -132,6 +132,9 @@ func (c *Client) addOperationListRelatedResourcesForAuditFindingMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRelatedResourcesForAuditFindingValidationMiddleware(stack); err != nil {
 		return err
 	}

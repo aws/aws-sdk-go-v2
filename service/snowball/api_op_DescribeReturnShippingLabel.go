@@ -114,6 +114,9 @@ func (c *Client) addOperationDescribeReturnShippingLabelMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeReturnShippingLabelValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -99,6 +99,9 @@ func (c *Client) addOperationInvalidateProjectCacheMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpInvalidateProjectCacheValidationMiddleware(stack); err != nil {
 		return err
 	}

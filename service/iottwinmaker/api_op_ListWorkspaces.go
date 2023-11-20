@@ -109,6 +109,9 @@ func (c *Client) addOperationListWorkspacesMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListWorkspacesMiddleware(stack); err != nil {
 		return err
 	}

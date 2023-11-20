@@ -104,6 +104,9 @@ func (c *Client) addOperationDisassociateFleetMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateFleetValidationMiddleware(stack); err != nil {
 		return err
 	}

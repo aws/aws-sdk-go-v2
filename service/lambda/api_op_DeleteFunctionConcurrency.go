@@ -104,6 +104,9 @@ func (c *Client) addOperationDeleteFunctionConcurrencyMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteFunctionConcurrencyValidationMiddleware(stack); err != nil {
 		return err
 	}

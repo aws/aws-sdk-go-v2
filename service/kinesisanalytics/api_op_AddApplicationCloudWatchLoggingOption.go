@@ -119,6 +119,9 @@ func (c *Client) addOperationAddApplicationCloudWatchLoggingOptionMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAddApplicationCloudWatchLoggingOptionValidationMiddleware(stack); err != nil {
 		return err
 	}

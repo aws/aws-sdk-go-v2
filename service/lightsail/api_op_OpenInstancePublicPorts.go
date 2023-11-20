@@ -116,6 +116,9 @@ func (c *Client) addOperationOpenInstancePublicPortsMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpOpenInstancePublicPortsValidationMiddleware(stack); err != nil {
 		return err
 	}

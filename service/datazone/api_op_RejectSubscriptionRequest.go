@@ -166,6 +166,9 @@ func (c *Client) addOperationRejectSubscriptionRequestMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRejectSubscriptionRequestValidationMiddleware(stack); err != nil {
 		return err
 	}

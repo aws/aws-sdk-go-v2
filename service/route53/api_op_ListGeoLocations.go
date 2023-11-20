@@ -170,6 +170,9 @@ func (c *Client) addOperationListGeoLocationsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGeoLocations(options.Region), middleware.Before); err != nil {
 		return err
 	}

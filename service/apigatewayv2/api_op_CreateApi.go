@@ -232,6 +232,9 @@ func (c *Client) addOperationCreateApiMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateApiValidationMiddleware(stack); err != nil {
 		return err
 	}

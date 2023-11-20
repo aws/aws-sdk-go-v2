@@ -115,6 +115,9 @@ func (c *Client) addOperationListAttributeGroupsForApplicationMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAttributeGroupsForApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

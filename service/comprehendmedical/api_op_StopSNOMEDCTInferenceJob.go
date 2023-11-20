@@ -104,6 +104,9 @@ func (c *Client) addOperationStopSNOMEDCTInferenceJobMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopSNOMEDCTInferenceJobValidationMiddleware(stack); err != nil {
 		return err
 	}

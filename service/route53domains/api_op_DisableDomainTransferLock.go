@@ -112,6 +112,9 @@ func (c *Client) addOperationDisableDomainTransferLockMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisableDomainTransferLockValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -151,6 +151,9 @@ func (c *Client) addOperationGetSimilarProfilesMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSimilarProfilesValidationMiddleware(stack); err != nil {
 		return err
 	}

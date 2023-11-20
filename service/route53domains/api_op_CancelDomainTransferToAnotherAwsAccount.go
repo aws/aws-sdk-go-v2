@@ -120,6 +120,9 @@ func (c *Client) addOperationCancelDomainTransferToAnotherAwsAccountMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCancelDomainTransferToAnotherAwsAccountValidationMiddleware(stack); err != nil {
 		return err
 	}

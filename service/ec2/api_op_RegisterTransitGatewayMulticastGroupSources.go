@@ -125,6 +125,9 @@ func (c *Client) addOperationRegisterTransitGatewayMulticastGroupSourcesMiddlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRegisterTransitGatewayMulticastGroupSourcesValidationMiddleware(stack); err != nil {
 		return err
 	}

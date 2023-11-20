@@ -124,6 +124,9 @@ func (c *Client) addOperationSendCustomVerificationEmailMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSendCustomVerificationEmailValidationMiddleware(stack); err != nil {
 		return err
 	}

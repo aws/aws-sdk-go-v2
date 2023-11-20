@@ -40,6 +40,13 @@ public final class SdkGoTypes {
             public static final Symbol SetSigningName = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("SetSigningName");
             public static final Symbol SetSigningRegion = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("SetSigningRegion");
         }
+
+        public static final class Signer {
+            public static final class V4 {
+                public static final Symbol Signer = AwsGoDependency.AWS_SIGNER_V4.pointableSymbol("Signer");
+                public static final Symbol DetectSkewMiddleware = AwsGoDependency.AWS_SIGNER_V4.pointableSymbol("DetectSkewMiddleware");
+            }
+        }
     }
 
     public static final class Internal {

@@ -113,6 +113,9 @@ func (c *Client) addOperationBatchGetFlowAssociationMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGetFlowAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

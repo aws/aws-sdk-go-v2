@@ -113,6 +113,9 @@ func (c *Client) addOperationDetachCustomerManagedPolicyReferenceFromPermissionS
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDetachCustomerManagedPolicyReferenceFromPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}

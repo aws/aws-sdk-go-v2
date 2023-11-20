@@ -152,6 +152,9 @@ func (c *Client) addOperationDescribeSMBSettingsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeSMBSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -111,6 +111,9 @@ func (c *Client) addOperationPutMessagingStreamingConfigurationsMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutMessagingStreamingConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}

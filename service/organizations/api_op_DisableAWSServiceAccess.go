@@ -145,6 +145,9 @@ func (c *Client) addOperationDisableAWSServiceAccessMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisableAWSServiceAccessValidationMiddleware(stack); err != nil {
 		return err
 	}

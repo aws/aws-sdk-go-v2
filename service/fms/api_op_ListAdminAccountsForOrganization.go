@@ -123,6 +123,9 @@ func (c *Client) addOperationListAdminAccountsForOrganizationMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAdminAccountsForOrganization(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -135,6 +135,9 @@ func (c *Client) addOperationCreateWebACLMigrationStackMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateWebACLMigrationStackValidationMiddleware(stack); err != nil {
 		return err
 	}

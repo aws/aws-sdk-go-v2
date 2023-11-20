@@ -138,6 +138,9 @@ func (c *Client) addOperationGetLegalHoldMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetLegalHoldValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -121,6 +121,9 @@ func (c *Client) addOperationGetExternalDataViewAccessDetailsMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetExternalDataViewAccessDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}

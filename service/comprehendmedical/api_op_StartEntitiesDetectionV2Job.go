@@ -139,6 +139,9 @@ func (c *Client) addOperationStartEntitiesDetectionV2JobMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartEntitiesDetectionV2JobMiddleware(stack, options); err != nil {
 		return err
 	}

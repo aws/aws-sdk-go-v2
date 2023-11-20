@@ -105,6 +105,9 @@ func (c *Client) addOperationCreateCrossAccountAuthorizationMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateCrossAccountAuthorizationValidationMiddleware(stack); err != nil {
 		return err
 	}

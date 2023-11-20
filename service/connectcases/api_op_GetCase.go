@@ -133,6 +133,9 @@ func (c *Client) addOperationGetCaseMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCaseValidationMiddleware(stack); err != nil {
 		return err
 	}

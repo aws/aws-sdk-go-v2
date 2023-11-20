@@ -112,6 +112,9 @@ func (c *Client) addOperationAssumeImpersonationRoleMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssumeImpersonationRoleValidationMiddleware(stack); err != nil {
 		return err
 	}

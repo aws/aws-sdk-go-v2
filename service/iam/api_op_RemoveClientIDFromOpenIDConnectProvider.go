@@ -113,6 +113,9 @@ func (c *Client) addOperationRemoveClientIDFromOpenIDConnectProviderMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRemoveClientIDFromOpenIDConnectProviderValidationMiddleware(stack); err != nil {
 		return err
 	}

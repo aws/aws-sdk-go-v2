@@ -104,6 +104,9 @@ func (c *Client) addOperationGetEulaMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetEulaValidationMiddleware(stack); err != nil {
 		return err
 	}

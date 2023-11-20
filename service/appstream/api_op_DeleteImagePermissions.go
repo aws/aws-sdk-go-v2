@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteImagePermissionsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteImagePermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

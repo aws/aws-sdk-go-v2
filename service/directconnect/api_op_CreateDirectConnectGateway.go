@@ -117,6 +117,9 @@ func (c *Client) addOperationCreateDirectConnectGatewayMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateDirectConnectGatewayValidationMiddleware(stack); err != nil {
 		return err
 	}

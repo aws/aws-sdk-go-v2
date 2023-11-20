@@ -118,6 +118,9 @@ func (c *Client) addOperationAcceptAddressTransferMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAcceptAddressTransferValidationMiddleware(stack); err != nil {
 		return err
 	}

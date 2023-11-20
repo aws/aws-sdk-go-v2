@@ -120,6 +120,9 @@ func (c *Client) addOperationDeprovisionPublicIpv4PoolCidrMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeprovisionPublicIpv4PoolCidrValidationMiddleware(stack); err != nil {
 		return err
 	}

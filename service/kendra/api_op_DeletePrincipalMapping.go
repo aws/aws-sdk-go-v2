@@ -138,6 +138,9 @@ func (c *Client) addOperationDeletePrincipalMappingMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeletePrincipalMappingValidationMiddleware(stack); err != nil {
 		return err
 	}

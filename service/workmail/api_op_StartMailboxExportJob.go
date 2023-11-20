@@ -148,6 +148,9 @@ func (c *Client) addOperationStartMailboxExportJobMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartMailboxExportJobMiddleware(stack, options); err != nil {
 		return err
 	}

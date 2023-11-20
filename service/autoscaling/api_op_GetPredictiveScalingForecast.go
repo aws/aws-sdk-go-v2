@@ -145,6 +145,9 @@ func (c *Client) addOperationGetPredictiveScalingForecastMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPredictiveScalingForecastValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -127,6 +127,9 @@ func (c *Client) addOperationSetPrincipalTagAttributeMapMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSetPrincipalTagAttributeMapValidationMiddleware(stack); err != nil {
 		return err
 	}

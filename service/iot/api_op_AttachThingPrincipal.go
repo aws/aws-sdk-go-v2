@@ -110,6 +110,9 @@ func (c *Client) addOperationAttachThingPrincipalMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAttachThingPrincipalValidationMiddleware(stack); err != nil {
 		return err
 	}

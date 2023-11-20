@@ -104,6 +104,9 @@ func (c *Client) addOperationGetPipelineMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPipelineValidationMiddleware(stack); err != nil {
 		return err
 	}

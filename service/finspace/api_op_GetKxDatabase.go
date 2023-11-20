@@ -143,6 +143,9 @@ func (c *Client) addOperationGetKxDatabaseMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetKxDatabaseValidationMiddleware(stack); err != nil {
 		return err
 	}

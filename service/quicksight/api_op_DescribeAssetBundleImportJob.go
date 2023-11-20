@@ -172,6 +172,9 @@ func (c *Client) addOperationDescribeAssetBundleImportJobMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAssetBundleImportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

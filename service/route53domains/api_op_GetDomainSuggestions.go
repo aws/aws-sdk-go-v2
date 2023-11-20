@@ -133,6 +133,9 @@ func (c *Client) addOperationGetDomainSuggestionsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetDomainSuggestionsValidationMiddleware(stack); err != nil {
 		return err
 	}

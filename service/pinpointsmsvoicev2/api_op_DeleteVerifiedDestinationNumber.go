@@ -122,6 +122,9 @@ func (c *Client) addOperationDeleteVerifiedDestinationNumberMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteVerifiedDestinationNumberValidationMiddleware(stack); err != nil {
 		return err
 	}

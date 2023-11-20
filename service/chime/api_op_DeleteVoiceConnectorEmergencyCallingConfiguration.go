@@ -109,6 +109,9 @@ func (c *Client) addOperationDeleteVoiceConnectorEmergencyCallingConfigurationMi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteVoiceConnectorEmergencyCallingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

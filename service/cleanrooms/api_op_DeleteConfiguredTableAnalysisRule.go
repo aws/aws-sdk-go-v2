@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteConfiguredTableAnalysisRuleMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteConfiguredTableAnalysisRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -117,6 +117,9 @@ func (c *Client) addOperationDescribeChannelMembershipForAppInstanceUserMiddlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeChannelMembershipForAppInstanceUserValidationMiddleware(stack); err != nil {
 		return err
 	}

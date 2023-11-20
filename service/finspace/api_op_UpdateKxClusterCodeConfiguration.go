@@ -131,6 +131,9 @@ func (c *Client) addOperationUpdateKxClusterCodeConfigurationMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateKxClusterCodeConfigurationMiddleware(stack, options); err != nil {
 		return err
 	}

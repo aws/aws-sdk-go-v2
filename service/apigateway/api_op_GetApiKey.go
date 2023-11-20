@@ -141,6 +141,9 @@ func (c *Client) addOperationGetApiKeyMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetApiKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

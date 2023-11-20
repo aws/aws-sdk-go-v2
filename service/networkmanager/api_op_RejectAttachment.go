@@ -104,6 +104,9 @@ func (c *Client) addOperationRejectAttachmentMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRejectAttachmentValidationMiddleware(stack); err != nil {
 		return err
 	}

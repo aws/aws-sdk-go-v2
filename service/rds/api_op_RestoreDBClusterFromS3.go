@@ -354,6 +354,9 @@ func (c *Client) addOperationRestoreDBClusterFromS3Middlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRestoreDBClusterFromS3ValidationMiddleware(stack); err != nil {
 		return err
 	}

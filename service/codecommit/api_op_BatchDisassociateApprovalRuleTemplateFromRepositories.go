@@ -122,6 +122,9 @@ func (c *Client) addOperationBatchDisassociateApprovalRuleTemplateFromRepositori
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchDisassociateApprovalRuleTemplateFromRepositoriesValidationMiddleware(stack); err != nil {
 		return err
 	}

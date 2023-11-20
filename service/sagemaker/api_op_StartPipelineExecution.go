@@ -126,6 +126,9 @@ func (c *Client) addOperationStartPipelineExecutionMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartPipelineExecutionMiddleware(stack, options); err != nil {
 		return err
 	}

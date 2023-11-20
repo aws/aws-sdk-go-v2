@@ -185,6 +185,9 @@ func (c *Client) addOperationGetCelebrityRecognitionMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCelebrityRecognitionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -111,6 +111,9 @@ func (c *Client) addOperationUpdateQueueHoursOfOperationMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateQueueHoursOfOperationValidationMiddleware(stack); err != nil {
 		return err
 	}

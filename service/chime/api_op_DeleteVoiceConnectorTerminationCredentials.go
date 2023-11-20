@@ -115,6 +115,9 @@ func (c *Client) addOperationDeleteVoiceConnectorTerminationCredentialsMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteVoiceConnectorTerminationCredentialsValidationMiddleware(stack); err != nil {
 		return err
 	}

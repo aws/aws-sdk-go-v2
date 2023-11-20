@@ -109,6 +109,9 @@ func (c *Client) addOperationSetTimeBasedAutoScalingMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSetTimeBasedAutoScalingValidationMiddleware(stack); err != nil {
 		return err
 	}

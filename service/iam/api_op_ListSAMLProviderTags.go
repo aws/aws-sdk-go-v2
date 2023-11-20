@@ -144,6 +144,9 @@ func (c *Client) addOperationListSAMLProviderTagsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSAMLProviderTagsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -104,6 +104,9 @@ func (c *Client) addOperationGetMediaPipelineMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetMediaPipelineValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -115,6 +115,9 @@ func (c *Client) addOperationListDomainsForPackageMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDomainsForPackageValidationMiddleware(stack); err != nil {
 		return err
 	}

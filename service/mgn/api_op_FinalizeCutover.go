@@ -156,6 +156,9 @@ func (c *Client) addOperationFinalizeCutoverMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpFinalizeCutoverValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -104,6 +104,9 @@ func (c *Client) addOperationGetLifecyclePolicyMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetLifecyclePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

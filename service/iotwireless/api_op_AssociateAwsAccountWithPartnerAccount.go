@@ -117,6 +117,9 @@ func (c *Client) addOperationAssociateAwsAccountWithPartnerAccountMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opAssociateAwsAccountWithPartnerAccountMiddleware(stack, options); err != nil {
 		return err
 	}

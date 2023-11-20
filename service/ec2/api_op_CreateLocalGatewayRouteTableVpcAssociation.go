@@ -118,6 +118,9 @@ func (c *Client) addOperationCreateLocalGatewayRouteTableVpcAssociationMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateLocalGatewayRouteTableVpcAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

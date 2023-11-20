@@ -124,6 +124,9 @@ func (c *Client) addOperationPutDeliverabilityDashboardOptionMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutDeliverabilityDashboardOptionValidationMiddleware(stack); err != nil {
 		return err
 	}

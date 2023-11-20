@@ -109,6 +109,9 @@ func (c *Client) addOperationDescribeFraudsterMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFraudsterValidationMiddleware(stack); err != nil {
 		return err
 	}

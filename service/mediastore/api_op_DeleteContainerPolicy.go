@@ -99,6 +99,9 @@ func (c *Client) addOperationDeleteContainerPolicyMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteContainerPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

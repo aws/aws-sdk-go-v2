@@ -216,6 +216,9 @@ func (c *Client) addOperationDescribeDimensionKeysMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDimensionKeysValidationMiddleware(stack); err != nil {
 		return err
 	}

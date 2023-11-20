@@ -148,6 +148,9 @@ func (c *Client) addOperationListRecoveryPointsByBackupVaultMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRecoveryPointsByBackupVaultValidationMiddleware(stack); err != nil {
 		return err
 	}

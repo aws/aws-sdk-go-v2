@@ -106,6 +106,9 @@ func (c *Client) addOperationDescribeHostedConnectionsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeHostedConnectionsValidationMiddleware(stack); err != nil {
 		return err
 	}

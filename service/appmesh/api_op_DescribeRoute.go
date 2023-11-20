@@ -123,6 +123,9 @@ func (c *Client) addOperationDescribeRouteMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRouteValidationMiddleware(stack); err != nil {
 		return err
 	}

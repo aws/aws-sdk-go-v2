@@ -145,6 +145,9 @@ func (c *Client) addOperationCreateReservedInstancesListingMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateReservedInstancesListingValidationMiddleware(stack); err != nil {
 		return err
 	}

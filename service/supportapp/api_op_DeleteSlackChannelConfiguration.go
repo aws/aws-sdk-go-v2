@@ -106,6 +106,9 @@ func (c *Client) addOperationDeleteSlackChannelConfigurationMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteSlackChannelConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

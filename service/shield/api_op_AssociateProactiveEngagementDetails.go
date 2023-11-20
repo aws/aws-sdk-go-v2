@@ -115,6 +115,9 @@ func (c *Client) addOperationAssociateProactiveEngagementDetailsMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateProactiveEngagementDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}

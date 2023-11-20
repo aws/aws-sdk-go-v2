@@ -113,6 +113,9 @@ func (c *Client) addOperationDeleteServiceQuotaIncreaseRequestFromTemplateMiddle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteServiceQuotaIncreaseRequestFromTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

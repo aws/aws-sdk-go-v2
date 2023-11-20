@@ -125,6 +125,9 @@ func (c *Client) addOperationCreateRoleAliasMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateRoleAliasValidationMiddleware(stack); err != nil {
 		return err
 	}

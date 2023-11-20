@@ -115,6 +115,9 @@ func (c *Client) addOperationListSkillsStoreSkillsByCategoryMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSkillsStoreSkillsByCategoryValidationMiddleware(stack); err != nil {
 		return err
 	}

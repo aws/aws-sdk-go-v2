@@ -122,6 +122,9 @@ func (c *Client) addOperationExecuteOpenCypherExplainQueryMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExecuteOpenCypherExplainQueryValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -133,6 +133,9 @@ func (c *Client) addOperationListWhatIfForecastExportsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListWhatIfForecastExportsValidationMiddleware(stack); err != nil {
 		return err
 	}

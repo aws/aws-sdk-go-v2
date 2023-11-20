@@ -174,6 +174,9 @@ func (c *Client) addOperationUpdateManagedRuleSetVersionExpiryDateMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateManagedRuleSetVersionExpiryDateValidationMiddleware(stack); err != nil {
 		return err
 	}

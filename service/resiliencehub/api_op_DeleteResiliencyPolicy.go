@@ -116,6 +116,9 @@ func (c *Client) addOperationDeleteResiliencyPolicyMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteResiliencyPolicyMiddleware(stack, options); err != nil {
 		return err
 	}

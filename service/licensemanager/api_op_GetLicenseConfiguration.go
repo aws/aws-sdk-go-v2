@@ -152,6 +152,9 @@ func (c *Client) addOperationGetLicenseConfigurationMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetLicenseConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

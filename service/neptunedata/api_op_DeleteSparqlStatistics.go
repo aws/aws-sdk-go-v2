@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteSparqlStatisticsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSparqlStatistics(options.Region), middleware.Before); err != nil {
 		return err
 	}

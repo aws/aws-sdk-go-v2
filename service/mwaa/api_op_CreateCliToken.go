@@ -108,6 +108,9 @@ func (c *Client) addOperationCreateCliTokenMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateCliTokenMiddleware(stack); err != nil {
 		return err
 	}

@@ -117,6 +117,9 @@ func (c *Client) addOperationStopDeliveryStreamEncryptionMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopDeliveryStreamEncryptionValidationMiddleware(stack); err != nil {
 		return err
 	}

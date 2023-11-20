@@ -119,6 +119,9 @@ func (c *Client) addOperationDecreaseStreamRetentionPeriodMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDecreaseStreamRetentionPeriodValidationMiddleware(stack); err != nil {
 		return err
 	}

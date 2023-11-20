@@ -129,6 +129,9 @@ func (c *Client) addOperationDescribeRemediationExceptionsMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRemediationExceptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -109,6 +109,9 @@ func (c *Client) addOperationStartOnDemandAuditTaskMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartOnDemandAuditTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

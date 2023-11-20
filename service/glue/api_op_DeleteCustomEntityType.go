@@ -103,6 +103,9 @@ func (c *Client) addOperationDeleteCustomEntityTypeMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteCustomEntityTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

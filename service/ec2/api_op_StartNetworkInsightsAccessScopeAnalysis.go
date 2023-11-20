@@ -120,6 +120,9 @@ func (c *Client) addOperationStartNetworkInsightsAccessScopeAnalysisMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartNetworkInsightsAccessScopeAnalysisMiddleware(stack, options); err != nil {
 		return err
 	}

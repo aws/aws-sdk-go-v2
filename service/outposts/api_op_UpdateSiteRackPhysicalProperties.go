@@ -171,6 +171,9 @@ func (c *Client) addOperationUpdateSiteRackPhysicalPropertiesMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateSiteRackPhysicalPropertiesValidationMiddleware(stack); err != nil {
 		return err
 	}

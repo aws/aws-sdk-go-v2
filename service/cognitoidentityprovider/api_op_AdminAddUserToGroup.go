@@ -115,6 +115,9 @@ func (c *Client) addOperationAdminAddUserToGroupMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAdminAddUserToGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

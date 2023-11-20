@@ -115,6 +115,9 @@ func (c *Client) addOperationStartDBInstanceMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartDBInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

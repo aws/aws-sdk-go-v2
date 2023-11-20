@@ -161,6 +161,9 @@ func (c *Client) addOperationDescribeSlotTypeMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeSlotTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

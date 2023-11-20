@@ -117,6 +117,9 @@ func (c *Client) addOperationDeleteTimeSeriesMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteTimeSeriesMiddleware(stack); err != nil {
 		return err
 	}

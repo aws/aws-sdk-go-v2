@@ -119,6 +119,9 @@ func (c *Client) addOperationCreateTransitGatewayMulticastDomainMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateTransitGatewayMulticastDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

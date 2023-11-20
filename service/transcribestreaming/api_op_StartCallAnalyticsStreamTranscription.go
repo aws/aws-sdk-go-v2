@@ -277,6 +277,9 @@ func (c *Client) addOperationStartCallAnalyticsStreamTranscriptionMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartCallAnalyticsStreamTranscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

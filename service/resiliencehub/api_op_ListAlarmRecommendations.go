@@ -123,6 +123,9 @@ func (c *Client) addOperationListAlarmRecommendationsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAlarmRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}

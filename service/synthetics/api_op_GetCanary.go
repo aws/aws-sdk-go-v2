@@ -107,6 +107,9 @@ func (c *Client) addOperationGetCanaryMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCanaryValidationMiddleware(stack); err != nil {
 		return err
 	}

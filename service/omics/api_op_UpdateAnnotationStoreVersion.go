@@ -150,6 +150,9 @@ func (c *Client) addOperationUpdateAnnotationStoreVersionMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateAnnotationStoreVersionMiddleware(stack); err != nil {
 		return err
 	}

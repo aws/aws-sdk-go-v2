@@ -139,6 +139,9 @@ func (c *Client) addOperationGetDevicePositionHistoryMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetDevicePositionHistoryMiddleware(stack); err != nil {
 		return err
 	}

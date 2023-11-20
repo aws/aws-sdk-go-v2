@@ -142,6 +142,9 @@ func (c *Client) addOperationGetAggregateComplianceDetailsByConfigRuleMiddleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetAggregateComplianceDetailsByConfigRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

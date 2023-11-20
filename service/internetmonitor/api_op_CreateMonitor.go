@@ -174,6 +174,9 @@ func (c *Client) addOperationCreateMonitorMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateMonitorMiddleware(stack, options); err != nil {
 		return err
 	}

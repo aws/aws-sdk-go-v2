@@ -129,6 +129,9 @@ func (c *Client) addOperationGetProvisionedProductOutputsMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetProvisionedProductOutputs(options.Region), middleware.Before); err != nil {
 		return err
 	}

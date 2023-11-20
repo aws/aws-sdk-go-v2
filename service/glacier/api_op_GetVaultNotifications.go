@@ -131,6 +131,9 @@ func (c *Client) addOperationGetVaultNotificationsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetVaultNotificationsValidationMiddleware(stack); err != nil {
 		return err
 	}

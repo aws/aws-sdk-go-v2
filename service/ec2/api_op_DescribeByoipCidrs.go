@@ -121,6 +121,9 @@ func (c *Client) addOperationDescribeByoipCidrsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeByoipCidrsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -119,6 +119,9 @@ func (c *Client) addOperationGetRelationalDatabaseMasterUserPasswordMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRelationalDatabaseMasterUserPasswordValidationMiddleware(stack); err != nil {
 		return err
 	}

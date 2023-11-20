@@ -105,6 +105,9 @@ func (c *Client) addOperationGetRelationalDatabaseLogStreamsMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRelationalDatabaseLogStreamsValidationMiddleware(stack); err != nil {
 		return err
 	}

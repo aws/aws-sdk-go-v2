@@ -127,6 +127,9 @@ func (c *Client) addOperationCreateAssistantAssociationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAssistantAssociationMiddleware(stack, options); err != nil {
 		return err
 	}

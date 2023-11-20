@@ -109,6 +109,9 @@ func (c *Client) addOperationAssociatePricingRulesMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociatePricingRulesValidationMiddleware(stack); err != nil {
 		return err
 	}

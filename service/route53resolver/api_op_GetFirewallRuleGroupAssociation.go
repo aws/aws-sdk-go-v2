@@ -106,6 +106,9 @@ func (c *Client) addOperationGetFirewallRuleGroupAssociationMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFirewallRuleGroupAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

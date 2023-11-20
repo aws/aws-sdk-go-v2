@@ -105,6 +105,9 @@ func (c *Client) addOperationAssociateAssessmentReportEvidenceFolderMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateAssessmentReportEvidenceFolderValidationMiddleware(stack); err != nil {
 		return err
 	}

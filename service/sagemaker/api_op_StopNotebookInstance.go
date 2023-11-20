@@ -105,6 +105,9 @@ func (c *Client) addOperationStopNotebookInstanceMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopNotebookInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

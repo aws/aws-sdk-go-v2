@@ -135,6 +135,9 @@ func (c *Client) addOperationSignalWorkflowExecutionMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSignalWorkflowExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

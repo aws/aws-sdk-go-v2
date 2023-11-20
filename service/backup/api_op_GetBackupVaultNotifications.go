@@ -122,6 +122,9 @@ func (c *Client) addOperationGetBackupVaultNotificationsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetBackupVaultNotificationsValidationMiddleware(stack); err != nil {
 		return err
 	}

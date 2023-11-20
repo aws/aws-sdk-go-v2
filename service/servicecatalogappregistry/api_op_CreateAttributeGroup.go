@@ -128,6 +128,9 @@ func (c *Client) addOperationCreateAttributeGroupMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAttributeGroupMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -119,6 +119,9 @@ func (c *Client) addOperationStartStudioSSOConfigurationRepairMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartStudioSSOConfigurationRepairMiddleware(stack, options); err != nil {
 		return err
 	}

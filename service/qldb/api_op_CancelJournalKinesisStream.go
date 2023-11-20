@@ -112,6 +112,9 @@ func (c *Client) addOperationCancelJournalKinesisStreamMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCancelJournalKinesisStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -155,6 +155,9 @@ func (c *Client) addOperationUpdateByteMatchSetMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateByteMatchSetValidationMiddleware(stack); err != nil {
 		return err
 	}

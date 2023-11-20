@@ -136,6 +136,9 @@ func (c *Client) addOperationCreateConfiguredTableAssociationMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateConfiguredTableAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

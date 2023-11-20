@@ -149,6 +149,9 @@ func (c *Client) addOperationDescribeAffectedEntitiesForOrganizationMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAffectedEntitiesForOrganizationValidationMiddleware(stack); err != nil {
 		return err
 	}

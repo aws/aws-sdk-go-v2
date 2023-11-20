@@ -110,6 +110,9 @@ func (c *Client) addOperationGetServiceSyncBlockerSummaryMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetServiceSyncBlockerSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}

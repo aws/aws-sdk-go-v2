@@ -131,6 +131,9 @@ func (c *Client) addOperationCreateEventIntegrationMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateEventIntegrationMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -106,6 +106,9 @@ func (c *Client) addOperationBatchDisableStandardsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchDisableStandardsValidationMiddleware(stack); err != nil {
 		return err
 	}

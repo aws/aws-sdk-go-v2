@@ -151,6 +151,9 @@ func (c *Client) addOperationGetTraceSummariesMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTraceSummariesValidationMiddleware(stack); err != nil {
 		return err
 	}

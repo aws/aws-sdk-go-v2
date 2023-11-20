@@ -112,6 +112,9 @@ func (c *Client) addOperationRemoveFlowMediaStreamMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRemoveFlowMediaStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

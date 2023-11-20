@@ -100,6 +100,9 @@ func (c *Client) addOperationUpdateDataCellsFilterMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateDataCellsFilterValidationMiddleware(stack); err != nil {
 		return err
 	}

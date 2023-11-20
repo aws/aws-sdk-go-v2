@@ -234,6 +234,9 @@ func (c *Client) addOperationPutBucketAclMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutBucketAclValidationMiddleware(stack); err != nil {
 		return err
 	}

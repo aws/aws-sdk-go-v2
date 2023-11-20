@@ -118,6 +118,9 @@ func (c *Client) addOperationUpdateBrokerCountMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateBrokerCountValidationMiddleware(stack); err != nil {
 		return err
 	}

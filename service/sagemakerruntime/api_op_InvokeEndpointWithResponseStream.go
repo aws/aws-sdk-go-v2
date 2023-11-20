@@ -197,6 +197,9 @@ func (c *Client) addOperationInvokeEndpointWithResponseStreamMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpInvokeEndpointWithResponseStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

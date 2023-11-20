@@ -115,6 +115,9 @@ func (c *Client) addOperationUpdateApnsVoipChannelMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateApnsVoipChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

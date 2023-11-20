@@ -99,6 +99,9 @@ func (c *Client) addOperationDisassociateWirelessDeviceFromThingMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateWirelessDeviceFromThingValidationMiddleware(stack); err != nil {
 		return err
 	}

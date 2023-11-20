@@ -205,6 +205,9 @@ func (c *Client) addOperationSendCommandMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSendCommandValidationMiddleware(stack); err != nil {
 		return err
 	}

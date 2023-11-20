@@ -132,6 +132,9 @@ func (c *Client) addOperationDescribeTableStatisticsMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTableStatisticsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -109,6 +109,9 @@ func (c *Client) addOperationPutConfigurationSetReputationOptionsMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutConfigurationSetReputationOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

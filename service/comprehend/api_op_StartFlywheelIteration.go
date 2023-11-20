@@ -112,6 +112,9 @@ func (c *Client) addOperationStartFlywheelIterationMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartFlywheelIterationValidationMiddleware(stack); err != nil {
 		return err
 	}

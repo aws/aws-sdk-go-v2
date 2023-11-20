@@ -155,6 +155,9 @@ func (c *Client) addOperationInitiateMultipartUploadMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpInitiateMultipartUploadValidationMiddleware(stack); err != nil {
 		return err
 	}

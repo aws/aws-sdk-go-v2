@@ -177,6 +177,9 @@ func (c *Client) addOperationPutPipelineDefinitionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutPipelineDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

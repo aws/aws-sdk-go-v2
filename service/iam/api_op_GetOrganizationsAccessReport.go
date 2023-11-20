@@ -183,6 +183,9 @@ func (c *Client) addOperationGetOrganizationsAccessReportMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetOrganizationsAccessReportValidationMiddleware(stack); err != nil {
 		return err
 	}

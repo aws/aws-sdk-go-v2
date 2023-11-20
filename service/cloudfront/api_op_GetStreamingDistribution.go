@@ -115,6 +115,9 @@ func (c *Client) addOperationGetStreamingDistributionMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetStreamingDistributionValidationMiddleware(stack); err != nil {
 		return err
 	}

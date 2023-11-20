@@ -165,6 +165,9 @@ func (c *Client) addOperationInvokeEndpointAsyncMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpInvokeEndpointAsyncValidationMiddleware(stack); err != nil {
 		return err
 	}

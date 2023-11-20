@@ -324,6 +324,9 @@ func (c *Client) addOperationGetMetricDataV2Middlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetMetricDataV2ValidationMiddleware(stack); err != nil {
 		return err
 	}

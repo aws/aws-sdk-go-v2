@@ -142,6 +142,9 @@ func (c *Client) addOperationCreateVodSourceMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateVodSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

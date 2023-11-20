@@ -150,6 +150,9 @@ func (c *Client) addOperationGetParametersForExportMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetParametersForExportValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -142,6 +142,9 @@ func (c *Client) addOperationAuthorizeDBSecurityGroupIngressMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAuthorizeDBSecurityGroupIngressValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -101,6 +101,9 @@ func (c *Client) addOperationCancelBatchImportJobMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCancelBatchImportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

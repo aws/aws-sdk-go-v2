@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteInstanceProfileMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteInstanceProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

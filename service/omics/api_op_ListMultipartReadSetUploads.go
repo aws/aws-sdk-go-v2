@@ -115,6 +115,9 @@ func (c *Client) addOperationListMultipartReadSetUploadsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListMultipartReadSetUploadsMiddleware(stack); err != nil {
 		return err
 	}

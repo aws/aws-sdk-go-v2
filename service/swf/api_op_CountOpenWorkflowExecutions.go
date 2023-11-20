@@ -152,6 +152,9 @@ func (c *Client) addOperationCountOpenWorkflowExecutionsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCountOpenWorkflowExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}

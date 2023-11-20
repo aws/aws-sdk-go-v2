@@ -135,6 +135,9 @@ func (c *Client) addOperationGetReservedNodeExchangeConfigurationOptionsMiddlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetReservedNodeExchangeConfigurationOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

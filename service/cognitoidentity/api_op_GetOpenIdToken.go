@@ -116,6 +116,9 @@ func (c *Client) addOperationGetOpenIdTokenMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetOpenIdTokenValidationMiddleware(stack); err != nil {
 		return err
 	}

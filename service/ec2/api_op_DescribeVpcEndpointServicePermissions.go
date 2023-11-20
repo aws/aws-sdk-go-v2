@@ -130,6 +130,9 @@ func (c *Client) addOperationDescribeVpcEndpointServicePermissionsMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeVpcEndpointServicePermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

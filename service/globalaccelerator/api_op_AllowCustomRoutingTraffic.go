@@ -134,6 +134,9 @@ func (c *Client) addOperationAllowCustomRoutingTrafficMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAllowCustomRoutingTrafficValidationMiddleware(stack); err != nil {
 		return err
 	}

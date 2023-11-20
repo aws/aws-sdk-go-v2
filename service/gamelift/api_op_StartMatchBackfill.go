@@ -161,6 +161,9 @@ func (c *Client) addOperationStartMatchBackfillMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartMatchBackfillValidationMiddleware(stack); err != nil {
 		return err
 	}

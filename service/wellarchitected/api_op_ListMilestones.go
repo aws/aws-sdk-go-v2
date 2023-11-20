@@ -120,6 +120,9 @@ func (c *Client) addOperationListMilestonesMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMilestonesValidationMiddleware(stack); err != nil {
 		return err
 	}

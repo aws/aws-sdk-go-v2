@@ -233,6 +233,9 @@ func (c *Client) addOperationDescribeScalingActivitiesMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeScalingActivitiesValidationMiddleware(stack); err != nil {
 		return err
 	}

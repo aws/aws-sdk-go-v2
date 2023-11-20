@@ -109,6 +109,9 @@ func (c *Client) addOperationDeleteBaiduChannelMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteBaiduChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

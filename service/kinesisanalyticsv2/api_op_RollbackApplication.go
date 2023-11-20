@@ -119,6 +119,9 @@ func (c *Client) addOperationRollbackApplicationMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRollbackApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

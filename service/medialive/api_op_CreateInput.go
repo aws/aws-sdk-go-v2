@@ -144,6 +144,9 @@ func (c *Client) addOperationCreateInputMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateInputMiddleware(stack, options); err != nil {
 		return err
 	}

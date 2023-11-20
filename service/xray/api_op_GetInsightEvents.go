@@ -119,6 +119,9 @@ func (c *Client) addOperationGetInsightEventsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetInsightEventsValidationMiddleware(stack); err != nil {
 		return err
 	}

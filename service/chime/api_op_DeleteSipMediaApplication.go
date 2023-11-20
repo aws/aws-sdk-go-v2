@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteSipMediaApplicationMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteSipMediaApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

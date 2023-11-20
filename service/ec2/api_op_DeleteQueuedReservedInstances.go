@@ -113,6 +113,9 @@ func (c *Client) addOperationDeleteQueuedReservedInstancesMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteQueuedReservedInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}

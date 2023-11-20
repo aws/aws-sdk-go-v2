@@ -149,6 +149,9 @@ func (c *Client) addOperationBatchCreateTableRowsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchCreateTableRowsValidationMiddleware(stack); err != nil {
 		return err
 	}

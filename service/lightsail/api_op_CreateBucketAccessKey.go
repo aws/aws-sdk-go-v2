@@ -121,6 +121,9 @@ func (c *Client) addOperationCreateBucketAccessKeyMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateBucketAccessKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -101,6 +101,9 @@ func (c *Client) addOperationDeleteTranscriptionJobMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteTranscriptionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

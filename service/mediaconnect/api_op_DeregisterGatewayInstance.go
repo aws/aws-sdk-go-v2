@@ -114,6 +114,9 @@ func (c *Client) addOperationDeregisterGatewayInstanceMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeregisterGatewayInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -141,6 +141,9 @@ func (c *Client) addOperationUpdatePullRequestApprovalRuleContentMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdatePullRequestApprovalRuleContentValidationMiddleware(stack); err != nil {
 		return err
 	}

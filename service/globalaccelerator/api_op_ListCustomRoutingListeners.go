@@ -116,6 +116,9 @@ func (c *Client) addOperationListCustomRoutingListenersMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCustomRoutingListenersValidationMiddleware(stack); err != nil {
 		return err
 	}

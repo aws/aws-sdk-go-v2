@@ -107,6 +107,9 @@ func (c *Client) addOperationUpdateMediaPipelineKinesisVideoStreamPoolMiddleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateMediaPipelineKinesisVideoStreamPoolValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -174,6 +174,9 @@ func (c *Client) addOperationTranslateDocumentMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpTranslateDocumentValidationMiddleware(stack); err != nil {
 		return err
 	}

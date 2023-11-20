@@ -145,6 +145,9 @@ func (c *Client) addOperationAssumeDecoratedRoleWithSAMLMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssumeDecoratedRoleWithSAMLValidationMiddleware(stack); err != nil {
 		return err
 	}

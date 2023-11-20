@@ -230,6 +230,9 @@ func (c *Client) addOperationCreateEventDataStoreMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateEventDataStoreValidationMiddleware(stack); err != nil {
 		return err
 	}

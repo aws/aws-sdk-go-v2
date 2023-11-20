@@ -103,6 +103,9 @@ func (c *Client) addOperationDeleteMeetingMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteMeetingValidationMiddleware(stack); err != nil {
 		return err
 	}

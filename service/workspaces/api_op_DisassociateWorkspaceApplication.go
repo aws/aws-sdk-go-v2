@@ -109,6 +109,9 @@ func (c *Client) addOperationDisassociateWorkspaceApplicationMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateWorkspaceApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

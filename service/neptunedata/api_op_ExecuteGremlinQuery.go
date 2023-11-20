@@ -140,6 +140,9 @@ func (c *Client) addOperationExecuteGremlinQueryMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExecuteGremlinQueryValidationMiddleware(stack); err != nil {
 		return err
 	}

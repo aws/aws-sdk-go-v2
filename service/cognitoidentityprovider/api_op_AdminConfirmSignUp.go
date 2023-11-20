@@ -133,6 +133,9 @@ func (c *Client) addOperationAdminConfirmSignUpMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAdminConfirmSignUpValidationMiddleware(stack); err != nil {
 		return err
 	}

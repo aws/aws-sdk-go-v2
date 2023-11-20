@@ -144,6 +144,9 @@ func (c *Client) addOperationCreateBatchPredictionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateBatchPredictionValidationMiddleware(stack); err != nil {
 		return err
 	}

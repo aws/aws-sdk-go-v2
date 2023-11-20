@@ -132,6 +132,9 @@ func (c *Client) addOperationAdminDisableProviderForUserMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAdminDisableProviderForUserValidationMiddleware(stack); err != nil {
 		return err
 	}

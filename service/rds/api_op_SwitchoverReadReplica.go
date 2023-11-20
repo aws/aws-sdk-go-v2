@@ -113,6 +113,9 @@ func (c *Client) addOperationSwitchoverReadReplicaMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSwitchoverReadReplicaValidationMiddleware(stack); err != nil {
 		return err
 	}

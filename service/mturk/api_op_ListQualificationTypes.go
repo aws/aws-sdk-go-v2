@@ -134,6 +134,9 @@ func (c *Client) addOperationListQualificationTypesMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListQualificationTypesValidationMiddleware(stack); err != nil {
 		return err
 	}

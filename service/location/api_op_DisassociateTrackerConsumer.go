@@ -110,6 +110,9 @@ func (c *Client) addOperationDisassociateTrackerConsumerMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDisassociateTrackerConsumerMiddleware(stack); err != nil {
 		return err
 	}

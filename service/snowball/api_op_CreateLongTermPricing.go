@@ -116,6 +116,9 @@ func (c *Client) addOperationCreateLongTermPricingMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateLongTermPricingValidationMiddleware(stack); err != nil {
 		return err
 	}

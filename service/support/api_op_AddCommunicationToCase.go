@@ -127,6 +127,9 @@ func (c *Client) addOperationAddCommunicationToCaseMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAddCommunicationToCaseValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -186,6 +186,9 @@ func (c *Client) addOperationUpdateNFSFileShareMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateNFSFileShareValidationMiddleware(stack); err != nil {
 		return err
 	}

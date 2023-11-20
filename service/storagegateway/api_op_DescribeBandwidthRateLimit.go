@@ -123,6 +123,9 @@ func (c *Client) addOperationDescribeBandwidthRateLimitMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBandwidthRateLimitValidationMiddleware(stack); err != nil {
 		return err
 	}

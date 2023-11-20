@@ -122,6 +122,9 @@ func (c *Client) addOperationCreateAdditionalAssignmentsForHITMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateAdditionalAssignmentsForHITValidationMiddleware(stack); err != nil {
 		return err
 	}

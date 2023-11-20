@@ -114,6 +114,9 @@ func (c *Client) addOperationStartViewerSessionRevocationMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartViewerSessionRevocationValidationMiddleware(stack); err != nil {
 		return err
 	}

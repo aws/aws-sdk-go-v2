@@ -113,6 +113,9 @@ func (c *Client) addOperationDetachPrincipalPolicyMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDetachPrincipalPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

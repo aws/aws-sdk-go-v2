@@ -106,6 +106,9 @@ func (c *Client) addOperationEnableDirectoryMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpEnableDirectoryValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -159,6 +159,9 @@ func (c *Client) addOperationExportECSServiceRecommendationsMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExportECSServiceRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -155,6 +155,9 @@ func (c *Client) addOperationConnectCustomKeyStoreMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpConnectCustomKeyStoreValidationMiddleware(stack); err != nil {
 		return err
 	}

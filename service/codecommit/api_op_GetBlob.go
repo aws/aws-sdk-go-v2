@@ -112,6 +112,9 @@ func (c *Client) addOperationGetBlobMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetBlobValidationMiddleware(stack); err != nil {
 		return err
 	}

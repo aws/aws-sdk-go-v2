@@ -137,6 +137,9 @@ func (c *Client) addOperationCreateSizeConstraintSetMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateSizeConstraintSetValidationMiddleware(stack); err != nil {
 		return err
 	}

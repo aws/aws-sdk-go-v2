@@ -118,6 +118,9 @@ func (c *Client) addOperationMergePullRequestByFastForwardMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpMergePullRequestByFastForwardValidationMiddleware(stack); err != nil {
 		return err
 	}

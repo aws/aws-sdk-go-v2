@@ -110,6 +110,9 @@ func (c *Client) addOperationCreateVoiceProfileMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateVoiceProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -128,6 +128,9 @@ func (c *Client) addOperationExecuteFastResetMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExecuteFastResetValidationMiddleware(stack); err != nil {
 		return err
 	}

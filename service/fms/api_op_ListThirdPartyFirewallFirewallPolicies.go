@@ -131,6 +131,9 @@ func (c *Client) addOperationListThirdPartyFirewallFirewallPoliciesMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListThirdPartyFirewallFirewallPoliciesValidationMiddleware(stack); err != nil {
 		return err
 	}

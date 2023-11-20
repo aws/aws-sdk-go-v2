@@ -166,6 +166,9 @@ func (c *Client) addOperationCreateDataRepositoryAssociationMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateDataRepositoryAssociationMiddleware(stack, options); err != nil {
 		return err
 	}

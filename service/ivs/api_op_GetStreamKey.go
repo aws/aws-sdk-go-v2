@@ -104,6 +104,9 @@ func (c *Client) addOperationGetStreamKeyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetStreamKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

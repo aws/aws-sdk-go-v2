@@ -103,6 +103,9 @@ func (c *Client) addOperationStopInputDeviceMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopInputDeviceValidationMiddleware(stack); err != nil {
 		return err
 	}

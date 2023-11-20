@@ -142,6 +142,9 @@ func (c *Client) addOperationModifyReplicationGroupShardConfigurationMiddlewares
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpModifyReplicationGroupShardConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

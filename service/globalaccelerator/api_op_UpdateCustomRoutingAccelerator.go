@@ -118,6 +118,9 @@ func (c *Client) addOperationUpdateCustomRoutingAcceleratorMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateCustomRoutingAcceleratorValidationMiddleware(stack); err != nil {
 		return err
 	}

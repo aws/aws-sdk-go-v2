@@ -134,6 +134,9 @@ func (c *Client) addOperationCreateRegexPatternSetMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateRegexPatternSetValidationMiddleware(stack); err != nil {
 		return err
 	}

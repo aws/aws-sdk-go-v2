@@ -136,6 +136,9 @@ func (c *Client) addOperationListGroupMembershipsForMemberMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListGroupMembershipsForMemberValidationMiddleware(stack); err != nil {
 		return err
 	}

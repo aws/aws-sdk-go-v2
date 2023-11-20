@@ -136,6 +136,9 @@ func (c *Client) addOperationUpdateLocationObjectStorageMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateLocationObjectStorageValidationMiddleware(stack); err != nil {
 		return err
 	}

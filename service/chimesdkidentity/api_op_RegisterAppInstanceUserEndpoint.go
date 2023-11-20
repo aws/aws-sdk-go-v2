@@ -143,6 +143,9 @@ func (c *Client) addOperationRegisterAppInstanceUserEndpointMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opRegisterAppInstanceUserEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

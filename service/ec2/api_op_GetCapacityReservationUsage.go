@@ -157,6 +157,9 @@ func (c *Client) addOperationGetCapacityReservationUsageMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCapacityReservationUsageValidationMiddleware(stack); err != nil {
 		return err
 	}

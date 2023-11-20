@@ -124,6 +124,9 @@ func (c *Client) addOperationDescribeCustomPluginMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeCustomPluginValidationMiddleware(stack); err != nil {
 		return err
 	}

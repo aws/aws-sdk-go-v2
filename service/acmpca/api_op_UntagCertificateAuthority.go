@@ -114,6 +114,9 @@ func (c *Client) addOperationUntagCertificateAuthorityMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUntagCertificateAuthorityValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -110,6 +110,9 @@ func (c *Client) addOperationDeleteInboundConnectionMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteInboundConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

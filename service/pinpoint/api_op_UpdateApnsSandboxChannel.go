@@ -115,6 +115,9 @@ func (c *Client) addOperationUpdateApnsSandboxChannelMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateApnsSandboxChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

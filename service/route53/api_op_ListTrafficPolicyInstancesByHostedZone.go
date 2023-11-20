@@ -169,6 +169,9 @@ func (c *Client) addOperationListTrafficPolicyInstancesByHostedZoneMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTrafficPolicyInstancesByHostedZoneValidationMiddleware(stack); err != nil {
 		return err
 	}

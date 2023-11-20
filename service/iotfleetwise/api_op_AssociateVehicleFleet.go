@@ -104,6 +104,9 @@ func (c *Client) addOperationAssociateVehicleFleetMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateVehicleFleetValidationMiddleware(stack); err != nil {
 		return err
 	}

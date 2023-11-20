@@ -117,6 +117,9 @@ func (c *Client) addOperationUpdateInstanceCustomHealthStatusMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateInstanceCustomHealthStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

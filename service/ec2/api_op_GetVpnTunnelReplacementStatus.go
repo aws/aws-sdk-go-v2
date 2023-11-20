@@ -130,6 +130,9 @@ func (c *Client) addOperationGetVpnTunnelReplacementStatusMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetVpnTunnelReplacementStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

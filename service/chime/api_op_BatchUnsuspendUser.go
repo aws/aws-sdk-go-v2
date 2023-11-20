@@ -117,6 +117,9 @@ func (c *Client) addOperationBatchUnsuspendUserMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchUnsuspendUserValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -105,6 +105,9 @@ func (c *Client) addOperationUnshareApplicationMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUnshareApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -280,6 +280,9 @@ func (c *Client) addOperationPutObjectAclMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutObjectAclValidationMiddleware(stack); err != nil {
 		return err
 	}

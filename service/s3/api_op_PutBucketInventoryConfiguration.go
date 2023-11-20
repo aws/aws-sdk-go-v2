@@ -162,6 +162,9 @@ func (c *Client) addOperationPutBucketInventoryConfigurationMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutBucketInventoryConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

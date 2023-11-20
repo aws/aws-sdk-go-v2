@@ -112,6 +112,9 @@ func (c *Client) addOperationListTagsForProjectMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTagsForProjectValidationMiddleware(stack); err != nil {
 		return err
 	}

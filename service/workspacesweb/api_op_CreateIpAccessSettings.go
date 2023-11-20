@@ -129,6 +129,9 @@ func (c *Client) addOperationCreateIpAccessSettingsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateIpAccessSettingsMiddleware(stack, options); err != nil {
 		return err
 	}

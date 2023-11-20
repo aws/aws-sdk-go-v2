@@ -118,6 +118,9 @@ func (c *Client) addOperationListReceivedGrantsForOrganizationMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListReceivedGrantsForOrganizationValidationMiddleware(stack); err != nil {
 		return err
 	}

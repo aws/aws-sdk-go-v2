@@ -110,6 +110,9 @@ func (c *Client) addOperationDescribeScheduledQueryMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeScheduledQueryValidationMiddleware(stack); err != nil {
 		return err
 	}

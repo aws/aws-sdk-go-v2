@@ -123,6 +123,9 @@ func (c *Client) addOperationImportHostKeyMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpImportHostKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

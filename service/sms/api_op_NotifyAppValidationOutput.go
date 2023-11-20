@@ -104,6 +104,9 @@ func (c *Client) addOperationNotifyAppValidationOutputMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpNotifyAppValidationOutputValidationMiddleware(stack); err != nil {
 		return err
 	}

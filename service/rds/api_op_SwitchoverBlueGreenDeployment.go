@@ -121,6 +121,9 @@ func (c *Client) addOperationSwitchoverBlueGreenDeploymentMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSwitchoverBlueGreenDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -110,6 +110,9 @@ func (c *Client) addOperationUpdateCostAllocationTagsStatusMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateCostAllocationTagsStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

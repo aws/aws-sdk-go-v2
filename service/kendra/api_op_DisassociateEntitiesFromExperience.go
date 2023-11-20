@@ -119,6 +119,9 @@ func (c *Client) addOperationDisassociateEntitiesFromExperienceMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateEntitiesFromExperienceValidationMiddleware(stack); err != nil {
 		return err
 	}

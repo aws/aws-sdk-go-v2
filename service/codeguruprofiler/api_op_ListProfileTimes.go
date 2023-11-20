@@ -156,6 +156,9 @@ func (c *Client) addOperationListProfileTimesMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListProfileTimesValidationMiddleware(stack); err != nil {
 		return err
 	}

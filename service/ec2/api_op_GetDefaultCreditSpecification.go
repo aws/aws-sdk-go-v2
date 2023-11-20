@@ -112,6 +112,9 @@ func (c *Client) addOperationGetDefaultCreditSpecificationMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetDefaultCreditSpecificationValidationMiddleware(stack); err != nil {
 		return err
 	}

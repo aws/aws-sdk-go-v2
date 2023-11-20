@@ -221,6 +221,9 @@ func (c *Client) addOperationGetQueueAttributesMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetQueueAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

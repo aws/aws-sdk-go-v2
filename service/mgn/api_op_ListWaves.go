@@ -114,6 +114,9 @@ func (c *Client) addOperationListWavesMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWaves(options.Region), middleware.Before); err != nil {
 		return err
 	}

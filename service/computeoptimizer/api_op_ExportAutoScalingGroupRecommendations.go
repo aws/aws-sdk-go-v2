@@ -166,6 +166,9 @@ func (c *Client) addOperationExportAutoScalingGroupRecommendationsMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExportAutoScalingGroupRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}

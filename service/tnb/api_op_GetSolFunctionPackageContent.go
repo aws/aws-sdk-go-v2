@@ -116,6 +116,9 @@ func (c *Client) addOperationGetSolFunctionPackageContentMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSolFunctionPackageContentValidationMiddleware(stack); err != nil {
 		return err
 	}

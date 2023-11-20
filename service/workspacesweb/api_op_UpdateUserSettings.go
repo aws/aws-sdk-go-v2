@@ -147,6 +147,9 @@ func (c *Client) addOperationUpdateUserSettingsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateUserSettingsMiddleware(stack, options); err != nil {
 		return err
 	}

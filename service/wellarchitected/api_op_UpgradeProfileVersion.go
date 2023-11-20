@@ -119,6 +119,9 @@ func (c *Client) addOperationUpgradeProfileVersionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpgradeProfileVersionMiddleware(stack, options); err != nil {
 		return err
 	}

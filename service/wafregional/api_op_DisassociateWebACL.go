@@ -112,6 +112,9 @@ func (c *Client) addOperationDisassociateWebACLMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateWebACLValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -131,6 +131,9 @@ func (c *Client) addOperationDescribeFleetMetadataMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFleetMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}

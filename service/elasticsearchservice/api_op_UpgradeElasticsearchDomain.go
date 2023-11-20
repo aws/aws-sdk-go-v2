@@ -132,6 +132,9 @@ func (c *Client) addOperationUpgradeElasticsearchDomainMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpgradeElasticsearchDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

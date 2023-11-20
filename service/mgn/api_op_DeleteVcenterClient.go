@@ -99,6 +99,9 @@ func (c *Client) addOperationDeleteVcenterClientMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteVcenterClientValidationMiddleware(stack); err != nil {
 		return err
 	}

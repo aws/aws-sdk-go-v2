@@ -108,6 +108,9 @@ func (c *Client) addOperationGetWorkflowRunPropertiesMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetWorkflowRunPropertiesValidationMiddleware(stack); err != nil {
 		return err
 	}

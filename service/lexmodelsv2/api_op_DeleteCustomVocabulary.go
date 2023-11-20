@@ -125,6 +125,9 @@ func (c *Client) addOperationDeleteCustomVocabularyMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteCustomVocabularyValidationMiddleware(stack); err != nil {
 		return err
 	}

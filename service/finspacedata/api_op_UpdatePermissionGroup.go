@@ -137,6 +137,9 @@ func (c *Client) addOperationUpdatePermissionGroupMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdatePermissionGroupMiddleware(stack, options); err != nil {
 		return err
 	}

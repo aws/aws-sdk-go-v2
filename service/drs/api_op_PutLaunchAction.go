@@ -185,6 +185,9 @@ func (c *Client) addOperationPutLaunchActionMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutLaunchActionValidationMiddleware(stack); err != nil {
 		return err
 	}

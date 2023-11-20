@@ -118,6 +118,9 @@ func (c *Client) addOperationGetReviewTemplateLensReviewMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetReviewTemplateLensReviewValidationMiddleware(stack); err != nil {
 		return err
 	}

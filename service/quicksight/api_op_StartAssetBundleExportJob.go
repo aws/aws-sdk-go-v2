@@ -177,6 +177,9 @@ func (c *Client) addOperationStartAssetBundleExportJobMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartAssetBundleExportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -294,6 +294,9 @@ func (c *Client) addOperationCreateEndpointMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -106,6 +106,9 @@ func (c *Client) addOperationStopGUISessionMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopGUISessionValidationMiddleware(stack); err != nil {
 		return err
 	}

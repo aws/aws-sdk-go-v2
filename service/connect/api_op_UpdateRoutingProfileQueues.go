@@ -113,6 +113,9 @@ func (c *Client) addOperationUpdateRoutingProfileQueuesMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateRoutingProfileQueuesValidationMiddleware(stack); err != nil {
 		return err
 	}

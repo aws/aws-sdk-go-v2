@@ -118,6 +118,9 @@ func (c *Client) addOperationPutStoredQueryMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutStoredQueryValidationMiddleware(stack); err != nil {
 		return err
 	}

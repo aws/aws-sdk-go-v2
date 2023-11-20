@@ -140,6 +140,9 @@ func (c *Client) addOperationListConformancePackComplianceScoresMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListConformancePackComplianceScoresValidationMiddleware(stack); err != nil {
 		return err
 	}

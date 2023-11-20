@@ -107,6 +107,9 @@ func (c *Client) addOperationDescribeAuditStreamConfigurationMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAuditStreamConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

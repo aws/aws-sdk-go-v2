@@ -123,6 +123,9 @@ func (c *Client) addOperationListAvailableManagementCidrRangesMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAvailableManagementCidrRangesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -121,6 +121,9 @@ func (c *Client) addOperationGetBucketLoggingMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetBucketLoggingValidationMiddleware(stack); err != nil {
 		return err
 	}

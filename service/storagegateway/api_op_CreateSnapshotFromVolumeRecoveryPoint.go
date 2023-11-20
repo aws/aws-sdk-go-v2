@@ -142,6 +142,9 @@ func (c *Client) addOperationCreateSnapshotFromVolumeRecoveryPointMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateSnapshotFromVolumeRecoveryPointValidationMiddleware(stack); err != nil {
 		return err
 	}

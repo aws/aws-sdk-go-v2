@@ -126,6 +126,9 @@ func (c *Client) addOperationListCustomRoutingPortMappingsByDestinationMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCustomRoutingPortMappingsByDestinationValidationMiddleware(stack); err != nil {
 		return err
 	}

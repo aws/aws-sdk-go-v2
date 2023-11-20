@@ -124,6 +124,9 @@ func (c *Client) addOperationAssociateIpamResourceDiscoveryMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opAssociateIpamResourceDiscoveryMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -222,6 +222,9 @@ func (c *Client) addOperationAssociateVirtualInterfaceMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateVirtualInterfaceValidationMiddleware(stack); err != nil {
 		return err
 	}

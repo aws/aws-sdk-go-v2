@@ -162,6 +162,9 @@ func (c *Client) addOperationReleasePhoneNumberMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpReleasePhoneNumberValidationMiddleware(stack); err != nil {
 		return err
 	}

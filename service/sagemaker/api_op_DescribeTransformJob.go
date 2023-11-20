@@ -213,6 +213,9 @@ func (c *Client) addOperationDescribeTransformJobMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTransformJobValidationMiddleware(stack); err != nil {
 		return err
 	}

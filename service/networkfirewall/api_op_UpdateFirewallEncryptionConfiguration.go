@@ -158,6 +158,9 @@ func (c *Client) addOperationUpdateFirewallEncryptionConfigurationMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateFirewallEncryptionConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

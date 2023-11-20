@@ -110,6 +110,9 @@ func (c *Client) addOperationDeleteKxClusterMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteKxClusterMiddleware(stack, options); err != nil {
 		return err
 	}

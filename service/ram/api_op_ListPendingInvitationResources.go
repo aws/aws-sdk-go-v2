@@ -142,6 +142,9 @@ func (c *Client) addOperationListPendingInvitationResourcesMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPendingInvitationResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -122,6 +122,9 @@ func (c *Client) addOperationGetChannelMessageMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetChannelMessageMiddleware(stack); err != nil {
 		return err
 	}

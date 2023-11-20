@@ -129,6 +129,9 @@ func (c *Client) addOperationDescribeManagedJobTemplateMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeManagedJobTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -115,6 +115,9 @@ func (c *Client) addOperationUpdateThreatIntelSetMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateThreatIntelSetValidationMiddleware(stack); err != nil {
 		return err
 	}

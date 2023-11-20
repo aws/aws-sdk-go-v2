@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteReportGroupMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteReportGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

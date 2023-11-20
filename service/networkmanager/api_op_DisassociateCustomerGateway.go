@@ -109,6 +109,9 @@ func (c *Client) addOperationDisassociateCustomerGatewayMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateCustomerGatewayValidationMiddleware(stack); err != nil {
 		return err
 	}

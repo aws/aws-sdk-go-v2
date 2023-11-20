@@ -117,6 +117,9 @@ func (c *Client) addOperationPutDataSetRefreshPropertiesMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutDataSetRefreshPropertiesValidationMiddleware(stack); err != nil {
 		return err
 	}

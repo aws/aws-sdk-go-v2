@@ -121,6 +121,9 @@ func (c *Client) addOperationGetEvidenceFileUploadUrlMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetEvidenceFileUploadUrlValidationMiddleware(stack); err != nil {
 		return err
 	}

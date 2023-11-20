@@ -120,6 +120,9 @@ func (c *Client) addOperationAcknowledgeThirdPartyJobMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAcknowledgeThirdPartyJobValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -114,6 +114,9 @@ func (c *Client) addOperationGetPatchBaselineForPatchGroupMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPatchBaselineForPatchGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

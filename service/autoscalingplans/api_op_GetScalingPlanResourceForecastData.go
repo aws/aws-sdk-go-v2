@@ -161,6 +161,9 @@ func (c *Client) addOperationGetScalingPlanResourceForecastDataMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetScalingPlanResourceForecastDataValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -156,6 +156,9 @@ func (c *Client) addOperationUpdateSqlInjectionMatchSetMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateSqlInjectionMatchSetValidationMiddleware(stack); err != nil {
 		return err
 	}

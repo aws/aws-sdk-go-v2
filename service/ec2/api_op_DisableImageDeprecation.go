@@ -111,6 +111,9 @@ func (c *Client) addOperationDisableImageDeprecationMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisableImageDeprecationValidationMiddleware(stack); err != nil {
 		return err
 	}

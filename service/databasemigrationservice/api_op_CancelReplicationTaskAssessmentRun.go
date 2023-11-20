@@ -106,6 +106,9 @@ func (c *Client) addOperationCancelReplicationTaskAssessmentRunMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCancelReplicationTaskAssessmentRunValidationMiddleware(stack); err != nil {
 		return err
 	}

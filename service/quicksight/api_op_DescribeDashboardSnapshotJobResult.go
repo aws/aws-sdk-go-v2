@@ -146,6 +146,9 @@ func (c *Client) addOperationDescribeDashboardSnapshotJobResultMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDashboardSnapshotJobResultValidationMiddleware(stack); err != nil {
 		return err
 	}

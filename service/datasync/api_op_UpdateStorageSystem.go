@@ -120,6 +120,9 @@ func (c *Client) addOperationUpdateStorageSystemMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateStorageSystemMiddleware(stack); err != nil {
 		return err
 	}

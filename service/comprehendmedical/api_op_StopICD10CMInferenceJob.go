@@ -104,6 +104,9 @@ func (c *Client) addOperationStopICD10CMInferenceJobMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopICD10CMInferenceJobValidationMiddleware(stack); err != nil {
 		return err
 	}

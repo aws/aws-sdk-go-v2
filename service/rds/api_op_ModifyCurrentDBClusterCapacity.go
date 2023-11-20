@@ -153,6 +153,9 @@ func (c *Client) addOperationModifyCurrentDBClusterCapacityMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpModifyCurrentDBClusterCapacityValidationMiddleware(stack); err != nil {
 		return err
 	}

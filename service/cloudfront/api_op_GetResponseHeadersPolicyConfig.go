@@ -116,6 +116,9 @@ func (c *Client) addOperationGetResponseHeadersPolicyConfigMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetResponseHeadersPolicyConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -121,6 +121,9 @@ func (c *Client) addOperationBatchGetCollaborationAnalysisTemplateMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGetCollaborationAnalysisTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

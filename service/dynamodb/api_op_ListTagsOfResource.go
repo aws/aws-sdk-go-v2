@@ -121,6 +121,9 @@ func (c *Client) addOperationListTagsOfResourceMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTagsOfResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

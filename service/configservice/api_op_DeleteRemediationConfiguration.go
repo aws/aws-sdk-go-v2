@@ -103,6 +103,9 @@ func (c *Client) addOperationDeleteRemediationConfigurationMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteRemediationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

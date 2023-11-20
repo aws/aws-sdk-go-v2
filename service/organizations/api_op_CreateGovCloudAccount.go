@@ -266,6 +266,9 @@ func (c *Client) addOperationCreateGovCloudAccountMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateGovCloudAccountValidationMiddleware(stack); err != nil {
 		return err
 	}

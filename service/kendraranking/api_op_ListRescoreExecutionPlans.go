@@ -112,6 +112,9 @@ func (c *Client) addOperationListRescoreExecutionPlansMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRescoreExecutionPlans(options.Region), middleware.Before); err != nil {
 		return err
 	}

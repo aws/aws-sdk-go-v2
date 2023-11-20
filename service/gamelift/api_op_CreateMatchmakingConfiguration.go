@@ -216,6 +216,9 @@ func (c *Client) addOperationCreateMatchmakingConfigurationMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateMatchmakingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

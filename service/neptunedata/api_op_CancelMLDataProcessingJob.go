@@ -116,6 +116,9 @@ func (c *Client) addOperationCancelMLDataProcessingJobMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCancelMLDataProcessingJobValidationMiddleware(stack); err != nil {
 		return err
 	}

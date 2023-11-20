@@ -116,6 +116,9 @@ func (c *Client) addOperationAddUploadBufferMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAddUploadBufferValidationMiddleware(stack); err != nil {
 		return err
 	}

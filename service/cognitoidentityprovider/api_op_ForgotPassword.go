@@ -173,6 +173,9 @@ func (c *Client) addOperationForgotPasswordMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpForgotPasswordValidationMiddleware(stack); err != nil {
 		return err
 	}

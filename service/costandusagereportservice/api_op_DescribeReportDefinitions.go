@@ -111,6 +111,9 @@ func (c *Client) addOperationDescribeReportDefinitionsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReportDefinitions(options.Region), middleware.Before); err != nil {
 		return err
 	}

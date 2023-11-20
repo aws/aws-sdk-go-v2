@@ -128,6 +128,9 @@ func (c *Client) addOperationSetRepositoryPolicyMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSetRepositoryPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

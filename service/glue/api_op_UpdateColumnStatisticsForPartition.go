@@ -124,6 +124,9 @@ func (c *Client) addOperationUpdateColumnStatisticsForPartitionMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateColumnStatisticsForPartitionValidationMiddleware(stack); err != nil {
 		return err
 	}

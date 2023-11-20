@@ -120,6 +120,9 @@ func (c *Client) addOperationBatchGetApplicationRevisionsMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGetApplicationRevisionsValidationMiddleware(stack); err != nil {
 		return err
 	}

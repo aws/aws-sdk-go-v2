@@ -157,6 +157,9 @@ func (c *Client) addOperationAdminResetUserPasswordMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAdminResetUserPasswordValidationMiddleware(stack); err != nil {
 		return err
 	}

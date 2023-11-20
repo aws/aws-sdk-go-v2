@@ -124,6 +124,9 @@ func (c *Client) addOperationResolveRoomMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpResolveRoomValidationMiddleware(stack); err != nil {
 		return err
 	}

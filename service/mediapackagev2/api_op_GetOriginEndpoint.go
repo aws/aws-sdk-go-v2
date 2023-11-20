@@ -182,6 +182,9 @@ func (c *Client) addOperationGetOriginEndpointMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetOriginEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

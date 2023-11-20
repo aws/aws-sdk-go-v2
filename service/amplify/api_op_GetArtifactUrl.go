@@ -112,6 +112,9 @@ func (c *Client) addOperationGetArtifactUrlMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetArtifactUrlValidationMiddleware(stack); err != nil {
 		return err
 	}

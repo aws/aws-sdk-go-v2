@@ -145,6 +145,9 @@ func (c *Client) addOperationGetClipMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetClipValidationMiddleware(stack); err != nil {
 		return err
 	}

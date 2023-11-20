@@ -117,6 +117,9 @@ func (c *Client) addOperationGetIdentityPoolRolesMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetIdentityPoolRolesValidationMiddleware(stack); err != nil {
 		return err
 	}

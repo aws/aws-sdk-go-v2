@@ -119,6 +119,9 @@ func (c *Client) addOperationStartMetadataModelImportMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartMetadataModelImportValidationMiddleware(stack); err != nil {
 		return err
 	}

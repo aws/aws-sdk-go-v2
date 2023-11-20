@@ -109,6 +109,9 @@ func (c *Client) addOperationSubmitAttachmentStateChangesMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSubmitAttachmentStateChangesValidationMiddleware(stack); err != nil {
 		return err
 	}

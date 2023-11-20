@@ -134,6 +134,9 @@ func (c *Client) addOperationCreateGlobalReplicationGroupMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateGlobalReplicationGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -139,6 +139,9 @@ func (c *Client) addOperationGetAggregateDiscoveredResourceCountsMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetAggregateDiscoveredResourceCountsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -137,6 +137,9 @@ func (c *Client) addOperationCreateStorageLensGroupMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateStorageLensGroupMiddleware(stack); err != nil {
 		return err
 	}

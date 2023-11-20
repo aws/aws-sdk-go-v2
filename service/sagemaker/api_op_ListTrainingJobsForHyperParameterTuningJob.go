@@ -134,6 +134,9 @@ func (c *Client) addOperationListTrainingJobsForHyperParameterTuningJobMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTrainingJobsForHyperParameterTuningJobValidationMiddleware(stack); err != nil {
 		return err
 	}

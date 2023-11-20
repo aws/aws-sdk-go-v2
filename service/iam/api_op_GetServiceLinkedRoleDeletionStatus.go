@@ -114,6 +114,9 @@ func (c *Client) addOperationGetServiceLinkedRoleDeletionStatusMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetServiceLinkedRoleDeletionStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

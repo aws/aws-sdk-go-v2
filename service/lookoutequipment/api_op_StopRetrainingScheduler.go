@@ -110,6 +110,9 @@ func (c *Client) addOperationStopRetrainingSchedulerMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopRetrainingSchedulerValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -135,6 +135,9 @@ func (c *Client) addOperationDecreaseReplicaCountMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDecreaseReplicaCountValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -125,6 +125,9 @@ func (c *Client) addOperationListDistributionsByRealtimeLogConfigMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDistributionsByRealtimeLogConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}

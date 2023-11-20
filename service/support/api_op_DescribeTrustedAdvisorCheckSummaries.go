@@ -124,6 +124,9 @@ func (c *Client) addOperationDescribeTrustedAdvisorCheckSummariesMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTrustedAdvisorCheckSummariesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -123,6 +123,9 @@ func (c *Client) addOperationBatchDeleteTableMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchDeleteTableValidationMiddleware(stack); err != nil {
 		return err
 	}

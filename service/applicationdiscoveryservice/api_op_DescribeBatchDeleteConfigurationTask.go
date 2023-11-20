@@ -106,6 +106,9 @@ func (c *Client) addOperationDescribeBatchDeleteConfigurationTaskMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBatchDeleteConfigurationTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

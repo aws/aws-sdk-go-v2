@@ -156,6 +156,9 @@ func (c *Client) addOperationSetSMSAttributesMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSetSMSAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

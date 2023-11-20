@@ -109,6 +109,9 @@ func (c *Client) addOperationUnsubscribeMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUnsubscribeValidationMiddleware(stack); err != nil {
 		return err
 	}

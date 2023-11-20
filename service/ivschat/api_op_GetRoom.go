@@ -140,6 +140,9 @@ func (c *Client) addOperationGetRoomMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRoomValidationMiddleware(stack); err != nil {
 		return err
 	}

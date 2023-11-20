@@ -104,6 +104,9 @@ func (c *Client) addOperationDeleteFormTypeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteFormTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -111,6 +111,9 @@ func (c *Client) addOperationUpdateUserPhoneConfigMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateUserPhoneConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

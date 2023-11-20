@@ -104,6 +104,9 @@ func (c *Client) addOperationDeleteHumanTaskUiMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteHumanTaskUiValidationMiddleware(stack); err != nil {
 		return err
 	}

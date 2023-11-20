@@ -161,6 +161,9 @@ func (c *Client) addOperationPollForTaskMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPollForTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -117,6 +117,9 @@ func (c *Client) addOperationTagLogGroupMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpTagLogGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

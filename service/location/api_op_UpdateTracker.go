@@ -164,6 +164,9 @@ func (c *Client) addOperationUpdateTrackerMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateTrackerMiddleware(stack); err != nil {
 		return err
 	}

@@ -153,6 +153,9 @@ func (c *Client) addOperationDetachVolumeMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDetachVolumeValidationMiddleware(stack); err != nil {
 		return err
 	}

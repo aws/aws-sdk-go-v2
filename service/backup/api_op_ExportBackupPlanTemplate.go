@@ -104,6 +104,9 @@ func (c *Client) addOperationExportBackupPlanTemplateMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExportBackupPlanTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

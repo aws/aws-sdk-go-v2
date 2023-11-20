@@ -123,6 +123,9 @@ func (c *Client) addOperationListEmailTemplatesMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEmailTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}

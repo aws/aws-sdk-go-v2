@@ -122,6 +122,9 @@ func (c *Client) addOperationCreateWorkerConfigurationMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateWorkerConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -112,6 +112,9 @@ func (c *Client) addOperationRemoveFlowSourceMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRemoveFlowSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

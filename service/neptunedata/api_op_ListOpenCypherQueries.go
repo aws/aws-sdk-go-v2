@@ -118,6 +118,9 @@ func (c *Client) addOperationListOpenCypherQueriesMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOpenCypherQueries(options.Region), middleware.Before); err != nil {
 		return err
 	}

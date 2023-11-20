@@ -187,6 +187,9 @@ func (c *Client) addOperationGetServiceLastAccessedDetailsWithEntitiesMiddleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetServiceLastAccessedDetailsWithEntitiesValidationMiddleware(stack); err != nil {
 		return err
 	}

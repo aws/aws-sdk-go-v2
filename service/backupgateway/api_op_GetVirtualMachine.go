@@ -106,6 +106,9 @@ func (c *Client) addOperationGetVirtualMachineMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetVirtualMachineValidationMiddleware(stack); err != nil {
 		return err
 	}

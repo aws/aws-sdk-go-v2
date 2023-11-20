@@ -138,6 +138,9 @@ func (c *Client) addOperationExportTransitGatewayRoutesMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExportTransitGatewayRoutesValidationMiddleware(stack); err != nil {
 		return err
 	}

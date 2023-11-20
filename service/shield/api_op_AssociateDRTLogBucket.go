@@ -106,6 +106,9 @@ func (c *Client) addOperationAssociateDRTLogBucketMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateDRTLogBucketValidationMiddleware(stack); err != nil {
 		return err
 	}

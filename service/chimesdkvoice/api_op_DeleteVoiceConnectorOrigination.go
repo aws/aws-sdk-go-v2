@@ -101,6 +101,9 @@ func (c *Client) addOperationDeleteVoiceConnectorOriginationMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteVoiceConnectorOriginationValidationMiddleware(stack); err != nil {
 		return err
 	}

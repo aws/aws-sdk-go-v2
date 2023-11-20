@@ -108,6 +108,9 @@ func (c *Client) addOperationGetFieldLevelEncryptionProfileMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFieldLevelEncryptionProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

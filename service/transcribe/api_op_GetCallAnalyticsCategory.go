@@ -107,6 +107,9 @@ func (c *Client) addOperationGetCallAnalyticsCategoryMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCallAnalyticsCategoryValidationMiddleware(stack); err != nil {
 		return err
 	}

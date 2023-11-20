@@ -139,6 +139,9 @@ func (c *Client) addOperationCreateVirtualMFADeviceMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateVirtualMFADeviceValidationMiddleware(stack); err != nil {
 		return err
 	}

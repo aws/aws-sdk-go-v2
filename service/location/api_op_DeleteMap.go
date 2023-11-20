@@ -101,6 +101,9 @@ func (c *Client) addOperationDeleteMapMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteMapMiddleware(stack); err != nil {
 		return err
 	}

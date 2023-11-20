@@ -105,6 +105,9 @@ func (c *Client) addOperationSetVoiceMessageSpendLimitOverrideMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSetVoiceMessageSpendLimitOverrideValidationMiddleware(stack); err != nil {
 		return err
 	}

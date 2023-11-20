@@ -125,6 +125,9 @@ func (c *Client) addOperationCreateQuickConnectMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateQuickConnectValidationMiddleware(stack); err != nil {
 		return err
 	}

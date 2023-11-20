@@ -100,6 +100,9 @@ func (c *Client) addOperationRemoveAutoTerminationPolicyMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRemoveAutoTerminationPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

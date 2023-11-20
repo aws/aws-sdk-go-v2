@@ -122,6 +122,9 @@ func (c *Client) addOperationPutDefaultEncryptionConfigurationMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opPutDefaultEncryptionConfigurationMiddleware(stack); err != nil {
 		return err
 	}

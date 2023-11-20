@@ -113,6 +113,9 @@ func (c *Client) addOperationUpdateTrustedTokenIssuerMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateTrustedTokenIssuerValidationMiddleware(stack); err != nil {
 		return err
 	}

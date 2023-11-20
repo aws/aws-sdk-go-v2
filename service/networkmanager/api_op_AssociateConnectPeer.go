@@ -120,6 +120,9 @@ func (c *Client) addOperationAssociateConnectPeerMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateConnectPeerValidationMiddleware(stack); err != nil {
 		return err
 	}

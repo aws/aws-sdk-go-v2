@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteSlotTypeVersionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addV4DetectSkewMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteSlotTypeVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
