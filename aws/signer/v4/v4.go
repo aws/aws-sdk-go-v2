@@ -273,7 +273,7 @@ func buildAuthorizationHeader(credentialStr, signedHeadersStr, signingSignature 
 // will not be lost.
 //
 // The passed in request will be modified in place.
-func (s Signer) SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time, optFns ...func(options *SignerOptions)) error {
+func (s *Signer) SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time, optFns ...func(options *SignerOptions)) error {
 	options := s.options
 
 	for _, fn := range optFns {
