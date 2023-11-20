@@ -201,6 +201,9 @@ func TestFailedRetrieveCredentials(t *testing.T) {
   "code": "Error",
   "message": "Message"
 }`))),
+				Header: http.Header{
+					"Content-Type": {"application/json"},
+				},
 			}, nil
 		})
 	})
