@@ -1,3 +1,7 @@
+# v1.21.2 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.1 (2023-11-17)
 
 * **Documentation**: Added support for SAP HANA in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies with pre and post scripts.

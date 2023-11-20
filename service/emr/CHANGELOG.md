@@ -1,3 +1,7 @@
+# v1.34.1 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2023-11-17)
 
 * **Feature**: Launch support for IAM Identity Center Trusted Identity Propagation and workspace storage encryption using AWS KMS in EMR Studio

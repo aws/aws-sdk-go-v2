@@ -1,3 +1,7 @@
+# v1.22.1 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2023-11-17)
 
 * **Feature**: Change the default value of these fields from 0 to null: MaxConnections, MaxPendingRequests, MaxRequests, HealthCheckThreshold, PortNumber, and HealthCheckPolicy -> port. Users are not expected to perceive the change, except that badRequestException is thrown when required fields missing configured.

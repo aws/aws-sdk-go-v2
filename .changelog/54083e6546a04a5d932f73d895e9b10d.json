@@ -1,8 +1,0 @@
-{
-    "id": "54083e65-46a0-4a5d-932f-73d895e9b10d",
-    "type": "feature",
-    "description": "This release adds support for Security group referencing over Transit gateways, enabling you to simplify Security group management and control of instance-to-instance traffic across VPCs that are connected by Transit gateway.",
-    "modules": [
-        "service/ec2"
-    ]
-}

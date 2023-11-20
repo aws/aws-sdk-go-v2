@@ -1,3 +1,7 @@
+# v1.26.1 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2023-11-16)
 
 * **Feature**: Introduces new APIs ListIncidentFindings and BatchGetIncidentFindings to use findings related to an incident.

@@ -1,3 +1,7 @@
+# v1.9.1 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2023-11-16)
 
 * **Feature**: This release includes updates to the Dev Environment APIs to include an optional vpcConnectionName parameter that supports using Dev Environments with Amazon VPC.

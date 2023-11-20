@@ -1,3 +1,7 @@
+# v1.37.1 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.0 (2023-11-16)
 
 * **Feature**: Enables customers to update their PerUnitStorageThroughput on their Lustre file systems.

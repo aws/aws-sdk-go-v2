@@ -1,3 +1,7 @@
+# v1.45.1 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.0 (2023-11-16)
 
 * **Feature**: GA release the ability to index and search devices based on their GeoLocation data. With GeoQueries you can narrow your search to retrieve devices located in the desired geographic boundary.

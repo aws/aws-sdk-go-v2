@@ -1,3 +1,7 @@
+# v1.48.1 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.0 (2023-11-16)
 
 * **Feature**: Adds support for logging configuration in Lambda Functions. Customers will have more control how their function logs are captured and to which cloud watch log group they are delivered also.

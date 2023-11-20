@@ -1,3 +1,7 @@
+# v1.20.4 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.3 (2023-11-17)
 
 * **Documentation**: A minor doc only update related to changing the date of an API change.

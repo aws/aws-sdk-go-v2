@@ -1,3 +1,7 @@
+# v1.22.1 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2023-11-17)
 
 * **Feature**: Improves support for configuring RefreshToken and TokenExchange grants on applications.

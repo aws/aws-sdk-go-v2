@@ -1,3 +1,7 @@
+# v1.19.1 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2023-11-17)
 
 * **Feature**: This release adds QuickResponse as a new Wisdom resource and Wisdom APIs for import, create, read, search, update and delete QuickResponse resources.

@@ -1,3 +1,7 @@
+# v1.23.1 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2023-11-17)
 
 * **Feature**: Documentation and operational updates for Amazon ECR, adding support for pull through cache rules for upstream registries that require authentication.

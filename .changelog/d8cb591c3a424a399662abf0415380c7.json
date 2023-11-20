@@ -1,8 +1,0 @@
-{
-    "id": "d8cb591c-3a42-4a39-9662-abf0415380c7",
-    "type": "feature",
-    "description": "This release updates a few CodeStar Connections related APIs.",
-    "modules": [
-        "service/codestarconnections"
-    ]
-}

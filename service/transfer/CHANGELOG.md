@@ -1,3 +1,7 @@
+# v1.38.1 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.0 (2023-11-16)
 
 * **Feature**: Introduced S3StorageOptions for servers to enable directory listing optimizations and added Type fields to logical directory mappings.

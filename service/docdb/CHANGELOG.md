@@ -1,3 +1,8 @@
+# v1.28.0 (2023-11-20)
+
+* **Feature**: Amazon DocumentDB updates for new cluster storage configuration: Amazon DocumentDB I/O-Optimized.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.2 (2023-11-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

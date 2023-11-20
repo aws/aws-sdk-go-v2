@@ -1,3 +1,7 @@
+# v1.21.1 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2023-11-17)
 
 * **Feature**: CodePipeline now supports overriding source revisions to achieve manual re-deploy of a past revision

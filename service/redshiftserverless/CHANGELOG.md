@@ -1,3 +1,7 @@
+# v1.13.1 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2023-11-17)
 
 * **Feature**: Updated SDK for Amazon Redshift Serverless, which provides the ability to configure a connection with IAM Identity Center to manage user and group access to databases.

@@ -1,3 +1,18 @@
+# Release (2023-11-20)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.23.1
+  * **Bug Fix**: Mark v4.SignHTTPRequestMiddleware as deprecated, this middleware is no longer used by the SDK.
+* `github.com/aws/aws-sdk-go-v2/service/codestarconnections`: [v1.19.0](service/codestarconnections/CHANGELOG.md#v1190-2023-11-20)
+  * **Feature**: This release updates a few CodeStar Connections related APIs.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.28.0](service/docdb/CHANGELOG.md#v1280-2023-11-20)
+  * **Feature**: Amazon DocumentDB updates for new cluster storage configuration: Amazon DocumentDB I/O-Optimized.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.137.0](service/ec2/CHANGELOG.md#v11370-2023-11-20)
+  * **Feature**: This release adds support for Security group referencing over Transit gateways, enabling you to simplify Security group management and control of instance-to-instance traffic across VPCs that are connected by Transit gateway.
+
 # Release (2023-11-17)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.63.1 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.63.0 (2023-11-17)
 
 * **Feature**: This release adds support for option groups and replica enhancements to Amazon RDS Custom.

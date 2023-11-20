@@ -1,3 +1,7 @@
+# v1.6.1 (2023-11-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2023-11-17)
 
 * **Feature**: Adding BatchIsAuthorized API which supports multiple authorization requests against a PolicyStore
