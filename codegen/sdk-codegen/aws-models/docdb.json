@@ -1986,6 +1986,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The cluster identifier of the new global cluster.</p>"
                     }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>\n         <note>\n            <p>When you create a DocumentDB DB cluster with the storage type set to <code>iopt1</code>, the storage type is returned\n                    in the response. The storage type isn't returned when you set it to <code>standard</code>.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -2774,6 +2780,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is\n            enabled, the cluster cannot be deleted unless it is modified and\n                <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code>\n            protects clusters from being accidentally deleted.</p>"
                     }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Storage type associated with your cluster</p>\n         <p>Storage type associated with your cluster</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -3147,6 +3159,12 @@
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
                         "smithy.api#documentation": "<p>If the cluster snapshot was copied from a source cluster snapshot, the ARN for\n            the source cluster snapshot; otherwise, a null value.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Storage type associated with your cluster snapshot </p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>"
                     }
                 }
             },
@@ -6459,6 +6477,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is\n            enabled, the cluster cannot be deleted unless it is modified and\n                <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code>\n            protects clusters from being accidentally deleted.</p>"
                     }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -6992,6 +7016,12 @@
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether an instance is in a virtual private cloud (VPC).</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster</p>"
                     }
                 }
             },
@@ -7761,6 +7791,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the DB cluster parameter group to associate with this DB cluster.</p>\n         <p>\n            <i>Type:</i> String.         <i>Required:</i> No.</p>\n         <p>If this argument is omitted, the default DB cluster parameter group is used.\n        If supplied, must match the name of an existing default DB cluster parameter group.\n        The string must consist of from 1 to 255 letters, numbers or hyphens. Its first\n        character must be a letter, and it cannot end with a hyphen or contain two consecutive\n        hyphens.</p>"
                     }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -7915,6 +7951,12 @@
                     "target": "com.amazonaws.docdb#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>"
                     }
                 }
             },
