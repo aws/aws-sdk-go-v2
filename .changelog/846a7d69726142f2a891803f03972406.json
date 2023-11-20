@@ -1,0 +1,8 @@
+{
+    "id": "846a7d69-7261-42f2-a891-803f03972406",
+    "type": "feature",
+    "description": "Amazon DocumentDB updates for new cluster storage configuration: Amazon DocumentDB I/O-Optimized.",
+    "modules": [
+        "service/docdb"
+    ]
+}

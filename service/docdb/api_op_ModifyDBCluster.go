@@ -119,6 +119,12 @@ type ModifyDBClusterInput struct {
 	// Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
+	// The storage type to associate with the DB cluster. For information on storage
+	// types for Amazon DocumentDB clusters, see Cluster storage configurations in the
+	// Amazon DocumentDB Developer Guide. Valid values for storage type - standard |
+	// iopt1 Default value is standard
+	StorageType *string
+
 	// A list of virtual private cloud (VPC) security groups that the cluster will
 	// belong to.
 	VpcSecurityGroupIds []string

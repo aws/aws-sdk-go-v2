@@ -2328,6 +2328,20 @@ type CreateTransitGatewayVpcAttachmentRequestOptions struct {
 	// Enable or disable IPv6 support. The default is disable .
 	Ipv6Support Ipv6SupportValue
 
+	// Enables you to reference a security group across VPCs attached to a transit
+	// gateway (TGW). Use this option to simplify security group management and control
+	// of instance-to-instance traffic across VPCs that are connected by transit
+	// gateway. You can also use this option to migrate from VPC peering (which was the
+	// only option that supported security group referencing) to transit gateways
+	// (which now also support security group referencing). This option is disabled by
+	// default and there are no additional costs to use this feature. If you don't
+	// enable or disable SecurityGroupReferencingSupport in the request, the attachment
+	// will inherit the security group referencing support setting on the transit
+	// gateway. For important information about this feature, see Create a transit
+	// gateway attachment to a VPC (https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#create-vpc-attachment)
+	// in the Amazon Web Services Transit Gateway Guide.
+	SecurityGroupReferencingSupport SecurityGroupReferencingSupportValue
+
 	noSmithyDocumentSerde
 }
 
@@ -10069,6 +10083,17 @@ type ModifyTransitGatewayOptions struct {
 	// Removes CIDR blocks for the transit gateway.
 	RemoveTransitGatewayCidrBlocks []string
 
+	// Enables you to reference a security group across VPCs attached to a transit
+	// gateway (TGW). Use this option to simplify security group management and control
+	// of instance-to-instance traffic across VPCs that are connected by transit
+	// gateway. You can also use this option to migrate from VPC peering (which was the
+	// only option that supported security group referencing) to transit gateways
+	// (which now also support security group referencing). This option is disabled by
+	// default and there are no additional costs to use this feature. For important
+	// information about this feature, see Create a transit gateway (https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw)
+	// in the Amazon Web Services Transit Gateway Guide.
+	SecurityGroupReferencingSupport SecurityGroupReferencingSupportValue
+
 	// Enable or disable Equal Cost Multipath Protocol support.
 	VpnEcmpSupport VpnEcmpSupportValue
 
@@ -10088,6 +10113,17 @@ type ModifyTransitGatewayVpcAttachmentRequestOptions struct {
 
 	// Enable or disable IPv6 support. The default is enable .
 	Ipv6Support Ipv6SupportValue
+
+	// Enables you to reference a security group across VPCs attached to a transit
+	// gateway (TGW). Use this option to simplify security group management and control
+	// of instance-to-instance traffic across VPCs that are connected by transit
+	// gateway. You can also use this option to migrate from VPC peering (which was the
+	// only option that supported security group referencing) to transit gateways
+	// (which now also support security group referencing). This option is disabled by
+	// default and there are no additional costs to use this feature. For important
+	// information about this feature, see Create a transit gateway attachment to a VPC (https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#create-vpc-attachment)
+	// in the Amazon Web Services Transit Gateway Guide.
+	SecurityGroupReferencingSupport SecurityGroupReferencingSupportValue
 
 	noSmithyDocumentSerde
 }
@@ -12099,7 +12135,7 @@ type ReferencedSecurityGroup struct {
 	// The ID of the VPC.
 	VpcId *string
 
-	// The ID of the VPC peering connection.
+	// The ID of the VPC peering connection (if applicable).
 	VpcPeeringConnectionId *string
 
 	noSmithyDocumentSerde
@@ -13681,7 +13717,16 @@ type SecurityGroupReference struct {
 	// The ID of the VPC with the referencing security group.
 	ReferencingVpcId *string
 
-	// The ID of the VPC peering connection.
+	// The ID of the transit gateway (if applicable). For more information about
+	// security group referencing for transit gateways, see Create a transit gateway
+	// attachment to a VPC (https://docs.aws.amazon.com/tgw/tgw-vpc-attachments.html#create-vpc-attachment)
+	// in the Amazon Web Services Transit Gateway Guide.
+	TransitGatewayId *string
+
+	// The ID of the VPC peering connection (if applicable). For more information
+	// about security group referencing for peering connections, see Update your
+	// security groups to reference peer security groups (https://docs.aws.amazon.com/peering/vpc-peering-security-groups.html)
+	// in the VPC Peering Guide.
 	VpcPeeringConnectionId *string
 
 	noSmithyDocumentSerde
@@ -16302,6 +16347,17 @@ type TransitGatewayOptions struct {
 	// The ID of the default propagation route table.
 	PropagationDefaultRouteTableId *string
 
+	// Enables you to reference a security group across VPCs attached to a transit
+	// gateway (TGW). Use this option to simplify security group management and control
+	// of instance-to-instance traffic across VPCs that are connected by transit
+	// gateway. You can also use this option to migrate from VPC peering (which was the
+	// only option that supported security group referencing) to transit gateways
+	// (which now also support security group referencing). This option is disabled by
+	// default and there are no additional costs to use this feature. For important
+	// information about this feature, see Create a transit gateway (https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw)
+	// in the Amazon Web Services Transit Gateway Guide.
+	SecurityGroupReferencingSupport SecurityGroupReferencingSupportValue
+
 	// The transit gateway CIDR blocks.
 	TransitGatewayCidrBlocks []string
 
@@ -16539,6 +16595,17 @@ type TransitGatewayRequestOptions struct {
 	// Indicates whether multicast is enabled on the transit gateway
 	MulticastSupport MulticastSupportValue
 
+	// Enables you to reference a security group across VPCs attached to a transit
+	// gateway (TGW). Use this option to simplify security group management and control
+	// of instance-to-instance traffic across VPCs that are connected by transit
+	// gateway. You can also use this option to migrate from VPC peering (which was the
+	// only option that supported security group referencing) to transit gateways
+	// (which now also support security group referencing). This option is disabled by
+	// default and there are no additional costs to use this feature. For important
+	// information about this feature, see Create a transit gateway (https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw)
+	// in the Amazon Web Services Transit Gateway Guide.
+	SecurityGroupReferencingSupport SecurityGroupReferencingSupportValue
+
 	// One or more IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size
 	// /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.
 	TransitGatewayCidrBlocks []string
@@ -16770,6 +16837,11 @@ type TransitGatewayVpcAttachmentOptions struct {
 
 	// Indicates whether IPv6 support is disabled.
 	Ipv6Support Ipv6SupportValue
+
+	// For important information about this feature, see Create a transit gateway
+	// attachment to a VPC (https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#create-vpc-attachment)
+	// in the Amazon Web Services Transit Gateway Guide.
+	SecurityGroupReferencingSupport SecurityGroupReferencingSupportValue
 
 	noSmithyDocumentSerde
 }

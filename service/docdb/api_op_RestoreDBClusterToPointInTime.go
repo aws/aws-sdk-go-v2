@@ -107,6 +107,12 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// cluster.
 	RestoreType *string
 
+	// The storage type to associate with the DB cluster. For information on storage
+	// types for Amazon DocumentDB clusters, see Cluster storage configurations in the
+	// Amazon DocumentDB Developer Guide. Valid values for storage type - standard |
+	// iopt1 Default value is standard
+	StorageType *string
+
 	// The tags to be assigned to the restored cluster.
 	Tags []types.Tag
 

@@ -199,6 +199,12 @@ type DBCluster struct {
 	// Specifies whether the cluster is encrypted.
 	StorageEncrypted *bool
 
+	// Storage type associated with your cluster Storage type associated with your
+	// cluster For information on storage types for Amazon DocumentDB clusters, see
+	// Cluster storage configurations in the Amazon DocumentDB Developer Guide. Valid
+	// values for storage type - standard | iopt1 Default value is standard
+	StorageType *string
+
 	// Provides a list of virtual private cloud (VPC) security groups that the cluster
 	// belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership
@@ -324,6 +330,12 @@ type DBClusterSnapshot struct {
 
 	// Specifies whether the cluster snapshot is encrypted.
 	StorageEncrypted *bool
+
+	// Storage type associated with your cluster snapshot For information on storage
+	// types for Amazon DocumentDB clusters, see Cluster storage configurations in the
+	// Amazon DocumentDB Developer Guide. Valid values for storage type - standard |
+	// iopt1 Default value is standard
+	StorageType *string
 
 	// Provides the virtual private cloud (VPC) ID that is associated with the cluster
 	// snapshot.
@@ -768,6 +780,9 @@ type OrderableDBInstanceOption struct {
 
 	// The license model for an instance.
 	LicenseModel *string
+
+	// The storage type to associate with the DB cluster
+	StorageType *string
 
 	// Indicates whether an instance is in a virtual private cloud (VPC).
 	Vpc *bool
