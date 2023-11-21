@@ -250,6 +250,26 @@ func (m *validateOpCreateKeyGroup) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateKeyValueStore struct {
+}
+
+func (*validateOpCreateKeyValueStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateKeyValueStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateKeyValueStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateKeyValueStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMonitoringSubscription struct {
 }
 
@@ -570,6 +590,26 @@ func (m *validateOpDeleteKeyGroup) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteKeyValueStore struct {
+}
+
+func (*validateOpDeleteKeyValueStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteKeyValueStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteKeyValueStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteKeyValueStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteMonitoringSubscription struct {
 }
 
@@ -705,6 +745,26 @@ func (m *validateOpDescribeFunction) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeFunctionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeKeyValueStore struct {
+}
+
+func (*validateOpDescribeKeyValueStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeKeyValueStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeKeyValueStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeKeyValueStoreInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1670,6 +1730,26 @@ func (m *validateOpUpdateKeyGroup) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateKeyValueStore struct {
+}
+
+func (*validateOpUpdateKeyValueStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateKeyValueStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateKeyValueStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateKeyValueStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateOriginAccessControl struct {
 }
 
@@ -1838,6 +1918,10 @@ func addOpCreateKeyGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateKeyGroup{}, middleware.After)
 }
 
+func addOpCreateKeyValueStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateKeyValueStore{}, middleware.After)
+}
+
 func addOpCreateMonitoringSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMonitoringSubscription{}, middleware.After)
 }
@@ -1902,6 +1986,10 @@ func addOpDeleteKeyGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteKeyGroup{}, middleware.After)
 }
 
+func addOpDeleteKeyValueStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteKeyValueStore{}, middleware.After)
+}
+
 func addOpDeleteMonitoringSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMonitoringSubscription{}, middleware.After)
 }
@@ -1928,6 +2016,10 @@ func addOpDeleteStreamingDistributionValidationMiddleware(stack *middleware.Stac
 
 func addOpDescribeFunctionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFunction{}, middleware.After)
+}
+
+func addOpDescribeKeyValueStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeKeyValueStore{}, middleware.After)
 }
 
 func addOpGetCachePolicyConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -2120,6 +2212,10 @@ func addOpUpdateFunctionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateKeyGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateKeyGroup{}, middleware.After)
+}
+
+func addOpUpdateKeyValueStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateKeyValueStore{}, middleware.After)
 }
 
 func addOpUpdateOriginAccessControlValidationMiddleware(stack *middleware.Stack) error {
@@ -3065,6 +3161,11 @@ func validateFunctionConfig(v *types.FunctionConfig) error {
 	if len(v.Runtime) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Runtime"))
 	}
+	if v.KeyValueStoreAssociations != nil {
+		if err := validateKeyValueStoreAssociations(v.KeyValueStoreAssociations); err != nil {
+			invalidParams.AddNested("KeyValueStoreAssociations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3105,6 +3206,24 @@ func validateHeaders(v *types.Headers) error {
 	}
 }
 
+func validateImportSource(v *types.ImportSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportSource"}
+	if len(v.SourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
+	}
+	if v.SourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInvalidationBatch(v *types.InvalidationBatch) error {
 	if v == nil {
 		return nil
@@ -3137,6 +3256,58 @@ func validateKeyGroupConfig(v *types.KeyGroupConfig) error {
 	}
 	if v.Items == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Items"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKeyValueStoreAssociation(v *types.KeyValueStoreAssociation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KeyValueStoreAssociation"}
+	if v.KeyValueStoreARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyValueStoreARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKeyValueStoreAssociationList(v []types.KeyValueStoreAssociation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KeyValueStoreAssociationList"}
+	for i := range v {
+		if err := validateKeyValueStoreAssociation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKeyValueStoreAssociations(v *types.KeyValueStoreAssociations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KeyValueStoreAssociations"}
+	if v.Quantity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Quantity"))
+	}
+	if v.Items != nil {
+		if err := validateKeyValueStoreAssociationList(v.Items); err != nil {
+			invalidParams.AddNested("Items", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4820,6 +4991,26 @@ func validateOpCreateKeyGroupInput(v *CreateKeyGroupInput) error {
 	}
 }
 
+func validateOpCreateKeyValueStoreInput(v *CreateKeyValueStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateKeyValueStoreInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ImportSource != nil {
+		if err := validateImportSource(v.ImportSource); err != nil {
+			invalidParams.AddNested("ImportSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateMonitoringSubscriptionInput(v *CreateMonitoringSubscriptionInput) error {
 	if v == nil {
 		return nil
@@ -5107,6 +5298,24 @@ func validateOpDeleteKeyGroupInput(v *DeleteKeyGroupInput) error {
 	}
 }
 
+func validateOpDeleteKeyValueStoreInput(v *DeleteKeyValueStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteKeyValueStoreInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.IfMatch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IfMatch"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteMonitoringSubscriptionInput(v *DeleteMonitoringSubscriptionInput) error {
 	if v == nil {
 		return nil
@@ -5202,6 +5411,21 @@ func validateOpDescribeFunctionInput(v *DescribeFunctionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeFunctionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeKeyValueStoreInput(v *DescribeKeyValueStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeKeyValueStoreInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -6011,6 +6235,27 @@ func validateOpUpdateKeyGroupInput(v *UpdateKeyGroupInput) error {
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateKeyValueStoreInput(v *UpdateKeyValueStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateKeyValueStoreInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Comment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Comment"))
+	}
+	if v.IfMatch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IfMatch"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

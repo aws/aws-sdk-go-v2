@@ -1,3 +1,7 @@
+# v1.137.1 (2023-11-21)
+
+* **Documentation**: Documentation updates for Amazon EC2.
+
 # v1.137.0 (2023-11-20)
 
 * **Feature**: This release adds support for Security group referencing over Transit gateways, enabling you to simplify Security group management and control of instance-to-instance traffic across VPCs that are connected by Transit gateway.

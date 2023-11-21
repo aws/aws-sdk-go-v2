@@ -30,6 +30,26 @@ func (m *validateOpBatchPutPropertyValues) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelMetadataTransferJob struct {
+}
+
+func (*validateOpCancelMetadataTransferJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelMetadataTransferJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelMetadataTransferJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelMetadataTransferJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateComponentType struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpCreateEntity) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateEntityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateMetadataTransferJob struct {
+}
+
+func (*validateOpCreateMetadataTransferJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMetadataTransferJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMetadataTransferJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMetadataTransferJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -290,6 +330,26 @@ func (m *validateOpGetEntity) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMetadataTransferJob struct {
+}
+
+func (*validateOpGetMetadataTransferJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMetadataTransferJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMetadataTransferJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMetadataTransferJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPropertyValueHistory struct {
 }
 
@@ -390,6 +450,26 @@ func (m *validateOpGetWorkspace) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListComponents struct {
+}
+
+func (*validateOpListComponents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListComponents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListComponentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListComponentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListComponentTypes struct {
 }
 
@@ -425,6 +505,46 @@ func (m *validateOpListEntities) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListEntitiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListMetadataTransferJobs struct {
+}
+
+func (*validateOpListMetadataTransferJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMetadataTransferJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMetadataTransferJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMetadataTransferJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListProperties struct {
+}
+
+func (*validateOpListProperties) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListProperties) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPropertiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPropertiesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -654,12 +774,20 @@ func addOpBatchPutPropertyValuesValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpBatchPutPropertyValues{}, middleware.After)
 }
 
+func addOpCancelMetadataTransferJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelMetadataTransferJob{}, middleware.After)
+}
+
 func addOpCreateComponentTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateComponentType{}, middleware.After)
 }
 
 func addOpCreateEntityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEntity{}, middleware.After)
+}
+
+func addOpCreateMetadataTransferJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMetadataTransferJob{}, middleware.After)
 }
 
 func addOpCreateSceneValidationMiddleware(stack *middleware.Stack) error {
@@ -706,6 +834,10 @@ func addOpGetEntityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEntity{}, middleware.After)
 }
 
+func addOpGetMetadataTransferJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMetadataTransferJob{}, middleware.After)
+}
+
 func addOpGetPropertyValueHistoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPropertyValueHistory{}, middleware.After)
 }
@@ -726,12 +858,24 @@ func addOpGetWorkspaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWorkspace{}, middleware.After)
 }
 
+func addOpListComponentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListComponents{}, middleware.After)
+}
+
 func addOpListComponentTypesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListComponentTypes{}, middleware.After)
 }
 
 func addOpListEntitiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEntities{}, middleware.After)
+}
+
+func addOpListMetadataTransferJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMetadataTransferJobs{}, middleware.After)
+}
+
+func addOpListPropertiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListProperties{}, middleware.After)
 }
 
 func addOpListScenesValidationMiddleware(stack *middleware.Stack) error {
@@ -848,6 +992,76 @@ func validateComponentUpdatesMapRequest(v map[string]types.ComponentUpdateReques
 	}
 }
 
+func validateCompositeComponentRequest(v *types.CompositeComponentRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompositeComponentRequest"}
+	if v.Properties != nil {
+		if err := validatePropertyRequests(v.Properties); err != nil {
+			invalidParams.AddNested("Properties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCompositeComponentsMapRequest(v map[string]types.CompositeComponentRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompositeComponentsMapRequest"}
+	for key := range v {
+		value := v[key]
+		if err := validateCompositeComponentRequest(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCompositeComponentUpdateRequest(v *types.CompositeComponentUpdateRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompositeComponentUpdateRequest"}
+	if v.PropertyUpdates != nil {
+		if err := validatePropertyRequests(v.PropertyUpdates); err != nil {
+			invalidParams.AddNested("PropertyUpdates", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCompositeComponentUpdatesMapRequest(v map[string]types.CompositeComponentUpdateRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompositeComponentUpdatesMapRequest"}
+	for key := range v {
+		value := v[key]
+		if err := validateCompositeComponentUpdateRequest(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataConnector(v *types.DataConnector) error {
 	if v == nil {
 		return nil
@@ -876,6 +1090,31 @@ func validateDataType(v *types.DataType) error {
 	if v.NestedType != nil {
 		if err := validateDataType(v.NestedType); err != nil {
 			invalidParams.AddNested("NestedType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestinationConfiguration(v *types.DestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.S3Configuration != nil {
+		if err := validateS3DestinationConfiguration(v.S3Configuration); err != nil {
+			invalidParams.AddNested("S3Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IotTwinMakerConfiguration != nil {
+		if err := validateIotTwinMakerDestinationConfiguration(v.IotTwinMakerConfiguration); err != nil {
+			invalidParams.AddNested("IotTwinMakerConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -917,6 +1156,36 @@ func validateEntries(v []types.PropertyValueEntry) error {
 	}
 }
 
+func validateFilterByComponentType(v *types.FilterByComponentType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterByComponentType"}
+	if v.ComponentTypeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentTypeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterByEntity(v *types.FilterByEntity) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterByEntity"}
+	if v.EntityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFunctionRequest(v *types.FunctionRequest) error {
 	if v == nil {
 		return nil
@@ -943,6 +1212,82 @@ func validateFunctionsRequest(v map[string]types.FunctionRequest) error {
 		value := v[key]
 		if err := validateFunctionRequest(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIotTwinMakerDestinationConfiguration(v *types.IotTwinMakerDestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IotTwinMakerDestinationConfiguration"}
+	if v.Workspace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Workspace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIotTwinMakerSourceConfiguration(v *types.IotTwinMakerSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IotTwinMakerSourceConfiguration"}
+	if v.Workspace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Workspace"))
+	}
+	if v.Filters != nil {
+		if err := validateIotTwinMakerSourceConfigurationFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIotTwinMakerSourceConfigurationFilter(v types.IotTwinMakerSourceConfigurationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IotTwinMakerSourceConfigurationFilter"}
+	switch uv := v.(type) {
+	case *types.IotTwinMakerSourceConfigurationFilterMemberFilterByComponentType:
+		if err := validateFilterByComponentType(&uv.Value); err != nil {
+			invalidParams.AddNested("[filterByComponentType]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.IotTwinMakerSourceConfigurationFilterMemberFilterByEntity:
+		if err := validateFilterByEntity(&uv.Value); err != nil {
+			invalidParams.AddNested("[filterByEntity]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIotTwinMakerSourceConfigurationFilters(v []types.IotTwinMakerSourceConfigurationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IotTwinMakerSourceConfigurationFilters"}
+	for i := range v {
+		if err := validateIotTwinMakerSourceConfigurationFilter(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1140,6 +1485,78 @@ func validatePropertyValues(v []types.PropertyValue) error {
 	}
 }
 
+func validateS3DestinationConfiguration(v *types.S3DestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3DestinationConfiguration"}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3SourceConfiguration(v *types.S3SourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3SourceConfiguration"}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceConfiguration(v *types.SourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.S3Configuration != nil {
+		if err := validateS3SourceConfiguration(v.S3Configuration); err != nil {
+			invalidParams.AddNested("S3Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IotTwinMakerConfiguration != nil {
+		if err := validateIotTwinMakerSourceConfiguration(v.IotTwinMakerConfiguration); err != nil {
+			invalidParams.AddNested("IotTwinMakerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceConfigurations(v []types.SourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceConfigurations"}
+	for i := range v {
+		if err := validateSourceConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTabularConditions(v *types.TabularConditions) error {
 	if v == nil {
 		return nil
@@ -1171,6 +1588,21 @@ func validateOpBatchPutPropertyValuesInput(v *BatchPutPropertyValuesInput) error
 		if err := validateEntries(v.Entries); err != nil {
 			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelMetadataTransferJobInput(v *CancelMetadataTransferJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelMetadataTransferJobInput"}
+	if v.MetadataTransferJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataTransferJobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1221,6 +1653,37 @@ func validateOpCreateEntityInput(v *CreateEntityInput) error {
 	if v.Components != nil {
 		if err := validateComponentsMapRequest(v.Components); err != nil {
 			invalidParams.AddNested("Components", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CompositeComponents != nil {
+		if err := validateCompositeComponentsMapRequest(v.CompositeComponents); err != nil {
+			invalidParams.AddNested("CompositeComponents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateMetadataTransferJobInput(v *CreateMetadataTransferJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMetadataTransferJobInput"}
+	if v.Sources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
+	} else if v.Sources != nil {
+		if err := validateSourceConfigurations(v.Sources); err != nil {
+			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	} else if v.Destination != nil {
+		if err := validateDestinationConfiguration(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1279,12 +1742,6 @@ func validateOpCreateWorkspaceInput(v *CreateWorkspaceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateWorkspaceInput"}
 	if v.WorkspaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
-	}
-	if v.S3Location == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3Location"))
-	}
-	if v.Role == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Role"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1434,6 +1891,21 @@ func validateOpGetEntityInput(v *GetEntityInput) error {
 	}
 }
 
+func validateOpGetMetadataTransferJobInput(v *GetMetadataTransferJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMetadataTransferJobInput"}
+	if v.MetadataTransferJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataTransferJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetPropertyValueHistoryInput(v *GetPropertyValueHistoryInput) error {
 	if v == nil {
 		return nil
@@ -1523,6 +1995,24 @@ func validateOpGetWorkspaceInput(v *GetWorkspaceInput) error {
 	}
 }
 
+func validateOpListComponentsInput(v *ListComponentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListComponentsInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if v.EntityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListComponentTypesInput(v *ListComponentTypesInput) error {
 	if v == nil {
 		return nil
@@ -1545,6 +2035,42 @@ func validateOpListEntitiesInput(v *ListEntitiesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListEntitiesInput"}
 	if v.WorkspaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMetadataTransferJobsInput(v *ListMetadataTransferJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMetadataTransferJobsInput"}
+	if len(v.SourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
+	}
+	if len(v.DestinationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPropertiesInput(v *ListPropertiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPropertiesInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if v.EntityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1694,6 +2220,11 @@ func validateOpUpdateEntityInput(v *UpdateEntityInput) error {
 	if v.ComponentUpdates != nil {
 		if err := validateComponentUpdatesMapRequest(v.ComponentUpdates); err != nil {
 			invalidParams.AddNested("ComponentUpdates", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CompositeComponentUpdates != nil {
+		if err := validateCompositeComponentUpdatesMapRequest(v.CompositeComponentUpdates); err != nil {
+			invalidParams.AddNested("CompositeComponentUpdates", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ParentEntityUpdate != nil {

@@ -32,7 +32,10 @@ func (c *Client) CreateAsset(ctx context.Context, params *CreateAssetInput, optF
 
 type CreateAssetInput struct {
 
-	// The ID of the asset model from which to create the asset.
+	// The ID of the asset model from which to create the asset. This can be either
+	// the actual ID in UUID format, or else externalId: followed by the external ID,
+	// if it has one. For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	AssetModelId *string
@@ -44,6 +47,17 @@ type CreateAssetInput struct {
 
 	// A description for the asset.
 	AssetDescription *string
+
+	// An external ID to assign to the asset. The external ID must be unique within
+	// your Amazon Web Services account. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	AssetExternalId *string
+
+	// The ID to assign to the asset, if desired. IoT SiteWise automatically generates
+	// a unique ID for you, so this parameter is never required. However, if you prefer
+	// to supply your own ID instead, you can specify it here in UUID format. If you
+	// specify your own ID, it must be globally unique.
+	AssetId *string
 
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
@@ -67,8 +81,8 @@ type CreateAssetOutput struct {
 	// This member is required.
 	AssetArn *string
 
-	// The ID of the asset. This ID uniquely identifies the asset within IoT SiteWise
-	// and can be used with other IoT SiteWise APIs.
+	// The ID of the asset, in UUID format. This ID uniquely identifies the asset
+	// within IoT SiteWise and can be used with other IoT SiteWise API operations.
 	//
 	// This member is required.
 	AssetId *string

@@ -13,7 +13,10 @@ import (
 )
 
 // Run queries to access information from your knowledge graph of entities within
-// individual workspaces.
+// individual workspaces. The ExecuteQuery action only works with Amazon Web
+// Services Java SDK2 (https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/home.html)
+// . ExecuteQuery will not work with any Amazon Web Services Java SDK version <
+// 2.x.
 func (c *Client) ExecuteQuery(ctx context.Context, params *ExecuteQueryInput, optFns ...func(*Options)) (*ExecuteQueryOutput, error) {
 	if params == nil {
 		params = &ExecuteQueryInput{}
@@ -41,8 +44,7 @@ type ExecuteQueryInput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// The maximum number of results to return at one time. The default is 25. Valid
-	// Range: Minimum value of 1. Maximum value of 250.
+	// The maximum number of results to return at one time. The default is 50.
 	MaxResults *int32
 
 	// The string that specifies the next page of results.
@@ -186,8 +188,7 @@ var _ ExecuteQueryAPIClient = (*Client)(nil)
 
 // ExecuteQueryPaginatorOptions is the paginator options for ExecuteQuery
 type ExecuteQueryPaginatorOptions struct {
-	// The maximum number of results to return at one time. The default is 25. Valid
-	// Range: Minimum value of 1. Maximum value of 250.
+	// The maximum number of results to return at one time. The default is 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

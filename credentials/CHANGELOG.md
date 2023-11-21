@@ -1,3 +1,7 @@
+# v1.16.4 (2023-11-21)
+
+* **Bug Fix**: Don't expect error responses to have a JSON payload in the endpointcreds provider.
+
 # v1.16.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

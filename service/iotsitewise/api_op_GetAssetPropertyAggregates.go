@@ -61,14 +61,14 @@ type GetAssetPropertyAggregatesInput struct {
 	// This member is required.
 	StartDate *time.Time
 
-	// The ID of the asset.
+	// The ID of the asset, in UUID format.
 	AssetId *string
 
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
 	//   - The size of the result set is equal to 1 MB.
 	//   - The number of data points in the result set is equal to the value of
-	//   maxResults . The maximum value of maxResults is 250.
+	//   maxResults . The maximum value of maxResults is 2500.
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -80,7 +80,7 @@ type GetAssetPropertyAggregatesInput struct {
 	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
 
-	// The ID of the asset property.
+	// The ID of the asset property, in UUID format.
 	PropertyId *string
 
 	// The quality by which to filter asset data.
@@ -233,7 +233,7 @@ type GetAssetPropertyAggregatesPaginatorOptions struct {
 	// set is returned in the two cases, whichever occurs first.
 	//   - The size of the result set is equal to 1 MB.
 	//   - The number of data points in the result set is equal to the value of
-	//   maxResults . The maximum value of maxResults is 250.
+	//   maxResults . The maximum value of maxResults is 2500.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

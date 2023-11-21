@@ -50,17 +50,6 @@ type GetWorkspaceOutput struct {
 	// This member is required.
 	CreationDateTime *time.Time
 
-	// The ARN of the execution role associated with the workspace.
-	//
-	// This member is required.
-	Role *string
-
-	// The ARN of the S3 bucket where resources associated with the workspace are
-	// stored.
-	//
-	// This member is required.
-	S3Location *string
-
 	// The date and time when the workspace was last updated.
 	//
 	// This member is required.
@@ -73,6 +62,16 @@ type GetWorkspaceOutput struct {
 
 	// The description of the workspace.
 	Description *string
+
+	// A list of services that are linked to the workspace.
+	LinkedServices []string
+
+	// The ARN of the execution role associated with the workspace.
+	Role *string
+
+	// The ARN of the S3 bucket where resources associated with the workspace are
+	// stored.
+	S3Location *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

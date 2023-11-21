@@ -7,6 +7,50 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
 )
 
+func ExampleIotSiteWiseSourceConfigurationFilter_outputUsage() {
+	var union types.IotSiteWiseSourceConfigurationFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IotSiteWiseSourceConfigurationFilterMemberFilterByAsset:
+		_ = v.Value // Value is types.FilterByAsset
+
+	case *types.IotSiteWiseSourceConfigurationFilterMemberFilterByAssetModel:
+		_ = v.Value // Value is types.FilterByAssetModel
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.FilterByAssetModel
+var _ *types.FilterByAsset
+
+func ExampleIotTwinMakerSourceConfigurationFilter_outputUsage() {
+	var union types.IotTwinMakerSourceConfigurationFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IotTwinMakerSourceConfigurationFilterMemberFilterByComponentType:
+		_ = v.Value // Value is types.FilterByComponentType
+
+	case *types.IotTwinMakerSourceConfigurationFilterMemberFilterByEntity:
+		_ = v.Value // Value is types.FilterByEntity
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.FilterByComponentType
+var _ *types.FilterByEntity
+
 func ExampleListComponentTypesFilter_outputUsage() {
 	var union types.ListComponentTypesFilter
 	// type switches can be used to check the union value
@@ -57,6 +101,28 @@ func ExampleListEntitiesFilter_outputUsage() {
 
 var _ *string
 var _ *string
+var _ *string
+
+func ExampleListMetadataTransferJobsFilter_outputUsage() {
+	var union types.ListMetadataTransferJobsFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ListMetadataTransferJobsFilterMemberState:
+		_ = v.Value // Value is types.MetadataTransferJobState
+
+	case *types.ListMetadataTransferJobsFilterMemberWorkspaceId:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.MetadataTransferJobState
 var _ *string
 
 func ExampleSyncResourceFilter_outputUsage() {

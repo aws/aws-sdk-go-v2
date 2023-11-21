@@ -35,12 +35,18 @@ func (c *Client) UpdateAssetProperty(ctx context.Context, params *UpdateAssetPro
 
 type UpdateAssetPropertyInput struct {
 
-	// The ID of the asset to be updated.
+	// The ID of the asset to be updated. This can be either the actual ID in UUID
+	// format, or else externalId: followed by the external ID, if it has one. For
+	// more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	AssetId *string
 
-	// The ID of the asset property to be updated.
+	// The ID of the asset property to be updated. This can be either the actual ID in
+	// UUID format, or else externalId: followed by the external ID, if it has one.
+	// For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	PropertyId *string

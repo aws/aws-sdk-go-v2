@@ -129,11 +129,22 @@ type ComponentRequest struct {
 // request.
 type ComponentResponse struct {
 
+	// This flag notes whether all compositeComponents are returned in the API
+	// response.
+	AreAllCompositeComponentsReturned *bool
+
+	// This flag notes whether all properties of the component are returned in the API
+	// response. The maximum number of properties returned is 800.
+	AreAllPropertiesReturned *bool
+
 	// The name of the component.
 	ComponentName *string
 
 	// The ID of the component type.
 	ComponentTypeId *string
+
+	// This lists objects that contain information about the compositeComponents .
+	CompositeComponents map[string]ComponentSummary
 
 	// The name of the property definition set in the request.
 	DefinedIn *string
@@ -150,6 +161,43 @@ type ComponentResponse struct {
 
 	// The status of the component type.
 	Status *Status
+
+	// The syncSource of the sync job, if this entity was created by a sync job.
+	SyncSource *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that returns information about a component summary.
+type ComponentSummary struct {
+
+	// The name of the component.
+	//
+	// This member is required.
+	ComponentName *string
+
+	// The ID of the component type.
+	//
+	// This member is required.
+	ComponentTypeId *string
+
+	// The status of the component type.
+	//
+	// This member is required.
+	Status *Status
+
+	// This string specifies the path to the composite component, starting from the
+	// top-level component.
+	ComponentPath *string
+
+	// The name of the property definition set in the request.
+	DefinedIn *string
+
+	// The description of the component request.
+	Description *string
+
+	// The property groups.
+	PropertyGroups map[string]ComponentPropertyGroupResponse
 
 	// The syncSource of the sync job, if this entity was created by a sync job.
 	SyncSource *string
@@ -197,6 +245,65 @@ type ComponentUpdateRequest struct {
 
 	// The ID of the component type.
 	ComponentTypeId *string
+
+	// The description of the component type.
+	Description *string
+
+	// The property group updates.
+	PropertyGroupUpdates map[string]ComponentPropertyGroupRequest
+
+	// An object that maps strings to the properties to set in the component type
+	// update. Each string in the mapping must be unique to this object.
+	PropertyUpdates map[string]PropertyRequest
+
+	// The update type of the component update request.
+	UpdateType ComponentUpdateType
+
+	noSmithyDocumentSerde
+}
+
+// An object that sets information about the composite component update request.
+type CompositeComponentRequest struct {
+
+	// The description of the component type.
+	Description *string
+
+	// This is an object that maps strings to the properties to set in the component
+	// type. Each string in the mapping must be unique to this object.
+	Properties map[string]PropertyRequest
+
+	// The property groups.
+	PropertyGroups map[string]ComponentPropertyGroupRequest
+
+	noSmithyDocumentSerde
+}
+
+// An object that sets information about the composite component types of a
+// component type.
+type CompositeComponentTypeRequest struct {
+
+	// This is the componentTypeId that the compositeComponentType refers to.
+	ComponentTypeId *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that returns information about the composite component types of a
+// component type.
+type CompositeComponentTypeResponse struct {
+
+	// This is the componentTypeId that this compositeComponentType refers to.
+	ComponentTypeId *string
+
+	// This boolean indicates whether this compositeComponentType is inherited from
+	// its parent.
+	IsInherited *bool
+
+	noSmithyDocumentSerde
+}
+
+// An object that sets information about the composite component update request.
+type CompositeComponentUpdateRequest struct {
 
 	// The description of the component type.
 	Description *string
@@ -283,6 +390,23 @@ type DataValue struct {
 	noSmithyDocumentSerde
 }
 
+// The [link to action] metadata transfer job destination configuration.
+type DestinationConfiguration struct {
+
+	// The destination type.
+	//
+	// This member is required.
+	Type DestinationType
+
+	// The metadata transfer job Amazon Web Services IoT TwinMaker configuration.
+	IotTwinMakerConfiguration *IotTwinMakerDestinationConfiguration
+
+	// The metadata transfer job S3 configuration. [need to add S3 entity]
+	S3Configuration *S3DestinationConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // An object that uniquely identifies an entity property.
 type EntityPropertyReference struct {
 
@@ -293,6 +417,10 @@ type EntityPropertyReference struct {
 
 	// The name of the component.
 	ComponentName *string
+
+	// This string specifies the path to the composite component, starting from the
+	// top-level component.
+	ComponentPath *string
 
 	// The ID of the entity.
 	EntityId *string
@@ -340,7 +468,8 @@ type EntitySummary struct {
 	// The description of the entity.
 	Description *string
 
-	// A Boolean value that specifies whether the entity has child entities or not.
+	// An eventual Boolean value that specifies whether the entity has child entities
+	// or not.
 	HasChildEntities *bool
 
 	// The ID of the parent entity.
@@ -357,6 +486,64 @@ type ErrorDetails struct {
 
 	// The error message.
 	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Filter by asset. [TwinMaker asset]
+type FilterByAsset struct {
+
+	// The external-Id property of an asset.
+	AssetExternalId *string
+
+	// Filter by asset Id.
+	AssetId *string
+
+	// Boolean to include the asset model.
+	IncludeAssetModel *bool
+
+	// Includes sub-assets.[need description hekp for this]
+	IncludeOffspring *bool
+
+	noSmithyDocumentSerde
+}
+
+// Filter by asset model.
+type FilterByAssetModel struct {
+
+	// The external-Id property of an asset model.
+	AssetModelExternalId *string
+
+	// The asset model Id.
+	AssetModelId *string
+
+	// Bolean to include assets.
+	IncludeAssets *bool
+
+	// Include asset offspring. [need desc.]
+	IncludeOffspring *bool
+
+	noSmithyDocumentSerde
+}
+
+// Filter by component type.
+type FilterByComponentType struct {
+
+	// The component type Id.
+	//
+	// This member is required.
+	ComponentTypeId *string
+
+	noSmithyDocumentSerde
+}
+
+// Vilter by entity.
+type FilterByEntity struct {
+
+	// The entity Id.
+	//
+	// This member is required.
+	EntityId *string
 
 	noSmithyDocumentSerde
 }
@@ -404,6 +591,100 @@ type InterpolationParameters struct {
 	IntervalInSeconds *int64
 
 	noSmithyDocumentSerde
+}
+
+// The metadata transfer job AWS IoT SiteWise source configuration.
+type IotSiteWiseSourceConfiguration struct {
+
+	// The AWS IoT SiteWise soucre configuration filters.
+	Filters []IotSiteWiseSourceConfigurationFilter
+
+	noSmithyDocumentSerde
+}
+
+// The AWS IoT SiteWise soucre configuration filter.[need held with desc here]
+//
+// The following types satisfy this interface:
+//
+//	IotSiteWiseSourceConfigurationFilterMemberFilterByAsset
+//	IotSiteWiseSourceConfigurationFilterMemberFilterByAssetModel
+type IotSiteWiseSourceConfigurationFilter interface {
+	isIotSiteWiseSourceConfigurationFilter()
+}
+
+// Filter by asset.
+type IotSiteWiseSourceConfigurationFilterMemberFilterByAsset struct {
+	Value FilterByAsset
+
+	noSmithyDocumentSerde
+}
+
+func (*IotSiteWiseSourceConfigurationFilterMemberFilterByAsset) isIotSiteWiseSourceConfigurationFilter() {
+}
+
+// Filter by asset model.
+type IotSiteWiseSourceConfigurationFilterMemberFilterByAssetModel struct {
+	Value FilterByAssetModel
+
+	noSmithyDocumentSerde
+}
+
+func (*IotSiteWiseSourceConfigurationFilterMemberFilterByAssetModel) isIotSiteWiseSourceConfigurationFilter() {
+}
+
+// The metadata transfer job AWS IoT TwinMaker destination configuration.
+type IotTwinMakerDestinationConfiguration struct {
+
+	// The IoT TwinMaker workspace.
+	//
+	// This member is required.
+	Workspace *string
+
+	noSmithyDocumentSerde
+}
+
+// The metadata transfer job AWS IoT TwinMaker source configuration.
+type IotTwinMakerSourceConfiguration struct {
+
+	// The IoT TwinMaker workspace.
+	//
+	// This member is required.
+	Workspace *string
+
+	// The metadata transfer job AWS IoT TwinMaker source configuration filters.
+	Filters []IotTwinMakerSourceConfigurationFilter
+
+	noSmithyDocumentSerde
+}
+
+// The metadata transfer job AWS IoT TwinMaker source configuration filter.
+//
+// The following types satisfy this interface:
+//
+//	IotTwinMakerSourceConfigurationFilterMemberFilterByComponentType
+//	IotTwinMakerSourceConfigurationFilterMemberFilterByEntity
+type IotTwinMakerSourceConfigurationFilter interface {
+	isIotTwinMakerSourceConfigurationFilter()
+}
+
+// Filter by component type.
+type IotTwinMakerSourceConfigurationFilterMemberFilterByComponentType struct {
+	Value FilterByComponentType
+
+	noSmithyDocumentSerde
+}
+
+func (*IotTwinMakerSourceConfigurationFilterMemberFilterByComponentType) isIotTwinMakerSourceConfigurationFilter() {
+}
+
+// Filter by entity.
+type IotTwinMakerSourceConfigurationFilterMemberFilterByEntity struct {
+	Value FilterByEntity
+
+	noSmithyDocumentSerde
+}
+
+func (*IotTwinMakerSourceConfigurationFilterMemberFilterByEntity) isIotTwinMakerSourceConfigurationFilter() {
 }
 
 // The Lambda function.
@@ -495,6 +776,101 @@ type ListEntitiesFilterMemberParentEntityId struct {
 }
 
 func (*ListEntitiesFilterMemberParentEntityId) isListEntitiesFilter() {}
+
+// The ListMetadataTransferJobs filter.
+//
+// The following types satisfy this interface:
+//
+//	ListMetadataTransferJobsFilterMemberState
+//	ListMetadataTransferJobsFilterMemberWorkspaceId
+type ListMetadataTransferJobsFilter interface {
+	isListMetadataTransferJobsFilter()
+}
+
+// The filter state.
+type ListMetadataTransferJobsFilterMemberState struct {
+	Value MetadataTransferJobState
+
+	noSmithyDocumentSerde
+}
+
+func (*ListMetadataTransferJobsFilterMemberState) isListMetadataTransferJobsFilter() {}
+
+// The workspace Id.
+type ListMetadataTransferJobsFilterMemberWorkspaceId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ListMetadataTransferJobsFilterMemberWorkspaceId) isListMetadataTransferJobsFilter() {}
+
+// The metadata transfer job's progress.
+type MetadataTransferJobProgress struct {
+
+	// The failed count.
+	FailedCount *int32
+
+	// The skipped count.
+	SkippedCount *int32
+
+	// The succeeded count.
+	SucceededCount *int32
+
+	// The total count. [of what]
+	TotalCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// The metadata transfer job status.
+type MetadataTransferJobStatus struct {
+
+	// The metadata transfer job error.
+	Error *ErrorDetails
+
+	// The queued position.
+	QueuedPosition *int32
+
+	// The metadata transfer job state.
+	State MetadataTransferJobState
+
+	noSmithyDocumentSerde
+}
+
+// The metadata transfer job summary.
+type MetadataTransferJobSummary struct {
+
+	// The metadata transfer job summary ARN.
+	//
+	// This member is required.
+	Arn *string
+
+	// The metadata transfer job summary creation DateTime object.
+	//
+	// This member is required.
+	CreationDateTime *time.Time
+
+	// The metadata transfer job summary Id.
+	//
+	// This member is required.
+	MetadataTransferJobId *string
+
+	// The metadata transfer job summary status.
+	//
+	// This member is required.
+	Status *MetadataTransferJobStatus
+
+	// The metadata transfer job summary update DateTime object
+	//
+	// This member is required.
+	UpdateDateTime *time.Time
+
+	// The metadata transfer job summary progess.
+	Progress *MetadataTransferJobProgress
+
+	noSmithyDocumentSerde
+}
 
 // Filter criteria that orders the return output. It can be sorted in ascending or
 // descending order.
@@ -729,10 +1105,35 @@ type PropertyRequest struct {
 // An object that contains information about a property response.
 type PropertyResponse struct {
 
+	// This flag notes whether all values of a list or map type property are returned
+	// in the API response. The maximum number of values per property returned is 50.
+	AreAllPropertyValuesReturned *bool
+
 	// An object that specifies information about a property.
 	Definition *PropertyDefinitionResponse
 
 	// The value of the property.
+	Value *DataValue
+
+	noSmithyDocumentSerde
+}
+
+// This is an object that contains the information of a property.
+type PropertySummary struct {
+
+	// This is the name of the property.
+	//
+	// This member is required.
+	PropertyName *string
+
+	// This flag notes whether all values of a list or map type property are returned
+	// in the API response. The maximum number of values per property returned is 50.
+	AreAllPropertyValuesReturned *bool
+
+	// This is the schema for the property.
+	Definition *PropertyDefinitionResponse
+
+	// This is the value for the property.
 	Value *DataValue
 
 	noSmithyDocumentSerde
@@ -835,6 +1236,28 @@ type Row struct {
 	noSmithyDocumentSerde
 }
 
+// The S3 destination configuration.
+type S3DestinationConfiguration struct {
+
+	// The S3 destination configuration location.
+	//
+	// This member is required.
+	Location *string
+
+	noSmithyDocumentSerde
+}
+
+// The S3 destination source configuration.
+type S3SourceConfiguration struct {
+
+	// The S3 destination source configuration location.
+	//
+	// This member is required.
+	Location *string
+
+	noSmithyDocumentSerde
+}
+
 // The scene error.
 type SceneError struct {
 
@@ -877,6 +1300,26 @@ type SceneSummary struct {
 
 	// The scene description.
 	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// The source configuration.
+type SourceConfiguration struct {
+
+	// The source configuration type.
+	//
+	// This member is required.
+	Type SourceType
+
+	// The source configuration IoT SiteWise configuration.
+	IotSiteWiseConfiguration *IotSiteWiseSourceConfiguration
+
+	// The source configuration IoT TwinMaker configuration.
+	IotTwinMakerConfiguration *IotTwinMakerSourceConfiguration
+
+	// The source configuration S3 configuration.
+	S3Configuration *S3SourceConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1051,6 +1494,9 @@ type WorkspaceSummary struct {
 	// The description of the workspace.
 	Description *string
 
+	// A list of services that are linked to the workspace.
+	LinkedServices []string
+
 	noSmithyDocumentSerde
 }
 
@@ -1065,6 +1511,9 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isListComponentTypesFilter() {}
-func (*UnknownUnionMember) isListEntitiesFilter()       {}
-func (*UnknownUnionMember) isSyncResourceFilter()       {}
+func (*UnknownUnionMember) isIotSiteWiseSourceConfigurationFilter()  {}
+func (*UnknownUnionMember) isIotTwinMakerSourceConfigurationFilter() {}
+func (*UnknownUnionMember) isListComponentTypesFilter()              {}
+func (*UnknownUnionMember) isListEntitiesFilter()                    {}
+func (*UnknownUnionMember) isListMetadataTransferJobsFilter()        {}
+func (*UnknownUnionMember) isSyncResourceFilter()                    {}

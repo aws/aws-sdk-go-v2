@@ -70,6 +70,24 @@ func (AssetModelState) Values() []AssetModelState {
 	}
 }
 
+type AssetModelType string
+
+// Enum values for AssetModelType
+const (
+	AssetModelTypeAssetModel     AssetModelType = "ASSET_MODEL"
+	AssetModelTypeComponentModel AssetModelType = "COMPONENT_MODEL"
+)
+
+// Values returns all known values for AssetModelType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssetModelType) Values() []AssetModelType {
+	return []AssetModelType{
+		"ASSET_MODEL",
+		"COMPONENT_MODEL",
+	}
+}
+
 type AssetRelationshipType string
 
 // Enum values for AssetRelationshipType
@@ -748,6 +766,30 @@ func (ResourceType) Values() []ResourceType {
 	}
 }
 
+type ScalarType string
+
+// Enum values for ScalarType
+const (
+	ScalarTypeBoolean   ScalarType = "BOOLEAN"
+	ScalarTypeInt       ScalarType = "INT"
+	ScalarTypeDouble    ScalarType = "DOUBLE"
+	ScalarTypeTimestamp ScalarType = "TIMESTAMP"
+	ScalarTypeString    ScalarType = "STRING"
+)
+
+// Values returns all known values for ScalarType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ScalarType) Values() []ScalarType {
+	return []ScalarType{
+		"BOOLEAN",
+		"INT",
+		"DOUBLE",
+		"TIMESTAMP",
+		"STRING",
+	}
+}
+
 type StorageType string
 
 // Enum values for StorageType
@@ -763,6 +805,22 @@ func (StorageType) Values() []StorageType {
 	return []StorageType{
 		"SITEWISE_DEFAULT_STORAGE",
 		"MULTI_LAYER_STORAGE",
+	}
+}
+
+type TargetResourceType string
+
+// Enum values for TargetResourceType
+const (
+	TargetResourceTypeAsset TargetResourceType = "ASSET"
+)
+
+// Values returns all known values for TargetResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TargetResourceType) Values() []TargetResourceType {
+	return []TargetResourceType{
+		"ASSET",
 	}
 }
 
@@ -815,5 +873,23 @@ const (
 func (TraversalType) Values() []TraversalType {
 	return []TraversalType{
 		"PATH_TO_ROOT",
+	}
+}
+
+type WarmTierState string
+
+// Enum values for WarmTierState
+const (
+	WarmTierStateEnabled  WarmTierState = "ENABLED"
+	WarmTierStateDisabled WarmTierState = "DISABLED"
+)
+
+// Values returns all known values for WarmTierState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WarmTierState) Values() []WarmTierState {
+	return []WarmTierState{
+		"ENABLED",
+		"DISABLED",
 	}
 }

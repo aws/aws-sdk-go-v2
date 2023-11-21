@@ -42,15 +42,38 @@ func (ComponentUpdateType) Values() []ComponentUpdateType {
 	}
 }
 
+type DestinationType string
+
+// Enum values for DestinationType
+const (
+	DestinationTypeS3           DestinationType = "s3"
+	DestinationTypeIotsitewise  DestinationType = "iotsitewise"
+	DestinationTypeIottwinmaker DestinationType = "iottwinmaker"
+)
+
+// Values returns all known values for DestinationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DestinationType) Values() []DestinationType {
+	return []DestinationType{
+		"s3",
+		"iotsitewise",
+		"iottwinmaker",
+	}
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeValidationError       ErrorCode = "VALIDATION_ERROR"
-	ErrorCodeInternalFailure       ErrorCode = "INTERNAL_FAILURE"
-	ErrorCodeSyncInitializingError ErrorCode = "SYNC_INITIALIZING_ERROR"
-	ErrorCodeSyncCreatingError     ErrorCode = "SYNC_CREATING_ERROR"
-	ErrorCodeSyncProcessingError   ErrorCode = "SYNC_PROCESSING_ERROR"
+	ErrorCodeValidationError           ErrorCode = "VALIDATION_ERROR"
+	ErrorCodeInternalFailure           ErrorCode = "INTERNAL_FAILURE"
+	ErrorCodeSyncInitializingError     ErrorCode = "SYNC_INITIALIZING_ERROR"
+	ErrorCodeSyncCreatingError         ErrorCode = "SYNC_CREATING_ERROR"
+	ErrorCodeSyncProcessingError       ErrorCode = "SYNC_PROCESSING_ERROR"
+	ErrorCodeSyncDeletingError         ErrorCode = "SYNC_DELETING_ERROR"
+	ErrorCodeProcessingError           ErrorCode = "PROCESSING_ERROR"
+	ErrorCodeCompositeComponentFailure ErrorCode = "COMPOSITE_COMPONENT_FAILURE"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
@@ -63,6 +86,9 @@ func (ErrorCode) Values() []ErrorCode {
 		"SYNC_INITIALIZING_ERROR",
 		"SYNC_CREATING_ERROR",
 		"SYNC_PROCESSING_ERROR",
+		"SYNC_DELETING_ERROR",
+		"PROCESSING_ERROR",
+		"COMPOSITE_COMPONENT_FAILURE",
 	}
 }
 
@@ -95,6 +121,34 @@ const (
 func (InterpolationType) Values() []InterpolationType {
 	return []InterpolationType{
 		"LINEAR",
+	}
+}
+
+type MetadataTransferJobState string
+
+// Enum values for MetadataTransferJobState
+const (
+	MetadataTransferJobStateValidating MetadataTransferJobState = "VALIDATING"
+	MetadataTransferJobStatePending    MetadataTransferJobState = "PENDING"
+	MetadataTransferJobStateRunning    MetadataTransferJobState = "RUNNING"
+	MetadataTransferJobStateCancelling MetadataTransferJobState = "CANCELLING"
+	MetadataTransferJobStateError      MetadataTransferJobState = "ERROR"
+	MetadataTransferJobStateCompleted  MetadataTransferJobState = "COMPLETED"
+	MetadataTransferJobStateCancelled  MetadataTransferJobState = "CANCELLED"
+)
+
+// Values returns all known values for MetadataTransferJobState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetadataTransferJobState) Values() []MetadataTransferJobState {
+	return []MetadataTransferJobState{
+		"VALIDATING",
+		"PENDING",
+		"RUNNING",
+		"CANCELLING",
+		"ERROR",
+		"COMPLETED",
+		"CANCELLED",
 	}
 }
 
@@ -265,6 +319,26 @@ func (Scope) Values() []Scope {
 	return []Scope{
 		"ENTITY",
 		"WORKSPACE",
+	}
+}
+
+type SourceType string
+
+// Enum values for SourceType
+const (
+	SourceTypeS3           SourceType = "s3"
+	SourceTypeIotsitewise  SourceType = "iotsitewise"
+	SourceTypeIottwinmaker SourceType = "iottwinmaker"
+)
+
+// Values returns all known values for SourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SourceType) Values() []SourceType {
+	return []SourceType{
+		"s3",
+		"iotsitewise",
+		"iottwinmaker",
 	}
 }
 

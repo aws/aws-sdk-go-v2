@@ -35,7 +35,10 @@ func (c *Client) DescribeAssetModel(ctx context.Context, params *DescribeAssetMo
 
 type DescribeAssetModelInput struct {
 
-	// The ID of the asset model.
+	// The ID of the asset model. This can be either the actual ID in UUID format, or
+	// else externalId: followed by the external ID, if it has one. For more
+	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	AssetModelId *string
@@ -72,7 +75,7 @@ type DescribeAssetModelOutput struct {
 	// This member is required.
 	AssetModelHierarchies []types.AssetModelHierarchy
 
-	// The ID of the asset model.
+	// The ID of the asset model, in UUID format.
 	//
 	// This member is required.
 	AssetModelId *string
@@ -100,8 +103,24 @@ type DescribeAssetModelOutput struct {
 	// This member is required.
 	AssetModelStatus *types.AssetModelStatus
 
-	// The list of composite asset models for the asset model.
+	// The list of the immediate child custom composite model summaries for the asset
+	// model.
+	AssetModelCompositeModelSummaries []types.AssetModelCompositeModelSummary
+
+	// The list of built-in composite models for the asset model, such as those with
+	// those of type AWS/ALARMS .
 	AssetModelCompositeModels []types.AssetModelCompositeModel
+
+	// The external ID of the asset model, if any.
+	AssetModelExternalId *string
+
+	// The type of asset model.
+	//   - ASSET_MODEL – (default) An asset model that you can use to create assets.
+	//   Can't be included as a component in another asset model.
+	//   - COMPONENT_MODEL – A reusable component that you can include in the
+	//   composite models of other asset models. You can't create assets directly from
+	//   this type of asset model.
+	AssetModelType types.AssetModelType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

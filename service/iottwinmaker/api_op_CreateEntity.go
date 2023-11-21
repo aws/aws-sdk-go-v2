@@ -45,6 +45,11 @@ type CreateEntityInput struct {
 	// mapping must be unique to this object.
 	Components map[string]types.ComponentRequest
 
+	// This is an object that maps strings to compositeComponent updates in the
+	// request. Each key of the map represents the componentPath of the
+	// compositeComponent .
+	CompositeComponents map[string]types.CompositeComponentRequest
+
 	// The description of the entity.
 	Description *string
 

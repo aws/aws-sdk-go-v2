@@ -38,7 +38,7 @@ func (c *Client) GetAssetPropertyValue(ctx context.Context, params *GetAssetProp
 
 type GetAssetPropertyValueInput struct {
 
-	// The ID of the asset.
+	// The ID of the asset, in UUID format.
 	AssetId *string
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
@@ -47,7 +47,7 @@ type GetAssetPropertyValueInput struct {
 	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
 
-	// The ID of the asset property.
+	// The ID of the asset property, in UUID format.
 	PropertyId *string
 
 	noSmithyDocumentSerde

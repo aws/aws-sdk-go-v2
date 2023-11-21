@@ -41,7 +41,10 @@ type DeleteTimeSeriesInput struct {
 	// The alias that identifies the time series.
 	Alias *string
 
-	// The ID of the asset in which the asset property was created.
+	// The ID of the asset in which the asset property was created. This can be either
+	// the actual ID in UUID format, or else externalId: followed by the external ID,
+	// if it has one. For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	AssetId *string
 
 	// A unique case-sensitive identifier that you can provide to ensure the
@@ -49,7 +52,10 @@ type DeleteTimeSeriesInput struct {
 	// request is required.
 	ClientToken *string
 
-	// The ID of the asset property.
+	// The ID of the asset property. This can be either the actual ID in UUID format,
+	// or else externalId: followed by the external ID, if it has one. For more
+	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	PropertyId *string
 
 	noSmithyDocumentSerde

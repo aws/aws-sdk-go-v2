@@ -39,7 +39,10 @@ func (c *Client) ListAssets(ctx context.Context, params *ListAssetsInput, optFns
 type ListAssetsInput struct {
 
 	// The ID of the asset model by which to filter the list of assets. This parameter
-	// is required if you choose ALL for filter .
+	// is required if you choose ALL for filter . This can be either the actual ID in
+	// UUID format, or else externalId: followed by the external ID, if it has one.
+	// For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	AssetModelId *string
 
 	// The filter for the requested list of assets. Choose one of the following

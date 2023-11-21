@@ -901,6 +901,16 @@ func awsRestjson1_serializeOpDocumentCreateAssetInput(v *CreateAssetInput, value
 		ok.String(*v.AssetDescription)
 	}
 
+	if v.AssetExternalId != nil {
+		ok := object.Key("assetExternalId")
+		ok.String(*v.AssetExternalId)
+	}
+
+	if v.AssetId != nil {
+		ok := object.Key("assetId")
+		ok.String(*v.AssetId)
+	}
+
 	if v.AssetModelId != nil {
 		ok := object.Key("assetModelId")
 		ok.String(*v.AssetModelId)
@@ -1005,11 +1015,21 @@ func awsRestjson1_serializeOpDocumentCreateAssetModelInput(v *CreateAssetModelIn
 		ok.String(*v.AssetModelDescription)
 	}
 
+	if v.AssetModelExternalId != nil {
+		ok := object.Key("assetModelExternalId")
+		ok.String(*v.AssetModelExternalId)
+	}
+
 	if v.AssetModelHierarchies != nil {
 		ok := object.Key("assetModelHierarchies")
 		if err := awsRestjson1_serializeDocumentAssetModelHierarchyDefinitions(v.AssetModelHierarchies, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.AssetModelId != nil {
+		ok := object.Key("assetModelId")
+		ok.String(*v.AssetModelId)
 	}
 
 	if v.AssetModelName != nil {
@@ -1024,6 +1044,11 @@ func awsRestjson1_serializeOpDocumentCreateAssetModelInput(v *CreateAssetModelIn
 		}
 	}
 
+	if len(v.AssetModelType) > 0 {
+		ok := object.Key("assetModelType")
+		ok.String(string(v.AssetModelType))
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
@@ -1034,6 +1059,136 @@ func awsRestjson1_serializeOpDocumentCreateAssetModelInput(v *CreateAssetModelIn
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateAssetModelCompositeModel struct {
+}
+
+func (*awsRestjson1_serializeOpCreateAssetModelCompositeModel) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateAssetModelCompositeModel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateAssetModelCompositeModelInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/asset-models/{assetModelId}/composite-models")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateAssetModelCompositeModelInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateAssetModelCompositeModelInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateAssetModelCompositeModelInput(v *CreateAssetModelCompositeModelInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssetModelId == nil || len(*v.AssetModelId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member assetModelId must not be empty")}
+	}
+	if v.AssetModelId != nil {
+		if err := encoder.SetURI("assetModelId").String(*v.AssetModelId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateAssetModelCompositeModelInput(v *CreateAssetModelCompositeModelInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssetModelCompositeModelDescription != nil {
+		ok := object.Key("assetModelCompositeModelDescription")
+		ok.String(*v.AssetModelCompositeModelDescription)
+	}
+
+	if v.AssetModelCompositeModelExternalId != nil {
+		ok := object.Key("assetModelCompositeModelExternalId")
+		ok.String(*v.AssetModelCompositeModelExternalId)
+	}
+
+	if v.AssetModelCompositeModelId != nil {
+		ok := object.Key("assetModelCompositeModelId")
+		ok.String(*v.AssetModelCompositeModelId)
+	}
+
+	if v.AssetModelCompositeModelName != nil {
+		ok := object.Key("assetModelCompositeModelName")
+		ok.String(*v.AssetModelCompositeModelName)
+	}
+
+	if v.AssetModelCompositeModelProperties != nil {
+		ok := object.Key("assetModelCompositeModelProperties")
+		if err := awsRestjson1_serializeDocumentAssetModelPropertyDefinitions(v.AssetModelCompositeModelProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AssetModelCompositeModelType != nil {
+		ok := object.Key("assetModelCompositeModelType")
+		ok.String(*v.AssetModelCompositeModelType)
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.ComposedAssetModelId != nil {
+		ok := object.Key("composedAssetModelId")
+		ok.String(*v.ComposedAssetModelId)
+	}
+
+	if v.ParentAssetModelCompositeModelId != nil {
+		ok := object.Key("parentAssetModelCompositeModelId")
+		ok.String(*v.ParentAssetModelCompositeModelId)
 	}
 
 	return nil
@@ -1105,6 +1260,16 @@ func awsRestjson1_serializeOpHttpBindingsCreateBulkImportJobInput(v *CreateBulkI
 func awsRestjson1_serializeOpDocumentCreateBulkImportJobInput(v *CreateBulkImportJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdaptiveIngestion != nil {
+		ok := object.Key("adaptiveIngestion")
+		ok.Boolean(*v.AdaptiveIngestion)
+	}
+
+	if v.DeleteFilesAfterImport != nil {
+		ok := object.Key("deleteFilesAfterImport")
+		ok.Boolean(*v.DeleteFilesAfterImport)
+	}
 
 	if v.ErrorReportLocation != nil {
 		ok := object.Key("errorReportLocation")
@@ -1761,6 +1926,84 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAssetModelInput(v *DeleteAssetMod
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteAssetModelCompositeModel struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteAssetModelCompositeModel) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteAssetModelCompositeModel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteAssetModelCompositeModelInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/asset-models/{assetModelId}/composite-models/{assetModelCompositeModelId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteAssetModelCompositeModelInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteAssetModelCompositeModelInput(v *DeleteAssetModelCompositeModelInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssetModelCompositeModelId == nil || len(*v.AssetModelCompositeModelId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member assetModelCompositeModelId must not be empty")}
+	}
+	if v.AssetModelCompositeModelId != nil {
+		if err := encoder.SetURI("assetModelCompositeModelId").String(*v.AssetModelCompositeModelId); err != nil {
+			return err
+		}
+	}
+
+	if v.AssetModelId == nil || len(*v.AssetModelId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member assetModelId must not be empty")}
+	}
+	if v.AssetModelId != nil {
+		if err := encoder.SetURI("assetModelId").String(*v.AssetModelId); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteDashboard struct {
 }
 
@@ -2189,6 +2432,71 @@ func awsRestjson1_serializeOpHttpBindingsDescribeAccessPolicyInput(v *DescribeAc
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeAction struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeAction) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeAction) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeActionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/actions/{actionId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeActionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeActionInput(v *DescribeActionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ActionId == nil || len(*v.ActionId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member actionId must not be empty")}
+	}
+	if v.ActionId != nil {
+		if err := encoder.SetURI("actionId").String(*v.ActionId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeAsset struct {
 }
 
@@ -2258,6 +2566,80 @@ func awsRestjson1_serializeOpHttpBindingsDescribeAssetInput(v *DescribeAssetInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeAssetCompositeModel struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeAssetCompositeModel) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeAssetCompositeModel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeAssetCompositeModelInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/assets/{assetId}/composite-models/{assetCompositeModelId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeAssetCompositeModelInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeAssetCompositeModelInput(v *DescribeAssetCompositeModelInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssetCompositeModelId == nil || len(*v.AssetCompositeModelId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member assetCompositeModelId must not be empty")}
+	}
+	if v.AssetCompositeModelId != nil {
+		if err := encoder.SetURI("assetCompositeModelId").String(*v.AssetCompositeModelId); err != nil {
+			return err
+		}
+	}
+
+	if v.AssetId == nil || len(*v.AssetId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member assetId must not be empty")}
+	}
+	if v.AssetId != nil {
+		if err := encoder.SetURI("assetId").String(*v.AssetId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeAssetModel struct {
 }
 
@@ -2322,6 +2704,80 @@ func awsRestjson1_serializeOpHttpBindingsDescribeAssetModelInput(v *DescribeAsse
 
 	if v.ExcludeProperties {
 		encoder.SetQuery("excludeProperties").Boolean(v.ExcludeProperties)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeAssetModelCompositeModel struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeAssetModelCompositeModel) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeAssetModelCompositeModel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeAssetModelCompositeModelInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/asset-models/{assetModelId}/composite-models/{assetModelCompositeModelId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeAssetModelCompositeModelInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeAssetModelCompositeModelInput(v *DescribeAssetModelCompositeModelInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssetModelCompositeModelId == nil || len(*v.AssetModelCompositeModelId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member assetModelCompositeModelId must not be empty")}
+	}
+	if v.AssetModelCompositeModelId != nil {
+		if err := encoder.SetURI("assetModelCompositeModelId").String(*v.AssetModelCompositeModelId); err != nil {
+			return err
+		}
+	}
+
+	if v.AssetModelId == nil || len(*v.AssetModelId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member assetModelId must not be empty")}
+	}
+	if v.AssetModelId != nil {
+		if err := encoder.SetURI("assetModelId").String(*v.AssetModelId); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3213,6 +3669,185 @@ func awsRestjson1_serializeOpDocumentDisassociateTimeSeriesFromAssetPropertyInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpExecuteAction struct {
+}
+
+func (*awsRestjson1_serializeOpExecuteAction) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpExecuteAction) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ExecuteActionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/actions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentExecuteActionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsExecuteActionInput(v *ExecuteActionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentExecuteActionInput(v *ExecuteActionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ActionDefinitionId != nil {
+		ok := object.Key("actionDefinitionId")
+		ok.String(*v.ActionDefinitionId)
+	}
+
+	if v.ActionPayload != nil {
+		ok := object.Key("actionPayload")
+		if err := awsRestjson1_serializeDocumentActionPayload(v.ActionPayload, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.TargetResource != nil {
+		ok := object.Key("targetResource")
+		if err := awsRestjson1_serializeDocumentTargetResource(v.TargetResource, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpExecuteQuery struct {
+}
+
+func (*awsRestjson1_serializeOpExecuteQuery) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpExecuteQuery) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ExecuteQueryInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/queries/execution")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentExecuteQueryInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsExecuteQueryInput(v *ExecuteQueryInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentExecuteQueryInput(v *ExecuteQueryInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.QueryStatement != nil {
+		ok := object.Key("queryStatement")
+		ok.String(*v.QueryStatement)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetAssetPropertyAggregates struct {
 }
 
@@ -3671,6 +4306,151 @@ func awsRestjson1_serializeOpHttpBindingsListAccessPoliciesInput(v *ListAccessPo
 	return nil
 }
 
+type awsRestjson1_serializeOpListActions struct {
+}
+
+func (*awsRestjson1_serializeOpListActions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListActions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListActionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/actions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListActionsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListActionsInput(v *ListActionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.TargetResourceId != nil {
+		encoder.SetQuery("targetResourceId").String(*v.TargetResourceId)
+	}
+
+	if len(v.TargetResourceType) > 0 {
+		encoder.SetQuery("targetResourceType").String(string(v.TargetResourceType))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListAssetModelCompositeModels struct {
+}
+
+func (*awsRestjson1_serializeOpListAssetModelCompositeModels) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListAssetModelCompositeModels) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAssetModelCompositeModelsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/asset-models/{assetModelId}/composite-models")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListAssetModelCompositeModelsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListAssetModelCompositeModelsInput(v *ListAssetModelCompositeModelsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssetModelId == nil || len(*v.AssetModelId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member assetModelId must not be empty")}
+	}
+	if v.AssetModelId != nil {
+		if err := encoder.SetURI("assetModelId").String(*v.AssetModelId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListAssetModelProperties struct {
 }
 
@@ -3799,6 +4579,12 @@ func (m *awsRestjson1_serializeOpListAssetModels) HandleSerialize(ctx context.Co
 func awsRestjson1_serializeOpHttpBindingsListAssetModelsInput(v *ListAssetModelsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssetModelTypes != nil {
+		for i := range v.AssetModelTypes {
+			encoder.AddQuery("assetModelTypes").String(string(v.AssetModelTypes[i]))
+		}
 	}
 
 	if v.MaxResults != nil {
@@ -4174,6 +4960,79 @@ func awsRestjson1_serializeOpHttpBindingsListBulkImportJobsInput(v *ListBulkImpo
 
 	if len(v.Filter) > 0 {
 		encoder.SetQuery("filter").String(string(v.Filter))
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListCompositionRelationships struct {
+}
+
+func (*awsRestjson1_serializeOpListCompositionRelationships) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListCompositionRelationships) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListCompositionRelationshipsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/asset-models/{assetModelId}/composition-relationships")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListCompositionRelationshipsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListCompositionRelationshipsInput(v *ListCompositionRelationshipsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssetModelId == nil || len(*v.AssetModelId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member assetModelId must not be empty")}
+	}
+	if v.AssetModelId != nil {
+		if err := encoder.SetURI("assetModelId").String(*v.AssetModelId); err != nil {
+			return err
+		}
 	}
 
 	if v.MaxResults != nil {
@@ -4908,6 +5767,18 @@ func awsRestjson1_serializeOpDocumentPutStorageConfigurationInput(v *PutStorageC
 		ok.String(string(v.StorageType))
 	}
 
+	if len(v.WarmTier) > 0 {
+		ok := object.Key("warmTier")
+		ok.String(string(v.WarmTier))
+	}
+
+	if v.WarmTierRetentionPeriod != nil {
+		ok := object.Key("warmTierRetentionPeriod")
+		if err := awsRestjson1_serializeDocumentWarmTierRetentionPeriod(v.WarmTierRetentionPeriod, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5254,6 +6125,11 @@ func awsRestjson1_serializeOpDocumentUpdateAssetInput(v *UpdateAssetInput, value
 		ok.String(*v.AssetDescription)
 	}
 
+	if v.AssetExternalId != nil {
+		ok := object.Key("assetExternalId")
+		ok.String(*v.AssetExternalId)
+	}
+
 	if v.AssetName != nil {
 		ok := object.Key("assetName")
 		ok.String(*v.AssetName)
@@ -5359,6 +6235,11 @@ func awsRestjson1_serializeOpDocumentUpdateAssetModelInput(v *UpdateAssetModelIn
 		ok.String(*v.AssetModelDescription)
 	}
 
+	if v.AssetModelExternalId != nil {
+		ok := object.Key("assetModelExternalId")
+		ok.String(*v.AssetModelExternalId)
+	}
+
 	if v.AssetModelHierarchies != nil {
 		ok := object.Key("assetModelHierarchies")
 		if err := awsRestjson1_serializeDocumentAssetModelHierarchies(v.AssetModelHierarchies, ok); err != nil {
@@ -5374,6 +6255,125 @@ func awsRestjson1_serializeOpDocumentUpdateAssetModelInput(v *UpdateAssetModelIn
 	if v.AssetModelProperties != nil {
 		ok := object.Key("assetModelProperties")
 		if err := awsRestjson1_serializeDocumentAssetModelProperties(v.AssetModelProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateAssetModelCompositeModel struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateAssetModelCompositeModel) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateAssetModelCompositeModel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateAssetModelCompositeModelInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/asset-models/{assetModelId}/composite-models/{assetModelCompositeModelId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateAssetModelCompositeModelInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateAssetModelCompositeModelInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateAssetModelCompositeModelInput(v *UpdateAssetModelCompositeModelInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssetModelCompositeModelId == nil || len(*v.AssetModelCompositeModelId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member assetModelCompositeModelId must not be empty")}
+	}
+	if v.AssetModelCompositeModelId != nil {
+		if err := encoder.SetURI("assetModelCompositeModelId").String(*v.AssetModelCompositeModelId); err != nil {
+			return err
+		}
+	}
+
+	if v.AssetModelId == nil || len(*v.AssetModelId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member assetModelId must not be empty")}
+	}
+	if v.AssetModelId != nil {
+		if err := encoder.SetURI("assetModelId").String(*v.AssetModelId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateAssetModelCompositeModelInput(v *UpdateAssetModelCompositeModelInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssetModelCompositeModelDescription != nil {
+		ok := object.Key("assetModelCompositeModelDescription")
+		ok.String(*v.AssetModelCompositeModelDescription)
+	}
+
+	if v.AssetModelCompositeModelExternalId != nil {
+		ok := object.Key("assetModelCompositeModelExternalId")
+		ok.String(*v.AssetModelCompositeModelExternalId)
+	}
+
+	if v.AssetModelCompositeModelName != nil {
+		ok := object.Key("assetModelCompositeModelName")
+		ok.String(*v.AssetModelCompositeModelName)
+	}
+
+	if v.AssetModelCompositeModelProperties != nil {
+		ok := object.Key("assetModelCompositeModelProperties")
+		if err := awsRestjson1_serializeDocumentAssetModelProperties(v.AssetModelCompositeModelProperties, ok); err != nil {
 			return err
 		}
 	}
@@ -6007,6 +7007,18 @@ func awsRestjson1_serializeOpDocumentUpdateProjectInput(v *UpdateProjectInput, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentActionPayload(v *types.ActionPayload, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StringValue != nil {
+		ok := object.Key("stringValue")
+		ok.String(*v.StringValue)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAggregateTypes(v []types.AggregateType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -6044,6 +7056,11 @@ func awsRestjson1_serializeDocumentAssetModelCompositeModel(v *types.AssetModelC
 		ok.String(*v.Description)
 	}
 
+	if v.ExternalId != nil {
+		ok := object.Key("externalId")
+		ok.String(*v.ExternalId)
+	}
+
 	if v.Id != nil {
 		ok := object.Key("id")
 		ok.String(*v.Id)
@@ -6076,6 +7093,16 @@ func awsRestjson1_serializeDocumentAssetModelCompositeModelDefinition(v *types.A
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.ExternalId != nil {
+		ok := object.Key("externalId")
+		ok.String(*v.ExternalId)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
 	}
 
 	if v.Name != nil {
@@ -6146,6 +7173,11 @@ func awsRestjson1_serializeDocumentAssetModelHierarchy(v *types.AssetModelHierar
 		ok.String(*v.ChildAssetModelId)
 	}
 
+	if v.ExternalId != nil {
+		ok := object.Key("externalId")
+		ok.String(*v.ExternalId)
+	}
+
 	if v.Id != nil {
 		ok := object.Key("id")
 		ok.String(*v.Id)
@@ -6166,6 +7198,16 @@ func awsRestjson1_serializeDocumentAssetModelHierarchyDefinition(v *types.AssetM
 	if v.ChildAssetModelId != nil {
 		ok := object.Key("childAssetModelId")
 		ok.String(*v.ChildAssetModelId)
+	}
+
+	if v.ExternalId != nil {
+		ok := object.Key("externalId")
+		ok.String(*v.ExternalId)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
 	}
 
 	if v.Name != nil {
@@ -6216,6 +7258,11 @@ func awsRestjson1_serializeDocumentAssetModelProperty(v *types.AssetModelPropert
 		ok.String(*v.DataTypeSpec)
 	}
 
+	if v.ExternalId != nil {
+		ok := object.Key("externalId")
+		ok.String(*v.ExternalId)
+	}
+
 	if v.Id != nil {
 		ok := object.Key("id")
 		ok.String(*v.Id)
@@ -6224,6 +7271,13 @@ func awsRestjson1_serializeDocumentAssetModelProperty(v *types.AssetModelPropert
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.Path != nil {
+		ok := object.Key("path")
+		if err := awsRestjson1_serializeDocumentAssetModelPropertyPath(v.Path, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Type != nil {
@@ -6253,6 +7307,16 @@ func awsRestjson1_serializeDocumentAssetModelPropertyDefinition(v *types.AssetMo
 	if v.DataTypeSpec != nil {
 		ok := object.Key("dataTypeSpec")
 		ok.String(*v.DataTypeSpec)
+	}
+
+	if v.ExternalId != nil {
+		ok := object.Key("externalId")
+		ok.String(*v.ExternalId)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
 	}
 
 	if v.Name != nil {
@@ -6285,6 +7349,36 @@ func awsRestjson1_serializeDocumentAssetModelPropertyDefinitions(v []types.Asset
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetModelPropertyPath(v []types.AssetModelPropertyPathSegment, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetModelPropertyPathSegment(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetModelPropertyPathSegment(v *types.AssetModelPropertyPathSegment, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
 	return nil
 }
 
@@ -6639,6 +7733,13 @@ func awsRestjson1_serializeDocumentFileFormat(v *types.FileFormat, value smithyj
 		}
 	}
 
+	if v.Parquet != nil {
+		ok := object.Key("parquet")
+		if err := awsRestjson1_serializeDocumentParquet(v.Parquet, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6957,6 +8058,13 @@ func awsRestjson1_serializeDocumentMultiLayerStorage(v *types.MultiLayerStorage,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentParquet(v *types.Parquet, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPortalResource(v *types.PortalResource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7123,6 +8231,18 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTargetResource(v *types.TargetResource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssetId != nil {
+		ok := object.Key("assetId")
+		ok.String(*v.AssetId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentTimeInNanos(v *types.TimeInNanos, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7228,6 +8348,13 @@ func awsRestjson1_serializeDocumentVariableValue(v *types.VariableValue, value s
 		ok.String(*v.PropertyId)
 	}
 
+	if v.PropertyPath != nil {
+		ok := object.Key("propertyPath")
+		if err := awsRestjson1_serializeDocumentAssetModelPropertyPath(v.PropertyPath, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7266,6 +8393,23 @@ func awsRestjson1_serializeDocumentVariant(v *types.Variant, value smithyjson.Va
 	if v.StringValue != nil {
 		ok := object.Key("stringValue")
 		ok.String(*v.StringValue)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWarmTierRetentionPeriod(v *types.WarmTierRetentionPeriod, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NumberOfDays != nil {
+		ok := object.Key("numberOfDays")
+		ok.Integer(*v.NumberOfDays)
+	}
+
+	if v.Unlimited != nil {
+		ok := object.Key("unlimited")
+		ok.Boolean(*v.Unlimited)
 	}
 
 	return nil

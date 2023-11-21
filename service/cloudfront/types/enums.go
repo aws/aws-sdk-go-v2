@@ -276,6 +276,22 @@ func (ICPRecordalStatus) Values() []ICPRecordalStatus {
 	}
 }
 
+type ImportSourceType string
+
+// Enum values for ImportSourceType
+const (
+	ImportSourceTypeS3 ImportSourceType = "S3"
+)
+
+// Values returns all known values for ImportSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImportSourceType) Values() []ImportSourceType {
+	return []ImportSourceType{
+		"S3",
+	}
+}
+
 type ItemSelection string
 
 // Enum values for ItemSelection

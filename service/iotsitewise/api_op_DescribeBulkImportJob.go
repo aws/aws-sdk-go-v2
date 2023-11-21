@@ -86,7 +86,7 @@ type DescribeBulkImportJobOutput struct {
 	// This member is required.
 	JobRoleArn *string
 
-	// The status of the bulk import job can be one of following values.
+	// The status of the bulk import job can be one of following values:
 	//   - PENDING – IoT SiteWise is waiting for the current bulk import job to finish.
 	//   - CANCELLED – The bulk import job has been canceled.
 	//   - RUNNING – IoT SiteWise is processing your request to import your data from
@@ -102,6 +102,15 @@ type DescribeBulkImportJobOutput struct {
 	//
 	// This member is required.
 	JobStatus types.JobStatus
+
+	// If set to true, ingest new data into IoT SiteWise storage. Measurements with
+	// notifications, metrics and transforms are computed. If set to false, historical
+	// data is ingested into IoT SiteWise as is.
+	AdaptiveIngestion *bool
+
+	// If set to true, your data files is deleted from S3, after ingestion into IoT
+	// SiteWise storage.
+	DeleteFilesAfterImport *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -17,7 +17,13 @@ import (
 // of the same type that have standardized definitions. Each asset created from a
 // model inherits the asset model's property and hierarchy definitions. For more
 // information, see Defining asset models (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/define-models.html)
-// in the IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide. You can create two types of asset models,
+// ASSET_MODEL or COMPONENT_MODEL .
+//   - ASSET_MODEL – (default) An asset model that you can use to create assets.
+//     Can't be included as a component in another asset model.
+//   - COMPONENT_MODEL – A reusable component that you can include in the
+//     composite models of other asset models. You can't create assets directly from
+//     this type of asset model.
 func (c *Client) CreateAssetModel(ctx context.Context, params *CreateAssetModelInput, optFns ...func(*Options)) (*CreateAssetModelOutput, error) {
 	if params == nil {
 		params = &CreateAssetModelInput{}
@@ -40,14 +46,23 @@ type CreateAssetModelInput struct {
 	// This member is required.
 	AssetModelName *string
 
-	// The composite asset models that are part of this asset model. Composite asset
-	// models are asset models that contain specific properties. Each composite model
-	// has a type that defines the properties that the composite model supports. Use
-	// composite asset models to define alarms on this asset model.
+	// The composite models that are part of this asset model. It groups properties
+	// (such as attributes, measurements, transforms, and metrics) and child composite
+	// models that model parts of your industrial equipment. Each composite model has a
+	// type that defines the properties that the composite model supports. Use
+	// composite models to define alarms on this asset model. When creating custom
+	// composite models, you need to use CreateAssetModelCompositeModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html)
+	// . For more information, see .
 	AssetModelCompositeModels []types.AssetModelCompositeModelDefinition
 
 	// A description for the asset model.
 	AssetModelDescription *string
+
+	// An external ID to assign to the asset model. The external ID must be unique
+	// within your Amazon Web Services account. For more information, see Using
+	// external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	AssetModelExternalId *string
 
 	// The hierarchy definitions of the asset model. Each hierarchy specifies an asset
 	// model whose assets can be children of any other assets created from this asset
@@ -57,12 +72,26 @@ type CreateAssetModelInput struct {
 	// in the IoT SiteWise User Guide.
 	AssetModelHierarchies []types.AssetModelHierarchyDefinition
 
+	// The ID to assign to the asset model, if desired. IoT SiteWise automatically
+	// generates a unique ID for you, so this parameter is never required. However, if
+	// you prefer to supply your own ID instead, you can specify it here in UUID
+	// format. If you specify your own ID, it must be globally unique.
+	AssetModelId *string
+
 	// The property definitions of the asset model. For more information, see Asset
 	// properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html)
 	// in the IoT SiteWise User Guide. You can specify up to 200 properties per asset
 	// model. For more information, see Quotas (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html)
 	// in the IoT SiteWise User Guide.
 	AssetModelProperties []types.AssetModelPropertyDefinition
+
+	// The type of asset model.
+	//   - ASSET_MODEL – (default) An asset model that you can use to create assets.
+	//   Can't be included as a component in another asset model.
+	//   - COMPONENT_MODEL – A reusable component that you can include in the
+	//   composite models of other asset models. You can't create assets directly from
+	//   this type of asset model.
+	AssetModelType types.AssetModelType
 
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
@@ -86,8 +115,8 @@ type CreateAssetModelOutput struct {
 	// This member is required.
 	AssetModelArn *string
 
-	// The ID of the asset model. You can use this ID when you call other IoT SiteWise
-	// APIs.
+	// The ID of the asset model, in UUID format. You can use this ID when you call
+	// other IoT SiteWise API operations.
 	//
 	// This member is required.
 	AssetModelId *string

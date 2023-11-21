@@ -61,7 +61,7 @@ type CreateGatewayOutput struct {
 	GatewayArn *string
 
 	// The ID of the gateway device. You can use this ID when you call other IoT
-	// SiteWise APIs.
+	// SiteWise API operations.
 	//
 	// This member is required.
 	GatewayId *string

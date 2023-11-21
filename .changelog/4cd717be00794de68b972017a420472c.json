@@ -1,8 +1,0 @@
-{
-    "id": "4cd717be-0079-4de6-8b97-2017a420472c",
-    "type": "bugfix",
-    "description": "Don't send MaxKeys/MaxUploads=0 when unspecified in ListObjectVersions and ListMultipartUploads paginators.",
-    "modules": [
-        "service/s3"
-    ]
-}

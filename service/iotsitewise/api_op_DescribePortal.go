@@ -53,8 +53,8 @@ type DescribePortalOutput struct {
 	PortalArn *string
 
 	// The IAM Identity Center application generated client ID (used with IAM Identity
-	// Center APIs). IoT SiteWise includes portalClientId for only portals that use
-	// IAM Identity Center to authenticate users.
+	// Center API operations). IoT SiteWise includes portalClientId for only portals
+	// that use IAM Identity Center to authenticate users.
 	//
 	// This member is required.
 	PortalClientId *string

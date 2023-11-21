@@ -85,7 +85,7 @@ type GetInterpolatedAssetPropertyValuesInput struct {
 	// This member is required.
 	Type *string
 
-	// The ID of the asset.
+	// The ID of the asset, in UUID format.
 	AssetId *string
 
 	// The nanosecond offset converted from endTimeInSeconds .
@@ -123,7 +123,7 @@ type GetInterpolatedAssetPropertyValuesInput struct {
 	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
 
-	// The ID of the asset property.
+	// The ID of the asset property, in UUID format.
 	PropertyId *string
 
 	// The nanosecond offset converted from startTimeInSeconds .

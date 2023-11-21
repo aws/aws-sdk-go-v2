@@ -1,3 +1,29 @@
+# Release (2023-11-21)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/credentials`: [v1.16.4](credentials/CHANGELOG.md#v1164-2023-11-21)
+  * **Bug Fix**: Don't expect error responses to have a JSON payload in the endpointcreds provider.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.31.0](service/cloudfront/CHANGELOG.md#v1310-2023-11-21)
+  * **Feature**: This release adds support for CloudFront KeyValueStore, a globally managed key value datastore associated with CloudFront Functions.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore`: [v1.0.0](service/cloudfrontkeyvaluestore/CHANGELOG.md#v100-2023-11-21)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds support for CloudFront KeyValueStore, a globally managed key value datastore associated with CloudFront Functions.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.137.1](service/ec2/CHANGELOG.md#v11371-2023-11-21)
+  * **Documentation**: Documentation updates for Amazon EC2.
+* `github.com/aws/aws-sdk-go-v2/service/inspectorscan`: [v1.0.0](service/inspectorscan/CHANGELOG.md#v100-2023-11-21)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds support for the new Amazon Inspector Scan API. The new Inspector Scan API can synchronously scan SBOMs adhering to the CycloneDX v1.5 format.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.33.0](service/iotsitewise/CHANGELOG.md#v1330-2023-11-21)
+  * **Feature**: Adds 1/ user-defined unique identifier for asset and model metadata, 2/ asset model components, and 3/ query API for asset metadata and telemetry data. Supports 4/ multi variate anomaly detection using Amazon Lookout for Equipment, 5/ warm storage tier, and 6/ buffered ingestion of time series data.
+* `github.com/aws/aws-sdk-go-v2/service/iottwinmaker`: [v1.16.0](service/iottwinmaker/CHANGELOG.md#v1160-2023-11-21)
+  * **Feature**: This release adds following support. 1. New APIs for metadata bulk operations. 2. Modify the component type API to support composite component types - nesting component types within one another. 3. New list APIs for components and properties. 4. Support the larger scope digital twin modeling.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.44.0](service/s3/CHANGELOG.md#v1440-2023-11-21)
+  * **Feature**: Add support for automatic date based partitioning in S3 Server Access Logs.
+  * **Bug Fix**: Don't send MaxKeys/MaxUploads=0 when unspecified in ListObjectVersions and ListMultipartUploads paginators.
+
 # Release (2023-11-20)
 
 ## General Highlights
