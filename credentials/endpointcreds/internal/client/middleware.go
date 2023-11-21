@@ -120,8 +120,9 @@ func deserializeError(response *smithyhttp.Response) error {
 
 	return &EndpointError{
 		// no sensible value for Code
-		Message: string(msg),
-		Fault:   stof(response.StatusCode),
+		Message:    string(msg),
+		Fault:      stof(response.StatusCode),
+		statusCode: response.StatusCode,
 	}
 }
 
@@ -134,6 +135,7 @@ func deserializeJSONError(response *smithyhttp.Response) error {
 	}
 
 	errShape.Fault = stof(response.StatusCode)
+	errShape.statusCode = response.StatusCode
 	return errShape
 }
 
