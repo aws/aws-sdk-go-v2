@@ -1,0 +1,1685 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.cloudfrontkeyvaluestore#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Access denied.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#CloudFrontKeyValueStore": {
+            "type": "service",
+            "version": "2022-07-26",
+            "operations": [
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#DeleteKey"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#DescribeKeyValueStore"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#GetKey"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ListKeys"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#PutKey"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#UpdateKeys"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "CloudFront KeyValueStore",
+                    "arnNamespace": "key-value-store",
+                    "endpointPrefix": "cloudfront-keyvaluestore"
+                },
+                "aws.auth#sigv4": {
+                    "name": "cloudfront-keyvaluestore"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon CloudFront KeyValueStore Service to View and Update Data in a KVS Resource</p>",
+                "smithy.api#title": "Amazon CloudFront KeyValueStore",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "KvsARN": {
+                            "required": false,
+                            "documentation": "The ARN of the Key Value Store",
+                            "type": "String"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseFIPS"
+                                        },
+                                        false
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "KvsARN"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.parseArn",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "KvsARN"
+                                                        }
+                                                    ],
+                                                    "assign": "parsedArn"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "parsedArn"
+                                                                        },
+                                                                        "service"
+                                                                    ]
+                                                                },
+                                                                "cloudfront"
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "parsedArn"
+                                                                                },
+                                                                                "region"
+                                                                            ]
+                                                                        },
+                                                                        ""
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "parsedArn"
+                                                                                },
+                                                                                "resourceId[0]"
+                                                                            ],
+                                                                            "assign": "arnType"
+                                                                        }
+                                                                    ],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [
+                                                                                {
+                                                                                    "fn": "not",
+                                                                                    "argv": [
+                                                                                        {
+                                                                                            "fn": "stringEquals",
+                                                                                            "argv": [
+                                                                                                {
+                                                                                                    "ref": "arnType"
+                                                                                                },
+                                                                                                ""
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ],
+                                                                            "rules": [
+                                                                                {
+                                                                                    "conditions": [
+                                                                                        {
+                                                                                            "fn": "stringEquals",
+                                                                                            "argv": [
+                                                                                                {
+                                                                                                    "ref": "arnType"
+                                                                                                },
+                                                                                                "key-value-store"
+                                                                                            ]
+                                                                                        }
+                                                                                    ],
+                                                                                    "rules": [
+                                                                                        {
+                                                                                            "conditions": [
+                                                                                                {
+                                                                                                    "fn": "stringEquals",
+                                                                                                    "argv": [
+                                                                                                        {
+                                                                                                            "fn": "getAttr",
+                                                                                                            "argv": [
+                                                                                                                {
+                                                                                                                    "ref": "parsedArn"
+                                                                                                                },
+                                                                                                                "partition"
+                                                                                                            ]
+                                                                                                        },
+                                                                                                        "aws"
+                                                                                                    ]
+                                                                                                }
+                                                                                            ],
+                                                                                            "rules": [
+                                                                                                {
+                                                                                                    "conditions": [
+                                                                                                        {
+                                                                                                            "fn": "isSet",
+                                                                                                            "argv": [
+                                                                                                                {
+                                                                                                                    "ref": "Region"
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ],
+                                                                                                    "rules": [
+                                                                                                        {
+                                                                                                            "conditions": [
+                                                                                                                {
+                                                                                                                    "fn": "aws.partition",
+                                                                                                                    "argv": [
+                                                                                                                        {
+                                                                                                                            "ref": "Region"
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "assign": "partitionResult"
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "rules": [
+                                                                                                                {
+                                                                                                                    "conditions": [
+                                                                                                                        {
+                                                                                                                            "fn": "stringEquals",
+                                                                                                                            "argv": [
+                                                                                                                                {
+                                                                                                                                    "fn": "getAttr",
+                                                                                                                                    "argv": [
+                                                                                                                                        {
+                                                                                                                                            "ref": "partitionResult"
+                                                                                                                                        },
+                                                                                                                                        "name"
+                                                                                                                                    ]
+                                                                                                                                },
+                                                                                                                                "{parsedArn#partition}"
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "rules": [
+                                                                                                                        {
+                                                                                                                            "conditions": [
+                                                                                                                                {
+                                                                                                                                    "fn": "isSet",
+                                                                                                                                    "argv": [
+                                                                                                                                        {
+                                                                                                                                            "ref": "Endpoint"
+                                                                                                                                        }
+                                                                                                                                    ]
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "rules": [
+                                                                                                                                {
+                                                                                                                                    "conditions": [
+                                                                                                                                        {
+                                                                                                                                            "fn": "parseURL",
+                                                                                                                                            "argv": [
+                                                                                                                                                {
+                                                                                                                                                    "ref": "Endpoint"
+                                                                                                                                                }
+                                                                                                                                            ],
+                                                                                                                                            "assign": "url"
+                                                                                                                                        }
+                                                                                                                                    ],
+                                                                                                                                    "rules": [
+                                                                                                                                        {
+                                                                                                                                            "conditions": [],
+                                                                                                                                            "endpoint": {
+                                                                                                                                                "url": "{url#scheme}://{parsedArn#accountId}.{url#authority}{url#path}",
+                                                                                                                                                "properties": {
+                                                                                                                                                    "authSchemes": [
+                                                                                                                                                        {
+                                                                                                                                                            "name": "sigv4a",
+                                                                                                                                                            "signingName": "cloudfront-keyvaluestore",
+                                                                                                                                                            "signingRegionSet": [
+                                                                                                                                                                "*"
+                                                                                                                                                            ]
+                                                                                                                                                        }
+                                                                                                                                                    ]
+                                                                                                                                                },
+                                                                                                                                                "headers": {}
+                                                                                                                                            },
+                                                                                                                                            "type": "endpoint"
+                                                                                                                                        }
+                                                                                                                                    ],
+                                                                                                                                    "type": "tree"
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "conditions": [],
+                                                                                                                                    "error": "Provided endpoint is not a valid URL",
+                                                                                                                                    "type": "error"
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "type": "tree"
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "conditions": [],
+                                                                                                                            "endpoint": {
+                                                                                                                                "url": "https://{parsedArn#accountId}.cloudfront-kvs.global.api.aws",
+                                                                                                                                "properties": {
+                                                                                                                                    "authSchemes": [
+                                                                                                                                        {
+                                                                                                                                            "name": "sigv4a",
+                                                                                                                                            "signingName": "cloudfront-keyvaluestore",
+                                                                                                                                            "signingRegionSet": [
+                                                                                                                                                "*"
+                                                                                                                                            ]
+                                                                                                                                        }
+                                                                                                                                    ]
+                                                                                                                                },
+                                                                                                                                "headers": {}
+                                                                                                                            },
+                                                                                                                            "type": "endpoint"
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "type": "tree"
+                                                                                                                },
+                                                                                                                {
+                                                                                                                    "conditions": [],
+                                                                                                                    "error": "Client was configured for partition `{partitionResult#name}` but Kvs ARN has `{parsedArn#partition}`",
+                                                                                                                    "type": "error"
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "type": "tree"
+                                                                                                        }
+                                                                                                    ],
+                                                                                                    "type": "tree"
+                                                                                                },
+                                                                                                {
+                                                                                                    "conditions": [
+                                                                                                        {
+                                                                                                            "fn": "isSet",
+                                                                                                            "argv": [
+                                                                                                                {
+                                                                                                                    "ref": "Endpoint"
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ],
+                                                                                                    "rules": [
+                                                                                                        {
+                                                                                                            "conditions": [
+                                                                                                                {
+                                                                                                                    "fn": "parseURL",
+                                                                                                                    "argv": [
+                                                                                                                        {
+                                                                                                                            "ref": "Endpoint"
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "assign": "url"
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "rules": [
+                                                                                                                {
+                                                                                                                    "conditions": [],
+                                                                                                                    "endpoint": {
+                                                                                                                        "url": "{url#scheme}://{parsedArn#accountId}.{url#authority}{url#path}",
+                                                                                                                        "properties": {
+                                                                                                                            "authSchemes": [
+                                                                                                                                {
+                                                                                                                                    "name": "sigv4a",
+                                                                                                                                    "signingName": "cloudfront-keyvaluestore",
+                                                                                                                                    "signingRegionSet": [
+                                                                                                                                        "*"
+                                                                                                                                    ]
+                                                                                                                                }
+                                                                                                                            ]
+                                                                                                                        },
+                                                                                                                        "headers": {}
+                                                                                                                    },
+                                                                                                                    "type": "endpoint"
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "type": "tree"
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "conditions": [],
+                                                                                                            "error": "Provided endpoint is not a valid URL",
+                                                                                                            "type": "error"
+                                                                                                        }
+                                                                                                    ],
+                                                                                                    "type": "tree"
+                                                                                                },
+                                                                                                {
+                                                                                                    "conditions": [],
+                                                                                                    "endpoint": {
+                                                                                                        "url": "https://{parsedArn#accountId}.cloudfront-kvs.global.api.aws",
+                                                                                                        "properties": {
+                                                                                                            "authSchemes": [
+                                                                                                                {
+                                                                                                                    "name": "sigv4a",
+                                                                                                                    "signingName": "cloudfront-keyvaluestore",
+                                                                                                                    "signingRegionSet": [
+                                                                                                                        "*"
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        },
+                                                                                                        "headers": {}
+                                                                                                    },
+                                                                                                    "type": "endpoint"
+                                                                                                }
+                                                                                            ],
+                                                                                            "type": "tree"
+                                                                                        },
+                                                                                        {
+                                                                                            "conditions": [],
+                                                                                            "error": "CloudFront-KeyValueStore is not supported in partition `{parsedArn#partition}`",
+                                                                                            "type": "error"
+                                                                                        }
+                                                                                    ],
+                                                                                    "type": "tree"
+                                                                                },
+                                                                                {
+                                                                                    "conditions": [],
+                                                                                    "error": "ARN resource type is invalid. Expected `key-value-store`, found: `{arnType}`",
+                                                                                    "type": "error"
+                                                                                }
+                                                                            ],
+                                                                            "type": "tree"
+                                                                        },
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "error": "No resource type found in the KVS ARN. Resource type must be `key-value-store`.",
+                                                                            "type": "error"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                },
+                                                                {
+                                                                    "conditions": [],
+                                                                    "error": "No resource type found in the KVS ARN. Resource type must be `key-value-store`.",
+                                                                    "type": "error"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "Provided ARN must be a global resource ARN. Found: `{parsedArn#region}`",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "Provided ARN is not a valid CloudFront Service ARN. Found: `{parsedArn#service}`",
+                                                    "type": "error"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "KVS ARN must be a valid ARN",
+                                            "type": "error"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "KVS ARN must be provided to use this service",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore.",
+                            "type": "error"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "FIPS should error",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore."
+                            },
+                            "params": {
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "KVS ARN must be provided to use this service",
+                            "expect": {
+                                "error": "KVS ARN must be provided to use this service"
+                            }
+                        },
+                        {
+                            "documentation": "KVS ARN must be a valid ARN",
+                            "expect": {
+                                "error": "KVS ARN must be a valid ARN"
+                            },
+                            "params": {
+                                "KvsARN": "not-a-valid-arn"
+                            }
+                        },
+                        {
+                            "documentation": "Provided ARN was not a valid CloudFront Service ARN. Found: `notcloudfront`",
+                            "expect": {
+                                "error": "Provided ARN is not a valid CloudFront Service ARN. Found: `notcloudfront`"
+                            },
+                            "params": {
+                                "KvsARN": "arn:aws:notcloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
+                            }
+                        },
+                        {
+                            "documentation": "Provided ARN must be a global resource ARN. Found: `us-west-2`",
+                            "expect": {
+                                "error": "Provided ARN must be a global resource ARN. Found: `us-west-2`"
+                            },
+                            "params": {
+                                "KvsARN": "arn:aws:cloudfront:us-west-2:123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
+                            }
+                        },
+                        {
+                            "documentation": "ARN resource type is invalid. Expected `key-value-store`, found: `some-other-resource-type`",
+                            "expect": {
+                                "error": "ARN resource type is invalid. Expected `key-value-store`, found: `some-other-resource-type`"
+                            },
+                            "params": {
+                                "KvsARN": "arn:aws:cloudfront::123456789012:some-other-resource-type/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
+                            }
+                        },
+                        {
+                            "documentation": "CloudFront-KeyValueStore is not supported in partition `aws-cn`",
+                            "expect": {
+                                "error": "CloudFront-KeyValueStore is not supported in partition `aws-cn`"
+                            },
+                            "params": {
+                                "KvsARN": "arn:aws-cn:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
+                            }
+                        },
+                        {
+                            "documentation": "CloudFront-KeyValueStore is not supported in partition `aws-us-gov`",
+                            "expect": {
+                                "error": "CloudFront-KeyValueStore is not supported in partition `aws-us-gov`"
+                            },
+                            "params": {
+                                "KvsARN": "arn:aws-us-gov:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
+                            }
+                        },
+                        {
+                            "documentation": "Valid account based endpoint",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingName": "cloudfront-keyvaluestore",
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://123456789012.cloudfront-kvs.global.api.aws"
+                                }
+                            },
+                            "params": {
+                                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
+                            }
+                        },
+                        {
+                            "documentation": "Valid account based endpoint, with SDK region",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingName": "cloudfront-keyvaluestore",
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://123456789012.cloudfront-kvs.global.api.aws"
+                                }
+                            },
+                            "params": {
+                                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "Valid ARN, different partition, should error",
+                            "expect": {
+                                "error": "Client was configured for partition `aws-cn` but Kvs ARN has `aws`"
+                            },
+                            "params": {
+                                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "Valid account based endpoint with FIPS, should error",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore."
+                            },
+                            "params": {
+                                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "Custom sdk endpoint override",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingName": "cloudfront-keyvaluestore",
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://123456789012.my-override.example.com"
+                                }
+                            },
+                            "params": {
+                                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
+                                "Region": "us-east-1",
+                                "Endpoint": "https://my-override.example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Custom sdk endpoint override with path and http",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingName": "cloudfront-keyvaluestore",
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "url": "http://123456789012.my-override.example.com/custom-path"
+                                }
+                            },
+                            "params": {
+                                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
+                                "Endpoint": "http://my-override.example.com/custom-path"
+                            }
+                        },
+                        {
+                            "documentation": "Custom override with different partition should error",
+                            "expect": {
+                                "error": "Client was configured for partition `aws-us-gov` but Kvs ARN has `aws`"
+                            },
+                            "params": {
+                                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
+                                "Region": "us-gov-east-1",
+                                "Endpoint": "https://my-override.example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Resource is not in expected state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#DeleteKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfrontkeyvaluestore#DeleteKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfrontkeyvaluestore#DeleteKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the key value pair specified by the key.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Delete 'key1' from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "input": {
+                            "Key": "key1",
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "IfMatch": "KV0AB12C3DEF456"
+                        },
+                        "output": {
+                            "ETag": "KV7XY89Z0ABC012",
+                            "ItemCount": 3,
+                            "TotalSizeInBytes": 5
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/key-value-stores/{KvsARN}/keys/{Key}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#DeleteKeyRequest": {
+            "type": "structure",
+            "members": {
+                "KvsARN": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#KvsARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Value Store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "KvsARN"
+                        }
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Etag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (ETag) of the Key Value Store that you are deleting keys from, which you can get using DescribeKeyValueStore.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#DeleteKeyRequestListItem": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the key value pair to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List item for keys to delete.</p>"
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#DeleteKeyRequestsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfrontkeyvaluestore#DeleteKeyRequestListItem"
+            },
+            "traits": {
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#DeleteKeyResponse": {
+            "type": "structure",
+            "members": {
+                "ItemCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of key value pairs in the Key Value Store after the successful delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalSizeInBytes": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total size of the Key Value Store after the successful delete, in bytes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Etag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version identifier of the Key Value Store after the successful delete.</p>",
+                        "smithy.api#httpHeader": "ETag",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata information about a Key Value Store.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#DescribeKeyValueStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfrontkeyvaluestore#DescribeKeyValueStoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfrontkeyvaluestore#DescribeKeyValueStoreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns metadata information about Key Value Store.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Describe the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "input": {
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58"
+                        },
+                        "output": {
+                            "ETag": "KV7XY89Z0ABC012",
+                            "ItemCount": 4,
+                            "TotalSizeInBytes": 15,
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "Created": "2023-11-01T22:18:46Z",
+                            "LastModified": "2023-11-01T14:28:17Z"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/key-value-stores/{KvsARN}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#DescribeKeyValueStoreRequest": {
+            "type": "structure",
+            "members": {
+                "KvsARN": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#KvsARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Value Store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "KvsARN"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#DescribeKeyValueStoreResponse": {
+            "type": "structure",
+            "members": {
+                "ItemCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of key value pairs in the Key Value Store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalSizeInBytes": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total size of the Key Value Store in bytes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KvsARN": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#KvsARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Value Store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Created": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date and time when the Key Value Store was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Etag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the Key Value Store.</p>",
+                        "smithy.api#httpHeader": "ETag",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModified": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date and time when the key value pairs in the Key Value Store was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata information about a Key Value Store.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#Etag": {
+            "type": "string"
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#GetKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfrontkeyvaluestore#GetKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfrontkeyvaluestore#GetKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a key value pair.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get 'key1' from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "input": {
+                            "Key": "key1",
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58"
+                        },
+                        "output": {
+                            "Key": "key1",
+                            "Value": "value1",
+                            "ItemCount": 4,
+                            "TotalSizeInBytes": 15
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/key-value-stores/{KvsARN}/keys/{Key}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#GetKeyRequest": {
+            "type": "structure",
+            "members": {
+                "KvsARN": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#KvsARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Value Store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "KvsARN"
+                        }
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key to get.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#GetKeyResponse": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the key value pair.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Value",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the key value pair.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ItemCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of key value pairs in the Key Value Store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalSizeInBytes": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total size of the Key Value Store in bytes.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A key value pair.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Internal server error.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#Key": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#KvsARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#ListKeys": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfrontkeyvaluestore#ListKeysRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfrontkeyvaluestore#ListKeysResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of key value pairs.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List keys in the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "input": {
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "MaxResults": 3
+                        },
+                        "output": {
+                            "NextToken": "hVTTZndkpBZ0VRZ0R1RF",
+                            "Items": [
+                                {
+                                    "Key": "key1",
+                                    "Value": "value1"
+                                },
+                                {
+                                    "Key": "key2",
+                                    "Value": "value2"
+                                },
+                                {
+                                    "Key": "key3",
+                                    "Value": "value3"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "List the next page in the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "input": {
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "MaxResults": 3,
+                            "NextToken": "hVTTZndkpBZ0VRZ0R1RF"
+                        },
+                        "output": {
+                            "NextToken": "hQTlB5YmM5UFNoFQvMk",
+                            "Items": [
+                                {
+                                    "Key": "key4",
+                                    "Value": "value4"
+                                },
+                                {
+                                    "Key": "key5",
+                                    "Value": "value5"
+                                },
+                                {
+                                    "Key": "key6",
+                                    "Value": "value6"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/key-value-stores/{KvsARN}/keys"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#ListKeysRequest": {
+            "type": "structure",
+            "members": {
+                "KvsARN": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#KvsARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Value Store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "KvsARN"
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If nextToken is returned in the response, there are more results available. Make the next call using the returned token to retrieve the next page.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>Maximum number of results that are returned per call. The default is 10 and maximum allowed page is 50.</p>",
+                        "smithy.api#httpQuery": "MaxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#ListKeysResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If nextToken is returned in the response, there are more results available. Make the next call using the returned token to retrieve the next page.</p>"
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ListKeysResponseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key value pairs</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#ListKeysResponseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfrontkeyvaluestore#ListKeysResponseListItem"
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#ListKeysResponseListItem": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the key value pair.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Value",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the key value pair.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A key value pair.</p>"
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#PutKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfrontkeyvaluestore#PutKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfrontkeyvaluestore#PutKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new key value pair or replaces the value of an existing key.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Put 'key1' with 'value1' into the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "input": {
+                            "Key": "key1",
+                            "Value": "value1",
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "IfMatch": "KV0AB12C3DEF456"
+                        },
+                        "output": {
+                            "ETag": "KV7XY89Z0ABC012",
+                            "ItemCount": 4,
+                            "TotalSizeInBytes": 15
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/key-value-stores/{KvsARN}/keys/{Key}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#PutKeyRequest": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key to put.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Value",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to put.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KvsARN": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#KvsARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Value Store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "KvsARN"
+                        }
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Etag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (ETag) of the Key Value Store that you are putting keys into, which you can get using DescribeKeyValueStore.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A key value pair.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#PutKeyRequestListItem": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the key value pair list item to put.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Value",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value for the key value pair to put.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List item for key value pair to put.</p>"
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#PutKeyRequestsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfrontkeyvaluestore#PutKeyRequestListItem"
+            },
+            "traits": {
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#PutKeyResponse": {
+            "type": "structure",
+            "members": {
+                "ItemCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of key value pairs in the Key Value Store after the successful put.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalSizeInBytes": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total size of the Key Value Store after the successful put, in bytes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Etag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version identifier of the Key Value Store after the successful put.</p>",
+                        "smithy.api#httpHeader": "ETag",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata information about a Key Value Store.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Resource was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Limit exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#UpdateKeys": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfrontkeyvaluestore#UpdateKeysRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfrontkeyvaluestore#UpdateKeysResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Puts or Deletes multiple key value pairs in a single, all-or-nothing operation.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Put 2 keys into the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "input": {
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "IfMatch": "KV0AB12C3DEF456",
+                            "Puts": [
+                                {
+                                    "Key": "key1",
+                                    "Value": "value1"
+                                },
+                                {
+                                    "Key": "key2",
+                                    "Value": "value2"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "ETag": "KV7XY89Z0ABC012",
+                            "ItemCount": 4,
+                            "TotalSizeInBytes": 15
+                        }
+                    },
+                    {
+                        "title": "Delete 2 keys from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "input": {
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "IfMatch": "KV0AB12C3DEF456",
+                            "Deletes": [
+                                {
+                                    "Key": "key1"
+                                },
+                                {
+                                    "Key": "key2"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "ETag": "KV7XY89Z0ABC012",
+                            "ItemCount": 4,
+                            "TotalSizeInBytes": 15
+                        }
+                    },
+                    {
+                        "title": "Put 2 keys into and delete 1 key from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "input": {
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "IfMatch": "KV0AB12C3DEF456",
+                            "Puts": [
+                                {
+                                    "Key": "key1",
+                                    "Value": "value1"
+                                },
+                                {
+                                    "Key": "key2",
+                                    "Value": "value2"
+                                }
+                            ],
+                            "Deletes": [
+                                {
+                                    "Key": "key3"
+                                },
+                                {
+                                    "Key": "key4"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "ETag": "KV7XY89Z0ABC012",
+                            "ItemCount": 4,
+                            "TotalSizeInBytes": 15
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/key-value-stores/{KvsARN}/keys"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#UpdateKeysRequest": {
+            "type": "structure",
+            "members": {
+                "KvsARN": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#KvsARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Value Store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "KvsARN"
+                        }
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Etag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (ETag) of the Key Value Store that you are updating keys of, which you can get using DescribeKeyValueStore.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Puts": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#PutKeyRequestsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of key value pairs to put.</p>"
+                    }
+                },
+                "Deletes": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#DeleteKeyRequestsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of keys to delete.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#UpdateKeysResponse": {
+            "type": "structure",
+            "members": {
+                "ItemCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of key value pairs in the Key Value Store after the successful update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalSizeInBytes": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total size of the Key Value Store after the successful update, in bytes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfrontkeyvaluestore#Etag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version identifier of the Key Value Store after the successful update.</p>",
+                        "smithy.api#httpHeader": "ETag",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata information about a Key Value Store.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Validation failed.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudfrontkeyvaluestore#Value": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        }
+    }
+}

@@ -9,10 +9,16 @@
                     "target": "com.amazonaws.iottwinmaker#BatchPutPropertyValues"
                 },
                 {
+                    "target": "com.amazonaws.iottwinmaker#CancelMetadataTransferJob"
+                },
+                {
                     "target": "com.amazonaws.iottwinmaker#CreateComponentType"
                 },
                 {
                     "target": "com.amazonaws.iottwinmaker#CreateEntity"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#CreateMetadataTransferJob"
                 },
                 {
                     "target": "com.amazonaws.iottwinmaker#CreateScene"
@@ -48,6 +54,9 @@
                     "target": "com.amazonaws.iottwinmaker#GetEntity"
                 },
                 {
+                    "target": "com.amazonaws.iottwinmaker#GetMetadataTransferJob"
+                },
+                {
                     "target": "com.amazonaws.iottwinmaker#GetPricingPlan"
                 },
                 {
@@ -66,10 +75,19 @@
                     "target": "com.amazonaws.iottwinmaker#GetWorkspace"
                 },
                 {
+                    "target": "com.amazonaws.iottwinmaker#ListComponents"
+                },
+                {
                     "target": "com.amazonaws.iottwinmaker#ListComponentTypes"
                 },
                 {
                     "target": "com.amazonaws.iottwinmaker#ListEntities"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ListMetadataTransferJobs"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ListProperties"
                 },
                 {
                     "target": "com.amazonaws.iottwinmaker#ListScenes"
@@ -117,7 +135,7 @@
                     "name": "iottwinmaker"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>IoT TwinMaker is a service with which you\n         can\n         build operational digital twins of physical systems. IoT TwinMaker overlays measurements\n         and analysis from real-world sensors, cameras, and enterprise applications so you can\n         create data visualizations to monitor your physical factory, building, or industrial plant.\n         You can use this real-world data to monitor operations and diagnose and repair\n         errors.</p>",
+                "smithy.api#documentation": "<p>IoT TwinMaker is a service with which you can\n         build operational digital twins of physical systems. IoT TwinMaker overlays measurements\n         and analysis from real-world sensors, cameras, and enterprise applications so you can\n         create data visualizations to monitor your physical factory, building, or industrial plant.\n         You can use this real-world data to monitor operations and diagnose and repair\n         errors.</p>",
                 "smithy.api#title": "AWS IoT TwinMaker",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -161,7 +179,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -204,7 +221,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -217,7 +235,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -231,7 +248,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -254,7 +270,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -289,7 +304,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -300,14 +314,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -321,14 +337,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -337,11 +351,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -352,14 +366,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -373,7 +389,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -393,7 +408,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -404,14 +418,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -422,9 +438,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -971,6 +989,104 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.iottwinmaker#CancelMetadataTransferJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iottwinmaker#CancelMetadataTransferJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iottwinmaker#CancelMetadataTransferJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iottwinmaker#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels the metadata transfer job.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/metadata-transfer-jobs/{metadataTransferJobId}/cancel",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#CancelMetadataTransferJobRequest": {
+            "type": "structure",
+            "members": {
+                "metadataTransferJobId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job Id.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iottwinmaker#CancelMetadataTransferJobResponse": {
+            "type": "structure",
+            "members": {
+                "metadataTransferJobId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job Id.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.iottwinmaker#TwinMakerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updateDateTime": {
+                    "target": "com.amazonaws.iottwinmaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to update the DateTime property.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iottwinmaker#MetadataTransferJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job's status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "progress": {
+                    "target": "com.amazonaws.iottwinmaker#MetadataTransferJobProgress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job's progress.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iottwinmaker#ColumnDescription": {
             "type": "structure",
             "members": {
@@ -1020,6 +1136,16 @@
                         "value": "VALUE"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.iottwinmaker#ComponentPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[a-zA-Z_\\-0-9/]+$"
             }
         },
         "com.amazonaws.iottwinmaker#ComponentPropertyGroupRequest": {
@@ -1177,10 +1303,93 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The syncSource of the sync job, if this entity was created by a sync job.</p>"
                     }
+                },
+                "areAllPropertiesReturned": {
+                    "target": "com.amazonaws.iottwinmaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This flag notes whether all properties of the component are returned in the API response. \n          The maximum number of properties returned is 800.</p>"
+                    }
+                },
+                "compositeComponents": {
+                    "target": "com.amazonaws.iottwinmaker#CompositeComponentResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This lists objects that contain information about the <code>compositeComponents</code>.</p>"
+                    }
+                },
+                "areAllCompositeComponentsReturned": {
+                    "target": "com.amazonaws.iottwinmaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This flag notes whether all <code>compositeComponents</code> are returned in the API \n          response.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that returns information about a component type create or update\n         request.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#ComponentSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iottwinmaker#ComponentSummary"
+            }
+        },
+        "com.amazonaws.iottwinmaker#ComponentSummary": {
+            "type": "structure",
+            "members": {
+                "componentName": {
+                    "target": "com.amazonaws.iottwinmaker#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "componentTypeId": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the component type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "definedIn": {
+                    "target": "com.amazonaws.iottwinmaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the property definition set in the request.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iottwinmaker#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the component request.</p>"
+                    }
+                },
+                "propertyGroups": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentPropertyGroupResponses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property groups.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iottwinmaker#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the component type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "syncSource": {
+                    "target": "com.amazonaws.iottwinmaker#SyncSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>syncSource</code> of the sync job, if this entity was created by a sync job.</p>"
+                    }
+                },
+                "componentPath": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This string specifies the path to the composite component, starting from the top-level component.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that returns information about a component summary.</p>"
             }
         },
         "com.amazonaws.iottwinmaker#ComponentTypeId": {
@@ -1347,6 +1556,143 @@
                 "target": "com.amazonaws.iottwinmaker#ComponentRequest"
             }
         },
+        "com.amazonaws.iottwinmaker#CompositeComponentRequest": {
+            "type": "structure",
+            "members": {
+                "description": {
+                    "target": "com.amazonaws.iottwinmaker#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the component type.</p>"
+                    }
+                },
+                "properties": {
+                    "target": "com.amazonaws.iottwinmaker#PropertyRequests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is an object that maps strings to the properties to set in the component type. Each string in \n          the mapping must be unique to this object.</p>"
+                    }
+                },
+                "propertyGroups": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentPropertyGroupRequests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property groups.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that sets information about the composite component update request.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#CompositeComponentResponse": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iottwinmaker#Name"
+            },
+            "value": {
+                "target": "com.amazonaws.iottwinmaker#ComponentSummary"
+            }
+        },
+        "com.amazonaws.iottwinmaker#CompositeComponentTypeRequest": {
+            "type": "structure",
+            "members": {
+                "componentTypeId": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the <code>componentTypeId</code> that the <code>compositeComponentType</code> refers to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that sets information about the composite component types of a component type.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#CompositeComponentTypeResponse": {
+            "type": "structure",
+            "members": {
+                "componentTypeId": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the <code>componentTypeId</code> that this <code>compositeComponentType</code> refers to.</p>"
+                    }
+                },
+                "isInherited": {
+                    "target": "com.amazonaws.iottwinmaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This boolean indicates whether this <code>compositeComponentType</code> is inherited from its parent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that returns information about the composite component types of a component type.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#CompositeComponentTypesRequest": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iottwinmaker#Name"
+            },
+            "value": {
+                "target": "com.amazonaws.iottwinmaker#CompositeComponentTypeRequest"
+            }
+        },
+        "com.amazonaws.iottwinmaker#CompositeComponentTypesResponse": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iottwinmaker#Name"
+            },
+            "value": {
+                "target": "com.amazonaws.iottwinmaker#CompositeComponentTypeResponse"
+            }
+        },
+        "com.amazonaws.iottwinmaker#CompositeComponentUpdateRequest": {
+            "type": "structure",
+            "members": {
+                "updateType": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentUpdateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The update type of the component update request.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iottwinmaker#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the component type.</p>"
+                    }
+                },
+                "propertyUpdates": {
+                    "target": "com.amazonaws.iottwinmaker#PropertyRequests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that maps strings to the properties to set in the component type update. Each string in the mapping must be unique to this object.</p>"
+                    }
+                },
+                "propertyGroupUpdates": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentPropertyGroupRequests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property group updates.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that sets information about the composite component update request.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#CompositeComponentUpdatesMapRequest": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iottwinmaker#ComponentPath"
+            },
+            "value": {
+                "target": "com.amazonaws.iottwinmaker#CompositeComponentUpdateRequest"
+            }
+        },
+        "com.amazonaws.iottwinmaker#CompositeComponentsMapRequest": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iottwinmaker#ComponentPath"
+            },
+            "value": {
+                "target": "com.amazonaws.iottwinmaker#CompositeComponentRequest"
+            }
+        },
         "com.amazonaws.iottwinmaker#Configuration": {
             "type": "map",
             "key": {
@@ -1501,6 +1847,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A friendly name for the component type.</p>"
                     }
+                },
+                "compositeComponentTypes": {
+                    "target": "com.amazonaws.iottwinmaker#CompositeComponentTypesRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is an object that maps strings to <code>compositeComponentTypes</code> of the <code>componentType</code>. \n          <code>CompositeComponentType</code> is referenced by <code>componentTypeId</code>.</p>"
+                    }
                 }
             }
         },
@@ -1606,6 +1958,12 @@
                         "smithy.api#documentation": "<p>An object that maps strings to the components in the entity. Each string in the mapping\n         must be unique to this object.</p>"
                     }
                 },
+                "compositeComponents": {
+                    "target": "com.amazonaws.iottwinmaker#CompositeComponentsMapRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is an object that maps strings to <code>compositeComponent</code> updates in the request. \n          Each key of the map represents the <code>componentPath</code> of the <code>compositeComponent</code>.</p>"
+                    }
+                },
                 "parentEntityId": {
                     "target": "com.amazonaws.iottwinmaker#ParentEntityId",
                     "traits": {
@@ -1651,6 +2009,119 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.iottwinmaker#CreateMetadataTransferJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iottwinmaker#CreateMetadataTransferJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iottwinmaker#CreateMetadataTransferJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iottwinmaker#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new metadata transfer job.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/metadata-transfer-jobs",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#CreateMetadataTransferJobRequest": {
+            "type": "structure",
+            "members": {
+                "metadataTransferJobId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job Id.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iottwinmaker#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job description.</p>"
+                    }
+                },
+                "sources": {
+                    "target": "com.amazonaws.iottwinmaker#SourceConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job sources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.iottwinmaker#DestinationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job destination.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iottwinmaker#CreateMetadataTransferJobResponse": {
+            "type": "structure",
+            "members": {
+                "metadataTransferJobId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job Id.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.iottwinmaker#TwinMakerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.iottwinmaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The The metadata transfer job creation DateTime property.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iottwinmaker#MetadataTransferJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job response status.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iottwinmaker#CreateScene": {
@@ -1923,15 +2394,13 @@
                 "s3Location": {
                     "target": "com.amazonaws.iottwinmaker#S3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the S3 bucket where resources associated with the workspace are\n         stored.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ARN of the S3 bucket where resources associated with the workspace are\n         stored.</p>"
                     }
                 },
                 "role": {
                     "target": "com.amazonaws.iottwinmaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the execution role associated with the workspace.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ARN of the execution role associated with the workspace.</p>"
                     }
                 },
                 "tags": {
@@ -2443,7 +2912,14 @@
         },
         "com.amazonaws.iottwinmaker#DeleteWorkspaceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iottwinmaker#WorkspaceDeleteMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string that specifies the delete result for the workspace.</p>"
+                    }
+                }
+            }
         },
         "com.amazonaws.iottwinmaker#Description": {
             "type": "string",
@@ -2453,6 +2929,52 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.iottwinmaker#DestinationConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.iottwinmaker#DestinationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3Configuration": {
+                    "target": "com.amazonaws.iottwinmaker#S3DestinationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job S3 configuration. [need to add S3 entity]</p>"
+                    }
+                },
+                "iotTwinMakerConfiguration": {
+                    "target": "com.amazonaws.iottwinmaker#IotTwinMakerDestinationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job Amazon Web Services IoT TwinMaker configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The [link to action] metadata transfer job destination configuration.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#DestinationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "S3",
+                        "value": "s3"
+                    },
+                    {
+                        "name": "IOTSITEWISE",
+                        "value": "iotsitewise"
+                    },
+                    {
+                        "name": "IOTTWINMAKER",
+                        "value": "iottwinmaker"
+                    }
+                ]
             }
         },
         "com.amazonaws.iottwinmaker#Double": {
@@ -2485,6 +3007,12 @@
                     "target": "com.amazonaws.iottwinmaker#Name",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the component.</p>"
+                    }
+                },
+                "componentPath": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This string specifies the path to the composite component, starting from the top-level component.</p>"
                     }
                 },
                 "externalIdProperty": {
@@ -2563,7 +3091,7 @@
                 "hasChildEntities": {
                     "target": "com.amazonaws.iottwinmaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the entity has child entities or not.</p>"
+                        "smithy.api#documentation": "<p>An <b>eventual</b> Boolean value that specifies whether the entity has child entities or not.</p>"
                     }
                 },
                 "creationDateTime": {
@@ -2620,6 +3148,18 @@
                     {
                         "name": "SYNC_PROCESSING_ERROR",
                         "value": "SYNC_PROCESSING_ERROR"
+                    },
+                    {
+                        "name": "SYNC_DELETING_ERROR",
+                        "value": "SYNC_DELETING_ERROR"
+                    },
+                    {
+                        "name": "PROCESSING_ERROR",
+                        "value": "PROCESSING_ERROR"
+                    },
+                    {
+                        "name": "COMPOSITE_COMPONENT_FAILURE",
+                        "value": "COMPOSITE_COMPONENT_FAILURE"
                     }
                 ]
             }
@@ -2709,7 +3249,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Run queries to access information from your knowledge graph of entities within\n         individual workspaces.</p>",
+                "smithy.api#documentation": "<p>Run queries to access information from your knowledge graph of entities within\n         individual workspaces.</p>\n         <note>\n            <p>The ExecuteQuery action only works with <a href=\"https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/home.html\">Amazon Web Services Java SDK2</a>.\n         ExecuteQuery will not work with any Amazon Web Services Java SDK version &lt; 2.x.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "api."
                 },
@@ -2745,7 +3285,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.iottwinmaker#QueryServiceMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 25.</p>\n         <p>Valid Range: Minimum value of 1. Maximum value of 250.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 50.</p>"
                     }
                 },
                 "nextToken": {
@@ -2802,6 +3342,100 @@
             },
             "value": {
                 "target": "com.amazonaws.iottwinmaker#String"
+            }
+        },
+        "com.amazonaws.iottwinmaker#FilterByAsset": {
+            "type": "structure",
+            "members": {
+                "assetId": {
+                    "target": "com.amazonaws.iottwinmaker#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by asset Id.</p>"
+                    }
+                },
+                "assetExternalId": {
+                    "target": "com.amazonaws.iottwinmaker#SiteWiseExternalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external-Id property of an asset. </p>"
+                    }
+                },
+                "includeOffspring": {
+                    "target": "com.amazonaws.iottwinmaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Includes sub-assets.[need description hekp for this]</p>"
+                    }
+                },
+                "includeAssetModel": {
+                    "target": "com.amazonaws.iottwinmaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Boolean to include the asset model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filter by asset. [TwinMaker asset]</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#FilterByAssetModel": {
+            "type": "structure",
+            "members": {
+                "assetModelId": {
+                    "target": "com.amazonaws.iottwinmaker#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset model Id.</p>"
+                    }
+                },
+                "assetModelExternalId": {
+                    "target": "com.amazonaws.iottwinmaker#SiteWiseExternalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external-Id property of an asset model.</p>"
+                    }
+                },
+                "includeOffspring": {
+                    "target": "com.amazonaws.iottwinmaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include asset offspring. [need desc.]</p>"
+                    }
+                },
+                "includeAssets": {
+                    "target": "com.amazonaws.iottwinmaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Bolean to include assets.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filter by asset model.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#FilterByComponentType": {
+            "type": "structure",
+            "members": {
+                "componentTypeId": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The component type Id.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filter by component type.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#FilterByEntity": {
+            "type": "structure",
+            "members": {
+                "entityId": {
+                    "target": "com.amazonaws.iottwinmaker#EntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity Id.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Vilter by entity.</p>"
             }
         },
         "com.amazonaws.iottwinmaker#FunctionRequest": {
@@ -3056,6 +3690,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The component type name.</p>"
                     }
+                },
+                "compositeComponentTypes": {
+                    "target": "com.amazonaws.iottwinmaker#CompositeComponentTypesResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is an object that maps strings to <code>compositeComponentTypes</code> of the <code>componentType</code>. <code>CompositeComponentType</code> is referenced by <code>componentTypeId</code>.</p>"
+                    }
                 }
             }
         },
@@ -3200,7 +3840,149 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The syncSource of the sync job, if this entity was created by a sync job.</p>"
                     }
+                },
+                "areAllComponentsReturned": {
+                    "target": "com.amazonaws.iottwinmaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This flag notes whether all components are returned in the API response. The maximum number of components returned is 30.</p>"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.iottwinmaker#GetMetadataTransferJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iottwinmaker#GetMetadataTransferJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iottwinmaker#GetMetadataTransferJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iottwinmaker#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a nmetadata transfer job.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/metadata-transfer-jobs/{metadataTransferJobId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.iottwinmaker#GetMetadataTransferJobRequest": {
+            "type": "structure",
+            "members": {
+                "metadataTransferJobId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job Id.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iottwinmaker#GetMetadataTransferJobResponse": {
+            "type": "structure",
+            "members": {
+                "metadataTransferJobId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job Id.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.iottwinmaker#TwinMakerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iottwinmaker#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job description.</p>"
+                    }
+                },
+                "sources": {
+                    "target": "com.amazonaws.iottwinmaker#SourceConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job's sources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.iottwinmaker#DestinationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job's destination.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadataTransferJobRole": {
+                    "target": "com.amazonaws.iottwinmaker#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job's role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reportUrl": {
+                    "target": "com.amazonaws.iottwinmaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job's report URL.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.iottwinmaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job's creation DateTime property.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updateDateTime": {
+                    "target": "com.amazonaws.iottwinmaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job's update DateTime property.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iottwinmaker#MetadataTransferJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job's status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "progress": {
+                    "target": "com.amazonaws.iottwinmaker#MetadataTransferJobProgress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job's progress.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iottwinmaker#GetPricingPlan": {
@@ -3379,6 +4161,12 @@
                         "smithy.api#documentation": "<p>The name of the component.</p>"
                     }
                 },
+                "componentPath": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This string specifies the path to the composite component, starting from the top-level component.</p>"
+                    }
+                },
                 "componentTypeId": {
                     "target": "com.amazonaws.iottwinmaker#ComponentTypeId",
                     "traits": {
@@ -3479,6 +4267,12 @@
                     "target": "com.amazonaws.iottwinmaker#Name",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the component whose property values the operation returns.</p>"
+                    }
+                },
+                "componentPath": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This string specifies the path to the composite component, starting from the top-level component.</p>"
                     }
                 },
                 "componentTypeId": {
@@ -3880,18 +4674,22 @@
                         "smithy.api#documentation": "<p>The description of the workspace.</p>"
                     }
                 },
+                "linkedServices": {
+                    "target": "com.amazonaws.iottwinmaker#LinkedServices",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of services that are linked to the workspace.</p>"
+                    }
+                },
                 "s3Location": {
                     "target": "com.amazonaws.iottwinmaker#S3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the S3 bucket where resources associated with the workspace are\n         stored.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ARN of the S3 bucket where resources associated with the workspace are\n         stored.</p>"
                     }
                 },
                 "role": {
                     "target": "com.amazonaws.iottwinmaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the execution role associated with the workspace.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ARN of the execution role associated with the workspace.</p>"
                     }
                 },
                 "creationDateTime": {
@@ -3991,6 +4789,108 @@
         "com.amazonaws.iottwinmaker#IntervalInSeconds": {
             "type": "long"
         },
+        "com.amazonaws.iottwinmaker#IotSiteWiseSourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.iottwinmaker#IotSiteWiseSourceConfigurationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS IoT SiteWise soucre configuration filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata transfer job AWS IoT SiteWise source configuration.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#IotSiteWiseSourceConfigurationFilter": {
+            "type": "union",
+            "members": {
+                "filterByAssetModel": {
+                    "target": "com.amazonaws.iottwinmaker#FilterByAssetModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by asset model.</p>"
+                    }
+                },
+                "filterByAsset": {
+                    "target": "com.amazonaws.iottwinmaker#FilterByAsset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by asset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The AWS IoT SiteWise soucre configuration filter.[need held with desc here]</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#IotSiteWiseSourceConfigurationFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iottwinmaker#IotSiteWiseSourceConfigurationFilter"
+            }
+        },
+        "com.amazonaws.iottwinmaker#IotTwinMakerDestinationConfiguration": {
+            "type": "structure",
+            "members": {
+                "workspace": {
+                    "target": "com.amazonaws.iottwinmaker#TwinMakerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IoT TwinMaker workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata transfer job AWS IoT TwinMaker destination configuration.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#IotTwinMakerSourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "workspace": {
+                    "target": "com.amazonaws.iottwinmaker#TwinMakerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IoT TwinMaker workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.iottwinmaker#IotTwinMakerSourceConfigurationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job AWS IoT TwinMaker source configuration filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata transfer job AWS IoT TwinMaker source configuration.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#IotTwinMakerSourceConfigurationFilter": {
+            "type": "union",
+            "members": {
+                "filterByComponentType": {
+                    "target": "com.amazonaws.iottwinmaker#FilterByComponentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by component type.</p>"
+                    }
+                },
+                "filterByEntity": {
+                    "target": "com.amazonaws.iottwinmaker#FilterByEntity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by entity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata transfer job AWS IoT TwinMaker source configuration filter.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#IotTwinMakerSourceConfigurationFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iottwinmaker#IotTwinMakerSourceConfigurationFilter"
+            }
+        },
         "com.amazonaws.iottwinmaker#LambdaArn": {
             "type": "string",
             "traits": {
@@ -4014,6 +4914,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The Lambda function.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#LinkedService": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z_0-9]+$"
+            }
+        },
+        "com.amazonaws.iottwinmaker#LinkedServices": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iottwinmaker#LinkedService"
+            },
+            "traits": {
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.iottwinmaker#ListComponentTypes": {
@@ -4149,6 +5064,111 @@
                 }
             }
         },
+        "com.amazonaws.iottwinmaker#ListComponents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iottwinmaker#ListComponentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iottwinmaker#ListComponentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iottwinmaker#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API lists the components of an entity.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workspaces/{workspaceId}/entities/{entityId}/components-list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#ListComponentsRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workspace ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityId": {
+                    "target": "com.amazonaws.iottwinmaker#EntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the entity whose metadata (component/properties) is returned by the operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "componentPath": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This string specifies the path to the composite component, starting from the top-level component.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iottwinmaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results returned at one time. The default is 25.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iottwinmaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string that specifies the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iottwinmaker#ListComponentsResponse": {
+            "type": "structure",
+            "members": {
+                "componentSummaries": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects that contain information about the components.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iottwinmaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string that specifies the next page of component results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iottwinmaker#ListEntities": {
             "type": "operation",
             "input": {
@@ -4266,6 +5286,242 @@
                         "smithy.api#documentation": "<p>The string that specifies the next page of results.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.iottwinmaker#ListMetadataTransferJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iottwinmaker#ListMetadataTransferJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iottwinmaker#ListMetadataTransferJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iottwinmaker#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the metadata transfer jobs.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/metadata-transfer-jobs-list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#ListMetadataTransferJobsFilter": {
+            "type": "union",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workspace Id.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.iottwinmaker#MetadataTransferJobState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ListMetadataTransferJobs filter.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#ListMetadataTransferJobsFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iottwinmaker#ListMetadataTransferJobsFilter"
+            }
+        },
+        "com.amazonaws.iottwinmaker#ListMetadataTransferJobsRequest": {
+            "type": "structure",
+            "members": {
+                "sourceType": {
+                    "target": "com.amazonaws.iottwinmaker#SourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job's source type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationType": {
+                    "target": "com.amazonaws.iottwinmaker#DestinationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job's destination type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.iottwinmaker#ListMetadataTransferJobsFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that filters metadata transfer jobs.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iottwinmaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string that specifies the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iottwinmaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return at one time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iottwinmaker#ListMetadataTransferJobsResponse": {
+            "type": "structure",
+            "members": {
+                "metadataTransferJobSummaries": {
+                    "target": "com.amazonaws.iottwinmaker#MetadataTransferJobSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iottwinmaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string that specifies the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iottwinmaker#ListProperties": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iottwinmaker#ListPropertiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iottwinmaker#ListPropertiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iottwinmaker#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API lists the properties of a component.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workspaces/{workspaceId}/properties-list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#ListPropertiesRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workspace ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "componentName": {
+                    "target": "com.amazonaws.iottwinmaker#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component whose properties are returned by the operation.</p>"
+                    }
+                },
+                "componentPath": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This string specifies the path to the composite component, starting from the top-level component.</p>"
+                    }
+                },
+                "entityId": {
+                    "target": "com.amazonaws.iottwinmaker#EntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the entity whose metadata (component/properties) is returned by the operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iottwinmaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results returned at one time. The default is 25.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iottwinmaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string that specifies the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iottwinmaker#ListPropertiesResponse": {
+            "type": "structure",
+            "members": {
+                "propertySummaries": {
+                    "target": "com.amazonaws.iottwinmaker#PropertySummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects that contain information about the properties.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iottwinmaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string that specifies the next page of property results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iottwinmaker#ListScenes": {
@@ -4683,6 +5939,154 @@
                     "min": 0,
                     "max": 200
                 }
+            }
+        },
+        "com.amazonaws.iottwinmaker#MetadataTransferJobProgress": {
+            "type": "structure",
+            "members": {
+                "totalCount": {
+                    "target": "com.amazonaws.iottwinmaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total count. [of what]</p>"
+                    }
+                },
+                "succeededCount": {
+                    "target": "com.amazonaws.iottwinmaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The succeeded count.</p>"
+                    }
+                },
+                "skippedCount": {
+                    "target": "com.amazonaws.iottwinmaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The skipped count.</p>"
+                    }
+                },
+                "failedCount": {
+                    "target": "com.amazonaws.iottwinmaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failed count.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata transfer job's progress.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#MetadataTransferJobState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "VALIDATING",
+                        "value": "VALIDATING"
+                    },
+                    {
+                        "name": "PENDING",
+                        "value": "PENDING"
+                    },
+                    {
+                        "name": "RUNNING",
+                        "value": "RUNNING"
+                    },
+                    {
+                        "name": "CANCELLING",
+                        "value": "CANCELLING"
+                    },
+                    {
+                        "name": "ERROR",
+                        "value": "ERROR"
+                    },
+                    {
+                        "name": "COMPLETED",
+                        "value": "COMPLETED"
+                    },
+                    {
+                        "name": "CANCELLED",
+                        "value": "CANCELLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iottwinmaker#MetadataTransferJobStatus": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.iottwinmaker#MetadataTransferJobState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job state.</p>"
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.iottwinmaker#ErrorDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job error.</p>"
+                    }
+                },
+                "queuedPosition": {
+                    "target": "com.amazonaws.iottwinmaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The queued position.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata transfer job status.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#MetadataTransferJobSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iottwinmaker#MetadataTransferJobSummary"
+            }
+        },
+        "com.amazonaws.iottwinmaker#MetadataTransferJobSummary": {
+            "type": "structure",
+            "members": {
+                "metadataTransferJobId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job summary Id.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.iottwinmaker#TwinMakerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job summary ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.iottwinmaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job summary creation DateTime object.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updateDateTime": {
+                    "target": "com.amazonaws.iottwinmaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job summary update DateTime object</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iottwinmaker#MetadataTransferJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job summary status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "progress": {
+                    "target": "com.amazonaws.iottwinmaker#MetadataTransferJobProgress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata transfer job summary progess.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata transfer job summary.</p>"
             }
         },
         "com.amazonaws.iottwinmaker#Name": {
@@ -5294,6 +6698,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value of the property.</p>"
                     }
+                },
+                "areAllPropertyValuesReturned": {
+                    "target": "com.amazonaws.iottwinmaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This flag notes whether all values of a list or map type property are returned in the API response. The maximum number of values per property returned is 50.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5307,6 +6717,45 @@
             },
             "value": {
                 "target": "com.amazonaws.iottwinmaker#PropertyResponse"
+            }
+        },
+        "com.amazonaws.iottwinmaker#PropertySummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iottwinmaker#PropertySummary"
+            }
+        },
+        "com.amazonaws.iottwinmaker#PropertySummary": {
+            "type": "structure",
+            "members": {
+                "definition": {
+                    "target": "com.amazonaws.iottwinmaker#PropertyDefinitionResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the schema for the property.</p>"
+                    }
+                },
+                "propertyName": {
+                    "target": "com.amazonaws.iottwinmaker#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the name of the property.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.iottwinmaker#DataValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the value for the property.</p>"
+                    }
+                },
+                "areAllPropertyValuesReturned": {
+                    "target": "com.amazonaws.iottwinmaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This flag notes whether all values of a list or map type property are returned in the API \n          response. The maximum number of values per property returned is 50.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This is an object that contains the information of a property.</p>"
             }
         },
         "com.amazonaws.iottwinmaker#PropertyTableValue": {
@@ -5561,6 +7010,27 @@
                 "target": "com.amazonaws.iottwinmaker#Row"
             }
         },
+        "com.amazonaws.iottwinmaker#S3DestinationConfiguration": {
+            "type": "structure",
+            "members": {
+                "location": {
+                    "target": "com.amazonaws.iottwinmaker#S3DestinationLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 destination configuration location.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The S3 destination configuration.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#S3DestinationLocation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "(^arn:((aws)|(aws-cn)|(aws-us-gov)):s3:::)([/a-zA-Z0-9_-]+$)"
+            }
+        },
         "com.amazonaws.iottwinmaker#S3Location": {
             "type": "string",
             "traits": {
@@ -5569,6 +7039,27 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "(^arn:((aws)|(aws-cn)|(aws-us-gov)):s3:::)([a-zA-Z0-9_-]+$)"
+            }
+        },
+        "com.amazonaws.iottwinmaker#S3SourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "location": {
+                    "target": "com.amazonaws.iottwinmaker#S3SourceLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 destination source configuration location.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The S3 destination source configuration.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#S3SourceLocation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "(^arn:((aws)|(aws-cn)|(aws-us-gov)):s3:::)([a-zA-Z0-9_-]+)\\/([/.a-zA-Z0-9_-]+$)"
             }
         },
         "com.amazonaws.iottwinmaker#S3Url": {
@@ -5752,6 +7243,80 @@
                 "smithy.api#documentation": "<p>The service quota was exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.iottwinmaker#SiteWiseExternalId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 128
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"
+            }
+        },
+        "com.amazonaws.iottwinmaker#SourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.iottwinmaker#SourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3Configuration": {
+                    "target": "com.amazonaws.iottwinmaker#S3SourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration S3 configuration.</p>"
+                    }
+                },
+                "iotSiteWiseConfiguration": {
+                    "target": "com.amazonaws.iottwinmaker#IotSiteWiseSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration IoT SiteWise configuration.</p>"
+                    }
+                },
+                "iotTwinMakerConfiguration": {
+                    "target": "com.amazonaws.iottwinmaker#IotTwinMakerSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration IoT TwinMaker configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source configuration.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#SourceConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iottwinmaker#SourceConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#SourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "S3",
+                        "value": "s3"
+                    },
+                    {
+                        "name": "IOTSITEWISE",
+                        "value": "iotsitewise"
+                    },
+                    {
+                        "name": "IOTTWINMAKER",
+                        "value": "iottwinmaker"
+                    }
+                ]
             }
         },
         "com.amazonaws.iottwinmaker#State": {
@@ -6435,6 +8000,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The component type name.</p>"
                     }
+                },
+                "compositeComponentTypes": {
+                    "target": "com.amazonaws.iottwinmaker#CompositeComponentTypesRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is an object that maps strings to <code>compositeComponentTypes</code> of the <code>componentType</code>. \n          <code>CompositeComponentType</code> is referenced by <code>componentTypeId</code>.</p>"
+                    }
                 }
             }
         },
@@ -6549,6 +8120,12 @@
                     "target": "com.amazonaws.iottwinmaker#ComponentUpdatesMapRequest",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that maps strings to the component updates in the request. Each string in the\n         mapping must be unique to this object.</p>"
+                    }
+                },
+                "compositeComponentUpdates": {
+                    "target": "com.amazonaws.iottwinmaker#CompositeComponentUpdatesMapRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is an object that maps strings to <code>compositeComponent</code> updates in the request. Each key \n          of the map represents the <code>componentPath</code> of the <code>compositeComponent</code>.</p>"
                     }
                 },
                 "parentEntityUpdate": {
@@ -6831,6 +8408,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the execution role associated with the workspace.</p>"
                     }
+                },
+                "s3Location": {
+                    "target": "com.amazonaws.iottwinmaker#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the S3 bucket where resources associated with the workspace are\n         stored.</p>"
+                    }
                 }
             }
         },
@@ -6844,6 +8427,16 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.iottwinmaker#Uuid": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.iottwinmaker#ValidationException": {
@@ -6869,6 +8462,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iottwinmaker#PropertyValue"
+            }
+        },
+        "com.amazonaws.iottwinmaker#WorkspaceDeleteMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": ".*"
             }
         },
         "com.amazonaws.iottwinmaker#WorkspaceSummaries": {
@@ -6898,6 +8501,12 @@
                     "target": "com.amazonaws.iottwinmaker#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the workspace.</p>"
+                    }
+                },
+                "linkedServices": {
+                    "target": "com.amazonaws.iottwinmaker#LinkedServices",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of services that are linked to the workspace.</p>"
                     }
                 },
                 "creationDateTime": {
