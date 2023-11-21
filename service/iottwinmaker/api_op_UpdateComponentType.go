@@ -43,6 +43,10 @@ type UpdateComponentTypeInput struct {
 	// The component type name.
 	ComponentTypeName *string
 
+	// This is an object that maps strings to compositeComponentTypes of the
+	// componentType . CompositeComponentType is referenced by componentTypeId .
+	CompositeComponentTypes map[string]types.CompositeComponentTypeRequest
+
 	// The description of the component type.
 	Description *string
 

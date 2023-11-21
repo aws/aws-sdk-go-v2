@@ -35,7 +35,10 @@ func (c *Client) DescribeAsset(ctx context.Context, params *DescribeAssetInput, 
 
 type DescribeAssetInput struct {
 
-	// The ID of the asset.
+	// The ID of the asset. This can be either the actual ID in UUID format, or else
+	// externalId: followed by the external ID, if it has one. For more information,
+	// see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	AssetId *string
@@ -66,7 +69,7 @@ type DescribeAssetOutput struct {
 	// This member is required.
 	AssetHierarchies []types.AssetHierarchy
 
-	// The ID of the asset.
+	// The ID of the asset, in UUID format.
 	//
 	// This member is required.
 	AssetId *string
@@ -98,11 +101,17 @@ type DescribeAssetOutput struct {
 	// This member is required.
 	AssetStatus *types.AssetStatus
 
+	// The list of the immediate child custom composite model summaries for the asset.
+	AssetCompositeModelSummaries []types.AssetCompositeModelSummary
+
 	// The composite models for the asset.
 	AssetCompositeModels []types.AssetCompositeModel
 
 	// A description for the asset.
 	AssetDescription *string
+
+	// The external ID of the asset, if any.
+	AssetExternalId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

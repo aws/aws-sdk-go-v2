@@ -31,7 +31,10 @@ func (c *Client) UpdateAsset(ctx context.Context, params *UpdateAssetInput, optF
 
 type UpdateAssetInput struct {
 
-	// The ID of the asset to update.
+	// The ID of the asset to update. This can be either the actual ID in UUID format,
+	// or else externalId: followed by the external ID, if it has one. For more
+	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	AssetId *string
@@ -43,6 +46,12 @@ type UpdateAssetInput struct {
 
 	// A description for the asset.
 	AssetDescription *string
+
+	// An external ID to assign to the asset. The asset must not already have an
+	// external ID. The external ID must be unique within your Amazon Web Services
+	// account. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	AssetExternalId *string
 
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent

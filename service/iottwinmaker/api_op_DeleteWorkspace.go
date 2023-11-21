@@ -38,6 +38,10 @@ type DeleteWorkspaceInput struct {
 }
 
 type DeleteWorkspaceOutput struct {
+
+	// The string that specifies the delete result for the workspace.
+	Message *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

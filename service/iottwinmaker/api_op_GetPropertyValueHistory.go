@@ -47,6 +47,10 @@ type GetPropertyValueHistoryInput struct {
 	// The name of the component.
 	ComponentName *string
 
+	// This string specifies the path to the composite component, starting from the
+	// top-level component.
+	ComponentPath *string
+
 	// The ID of the component type.
 	ComponentTypeId *string
 

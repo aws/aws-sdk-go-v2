@@ -41,6 +41,10 @@ type UpdateWorkspaceInput struct {
 	// The ARN of the execution role associated with the workspace.
 	Role *string
 
+	// The ARN of the S3 bucket where resources associated with the workspace are
+	// stored.
+	S3Location *string
+
 	noSmithyDocumentSerde
 }
 

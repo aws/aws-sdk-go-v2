@@ -40,7 +40,10 @@ func (c *Client) UpdateAssetModel(ctx context.Context, params *UpdateAssetModelI
 
 type UpdateAssetModelInput struct {
 
-	// The ID of the asset model to update.
+	// The ID of the asset model to update. This can be either the actual ID in UUID
+	// format, or else externalId: followed by the external ID, if it has one. For
+	// more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	AssetModelId *string
@@ -50,14 +53,23 @@ type UpdateAssetModelInput struct {
 	// This member is required.
 	AssetModelName *string
 
-	// The composite asset models that are part of this asset model. Composite asset
-	// models are asset models that contain specific properties. Each composite model
-	// has a type that defines the properties that the composite model supports. Use
-	// composite asset models to define alarms on this asset model.
+	// The composite models that are part of this asset model. It groups properties
+	// (such as attributes, measurements, transforms, and metrics) and child composite
+	// models that model parts of your industrial equipment. Each composite model has a
+	// type that defines the properties that the composite model supports. Use
+	// composite models to define alarms on this asset model. When creating custom
+	// composite models, you need to use CreateAssetModelCompositeModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html)
+	// . For more information, see .
 	AssetModelCompositeModels []types.AssetModelCompositeModel
 
 	// A description for the asset model.
 	AssetModelDescription *string
+
+	// An external ID to assign to the asset model. The asset model must not already
+	// have an external ID. The external ID must be unique within your Amazon Web
+	// Services account. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	AssetModelExternalId *string
 
 	// The updated hierarchy definitions of the asset model. Each hierarchy specifies
 	// an asset model whose assets can be children of any other assets created from

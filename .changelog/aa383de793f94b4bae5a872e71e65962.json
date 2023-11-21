@@ -1,0 +1,8 @@
+{
+    "id": "aa383de7-93f9-4b4b-ae5a-872e71e65962",
+    "type": "documentation",
+    "description": "Documentation updates for Amazon EC2.",
+    "modules": [
+        "service/ec2"
+    ]
+}

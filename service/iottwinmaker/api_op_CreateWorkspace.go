@@ -30,17 +30,6 @@ func (c *Client) CreateWorkspace(ctx context.Context, params *CreateWorkspaceInp
 
 type CreateWorkspaceInput struct {
 
-	// The ARN of the execution role associated with the workspace.
-	//
-	// This member is required.
-	Role *string
-
-	// The ARN of the S3 bucket where resources associated with the workspace are
-	// stored.
-	//
-	// This member is required.
-	S3Location *string
-
 	// The ID of the workspace.
 	//
 	// This member is required.
@@ -48,6 +37,13 @@ type CreateWorkspaceInput struct {
 
 	// The description of the workspace.
 	Description *string
+
+	// The ARN of the execution role associated with the workspace.
+	Role *string
+
+	// The ARN of the S3 bucket where resources associated with the workspace are
+	// stored.
+	S3Location *string
 
 	// Metadata that you can use to manage the workspace
 	Tags map[string]string

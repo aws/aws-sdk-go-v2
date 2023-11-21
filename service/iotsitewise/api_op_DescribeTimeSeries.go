@@ -41,10 +41,16 @@ type DescribeTimeSeriesInput struct {
 	// The alias that identifies the time series.
 	Alias *string
 
-	// The ID of the asset in which the asset property was created.
+	// The ID of the asset in which the asset property was created. This can be either
+	// the actual ID in UUID format, or else externalId: followed by the external ID,
+	// if it has one. For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	AssetId *string
 
-	// The ID of the asset property.
+	// The ID of the asset property. This can be either the actual ID in UUID format,
+	// or else externalId: followed by the external ID, if it has one. For more
+	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	PropertyId *string
 
 	noSmithyDocumentSerde
@@ -93,7 +99,7 @@ type DescribeTimeSeriesOutput struct {
 	// alarm state in alarm composite models.
 	DataTypeSpec *string
 
-	// The ID of the asset property.
+	// The ID of the asset property, in UUID format.
 	PropertyId *string
 
 	// Metadata pertaining to the operation's result.

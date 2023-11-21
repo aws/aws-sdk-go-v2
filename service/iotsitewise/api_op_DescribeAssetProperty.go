@@ -36,12 +36,18 @@ func (c *Client) DescribeAssetProperty(ctx context.Context, params *DescribeAsse
 
 type DescribeAssetPropertyInput struct {
 
-	// The ID of the asset.
+	// The ID of the asset. This can be either the actual ID in UUID format, or else
+	// externalId: followed by the external ID, if it has one. For more information,
+	// see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	AssetId *string
 
-	// The ID of the asset property.
+	// The ID of the asset property. This can be either the actual ID in UUID format,
+	// or else externalId: followed by the external ID, if it has one. For more
+	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	PropertyId *string
@@ -51,12 +57,12 @@ type DescribeAssetPropertyInput struct {
 
 type DescribeAssetPropertyOutput struct {
 
-	// The ID of the asset.
+	// The ID of the asset, in UUID format.
 	//
 	// This member is required.
 	AssetId *string
 
-	// The ID of the asset model.
+	// The ID of the asset model, in UUID format.
 	//
 	// This member is required.
 	AssetModelId *string
@@ -66,14 +72,18 @@ type DescribeAssetPropertyOutput struct {
 	// This member is required.
 	AssetName *string
 
+	// The external ID of the asset. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	AssetExternalId *string
+
 	// The asset property's definition, alias, and notification state. This response
 	// includes this object for normal asset properties. If you describe an asset
 	// property in a composite model, this response includes the asset property
 	// information in compositeModel .
 	AssetProperty *types.Property
 
-	// The composite asset model that declares this asset property, if this asset
-	// property exists in a composite model.
+	// The composite model that declares this asset property, if this asset property
+	// exists in a composite model.
 	CompositeModel *types.CompositeModelProperty
 
 	// Metadata pertaining to the operation's result.

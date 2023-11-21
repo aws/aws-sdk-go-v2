@@ -32,7 +32,10 @@ func (c *Client) ListAssetModelProperties(ctx context.Context, params *ListAsset
 
 type ListAssetModelPropertiesInput struct {
 
-	// The ID of the asset model.
+	// The ID of the asset model. This can be either the actual ID in UUID format, or
+	// else externalId: followed by the external ID, if it has one. For more
+	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	AssetModelId *string

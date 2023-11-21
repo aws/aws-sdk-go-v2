@@ -1916,7 +1916,7 @@ type FieldLevelEncryptionConfig struct {
 	noSmithyDocumentSerde
 }
 
-// List of field-level encrpytion configurations.
+// List of field-level encryption configurations.
 type FieldLevelEncryptionList struct {
 
 	// The maximum number of elements you want in the response body.
@@ -2031,7 +2031,7 @@ type FieldLevelEncryptionProfileSummary struct {
 	// This member is required.
 	Id *string
 
-	// The time when the the field-level encryption profile summary was last updated.
+	// The time when the field-level encryption profile summary was last updated.
 	//
 	// This member is required.
 	LastModifiedTime *time.Time
@@ -2217,10 +2217,13 @@ type FunctionConfig struct {
 	// This member is required.
 	Comment *string
 
-	// The function's runtime environment verion.
+	// The function's runtime environment version.
 	//
 	// This member is required.
 	Runtime FunctionRuntime
+
+	// The configuration for the Key Value Store associations.
+	KeyValueStoreAssociations *KeyValueStoreAssociations
 
 	noSmithyDocumentSerde
 }
@@ -2348,6 +2351,22 @@ type Headers struct {
 
 	// A list of HTTP header names.
 	Items []string
+
+	noSmithyDocumentSerde
+}
+
+// The import source for the Key Value Store.
+type ImportSource struct {
+
+	// The Amazon Resource Name (ARN) of the import source for the Key Value Store.
+	//
+	// This member is required.
+	SourceARN *string
+
+	// The source type of the import source for the Key Value Store.
+	//
+	// This member is required.
+	SourceType ImportSourceType
 
 	noSmithyDocumentSerde
 }
@@ -2566,6 +2585,89 @@ type KeyPairIds struct {
 	noSmithyDocumentSerde
 }
 
+// The Key Value Store. Use this to separate data from function code, allowing you
+// to update data without having to publish a new version of a function. The Key
+// Value Store holds keys and their corresponding values.
+type KeyValueStore struct {
+
+	// The Amazon Resource Name (ARN) of the Key Value Store.
+	//
+	// This member is required.
+	ARN *string
+
+	// A comment for the Key Value Store.
+	//
+	// This member is required.
+	Comment *string
+
+	// The unique Id for the Key Value Store.
+	//
+	// This member is required.
+	Id *string
+
+	// The last-modified time of the Key Value Store.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The name of the Key Value Store.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the Key Value Store.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// The Key Value Store association.
+type KeyValueStoreAssociation struct {
+
+	// The Amazon Resource Name (ARN) of the Key Value Store association.
+	//
+	// This member is required.
+	KeyValueStoreARN *string
+
+	noSmithyDocumentSerde
+}
+
+// The Key Value Store associations.
+type KeyValueStoreAssociations struct {
+
+	// The quantity of Key Value Store associations.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// The items of the Key Value Store association.
+	Items []KeyValueStoreAssociation
+
+	noSmithyDocumentSerde
+}
+
+// The Key Value Store list.
+type KeyValueStoreList struct {
+
+	// The maximum number of items in the Key Value Store list.
+	//
+	// This member is required.
+	MaxItems *int32
+
+	// The quantity of the Key Value Store list.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// The items of the Key Value Store list.
+	Items []KeyValueStore
+
+	// The next marker associated with the Key Value Store list.
+	NextMarker *string
+
+	noSmithyDocumentSerde
+}
+
 // A list of identifiers for the public keys that CloudFront can use to verify the
 // signatures of signed URLs and signed cookies.
 type KGKeyPairIds struct {
@@ -2717,8 +2819,8 @@ type MonitoringSubscription struct {
 //   - Use CustomOriginConfig to specify all other kinds of origins, including:
 //   - An Amazon S3 bucket that is configured with static website hosting
 //   - An Elastic Load Balancing load balancer
-//   - An AWS Elemental MediaPackage endpoint
-//   - An AWS Elemental MediaStore container
+//   - An Elemental MediaPackage endpoint
+//   - An Elemental MediaStore container
 //   - Any other HTTP server, running on an Amazon EC2 instance or any other kind
 //     of host
 //
@@ -2959,7 +3061,7 @@ type OriginCustomHeader struct {
 // An origin group includes two origins (a primary origin and a second origin to
 // failover to) and a failover criteria that you specify. You create an origin
 // group to support origin failover in CloudFront. When you create or update a
-// distribution, you can specifiy the origin group instead of a single origin, and
+// distribution, you can specify the origin group instead of a single origin, and
 // CloudFront will failover from the primary origin to the second origin under the
 // failover conditions that you've chosen.
 type OriginGroup struct {

@@ -141,6 +141,32 @@ func (e *CannotChangeImmutablePublicKeyFields) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// The Key Value Store entity cannot be deleted while it is in use.
+type CannotDeleteEntityWhileInUse struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CannotDeleteEntityWhileInUse) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CannotDeleteEntityWhileInUse) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CannotDeleteEntityWhileInUse) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "CannotDeleteEntityWhileInUse"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *CannotDeleteEntityWhileInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // If the CallerReference is a value you already sent in a previous request to
 // create an identity but the content of the CloudFrontOriginAccessIdentityConfig
 // is different from the original request, CloudFront returns a
@@ -334,6 +360,111 @@ func (e *DistributionNotDisabled) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DistributionNotDisabled) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The Key Value Store entity already exists. You must provide a unique Key Value
+// Store entity.
+type EntityAlreadyExists struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EntityAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EntityAlreadyExists) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EntityAlreadyExists) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "EntityAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *EntityAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The Key Value Store entity limit has been exceeded.
+type EntityLimitExceeded struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EntityLimitExceeded) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EntityLimitExceeded) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EntityLimitExceeded) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "EntityLimitExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *EntityLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The Key Value Store entity was not found.
+type EntityNotFound struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EntityNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EntityNotFound) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EntityNotFound) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "EntityNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *EntityNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The Key Value Store entity size limit was exceeded.
+type EntitySizeLimitExceeded struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EntitySizeLimitExceeded) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EntitySizeLimitExceeded) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EntitySizeLimitExceeded) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "EntitySizeLimitExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *EntitySizeLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified configuration for field-level encryption already exists.
 type FieldLevelEncryptionConfigAlreadyExists struct {

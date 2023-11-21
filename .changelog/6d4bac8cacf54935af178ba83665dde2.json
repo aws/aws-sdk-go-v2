@@ -1,0 +1,8 @@
+{
+    "id": "6d4bac8c-acf5-4935-af17-8ba83665dde2",
+    "type": "feature",
+    "description": "Add support for automatic date based partitioning in S3 Server Access Logs.",
+    "modules": [
+        "service/s3"
+    ]
+}

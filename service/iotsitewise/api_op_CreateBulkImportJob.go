@@ -14,10 +14,11 @@ import (
 
 // Defines a job to ingest data to IoT SiteWise from Amazon S3. For more
 // information, see Create a bulk import job (CLI) (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/CreateBulkImportJob.html)
-// in the Amazon Simple Storage Service User Guide. You must enable IoT SiteWise to
-// export data to Amazon S3 before you create a bulk import job. For more
+// in the Amazon Simple Storage Service User Guide. Before you create a bulk import
+// job, you must enable IoT SiteWise warm tier or IoT SiteWise cold tier. For more
 // information about how to configure storage settings, see PutStorageConfiguration (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_PutStorageConfiguration.html)
-// .
+// . Bulk import is designed to store historical data to IoT SiteWise. It does not
+// trigger computations or notifications on IoT SiteWise warm or cold tier storage.
 func (c *Client) CreateBulkImportJob(ctx context.Context, params *CreateBulkImportJobInput, optFns ...func(*Options)) (*CreateBulkImportJobOutput, error) {
 	if params == nil {
 		params = &CreateBulkImportJobInput{}
@@ -63,6 +64,15 @@ type CreateBulkImportJobInput struct {
 	// This member is required.
 	JobRoleArn *string
 
+	// If set to true, ingest new data into IoT SiteWise storage. Measurements with
+	// notifications, metrics and transforms are computed. If set to false, historical
+	// data is ingested into IoT SiteWise as is.
+	AdaptiveIngestion *bool
+
+	// If set to true, your data files is deleted from S3, after ingestion into IoT
+	// SiteWise storage.
+	DeleteFilesAfterImport *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -78,7 +88,7 @@ type CreateBulkImportJobOutput struct {
 	// This member is required.
 	JobName *string
 
-	// The status of the bulk import job can be one of following values.
+	// The status of the bulk import job can be one of following values:
 	//   - PENDING – IoT SiteWise is waiting for the current bulk import job to finish.
 	//   - CANCELLED – The bulk import job has been canceled.
 	//   - RUNNING – IoT SiteWise is processing your request to import your data from

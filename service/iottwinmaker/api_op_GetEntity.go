@@ -91,6 +91,10 @@ type GetEntityOutput struct {
 	// This member is required.
 	WorkspaceId *string
 
+	// This flag notes whether all components are returned in the API response. The
+	// maximum number of components returned is 30.
+	AreAllComponentsReturned *bool
+
 	// An object that maps strings to the components in the entity. Each string in the
 	// mapping must be unique to this object.
 	Components map[string]types.ComponentResponse

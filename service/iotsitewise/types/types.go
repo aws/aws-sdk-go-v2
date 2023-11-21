@@ -42,6 +42,53 @@ type AccessPolicySummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains a definition for an action.
+type ActionDefinition struct {
+
+	// The ID of the action definition.
+	//
+	// This member is required.
+	ActionDefinitionId *string
+
+	// The name of the action definition.
+	//
+	// This member is required.
+	ActionName *string
+
+	// The type of the action definition.
+	//
+	// This member is required.
+	ActionType *string
+
+	noSmithyDocumentSerde
+}
+
+// The JSON payload of the action.
+type ActionPayload struct {
+
+	// The payload of the action in a JSON string.
+	//
+	// This member is required.
+	StringValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the summary of the actions.
+type ActionSummary struct {
+
+	// The ID of the action definition.
+	ActionDefinitionId *string
+
+	// The ID of the action.
+	ActionId *string
+
+	// The resource the action will be taken on.
+	TargetResource *TargetResource
+
+	noSmithyDocumentSerde
+}
+
 // Contains aggregated asset property values (for example, average, minimum, and
 // maximum).
 type AggregatedValue struct {
@@ -132,8 +179,67 @@ type AssetCompositeModel struct {
 	// The description of the composite model.
 	Description *string
 
+	// The external ID of the asset composite model. For more information, see Using
+	// external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
+
 	// The ID of the asset composite model.
 	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents one level between a composite model and the root of the asset.
+type AssetCompositeModelPathSegment struct {
+
+	// The ID of the path segment.
+	Id *string
+
+	// The name of the path segment.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains a summary of the composite model for a specific asset.
+type AssetCompositeModelSummary struct {
+
+	// A description of the composite model that this summary describes.
+	//
+	// This member is required.
+	Description *string
+
+	// The ID of the composite model that this summary describes.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the composite model that this summary describes.
+	//
+	// This member is required.
+	Name *string
+
+	// The path that includes all the components of the asset model for the asset.
+	//
+	// This member is required.
+	Path []AssetCompositeModelPathSegment
+
+	// The type of asset model.
+	//   - ASSET_MODEL – (default) An asset model that you can use to create assets.
+	//   Can't be included as a component in another asset model.
+	//   - COMPONENT_MODEL – A reusable component that you can include in the
+	//   composite models of other asset models. You can't create assets directly from
+	//   this type of asset model.
+	//
+	// This member is required.
+	Type *string
+
+	// An external ID to assign to the asset model. If the composite model is a
+	// derived composite model, or one nested inside a component model, you can only
+	// set the external ID using UpdateAssetModelCompositeModel and specifying the
+	// derived ID of the model or property from the created model it's a part of.
+	ExternalId *string
 
 	noSmithyDocumentSerde
 }
@@ -141,7 +247,7 @@ type AssetCompositeModel struct {
 // Contains error details for the requested associate project asset action.
 type AssetErrorDetails struct {
 
-	// The ID of the asset.
+	// The ID of the asset, in UUID format.
 	//
 	// This member is required.
 	AssetId *string
@@ -168,6 +274,13 @@ type AssetHierarchy struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The external ID of the hierarchy, if it has one. When you update an asset
+	// hierarchy, you may assign an external ID if it doesn't already have one. You
+	// can't change the external ID of an asset hierarchy that already has one. For
+	// more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
 
 	// The ID of the hierarchy. This ID is a hierarchyId .
 	Id *string
@@ -206,6 +319,11 @@ type AssetModelCompositeModel struct {
 	// The description of the composite model.
 	Description *string
 
+	// The external ID of the asset model composite model. For more information, see
+	// Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
+
 	// The ID of the asset model composite model.
 	Id *string
 
@@ -233,8 +351,69 @@ type AssetModelCompositeModelDefinition struct {
 	// The description of the composite model.
 	Description *string
 
+	// An external ID to assign to the composite model. The external ID must be unique
+	// among composite models within this asset model. For more information, see Using
+	// external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
+
+	// The ID to assign to the composite model, if desired. IoT SiteWise automatically
+	// generates a unique ID for you, so this parameter is never required. However, if
+	// you prefer to supply your own ID instead, you can specify it here in UUID
+	// format. If you specify your own ID, it must be globally unique.
+	Id *string
+
 	// The asset property definitions for this composite model.
 	Properties []AssetModelPropertyDefinition
+
+	noSmithyDocumentSerde
+}
+
+// Represents one level between a composite model and the root of the asset model.
+type AssetModelCompositeModelPathSegment struct {
+
+	// The ID of the path segment.
+	Id *string
+
+	// The name of the path segment.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains a summary of the composite model.
+type AssetModelCompositeModelSummary struct {
+
+	// The ID of the the composite model that this summary describes..
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the the composite model that this summary describes..
+	//
+	// This member is required.
+	Name *string
+
+	// The type of asset model.
+	//   - ASSET_MODEL – (default) An asset model that you can use to create assets.
+	//   Can't be included as a component in another asset model.
+	//   - COMPONENT_MODEL – A reusable component that you can include in the
+	//   composite models of other asset models. You can't create assets directly from
+	//   this type of asset model.
+	//
+	// This member is required.
+	Type *string
+
+	// The description of the the composite model that this summary describes..
+	Description *string
+
+	// The external ID of a composite model on this asset model. For more information,
+	// see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
+
+	// The path that includes all the pieces that make up the composite model.
+	Path []AssetModelCompositeModelPathSegment
 
 	noSmithyDocumentSerde
 }
@@ -243,8 +422,13 @@ type AssetModelCompositeModelDefinition struct {
 // asset model ID that specifies the type of asset that can be in this hierarchy.
 type AssetModelHierarchy struct {
 
-	// The ID of the asset model. All assets in this hierarchy must be instances of
-	// the childAssetModelId asset model.
+	// The ID of the asset model, in UUID format. All assets in this hierarchy must be
+	// instances of the childAssetModelId asset model. IoT SiteWise will always return
+	// the actual asset model ID for this value. However, when you are specifying this
+	// value as part of a call to UpdateAssetModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html)
+	// , you may provide either the asset model ID or else externalId: followed by the
+	// asset model's external ID. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	ChildAssetModelId *string
@@ -257,7 +441,26 @@ type AssetModelHierarchy struct {
 	// This member is required.
 	Name *string
 
+	// The external ID (if any) provided in the CreateAssetModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html)
+	// or UpdateAssetModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html)
+	// operation. You can assign an external ID by specifying this value as part of a
+	// call to UpdateAssetModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html)
+	// . However, you can't change the external ID if one is already assigned. For more
+	// information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
+
 	// The ID of the asset model hierarchy. This ID is a hierarchyId .
+	//   - If you are callling UpdateAssetModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html)
+	//   to create a new hierarchy: You can specify its ID here, if desired. IoT SiteWise
+	//   automatically generates a unique ID for you, so this parameter is never
+	//   required. However, if you prefer to supply your own ID instead, you can specify
+	//   it here in UUID format. If you specify your own ID, it must be globally unique.
+	//   - If you are calling UpdateAssetModel to modify an existing hierarchy: This
+	//   can be either the actual ID in UUID format, or else externalId: followed by
+	//   the external ID, if it has one. For more information, see Referencing objects
+	//   with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	//   in the IoT SiteWise User Guide.
 	Id *string
 
 	noSmithyDocumentSerde
@@ -267,7 +470,10 @@ type AssetModelHierarchy struct {
 // hierarchy determines the kind (or type) of asset that can belong to a hierarchy.
 type AssetModelHierarchyDefinition struct {
 
-	// The ID of an asset model for this hierarchy.
+	// The ID of an asset model for this hierarchy. This can be either the actual ID
+	// in UUID format, or else externalId: followed by the external ID, if it has one.
+	// For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	ChildAssetModelId *string
@@ -279,6 +485,18 @@ type AssetModelHierarchyDefinition struct {
 	//
 	// This member is required.
 	Name *string
+
+	// An external ID to assign to the asset model hierarchy. The external ID must be
+	// unique among asset model hierarchies within this asset model. For more
+	// information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
+
+	// The ID to assign to the asset model hierarchy, if desired. IoT SiteWise
+	// automatically generates a unique ID for you, so this parameter is never
+	// required. However, if you prefer to supply your own ID instead, you can specify
+	// it here in UUID format. If you specify your own ID, it must be globally unique.
+	Id *string
 
 	noSmithyDocumentSerde
 }
@@ -305,8 +523,30 @@ type AssetModelProperty struct {
 	// properties that have the STRUCT data type.
 	DataTypeSpec *string
 
+	// The external ID (if any) provided in the CreateAssetModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html)
+	// or UpdateAssetModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html)
+	// operation. You can assign an external ID by specifying this value as part of a
+	// call to UpdateAssetModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html)
+	// . However, you can't change the external ID if one is already assigned. For more
+	// information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
+
 	// The ID of the asset model property.
+	//   - If you are callling UpdateAssetModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html)
+	//   to create a new property: You can specify its ID here, if desired. IoT SiteWise
+	//   automatically generates a unique ID for you, so this parameter is never
+	//   required. However, if you prefer to supply your own ID instead, you can specify
+	//   it here in UUID format. If you specify your own ID, it must be globally unique.
+	//   - If you are calling UpdateAssetModel to modify an existing property: This
+	//   can be either the actual ID in UUID format, or else externalId: followed by
+	//   the external ID, if it has one. For more information, see Referencing objects
+	//   with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	//   in the IoT SiteWise User Guide.
 	Id *string
+
+	// The structured path to the property from the root of the asset model.
+	Path []AssetModelPropertyPathSegment
 
 	// The unit of the asset model property, such as Newtons or RPM .
 	Unit *string
@@ -341,8 +581,32 @@ type AssetModelPropertyDefinition struct {
 	// AWS/ALARM_STATE for alarm state in alarm composite models.
 	DataTypeSpec *string
 
+	// An external ID to assign to the property definition. The external ID must be
+	// unique among property definitions within this asset model. For more information,
+	// see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
+
+	// The ID to assign to the asset model property, if desired. IoT SiteWise
+	// automatically generates a unique ID for you, so this parameter is never
+	// required. However, if you prefer to supply your own ID instead, you can specify
+	// it here in UUID format. If you specify your own ID, it must be globally unique.
+	Id *string
+
 	// The unit of the property definition, such as Newtons or RPM .
 	Unit *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents one level between a property and the root of the asset model.
+type AssetModelPropertyPathSegment struct {
+
+	// The ID of the path segment.
+	Id *string
+
+	// The name of the path segment.
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -373,8 +637,15 @@ type AssetModelPropertySummary struct {
 	// properties that have the STRUCT data type.
 	DataTypeSpec *string
 
+	// The external ID of the property. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
+
 	// The ID of the property.
 	Id *string
+
+	// The structured path to the property from the root of the asset model.
+	Path []AssetModelPropertyPathSegment
 
 	// The unit (such as Newtons or RPM ) of the property.
 	Unit *string
@@ -418,7 +689,7 @@ type AssetModelSummary struct {
 	// This member is required.
 	Description *string
 
-	// The ID of the asset model (used with IoT SiteWise APIs).
+	// The ID of the asset model (used with IoT SiteWise API operations).
 	//
 	// This member is required.
 	Id *string
@@ -437,6 +708,18 @@ type AssetModelSummary struct {
 	//
 	// This member is required.
 	Status *AssetModelStatus
+
+	// The type of asset model.
+	//   - ASSET_MODEL – (default) An asset model that you can use to create assets.
+	//   Can't be included as a component in another asset model.
+	//   - COMPONENT_MODEL – A reusable component that you can include in the
+	//   composite models of other asset models. You can't create assets directly from
+	//   this type of asset model.
+	AssetModelType AssetModelType
+
+	// The external ID of the asset model. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
 
 	noSmithyDocumentSerde
 }
@@ -469,10 +752,18 @@ type AssetProperty struct {
 	// properties that have the STRUCT data type.
 	DataTypeSpec *string
 
+	// The external ID of the asset property. For more information, see Using external
+	// IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
+
 	// The asset property's notification topic and state. For more information, see
 	// UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
 	// .
 	Notification *PropertyNotification
+
+	// The structured path to the property from the root of the asset.
+	Path []AssetPropertyPathSegment
 
 	// The unit (such as Newtons or RPM ) of the asset property.
 	Unit *string
@@ -480,8 +771,25 @@ type AssetProperty struct {
 	noSmithyDocumentSerde
 }
 
+// Represents one level between a property and the root of the asset.
+type AssetPropertyPathSegment struct {
+
+	// The ID of the path segment.
+	Id *string
+
+	// The name of the path segment.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains a summary of a property associated with an asset.
 type AssetPropertySummary struct {
+
+	// The ID of the property.
+	//
+	// This member is required.
+	Id *string
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
 	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
@@ -492,14 +800,18 @@ type AssetPropertySummary struct {
 	// The ID of the composite model that contains the asset property.
 	AssetCompositeModelId *string
 
-	// The ID of the property.
-	Id *string
+	// The external ID of the property. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
 
 	// Contains asset property value notification information. When the notification
 	// state is enabled, IoT SiteWise publishes property value updates to a unique MQTT
 	// topic. For more information, see Interacting with other services (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/interact-with-other-services.html)
 	// in the IoT SiteWise User Guide.
 	Notification *PropertyNotification
+
+	// The structured path to the property from the root of the asset.
+	Path []AssetPropertyPathSegment
 
 	// The unit of measure (such as Newtons or RPM) of the asset property.
 	Unit *string
@@ -587,7 +899,7 @@ type AssetSummary struct {
 	// This member is required.
 	Hierarchies []AssetHierarchy
 
-	// The ID of the asset.
+	// The ID of the asset, in UUID format.
 	//
 	// This member is required.
 	Id *string
@@ -609,6 +921,10 @@ type AssetSummary struct {
 
 	// A description for the asset.
 	Description *string
+
+	// The external ID of the asset. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
 
 	noSmithyDocumentSerde
 }
@@ -639,7 +955,7 @@ type AssociatedAssetsSummary struct {
 	// This member is required.
 	Hierarchies []AssetHierarchy
 
-	// The ID of the asset.
+	// The ID of the asset, in UUID format.
 	//
 	// This member is required.
 	Id *string
@@ -661,6 +977,10 @@ type AssociatedAssetsSummary struct {
 
 	// A description for the asset.
 	Description *string
+
+	// The external ID of the asset. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
 
 	noSmithyDocumentSerde
 }
@@ -725,7 +1045,7 @@ type BatchGetAssetPropertyAggregatesEntry struct {
 	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
 
-	// The ID of the asset property.
+	// The ID of the asset property, in UUID format.
 	PropertyId *string
 
 	// The quality by which to filter asset data.
@@ -844,7 +1164,7 @@ type BatchGetAssetPropertyValueEntry struct {
 	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
 
-	// The ID of the asset property.
+	// The ID of the asset property, in UUID format.
 	PropertyId *string
 
 	noSmithyDocumentSerde
@@ -917,7 +1237,7 @@ type BatchGetAssetPropertyValueHistoryEntry struct {
 	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
 
-	// The ID of the asset property.
+	// The ID of the asset property, in UUID format.
 	PropertyId *string
 
 	// The quality by which to filter asset data.
@@ -1090,6 +1410,27 @@ type BatchPutAssetPropertyErrorEntry struct {
 	noSmithyDocumentSerde
 }
 
+// A description of the column in the query results.
+type ColumnInfo struct {
+
+	// The name of the column description.
+	Name *string
+
+	// The type of the column description.
+	Type *ColumnType
+
+	noSmithyDocumentSerde
+}
+
+// The data type of the column.
+type ColumnType struct {
+
+	// The allowed data types that the column has as it's value.
+	ScalarType ScalarType
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a composite model property on an asset.
 type CompositeModelProperty struct {
 
@@ -1108,8 +1449,56 @@ type CompositeModelProperty struct {
 	// This member is required.
 	Type *string
 
+	// The external ID of the composite model that contains the property. For more
+	// information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
+
 	// The ID of the composite model that contains the property.
 	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for the composition relationship established by using
+// composedAssetModelId in CreateAssetModelCompositeModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html)
+// .
+type CompositionDetails struct {
+
+	// An array detailing the composition relationship for this composite model.
+	CompositionRelationship []CompositionRelationshipItem
+
+	noSmithyDocumentSerde
+}
+
+// Represents a composite model that composed an asset model of type
+// COMPONENT_MODEL .
+type CompositionRelationshipItem struct {
+
+	// The ID of the component.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains a summary of the components of the composite model.
+type CompositionRelationshipSummary struct {
+
+	// The ID of a composite model on this asset model.
+	//
+	// This member is required.
+	AssetModelCompositeModelId *string
+
+	// The composite model type. Valid values are AWS/ALARM , CUSTOM , or
+	// AWS/L4E_ANOMALY .
+	//
+	// This member is required.
+	AssetModelCompositeModelType *string
+
+	// The ID of the asset model, in UUID format.
+	//
+	// This member is required.
+	AssetModelId *string
 
 	noSmithyDocumentSerde
 }
@@ -1144,10 +1533,12 @@ type ConfigurationStatus struct {
 	noSmithyDocumentSerde
 }
 
-// A .csv file.
+// A .CSV file.
 type Csv struct {
 
 	// The column names specified in the .csv file.
+	//
+	// This member is required.
 	ColumnNames []ColumnName
 
 	noSmithyDocumentSerde
@@ -1195,6 +1586,25 @@ type DashboardSummary struct {
 
 	// The date the dashboard was last updated, in Unix epoch time.
 	LastUpdateDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single data point in a query result.
+type Datum struct {
+
+	// Indicates if the data point is an array.
+	ArrayValue []Datum
+
+	// Indicates if the data point is null.
+	NullValue *bool
+
+	// Indicates if the data point is a row.
+	RowValue *Row
+
+	// Indicates if the data point is a scalar value such as integer, string, double,
+	// or Boolean.
+	ScalarValue *string
 
 	noSmithyDocumentSerde
 }
@@ -1293,11 +1703,14 @@ type File struct {
 	noSmithyDocumentSerde
 }
 
-// The file format of the data.
+// The file format of the data in S3.
 type FileFormat struct {
 
-	// The .csv file format.
+	// The file is in .CSV format.
 	Csv *Csv
+
+	// The file is in parquet format.
+	Parquet *Parquet
 
 	noSmithyDocumentSerde
 }
@@ -1460,9 +1873,9 @@ type IAMUserIdentity struct {
 }
 
 // Contains an identity that can access an IoT SiteWise Monitor resource.
-// Currently, you can't use Amazon Web Services APIs to retrieve IAM Identity
-// Center identity IDs. You can find the IAM Identity Center identity IDs in the
-// URL of user and group pages in the IAM Identity Center console (https://console.aws.amazon.com/singlesignon)
+// Currently, you can't use Amazon Web Services API operations to retrieve IAM
+// Identity Center identity IDs. You can find the IAM Identity Center identity IDs
+// in the URL of user and group pages in the IAM Identity Center console (https://console.aws.amazon.com/singlesignon)
 // .
 type Identity struct {
 
@@ -1549,7 +1962,7 @@ type InterpolatedAssetPropertyValue struct {
 // to save data in Amazon S3.
 type JobConfiguration struct {
 
-	// The file format of the data in Amazon S3.
+	// The file format of the data in S3.
 	//
 	// This member is required.
 	FileFormat *FileFormat
@@ -1557,7 +1970,7 @@ type JobConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Contains a job summary information.
+// Contains the job summary information.
 type JobSummary struct {
 
 	// The ID of the job.
@@ -1570,7 +1983,7 @@ type JobSummary struct {
 	// This member is required.
 	Name *string
 
-	// The status of the bulk import job can be one of following values.
+	// The status of the bulk import job can be one of following values:
 	//   - PENDING – IoT SiteWise is waiting for the current bulk import job to finish.
 	//   - CANCELLED – The bulk import job has been canceled.
 	//   - RUNNING – IoT SiteWise is processing your request to import your data from
@@ -1710,6 +2123,11 @@ type MultiLayerStorage struct {
 	noSmithyDocumentSerde
 }
 
+// A parquet file.
+type Parquet struct {
+	noSmithyDocumentSerde
+}
+
 // Identifies an IoT SiteWise Monitor portal.
 type PortalResource struct {
 
@@ -1840,10 +2258,18 @@ type Property struct {
 	// in the IoT SiteWise User Guide.
 	Alias *string
 
+	// The external ID of the asset property. For more information, see Using external
+	// IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	ExternalId *string
+
 	// The asset property's notification topic and state. For more information, see
 	// UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
 	// .
 	Notification *PropertyNotification
+
+	// The structured path to the property from the root of the asset.
+	Path []AssetPropertyPathSegment
 
 	// The property type (see PropertyType ). A property contains one type.
 	Type *PropertyType
@@ -1946,8 +2372,8 @@ type Resource struct {
 	noSmithyDocumentSerde
 }
 
-// How many days your data is kept in the hot tier. By default, your data is kept
-// indefinitely in the hot tier.
+// The number of days your data is kept in the hot tier. By default, your data is
+// kept indefinitely in the hot tier.
 type RetentionPeriod struct {
 
 	// The number of days that your data is kept. If you specified a value for this
@@ -1957,6 +2383,28 @@ type RetentionPeriod struct {
 	// If true, your data is kept indefinitely. If configured to true , you must not
 	// specify a value for the numberOfDays parameter.
 	Unlimited *bool
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single row in the query results.
+type Row struct {
+
+	// List of data points in a single row of the result set.
+	//
+	// This member is required.
+	Data []Datum
+
+	noSmithyDocumentSerde
+}
+
+// The resource the action will be taken on.
+type TargetResource struct {
+
+	// The ID of the asset, in UUID format.
+	//
+	// This member is required.
+	AssetId *string
 
 	noSmithyDocumentSerde
 }
@@ -2020,7 +2468,7 @@ type TimeSeriesSummary struct {
 	// alarm state in alarm composite models.
 	DataTypeSpec *string
 
-	// The ID of the asset property.
+	// The ID of the asset property, in UUID format.
 	PropertyId *string
 
 	noSmithyDocumentSerde
@@ -2138,20 +2586,26 @@ type UserIdentity struct {
 // Identifies a property value used in an expression.
 type VariableValue struct {
 
-	// The ID of the property to use as the variable. You can use the property name if
-	// it's from the same asset model.
-	//
-	// This member is required.
-	PropertyId *string
-
 	// The ID of the hierarchy to query for the property ID. You can use the
-	// hierarchy's name instead of the hierarchy's ID. You use a hierarchy ID instead
-	// of a model ID because you can have several hierarchies using the same model and
-	// therefore the same propertyId . For example, you might have separately grouped
-	// assets that come from the same asset model. For more information, see Asset
-	// hierarchies (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
+	// hierarchy's name instead of the hierarchy's ID. If the hierarchy has an external
+	// ID, you can specify externalId: followed by the external ID. For more
+	// information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide. You use a hierarchy ID instead of a model ID
+	// because you can have several hierarchies using the same model and therefore the
+	// same propertyId . For example, you might have separately grouped assets that
+	// come from the same asset model. For more information, see Asset hierarchies (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
 	// in the IoT SiteWise User Guide.
 	HierarchyId *string
+
+	// The ID of the property to use as the variable. You can use the property name if
+	// it's from the same asset model. If the property has an external ID, you can
+	// specify externalId: followed by the external ID. For more information, see
+	// Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
+	// in the IoT SiteWise User Guide.
+	PropertyId *string
+
+	// The path of the property.
+	PropertyPath []AssetModelPropertyPathSegment
 
 	noSmithyDocumentSerde
 }
@@ -2165,11 +2619,25 @@ type Variant struct {
 	// Asset property data of type double (floating point number).
 	DoubleValue *float64
 
-	// Asset property data of type integer (whole number).
+	// Asset property data of type integer (number that's greater than or equal to
+	// zero).
 	IntegerValue *int32
 
 	// Asset property data of type string (sequence of characters).
 	StringValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Set this period to specify how long your data is stored in the warm tier before
+// it is deleted. You can set this only if cold tier is enabled.
+type WarmTierRetentionPeriod struct {
+
+	// The number of days the data is stored in the warm tier.
+	NumberOfDays *int32
+
+	// If set to true, the data is stored indefinitely in the warm tier.
+	Unlimited *bool
 
 	noSmithyDocumentSerde
 }

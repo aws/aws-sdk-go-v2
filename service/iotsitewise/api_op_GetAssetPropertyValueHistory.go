@@ -39,7 +39,7 @@ func (c *Client) GetAssetPropertyValueHistory(ctx context.Context, params *GetAs
 
 type GetAssetPropertyValueHistoryInput struct {
 
-	// The ID of the asset.
+	// The ID of the asset, in UUID format.
 	AssetId *string
 
 	// The inclusive end of the range from which to query historical data, expressed
@@ -62,7 +62,7 @@ type GetAssetPropertyValueHistoryInput struct {
 	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
 
-	// The ID of the asset property.
+	// The ID of the asset property, in UUID format.
 	PropertyId *string
 
 	// The quality by which to filter asset data.

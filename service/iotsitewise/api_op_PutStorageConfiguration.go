@@ -56,9 +56,18 @@ type PutStorageConfigurationInput struct {
 	// storage type, you must specify a MultiLayerStorage object.
 	MultiLayerStorage *types.MultiLayerStorage
 
-	// How many days your data is kept in the hot tier. By default, your data is kept
-	// indefinitely in the hot tier.
+	// The number of days your data is kept in the hot tier. By default, your data is
+	// kept indefinitely in the hot tier.
 	RetentionPeriod *types.RetentionPeriod
+
+	// A service managed storage tier optimized for analytical queries. It stores
+	// periodically uploaded, buffered and historical data ingested with the
+	// CreaeBulkImportJob API.
+	WarmTier types.WarmTierState
+
+	// Set this period to specify how long your data is stored in the warm tier before
+	// it is deleted. You can set this only if cold tier is enabled.
+	WarmTierRetentionPeriod *types.WarmTierRetentionPeriod
 
 	noSmithyDocumentSerde
 }
@@ -95,9 +104,18 @@ type PutStorageConfigurationOutput struct {
 	// Contains information about the storage destination.
 	MultiLayerStorage *types.MultiLayerStorage
 
-	// How many days your data is kept in the hot tier. By default, your data is kept
-	// indefinitely in the hot tier.
+	// The number of days your data is kept in the hot tier. By default, your data is
+	// kept indefinitely in the hot tier.
 	RetentionPeriod *types.RetentionPeriod
+
+	// A service managed storage tier optimized for analytical queries. It stores
+	// periodically uploaded, buffered and historical data ingested with the
+	// CreaeBulkImportJob API.
+	WarmTier types.WarmTierState
+
+	// Set this period to specify how long your data is stored in the warm tier before
+	// it is deleted. You can set this only if cold tier is enabled.
+	WarmTierRetentionPeriod *types.WarmTierRetentionPeriod
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

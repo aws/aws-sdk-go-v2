@@ -34,13 +34,19 @@ func (c *Client) ListAssociatedAssets(ctx context.Context, params *ListAssociate
 
 type ListAssociatedAssetsInput struct {
 
-	// The ID of the asset to query.
+	// The ID of the asset to query. This can be either the actual ID in UUID format,
+	// or else externalId: followed by the external ID, if it has one. For more
+	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	AssetId *string
 
-	// The ID of the hierarchy by which child assets are associated to the asset. To
-	// find a hierarchy ID, use the DescribeAsset (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAsset.html)
+	// The ID of the hierarchy by which child assets are associated to the asset.
+	// (This can be either the actual ID in UUID format, or else externalId: followed
+	// by the external ID, if it has one. For more information, see Referencing
+	// objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.) To find a hierarchy ID, use the DescribeAsset (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAsset.html)
 	// or DescribeAssetModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html)
 	// operations. This parameter is required if you choose CHILD for
 	// traversalDirection . For more information, see Asset hierarchies (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)

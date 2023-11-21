@@ -32,19 +32,28 @@ func (c *Client) AssociateAssets(ctx context.Context, params *AssociateAssetsInp
 
 type AssociateAssetsInput struct {
 
-	// The ID of the parent asset.
+	// The ID of the parent asset. This can be either the actual ID in UUID format, or
+	// else externalId: followed by the external ID, if it has one. For more
+	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	AssetId *string
 
-	// The ID of the child asset to be associated.
+	// The ID of the child asset to be associated. This can be either the actual ID in
+	// UUID format, or else externalId: followed by the external ID, if it has one.
+	// For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	ChildAssetId *string
 
-	// The ID of a hierarchy in the parent asset's model. Hierarchies allow different
-	// groupings of assets to be formed that all come from the same asset model. For
-	// more information, see Asset hierarchies (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
+	// The ID of a hierarchy in the parent asset's model. (This can be either the
+	// actual ID in UUID format, or else externalId: followed by the external ID, if
+	// it has one. For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
+	// in the IoT SiteWise User Guide.) Hierarchies allow different groupings of assets
+	// to be formed that all come from the same asset model. For more information, see
+	// Asset hierarchies (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
 	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.

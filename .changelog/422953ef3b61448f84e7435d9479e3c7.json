@@ -1,0 +1,8 @@
+{
+    "id": "422953ef-3b61-448f-84e7-435d9479e3c7",
+    "type": "feature",
+    "description": "This release adds support for CloudFront KeyValueStore, a globally managed key value datastore associated with CloudFront Functions.",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

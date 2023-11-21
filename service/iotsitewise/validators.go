@@ -210,6 +210,26 @@ func (m *validateOpCreateAsset) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAssetModelCompositeModel struct {
+}
+
+func (*validateOpCreateAssetModelCompositeModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAssetModelCompositeModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAssetModelCompositeModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAssetModelCompositeModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAssetModel struct {
 }
 
@@ -370,6 +390,26 @@ func (m *validateOpDeleteAsset) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAssetModelCompositeModel struct {
+}
+
+func (*validateOpDeleteAssetModelCompositeModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAssetModelCompositeModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAssetModelCompositeModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAssetModelCompositeModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAssetModel struct {
 }
 
@@ -490,6 +530,46 @@ func (m *validateOpDescribeAccessPolicy) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeAction struct {
+}
+
+func (*validateOpDescribeAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAssetCompositeModel struct {
+}
+
+func (*validateOpDescribeAssetCompositeModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAssetCompositeModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAssetCompositeModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAssetCompositeModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeAsset struct {
 }
 
@@ -505,6 +585,26 @@ func (m *validateOpDescribeAsset) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAssetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAssetModelCompositeModel struct {
+}
+
+func (*validateOpDescribeAssetModelCompositeModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAssetModelCompositeModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAssetModelCompositeModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAssetModelCompositeModelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -710,6 +810,46 @@ func (m *validateOpDisassociateTimeSeriesFromAssetProperty) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpExecuteAction struct {
+}
+
+func (*validateOpExecuteAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExecuteAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExecuteActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExecuteActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpExecuteQuery struct {
+}
+
+func (*validateOpExecuteQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExecuteQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExecuteQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExecuteQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAssetPropertyAggregates struct {
 }
 
@@ -745,6 +885,46 @@ func (m *validateOpGetInterpolatedAssetPropertyValues) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetInterpolatedAssetPropertyValuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListActions struct {
+}
+
+func (*validateOpListActions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListActions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListActionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListActionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssetModelCompositeModels struct {
+}
+
+func (*validateOpListAssetModelCompositeModels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssetModelCompositeModels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssetModelCompositeModelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssetModelCompositeModelsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -825,6 +1005,26 @@ func (m *validateOpListAssociatedAssets) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAssociatedAssetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCompositionRelationships struct {
+}
+
+func (*validateOpListCompositionRelationships) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCompositionRelationships) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCompositionRelationshipsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCompositionRelationshipsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1050,6 +1250,26 @@ func (m *validateOpUpdateAsset) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAssetModelCompositeModel struct {
+}
+
+func (*validateOpUpdateAssetModelCompositeModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAssetModelCompositeModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAssetModelCompositeModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAssetModelCompositeModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateAssetModel struct {
 }
 
@@ -1230,6 +1450,10 @@ func addOpCreateAssetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAsset{}, middleware.After)
 }
 
+func addOpCreateAssetModelCompositeModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAssetModelCompositeModel{}, middleware.After)
+}
+
 func addOpCreateAssetModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAssetModel{}, middleware.After)
 }
@@ -1262,6 +1486,10 @@ func addOpDeleteAssetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAsset{}, middleware.After)
 }
 
+func addOpDeleteAssetModelCompositeModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAssetModelCompositeModel{}, middleware.After)
+}
+
 func addOpDeleteAssetModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAssetModel{}, middleware.After)
 }
@@ -1286,8 +1514,20 @@ func addOpDescribeAccessPolicyValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDescribeAccessPolicy{}, middleware.After)
 }
 
+func addOpDescribeActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAction{}, middleware.After)
+}
+
+func addOpDescribeAssetCompositeModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAssetCompositeModel{}, middleware.After)
+}
+
 func addOpDescribeAssetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAsset{}, middleware.After)
+}
+
+func addOpDescribeAssetModelCompositeModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAssetModelCompositeModel{}, middleware.After)
 }
 
 func addOpDescribeAssetModelValidationMiddleware(stack *middleware.Stack) error {
@@ -1330,12 +1570,28 @@ func addOpDisassociateTimeSeriesFromAssetPropertyValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpDisassociateTimeSeriesFromAssetProperty{}, middleware.After)
 }
 
+func addOpExecuteActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExecuteAction{}, middleware.After)
+}
+
+func addOpExecuteQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExecuteQuery{}, middleware.After)
+}
+
 func addOpGetAssetPropertyAggregatesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAssetPropertyAggregates{}, middleware.After)
 }
 
 func addOpGetInterpolatedAssetPropertyValuesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetInterpolatedAssetPropertyValues{}, middleware.After)
+}
+
+func addOpListActionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListActions{}, middleware.After)
+}
+
+func addOpListAssetModelCompositeModelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssetModelCompositeModels{}, middleware.After)
 }
 
 func addOpListAssetModelPropertiesValidationMiddleware(stack *middleware.Stack) error {
@@ -1352,6 +1608,10 @@ func addOpListAssetRelationshipsValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListAssociatedAssetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAssociatedAssets{}, middleware.After)
+}
+
+func addOpListCompositionRelationshipsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCompositionRelationships{}, middleware.After)
 }
 
 func addOpListDashboardsValidationMiddleware(stack *middleware.Stack) error {
@@ -1398,6 +1658,10 @@ func addOpUpdateAssetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAsset{}, middleware.After)
 }
 
+func addOpUpdateAssetModelCompositeModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAssetModelCompositeModel{}, middleware.After)
+}
+
 func addOpUpdateAssetModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAssetModel{}, middleware.After)
 }
@@ -1424,6 +1688,21 @@ func addOpUpdatePortalValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProject{}, middleware.After)
+}
+
+func validateActionPayload(v *types.ActionPayload) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionPayload"}
+	if v.StringValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StringValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAlarms(v *types.Alarms) error {
@@ -1822,6 +2101,21 @@ func validateBatchGetAssetPropertyValueHistoryEntry(v *types.BatchGetAssetProper
 	}
 }
 
+func validateCsv(v *types.Csv) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Csv"}
+	if v.ColumnNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomerManagedS3Storage(v *types.CustomerManagedS3Storage) error {
 	if v == nil {
 		return nil
@@ -1868,10 +2162,6 @@ func validateExpressionVariable(v *types.ExpressionVariable) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	} else if v.Value != nil {
-		if err := validateVariableValue(v.Value); err != nil {
-			invalidParams.AddNested("Value", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1907,6 +2197,23 @@ func validateFile(v *types.File) error {
 	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFileFormat(v *types.FileFormat) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FileFormat"}
+	if v.Csv != nil {
+		if err := validateCsv(v.Csv); err != nil {
+			invalidParams.AddNested("Csv", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2118,6 +2425,10 @@ func validateJobConfiguration(v *types.JobConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "JobConfiguration"}
 	if v.FileFormat == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FileFormat"))
+	} else if v.FileFormat != nil {
+		if err := validateFileFormat(v.FileFormat); err != nil {
+			invalidParams.AddNested("FileFormat", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2380,6 +2691,21 @@ func validateResource(v *types.Resource) error {
 	}
 }
 
+func validateTargetResource(v *types.TargetResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetResource"}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTimeInNanos(v *types.TimeInNanos) error {
 	if v == nil {
 		return nil
@@ -2464,21 +2790,6 @@ func validateUserIdentity(v *types.UserIdentity) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UserIdentity"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateVariableValue(v *types.VariableValue) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "VariableValue"}
-	if v.PropertyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PropertyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2688,6 +2999,32 @@ func validateOpCreateAssetInput(v *CreateAssetInput) error {
 	}
 }
 
+func validateOpCreateAssetModelCompositeModelInput(v *CreateAssetModelCompositeModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAssetModelCompositeModelInput"}
+	if v.AssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
+	}
+	if v.AssetModelCompositeModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelCompositeModelName"))
+	}
+	if v.AssetModelCompositeModelType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelCompositeModelType"))
+	}
+	if v.AssetModelCompositeModelProperties != nil {
+		if err := validateAssetModelPropertyDefinitions(v.AssetModelCompositeModelProperties); err != nil {
+			invalidParams.AddNested("AssetModelCompositeModelProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAssetModelInput(v *CreateAssetModelInput) error {
 	if v == nil {
 		return nil
@@ -2879,6 +3216,24 @@ func validateOpDeleteAssetInput(v *DeleteAssetInput) error {
 	}
 }
 
+func validateOpDeleteAssetModelCompositeModelInput(v *DeleteAssetModelCompositeModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAssetModelCompositeModelInput"}
+	if v.AssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
+	}
+	if v.AssetModelCompositeModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelCompositeModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAssetModelInput(v *DeleteAssetModelInput) error {
 	if v == nil {
 		return nil
@@ -2969,6 +3324,39 @@ func validateOpDescribeAccessPolicyInput(v *DescribeAccessPolicyInput) error {
 	}
 }
 
+func validateOpDescribeActionInput(v *DescribeActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeActionInput"}
+	if v.ActionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAssetCompositeModelInput(v *DescribeAssetCompositeModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAssetCompositeModelInput"}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if v.AssetCompositeModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetCompositeModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeAssetInput(v *DescribeAssetInput) error {
 	if v == nil {
 		return nil
@@ -2976,6 +3364,24 @@ func validateOpDescribeAssetInput(v *DescribeAssetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeAssetInput"}
 	if v.AssetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAssetModelCompositeModelInput(v *DescribeAssetModelCompositeModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAssetModelCompositeModelInput"}
+	if v.AssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
+	}
+	if v.AssetModelCompositeModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelCompositeModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3152,6 +3558,50 @@ func validateOpDisassociateTimeSeriesFromAssetPropertyInput(v *DisassociateTimeS
 	}
 }
 
+func validateOpExecuteActionInput(v *ExecuteActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExecuteActionInput"}
+	if v.TargetResource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetResource"))
+	} else if v.TargetResource != nil {
+		if err := validateTargetResource(v.TargetResource); err != nil {
+			invalidParams.AddNested("TargetResource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ActionDefinitionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionDefinitionId"))
+	}
+	if v.ActionPayload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionPayload"))
+	} else if v.ActionPayload != nil {
+		if err := validateActionPayload(v.ActionPayload); err != nil {
+			invalidParams.AddNested("ActionPayload", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpExecuteQueryInput(v *ExecuteQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExecuteQueryInput"}
+	if v.QueryStatement == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryStatement"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAssetPropertyAggregatesInput(v *GetAssetPropertyAggregatesInput) error {
 	if v == nil {
 		return nil
@@ -3195,6 +3645,39 @@ func validateOpGetInterpolatedAssetPropertyValuesInput(v *GetInterpolatedAssetPr
 	}
 	if v.Type == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListActionsInput(v *ListActionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListActionsInput"}
+	if len(v.TargetResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetResourceType"))
+	}
+	if v.TargetResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssetModelCompositeModelsInput(v *ListAssetModelCompositeModelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssetModelCompositeModelsInput"}
+	if v.AssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3258,6 +3741,21 @@ func validateOpListAssociatedAssetsInput(v *ListAssociatedAssetsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListAssociatedAssetsInput"}
 	if v.AssetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCompositionRelationshipsInput(v *ListCompositionRelationshipsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCompositionRelationshipsInput"}
+	if v.AssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3458,6 +3956,32 @@ func validateOpUpdateAssetInput(v *UpdateAssetInput) error {
 	}
 	if v.AssetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssetName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAssetModelCompositeModelInput(v *UpdateAssetModelCompositeModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssetModelCompositeModelInput"}
+	if v.AssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
+	}
+	if v.AssetModelCompositeModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelCompositeModelId"))
+	}
+	if v.AssetModelCompositeModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelCompositeModelName"))
+	}
+	if v.AssetModelCompositeModelProperties != nil {
+		if err := validateAssetModelProperties(v.AssetModelCompositeModelProperties); err != nil {
+			invalidParams.AddNested("AssetModelCompositeModelProperties", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

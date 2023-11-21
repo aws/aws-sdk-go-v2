@@ -45,6 +45,10 @@ type GetPropertyValueInput struct {
 	// The name of the component whose property values the operation returns.
 	ComponentName *string
 
+	// This string specifies the path to the composite component, starting from the
+	// top-level component.
+	ComponentPath *string
+
 	// The ID of the component type whose property values the operation returns.
 	ComponentTypeId *string
 
