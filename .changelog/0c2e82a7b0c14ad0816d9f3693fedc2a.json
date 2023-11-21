@@ -1,8 +1,0 @@
-{
-    "id": "0c2e82a7-b0c1-4ad0-816d-9f3693fedc2a",
-    "type": "feature",
-    "description": "This release adds following support. 1. New APIs for metadata bulk operations. 2. Modify the component type API to support composite component types - nesting component types within one another. 3. New list APIs for components and properties. 4. Support the larger scope digital twin modeling.",
-    "modules": [
-        "service/iottwinmaker"
-    ]
-}

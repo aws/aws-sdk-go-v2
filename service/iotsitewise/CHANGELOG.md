@@ -1,3 +1,7 @@
+# v1.33.0 (2023-11-21)
+
+* **Feature**: Adds 1/ user-defined unique identifier for asset and model metadata, 2/ asset model components, and 3/ query API for asset metadata and telemetry data. Supports 4/ multi variate anomaly detection using Amazon Lookout for Equipment, 5/ warm storage tier, and 6/ buffered ingestion of time series data.
+
 # v1.32.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "ad77865e-d438-4b33-b473-33c82171b542",
-    "type": "feature",
-    "description": "Adds 1/ user-defined unique identifier for asset and model metadata, 2/ asset model components, and 3/ query API for asset metadata and telemetry data. Supports 4/ multi variate anomaly detection using Amazon Lookout for Equipment, 5/ warm storage tier, and 6/ buffered ingestion of time series data.",
-    "modules": [
-        "service/iotsitewise"
-    ]
-}

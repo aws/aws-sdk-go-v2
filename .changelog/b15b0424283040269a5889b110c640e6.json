@@ -1,8 +1,0 @@
-{
-    "id": "b15b0424-2830-4026-9a58-89b110c640e6",
-    "type": "feature",
-    "description": "This release adds support for the new Amazon Inspector Scan API. The new Inspector Scan API can synchronously scan SBOMs adhering to the CycloneDX v1.5 format.",
-    "modules": [
-        "service/inspectorscan"
-    ]
-}

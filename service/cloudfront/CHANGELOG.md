@@ -1,3 +1,7 @@
+# v1.31.0 (2023-11-21)
+
+* **Feature**: This release adds support for CloudFront KeyValueStore, a globally managed key value datastore associated with CloudFront Functions.
+
 # v1.30.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions
