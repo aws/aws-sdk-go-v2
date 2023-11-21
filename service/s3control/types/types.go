@@ -1346,14 +1346,14 @@ type PublicAccessBlockConfiguration struct {
 	//   - PUT Bucket calls fail if the request includes a public ACL.
 	// Enabling this setting doesn't affect existing policies or ACLs. This property
 	// is not supported for Amazon S3 on Outposts.
-	BlockPublicAcls bool
+	BlockPublicAcls *bool
 
 	// Specifies whether Amazon S3 should block public bucket policies for buckets in
 	// this account. Setting this element to TRUE causes Amazon S3 to reject calls to
 	// PUT Bucket policy if the specified bucket policy allows public access. Enabling
 	// this setting doesn't affect existing bucket policies. This property is not
 	// supported for Amazon S3 on Outposts.
-	BlockPublicPolicy bool
+	BlockPublicPolicy *bool
 
 	// Specifies whether Amazon S3 should ignore public ACLs for buckets in this
 	// account. Setting this element to TRUE causes Amazon S3 to ignore all public
@@ -1361,7 +1361,7 @@ type PublicAccessBlockConfiguration struct {
 	// setting doesn't affect the persistence of any existing ACLs and doesn't prevent
 	// new public ACLs from being set. This property is not supported for Amazon S3 on
 	// Outposts.
-	IgnorePublicAcls bool
+	IgnorePublicAcls *bool
 
 	// Specifies whether Amazon S3 should restrict public bucket policies for buckets
 	// in this account. Setting this element to TRUE restricts access to buckets with
@@ -1370,7 +1370,7 @@ type PublicAccessBlockConfiguration struct {
 	// bucket policies, except that public and cross-account access within any public
 	// bucket policy, including non-public delegation to specific accounts, is blocked.
 	// This property is not supported for Amazon S3 on Outposts.
-	RestrictPublicBuckets bool
+	RestrictPublicBuckets *bool
 
 	noSmithyDocumentSerde
 }
