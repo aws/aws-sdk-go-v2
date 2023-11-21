@@ -1,0 +1,8 @@
+{
+    "id": "08c84fb2-c664-4d8b-983c-9986c770cfda",
+    "type": "feature",
+    "description": "**BREAK FIX**: Convert S3Control PublicAccessBlock field types to nilable. See #2384, #2162.",
+    "modules": [
+        "service/s3control"
+    ]
+}

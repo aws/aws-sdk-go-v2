@@ -15169,7 +15169,7 @@ func awsRestxml_deserializeDocumentPublicAccessBlockConfiguration(v **types.Publ
 				if err != nil {
 					return fmt.Errorf("expected Setting to be of type *bool, got %T instead", val)
 				}
-				sv.BlockPublicAcls = xtv
+				sv.BlockPublicAcls = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("BlockPublicPolicy", t.Name.Local):
@@ -15185,7 +15185,7 @@ func awsRestxml_deserializeDocumentPublicAccessBlockConfiguration(v **types.Publ
 				if err != nil {
 					return fmt.Errorf("expected Setting to be of type *bool, got %T instead", val)
 				}
-				sv.BlockPublicPolicy = xtv
+				sv.BlockPublicPolicy = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("IgnorePublicAcls", t.Name.Local):
@@ -15201,7 +15201,7 @@ func awsRestxml_deserializeDocumentPublicAccessBlockConfiguration(v **types.Publ
 				if err != nil {
 					return fmt.Errorf("expected Setting to be of type *bool, got %T instead", val)
 				}
-				sv.IgnorePublicAcls = xtv
+				sv.IgnorePublicAcls = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("RestrictPublicBuckets", t.Name.Local):
@@ -15217,7 +15217,7 @@ func awsRestxml_deserializeDocumentPublicAccessBlockConfiguration(v **types.Publ
 				if err != nil {
 					return fmt.Errorf("expected Setting to be of type *bool, got %T instead", val)
 				}
-				sv.RestrictPublicBuckets = xtv
+				sv.RestrictPublicBuckets = ptr.Bool(xtv)
 			}
 
 		default:

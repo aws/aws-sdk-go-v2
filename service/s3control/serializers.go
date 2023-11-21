@@ -7773,7 +7773,7 @@ func awsRestxml_serializeDocumentPrefixLevelStorageMetrics(v *types.PrefixLevelS
 
 func awsRestxml_serializeDocumentPublicAccessBlockConfiguration(v *types.PublicAccessBlockConfiguration, value smithyxml.Value) error {
 	defer value.Close()
-	if v.BlockPublicAcls {
+	if v.BlockPublicAcls != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -7782,9 +7782,9 @@ func awsRestxml_serializeDocumentPublicAccessBlockConfiguration(v *types.PublicA
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(v.BlockPublicAcls)
+		el.Boolean(*v.BlockPublicAcls)
 	}
-	if v.BlockPublicPolicy {
+	if v.BlockPublicPolicy != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -7793,9 +7793,9 @@ func awsRestxml_serializeDocumentPublicAccessBlockConfiguration(v *types.PublicA
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(v.BlockPublicPolicy)
+		el.Boolean(*v.BlockPublicPolicy)
 	}
-	if v.IgnorePublicAcls {
+	if v.IgnorePublicAcls != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -7804,9 +7804,9 @@ func awsRestxml_serializeDocumentPublicAccessBlockConfiguration(v *types.PublicA
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(v.IgnorePublicAcls)
+		el.Boolean(*v.IgnorePublicAcls)
 	}
-	if v.RestrictPublicBuckets {
+	if v.RestrictPublicBuckets != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -7815,7 +7815,7 @@ func awsRestxml_serializeDocumentPublicAccessBlockConfiguration(v *types.PublicA
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(v.RestrictPublicBuckets)
+		el.Boolean(*v.RestrictPublicBuckets)
 	}
 	return nil
 }
