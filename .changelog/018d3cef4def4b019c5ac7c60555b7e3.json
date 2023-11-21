@@ -1,0 +1,8 @@
+{
+    "id": "018d3cef-4def-4b01-9c5a-c7c60555b7e3",
+    "type": "bugfix",
+    "description": "Don't expect error responses to have a JSON payload in the endpointcreds provider.",
+    "modules": [
+        "credentials"
+    ]
+}

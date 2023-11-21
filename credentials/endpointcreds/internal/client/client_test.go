@@ -18,14 +18,15 @@ import (
 
 func TestClient_GetCredentials(t *testing.T) {
 	cases := map[string]struct {
-		Token           string
-		RelativeURI     string
-		ResponseCode    int
-		ResponseBody    []byte
-		ExpectResult    *GetCredentialsOutput
-		ExpectErr       bool
-		ValidateRequest func(*testing.T, *http.Request)
-		ValidateError   func(*testing.T, error) bool
+		Token               string
+		RelativeURI         string
+		ResponseCode        int
+		ResponseBody        []byte
+		ResponseContentType string
+		ExpectResult        *GetCredentialsOutput
+		ExpectErr           bool
+		ValidateRequest     func(*testing.T, *http.Request)
+		ValidateError       func(*testing.T, error) bool
 	}{
 		"success static": {
 			ResponseCode: 200,
@@ -33,6 +34,7 @@ func TestClient_GetCredentials(t *testing.T) {
    "AccessKeyId" : "FooKey",
    "SecretAccessKey" : "FooSecret"
  }`),
+			ResponseContentType: "application/json",
 			ExpectResult: &GetCredentialsOutput{
 				AccessKeyID:     "FooKey",
 				SecretAccessKey: "FooSecret",
@@ -45,6 +47,7 @@ func TestClient_GetCredentials(t *testing.T) {
    "AccessKeyId" : "FooKey",
    "SecretAccessKey" : "FooSecret"
  }`),
+			ResponseContentType: "application/json",
 			ExpectResult: &GetCredentialsOutput{
 				AccessKeyID:     "FooKey",
 				SecretAccessKey: "FooSecret",
@@ -59,6 +62,7 @@ func TestClient_GetCredentials(t *testing.T) {
   "Token": "FooToken",
   "Expiration": "2016-02-25T06:03:31Z"
 }`),
+			ResponseContentType: "application/json",
 			ExpectResult: &GetCredentialsOutput{
 				AccessKeyID:     "FooKey",
 				SecretAccessKey: "FooSecret",
@@ -76,6 +80,7 @@ func TestClient_GetCredentials(t *testing.T) {
    "AccessKeyId" : "FooKey",
    "SecretAccessKey" : "FooSecret"
  }`),
+			ResponseContentType: "application/json",
 			ValidateRequest: func(t *testing.T, r *http.Request) {
 				t.Helper()
 				if e, a := "/path/to/thing", r.URL.Path; e != a {
@@ -96,7 +101,8 @@ func TestClient_GetCredentials(t *testing.T) {
   "code": "Unauthorized",
   "message": "not authorized for endpoint"
 }`),
-			ExpectErr: true,
+			ResponseContentType: "application/json",
+			ExpectErr:           true,
 			ValidateError: func(t *testing.T, err error) (ok bool) {
 				t.Helper()
 				var apiError smithy.APIError
@@ -126,7 +132,8 @@ func TestClient_GetCredentials(t *testing.T) {
   "code": "InternalError",
   "message": "an error occurred"
 }`),
-			ExpectErr: true,
+			ResponseContentType: "application/json",
+			ExpectErr:           true,
 			ValidateError: func(t *testing.T, err error) (ok bool) {
 				t.Helper()
 				var apiError smithy.APIError
@@ -151,13 +158,28 @@ func TestClient_GetCredentials(t *testing.T) {
 			},
 		},
 		"non-json error response": {
-			ResponseCode: 500,
-			ResponseBody: []byte(`<html><body>unexpected message format</body></html>`),
-			ExpectErr:    true,
+			ResponseCode:        500,
+			ResponseBody:        []byte(`<html><body>unexpected message format</body></html>`),
+			ResponseContentType: "text/html",
+			ExpectErr:           true,
 			ValidateError: func(t *testing.T, err error) (ok bool) {
 				t.Helper()
-				if e, a := "failed to decode error message", err.Error(); !strings.Contains(a, e) {
-					t.Errorf("expect %v, got %v", e, a)
+				var apiError smithy.APIError
+				if errors.As(err, &apiError) {
+					if e, a := "", apiError.ErrorCode(); e != a {
+						t.Errorf("expect %v, got %v", e, a)
+						ok = false
+					}
+					if e, a := "<html><body>unexpected message format</body></html>", apiError.ErrorMessage(); e != a {
+						t.Errorf("expect %v, got %v", e, a)
+						ok = false
+					}
+					if e, a := smithy.FaultServer, apiError.ErrorFault(); e != a {
+						t.Errorf("expect %v, got %v", e, a)
+						ok = false
+					}
+				} else {
+					t.Errorf("expect %T error type, got %T: %v", apiError, err, err)
 					ok = false
 				}
 				return ok
@@ -177,6 +199,7 @@ func TestClient_GetCredentials(t *testing.T) {
 
 				actualReq.Body = ioutil.NopCloser(bytes.NewReader(buf.Bytes()))
 
+				w.Header().Set("Content-Type", tt.ResponseContentType)
 				w.WriteHeader(tt.ResponseCode)
 				w.Write(tt.ResponseBody)
 			}))

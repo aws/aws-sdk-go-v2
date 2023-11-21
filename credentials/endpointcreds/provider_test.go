@@ -5,6 +5,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -201,6 +202,9 @@ func TestFailedRetrieveCredentials(t *testing.T) {
   "code": "Error",
   "message": "Message"
 }`))),
+				Header: http.Header{
+					"Content-Type": {"application/json"},
+				},
 			}, nil
 		})
 	})
@@ -236,5 +240,74 @@ func TestFailedRetrieveCredentials(t *testing.T) {
 	}
 	if creds.Expired() {
 		t.Errorf("expect empty creds not to be expired")
+	}
+}
+
+type mockClientN struct {
+	responses []*http.Response
+	index     int
+}
+
+func (c *mockClientN) Do(r *http.Request) (*http.Response, error) {
+	resp := c.responses[c.index]
+	c.index++
+	return resp, nil
+}
+
+func TestRetryHTTPStatusCode(t *testing.T) {
+	expTime := time.Now().UTC().Add(1 * time.Hour).Format("2006-01-02T15:04:05Z")
+	credsResp := fmt.Sprintf(`{"AccessKeyID":"AKID","SecretAccessKey":"SECRET","Token":"TOKEN","Expiration":"%s"}`, expTime)
+
+	p := endpointcreds.New("http://127.0.0.1", func(o *endpointcreds.Options) {
+		o.HTTPClient = &mockClientN{
+			responses: []*http.Response{
+				{
+					StatusCode: 429,
+					Body:       io.NopCloser(strings.NewReader("You have made too many requests.")),
+					Header: http.Header{
+						"Content-Type": {"text/plain"},
+					},
+				},
+				{
+					StatusCode: 500,
+					Body:       io.NopCloser(strings.NewReader("Internal server error.")),
+					Header: http.Header{
+						"Content-Type": {"text/plain"},
+					},
+				},
+				{
+					StatusCode: 200,
+					Body:       ioutil.NopCloser(strings.NewReader(credsResp)),
+					Header: http.Header{
+						"Content-Type": {"application/json"},
+					},
+				},
+			},
+		}
+	})
+
+	creds, err := p.Retrieve(context.Background())
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if e, a := "AKID", creds.AccessKeyID; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "SECRET", creds.SecretAccessKey; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "TOKEN", creds.SessionToken; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if creds.Expired() {
+		t.Errorf("expect not expired")
+	}
+
+	sdk.NowTime = func() time.Time {
+		return time.Now().Add(2 * time.Hour)
+	}
+	if !creds.Expired() {
+		t.Errorf("expect to be expired")
 	}
 }
