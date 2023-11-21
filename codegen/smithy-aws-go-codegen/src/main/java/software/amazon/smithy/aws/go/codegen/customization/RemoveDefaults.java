@@ -46,7 +46,8 @@ public class RemoveDefaults implements GoIntegration {
     }
 
     private Shape withoutDefault(Shape shape) {
-        var builder = ((ToSmithyBuilder<?>) shape).toBuilder();
-        return ((AbstractShapeBuilder<?, ?>) builder).removeTrait(DefaultTrait.ID).build();
+        return Shape.shapeToBuilder(shape)
+                .removeTrait(DefaultTrait.ID)
+                .build();
     }
 }
