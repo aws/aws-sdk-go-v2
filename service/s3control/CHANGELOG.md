@@ -1,3 +1,8 @@
+# v1.38.0 (2023-11-22)
+
+* **Feature**: **BREAK FIX**: Convert S3Control PublicAccessBlock field types to nilable. See #2384, #2162.
+* **Feature**: Amazon S3 Batch Operations now manages buckets or prefixes in a single step.
+
 # v1.37.1 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

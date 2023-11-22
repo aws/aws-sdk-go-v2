@@ -1,3 +1,7 @@
+# v1.23.0 (2023-11-22)
+
+* **Feature**: This release adds support for resource based policies on streams and consumers.
+
 # v1.22.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

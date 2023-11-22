@@ -1,3 +1,14 @@
+# Release (2023-11-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.23.0](service/kinesis/CHANGELOG.md#v1230-2023-11-22)
+  * **Feature**: This release adds support for resource based policies on streams and consumers.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.38.0](service/s3control/CHANGELOG.md#v1380-2023-11-22)
+  * **Feature**: **BREAK FIX**: Convert S3Control PublicAccessBlock field types to nilable. See #2384, #2162.
+  * **Feature**: Amazon S3 Batch Operations now manages buckets or prefixes in a single step.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.118.0](service/sagemaker/CHANGELOG.md#v11180-2023-11-22)
+  * **Feature**: This feature adds the end user license agreement status as a model access configuration parameter.
+
 # Release (2023-11-21)
 
 ## General Highlights

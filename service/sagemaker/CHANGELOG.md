@@ -1,3 +1,7 @@
+# v1.118.0 (2023-11-22)
+
+* **Feature**: This feature adds the end user license agreement status as a model access configuration parameter.
+
 # v1.117.1 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions
