@@ -39,6 +39,9 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.sagemaker#AcceptEula": {
+            "type": "boolean"
+        },
         "com.amazonaws.sagemaker#AccountId": {
             "type": "string",
             "traits": {
@@ -16047,7 +16050,7 @@
                 "SingleSignOnApplicationArn": {
                     "target": "com.amazonaws.sagemaker#SingleSignOnApplicationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the associated Amazon Web Services Single Sign-On application\n        for this Domain.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the application managed by SageMaker in IAM Identity Center. This value is only returned for domains created after September 19, 2023.</p>"
                     }
                 },
                 "Status": {
@@ -38949,6 +38952,22 @@
                 "smithy.api#documentation": "<p>The properties of a model as returned by the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html\">Search</a> API.</p>"
             }
         },
+        "com.amazonaws.sagemaker#ModelAccessConfig": {
+            "type": "structure",
+            "members": {
+                "AcceptEula": {
+                    "target": "com.amazonaws.sagemaker#AcceptEula",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies agreement to the model end-user license agreement (EULA). The\n         <code>AcceptEula</code> value must be explicitly defined as <code>True</code> in\n         order to accept the EULA that this model requires. You are responsible for reviewing and\n         complying with any applicable license terms and making sure they are acceptable for your\n         use case before downloading or using a model.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The access configuration file for the ML model. You can explicitly accept the model\n         end-user license agreement (EULA) within the <code>ModelAccessConfig</code>. For more\n         information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula\">End-user license agreements</a>.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#ModelApprovalStatus": {
             "type": "enum",
             "members": {
@@ -50186,6 +50205,12 @@
                         "smithy.api#documentation": "<p>Specifies how the ML model data is prepared.</p>\n         <p>If you choose <code>Gzip</code> and choose <code>S3Object</code> as the value of\n                <code>S3DataType</code>, <code>S3Uri</code> identifies an object that is a\n            gzip-compressed TAR archive. SageMaker will attempt to decompress and untar the object during\n            model deployment.</p>\n         <p>If you choose <code>None</code> and chooose <code>S3Object</code> as the value of\n                <code>S3DataType</code>, <code>S3Uri</code> identifies an object that represents an\n            uncompressed ML model to deploy.</p>\n         <p>If you choose None and choose <code>S3Prefix</code> as the value of\n                <code>S3DataType</code>, <code>S3Uri</code> identifies a key name prefix, under\n            which all objects represents the uncompressed ML model to deploy.</p>\n         <p>If you choose None, then SageMaker will follow rules below when creating model data files\n            under /opt/ml/model directory for use by your inference code:</p>\n         <ul>\n            <li>\n               <p>If you choose <code>S3Object</code> as the value of <code>S3DataType</code>,\n                    then SageMaker will split the key of the S3 object referenced by <code>S3Uri</code>\n                    by slash (/), and use the last part as the filename of the file holding the\n                    content of the S3 object.</p>\n            </li>\n            <li>\n               <p>If you choose <code>S3Prefix</code> as the value of <code>S3DataType</code>,\n                    then for each S3 object under the key name pefix referenced by\n                        <code>S3Uri</code>, SageMaker will trim its key by the prefix, and use the\n                    remainder as the path (relative to <code>/opt/ml/model</code>) of the file\n                    holding the content of the S3 object. SageMaker will split the remainder by slash\n                    (/), using intermediate parts as directory names and the last part as filename\n                    of the file holding the content of the S3 object.</p>\n            </li>\n            <li>\n               <p>Do not use any of the following as file names or directory names:</p>\n               <ul>\n                  <li>\n                     <p>An empty or blank string</p>\n                  </li>\n                  <li>\n                     <p>A string which contains null bytes</p>\n                  </li>\n                  <li>\n                     <p>A string longer than 255 bytes</p>\n                  </li>\n                  <li>\n                     <p>A single dot (<code>.</code>)</p>\n                  </li>\n                  <li>\n                     <p>A double dot (<code>..</code>)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Ambiguous file names will result in model deployment failure. For example, if\n                    your uncompressed ML model consists of two S3 objects\n                        <code>s3://mybucket/model/weights</code> and\n                        <code>s3://mybucket/model/weights/part1</code> and you specify\n                        <code>s3://mybucket/model/</code> as the value of <code>S3Uri</code> and\n                        <code>S3Prefix</code> as the value of <code>S3DataType</code>, then it will\n                    result in name clash between <code>/opt/ml/model/weights</code> (a regular file)\n                    and <code>/opt/ml/model/weights/</code> (a directory).</p>\n            </li>\n            <li>\n               <p>Do not organize the model artifacts in <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html\">S3 console using\n                        folders</a>. When you create a folder in S3 console, S3 creates a 0-byte\n                    object with a key set to the folder name you provide. They key of the 0-byte\n                    object ends with a slash (/) which violates SageMaker restrictions on model artifact\n                    file names, leading to model deployment failure. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
+                },
+                "ModelAccessConfig": {
+                    "target": "com.amazonaws.sagemaker#ModelAccessConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the access configuration file for the ML model. You can explicitly accept\n         the model end-user license agreement (EULA) within the <code>ModelAccessConfig</code>.\n         You are responsible for reviewing and complying with any applicable license terms and\n         making sure they are acceptable for your use case before downloading or using a\n         model.</p>"
+                    }
                 }
             },
             "traits": {
@@ -54751,7 +54776,7 @@
                 "MaxPendingTimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxPendingTimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum pending time in seconds.</p>"
+                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can be pending before it is stopped.</p>"
                     }
                 }
             },

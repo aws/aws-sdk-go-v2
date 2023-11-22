@@ -6137,7 +6137,7 @@
                 "StorageLensGroupLevel": {
                     "target": "com.amazonaws.s3control#StorageLensGroupLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nA container element for S3 Storage Lens groups metrics.\n</p>"
+                        "smithy.api#documentation": "<p> A container element for S3 Storage Lens groups metrics. </p>"
                     }
                 }
             },
@@ -7247,7 +7247,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID that the Storage Lens group is created from and associated with.\n</p>",
+                        "smithy.api#documentation": "<p> The Amazon Web Services account ID that the Storage Lens group is created from and associated with.\n      </p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -7259,14 +7259,14 @@
                 "StorageLensGroup": {
                     "target": "com.amazonaws.s3control#StorageLensGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Storage Lens group configuration.\n</p>",
+                        "smithy.api#documentation": "<p> The Storage Lens group configuration. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.s3control#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Web Services resource tags that you're adding to your Storage Lens group. This parameter is optional.\n</p>"
+                        "smithy.api#documentation": "<p> The Amazon Web Services resource tags that you're adding to your Storage Lens group. This parameter\n         is optional. </p>"
                     }
                 }
             },
@@ -7876,7 +7876,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies whether S3 on Outposts replicates delete markers. If you specify a\n            <code>Filter</code> element in your replication configuration, you must also include a\n            <code>DeleteMarkerReplication</code> element. If your <code>Filter</code> includes a\n            <code>Tag</code> element, the <code>DeleteMarkerReplication</code> element's\n            <code>Status</code> child element must be set to <code>Disabled</code>, because\n         S3 on Outposts does not support replicating delete markers for tag-based rules.</p>\n         <p>For more information about delete marker replication, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html#outposts-replication-what-is-replicated\">How delete operations affect replication</a> in the <i>Amazon S3 User Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Specifies whether S3 on Outposts replicates delete markers. If you specify a\n            <code>Filter</code> element in your replication configuration, you must also include a\n            <code>DeleteMarkerReplication</code> element. If your <code>Filter</code> includes a\n            <code>Tag</code> element, the <code>DeleteMarkerReplication</code> element's\n            <code>Status</code> child element must be set to <code>Disabled</code>, because\n         S3 on Outposts does not support replicating delete markers for tag-based rules.</p>\n         <p>For more information about delete marker replication, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html#outposts-replication-what-is-replicated\">How delete operations affect replication</a> in the\n            <i>Amazon S3 User Guide</i>. </p>"
             }
         },
         "com.amazonaws.s3control#DeleteMarkerReplicationStatus": {
@@ -8153,7 +8153,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nDeletes an existing S3 Storage Lens group.</p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:DeleteStorageLensGroup</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n      Lens error codes</a>.</p>",
+                "smithy.api#documentation": "<p> Deletes an existing S3 Storage Lens group.</p>\n         <p>To use this operation, you must have the permission to perform the\n            <code>s3:DeleteStorageLensGroup</code> action. For more information about the required\n         Storage Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n            Lens error codes</a>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -8175,7 +8175,7 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#StorageLensGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the Storage Lens group that you're trying to delete.\n</p>",
+                        "smithy.api#documentation": "<p> The name of the Storage Lens group that you're trying to delete. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8183,7 +8183,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID used to create the Storage Lens group that you're trying to delete.\n</p>",
+                        "smithy.api#documentation": "<p> The Amazon Web Services account ID used to create the Storage Lens group that you're trying to\n         delete. </p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -8389,7 +8389,7 @@
                 "StorageClass": {
                     "target": "com.amazonaws.s3control#ReplicationStorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p> The storage class to use when replicating objects. All objects stored on S3 on Outposts\n         are stored in the <code>OUTPOSTS</code> storage class. S3 on Outposts uses the\n            <code>OUTPOSTS</code> storage class to create the object replicas. </p>\n         <note>\n            <p>Values other than <code>OUTPOSTS</code> are not supported by Amazon S3 on Outposts. </p>\n         </note>"
+                        "smithy.api#documentation": "<p> The storage class to use when replicating objects. All objects stored on S3 on Outposts\n         are stored in the <code>OUTPOSTS</code> storage class. S3 on Outposts uses the\n            <code>OUTPOSTS</code> storage class to create the object replicas. </p>\n         <note>\n            <p>Values other than <code>OUTPOSTS</code> are not supported by Amazon S3 on Outposts.\n         </p>\n         </note>"
                     }
                 }
             },
@@ -9311,7 +9311,7 @@
                 "target": "com.amazonaws.s3control#GetBucketReplicationResult"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This operation gets an Amazon S3 on Outposts bucket's replication configuration. To get an\n            S3 bucket's replication configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html\">GetBucketReplication</a>\n            in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Returns the replication configuration of an S3 on Outposts bucket. For more information\n         about S3 on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the\n            <i>Amazon S3 User Guide</i>. For information about S3 replication on Outposts\n         configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html\">Replicating objects for S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <note>\n            <p>It can take a while to propagate <code>PUT</code> or <code>DELETE</code> requests for\n            a replication configuration to all S3 on Outposts systems. Therefore, the replication\n            configuration that's returned by a <code>GET</code> request soon after a\n               <code>PUT</code> or <code>DELETE</code> request might return a more recent result\n            than what's on the Outpost. If an Outpost is offline, the delay in updating the\n            replication configuration on that Outpost can be significant.</p>\n         </note>\n         <p>This action requires permissions for the\n            <code>s3-outposts:GetReplicationConfiguration</code> action. The Outposts bucket owner\n         has this permission by default and can grant it to others. For more information about\n         permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsIAM.html\">Setting up IAM with\n            S3 on Outposts</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsBucketPolicy.html\">Managing access to\n            S3 on Outposts bucket</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketReplication.html#API_control_GetBucketReplication_Examples\">Examples</a> section.</p>\n         <p>If you include the <code>Filter</code> element in a replication configuration, you must\n         also include the <code>DeleteMarkerReplication</code>, <code>Status</code>, and\n            <code>Priority</code> elements. The response also returns those elements.</p>\n         <p>For information about S3 on Outposts replication failure reasons, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/outposts-replication-eventbridge.html#outposts-replication-failure-codes\">Replication failure reasons</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>The following operations are related to <code>GetBucketReplication</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketReplication.html\">PutBucketReplication</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketReplication.html\">DeleteBucketReplication</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This operation gets an Amazon S3 on Outposts bucket's replication configuration. To get an\n            S3 bucket's replication configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html\">GetBucketReplication</a>\n            in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Returns the replication configuration of an S3 on Outposts bucket. For more information\n         about S3 on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the\n            <i>Amazon S3 User Guide</i>. For information about S3 replication on Outposts\n         configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html\">Replicating objects for\n            S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <note>\n            <p>It can take a while to propagate <code>PUT</code> or <code>DELETE</code> requests for\n            a replication configuration to all S3 on Outposts systems. Therefore, the replication\n            configuration that's returned by a <code>GET</code> request soon after a\n               <code>PUT</code> or <code>DELETE</code> request might return a more recent result\n            than what's on the Outpost. If an Outpost is offline, the delay in updating the\n            replication configuration on that Outpost can be significant.</p>\n         </note>\n         <p>This action requires permissions for the\n            <code>s3-outposts:GetReplicationConfiguration</code> action. The Outposts bucket owner\n         has this permission by default and can grant it to others. For more information about\n         permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsIAM.html\">Setting up IAM with\n            S3 on Outposts</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsBucketPolicy.html\">Managing access to\n            S3 on Outposts bucket</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketReplication.html#API_control_GetBucketReplication_Examples\">Examples</a> section.</p>\n         <p>If you include the <code>Filter</code> element in a replication configuration, you must\n         also include the <code>DeleteMarkerReplication</code>, <code>Status</code>, and\n            <code>Priority</code> elements. The response also returns those elements.</p>\n         <p>For information about S3 on Outposts replication failure reasons, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/outposts-replication-eventbridge.html#outposts-replication-failure-codes\">Replication failure reasons</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>The following operations are related to <code>GetBucketReplication</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketReplication.html\">PutBucketReplication</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketReplication.html\">DeleteBucketReplication</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -9364,7 +9364,7 @@
                 "ReplicationConfiguration": {
                     "target": "com.amazonaws.s3control#ReplicationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container for one or more replication rules. A replication configuration must have at least one rule and you can add up to 100 rules. The maximum size of a\n         replication configuration is 128 KB.</p>"
+                        "smithy.api#documentation": "<p>A container for one or more replication rules. A replication configuration must have at\n         least one rule and you can add up to 100 rules. The maximum size of a replication\n         configuration is 128 KB.</p>"
                     }
                 }
             },
@@ -10140,7 +10140,7 @@
                 "target": "com.amazonaws.s3control#GetStorageLensGroupResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nRetrieves the Storage Lens group configuration details.</p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:GetStorageLensGroup</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n      Lens error codes</a>.</p>",
+                "smithy.api#documentation": "<p> Retrieves the Storage Lens group configuration details.</p>\n         <p>To use this operation, you must have the permission to perform the\n            <code>s3:GetStorageLensGroup</code> action. For more information about the required\n         Storage Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n            Lens error codes</a>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -10162,7 +10162,7 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#StorageLensGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the Storage Lens group that you're trying to retrieve the configuration details for.\n</p>",
+                        "smithy.api#documentation": "<p> The name of the Storage Lens group that you're trying to retrieve the configuration\n         details for. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -10170,7 +10170,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID associated with the Storage Lens group that you're trying to retrieve the details for.\n</p>",
+                        "smithy.api#documentation": "<p> The Amazon Web Services account ID associated with the Storage Lens group that you're trying to\n         retrieve the details for. </p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -10190,7 +10190,7 @@
                 "StorageLensGroup": {
                     "target": "com.amazonaws.s3control#StorageLensGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the Storage Lens group that you're trying to retrieve the configuration details for.\n</p>",
+                        "smithy.api#documentation": "<p> The name of the Storage Lens group that you're trying to retrieve the configuration\n         details for. </p>",
                         "smithy.api#httpPayload": {}
                     }
                 }
@@ -10662,19 +10662,45 @@
                 "CreatedAfter": {
                     "target": "com.amazonaws.s3control#ObjectCreationTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>If provided, the generated manifest should include only source bucket objects that were\n         created after this time.</p>"
+                        "smithy.api#documentation": "<p>If provided, the generated manifest includes only source bucket objects that were\n         created after this time.</p>"
                     }
                 },
                 "CreatedBefore": {
                     "target": "com.amazonaws.s3control#ObjectCreationTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>If provided, the generated manifest should include only source bucket objects that were\n         created before this time.</p>"
+                        "smithy.api#documentation": "<p>If provided, the generated manifest includes only source bucket objects that were\n         created before this time.</p>"
                     }
                 },
                 "ObjectReplicationStatuses": {
                     "target": "com.amazonaws.s3control#ReplicationStatusFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>If provided, the generated manifest should include only source bucket objects that have\n         one of the specified Replication statuses.</p>"
+                        "smithy.api#documentation": "<p>If provided, the generated manifest includes only source bucket objects that have one of\n         the specified Replication statuses.</p>"
+                    }
+                },
+                "KeyNameConstraint": {
+                    "target": "com.amazonaws.s3control#KeyNameConstraint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If provided, the generated manifest includes only source bucket objects whose object\n         keys match the string constraints specified for <code>MatchAnyPrefix</code>,\n            <code>MatchAnySuffix</code>, and <code>MatchAnySubstring</code>.</p>"
+                    }
+                },
+                "ObjectSizeGreaterThanBytes": {
+                    "target": "com.amazonaws.s3control#ObjectSizeGreaterThanBytes",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>If provided, the generated manifest includes only source bucket objects whose file size\n         is greater than the specified number of bytes.</p>"
+                    }
+                },
+                "ObjectSizeLessThanBytes": {
+                    "target": "com.amazonaws.s3control#ObjectSizeLessThanBytes",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>If provided, the generated manifest includes only source bucket objects whose file size\n         is less than the specified number of bytes.</p>"
+                    }
+                },
+                "MatchAnyStorageClass": {
+                    "target": "com.amazonaws.s3control#StorageClassList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If provided, the generated manifest includes only source bucket objects that are stored\n         with the specified storage class.</p>"
                     }
                 }
             },
@@ -11064,6 +11090,32 @@
                 }
             }
         },
+        "com.amazonaws.s3control#KeyNameConstraint": {
+            "type": "structure",
+            "members": {
+                "MatchAnyPrefix": {
+                    "target": "com.amazonaws.s3control#NonEmptyMaxLength1024StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If provided, the generated manifest includes objects where the specified string appears\n         at the start of the object key string.</p>"
+                    }
+                },
+                "MatchAnySuffix": {
+                    "target": "com.amazonaws.s3control#NonEmptyMaxLength1024StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If provided, the generated manifest includes objects where the specified string appears\n         at the end of the object key string.</p>"
+                    }
+                },
+                "MatchAnySubstring": {
+                    "target": "com.amazonaws.s3control#NonEmptyMaxLength1024StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If provided, the generated manifest includes objects where the specified string appears\n         anywhere within the object key string.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>If provided, the generated manifest includes only source bucket objects whose object\n         keys match the string constraints specified for <code>MatchAnyPrefix</code>,\n            <code>MatchAnySuffix</code>, and <code>MatchAnySubstring</code>.</p>"
+            }
+        },
         "com.amazonaws.s3control#KmsKeyArnString": {
             "type": "string",
             "traits": {
@@ -11178,7 +11230,7 @@
                 "AbortIncompleteMultipartUpload": {
                     "target": "com.amazonaws.s3control#AbortIncompleteMultipartUpload",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the days since the initiation of an incomplete multipart upload that Amazon S3\n         waits before permanently removing all parts of the upload. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config\">\n            Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Configuration</a> in the\n            <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the days since the initiation of an incomplete multipart upload that Amazon S3\n         waits before permanently removing all parts of the upload. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config\">\n            Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Configuration</a> in\n         the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 }
             },
@@ -11850,27 +11902,27 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#StorageLensGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nContains the name of the Storage Lens group that exists in the specified home Region.\n</p>",
+                        "smithy.api#documentation": "<p> Contains the name of the Storage Lens group that exists in the specified home Region.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "StorageLensGroupArn": {
                     "target": "com.amazonaws.s3control#StorageLensGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nContains the Amazon Resource Name (ARN) of the Storage Lens group. This property is read-only.\n</p>",
+                        "smithy.api#documentation": "<p> Contains the Amazon Resource Name (ARN) of the Storage Lens group. This property is\n         read-only. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "HomeRegion": {
                     "target": "com.amazonaws.s3control#S3AWSRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nContains the Amazon Web Services Region where the Storage Lens group was created.\n</p>",
+                        "smithy.api#documentation": "<p> Contains the Amazon Web Services Region where the Storage Lens group was created. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nEach entry contains a Storage Lens group that exists in the specified home Region.\n</p>"
+                "smithy.api#documentation": "<p> Each entry contains a Storage Lens group that exists in the specified home Region.\n      </p>"
             }
         },
         "com.amazonaws.s3control#ListStorageLensGroups": {
@@ -11882,7 +11934,7 @@
                 "target": "com.amazonaws.s3control#ListStorageLensGroupsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nLists all the Storage Lens groups in the specified home Region.\n</p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:ListStorageLensGroups</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n      Lens error codes</a>.</p>",
+                "smithy.api#documentation": "<p> Lists all the Storage Lens groups in the specified home Region. </p>\n         <p>To use this operation, you must have the permission to perform the\n            <code>s3:ListStorageLensGroups</code> action. For more information about the required\n         Storage Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n            Lens error codes</a>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -11908,7 +11960,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The Amazon Web Services account ID that owns the Storage Lens groups.\n</p>",
+                        "smithy.api#documentation": "<p> The Amazon Web Services account ID that owns the Storage Lens groups. </p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -11920,7 +11972,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.s3control#ContinuationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> if there are no more results.\n   </p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> if there are no more\n         results. </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -11935,13 +11987,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.s3control#ContinuationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   If <code>NextToken</code> is returned, there are more Storage Lens groups results available. The value of <code>NextToken</code> is a\n      unique pagination token for each page. Make the call again using the returned token to\n      retrieve the next page. Keep all other arguments unchanged. Each pagination token expires\n      after 24 hours.\n</p>"
+                        "smithy.api#documentation": "<p> If <code>NextToken</code> is returned, there are more Storage Lens groups results\n         available. The value of <code>NextToken</code> is a unique pagination token for each page.\n         Make the call again using the returned token to retrieve the next page. Keep all other\n         arguments unchanged. Each pagination token expires after 24 hours. </p>"
                     }
                 },
                 "StorageLensGroupList": {
                     "target": "com.amazonaws.s3control#StorageLensGroupList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe list of Storage Lens groups that exist in the specified home Region.\n</p>",
+                        "smithy.api#documentation": "<p> The list of Storage Lens groups that exist in the specified home Region. </p>",
                         "smithy.api#xmlFlattened": {}
                     }
                 }
@@ -11959,7 +12011,7 @@
                 "target": "com.amazonaws.s3control#ListTagsForResourceResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p> This operation allows you to list all the Amazon Web Services resource tags for the specified\n         resource. </p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:ListTagsForResource</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3 Tagging error codes</a>.</p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens\n               groups</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p> This operation allows you to list all the Amazon Web Services resource tags for the specified\n         resource. </p>\n         <p>To use this operation, you must have the permission to perform the\n            <code>s3:ListTagsForResource</code> action. For more information about the required\n         Storage Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3\n            Tagging error codes</a>.</p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens\n               groups</a>.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -11981,7 +12033,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID of the resource owner.\n</p>",
+                        "smithy.api#documentation": "<p> The Amazon Web Services account ID of the resource owner. </p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -11993,7 +12045,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.s3control#S3ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Resource Name (ARN) of the S3 resource that you want to list the tags for.\n</p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the S3 resource that you want to list the tags for.\n      </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -12009,7 +12061,7 @@
                 "Tags": {
                     "target": "com.amazonaws.s3control#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Web Services resource tags that are associated with the resource.\n</p>"
+                        "smithy.api#documentation": "<p> The Amazon Web Services resource tags that are associated with the resource. </p>"
                     }
                 }
             },
@@ -12100,19 +12152,19 @@
                     "target": "com.amazonaws.s3control#ObjectAgeValue",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\nSpecifies the maximum object age in days. Must be a positive whole number, greater than the minimum object age and less than or equal to 2,147,483,647. \n</p>"
+                        "smithy.api#documentation": "<p> Specifies the maximum object age in days. Must be a positive whole number, greater than\n         the minimum object age and less than or equal to 2,147,483,647. </p>"
                     }
                 },
                 "DaysLessThan": {
                     "target": "com.amazonaws.s3control#ObjectAgeValue",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\nSpecifies the minimum object age in days. The value must be a positive whole number, greater than 0 and less than or equal to 2,147,483,647.\n</p>"
+                        "smithy.api#documentation": "<p> Specifies the minimum object age in days. The value must be a positive whole number,\n         greater than 0 and less than or equal to 2,147,483,647. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   A filter condition that specifies the object age range of included objects in days. Only integers are supported.\n</p>"
+                "smithy.api#documentation": "<p> A filter condition that specifies the object age range of included objects in days.\n         Only integers are supported. </p>"
             }
         },
         "com.amazonaws.s3control#MatchObjectSize": {
@@ -12122,19 +12174,19 @@
                     "target": "com.amazonaws.s3control#ObjectSizeValue",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\nSpecifies the minimum object size in Bytes. The value must be a positive number, greater than 0 and less than 5 TB.\n</p>"
+                        "smithy.api#documentation": "<p> Specifies the minimum object size in Bytes. The value must be a positive number,\n         greater than 0 and less than 5 TB. </p>"
                     }
                 },
                 "BytesLessThan": {
                     "target": "com.amazonaws.s3control#ObjectSizeValue",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\nSpecifies the maximum object size in Bytes. The value must be a positive number, greater than the minimum object size and less than 5 TB.\n</p>"
+                        "smithy.api#documentation": "<p> Specifies the maximum object size in Bytes. The value must be a positive number,\n         greater than the minimum object size and less than 5 TB. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nA filter condition that specifies the object size range of included objects in bytes. Only integers are supported.\n</p>"
+                "smithy.api#documentation": "<p> A filter condition that specifies the object size range of included objects in bytes.\n         Only integers are supported. </p>"
             }
         },
         "com.amazonaws.s3control#MaxLength1024String": {
@@ -12472,6 +12524,12 @@
                 }
             }
         },
+        "com.amazonaws.s3control#NonEmptyMaxLength1024StringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#NonEmptyMaxLength1024String"
+            }
+        },
         "com.amazonaws.s3control#NonEmptyMaxLength2048String": {
             "type": "string",
             "traits": {
@@ -12617,12 +12675,12 @@
                 "Status": {
                     "target": "com.amazonaws.s3control#ObjectLambdaAccessPointAliasStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the Object Lambda Access Point alias. If the status is <code>PROVISIONING</code>, the Object Lambda Access Point is provisioning the alias and the alias is not ready for use yet. If \n         the status is <code>READY</code>, the Object Lambda Access Point alias is successfully provisioned and ready for use.</p>"
+                        "smithy.api#documentation": "<p>The status of the Object Lambda Access Point alias. If the status is <code>PROVISIONING</code>, the Object Lambda Access Point\n         is provisioning the alias and the alias is not ready for use yet. If the status is\n            <code>READY</code>, the Object Lambda Access Point alias is successfully provisioned and ready for\n         use.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The alias of an Object Lambda Access Point. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-use.html#ol-access-points-alias\">How to use a bucket-style alias for your S3 bucket\n         Object Lambda Access Point</a>.</p>"
+                "smithy.api#documentation": "<p>The alias of an Object Lambda Access Point. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-use.html#ol-access-points-alias\">How to use a\n            bucket-style alias for your S3 bucket Object Lambda Access Point</a>.</p>"
             }
         },
         "com.amazonaws.s3control#ObjectLambdaAccessPointAliasStatus": {
@@ -13411,7 +13469,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This action creates an Amazon S3 on Outposts bucket's replication configuration. To create\n            an S3 bucket's replication configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html\">PutBucketReplication</a>\n            in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Creates a replication configuration or replaces an existing one. For information about\n         S3 replication on Outposts configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html\">Replicating objects for S3 on Outposts</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <note>\n            <p>It can take a while to propagate <code>PUT</code> or <code>DELETE</code> requests for\n            a replication configuration to all S3 on Outposts systems. Therefore, the replication\n            configuration that's returned by a <code>GET</code> request soon after a\n               <code>PUT</code> or <code>DELETE</code> request might return a more recent result\n            than what's on the Outpost. If an Outpost is offline, the delay in updating the\n            replication configuration on that Outpost can be significant.</p>\n         </note>\n         <p>Specify the replication configuration in the request body. In the replication\n         configuration, you provide the following information:</p>\n         <ul>\n            <li>\n               <p>The name of the destination bucket or buckets where you want S3 on Outposts to\n               replicate objects</p>\n            </li>\n            <li>\n               <p>The Identity and Access Management (IAM) role that S3 on Outposts can assume to replicate objects on\n               your behalf</p>\n            </li>\n            <li>\n               <p>Other relevant information, such as replication rules</p>\n            </li>\n         </ul>\n         <p>A replication configuration must include at least one rule and can contain a maximum of\n         100. Each rule identifies a subset of objects to replicate by filtering the objects in\n         the source Outposts bucket. To choose additional subsets of objects to replicate, add a\n         rule for each subset.</p>\n         <p>To specify a subset of the objects in the source Outposts bucket to apply a replication\n         rule to, add the <code>Filter</code> element as a child of the <code>Rule</code> element.\n         You can filter objects based on an object key prefix, one or more object tags, or both.\n         When you add the <code>Filter</code> element in the configuration, you must also add the\n         following elements: <code>DeleteMarkerReplication</code>, <code>Status</code>, and\n            <code>Priority</code>.</p>\n         <p>Using <code>PutBucketReplication</code> on Outposts requires that both the source and\n         destination buckets must have versioning enabled. For information about enabling versioning\n         on a bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsManagingVersioning.html\">Managing S3 Versioning\n            for your S3 on Outposts bucket</a>.</p>\n         <p>For information about S3 on Outposts replication failure reasons, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/outposts-replication-eventbridge.html#outposts-replication-failure-codes\">Replication failure reasons</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>\n            <b>Handling Replication of Encrypted Objects</b>\n         </p>\n         <p>Outposts buckets are encrypted at all times. All the objects in the source Outposts\n         bucket are encrypted and can be replicated. Also, all the replicas in the destination\n         Outposts bucket are encrypted with the same encryption key as the objects in the source\n         Outposts bucket.</p>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>To create a <code>PutBucketReplication</code> request, you must have\n            <code>s3-outposts:PutReplicationConfiguration</code> permissions for the bucket. The\n         Outposts bucket owner has this permission by default and can grant it to others. For more\n         information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsIAM.html\">Setting up IAM with\n            S3 on Outposts</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsBucketPolicy.html\">Managing access to\n            S3 on Outposts buckets</a>. </p>\n         <note>\n            <p>To perform this operation, the user or role must also have the <code>iam:CreateRole</code> and <code>iam:PassRole</code> permissions. \n            For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">Granting a user\n               permissions to pass a role to an Amazon Web Services service</a>.</p>\n         </note>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketReplication.html#API_control_PutBucketReplication_Examples\">Examples</a> section.</p>\n         <p>The following operations are related to <code>PutBucketReplication</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketReplication.html\">GetBucketReplication</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketReplication.html\">DeleteBucketReplication</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This action creates an Amazon S3 on Outposts bucket's replication configuration. To create\n            an S3 bucket's replication configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html\">PutBucketReplication</a>\n            in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Creates a replication configuration or replaces an existing one. For information about\n         S3 replication on Outposts configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html\">Replicating objects for\n            S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <note>\n            <p>It can take a while to propagate <code>PUT</code> or <code>DELETE</code> requests for\n            a replication configuration to all S3 on Outposts systems. Therefore, the replication\n            configuration that's returned by a <code>GET</code> request soon after a\n               <code>PUT</code> or <code>DELETE</code> request might return a more recent result\n            than what's on the Outpost. If an Outpost is offline, the delay in updating the\n            replication configuration on that Outpost can be significant.</p>\n         </note>\n         <p>Specify the replication configuration in the request body. In the replication\n         configuration, you provide the following information:</p>\n         <ul>\n            <li>\n               <p>The name of the destination bucket or buckets where you want S3 on Outposts to\n               replicate objects</p>\n            </li>\n            <li>\n               <p>The Identity and Access Management (IAM) role that S3 on Outposts can assume to replicate objects on\n               your behalf</p>\n            </li>\n            <li>\n               <p>Other relevant information, such as replication rules</p>\n            </li>\n         </ul>\n         <p>A replication configuration must include at least one rule and can contain a maximum of\n         100. Each rule identifies a subset of objects to replicate by filtering the objects in the\n         source Outposts bucket. To choose additional subsets of objects to replicate, add a rule\n         for each subset.</p>\n         <p>To specify a subset of the objects in the source Outposts bucket to apply a replication\n         rule to, add the <code>Filter</code> element as a child of the <code>Rule</code> element.\n         You can filter objects based on an object key prefix, one or more object tags, or both.\n         When you add the <code>Filter</code> element in the configuration, you must also add the\n         following elements: <code>DeleteMarkerReplication</code>, <code>Status</code>, and\n            <code>Priority</code>.</p>\n         <p>Using <code>PutBucketReplication</code> on Outposts requires that both the source and\n         destination buckets must have versioning enabled. For information about enabling versioning\n         on a bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsManagingVersioning.html\">Managing S3 Versioning\n            for your S3 on Outposts bucket</a>.</p>\n         <p>For information about S3 on Outposts replication failure reasons, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/outposts-replication-eventbridge.html#outposts-replication-failure-codes\">Replication failure reasons</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>\n            <b>Handling Replication of Encrypted Objects</b>\n         </p>\n         <p>Outposts buckets are encrypted at all times. All the objects in the source Outposts\n         bucket are encrypted and can be replicated. Also, all the replicas in the destination\n         Outposts bucket are encrypted with the same encryption key as the objects in the source\n         Outposts bucket.</p>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>To create a <code>PutBucketReplication</code> request, you must have\n            <code>s3-outposts:PutReplicationConfiguration</code> permissions for the bucket. The\n         Outposts bucket owner has this permission by default and can grant it to others. For more\n         information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsIAM.html\">Setting up IAM with\n            S3 on Outposts</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsBucketPolicy.html\">Managing access to\n            S3 on Outposts buckets</a>. </p>\n         <note>\n            <p>To perform this operation, the user or role must also have the\n               <code>iam:CreateRole</code> and <code>iam:PassRole</code> permissions. For more\n            information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">Granting a user permissions to\n               pass a role to an Amazon Web Services service</a>.</p>\n         </note>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketReplication.html#API_control_PutBucketReplication_Examples\">Examples</a> section.</p>\n         <p>The following operations are related to <code>PutBucketReplication</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketReplication.html\">GetBucketReplication</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketReplication.html\">DeleteBucketReplication</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -13543,7 +13601,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This operation sets the versioning state\n            for\n            S3 on Outposts\n            buckets\n            only. To set the versioning state for an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketVersioning.html\">PutBucketVersioning</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Sets the versioning state for an S3 on Outposts bucket. With\n         S3\n         Versioning,\n         you can save multiple distinct copies of your\n         objects\n         and recover from unintended user actions and application failures.</p>\n         <p>You can set the versioning state to one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Enabled</b> - Enables versioning for the objects in\n               the bucket. All objects added to the bucket receive a unique version ID.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Suspended</b> - Suspends versioning for the objects\n               in the bucket. All objects added to the bucket receive the version ID\n                  <code>null</code>.</p>\n            </li>\n         </ul>\n         <p>If you've never set versioning on your bucket, it has no versioning state. In that case,\n         a <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html\">\n            GetBucketVersioning</a> request does not return a versioning state value.</p>\n         <p>When you enable S3 Versioning, for each object in your bucket, you have a current\n         version and zero or more noncurrent versions. You can configure your bucket S3 Lifecycle\n         rules to expire noncurrent versions after a specified time period. For more information,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsLifecycleManaging.html\"> Creating and managing\n            a lifecycle configuration for your S3 on Outposts bucket</a> in the <i>Amazon S3\n            User Guide</i>.</p>\n         <p>If you have an object expiration lifecycle configuration in your non-versioned bucket and you\n         want to maintain the same permanent delete behavior when you enable versioning, you must\n         add a noncurrent expiration policy. The noncurrent expiration lifecycle configuration will manage\n         the deletes of the noncurrent object versions in the version-enabled bucket. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html\">Versioning</a> in the <i>Amazon S3\n            User Guide</i>.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html#API_control_PutBucketVersioning_Examples\">Examples</a> section.</p>\n         <p>The following operations are related to <code>PutBucketVersioning</code> for\n         S3 on Outposts.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html\">GetBucketVersioning</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This operation sets the versioning state\n            for\n            S3 on Outposts\n            buckets\n            only. To set the versioning state for an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketVersioning.html\">PutBucketVersioning</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Sets the versioning state for an S3 on Outposts bucket. With\n         S3\n         Versioning,\n         you can save multiple distinct copies of your\n         objects\n         and recover from unintended user actions and application failures.</p>\n         <p>You can set the versioning state to one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Enabled</b> - Enables versioning for the objects in\n               the bucket. All objects added to the bucket receive a unique version ID.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Suspended</b> - Suspends versioning for the objects\n               in the bucket. All objects added to the bucket receive the version ID\n                  <code>null</code>.</p>\n            </li>\n         </ul>\n         <p>If you've never set versioning on your bucket, it has no versioning state. In that case,\n         a <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html\">\n            GetBucketVersioning</a> request does not return a versioning state value.</p>\n         <p>When you enable S3 Versioning, for each object in your bucket, you have a current\n         version and zero or more noncurrent versions. You can configure your bucket S3 Lifecycle\n         rules to expire noncurrent versions after a specified time period. For more information,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsLifecycleManaging.html\"> Creating and managing\n            a lifecycle configuration for your S3 on Outposts bucket</a> in the <i>Amazon S3\n            User Guide</i>.</p>\n         <p>If you have an object expiration lifecycle configuration in your non-versioned bucket\n         and you want to maintain the same permanent delete behavior when you enable versioning, you\n         must add a noncurrent expiration policy. The noncurrent expiration lifecycle configuration\n         will manage the deletes of the noncurrent object versions in the version-enabled bucket.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html\">Versioning</a> in the <i>Amazon S3\n            User Guide</i>.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html#API_control_PutBucketVersioning_Examples\">Examples</a> section.</p>\n         <p>The following operations are related to <code>PutBucketVersioning</code> for\n         S3 on Outposts.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html\">GetBucketVersioning</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -14160,7 +14218,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A container for one or more replication rules. A replication configuration must have at least one rule and you can add up to 100 rules. The maximum size of a\n         replication configuration is 128 KB.</p>"
+                "smithy.api#documentation": "<p>A container for one or more replication rules. A replication configuration must have at\n         least one rule and you can add up to 100 rules. The maximum size of a replication\n         configuration is 128 KB.</p>"
             }
         },
         "com.amazonaws.s3control#ReplicationRule": {
@@ -14176,7 +14234,7 @@
                     "target": "com.amazonaws.s3control#Priority",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The priority indicates which rule has precedence whenever two or more replication rules\n         conflict. S3 on Outposts attempts to replicate objects according to all replication rules.\n         However, if there are two or more rules with the same destination Outposts bucket, then objects will\n         be replicated according to the rule with the highest priority. The higher the number, the\n         higher the priority. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-between-outposts.html\">Creating replication rules on Outposts</a> in the\n            <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The priority indicates which rule has precedence whenever two or more replication rules\n         conflict. S3 on Outposts attempts to replicate objects according to all replication rules.\n         However, if there are two or more rules with the same destination Outposts bucket, then\n         objects will be replicated according to the rule with the highest priority. The higher the\n         number, the higher the priority. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-between-outposts.html\">Creating replication\n            rules on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "Prefix": {
@@ -14204,7 +14262,7 @@
                 "SourceSelectionCriteria": {
                     "target": "com.amazonaws.s3control#SourceSelectionCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container that describes additional filters for identifying the source Outposts objects that\n         you want to replicate. You can choose to enable or disable the replication of these\n         objects.</p>"
+                        "smithy.api#documentation": "<p>A container that describes additional filters for identifying the source Outposts\n         objects that you want to replicate. You can choose to enable or disable the replication of\n         these objects.</p>"
                     }
                 },
                 "ExistingObjectReplication": {
@@ -14216,14 +14274,14 @@
                 "Destination": {
                     "target": "com.amazonaws.s3control#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container for information about the replication destination and its configurations.</p>",
+                        "smithy.api#documentation": "<p>A container for information about the replication destination and its\n         configurations.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DeleteMarkerReplication": {
                     "target": "com.amazonaws.s3control#DeleteMarkerReplication",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether S3 on Outposts replicates delete markers. If you specify a\n            <code>Filter</code> element in your replication configuration, you must also include a\n            <code>DeleteMarkerReplication</code> element. If your <code>Filter</code> includes a\n            <code>Tag</code> element, the <code>DeleteMarkerReplication</code> element's\n            <code>Status</code> child element must be set to <code>Disabled</code>, because\n         S3 on Outposts doesn't support replicating delete markers for tag-based rules.</p>\n         <p>For more information about delete marker replication, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html#outposts-replication-what-is-replicated\">How delete operations affect replication</a> in the <i>Amazon S3 User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>Specifies whether S3 on Outposts replicates delete markers. If you specify a\n            <code>Filter</code> element in your replication configuration, you must also include a\n            <code>DeleteMarkerReplication</code> element. If your <code>Filter</code> includes a\n            <code>Tag</code> element, the <code>DeleteMarkerReplication</code> element's\n            <code>Status</code> child element must be set to <code>Disabled</code>, because\n         S3 on Outposts doesn't support replicating delete markers for tag-based rules.</p>\n         <p>For more information about delete marker replication, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html#outposts-replication-what-is-replicated\">How delete operations affect replication</a> in the\n            <i>Amazon S3 User Guide</i>. </p>"
                     }
                 },
                 "Bucket": {
@@ -14235,7 +14293,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies which S3 on Outposts objects to replicate and where to store the replicas.</p>"
+                "smithy.api#documentation": "<p>Specifies which S3 on Outposts objects to replicate and where to store the\n         replicas.</p>"
             }
         },
         "com.amazonaws.s3control#ReplicationRuleAndOperator": {
@@ -14806,7 +14864,7 @@
                 "ChecksumAlgorithm": {
                     "target": "com.amazonaws.s3control#S3ChecksumAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the algorithm\n         that\n         you want Amazon S3 to use to create the checksum. For more\n         information,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\"> Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Indicates the algorithm\n         that\n         you want Amazon S3 to use to create the checksum. For more\n         information,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\"> Checking object\n            integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 }
             },
@@ -15627,6 +15685,12 @@
                 }
             }
         },
+        "com.amazonaws.s3control#StorageClassList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#S3StorageClass"
+            }
+        },
         "com.amazonaws.s3control#StorageLensArn": {
             "type": "string",
             "traits": {
@@ -15769,21 +15833,21 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#StorageLensGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nContains the name of the Storage Lens group.\n</p>",
+                        "smithy.api#documentation": "<p> Contains the name of the Storage Lens group. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Filter": {
                     "target": "com.amazonaws.s3control#StorageLensGroupFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the criteria for the Storage Lens group data that is displayed. For multiple filter conditions, the <code>AND</code> or <code>OR</code>\n         logical operator is used.</p>",
+                        "smithy.api#documentation": "<p>Sets the criteria for the Storage Lens group data that is displayed. For multiple filter\n         conditions, the <code>AND</code> or <code>OR</code> logical operator is used.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "StorageLensGroupArn": {
                     "target": "com.amazonaws.s3control#StorageLensGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nContains the Amazon Resource Name (ARN) of the Storage Lens group. This property is read-only.\n</p>"
+                        "smithy.api#documentation": "<p> Contains the Amazon Resource Name (ARN) of the Storage Lens group. This property is\n         read-only. </p>"
                     }
                 }
             },
@@ -15797,36 +15861,36 @@
                 "MatchAnyPrefix": {
                     "target": "com.amazonaws.s3control#MatchAnyPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Contains a list of prefixes. At least one prefix must be specified. Up to 10 prefixes are allowed.\n</p>"
+                        "smithy.api#documentation": "<p> Contains a list of prefixes. At least one prefix must be specified. Up to 10 prefixes\n         are allowed. </p>"
                     }
                 },
                 "MatchAnySuffix": {
                     "target": "com.amazonaws.s3control#MatchAnySuffix",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Contains a list of suffixes. At least one suffix must be specified. Up to 10 suffixes are allowed.\n</p>"
+                        "smithy.api#documentation": "<p> Contains a list of suffixes. At least one suffix must be specified. Up to 10 suffixes\n         are allowed. </p>"
                     }
                 },
                 "MatchAnyTag": {
                     "target": "com.amazonaws.s3control#MatchAnyTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Contains the list of object tags. At least one object tag must be specified. Up to 10 object tags are allowed.\n</p>"
+                        "smithy.api#documentation": "<p> Contains the list of object tags. At least one object tag must be specified. Up to 10\n         object tags are allowed. </p>"
                     }
                 },
                 "MatchObjectAge": {
                     "target": "com.amazonaws.s3control#MatchObjectAge",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Contains <code>DaysGreaterThan</code> and <code>DaysLessThan</code> to define the object age range (minimum and maximum number of days).\n</p>"
+                        "smithy.api#documentation": "<p> Contains <code>DaysGreaterThan</code> and <code>DaysLessThan</code> to define the\n         object age range (minimum and maximum number of days). </p>"
                     }
                 },
                 "MatchObjectSize": {
                     "target": "com.amazonaws.s3control#MatchObjectSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Contains <code>BytesGreaterThan</code> and <code>BytesLessThan</code> to define the object size range (minimum and maximum number of Bytes).\n</p>"
+                        "smithy.api#documentation": "<p> Contains <code>BytesGreaterThan</code> and <code>BytesLessThan</code> to define the\n         object size range (minimum and maximum number of Bytes). </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nA logical operator that allows multiple filter conditions to be joined for more complex comparisons of Storage Lens group data.\n</p>"
+                "smithy.api#documentation": "<p> A logical operator that allows multiple filter conditions to be joined for more complex\n         comparisons of Storage Lens group data. </p>"
             }
         },
         "com.amazonaws.s3control#StorageLensGroupArn": {
@@ -15845,48 +15909,48 @@
                 "MatchAnyPrefix": {
                     "target": "com.amazonaws.s3control#MatchAnyPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Contains a list of prefixes. At least one prefix must be specified. Up to 10 prefixes are allowed.\n</p>"
+                        "smithy.api#documentation": "<p> Contains a list of prefixes. At least one prefix must be specified. Up to 10 prefixes\n         are allowed. </p>"
                     }
                 },
                 "MatchAnySuffix": {
                     "target": "com.amazonaws.s3control#MatchAnySuffix",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Contains a list of suffixes. At least one suffix must be specified. Up to 10 suffixes are allowed.\n</p>"
+                        "smithy.api#documentation": "<p> Contains a list of suffixes. At least one suffix must be specified. Up to 10 suffixes\n         are allowed. </p>"
                     }
                 },
                 "MatchAnyTag": {
                     "target": "com.amazonaws.s3control#MatchAnyTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Contains the list of S3 object tags. At least one object tag must be specified. Up to 10 object tags are allowed.\n</p>"
+                        "smithy.api#documentation": "<p> Contains the list of S3 object tags. At least one object tag must be specified. Up to\n         10 object tags are allowed. </p>"
                     }
                 },
                 "MatchObjectAge": {
                     "target": "com.amazonaws.s3control#MatchObjectAge",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Contains <code>DaysGreaterThan</code> and <code>DaysLessThan</code> to define the object age range (minimum and maximum number of days).\n</p>"
+                        "smithy.api#documentation": "<p> Contains <code>DaysGreaterThan</code> and <code>DaysLessThan</code> to define the\n         object age range (minimum and maximum number of days). </p>"
                     }
                 },
                 "MatchObjectSize": {
                     "target": "com.amazonaws.s3control#MatchObjectSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Contains <code>BytesGreaterThan</code> and <code>BytesLessThan</code> to define the object size range (minimum and maximum number of Bytes).\n</p>"
+                        "smithy.api#documentation": "<p> Contains <code>BytesGreaterThan</code> and <code>BytesLessThan</code> to define the\n         object size range (minimum and maximum number of Bytes). </p>"
                     }
                 },
                 "And": {
                     "target": "com.amazonaws.s3control#StorageLensGroupAndOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>A logical operator that allows multiple filter conditions to be joined for more complex\n         comparisons of Storage Lens group data. Objects must match all of the listed filter\n         conditions that are joined by the <code>And</code> logical operator. Only one of each filter condition\n         is allowed.</p>"
+                        "smithy.api#documentation": "<p>A logical operator that allows multiple filter conditions to be joined for more complex\n         comparisons of Storage Lens group data. Objects must match all of the listed filter\n         conditions that are joined by the <code>And</code> logical operator. Only one of each\n         filter condition is allowed.</p>"
                     }
                 },
                 "Or": {
                     "target": "com.amazonaws.s3control#StorageLensGroupOrOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>A single logical operator that allows multiple filter conditions to be joined. Objects\n         can match any of the listed filter conditions, which are joined by the <code>Or</code> logical operator.\n         Only one of each filter condition is allowed. </p>"
+                        "smithy.api#documentation": "<p>A single logical operator that allows multiple filter conditions to be joined. Objects\n         can match any of the listed filter conditions, which are joined by the <code>Or</code>\n         logical operator. Only one of each filter condition is allowed. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The filter element sets the criteria for the Storage Lens group data that is displayed. For multiple filter conditions, the <code>AND</code> or <code>OR</code>\n      logical operator is used.</p>"
+                "smithy.api#documentation": "<p>The filter element sets the criteria for the Storage Lens group data that is displayed.\n         For multiple filter conditions, the <code>AND</code> or <code>OR</code> logical operator is\n         used.</p>"
             }
         },
         "com.amazonaws.s3control#StorageLensGroupLevel": {
@@ -15895,12 +15959,12 @@
                 "SelectionCriteria": {
                     "target": "com.amazonaws.s3control#StorageLensGroupLevelSelectionCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Indicates which Storage Lens group ARNs to include or exclude in the Storage Lens group aggregation. If this value is left null, then all Storage Lens groups are selected.\n</p>"
+                        "smithy.api#documentation": "<p> Indicates which Storage Lens group ARNs to include or exclude in the Storage Lens group\n         aggregation. If this value is left null, then all Storage Lens groups are selected. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nSpecifies the Storage Lens groups to include in the Storage Lens group aggregation.\n</p>"
+                "smithy.api#documentation": "<p> Specifies the Storage Lens groups to include in the Storage Lens group aggregation.\n      </p>"
             }
         },
         "com.amazonaws.s3control#StorageLensGroupLevelExclude": {
@@ -15927,7 +15991,7 @@
                 "Include": {
                     "target": "com.amazonaws.s3control#StorageLensGroupLevelInclude",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nIndicates which Storage Lens group ARNs to include in the Storage Lens group aggregation.\n</p>"
+                        "smithy.api#documentation": "<p> Indicates which Storage Lens group ARNs to include in the Storage Lens group\n         aggregation. </p>"
                     }
                 },
                 "Exclude": {
@@ -15972,30 +16036,30 @@
                 "MatchAnySuffix": {
                     "target": "com.amazonaws.s3control#MatchAnySuffix",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nFilters objects that match any of the specified suffixes.\n</p>"
+                        "smithy.api#documentation": "<p> Filters objects that match any of the specified suffixes. </p>"
                     }
                 },
                 "MatchAnyTag": {
                     "target": "com.amazonaws.s3control#MatchAnyTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nFilters objects that match any of the specified S3 object tags.\n</p>"
+                        "smithy.api#documentation": "<p> Filters objects that match any of the specified S3 object tags. </p>"
                     }
                 },
                 "MatchObjectAge": {
                     "target": "com.amazonaws.s3control#MatchObjectAge",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nFilters objects that match the specified object age range.\n</p>"
+                        "smithy.api#documentation": "<p> Filters objects that match the specified object age range. </p>"
                     }
                 },
                 "MatchObjectSize": {
                     "target": "com.amazonaws.s3control#MatchObjectSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nFilters objects that match the specified object size range.\n</p>"
+                        "smithy.api#documentation": "<p> Filters objects that match the specified object size range. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A container element for specifying <code>Or</code> rule conditions. The rule conditions\n         determine the subset of objects to which the <code>Or</code> rule applies. Objects can\n         match any of the listed filter conditions, which are joined by the <code>Or</code> logical operator.\n         Only one of each filter condition is allowed.</p>"
+                "smithy.api#documentation": "<p>A container element for specifying <code>Or</code> rule conditions. The rule conditions\n         determine the subset of objects to which the <code>Or</code> rule applies. Objects can\n         match any of the listed filter conditions, which are joined by the <code>Or</code> logical\n         operator. Only one of each filter condition is allowed.</p>"
             }
         },
         "com.amazonaws.s3control#StorageLensPrefixLevelDelimiter": {
@@ -16066,7 +16130,7 @@
                 "target": "com.amazonaws.s3control#SubmitMultiRegionAccessPointRoutesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Submits an updated route configuration for a Multi-Region Access Point. This API operation updates the\n         routing status for the specified Regions from active to passive, or from passive to active.\n         A value of <code>0</code> indicates a passive status, which means that traffic won't be\n         routed to the specified Region. A value of <code>100</code> indicates an active status,\n         which means that traffic will be routed to the specified Region. At least one Region must be active at all times.</p>\n         <p>When the routing configuration is changed, any in-progress operations (uploads, copies,\n         deletes, and so on) to formerly active Regions will continue to run to their final\n         completion state (success or failure). The routing configurations of any Regions that\n         aren’t specified remain unchanged.</p>\n         <note>\n            <p>Updated routing configurations might not be immediately applied. It can take up to 2\n            minutes for your changes to take effect.</p>\n         </note>\n         <p>To submit routing control changes and failover requests, use the Amazon S3 failover control\n         infrastructure endpoints in these five Amazon Web Services Regions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>us-east-1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>us-west-2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ap-southeast-2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ap-northeast-1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eu-west-1</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Your Amazon S3 bucket does not need to be in these five Regions.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Submits an updated route configuration for a Multi-Region Access Point. This API operation updates the\n         routing status for the specified Regions from active to passive, or from passive to active.\n         A value of <code>0</code> indicates a passive status, which means that traffic won't be\n         routed to the specified Region. A value of <code>100</code> indicates an active status,\n         which means that traffic will be routed to the specified Region. At least one Region must\n         be active at all times.</p>\n         <p>When the routing configuration is changed, any in-progress operations (uploads, copies,\n         deletes, and so on) to formerly active Regions will continue to run to their final\n         completion state (success or failure). The routing configurations of any Regions that\n         aren’t specified remain unchanged.</p>\n         <note>\n            <p>Updated routing configurations might not be immediately applied. It can take up to 2\n            minutes for your changes to take effect.</p>\n         </note>\n         <p>To submit routing control changes and failover requests, use the Amazon S3 failover control\n         infrastructure endpoints in these five Amazon Web Services Regions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>us-east-1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>us-west-2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ap-southeast-2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ap-northeast-1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eu-west-1</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Your Amazon S3 bucket does not need to be in these five Regions.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -16146,20 +16210,20 @@
                 "Key": {
                     "target": "com.amazonaws.s3control#TagKeyString",
                     "traits": {
-                        "smithy.api#documentation": "<p> The tag key for your Amazon Web Services resource. A tag key can be up to 128 Unicode characters in\n         length and is case-sensitive. System created tags that begin with <code>aws:</code> aren’t supported.\n      </p>",
+                        "smithy.api#documentation": "<p> The tag key for your Amazon Web Services resource. A tag key can be up to 128 Unicode characters in\n         length and is case-sensitive. System created tags that begin with <code>aws:</code> aren’t\n         supported. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.s3control#TagValueString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The tag value for your Amazon Web Services resource. A tag value can be up to 256 Unicode characters in length and is case-sensitive.\n</p>",
+                        "smithy.api#documentation": "<p> The tag value for your Amazon Web Services resource. A tag value can be up to 256 Unicode characters\n         in length and is case-sensitive. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   An Amazon Web Services resource tag that's associated with your S3 resource. You can add tags to new objects when you upload them, or you can add object tags to existing objects. \n</p>\n         <note>\n            <p>This data type is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens groups</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p> An Amazon Web Services resource tag that's associated with your S3 resource. You can add tags to new\n         objects when you upload them, or you can add object tags to existing objects. </p>\n         <note>\n            <p>This data type is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens\n               groups</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.s3control#TagKeyList": {
@@ -16208,7 +16272,7 @@
                 "target": "com.amazonaws.s3control#TagResourceResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p> Creates a new Amazon Web Services resource tag or updates an existing resource tag. You can add up to\n         50 Amazon Web Services resource tags for each S3 resource. </p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:TagResource</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3 Tagging error codes</a>.</p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens groups</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Creates a new Amazon Web Services resource tag or updates an existing resource tag. You can add up to\n         50 Amazon Web Services resource tags for each S3 resource. </p>\n         <p>To use this operation, you must have the permission to perform the\n            <code>s3:TagResource</code> action. For more information about the required Storage Lens\n         Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3\n            Tagging error codes</a>.</p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens\n               groups</a>.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -16230,7 +16294,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID that created the S3 resource that you're trying to add tags to. \n</p>",
+                        "smithy.api#documentation": "<p> The Amazon Web Services account ID that created the S3 resource that you're trying to add tags to.\n      </p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -16242,7 +16306,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.s3control#S3ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Resource Name (ARN) of the S3 resource that you're trying to add tags to.\n</p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the S3 resource that you're trying to add tags to.\n      </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -16250,7 +16314,7 @@
                 "Tags": {
                     "target": "com.amazonaws.s3control#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Web Services resource tags that you want to add to the specified S3 resource.\n</p>",
+                        "smithy.api#documentation": "<p> The Amazon Web Services resource tags that you want to add to the specified S3 resource. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -16429,7 +16493,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID that owns the resource that you're trying to remove the tags from.\n</p>",
+                        "smithy.api#documentation": "<p> The Amazon Web Services account ID that owns the resource that you're trying to remove the tags from.\n      </p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -16441,7 +16505,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.s3control#S3ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Resource Name (ARN) of the S3 resource that you want to remove the resource tags from.\n</p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the S3 resource that you want to remove the resource\n         tags from. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -16449,7 +16513,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.s3control#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe tag key pair of the S3 resource tag that you're trying to remove.\n</p>",
+                        "smithy.api#documentation": "<p> The tag key pair of the S3 resource tag that you're trying to remove. </p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -16685,7 +16749,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nUpdates the existing Storage Lens group.</p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:UpdateStorageLensGroup</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n      Lens error codes</a>.</p>",
+                "smithy.api#documentation": "<p> Updates the existing Storage Lens group.</p>\n         <p>To use this operation, you must have the permission to perform the\n            <code>s3:UpdateStorageLensGroup</code> action. For more information about the required\n         Storage Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n            Lens error codes</a>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -16707,7 +16771,7 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#StorageLensGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the Storage Lens group that you want to update.\n</p>",
+                        "smithy.api#documentation": "<p> The name of the Storage Lens group that you want to update. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -16715,7 +16779,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID of the Storage Lens group owner.\n</p>",
+                        "smithy.api#documentation": "<p> The Amazon Web Services account ID of the Storage Lens group owner. </p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -16727,7 +16791,7 @@
                 "StorageLensGroup": {
                     "target": "com.amazonaws.s3control#StorageLensGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe JSON file that contains the Storage Lens group configuration.\n</p>",
+                        "smithy.api#documentation": "<p> The JSON file that contains the Storage Lens group configuration. </p>",
                         "smithy.api#required": {}
                     }
                 }
