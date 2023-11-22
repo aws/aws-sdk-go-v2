@@ -18,6 +18,7 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
+	smithyrequestcompression "github.com/aws/smithy-go/private/requestcompression"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net"
 	"net/http"
@@ -217,15 +218,17 @@ func setResolvedDefaultsMode(o *Options) {
 // NewFromConfig returns a new client from the provided config.
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	opts := Options{
-		Region:             cfg.Region,
-		DefaultsMode:       cfg.DefaultsMode,
-		RuntimeEnvironment: cfg.RuntimeEnvironment,
-		HTTPClient:         cfg.HTTPClient,
-		Credentials:        cfg.Credentials,
-		APIOptions:         cfg.APIOptions,
-		Logger:             cfg.Logger,
-		ClientLogMode:      cfg.ClientLogMode,
-		AppID:              cfg.AppID,
+		Region:                      cfg.Region,
+		DefaultsMode:                cfg.DefaultsMode,
+		RuntimeEnvironment:          cfg.RuntimeEnvironment,
+		HTTPClient:                  cfg.HTTPClient,
+		Credentials:                 cfg.Credentials,
+		APIOptions:                  cfg.APIOptions,
+		Logger:                      cfg.Logger,
+		ClientLogMode:               cfg.ClientLogMode,
+		AppID:                       cfg.AppID,
+		DisableRequestCompression:   cfg.DisableRequestCompression,
+		RequestMinCompressSizeBytes: cfg.RequestMinCompressSizeBytes,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
@@ -406,6 +409,11 @@ func resolveUseFIPSEndpoint(cfg aws.Config, o *Options) error {
 		o.EndpointOptions.UseFIPSEndpoint = value
 	}
 	return nil
+}
+
+func addRequestCompression(stack *middleware.Stack, options Options) error {
+	return smithyrequestcompression.AddRequestCompression(stack, options.DisableRequestCompression, options.RequestMinCompressSizeBytes,
+		"gzip")
 }
 
 func addRequestIDRetrieverMiddleware(stack *middleware.Stack) error {

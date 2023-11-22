@@ -36,6 +36,9 @@ type Options struct {
 	// clients initial default settings.
 	DefaultsMode aws.DefaultsMode
 
+	// Whether to disable automatic request compression for supported operations.
+	DisableRequestCompression bool
+
 	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions EndpointResolverOptions
 
@@ -57,6 +60,10 @@ type Options struct {
 
 	// The region to send requests to. (Required)
 	Region string
+
+	// Inclusive threshold request body size to trigger compression, default to 10240
+	// and must be within 0 and 10485760 bytes inclusively
+	RequestMinCompressSizeBytes int64
 
 	// RetryMaxAttempts specifies the maximum number attempts an API client will call
 	// an operation that fails with a retryable error. A value of 0 is ignored, and

@@ -62,14 +62,6 @@ func TestClient_PutWithContentEncoding_awsEc2querySerialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "SDKAppliedContentEncoding_ec2Query" {
-				t.Skip("disabled test aws.protocoltests.ec2#AwsEc2 aws.protocoltests.ec2#PutWithContentEncoding")
-			}
-
-			if name == "SDKAppendsGzipAndIgnoresHttpProvidedEncoding_ec2Query" {
-				t.Skip("disabled test aws.protocoltests.ec2#AwsEc2 aws.protocoltests.ec2#PutWithContentEncoding")
-			}
-
 			actualReq := &http.Request{}
 			serverURL := "http://localhost:8888/"
 			if c.Host != nil {

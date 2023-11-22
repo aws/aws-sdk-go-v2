@@ -74,6 +74,9 @@ const (
 
 	awsIgnoreConfiguredEndpoints = "AWS_IGNORE_CONFIGURED_ENDPOINT_URLS"
 	awsEndpointURL               = "AWS_ENDPOINT_URL"
+
+	awsDisableRequestCompression      = "AWS_DISABLE_REQUEST_COMPRESSION"
+	awsRequestMinCompressionSizeBytes = "AWS_REQUEST_MIN_COMPRESSION_SIZE_BYTES"
 )
 
 var (
@@ -268,6 +271,15 @@ type EnvConfig struct {
 	// Value to contain configured endpoints to be propagated to
 	// corresponding endpoint resolution field.
 	BaseEndpoint string
+
+	// determine if request compression is allowed, default to false
+	// retrieved from env var AWS_DISABLE_REQUEST_COMPRESSION
+	DisableRequestCompression *bool
+
+	// inclusive threshold request body size to trigger compression,
+	// default to 10240 and must be within 0 and 10485760 bytes inclusive
+	// retrieved from env var AWS_REQUEST_MIN_COMPRESSION_SIZE_BYTES
+	RequestMinCompressSizeBytes *int64
 }
 
 // loadEnvConfig reads configuration values from the OS's environment variables.
@@ -309,6 +321,13 @@ func NewEnvConfig() (EnvConfig, error) {
 	cfg.RoleSessionName = os.Getenv(awsRoleSessionNameEnvVar)
 
 	cfg.AppID = os.Getenv(awsSdkAppID)
+
+	if err := setBoolPtrFromEnvVal(&cfg.DisableRequestCompression, []string{awsDisableRequestCompression}); err != nil {
+		return cfg, err
+	}
+	if err := setRequestMinCompressSizeBytes(&cfg.RequestMinCompressSizeBytes); err != nil {
+		return cfg, err
+	}
 
 	if err := setEndpointDiscoveryTypeFromEnvVal(&cfg.EnableEndpointDiscovery, []string{awsEnableEndpointDiscoveryEnvVar}); err != nil {
 		return cfg, err
@@ -368,6 +387,41 @@ func (c EnvConfig) getDefaultsMode(ctx context.Context) (aws.DefaultsMode, bool,
 
 func (c EnvConfig) getAppID(context.Context) (string, bool, error) {
 	return c.AppID, len(c.AppID) > 0, nil
+}
+
+func setRequestMinCompressSizeBytes(bytes **int64) error {
+	b := os.Getenv(awsRequestMinCompressionSizeBytes)
+	if b == "" {
+		return nil
+	}
+
+	byte, err := strconv.ParseInt(b, 10, 64)
+	if err != nil {
+		return fmt.Errorf("invalid value for env var, %s=%s, need int64",
+			awsRequestMinCompressionSizeBytes, b)
+	} else if byte < 0 || byte > 10485760 {
+		return fmt.Errorf("invalid range for env var min request compression size bytes %q, must be within 0 and 10485760 inclusively", byte)
+	}
+	if *bytes == nil {
+		*bytes = new(int64)
+	}
+	**bytes = byte
+
+	return nil
+}
+
+func (c EnvConfig) getDisableRequestCompression(context.Context) (bool, bool, error) {
+	if c.DisableRequestCompression == nil {
+		return false, false, nil
+	}
+	return *c.DisableRequestCompression, true, nil
+}
+
+func (c EnvConfig) getRequestMinCompressSizeBytes(context.Context) (int64, bool, error) {
+	if c.RequestMinCompressSizeBytes == nil {
+		return 0, false, nil
+	}
+	return *c.RequestMinCompressSizeBytes, true, nil
 }
 
 // GetRetryMaxAttempts returns the value of AWS_MAX_ATTEMPTS if was specified,

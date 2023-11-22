@@ -62,14 +62,6 @@ func TestClient_PutWithContentEncoding_awsRestjson1Serialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "SDKAppliedContentEncoding_restJson1" {
-				t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#PutWithContentEncoding")
-			}
-
-			if name == "SDKAppendedGzipAfterProvidedEncoding_restJson1" {
-				t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#PutWithContentEncoding")
-			}
-
 			actualReq := &http.Request{}
 			serverURL := "http://localhost:8888/"
 			if c.Host != nil {
