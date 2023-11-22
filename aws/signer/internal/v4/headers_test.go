@@ -15,6 +15,10 @@ func TestAllowedQueryHoisting(t *testing.T) {
 			Header:      "X-Amz-Meta-SomeName",
 			ExpectHoist: false,
 		},
+		"s3 object integrity check": {
+			Header:      "X-Amz-Checksum-Sha256",
+			ExpectHoist: false,
+		},
 		"another header": {
 			Header:      "X-Amz-SomeOtherHeader",
 			ExpectHoist: true,

@@ -61,6 +61,7 @@ var RequiredSignedHeaders = Rules{
 	},
 	Patterns{"X-Amz-Object-Lock-"},
 	Patterns{"X-Amz-Meta-"},
+	Patterns{"X-Amz-Checksum-"},
 }
 
 // AllowedQueryHoisting is a allowed list for Build query headers. The boolean value
