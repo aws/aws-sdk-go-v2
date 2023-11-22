@@ -21650,6 +21650,18 @@ func awsAwsjson11_serializeDocumentMetricsSource(v *types.MetricsSource, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentModelAccessConfig(v *types.ModelAccessConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AcceptEula != nil {
+		ok := object.Key("AcceptEula")
+		ok.Boolean(*v.AcceptEula)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentModelBiasAppSpecification(v *types.ModelBiasAppSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -24779,6 +24791,13 @@ func awsAwsjson11_serializeDocumentS3ModelDataSource(v *types.S3ModelDataSource,
 	if len(v.CompressionType) > 0 {
 		ok := object.Key("CompressionType")
 		ok.String(string(v.CompressionType))
+	}
+
+	if v.ModelAccessConfig != nil {
+		ok := object.Key("ModelAccessConfig")
+		if err := awsAwsjson11_serializeDocumentModelAccessConfig(v.ModelAccessConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.S3DataType) > 0 {

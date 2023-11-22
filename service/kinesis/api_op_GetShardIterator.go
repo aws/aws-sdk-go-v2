@@ -15,15 +15,16 @@ import (
 )
 
 // Gets an Amazon Kinesis shard iterator. A shard iterator expires 5 minutes after
-// it is returned to the requester. When invoking this API, it is recommended you
-// use the StreamARN input parameter rather than the StreamName input parameter. A
-// shard iterator specifies the shard position from which to start reading data
-// records sequentially. The position is specified using the sequence number of a
-// data record in a shard. A sequence number is the identifier associated with
-// every record ingested in the stream, and is assigned when a record is put into
-// the stream. Each stream has one or more shards. You must specify the shard
-// iterator type. For example, you can set the ShardIteratorType parameter to read
-// exactly from the position denoted by a specific sequence number by using the
+// it is returned to the requester. When invoking this API, you must use either the
+// StreamARN or the StreamName parameter, or both. It is recommended that you use
+// the StreamARN input parameter when you invoke this API. A shard iterator
+// specifies the shard position from which to start reading data records
+// sequentially. The position is specified using the sequence number of a data
+// record in a shard. A sequence number is the identifier associated with every
+// record ingested in the stream, and is assigned when a record is put into the
+// stream. Each stream has one or more shards. You must specify the shard iterator
+// type. For example, you can set the ShardIteratorType parameter to read exactly
+// from the position denoted by a specific sequence number by using the
 // AT_SEQUENCE_NUMBER shard iterator type. Alternatively, the parameter can read
 // right after the sequence number by using the AFTER_SEQUENCE_NUMBER shard
 // iterator type, using sequence numbers returned by earlier calls to PutRecord ,

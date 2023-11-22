@@ -649,21 +649,38 @@ func (*JobManifestGeneratorMemberS3JobManifestGenerator) isJobManifestGenerator(
 // The filter used to describe a set of objects for the job's manifest.
 type JobManifestGeneratorFilter struct {
 
-	// If provided, the generated manifest should include only source bucket objects
-	// that were created after this time.
+	// If provided, the generated manifest includes only source bucket objects that
+	// were created after this time.
 	CreatedAfter *time.Time
 
-	// If provided, the generated manifest should include only source bucket objects
-	// that were created before this time.
+	// If provided, the generated manifest includes only source bucket objects that
+	// were created before this time.
 	CreatedBefore *time.Time
 
 	// Include objects in the generated manifest only if they are eligible for
 	// replication according to the Replication configuration on the source bucket.
 	EligibleForReplication *bool
 
-	// If provided, the generated manifest should include only source bucket objects
-	// that have one of the specified Replication statuses.
+	// If provided, the generated manifest includes only source bucket objects whose
+	// object keys match the string constraints specified for MatchAnyPrefix ,
+	// MatchAnySuffix , and MatchAnySubstring .
+	KeyNameConstraint *KeyNameConstraint
+
+	// If provided, the generated manifest includes only source bucket objects that
+	// are stored with the specified storage class.
+	MatchAnyStorageClass []S3StorageClass
+
+	// If provided, the generated manifest includes only source bucket objects that
+	// have one of the specified Replication statuses.
 	ObjectReplicationStatuses []ReplicationStatus
+
+	// If provided, the generated manifest includes only source bucket objects whose
+	// file size is greater than the specified number of bytes.
+	ObjectSizeGreaterThanBytes *int64
+
+	// If provided, the generated manifest includes only source bucket objects whose
+	// file size is less than the specified number of bytes.
+	ObjectSizeLessThanBytes *int64
 
 	noSmithyDocumentSerde
 }
@@ -808,6 +825,26 @@ type JobTimers struct {
 
 	// Indicates the elapsed time in seconds the job has been in the Active job state.
 	ElapsedTimeInActiveSeconds *int64
+
+	noSmithyDocumentSerde
+}
+
+// If provided, the generated manifest includes only source bucket objects whose
+// object keys match the string constraints specified for MatchAnyPrefix ,
+// MatchAnySuffix , and MatchAnySubstring .
+type KeyNameConstraint struct {
+
+	// If provided, the generated manifest includes objects where the specified string
+	// appears at the start of the object key string.
+	MatchAnyPrefix []string
+
+	// If provided, the generated manifest includes objects where the specified string
+	// appears anywhere within the object key string.
+	MatchAnySubstring []string
+
+	// If provided, the generated manifest includes objects where the specified string
+	// appears at the end of the object key string.
+	MatchAnySuffix []string
 
 	noSmithyDocumentSerde
 }

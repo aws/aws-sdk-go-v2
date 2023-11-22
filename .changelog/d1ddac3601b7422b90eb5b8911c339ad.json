@@ -1,0 +1,8 @@
+{
+    "id": "d1ddac36-01b7-422b-90eb-5b8911c339ad",
+    "type": "feature",
+    "description": "This feature adds the end user license agreement status as a model access configuration parameter.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

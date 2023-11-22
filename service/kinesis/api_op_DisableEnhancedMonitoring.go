@@ -13,8 +13,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables enhanced monitoring. When invoking this API, it is recommended you use
-// the StreamARN input parameter rather than the StreamName input parameter.
+// Disables enhanced monitoring. When invoking this API, you must use either the
+// StreamARN or the StreamName parameter, or both. It is recommended that you use
+// the StreamARN input parameter when you invoke this API.
 func (c *Client) DisableEnhancedMonitoring(ctx context.Context, params *DisableEnhancedMonitoringInput, optFns ...func(*Options)) (*DisableEnhancedMonitoringOutput, error) {
 	if params == nil {
 		params = &DisableEnhancedMonitoringInput{}

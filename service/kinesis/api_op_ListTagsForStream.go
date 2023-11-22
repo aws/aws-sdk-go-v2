@@ -14,9 +14,9 @@ import (
 )
 
 // Lists the tags for the specified Kinesis data stream. This operation has a
-// limit of five transactions per second per account. When invoking this API, it is
-// recommended you use the StreamARN input parameter rather than the StreamName
-// input parameter.
+// limit of five transactions per second per account. When invoking this API, you
+// must use either the StreamARN or the StreamName parameter, or both. It is
+// recommended that you use the StreamARN input parameter when you invoke this API.
 func (c *Client) ListTagsForStream(ctx context.Context, params *ListTagsForStreamInput, optFns ...func(*Options)) (*ListTagsForStreamOutput, error) {
 	if params == nil {
 		params = &ListTagsForStreamInput{}

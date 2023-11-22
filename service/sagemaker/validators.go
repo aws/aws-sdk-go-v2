@@ -8847,6 +8847,21 @@ func validateMetricsSource(v *types.MetricsSource) error {
 	}
 }
 
+func validateModelAccessConfig(v *types.ModelAccessConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelAccessConfig"}
+	if v.AcceptEula == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcceptEula"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateModelBiasAppSpecification(v *types.ModelBiasAppSpecification) error {
 	if v == nil {
 		return nil
@@ -10570,6 +10585,11 @@ func validateS3ModelDataSource(v *types.S3ModelDataSource) error {
 	}
 	if len(v.CompressionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("CompressionType"))
+	}
+	if v.ModelAccessConfig != nil {
+		if err := validateModelAccessConfig(v.ModelAccessConfig); err != nil {
+			invalidParams.AddNested("ModelAccessConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

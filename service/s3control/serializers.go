@@ -6717,6 +6717,32 @@ func awsRestxml_serializeDocumentJobManifestGeneratorFilter(v *types.JobManifest
 		el := value.MemberElement(root)
 		el.Boolean(*v.EligibleForReplication)
 	}
+	if v.KeyNameConstraint != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "KeyNameConstraint",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentKeyNameConstraint(v.KeyNameConstraint, el); err != nil {
+			return err
+		}
+	}
+	if v.MatchAnyStorageClass != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "MatchAnyStorageClass",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentStorageClassList(v.MatchAnyStorageClass, el); err != nil {
+			return err
+		}
+	}
 	if v.ObjectReplicationStatuses != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -6729,6 +6755,28 @@ func awsRestxml_serializeDocumentJobManifestGeneratorFilter(v *types.JobManifest
 		if err := awsRestxml_serializeDocumentReplicationStatusFilterList(v.ObjectReplicationStatuses, el); err != nil {
 			return err
 		}
+	}
+	if v.ObjectSizeGreaterThanBytes != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ObjectSizeGreaterThanBytes",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Long(*v.ObjectSizeGreaterThanBytes)
+	}
+	if v.ObjectSizeLessThanBytes != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ObjectSizeLessThanBytes",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Long(*v.ObjectSizeLessThanBytes)
 	}
 	return nil
 }
@@ -6978,6 +7026,50 @@ func awsRestxml_serializeDocumentJobReport(v *types.JobReport, value smithyxml.V
 		}
 		el := value.MemberElement(root)
 		el.String(string(v.ReportScope))
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentKeyNameConstraint(v *types.KeyNameConstraint, value smithyxml.Value) error {
+	defer value.Close()
+	if v.MatchAnyPrefix != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "MatchAnyPrefix",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentNonEmptyMaxLength1024StringList(v.MatchAnyPrefix, el); err != nil {
+			return err
+		}
+	}
+	if v.MatchAnySubstring != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "MatchAnySubstring",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentNonEmptyMaxLength1024StringList(v.MatchAnySubstring, el); err != nil {
+			return err
+		}
+	}
+	if v.MatchAnySuffix != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "MatchAnySuffix",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentNonEmptyMaxLength1024StringList(v.MatchAnySuffix, el); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -7551,6 +7643,19 @@ func awsRestxml_serializeDocumentNoncurrentVersionTransitionList(v []types.Noncu
 		if err := awsRestxml_serializeDocumentNoncurrentVersionTransition(&v[i], am); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentNonEmptyMaxLength1024StringList(v []string, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	array = value.Array()
+	for i := range v {
+		am := array.Member()
+		am.String(v[i])
 	}
 	return nil
 }
@@ -9334,6 +9439,19 @@ func awsRestxml_serializeDocumentSSES3(v *types.SSES3, value smithyxml.Value) er
 
 func awsRestxml_serializeDocumentSSES3Encryption(v *types.SSES3Encryption, value smithyxml.Value) error {
 	defer value.Close()
+	return nil
+}
+
+func awsRestxml_serializeDocumentStorageClassList(v []types.S3StorageClass, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	array = value.Array()
+	for i := range v {
+		am := array.Member()
+		am.String(string(v[i]))
+	}
 	return nil
 }
 

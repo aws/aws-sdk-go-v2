@@ -101,8 +101,8 @@ type DescribeDomainOutput struct {
 	// apps and the RStudioServerPro app.
 	SecurityGroupIdForDomainBoundary *string
 
-	// The ARN of the associated Amazon Web Services Single Sign-On application for
-	// this Domain.
+	// The ARN of the application managed by SageMaker in IAM Identity Center. This
+	// value is only returned for domains created after September 19, 2023.
 	SingleSignOnApplicationArn *string
 
 	// The IAM Identity Center managed application instance ID.

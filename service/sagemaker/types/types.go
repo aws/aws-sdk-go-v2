@@ -7953,6 +7953,24 @@ type Model struct {
 	noSmithyDocumentSerde
 }
 
+// The access configuration file for the ML model. You can explicitly accept the
+// model end-user license agreement (EULA) within the ModelAccessConfig . For more
+// information, see End-user license agreements (https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula)
+// .
+type ModelAccessConfig struct {
+
+	// Specifies agreement to the model end-user license agreement (EULA). The
+	// AcceptEula value must be explicitly defined as True in order to accept the EULA
+	// that this model requires. You are responsible for reviewing and complying with
+	// any applicable license terms and making sure they are acceptable for your use
+	// case before downloading or using a model.
+	//
+	// This member is required.
+	AcceptEula *bool
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about the location that is configured for storing model
 // artifacts. Model artifacts are the output that results from training a model,
 // and typically consist of trained parameters, a model definition that describes
@@ -12687,6 +12705,13 @@ type S3ModelDataSource struct {
 	// This member is required.
 	S3Uri *string
 
+	// Specifies the access configuration file for the ML model. You can explicitly
+	// accept the model end-user license agreement (EULA) within the ModelAccessConfig
+	// . You are responsible for reviewing and complying with any applicable license
+	// terms and making sure they are acceptable for your use case before downloading
+	// or using a model.
+	ModelAccessConfig *ModelAccessConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -13283,7 +13308,8 @@ type Stairs struct {
 // maximum runtime is sufficient for the training job to complete.
 type StoppingCondition struct {
 
-	// The maximum pending time in seconds.
+	// The maximum length of time, in seconds, that a training or compilation job can
+	// be pending before it is stopped.
 	MaxPendingTimeInSeconds *int32
 
 	// The maximum length of time, in seconds, that a training or compilation job can

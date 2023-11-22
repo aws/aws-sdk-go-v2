@@ -1,0 +1,8 @@
+{
+    "id": "a0225ddc-c20d-4d8c-b1cb-4dfd7510d3c6",
+    "type": "feature",
+    "description": "This release adds support for resource based policies on streams and consumers.",
+    "modules": [
+        "service/kinesis"
+    ]
+}

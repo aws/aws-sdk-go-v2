@@ -21,12 +21,12 @@ import (
 // range of 382...454, then you could merge these two shards into a single shard
 // that would have a hash key range of 276...454. After the merge, the single child
 // shard receives data for all hash key values covered by the two parent shards.
-// When invoking this API, it is recommended you use the StreamARN input parameter
-// rather than the StreamName input parameter. MergeShards is called when there is
-// a need to reduce the overall capacity of a stream because of excess capacity
-// that is not being used. You must specify the shard to be merged and the adjacent
-// shard for a stream. For more information about merging shards, see Merge Two
-// Shards (https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-merge.html)
+// When invoking this API, you must use either the StreamARN or the StreamName
+// parameter, or both. It is recommended that you use the StreamARN input
+// parameter when you invoke this API. MergeShards is called when there is a need
+// to reduce the overall capacity of a stream because of excess capacity that is
+// not being used. You must specify the shard to be merged and the adjacent shard
+// for a stream. For more information about merging shards, see Merge Two Shards (https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-merge.html)
 // in the Amazon Kinesis Data Streams Developer Guide. If the stream is in the
 // ACTIVE state, you can call MergeShards . If a stream is in the CREATING ,
 // UPDATING , or DELETING state, MergeShards returns a ResourceInUseException . If

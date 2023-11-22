@@ -14,8 +14,9 @@ import (
 )
 
 // Enables enhanced Kinesis data stream monitoring for shard-level metrics. When
-// invoking this API, it is recommended you use the StreamARN input parameter
-// rather than the StreamName input parameter.
+// invoking this API, you must use either the StreamARN or the StreamName
+// parameter, or both. It is recommended that you use the StreamARN input
+// parameter when you invoke this API.
 func (c *Client) EnableEnhancedMonitoring(ctx context.Context, params *EnableEnhancedMonitoringInput, optFns ...func(*Options)) (*EnableEnhancedMonitoringOutput, error) {
 	if params == nil {
 		params = &EnableEnhancedMonitoringInput{}
