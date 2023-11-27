@@ -20,15 +20,15 @@ import (
 // mirroring. In this case, the instance becomes a Multi-AZ deployment, not a
 // Single-AZ deployment. If you want to replace your original DB instance with the
 // new, restored DB instance, then rename your original DB instance before you call
-// the RestoreDBInstanceFromDBSnapshot action. RDS doesn't allow two DB instances
-// with the same name. After you have renamed your original DB instance with a
-// different identifier, then you can pass the original name of the DB instance as
-// the DBInstanceIdentifier in the call to the RestoreDBInstanceFromDBSnapshot
-// action. The result is that you replace the original DB instance with the DB
-// instance created from the snapshot. If you are restoring from a shared manual DB
-// snapshot, the DBSnapshotIdentifier must be the ARN of the shared DB snapshot.
-// This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora,
-// use RestoreDBClusterFromSnapshot .
+// the RestoreDBInstanceFromDBSnapshot operation. RDS doesn't allow two DB
+// instances with the same name. After you have renamed your original DB instance
+// with a different identifier, then you can pass the original name of the DB
+// instance as the DBInstanceIdentifier in the call to the
+// RestoreDBInstanceFromDBSnapshot operation. The result is that you replace the
+// original DB instance with the DB instance created from the snapshot. If you are
+// restoring from a shared manual DB snapshot, the DBSnapshotIdentifier must be
+// the ARN of the shared DB snapshot. This command doesn't apply to Aurora MySQL
+// and Aurora PostgreSQL. For Aurora, use RestoreDBClusterFromSnapshot .
 func (c *Client) RestoreDBInstanceFromDBSnapshot(ctx context.Context, params *RestoreDBInstanceFromDBSnapshotInput, optFns ...func(*Options)) (*RestoreDBInstanceFromDBSnapshotOutput, error) {
 	if params == nil {
 		params = &RestoreDBInstanceFromDBSnapshotInput{}
@@ -46,11 +46,11 @@ func (c *Client) RestoreDBInstanceFromDBSnapshot(ctx context.Context, params *Re
 
 type RestoreDBInstanceFromDBSnapshotInput struct {
 
-	// Name of the DB instance to create from the DB snapshot. This parameter isn't
-	// case-sensitive. Constraints:
-	//   - Must contain from 1 to 63 numbers, letters, or hyphens
-	//   - First character must be a letter
-	//   - Can't end with a hyphen or contain two consecutive hyphens
+	// The name of the DB instance to create from the DB snapshot. This parameter
+	// isn't case-sensitive. Constraints:
+	//   - Must contain from 1 to 63 numbers, letters, or hyphens.
+	//   - First character must be a letter.
+	//   - Can't end with a hyphen or contain two consecutive hyphens.
 	// Example: my-snapshot-id
 	//
 	// This member is required.
@@ -125,31 +125,32 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// DB instance.
 	DBInstanceClass *string
 
-	// The database name for the restored DB instance. This parameter doesn't apply to
-	// the MySQL, PostgreSQL, or MariaDB engines. It also doesn't apply to RDS Custom
-	// DB instances.
+	// The name of the database for the restored DB instance. This parameter only
+	// applies to RDS for Oracle and RDS for SQL Server DB instances. It doesn't apply
+	// to the other engines or to RDS Custom DB instances.
 	DBName *string
 
 	// The name of the DB parameter group to associate with this DB instance. If you
 	// don't specify a value for DBParameterGroupName , then RDS uses the default
 	// DBParameterGroup for the specified DB engine. This setting doesn't apply to RDS
 	// Custom. Constraints:
-	//   - If supplied, must match the name of an existing DBParameterGroup.
+	//   - If supplied, must match the name of an existing DB parameter group.
 	//   - Must be 1 to 255 letters, numbers, or hyphens.
 	//   - First character must be a letter.
 	//   - Can't end with a hyphen or contain two consecutive hyphens.
 	DBParameterGroupName *string
 
 	// The identifier for the DB snapshot to restore from. Constraints:
-	//   - Must match the identifier of an existing DBSnapshot.
+	//   - Must match the identifier of an existing DB snapshot.
 	//   - Can't be specified when DBClusterSnapshotIdentifier is specified.
 	//   - Must be specified when DBClusterSnapshotIdentifier isn't specified.
 	//   - If you are restoring from a shared manual DB snapshot, the
 	//   DBSnapshotIdentifier must be the ARN of the shared DB snapshot.
 	DBSnapshotIdentifier *string
 
-	// The DB subnet group name to use for the new instance. Constraints: If supplied,
-	// must match the name of an existing DBSubnetGroup. Example: mydbsubnetgroup
+	// The name of the DB subnet group to use for the new instance. Constraints:
+	//   - If supplied, must match the name of an existing DB subnet group.
+	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
 	// Specifies whether to enable a dedicated log volume (DLV) for the DB instance.
@@ -162,8 +163,8 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// .
 	DeletionProtection *bool
 
-	// Specify the Active Directory directory ID to restore the DB instance in. The
-	// domain/ must be created prior to this operation. Currently, you can create only
+	// The Active Directory directory ID to restore the DB instance in. The domain/
+	// must be created prior to this operation. Currently, you can create only Db2,
 	// MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances in an Active
 	// Directory Domain. For more information, see Kerberos Authentication (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html)
 	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
@@ -201,9 +202,9 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain
 	DomainOu *string
 
-	// The list of logs that the restored DB instance is to export to CloudWatch Logs.
-	// The values in the list depend on the DB engine being used. For more information,
-	// see Publishing Database Logs to Amazon CloudWatch Logs (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
+	// The list of logs for the restored DB instance to export to CloudWatch Logs. The
+	// values in the list depend on the DB engine. For more information, see
+	// Publishing Database Logs to Amazon CloudWatch Logs (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	EnableCloudwatchLogsExports []string
 
@@ -230,6 +231,8 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// RDS Custom. Default: The same as source Constraint: Must be compatible with the
 	// engine of the source. For example, you can restore a MariaDB 10.1 DB instance
 	// from a MySQL 5.6 snapshot. Valid Values:
+	//   - db2-ae
+	//   - db2-se
 	//   - mariadb
 	//   - mysql
 	//   - oracle-ee

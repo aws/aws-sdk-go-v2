@@ -13,7 +13,7 @@ import (
 )
 
 // Returns the current LifecycleConfiguration object for the specified Amazon EFS
-// file system. Llifecycle management uses the LifecycleConfiguration object to
+// file system. Lifecycle management uses the LifecycleConfiguration object to
 // identify when to move files between storage classes. For a file system without a
 // LifecycleConfiguration object, the call returns an empty array in the response.
 // This operation requires permissions for the

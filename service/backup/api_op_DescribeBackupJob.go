@@ -103,12 +103,16 @@ type DescribeBackupJobOutput struct {
 	// example, arn:aws:iam::123456789012:role/S3Access .
 	IamRoleArn *string
 
+	// This is the date a backup job was initiated.
+	InitiationDate *time.Time
+
 	// This returns the boolean value that a backup job is a parent (composite) job.
 	IsParent bool
 
 	// This is the job count for the specified message category. Example strings may
-	// include AccessDenied , Success , and InvalidParameters . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
-	// for a list of MessageCategory strings.
+	// include AccessDenied , SUCCESS , AGGREGATE_ALL , and INVALIDPARAMETERS . View
+	// Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
+	// for a list of accepted MessageCategory strings.
 	MessageCategory *string
 
 	// This returns the number of child (nested) backup jobs.

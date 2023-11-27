@@ -1,0 +1,8 @@
+{
+    "id": "678775d8-30b7-420e-ba3e-6b2a8dff2a7f",
+    "type": "feature",
+    "description": "This is the initial SDK release for AWS B2B Data Interchange.",
+    "modules": [
+        "service/b2bi"
+    ]
+}

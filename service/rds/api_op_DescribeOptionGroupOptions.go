@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes all available options.
+// Describes all available options for the specified engine.
 func (c *Client) DescribeOptionGroupOptions(ctx context.Context, params *DescribeOptionGroupOptionsInput, optFns ...func(*Options)) (*DescribeOptionGroupOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeOptionGroupOptionsInput{}
@@ -30,8 +30,9 @@ func (c *Client) DescribeOptionGroupOptions(ctx context.Context, params *Describ
 
 type DescribeOptionGroupOptionsInput struct {
 
-	// A required parameter. Options available for the given engine name are
-	// described. Valid Values:
+	// The name of the engine to describe options for. Valid Values:
+	//   - db2-ae
+	//   - db2-se
 	//   - mariadb
 	//   - mysql
 	//   - oracle-ee

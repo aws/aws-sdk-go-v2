@@ -65,6 +65,9 @@ type EnabledControlDetails struct {
 	// The drift status of the enabled control.
 	DriftStatusSummary *DriftStatusSummary
 
+	// Array of EnabledControlParameter objects.
+	Parameters []EnabledControlParameterSummary
+
 	// The deployment summary of the enabled control.
 	StatusSummary *EnablementStatusSummary
 
@@ -75,6 +78,40 @@ type EnabledControlDetails struct {
 
 	// Target Amazon Web Services Regions for the enabled control.
 	TargetRegions []Region
+
+	noSmithyDocumentSerde
+}
+
+// A set of parameters that configure the behavior of the enabled control. A
+// key/value pair, where Key is of type String and Value is of type Document .
+type EnabledControlParameter struct {
+
+	// The key of a key/value pair. It is of type string .
+	//
+	// This member is required.
+	Key *string
+
+	// The value of a key/value pair. It can be of type array string , number , object
+	// , or boolean .
+	//
+	// This member is required.
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Returns a summary of information about the parameters of an enabled control.
+type EnabledControlParameterSummary struct {
+
+	// The key of a key/value pair.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of a key/value pair.
+	//
+	// This member is required.
+	Value document.Interface
 
 	noSmithyDocumentSerde
 }
@@ -138,10 +175,7 @@ type LandingZoneDetail struct {
 	// The latest available version of the landing zone.
 	LatestAvailableVersion *string
 
-	// The landing zone deployment status. Valid values:
-	//   - ACTIVE : The landing zone is actively deployed.
-	//   - PROCESSING : The landing zone is processing deployment.
-	//   - FAILED : The landing zone failed deployment.
+	// The landing zone deployment status.
 	Status LandingZoneStatus
 
 	noSmithyDocumentSerde
@@ -178,7 +212,7 @@ type LandingZoneOperationDetail struct {
 	// The landing zone operation start time.
 	StartTime *time.Time
 
-	// The landing zone operation status. Valid values:
+	// Valid values:
 	//   - SUCCEEDED : The landing zone operation succeeded.
 	//   - IN_PROGRESS : The landing zone operation is in progress.
 	//   - FAILED : The landing zone operation failed.

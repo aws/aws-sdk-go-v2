@@ -1,0 +1,8 @@
+{
+    "id": "907d07a4-8148-4c52-af2e-7df7b78882f4",
+    "type": "feature",
+    "description": "AWS Backup now supports restore testing, a new feature that allows customers to automate restore testing and validating their backups. Additionally, this release adds support for EBS Snapshots Archive tier.",
+    "modules": [
+        "service/backup"
+    ]
+}

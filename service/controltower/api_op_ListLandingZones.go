@@ -14,7 +14,7 @@ import (
 
 // Returns the landing zone ARN for the landing zone deployed in your managed
 // account. This API also creates an ARN for existing accounts that do not yet have
-// a landing zone ARN. The return limit is one landing zone ARN.
+// a landing zone ARN. Returns one landing zone ARN.
 func (c *Client) ListLandingZones(ctx context.Context, params *ListLandingZonesInput, optFns ...func(*Options)) (*ListLandingZonesOutput, error) {
 	if params == nil {
 		params = &ListLandingZonesInput{}
@@ -32,7 +32,7 @@ func (c *Client) ListLandingZones(ctx context.Context, params *ListLandingZonesI
 
 type ListLandingZonesInput struct {
 
-	// The maximum number of returned landing zone ARNs.
+	// The maximum number of returned landing zone ARNs, which is one.
 	MaxResults *int32
 
 	// The token to continue the list from a previous API call with the same
@@ -49,8 +49,8 @@ type ListLandingZonesOutput struct {
 	// This member is required.
 	LandingZones []types.LandingZoneSummary
 
-	// Retrieves the next page of results. If the string is empty, the current
-	// response is the end of the results.
+	// Retrieves the next page of results. If the string is empty, the response is the
+	// end of the results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -145,7 +145,7 @@ var _ ListLandingZonesAPIClient = (*Client)(nil)
 
 // ListLandingZonesPaginatorOptions is the paginator options for ListLandingZones
 type ListLandingZonesPaginatorOptions struct {
-	// The maximum number of returned landing zone ARNs.
+	// The maximum number of returned landing zone ARNs, which is one.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

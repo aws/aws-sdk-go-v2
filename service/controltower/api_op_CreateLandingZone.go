@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new landing zone. This starts an asynchronous operation that creates
-// and configures a landing zone based on the parameters specified in the manifest
-// JSON file.
+// Creates a new landing zone. This API call starts an asynchronous operation that
+// creates and configures a landing zone, based on the parameters specified in the
+// manifest JSON file.
 func (c *Client) CreateLandingZone(ctx context.Context, params *CreateLandingZoneInput, optFns ...func(*Options)) (*CreateLandingZoneOutput, error) {
 	if params == nil {
 		params = &CreateLandingZoneInput{}
@@ -39,7 +39,7 @@ type CreateLandingZoneInput struct {
 	// This member is required.
 	Manifest document.Interface
 
-	// The landing zone version.
+	// The landing zone version, for example, 3.0.
 	//
 	// This member is required.
 	Version *string
@@ -52,7 +52,7 @@ type CreateLandingZoneInput struct {
 
 type CreateLandingZoneOutput struct {
 
-	// The ARN of the landing zone.
+	// The ARN of the landing zone resource.
 	//
 	// This member is required.
 	Arn *string

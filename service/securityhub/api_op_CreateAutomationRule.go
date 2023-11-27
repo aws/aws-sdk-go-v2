@@ -76,7 +76,7 @@ type CreateAutomationRuleInput struct {
 	// .
 	RuleStatus types.RuleStatus
 
-	// User-defined tags that help you label the purpose of a rule.
+	// User-defined tags associated with an automation rule.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

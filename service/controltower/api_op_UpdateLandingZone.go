@@ -13,8 +13,8 @@ import (
 )
 
 // This API call updates the landing zone. It starts an asynchronous operation
-// that updates the landing zone based on the new landing zone version or the
-// updated parameters specified in the updated manifest file.
+// that updates the landing zone based on the new landing zone version, or on the
+// changed parameters specified in the updated manifest file.
 func (c *Client) UpdateLandingZone(ctx context.Context, params *UpdateLandingZoneInput, optFns ...func(*Options)) (*UpdateLandingZoneOutput, error) {
 	if params == nil {
 		params = &UpdateLandingZoneInput{}
@@ -39,11 +39,12 @@ type UpdateLandingZoneInput struct {
 
 	// The manifest.yaml file is a text file that describes your Amazon Web Services
 	// resources. For examples, review The manifest file (https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file)
+	// .
 	//
 	// This member is required.
 	Manifest document.Interface
 
-	// The landing zone version.
+	// The landing zone version, for example, 3.2.
 	//
 	// This member is required.
 	Version *string

@@ -138,7 +138,7 @@ type Destination struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the destination file system to create in the replication
+// Describes the new or existing destination file system for the replication
 // configuration.
 type DestinationToCreate struct {
 
@@ -146,7 +146,12 @@ type DestinationToCreate struct {
 	// Availability Zone in which to create the destination file system.
 	AvailabilityZoneName *string
 
-	// Specifies the Key Management Service (KMS) key that you want to use to encrypt
+	// The ID of the file system to use for the destination. The file system's
+	// replication overwrite replication must be disabled. If you do not provide an ID,
+	// then EFS creates a new file system for the replication destination.
+	FileSystemId *string
+
+	// Specify the Key Management Service (KMS) key that you want to use to encrypt
 	// the destination file system. If you do not specify a KMS key, Amazon EFS uses
 	// your default KMS key for Amazon EFS, /aws/elasticfilesystem . This ID can be in
 	// one of the following formats:
@@ -246,6 +251,9 @@ type FileSystemDescription struct {
 	// arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567
 	FileSystemArn *string
 
+	// Describes the protection on the file system.
+	FileSystemProtection *FileSystemProtectionDescription
+
 	// The ID of an KMS key used to protect the encrypted file system.
 	KmsKeyId *string
 
@@ -262,6 +270,26 @@ type FileSystemDescription struct {
 	// Throughput modes (https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes)
 	// in the Amazon EFS User Guide.
 	ThroughputMode ThroughputMode
+
+	noSmithyDocumentSerde
+}
+
+// Describes the protection on a file system.
+type FileSystemProtectionDescription struct {
+
+	// The status of the file system's replication overwrite protection.
+	//   - ENABLED – The file system cannot be used as the destination file system in a
+	//   replication configuration. The file system is writeable. Replication overwrite
+	//   protection is ENABLED by default.
+	//   - DISABLED – The file system can be used as the destination file system in a
+	//   replication configuration. The file system is read-only and can only be modified
+	//   by EFS replication.
+	//   - REPLICATING – The file system is being used as the destination file system
+	//   in a replication configuration. The file system is read-only and is only
+	//   modified only by EFS replication.
+	// If the replication configuration is deleted, the file system's replication
+	// overwrite protection is re-enabled, the file system becomes writeable.
+	ReplicationOverwriteProtection ReplicationOverwriteProtection
 
 	noSmithyDocumentSerde
 }
@@ -301,8 +329,8 @@ type FileSystemSize struct {
 }
 
 // Describes a policy used by Lifecycle management that specifies when to
-// transition files into and out of the Infrequent Access (IA) and Archive storage
-// classes. For more information, see Managing file system storage (https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html)
+// transition files into and out of storage classes. For more information, see
+// Managing file system storage (https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html)
 // . When using the put-lifecycle-configuration CLI command or the
 // PutLifecycleConfiguration API action, Amazon EFS requires that each
 // LifecyclePolicy object have only a single transition. This means that in a

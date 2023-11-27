@@ -58,8 +58,8 @@ type ListEnabledControlsOutput struct {
 	// This member is required.
 	EnabledControls []types.EnabledControlSummary
 
-	// Retrieves the next page of results. If the string is empty, the current
-	// response is the end of the results.
+	// Retrieves the next page of results. If the string is empty, the response is the
+	// end of the results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

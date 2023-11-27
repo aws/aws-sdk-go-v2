@@ -1,0 +1,8 @@
+{
+    "id": "7470f9e2-d862-4a9a-af6d-03b958b56262",
+    "type": "feature",
+    "description": "AWS FIS adds support for multi-account experiments \u0026 empty target resolution. This release also introduces the CreateTargetAccountConfiguration API that allows experiments across multiple AWS accounts, and the ListExperimentResolvedTargets API to list target details.",
+    "modules": [
+        "service/fis"
+    ]
+}

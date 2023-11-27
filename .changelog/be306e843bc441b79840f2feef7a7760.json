@@ -1,0 +1,8 @@
+{
+    "id": "be306e84-3bc4-41b7-9840-f2feef7a7760",
+    "type": "feature",
+    "description": "This update enables introspection of Aurora cluster databases using the RDS Data API",
+    "modules": [
+        "service/appsync"
+    ]
+}

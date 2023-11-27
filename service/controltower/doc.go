@@ -12,12 +12,12 @@
 //     the targetIdentifier .
 //   - the ARN associated with a resource that you wish to tag or untag.
 //
-// To get the controlIdentifier for your AWS Control Tower control: The
-// controlIdentifier is an ARN that is specified for each control. You can view the
-// controlIdentifier in the console on the Control details page, as well as in the
-// documentation. The controlIdentifier is unique in each Amazon Web Services
-// Region for each control. You can find the controlIdentifier for each Region and
-// control in the Tables of control metadata (https://docs.aws.amazon.com/controltower/latest/userguide/control-metadata-tables.html)
+// To get the controlIdentifier for your Amazon Web Services Control Tower
+// control: The controlIdentifier is an ARN that is specified for each control.
+// You can view the controlIdentifier in the console on the Control details page,
+// as well as in the documentation. The controlIdentifier is unique in each Amazon
+// Web Services Region for each control. You can find the controlIdentifier for
+// each Region and control in the Tables of control metadata (https://docs.aws.amazon.com/controltower/latest/userguide/control-metadata-tables.html)
 // in the Amazon Web Services Control Tower User Guide. A quick-reference list of
 // control identifers for the Amazon Web Services Control Tower legacy Strongly
 // recommended and Elective controls is given in Resource identifiers for APIs and

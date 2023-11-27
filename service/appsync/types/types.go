@@ -332,6 +332,102 @@ type DataSource struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the introspected data that was retrieved from the data source.
+type DataSourceIntrospectionModel struct {
+
+	// The DataSourceIntrospectionModelField object data.
+	Fields []DataSourceIntrospectionModelField
+
+	// The array of DataSourceIntrospectionModelIndex objects.
+	Indexes []DataSourceIntrospectionModelIndex
+
+	// The name of the model. For example, this could be the name of a single table in
+	// a database.
+	Name *string
+
+	// The primary key stored as a DataSourceIntrospectionModelIndex object.
+	PrimaryKey *DataSourceIntrospectionModelIndex
+
+	// Contains the output of the SDL that was generated from the introspected types.
+	// This is controlled by the includeModelsSDL parameter of the
+	// GetDataSourceIntrospection operation.
+	Sdl *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the fields that were retrieved from the introspected data.
+type DataSourceIntrospectionModelField struct {
+
+	// The length value of the introspected field.
+	Length int64
+
+	// The name of the field that was retrieved from the introspected data.
+	Name *string
+
+	// The DataSourceIntrospectionModelFieldType object data.
+	Type *DataSourceIntrospectionModelFieldType
+
+	noSmithyDocumentSerde
+}
+
+// Represents the type data for each field retrieved from the introspection.
+type DataSourceIntrospectionModelFieldType struct {
+
+	// Specifies the classification of data. For example, this could be set to values
+	// like Scalar or NonNull to indicate a fundamental property of the field. Valid
+	// values include:
+	//   - Scalar : Indicates the value is a primitive type (scalar).
+	//   - NonNull : Indicates the field cannot be null .
+	//   - List : Indicates the field contains a list.
+	Kind *string
+
+	// The name of the data type that represents the field. For example, String is a
+	// valid name value.
+	Name *string
+
+	// The DataSourceIntrospectionModelFieldType object data. The type is only present
+	// if DataSourceIntrospectionModelFieldType.kind is set to NonNull or List . The
+	// type typically contains its own kind and name fields to represent the actual
+	// type data. For instance, type could contain a kind value of Scalar with a name
+	// value of String . The values Scalar and String will be collectively stored in
+	// the values field.
+	Type *DataSourceIntrospectionModelFieldType
+
+	// The values of the type field. This field represents the AppSync data type
+	// equivalent of the introspected field.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// The index that was retrieved from the introspected data.
+type DataSourceIntrospectionModelIndex struct {
+
+	// The fields of the index.
+	Fields []string
+
+	// The name of the index.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the output of a DataSourceIntrospectionResult . This is the populated
+// result of a GetDataSourceIntrospection operation.
+type DataSourceIntrospectionResult struct {
+
+	// The array of DataSourceIntrospectionModel objects.
+	Models []DataSourceIntrospectionModel
+
+	// Determines the number of types to be returned in a single response before
+	// paginating. This value is typically taken from nextToken value from the
+	// previous response.
+	NextToken *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a Delta Sync configuration.
 type DeltaSyncConfig struct {
 
@@ -716,6 +812,31 @@ type PipelineConfig struct {
 
 	// A list of Function objects.
 	Functions []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the metadata required to introspect the RDS cluster.
+type RdsDataApiConfig struct {
+
+	// The name of the database in the cluster.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// The resource ARN of the RDS cluster.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	// The secret's ARN that was obtained from Secrets Manager. A secret consists of
+	// secret information, the secret value, plus metadata about the secret. A secret
+	// value can be a string or binary. It typically includes the ARN, secret name and
+	// description, policies, tags, encryption key from the Key Management Service, and
+	// key rotation data.
+	//
+	// This member is required.
+	SecretArn *string
 
 	noSmithyDocumentSerde
 }

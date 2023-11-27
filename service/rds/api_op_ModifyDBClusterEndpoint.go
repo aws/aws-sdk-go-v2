@@ -12,7 +12,7 @@ import (
 )
 
 // Modifies the properties of an endpoint in an Amazon Aurora DB cluster. This
-// action only applies to Aurora DB clusters.
+// operation only applies to Aurora DB clusters.
 func (c *Client) ModifyDBClusterEndpoint(ctx context.Context, params *ModifyDBClusterEndpointInput, optFns ...func(*Options)) (*ModifyDBClusterEndpointOutput, error) {
 	if params == nil {
 		params = &ModifyDBClusterEndpointInput{}

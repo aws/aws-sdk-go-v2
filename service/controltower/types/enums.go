@@ -26,8 +26,9 @@ type ControlOperationType string
 
 // Enum values for ControlOperationType
 const (
-	ControlOperationTypeEnableControl  ControlOperationType = "ENABLE_CONTROL"
-	ControlOperationTypeDisableControl ControlOperationType = "DISABLE_CONTROL"
+	ControlOperationTypeEnableControl        ControlOperationType = "ENABLE_CONTROL"
+	ControlOperationTypeDisableControl       ControlOperationType = "DISABLE_CONTROL"
+	ControlOperationTypeUpdateEnabledControl ControlOperationType = "UPDATE_ENABLED_CONTROL"
 )
 
 // Values returns all known values for ControlOperationType. Note that this can be
@@ -37,6 +38,7 @@ func (ControlOperationType) Values() []ControlOperationType {
 	return []ControlOperationType{
 		"ENABLE_CONTROL",
 		"DISABLE_CONTROL",
+		"UPDATE_ENABLED_CONTROL",
 	}
 }
 

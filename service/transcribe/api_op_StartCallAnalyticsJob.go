@@ -109,7 +109,7 @@ type StartCallAnalyticsJobInput struct {
 	//   arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab .
 	//   - Use the ARN for the KMS key alias. For example,
 	//   arn:aws:kms:region:account-ID:alias/ExampleAlias .
-	// If you don't specify an encryption key, your output is encrypted with the
+	// If you do not specify an encryption key, your output is encrypted with the
 	// default Amazon S3 key (SSE-S3). If you specify a KMS key to encrypt your output,
 	// you must also specify an output location using the OutputLocation parameter.
 	// Note that the role making the request must have permission to use the specified
@@ -125,11 +125,11 @@ type StartCallAnalyticsJobInput struct {
 	// Unless you specify a file name (option 3), the name of your output file has a
 	// default value that matches the name you specified for your transcription job
 	// using the CallAnalyticsJobName parameter. You can specify a KMS key to encrypt
-	// your output using the OutputEncryptionKMSKeyId parameter. If you don't specify
+	// your output using the OutputEncryptionKMSKeyId parameter. If you do not specify
 	// a KMS key, Amazon Transcribe uses the default Amazon S3 key for server-side
-	// encryption. If you don't specify OutputLocation , your transcript is placed in a
-	// service-managed Amazon S3 bucket and you are provided with a URI to access your
-	// transcript.
+	// encryption. If you do not specify OutputLocation , your transcript is placed in
+	// a service-managed Amazon S3 bucket and you are provided with a URI to access
+	// your transcript.
 	OutputLocation *string
 
 	// Specify additional optional settings in your request, including content

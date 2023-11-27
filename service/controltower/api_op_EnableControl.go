@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,8 +36,8 @@ func (c *Client) EnableControl(ctx context.Context, params *EnableControlInput, 
 type EnableControlInput struct {
 
 	// The ARN of the control. Only Strongly recommended and Elective controls are
-	// permitted, with the exception of the Region deny control. For information on how
-	// to find the controlIdentifier , see the overview page (https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html)
+	// permitted, with the exception of the landing zone Region deny control. For
+	// information on how to find the controlIdentifier , see the overview page (https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html)
 	// .
 	//
 	// This member is required.
@@ -48,6 +49,9 @@ type EnableControlInput struct {
 	//
 	// This member is required.
 	TargetIdentifier *string
+
+	// An array of EnabledControlParameter objects
+	Parameters []types.EnabledControlParameter
 
 	// Tags to be applied to the EnabledControl resource.
 	Tags map[string]string

@@ -39,7 +39,7 @@ type ListMedicalTranscriptionJobsInput struct {
 
 	// The maximum number of medical transcription jobs to return in each page of
 	// results. If there are fewer results than the value that you specify, only the
-	// actual results are returned. If you don't specify a value, a default of 5 is
+	// actual results are returned. If you do not specify a value, a default of 5 is
 	// used.
 	MaxResults *int32
 
@@ -51,8 +51,8 @@ type ListMedicalTranscriptionJobsInput struct {
 	NextToken *string
 
 	// Returns only medical transcription jobs with the specified status. Jobs are
-	// ordered by creation date, with the newest job first. If you don't include Status
-	// , all medical transcription jobs are returned.
+	// ordered by creation date, with the newest job first. If you do not include
+	// Status , all medical transcription jobs are returned.
 	Status types.TranscriptionJobStatus
 
 	noSmithyDocumentSerde
@@ -169,7 +169,7 @@ var _ ListMedicalTranscriptionJobsAPIClient = (*Client)(nil)
 type ListMedicalTranscriptionJobsPaginatorOptions struct {
 	// The maximum number of medical transcription jobs to return in each page of
 	// results. If there are fewer results than the value that you specify, only the
-	// actual results are returned. If you don't specify a value, a default of 5 is
+	// actual results are returned. If you do not specify a value, a default of 5 is
 	// used.
 	Limit int32
 

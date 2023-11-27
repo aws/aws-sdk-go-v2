@@ -46,6 +46,27 @@ func (PerformanceMode) Values() []PerformanceMode {
 	}
 }
 
+type ReplicationOverwriteProtection string
+
+// Enum values for ReplicationOverwriteProtection
+const (
+	ReplicationOverwriteProtectionEnabled     ReplicationOverwriteProtection = "ENABLED"
+	ReplicationOverwriteProtectionDisabled    ReplicationOverwriteProtection = "DISABLED"
+	ReplicationOverwriteProtectionReplicating ReplicationOverwriteProtection = "REPLICATING"
+)
+
+// Values returns all known values for ReplicationOverwriteProtection. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ReplicationOverwriteProtection) Values() []ReplicationOverwriteProtection {
+	return []ReplicationOverwriteProtection{
+		"ENABLED",
+		"DISABLED",
+		"REPLICATING",
+	}
+}
+
 type ReplicationStatus string
 
 // Enum values for ReplicationStatus

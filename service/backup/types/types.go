@@ -96,11 +96,15 @@ type BackupJob struct {
 	// names without those strings lack permissions to perform backup jobs.
 	IamRoleArn *string
 
+	// This is the date on which the backup job was initiated.
+	InitiationDate *time.Time
+
 	// This is a boolean value indicating this is a parent (composite) backup job.
 	IsParent bool
 
 	// This parameter is the job count for the specified message category. Example
-	// strings include AccessDenied , Success , and InvalidParameters . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
+	// strings may include AccessDenied , SUCCESS , AGGREGATE_ALL , and
+	// INVALIDPARAMETERS . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
 	// for a list of MessageCategory strings. The the value ANY returns count of all
 	// message categories. AGGREGATE_ALL aggregates job counts for all message
 	// categories and returns the sum.
@@ -468,9 +472,9 @@ type BackupSelection struct {
 	SelectionName *string
 
 	// A list of conditions that you define to assign resources to your backup plans
-	// using tags. For example, "StringEquals": { "ConditionKey":
-	// "aws:ResourceTag/CreatedByCryo", "ConditionValue": "true" }, . Condition
-	// operators are case sensitive. Conditions differs from ListOfTags as follows:
+	// using tags. For example, "StringEquals": { "Key":
+	// "aws:ResourceTag/CreatedByCryo", "Value": "true" }, . Condition operators are
+	// case sensitive. Conditions differs from ListOfTags as follows:
 	//   - When you specify more than one condition, you only assign the resources
 	//   that match ALL conditions (using AND logic).
 	//   - Conditions supports StringEquals , StringLike , StringNotEquals , and
@@ -478,9 +482,9 @@ type BackupSelection struct {
 	Conditions *Conditions
 
 	// A list of conditions that you define to assign resources to your backup plans
-	// using tags. For example, "StringEquals": { "ConditionKey":
-	// "aws:ResourceTag/CreatedByCryo", "ConditionValue": "true" }, . Condition
-	// operators are case sensitive. ListOfTags differs from Conditions as follows:
+	// using tags. For example, "StringEquals": { "Key":
+	// "aws:ResourceTag/CreatedByCryo", "Value": "true" }, . Condition operators are
+	// case sensitive. ListOfTags differs from Conditions as follows:
 	//   - When you specify more than one condition, you assign all resources that
 	//   match AT LEAST ONE condition (using OR logic).
 	//   - ListOfTags only supports StringEquals . Conditions supports StringEquals ,
@@ -822,7 +826,8 @@ type CopyJob struct {
 	IsParent bool
 
 	// This parameter is the job count for the specified message category. Example
-	// strings include AccessDenied , Success , and InvalidParameters . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
+	// strings may include AccessDenied , SUCCESS , AGGREGATE_ALL , and
+	// InvalidParameters . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
 	// for a list of MessageCategory strings. The the value ANY returns count of all
 	// message categories. AGGREGATE_ALL aggregates job counts for all message
 	// categories and returns the sum
@@ -987,6 +992,27 @@ type FrameworkControl struct {
 	noSmithyDocumentSerde
 }
 
+// Pair of two related strings. Allowed characters are letters, white space, and
+// numbers that can be represented in UTF-8 and the following characters: + - = .
+// _ : /
+type KeyValue struct {
+
+	// The tag key (String). The key can't start with aws: . Length Constraints:
+	// Minimum length of 1. Maximum length of 128. Pattern:
+	// ^(?![aA]{1}[wW]{1}[sS]{1}:)([\p{L}\p{Z}\p{N}_.:/=+\-@]+)$
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the key. Length Constraints: Maximum length of 256. Pattern:
+	// ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // A legal hold is an administrative tool that helps prevent backups from being
 // deleted while under a hold. While the hold is in place, backups under a hold
 // cannot be deleted and lifecycle policies that would alter the backup status
@@ -1043,6 +1069,11 @@ type Lifecycle struct {
 	// cold storage.
 	MoveToColdStorageAfterDays *int64
 
+	// Optional Boolean. If this is true, this setting will instruct your backup plan
+	// to transition supported resources to archive (cold) storage tier in accordance
+	// with your lifecycle settings.
+	OptInToArchiveForSupportedResources *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -1054,6 +1085,13 @@ type ProtectedResource struct {
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
 	LastBackupTime *time.Time
+
+	// This is the ARN (Amazon Resource Name) of the backup vault that contains the
+	// most recent backup recovery point.
+	LastBackupVaultArn *string
+
+	// This is the ARN (Amazon Resource Name) of the most recent recovery point.
+	LastRecoveryPointArn *string
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
 	// of the ARN depends on the resource type.
@@ -1068,6 +1106,23 @@ type ProtectedResource struct {
 	// database. For Windows Volume Shadow Copy Service (VSS) backups, the only
 	// supported resource type is Amazon EC2.
 	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of conditions that you define for resources in your restore testing plan
+// using tags. For example, "StringEquals": { "Key":
+// "aws:ResourceTag/CreatedByCryo", "Value": "true" }, . Condition operators are
+// case sensitive.
+type ProtectedResourceConditions struct {
+
+	// Filters the values of your tagged resources for only those resources that you
+	// tagged with the same value. Also called "exact matching."
+	StringEquals []KeyValue
+
+	// Filters the values of your tagged resources for only those resources that you
+	// tagged that do not have the same value. Also called "negated matching."
+	StringNotEquals []KeyValue
 
 	noSmithyDocumentSerde
 }
@@ -1465,6 +1520,16 @@ type ReportSetting struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the restore testing plan that Backup used to
+// initiate the restore job.
+type RestoreJobCreator struct {
+
+	// An Amazon Resource Name (ARN) that uniquely identifies a restore testing plan.
+	RestoreTestingPlanArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains metadata about a restore job.
 type RestoreJobsListMember struct {
 
@@ -1480,6 +1545,9 @@ type RestoreJobsListMember struct {
 	// Friday, January 26, 2018 12:11:30.087 AM.
 	CompletionDate *time.Time
 
+	// Contains identifying information about the creation of a restore job.
+	CreatedBy *RestoreJobCreator
+
 	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
 	// of the ARN depends on the resource type.
 	CreatedResourceArn *string
@@ -1489,6 +1557,13 @@ type RestoreJobsListMember struct {
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
 	CreationDate *time.Time
+
+	// This notes the status of the data generated by the restore test. The status may
+	// be Deleting , Failed , or Successful .
+	DeletionStatus RestoreDeletionStatus
+
+	// This describes the restore job deletion status.
+	DeletionStatusMessage *string
 
 	// The amount of time in minutes that a job restoring a recovery point is expected
 	// to take.
@@ -1507,6 +1582,9 @@ type RestoreJobsListMember struct {
 	// .
 	RecoveryPointArn *string
 
+	// The date on which a recovery point was created.
+	RecoveryPointCreationDate *time.Time
+
 	// The resource type of the listed restore jobs; for example, an Amazon Elastic
 	// Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon
 	// RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the only
@@ -1522,6 +1600,12 @@ type RestoreJobsListMember struct {
 
 	// A detailed message explaining the status of the job to restore a recovery point.
 	StatusMessage *string
+
+	// This is the status of validation run on the indicated restore job.
+	ValidationStatus RestoreValidationStatus
+
+	// This describes the status of validation run on the indicated restore job.
+	ValidationStatusMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -1558,6 +1642,418 @@ type RestoreJobSummary struct {
 
 	// This value is job count for jobs with the specified state.
 	State RestoreJobState
+
+	noSmithyDocumentSerde
+}
+
+// This contains metadata about a restore testing plan.
+type RestoreTestingPlanForCreate struct {
+
+	// Required: Algorithm; Required: Recovery point types; IncludeVaults (one or
+	// more). Optional: SelectionWindowDays ('30' if not specified); ExcludeVaults
+	// (list of selectors), defaults to empty list if not listed.
+	//
+	// This member is required.
+	RecoveryPointSelection *RestoreTestingRecoveryPointSelection
+
+	// The RestoreTestingPlanName is a unique string that is the name of the restore
+	// testing plan. This cannot be changed after creation, and it must consist of only
+	// alphanumeric characters and underscores.
+	//
+	// This member is required.
+	RestoreTestingPlanName *string
+
+	// A CRON expression in specified timezone when a restore testing plan is executed.
+	//
+	// This member is required.
+	ScheduleExpression *string
+
+	// Optional. This is the timezone in which the schedule expression is set. By
+	// default, ScheduleExpressions are in UTC. You can modify this to a specified
+	// timezone.
+	ScheduleExpressionTimezone *string
+
+	// Defaults to 24 hours. A value in hours after a restore test is scheduled before
+	// a job will be canceled if it doesn't start successfully. This value is optional.
+	// If this value is included, this parameter has a maximum value of 168 hours (one
+	// week).
+	StartWindowHours int32
+
+	noSmithyDocumentSerde
+}
+
+// This contains metadata about a restore testing plan.
+type RestoreTestingPlanForGet struct {
+
+	// The date and time that a restore testing plan was created, in Unix format and
+	// Coordinated Universal Time (UTC). The value of CreationTime is accurate to
+	// milliseconds. For example, the value 1516925490.087 represents Friday, January
+	// 26, 2018 12:11:30.087 AM.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The specified criteria to assign a set of resources, such as recovery point
+	// types or backup vaults.
+	//
+	// This member is required.
+	RecoveryPointSelection *RestoreTestingRecoveryPointSelection
+
+	// An Amazon Resource Name (ARN) that uniquely identifies a restore testing plan.
+	//
+	// This member is required.
+	RestoreTestingPlanArn *string
+
+	// This is the restore testing plan name.
+	//
+	// This member is required.
+	RestoreTestingPlanName *string
+
+	// A CRON expression in specified timezone when a restore testing plan is executed.
+	//
+	// This member is required.
+	ScheduleExpression *string
+
+	// This identifies the request and allows failed requests to be retried without
+	// the risk of running the operation twice. If the request includes a
+	// CreatorRequestId that matches an existing backup plan, that plan is returned.
+	// This parameter is optional. If used, this parameter must contain 1 to 50
+	// alphanumeric or '-_.' characters.
+	CreatorRequestId *string
+
+	// The last time a restore test was run with the specified restore testing plan. A
+	// date and time, in Unix format and Coordinated Universal Time (UTC). The value of
+	// LastExecutionDate is accurate to milliseconds. For example, the value
+	// 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+	LastExecutionTime *time.Time
+
+	// The date and time that the restore testing plan was updated. This update is in
+	// Unix format and Coordinated Universal Time (UTC). The value of LastUpdateTime
+	// is accurate to milliseconds. For example, the value 1516925490.087 represents
+	// Friday, January 26, 2018 12:11:30.087 AM.
+	LastUpdateTime *time.Time
+
+	// Optional. This is the timezone in which the schedule expression is set. By
+	// default, ScheduleExpressions are in UTC. You can modify this to a specified
+	// timezone.
+	ScheduleExpressionTimezone *string
+
+	// Defaults to 24 hours. A value in hours after a restore test is scheduled before
+	// a job will be canceled if it doesn't start successfully. This value is optional.
+	// If this value is included, this parameter has a maximum value of 168 hours (one
+	// week).
+	StartWindowHours int32
+
+	noSmithyDocumentSerde
+}
+
+// This contains metadata about a restore testing plan.
+type RestoreTestingPlanForList struct {
+
+	// The date and time that a restore testing plan was created, in Unix format and
+	// Coordinated Universal Time (UTC). The value of CreationTime is accurate to
+	// milliseconds. For example, the value 1516925490.087 represents Friday, January
+	// 26, 2018 12:11:30.087 AM.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// An Amazon Resource Name (ARN) that uniquely identifiesa restore testing plan.
+	//
+	// This member is required.
+	RestoreTestingPlanArn *string
+
+	// This is the restore testing plan name.
+	//
+	// This member is required.
+	RestoreTestingPlanName *string
+
+	// A CRON expression in specified timezone when a restore testing plan is executed.
+	//
+	// This member is required.
+	ScheduleExpression *string
+
+	// The last time a restore test was run with the specified restore testing plan. A
+	// date and time, in Unix format and Coordinated Universal Time (UTC). The value of
+	// LastExecutionDate is accurate to milliseconds. For example, the value
+	// 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+	LastExecutionTime *time.Time
+
+	// The date and time that the restore testing plan was updated. This update is in
+	// Unix format and Coordinated Universal Time (UTC). The value of LastUpdateTime
+	// is accurate to milliseconds. For example, the value 1516925490.087 represents
+	// Friday, January 26, 2018 12:11:30.087 AM.
+	LastUpdateTime *time.Time
+
+	// Optional. This is the timezone in which the schedule expression is set. By
+	// default, ScheduleExpressions are in UTC. You can modify this to a specified
+	// timezone.
+	ScheduleExpressionTimezone *string
+
+	// Defaults to 24 hours. A value in hours after a restore test is scheduled before
+	// a job will be canceled if it doesn't start successfully. This value is optional.
+	// If this value is included, this parameter has a maximum value of 168 hours (one
+	// week).
+	StartWindowHours int32
+
+	noSmithyDocumentSerde
+}
+
+// This contains metadata about a restore testing plan.
+type RestoreTestingPlanForUpdate struct {
+
+	// Required: Algorithm ; RecoveryPointTypes ; IncludeVaults (one or more).
+	// Optional: SelectionWindowDays ('30' if not specified); ExcludeVaults (defaults
+	// to empty list if not listed).
+	RecoveryPointSelection *RestoreTestingRecoveryPointSelection
+
+	// A CRON expression in specified timezone when a restore testing plan is executed.
+	ScheduleExpression *string
+
+	// Optional. This is the timezone in which the schedule expression is set. By
+	// default, ScheduleExpressions are in UTC. You can modify this to a specified
+	// timezone.
+	ScheduleExpressionTimezone *string
+
+	// Defaults to 24 hours. A value in hours after a restore test is scheduled before
+	// a job will be canceled if it doesn't start successfully. This value is optional.
+	// If this value is included, this parameter has a maximum value of 168 hours (one
+	// week).
+	StartWindowHours int32
+
+	noSmithyDocumentSerde
+}
+
+// Required: Algorithm; Required: Recovery point types; IncludeVaults(one or
+// more). Optional: SelectionWindowDays ('30' if not specified);ExcludeVaults (list
+// of selectors), defaults to empty list if not listed.
+type RestoreTestingRecoveryPointSelection struct {
+
+	// Acceptable values include "LATEST_WITHIN_WINDOW" or "RANDOM_WITHIN_WINDOW"
+	Algorithm RestoreTestingRecoveryPointSelectionAlgorithm
+
+	// Accepted values include specific ARNs or list of selectors. Defaults to empty
+	// list if not listed.
+	ExcludeVaults []string
+
+	// Accepted values include wildcard ["*"] or by specific ARNs or ARN wilcard
+	// replacement ["arn:aws:backup:us-west-2:123456789012:backup-vault:asdf", ...]
+	// ["arn:aws:backup:*:*:backup-vault:asdf-*", ...]
+	IncludeVaults []string
+
+	// These are the types of recovery points.
+	RecoveryPointTypes []RestoreTestingRecoveryPointType
+
+	// Accepted values are integers from 1 to 365.
+	SelectionWindowDays int32
+
+	noSmithyDocumentSerde
+}
+
+// This contains metadata about a specific restore testing selection.
+// ProtectedResourceType is required, such as Amazon EBS or Amazon EC2. This
+// consists of RestoreTestingSelectionName , ProtectedResourceType , and one of the
+// following:
+//   - ProtectedResourceArns
+//   - ProtectedResourceConditions
+//
+// Each protected resource type can have one single value. A restore testing
+// selection can include a wildcard value ("*") for ProtectedResourceArns along
+// with ProtectedResourceConditions . Alternatively, you can include up to 30
+// specific protected resource ARNs in ProtectedResourceArns .
+// ProtectedResourceConditions examples include as StringEquals and StringNotEquals
+// .
+type RestoreTestingSelectionForCreate struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the
+	// target resource; for example: arn:aws:iam::123456789012:role/S3Access .
+	//
+	// This member is required.
+	IamRoleArn *string
+
+	// The type of Amazon Web Services resource included in a restore testing
+	// selection; for example, an Amazon EBS volume or an Amazon RDS database.
+	// Supported resource types accepted include:
+	//   - Aurora for Amazon Aurora
+	//   - DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
+	//   - DynamoDB for Amazon DynamoDB
+	//   - EBS for Amazon Elastic Block Store
+	//   - EC2 for Amazon Elastic Compute Cloud
+	//   - EFS for Amazon Elastic File System
+	//   - FSx for Amazon FSx
+	//   - Neptune for Amazon Neptune
+	//   - RDS for Amazon Relational Database Service
+	//   - S3 for Amazon S3
+	//
+	// This member is required.
+	ProtectedResourceType *string
+
+	// This is the unique name of the restore testing selection that belongs to the
+	// related restore testing plan.
+	//
+	// This member is required.
+	RestoreTestingSelectionName *string
+
+	// Each protected resource can be filtered by its specific ARNs, such as
+	// ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."] or by a wildcard:
+	// ProtectedResourceArns: ["*"] , but not both.
+	ProtectedResourceArns []string
+
+	// If you have included the wildcard in ProtectedResourceArns, you can include
+	// resource conditions, such as ProtectedResourceConditions: { StringEquals: [{
+	// key: "XXXX", value: "YYYY" }] .
+	ProtectedResourceConditions *ProtectedResourceConditions
+
+	// You can override certain restore metadata keys by including the parameter
+	// RestoreMetadataOverrides in the body of RestoreTestingSelection . Key values are
+	// not case sensitive. See the complete list of restore testing inferred metadata (https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html)
+	// .
+	RestoreMetadataOverrides map[string]string
+
+	// This is amount of hours (1 to 168) available to run a validation script on the
+	// data. The data will be deleted upon the completion of the validation script or
+	// the end of the specified retention period, whichever comes first.
+	ValidationWindowHours int32
+
+	noSmithyDocumentSerde
+}
+
+// This contains metadata about a restore testing selection.
+type RestoreTestingSelectionForGet struct {
+
+	// The date and time that a restore testing selection was created, in Unix format
+	// and Coordinated Universal Time (UTC). The value of CreationTime is accurate to
+	// milliseconds. For example, the value 1516925490.087 represents Friday, January
+	// 26, 201812:11:30.087 AM.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the
+	// target resource; for example: arn:aws:iam::123456789012:role/S3Access .
+	//
+	// This member is required.
+	IamRoleArn *string
+
+	// The type of Amazon Web Services resource included in a resource testing
+	// selection; for example, an Amazon EBS volume or an Amazon RDS database.
+	//
+	// This member is required.
+	ProtectedResourceType *string
+
+	// The RestoreTestingPlanName is a unique string that is the name of the restore
+	// testing plan.
+	//
+	// This member is required.
+	RestoreTestingPlanName *string
+
+	// This is the unique name of the restore testing selection that belongs to the
+	// related restore testing plan.
+	//
+	// This member is required.
+	RestoreTestingSelectionName *string
+
+	// This identifies the request and allows failed requests to be retried without
+	// the risk of running the operation twice. If the request includes a
+	// CreatorRequestId that matches an existing backup plan, that plan is returned.
+	// This parameter is optional. If used, this parameter must contain 1 to 50
+	// alphanumeric or '-_.' characters.
+	CreatorRequestId *string
+
+	// You can include specific ARNs, such as ProtectedResourceArns: ["arn:aws:...",
+	// "arn:aws:..."] or you can include a wildcard: ProtectedResourceArns: ["*"] , but
+	// not both.
+	ProtectedResourceArns []string
+
+	// In a resource testing selection, this parameter filters by specific conditions
+	// such as StringEquals or StringNotEquals .
+	ProtectedResourceConditions *ProtectedResourceConditions
+
+	// You can override certain restore metadata keys by including the parameter
+	// RestoreMetadataOverrides in the body of RestoreTestingSelection . Key values are
+	// not case sensitive. See the complete list of restore testing inferred metadata (https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html)
+	// .
+	RestoreMetadataOverrides map[string]string
+
+	// This is amount of hours (1 to 168) available to run a validation script on the
+	// data. The data will be deleted upon the completion of the validation script or
+	// the end of the specified retention period, whichever comes first.
+	ValidationWindowHours int32
+
+	noSmithyDocumentSerde
+}
+
+// This contains metadata about a restore testing selection.
+type RestoreTestingSelectionForList struct {
+
+	// This is the date and time that a restore testing selection was created, in Unix
+	// format and Coordinated Universal Time (UTC). The value of CreationTime is
+	// accurate to milliseconds. For example, the value 1516925490.087 represents
+	// Friday, January 26,2018 12:11:30.087 AM.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the
+	// target resource; for example: arn:aws:iam::123456789012:role/S3Access .
+	//
+	// This member is required.
+	IamRoleArn *string
+
+	// The type of Amazon Web Services resource included in a restore testing
+	// selection; for example, an Amazon EBS volume or an Amazon RDS database.
+	//
+	// This member is required.
+	ProtectedResourceType *string
+
+	// Unique string that is the name of the restore testing plan. The name cannot be
+	// changed after creation. The name must consist of only alphanumeric characters
+	// and underscores. Maximum length is 50.
+	//
+	// This member is required.
+	RestoreTestingPlanName *string
+
+	// Unique name of a restore testing selection.
+	//
+	// This member is required.
+	RestoreTestingSelectionName *string
+
+	// This value represents the time, in hours, data is retained after a restore test
+	// so that optional validation can be completed. Accepted value is an integer
+	// between 0 and 168 (the hourly equivalent of seven days).
+	ValidationWindowHours int32
+
+	noSmithyDocumentSerde
+}
+
+// This contains metadata about a restore testing selection.
+type RestoreTestingSelectionForUpdate struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the
+	// target resource; for example: arn:aws:iam::123456789012:role/S3Access .
+	IamRoleArn *string
+
+	// You can include a list of specific ARNs, such as ProtectedResourceArns:
+	// ["arn:aws:...", "arn:aws:..."] or you can include a wildcard:
+	// ProtectedResourceArns: ["*"] , but not both.
+	ProtectedResourceArns []string
+
+	// A list of conditions that you define for resources in your restore testing plan
+	// using tags. For example, "StringEquals": { "Key":
+	// "aws:ResourceTag/CreatedByCryo", "Value": "true" }, . Condition operators are
+	// case sensitive.
+	ProtectedResourceConditions *ProtectedResourceConditions
+
+	// You can override certain restore metadata keys by including the parameter
+	// RestoreMetadataOverrides in the body of RestoreTestingSelection . Key values are
+	// not case sensitive. See the complete list of restore testing inferred metadata (https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html)
+	// .
+	RestoreMetadataOverrides map[string]string
+
+	// This value represents the time, in hours, data is retained after a restore test
+	// so that optional validation can be completed. Accepted value is an integer
+	// between 0 and 168 (the hourly equivalent of seven days).
+	ValidationWindowHours int32
 
 	noSmithyDocumentSerde
 }

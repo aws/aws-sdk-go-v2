@@ -30,6 +30,26 @@ func (m *validateOpCreateExperimentTemplate) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateTargetAccountConfiguration struct {
+}
+
+func (*validateOpCreateTargetAccountConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTargetAccountConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTargetAccountConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTargetAccountConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteExperimentTemplate struct {
 }
 
@@ -45,6 +65,26 @@ func (m *validateOpDeleteExperimentTemplate) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteExperimentTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTargetAccountConfiguration struct {
+}
+
+func (*validateOpDeleteTargetAccountConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTargetAccountConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTargetAccountConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTargetAccountConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -90,6 +130,26 @@ func (m *validateOpGetExperiment) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetExperimentTargetAccountConfiguration struct {
+}
+
+func (*validateOpGetExperimentTargetAccountConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetExperimentTargetAccountConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetExperimentTargetAccountConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetExperimentTargetAccountConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetExperimentTemplate struct {
 }
 
@@ -105,6 +165,26 @@ func (m *validateOpGetExperimentTemplate) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetExperimentTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTargetAccountConfiguration struct {
+}
+
+func (*validateOpGetTargetAccountConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTargetAccountConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTargetAccountConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTargetAccountConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -130,6 +210,46 @@ func (m *validateOpGetTargetResourceType) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListExperimentResolvedTargets struct {
+}
+
+func (*validateOpListExperimentResolvedTargets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExperimentResolvedTargets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExperimentResolvedTargetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExperimentResolvedTargetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListExperimentTargetAccountConfigurations struct {
+}
+
+func (*validateOpListExperimentTargetAccountConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExperimentTargetAccountConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExperimentTargetAccountConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExperimentTargetAccountConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -145,6 +265,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTargetAccountConfigurations struct {
+}
+
+func (*validateOpListTargetAccountConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTargetAccountConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTargetAccountConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTargetAccountConfigurationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,12 +390,40 @@ func (m *validateOpUpdateExperimentTemplate) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateTargetAccountConfiguration struct {
+}
+
+func (*validateOpUpdateTargetAccountConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTargetAccountConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTargetAccountConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTargetAccountConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateExperimentTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateExperimentTemplate{}, middleware.After)
 }
 
+func addOpCreateTargetAccountConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTargetAccountConfiguration{}, middleware.After)
+}
+
 func addOpDeleteExperimentTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteExperimentTemplate{}, middleware.After)
+}
+
+func addOpDeleteTargetAccountConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTargetAccountConfiguration{}, middleware.After)
 }
 
 func addOpGetActionValidationMiddleware(stack *middleware.Stack) error {
@@ -266,16 +434,36 @@ func addOpGetExperimentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetExperiment{}, middleware.After)
 }
 
+func addOpGetExperimentTargetAccountConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetExperimentTargetAccountConfiguration{}, middleware.After)
+}
+
 func addOpGetExperimentTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetExperimentTemplate{}, middleware.After)
+}
+
+func addOpGetTargetAccountConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTargetAccountConfiguration{}, middleware.After)
 }
 
 func addOpGetTargetResourceTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTargetResourceType{}, middleware.After)
 }
 
+func addOpListExperimentResolvedTargetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExperimentResolvedTargets{}, middleware.After)
+}
+
+func addOpListExperimentTargetAccountConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExperimentTargetAccountConfigurations{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListTargetAccountConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTargetAccountConfigurations{}, middleware.After)
 }
 
 func addOpStartExperimentValidationMiddleware(stack *middleware.Stack) error {
@@ -296,6 +484,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateExperimentTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateExperimentTemplate{}, middleware.After)
+}
+
+func addOpUpdateTargetAccountConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTargetAccountConfiguration{}, middleware.After)
 }
 
 func validateCreateExperimentTemplateActionInput(v *types.CreateExperimentTemplateActionInput) error {
@@ -634,6 +826,27 @@ func validateOpCreateExperimentTemplateInput(v *CreateExperimentTemplateInput) e
 	}
 }
 
+func validateOpCreateTargetAccountConfigurationInput(v *CreateTargetAccountConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTargetAccountConfigurationInput"}
+	if v.ExperimentTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentTemplateId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteExperimentTemplateInput(v *DeleteExperimentTemplateInput) error {
 	if v == nil {
 		return nil
@@ -641,6 +854,24 @@ func validateOpDeleteExperimentTemplateInput(v *DeleteExperimentTemplateInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteExperimentTemplateInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTargetAccountConfigurationInput(v *DeleteTargetAccountConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTargetAccountConfigurationInput"}
+	if v.ExperimentTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentTemplateId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -679,6 +910,24 @@ func validateOpGetExperimentInput(v *GetExperimentInput) error {
 	}
 }
 
+func validateOpGetExperimentTargetAccountConfigurationInput(v *GetExperimentTargetAccountConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetExperimentTargetAccountConfigurationInput"}
+	if v.ExperimentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetExperimentTemplateInput(v *GetExperimentTemplateInput) error {
 	if v == nil {
 		return nil
@@ -686,6 +935,24 @@ func validateOpGetExperimentTemplateInput(v *GetExperimentTemplateInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetExperimentTemplateInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTargetAccountConfigurationInput(v *GetTargetAccountConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTargetAccountConfigurationInput"}
+	if v.ExperimentTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentTemplateId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -709,6 +976,36 @@ func validateOpGetTargetResourceTypeInput(v *GetTargetResourceTypeInput) error {
 	}
 }
 
+func validateOpListExperimentResolvedTargetsInput(v *ListExperimentResolvedTargetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExperimentResolvedTargetsInput"}
+	if v.ExperimentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListExperimentTargetAccountConfigurationsInput(v *ListExperimentTargetAccountConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExperimentTargetAccountConfigurationsInput"}
+	if v.ExperimentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -716,6 +1013,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTargetAccountConfigurationsInput(v *ListTargetAccountConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTargetAccountConfigurationsInput"}
+	if v.ExperimentTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentTemplateId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -812,6 +1124,24 @@ func validateOpUpdateExperimentTemplateInput(v *UpdateExperimentTemplateInput) e
 		if err := validateUpdateExperimentTemplateLogConfigurationInput(v.LogConfiguration); err != nil {
 			invalidParams.AddNested("LogConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTargetAccountConfigurationInput(v *UpdateTargetAccountConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTargetAccountConfigurationInput"}
+	if v.ExperimentTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentTemplateId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

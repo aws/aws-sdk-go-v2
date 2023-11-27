@@ -1,0 +1,8 @@
+{
+    "id": "a5bb6ce9-4744-49b5-b9bb-50abc05634a9",
+    "type": "feature",
+    "description": "This release adds support for AWS HealthScribe APIs within Amazon Transcribe",
+    "modules": [
+        "service/transcribe"
+    ]
+}

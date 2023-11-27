@@ -1,0 +1,8 @@
+{
+    "id": "f9a5e82f-7de4-403e-8d8f-d82e5d913c08",
+    "type": "documentation",
+    "description": "Updates Amazon RDS documentation for support for RDS for Db2.",
+    "modules": [
+        "service/rds"
+    ]
+}

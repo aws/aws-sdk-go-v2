@@ -41,10 +41,10 @@ type ModifyDBInstanceInput struct {
 	DBInstanceIdentifier *string
 
 	// The new amount of storage in gibibytes (GiB) to allocate for the DB instance.
-	// For RDS for MariaDB, RDS for MySQL, RDS for Oracle, and RDS for PostgreSQL, the
-	// value supplied must be at least 10% greater than the current value. Values that
-	// are not at least 10% greater than the existing value are rounded up so that they
-	// are 10% greater than the current value. For the valid values for allocated
+	// For RDS for Db2, MariaDB, RDS for MySQL, RDS for Oracle, and RDS for PostgreSQL,
+	// the value supplied must be at least 10% greater than the current value. Values
+	// that are not at least 10% greater than the existing value are rounded up so that
+	// they are 10% greater than the current value. For the valid values for allocated
 	// storage for each engine, see CreateDBInstance .
 	AllocatedStorage *int32
 
@@ -178,6 +178,7 @@ type ModifyDBInstanceInput struct {
 	// parameter. This setting doesn't apply to RDS Custom DB instances. Valid Values:
 	// 1150-65535 Default:
 	//   - Amazon Aurora - 3306
+	//   - RDS for Db2 - 50000
 	//   - RDS for MariaDB - 3306
 	//   - RDS for Microsoft SQL Server - 1433
 	//   - RDS for MySQL - 3306
@@ -221,7 +222,7 @@ type ModifyDBInstanceInput struct {
 
 	// The Active Directory directory ID to move the DB instance to. Specify none to
 	// remove the instance from its current domain. You must create the domain before
-	// this operation. Currently, you can create only MySQL, Microsoft SQL Server,
+	// this operation. Currently, you can create only Db2, MySQL, Microsoft SQL Server,
 	// Oracle, and PostgreSQL DB instances in an Active Directory Domain. For more
 	// information, see Kerberos Authentication (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html)
 	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom DB
@@ -352,6 +353,7 @@ type ModifyDBInstanceInput struct {
 
 	// The license model for the DB instance. This setting doesn't apply to Amazon
 	// Aurora or RDS Custom DB instances. Valid Values:
+	//   - RDS for Db2 - bring-your-own-license
 	//   - RDS for MariaDB - general-public-license
 	//   - RDS for Microsoft SQL Server - license-included
 	//   - RDS for MySQL - general-public-license
@@ -379,7 +381,7 @@ type ModifyDBInstanceInput struct {
 	// the time of the request and the completion of the request, the
 	// MasterUserPassword element exists in the PendingModifiedValues element of the
 	// operation response. Amazon RDS API operations never return the password, so this
-	// action provides a way to regain access to a primary instance user if the
+	// operation provides a way to regain access to a primary instance user if the
 	// password is lost. This includes restoring privileges that might have been
 	// accidentally revoked. This setting doesn't apply to the following DB instances:
 	//   - Amazon Aurora (The password for the master user is managed by the DB
@@ -387,8 +389,11 @@ type ModifyDBInstanceInput struct {
 	//   - RDS Custom
 	// Default: Uses existing setting Constraints:
 	//   - Can't be specified if ManageMasterUserPassword is turned on.
-	//   - Can include any printable ASCII character except "/", """, or "@".
+	//   - Can include any printable ASCII character except "/", """, or "@". For RDS
+	//   for Oracle, can't include the "&" (ampersand) or the "'" (single quotes)
+	//   character.
 	// Length Constraints:
+	//   - RDS for Db2 - Must contain from 8 to 255 characters.
 	//   - RDS for MariaDB - Must contain from 8 to 41 characters.
 	//   - RDS for Microsoft SQL Server - Must contain from 8 to 128 characters.
 	//   - RDS for MySQL - Must contain from 8 to 41 characters.

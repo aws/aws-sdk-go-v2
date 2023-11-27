@@ -22,8 +22,9 @@ import (
 // group. By default, the new DB instance is created as a single-AZ deployment
 // except when the instance is a SQL Server instance that has an option group that
 // is associated with mirroring; in this case, the instance becomes a mirrored
-// deployment and not a single-AZ deployment. This command doesn't apply to Aurora
-// MySQL and Aurora PostgreSQL. For Aurora, use RestoreDBClusterToPointInTime .
+// deployment and not a single-AZ deployment. This operation doesn't apply to
+// Aurora MySQL and Aurora PostgreSQL. For Aurora, use
+// RestoreDBClusterToPointInTime .
 func (c *Client) RestoreDBInstanceToPointInTime(ctx context.Context, params *RestoreDBInstanceToPointInTimeInput, optFns ...func(*Options)) (*RestoreDBInstanceToPointInTimeOutput, error) {
 	if params == nil {
 		params = &RestoreDBInstanceToPointInTimeInput{}
@@ -67,10 +68,12 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// Example: us-east-1a
 	AvailabilityZone *string
 
-	// Specifies where automated backups and manual snapshots are stored for the
-	// restored DB instance. Possible values are outposts (Amazon Web Services
-	// Outposts) and region (Amazon Web Services Region). The default is region . For
-	// more information, see Working with Amazon RDS on Amazon Web Services Outposts (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html)
+	// The location for storing automated backups and manual snapshots for the
+	// restored DB instance. Valid Values:
+	//   - outposts (Amazon Web Services Outposts)
+	//   - region (Amazon Web Services Region)
+	// Default: region For more information, see Working with Amazon RDS on Amazon Web
+	// Services Outposts (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html)
 	// in the Amazon RDS User Guide.
 	BackupTarget *string
 
@@ -99,8 +102,12 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// original DB instance.
 	DBInstanceClass *string
 
-	// The database name for the restored DB instance. This parameter isn't supported
-	// for the MySQL or MariaDB engines. It also doesn't apply to RDS Custom.
+	// The database name for the restored DB instance. This parameter doesn't apply to
+	// the following DB instances:
+	//   - RDS Custom
+	//   - RDS for Db2
+	//   - RDS for MariaDB
+	//   - RDS for MySQL
 	DBName *string
 
 	// The name of the DB parameter group to associate with this DB instance. If you
@@ -195,6 +202,8 @@ type RestoreDBInstanceToPointInTimeInput struct {
 
 	// The database engine to use for the new instance. This setting doesn't apply to
 	// RDS Custom. Valid Values:
+	//   - db2-ae
+	//   - db2-se
 	//   - mariadb
 	//   - mysql
 	//   - oracle-ee

@@ -134,6 +134,9 @@ type UpdateFileSystemOutput struct {
 	// arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567
 	FileSystemArn *string
 
+	// Describes the protection on the file system.
+	FileSystemProtection *types.FileSystemProtectionDescription
+
 	// The ID of an KMS key used to protect the encrypted file system.
 	KmsKeyId *string
 

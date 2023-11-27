@@ -12,10 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use this action to manage storage of your file system. A LifecycleConfiguration
+// Use this action to manage storage for your file system. A LifecycleConfiguration
 // consists of one or more LifecyclePolicy objects that define the following:
+//
 //   - TransitionToIA – When to move files in the file system from primary storage
 //     (Standard storage class) into the Infrequent Access (IA) storage.
+//
 //   - TransitionToArchive – When to move files in the file system from their
 //     current storage class (either IA or Standard storage) into the Archive storage.
 //     File systems cannot transition into Archive storage before transitioning into IA
@@ -23,6 +25,7 @@ import (
 //     than TransitionToIA. The Archive storage class is available only for file
 //     systems that use the Elastic Throughput mode and the General Purpose Performance
 //     mode.
+//
 //   - TransitionToPrimaryStorageClass – Whether to move files in the file system
 //     back to primary storage (Standard storage class) after they are accessed in IA
 //     or Archive storage.
@@ -33,8 +36,7 @@ import (
 // already exists for the specified file system, a PutLifecycleConfiguration call
 // modifies the existing configuration. A PutLifecycleConfiguration call with an
 // empty LifecyclePolicies array in the request body deletes any existing
-// LifecycleConfiguration for the file system. In the request, specify the
-// following:
+// LifecycleConfiguration . In the request, specify the following:
 //   - The ID for the file system for which you are enabling, disabling, or
 //     modifying Lifecycle management.
 //   - A LifecyclePolicies array of LifecyclePolicy objects that define when to

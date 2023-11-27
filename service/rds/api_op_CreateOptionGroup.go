@@ -31,8 +31,9 @@ func (c *Client) CreateOptionGroup(ctx context.Context, params *CreateOptionGrou
 
 type CreateOptionGroupInput struct {
 
-	// Specifies the name of the engine that this option group should be associated
-	// with. Valid Values:
+	// The name of the engine to associate this option group with. Valid Values:
+	//   - db2-ae
+	//   - db2-se
 	//   - mariadb
 	//   - mysql
 	//   - oracle-ee

@@ -1,0 +1,8 @@
+{
+    "id": "792433a3-28ca-4a8a-aae2-46ba86d6144a",
+    "type": "feature",
+    "description": "Adding support for EFS Replication to existing file system.",
+    "modules": [
+        "service/efs"
+    ]
+}

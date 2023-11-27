@@ -95,6 +95,18 @@ type CreateExperimentTemplateActionInput struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies experiment options for an experiment template.
+type CreateExperimentTemplateExperimentOptionsInput struct {
+
+	// Specifies the account targeting setting for experiment options.
+	AccountTargeting AccountTargeting
+
+	// Specifies the empty target resolution mode for experiment options.
+	EmptyTargetResolutionMode EmptyTargetResolutionMode
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the configuration for experiment logging.
 type CreateExperimentTemplateLogConfigurationInput struct {
 
@@ -181,6 +193,9 @@ type Experiment struct {
 	// The time that the experiment ended.
 	EndTime *time.Time
 
+	// The experiment options for the experiment.
+	ExperimentOptions *ExperimentOptions
+
 	// The ID of the experiment template.
 	ExperimentTemplateId *string
 
@@ -205,6 +220,9 @@ type Experiment struct {
 
 	// The tags for the experiment.
 	Tags map[string]string
+
+	// The count of target account configurations for the experiment.
+	TargetAccountConfigurationsCount *int64
 
 	// The targets for the experiment.
 	Targets map[string]ExperimentTarget
@@ -275,6 +293,18 @@ type ExperimentLogConfiguration struct {
 
 	// The configuration for experiment logging to Amazon S3.
 	S3Configuration *ExperimentS3LogConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Describes the options for an experiment.
+type ExperimentOptions struct {
+
+	// The account targeting setting for an experiment.
+	AccountTargeting AccountTargeting
+
+	// The empty target resolution mode for an experiment.
+	EmptyTargetResolutionMode EmptyTargetResolutionMode
 
 	noSmithyDocumentSerde
 }
@@ -360,6 +390,36 @@ type ExperimentTarget struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a target account configuration for an experiment.
+type ExperimentTargetAccountConfiguration struct {
+
+	// The AWS account ID of the target account.
+	AccountId *string
+
+	// The description of the target account.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of an IAM role for the target account.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of a target account configuration.
+type ExperimentTargetAccountConfigurationSummary struct {
+
+	// The AWS account ID of the target account.
+	AccountId *string
+
+	// The description of the target account.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of an IAM role for the target account.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a filter used for the target resources in an experiment.
 type ExperimentTargetFilter struct {
 
@@ -384,6 +444,9 @@ type ExperimentTemplate struct {
 	// The description for the experiment template.
 	Description *string
 
+	// The experiment options for an experiment template.
+	ExperimentOptions *ExperimentTemplateExperimentOptions
+
 	// The ID of the experiment template.
 	Id *string
 
@@ -401,6 +464,9 @@ type ExperimentTemplate struct {
 
 	// The tags for the experiment template.
 	Tags map[string]string
+
+	// The count of target account configurations for the experiment template.
+	TargetAccountConfigurationsCount *int64
 
 	// The targets for the experiment.
 	Targets map[string]ExperimentTemplateTarget
@@ -447,6 +513,18 @@ type ExperimentTemplateCloudWatchLogsLogConfigurationInput struct {
 	//
 	// This member is required.
 	LogGroupArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the experiment options for an experiment template.
+type ExperimentTemplateExperimentOptions struct {
+
+	// The account targeting setting for an experiment template.
+	AccountTargeting AccountTargeting
+
+	// The empty target resolution mode for an experiment template.
+	EmptyTargetResolutionMode EmptyTargetResolutionMode
 
 	noSmithyDocumentSerde
 }
@@ -579,6 +657,51 @@ type ExperimentTemplateTargetInputFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a resolved target.
+type ResolvedTarget struct {
+
+	// The resource type of the target.
+	ResourceType *string
+
+	// Information about the target.
+	TargetInformation map[string]string
+
+	// The name of the target.
+	TargetName *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a target account configuration.
+type TargetAccountConfiguration struct {
+
+	// The AWS account ID of the target account.
+	AccountId *string
+
+	// The description of the target account.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of an IAM role for the target account.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of a target account configuration.
+type TargetAccountConfigurationSummary struct {
+
+	// The AWS account ID of the target account.
+	AccountId *string
+
+	// The description of the target account.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of an IAM role for the target account.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a resource type.
 type TargetResourceType struct {
 
@@ -637,6 +760,15 @@ type UpdateExperimentTemplateActionInputItem struct {
 
 	// The targets for the action.
 	Targets map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an experiment option for an experiment template.
+type UpdateExperimentTemplateExperimentOptionsInput struct {
+
+	// The empty target resolution mode of the experiment template.
+	EmptyTargetResolutionMode EmptyTargetResolutionMode
 
 	noSmithyDocumentSerde
 }

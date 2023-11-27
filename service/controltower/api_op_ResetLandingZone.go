@@ -42,8 +42,8 @@ type ResetLandingZoneInput struct {
 type ResetLandingZoneOutput struct {
 
 	// A unique identifier assigned to a ResetLandingZone operation. You can use this
-	// identifier as an input of GetLandingZoneOperation to check the operation's
-	// status.
+	// identifier as an input parameter of GetLandingZoneOperation to check the
+	// operation's status.
 	//
 	// This member is required.
 	OperationIdentifier *string

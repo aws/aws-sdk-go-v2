@@ -35,8 +35,8 @@ func (c *Client) DisableControl(ctx context.Context, params *DisableControlInput
 type DisableControlInput struct {
 
 	// The ARN of the control. Only Strongly recommended and Elective controls are
-	// permitted, with the exception of the Region deny control. For information on how
-	// to find the controlIdentifier , see the overview page (https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html)
+	// permitted, with the exception of the landing zone Region deny control. For
+	// information on how to find the controlIdentifier , see the overview page (https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html)
 	// .
 	//
 	// This member is required.

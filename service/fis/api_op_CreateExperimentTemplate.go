@@ -24,7 +24,7 @@ import (
 //     running, the experiment is automatically stopped. You can define a stop
 //     condition as a CloudWatch alarm.
 //
-// For more information, see Experiment templates (https://docs.aws.amazon.com/fis/latest/userguide/experiment-templates.html)
+// For more information, see experiment templates (https://docs.aws.amazon.com/fis/latest/userguide/experiment-templates.html)
 // in the Fault Injection Simulator User Guide.
 func (c *Client) CreateExperimentTemplate(ctx context.Context, params *CreateExperimentTemplateInput, optFns ...func(*Options)) (*CreateExperimentTemplateOutput, error) {
 	if params == nil {
@@ -69,6 +69,9 @@ type CreateExperimentTemplateInput struct {
 	//
 	// This member is required.
 	StopConditions []types.CreateExperimentTemplateStopConditionInput
+
+	// The experiment options for the experiment template.
+	ExperimentOptions *types.CreateExperimentTemplateExperimentOptionsInput
 
 	// The configuration for experiment logging.
 	LogConfiguration *types.CreateExperimentTemplateLogConfigurationInput

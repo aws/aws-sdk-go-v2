@@ -355,6 +355,63 @@ func (MedicalContentIdentificationType) Values() []MedicalContentIdentificationT
 	}
 }
 
+type MedicalScribeJobStatus string
+
+// Enum values for MedicalScribeJobStatus
+const (
+	MedicalScribeJobStatusQueued     MedicalScribeJobStatus = "QUEUED"
+	MedicalScribeJobStatusInProgress MedicalScribeJobStatus = "IN_PROGRESS"
+	MedicalScribeJobStatusFailed     MedicalScribeJobStatus = "FAILED"
+	MedicalScribeJobStatusCompleted  MedicalScribeJobStatus = "COMPLETED"
+)
+
+// Values returns all known values for MedicalScribeJobStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MedicalScribeJobStatus) Values() []MedicalScribeJobStatus {
+	return []MedicalScribeJobStatus{
+		"QUEUED",
+		"IN_PROGRESS",
+		"FAILED",
+		"COMPLETED",
+	}
+}
+
+type MedicalScribeLanguageCode string
+
+// Enum values for MedicalScribeLanguageCode
+const (
+	MedicalScribeLanguageCodeEnUs MedicalScribeLanguageCode = "en-US"
+)
+
+// Values returns all known values for MedicalScribeLanguageCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MedicalScribeLanguageCode) Values() []MedicalScribeLanguageCode {
+	return []MedicalScribeLanguageCode{
+		"en-US",
+	}
+}
+
+type MedicalScribeParticipantRole string
+
+// Enum values for MedicalScribeParticipantRole
+const (
+	MedicalScribeParticipantRolePatient   MedicalScribeParticipantRole = "PATIENT"
+	MedicalScribeParticipantRoleClinician MedicalScribeParticipantRole = "CLINICIAN"
+)
+
+// Values returns all known values for MedicalScribeParticipantRole. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MedicalScribeParticipantRole) Values() []MedicalScribeParticipantRole {
+	return []MedicalScribeParticipantRole{
+		"PATIENT",
+		"CLINICIAN",
+	}
+}
+
 type ModelStatus string
 
 // Enum values for ModelStatus

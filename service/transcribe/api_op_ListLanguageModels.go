@@ -34,7 +34,7 @@ type ListLanguageModelsInput struct {
 
 	// The maximum number of custom language models to return in each page of results.
 	// If there are fewer results than the value that you specify, only the actual
-	// results are returned. If you don't specify a value, a default of 5 is used.
+	// results are returned. If you do not specify a value, a default of 5 is used.
 	MaxResults *int32
 
 	// Returns only the custom language models that contain the specified string. The
@@ -49,7 +49,7 @@ type ListLanguageModelsInput struct {
 	NextToken *string
 
 	// Returns only custom language models with the specified status. Language models
-	// are ordered by creation date, with the newest model first. If you don't include
+	// are ordered by creation date, with the newest model first. If you do not include
 	// StatusEquals , all custom language models are returned.
 	StatusEquals types.ModelStatus
 
@@ -164,7 +164,7 @@ var _ ListLanguageModelsAPIClient = (*Client)(nil)
 type ListLanguageModelsPaginatorOptions struct {
 	// The maximum number of custom language models to return in each page of results.
 	// If there are fewer results than the value that you specify, only the actual
-	// results are returned. If you don't specify a value, a default of 5 is used.
+	// results are returned. If you do not specify a value, a default of 5 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

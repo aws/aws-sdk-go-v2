@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This decommissions a landing zone. This starts an asynchronous operation that
-// deletes Amazon Web Services Control Tower resources deployed in Amazon Web
-// Services Control Tower managed accounts.
+// Decommissions a landing zone. This API call starts an asynchronous operation
+// that deletes Amazon Web Services Control Tower resources deployed in accounts
+// managed by Amazon Web Services Control Tower.
 func (c *Client) DeleteLandingZone(ctx context.Context, params *DeleteLandingZoneInput, optFns ...func(*Options)) (*DeleteLandingZoneOutput, error) {
 	if params == nil {
 		params = &DeleteLandingZoneInput{}
@@ -41,9 +41,9 @@ type DeleteLandingZoneInput struct {
 
 type DeleteLandingZoneOutput struct {
 
-	// A unique identifier assigned to a DeleteLandingZone operation. You can use this
-	// identifier as an input of GetLandingZoneOperation to check the operation's
-	// status.
+	// >A unique identifier assigned to a DeleteLandingZone operation. You can use
+	// this identifier as an input parameter of GetLandingZoneOperation to check the
+	// operation's status.
 	//
 	// This member is required.
 	OperationIdentifier *string
