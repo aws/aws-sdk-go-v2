@@ -29,10 +29,28 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.personalizeruntime#ActionID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.personalizeruntime#ActionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalizeruntime#PredictedAction"
+            }
+        },
         "com.amazonaws.personalizeruntime#AmazonPersonalizeRuntime": {
             "type": "service",
             "version": "2018-05-22",
             "operations": [
+                {
+                    "target": "com.amazonaws.personalizeruntime#GetActionRecommendations"
+                },
                 {
                     "target": "com.amazonaws.personalizeruntime#GetPersonalizedRanking"
                 },
@@ -714,6 +732,36 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.personalizeruntime#ColumnName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 150
+                }
+            }
+        },
+        "com.amazonaws.personalizeruntime#ColumnNamesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalizeruntime#ColumnName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 99
+                }
+            }
+        },
+        "com.amazonaws.personalizeruntime#ColumnValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20000
+                }
+            }
+        },
         "com.amazonaws.personalizeruntime#Context": {
             "type": "map",
             "key": {
@@ -726,6 +774,15 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 150
+                }
+            }
+        },
+        "com.amazonaws.personalizeruntime#DatasetType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
                 }
             }
         },
@@ -767,6 +824,91 @@
                 }
             }
         },
+        "com.amazonaws.personalizeruntime#GetActionRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalizeruntime#GetActionRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalizeruntime#GetActionRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalizeruntime#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalizeruntime#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of recommended actions in sorted in descending order by prediction score. \n      Use the <code>GetActionRecommendations</code> API if you have a custom\n       campaign that deploys a solution version trained with a PERSONALIZED_ACTIONS recipe.\n    </p>\n         <p>For more information about PERSONALIZED_ACTIONS recipes, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/nexts-best-action-recipes.html\">PERSONALIZED_ACTIONS recipes</a>.\n      For more information about getting action recommendations, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/get-action-recommendations.html\">Getting action recommendations</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/action-recommendations",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalizeruntime#GetActionRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "campaignArn": {
+                    "target": "com.amazonaws.personalizeruntime#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the campaign to use for getting action recommendations. This campaign must deploy a solution version trained with a PERSONALIZED_ACTIONS recipe.</p>"
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.personalizeruntime#UserID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user ID of the user to provide action recommendations for.</p>"
+                    }
+                },
+                "numResults": {
+                    "target": "com.amazonaws.personalizeruntime#NumResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of results to return. The default is 5. The maximum is 100.</p>"
+                    }
+                },
+                "filterArn": {
+                    "target": "com.amazonaws.personalizeruntime#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the filter to apply to the returned recommendations. For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filter.html\">Filtering Recommendations</a>.</p>\n         <p>When using this parameter, be sure the filter resource is <code>ACTIVE</code>.</p>"
+                    }
+                },
+                "filterValues": {
+                    "target": "com.amazonaws.personalizeruntime#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case)\n      as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.\n    </p>\n         <p>For filter expressions that use an <code>INCLUDE</code> element to include actions,\n    you must provide values for all parameters that are defined in the expression. For\n    filters with expressions that use an <code>EXCLUDE</code> element to exclude actions, you\n      can omit the <code>filter-values</code>. In this case, Amazon Personalize doesn't use that portion of\n    the expression to filter recommendations.</p>\n         <p>For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filter.html\">Filtering recommendations and user segments</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.personalizeruntime#GetActionRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "actionList": {
+                    "target": "com.amazonaws.personalizeruntime#ActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of action recommendations sorted in descending order by prediction score. There can be a maximum of 100 actions\n      in the list. For information about action scores, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/how-action-recommendation-scoring-works.html\">How action recommendation scoring\n      works</a>.</p>"
+                    }
+                },
+                "recommendationId": {
+                    "target": "com.amazonaws.personalizeruntime#RecommendationID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the recommendation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.personalizeruntime#GetPersonalizedRanking": {
             "type": "operation",
             "input": {
@@ -806,7 +948,7 @@
                 "inputList": {
                     "target": "com.amazonaws.personalizeruntime#InputList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of items (by <code>itemId</code>) to rank. If an item was not included in the training dataset,\n      the item is appended to the end of the reranked list. The maximum is 500.</p>",
+                        "smithy.api#documentation": "<p>A list of items (by <code>itemId</code>) to rank. If an item was not included in the training dataset,\n      the item is appended to the end of the reranked list. If you are including \n      metadata in recommendations, the maximum is 50. Otherwise, the maximum is 500.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -833,6 +975,12 @@
                     "target": "com.amazonaws.personalizeruntime#FilterValues",
                     "traits": {
                         "smithy.api#documentation": "<p>The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case)\n      as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.\n    </p>\n         <p>For filter expressions that use an <code>INCLUDE</code> element to include items,\n      you must provide values for all parameters that are defined in the expression. For\n      filters with expressions that use an <code>EXCLUDE</code> element to exclude items, you\n      can omit the <code>filter-values</code>.In this case, Amazon Personalize doesn't use that portion of\n      the expression to filter recommendations.</p>\n         <p>For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filter.html\">Filtering Recommendations</a>.</p>"
+                    }
+                },
+                "metadataColumns": {
+                    "target": "com.amazonaws.personalizeruntime#MetadataColumns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you enabled metadata in recommendations when you created or updated the campaign, specify metadata columns from your Items dataset to include\n      in the personalized ranking.\n      The map key is <code>ITEMS</code> and the value is a list of column names from your Items dataset.\n      The maximum number of columns you can provide is 10.</p>\n         <p>\n      For information about enabling metadata for a campaign, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/create-campaign-return-metadata.html\">Enabling metadata in recommendations for a campaign</a>.\n    </p>"
                     }
                 }
             },
@@ -911,7 +1059,7 @@
                     "target": "com.amazonaws.personalizeruntime#NumResults",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of results to return. The default is 25. The maximum is 500.</p>"
+                        "smithy.api#documentation": "<p>The number of results to return. The default is 25. If you are including \n      metadata in recommendations, the maximum is 50. Otherwise, the maximum is 500.</p>"
                     }
                 },
                 "context": {
@@ -942,6 +1090,12 @@
                     "target": "com.amazonaws.personalizeruntime#PromotionList",
                     "traits": {
                         "smithy.api#documentation": "<p>The promotions to apply to the recommendation request. \n      A promotion defines additional business rules that apply to a configurable subset of recommended items.</p>"
+                    }
+                },
+                "metadataColumns": {
+                    "target": "com.amazonaws.personalizeruntime#MetadataColumns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you enabled metadata in recommendations when you created or updated the campaign or recommender, specify the metadata columns from your Items dataset to include in item recommendations. \n      The map key is <code>ITEMS</code> and the value is a list of column names from your Items dataset.\n    The maximum number of columns you can provide is 10.</p>\n         <p>\n      For information about enabling metadata for a campaign, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/create-campaign-return-metadata.html\">Enabling metadata in recommendations for a campaign</a>.\n      For information about enabling metadata for a recommender, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/create-recommender-return-metadata.html\">Enabling metadata in recommendations for a recommender</a>.\n    </p>"
                     }
                 }
             },
@@ -1003,6 +1157,30 @@
                 "target": "com.amazonaws.personalizeruntime#PredictedItem"
             }
         },
+        "com.amazonaws.personalizeruntime#Metadata": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.personalizeruntime#ColumnName"
+            },
+            "value": {
+                "target": "com.amazonaws.personalizeruntime#ColumnValue"
+            }
+        },
+        "com.amazonaws.personalizeruntime#MetadataColumns": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.personalizeruntime#DatasetType"
+            },
+            "value": {
+                "target": "com.amazonaws.personalizeruntime#ColumnNamesList"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.personalizeruntime#Name": {
             "type": "string",
             "traits": {
@@ -1031,6 +1209,26 @@
                 }
             }
         },
+        "com.amazonaws.personalizeruntime#PredictedAction": {
+            "type": "structure",
+            "members": {
+                "actionId": {
+                    "target": "com.amazonaws.personalizeruntime#ActionID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the recommended action.</p>"
+                    }
+                },
+                "score": {
+                    "target": "com.amazonaws.personalizeruntime#Score",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The score of the recommended action. For information about action scores, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/how-action-recommendation-scoring-works.html\">How action recommendation scoring works</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that identifies an action.</p>\n         <p>The  API returns a list of\n      <code>PredictedAction</code>s.</p>"
+            }
+        },
         "com.amazonaws.personalizeruntime#PredictedItem": {
             "type": "structure",
             "members": {
@@ -1050,6 +1248,12 @@
                     "target": "com.amazonaws.personalizeruntime#Name",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the promotion that included the predicted item.</p>"
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.personalizeruntime#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata about the item from your Items dataset.</p>"
                     }
                 }
             },

@@ -113,7 +113,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Key of the object for which the multipart upload was initiated.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Key"
+                        }
                     }
                 },
                 "UploadId": {
@@ -533,6 +536,9 @@
                     "noErrorWrapping": true
                 },
                 "smithy.api#documentation": "<p></p>",
+                "smithy.api#suppress": [
+                    "RuleSetAuthSchemes"
+                ],
                 "smithy.api#title": "Amazon Simple Storage Service",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -614,6 +620,16 @@
                             "required": false,
                             "documentation": "Internal parameter to use object lambda endpoint for an operation (eg: WriteGetObjectResponse)",
                             "type": "Boolean"
+                        },
+                        "Key": {
+                            "required": false,
+                            "documentation": "The S3 Key used to send the request. This is an optional parameter that will be set automatically for operations that are scoped to an S3 Key.",
+                            "type": "String"
+                        },
+                        "Prefix": {
+                            "required": false,
+                            "documentation": "The S3 Prefix used to send the request. This is an optional parameter that will be set automatically for operations that are scoped to an S3 Prefix.",
+                            "type": "String"
                         },
                         "DisableAccessPoints": {
                             "required": false,
@@ -9597,6 +9613,45 @@
                             }
                         },
                         {
+                            "documentation": "virtual addressing, aws-global region with Prefix, and Key uses the global endpoint. Prefix and Key parameters should not be used in endpoint evaluation.",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "s3",
+                                                "signingRegion": "us-east-1",
+                                                "disableDoubleEncoding": true
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://bucket-name.s3.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "aws-global"
+                                    },
+                                    "operationName": "ListObjects",
+                                    "operationParams": {
+                                        "Bucket": "bucket-name",
+                                        "Prefix": "prefix"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "Region": "aws-global",
+                                "Bucket": "bucket-name",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Accelerate": false,
+                                "Prefix": "prefix",
+                                "Key": "key"
+                            }
+                        },
+                        {
                             "documentation": "virtual addressing, aws-global region with fips uses the regional fips endpoint",
                             "expect": {
                                 "endpoint": {
@@ -16461,7 +16516,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Object key for which the multipart upload was initiated.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Key"
+                        }
                     }
                 },
                 "MultipartUpload": {
@@ -17254,13 +17312,16 @@
                 "smithy.api#documentation": "<p>Creates a new S3 bucket. To create a bucket, you must register with Amazon S3 and have a\n         valid Amazon Web Services Access Key ID to authenticate requests. Anonymous requests are never allowed to\n         create buckets. By creating the bucket, you become the bucket owner.</p>\n         <p>Not every string is an acceptable bucket name. For information about bucket naming\n         restrictions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html\">Bucket naming\n         rules</a>.</p>\n         <p>If you want to create an Amazon S3 on Outposts bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html\">Create Bucket</a>. </p>\n         <p>By default, the bucket is created in the US East (N. Virginia) Region. You can\n         optionally specify a Region in the request body. To constrain the bucket creation to a\n         specific Region, you can use <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketConfiguration.html\">\n               <code>LocationConstraint</code>\n            </a> condition key. You might choose a Region to\n         optimize latency, minimize costs, or address regulatory requirements. For example, if you\n         reside in Europe, you will probably find it advantageous to create buckets in the Europe\n         (Ireland) Region. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro\">Accessing a\n            bucket</a>.</p>\n         <note>\n            <p>If you send your create bucket request to the <code>s3.amazonaws.com</code> endpoint,\n            the request goes to the <code>us-east-1</code> Region. Accordingly, the signature\n            calculations in Signature Version 4 must use <code>us-east-1</code> as the Region, even\n            if the location constraint in the request specifies another Region where the bucket is\n            to be created. If you create a bucket in a Region other than US East (N. Virginia), your\n            application must be able to handle 307 redirect. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html\">Virtual hosting of\n               buckets</a>.</p>\n         </note>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>In addition to <code>s3:CreateBucket</code>, the following permissions are\n                  required when your <code>CreateBucket</code> request includes specific\n                  headers:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Access control lists (ACLs)</b> - If your\n                           <code>CreateBucket</code> request specifies access control list (ACL)\n                        permissions and the ACL is public-read, public-read-write,\n                        authenticated-read, or if you specify access permissions explicitly through\n                        any other ACL, both <code>s3:CreateBucket</code> and\n                           <code>s3:PutBucketAcl</code> permissions are needed. If the ACL for the\n                           <code>CreateBucket</code> request is private or if the request doesn't\n                        specify any ACLs, only <code>s3:CreateBucket</code> permission is needed.\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Object Lock</b> - If\n                           <code>ObjectLockEnabledForBucket</code> is set to true in your\n                           <code>CreateBucket</code> request,\n                           <code>s3:PutBucketObjectLockConfiguration</code> and\n                           <code>s3:PutBucketVersioning</code> permissions are required.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>S3 Object Ownership</b> - If your\n                           <code>CreateBucket</code> request includes the\n                           <code>x-amz-object-ownership</code> header, then the\n                           <code>s3:PutBucketOwnershipControls</code> permission is required. By\n                        default, <code>ObjectOwnership</code> is set to\n                           <code>BucketOWnerEnforced</code> and ACLs are disabled. We recommend\n                        keeping ACLs disabled, except in uncommon use cases where you must control\n                        access for each object individually. If you want to change the\n                           <code>ObjectOwnership</code> setting, you can use the\n                           <code>x-amz-object-ownership</code> header in your\n                           <code>CreateBucket</code> request to set the <code>ObjectOwnership</code>\n                        setting of your choice. For more information about S3 Object Ownership, see\n                           <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html\">Controlling\n                           object ownership </a> in the\n                        <i>Amazon S3 User Guide</i>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>S3 Block Public Access</b> - If your\n                        specific use case requires granting public access to your S3 resources, you\n                        can disable Block Public Access. You can create a new bucket with Block\n                        Public Access enabled, then separately call the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html\">\n                           <code>DeletePublicAccessBlock</code>\n                        </a> API. To use this operation, you must have the\n                           <code>s3:PutBucketPublicAccessBlock</code> permission. By default, all\n                        Block Public Access settings are enabled for new buckets. To avoid\n                        inadvertent exposure of your resources, we recommend keeping the S3 Block\n                        Public Access settings enabled. For more information about S3 Block Public\n                        Access, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html\">Blocking\n                           public access to your Amazon S3 storage </a> in the\n                           <i>Amazon S3 User Guide</i>. </p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>\n         <important>\n            <p> If your <code>CreateBucket</code> request sets <code>BucketOwnerEnforced</code> for\n            Amazon S3 Object Ownership and specifies a bucket ACL that provides access to an external\n            Amazon Web Services account, your request fails with a <code>400</code> error and returns the\n               <code>InvalidBucketAcLWithObjectOwnership</code> error code. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-ownership-existing-bucket.html\">Setting Object\n               Ownership on an existing bucket </a> in the <i>Amazon S3 User Guide</i>.\n         </p>\n         </important>\n         <p>The following operations are related to <code>CreateBucket</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html\">DeleteBucket</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
                     {
-                        "title": "To create a bucket ",
-                        "documentation": "The following example creates a bucket.",
+                        "title": "To create a bucket in a specific region",
+                        "documentation": "The following example creates a bucket. The request specifies an AWS region where to create the bucket.",
                         "input": {
-                            "Bucket": "examplebucket"
+                            "Bucket": "examplebucket",
+                            "CreateBucketConfiguration": {
+                                "LocationConstraint": "eu-west-1"
+                            }
                         },
                         "output": {
-                            "Location": "/examplebucket"
+                            "Location": "http://examplebucket.<Region>.s3.amazonaws.com/"
                         }
                     }
                 ],
@@ -17612,7 +17673,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Object key for which the multipart upload is to be initiated.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Key"
+                        }
                     }
                 },
                 "Metadata": {
@@ -18604,7 +18668,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Key name of the object to delete.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Key"
+                        }
                     }
                 },
                 "MFA": {
@@ -18658,15 +18725,14 @@
                 "smithy.api#documentation": "<p>Removes the entire tag set from the specified object. For more information about\n         managing object tags, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html\"> Object Tagging</a>.</p>\n         <p>To use this operation, you must have permission to perform the\n            <code>s3:DeleteObjectTagging</code> action.</p>\n         <p>To delete tags of a specific object version, add the <code>versionId</code> query\n         parameter in the request. You will need permission for the\n            <code>s3:DeleteObjectVersionTagging</code> action.</p>\n         <p>The following operations are related to <code>DeleteObjectTagging</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html\">PutObjectTagging</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html\">GetObjectTagging</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
                     {
-                        "title": "To remove tag set from an object version",
-                        "documentation": "The following example removes tag set associated with the specified object version. The request specifies both the object key and object version.",
+                        "title": "To remove tag set from an object",
+                        "documentation": "The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the operation removes tag set from the latest object version.",
                         "input": {
                             "Bucket": "examplebucket",
-                            "Key": "HappyFace.jpg",
-                            "VersionId": "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI"
+                            "Key": "HappyFace.jpg"
                         },
                         "output": {
-                            "VersionId": "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI"
+                            "VersionId": "null"
                         }
                     }
                 ],
@@ -18747,6 +18813,40 @@
                     "requestChecksumRequired": true
                 },
                 "smithy.api#documentation": "<p>This action enables you to delete multiple objects from a bucket using a single HTTP\n         request. If you know the object keys that you want to delete, then this action provides a\n         suitable alternative to sending individual delete requests, reducing per-request\n         overhead.</p>\n         <p>The request contains a list of up to 1000 keys that you want to delete. In the XML, you\n         provide the object key names, and optionally, version IDs if you want to delete a specific\n         version of the object from a versioning-enabled bucket. For each key, Amazon S3 performs a\n         delete action and returns the result of that delete, success, or failure, in the response.\n         Note that if the object specified in the request is not found, Amazon S3 returns the result as\n         deleted.</p>\n         <p> The action supports two modes for the response: verbose and quiet. By default, the\n         action uses verbose mode in which the response includes the result of deletion of each key\n         in your request. In quiet mode the response includes only keys where the delete action\n         encountered an error. For a successful deletion, the action does not return any information\n         about the delete in the response body.</p>\n         <p>When performing this action on an MFA Delete enabled bucket, that attempts to delete any\n         versioned objects, you must include an MFA token. If you do not provide one, the entire\n         request will fail, even if there are non-versioned objects you are trying to delete. If you\n         provide an invalid token, whether there are versioned keys in the request or not, the\n         entire Multi-Object Delete request will fail. For information about MFA Delete, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html#MultiFactorAuthenticationDelete\"> MFA\n            Delete</a>.</p>\n         <p>Finally, the Content-MD5 header is required for all Multi-Object Delete requests. Amazon S3\n         uses the header value to ensure that your request body has not been altered in\n         transit.</p>\n         <p>The following operations are related to <code>DeleteObjects</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html\">CreateMultipartUpload</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html\">UploadPart</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html\">CompleteMultipartUpload</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html\">ListParts</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html\">AbortMultipartUpload</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete multiple object versions from a versioned bucket",
+                        "documentation": "The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object versions and returns the key and versions of deleted objects in the response.",
+                        "input": {
+                            "Bucket": "examplebucket",
+                            "Delete": {
+                                "Objects": [
+                                    {
+                                        "Key": "HappyFace.jpg",
+                                        "VersionId": "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b"
+                                    },
+                                    {
+                                        "Key": "HappyFace.jpg",
+                                        "VersionId": "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd"
+                                    }
+                                ],
+                                "Quiet": false
+                            }
+                        },
+                        "output": {
+                            "Deleted": [
+                                {
+                                    "VersionId": "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd",
+                                    "Key": "HappyFace.jpg"
+                                },
+                                {
+                                    "VersionId": "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b",
+                                    "Key": "HappyFace.jpg"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/{Bucket}?delete&x-id=DeleteObjects",
@@ -20990,7 +21090,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The key of the object for which to get the ACL information.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Key"
+                        }
                     }
                 },
                 "VersionId": {
@@ -21686,7 +21789,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Key of the object to get.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Key"
+                        }
                     }
                 },
                 "Range": {
@@ -21892,22 +21998,19 @@
                 "smithy.api#documentation": "<p>Returns the tag-set of an object. You send the GET request against the tagging\n         subresource associated with the object.</p>\n         <p>To use this operation, you must have permission to perform the\n            <code>s3:GetObjectTagging</code> action. By default, the GET action returns information\n         about current version of an object. For a versioned bucket, you can have multiple versions\n         of an object in your bucket. To retrieve tags of any other version, use the versionId query\n         parameter. You also need permission for the <code>s3:GetObjectVersionTagging</code>\n         action.</p>\n         <p> By default, the bucket owner has this permission and can grant this permission to\n         others.</p>\n         <p> For information about the Amazon S3 object tagging feature, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html\">Object Tagging</a>.</p>\n         <p>The following actions are related to <code>GetObjectTagging</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html\">DeleteObjectTagging</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html\">GetObjectAttributes</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html\">PutObjectTagging</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
                     {
-                        "title": "To retrieve tag set of an object",
-                        "documentation": "The following example retrieves tag set of an object.",
+                        "title": "To retrieve tag set of a specific object version",
+                        "documentation": "The following example retrieves tag set of an object. The request specifies object version.",
                         "input": {
                             "Bucket": "examplebucket",
-                            "Key": "HappyFace.jpg"
+                            "Key": "exampleobject",
+                            "VersionId": "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI"
                         },
                         "output": {
-                            "VersionId": "null",
+                            "VersionId": "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI",
                             "TagSet": [
                                 {
-                                    "Value": "Value4",
-                                    "Key": "Key4"
-                                },
-                                {
-                                    "Value": "Value3",
-                                    "Key": "Key3"
+                                    "Value": "Value1",
+                                    "Key": "Key1"
                                 }
                             ]
                         }
@@ -22673,7 +22776,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The object key.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Key"
+                        }
                     }
                 },
                 "Range": {
@@ -24179,7 +24285,10 @@
                     "target": "com.amazonaws.s3#Prefix",
                     "traits": {
                         "smithy.api#documentation": "<p>Lists in-progress uploads only for those keys that begin with the specified prefix. You\n         can use prefixes to separate a bucket into different grouping of keys. (You can think of\n         using <code>prefix</code> to make groups in the same way that you'd use a folder in a file\n         system.)</p>",
-                        "smithy.api#httpQuery": "prefix"
+                        "smithy.api#httpQuery": "prefix",
+                        "smithy.rules#contextParam": {
+                            "name": "Prefix"
+                        }
                     }
                 },
                 "UploadIdMarker": {
@@ -24407,7 +24516,10 @@
                     "target": "com.amazonaws.s3#Prefix",
                     "traits": {
                         "smithy.api#documentation": "<p>Use this parameter to select only those keys that begin with the specified prefix. You\n         can use prefixes to separate a bucket into different groupings of keys. (You can think of\n         using <code>prefix</code> to make groups in the same way that you'd use a folder in a file\n         system.) You can use <code>prefix</code> with <code>delimiter</code> to roll up numerous\n         objects into a single result under <code>CommonPrefixes</code>. </p>",
-                        "smithy.api#httpQuery": "prefix"
+                        "smithy.api#httpQuery": "prefix",
+                        "smithy.rules#contextParam": {
+                            "name": "Prefix"
+                        }
                     }
                 },
                 "VersionIdMarker": {
@@ -24586,7 +24698,10 @@
                     "target": "com.amazonaws.s3#Prefix",
                     "traits": {
                         "smithy.api#documentation": "<p>Limits the response to keys that begin with the specified prefix.</p>",
-                        "smithy.api#httpQuery": "prefix"
+                        "smithy.api#httpQuery": "prefix",
+                        "smithy.rules#contextParam": {
+                            "name": "Prefix"
+                        }
                     }
                 },
                 "RequestPayer": {
@@ -24770,7 +24885,10 @@
                     "target": "com.amazonaws.s3#Prefix",
                     "traits": {
                         "smithy.api#documentation": "<p>Limits the response to keys that begin with the specified prefix.</p>",
-                        "smithy.api#httpQuery": "prefix"
+                        "smithy.api#httpQuery": "prefix",
+                        "smithy.rules#contextParam": {
+                            "name": "Prefix"
+                        }
                     }
                 },
                 "ContinuationToken": {
@@ -24965,7 +25083,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Object key for which the multipart upload was initiated.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Key"
+                        }
                     }
                 },
                 "MaxParts": {
@@ -27984,19 +28105,16 @@
                 "smithy.api#documentation": "<p>Adds an object to a bucket. You must have WRITE permissions on a bucket to add an object\n         to it.</p>\n         <note>\n            <p>Amazon S3 never adds partial objects; if you receive a success response, Amazon S3 added the\n            entire object to the bucket. You cannot use <code>PutObject</code> to only update a\n            single piece of metadata for an existing object. You must put the entire object with\n            updated metadata if you want to update some values.</p>\n         </note>\n         <p>Amazon S3 is a distributed system. If it receives multiple write requests for the same object\n         simultaneously, it overwrites all but the last object written. To prevent objects from\n         being deleted or overwritten, you can use <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html\">Amazon S3 Object\n            Lock</a>.</p>\n         <p>To ensure that data is not corrupted traversing the network, use the\n            <code>Content-MD5</code> header. When you use this header, Amazon S3 checks the object\n         against the provided MD5 value and, if they do not match, returns an error. Additionally,\n         you can calculate the MD5 while putting an object to Amazon S3 and compare the returned ETag to\n         the calculated MD5 value.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>To successfully complete the <code>PutObject</code> request, you must have the\n                     <code>s3:PutObject</code> in your IAM permissions.</p>\n               </li>\n               <li>\n                  <p>To successfully change the objects acl of your <code>PutObject</code> request,\n                  you must have the <code>s3:PutObjectAcl</code> in your IAM permissions.</p>\n               </li>\n               <li>\n                  <p>To successfully set the tag-set with your <code>PutObject</code> request, you\n                  must have the <code>s3:PutObjectTagging</code> in your IAM permissions.</p>\n               </li>\n               <li>\n                  <p> The <code>Content-MD5</code> header is required for any request to upload an\n                  object with a retention period configured using Amazon S3 Object Lock. For more\n                  information about Amazon S3 Object Lock, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html\">Amazon S3 Object Lock\n                     Overview</a> in the <i>Amazon S3 User Guide</i>. </p>\n               </li>\n            </ul>\n         </note>\n         <p>You have four mutually exclusive options to protect data using server-side encryption in\n         Amazon S3, depending on how you choose to manage the encryption keys. Specifically, the\n         encryption key options are Amazon S3 managed keys (SSE-S3), Amazon Web Services KMS keys (SSE-KMS or\n         DSSE-KMS), and customer-provided keys (SSE-C). Amazon S3 encrypts data with server-side\n         encryption by using Amazon S3 managed keys (SSE-S3) by default. You can optionally tell Amazon S3 to\n         encrypt data at rest by using server-side encryption with other key options. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html\">Using Server-Side\n            Encryption</a>.</p>\n         <p>When adding a new object, you can use headers to grant ACL-based permissions to\n         individual Amazon Web Services accounts or to predefined groups defined by Amazon S3. These permissions are\n         then added to the ACL on the object. By default, all objects are private. Only the owner\n         has full access control. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html\">Access Control List (ACL) Overview</a>\n         and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html\">Managing\n            ACLs Using the REST API</a>. </p>\n         <p>If the bucket that you're uploading objects to uses the bucket owner enforced setting\n         for S3 Object Ownership, ACLs are disabled and no longer affect permissions. Buckets that\n         use this setting only accept PUT requests that don't specify an ACL or PUT requests that\n         specify bucket owner full control ACLs, such as the <code>bucket-owner-full-control</code>\n         canned ACL or an equivalent form of this ACL expressed in the XML format. PUT requests that\n         contain other ACLs (for example, custom grants to certain Amazon Web Services accounts) fail and return a\n            <code>400</code> error with the error code <code>AccessControlListNotSupported</code>.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html\"> Controlling ownership of\n            objects and disabling ACLs</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <note>\n            <p>If your bucket uses the bucket owner enforced setting for Object Ownership, all\n            objects written to the bucket by any account will be owned by the bucket owner.</p>\n         </note>\n         <p>By default, Amazon S3 uses the STANDARD Storage Class to store newly created objects. The\n         STANDARD storage class provides high durability and high availability. Depending on\n         performance needs, you can specify a different Storage Class. Amazon S3 on Outposts only uses\n         the OUTPOSTS Storage Class. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html\">Storage Classes</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>If you enable versioning for a bucket, Amazon S3 automatically generates a unique version ID\n         for the object being stored. Amazon S3 returns this ID in the response. When you enable\n         versioning for a bucket, if Amazon S3 receives multiple write requests for the same object\n         simultaneously, it stores all of the objects. For more information about versioning, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html\">Adding Objects to\n            Versioning-Enabled Buckets</a>. For information about returning the versioning state\n         of a bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html\">GetBucketVersioning</a>. </p>\n         <p>For more information about related Amazon S3 APIs, see the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html\">CopyObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html\">DeleteObject</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
                     {
-                        "title": "To upload object and specify user-defined metadata",
-                        "documentation": "The following example creates an object. The request also specifies optional metadata. If the bucket is versioning enabled, S3 returns version ID in response.",
+                        "title": "To upload an object and specify optional tags",
+                        "documentation": "The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore S3 returns version ID of the newly created object.",
                         "input": {
-                            "Body": "filetoupload",
+                            "Body": "c:\\HappyFace.jpg",
                             "Bucket": "examplebucket",
-                            "Key": "exampleobject",
-                            "Metadata": {
-                                "metadata1": "value1",
-                                "metadata2": "value2"
-                            }
+                            "Key": "HappyFace.jpg",
+                            "Tagging": "key1=value1&key2=value2"
                         },
                         "output": {
-                            "VersionId": "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0",
+                            "VersionId": "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a",
                             "ETag": "\"6805f2cfc46c0f04559748bb039d69ae\""
                         }
                     }
@@ -28145,7 +28263,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Key for which the PUT action was initiated.</p>\n         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>When you use this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>\n               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When you use this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts access point ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">What is S3 on Outposts?</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Key"
+                        }
                     }
                 },
                 "RequestPayer": {
@@ -28290,7 +28411,7 @@
                     "requestAlgorithmMember": "ChecksumAlgorithm",
                     "requestChecksumRequired": true
                 },
-                "smithy.api#documentation": "<p>Places an Object Lock configuration on the specified bucket. The rule specified in the\n         Object Lock configuration will be applied by default to every new object placed in the\n         specified bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html\">Locking Objects</a>. </p>\n         <note>\n            <ul>\n               <li>\n                  <p>The <code>DefaultRetention</code> settings require both a mode and a\n                  period.</p>\n               </li>\n               <li>\n                  <p>The <code>DefaultRetention</code> period can be either <code>Days</code> or\n                     <code>Years</code> but you must select one. You cannot specify\n                     <code>Days</code> and <code>Years</code> at the same time.</p>\n               </li>\n               <li>\n                  <p>You can only enable Object Lock for new buckets. If you want to turn on Object\n                  Lock for an existing bucket, contact Amazon Web Services Support.</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Places an Object Lock configuration on the specified bucket. The rule specified in the\n         Object Lock configuration will be applied by default to every new object placed in the\n         specified bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html\">Locking Objects</a>. </p>\n         <note>\n            <ul>\n               <li>\n                  <p>The <code>DefaultRetention</code> settings require both a mode and a\n                  period.</p>\n               </li>\n               <li>\n                  <p>The <code>DefaultRetention</code> period can be either <code>Days</code> or\n                     <code>Years</code> but you must select one. You cannot specify\n                     <code>Days</code> and <code>Years</code> at the same time.</p>\n               </li>\n               <li>\n                  <p>You can enable Object Lock for new or existing buckets. For more\n                  information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html\">Configuring Object\n                     Lock</a>.</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/{Bucket}?object-lock",
@@ -28631,7 +28752,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Object key for which the PUT action was initiated.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Key"
+                        }
                     }
                 },
                 "Metadata": {
@@ -31221,7 +31345,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Object key for which the multipart upload was initiated.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Key"
+                        }
                     }
                 },
                 "PartNumber": {

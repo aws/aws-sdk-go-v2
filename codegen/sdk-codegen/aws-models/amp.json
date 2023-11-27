@@ -150,6 +150,9 @@
             "version": "2020-08-01",
             "operations": [
                 {
+                    "target": "com.amazonaws.amp#GetDefaultScraperConfiguration"
+                },
+                {
                     "target": "com.amazonaws.amp#ListTagsForResource"
                 },
                 {
@@ -160,6 +163,9 @@
                 }
             ],
             "resources": [
+                {
+                    "target": "com.amazonaws.amp#Scraper"
+                },
                 {
                     "target": "com.amazonaws.amp#Workspace"
                 }
@@ -241,7 +247,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -284,7 +289,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -297,7 +303,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -311,7 +316,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -334,7 +338,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -369,7 +372,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -380,14 +382,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -401,14 +405,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -417,11 +419,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -432,14 +434,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -453,7 +457,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -473,7 +476,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -484,14 +486,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -502,9 +506,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -946,6 +952,31 @@
                 }
             }
         },
+        "com.amazonaws.amp#AmpConfiguration": {
+            "type": "structure",
+            "members": {
+                "workspaceArn": {
+                    "target": "com.amazonaws.amp#WorkspaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of an AMP workspace.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A representation of an AMP destination."
+            }
+        },
+        "com.amazonaws.amp#ClusterArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::EKS::Cluster"
+                },
+                "smithy.api#documentation": "The ARN of an EKS cluster.",
+                "smithy.api#pattern": "^arn:aws[-a-z]*:eks:[-a-z0-9]+:[0-9]{12}:cluster/.+$"
+            }
+        },
         "com.amazonaws.amp#ConflictException": {
             "type": "structure",
             "members": {
@@ -1259,6 +1290,173 @@
                 "smithy.api#documentation": "Represents the output of a CreateRuleGroupsNamespace operation."
             }
         },
+        "com.amazonaws.amp#CreateScraper": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#CreateScraperRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#CreateScraperResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Create a scraper.",
+                "smithy.api#examples": [
+                    {
+                        "title": "CreateScraper with optional alias input, optional clientToken input, and one set of tags",
+                        "input": {
+                            "alias": "alias",
+                            "scrapeConfiguration": {
+                                "configurationBlob": "blob"
+                            },
+                            "source": {
+                                "eksConfiguration": {
+                                    "clusterArn": "arn:aws:eks:us-west-2:123456789012:cluster/example",
+                                    "securityGroupIds": [
+                                        "sg-abc123"
+                                    ],
+                                    "subnetIds": [
+                                        "subnet-abc123"
+                                    ]
+                                }
+                            },
+                            "destination": {
+                                "ampConfiguration": {
+                                    "workspaceArn": "arn:aws:aps:us-west-2:123456789012:workspace/ws-ogh2u499-ce12-hg89-v6c7-123412341234"
+                                }
+                            },
+                            "clientToken": "token",
+                            "tags": {
+                                "exampleTag": "exampleValue"
+                            }
+                        },
+                        "output": {
+                            "scraperId": "scraper-123",
+                            "arn": "arn:aws:aps:us-west-2:123456789012:scraper/scraper-123",
+                            "status": {
+                                "statusCode": "CREATING"
+                            },
+                            "tags": {
+                                "exampleTag": "exampleValue"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "POST",
+                    "uri": "/scrapers"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amp#CreateScraperRequest": {
+            "type": "structure",
+            "members": {
+                "alias": {
+                    "target": "com.amazonaws.amp#ScraperAlias",
+                    "traits": {
+                        "smithy.api#documentation": "An optional user-assigned alias for this scraper. This alias is for user reference and does not need to be unique."
+                    }
+                },
+                "scrapeConfiguration": {
+                    "target": "com.amazonaws.amp#ScrapeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "The configuration used to create the scraper.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.amp#Source",
+                    "traits": {
+                        "smithy.api#documentation": "The source that the scraper will be discovering and collecting metrics from.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.amp#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "The destination that the scraper will be producing metrics to.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.amp#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "Optional, user-provided tags for this scraper."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents the input of a CreateScraper operation.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#CreateScraperResponse": {
+            "type": "structure",
+            "members": {
+                "scraperId": {
+                    "target": "com.amazonaws.amp#ScraperId",
+                    "traits": {
+                        "smithy.api#documentation": "The generated ID of the scraper that was just created.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.amp#ScraperArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the scraper that was just created.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.amp#ScraperStatus",
+                    "traits": {
+                        "smithy.api#documentation": "The status of the scraper that was just created (usually CREATING).",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "The tags of this scraper."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents the output of a CreateScraper operation.",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.amp#CreateWorkspace": {
             "type": "operation",
             "input": {
@@ -1550,6 +1748,107 @@
                 "smithy.api#documentation": "Represents the input of a DeleteRuleGroupsNamespace operation."
             }
         },
+        "com.amazonaws.amp#DeleteScraper": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#DeleteScraperRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#DeleteScraperResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes a scraper.",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeleteScraper with optional clientToken input",
+                        "input": {
+                            "scraperId": "scraper-123",
+                            "clientToken": "token"
+                        },
+                        "output": {
+                            "scraperId": "scraper-123",
+                            "status": {
+                                "statusCode": "DELETING"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "DELETE",
+                    "uri": "/scrapers/{scraperId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amp#DeleteScraperRequest": {
+            "type": "structure",
+            "members": {
+                "scraperId": {
+                    "target": "com.amazonaws.amp#ScraperId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the scraper to delete.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.amp#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents the input of a DeleteScraper operation.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#DeleteScraperResponse": {
+            "type": "structure",
+            "members": {
+                "scraperId": {
+                    "target": "com.amazonaws.amp#ScraperId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the scraper that was deleted.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.amp#ScraperStatus",
+                    "traits": {
+                        "smithy.api#documentation": "The status of the scraper that is being deleted.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents the output of a DeleteScraper operation.",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.amp#DeleteWorkspace": {
             "type": "operation",
             "input": {
@@ -1815,6 +2114,165 @@
                 "smithy.api#documentation": "Represents the output of a DescribeRuleGroupsNamespace operation."
             }
         },
+        "com.amazonaws.amp#DescribeScraper": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#DescribeScraperRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#DescribeScraperResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Describe an existing scraper.",
+                "smithy.api#examples": [
+                    {
+                        "title": "DescribeScraper, with no statusReason to report",
+                        "input": {
+                            "scraperId": "scraper-123"
+                        },
+                        "output": {
+                            "scraper": {
+                                "alias": "alias",
+                                "scraperId": "scraper-123",
+                                "arn": "arn:aws:aps:us-west-2:123456789012:scraper/scraper-123",
+                                "roleArn": "arn:aws:iam::123456789012:role/exampleRole",
+                                "status": {
+                                    "statusCode": "ACTIVE"
+                                },
+                                "createdAt": "2023-01-01T00:00:00Z",
+                                "lastModifiedAt": "2020-01-02T00:00:00Z",
+                                "tags": {
+                                    "exampleTag": "exampleValue"
+                                },
+                                "scrapeConfiguration": {
+                                    "configurationBlob": "blob"
+                                },
+                                "source": {
+                                    "eksConfiguration": {
+                                        "clusterArn": "arn:aws:eks:us-west-2:123456789012:cluster/example",
+                                        "securityGroupIds": [
+                                            "sg-abc123"
+                                        ],
+                                        "subnetIds": [
+                                            "subnet-abc123"
+                                        ]
+                                    }
+                                },
+                                "destination": {
+                                    "ampConfiguration": {
+                                        "workspaceArn": "arn:aws:aps:us-west-2:123456789012:workspace/ws-ogh2u499-ce12-hg89-v6c7-123412341234"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/scrapers/{scraperId}"
+                },
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "ScraperActive": {
+                        "documentation": "Wait until a scraper reaches ACTIVE status",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "scraper.status.statusCode",
+                                        "expected": "ACTIVE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "scraper.status.statusCode",
+                                        "expected": "CREATION_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "ScraperDeleted": {
+                        "documentation": "Wait until a scraper reaches DELETED status",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "scraper.status.statusCode",
+                                        "expected": "DELETION_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amp#DescribeScraperRequest": {
+            "type": "structure",
+            "members": {
+                "scraperId": {
+                    "target": "com.amazonaws.amp#ScraperId",
+                    "traits": {
+                        "smithy.api#documentation": "The IDs of the scraper to describe.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents the input of a DescribeScraper operation.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#DescribeScraperResponse": {
+            "type": "structure",
+            "members": {
+                "scraper": {
+                    "target": "com.amazonaws.amp#ScraperDescription",
+                    "traits": {
+                        "smithy.api#documentation": "The properties of the selected scrapers.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents the output of a DescribeScraper operation.",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.amp#DescribeWorkspace": {
             "type": "operation",
             "input": {
@@ -1937,6 +2395,152 @@
             },
             "traits": {
                 "smithy.api#documentation": "Represents the output of a DescribeWorkspace operation."
+            }
+        },
+        "com.amazonaws.amp#Destination": {
+            "type": "union",
+            "members": {
+                "ampConfiguration": {
+                    "target": "com.amazonaws.amp#AmpConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "A representation of an AMP destination."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A representation of a destination that a scraper can produce metrics to."
+            }
+        },
+        "com.amazonaws.amp#EksConfiguration": {
+            "type": "structure",
+            "members": {
+                "clusterArn": {
+                    "target": "com.amazonaws.amp#ClusterArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of an EKS cluster.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "securityGroupIds": {
+                    "target": "com.amazonaws.amp#SecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "A list of security group IDs specified for VPC configuration."
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.amp#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "A list of subnet IDs specified for VPC configuration.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A representation of an EKS source."
+            }
+        },
+        "com.amazonaws.amp#FilterKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The name of the key to filter by.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.amp#FilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The value of a given key to filter by.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.amp#FilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amp#FilterValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of scraper filter values.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.amp#GetDefaultScraperConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#GetDefaultScraperConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#GetDefaultScraperConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Gets a default configuration.",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetDefaultScraperConfiguration",
+                        "input": {},
+                        "output": {
+                            "configuration": "blob"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/scraperconfiguration"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amp#GetDefaultScraperConfigurationRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Represents the input of a GetDefaultScraperConfiguration operation.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#GetDefaultScraperConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "configuration": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "The default configuration.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents the output of a GetDefaultScraperConfiguration operation.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.amp#IamRoleArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::IAM::Role"
+                },
+                "smithy.api#documentation": "An ARN identifying an IAM role used by the scraper."
             }
         },
         "com.amazonaws.amp#IdempotencyToken": {
@@ -2076,6 +2680,223 @@
             },
             "traits": {
                 "smithy.api#documentation": "Represents the output of a ListRuleGroupsNamespaces operation."
+            }
+        },
+        "com.amazonaws.amp#ListScrapers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#ListScrapersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#ListScrapersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists all scrapers in a customer account, including scrapers being created or deleted. You may provide filters to return a more specific list of results.",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListScrapers, with a max result of 2, using a pagination token from a previous call to ListScrapers",
+                        "input": {
+                            "maxResults": 2,
+                            "nextToken": "previouslyGeneratedToken"
+                        },
+                        "output": {
+                            "scrapers": [
+                                {
+                                    "alias": "alias1",
+                                    "scraperId": "scraper-123",
+                                    "arn": "arn:aws:aps:us-west-2:123456789012:scraper/scraper-123",
+                                    "roleArn": "arn:aws:iam::123456789012:role/exampleRole",
+                                    "status": {
+                                        "statusCode": "ACTIVE"
+                                    },
+                                    "createdAt": "2023-01-01T00:00:00Z",
+                                    "lastModifiedAt": "2020-01-02T00:00:00Z",
+                                    "tags": {
+                                        "exampleTag": "exampleValue"
+                                    },
+                                    "source": {
+                                        "eksConfiguration": {
+                                            "clusterArn": "arn:aws:eks:us-west-2:123456789012:cluster/example1",
+                                            "securityGroupIds": [
+                                                "sg-abc123"
+                                            ],
+                                            "subnetIds": [
+                                                "subnet-abc123"
+                                            ]
+                                        }
+                                    },
+                                    "destination": {
+                                        "ampConfiguration": {
+                                            "workspaceArn": "arn:aws:aps:us-west-2:123456789012:workspace/ws-ogh2u499-ce12-hg89-v6c7-123412341234"
+                                        }
+                                    }
+                                },
+                                {
+                                    "alias": "alias2",
+                                    "scraperId": "scraper-456",
+                                    "arn": "arn:aws:aps:us-west-2:123456789012:scraper/scraper-456",
+                                    "roleArn": "arn:aws:iam::123456789012:role/exampleRole",
+                                    "status": {
+                                        "statusCode": "CREATING"
+                                    },
+                                    "createdAt": "2023-01-01T00:00:00Z",
+                                    "lastModifiedAt": "2020-01-02T00:00:00Z",
+                                    "tags": {
+                                        "exampleTag": "exampleValue"
+                                    },
+                                    "source": {
+                                        "eksConfiguration": {
+                                            "clusterArn": "arn:aws:eks:us-west-2:123456789012:cluster/example2",
+                                            "securityGroupIds": [
+                                                "sg-abc456"
+                                            ],
+                                            "subnetIds": [
+                                                "subnet-abc456"
+                                            ]
+                                        }
+                                    },
+                                    "destination": {
+                                        "ampConfiguration": {
+                                            "workspaceArn": "arn:aws:aps:us-west-2:123456789012:workspace/ws-ogh2u499-ce12-hg89-v6c7-123412341234"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "ListScrapers, with filters",
+                        "input": {
+                            "filters": {
+                                "status": [
+                                    "ACTIVE"
+                                ],
+                                "sourceArn": [
+                                    "arn:aws:eks:us-west-2:123456789012:cluster/example1"
+                                ],
+                                "alias": [
+                                    "alias1"
+                                ]
+                            }
+                        },
+                        "output": {
+                            "scrapers": [
+                                {
+                                    "alias": "alias1",
+                                    "scraperId": "scraper-123",
+                                    "arn": "arn:aws:aps:us-west-2:123456789012:scraper/scraper-123",
+                                    "roleArn": "arn:aws:iam::123456789012:role/exampleRole",
+                                    "status": {
+                                        "statusCode": "ACTIVE"
+                                    },
+                                    "createdAt": "2023-01-01T00:00:00Z",
+                                    "lastModifiedAt": "2020-01-02T00:00:00Z",
+                                    "tags": {
+                                        "exampleTag": "exampleValue"
+                                    },
+                                    "source": {
+                                        "eksConfiguration": {
+                                            "clusterArn": "arn:aws:eks:us-west-2:123456789012:cluster/example1",
+                                            "securityGroupIds": [
+                                                "sg-abc123"
+                                            ],
+                                            "subnetIds": [
+                                                "subnet-abc123"
+                                            ]
+                                        }
+                                    },
+                                    "destination": {
+                                        "ampConfiguration": {
+                                            "workspaceArn": "arn:aws:aps:us-west-2:123456789012:workspace/ws-ogh2u499-ce12-hg89-v6c7-123412341234"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/scrapers"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "scrapers"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amp#ListScrapersRequest": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.amp#ScraperFilters",
+                    "traits": {
+                        "smithy.api#documentation": "A list of scraper filters.",
+                        "smithy.api#httpQueryParams": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.amp#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "Pagination token to request the next page in a paginated list. This token is obtained from the output of the previous ListScrapers request.",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum results to return in response (default=100, maximum=1000).",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents the input of a ListScrapers operation.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#ListScrapersResponse": {
+            "type": "structure",
+            "members": {
+                "scrapers": {
+                    "target": "com.amazonaws.amp#ScraperSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "The list of scrapers, filtered down if a set of filters was provided in the request.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.amp#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "Pagination token to use when requesting the next page in this list."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents the output of a ListScrapers operation.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.amp#ListTagsForResource": {
@@ -2365,7 +3186,10 @@
         "com.amazonaws.amp#PaginationToken": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "A token used to access the next page in a paginated result set."
+                "smithy.api#documentation": "A token used to access the next page in a paginated result set.",
+                "smithy.api#length": {
+                    "max": 1000
+                }
             }
         },
         "com.amazonaws.amp#PutAlertManagerDefinition": {
@@ -2832,6 +3656,363 @@
                 "smithy.api#documentation": "A list of rule groups namespace summary."
             }
         },
+        "com.amazonaws.amp#ScrapeConfiguration": {
+            "type": "union",
+            "members": {
+                "configurationBlob": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "Binary data representing a Prometheus configuration file."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A representation of a Prometheus configuration file."
+            }
+        },
+        "com.amazonaws.amp#Scraper": {
+            "type": "resource",
+            "identifiers": {
+                "scraperId": {
+                    "target": "com.amazonaws.amp#ScraperId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.amp#CreateScraper"
+            },
+            "read": {
+                "target": "com.amazonaws.amp#DescribeScraper"
+            },
+            "delete": {
+                "target": "com.amazonaws.amp#DeleteScraper"
+            },
+            "list": {
+                "target": "com.amazonaws.amp#ListScrapers"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "scraper/{scraperId}"
+                },
+                "smithy.api#documentation": "A scraper is a logical and isolated Prometheus server dedicated to discovering and collecting metrics and producing them to an AMP workspace."
+            }
+        },
+        "com.amazonaws.amp#ScraperAlias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A user-assigned scraper alias.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z][-.0-9A-Z_a-z]*$"
+            }
+        },
+        "com.amazonaws.amp#ScraperArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::APS::Scraper",
+                    "service": "ManagedPrometheusCP",
+                    "resource": "Scraper"
+                },
+                "smithy.api#documentation": "An ARN identifying a scrape configuration."
+            }
+        },
+        "com.amazonaws.amp#ScraperDescription": {
+            "type": "structure",
+            "members": {
+                "alias": {
+                    "target": "com.amazonaws.amp#ScraperAlias",
+                    "traits": {
+                        "smithy.api#documentation": "Alias of this scraper."
+                    }
+                },
+                "scraperId": {
+                    "target": "com.amazonaws.amp#ScraperId",
+                    "traits": {
+                        "smithy.api#documentation": "Unique string identifying this scraper.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.amp#ScraperArn",
+                    "traits": {
+                        "smithy.api#documentation": "The Amazon Resource Name (ARN) of this scraper.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.amp#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "The Amazon Resource Name (ARN) of the IAM role that provides permissions for the scraper to dsicover, collect, and produce metrics on your behalf.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.amp#ScraperStatus",
+                    "traits": {
+                        "smithy.api#documentation": "The status of this scraper.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The time when the scraper was created.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The time when the scraper was last modified.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "The tags of this scraper."
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.amp#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "The reason for failure if any."
+                    }
+                },
+                "scrapeConfiguration": {
+                    "target": "com.amazonaws.amp#ScrapeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "The configuration used to create the scraper.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.amp#Source",
+                    "traits": {
+                        "smithy.api#documentation": "The source that the scraper is discovering and collecting metrics from.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.amp#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "The destination that the scraper is producing metrics to.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents the properties of a scraper.",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.amp#Scraper"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amp#ScraperFilters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.amp#FilterKey",
+                "traits": {
+                    "smithy.api#documentation": "The name of the key to filter by. Currently supported filter keys are 'status', 'sourceArn', 'destinationArn', and 'alias'."
+                }
+            },
+            "value": {
+                "target": "com.amazonaws.amp#FilterValues",
+                "traits": {
+                    "smithy.api#documentation": "The values of the given key to filter by."
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of scraper filters.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.amp#ScraperId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A scraper ID.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z][-.0-9A-Z_a-z]*$"
+            }
+        },
+        "com.amazonaws.amp#ScraperStatus": {
+            "type": "structure",
+            "members": {
+                "statusCode": {
+                    "target": "com.amazonaws.amp#ScraperStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "Status code of this scraper.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents the status of a scraper."
+            }
+        },
+        "com.amazonaws.amp#ScraperStatusCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "State of a scraper.",
+                "smithy.api#enum": [
+                    {
+                        "name": "CREATING",
+                        "value": "CREATING",
+                        "documentation": "Scraper is being created. Deletion is disallowed until status is ACTIVE."
+                    },
+                    {
+                        "name": "ACTIVE",
+                        "value": "ACTIVE",
+                        "documentation": "Scraper has been created and is usable."
+                    },
+                    {
+                        "name": "DELETING",
+                        "value": "DELETING",
+                        "documentation": "Scraper is being deleted. Deletions are allowed only when status is ACTIVE."
+                    },
+                    {
+                        "name": "CREATION_FAILED",
+                        "value": "CREATION_FAILED",
+                        "documentation": "Scraper creation failed."
+                    },
+                    {
+                        "name": "DELETION_FAILED",
+                        "value": "DELETION_FAILED",
+                        "documentation": "Scraper deletion failed."
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amp#ScraperSummary": {
+            "type": "structure",
+            "members": {
+                "alias": {
+                    "target": "com.amazonaws.amp#ScraperAlias",
+                    "traits": {
+                        "smithy.api#documentation": "Alias of this scraper."
+                    }
+                },
+                "scraperId": {
+                    "target": "com.amazonaws.amp#ScraperId",
+                    "traits": {
+                        "smithy.api#documentation": "Unique string identifying this scraper.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.amp#ScraperArn",
+                    "traits": {
+                        "smithy.api#documentation": "The Amazon Resource Name (ARN) of this scraper.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.amp#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "The Amazon Resource Name (ARN) of the IAM role that provides permissions for the scraper to dsicover, collect, and produce metrics on your behalf.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.amp#ScraperStatus",
+                    "traits": {
+                        "smithy.api#documentation": "The status of this scraper.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The time when the scraper was created.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The time when the scraper was last modified.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "The tags of this scraper."
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.amp#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "The reason for failure if any."
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.amp#Source",
+                    "traits": {
+                        "smithy.api#documentation": "The source that the scraper is discovering and collecting metrics from.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.amp#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "The destination that the scraper is producing metrics to.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents a summary of the properties of a scraper.",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.amp#Scraper"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amp#ScraperSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amp#ScraperSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of scraper summaries."
+            }
+        },
+        "com.amazonaws.amp#SecurityGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ID of a VPC security group.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^sg-[0-9a-z]+$"
+            }
+        },
+        "com.amazonaws.amp#SecurityGroupIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amp#SecurityGroupId"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of security group IDs specified for VPC configuration.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.amp#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -2875,6 +4056,54 @@
                 "smithy.api#documentation": "Request would cause a service quota to be exceeded.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.amp#Source": {
+            "type": "union",
+            "members": {
+                "eksConfiguration": {
+                    "target": "com.amazonaws.amp#EksConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "A representation of an EKS source."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A representation of a source that a scraper can discover and collect metrics from."
+            }
+        },
+        "com.amazonaws.amp#StatusReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The reason for failure if any.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.amp#SubnetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ID of a VPC subnet.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^subnet-[0-9a-z]+$"
+            }
+        },
+        "com.amazonaws.amp#SubnetIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amp#SubnetId"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of subnet IDs specified for VPC configuration.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.amp#TagKey": {
@@ -3378,7 +4607,8 @@
                     "service": "ManagedPrometheusCP",
                     "resource": "Workspace"
                 },
-                "smithy.api#documentation": "An ARN identifying a Workspace."
+                "smithy.api#documentation": "An ARN identifying a Workspace.",
+                "smithy.api#pattern": "^arn:aws[-a-z]*:aps:[-a-z0-9]+:[0-9]{12}:workspace/.+$"
             }
         },
         "com.amazonaws.amp#WorkspaceDescription": {

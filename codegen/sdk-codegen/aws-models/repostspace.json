@@ -1,0 +1,2250 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.repostspace#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>User does not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.repostspace#AccessorId": {
+            "type": "string"
+        },
+        "com.amazonaws.repostspace#AccessorIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.repostspace#AccessorId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.repostspace#AdminId": {
+            "type": "string"
+        },
+        "com.amazonaws.repostspace#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.repostspace#ClientId": {
+            "type": "string"
+        },
+        "com.amazonaws.repostspace#ConfigurationStatus": {
+            "type": "enum",
+            "members": {
+                "CONFIGURED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONFIGURED"
+                    }
+                },
+                "UNCONFIGURED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNCONFIGURED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.repostspace#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updating or deleting a resource can cause an inconsistent state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.repostspace#ContentSize": {
+            "type": "long"
+        },
+        "com.amazonaws.repostspace#CreateSpace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#CreateSpaceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.repostspace#CreateSpaceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an AWS re:Post Private private re:Post.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/spaces",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.repostspace#CreateSpaceInput": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.repostspace#SpaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the private re:Post. This must be unique in your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subdomain": {
+                    "target": "com.amazonaws.repostspace#SpaceSubdomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subdomain that you use to access your AWS re:Post Private private re:Post. All custom subdomains must be approved by AWS before use. In addition to your custom subdomain, all private re:Posts are issued an AWS generated subdomain for immediate use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tier": {
+                    "target": "com.amazonaws.repostspace#TierLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing tier for the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.repostspace#SpaceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the private re:Post. This is used only to help you identify this private re:Post.</p>"
+                    }
+                },
+                "userKMSKey": {
+                    "target": "com.amazonaws.repostspace#KMSKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS KMS key ARN that’s used for the AWS KMS encryption. If you don't provide a key, your data is encrypted by default with a key that AWS owns and manages for you.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.repostspace#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags associated with the private re:Post.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.repostspace#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that grants permissions to the private re:Post to convert unanswered questions into AWS support tickets.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#CreateSpaceOutput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.repostspace#DeleteSpace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#DeleteSpaceInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an AWS re:Post Private private re:Post.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/spaces/{spaceId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.repostspace#DeleteSpaceInput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#DeregisterAdmin": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#DeregisterAdminInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the user or group from the list of administrators of the private re:Post.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/spaces/{spaceId}/admins/{adminId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.repostspace#DeregisterAdminInput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the private re:Post to remove the admin from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "adminId": {
+                    "target": "com.amazonaws.repostspace#AdminId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the admin to remove.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#GetSpace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#GetSpaceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.repostspace#GetSpaceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Displays information about the AWS re:Post Private private re:Post.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/spaces/{spaceId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.repostspace#GetSpaceInput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the private re:Post.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#GetSpaceOutput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.repostspace#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.repostspace#SpaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.repostspace#ProvisioningStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation or deletion status of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configurationStatus": {
+                    "target": "com.amazonaws.repostspace#ConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration status of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientId": {
+                    "target": "com.amazonaws.repostspace#ClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Identity Center identifier for the Application Instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.repostspace#SpaceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the private re:Post.</p>"
+                    }
+                },
+                "vanityDomainStatus": {
+                    "target": "com.amazonaws.repostspace#VanityDomainStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approval status of the custom subdomain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vanityDomain": {
+                    "target": "com.amazonaws.repostspace#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom subdomain that you use to access your private re:Post. All custom subdomains must be approved by AWS before use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "randomDomain": {
+                    "target": "com.amazonaws.repostspace#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS generated subdomain of the private re:Post</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "customerRoleArn": {
+                    "target": "com.amazonaws.repostspace#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that grants permissions to the private re:Post to convert unanswered questions into AWS support tickets.</p>"
+                    }
+                },
+                "createDateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the private re:Post was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "deleteDateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the private re:Post was deleted.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "tier": {
+                    "target": "com.amazonaws.repostspace#TierLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing tier of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageLimit": {
+                    "target": "com.amazonaws.repostspace#StorageLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage limit of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "userAdmins": {
+                    "target": "com.amazonaws.repostspace#UserAdmins",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of users that are administrators of the private re:Post.</p>"
+                    }
+                },
+                "groupAdmins": {
+                    "target": "com.amazonaws.repostspace#GroupAdmins",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of groups that are administrators of the private re:Post.</p>"
+                    }
+                },
+                "userKMSKey": {
+                    "target": "com.amazonaws.repostspace#KMSKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom AWS KMS key ARN that’s used for the AWS KMS encryption.</p>"
+                    }
+                },
+                "userCount": {
+                    "target": "com.amazonaws.repostspace#UserCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of users that have onboarded to the private re:Post.</p>"
+                    }
+                },
+                "contentSize": {
+                    "target": "com.amazonaws.repostspace#ContentSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content size of the private re:Post.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.repostspace#GroupAdmins": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.repostspace#AdminId"
+            }
+        },
+        "com.amazonaws.repostspace#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Advice to clients on when the call can be safely retried.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Unexpected error during processing of request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.repostspace#InviteBody": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 600
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.repostspace#InviteTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.repostspace#KMSKey": {
+            "type": "string"
+        },
+        "com.amazonaws.repostspace#ListSpaces": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#ListSpacesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.repostspace#ListSpacesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of AWS re:Post Private private re:Posts in the account with some information about each private re:Post.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/spaces",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "spaces"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.repostspace#ListSpacesInput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of private re:Posts to return. You receive this token from a previous ListSpaces operation.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.repostspace#ListSpacesLimit",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>The maximum number of private re:Posts to include in the results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#ListSpacesLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 10,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.repostspace#ListSpacesOutput": {
+            "type": "structure",
+            "members": {
+                "spaces": {
+                    "target": "com.amazonaws.repostspace#SpacesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures that contain some information about the private re:Posts in the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you use when you request the next set of private re:Posts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.repostspace#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.repostspace#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the tags that are associated with the AWS re:Post Private resource specified by the resourceArn. The only resource that can be tagged is a private re:Post.</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.repostspace#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.repostspace#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource that the tags are associated with.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.repostspace#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags that are associated with the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.repostspace#ProvisioningStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.repostspace#RegisterAdmin": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#RegisterAdminInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a user or group to the list of administrators of the private re:Post.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/spaces/{spaceId}/admins/{adminId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.repostspace#RegisterAdminInput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the private re:Post.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "adminId": {
+                    "target": "com.amazonaws.repostspace#AdminId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the administrator.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#RepostSpace": {
+            "type": "service",
+            "version": "2022-05-13",
+            "operations": [
+                {
+                    "target": "com.amazonaws.repostspace#CreateSpace"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#DeleteSpace"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#DeregisterAdmin"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#GetSpace"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ListSpaces"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#RegisterAdmin"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#SendInvites"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#UpdateSpace"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "arnNamespace": "repostspace",
+                    "sdkId": "repostspace",
+                    "cloudTrailEventSource": "repostspace.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "repostspace"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*",
+                        "content-type",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "x-amzn-platform-id",
+                        "x-amzn-trace-id",
+                        "content-length",
+                        "x-api-key",
+                        "authorization",
+                        "x-amz-date",
+                        "x-amz-security-token"
+                    ],
+                    "additionalExposedHeaders": [
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-trace-id"
+                    ]
+                },
+                "smithy.api#documentation": "<p>AWS re:Post Private is a private version of AWS re:Post for enterprises with Enterprise Support or Enterprise On-Ramp Support plans. It provides access to knowledge and experts to accelerate cloud adoption and increase developer productivity. With your organization-specific private re:Post, you can build an organization-specific developer community that drives efficiencies at scale and provides access to valuable knowledge resources. Additionally, re:Post Private centralizes trusted AWS technical content and offers private discussion forums to improve how your teams collaborate internally and with AWS to remove technical obstacles, accelerate innovation, and scale more efficiently in the cloud.</p>",
+                "smithy.api#title": "AWS re:Post Private",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://repostspace-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://repostspace-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://repostspace.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://repostspace.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://repostspace.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.repostspace#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request references a resource which does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.repostspace#SendInvites": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#SendInvitesInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sends an invitation email to selected users and groups.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/spaces/{spaceId}/invite",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.repostspace#SendInvitesInput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the private re:Post.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "accessorIds": {
+                    "target": "com.amazonaws.repostspace#AccessorIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The array of identifiers for the users and groups.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "com.amazonaws.repostspace#InviteTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the invite.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.repostspace#InviteBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body of the invite.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code to identify the service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "quotaCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code to identify the quota.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request would cause a service quota to be exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.repostspace#SpaceData": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.repostspace#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.repostspace#SpaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.repostspace#SpaceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the private re:Post. This is used only to help you identify this private re:Post.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.repostspace#ProvisioningStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation/deletion status of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configurationStatus": {
+                    "target": "com.amazonaws.repostspace#ConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration status of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vanityDomainStatus": {
+                    "target": "com.amazonaws.repostspace#VanityDomainStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This approval status of the custom subdomain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vanityDomain": {
+                    "target": "com.amazonaws.repostspace#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This custom subdomain that you use to access your private re:Post. All custom subdomains must be approved by AWS before use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "randomDomain": {
+                    "target": "com.amazonaws.repostspace#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS generated subdomain of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tier": {
+                    "target": "com.amazonaws.repostspace#TierLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing tier of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageLimit": {
+                    "target": "com.amazonaws.repostspace#StorageLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage limit of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createDateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the private re:Post was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "deleteDateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the private re:Post was deleted.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "userKMSKey": {
+                    "target": "com.amazonaws.repostspace#KMSKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom AWS KMS key ARN that’s used for the AWS KMS encryption.</p>"
+                    }
+                },
+                "userCount": {
+                    "target": "com.amazonaws.repostspace#UserCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of onboarded users to the private re:Post.</p>"
+                    }
+                },
+                "contentSize": {
+                    "target": "com.amazonaws.repostspace#ContentSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content size of the private re:Post.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains some information about a private re:Post in the account.</p>"
+            }
+        },
+        "com.amazonaws.repostspace#SpaceDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.repostspace#SpaceId": {
+            "type": "string"
+        },
+        "com.amazonaws.repostspace#SpaceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.repostspace#SpaceSubdomain": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                }
+            }
+        },
+        "com.amazonaws.repostspace#SpacesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.repostspace#SpaceData"
+            }
+        },
+        "com.amazonaws.repostspace#StorageLimit": {
+            "type": "long"
+        },
+        "com.amazonaws.repostspace#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.repostspace#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.repostspace#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.repostspace#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.repostspace#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates tags with an AWS re:Post Private resource. Currently, the only resource that can be tagged is the private re:Post.  If you specify a new tag key for the resource, the tag is appended to the list of tags that are associated with the resource. If you specify a tag key that’s already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.repostspace#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.repostspace#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource that the tag is associated with.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.repostspace#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tag keys and values that must be associated with the resource. You can associate tag keys only, tags (key and values) only, or a combination of tag keys and tags.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.repostspace#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.repostspace#Tags": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.repostspace#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.repostspace#TagValue"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.repostspace#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code to identify the service.</p>"
+                    }
+                },
+                "quotaCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code to identify the quota.</p>"
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Advice to clients on when the call can be safely retried.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.repostspace#TierLevel": {
+            "type": "enum",
+            "members": {
+                "BASIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASIC"
+                    }
+                },
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.repostspace#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.repostspace#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the association of the tag with the AWS re:Post Private resource.</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "DELETE",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.repostspace#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.repostspace#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.repostspace#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key values of the tag.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.repostspace#UpdateSpace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#UpdateSpaceInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies an existing AWS re:Post Private private re:Post.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/spaces/{spaceId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.repostspace#UpdateSpaceInput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of this private re:Post.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.repostspace#SpaceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the private re:Post. This is used only to help you identify this private re:Post.</p>"
+                    }
+                },
+                "tier": {
+                    "target": "com.amazonaws.repostspace#TierLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing tier of this private re:Post.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.repostspace#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that grants permissions to the private re:Post to convert unanswered questions into AWS support tickets.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#Url": {
+            "type": "string"
+        },
+        "com.amazonaws.repostspace#UserAdmins": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.repostspace#AdminId"
+            }
+        },
+        "com.amazonaws.repostspace#UserCount": {
+            "type": "integer"
+        },
+        "com.amazonaws.repostspace#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.repostspace#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why the request failed validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldList": {
+                    "target": "com.amazonaws.repostspace#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field that caused the error, if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.repostspace#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Message describing why the field failed validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stores information about a field that’s passed inside a request that resulted in an exception.</p>"
+            }
+        },
+        "com.amazonaws.repostspace#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.repostspace#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.repostspace#ValidationExceptionReason": {
+            "type": "enum",
+            "members": {
+                "UNKNOWN_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknownOperation"
+                    }
+                },
+                "CANNOT_PARSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cannotParse"
+                    }
+                },
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fieldValidationFailed"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "other"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.repostspace#VanityDomainStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "APPROVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPROVED"
+                    }
+                },
+                "UNAPPROVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNAPPROVED"
+                    }
+                }
+            }
+        }
+    }
+}

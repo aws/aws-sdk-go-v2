@@ -483,6 +483,12 @@
                 }
             }
         },
+        "com.amazonaws.securityhub#AlphaNumericNonEmptyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[-_ a-zA-Z0-9]+$"
+            }
+        },
         "com.amazonaws.securityhub#ArnList": {
             "type": "list",
             "member": {
@@ -4018,7 +4024,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that describes the\n            Amazon S3 bucket, HTTP server (for example, a web server), AWS Elemental MediaStore, or other server from which CloudFront gets your files.</p>"
+                "smithy.api#documentation": "<p>A complex type that describes the\n            Amazon S3 bucket, HTTP server (for example, a web server), Elemental MediaStore, or other server from which CloudFront gets your files.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsCloudFrontDistributionOriginItemList": {
@@ -18638,10 +18644,34 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The unique identifier of a standard in which a control is enabled. This field consists of the resource portion of the \n         Amazon Resource Name (ARN) returned for a standard in the <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html\">DescribeStandards</a> API response.\n      </p>"
                     }
+                },
+                "VulnerabilitiesExploitAvailable": {
+                    "target": "com.amazonaws.securityhub#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether a software vulnerability in your environment has a known exploit. You can filter findings by this \n            field only if you use Security Hub and Amazon Inspector.\n        </p>"
+                    }
+                },
+                "VulnerabilitiesFixAvailable": {
+                    "target": "com.amazonaws.securityhub#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether a vulnerability is fixed in a newer version of the affected software packages. You can filter \n            findings by this field only if you use Security Hub and Amazon Inspector.\n            \n        </p>"
+                    }
+                },
+                "ComplianceSecurityControlParametersName": {
+                    "target": "com.amazonaws.securityhub#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of a security control parameter.\n        </p>"
+                    }
+                },
+                "ComplianceSecurityControlParametersValue": {
+                    "target": "com.amazonaws.securityhub#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The current value of a security control parameter.\n        </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of attributes that are applied to all active Security Hub-aggregated findings and\n         that result in a subset of findings that are included in this insight.</p>\n         <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to\n         20 filter values.</p>"
+                "smithy.api#documentation": "<p>A collection of filters that are applied to all active findings aggregated by Security Hub.</p>\n         <p>You can filter by up to ten finding attributes. For each attribute, you can provide up to\n         20 filter values.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsSecurityFindingIdentifier": {
@@ -20616,7 +20646,17 @@
                                     "Description": "This AWS control checks whether ACM Certificates in your account are marked for expiration within a specified time period. Certificates provided by ACM are automatically renewed. ACM does not automatically renew certificates that you import.",
                                     "RemediationUrl": "https://docs.aws.amazon.com/console/securityhub/ACM.1/remediation",
                                     "SeverityRating": "MEDIUM",
-                                    "SecurityControlStatus": "ENABLED"
+                                    "SecurityControlStatus": "ENABLED",
+                                    "UpdateStatus": "UPDATING",
+                                    "Parameters": {
+                                        "daysToExpiration": {
+                                            "ValueType": "DEFAULT",
+                                            "Value": {
+                                                "Integer": 30
+                                            }
+                                        }
+                                    },
+                                    "LastUpdateReason": "Stayed with default value"
                                 },
                                 {
                                     "SecurityControlId": "APIGateway.1",
@@ -20625,7 +20665,17 @@
                                     "Description": "This control checks whether all stages of Amazon API Gateway REST and WebSocket APIs have logging enabled. The control fails if logging is not enabled for all methods of a stage or if loggingLevel is neither ERROR nor INFO.",
                                     "RemediationUrl": "https://docs.aws.amazon.com/console/securityhub/APIGateway.1/remediation",
                                     "SeverityRating": "MEDIUM",
-                                    "SecurityControlStatus": "ENABLED"
+                                    "SecurityControlStatus": "ENABLED",
+                                    "UpdateStatus": "UPDATING",
+                                    "Parameters": {
+                                        "loggingLevel": {
+                                            "ValueType": "CUSTOM",
+                                            "Value": {
+                                                "Enum": "ERROR"
+                                            }
+                                        }
+                                    },
+                                    "LastUpdateReason": "Updated control parameters to comply with internal requirements"
                                 }
                             ]
                         }
@@ -21288,6 +21338,20 @@
         "com.amazonaws.securityhub#Boolean": {
             "type": "boolean"
         },
+        "com.amazonaws.securityhub#BooleanConfigurationOptions": {
+            "type": "structure",
+            "members": {
+                "DefaultValue": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Security Hub default value for a boolean parameter.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter with a boolean. For a boolean parameter, the options are \n            <code>true</code> and <code>false</code>.\n        </p>"
+            }
+        },
         "com.amazonaws.securityhub#BooleanFilter": {
             "type": "structure",
             "members": {
@@ -21552,6 +21616,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The enabled security standards in which a security control is currently enabled.\n      </p>"
                     }
+                },
+                "SecurityControlParameters": {
+                    "target": "com.amazonaws.securityhub#SecurityControlParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that includes security control parameter names and values.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -21585,6 +21655,62 @@
                         "smithy.api#enumValue": "NOT_AVAILABLE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.securityhub#ConfigurationOptions": {
+            "type": "union",
+            "members": {
+                "Integer": {
+                    "target": "com.amazonaws.securityhub#IntegerConfigurationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is an integer.\n        </p>"
+                    }
+                },
+                "IntegerList": {
+                    "target": "com.amazonaws.securityhub#IntegerListConfigurationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is a list of integers.\n        </p>"
+                    }
+                },
+                "Double": {
+                    "target": "com.amazonaws.securityhub#DoubleConfigurationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is a double.\n        </p>"
+                    }
+                },
+                "String": {
+                    "target": "com.amazonaws.securityhub#StringConfigurationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is a string data type.\n        </p>"
+                    }
+                },
+                "StringList": {
+                    "target": "com.amazonaws.securityhub#StringListConfigurationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is a list of strings.\n        </p>"
+                    }
+                },
+                "Boolean": {
+                    "target": "com.amazonaws.securityhub#BooleanConfigurationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is a boolean. For a boolean parameter, the options are \n            <code>true</code> and <code>false</code>.\n        </p>"
+                    }
+                },
+                "Enum": {
+                    "target": "com.amazonaws.securityhub#EnumConfigurationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is an enum.\n        </p>"
+                    }
+                },
+                "EnumList": {
+                    "target": "com.amazonaws.securityhub#EnumListConfigurationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is a list of enums.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter.\n        </p>"
             }
         },
         "com.amazonaws.securityhub#ContainerDetails": {
@@ -22333,6 +22459,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains an instance of sensitive data that was detected by a customer-defined identifier.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#CustomizableProperties": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#SecurityControlProperty"
             }
         },
         "com.amazonaws.securityhub#Cvss": {
@@ -23896,6 +24028,32 @@
         "com.amazonaws.securityhub#Double": {
             "type": "double"
         },
+        "com.amazonaws.securityhub#DoubleConfigurationOptions": {
+            "type": "structure",
+            "members": {
+                "DefaultValue": {
+                    "target": "com.amazonaws.securityhub#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Security Hub default value for a control parameter that is a double.\n        </p>"
+                    }
+                },
+                "Min": {
+                    "target": "com.amazonaws.securityhub#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The minimum valid value for a control parameter that is a double.\n        </p>"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.securityhub#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum valid value for a control parameter that is a double.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is a double.\n        </p>"
+            }
+        },
         "com.amazonaws.securityhub#EnableImportFindingsForProduct": {
             "type": "operation",
             "input": {
@@ -24112,6 +24270,52 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#EnumConfigurationOptions": {
+            "type": "structure",
+            "members": {
+                "DefaultValue": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Security Hub default value for a control parameter that is an enum.\n        </p>"
+                    }
+                },
+                "AllowedValues": {
+                    "target": "com.amazonaws.securityhub#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The valid values for a control parameter that is an enum.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is an enum.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#EnumListConfigurationOptions": {
+            "type": "structure",
+            "members": {
+                "DefaultValue": {
+                    "target": "com.amazonaws.securityhub#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Security Hub default value for a control parameter that is a list of enums.\n        </p>"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum number of list items that an enum list control parameter can accept.\n        </p>"
+                    }
+                },
+                "AllowedValues": {
+                    "target": "com.amazonaws.securityhub#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The valid values for a control parameter that is a list of enums.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is a list of enums.\n        </p>"
             }
         },
         "com.amazonaws.securityhub#FieldMap": {
@@ -25466,6 +25670,103 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securityhub#GetSecurityControlDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#GetSecurityControlDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#GetSecurityControlDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Retrieves the definition of a security control. The definition includes the control title, description, Region availability, parameter definitions, and other details.\n        </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get the definition of a security control.",
+                        "documentation": "The following example retrieves definition details for the specified security control.",
+                        "input": {
+                            "SecurityControlId": "EC2.4"
+                        },
+                        "output": {
+                            "SecurityControlDefinition": {
+                                "CurrentRegionAvailability": "AVAILABLE",
+                                "Description": "This control checks whether an Amazon EC2 instance has been stopped for longer than the allowed number of days. The control fails if an EC2 instance is stopped for longer than the maximum allowed time period. Unless you provide a custom parameter value for the maximum allowed time period, Security Hub uses a default value of 30 days.",
+                                "RemediationUrl": "https://docs.aws.amazon.com/console/securityhub/EC2.4/remediation",
+                                "SecurityControlId": "EC2.4",
+                                "SeverityRating": "MEDIUM",
+                                "Title": "Stopped Amazon EC2 instances should be removed after a specified time period",
+                                "ParameterDefinitions": {
+                                    "AllowedDays": {
+                                        "Description": "Number of days the EC2 instance is allowed to be in a stopped state before generating a failed finding",
+                                        "ConfigurationOptions": {
+                                            "Integer": {
+                                                "DefaultValue": 30,
+                                                "Min": 1,
+                                                "Max": 365
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/securityControl/definition",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#GetSecurityControlDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "SecurityControlId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            The ID of the security control to retrieve the definition for. This field doesn’t accept an Amazon Resource Name (ARN).\n        </p>",
+                        "smithy.api#httpQuery": "SecurityControlId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetSecurityControlDefinitionResponse": {
+            "type": "structure",
+            "members": {
+                "SecurityControlDefinition": {
+                    "target": "com.amazonaws.securityhub#SecurityControlDefinition",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityhub#IcmpTypeCode": {
             "type": "structure",
             "members": {
@@ -25635,10 +25936,68 @@
         "com.amazonaws.securityhub#Integer": {
             "type": "integer"
         },
+        "com.amazonaws.securityhub#IntegerConfigurationOptions": {
+            "type": "structure",
+            "members": {
+                "DefaultValue": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Security Hub default value for a control parameter that is an integer.\n        </p>"
+                    }
+                },
+                "Min": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The minimum valid value for a control parameter that is an integer.\n        </p>"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum valid value for a control parameter that is an integer.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is an integer.\n        </p>"
+            }
+        },
         "com.amazonaws.securityhub#IntegerList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#Integer"
+            }
+        },
+        "com.amazonaws.securityhub#IntegerListConfigurationOptions": {
+            "type": "structure",
+            "members": {
+                "DefaultValue": {
+                    "target": "com.amazonaws.securityhub#IntegerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Security Hub default value for a control parameter that is a list of integers.\n        </p>"
+                    }
+                },
+                "Min": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The minimum valid value for a control parameter that is a list of integers.\n        </p>"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum valid value for a control parameter that is a list of integers.\n        </p>"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum number of list items that an interger list control parameter can accept.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is a list of integers.\n        </p>"
             }
         },
         "com.amazonaws.securityhub#IntegrationType": {
@@ -26550,7 +26909,10 @@
                                     "Description": "This AWS control checks whether ACM Certificates in your account are marked for expiration within a specified time period. Certificates provided by ACM are automatically renewed. ACM does not automatically renew certificates that you import.",
                                     "RemediationUrl": "https://docs.aws.amazon.com/console/securityhub/ACM.1/remediation",
                                     "SeverityRating": "MEDIUM",
-                                    "CurrentRegionAvailability": "AVAILABLE"
+                                    "CurrentRegionAvailability": "AVAILABLE",
+                                    "CustomizableProperties": [
+                                        "Parameters"
+                                    ]
                                 },
                                 {
                                     "SecurityControlId": "APIGateway.1",
@@ -26558,7 +26920,10 @@
                                     "Description": "This control checks whether all stages of Amazon API Gateway REST and WebSocket APIs have logging enabled. The control fails if logging is not enabled for all methods of a stage or if loggingLevel is neither ERROR nor INFO.",
                                     "RemediationUrl": "https://docs.aws.amazon.com/console/securityhub/APIGateway.1/remediation",
                                     "SeverityRating": "MEDIUM",
-                                    "CurrentRegionAvailability": "AVAILABLE"
+                                    "CurrentRegionAvailability": "AVAILABLE",
+                                    "CustomizableProperties": [
+                                        "Parameters"
+                                    ]
                                 },
                                 {
                                     "SecurityControlId": "APIGateway.2",
@@ -27421,6 +27786,18 @@
                         "smithy.api#documentation": "<p>The less-than-equal condition to be applied to a single field when querying for\n         findings. </p>"
                     }
                 },
+                "Gt": {
+                    "target": "com.amazonaws.securityhub#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The greater-than condition to be applied to a single field when querying for findings.\n        </p>"
+                    }
+                },
+                "Lt": {
+                    "target": "com.amazonaws.securityhub#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The less-than condition to be applied to a single field when querying for findings.\n        </p>"
+                    }
+                },
                 "Eq": {
                     "target": "com.amazonaws.securityhub#Double",
                     "traits": {
@@ -27506,6 +27883,143 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#Page"
+            }
+        },
+        "com.amazonaws.securityhub#ParameterConfiguration": {
+            "type": "structure",
+            "members": {
+                "ValueType": {
+                    "target": "com.amazonaws.securityhub#ParameterValueType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            Identifies whether a control parameter uses a custom user-defined value or the Security Hub default value.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.securityhub#ParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The current value of a control parameter.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            An object that provides the current value of a security control parameter and identifies whether it has been customized.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#ParameterDefinition": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            Description of a control parameter.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfigurationOptions": {
+                    "target": "com.amazonaws.securityhub#ConfigurationOptions",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            The options for customizing a control parameter. Customization options vary based on the data type of the parameter.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            An object that describes a security control parameter and the options for customizing it. \n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#ParameterDefinitions": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.securityhub#NonEmptyString"
+            },
+            "value": {
+                "target": "com.amazonaws.securityhub#ParameterDefinition"
+            }
+        },
+        "com.amazonaws.securityhub#ParameterValue": {
+            "type": "union",
+            "members": {
+                "Integer": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A control parameter that is an integer.\n        </p>"
+                    }
+                },
+                "IntegerList": {
+                    "target": "com.amazonaws.securityhub#IntegerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A control parameter that is a list of integers.\n        </p>"
+                    }
+                },
+                "Double": {
+                    "target": "com.amazonaws.securityhub#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A control parameter that is a double.\n        </p>"
+                    }
+                },
+                "String": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A control parameter that is a string.\n        </p>"
+                    }
+                },
+                "StringList": {
+                    "target": "com.amazonaws.securityhub#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A control parameter that is a list of strings.\n        </p>"
+                    }
+                },
+                "Boolean": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A control parameter that is a boolean.\n        </p>"
+                    }
+                },
+                "Enum": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A control parameter that is an enum.\n        </p>"
+                    }
+                },
+                "EnumList": {
+                    "target": "com.amazonaws.securityhub#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A control parameter that is a list of enums.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            An object that includes the data type of a security control parameter and its current value.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#ParameterValueType": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#Parameters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.securityhub#NonEmptyString"
+            },
+            "value": {
+                "target": "com.amazonaws.securityhub#ParameterConfiguration"
             }
         },
         "com.amazonaws.securityhub#Partition": {
@@ -28676,6 +29190,22 @@
                 "smithy.api#documentation": "<p>Additional details about a resource related to a finding.</p>\n         <p>To provide the details, use the object that corresponds to the resource type. For\n         example, if the resource type is <code>AwsEc2Instance</code>, then you use the\n            <code>AwsEc2Instance</code> object to provide the details.</p>\n         <p>If the type-specific object does not contain all of the fields you want to populate,\n         then you use the <code>Other</code> object to populate those additional fields.</p>\n         <p>You also use the <code>Other</code> object to populate the details when the selected\n         type does not have a corresponding object.</p>"
             }
         },
+        "com.amazonaws.securityhub#ResourceInUseException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString"
+                },
+                "Code": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The request was rejected because it conflicts with the resource's availability. For example, you tried \n            to update a security control that's currently in the <code>UPDATING</code> state.\n        </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.securityhub#ResourceList": {
             "type": "list",
             "member": {
@@ -29412,6 +29942,24 @@
                         "smithy.api#documentation": "<p>\n         The enablement status of a security control in a specific standard.\n      </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "UpdateStatus": {
+                    "target": "com.amazonaws.securityhub#UpdateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Identifies whether customizable properties of a security control are reflected in Security Hub findings. A status of \n<code>READY</code> indicates findings include the current parameter values. A status of <code>UPDATING</code> indicates that \nall findings may not include the current parameter values.\n        </p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.securityhub#Parameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that identifies the name of a control parameter, its current value, and whether it has been customized.\n        </p>"
+                    }
+                },
+                "LastUpdateReason": {
+                    "target": "com.amazonaws.securityhub#AlphaNumericNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The most recent reason for updating the customizable properties of a security control. This differs from the \n            <code>UpdateReason</code> field of the <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html\">\n               <code>BatchUpdateStandardsControlAssociations</code>\n            </a> API, which tracks the \n            reason for updating the enablement status of a control. This field accepts alphanumeric \n            characters in addition to white spaces, dashes, and underscores.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -29468,6 +30016,18 @@
                         "smithy.api#documentation": "<p>\n         Specifies whether a security control is available in the current Amazon Web Services Region.\n      </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "CustomizableProperties": {
+                    "target": "com.amazonaws.securityhub#CustomizableProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Security control properties that you can customize. Currently, only parameter customization is supported for select \n            controls. An empty array is returned for controls that don’t support custom properties.\n        </p>"
+                    }
+                },
+                "ParameterDefinitions": {
+                    "target": "com.amazonaws.securityhub#ParameterDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that provides a security control parameter name, description, and the options for customizing it. This \nobject is excluded for a control that doesn't support custom parameters.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -29478,6 +30038,43 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#SecurityControlDefinition"
+            }
+        },
+        "com.amazonaws.securityhub#SecurityControlParameter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of a \n        </p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.securityhub#TypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The current value of a control parameter.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            A parameter that a security control accepts.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#SecurityControlParametersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#SecurityControlParameter"
+            }
+        },
+        "com.amazonaws.securityhub#SecurityControlProperty": {
+            "type": "enum",
+            "members": {
+                "Parameters": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Parameters"
+                    }
+                }
             }
         },
         "com.amazonaws.securityhub#SecurityControls": {
@@ -29641,6 +30238,9 @@
                     "target": "com.amazonaws.securityhub#GetMembers"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#GetSecurityControlDefinition"
+                },
+                {
                     "target": "com.amazonaws.securityhub#InviteMembers"
                 },
                 {
@@ -29690,6 +30290,9 @@
                 },
                 {
                     "target": "com.amazonaws.securityhub#UpdateOrganizationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#UpdateSecurityControl"
                 },
                 {
                     "target": "com.amazonaws.securityhub#UpdateSecurityHubConfiguration"
@@ -30763,7 +31366,7 @@
                 "Product": {
                     "target": "com.amazonaws.securityhub#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>Deprecated. This attribute is being deprecated. Instead of providing\n            <code>Product</code>, provide <code>Original</code>.</p>\n         <p>The native severity as defined by the Amazon Web Services service or integrated partner product that\n         generated the finding.</p>"
+                        "smithy.api#documentation": "<p>Deprecated. This attribute isn't included in findings. Instead of providing\n            <code>Product</code>, provide <code>Original</code>.</p>\n         <p>The native severity as defined by the Amazon Web Services service or integrated partner product that\n         generated the finding.</p>"
                     }
                 },
                 "Label": {
@@ -30775,7 +31378,7 @@
                 "Normalized": {
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Deprecated. The normalized severity of a finding. This attribute is being deprecated.\n         Instead of providing <code>Normalized</code>, provide <code>Label</code>.</p>\n         <p>If you provide <code>Label</code> and do not provide <code>Normalized</code>, then\n            <code>Normalized</code> is set automatically as follows.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>INFORMATIONAL</code> - 0</p>\n            </li>\n            <li>\n               <p>\n                  <code>LOW</code> - 1</p>\n            </li>\n            <li>\n               <p>\n                  <code>MEDIUM</code> - 40</p>\n            </li>\n            <li>\n               <p>\n                  <code>HIGH</code> - 70</p>\n            </li>\n            <li>\n               <p>\n                  <code>CRITICAL</code> - 90</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Deprecated. The normalized severity of a finding.\n         Instead of providing <code>Normalized</code>, provide <code>Label</code>.</p>\n         <p>If you provide <code>Label</code> and do not provide <code>Normalized</code>, then\n            <code>Normalized</code> is set automatically as follows.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>INFORMATIONAL</code> - 0</p>\n            </li>\n            <li>\n               <p>\n                  <code>LOW</code> - 1</p>\n            </li>\n            <li>\n               <p>\n                  <code>MEDIUM</code> - 40</p>\n            </li>\n            <li>\n               <p>\n                  <code>HIGH</code> - 70</p>\n            </li>\n            <li>\n               <p>\n                  <code>CRITICAL</code> - 90</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Original": {
@@ -31632,6 +32235,32 @@
                 "target": "com.amazonaws.securityhub#StatusReason"
             }
         },
+        "com.amazonaws.securityhub#StringConfigurationOptions": {
+            "type": "structure",
+            "members": {
+                "DefaultValue": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Security Hub default value for a control parameter that is a string.\n        </p>"
+                    }
+                },
+                "Re2Expression": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An RE2 regular expression that Security Hub uses to validate a user-provided control parameter string.\n        </p>"
+                    }
+                },
+                "ExpressionDescription": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The description of the RE2 regular expression.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is a string.\n        </p>"
+            }
+        },
         "com.amazonaws.securityhub#StringFilter": {
             "type": "structure",
             "members": {
@@ -31703,6 +32332,38 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#NonEmptyString"
+            }
+        },
+        "com.amazonaws.securityhub#StringListConfigurationOptions": {
+            "type": "structure",
+            "members": {
+                "DefaultValue": {
+                    "target": "com.amazonaws.securityhub#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Security Hub default value for a control parameter that is a list of strings.\n        </p>"
+                    }
+                },
+                "Re2Expression": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An RE2 regular expression that Security Hub uses to validate a user-provided list of strings for a control \n            parameter.\n        </p>"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum number of list items that a string list control parameter can accept.\n        </p>"
+                    }
+                },
+                "ExpressionDescription": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The description of the RE2 regular expression.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is a list of strings.\n        </p>"
             }
         },
         "com.amazonaws.securityhub#TagKey": {
@@ -32782,6 +33443,99 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securityhub#UpdateSecurityControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#UpdateSecurityControlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#UpdateSecurityControlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Updates the properties of a security control. \n        </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update security control properties",
+                        "documentation": "The following example updates the specified security control. Specifically, this example updates control parameters.",
+                        "input": {
+                            "SecurityControlId": "ACM.1",
+                            "Parameters": {
+                                "maxCredentialUsageAge": {
+                                    "ValueType": "CUSTOM",
+                                    "Value": {
+                                        "Integer": 15
+                                    }
+                                }
+                            },
+                            "LastUpdateReason": "Comply with internal requirements"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/securityControl/update",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#UpdateSecurityControlRequest": {
+            "type": "structure",
+            "members": {
+                "SecurityControlId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) or ID of the control to update. \n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.securityhub#Parameters",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            An object that specifies which security control parameters to update.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdateReason": {
+                    "target": "com.amazonaws.securityhub#AlphaNumericNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The most recent reason for updating the properties of the security control. This field accepts alphanumeric \ncharacters in addition to white spaces, dashes, and underscores.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#UpdateSecurityControlResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityhub#UpdateSecurityHubConfiguration": {
             "type": "operation",
             "input": {
@@ -32928,6 +33682,23 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#UpdateStatus": {
+            "type": "enum",
+            "members": {
+                "READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                }
             }
         },
         "com.amazonaws.securityhub#VerificationState": {

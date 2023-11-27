@@ -29,10 +29,149 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.personalizeevents#Action": {
+            "type": "structure",
+            "members": {
+                "actionId": {
+                    "target": "com.amazonaws.personalizeevents#StringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID associated with the action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "properties": {
+                    "target": "com.amazonaws.personalizeevents#SynthesizedJsonActionProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string map of action-specific metadata. Each element in the map consists of a key-value pair. \n      For example, <code>{\"value\": \"100\"}</code>.</p>\n         <p>The keys use camel case names that match the fields in the schema for the Actions\n      dataset. In the previous example, the <code>value</code> matches the\n      'VALUE' field defined in the Actions schema. For categorical string data, to include multiple categories for a single action, \n      separate each category with a pipe separator (<code>|</code>). For example, <code>\\\"Deluxe|Premium\\\"</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents action metadata added to an Action dataset using the \n      <code>PutActions</code> API. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-actions.html\">Importing actions individually</a>.\n    </p>"
+            }
+        },
+        "com.amazonaws.personalizeevents#ActionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.personalizeevents#ActionImpression": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalizeevents#ActionId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.personalizeevents#ActionInteraction": {
+            "type": "structure",
+            "members": {
+                "actionId": {
+                    "target": "com.amazonaws.personalizeevents#ActionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the action the user interacted with. This corresponds to the <code>ACTION_ID</code> \n      field of the Action interaction schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.personalizeevents#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user who interacted with the action. This corresponds to the <code>USER_ID</code> \n      field of the Action interaction schema.</p>"
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.personalizeevents#StringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID associated with the user's visit. \n      Your application generates a unique <code>sessionId</code> when a user first visits your website or uses your application. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timestamp": {
+                    "target": "com.amazonaws.personalizeevents#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the action interaction event occurred. Timestamps must be in Unix epoch time format, in seconds.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventType": {
+                    "target": "com.amazonaws.personalizeevents#StringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of action interaction event. You can specify <code>Viewed</code>, <code>Taken</code>, and <code>Not Taken</code> event types. For more\n      information about action interaction event type data, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/action-interaction-event-type-data.html\">Event type data</a>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.personalizeevents#StringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ID associated with the event. If an event ID is not provided, Amazon Personalize generates\n      a unique ID for the event. An event ID is not used as an input to the model. Amazon Personalize uses\n      the event ID to distinguish unique events. Any subsequent events after the first with the\n      same event ID are not used in model training.</p>"
+                    }
+                },
+                "recommendationId": {
+                    "target": "com.amazonaws.personalizeevents#RecommendationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the list of recommendations that contains the action the user interacted with.</p>"
+                    }
+                },
+                "impression": {
+                    "target": "com.amazonaws.personalizeevents#ActionImpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of action IDs that represents the sequence of actions you have shown the user. For example, <code>[\"actionId1\", \"actionId2\", \"actionId3\"]</code>.\n      Amazon Personalize doesn't use impressions data from action interaction events. Instead, record multiple events for each action and use the <code>Viewed</code> event type.\n    </p>"
+                    }
+                },
+                "properties": {
+                    "target": "com.amazonaws.personalizeevents#SynthesizedJsonActionInteractionProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string map of event-specific data that you might choose to record. For example, if a\n      user takes an action, other than the action ID, you might also send the number of actions taken by the user.</p>\n         <p>Each item in the map consists of a key-value pair. For example,</p>\n         <p>\n            <code>{\"numberOfActions\": \"12\"}</code>\n         </p>\n         <p>The keys use camel case names that match the fields in the Action interactions\n      schema. In the above example, the <code>numberOfActions</code> would match the\n      'NUMBER_OF_ACTIONS' field defined in the Action interactions schema.</p>\n         <p>\n      The following can't be included as a keyword for properties (case insensitive). \n    </p>\n         <ul>\n            <li>\n               <p>\n          userId\n        </p>\n            </li>\n            <li>\n               <p>\n          sessionId\n        </p>\n            </li>\n            <li>\n               <p>eventType</p>\n            </li>\n            <li>\n               <p>timestamp</p>\n            </li>\n            <li>\n               <p>recommendationId</p>\n            </li>\n            <li>\n               <p>impression</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an action interaction event sent using the\n      <code>PutActionInteractions</code> API.</p>"
+            }
+        },
+        "com.amazonaws.personalizeevents#ActionInteractionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalizeevents#ActionInteraction"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.personalizeevents#ActionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalizeevents#Action"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.personalizeevents#AmazonPersonalizeEvents": {
             "type": "service",
             "version": "2018-03-22",
             "operations": [
+                {
+                    "target": "com.amazonaws.personalizeevents#PutActionInteractions"
+                },
+                {
+                    "target": "com.amazonaws.personalizeevents#PutActions"
+                },
                 {
                     "target": "com.amazonaws.personalizeevents#PutEvents"
                 },
@@ -55,7 +194,7 @@
                     "name": "personalize"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Personalize can consume real-time user event data, such as <i>stream</i> or <i>click</i> data, and use\n      it for model training either alone or combined with historical data. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html\">Recording Events</a>.</p>",
+                "smithy.api#documentation": "<p>Amazon Personalize can consume real-time user event data, such as <i>stream</i> or <i>click</i> data, and use\n      it for model training either alone or combined with historical data. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-item-interaction-events.html\">Recording item interaction events</a>.</p>",
                 "smithy.api#title": "Amazon Personalize Events",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -99,7 +238,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -142,7 +280,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -155,7 +294,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -169,7 +307,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -192,7 +329,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -227,7 +363,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -238,14 +373,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -259,14 +396,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -275,11 +410,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -290,14 +425,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -311,7 +448,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -331,7 +467,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -342,14 +477,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -360,9 +497,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -709,32 +848,32 @@
                 "eventId": {
                     "target": "com.amazonaws.personalizeevents#StringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ID associated with the event. If an event ID is not provided, Amazon Personalize generates\n      a unique ID for the event. An event ID is not used as an input to the model. Amazon Personalize uses\n      the event ID to distinquish unique events. Any subsequent events after the first with the\n      same event ID are not used in model training.</p>"
+                        "smithy.api#documentation": "<p>An ID associated with the event. If an event ID is not provided, Amazon Personalize generates\n      a unique ID for the event. An event ID is not used as an input to the model. Amazon Personalize uses\n      the event ID to distinguish unique events. Any subsequent events after the first with the\n      same event ID are not used in model training.</p>"
                     }
                 },
                 "eventType": {
                     "target": "com.amazonaws.personalizeevents#StringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of event, such as click or download. This property corresponds to the <code>EVENT_TYPE</code>\n      field of your Interactions schema and depends on the types of events you are tracking.</p>",
+                        "smithy.api#documentation": "<p>The type of event, such as click or download. This property corresponds to the <code>EVENT_TYPE</code>\n      field of your Item interactions dataset's schema and depends on the types of events you are tracking.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "eventValue": {
                     "target": "com.amazonaws.personalizeevents#FloatType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The event value that corresponds to the <code>EVENT_VALUE</code> field of the Interactions schema.</p>"
+                        "smithy.api#documentation": "<p>The event value that corresponds to the <code>EVENT_VALUE</code> field of the Item interactions schema.</p>"
                     }
                 },
                 "itemId": {
                     "target": "com.amazonaws.personalizeevents#ItemId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The item ID key that corresponds to the <code>ITEM_ID</code> field of the Interactions schema.</p>"
+                        "smithy.api#documentation": "<p>The item ID key that corresponds to the <code>ITEM_ID</code> field of the Item interactions dataset's schema.</p>"
                     }
                 },
                 "properties": {
                     "target": "com.amazonaws.personalizeevents#SynthesizedJsonEventPropertiesJSON",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string map of event-specific data that you might choose to record. For example, if a\n      user rates a movie on your site, other than movie ID (<code>itemId</code>) and rating (<code>eventValue</code>)\n      , you might also send the number of movie ratings made by the user.</p>\n         <p>Each item in the map consists of a key-value pair. For example,</p>\n         <p>\n            <code>{\"numberOfRatings\": \"12\"}</code>\n         </p>\n         <p>The keys use camel case names that match the fields in the Interactions\n      schema. In the above example, the <code>numberOfRatings</code> would match the\n      'NUMBER_OF_RATINGS' field defined in the Interactions schema.</p>"
+                        "smithy.api#documentation": "<p>A string map of event-specific data that you might choose to record. For example, if a\n      user rates a movie on your site, other than movie ID (<code>itemId</code>) and rating (<code>eventValue</code>)\n      , you might also send the number of movie ratings made by the user.</p>\n         <p>Each item in the map consists of a key-value pair. For example,</p>\n         <p>\n            <code>{\"numberOfRatings\": \"12\"}</code>\n         </p>\n         <p>The keys use camel case names that match the fields in the Item interactions dataset's\n      schema. In the above example, the <code>numberOfRatings</code> would match the\n      'NUMBER_OF_RATINGS' field defined in the Item interactions dataset's schema.</p>\n         <p>\n      The following can't be included as a keyword for properties (case insensitive). \n      \n    </p>\n         <ul>\n            <li>\n               <p>\n          userId\n        </p>\n            </li>\n            <li>\n               <p>\n          sessionId\n        </p>\n            </li>\n            <li>\n               <p>eventType</p>\n            </li>\n            <li>\n               <p>timestamp</p>\n            </li>\n            <li>\n               <p>recommendationId</p>\n            </li>\n            <li>\n               <p>impression</p>\n            </li>\n         </ul>"
                     }
                 },
                 "sentAt": {
@@ -764,7 +903,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents user interaction event information sent using the\n      <code>PutEvents</code> API.</p>",
+                "smithy.api#documentation": "<p>Represents item interaction event information sent using the\n      <code>PutEvents</code> API.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -836,7 +975,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents item metadata added to an Items dataset using the \n      <code>PutItems</code> API. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html\">Importing Items Incrementally</a>.\n    </p>"
+                "smithy.api#documentation": "<p>Represents item metadata added to an Items dataset using the \n      <code>PutItems</code> API. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html\">Importing items individually</a>.\n    </p>"
             }
         },
         "com.amazonaws.personalizeevents#ItemId": {
@@ -876,6 +1015,106 @@
                 "smithy.api#documentation": "<p>Contains information about a metric attribution associated with an event. For more information about metric attributions, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html\">Measuring impact of recommendations</a>.</p>"
             }
         },
+        "com.amazonaws.personalizeevents#PutActionInteractions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalizeevents#PutActionInteractionsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalizeevents#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalizeevents#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.personalizeevents#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Records action interaction event data. An <i>action interaction</i> event is an interaction between a user and an <i>action</i>. \n      For example, a user taking an action, such a enrolling in a membership program or downloading your app.</p>\n         <p>\n      For more information about recording action interactions, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-action-interaction-events.html\">Recording action interaction events</a>.\n      For more information about actions in an Actions dataset, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/actions-datasets.html\">Actions dataset</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/action-interactions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.personalizeevents#PutActionInteractionsRequest": {
+            "type": "structure",
+            "members": {
+                "trackingId": {
+                    "target": "com.amazonaws.personalizeevents#StringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of your action interaction event tracker. When you create an Action interactions dataset, Amazon Personalize creates an\n      action interaction event tracker for you. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/action-interaction-tracker-id.html\">Action interaction event tracker ID</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "actionInteractions": {
+                    "target": "com.amazonaws.personalizeevents#ActionInteractionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of action interaction events from the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.personalizeevents#PutActions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalizeevents#PutActionsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalizeevents#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalizeevents#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.personalizeevents#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds one or more actions to an Actions dataset. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-actions.html\">Importing actions individually</a>.\n    </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/actions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.personalizeevents#PutActionsRequest": {
+            "type": "structure",
+            "members": {
+                "datasetArn": {
+                    "target": "com.amazonaws.personalizeevents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Actions dataset you are adding the action or actions to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "actions": {
+                    "target": "com.amazonaws.personalizeevents#ActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of action data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.personalizeevents#PutEvents": {
             "type": "operation",
             "input": {
@@ -890,7 +1129,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Records user interaction event data. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html\">Recording Events</a>.</p>",
+                "smithy.api#documentation": "<p>Records item interaction event data. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-item-interaction-events.html\">Recording item interaction events</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/events",
@@ -917,7 +1156,7 @@
                 "sessionId": {
                     "target": "com.amazonaws.personalizeevents#StringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The session ID associated with the user's visit. Your application generates the sessionId when a user first visits your website or uses your application. \n      Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information, see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html\">Recording Events</a>.</p>",
+                        "smithy.api#documentation": "<p>The session ID associated with the user's visit. Your application generates the sessionId when a user first visits your website or uses your application. \n      Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information, see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-item-interaction-events.html\">Recording item interaction events</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -953,7 +1192,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more items to an Items dataset. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html\">Importing Items Incrementally</a>.\n     </p>",
+                "smithy.api#documentation": "<p>Adds one or more items to an Items dataset. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html\">Importing items individually</a>.\n     </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/items",
@@ -1003,7 +1242,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more users to a Users dataset. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html\">Importing Users Incrementally</a>.</p>",
+                "smithy.api#documentation": "<p>Adds one or more users to a Users dataset. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html\">Importing users individually</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/users",
@@ -1077,6 +1316,28 @@
                 }
             }
         },
+        "com.amazonaws.personalizeevents#SynthesizedJsonActionInteractionProperties": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#mediaType": "application/json",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.personalizeevents#SynthesizedJsonActionProperties": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32000
+                },
+                "smithy.api#mediaType": "application/json",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.personalizeevents#SynthesizedJsonEventPropertiesJSON": {
             "type": "string",
             "traits": {
@@ -1093,7 +1354,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 24262
+                    "max": 32000
                 },
                 "smithy.api#mediaType": "application/json",
                 "smithy.api#sensitive": {}
@@ -1104,7 +1365,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 4096
+                    "max": 24000
                 },
                 "smithy.api#mediaType": "application/json",
                 "smithy.api#sensitive": {}
@@ -1128,7 +1389,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents user metadata added to a Users dataset using the \n      <code>PutUsers</code> API. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html\">Importing Users Incrementally</a>.</p>"
+                "smithy.api#documentation": "<p>Represents user metadata added to a Users dataset using the \n      <code>PutUsers</code> API. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html\">Importing users individually</a>.</p>"
             }
         },
         "com.amazonaws.personalizeevents#UserId": {

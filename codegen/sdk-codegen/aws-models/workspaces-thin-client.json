@@ -1,0 +1,3371 @@
+{
+    "smithy": "2.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "SdkServiceId",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.workspacesthinclient#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.workspacesthinclient#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ActivationCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-z]{2}[a-z0-9]{6}$"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ApplyTimeOf": {
+            "type": "enum",
+            "members": {
+                "UTC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UTC"
+                    }
+                },
+                "DEVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEVICE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[0-9]{0,12}:[a-zA-Z0-9\\-\\/\\._]+$"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.workspacesthinclient#ExceptionMessage"
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource associated with the request.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource associated with the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested operation would cause a conflict with the current state of a service\n            resource associated with the request. Resolve the conflict before retrying this\n            request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.workspacesthinclient#CreateEnvironment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#CreateEnvironmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#CreateEnvironmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an environment for your thin client devices.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/environments",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#CreateEnvironmentRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.workspacesthinclient#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the environment.</p>"
+                    }
+                },
+                "desktopArn": {
+                    "target": "com.amazonaws.workspacesthinclient#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n                WorkSpaces Web, or AppStream 2.0.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "desktopEndpoint": {
+                    "target": "com.amazonaws.workspacesthinclient#DesktopEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for the identity provider login (only for environments that use AppStream 2.0).</p>"
+                    }
+                },
+                "softwareSetUpdateSchedule": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance\n            window.</p>"
+                    }
+                },
+                "maintenanceWindow": {
+                    "target": "com.amazonaws.workspacesthinclient#MaintenanceWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A specification for a time window to apply software updates.</p>"
+                    }
+                },
+                "softwareSetUpdateMode": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to define which software updates to apply.</p>"
+                    }
+                },
+                "desiredSoftwareSetId": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set to apply.</p>"
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.workspacesthinclient#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key to use to encrypt the\n            environment.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.workspacesthinclient#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency\n         of the request. This lets you safely retry the request without accidentally performing the\n         same operation a second time. Passing the same value to a later call to an operation\n         requires that you also pass the same value for all other parameters. We recommend that you\n         use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of\n            value</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n         you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with different\n         parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.workspacesthinclient#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the key-value pairs of the tag or tags to assign to the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#CreateEnvironmentResponse": {
+            "type": "structure",
+            "members": {
+                "environment": {
+                    "target": "com.amazonaws.workspacesthinclient#EnvironmentSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes an environment.</p>",
+                        "smithy.api#nestedProperties": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DayOfWeek": {
+            "type": "enum",
+            "members": {
+                "MONDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONDAY"
+                    }
+                },
+                "TUESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TUESDAY"
+                    }
+                },
+                "WEDNESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEDNESDAY"
+                    }
+                },
+                "THURSDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THURSDAY"
+                    }
+                },
+                "FRIDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FRIDAY"
+                    }
+                },
+                "SATURDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SATURDAY"
+                    }
+                },
+                "SUNDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUNDAY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DayOfWeekList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesthinclient#DayOfWeek"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 7
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeleteDevice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#DeleteDeviceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#DeleteDeviceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a thin client device.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/devices/{id}",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeleteDeviceRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the device to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.workspacesthinclient#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency\n         of the request. This lets you safely retry the request without accidentally performing the\n         same operation a second time. Passing the same value to a later call to an operation\n         requires that you also pass the same value for all other parameters. We recommend that you\n         use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of\n            value</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n         you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with different\n         parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeleteDeviceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeleteEnvironment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#DeleteEnvironmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#DeleteEnvironmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an environment.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/environments/{id}",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeleteEnvironmentRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.workspacesthinclient#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.workspacesthinclient#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency\n         of the request. This lets you safely retry the request without accidentally performing the\n         same operation a second time. Passing the same value to a later call to an operation\n         requires that you also pass the same value for all other parameters. We recommend that you\n         use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of\n            value</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n         you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with different\n         parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeleteEnvironmentResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeregisterDevice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#DeregisterDeviceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#DeregisterDeviceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deregisters a thin client device.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/deregister-device/{id}",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeregisterDeviceRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the device to deregister.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetDeviceStatus": {
+                    "target": "com.amazonaws.workspacesthinclient#TargetDeviceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired new status for the device.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.workspacesthinclient#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency\n         of the request. This lets you safely retry the request without accidentally performing the\n         same operation a second time. Passing the same value to a later call to an operation\n         requires that you also pass the same value for all other parameters. We recommend that you\n         use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of\n            value</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n         you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with different\n         parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeregisterDeviceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DesktopEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^(https:\\/\\/)[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,32}(:[0-9]{1,5})?(\\/.*)?$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DesktopType": {
+            "type": "enum",
+            "members": {
+                "WORKSPACES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "workspaces"
+                    }
+                },
+                "APPSTREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "appstream"
+                    }
+                },
+                "WORKSPACES_WEB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "workspaces-web"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#Device": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the device.</p>"
+                    }
+                },
+                "serialNumber": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hardware serial number of the device.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the device.</p>"
+                    }
+                },
+                "model": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model number of the device.</p>"
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.workspacesthinclient#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment the device is associated with.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the device.</p>"
+                    }
+                },
+                "currentSoftwareSetId": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set currently installed on the device.</p>"
+                    }
+                },
+                "currentSoftwareSetVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the software set currently installed on the device.</p>"
+                    }
+                },
+                "desiredSoftwareSetId": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set which the device has been set to.</p>"
+                    }
+                },
+                "pendingSoftwareSetId": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set that is pending to be installed on the device.</p>"
+                    }
+                },
+                "pendingSoftwareSetVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the software set that is pending to be installed on the device.</p>"
+                    }
+                },
+                "softwareSetUpdateSchedule": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance\n            window.</p>"
+                    }
+                },
+                "softwareSetComplianceStatus": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceSoftwareSetComplianceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes if the software currently installed on the device is a supported\n            version.</p>"
+                    }
+                },
+                "softwareSetUpdateStatus": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes if the device has a supported version of software installed.</p>"
+                    }
+                },
+                "lastConnectedAt": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the most recent session on the device.</p>"
+                    }
+                },
+                "lastPostureAt": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the most recent check-in of the device.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the device was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the device was updated.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.workspacesthinclient#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the device.</p>"
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.workspacesthinclient#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the\n            device.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.workspacesthinclient#EmbeddedTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a thin client device.</p>"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeviceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9]{24}$"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeviceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesthinclient#DeviceSummary"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeviceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9\\p{IsAlphabetic}+:,.@'\" -]{1,64}$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeviceSoftwareSetComplianceStatus": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "COMPLIANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLIANT"
+                    }
+                },
+                "NOT_COMPLIANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_COMPLIANT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeviceStatus": {
+            "type": "enum",
+            "members": {
+                "REGISTERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTERED"
+                    }
+                },
+                "DEREGISTERING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEREGISTERING"
+                    }
+                },
+                "DEREGISTERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEREGISTERED"
+                    }
+                },
+                "ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeviceSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the device.</p>"
+                    }
+                },
+                "serialNumber": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hardware serial number of the device.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the device.</p>"
+                    }
+                },
+                "model": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model number of the device.</p>"
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.workspacesthinclient#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment the device is associated with.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the device.</p>"
+                    }
+                },
+                "currentSoftwareSetId": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set currently installed on the device.</p>"
+                    }
+                },
+                "desiredSoftwareSetId": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set which the device has been set to.</p>"
+                    }
+                },
+                "pendingSoftwareSetId": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set that is pending to be installed on the device.</p>"
+                    }
+                },
+                "softwareSetUpdateSchedule": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance\n            window.</p>"
+                    }
+                },
+                "lastConnectedAt": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the most recent session on the device.</p>"
+                    }
+                },
+                "lastPostureAt": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the most recent check-in of the device.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the device was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the device was updated.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.workspacesthinclient#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the device.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.workspacesthinclient#EmbeddedTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a thin client device.</p>"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#EmbeddedTag": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a resource to tag.</p>"
+                    }
+                },
+                "internalId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The internal ID of a resource to tag.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource and internal ID of a resource to tag.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#Environment": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.workspacesthinclient#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.workspacesthinclient#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment.</p>"
+                    }
+                },
+                "desktopArn": {
+                    "target": "com.amazonaws.workspacesthinclient#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n                WorkSpaces Web, or AppStream 2.0.</p>"
+                    }
+                },
+                "desktopEndpoint": {
+                    "target": "com.amazonaws.workspacesthinclient#DesktopEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for the identity provider login (only for environments that use AppStream 2.0).</p>"
+                    }
+                },
+                "desktopType": {
+                    "target": "com.amazonaws.workspacesthinclient#DesktopType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of streaming desktop for the environment.</p>"
+                    }
+                },
+                "activationCode": {
+                    "target": "com.amazonaws.workspacesthinclient#ActivationCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The activation code to register a device to the environment.</p>"
+                    }
+                },
+                "registeredDevicesCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of devices registered to the environment.</p>"
+                    }
+                },
+                "softwareSetUpdateSchedule": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance\n            window.</p>"
+                    }
+                },
+                "maintenanceWindow": {
+                    "target": "com.amazonaws.workspacesthinclient#MaintenanceWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A specification for a time window to apply software updates.</p>"
+                    }
+                },
+                "softwareSetUpdateMode": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to define which software updates to apply.</p>"
+                    }
+                },
+                "desiredSoftwareSetId": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set to apply.</p>"
+                    }
+                },
+                "pendingSoftwareSetId": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set that is pending to be installed.</p>"
+                    }
+                },
+                "pendingSoftwareSetVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the software set that is pending to be installed.</p>"
+                    }
+                },
+                "softwareSetComplianceStatus": {
+                    "target": "com.amazonaws.workspacesthinclient#EnvironmentSoftwareSetComplianceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes if the software currently installed on all devices in the environment is a\n            supported version.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the environment was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the device was updated.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.workspacesthinclient#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the environment.</p>"
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.workspacesthinclient#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the\n            environment.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.workspacesthinclient#EmbeddedTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an environment.</p>"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#EnvironmentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-z0-9]{9}$"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#EnvironmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesthinclient#EnvironmentSummary"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#EnvironmentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9\\p{IsAlphabetic}+:,.@'\" -][0-9\\p{IsAlphabetic}+=:,.@'\" -]{0,63}$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#EnvironmentSoftwareSetComplianceStatus": {
+            "type": "enum",
+            "members": {
+                "NO_REGISTERED_DEVICES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_REGISTERED_DEVICES"
+                    }
+                },
+                "COMPLIANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLIANT"
+                    }
+                },
+                "NOT_COMPLIANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_COMPLIANT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#EnvironmentSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.workspacesthinclient#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.workspacesthinclient#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment.</p>"
+                    }
+                },
+                "desktopArn": {
+                    "target": "com.amazonaws.workspacesthinclient#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n                WorkSpaces Web, or AppStream 2.0.</p>"
+                    }
+                },
+                "desktopEndpoint": {
+                    "target": "com.amazonaws.workspacesthinclient#DesktopEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for the identity provider login (only for environments that use AppStream 2.0).</p>"
+                    }
+                },
+                "desktopType": {
+                    "target": "com.amazonaws.workspacesthinclient#DesktopType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of streaming desktop for the environment.</p>"
+                    }
+                },
+                "activationCode": {
+                    "target": "com.amazonaws.workspacesthinclient#ActivationCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The activation code to register a device to the environment.</p>"
+                    }
+                },
+                "softwareSetUpdateSchedule": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance\n            window.</p>"
+                    }
+                },
+                "maintenanceWindow": {
+                    "target": "com.amazonaws.workspacesthinclient#MaintenanceWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A specification for a time window to apply software updates.</p>"
+                    }
+                },
+                "softwareSetUpdateMode": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to define which software updates to apply.</p>"
+                    }
+                },
+                "desiredSoftwareSetId": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set to apply.</p>"
+                    }
+                },
+                "pendingSoftwareSetId": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set that is pending to be installed.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the environment was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the device was updated.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.workspacesthinclient#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the environment.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.workspacesthinclient#EmbeddedTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an environment.</p>"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ExceptionMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.workspacesthinclient#FieldName": {
+            "type": "string"
+        },
+        "com.amazonaws.workspacesthinclient#GetDevice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#GetDeviceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#GetDeviceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information for a thin client device.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/devices/{id}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#GetDeviceRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the device for which to return information.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#GetDeviceResponse": {
+            "type": "structure",
+            "members": {
+                "device": {
+                    "target": "com.amazonaws.workspacesthinclient#Device",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes an device.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#GetEnvironment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#GetEnvironmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#GetEnvironmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information for an environment.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/environments/{id}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#GetEnvironmentRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.workspacesthinclient#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment for which to return information.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#GetEnvironmentResponse": {
+            "type": "structure",
+            "members": {
+                "environment": {
+                    "target": "com.amazonaws.workspacesthinclient#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes an environment.</p>",
+                        "smithy.api#nestedProperties": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#GetSoftwareSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#GetSoftwareSetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#GetSoftwareSetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information for a software set.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/softwaresets/{id}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#GetSoftwareSetRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set for which to return information.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#GetSoftwareSetResponse": {
+            "type": "structure",
+            "members": {
+                "softwareSet": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes a software set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#Hour": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 23
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.workspacesthinclient#ExceptionMessage"
+                },
+                "retryAfterSeconds": {
+                    "target": "com.amazonaws.workspacesthinclient#RetryAfterSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait before retrying the next request.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The server encountered an internal error and is unable to complete the request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.workspacesthinclient#InternalServiceException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.workspacesthinclient#ExceptionMessage"
+                },
+                "retryAfterSeconds": {
+                    "target": "com.amazonaws.workspacesthinclient#RetryAfterSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait before retrying the next request.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request processing failed due to some unknown error, exception, or failure.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.workspacesthinclient#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[\\w+=\\/,.@-]+:kms:[a-zA-Z0-9\\-]*:[0-9]{0,12}:key\\/[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ListDevices": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#ListDevicesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#ListDevicesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of thin client devices.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/devices",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "devices"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ListDevicesRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.workspacesthinclient#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of\n            <code>nextToken</code> is a unique pagination token for each page. Make the call again\n         using the returned token to retrieve the next page. Keep all other arguments unchanged.\n         Each pagination token expires after 24 hours. Using an expired pagination token will return\n         an <i>HTTP 400 InvalidToken error</i>.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.workspacesthinclient#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n                <code>nextToken</code> to obtain further pages of results.</p>\n         <p>This is only an upper limit. The actual number of results returned per call might be\n            fewer than the specified maximum.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ListDevicesResponse": {
+            "type": "structure",
+            "members": {
+                "devices": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes devices.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.workspacesthinclient#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of\n            <code>nextToken</code> is a unique pagination token for each page. Make the call again\n         using the returned token to retrieve the next page. Keep all other arguments unchanged.\n         Each pagination token expires after 24 hours. Using an expired pagination token will return\n         an <i>HTTP 400 InvalidToken error</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ListEnvironments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#ListEnvironmentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#ListEnvironmentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of environments.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/environments",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "environments"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ListEnvironmentsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.workspacesthinclient#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of\n            <code>nextToken</code> is a unique pagination token for each page. Make the call again\n         using the returned token to retrieve the next page. Keep all other arguments unchanged.\n         Each pagination token expires after 24 hours. Using an expired pagination token will return\n         an <i>HTTP 400 InvalidToken error</i>.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.workspacesthinclient#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n                <code>nextToken</code> to obtain further pages of results.</p>\n         <p>This is only an upper limit. The actual number of results returned per call might be\n            fewer than the specified maximum.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ListEnvironmentsResponse": {
+            "type": "structure",
+            "members": {
+                "environments": {
+                    "target": "com.amazonaws.workspacesthinclient#EnvironmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes environments.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.workspacesthinclient#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of\n            <code>nextToken</code> is a unique pagination token for each page. Make the call again\n         using the returned token to retrieve the next page. Keep all other arguments unchanged.\n         Each pagination token expires after 24 hours. Using an expired pagination token will return\n         an <i>HTTP 400 InvalidToken error</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ListSoftwareSets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#ListSoftwareSetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#ListSoftwareSetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of software sets.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/softwaresets",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "softwareSets"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ListSoftwareSetsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.workspacesthinclient#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of\n            <code>nextToken</code> is a unique pagination token for each page. Make the call again\n         using the returned token to retrieve the next page. Keep all other arguments unchanged.\n         Each pagination token expires after 24 hours. Using an expired pagination token will return\n         an <i>HTTP 400 InvalidToken error</i>.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.workspacesthinclient#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n                <code>nextToken</code> to obtain further pages of results.</p>\n         <p>This is only an upper limit. The actual number of results returned per call might be\n            fewer than the specified maximum.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ListSoftwareSetsResponse": {
+            "type": "structure",
+            "members": {
+                "softwareSets": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes software sets.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.workspacesthinclient#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of\n            <code>nextToken</code> is a unique pagination token for each page. Make the call again\n         using the returned token to retrieve the next page. Keep all other arguments unchanged.\n         Each pagination token expires after 24 hours. Using an expired pagination token will return\n         an <i>HTTP 400 InvalidToken error</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of tags for a resource.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which you want to retrieve\n            tags.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.workspacesthinclient#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the key-value pairs for the tag or tags assigned to the specified resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#MaintenanceWindow": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.workspacesthinclient#MaintenanceWindowType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to select the default or custom maintenance window.</p>"
+                    }
+                },
+                "startTimeHour": {
+                    "target": "com.amazonaws.workspacesthinclient#Hour",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hour for the maintenance window start (<code>00</code>-<code>23</code>).</p>"
+                    }
+                },
+                "startTimeMinute": {
+                    "target": "com.amazonaws.workspacesthinclient#Minute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minutes past the hour for the maintenance window start\n                (<code>00</code>-<code>59</code>).</p>"
+                    }
+                },
+                "endTimeHour": {
+                    "target": "com.amazonaws.workspacesthinclient#Hour",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hour for the maintenance window end (<code>00</code>-<code>23</code>).</p>"
+                    }
+                },
+                "endTimeMinute": {
+                    "target": "com.amazonaws.workspacesthinclient#Minute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minutes for the maintenance window end (<code>00</code>-<code>59</code>).</p>"
+                    }
+                },
+                "daysOfTheWeek": {
+                    "target": "com.amazonaws.workspacesthinclient#DayOfWeekList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The days of the week during which the maintenance window is open.</p>"
+                    }
+                },
+                "applyTimeOf": {
+                    "target": "com.amazonaws.workspacesthinclient#ApplyTimeOf",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to set the maintenance window during the device local time or Universal\n            Coordinated Time (UTC).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the maintenance window for a thin client device.</p>"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#MaintenanceWindowType": {
+            "type": "enum",
+            "members": {
+                "SYSTEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#Minute": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 59
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#PaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^\\S*$"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#QuotaCode": {
+            "type": "string"
+        },
+        "com.amazonaws.workspacesthinclient#ResourceId": {
+            "type": "string"
+        },
+        "com.amazonaws.workspacesthinclient#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.workspacesthinclient#ExceptionMessage"
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource associated with the request.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource associated with the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource specified in the request was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ResourceType": {
+            "type": "string"
+        },
+        "com.amazonaws.workspacesthinclient#RetryAfterSeconds": {
+            "type": "integer"
+        },
+        "com.amazonaws.workspacesthinclient#ServiceCode": {
+            "type": "string"
+        },
+        "com.amazonaws.workspacesthinclient#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.workspacesthinclient#ExceptionMessage"
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource that exceeds the service quota.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource that exceeds the service quota.</p>"
+                    }
+                },
+                "serviceCode": {
+                    "target": "com.amazonaws.workspacesthinclient#ServiceCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for the service in <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html\">Service Quotas</a>.</p>"
+                    }
+                },
+                "quotaCode": {
+                    "target": "com.amazonaws.workspacesthinclient#QuotaCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for the quota in <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html\">Service Quotas</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Your request exceeds a service quota.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.workspacesthinclient#Software": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the software component.</p>"
+                    }
+                },
+                "version": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the software component.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes software.</p>"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#SoftwareList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesthinclient#Software"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#SoftwareSet": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set.</p>"
+                    }
+                },
+                "version": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the software set.</p>"
+                    }
+                },
+                "releasedAt": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the software set was released.</p>"
+                    }
+                },
+                "supportedUntil": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the end of support for the software set.</p>"
+                    }
+                },
+                "validationStatus": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetValidationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to define if the software set has been validated.</p>"
+                    }
+                },
+                "software": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the software components in the software set.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.workspacesthinclient#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the software set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a software set.</p>"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#SoftwareSetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{1,9}$"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#SoftwareSetIdOrEmptyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{0,9}$"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#SoftwareSetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesthinclient#SoftwareSetSummary"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#SoftwareSetSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set.</p>"
+                    }
+                },
+                "version": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the software set.</p>"
+                    }
+                },
+                "releasedAt": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the software set was released.</p>"
+                    }
+                },
+                "supportedUntil": {
+                    "target": "com.amazonaws.workspacesthinclient#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the end of support for the software set.</p>"
+                    }
+                },
+                "validationStatus": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetValidationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to define if the software set has been validated.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.workspacesthinclient#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the software set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a software set.</p>"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#SoftwareSetUpdateMode": {
+            "type": "enum",
+            "members": {
+                "USE_LATEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USE_LATEST"
+                    }
+                },
+                "USE_DESIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USE_DESIRED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#SoftwareSetUpdateSchedule": {
+            "type": "enum",
+            "members": {
+                "USE_MAINTENANCE_WINDOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USE_MAINTENANCE_WINDOW"
+                    }
+                },
+                "APPLY_IMMEDIATELY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLY_IMMEDIATELY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#SoftwareSetUpdateStatus": {
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "UP_TO_DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UP_TO_DATE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#SoftwareSetValidationStatus": {
+            "type": "enum",
+            "members": {
+                "VALIDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATED"
+                    }
+                },
+                "NOT_VALIDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_VALIDATED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#TagKeys": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified resource.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}"
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to tag.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.workspacesthinclient#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the key-value pairs of the tag or tags to assign to the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#TagsMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#TargetDeviceStatus": {
+            "type": "enum",
+            "members": {
+                "DEREGISTERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEREGISTERED"
+                    }
+                },
+                "ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ThinClient": {
+            "type": "service",
+            "version": "2023-08-22",
+            "operations": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#CreateEnvironment"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#DeleteDevice"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#DeleteEnvironment"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#DeregisterDevice"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#GetDevice"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#GetEnvironment"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#GetSoftwareSet"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ListDevices"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ListEnvironments"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ListSoftwareSets"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#UpdateDevice"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#UpdateEnvironment"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#UpdateSoftwareSet"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "WorkSpaces Thin Client",
+                    "arnNamespace": "thinclient",
+                    "cloudTrailEventSource": "thinclient.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "thinclient"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>Amazon WorkSpaces Thin Client is a affordable device built to work with Amazon Web Services End User\n            Computing (EUC) virtual desktops to provide users with a complete cloud desktop\n            solution. WorkSpaces Thin Client is a compact device designed to connect up to two monitors and USB\n            devices like a keyboard, mouse, headset, and webcam. To maximize endpoint security, WorkSpaces Thin Client\n            devices do not allow local data storage or installation of unapproved applications. The\n            WorkSpaces Thin Client device ships preloaded with device management software.</p>\n         <p>You can use these APIs to complete WorkSpaces Thin Client tasks, such as creating environments or\n            viewing devices. For more information about WorkSpaces Thin Client, including the required permissions to\n            use the service, see the <a href=\"https://docs.aws.amazon.com/workspaces-thin-client/latest/ag/\">Amazon WorkSpaces Thin Client Administrator Guide</a>. For\n            more information about using the Command Line Interface (CLI) to manage\n            your WorkSpaces Thin Client resources, see the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/workspaces-thin-client/index.html\">WorkSpaces Thin Client section of the\n                    CLI Reference</a>.</p>",
+                "smithy.api#title": "Amazon WorkSpaces Thin Client",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://thinclient-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://thinclient-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://thinclient.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://thinclient.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://thinclient.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.workspacesthinclient#ExceptionMessage"
+                },
+                "serviceCode": {
+                    "target": "com.amazonaws.workspacesthinclient#ServiceCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for the service in <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html\">Service Quotas</a>.</p>"
+                    }
+                },
+                "quotaCode": {
+                    "target": "com.amazonaws.workspacesthinclient#QuotaCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for the quota in <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html\">Service Quotas</a>.</p>"
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "com.amazonaws.workspacesthinclient#RetryAfterSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait before retrying the next request.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.workspacesthinclient#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.workspacesthinclient#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a tag or tags from a resource.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to untag.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.workspacesthinclient#TagKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The keys of the key-value pairs for the tag or tags you want to remove from the\n            specified resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#UpdateDevice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#UpdateDeviceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#UpdateDeviceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a thin client device.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/devices/{id}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#UpdateDeviceRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the device to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the device to update.</p>"
+                    }
+                },
+                "desiredSoftwareSetId": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set to apply.</p>"
+                    }
+                },
+                "softwareSetUpdateSchedule": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance\n            window.</p>"
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.workspacesthinclient#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key to use for the\n            update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#UpdateDeviceResponse": {
+            "type": "structure",
+            "members": {
+                "device": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes a device.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#UpdateEnvironment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#UpdateEnvironmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#UpdateEnvironmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an environment.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/environments/{id}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#UpdateEnvironmentRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.workspacesthinclient#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.workspacesthinclient#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment to update.</p>"
+                    }
+                },
+                "desktopArn": {
+                    "target": "com.amazonaws.workspacesthinclient#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n                WorkSpaces Web, or AppStream 2.0.</p>"
+                    }
+                },
+                "desktopEndpoint": {
+                    "target": "com.amazonaws.workspacesthinclient#DesktopEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for the identity provider login (only for environments that use AppStream 2.0).</p>"
+                    }
+                },
+                "softwareSetUpdateSchedule": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to define if software updates should be applied within a maintenance\n            window.</p>"
+                    }
+                },
+                "maintenanceWindow": {
+                    "target": "com.amazonaws.workspacesthinclient#MaintenanceWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A specification for a time window to apply software updates.</p>"
+                    }
+                },
+                "softwareSetUpdateMode": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetUpdateMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to define which software updates to apply.</p>"
+                    }
+                },
+                "desiredSoftwareSetId": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetIdOrEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set to apply.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#UpdateEnvironmentResponse": {
+            "type": "structure",
+            "members": {
+                "environment": {
+                    "target": "com.amazonaws.workspacesthinclient#EnvironmentSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes an environment.</p>",
+                        "smithy.api#nestedProperties": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#UpdateSoftwareSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesthinclient#UpdateSoftwareSetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesthinclient#UpdateSoftwareSetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a software set.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/softwaresets/{id}",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#UpdateSoftwareSetRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the software set to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "validationStatus": {
+                    "target": "com.amazonaws.workspacesthinclient#SoftwareSetValidationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to define if the software set has been validated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#UpdateSoftwareSetResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.workspacesthinclient#ExceptionMessage"
+                },
+                "reason": {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the exception.</p>"
+                    }
+                },
+                "fieldList": {
+                    "target": "com.amazonaws.workspacesthinclient#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of fields that didn't validate.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the specified constraints.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.workspacesthinclient#FieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.workspacesthinclient#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the reason for the exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a validation exception.</p>"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesthinclient#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#ValidationExceptionReason": {
+            "type": "enum",
+            "members": {
+                "UNKNOWN_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknownOperation"
+                    }
+                },
+                "CANNOT_PARSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cannotParse"
+                    }
+                },
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fieldValidationFailed"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "other"
+                    }
+                }
+            }
+        }
+    }
+}

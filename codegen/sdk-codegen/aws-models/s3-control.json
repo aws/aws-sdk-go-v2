@@ -34,6 +34,18 @@
             "version": "2018-08-20",
             "operations": [
                 {
+                    "target": "com.amazonaws.s3control#AssociateAccessGrantsIdentityCenter"
+                },
+                {
+                    "target": "com.amazonaws.s3control#CreateAccessGrant"
+                },
+                {
+                    "target": "com.amazonaws.s3control#CreateAccessGrantsInstance"
+                },
+                {
+                    "target": "com.amazonaws.s3control#CreateAccessGrantsLocation"
+                },
+                {
                     "target": "com.amazonaws.s3control#CreateAccessPoint"
                 },
                 {
@@ -50,6 +62,18 @@
                 },
                 {
                     "target": "com.amazonaws.s3control#CreateStorageLensGroup"
+                },
+                {
+                    "target": "com.amazonaws.s3control#DeleteAccessGrant"
+                },
+                {
+                    "target": "com.amazonaws.s3control#DeleteAccessGrantsInstance"
+                },
+                {
+                    "target": "com.amazonaws.s3control#DeleteAccessGrantsInstanceResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.s3control#DeleteAccessGrantsLocation"
                 },
                 {
                     "target": "com.amazonaws.s3control#DeleteAccessPoint"
@@ -103,6 +127,24 @@
                     "target": "com.amazonaws.s3control#DescribeMultiRegionAccessPointOperation"
                 },
                 {
+                    "target": "com.amazonaws.s3control#DissociateAccessGrantsIdentityCenter"
+                },
+                {
+                    "target": "com.amazonaws.s3control#GetAccessGrant"
+                },
+                {
+                    "target": "com.amazonaws.s3control#GetAccessGrantsInstance"
+                },
+                {
+                    "target": "com.amazonaws.s3control#GetAccessGrantsInstanceForPrefix"
+                },
+                {
+                    "target": "com.amazonaws.s3control#GetAccessGrantsInstanceResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.s3control#GetAccessGrantsLocation"
+                },
+                {
                     "target": "com.amazonaws.s3control#GetAccessPoint"
                 },
                 {
@@ -142,6 +184,9 @@
                     "target": "com.amazonaws.s3control#GetBucketVersioning"
                 },
                 {
+                    "target": "com.amazonaws.s3control#GetDataAccess"
+                },
+                {
                     "target": "com.amazonaws.s3control#GetJobTagging"
                 },
                 {
@@ -169,6 +214,15 @@
                     "target": "com.amazonaws.s3control#GetStorageLensGroup"
                 },
                 {
+                    "target": "com.amazonaws.s3control#ListAccessGrants"
+                },
+                {
+                    "target": "com.amazonaws.s3control#ListAccessGrantsInstances"
+                },
+                {
+                    "target": "com.amazonaws.s3control#ListAccessGrantsLocations"
+                },
+                {
                     "target": "com.amazonaws.s3control#ListAccessPoints"
                 },
                 {
@@ -191,6 +245,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3control#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.s3control#PutAccessGrantsInstanceResourcePolicy"
                 },
                 {
                     "target": "com.amazonaws.s3control#PutAccessPointConfigurationForObjectLambda"
@@ -239,6 +296,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3control#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.s3control#UpdateAccessGrantsLocation"
                 },
                 {
                     "target": "com.amazonaws.s3control#UpdateJobPriority"
@@ -6019,6 +6079,113 @@
                 "smithy.api#documentation": "<p>A container for information about access control for replicas.</p>\n         <note>\n            <p>This is not supported by Amazon S3 on Outposts buckets.</p>\n         </note>"
             }
         },
+        "com.amazonaws.s3control#AccessGrantArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[a-z\\-]+:s3:[a-z0-9\\-]+:\\d{12}:access\\-grants\\/grant/[a-zA-Z0-9\\-]+$"
+            }
+        },
+        "com.amazonaws.s3control#AccessGrantId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-]+$"
+            }
+        },
+        "com.amazonaws.s3control#AccessGrantsInstanceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[a-z\\-]+:s3:[a-z0-9\\-]+:\\d{12}:access\\-grants\\/[a-zA-Z0-9\\-]+$"
+            }
+        },
+        "com.amazonaws.s3control#AccessGrantsInstanceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-]+$"
+            }
+        },
+        "com.amazonaws.s3control#AccessGrantsInstancesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#ListAccessGrantsInstanceEntry",
+                "traits": {
+                    "smithy.api#xmlName": "AccessGrantsInstance"
+                }
+            }
+        },
+        "com.amazonaws.s3control#AccessGrantsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#ListAccessGrantEntry",
+                "traits": {
+                    "smithy.api#xmlName": "AccessGrant"
+                }
+            }
+        },
+        "com.amazonaws.s3control#AccessGrantsLocationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[a-z\\-]+:s3:[a-z0-9\\-]+:\\d{12}:access\\-grants\\/location/[a-zA-Z0-9\\-]+$"
+            }
+        },
+        "com.amazonaws.s3control#AccessGrantsLocationConfiguration": {
+            "type": "structure",
+            "members": {
+                "S3SubPrefix": {
+                    "target": "com.amazonaws.s3control#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>S3SubPrefix</code> is appended to the location scope creating the grant scope. Use this field to narrow the scope of the grant to a subset of the location scope. This field is required if the location scope is the default location <code>s3://</code> because you cannot create a grant for all of your S3 data in the Region and must narrow the scope. For example, if the location scope is the default location <code>s3://</code>, the <code>S3SubPrefx</code> can be a <bucket-name>/*, so the full grant scope path would be <code>s3://<bucket-name>/*</code>. Or the <code>S3SubPrefx</code> can be <code><bucket-name>/<prefix-name>*</code>, so the full grant scope path would be or <code>s3://<bucket-name>/<prefix-name>*</code>.</p>\n         <p>If the <code>S3SubPrefix</code> includes a prefix, append the wildcard character <code>*</code> after the prefix to indicate that you want to include all object key names in the bucket that start with that prefix. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration options of the S3 Access Grants location. It contains the <code>S3SubPrefix</code> field. The grant scope, the data to which you are granting access, is the result of appending the <code>Subprefix</code> field to the scope of the registered location.</p>"
+            }
+        },
+        "com.amazonaws.s3control#AccessGrantsLocationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-]+$"
+            }
+        },
+        "com.amazonaws.s3control#AccessGrantsLocationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#ListAccessGrantsLocationsEntry",
+                "traits": {
+                    "smithy.api#xmlName": "AccessGrantsLocation"
+                }
+            }
+        },
+        "com.amazonaws.s3control#AccessKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.s3control#AccessPoint": {
             "type": "structure",
             "members": {
@@ -6137,7 +6304,7 @@
                 "StorageLensGroupLevel": {
                     "target": "com.amazonaws.s3control#StorageLensGroupLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p> A container element for S3 Storage Lens groups metrics. </p>"
+                        "smithy.api#documentation": "<p>\nA container element for S3 Storage Lens groups metrics.\n</p>"
                     }
                 }
             },
@@ -6198,6 +6365,59 @@
                     "max": 63
                 },
                 "smithy.api#pattern": "^[0-9a-z\\\\-]{63}$"
+            }
+        },
+        "com.amazonaws.s3control#AssociateAccessGrantsIdentityCenter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#AssociateAccessGrantsIdentityCenterRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Associate your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance. Use this action if you want to create access grants for users or groups from your corporate identity directory. First, you must add your corporate identity directory to Amazon Web Services IAM Identity Center. Then, you can associate this IAM Identity Center instance with your S3 Access Grants instance.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:AssociateAccessGrantsIdentityCenter</code> permission to use this operation. </p>\n            </dd>\n            <dt>Additional Permissions</dt>\n            <dd>\n               <p>You must also have the following permissions: <code>sso:CreateApplication</code>, <code>sso:PutApplicationGrant</code>, and <code>sso:PutApplicationAuthenticationMethod</code>. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v20180820/accessgrantsinstance/identitycenter",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#AssociateAccessGrantsIdentityCenterRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "IdentityCenterArn": {
+                    "target": "com.amazonaws.s3control#IdentityCenterArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center instance that you are associating with your S3 Access Grants instance. An IAM Identity Center instance is your corporate identity directory that you added to the IAM Identity Center. You can use the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html\">ListInstances</a> API operation to retrieve a list of your Identity Center instances and their ARNs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.s3control#AsyncCreationTimestamp": {
@@ -6645,6 +6865,353 @@
         },
         "com.amazonaws.s3control#ContinuationToken": {
             "type": "string"
+        },
+        "com.amazonaws.s3control#CreateAccessGrant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#CreateAccessGrantRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#CreateAccessGrantResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an access grant that gives a grantee access to your S3 data. The grantee can be an IAM user or role or a directory user, or group. Before you can create a grant, you must have an S3 Access Grants instance in the same Region as the S3 data. You can create an S3 Access Grants instance using the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessGrantsInstance.html\">CreateAccessGrantsInstance</a>. You must also have registered at least one S3 data location in your S3 Access Grants instance using <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessGrantsLocation.html\">CreateAccessGrantsLocation</a>.  </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:CreateAccessGrant</code> permission to use this operation. </p>\n            </dd>\n            <dt>Additional Permissions</dt>\n            <dd>\n               <p>For any directory identity - <code>sso:DescribeInstance</code> and <code>sso:DescribeApplication</code>\n               </p>\n               <p>For directory users - <code>identitystore:DescribeUser</code>\n               </p>\n               <p>For directory groups - <code>identitystore:DescribeGroup</code>\n               </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v20180820/accessgrantsinstance/grant",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#CreateAccessGrantRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "AccessGrantsLocationId": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the registered location to which you are granting access. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register. </p>\n         <p>If you are passing the <code>default</code> location, you cannot create an access grant for the entire default location. You must also specify a bucket or a bucket and prefix in the <code>Subprefix</code> field. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccessGrantsLocationConfiguration": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration options of the grant location. The grant location is the S3 path to the data to which you are granting access. It contains the <code>S3SubPrefix</code> field. The grant scope is the result of appending the subprefix to the location scope of the registered location.</p>"
+                    }
+                },
+                "Grantee": {
+                    "target": "com.amazonaws.s3control#Grantee",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user, group, or role to which you are granting access. You can grant access to an IAM user or role. If you have added your corporate directory to Amazon Web Services IAM Identity Center and associated your Identity Center instance with your S3 Access Grants instance, the grantee can also be a corporate directory user or group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permission": {
+                    "target": "com.amazonaws.s3control#Permission",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of access that you are granting to your S3 data, which can be set to one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READ</code> – Grant read-only access to the S3 data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WRITE</code> – Grant write-only access to the S3 data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READWRITE</code> – Grant both read and write access to the S3 data.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.s3control#IdentityCenterApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance. If an application ARN is included in the request to create an access grant, the grantee can only access the S3 data through this application. </p>"
+                    }
+                },
+                "S3PrefixType": {
+                    "target": "com.amazonaws.s3control#S3PrefixType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of <code>S3SubPrefix</code>. The only possible value is <code>Object</code>. Pass this value if the access grant scope is an object. Do not pass this value if the access grant scope is a bucket or a bucket and a prefix. </p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.s3control#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services resource tags that you are adding to the access grant. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#CreateAccessGrantResult": {
+            "type": "structure",
+            "members": {
+                "CreatedAt": {
+                    "target": "com.amazonaws.s3control#CreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you created the access grant. </p>"
+                    }
+                },
+                "AccessGrantId": {
+                    "target": "com.amazonaws.s3control#AccessGrantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the access grant. S3 Access Grants auto-generates this ID when you create the access grant.</p>"
+                    }
+                },
+                "AccessGrantArn": {
+                    "target": "com.amazonaws.s3control#AccessGrantArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the access grant. </p>"
+                    }
+                },
+                "Grantee": {
+                    "target": "com.amazonaws.s3control#Grantee",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user, group, or role to which you are granting access. You can grant access to an IAM user or role. If you have added your corporate directory to Amazon Web Services IAM Identity Center and associated your Identity Center instance with your S3 Access Grants instance, the grantee can also be a corporate directory user or group.</p>"
+                    }
+                },
+                "AccessGrantsLocationId": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the registered location to which you are granting access. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register. </p>"
+                    }
+                },
+                "AccessGrantsLocationConfiguration": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration options of the grant location. The grant location is the S3 path to the data to which you are granting access. </p>"
+                    }
+                },
+                "Permission": {
+                    "target": "com.amazonaws.s3control#Permission",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of access that you are granting to your S3 data, which can be set to one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READ</code> – Grant read-only access to the S3 data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WRITE</code> – Grant write-only access to the S3 data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READWRITE</code> – Grant both read and write access to the S3 data.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.s3control#IdentityCenterApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance. If the grant includes an application ARN, the grantee can only access the S3 data through this application. </p>"
+                    }
+                },
+                "GrantScope": {
+                    "target": "com.amazonaws.s3control#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 path of the data to which you are granting access. It is the result of appending the <code>Subprefix</code> to the location scope. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3control#CreateAccessGrantsInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#CreateAccessGrantsInstanceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#CreateAccessGrantsInstanceResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an S3 Access Grants instance, which serves as a logical grouping for access grants. You can create one S3 Access Grants instance per Region per account. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:CreateAccessGrantsInstance</code> permission to use this operation. </p>\n            </dd>\n            <dt>Additional Permissions</dt>\n            <dd>\n               <p>To associate an IAM Identity Center instance with your S3 Access Grants instance, you must also have the <code>sso:DescribeInstance</code>, <code>sso:CreateApplication</code>, <code>sso:PutApplicationGrant</code>, and <code>sso:PutApplicationAuthenticationMethod</code> permissions. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v20180820/accessgrantsinstance",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#CreateAccessGrantsInstanceRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "IdentityCenterArn": {
+                    "target": "com.amazonaws.s3control#IdentityCenterArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you would like to associate your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance, use this field to pass the Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center instance that you are associating with your S3 Access Grants instance. An IAM Identity Center instance is your corporate identity directory that you added to the IAM Identity Center. You can use the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html\">ListInstances</a> API operation to retrieve a list of your Identity Center instances and their ARNs. </p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.s3control#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services resource tags that you are adding to the S3 Access Grants instance. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#CreateAccessGrantsInstanceResult": {
+            "type": "structure",
+            "members": {
+                "CreatedAt": {
+                    "target": "com.amazonaws.s3control#CreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you created the S3 Access Grants instance. </p>"
+                    }
+                },
+                "AccessGrantsInstanceId": {
+                    "target": "com.amazonaws.s3control#AccessGrantsInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the S3 Access Grants instance. The ID is <code>default</code>. You can have one S3 Access Grants instance per Region per account. </p>"
+                    }
+                },
+                "AccessGrantsInstanceArn": {
+                    "target": "com.amazonaws.s3control#AccessGrantsInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 Access Grants instance. </p>"
+                    }
+                },
+                "IdentityCenterArn": {
+                    "target": "com.amazonaws.s3control#IdentityCenterArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you associated your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance, this field returns the Amazon Resource Name (ARN) of the IAM Identity Center instance application; a subresource of the original Identity Center instance passed in the request. S3 Access Grants creates this Identity Center application for this specific S3 Access Grants instance.  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3control#CreateAccessGrantsLocation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#CreateAccessGrantsLocationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#CreateAccessGrantsLocationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The S3 data location that you would like to register in your S3 Access Grants instance. Your S3 data must be in the same Region as your S3 Access Grants instance. The location can be one of the following: </p>\n         <ul>\n            <li>\n               <p>The default S3 location <code>s3://</code>\n               </p>\n            </li>\n            <li>\n               <p>A bucket - <code>S3://<bucket-name></code>\n               </p>\n            </li>\n            <li>\n               <p>A bucket and prefix - <code>S3://<bucket-name>/<prefix></code>\n               </p>\n            </li>\n         </ul>\n         <p>When you register a location, you must include the IAM role that has permission to manage the S3 location that you are registering. Give S3 Access Grants permission to assume this role <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-location.html\">using a policy</a>. S3 Access Grants assumes this role to manage access to the location and to vend temporary credentials to grantees or client applications. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:CreateAccessGrantsLocation</code> permission to use this operation. </p>\n            </dd>\n            <dt>Additional Permissions</dt>\n            <dd>\n               <p>You must also have the following permission for the specified IAM role: <code>iam:PassRole</code>\n               </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v20180820/accessgrantsinstance/location",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#CreateAccessGrantsLocationRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "LocationScope": {
+                    "target": "com.amazonaws.s3control#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 path to the location that you are registering. The location scope can be the default S3 location <code>s3://</code>, the S3 path to a bucket <code>s3://<bucket></code>, or the S3 path to a bucket and prefix <code>s3://<bucket>/<prefix></code>. A prefix in S3 is a string of characters at the beginning of an object key name used to organize the objects that you store in your S3 buckets. For example, object key names that start with the <code>engineering/</code> prefix or object key names that start with the <code>marketing/campaigns/</code> prefix.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IAMRoleArn": {
+                    "target": "com.amazonaws.s3control#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for the registered location. S3 Access Grants assumes this role to manage access to the registered location. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.s3control#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services resource tags that you are adding to the S3 Access Grants location. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#CreateAccessGrantsLocationResult": {
+            "type": "structure",
+            "members": {
+                "CreatedAt": {
+                    "target": "com.amazonaws.s3control#CreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you registered the location. </p>"
+                    }
+                },
+                "AccessGrantsLocationId": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the registered location to which you are granting access. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register.  </p>"
+                    }
+                },
+                "AccessGrantsLocationArn": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the location you are registering.</p>"
+                    }
+                },
+                "LocationScope": {
+                    "target": "com.amazonaws.s3control#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI path to the location that you are registering. The location scope can be the default S3 location <code>s3://</code>, the S3 path to a bucket, or the S3 path to a bucket and prefix. A prefix in S3 is a string of characters at the beginning of an object key name used to organize the objects that you store in your S3 buckets. For example, object key names that start with the <code>engineering/</code> prefix or object key names that start with the <code>marketing/campaigns/</code> prefix.</p>"
+                    }
+                },
+                "IAMRoleArn": {
+                    "target": "com.amazonaws.s3control#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for the registered location. S3 Access Grants assumes this role to manage access to the registered location. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.s3control#CreateAccessPoint": {
             "type": "operation",
@@ -7247,7 +7814,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Services account ID that the Storage Lens group is created from and associated with.\n      </p>",
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID that the Storage Lens group is created from and associated with.\n</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -7259,14 +7826,14 @@
                 "StorageLensGroup": {
                     "target": "com.amazonaws.s3control#StorageLensGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Storage Lens group configuration. </p>",
+                        "smithy.api#documentation": "<p>\nThe Storage Lens group configuration.\n</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.s3control#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Services resource tags that you're adding to your Storage Lens group. This parameter\n         is optional. </p>"
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services resource tags that you're adding to your Storage Lens group. This parameter is optional.\n</p>"
                     }
                 }
             },
@@ -7279,6 +7846,39 @@
         },
         "com.amazonaws.s3control#CreationTimestamp": {
             "type": "timestamp"
+        },
+        "com.amazonaws.s3control#Credentials": {
+            "type": "structure",
+            "members": {
+                "AccessKeyId": {
+                    "target": "com.amazonaws.s3control#AccessKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique access key ID of the Amazon Web Services STS temporary credential that S3 Access Grants vends to grantees and client applications. </p>"
+                    }
+                },
+                "SecretAccessKey": {
+                    "target": "com.amazonaws.s3control#SecretAccessKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secret access key of the Amazon Web Services STS temporary credential that S3 Access Grants vends to grantees and client applications. </p>"
+                    }
+                },
+                "SessionToken": {
+                    "target": "com.amazonaws.s3control#SessionToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services STS temporary credential that S3 Access Grants vends to grantees and client applications. </p>"
+                    }
+                },
+                "Expiration": {
+                    "target": "com.amazonaws.s3control#Expiration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration date and time of the temporary credential that S3 Access Grants vends to grantees and client applications. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Web Services Security Token Service temporary credential that S3 Access Grants vends to grantees and client applications. </p>",
+                "smithy.api#sensitive": {}
+            }
         },
         "com.amazonaws.s3control#Date": {
             "type": "timestamp"
@@ -7293,6 +7893,206 @@
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.s3control#DeleteAccessGrant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#DeleteAccessGrantRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the access grant from the S3 Access Grants instance. You cannot undo an access grant deletion and the grantee will no longer have access to the S3 data.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:DeleteAccessGrant</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v20180820/accessgrantsinstance/grant/{AccessGrantId}",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#DeleteAccessGrantRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "AccessGrantId": {
+                    "target": "com.amazonaws.s3control#AccessGrantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the access grant. S3 Access Grants auto-generates this ID when you create the access grant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#DeleteAccessGrantsInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#DeleteAccessGrantsInstanceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes your S3 Access Grants instance. You must first delete the access grants and locations before S3 Access Grants can delete the instance. See <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html\">DeleteAccessGrant</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrantsLocation.html\">DeleteAccessGrantsLocation</a>. If you have associated an IAM Identity Center instance with your S3 Access Grants instance, you must first dissassociate the Identity Center instance from the S3 Access Grants instance before you can delete the S3 Access Grants instance. See <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_AssociateAccessGrantsIdentityCenter.html\">AssociateAccessGrantsIdentityCenter</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DissociateAccessGrantsIdentityCenter.html\">DissociateAccessGrantsIdentityCenter</a>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:DeleteAccessGrantsInstance</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v20180820/accessgrantsinstance",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#DeleteAccessGrantsInstanceRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#DeleteAccessGrantsInstanceResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#DeleteAccessGrantsInstanceResourcePolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the resource policy of the S3 Access Grants instance. The resource policy is used to manage cross-account access to your S3 Access Grants instance. By deleting the resource policy, you delete any cross-account permissions to your S3 Access Grants instance. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:DeleteAccessGrantsInstanceResourcePolicy</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v20180820/accessgrantsinstance/resourcepolicy",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#DeleteAccessGrantsInstanceResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#DeleteAccessGrantsLocation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#DeleteAccessGrantsLocationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deregisters a location from your S3 Access Grants instance. You can only delete a location registration from an S3 Access Grants instance if there are no grants associated with this location. See <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html\">Delete a grant</a> for information on how to delete grants. You need to have at least one registered location in your S3 Access Grants instance in order to create access grants. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:DeleteAccessGrantsLocation</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v20180820/accessgrantsinstance/location/{AccessGrantsLocationId}",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#DeleteAccessGrantsLocationRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "AccessGrantsLocationId": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the registered location that you are deregistering from your S3 Access Grants instance. S3 Access Grants assigned this ID when you registered the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register.  </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.s3control#DeleteAccessPoint": {
@@ -8153,7 +8953,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p> Deletes an existing S3 Storage Lens group.</p>\n         <p>To use this operation, you must have the permission to perform the\n            <code>s3:DeleteStorageLensGroup</code> action. For more information about the required\n         Storage Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n            Lens error codes</a>.</p>",
+                "smithy.api#documentation": "<p>\nDeletes an existing S3 Storage Lens group.</p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:DeleteStorageLensGroup</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n      Lens error codes</a>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -8175,7 +8975,7 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#StorageLensGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the Storage Lens group that you're trying to delete. </p>",
+                        "smithy.api#documentation": "<p>\nThe name of the Storage Lens group that you're trying to delete.\n</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8183,7 +8983,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Services account ID used to create the Storage Lens group that you're trying to\n         delete. </p>",
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID used to create the Storage Lens group that you're trying to delete.\n</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -8412,6 +9212,61 @@
                 "smithy.api#documentation": "<p>The container element for Amazon S3 Storage Lens detailed status code metrics. Detailed status\n         code metrics generate metrics for HTTP status codes, such as <code>200 OK</code>, <code>403\n            Forbidden</code>, <code>503 Service Unavailable</code> and others. </p>\n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>"
             }
         },
+        "com.amazonaws.s3control#DissociateAccessGrantsIdentityCenter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#DissociateAccessGrantsIdentityCenterRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Dissociates the Amazon Web Services IAM Identity Center instance from the S3 Access Grants instance. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:DissociateAccessGrantsIdentityCenter</code> permission to use this operation. </p>\n            </dd>\n            <dt>Additional Permissions</dt>\n            <dd>\n               <p>You must have the <code>sso:DeleteApplication</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v20180820/accessgrantsinstance/identitycenter",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#DissociateAccessGrantsIdentityCenterRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#DurationSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 900,
+                    "max": 43200
+                }
+            }
+        },
         "com.amazonaws.s3control#EncryptionConfiguration": {
             "type": "structure",
             "members": {
@@ -8510,6 +9365,9 @@
                 }
             }
         },
+        "com.amazonaws.s3control#Expiration": {
+            "type": "timestamp"
+        },
         "com.amazonaws.s3control#ExpirationStatus": {
             "type": "enum",
             "members": {
@@ -8591,6 +9449,438 @@
                         "smithy.api#enumValue": "S3InventoryReport_CSV_20211130"
                     }
                 }
+            }
+        },
+        "com.amazonaws.s3control#GetAccessGrant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#GetAccessGrantRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#GetAccessGrantResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Get the details of an access grant from your S3 Access Grants instance.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:GetAccessGrant</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/accessgrantsinstance/grant/{AccessGrantId}",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetAccessGrantRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "AccessGrantId": {
+                    "target": "com.amazonaws.s3control#AccessGrantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the access grant. S3 Access Grants auto-generates this ID when you create the access grant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#GetAccessGrantResult": {
+            "type": "structure",
+            "members": {
+                "CreatedAt": {
+                    "target": "com.amazonaws.s3control#CreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you created the access grant. </p>"
+                    }
+                },
+                "AccessGrantId": {
+                    "target": "com.amazonaws.s3control#AccessGrantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the access grant. S3 Access Grants auto-generates this ID when you create the access grant.</p>"
+                    }
+                },
+                "AccessGrantArn": {
+                    "target": "com.amazonaws.s3control#AccessGrantArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the access grant. </p>"
+                    }
+                },
+                "Grantee": {
+                    "target": "com.amazonaws.s3control#Grantee",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user, group, or role to which you are granting access. You can grant access to an IAM user or role. If you have added a corporate directory to Amazon Web Services IAM Identity Center and associated this Identity Center instance with the S3 Access Grants instance, the grantee can also be a corporate directory user or group.</p>"
+                    }
+                },
+                "Permission": {
+                    "target": "com.amazonaws.s3control#Permission",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of permission that was granted in the access grant. Can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READ</code> – Grant read-only access to the S3 data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WRITE</code> – Grant write-only access to the S3 data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READWRITE</code> – Grant both read and write access to the S3 data.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "AccessGrantsLocationId": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the registered location to which you are granting access. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register. </p>"
+                    }
+                },
+                "AccessGrantsLocationConfiguration": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration options of the grant location. The grant location is the S3 path to the data to which you are granting access. </p>"
+                    }
+                },
+                "GrantScope": {
+                    "target": "com.amazonaws.s3control#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 path of the data to which you are granting access. It is the result of appending the <code>Subprefix</code> to the location scope.</p>"
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.s3control#IdentityCenterApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance. If the grant includes an application ARN, the grantee can only access the S3 data through this application.  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3control#GetAccessGrantsInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#GetAccessGrantsInstanceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#GetAccessGrantsInstanceResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the S3 Access Grants instance for a Region in your account. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:GetAccessGrantsInstance</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/accessgrantsinstance",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetAccessGrantsInstanceForPrefix": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#GetAccessGrantsInstanceForPrefixRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#GetAccessGrantsInstanceForPrefixResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve the S3 Access Grants instance that contains a particular prefix.  </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:GetAccessGrantsInstanceForPrefix</code> permission for the caller account to use this operation. </p>\n            </dd>\n            <dt>Additional Permissions</dt>\n            <dd>\n               <p>The prefix owner account must grant you the following permissions to their S3 Access Grants instance: <code>s3:GetAccessGrantsInstanceForPrefix</code>. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/accessgrantsinstance/prefix",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetAccessGrantsInstanceForPrefixRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "S3Prefix": {
+                    "target": "com.amazonaws.s3control#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 prefix of the access grants that you would like to retrieve.</p>",
+                        "smithy.api#httpQuery": "s3prefix",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#GetAccessGrantsInstanceForPrefixResult": {
+            "type": "structure",
+            "members": {
+                "AccessGrantsInstanceArn": {
+                    "target": "com.amazonaws.s3control#AccessGrantsInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 Access Grants instance. </p>"
+                    }
+                },
+                "AccessGrantsInstanceId": {
+                    "target": "com.amazonaws.s3control#AccessGrantsInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the S3 Access Grants instance. The ID is <code>default</code>. You can have one S3 Access Grants instance per Region per account. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3control#GetAccessGrantsInstanceRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#GetAccessGrantsInstanceResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#GetAccessGrantsInstanceResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#GetAccessGrantsInstanceResourcePolicyResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the resource policy of the S3 Access Grants instance. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:GetAccessGrantsInstanceResourcePolicy</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/accessgrantsinstance/resourcepolicy",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetAccessGrantsInstanceResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#GetAccessGrantsInstanceResourcePolicyResult": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "com.amazonaws.s3control#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource policy of the S3 Access Grants instance.</p>"
+                    }
+                },
+                "Organization": {
+                    "target": "com.amazonaws.s3control#Organization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Organization of the resource policy of the S3 Access Grants instance.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.s3control#CreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you created the S3 Access Grants instance resource policy. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3control#GetAccessGrantsInstanceResult": {
+            "type": "structure",
+            "members": {
+                "AccessGrantsInstanceArn": {
+                    "target": "com.amazonaws.s3control#AccessGrantsInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 Access Grants instance. </p>"
+                    }
+                },
+                "AccessGrantsInstanceId": {
+                    "target": "com.amazonaws.s3control#AccessGrantsInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the S3 Access Grants instance. The ID is <code>default</code>. You can have one S3 Access Grants instance per Region per account. </p>"
+                    }
+                },
+                "IdentityCenterArn": {
+                    "target": "com.amazonaws.s3control#IdentityCenterArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you associated your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance, this field returns the Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center instance application; a subresource of the original Identity Center instance. S3 Access Grants creates this Identity Center application for the specific S3 Access Grants instance. </p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.s3control#CreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you created the S3 Access Grants instance. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3control#GetAccessGrantsLocation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#GetAccessGrantsLocationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#GetAccessGrantsLocationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of a particular location registered in your S3 Access Grants instance. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:GetAccessGrantsLocation</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/accessgrantsinstance/location/{AccessGrantsLocationId}",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetAccessGrantsLocationRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "AccessGrantsLocationId": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the registered location that you are retrieving. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register.  </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#GetAccessGrantsLocationResult": {
+            "type": "structure",
+            "members": {
+                "CreatedAt": {
+                    "target": "com.amazonaws.s3control#CreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you registered the location. </p>"
+                    }
+                },
+                "AccessGrantsLocationId": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the registered location to which you are granting access. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register.  </p>"
+                    }
+                },
+                "AccessGrantsLocationArn": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the registered location. </p>"
+                    }
+                },
+                "LocationScope": {
+                    "target": "com.amazonaws.s3control#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI path to the registered location. The location scope can be the default S3 location <code>s3://</code>, the S3 path to a bucket, or the S3 path to a bucket and prefix. A prefix in S3 is a string of characters at the beginning of an object key name used to organize the objects that you store in your S3 buckets. For example, object key names that start with the <code>engineering/</code> prefix or object key names that start with the <code>marketing/campaigns/</code> prefix.</p>"
+                    }
+                },
+                "IAMRoleArn": {
+                    "target": "com.amazonaws.s3control#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for the registered location. S3 Access Grants assumes this role to manage access to the registered location. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.s3control#GetAccessPoint": {
@@ -9578,6 +10868,109 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.s3control#GetDataAccess": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#GetDataAccessRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#GetDataAccessResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a temporary access credential from S3 Access Grants to the grantee or client application. The <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_Credentials.html\">temporary credential</a> is an Amazon Web Services STS token that grants them access to the S3 data. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:GetDataAccess</code> permission to use this operation. </p>\n            </dd>\n            <dt>Additional Permissions</dt>\n            <dd>\n               <p>The IAM role that S3 Access Grants assumes must have the following permissions specified in the trust policy when registering the location: <code>sts:AssumeRole</code>, for directory users or groups <code>sts:SetContext</code>, and for IAM users or roles <code>sts:SourceIdentity</code>. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/accessgrantsinstance/dataaccess",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetDataAccessRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "Target": {
+                    "target": "com.amazonaws.s3control#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI path of the data to which you are requesting temporary access credentials. If the requesting account has an access grant for this data, S3 Access Grants vends temporary access credentials in the response.</p>",
+                        "smithy.api#httpQuery": "target",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permission": {
+                    "target": "com.amazonaws.s3control#Permission",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of permission granted to your S3 data, which can be set to one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READ</code> – Grant read-only access to the S3 data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WRITE</code> – Grant write-only access to the S3 data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READWRITE</code> – Grant both read and write access to the S3 data.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "permission",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DurationSeconds": {
+                    "target": "com.amazonaws.s3control#DurationSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session duration, in seconds, of the temporary access credential that S3 Access Grants vends to the grantee or client application. The default value is 1 hour, but the grantee can specify a range from 900 seconds (15 minutes) up to 43200 seconds (12 hours). If the grantee requests a value higher than this maximum, the operation fails. </p>",
+                        "smithy.api#httpQuery": "durationSeconds"
+                    }
+                },
+                "Privilege": {
+                    "target": "com.amazonaws.s3control#Privilege",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the temporary access credential that S3 Access Grants vends to the grantee or client application. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Default</code> – The scope of the returned temporary access token is the scope of the grant that is closest to the target scope.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Minimal</code> – The scope of the returned temporary access token is the same as the requested target scope as long as the requested scope is the same as or a subset of the grant scope. </p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "privilege"
+                    }
+                },
+                "TargetType": {
+                    "target": "com.amazonaws.s3control#S3PrefixType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of <code>Target</code>. The only possible value is <code>Object</code>. Pass this value if the target data that you would like to access is a path to an object. Do not pass this value if the target data is a bucket or a bucket and a prefix. </p>",
+                        "smithy.api#httpQuery": "targetType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#GetDataAccessResult": {
+            "type": "structure",
+            "members": {
+                "Credentials": {
+                    "target": "com.amazonaws.s3control#Credentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The temporary credential token that S3 Access Grants vends.</p>"
+                    }
+                },
+                "MatchedGrantTarget": {
+                    "target": "com.amazonaws.s3control#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI path of the data to which you are being granted temporary access credentials. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.s3control#GetJobTagging": {
             "type": "operation",
             "input": {
@@ -10140,7 +11533,7 @@
                 "target": "com.amazonaws.s3control#GetStorageLensGroupResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p> Retrieves the Storage Lens group configuration details.</p>\n         <p>To use this operation, you must have the permission to perform the\n            <code>s3:GetStorageLensGroup</code> action. For more information about the required\n         Storage Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n            Lens error codes</a>.</p>",
+                "smithy.api#documentation": "<p>\nRetrieves the Storage Lens group configuration details.</p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:GetStorageLensGroup</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n      Lens error codes</a>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -10162,7 +11555,7 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#StorageLensGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the Storage Lens group that you're trying to retrieve the configuration\n         details for. </p>",
+                        "smithy.api#documentation": "<p>\nThe name of the Storage Lens group that you're trying to retrieve the configuration details for.\n</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -10170,7 +11563,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Services account ID associated with the Storage Lens group that you're trying to\n         retrieve the details for. </p>",
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID associated with the Storage Lens group that you're trying to retrieve the details for.\n</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -10190,7 +11583,7 @@
                 "StorageLensGroup": {
                     "target": "com.amazonaws.s3control#StorageLensGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the Storage Lens group that you're trying to retrieve the configuration\n         details for. </p>",
+                        "smithy.api#documentation": "<p>\nThe name of the Storage Lens group that you're trying to retrieve the configuration details for.\n</p>",
                         "smithy.api#httpPayload": {}
                     }
                 }
@@ -10213,6 +11606,52 @@
         },
         "com.amazonaws.s3control#GrantWriteACP": {
             "type": "string"
+        },
+        "com.amazonaws.s3control#Grantee": {
+            "type": "structure",
+            "members": {
+                "GranteeType": {
+                    "target": "com.amazonaws.s3control#GranteeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the grantee to which access has been granted. It can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IAM</code> - An IAM user or role.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECTORY_USER</code> - Your corporate directory user. You can use this option if you have added your corporate identity directory to IAM Identity Center and associated the IAM Identity Center instance with your S3 Access Grants instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECTORY_GROUP</code> - Your corporate directory group. You can use this option if you have added your corporate identity directory to IAM Identity Center and associated the IAM Identity Center instance with your S3 Access Grants instance.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "GranteeIdentifier": {
+                    "target": "com.amazonaws.s3control#GranteeIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the <code>Grantee</code>. If the grantee type is <code>IAM</code>, the identifier is the IAM Amazon Resource Name (ARN) of the user or role. If the grantee type is a directory user or group, the identifier is 128-bit universally unique identifier (UUID) in the format <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE11111</code>. You can obtain this UUID from your Amazon Web Services IAM Identity Center instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The user, group, or role to which you are granting access. You can grant access to an IAM user or role. If you have added your corporate directory to Amazon Web Services IAM Identity Center and associated your Identity Center instance with your S3 Access Grants instance, the grantee can also be a corporate directory user or group.</p>"
+            }
+        },
+        "com.amazonaws.s3control#GranteeIdentifier": {
+            "type": "string"
+        },
+        "com.amazonaws.s3control#GranteeType": {
+            "type": "enum",
+            "members": {
+                "DIRECTORY_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECTORY_USER"
+                    }
+                },
+                "DIRECTORY_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECTORY_GROUP"
+                    }
+                },
+                "IAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM"
+                    }
+                }
+            }
         },
         "com.amazonaws.s3control#IAMRoleArn": {
             "type": "string",
@@ -10237,6 +11676,26 @@
             "traits": {
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.s3control#IdentityCenterApplicationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:[^:]+:sso:.*$"
+            }
+        },
+        "com.amazonaws.s3control#IdentityCenterArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:[^:]+:sso::(\\d{12}){0,1}:instance/.*$"
             }
         },
         "com.amazonaws.s3control#Include": {
@@ -11318,6 +12777,438 @@
                 }
             }
         },
+        "com.amazonaws.s3control#ListAccessGrantEntry": {
+            "type": "structure",
+            "members": {
+                "CreatedAt": {
+                    "target": "com.amazonaws.s3control#CreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you created the S3 Access Grants instance. </p>"
+                    }
+                },
+                "AccessGrantId": {
+                    "target": "com.amazonaws.s3control#AccessGrantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the access grant. S3 Access Grants auto-generates this ID when you create the access grant.</p>"
+                    }
+                },
+                "AccessGrantArn": {
+                    "target": "com.amazonaws.s3control#AccessGrantArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the access grant. </p>"
+                    }
+                },
+                "Grantee": {
+                    "target": "com.amazonaws.s3control#Grantee",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user, group, or role to which you are granting access. You can grant access to an IAM user or role. If you have added your corporate directory to Amazon Web Services IAM Identity Center and associated your Identity Center instance with your S3 Access Grants instance, the grantee can also be a corporate directory user or group.</p>"
+                    }
+                },
+                "Permission": {
+                    "target": "com.amazonaws.s3control#Permission",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of access granted to your S3 data, which can be set to one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READ</code> – Grant read-only access to the S3 data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WRITE</code> – Grant write-only access to the S3 data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READWRITE</code> – Grant both read and write access to the S3 data.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "AccessGrantsLocationId": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the registered location to which you are granting access. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register.  </p>"
+                    }
+                },
+                "AccessGrantsLocationConfiguration": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration options of the grant location. The grant location is the S3 path to the data to which you are granting access. </p>"
+                    }
+                },
+                "GrantScope": {
+                    "target": "com.amazonaws.s3control#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 path of the data to which you are granting access. It is the result of appending the <code>Subprefix</code> to the location scope.</p>"
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.s3control#IdentityCenterApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance. If the grant includes an application ARN, the grantee can only access the S3 data through this application. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the access grant.</p>"
+            }
+        },
+        "com.amazonaws.s3control#ListAccessGrants": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#ListAccessGrantsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#ListAccessGrantsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the list of access grants in your S3 Access Grants instance.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:ListAccessGrants</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/accessgrantsinstance/grants",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#ListAccessGrantsInstanceEntry": {
+            "type": "structure",
+            "members": {
+                "AccessGrantsInstanceId": {
+                    "target": "com.amazonaws.s3control#AccessGrantsInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the S3 Access Grants instance. The ID is <code>default</code>. You can have one S3 Access Grants instance per Region per account. </p>"
+                    }
+                },
+                "AccessGrantsInstanceArn": {
+                    "target": "com.amazonaws.s3control#AccessGrantsInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 Access Grants instance. </p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.s3control#CreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you created the S3 Access Grants instance. </p>"
+                    }
+                },
+                "IdentityCenterArn": {
+                    "target": "com.amazonaws.s3control#IdentityCenterArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you associated your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance, this field returns the Amazon Resource Name (ARN) of the IAM Identity Center instance application; a subresource of the original Identity Center instance. S3 Access Grants creates this Identity Center application for the specific S3 Access Grants instance. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the S3 Access Grants instance.</p>"
+            }
+        },
+        "com.amazonaws.s3control#ListAccessGrantsInstances": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#ListAccessGrantsInstancesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#ListAccessGrantsInstancesResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of S3 Access Grants instances. An S3 Access Grants instance serves as a logical grouping for your individual access grants. You can only have one S3 Access Grants instance per Region per account.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:ListAccessGrantsInstances</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/accessgrantsinstances",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#ListAccessGrantsInstancesRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.s3control#ContinuationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to request the next page of results. Pass this value into a subsequent <code>List Access Grants Instances</code> request in order to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.s3control#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of access grants that you would like returned in the <code>List Access Grants</code> response. If the results include the pagination token <code>NextToken</code>, make another call using the <code>NextToken</code> to determine if there are more results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#ListAccessGrantsInstancesResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.s3control#ContinuationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to request the next page of results. Pass this value into a subsequent <code>List Access Grants Instances</code> request in order to retrieve the next page of results.</p>"
+                    }
+                },
+                "AccessGrantsInstancesList": {
+                    "target": "com.amazonaws.s3control#AccessGrantsInstancesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for a list of S3 Access Grants instances.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3control#ListAccessGrantsLocations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#ListAccessGrantsLocationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#ListAccessGrantsLocationsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of the locations registered in your S3 Access Grants instance.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:ListAccessGrantsLocations</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/accessgrantsinstance/locations",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#ListAccessGrantsLocationsEntry": {
+            "type": "structure",
+            "members": {
+                "CreatedAt": {
+                    "target": "com.amazonaws.s3control#CreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you registered the location. </p>"
+                    }
+                },
+                "AccessGrantsLocationId": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the registered location to which you are granting access. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register.  </p>"
+                    }
+                },
+                "AccessGrantsLocationArn": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the registered location. </p>"
+                    }
+                },
+                "LocationScope": {
+                    "target": "com.amazonaws.s3control#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 path to the location that you are registering. The location scope can be the default S3 location <code>s3://</code>, the S3 path to a bucket <code>s3://<bucket></code>, or the S3 path to a bucket and prefix <code>s3://<bucket>/<prefix></code>. A prefix in S3 is a string of characters at the beginning of an object key name used to organize the objects that you store in your S3 buckets. For example, object key names that start with the <code>engineering/</code> prefix or object key names that start with the <code>marketing/campaigns/</code> prefix.</p>"
+                    }
+                },
+                "IAMRoleArn": {
+                    "target": "com.amazonaws.s3control#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for the registered location. S3 Access Grants assumes this role to manage access to the registered location. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container for information about the registered location.</p>"
+            }
+        },
+        "com.amazonaws.s3control#ListAccessGrantsLocationsRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.s3control#ContinuationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to request the next page of results. Pass this value into a subsequent <code>List Access Grants Locations</code> request in order to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.s3control#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of access grants that you would like returned in the <code>List Access Grants</code> response. If the results include the pagination token <code>NextToken</code>, make another call using the <code>NextToken</code> to determine if there are more results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "LocationScope": {
+                    "target": "com.amazonaws.s3control#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 path to the location that you are registering. The location scope can be the default S3 location <code>s3://</code>, the S3 path to a bucket <code>s3://<bucket></code>, or the S3 path to a bucket and prefix <code>s3://<bucket>/<prefix></code>. A prefix in S3 is a string of characters at the beginning of an object key name used to organize the objects that you store in your S3 buckets. For example, object key names that start with the <code>engineering/</code> prefix or object key names that start with the <code>marketing/campaigns/</code> prefix.</p>",
+                        "smithy.api#httpQuery": "locationscope"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#ListAccessGrantsLocationsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.s3control#ContinuationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to request the next page of results. Pass this value into a subsequent <code>List Access Grants Locations</code> request in order to retrieve the next page of results.</p>"
+                    }
+                },
+                "AccessGrantsLocationsList": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for a list of registered locations in an S3 Access Grants instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3control#ListAccessGrantsRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.s3control#ContinuationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to request the next page of results. Pass this value into a subsequent <code>List Access Grants</code> request in order to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.s3control#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of access grants that you would like returned in the <code>List Access Grants</code> response. If the results include the pagination token <code>NextToken</code>, make another call using the <code>NextToken</code> to determine if there are more results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "GranteeType": {
+                    "target": "com.amazonaws.s3control#GranteeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the grantee to which access has been granted. It can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IAM</code> - An IAM user or role.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECTORY_USER</code> - Your corporate directory user. You can use this option if you have added your corporate identity directory to IAM Identity Center and associated the IAM Identity Center instance with your S3 Access Grants instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECTORY_GROUP</code> - Your corporate directory group. You can use this option if you have added your corporate identity directory to IAM Identity Center and associated the IAM Identity Center instance with your S3 Access Grants instance.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "granteetype"
+                    }
+                },
+                "GranteeIdentifier": {
+                    "target": "com.amazonaws.s3control#GranteeIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifer of the <code>Grantee</code>. If the grantee type is <code>IAM</code>, the identifier is the IAM Amazon Resource Name (ARN) of the user or role. If the grantee type is a directory user or group, the identifier is 128-bit universally unique identifier (UUID) in the format <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE11111</code>. You can obtain this UUID from your Amazon Web Services IAM Identity Center instance.</p>",
+                        "smithy.api#httpQuery": "granteeidentifier"
+                    }
+                },
+                "Permission": {
+                    "target": "com.amazonaws.s3control#Permission",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of permission granted to your S3 data, which can be set to one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READ</code> – Grant read-only access to the S3 data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WRITE</code> – Grant write-only access to the S3 data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READWRITE</code> – Grant both read and write access to the S3 data.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "permission"
+                    }
+                },
+                "GrantScope": {
+                    "target": "com.amazonaws.s3control#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 path of the data to which you are granting access. It is the result of appending the <code>Subprefix</code> to the location scope.</p>",
+                        "smithy.api#httpQuery": "grantscope"
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.s3control#IdentityCenterApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance. If the grant includes an application ARN, the grantee can only access the S3 data through this application. </p>",
+                        "smithy.api#httpQuery": "application_arn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#ListAccessGrantsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.s3control#ContinuationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to request the next page of results. Pass this value into a subsequent <code>List Access Grants</code> request in order to retrieve the next page of results.</p>"
+                    }
+                },
+                "AccessGrantsList": {
+                    "target": "com.amazonaws.s3control#AccessGrantsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for a list of grants in an S3 Access Grants instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.s3control#ListAccessPoints": {
             "type": "operation",
             "input": {
@@ -11902,27 +13793,27 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#StorageLensGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains the name of the Storage Lens group that exists in the specified home Region.\n      </p>",
+                        "smithy.api#documentation": "<p>\nContains the name of the Storage Lens group that exists in the specified home Region.\n</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "StorageLensGroupArn": {
                     "target": "com.amazonaws.s3control#StorageLensGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains the Amazon Resource Name (ARN) of the Storage Lens group. This property is\n         read-only. </p>",
+                        "smithy.api#documentation": "<p>\nContains the Amazon Resource Name (ARN) of the Storage Lens group. This property is read-only.\n</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "HomeRegion": {
                     "target": "com.amazonaws.s3control#S3AWSRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains the Amazon Web Services Region where the Storage Lens group was created. </p>",
+                        "smithy.api#documentation": "<p>\nContains the Amazon Web Services Region where the Storage Lens group was created.\n</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Each entry contains a Storage Lens group that exists in the specified home Region.\n      </p>"
+                "smithy.api#documentation": "<p>\nEach entry contains a Storage Lens group that exists in the specified home Region.\n</p>"
             }
         },
         "com.amazonaws.s3control#ListStorageLensGroups": {
@@ -11934,7 +13825,7 @@
                 "target": "com.amazonaws.s3control#ListStorageLensGroupsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p> Lists all the Storage Lens groups in the specified home Region. </p>\n         <p>To use this operation, you must have the permission to perform the\n            <code>s3:ListStorageLensGroups</code> action. For more information about the required\n         Storage Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n            Lens error codes</a>.</p>",
+                "smithy.api#documentation": "<p>\nLists all the Storage Lens groups in the specified home Region.\n</p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:ListStorageLensGroups</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n      Lens error codes</a>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -11960,7 +13851,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Services account ID that owns the Storage Lens groups. </p>",
+                        "smithy.api#documentation": "<p>\n   The Amazon Web Services account ID that owns the Storage Lens groups.\n</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -11972,7 +13863,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.s3control#ContinuationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> if there are no more\n         results. </p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> if there are no more results.\n   </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -11987,13 +13878,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.s3control#ContinuationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> If <code>NextToken</code> is returned, there are more Storage Lens groups results\n         available. The value of <code>NextToken</code> is a unique pagination token for each page.\n         Make the call again using the returned token to retrieve the next page. Keep all other\n         arguments unchanged. Each pagination token expires after 24 hours. </p>"
+                        "smithy.api#documentation": "<p>\n   If <code>NextToken</code> is returned, there are more Storage Lens groups results available. The value of <code>NextToken</code> is a\n      unique pagination token for each page. Make the call again using the returned token to\n      retrieve the next page. Keep all other arguments unchanged. Each pagination token expires\n      after 24 hours.\n</p>"
                     }
                 },
                 "StorageLensGroupList": {
                     "target": "com.amazonaws.s3control#StorageLensGroupList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The list of Storage Lens groups that exist in the specified home Region. </p>",
+                        "smithy.api#documentation": "<p>\nThe list of Storage Lens groups that exist in the specified home Region.\n</p>",
                         "smithy.api#xmlFlattened": {}
                     }
                 }
@@ -12011,7 +13902,7 @@
                 "target": "com.amazonaws.s3control#ListTagsForResourceResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p> This operation allows you to list all the Amazon Web Services resource tags for the specified\n         resource. </p>\n         <p>To use this operation, you must have the permission to perform the\n            <code>s3:ListTagsForResource</code> action. For more information about the required\n         Storage Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3\n            Tagging error codes</a>.</p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens\n               groups</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>This operation allows you to list all the Amazon Web Services resource tags for a specified resource. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:ListTagsForResource</code> permission to use this operation. </p>\n            </dd>\n         </dl>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens groups</a> and for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html\">S3 Access Grants</a>. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant. </p>\n         </note>\n         <p>For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3 Tagging error codes</a>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -12033,7 +13924,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Services account ID of the resource owner. </p>",
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID of the resource owner.\n</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -12045,7 +13936,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.s3control#S3ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the S3 resource that you want to list the tags for.\n      </p>",
+                        "smithy.api#documentation": "<p>\nThe Amazon Resource Name (ARN) of the S3 resource that you want to list the tags for. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.\n</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -12061,7 +13952,7 @@
                 "Tags": {
                     "target": "com.amazonaws.s3control#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Services resource tags that are associated with the resource. </p>"
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services resource tags that are associated with the resource. \n</p>"
                     }
                 }
             },
@@ -12152,19 +14043,19 @@
                     "target": "com.amazonaws.s3control#ObjectAgeValue",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p> Specifies the maximum object age in days. Must be a positive whole number, greater than\n         the minimum object age and less than or equal to 2,147,483,647. </p>"
+                        "smithy.api#documentation": "<p>\nSpecifies the maximum object age in days. Must be a positive whole number, greater than the minimum object age and less than or equal to 2,147,483,647. \n</p>"
                     }
                 },
                 "DaysLessThan": {
                     "target": "com.amazonaws.s3control#ObjectAgeValue",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p> Specifies the minimum object age in days. The value must be a positive whole number,\n         greater than 0 and less than or equal to 2,147,483,647. </p>"
+                        "smithy.api#documentation": "<p>\nSpecifies the minimum object age in days. The value must be a positive whole number, greater than 0 and less than or equal to 2,147,483,647.\n</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> A filter condition that specifies the object age range of included objects in days.\n         Only integers are supported. </p>"
+                "smithy.api#documentation": "<p>\n   A filter condition that specifies the object age range of included objects in days. Only integers are supported.\n</p>"
             }
         },
         "com.amazonaws.s3control#MatchObjectSize": {
@@ -12174,19 +14065,19 @@
                     "target": "com.amazonaws.s3control#ObjectSizeValue",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p> Specifies the minimum object size in Bytes. The value must be a positive number,\n         greater than 0 and less than 5 TB. </p>"
+                        "smithy.api#documentation": "<p>\nSpecifies the minimum object size in Bytes. The value must be a positive number, greater than 0 and less than 5 TB.\n</p>"
                     }
                 },
                 "BytesLessThan": {
                     "target": "com.amazonaws.s3control#ObjectSizeValue",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p> Specifies the maximum object size in Bytes. The value must be a positive number,\n         greater than the minimum object size and less than 5 TB. </p>"
+                        "smithy.api#documentation": "<p>\nSpecifies the maximum object size in Bytes. The value must be a positive number, greater than the minimum object size and less than 5 TB.\n</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> A filter condition that specifies the object size range of included objects in bytes.\n         Only integers are supported. </p>"
+                "smithy.api#documentation": "<p>\nA filter condition that specifies the object size range of included objects in bytes. Only integers are supported.\n</p>"
             }
         },
         "com.amazonaws.s3control#MaxLength1024String": {
@@ -12997,6 +14888,16 @@
                 }
             }
         },
+        "com.amazonaws.s3control#Organization": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 34
+                },
+                "smithy.api#pattern": "^o-[a-z0-9]{10,32}$"
+            }
+        },
         "com.amazonaws.s3control#OutputSchemaVersion": {
             "type": "enum",
             "members": {
@@ -13019,8 +14920,40 @@
                 }
             }
         },
+        "com.amazonaws.s3control#Permission": {
+            "type": "enum",
+            "members": {
+                "READ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READ"
+                    }
+                },
+                "WRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WRITE"
+                    }
+                },
+                "READWRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READWRITE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.s3control#Policy": {
             "type": "string"
+        },
+        "com.amazonaws.s3control#PolicyDocument": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 350000
+                }
+            }
         },
         "com.amazonaws.s3control#PolicyStatus": {
             "type": "structure",
@@ -13078,6 +15011,23 @@
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.s3control#Privilege": {
+            "type": "enum",
+            "members": {
+                "Minimal": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Minimal"
+                    }
+                },
+                "Default": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Default"
+                    }
+                }
             }
         },
         "com.amazonaws.s3control#ProposedMultiRegionAccessPointPolicy": {
@@ -13138,6 +15088,91 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.s3control#PutAccessGrantsInstanceResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#PutAccessGrantsInstanceResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#PutAccessGrantsInstanceResourcePolicyResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the resource policy of the S3 Access Grants instance. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:PutAccessGrantsInstanceResourcePolicy</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v20180820/accessgrantsinstance/resourcepolicy",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#PutAccessGrantsInstanceResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.s3control#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource policy of the S3 Access Grants instance that you are updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Organization": {
+                    "target": "com.amazonaws.s3control#Organization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Organization of the resource policy of the S3 Access Grants instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#PutAccessGrantsInstanceResourcePolicyResult": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "com.amazonaws.s3control#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated resource policy of the S3 Access Grants instance.</p>"
+                    }
+                },
+                "Organization": {
+                    "target": "com.amazonaws.s3control#Organization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Organization of the resource policy of the S3 Access Grants instance.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.s3control#CreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you created the S3 Access Grants instance resource policy. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.s3control#PutAccessPointConfigurationForObjectLambda": {
@@ -15332,6 +17367,27 @@
                 }
             }
         },
+        "com.amazonaws.s3control#S3Prefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                },
+                "smithy.api#pattern": "^.+$"
+            }
+        },
+        "com.amazonaws.s3control#S3PrefixType": {
+            "type": "enum",
+            "members": {
+                "Object": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Object"
+                    }
+                }
+            }
+        },
         "com.amazonaws.s3control#S3RegionalBucketArn": {
             "type": "string",
             "traits": {
@@ -15601,6 +17657,12 @@
                 "smithy.api#xmlName": "SSE-S3"
             }
         },
+        "com.amazonaws.s3control#SecretAccessKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.s3control#SelectionCriteria": {
             "type": "structure",
             "members": {
@@ -15625,6 +17687,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.s3control#SessionToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.s3control#Setting": {
@@ -15833,21 +17901,21 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#StorageLensGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains the name of the Storage Lens group. </p>",
+                        "smithy.api#documentation": "<p>\nContains the name of the Storage Lens group.\n</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Filter": {
                     "target": "com.amazonaws.s3control#StorageLensGroupFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the criteria for the Storage Lens group data that is displayed. For multiple filter\n         conditions, the <code>AND</code> or <code>OR</code> logical operator is used.</p>",
+                        "smithy.api#documentation": "<p>Sets the criteria for the Storage Lens group data that is displayed. For multiple filter conditions, the <code>AND</code> or <code>OR</code>\n         logical operator is used.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "StorageLensGroupArn": {
                     "target": "com.amazonaws.s3control#StorageLensGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains the Amazon Resource Name (ARN) of the Storage Lens group. This property is\n         read-only. </p>"
+                        "smithy.api#documentation": "<p>\nContains the Amazon Resource Name (ARN) of the Storage Lens group. This property is read-only.\n</p>"
                     }
                 }
             },
@@ -15861,36 +17929,36 @@
                 "MatchAnyPrefix": {
                     "target": "com.amazonaws.s3control#MatchAnyPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains a list of prefixes. At least one prefix must be specified. Up to 10 prefixes\n         are allowed. </p>"
+                        "smithy.api#documentation": "<p>\n   Contains a list of prefixes. At least one prefix must be specified. Up to 10 prefixes are allowed.\n</p>"
                     }
                 },
                 "MatchAnySuffix": {
                     "target": "com.amazonaws.s3control#MatchAnySuffix",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains a list of suffixes. At least one suffix must be specified. Up to 10 suffixes\n         are allowed. </p>"
+                        "smithy.api#documentation": "<p>\n   Contains a list of suffixes. At least one suffix must be specified. Up to 10 suffixes are allowed.\n</p>"
                     }
                 },
                 "MatchAnyTag": {
                     "target": "com.amazonaws.s3control#MatchAnyTag",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains the list of object tags. At least one object tag must be specified. Up to 10\n         object tags are allowed. </p>"
+                        "smithy.api#documentation": "<p>\n   Contains the list of object tags. At least one object tag must be specified. Up to 10 object tags are allowed.\n</p>"
                     }
                 },
                 "MatchObjectAge": {
                     "target": "com.amazonaws.s3control#MatchObjectAge",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains <code>DaysGreaterThan</code> and <code>DaysLessThan</code> to define the\n         object age range (minimum and maximum number of days). </p>"
+                        "smithy.api#documentation": "<p>\n   Contains <code>DaysGreaterThan</code> and <code>DaysLessThan</code> to define the object age range (minimum and maximum number of days).\n</p>"
                     }
                 },
                 "MatchObjectSize": {
                     "target": "com.amazonaws.s3control#MatchObjectSize",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains <code>BytesGreaterThan</code> and <code>BytesLessThan</code> to define the\n         object size range (minimum and maximum number of Bytes). </p>"
+                        "smithy.api#documentation": "<p>\n   Contains <code>BytesGreaterThan</code> and <code>BytesLessThan</code> to define the object size range (minimum and maximum number of Bytes).\n</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> A logical operator that allows multiple filter conditions to be joined for more complex\n         comparisons of Storage Lens group data. </p>"
+                "smithy.api#documentation": "<p>\nA logical operator that allows multiple filter conditions to be joined for more complex comparisons of Storage Lens group data.\n</p>"
             }
         },
         "com.amazonaws.s3control#StorageLensGroupArn": {
@@ -15909,48 +17977,48 @@
                 "MatchAnyPrefix": {
                     "target": "com.amazonaws.s3control#MatchAnyPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains a list of prefixes. At least one prefix must be specified. Up to 10 prefixes\n         are allowed. </p>"
+                        "smithy.api#documentation": "<p>\n   Contains a list of prefixes. At least one prefix must be specified. Up to 10 prefixes are allowed.\n</p>"
                     }
                 },
                 "MatchAnySuffix": {
                     "target": "com.amazonaws.s3control#MatchAnySuffix",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains a list of suffixes. At least one suffix must be specified. Up to 10 suffixes\n         are allowed. </p>"
+                        "smithy.api#documentation": "<p>\n   Contains a list of suffixes. At least one suffix must be specified. Up to 10 suffixes are allowed.\n</p>"
                     }
                 },
                 "MatchAnyTag": {
                     "target": "com.amazonaws.s3control#MatchAnyTag",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains the list of S3 object tags. At least one object tag must be specified. Up to\n         10 object tags are allowed. </p>"
+                        "smithy.api#documentation": "<p>\n   Contains the list of S3 object tags. At least one object tag must be specified. Up to 10 object tags are allowed.\n</p>"
                     }
                 },
                 "MatchObjectAge": {
                     "target": "com.amazonaws.s3control#MatchObjectAge",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains <code>DaysGreaterThan</code> and <code>DaysLessThan</code> to define the\n         object age range (minimum and maximum number of days). </p>"
+                        "smithy.api#documentation": "<p>\n   Contains <code>DaysGreaterThan</code> and <code>DaysLessThan</code> to define the object age range (minimum and maximum number of days).\n</p>"
                     }
                 },
                 "MatchObjectSize": {
                     "target": "com.amazonaws.s3control#MatchObjectSize",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains <code>BytesGreaterThan</code> and <code>BytesLessThan</code> to define the\n         object size range (minimum and maximum number of Bytes). </p>"
+                        "smithy.api#documentation": "<p>\n   Contains <code>BytesGreaterThan</code> and <code>BytesLessThan</code> to define the object size range (minimum and maximum number of Bytes).\n</p>"
                     }
                 },
                 "And": {
                     "target": "com.amazonaws.s3control#StorageLensGroupAndOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>A logical operator that allows multiple filter conditions to be joined for more complex\n         comparisons of Storage Lens group data. Objects must match all of the listed filter\n         conditions that are joined by the <code>And</code> logical operator. Only one of each\n         filter condition is allowed.</p>"
+                        "smithy.api#documentation": "<p>A logical operator that allows multiple filter conditions to be joined for more complex\n         comparisons of Storage Lens group data. Objects must match all of the listed filter\n         conditions that are joined by the <code>And</code> logical operator. Only one of each filter condition\n         is allowed.</p>"
                     }
                 },
                 "Or": {
                     "target": "com.amazonaws.s3control#StorageLensGroupOrOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>A single logical operator that allows multiple filter conditions to be joined. Objects\n         can match any of the listed filter conditions, which are joined by the <code>Or</code>\n         logical operator. Only one of each filter condition is allowed. </p>"
+                        "smithy.api#documentation": "<p>A single logical operator that allows multiple filter conditions to be joined. Objects\n         can match any of the listed filter conditions, which are joined by the <code>Or</code> logical operator.\n         Only one of each filter condition is allowed. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The filter element sets the criteria for the Storage Lens group data that is displayed.\n         For multiple filter conditions, the <code>AND</code> or <code>OR</code> logical operator is\n         used.</p>"
+                "smithy.api#documentation": "<p>The filter element sets the criteria for the Storage Lens group data that is displayed. For multiple filter conditions, the <code>AND</code> or <code>OR</code>\n      logical operator is used.</p>"
             }
         },
         "com.amazonaws.s3control#StorageLensGroupLevel": {
@@ -15959,12 +18027,12 @@
                 "SelectionCriteria": {
                     "target": "com.amazonaws.s3control#StorageLensGroupLevelSelectionCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates which Storage Lens group ARNs to include or exclude in the Storage Lens group\n         aggregation. If this value is left null, then all Storage Lens groups are selected. </p>"
+                        "smithy.api#documentation": "<p>\n   Indicates which Storage Lens group ARNs to include or exclude in the Storage Lens group aggregation. If this value is left null, then all Storage Lens groups are selected.\n</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Specifies the Storage Lens groups to include in the Storage Lens group aggregation.\n      </p>"
+                "smithy.api#documentation": "<p>\nSpecifies the Storage Lens groups to include in the Storage Lens group aggregation.\n</p>"
             }
         },
         "com.amazonaws.s3control#StorageLensGroupLevelExclude": {
@@ -15991,7 +18059,7 @@
                 "Include": {
                     "target": "com.amazonaws.s3control#StorageLensGroupLevelInclude",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates which Storage Lens group ARNs to include in the Storage Lens group\n         aggregation. </p>"
+                        "smithy.api#documentation": "<p>\nIndicates which Storage Lens group ARNs to include in the Storage Lens group aggregation.\n</p>"
                     }
                 },
                 "Exclude": {
@@ -16036,30 +18104,30 @@
                 "MatchAnySuffix": {
                     "target": "com.amazonaws.s3control#MatchAnySuffix",
                     "traits": {
-                        "smithy.api#documentation": "<p> Filters objects that match any of the specified suffixes. </p>"
+                        "smithy.api#documentation": "<p>\nFilters objects that match any of the specified suffixes.\n</p>"
                     }
                 },
                 "MatchAnyTag": {
                     "target": "com.amazonaws.s3control#MatchAnyTag",
                     "traits": {
-                        "smithy.api#documentation": "<p> Filters objects that match any of the specified S3 object tags. </p>"
+                        "smithy.api#documentation": "<p>\nFilters objects that match any of the specified S3 object tags.\n</p>"
                     }
                 },
                 "MatchObjectAge": {
                     "target": "com.amazonaws.s3control#MatchObjectAge",
                     "traits": {
-                        "smithy.api#documentation": "<p> Filters objects that match the specified object age range. </p>"
+                        "smithy.api#documentation": "<p>\nFilters objects that match the specified object age range.\n</p>"
                     }
                 },
                 "MatchObjectSize": {
                     "target": "com.amazonaws.s3control#MatchObjectSize",
                     "traits": {
-                        "smithy.api#documentation": "<p> Filters objects that match the specified object size range. </p>"
+                        "smithy.api#documentation": "<p>\nFilters objects that match the specified object size range.\n</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A container element for specifying <code>Or</code> rule conditions. The rule conditions\n         determine the subset of objects to which the <code>Or</code> rule applies. Objects can\n         match any of the listed filter conditions, which are joined by the <code>Or</code> logical\n         operator. Only one of each filter condition is allowed.</p>"
+                "smithy.api#documentation": "<p>A container element for specifying <code>Or</code> rule conditions. The rule conditions\n         determine the subset of objects to which the <code>Or</code> rule applies. Objects can\n         match any of the listed filter conditions, which are joined by the <code>Or</code> logical operator.\n         Only one of each filter condition is allowed.</p>"
             }
         },
         "com.amazonaws.s3control#StorageLensPrefixLevelDelimiter": {
@@ -16210,20 +18278,20 @@
                 "Key": {
                     "target": "com.amazonaws.s3control#TagKeyString",
                     "traits": {
-                        "smithy.api#documentation": "<p> The tag key for your Amazon Web Services resource. A tag key can be up to 128 Unicode characters in\n         length and is case-sensitive. System created tags that begin with <code>aws:</code> aren’t\n         supported. </p>",
+                        "smithy.api#documentation": "<p>The key of the key-value pair of a tag added to your Amazon Web Services resource. A tag key can be up to 128 Unicode characters in length and is case-sensitive. System created tags that begin with <code>aws:</code> aren’t supported.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.s3control#TagValueString",
                     "traits": {
-                        "smithy.api#documentation": "<p> The tag value for your Amazon Web Services resource. A tag value can be up to 256 Unicode characters\n         in length and is case-sensitive. </p>",
+                        "smithy.api#documentation": "<p>\n   The value of the key-value pair of a tag added to your Amazon Web Services resource. A tag value can be up to 256 Unicode characters in length and is case-sensitive.\n</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> An Amazon Web Services resource tag that's associated with your S3 resource. You can add tags to new\n         objects when you upload them, or you can add object tags to existing objects. </p>\n         <note>\n            <p>This data type is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens\n               groups</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>\n   An Amazon Web Services resource tag that's associated with your S3 resource. You can add tags to new objects when you upload them, or you can add object tags to existing objects. \n</p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens groups</a> and for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html\">S3 Access Grants</a>. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant. </p>\n         </note>"
             }
         },
         "com.amazonaws.s3control#TagKeyList": {
@@ -16272,7 +18340,7 @@
                 "target": "com.amazonaws.s3control#TagResourceResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p> Creates a new Amazon Web Services resource tag or updates an existing resource tag. You can add up to\n         50 Amazon Web Services resource tags for each S3 resource. </p>\n         <p>To use this operation, you must have the permission to perform the\n            <code>s3:TagResource</code> action. For more information about the required Storage Lens\n         Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3\n            Tagging error codes</a>.</p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens\n               groups</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Creates a new Amazon Web Services resource tag or updates an existing resource tag. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. You can add up to 50 Amazon Web Services resource tags for each S3 resource. </p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens groups</a> and for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html\">S3 Access Grants</a>. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant. </p>\n         </note>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:TagResource</code> permission to use this operation. </p>\n            </dd>\n         </dl>\n         <p>For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3 Tagging error codes</a>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -16294,7 +18362,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Services account ID that created the S3 resource that you're trying to add tags to.\n      </p>",
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID that created the S3 resource that you're trying to add tags to or the requester's account ID. \n</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -16306,7 +18374,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.s3control#S3ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the S3 resource that you're trying to add tags to.\n      </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 resource that you're trying to add tags to. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -16314,7 +18382,7 @@
                 "Tags": {
                     "target": "com.amazonaws.s3control#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Services resource tags that you want to add to the specified S3 resource. </p>",
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services resource tags that you want to add to the specified S3 resource. \n</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -16471,7 +18539,7 @@
                 "target": "com.amazonaws.s3control#UntagResourceResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p> This operation removes the specified Amazon Web Services resource tags from an S3 resource. </p>\n         <p>To use this operation, you must have the permission to perform the\n            <code>s3:UntagResource</code> action. For more information about the required Storage\n         Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3\n            Tagging error codes</a>.</p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens\n               groups</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p> This operation removes the specified Amazon Web Services resource tags from an S3 resource. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. </p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens groups</a> and for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html\">S3 Access Grants</a>. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant. </p>\n         </note>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:UntagResource</code> permission to use this operation. </p>\n            </dd>\n         </dl>\n         <p>For more information about the required Storage\n         Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3\n            Tagging error codes</a>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -16493,7 +18561,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Services account ID that owns the resource that you're trying to remove the tags from.\n      </p>",
+                        "smithy.api#documentation": "<p>\n   The Amazon Web Services account ID that owns the resource that you're trying to remove the tags from.\n   </p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -16505,7 +18573,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.s3control#S3ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the S3 resource that you want to remove the resource\n         tags from. </p>",
+                        "smithy.api#documentation": "<p>\n   The Amazon Resource Name (ARN) of the S3 resource that you're trying to remove the tags from.\n   </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -16513,7 +18581,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.s3control#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The tag key pair of the S3 resource tag that you're trying to remove. </p>",
+                        "smithy.api#documentation": "<p>\n   The array of tag key-value pairs that you're trying to remove from of the S3 resource.\n   </p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -16526,6 +18594,105 @@
         "com.amazonaws.s3control#UntagResourceResult": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3control#UpdateAccessGrantsLocation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#UpdateAccessGrantsLocationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#UpdateAccessGrantsLocationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the IAM role of a registered location in your S3 Access Grants instance.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:UpdateAccessGrantsLocation</code> permission to use this operation. </p>\n            </dd>\n            <dt>Additional Permissions</dt>\n            <dd>\n               <p>You must also have the following permission: <code>iam:PassRole</code>\n               </p>\n            </dd>\n         </dl>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v20180820/accessgrantsinstance/location/{AccessGrantsLocationId}",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#UpdateAccessGrantsLocationRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that is making this request.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "AccessGrantsLocationId": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the registered location that you are updating. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register.  </p>\n         <p>The ID of the registered location to which you are granting access. S3 Access Grants assigned this ID when you registered the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register.  </p>\n         <p>If you are passing the <code>default</code> location, you cannot create an access grant for the entire default location. You must also specify a bucket or a bucket and prefix in the <code>Subprefix</code> field. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IAMRoleArn": {
+                    "target": "com.amazonaws.s3control#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for the registered location. S3 Access Grants assumes this role to manage access to the registered location. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3control#UpdateAccessGrantsLocationResult": {
+            "type": "structure",
+            "members": {
+                "CreatedAt": {
+                    "target": "com.amazonaws.s3control#CreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you registered the location. </p>"
+                    }
+                },
+                "AccessGrantsLocationId": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the registered location to which you are granting access. S3 Access Grants assigned this ID when you registered the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register.  </p>"
+                    }
+                },
+                "AccessGrantsLocationArn": {
+                    "target": "com.amazonaws.s3control#AccessGrantsLocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the registered location that you are updating. </p>"
+                    }
+                },
+                "LocationScope": {
+                    "target": "com.amazonaws.s3control#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI path of the location that you are updating. You cannot update the scope of the registered location. The location scope can be the default S3 location <code>s3://</code>, the S3 path to a bucket <code>s3://<bucket></code>, or the S3 path to a bucket and prefix <code>s3://<bucket>/<prefix></code>. </p>"
+                    }
+                },
+                "IAMRoleArn": {
+                    "target": "com.amazonaws.s3control#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role of the registered location. S3 Access Grants assumes this role to manage access to the registered location. </p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
@@ -16749,7 +18916,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p> Updates the existing Storage Lens group.</p>\n         <p>To use this operation, you must have the permission to perform the\n            <code>s3:UpdateStorageLensGroup</code> action. For more information about the required\n         Storage Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n            Lens error codes</a>.</p>",
+                "smithy.api#documentation": "<p>\nUpdates the existing Storage Lens group.</p>\n         <p>To use this operation, you must have the permission to perform the\n      <code>s3:UpdateStorageLensGroup</code> action. For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about Storage Lens groups errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList\">List of Amazon S3 Storage\n      Lens error codes</a>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -16771,7 +18938,7 @@
                 "Name": {
                     "target": "com.amazonaws.s3control#StorageLensGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the Storage Lens group that you want to update. </p>",
+                        "smithy.api#documentation": "<p>\nThe name of the Storage Lens group that you want to update.\n</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -16779,7 +18946,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Services account ID of the Storage Lens group owner. </p>",
+                        "smithy.api#documentation": "<p>\nThe Amazon Web Services account ID of the Storage Lens group owner.\n</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {},
@@ -16791,7 +18958,7 @@
                 "StorageLensGroup": {
                     "target": "com.amazonaws.s3control#StorageLensGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p> The JSON file that contains the Storage Lens group configuration. </p>",
+                        "smithy.api#documentation": "<p>\nThe JSON file that contains the Storage Lens group configuration.\n</p>",
                         "smithy.api#required": {}
                     }
                 }

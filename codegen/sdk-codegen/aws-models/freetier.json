@@ -1,0 +1,1002 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.freetier#AWSFreeTierService": {
+            "type": "service",
+            "version": "2023-09-07",
+            "operations": [
+                {
+                    "target": "com.amazonaws.freetier#GetFreeTierUsage"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "FreeTier",
+                    "endpointPrefix": "freetier"
+                },
+                "aws.auth#sigv4": {
+                    "name": "freetier"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>You can use the Amazon Web Services Free Tier API to query programmatically your Free Tier usage data.</p>\n         <p>Free Tier tracks your monthly usage data for all free tier offers that are associated with your\n      Amazon Web Services account. You can use the Free Tier API to filter and show only the data that you want.</p>\n         <p>Service endpoint</p>\n         <p>The Free Tier API provides the following endpoint:</p>\n         <ul>\n            <li>\n               <p>https://freetier.us-east-1.api.aws</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-free-tier.html\">Using the Amazon Web Services Free Tier</a> in the <i>Billing User Guide</i>.</p>",
+                "smithy.api#title": "AWS Free Tier",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "name"
+                                                            ]
+                                                        },
+                                                        "aws"
+                                                    ]
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://freetier-fips.{Region}.api.aws",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://freetier.us-east-1.api.aws",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingName": "freetier",
+                                                                    "signingRegion": "us-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://freetier-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "Region"
+                                                                },
+                                                                "aws-cn-global"
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://freetier.cn-northwest-1.api.amazonwebservices.com.cn",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingName": "freetier",
+                                                                    "signingRegion": "cn-northwest-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://freetier.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://freetier-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        },
+                                                        "aws-cn-global"
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://freetier.cn-northwest-1.api.amazonwebservices.com.cn",
+                                                "properties": {
+                                                    "authSchemes": [
+                                                        {
+                                                            "name": "sigv4",
+                                                            "signingName": "freetier",
+                                                            "signingRegion": "cn-northwest-1"
+                                                        }
+                                                    ]
+                                                },
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": "https://freetier.{Region}.{PartitionResult#dnsSuffix}",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region aws-global with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "freetier",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://freetier.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "aws-global",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://freetier-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "freetier",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://freetier.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region aws-cn-global with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "freetier",
+                                                "signingRegion": "cn-northwest-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://freetier.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "aws-cn-global",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://freetier-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://freetier.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://freetier-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://freetier.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.freetier#Dimension": {
+            "type": "enum",
+            "members": {
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE"
+                    }
+                },
+                "OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPERATION"
+                    }
+                },
+                "USAGE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USAGE_TYPE"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGION"
+                    }
+                },
+                "FREE_TIER_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FREE_TIER_TYPE"
+                    }
+                },
+                "DESCRIPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESCRIPTION"
+                    }
+                },
+                "USAGE_PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USAGE_PERCENTAGE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.freetier#DimensionValues": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.freetier#Dimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dimension that you want to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.freetier#Values",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata values you can specify to filter upon, so that the results all match at least\n      one of the specified values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MatchOptions": {
+                    "target": "com.amazonaws.freetier#MatchOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The match options that you can use to filter your results. You can specify only one of\n      these values in the array.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the specifications for the filters to use for your request.</p>"
+            }
+        },
+        "com.amazonaws.freetier#Expression": {
+            "type": "structure",
+            "members": {
+                "Or": {
+                    "target": "com.amazonaws.freetier#Expressions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Return results that match any of the <code>Expressions</code>  that you specified. in the\n      array.</p>"
+                    }
+                },
+                "And": {
+                    "target": "com.amazonaws.freetier#Expressions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Return results that match all <code>Expressions</code>  that you specified in the\n      array.</p>"
+                    }
+                },
+                "Not": {
+                    "target": "com.amazonaws.freetier#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Return results that don’t match the <code>Expression</code> that you specified.</p>"
+                    }
+                },
+                "Dimensions": {
+                    "target": "com.amazonaws.freetier#DimensionValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific dimension, values, and match type to filter objects with.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Use <code>Expression</code> to filter in the <code>GetFreeTierUsage</code> API operation.</p>\n         <p>You can use the following patterns:</p>\n         <ul>\n            <li>\n               <p>Simple dimension values (<code>Dimensions</code> root operator)</p>\n            </li>\n            <li>\n               <p>Complex expressions with logical operators (<code>AND</code>, <code>NOT</code>, and\n            <code>OR</code> root operators).</p>\n            </li>\n         </ul>\n         <p>For <i>simple dimension values</i>, you can set the dimension name, values,\n      and match type for the filters that you plan to use.</p>\n         <p>\n            <b>Example for simple dimension values</b>\n         </p>\n         <p>You can filter to match exactly for <code>REGION==us-east-1 OR\n      REGION==us-west-1</code>.</p>\n         <p>The corresponding <code>Expression</code> appears like the following: <code>{ \"Dimensions\": { \"Key\": \"REGION\", \"Values\": [ \"us-east-1\", \"us-west-1\" ], \"MatchOptions\": [\"EQUALS\"] } }</code>\n         </p>\n         <p>As shown in the previous example, lists of dimension values are combined with <code>OR</code> when\n      you apply the filter.</p>\n         <p>For <i>complex expressions with logical operators</i>, you can have nested\n      expressions to use the logical operators and specify advanced filtering.</p>\n         <p>\n            <b>Example for complex expressions with logical operators</b>\n         </p>\n         <p>You can filter by <code>((REGION == us-east-1 OR REGION == us-west-1) OR (SERVICE CONTAINS\n        AWSLambda)) AND (USAGE_TYPE !CONTAINS DataTransfer)</code>.</p>\n         <p>The corresponding <code>Expression</code> appears like the following: <code>{ \"And\": [\n          {\"Or\": [ {\"Dimensions\": { \"Key\": \"REGION\", \"Values\": [ \"us-east-1\", \"us-west-1\" ],\n          \"MatchOptions\": [\"EQUALS\"] }}, {\"Dimensions\": { \"Key\": \"SERVICE\", \"Values\": [\"AWSLambda\"], \"MatchOptions\": [\"CONTAINS\"] } } ]}, {\"Not\": {\"Dimensions\": { \"Key\": \"USAGE_TYPE\", \"Values\": [\"DataTransfer\"], \"MatchOptions\": [\"CONTAINS\"] }}} ] }</code>\n         </p>\n         <p>In the following <b>Contents</b>, you must specify exactly one of the\n      following root operators.</p>"
+            }
+        },
+        "com.amazonaws.freetier#Expressions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.freetier#Expression"
+            }
+        },
+        "com.amazonaws.freetier#FreeTierUsage": {
+            "type": "structure",
+            "members": {
+                "service": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Service providing the Free Tier offer. For example, this can be\n      Amazon Elastic Compute Cloud.</p>"
+                    }
+                },
+                "operation": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes <code>usageType</code> more granularly with the specific Amazon Web Service API\n      operation. For example, this can be the <code>RunInstances</code> API operation for\n      Amazon Elastic Compute Cloud.</p>"
+                    }
+                },
+                "usageType": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the usage details of the offer. For example, this might be\n        <code>Global-BoxUsage:freetrial</code>.</p>"
+                    }
+                },
+                "region": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the Amazon Web Services Region for which this offer is applicable</p>"
+                    }
+                },
+                "actualUsageAmount": {
+                    "target": "com.amazonaws.freetier#GenericDouble",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Describes the actual usage accrued month-to-day (MTD) that you've used so far.</p>"
+                    }
+                },
+                "forecastedUsageAmount": {
+                    "target": "com.amazonaws.freetier#GenericDouble",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Describes the forecasted usage by the month that you're expected to use.</p>"
+                    }
+                },
+                "limit": {
+                    "target": "com.amazonaws.freetier#GenericDouble",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Describes the maximum usage allowed in Free Tier.</p>"
+                    }
+                },
+                "unit": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the unit of the <code>usageType</code>, such as <code>Hrs</code>.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the Free Tier offer.</p>"
+                    }
+                },
+                "freeTierType": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the type of the Free Tier offer. For example, the offer can be <code>\"12 Months\n        Free\"</code>,  <code>\"Always Free\"</code>, and <code>\"Free Trial\"</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Consists of a Amazon Web Services Free Tier offer’s metadata and your data usage for the offer.</p>"
+            }
+        },
+        "com.amazonaws.freetier#FreeTierUsages": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.freetier#FreeTierUsage"
+            }
+        },
+        "com.amazonaws.freetier#GenericDouble": {
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.freetier#GenericString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.freetier#GetFreeTierUsage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.freetier#GetFreeTierUsageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.freetier#GetFreeTierUsageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.freetier#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.freetier#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.freetier#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all Free Tier usage objects that match your filters.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "freeTierUsages"
+                }
+            }
+        },
+        "com.amazonaws.freetier#GetFreeTierUsageRequest": {
+            "type": "structure",
+            "members": {
+                "filter": {
+                    "target": "com.amazonaws.freetier#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An expression that specifies the conditions that you want each <code>FreeTierUsage</code> object\n    to meet.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.freetier#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. <code>MaxResults</code> means\n      that there can be up to the specified number of values, but there might be fewer results based\n      on your filters.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.freetier#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.freetier#GetFreeTierUsageResponse": {
+            "type": "structure",
+            "members": {
+                "freeTierUsages": {
+                    "target": "com.amazonaws.freetier#FreeTierUsages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Free Tier usage objects that meet your filter expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.freetier#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.freetier#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An unexpected error occurred during the processing of your request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.freetier#MatchOption": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                },
+                "STARTS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTS_WITH"
+                    }
+                },
+                "ENDS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENDS_WITH"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.freetier#MatchOptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.freetier#MatchOption"
+            }
+        },
+        "com.amazonaws.freetier#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 10,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.freetier#NextPageToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8192
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.freetier#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.freetier#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.freetier#Value": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^[ a-zA-Z0-9\\-\\:\\.\\_\\/\\,\\$\\(\\)]*$"
+            }
+        },
+        "com.amazonaws.freetier#Values": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.freetier#Value"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        }
+    }
+}

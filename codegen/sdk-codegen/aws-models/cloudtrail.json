@@ -29,6 +29,26 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.cloudtrail#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceAccessDenied",
+                    "httpResponseCode": 403
+                },
+                "smithy.api#documentation": "<p>\n         You do not have sufficient access to perform this action.\n      </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
         "com.amazonaws.cloudtrail#AccountHasOngoingImportException": {
             "type": "structure",
             "members": {
@@ -681,6 +701,12 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#DescribeTrails"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#DisableFederation"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EnableFederation"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#GetChannel"
@@ -1854,6 +1880,26 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.cloudtrail#ConcurrentModificationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ConcurrentModification",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>\n         You are trying to update a resource when another request is in progress. Allow sufficient wait time for the previous request to complete, then retry your request. \n      </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cloudtrail#ConflictException": {
             "type": "structure",
             "members": {
@@ -2603,7 +2649,13 @@
                     "target": "com.amazonaws.cloudtrail#ChannelExistsForEDSException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#EventDataStoreARNInvalidException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreFederationEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#EventDataStoreHasOngoingImportException"
@@ -2637,7 +2689,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables the event data store specified by <code>EventDataStore</code>, which accepts an\n         event data store ARN. After you run <code>DeleteEventDataStore</code>, the event data store\n         enters a <code>PENDING_DELETION</code> state, and is automatically deleted after a wait\n         period of seven days. <code>TerminationProtectionEnabled</code> must be set to\n            <code>False</code> on the event data store; this operation cannot work if\n            <code>TerminationProtectionEnabled</code> is <code>True</code>.</p>\n         <p>After you run <code>DeleteEventDataStore</code> on an event data store, you cannot run\n            <code>ListQueries</code>, <code>DescribeQuery</code>, or <code>GetQueryResults</code> on\n         queries that are using an event data store in a <code>PENDING_DELETION</code> state. An\n         event data store in the <code>PENDING_DELETION</code> state does not incur costs.</p>"
+                "smithy.api#documentation": "<p>Disables the event data store specified by <code>EventDataStore</code>, which accepts an\n         event data store ARN. After you run <code>DeleteEventDataStore</code>, the event data store\n         enters a <code>PENDING_DELETION</code> state, and is automatically deleted after a wait\n         period of seven days. <code>TerminationProtectionEnabled</code> must be set to\n            <code>False</code> on the event data store and the <code>FederationStatus</code> must be <code>DISABLED</code>. \n         You cannot delete an event data store if <code>TerminationProtectionEnabled</code> \n         is <code>True</code> or the <code>FederationStatus</code> is <code>ENABLED</code>.</p>\n         <p>After you run <code>DeleteEventDataStore</code> on an event data store, you cannot run\n            <code>ListQueries</code>, <code>DescribeQuery</code>, or <code>GetQueryResults</code> on\n         queries that are using an event data store in a <code>PENDING_DELETION</code> state. An\n         event data store in the <code>PENDING_DELETION</code> state does not incur costs.</p>"
             }
         },
         "com.amazonaws.cloudtrail#DeleteEventDataStoreRequest": {
@@ -3162,6 +3214,204 @@
                 }
             }
         },
+        "com.amazonaws.cloudtrail#DisableFederation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#DisableFederationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#DisableFederationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailAccessNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreARNInvalidException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InactiveEventDataStoreException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InsufficientDependencyServiceAccessPermissionException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OrganizationNotInAllFeaturesModeException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OrganizationsNotInUseException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Disables Lake query federation on the specified event data store. When you disable federation, CloudTrail \n         removes the metadata associated with the federated event data store in the Glue Data Catalog and removes registration for\n         the federation role ARN and event data store in Lake Formation. No CloudTrail Lake data is deleted \n         when you disable federation.\n      </p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#DisableFederationRequest": {
+            "type": "structure",
+            "members": {
+                "EventDataStore": {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ARN (or ID suffix of the ARN) of the event data store for which you want to disable Lake query federation.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#DisableFederationResponse": {
+            "type": "structure",
+            "members": {
+                "EventDataStoreArn": {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ARN of the event data store for which you disabled Lake query federation.\n      </p>"
+                    }
+                },
+                "FederationStatus": {
+                    "target": "com.amazonaws.cloudtrail#FederationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The federation status.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#EnableFederation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#EnableFederationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#EnableFederationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailAccessNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreARNInvalidException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreFederationEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InactiveEventDataStoreException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InsufficientDependencyServiceAccessPermissionException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OrganizationNotInAllFeaturesModeException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OrganizationsNotInUseException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Enables Lake query federation on the specified event data store. Federating an event data store lets you view the metadata associated with the event data store in the Glue \n         <a href=\"https://docs.aws.amazon.com/glue/latest/dg/components-overview.html#data-catalog-intro\">Data Catalog</a> and run \n         SQL queries against your event data using Amazon Athena. The table metadata stored in the Glue Data Catalog \n         lets the Athena query engine know how to find, read, and process the data that you want to query.</p>\n         <p>When you enable Lake query federation, CloudTrail\n         creates a federated database named <code>aws:cloudtrail</code> (if the database doesn't already exist) and a federated table in\n         the Glue Data Catalog. The event data store ID is used for the table name. CloudTrail registers the role ARN and event data store in\n         <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/how-it-works.html\">Lake Formation</a>, the service responsible for revoking or granting permissions\n         to the federated resources in the Glue Data Catalog.\n      </p>\n         <p>For more information about Lake query federation, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html\">Federate an event data store</a>.</p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#EnableFederationRequest": {
+            "type": "structure",
+            "members": {
+                "EventDataStore": {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (or ID suffix of the ARN) of the event data store for which you want to enable Lake query federation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FederationRoleArn": {
+                    "target": "com.amazonaws.cloudtrail#FederationRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ARN of the federation role to use for the event data store. Amazon Web Services services like Lake Formation use this federation role to access data for the federated event \n         data store. The federation role must exist in your account and provide the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html#query-federation-permissions-role\">required minimum permissions</a>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#EnableFederationResponse": {
+            "type": "structure",
+            "members": {
+                "EventDataStoreArn": {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ARN of the event data store for which you enabled Lake query federation.\n      </p>"
+                    }
+                },
+                "FederationStatus": {
+                    "target": "com.amazonaws.cloudtrail#FederationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The federation status.\n      </p>"
+                    }
+                },
+                "FederationRoleArn": {
+                    "target": "com.amazonaws.cloudtrail#FederationRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ARN of the federation role.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudtrail#ErrorMessage": {
             "type": "string",
             "traits": {
@@ -3387,6 +3637,26 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9._/\\-:]+$"
             }
         },
+        "com.amazonaws.cloudtrail#EventDataStoreFederationEnabledException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EventDataStoreFederationEnabled",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>\n        You cannot delete the event data store because Lake query federation is enabled. To delete the event data store, run the <code>DisableFederation</code> operation to \n         disable Lake query federation on the event data store. \n      </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cloudtrail#EventDataStoreHasOngoingImportException": {
             "type": "structure",
             "members": {
@@ -3582,6 +3852,45 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudtrail#String"
+            }
+        },
+        "com.amazonaws.cloudtrail#FederationRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 125
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9._/\\-:@=\\+,\\.]+$"
+            }
+        },
+        "com.amazonaws.cloudtrail#FederationStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLING"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLING"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudtrail#GetChannel": {
@@ -3791,6 +4100,18 @@
                     "target": "com.amazonaws.cloudtrail#BillingMode",
                     "traits": {
                         "smithy.api#documentation": "<p>The billing mode for the event data store.</p>"
+                    }
+                },
+                "FederationStatus": {
+                    "target": "com.amazonaws.cloudtrail#FederationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Indicates the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html\">Lake query federation</a> status. The status is \n         <code>ENABLED</code> if Lake query federation is enabled, or <code>DISABLED</code> if Lake query federation is disabled. You cannot delete an event data store if the <code>FederationStatus</code> is <code>ENABLED</code>.\n      </p>"
+                    }
+                },
+                "FederationRoleArn": {
+                    "target": "com.amazonaws.cloudtrail#FederationRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         If Lake query federation is enabled, provides the ARN of the federation role used to access the resources for the federated event data store.\n      </p>"
                     }
                 }
             },
@@ -9116,6 +9437,18 @@
                     "target": "com.amazonaws.cloudtrail#BillingMode",
                     "traits": {
                         "smithy.api#documentation": "<p>The billing mode for the event data store.</p>"
+                    }
+                },
+                "FederationStatus": {
+                    "target": "com.amazonaws.cloudtrail#FederationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Indicates the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html\">Lake query federation</a> status. The status is \n         <code>ENABLED</code> if Lake query federation is enabled, or <code>DISABLED</code> if Lake query federation is disabled. You cannot delete an event data store if the <code>FederationStatus</code> is <code>ENABLED</code>.\n      </p>"
+                    }
+                },
+                "FederationRoleArn": {
+                    "target": "com.amazonaws.cloudtrail#FederationRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         If Lake query federation is enabled, provides the ARN of the federation role used to access the resources for the federated event data store.\n      </p>"
                     }
                 }
             },
