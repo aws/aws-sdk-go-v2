@@ -118,6 +118,9 @@
                     "target": "com.amazonaws.appsync#GetDataSource"
                 },
                 {
+                    "target": "com.amazonaws.appsync#GetDataSourceIntrospection"
+                },
+                {
                     "target": "com.amazonaws.appsync#GetDomainName"
                 },
                 {
@@ -173,6 +176,9 @@
                 },
                 {
                     "target": "com.amazonaws.appsync#ListTypesByAssociation"
+                },
+                {
+                    "target": "com.amazonaws.appsync#StartDataSourceIntrospection"
                 },
                 {
                     "target": "com.amazonaws.appsync#StartSchemaCreation"
@@ -273,7 +279,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -316,7 +321,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -329,7 +335,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -343,7 +348,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -366,7 +370,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -401,7 +404,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -412,14 +414,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -433,14 +437,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -449,11 +451,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -464,14 +466,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -485,7 +489,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -505,7 +508,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -516,14 +518,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -534,9 +538,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -3071,6 +3077,196 @@
                 "smithy.api#documentation": "<p>Describes a data source.</p>"
             }
         },
+        "com.amazonaws.appsync#DataSourceIntrospectionModel": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model. For example, this could be the name of a single table in a database.</p>"
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.appsync#DataSourceIntrospectionModelFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>DataSourceIntrospectionModelField</code> object data.</p>"
+                    }
+                },
+                "primaryKey": {
+                    "target": "com.amazonaws.appsync#DataSourceIntrospectionModelIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary key stored as a <code>DataSourceIntrospectionModelIndex</code> object.</p>"
+                    }
+                },
+                "indexes": {
+                    "target": "com.amazonaws.appsync#DataSourceIntrospectionModelIndexes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The array of <code>DataSourceIntrospectionModelIndex</code> objects.</p>"
+                    }
+                },
+                "sdl": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the output of the SDL that was generated from the introspected types. This is controlled by the\n         <code>includeModelsSDL</code> parameter of the <code>GetDataSourceIntrospection</code> operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the introspected data that was retrieved from the data source.</p>"
+            }
+        },
+        "com.amazonaws.appsync#DataSourceIntrospectionModelField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field that was retrieved from the introspected data.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.appsync#DataSourceIntrospectionModelFieldType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>DataSourceIntrospectionModelFieldType</code> object data.</p>"
+                    }
+                },
+                "length": {
+                    "target": "com.amazonaws.appsync#Long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The length value of the introspected field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the fields that were retrieved from the introspected data.</p>"
+            }
+        },
+        "com.amazonaws.appsync#DataSourceIntrospectionModelFieldType": {
+            "type": "structure",
+            "members": {
+                "kind": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the classification of data. For example, this could be set to values like <code>Scalar</code> or\n            <code>NonNull</code> to indicate a fundamental property of the field.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Scalar</code>: Indicates the value is a primitive type (scalar).</p>\n            </li>\n            <li>\n               <p>\n                  <code>NonNull</code>: Indicates the field cannot be <code>null</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>List</code>: Indicates the field contains a list.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data type that represents the field. For example, <code>String</code> is a valid\n            <code>name</code> value.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.appsync#DataSourceIntrospectionModelFieldType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>DataSourceIntrospectionModelFieldType</code> object data. The <code>type</code> is only present if\n            <code>DataSourceIntrospectionModelFieldType.kind</code> is set to <code>NonNull</code> or <code>List</code>. </p>\n         <p>The <code>type</code> typically contains its own <code>kind</code> and <code>name</code> fields to represent\n         the actual type data. For instance, <code>type</code> could contain a <code>kind</code> value of\n            <code>Scalar</code> with a <code>name</code> value of <code>String</code>. The values <code>Scalar</code>\n         and <code>String</code> will be collectively stored in the <code>values</code> field.</p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.appsync#DataSourceIntrospectionModelFieldTypeValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values of the <code>type</code> field. This field represents the AppSync data type equivalent of the\n         introspected field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the type data for each field retrieved from the introspection.</p>"
+            }
+        },
+        "com.amazonaws.appsync#DataSourceIntrospectionModelFieldTypeValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appsync#String"
+            }
+        },
+        "com.amazonaws.appsync#DataSourceIntrospectionModelFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appsync#DataSourceIntrospectionModelField"
+            }
+        },
+        "com.amazonaws.appsync#DataSourceIntrospectionModelIndex": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the index.</p>"
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.appsync#DataSourceIntrospectionModelIndexFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fields of the index.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The index that was retrieved from the introspected data.</p>"
+            }
+        },
+        "com.amazonaws.appsync#DataSourceIntrospectionModelIndexFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appsync#String"
+            }
+        },
+        "com.amazonaws.appsync#DataSourceIntrospectionModelIndexes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appsync#DataSourceIntrospectionModelIndex"
+            }
+        },
+        "com.amazonaws.appsync#DataSourceIntrospectionModels": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appsync#DataSourceIntrospectionModel"
+            }
+        },
+        "com.amazonaws.appsync#DataSourceIntrospectionResult": {
+            "type": "structure",
+            "members": {
+                "models": {
+                    "target": "com.amazonaws.appsync#DataSourceIntrospectionModels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The array of <code>DataSourceIntrospectionModel</code> objects.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.appsync#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the number of types to be returned in a single response before paginating. This value is\n         typically taken from <code>nextToken</code> value from the previous response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the output of a <code>DataSourceIntrospectionResult</code>. This is the populated result of a\n            <code>GetDataSourceIntrospection</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.appsync#DataSourceIntrospectionStatus": {
+            "type": "enum",
+            "members": {
+                "PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESSING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.appsync#DataSourceType": {
             "type": "enum",
             "members": {
@@ -4565,6 +4761,105 @@
                     "uri": "/v1/apis/{apiId}/datasources/{name}",
                     "code": 200
                 }
+            }
+        },
+        "com.amazonaws.appsync#GetDataSourceIntrospection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appsync#GetDataSourceIntrospectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appsync#GetDataSourceIntrospectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appsync#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appsync#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.appsync#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the record of an existing introspection. If the retrieval is successful, the result of the\n         instrospection will also be returned. If the retrieval fails the operation, an error message will be returned\n         instead.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/datasources/introspections/{introspectionId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appsync#GetDataSourceIntrospectionRequest": {
+            "type": "structure",
+            "members": {
+                "introspectionId": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The introspection ID. Each introspection contains a unique ID that can be used to reference the\n         instrospection record.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "includeModelsSDL": {
+                    "target": "com.amazonaws.appsync#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A boolean flag that determines whether SDL should be generated for introspected types or not. If set to\n            <code>true</code>, each model will contain an <code>sdl</code> property that contains the SDL for that type.\n         The SDL only contains the type data and no additional metadata or directives. </p>",
+                        "smithy.api#httpQuery": "includeModelsSDL"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.appsync#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the number of types to be returned in a single response before paginating. This value is\n         typically taken from <code>nextToken</code> value from the previous response.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.appsync#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of introspected types that will be returned in a single response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appsync#GetDataSourceIntrospectionResponse": {
+            "type": "structure",
+            "members": {
+                "introspectionId": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The introspection ID. Each introspection contains a unique ID that can be used to reference the\n         instrospection record.</p>"
+                    }
+                },
+                "introspectionStatus": {
+                    "target": "com.amazonaws.appsync#DataSourceIntrospectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the introspection during retrieval. By default, when a new instrospection is being retrieved,\n         the status will be set to <code>PROCESSING</code>. Once the operation has been completed, the status will\n         change to <code>SUCCESS</code> or <code>FAILED</code> depending on how the data was parsed. A\n            <code>FAILED</code> operation will return an error and its details as an\n            <code>introspectionStatusDetail</code>.</p>"
+                    }
+                },
+                "introspectionStatusDetail": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error detail field. When a <code>FAILED</code>\n            <code>introspectionStatus</code> is returned, the <code>introspectionStatusDetail</code> will also return the\n         exact error that was generated during the operation.</p>"
+                    }
+                },
+                "introspectionResult": {
+                    "target": "com.amazonaws.appsync#DataSourceIntrospectionResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>DataSourceIntrospectionResult</code> object data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appsync#GetDataSourceRequest": {
@@ -6592,6 +6887,64 @@
                 "smithy.api#documentation": "<p>The pipeline configuration for a resolver of kind <code>PIPELINE</code>.</p>"
             }
         },
+        "com.amazonaws.appsync#RdsDataApiConfig": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.appsync#RdsDataApiConfigResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ARN of the RDS cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "secretArn": {
+                    "target": "com.amazonaws.appsync#RdsDataApiConfigSecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secret's ARN that was obtained from Secrets Manager. A secret consists of secret information, the secret\n         value, plus metadata about the secret. A secret value can be a string or binary. It typically includes the ARN,\n         secret name and description, policies, tags, encryption key from the Key Management Service, and key rotation\n         data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "databaseName": {
+                    "target": "com.amazonaws.appsync#RdsDataApiConfigDatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database in the cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the metadata required to introspect the RDS cluster.</p>"
+            }
+        },
+        "com.amazonaws.appsync#RdsDataApiConfigDatabaseName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.appsync#RdsDataApiConfigResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[a-z-]*:rds:[a-z0-9-]*:\\d{12}:cluster:[0-9A-Za-z_/-]*$"
+            }
+        },
+        "com.amazonaws.appsync#RdsDataApiConfigSecretArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[a-z-]*:secretsmanager:[a-z0-9-]*:\\d{12}:secret:[0-9A-Za-z_/-]*$"
+            }
+        },
         "com.amazonaws.appsync#RdsHttpEndpointConfig": {
             "type": "structure",
             "members": {
@@ -7035,6 +7388,77 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.appsync#SourceApiAssociationSummary"
+            }
+        },
+        "com.amazonaws.appsync#StartDataSourceIntrospection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appsync#StartDataSourceIntrospectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appsync#StartDataSourceIntrospectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appsync#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appsync#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.appsync#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appsync#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new introspection. Returns the <code>introspectionId</code> of the new introspection after its\n         creation. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/datasources/introspections",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appsync#StartDataSourceIntrospectionRequest": {
+            "type": "structure",
+            "members": {
+                "rdsDataApiConfig": {
+                    "target": "com.amazonaws.appsync#RdsDataApiConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>rdsDataApiConfig</code> object data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appsync#StartDataSourceIntrospectionResponse": {
+            "type": "structure",
+            "members": {
+                "introspectionId": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The introspection ID. Each introspection contains a unique ID that can be used to reference the\n         instrospection record.</p>"
+                    }
+                },
+                "introspectionStatus": {
+                    "target": "com.amazonaws.appsync#DataSourceIntrospectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the introspection during creation. By default, when a new instrospection has been created, the\n         status will be set to <code>PROCESSING</code>. Once the operation has been completed, the status will change to\n            <code>SUCCESS</code> or <code>FAILED</code> depending on how the data was parsed. A <code>FAILED</code>\n         operation will return an error and its details as an <code>introspectionStatusDetail</code>.</p>"
+                    }
+                },
+                "introspectionStatusDetail": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error detail field. When a <code>FAILED</code>\n            <code>introspectionStatus</code> is returned, the <code>introspectionStatusDetail</code> will also return the\n         exact error that was generated during the operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appsync#StartSchemaCreation": {

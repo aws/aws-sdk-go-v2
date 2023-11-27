@@ -28,6 +28,9 @@
                 },
                 {
                     "target": "com.amazonaws.controltower#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.controltower#UpdateEnabledControl"
                 }
             ],
             "resources": [
@@ -67,7 +70,7 @@
                         "x-amzn-trace-id"
                     ]
                 },
-                "smithy.api#documentation": "<p>These interfaces allow you to apply the Amazon Web Services library of pre-defined\n         <i>controls</i> to your organizational units, programmatically. In Amazon Web Services Control Tower, the terms \"control\" and \"guardrail\" are synonyms.</p>\n         <p>To call these APIs, you'll need to know:</p>\n         <ul>\n            <li>\n               <p>the <code>controlIdentifier</code> for the control--or guardrail--you are targeting.</p>\n            </li>\n            <li>\n               <p>the ARN associated with the target organizational unit (OU), which we call the <code>targetIdentifier</code>.</p>\n            </li>\n            <li>\n               <p>the ARN associated with a resource that you wish to tag or untag.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To get the <code>controlIdentifier</code> for your AWS Control Tower\n         control:</b>\n         </p>\n         <p>The <code>controlIdentifier</code> is an ARN that is specified for each\n         control. You can view the <code>controlIdentifier</code> in the console on the <b>Control details</b> page, as well as in the documentation.</p>\n         <p>The <code>controlIdentifier</code> is unique in each Amazon Web Services Region for each control. You can\n         find the <code>controlIdentifier</code> for each Region and control in the <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-metadata-tables.html\">Tables of control metadata</a> in the <i>Amazon Web Services Control Tower User Guide.</i>\n         </p>\n         <p>A quick-reference list of control identifers for the Amazon Web Services Control Tower legacy <i>Strongly recommended</i> and\n         <i>Elective</i> controls is given in <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html.html\">Resource identifiers for\n            APIs and controls</a> in the <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html\">Controls reference guide section</a>\n         of the <i>Amazon Web Services Control Tower User Guide</i>. Remember that <i>Mandatory</i> controls\n         cannot be added or removed.</p>\n         <note>\n            <p>\n               <b>ARN format:</b>\n               <code>arn:aws:controltower:{REGION}::control/{CONTROL_NAME}</code>\n            </p>\n            <p>\n               <b>Example:</b>\n            </p>\n            <p>\n               <code>arn:aws:controltower:us-west-2::control/AWS-GR_AUTOSCALING_LAUNCH_CONFIG_PUBLIC_IP_DISABLED</code>\n            </p>\n         </note>\n         <p>\n            <b>To get the <code>targetIdentifier</code>:</b>\n         </p>\n         <p>The <code>targetIdentifier</code> is the ARN for an OU.</p>\n         <p>In the Amazon Web Services Organizations console, you can find the ARN for the OU on the <b>Organizational unit details</b> page associated with that OU.</p>\n         <note>\n            <p>\n               <b>OU ARN format:</b>\n            </p>\n            <p>\n               <code>arn:${Partition}:organizations::${MasterAccountId}:ou/o-${OrganizationId}/ou-${OrganizationalUnitId}</code>\n            </p>\n         </note>\n         <p class=\"title\">\n            <b>Details and examples</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">Control API input and output examples with CLI</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/enable-controls.html\">Enable controls with CloudFormation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-metadata-tables.html\">Control metadata tables</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html\">List of identifiers for legacy controls</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/controls.html\">Controls reference guide</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/controls-reference.html\">Controls library groupings</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/creating-resources-with-cloudformation.html\">Creating Amazon Web Services Control Tower resources with Amazon Web Services CloudFormation</a>\n               </p>\n            </li>\n         </ul>\n         <p>To view the open source resource repository on GitHub, see <a href=\"https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-controltower\">aws-cloudformation/aws-cloudformation-resource-providers-controltower</a>\n         </p>\n         <p>\n            <b>Recording API Requests</b>\n         </p>\n         <p>Amazon Web Services Control Tower supports Amazon Web Services CloudTrail, a service that records Amazon Web Services API calls for your\n         Amazon Web Services account and delivers log files to an Amazon S3 bucket. By using information collected by\n         CloudTrail, you can determine which requests the Amazon Web Services Control Tower service received, who made\n         the request and when, and so on. For more about Amazon Web Services Control Tower and its support for\n         CloudTrail, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/logging-using-cloudtrail.html\">Logging Amazon Web Services Control Tower\n            Actions with Amazon Web Services CloudTrail</a> in the Amazon Web Services Control Tower User Guide. To learn more about\n         CloudTrail, including how to turn it on and find your log files, see the Amazon Web Services CloudTrail User\n         Guide.</p>",
+                "smithy.api#documentation": "<p>These interfaces allow you to apply the  Amazon Web Services library of pre-defined\n         <i>controls</i> to your organizational units, programmatically. In  Amazon Web Services Control Tower, the terms \"control\" and \"guardrail\" are synonyms.</p>\n         <p>To call these APIs, you'll need to know:</p>\n         <ul>\n            <li>\n               <p>the <code>controlIdentifier</code> for the control--or guardrail--you are targeting.</p>\n            </li>\n            <li>\n               <p>the ARN associated with the target organizational unit (OU), which we call the <code>targetIdentifier</code>.</p>\n            </li>\n            <li>\n               <p>the ARN associated with a resource that you wish to tag or untag.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To get the <code>controlIdentifier</code> for your Amazon Web Services Control Tower\n         control:</b>\n         </p>\n         <p>The <code>controlIdentifier</code> is an ARN that is specified for each\n         control. You can view the <code>controlIdentifier</code> in the console on the <b>Control details</b> page, as well as in the documentation.</p>\n         <p>The <code>controlIdentifier</code> is unique in each Amazon Web Services Region for each control. You can\n         find the <code>controlIdentifier</code> for each Region and control in the <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-metadata-tables.html\">Tables of control metadata</a> in the <i>Amazon Web Services Control Tower User Guide.</i>\n         </p>\n         <p>A quick-reference list of control identifers for the Amazon Web Services Control Tower legacy <i>Strongly recommended</i> and\n         <i>Elective</i> controls is given in <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html.html\">Resource identifiers for\n            APIs and controls</a> in the <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html\">Controls reference guide section</a>\n         of the <i>Amazon Web Services Control Tower User Guide</i>. Remember that <i>Mandatory</i> controls\n         cannot be added or removed.</p>\n         <note>\n            <p>\n               <b>ARN format:</b>\n               <code>arn:aws:controltower:{REGION}::control/{CONTROL_NAME}</code>\n            </p>\n            <p>\n               <b>Example:</b>\n            </p>\n            <p>\n               <code>arn:aws:controltower:us-west-2::control/AWS-GR_AUTOSCALING_LAUNCH_CONFIG_PUBLIC_IP_DISABLED</code>\n            </p>\n         </note>\n         <p>\n            <b>To get the <code>targetIdentifier</code>:</b>\n         </p>\n         <p>The <code>targetIdentifier</code> is the ARN for an OU.</p>\n         <p>In the Amazon Web Services Organizations console, you can find the ARN for the OU on the <b>Organizational unit details</b> page associated with that OU.</p>\n         <note>\n            <p>\n               <b>OU ARN format:</b>\n            </p>\n            <p>\n               <code>arn:${Partition}:organizations::${MasterAccountId}:ou/o-${OrganizationId}/ou-${OrganizationalUnitId}</code>\n            </p>\n         </note>\n         <p class=\"title\">\n            <b>Details and examples</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">Control API input and output examples with CLI</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/enable-controls.html\">Enable controls with CloudFormation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-metadata-tables.html\">Control metadata tables</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html\">List of identifiers for legacy controls</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/controls.html\">Controls reference guide</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/controls-reference.html\">Controls library groupings</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/creating-resources-with-cloudformation.html\">Creating Amazon Web Services Control Tower resources with Amazon Web Services CloudFormation</a>\n               </p>\n            </li>\n         </ul>\n         <p>To view the open source resource repository on GitHub, see <a href=\"https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-controltower\">aws-cloudformation/aws-cloudformation-resource-providers-controltower</a>\n         </p>\n         <p>\n            <b>Recording API Requests</b>\n         </p>\n         <p>Amazon Web Services Control Tower supports Amazon Web Services CloudTrail, a service that records Amazon Web Services API calls for your\n         Amazon Web Services account and delivers log files to an Amazon S3 bucket. By using information collected by\n         CloudTrail, you can determine which requests the Amazon Web Services Control Tower service received, who made\n         the request and when, and so on. For more about Amazon Web Services Control Tower and its support for\n         CloudTrail, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/logging-using-cloudtrail.html\">Logging Amazon Web Services Control Tower\n            Actions with Amazon Web Services CloudTrail</a> in the Amazon Web Services Control Tower User Guide. To learn more about\n         CloudTrail, including how to turn it on and find your log files, see the Amazon Web Services CloudTrail User\n         Guide.</p>",
                 "smithy.api#title": "AWS Control Tower",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -957,7 +960,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updating or deleting a resource can cause an inconsistent state.</p>",
+                "smithy.api#documentation": "<p>Updating or deleting the resource can cause an inconsistent state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -1042,6 +1045,10 @@
                     {
                         "name": "DISABLE_CONTROL",
                         "value": "DISABLE_CONTROL"
+                    },
+                    {
+                        "name": "UPDATE_ENABLED_CONTROL",
+                        "value": "UPDATE_ENABLED_CONTROL"
                     }
                 ]
             }
@@ -1072,7 +1079,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new landing zone. This starts an asynchronous operation that creates and configures a landing zone \n         based on the parameters specified in the manifest JSON file. </p>",
+                "smithy.api#documentation": "<p>Creates a new landing zone. This API call starts an asynchronous operation that creates and configures a landing zone, \n         based on the parameters specified in the manifest JSON file.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1086,7 +1093,7 @@
                 "version": {
                     "target": "com.amazonaws.controltower#LandingZoneVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing zone version. </p>",
+                        "smithy.api#documentation": "<p>The landing zone version, for example, 3.0.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1115,14 +1122,14 @@
                 "arn": {
                     "target": "com.amazonaws.controltower#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the landing zone. </p>",
+                        "smithy.api#documentation": "<p>The ARN of the landing zone resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "operationIdentifier": {
                     "target": "com.amazonaws.controltower#OperationIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier assigned to a <code>CreateLandingZone</code> operation. You can use this \n      identifier as an input of <code>GetLandingZoneOperation</code> to check the operation's status. </p>",
+                        "smithy.api#documentation": "<p>A unique identifier assigned to a <code>CreateLandingZone</code> operation. You can use this \n         identifier as an input of <code>GetLandingZoneOperation</code> to check the operation's status.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1160,7 +1167,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This decommissions a landing zone. This starts an asynchronous operation that deletes Amazon Web Services Control Tower \n         resources deployed in Amazon Web Services Control Tower managed accounts. </p>",
+                "smithy.api#documentation": "<p>Decommissions a landing zone. This API call starts an asynchronous operation that deletes Amazon Web Services Control Tower \n         resources deployed in accounts managed by Amazon Web Services Control Tower.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1175,7 +1182,7 @@
                 "landingZoneIdentifier": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the landing zone. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the landing zone.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1190,7 +1197,7 @@
                 "operationIdentifier": {
                     "target": "com.amazonaws.controltower#OperationIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier assigned to a <code>DeleteLandingZone</code> operation. You can use this \n         identifier as an input of <code>GetLandingZoneOperation</code> to check the operation's status. </p>",
+                        "smithy.api#documentation": "<p>&gt;A unique identifier assigned to a <code>DeleteLandingZone</code> operation. You can use this \n         identifier as an input parameter of <code>GetLandingZoneOperation</code> to check the operation's status.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1245,7 +1252,7 @@
                 "controlIdentifier": {
                     "target": "com.amazonaws.controltower#ControlIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the control. Only <b>Strongly recommended</b> and\n         <b>Elective</b> controls are permitted, with the exception of the\n         <b>Region deny</b> control. For information on how to find the <code>controlIdentifier</code>, see <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html\">the overview page</a>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the control. Only <b>Strongly recommended</b> and\n         <b>Elective</b> controls are permitted, with the exception of the\n         <b>landing zone Region deny</b> control. For information on how to find the <code>controlIdentifier</code>, see <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html\">the overview page</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1305,12 +1312,12 @@
                 "driftStatus": {
                     "target": "com.amazonaws.controltower#DriftStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p> The drift status of the enabled control.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DRIFTED</code>: The <code>enabledControl</code> deployed in this configuration\n               doesn’t match the configuration that Amazon Web Services Control Tower expected. </p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_SYNC</code>: The <code>enabledControl</code> deployed in this configuration matches\n               the configuration that Amazon Web Services Control Tower expected.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_CHECKING</code>: Amazon Web Services Control Tower does not check drift for this enabled\n               control. Drift is not supported for the control type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN</code>: Amazon Web Services Control Tower is not able to check the drift status for the\n               enabled control. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> The drift status of the enabled control.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DRIFTED</code>: The <code>enabledControl</code> deployed in this configuration\n                  doesn’t match the configuration that Amazon Web Services Control Tower expected. </p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_SYNC</code>: The <code>enabledControl</code> deployed in this configuration matches\n                  the configuration that Amazon Web Services Control Tower expected.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_CHECKING</code>: Amazon Web Services Control Tower does not check drift for this enabled\n                  control. Drift is not supported for the control type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN</code>: Amazon Web Services Control Tower is not able to check the drift status for the\n                  enabled control. </p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The drift summary of the enabled control.</p>\n         <p>Amazon Web Services Control Tower expects the enabled control\n         configuration to include all supported and governed Regions. If the enabled control differs\n         from the expected configuration, it is defined to be in a state of drift. You can repair this drift by resetting the enabled control.</p>"
+                "smithy.api#documentation": "<p>The drift summary of the enabled control.</p>\n         <p>Amazon Web Services Control Tower expects the enabled control\n         configuration to include all supported and governed Regions. If the enabled control differs\n         from the expected configuration, it is defined to be in a state of drift. You can repair this drift by resetting the enabled control.</p>"
             }
         },
         "com.amazonaws.controltower#EnableControl": {
@@ -1359,7 +1366,7 @@
                 "controlIdentifier": {
                     "target": "com.amazonaws.controltower#ControlIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the control. Only <b>Strongly recommended</b> and\n         <b>Elective</b> controls are permitted, with the exception of the\n         <b>Region deny</b> control. For information on how to find the <code>controlIdentifier</code>, see <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html\">the overview page</a>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the control. Only <b>Strongly recommended</b> and\n         <b>Elective</b> controls are permitted, with the exception of the\n         <b>landing zone Region deny</b> control. For information on how to find the <code>controlIdentifier</code>, see <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html\">the overview page</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1374,6 +1381,12 @@
                     "target": "com.amazonaws.controltower#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Tags to be applied to the <code>EnabledControl</code> resource.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.controltower#EnabledControlParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>EnabledControlParameter</code> objects</p>"
                     }
                 }
             }
@@ -1434,10 +1447,72 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The drift status of the enabled control.</p>"
                     }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.controltower#EnabledControlParameterSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Array of <code>EnabledControlParameter</code> objects.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the enabled control.</p>"
+            }
+        },
+        "com.amazonaws.controltower#EnabledControlParameter": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of a key/value pair. It is of type <code>string</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of a key/value pair. It can be of type <code>array</code>\n            <code>string</code>, <code>number</code>, <code>object</code>, or <code>boolean</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A set of parameters that configure the behavior of the enabled control. A key/value pair, where <code>Key</code> is of type <code>String</code> and <code>Value</code> is of type <code>Document</code>.</p>"
+            }
+        },
+        "com.amazonaws.controltower#EnabledControlParameterSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controltower#EnabledControlParameterSummary"
+            }
+        },
+        "com.amazonaws.controltower#EnabledControlParameterSummary": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of a key/value pair.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of a key/value pair.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a summary of information about the parameters of an enabled control.</p>"
+            }
+        },
+        "com.amazonaws.controltower#EnabledControlParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controltower#EnabledControlParameter"
             }
         },
         "com.amazonaws.controltower#EnabledControlSummary": {
@@ -1458,7 +1533,7 @@
                 "targetIdentifier": {
                     "target": "com.amazonaws.controltower#TargetIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The ARN of the organizational unit.\n      </p>"
+                        "smithy.api#documentation": "<p>The ARN of the organizational unit.</p>"
                     }
                 },
                 "statusSummary": {
@@ -1677,7 +1752,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns details about the landing zone. Displays a message in case of error. </p>",
+                "smithy.api#documentation": "<p>Returns details about the landing zone. Displays a message in case of error.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1692,7 +1767,7 @@
                 "landingZoneIdentifier": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the landing zone. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the landing zone.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1727,7 +1802,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the status of the specified landing zone operation. Details for an operation are available for \n         X days. </p>",
+                "smithy.api#documentation": "<p>Returns the status of the specified landing zone operation. Details for an operation are available for \n         60 days.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1742,7 +1817,7 @@
                 "operationIdentifier": {
                     "target": "com.amazonaws.controltower#OperationIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier assigned to a landing zone operation. </p>",
+                        "smithy.api#documentation": "<p>A unique identifier assigned to a landing zone operation.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1757,7 +1832,7 @@
                 "operationDetails": {
                     "target": "com.amazonaws.controltower#LandingZoneOperationDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing zone operation details. </p>",
+                        "smithy.api#documentation": "<p>Details about a landing zone operation.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1772,7 +1847,7 @@
                 "landingZone": {
                     "target": "com.amazonaws.controltower#LandingZoneDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the landing zone. </p>",
+                        "smithy.api#documentation": "<p>Information about the landing zone.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1792,7 +1867,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Unexpected error during processing of request.</p>",
+                "smithy.api#documentation": "<p>An unexpected error occurred during processing of a request.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
@@ -1804,44 +1879,44 @@
                 "version": {
                     "target": "com.amazonaws.controltower#LandingZoneVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing zone's current deployed version. </p>",
+                        "smithy.api#documentation": "<p>The landing zone's current deployed version.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "manifest": {
                     "target": "com.amazonaws.controltower#Manifest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing zone manifest.yaml text file that specifies the landing zone configurations. </p>",
+                        "smithy.api#documentation": "<p>The landing zone <code>manifest.yaml</code> text file that specifies the landing zone configurations. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "arn": {
                     "target": "com.amazonaws.controltower#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the landing zone. </p>"
+                        "smithy.api#documentation": "<p>The ARN of the landing zone.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.controltower#LandingZoneStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing zone deployment status. </p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>: The landing zone is actively deployed.  </p>\n            </li>\n            <li>\n               <p>\n                  <code>PROCESSING</code>: The landing zone is processing deployment. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The landing zone failed deployment. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The landing zone deployment status.</p>"
                     }
                 },
                 "latestAvailableVersion": {
                     "target": "com.amazonaws.controltower#LandingZoneVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The latest available version of the landing zone. </p>"
+                        "smithy.api#documentation": "<p>The latest available version of the landing zone.</p>"
                     }
                 },
                 "driftStatus": {
                     "target": "com.amazonaws.controltower#LandingZoneDriftStatusSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>The drift status of the landing zone. </p>"
+                        "smithy.api#documentation": "<p>The drift status of the landing zone.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the landing zone. </p>"
+                "smithy.api#documentation": "<p>Information about the landing zone.</p>"
             }
         },
         "com.amazonaws.controltower#LandingZoneDriftStatus": {
@@ -1872,7 +1947,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The drift status summary of the landing zone. </p>\n         <p>If the landing zone differs from the expected configuration, it is defined to be in a state of \n      drift. You can repair this drift by resetting the landing zone. </p>"
+                "smithy.api#documentation": "<p>The drift status summary of the landing zone. </p>\n         <p>If the landing zone differs from the expected configuration, it is defined to be in a state of \n         drift. You can repair this drift by resetting the landing zone.</p>"
             }
         },
         "com.amazonaws.controltower#LandingZoneOperationDetail": {
@@ -1887,30 +1962,30 @@
                 "startTime": {
                     "target": "com.amazonaws.controltower#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing zone operation start time. </p>"
+                        "smithy.api#documentation": "<p>The landing zone operation start time.</p>"
                     }
                 },
                 "endTime": {
                     "target": "com.amazonaws.controltower#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing zone operation end time. </p>"
+                        "smithy.api#documentation": "<p>The landing zone operation end time.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.controltower#LandingZoneOperationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing zone operation status. </p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The landing zone operation succeeded.  </p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: The landing zone operation is in progress. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The landing zone operation failed. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The landing zone operation succeeded.  </p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: The landing zone operation is in progress. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The landing zone operation failed. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "statusMessage": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the operation result is FAILED, this string contains a message explaining why the operation failed. </p>"
+                        "smithy.api#documentation": "<p>If the operation result is FAILED, this string contains a message explaining why the operation failed.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a landing zone operation. </p>"
+                "smithy.api#documentation": "<p>Information about a landing zone operation.</p>"
             }
         },
         "com.amazonaws.controltower#LandingZoneOperationStatus": {
@@ -2038,12 +2113,12 @@
                 "arn": {
                     "target": "com.amazonaws.controltower#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the landing zone. </p>"
+                        "smithy.api#documentation": "<p>The ARN of the landing zone.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a summary of information about a landing zone. </p>"
+                "smithy.api#documentation": "<p>Returns a summary of information about a landing zone.</p>"
             }
         },
         "com.amazonaws.controltower#LandingZoneVersion": {
@@ -2134,7 +2209,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Retrieves the next page of results. If the string is empty, the current response is the\n         end of the results.</p>"
+                        "smithy.api#documentation": "<p>Retrieves the next page of results. If the string is empty, the response is the\n         end of the results.</p>"
                     }
                 }
             }
@@ -2162,7 +2237,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the landing zone ARN for the landing zone deployed in your managed account. This API also \n         creates an ARN for existing accounts that do not yet have a landing zone ARN. </p>\n         <p>The return limit is one landing zone ARN. </p>",
+                "smithy.api#documentation": "<p>Returns the landing zone ARN for the landing zone deployed in your managed account. This API also \n         creates an ARN for existing accounts that do not yet have a landing zone ARN. </p>\n         <p>Returns one landing zone ARN.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2183,13 +2258,13 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to continue the list from a previous API call with the same parameters. </p>"
+                        "smithy.api#documentation": "<p>The token to continue the list from a previous API call with the same parameters.</p>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.controltower#ListLandingZonesMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of returned landing zone ARNs. </p>"
+                        "smithy.api#documentation": "<p>The maximum number of returned landing zone ARNs, which is one.</p>"
                     }
                 }
             },
@@ -2212,7 +2287,7 @@
                 "landingZones": {
                     "target": "com.amazonaws.controltower#LandingZoneSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the landing zone. </p>",
+                        "smithy.api#documentation": "<p>The ARN of the landing zone.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 1
@@ -2223,7 +2298,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Retrieves the next page of results. If the string is empty, the current response is the end of the results. </p>"
+                        "smithy.api#documentation": "<p>Retrieves the next page of results. If the string is empty, the response is the end of the results.</p>"
                     }
                 }
             },
@@ -2324,7 +2399,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An Amazon Web Services Region in which Amazon Web Services Control Tower expects to find the control deployed. </p>\n         <p>The expected Regions are based on the Regions that are governed by the landing zone. In\n         certain cases, a control is not actually enabled in the Region as expected, such as during\n         drift, or <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/region-how.html#mixed-governance\">mixed governance</a>.</p>"
+                "smithy.api#documentation": "<p>An  Amazon Web Services Region in which  Amazon Web Services Control Tower expects to find the control deployed. </p>\n         <p>The expected Regions are based on the Regions that are governed by the landing zone. In\n            certain cases, a control is not actually enabled in the Region as expected, such as during\n            drift, or <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/region-how.html#mixed-governance\">mixed governance</a>.</p>"
             }
         },
         "com.amazonaws.controltower#RegionName": {
@@ -2365,7 +2440,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API call resets a landing zone. It starts an asynchronous operation that resets the \n         landing zone to the parameters specified in its original configuration. </p>",
+                "smithy.api#documentation": "<p>This API call resets a landing zone. It starts an asynchronous operation that resets the \n         landing zone to the parameters specified in its original configuration.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2379,7 +2454,7 @@
                 "landingZoneIdentifier": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the landing zone. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the landing zone.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2394,7 +2469,7 @@
                 "operationIdentifier": {
                     "target": "com.amazonaws.controltower#OperationIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier assigned to a <code>ResetLandingZone</code> operation. You can use this \n         identifier as an input of <code>GetLandingZoneOperation</code> to check the operation's status.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier assigned to a <code>ResetLandingZone</code> operation. You can use this \n         identifier as an input parameter of <code>GetLandingZoneOperation</code> to check the operation's status.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2414,7 +2489,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request references a resource which does not exist.</p>",
+                "smithy.api#documentation": "<p>The request references a resource that does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -2430,7 +2505,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request would cause a service quota to be exceeded. The limit is 10 concurrent operations.</p>",
+                "smithy.api#documentation": "<p>The request would cause a service quota to be exceeded. The limit is 10 concurrent operations.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -2566,7 +2641,7 @@
                 "serviceCode": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the service that is associated with the error.</p>"
+                        "smithy.api#documentation": "<p>The ID of the service that is associated with the error.\n      </p>"
                     }
                 },
                 "quotaCode": {
@@ -2578,13 +2653,13 @@
                 "retryAfterSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of seconds the caller should wait before retrying.</p>",
+                        "smithy.api#documentation": "<p>The number of seconds to wait before retrying.</p>",
                         "smithy.api#httpHeader": "Retry-After"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request was denied due to request throttling.</p>",
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {
@@ -2657,6 +2732,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.controltower#UpdateEnabledControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#UpdateEnabledControlInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#UpdateEnabledControlOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Updates the configuration of an already enabled control.</p>\n         <p>If the enabled control shows an <code>EnablementStatus</code> of SUCCEEDED, supply parameters that are different from the currently configured parameters. Otherwise, Amazon Web Services Control Tower will not accept the request.</p>\n         <p>If the enabled control shows an <code>EnablementStatus</code> of FAILED, Amazon Web Services Control Tower will update the control to match any valid parameters that you supply.</p>\n         <p>If the <code>DriftSummary</code> status for the control shows as DRIFTED, you cannot call this API. Instead, you can update the control by calling <code>DisableControl</code> and again calling <code>EnableControl</code>, or you can run an extending governance operation. For usage examples, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">\n               <i>the Amazon Web Services Control Tower User Guide</i>\n            </a>\n         </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/update-enabled-control"
+                }
+            }
+        },
+        "com.amazonaws.controltower#UpdateEnabledControlInput": {
+            "type": "structure",
+            "members": {
+                "parameters": {
+                    "target": "com.amazonaws.controltower#EnabledControlParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key/value pair, where <code>Key</code> is of type <code>String</code> and <code>Value</code> is of type <code>Document</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enabledControlIdentifier": {
+                    "target": "com.amazonaws.controltower#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ARN of the enabled control that will be updated.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controltower#UpdateEnabledControlOutput": {
+            "type": "structure",
+            "members": {
+                "operationIdentifier": {
+                    "target": "com.amazonaws.controltower#OperationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The operation identifier for this <code>UpdateEnabledControl</code> operation.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.controltower#UpdateLandingZone": {
             "type": "operation",
             "input": {
@@ -2686,7 +2838,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API call updates the landing zone. It starts an asynchronous operation that updates the \n      landing zone based on the new landing zone version or the updated parameters specified in the \n      updated manifest file. </p>",
+                "smithy.api#documentation": "<p>This API call updates the landing zone. It starts an asynchronous operation that updates the \n         landing zone based on the new landing zone version, or on the changed parameters specified in the \n         updated manifest file. </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2700,21 +2852,21 @@
                 "version": {
                     "target": "com.amazonaws.controltower#LandingZoneVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing zone version. </p>",
+                        "smithy.api#documentation": "<p>The landing zone version, for example, 3.2.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "manifest": {
                     "target": "com.amazonaws.controltower#Manifest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The manifest.yaml file is a text file that describes your Amazon Web Services resources. For examples, review \n         <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file\">The manifest file</a>\n         </p>",
+                        "smithy.api#documentation": "<p>The <code>manifest.yaml</code> file is a text file that describes your Amazon Web Services resources. For examples, review \n         <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file\">The manifest file</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "landingZoneIdentifier": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the landing zone. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the landing zone.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2749,7 +2901,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>",
+                "smithy.api#documentation": "<p>The input does not satisfy the constraints specified by an  Amazon Web Services service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

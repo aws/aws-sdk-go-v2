@@ -515,6 +515,32 @@
                 "target": "com.amazonaws.securityhub#AssociatedStandard"
             }
         },
+        "com.amazonaws.securityhub#AssociationFilters": {
+            "type": "structure",
+            "members": {
+                "ConfigurationPolicyId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ARN or UUID of the configuration policy.\n        </p>"
+                    }
+                },
+                "AssociationType": {
+                    "target": "com.amazonaws.securityhub#AssociationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether the association between a target and a configuration was directly applied by the \n            Security Hub delegated administrator or inherited from a parent.\n        </p>"
+                    }
+                },
+                "AssociationStatus": {
+                    "target": "com.amazonaws.securityhub#ConfigurationPolicyAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The current status of the association between a target and a configuration policy.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Options for filtering the <code>ListConfigurationPolicyAssociations</code> response. You can filter by the Amazon Resource Name (ARN) or \n            universally unique identifier (UUID) of a configuration policy, <code>AssociationType</code>, or <code>AssociationStatus</code>.\n        </p>"
+            }
+        },
         "com.amazonaws.securityhub#AssociationSetDetails": {
             "type": "structure",
             "members": {
@@ -598,6 +624,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#AssociationType": {
+            "type": "enum",
+            "members": {
+                "INHERITED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INHERITED"
+                    }
+                },
+                "APPLIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLIED"
                     }
                 }
             }
@@ -807,7 +850,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Services account ID in which a finding was generated. </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 100 items.\n   \t</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID in which a finding was generated.</p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 100 items.\n   \t</p>"
                     }
                 },
                 "Id": {
@@ -1006,6 +1049,24 @@
                     "target": "com.amazonaws.securityhub#MapFilterList",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            A list of user-defined name and value string pairs added to a finding.\n        </p>\n         <p>\n    \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n    \t</p>"
+                    }
+                },
+                "ResourceApplicationArn": {
+                    "target": "com.amazonaws.securityhub#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the application that is related to a finding.\n        </p>\n         <p>\n            Array Members: Minimum number of 1 item. Maximum number of 20 items.\n        </p>"
+                    }
+                },
+                "ResourceApplicationName": {
+                    "target": "com.amazonaws.securityhub#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the application that is related to a finding.\n        </p>\n         <p>\n            Array Members: Minimum number of 1 item. Maximum number of 20 items.\n        </p>"
+                    }
+                },
+                "AwsAccountName": {
+                    "target": "com.amazonaws.securityhub#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services account in which a finding was generated.\n        </p>\n         <p>\n            Array Members: Minimum number of 1 item. Maximum number of 20 items.\n        </p>"
                     }
                 }
             },
@@ -18042,6 +18103,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides metadata for the Amazon CodeGuru detector associated with a finding. This field pertains to \nfindings that relate to Lambda functions. Amazon Inspector identifies policy violations and \nvulnerabilities in Lambda function code based on internal detectors developed \nin collaboration with Amazon CodeGuru. Security Hub receives those findings.\n        </p>"
                     }
+                },
+                "ProcessedAt": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ISO8601-formatted timestamp that indicates when Security Hub received a finding and begins to process it.</p>\n         <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>"
+                    }
+                },
+                "AwsAccountName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services account from which a finding was generated.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -18060,7 +18133,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that a finding is generated in.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID in which a finding is generated.</p>"
                     }
                 },
                 "Id": {
@@ -18667,6 +18740,24 @@
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The current value of a security control parameter.\n        </p>"
+                    }
+                },
+                "AwsAccountName": {
+                    "target": "com.amazonaws.securityhub#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services account in which a finding is generated.</p>"
+                    }
+                },
+                "ResourceApplicationName": {
+                    "target": "com.amazonaws.securityhub#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the application that is related to a finding.\n        </p>"
+                    }
+                },
+                "ResourceApplicationArn": {
+                    "target": "com.amazonaws.securityhub#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ARN of the application that is related to a finding.\n        </p>"
                     }
                 }
             },
@@ -20282,6 +20373,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.securityhub#InternalException"
                 },
                 {
@@ -20363,6 +20457,9 @@
                 "target": "com.amazonaws.securityhub#BatchEnableStandardsResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
                 {
                     "target": "com.amazonaws.securityhub#InternalException"
                 },
@@ -20596,6 +20693,123 @@
                     "target": "com.amazonaws.securityhub#UnprocessedAutomationRulesList",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         A list of objects containing <code>RuleArn</code>, <code>ErrorCode</code>, and <code>ErrorMessage</code>. This parameter \n         tells you which automation rules the request didn't retrieve and why.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#BatchGetConfigurationPolicyAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#BatchGetConfigurationPolicyAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#BatchGetConfigurationPolicyAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Returns associations between an Security Hub configuration and a batch of target accounts, organizational units, or the root. \n            Only the Security Hub delegated administrator can invoke this operation from the home Region. A configuration \n            can refer to a configuration policy or to a self-managed configuration.\n        </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get configuration associations for a batch of targets",
+                        "documentation": "This operation provides details about configuration associations for a batch of target accounts, organizational units, or the root.",
+                        "input": {
+                            "ConfigurationPolicyAssociationIdentifiers": [
+                                {
+                                    "Target": {
+                                        "AccountId": "111122223333"
+                                    }
+                                },
+                                {
+                                    "Target": {
+                                        "RootId": "r-f6g7h8i9j0example"
+                                    }
+                                }
+                            ]
+                        },
+                        "output": {
+                            "ConfigurationPolicyAssociations": [
+                                {
+                                    "ConfigurationPolicyId": "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                    "TargetId": "111122223333",
+                                    "TargetType": "ACCOUNT",
+                                    "AssociationType": "INHERITED",
+                                    "UpdatedAt": "2023-01-11T06:17:17.154Z",
+                                    "AssociationStatus": "SUCCESS",
+                                    "AssociationStatusMessage": "This field is only populated for a failed association"
+                                }
+                            ],
+                            "UnprocessedConfigurationPolicyAssociations": [
+                                {
+                                    "ErrorCode": "400",
+                                    "ErrorReason": "You do not have sufficient access to perform this action.",
+                                    "ConfigurationPolicyAssociationIdentifiers": {
+                                        "Target": {
+                                            "RootId": "r-f6g7h8i9j0example"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/configurationPolicyAssociation/batchget",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#BatchGetConfigurationPolicyAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "ConfigurationPolicyAssociationIdentifiers": {
+                    "target": "com.amazonaws.securityhub#ConfigurationPolicyAssociationsList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            Specifies one or more target account IDs, organizational unit (OU) IDs, or the root ID to retrieve associations for. \n        </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#BatchGetConfigurationPolicyAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "ConfigurationPolicyAssociations": {
+                    "target": "com.amazonaws.securityhub#ConfigurationPolicyAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes associations for the target accounts, OUs, or the root.\n        </p>"
+                    }
+                },
+                "UnprocessedConfigurationPolicyAssociations": {
+                    "target": "com.amazonaws.securityhub#UnprocessedConfigurationPolicyAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of configuration policy associations, one for each configuration policy association identifier, that was \n            specified in the request but couldn’t be processed due to an error.\n        </p>"
                     }
                 }
             },
@@ -21248,6 +21462,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.securityhub#InternalException"
                 },
                 {
@@ -21713,6 +21930,161 @@
                 "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter.\n        </p>"
             }
         },
+        "com.amazonaws.securityhub#ConfigurationPolicyAssociation": {
+            "type": "structure",
+            "members": {
+                "Target": {
+                    "target": "com.amazonaws.securityhub#Target",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The target account, organizational unit, or the root.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about the association between an Security Hub configuration and a target account, organizational unit, or \n            the root. An association can exist between a target and a configuration policy, or between a target and self-managed \n            behavior.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#ConfigurationPolicyAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#ConfigurationPolicyAssociationSummary"
+            }
+        },
+        "com.amazonaws.securityhub#ConfigurationPolicyAssociationStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#ConfigurationPolicyAssociationSummary": {
+            "type": "structure",
+            "members": {
+                "ConfigurationPolicyId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The universally unique identifier (UUID) of the configuration policy.\n        </p>"
+                    }
+                },
+                "TargetId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The identifier of the target account, organizational unit, or the root.\n        </p>"
+                    }
+                },
+                "TargetType": {
+                    "target": "com.amazonaws.securityhub#TargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies whether the target is an Amazon Web Services account, organizational unit, or the root.\n        </p>"
+                    }
+                },
+                "AssociationType": {
+                    "target": "com.amazonaws.securityhub#AssociationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether the association between the specified target and the configuration was directly applied by the \n            Security Hub delegated administrator or inherited from a parent.\n        </p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The date and time, in UTC and ISO 8601 format, that the configuration policy association was last updated.\n        </p>"
+                    }
+                },
+                "AssociationStatus": {
+                    "target": "com.amazonaws.securityhub#ConfigurationPolicyAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The current status of the association between the specified target and the configuration.\n        </p>"
+                    }
+                },
+                "AssociationStatusMessage": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The explanation for a <code>FAILED</code> value for <code>AssociationStatus</code>.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            An object that contains the details of a configuration policy association that’s returned in a \n            <code>ListConfigurationPolicyAssociations</code> request.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#ConfigurationPolicyAssociationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#ConfigurationPolicyAssociationSummary"
+            }
+        },
+        "com.amazonaws.securityhub#ConfigurationPolicyAssociationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#ConfigurationPolicyAssociation"
+            }
+        },
+        "com.amazonaws.securityhub#ConfigurationPolicySummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the configuration policy.\n        </p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The universally unique identifier (UUID) of the configuration policy.\n        </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the configuration policy.\n        </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The description of the configuration policy.\n        </p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The date and time, in UTC and ISO 8601 format, that the configuration policy was last updated.\n        </p>"
+                    }
+                },
+                "ServiceEnabled": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether the service that the configuration policy applies to is enabled in the policy.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            An object that contains the details of an Security Hub configuration policy that’s returned in a \n            <code>ListConfigurationPolicies</code> request.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#ConfigurationPolicySummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#ConfigurationPolicySummary"
+            }
+        },
         "com.amazonaws.securityhub#ContainerDetails": {
             "type": "structure",
             "members": {
@@ -22018,7 +22390,7 @@
                 "Tags": {
                     "target": "com.amazonaws.securityhub#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            User-defined tags that help you label the purpose of a rule. \n        </p>"
+                        "smithy.api#documentation": "<p>\n            User-defined tags associated with an automation rule. \n        </p>"
                     }
                 },
                 "RuleStatus": {
@@ -22085,6 +22457,201 @@
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the automation rule that you created.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#CreateConfigurationPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#CreateConfigurationPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#CreateConfigurationPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceConflictException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Creates a configuration policy with the defined configuration. Only the Security Hub delegated administrator \n            can invoke this operation from the home Region.\n        </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a configuration policy",
+                        "documentation": "This operation creates a configuration policy in Security Hub.",
+                        "input": {
+                            "Name": "TestConfigurationPolicy",
+                            "Description": "Configuration policy for testing FSBP and CIS",
+                            "ConfigurationPolicy": {
+                                "SecurityHub": {
+                                    "ServiceEnabled": true,
+                                    "EnabledStandardIdentifiers": [
+                                        "arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                                        "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0"
+                                    ],
+                                    "SecurityControlsConfiguration": {
+                                        "DisabledSecurityControlIdentifiers": [
+                                            "CloudWatch.1"
+                                        ],
+                                        "SecurityControlCustomParameters": [
+                                            {
+                                                "SecurityControlId": "ACM.1",
+                                                "Parameters": {
+                                                    "daysToExpiration": {
+                                                        "ValueType": "CUSTOM",
+                                                        "Value": {
+                                                            "Integer": 14
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "output": {
+                            "Arn": "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "Id": "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "Name": "TestConfigurationPolicy",
+                            "Description": "Configuration policy for testing FSBP and CIS",
+                            "UpdatedAt": "2023-01-11T06:17:17.154Z",
+                            "CreatedAt": "2023-01-11T06:17:17.154Z",
+                            "ConfigurationPolicy": {
+                                "SecurityHub": {
+                                    "ServiceEnabled": true,
+                                    "EnabledStandardIdentifiers": [
+                                        "arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                                        "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0"
+                                    ],
+                                    "SecurityControlsConfiguration": {
+                                        "DisabledSecurityControlIdentifiers": [
+                                            "CloudWatch.1"
+                                        ],
+                                        "SecurityControlCustomParameters": [
+                                            {
+                                                "SecurityControlId": "ACM.1",
+                                                "Parameters": {
+                                                    "daysToExpiration": {
+                                                        "ValueType": "CUSTOM",
+                                                        "Value": {
+                                                            "Integer": 14
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/configurationPolicy/create",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#CreateConfigurationPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            The name of the configuration policy.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The description of the configuration policy.\n        </p>"
+                    }
+                },
+                "ConfigurationPolicy": {
+                    "target": "com.amazonaws.securityhub#Policy",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            An object that defines how Security Hub is configured. It includes whether Security Hub is enabled or \n            disabled, a list of enabled security standards, a list of enabled or disabled security controls, and a list of custom parameter values for specified controls. \n            If you provide a list of security controls that are enabled in the configuration policy, Security Hub disables all other controls (including newly \n            released controls). If you provide a list of security controls that are disabled in the configuration policy, Security Hub \n            enables all other controls (including newly released controls).\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.securityhub#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            User-defined tags associated with a configuration policy. For more information, see \n            <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/tagging-resources.html\">Tagging Security Hub resources</a> \n            in the <i>Security Hub user guide</i>.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#CreateConfigurationPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the configuration policy.\n        </p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The universally unique identifier (UUID) of the configuration policy.\n        </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the configuration policy.\n        </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The description of the configuration policy.\n        </p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The date and time, in UTC and ISO 8601 format, that the configuration policy was last updated.\n        </p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The date and time, in UTC and ISO 8601 format, that the configuration policy was created.\n        </p>"
+                    }
+                },
+                "ConfigurationPolicy": {
+                    "target": "com.amazonaws.securityhub#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that defines how Security Hub is configured. It includes whether Security Hub is enabled or disabled, a \n            list of enabled security standards, a list of enabled or disabled security controls, and a list of custom parameter values for specified controls. \n            If the request included a list of security controls that are enabled in the configuration policy, Security Hub disables all other controls (including newly \n            released controls). If the request included a list of security controls that are disabled in the configuration policy, \n            Security Hub enables all other controls (including newly released controls).\n        </p>"
                     }
                 }
             },
@@ -22320,6 +22887,9 @@
                 "target": "com.amazonaws.securityhub#CreateMembersResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
                 {
                     "target": "com.amazonaws.securityhub#InternalException"
                 },
@@ -22741,6 +23311,78 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#DeleteConfigurationPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#DeleteConfigurationPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#DeleteConfigurationPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Deletes a configuration policy. Only the Security Hub delegated administrator can invoke this operation \n            from the home Region. For the deletion to succeed, you must first disassociate a configuration policy from target accounts, \n            organizational units, or the root by invoking the <code>StartConfigurationPolicyDisassociation</code> operation.\n        </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a configuration policy",
+                        "documentation": "This operation deletes the specified configuration policy.",
+                        "input": {
+                            "Identifier": "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/configurationPolicy/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#DeleteConfigurationPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy.\n        </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#DeleteConfigurationPolicyResponse": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
@@ -23273,15 +23915,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the Organizations configuration for Security Hub. Can only be\n         called from a Security Hub administrator account.</p>",
+                "smithy.api#documentation": "<p>Returns information about the way your organization is configured in Security Hub. Only the \n         Security Hub administrator account can invoke this operation.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "To get information about Organizations configuration",
-                        "documentation": "The following example returns details about the way in which AWS Organizations is configured for a Security Hub account that belongs to an organization. Only a Security Hub administrator account can call this operation.",
+                        "title": "To get information about organization configuration",
+                        "documentation": "This operation provides information about the way your organization is configured in Security Hub. Only a Security Hub administrator account can invoke this operation.",
                         "output": {
-                            "AutoEnable": true,
-                            "MemberAccountLimitReached": true,
-                            "AutoEnableStandards": "DEFAULT"
+                            "AutoEnable": false,
+                            "MemberAccountLimitReached": false,
+                            "AutoEnableStandards": "NONE",
+                            "OrganizationConfiguration": {
+                                "ConfigurationType": "CENTRAL",
+                                "Status": "ENABLED"
+                            }
                         }
                     }
                 ],
@@ -23305,7 +23951,7 @@
                 "AutoEnable": {
                     "target": "com.amazonaws.securityhub#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to automatically enable Security Hub for new accounts in the organization.</p>\n         <p>If set to <code>true</code>, then Security Hub is enabled for new accounts. If set to false,\n         then new accounts are not added automatically.</p>"
+                        "smithy.api#documentation": "<p>Whether to automatically enable Security Hub in new member accounts when they join the organization.</p>\n         <p>If set to <code>true</code>, then Security Hub is automatically enabled in new accounts. If set to <code>false</code>,\n           then Security Hub isn't enabled in new accounts automatically. The default value is <code>false</code>.</p>\n         <p>If the <code>ConfigurationType</code> of your organization is set to <code>CENTRAL</code>, then this field is set \n           to <code>false</code> and can't be changed in the home Region and linked Regions. However, in that case, the delegated administrator can create a configuration \n            policy in which Security Hub is enabled and associate the policy with new organization accounts.</p>"
                     }
                 },
                 "MemberAccountLimitReached": {
@@ -23317,8 +23963,11 @@
                 "AutoEnableStandards": {
                     "target": "com.amazonaws.securityhub#AutoEnableStandards",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to automatically enable Security Hub <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html\">default standards</a> \n         for new member accounts in the organization.</p>\n         <p>The default value of this parameter is equal to <code>DEFAULT</code>.</p>\n         <p>If equal to <code>DEFAULT</code>, then Security Hub default standards are automatically enabled for new member \n         accounts. If equal to <code>NONE</code>, then default standards are not automatically enabled for new member \n         accounts.</p>"
+                        "smithy.api#documentation": "<p>Whether to automatically enable Security Hub <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html\">default standards</a> \n         in new member accounts when they join the organization.</p>\n         <p>If equal to <code>DEFAULT</code>, then Security Hub default standards are automatically enabled for new member \n         accounts. If equal to <code>NONE</code>, then default standards are not automatically enabled for new member \n          accounts. The default value of this parameter is equal to <code>DEFAULT</code>.</p>\n         <p>If the <code>ConfigurationType</code> of your organization is set to <code>CENTRAL</code>, then this field is set \n           to <code>NONE</code> and can't be changed in the home Region and linked Regions. However, in that case, the delegated administrator can create a configuration \n            policy in which specific security standards are enabled and associate the policy with new organization accounts.</p>"
                     }
+                },
+                "OrganizationConfiguration": {
+                    "target": "com.amazonaws.securityhub#OrganizationConfiguration"
                 }
             },
             "traits": {
@@ -23721,6 +24370,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.securityhub#InternalException"
                 },
                 {
@@ -23784,6 +24436,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.securityhub#InternalException"
                 },
                 {
@@ -23823,6 +24478,12 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#DisabledSecurityControlIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#NonEmptyString"
             }
         },
         "com.amazonaws.securityhub#DisassociateFromAdministratorAccount": {
@@ -23939,6 +24600,9 @@
                 "target": "com.amazonaws.securityhub#DisassociateMembersResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
                 {
                     "target": "com.amazonaws.securityhub#InternalException"
                 },
@@ -24140,6 +24804,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.securityhub#InternalException"
                 },
                 {
@@ -24270,6 +24937,18 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#EnabledSecurityControlIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#NonEmptyString"
+            }
+        },
+        "com.amazonaws.securityhub#EnabledStandardIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#NonEmptyString"
             }
         },
         "com.amazonaws.securityhub#EnumConfigurationOptions": {
@@ -24761,6 +25440,276 @@
             "members": {
                 "Administrator": {
                     "target": "com.amazonaws.securityhub#Invitation"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetConfigurationPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#GetConfigurationPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#GetConfigurationPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides information about a configuration policy. Only the Security Hub delegated administrator can invoke \n            this operation from the home Region.\n        </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get details about a configuration policy",
+                        "documentation": "This operation provides details about the specified configuration policy.",
+                        "input": {
+                            "Identifier": "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+                        },
+                        "output": {
+                            "Arn": "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "Id": "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "Name": "TestConfigurationPolicy",
+                            "Description": "Configuration policy for testing FSBP and CIS",
+                            "UpdatedAt": "2023-01-11T06:17:17.154Z",
+                            "CreatedAt": "2023-01-11T06:17:17.154Z",
+                            "ConfigurationPolicy": {
+                                "SecurityHub": {
+                                    "ServiceEnabled": true,
+                                    "EnabledStandardIdentifiers": [
+                                        "arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                                        "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0"
+                                    ],
+                                    "SecurityControlsConfiguration": {
+                                        "DisabledSecurityControlIdentifiers": [
+                                            "CloudWatch.1"
+                                        ],
+                                        "SecurityControlCustomParameters": [
+                                            {
+                                                "SecurityControlId": "ACM.1",
+                                                "Parameters": {
+                                                    "daysToExpiration": {
+                                                        "ValueType": "CUSTOM",
+                                                        "Value": {
+                                                            "Integer": 14
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/configurationPolicy/get/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#GetConfigurationPolicyAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#GetConfigurationPolicyAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#GetConfigurationPolicyAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Returns the association between a configuration and a target account, organizational unit, or the root. The \n            configuration can be a configuration policy or self-managed behavior. Only the Security Hub delegated administrator can \n            invoke this operation from the home Region.\n        </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get details about a configuration association",
+                        "documentation": "This operation provides details about configuration associations for a specific target account, organizational unit, or the root.",
+                        "input": {
+                            "Target": {
+                                "AccountId": "111122223333"
+                            }
+                        },
+                        "output": {
+                            "ConfigurationPolicyId": "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "TargetId": "111122223333",
+                            "TargetType": "ACCOUNT",
+                            "AssociationType": "INHERITED",
+                            "UpdatedAt": "2023-01-11T06:17:17.154Z",
+                            "AssociationStatus": "FAILED",
+                            "AssociationStatusMessage": "Configuration Policy a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 couldn’t be applied to account 111122223333 in us-east-1 Region. Retry your request."
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/configurationPolicyAssociation/get",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#GetConfigurationPolicyAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "Target": {
+                    "target": "com.amazonaws.securityhub#Target",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            The target account ID, organizational unit ID, or the root ID to retrieve the association for. \n        </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetConfigurationPolicyAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "ConfigurationPolicyId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The universally unique identifier (UUID) of a configuration policy. For self-managed behavior, the value is \n            <code>SELF_MANAGED_SECURITY_HUB</code>.\n        </p>"
+                    }
+                },
+                "TargetId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The target account ID, organizational unit ID, or the root ID for which the association is retrieved.\n        </p>"
+                    }
+                },
+                "TargetType": {
+                    "target": "com.amazonaws.securityhub#TargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies whether the target is an Amazon Web Services account, organizational unit, or the organization root.\n        </p>"
+                    }
+                },
+                "AssociationType": {
+                    "target": "com.amazonaws.securityhub#AssociationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether the association between the specified target and the configuration was directly applied by the \n            Security Hub delegated administrator or inherited from a parent.\n        </p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The date and time, in UTC and ISO 8601 format, that the configuration policy association was last updated.\n        </p>"
+                    }
+                },
+                "AssociationStatus": {
+                    "target": "com.amazonaws.securityhub#ConfigurationPolicyAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The current status of the association between the specified target and the configuration.\n        </p>"
+                    }
+                },
+                "AssociationStatusMessage": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The explanation for a <code>FAILED</code> value for <code>AssociationStatus</code>.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetConfigurationPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy.\n        </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetConfigurationPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ARN of the configuration policy.\n        </p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The UUID of the configuration policy.\n        </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the configuration policy.\n        </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The description of the configuration policy.\n        </p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The date and time, in UTC and ISO 8601 format, that the configuration policy was last updated.\n        </p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The date and time, in UTC and ISO 8601 format, that the configuration policy was created.\n        </p>"
+                    }
+                },
+                "ConfigurationPolicy": {
+                    "target": "com.amazonaws.securityhub#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that defines how Security Hub is configured. It includes whether Security Hub is enabled or \n            disabled, a list of enabled security standards, a list of enabled or disabled security controls, and a list of custom parameter values for specified controls. \n            If the policy includes a list of security controls that are enabled, Security Hub disables all other controls (including newly released controls). \n            If the policy includes a list of security controls that are disabled, Security Hub enables all other controls (including \n            newly released controls).\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -26425,6 +27374,223 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securityhub#ListConfigurationPolicies": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#ListConfigurationPoliciesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#ListConfigurationPoliciesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Lists the configuration policies that the Security Hub delegated administrator has created for your \n            organization. Only the delegated administrator can invoke this operation from the home Region.\n        </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To view a list of configuration policies",
+                        "documentation": "This operation provides a list of your configuration policies, including metadata for each policy.",
+                        "input": {
+                            "NextToken": "U1FsdGVkX19nBV2zoh+Gou9NgnulLJHWpn9xnG4hqSOhvw3o2JqjI86QDxdf",
+                            "MaxResults": 1
+                        },
+                        "output": {
+                            "ConfigurationPolicySummaries": [
+                                {
+                                    "Arn": "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                    "Id": "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                    "Name": "TestConfigurationPolicy",
+                                    "Description": "Configuration policy for testing FSBP and CIS",
+                                    "UpdatedAt": "2023-01-11T06:17:17.154Z",
+                                    "ServiceEnabled": true
+                                }
+                            ],
+                            "NextToken": "U1FsdGVkX19nBV2zoh+Gou9NgnulLJHWpn9xnG4hqSOfvw3o2JqjI86QDxef"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/configurationPolicy/list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ConfigurationPolicySummaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.securityhub#ListConfigurationPoliciesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The NextToken value that's returned from a previous paginated <code>ListConfigurationPolicies</code> request where \n            <code>MaxResults</code> was used but the results exceeded the value of that parameter. Pagination continues from the \n            <code>MaxResults</code> was used but the results exceeded the value of that parameter. Pagination continues from the \n            end of the previous response that returned the <code>NextToken</code> value. This value is <code>null</code> when \n            there are no more results to return.\n        </p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.securityhub#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum number of results that's returned by <code>ListConfigurationPolicies</code> in each page of the response. \n            When this parameter is used, <code>ListConfigurationPolicies</code> returns the specified number of results in a \n            single page and a <code>NextToken</code> response element. You can see the remaining results of the initial request \n            by sending another <code>ListConfigurationPolicies</code> request with the returned <code>NextToken</code> value. A \n            valid range for <code>MaxResults</code> is between 1 and 100.\n        </p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#ListConfigurationPoliciesResponse": {
+            "type": "structure",
+            "members": {
+                "ConfigurationPolicySummaries": {
+                    "target": "com.amazonaws.securityhub#ConfigurationPolicySummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides metadata for each of your configuration policies.\n        </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The <code>NextToken</code> value to include in the next <code>ListConfigurationPolicies</code> request. When the \n            results of a <code>ListConfigurationPolicies</code> request exceed <code>MaxResults</code>, this value can be used to \n            retrieve the next page of results. This value is <code>null</code> when there are no more results to return.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#ListConfigurationPolicyAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#ListConfigurationPolicyAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#ListConfigurationPolicyAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides information about the associations for your configuration policies and self-managed behavior. Only the \n            Security Hub delegated administrator can invoke this operation from the home Region.\n        </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list configuration associations",
+                        "documentation": "This operation lists all of the associations between targets and configuration policies or self-managed behavior. Targets can include accounts, organizational units, or the root.",
+                        "input": {
+                            "NextToken": "U1FsdGVkX19nBV2zoh+Gou9NgnulLJHWpn9xnG4hqSOhvw3o2JqjI86QDxdf",
+                            "MaxResults": 1,
+                            "Filters": {
+                                "AssociationType": "APPLIED"
+                            }
+                        },
+                        "output": {
+                            "ConfigurationPolicyAssociationSummaries": [
+                                {
+                                    "ConfigurationPolicyId": "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                    "TargetId": "123456789012",
+                                    "TargetType": "ACCOUNT",
+                                    "AssociationType": "APPLIED",
+                                    "UpdatedAt": "2023-01-11T06:17:17.154Z",
+                                    "AssociationStatus": "PENDING"
+                                }
+                            ],
+                            "NextToken": "U1FsdGVkX19nBV2zoh+Gou9NgnulLJHWpn9xnG4hqSOfvw3o2JqjI86QDxef"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/configurationPolicyAssociation/list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ConfigurationPolicyAssociationSummaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.securityhub#ListConfigurationPolicyAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The <code>NextToken</code> value that's returned from a previous paginated <code>ListConfigurationPolicyAssociations</code> \n            request where <code>MaxResults</code> was used but the results exceeded the value of that parameter. Pagination \n            continues from the end of the previous response that returned the <code>NextToken</code> value. This value is <code>null</code> \n            when there are no more results to return.\n        </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.securityhub#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum number of results that's returned by <code>ListConfigurationPolicies</code> in each page of the response. \n            When this parameter is used, <code>ListConfigurationPolicyAssociations</code> returns the specified number of results \n            in a single page and a <code>NextToken</code> response element. You can see the remaining results of the initial \n            request by sending another <code>ListConfigurationPolicyAssociations</code> request with the returned <code>NextToken</code> \n            value. A valid range for <code>MaxResults</code> is between 1 and 100.\n        </p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.securityhub#AssociationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Options for filtering the <code>ListConfigurationPolicyAssociations</code> response. You can filter by the Amazon Resource Name (ARN) or \n            universally unique identifier (UUID) of a configuration, <code>AssociationType</code>, or <code>AssociationStatus</code>.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#ListConfigurationPolicyAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "ConfigurationPolicyAssociationSummaries": {
+                    "target": "com.amazonaws.securityhub#ConfigurationPolicyAssociationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that contains the details of each configuration policy association that’s returned in a \n            <code>ListConfigurationPolicyAssociations</code> request.\n        </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The <code>NextToken</code> value to include in the next <code>ListConfigurationPolicyAssociations</code> request. When \n            the results of a <code>ListConfigurationPolicyAssociations</code> request exceed <code>MaxResults</code>, this value \n            can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityhub#ListEnabledProductsForImport": {
             "type": "operation",
             "input": {
@@ -27853,6 +29019,72 @@
                 "smithy.api#documentation": "<p>The detected occurrences of sensitive data.</p>"
             }
         },
+        "com.amazonaws.securityhub#OrganizationConfiguration": {
+            "type": "structure",
+            "members": {
+                "ConfigurationType": {
+                    "target": "com.amazonaws.securityhub#OrganizationConfigurationConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether the organization uses local or central configuration.\n        </p>\n         <p>If you use local configuration, the \n            Security Hub delegated administrator can set <code>AutoEnable</code> to <code>true</code> and \n            <code>AutoEnableStandards</code> to <code>DEFAULT</code>. This automatically enables Security Hub and \n            default security standards in new organization accounts. These new account settings must be set separately in \n            each Amazon Web Services Region, and settings may be different in each Region.\n        </p>\n         <p>\n            If you use central configuration, the delegated administrator can create configuration policies. Configuration \n            policies can be used to configure Security Hub, security standards, and security controls in multiple \n            accounts and Regions. If you want new organization accounts to use a specific configuration, you can create a \n            configuration policy and associate it with the root or specific organizational units (OUs). New accounts will \n            inherit the policy from the root or their assigned OU.\n        </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.securityhub#OrganizationConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes whether central configuration could be enabled as the <code>ConfigurationType</code> for the \n            organization. If your <code>ConfigurationType</code> is local configuration, then the value of <code>Status</code> \n            is always <code>ENABLED</code>.\n        </p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides an explanation if the value of <code>Status</code> is equal to <code>FAILED</code> when <code>ConfigurationType</code> \n            is equal to <code>CENTRAL</code>.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides information about the way an organization is configured in Security Hub.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#OrganizationConfigurationConfigurationType": {
+            "type": "enum",
+            "members": {
+                "CENTRAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CENTRAL"
+                    }
+                },
+                "LOCAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOCAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#OrganizationConfigurationStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.securityhub#Page": {
             "type": "structure",
             "members": {
@@ -28119,6 +29351,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides an overview of the patch compliance status for an instance against a selected\n         compliance standard.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#Policy": {
+            "type": "union",
+            "members": {
+                "SecurityHub": {
+                    "target": "com.amazonaws.securityhub#SecurityHubPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Web Service that the configuration policy applies to.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            An object that defines how Security Hub is configured. It includes whether Security Hub is \n            enabled or disabled, a list of enabled security standards, a list of enabled or disabled security controls, and a list of custom parameter values for specified controls. \n            If you provide a list of security controls that are enabled in the configuration policy, Security Hub \n            disables all other controls (including newly released controls). If you provide a list of security controls that \n            are disabled in the configuration policy, Security Hub enables all other controls (including newly \n            released controls).\n        </p>"
             }
         },
         "com.amazonaws.securityhub#PortProbeAction": {
@@ -28583,6 +29829,18 @@
                     "target": "com.amazonaws.securityhub#ResourceDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional details about the resource related to a finding.</p>"
+                    }
+                },
+                "ApplicationName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the application that is related to a finding.\n        </p>"
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the application that is related to a finding.\n        </p>"
                     }
                 }
             },
@@ -29966,6 +31224,32 @@
                 "smithy.api#documentation": "<p>\n         A security control in Security Hub describes a security best practice related to a specific resource. \n      </p>"
             }
         },
+        "com.amazonaws.securityhub#SecurityControlCustomParameter": {
+            "type": "structure",
+            "members": {
+                "SecurityControlId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ID of the security control.\n        </p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.securityhub#Parameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that specifies parameter values for a control in a configuration policy.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            A list of security controls and control parameter values that are included in a configuration policy.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#SecurityControlCustomParametersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#SecurityControlCustomParameter"
+            }
+        },
         "com.amazonaws.securityhub#SecurityControlDefinition": {
             "type": "structure",
             "members": {
@@ -30083,6 +31367,32 @@
                 "target": "com.amazonaws.securityhub#SecurityControl"
             }
         },
+        "com.amazonaws.securityhub#SecurityControlsConfiguration": {
+            "type": "structure",
+            "members": {
+                "EnabledSecurityControlIdentifiers": {
+                    "target": "com.amazonaws.securityhub#EnabledSecurityControlIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of security controls that are enabled in the configuration policy. Security Hub disables all other \n            controls (including newly released controls) other than the listed controls.\n        </p>"
+                    }
+                },
+                "DisabledSecurityControlIdentifiers": {
+                    "target": "com.amazonaws.securityhub#DisabledSecurityControlIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of security controls that are disabled in the configuration policy. Security Hub enables all other \n            controls (including newly released controls) other than the listed controls.\n        </p>"
+                    }
+                },
+                "SecurityControlCustomParameters": {
+                    "target": "com.amazonaws.securityhub#SecurityControlCustomParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of security controls and control parameter values that are included in a configuration policy.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            An object that defines which security controls are enabled in an Security Hub configuration policy. \n            The enablement status of a control is aligned across all of the enabled standards in an account.\n        </p>"
+            }
+        },
         "com.amazonaws.securityhub#SecurityGroups": {
             "type": "list",
             "member": {
@@ -30112,6 +31422,9 @@
                     "target": "com.amazonaws.securityhub#BatchGetAutomationRules"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#BatchGetConfigurationPolicyAssociations"
+                },
+                {
                     "target": "com.amazonaws.securityhub#BatchGetSecurityControls"
                 },
                 {
@@ -30136,6 +31449,9 @@
                     "target": "com.amazonaws.securityhub#CreateAutomationRule"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#CreateConfigurationPolicy"
+                },
+                {
                     "target": "com.amazonaws.securityhub#CreateFindingAggregator"
                 },
                 {
@@ -30149,6 +31465,9 @@
                 },
                 {
                     "target": "com.amazonaws.securityhub#DeleteActionTarget"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#DeleteConfigurationPolicy"
                 },
                 {
                     "target": "com.amazonaws.securityhub#DeleteFindingAggregator"
@@ -30211,6 +31530,12 @@
                     "target": "com.amazonaws.securityhub#GetAdministratorAccount"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#GetConfigurationPolicy"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#GetConfigurationPolicyAssociation"
+                },
+                {
                     "target": "com.amazonaws.securityhub#GetEnabledStandards"
                 },
                 {
@@ -30247,6 +31572,12 @@
                     "target": "com.amazonaws.securityhub#ListAutomationRules"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#ListConfigurationPolicies"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ListConfigurationPolicyAssociations"
+                },
+                {
                     "target": "com.amazonaws.securityhub#ListEnabledProductsForImport"
                 },
                 {
@@ -30271,6 +31602,12 @@
                     "target": "com.amazonaws.securityhub#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#StartConfigurationPolicyAssociation"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#StartConfigurationPolicyDisassociation"
+                },
+                {
                     "target": "com.amazonaws.securityhub#TagResource"
                 },
                 {
@@ -30278,6 +31615,9 @@
                 },
                 {
                     "target": "com.amazonaws.securityhub#UpdateActionTarget"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#UpdateConfigurationPolicy"
                 },
                 {
                     "target": "com.amazonaws.securityhub#UpdateFindingAggregator"
@@ -31296,6 +32636,32 @@
                 }
             }
         },
+        "com.amazonaws.securityhub#SecurityHubPolicy": {
+            "type": "structure",
+            "members": {
+                "ServiceEnabled": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether Security Hub is enabled in the policy.\n        </p>"
+                    }
+                },
+                "EnabledStandardIdentifiers": {
+                    "target": "com.amazonaws.securityhub#EnabledStandardIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list that defines which security standards are enabled in the configuration policy.\n        </p>"
+                    }
+                },
+                "SecurityControlsConfiguration": {
+                    "target": "com.amazonaws.securityhub#SecurityControlsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that defines which security controls are enabled in the configuration policy. The enablement status \n            of a control is aligned across all of the enabled standards in an account.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            An object that defines how Security Hub is configured. The configuration policy includes whether \n            Security Hub is enabled or disabled, a list of enabled security standards, a list of enabled or \n            disabled security controls, and a list of custom parameter values for specified controls. If you provide a list of security controls that are enabled in the configuration \n            policy, Security Hub disables all other controls (including newly released controls). If you provide a \n            list of security controls that are disabled in the configuration policy, Security Hub enables all other \n            controls (including newly released controls).\n        </p>"
+            }
+        },
         "com.amazonaws.securityhub#SensitiveDataDetections": {
             "type": "structure",
             "members": {
@@ -31888,13 +33254,13 @@
                 "UpdatedAt": {
                     "target": "com.amazonaws.securityhub#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> The last time that a control's enablement status in a specified standard was updated. </p>"
+                        "smithy.api#documentation": "<p>The last time that a control's enablement status in a specified standard was updated.</p>"
                     }
                 },
                 "UpdatedReason": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p> The reason for updating the control's enablement status in a specified standard. </p>"
+                        "smithy.api#documentation": "<p>The reason for updating a control's enablement status in a specified standard.</p>"
                     }
                 },
                 "StandardsControlTitle": {
@@ -32140,6 +33506,216 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#StandardsSubscription"
+            }
+        },
+        "com.amazonaws.securityhub#StartConfigurationPolicyAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#StartConfigurationPolicyAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#StartConfigurationPolicyAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Associates a target account, organizational unit, or the root with a specified configuration. The target can be \n            associated with a configuration policy or self-managed behavior. Only the Security Hub delegated administrator can \n            invoke this operation from the home Region.\n        </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To associate a configuration with a target",
+                        "documentation": "This operation associates a configuration policy or self-managed behavior with the target account, organizational unit, or the root.",
+                        "input": {
+                            "ConfigurationPolicyIdentifier": "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "Target": {
+                                "AccountId": "111122223333"
+                            }
+                        },
+                        "output": {
+                            "ConfigurationPolicyId": "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "TargetId": "111122223333",
+                            "TargetType": "ACCOUNT",
+                            "AssociationType": "APPLIED",
+                            "UpdatedAt": "2023-01-11T06:17:17.154Z",
+                            "AssociationStatus": "SUCCESS",
+                            "AssociationStatusMessage": "This field is populated only if the association fails"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/configurationPolicyAssociation/associate",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#StartConfigurationPolicyAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "ConfigurationPolicyIdentifier": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Target": {
+                    "target": "com.amazonaws.securityhub#Target",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            The identifier of the target account, organizational unit, or the root to associate with the specified configuration.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#StartConfigurationPolicyAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "ConfigurationPolicyId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The UUID of the configuration policy.\n        </p>"
+                    }
+                },
+                "TargetId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The identifier of the target account, organizational unit, or the organization root with which the configuration is associated.\n        </p>"
+                    }
+                },
+                "TargetType": {
+                    "target": "com.amazonaws.securityhub#TargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether the target is an Amazon Web Services account, organizational unit, or the organization root.\n        </p>"
+                    }
+                },
+                "AssociationType": {
+                    "target": "com.amazonaws.securityhub#AssociationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether the association between the specified target and the configuration was directly applied by the \n            Security Hub delegated administrator or inherited from a parent.\n        </p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The date and time, in UTC and ISO 8601 format, that the configuration policy association was last updated.\n        </p>"
+                    }
+                },
+                "AssociationStatus": {
+                    "target": "com.amazonaws.securityhub#ConfigurationPolicyAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The current status of the association between the specified target and the configuration.\n        </p>"
+                    }
+                },
+                "AssociationStatusMessage": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An explanation for a <code>FAILED</code> value for <code>AssociationStatus</code>.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#StartConfigurationPolicyDisassociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#StartConfigurationPolicyDisassociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#StartConfigurationPolicyDisassociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Disassociates a target account, organizational unit, or the root from a specified configuration. When you \n            disassociate a configuration from its target, the target inherits the configuration of the closest parent. If there’s no \n            configuration to inherit, the target retains its settings but becomes a self-managed account. A target can be disassociated from \n            a configuration policy or self-managed behavior. Only the Security Hub delegated administrator can invoke this \n            operation from the home Region.\n        </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To disassociate a configuration from a target",
+                        "documentation": "This operation disassociates a configuration policy or self-managed behavior from the target account, organizational unit, or the root.",
+                        "input": {
+                            "Target": {
+                                "RootId": "r-f6g7h8i9j0example"
+                            },
+                            "ConfigurationPolicyIdentifier": "SELF_MANAGED_SECURITY_HUB"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/configurationPolicyAssociation/disassociate",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#StartConfigurationPolicyDisassociationRequest": {
+            "type": "structure",
+            "members": {
+                "Target": {
+                    "target": "com.amazonaws.securityhub#Target",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The identifier of the target account, organizational unit, or the root to disassociate from the specified configuration.\n        </p>"
+                    }
+                },
+                "ConfigurationPolicyIdentifier": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#StartConfigurationPolicyDisassociationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.securityhub#StatelessCustomActionDefinition": {
@@ -32484,6 +34060,49 @@
                 }
             }
         },
+        "com.amazonaws.securityhub#Target": {
+            "type": "union",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Web Services account ID of the target account.\n        </p>"
+                    }
+                },
+                "OrganizationalUnitId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The organizational unit ID of the target organizational unit.\n        </p>"
+                    }
+                },
+                "RootId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ID of the organization root.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The target account, organizational unit, or the root that is associated with an Security Hub configuration. The configuration \n            can be a configuration policy or self-managed behavior.  \n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#TargetType": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT"
+                    }
+                },
+                "ORGANIZATIONAL_UNIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORGANIZATIONAL_UNIT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.securityhub#Threat": {
             "type": "structure",
             "members": {
@@ -32726,6 +34345,38 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#UnprocessedAutomationRule"
+            }
+        },
+        "com.amazonaws.securityhub#UnprocessedConfigurationPolicyAssociation": {
+            "type": "structure",
+            "members": {
+                "ConfigurationPolicyAssociationIdentifiers": {
+                    "target": "com.amazonaws.securityhub#ConfigurationPolicyAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Configuration policy association identifiers that were specified in a <code>BatchGetConfigurationPolicyAssociations</code> \n            request but couldn’t be processed due to an error.\n        </p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An HTTP status code that identifies why the configuration policy association failed.\n        </p>"
+                    }
+                },
+                "ErrorReason": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A string that identifies why the configuration policy association failed.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            An array of configuration policy associations, one for each configuration policy association identifier, that \n            was specified in a <code>BatchGetConfigurationPolicyAssociations</code> request but couldn’t be processed due \n            to an error.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#UnprocessedConfigurationPolicyAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#UnprocessedConfigurationPolicyAssociation"
             }
         },
         "com.amazonaws.securityhub#UnprocessedErrorCode": {
@@ -33084,6 +34735,212 @@
                 }
             }
         },
+        "com.amazonaws.securityhub#UpdateConfigurationPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#UpdateConfigurationPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#UpdateConfigurationPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Updates a configuration policy. Only the Security Hub delegated \n            administrator can invoke this operation from the home Region.\n        </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a configuration policy",
+                        "documentation": "This operation updates the specified configuration policy.",
+                        "input": {
+                            "Identifier": "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "Name": "TestConfigurationPolicy",
+                            "Description": "Updated configuration policy for testing FSBP and CIS",
+                            "UpdatedReason": "Enabling ACM.2",
+                            "ConfigurationPolicy": {
+                                "SecurityHub": {
+                                    "ServiceEnabled": true,
+                                    "EnabledStandardIdentifiers": [
+                                        "arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                                        "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0"
+                                    ],
+                                    "SecurityControlsConfiguration": {
+                                        "DisabledSecurityControlIdentifiers": [
+                                            "CloudWatch.1",
+                                            "CloudWatch.2"
+                                        ],
+                                        "SecurityControlCustomParameters": [
+                                            {
+                                                "SecurityControlId": "ACM.1",
+                                                "Parameters": {
+                                                    "daysToExpiration": {
+                                                        "ValueType": "CUSTOM",
+                                                        "Value": {
+                                                            "Integer": 21
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "output": {
+                            "Arn": "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "Id": "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "Name": "TestConfigurationPolicy",
+                            "Description": "Updated configuration policy for testing FSBP and CIS",
+                            "UpdatedAt": "2023-01-12T06:17:17.154Z",
+                            "CreatedAt": "2023-01-11T06:17:17.154Z",
+                            "ConfigurationPolicy": {
+                                "SecurityHub": {
+                                    "ServiceEnabled": true,
+                                    "EnabledStandardIdentifiers": [
+                                        "arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                                        "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0"
+                                    ],
+                                    "SecurityControlsConfiguration": {
+                                        "DisabledSecurityControlIdentifiers": [
+                                            "CloudWatch.1",
+                                            "CloudWatch.2"
+                                        ],
+                                        "SecurityControlCustomParameters": [
+                                            {
+                                                "SecurityControlId": "ACM.1",
+                                                "Parameters": {
+                                                    "daysToExpiration": {
+                                                        "ValueType": "CUSTOM",
+                                                        "Value": {
+                                                            "Integer": 21
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/configurationPolicy/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#UpdateConfigurationPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy.\n        </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the configuration policy.\n        </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The description of the configuration policy.\n        </p>"
+                    }
+                },
+                "UpdatedReason": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The reason for updating the configuration policy.\n        </p>"
+                    }
+                },
+                "ConfigurationPolicy": {
+                    "target": "com.amazonaws.securityhub#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that defines how Security Hub is configured. It includes whether Security Hub is enabled or \n            disabled, a list of enabled security standards, a list of enabled or disabled security controls, and a list of custom parameter values for specified controls. \n            If you provide a list of security controls that are enabled in the configuration policy, Security Hub disables all other controls (including newly \n            released controls). If you provide a list of security controls that are disabled in the configuration policy, Security Hub \n            enables all other controls (including newly released controls).\n        </p>\n         <p>When updating a configuration policy, provide a complete list of standards that you want to enable and a complete list \n            of controls that you want to enable or disable. The updated configuration replaces the current configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#UpdateConfigurationPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ARN of the configuration policy.\n        </p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The UUID of the configuration policy.\n        </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the configuration policy.\n        </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The description of the configuration policy.\n        </p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The date and time, in UTC and ISO 8601 format, that the configuration policy was last updated.\n        </p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The date and time, in UTC and ISO 8601 format, that the configuration policy was created.\n        </p>"
+                    }
+                },
+                "ConfigurationPolicy": {
+                    "target": "com.amazonaws.securityhub#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that defines how Security Hub is configured. It includes whether Security Hub is enabled or \n            disabled, a list of enabled security standards, a list of enabled or disabled security controls, and a list of custom parameter values for specified controls. If the request included a \n            list of security controls that are enabled in the configuration policy, Security Hub disables all other controls (including \n            newly released controls). If the request included a list of security controls that are disabled in the configuration policy, \n            Security Hub enables all other controls (including newly released controls).\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityhub#UpdateFindingAggregator": {
             "type": "operation",
             "input": {
@@ -33384,6 +35241,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.securityhub#InternalException"
                 },
                 {
@@ -33394,16 +35254,26 @@
                 },
                 {
                     "target": "com.amazonaws.securityhub#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used to update the configuration related to Organizations. Can only be called from a\n         Security Hub administrator account.</p>",
+                "smithy.api#documentation": "<p>Updates the configuration of your organization in Security Hub. Only the\n         Security Hub administrator account can invoke this operation.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To update organization configuration",
-                        "documentation": "The following example updates the configuration for an organization so that Security Hub is automatically activated for new member accounts. Only the Security Hub administrator account can call this operation.",
+                        "documentation": "This operation updates the way your organization is configured in Security Hub. Only a Security Hub administrator account can invoke this operation.",
                         "input": {
-                            "AutoEnable": true
+                            "AutoEnable": false,
+                            "AutoEnableStandards": "NONE",
+                            "OrganizationConfiguration": {
+                                "ConfigurationType": "CENTRAL"
+                            }
                         }
                     }
                 ],
@@ -33421,15 +35291,18 @@
                     "target": "com.amazonaws.securityhub#Boolean",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Whether to automatically enable Security Hub for new accounts in the organization.</p>\n         <p>By default, this is <code>false</code>, and new accounts are not added\n         automatically.</p>\n         <p>To automatically enable Security Hub for new accounts, set this to <code>true</code>.</p>",
+                        "smithy.api#documentation": "<p>Whether to automatically enable Security Hub in new member accounts when they join the organization.</p>\n         <p>If set to <code>true</code>, then Security Hub is automatically enabled in new accounts. If set to <code>false</code>,\n           then Security Hub isn't enabled in new accounts automatically. The default value is <code>false</code>.</p>\n         <p>If the <code>ConfigurationType</code> of your organization is set to <code>CENTRAL</code>, then this field is set \n           to <code>false</code> and can't be changed in the home Region and linked Regions. However, in that case, the delegated administrator can create a configuration \n            policy in which Security Hub is enabled and associate the policy with new organization accounts.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AutoEnableStandards": {
                     "target": "com.amazonaws.securityhub#AutoEnableStandards",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to automatically enable Security Hub <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html\">default standards</a> \n         for new member accounts in the organization.</p>\n         <p>By default, this parameter is equal to <code>DEFAULT</code>, and new member accounts are automatically enabled with default Security Hub standards.</p>\n         <p>To opt out of enabling default standards for new member accounts, set this parameter equal to <code>NONE</code>.</p>"
+                        "smithy.api#documentation": "<p>Whether to automatically enable Security Hub <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html\">default standards</a> \n           in new member accounts when they join the organization.</p>\n         <p>The default value of this parameter is equal to <code>DEFAULT</code>.</p>\n         <p>If equal to <code>DEFAULT</code>, then Security Hub default standards are automatically enabled for new member \n           accounts. If equal to <code>NONE</code>, then default standards are not automatically enabled for new member \n           accounts.</p>\n         <p>If the <code>ConfigurationType</code> of your organization is set to <code>CENTRAL</code>, then this field is set \n           to <code>NONE</code> and can't be changed in the home Region and linked Regions. However, in that case, the delegated administrator can create a configuration \n            policy in which specific security standards are enabled and associate the policy with new organization accounts.</p>"
                     }
+                },
+                "OrganizationConfiguration": {
+                    "target": "com.amazonaws.securityhub#OrganizationConfiguration"
                 }
             },
             "traits": {
@@ -33452,6 +35325,9 @@
                 "target": "com.amazonaws.securityhub#UpdateSecurityControlResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
                 {
                     "target": "com.amazonaws.securityhub#InternalException"
                 },
@@ -33546,6 +35422,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.securityhub#InternalException"
                 },
                 {
@@ -33616,6 +35495,9 @@
                 "target": "com.amazonaws.securityhub#UpdateStandardsControlResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
                 {
                     "target": "com.amazonaws.securityhub#InternalException"
                 },
