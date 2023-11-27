@@ -1,3 +1,7 @@
+# v1.38.0 (2023-11-27)
+
+* **Feature**: This release adds support for multi-data warehouse writes through data sharing.
+
 # v1.37.1 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

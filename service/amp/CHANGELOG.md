@@ -1,3 +1,7 @@
+# v1.20.0 (2023-11-27)
+
+* **Feature**: This release adds support for the Amazon Managed Service for Prometheus collector, a fully managed, agentless Prometheus metrics scraping capability.
+
 # v1.19.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

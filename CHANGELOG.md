@@ -1,3 +1,92 @@
+# Release (2023-11-27)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.24.0](service/accessanalyzer/CHANGELOG.md#v1240-2023-11-27)
+  * **Feature**: IAM Access Analyzer now continuously monitors IAM roles and users in your AWS account or organization to generate findings for unused access. Additionally, IAM Access Analyzer now provides custom policy checks to validate that IAM policies adhere to your security standards ahead of deployments.
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.20.0](service/amp/CHANGELOG.md#v1200-2023-11-27)
+  * **Feature**: This release adds support for the Amazon Managed Service for Prometheus collector, a fully managed, agentless Prometheus metrics scraping capability.
+* `github.com/aws/aws-sdk-go-v2/service/bcmdataexports`: [v1.0.0](service/bcmdataexports/CHANGELOG.md#v100-2023-11-27)
+  * **Release**: New AWS service client module
+  * **Feature**: Users can create, read, update, delete Exports of billing and cost management data.  Users can get details of Export Executions and details of Tables for exporting.  Tagging support is provided for Exports
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.34.0](service/cloudtrail/CHANGELOG.md#v1340-2023-11-27)
+  * **Feature**: CloudTrail Lake now supports federating event data stores. giving users the ability to run queries against their event data using Amazon Athena.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.28.0](service/cloudwatchlogs/CHANGELOG.md#v1280-2023-11-27)
+  * **Feature**: Added APIs to Create, Update, Get, List and Delete LogAnomalyDetectors and List and Update Anomalies in Detector. Added LogGroupClass attribute for LogGroups to classify loggroup as Standard loggroup with all capabilities or InfrequentAccess loggroup with limited capabilities.
+* `github.com/aws/aws-sdk-go-v2/service/codestarconnections`: [v1.20.0](service/codestarconnections/CHANGELOG.md#v1200-2023-11-27)
+  * **Feature**: This release adds support for the CloudFormation Git sync feature. Git sync enables updating a CloudFormation stack from a template stored in a Git repository.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.30.0](service/computeoptimizer/CHANGELOG.md#v1300-2023-11-27)
+  * **Feature**: This release enables AWS Compute Optimizer to analyze and generate recommendations with customization and discounts preferences.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.42.0](service/configservice/CHANGELOG.md#v1420-2023-11-27)
+  * **Feature**: Support Periodic Recording for Configuration Recorder
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.8.0](service/controltower/CHANGELOG.md#v180-2023-11-27)
+  * **Feature**: Add APIs to create and manage a landing zone.
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.0.0](service/costoptimizationhub/CHANGELOG.md#v100-2023-11-27)
+  * **Release**: New AWS service client module
+  * **Feature**: This release launches Cost Optimization Hub, a new AWS Billing and Cost Management feature that helps you consolidate and prioritize cost optimization recommendations across your AWS Organizations member accounts and AWS Regions, so that you can get the most out of your AWS spend.
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.24.0](service/detective/CHANGELOG.md#v1240-2023-11-27)
+  * **Feature**: Added new APIs in Detective to support resource investigations
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.34.0](service/ecs/CHANGELOG.md#v1340-2023-11-27)
+  * **Feature**: Adds a new 'type' property to the Setting structure. Adds a new AccountSetting - guardDutyActivate for ECS.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.24.0](service/efs/CHANGELOG.md#v1240-2023-11-27)
+  * **Feature**: Adding support for EFS Archive lifecycle configuration.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.34.0](service/eks/CHANGELOG.md#v1340-2023-11-27)
+  * **Feature**: This release adds support for EKS Pod Identity feature. EKS Pod Identity makes it easy for customers to obtain IAM permissions for the applications running in their EKS clusters.
+* `github.com/aws/aws-sdk-go-v2/service/eksauth`: [v1.0.0](service/eksauth/CHANGELOG.md#v100-2023-11-27)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds support for EKS Pod Identity feature. EKS Pod Identity makes it easy for customers to obtain IAM permissions for their applications running in the EKS clusters.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.25.0](service/elasticloadbalancingv2/CHANGELOG.md#v1250-2023-11-27)
+  * **Feature**: This release enables both mutual authentication (mTLS), and Automatic Target Weights (ATW) for Application Load Balancers.
+* `github.com/aws/aws-sdk-go-v2/service/freetier`: [v1.0.0](service/freetier/CHANGELOG.md#v100-2023-11-27)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the initial SDK release for the AWS Free Tier GetFreeTierUsage API
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.38.0](service/fsx/CHANGELOG.md#v1380-2023-11-27)
+  * **Feature**: Added support for FSx for ONTAP scale-out file systems and FlexGroup volumes. Added the HAPairs field and ThroughputCapacityPerHAPair for filesystem. Added AggregateConfiguration (containing Aggregates and ConstituentsPerAggregate) and SizeInBytes for volume.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.34.0](service/guardduty/CHANGELOG.md#v1340-2023-11-27)
+  * **Feature**: Add support for Runtime Monitoring for ECS and ECS-EC2.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.9.0](service/iotfleetwise/CHANGELOG.md#v190-2023-11-27)
+  * **Feature**: AWS IoT FleetWise introduces new APIs for vision system data, such as data collected from cameras, radars, and lidars. You can now model and decode complex data types.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.27.0](service/lakeformation/CHANGELOG.md#v1270-2023-11-27)
+  * **Feature**: This release adds four new APIs "DescribeLakeFormationIdentityCenterConfiguration", "CreateLakeFormationIdentityCenterConfiguration", "DescribeLakeFormationIdentityCenterConfiguration", and "DeleteLakeFormationIdentityCenterConfiguration", and also updates the corresponding documentation.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.37.0](service/lexmodelsv2/CHANGELOG.md#v1370-2023-11-27)
+  * **Feature**: This release introduces new generative AI features in AWS Lex: Assisted Slot Resolution, Descriptive Bot Building, and Sample Utterance Generation. These features leverage large language models available through Amazon Bedrock to improve the bot builder and customer experiences.
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.22.0](service/lexruntimev2/CHANGELOG.md#v1220-2023-11-27)
+  * **Feature**: This release introduces support for interpretationSource in the runtime service response.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.19.0](service/managedblockchain/CHANGELOG.md#v1190-2023-11-27)
+  * **Feature**: Add optional NetworkType property to Accessor APIs
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.29.0](service/personalize/CHANGELOG.md#v1290-2023-11-27)
+  * **Feature**: Enables metadata in recommendations, recommendations with themes, and next best action recommendations
+* `github.com/aws/aws-sdk-go-v2/service/personalizeevents`: [v1.18.0](service/personalizeevents/CHANGELOG.md#v1180-2023-11-27)
+  * **Feature**: This release enables PutActions and PutActionInteractions
+* `github.com/aws/aws-sdk-go-v2/service/personalizeruntime`: [v1.19.0](service/personalizeruntime/CHANGELOG.md#v1190-2023-11-27)
+  * **Feature**: Enables metadata in recommendations and next best action recommendations
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.52.0](service/quicksight/CHANGELOG.md#v1520-2023-11-27)
+  * **Feature**: This release launches new APIs for trusted identity propagation setup and supports creating datasources using trusted identity propagation as authentication method for QuickSight accounts configured with IAM Identity Center.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.38.0](service/redshift/CHANGELOG.md#v1380-2023-11-27)
+  * **Feature**: This release adds support for multi-data warehouse writes through data sharing.
+* `github.com/aws/aws-sdk-go-v2/service/repostspace`: [v1.0.0](service/repostspace/CHANGELOG.md#v100-2023-11-27)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of AWS re:Post Private
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.45.0](service/s3/CHANGELOG.md#v1450-2023-11-27)
+  * **Feature**: Adding new params - Key and Prefix, to S3 API operations for supporting S3 Access Grants. Note - These updates will not change any of the existing S3 API functionality.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.39.0](service/s3control/CHANGELOG.md#v1390-2023-11-27)
+  * **Feature**: Introduce Amazon S3 Access Grants, a new S3 access control feature that maps identities in directories such as Active Directory, or AWS Identity and Access Management (IAM) Principals, to datasets in S3.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.24.0](service/secretsmanager/CHANGELOG.md#v1240-2023-11-27)
+  * **Feature**: AWS Secrets Manager has released the BatchGetSecretValue API, which allows customers to fetch up to 20 Secrets with a single request using a list of secret names or filters.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.41.0](service/securityhub/CHANGELOG.md#v1410-2023-11-27)
+  * **Feature**: Adds and updates APIs to support customizable security controls. This feature allows Security Hub customers to provide custom parameters for security controls. With this release, findings for controls that support custom parameters will include the parameters used to generate the findings.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.23.0](service/sfn/CHANGELOG.md#v1230-2023-11-27)
+  * **Feature**: Adds new TestState operation which accepts the definition of a single state and executes it. You can test a state without creating a state machine or updating an existing state machine.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.32.0](service/transcribe/CHANGELOG.md#v1320-2023-11-27)
+  * **Feature**: This release adds support for transcriptions from audio sources in 64 new languages and introduces generative call summarization in Transcribe Call Analytics (Post call)
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.34.0](service/workspaces/CHANGELOG.md#v1340-2023-11-27)
+  * **Feature**: The release introduces Multi-Region Resilience one-way data replication that allows you to replicate data from your primary WorkSpace to a standby WorkSpace in another AWS Region. DescribeWorkspaces now returns the status of data replication.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.0.0](service/workspacesthinclient/CHANGELOG.md#v100-2023-11-27)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of Amazon WorkSpaces Thin Client
+
 # Release (2023-11-22)
 
 ## Module Highlights

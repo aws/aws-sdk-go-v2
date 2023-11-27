@@ -1,3 +1,7 @@
+# v1.24.0 (2023-11-27)
+
+* **Feature**: Added new APIs in Detective to support resource investigations
+
 # v1.23.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

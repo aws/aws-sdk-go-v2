@@ -1,8 +1,0 @@
-{
-    "id": "2a3b3de3-43f4-463d-97ba-211b6f3f8586",
-    "type": "feature",
-    "description": "This is the initial SDK release for the AWS Free Tier GetFreeTierUsage API",
-    "modules": [
-        "service/freetier"
-    ]
-}

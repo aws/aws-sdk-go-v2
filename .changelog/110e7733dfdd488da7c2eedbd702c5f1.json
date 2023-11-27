@@ -1,8 +1,0 @@
-{
-    "id": "110e7733-dfdd-488d-a7c2-eedbd702c5f1",
-    "type": "feature",
-    "description": "This release introduces new generative AI features in AWS Lex: Assisted Slot Resolution, Descriptive Bot Building, and Sample Utterance Generation. These features leverage large language models available through Amazon Bedrock to improve the bot builder and customer experiences.",
-    "modules": [
-        "service/lexmodelsv2"
-    ]
-}

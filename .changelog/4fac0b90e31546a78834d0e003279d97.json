@@ -1,8 +1,0 @@
-{
-    "id": "4fac0b90-e315-46a7-8834-d0e003279d97",
-    "type": "feature",
-    "description": "This release enables both mutual authentication (mTLS), and Automatic Target Weights (ATW) for Application Load Balancers.",
-    "modules": [
-        "service/elasticloadbalancingv2"
-    ]
-}

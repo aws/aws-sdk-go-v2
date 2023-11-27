@@ -15,7 +15,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.19.3
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.33.1
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.30.3
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.25.3
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.18.3
@@ -23,22 +23,22 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.30.3
-	github.com/aws/aws-sdk-go-v2/service/configservice v1.41.3
+	github.com/aws/aws-sdk-go-v2/service/configservice v1.42.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.20.2
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.34.2
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.19.3
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.21.3
-	github.com/aws/aws-sdk-go-v2/service/docdb v1.28.0
+	github.com/aws/aws-sdk-go-v2/service/docdb v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.25.3
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.137.1
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.23.1
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.33.2
-	github.com/aws/aws-sdk-go-v2/service/efs v1.23.3
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.34.0
+	github.com/aws/aws-sdk-go-v2/service/efs v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.32.3
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.19.3
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.20.3
-	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.24.3
+	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.23.3
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/emr v1.34.1
@@ -56,22 +56,22 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.48.1
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.31.3
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.17.3
-	github.com/aws/aws-sdk-go-v2/service/neptune v1.26.3
+	github.com/aws/aws-sdk-go-v2/service/neptune v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.16.3
 	github.com/aws/aws-sdk-go-v2/service/polly v1.35.1
-	github.com/aws/aws-sdk-go-v2/service/rds v1.63.1
-	github.com/aws/aws-sdk-go-v2/service/redshift v1.37.1
+	github.com/aws/aws-sdk-go-v2/service/rds v1.63.2
+	github.com/aws/aws-sdk-go-v2/service/redshift v1.38.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.34.3
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.34.3
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.19.3
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.22.3
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.44.0
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.38.0
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.23.3
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.45.0
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.39.0
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.24.3
 	github.com/aws/aws-sdk-go-v2/service/ses v1.18.3
-	github.com/aws/aws-sdk-go-v2/service/sfn v1.22.2
+	github.com/aws/aws-sdk-go-v2/service/sfn v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/shield v1.22.3
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.23.3
 	github.com/aws/aws-sdk-go-v2/service/sns v1.25.3
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.42.3
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.33.4
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.34.0
 	github.com/aws/smithy-go v1.17.0
 	github.com/google/go-cmp v0.5.8
 )

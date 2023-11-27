@@ -1,8 +1,0 @@
-{
-    "id": "8770fbe4-afd6-4dfe-9db2-985720f73a2e",
-    "type": "feature",
-    "description": "Added APIs to Create, Update, Get, List and Delete LogAnomalyDetectors and List and Update Anomalies in Detector. Added LogGroupClass attribute for LogGroups to classify loggroup as Standard loggroup with all capabilities or InfrequentAccess loggroup with limited capabilities.",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

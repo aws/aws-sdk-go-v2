@@ -1,3 +1,7 @@
+# v1.41.0 (2023-11-27)
+
+* **Feature**: Adds and updates APIs to support customizable security controls. This feature allows Security Hub customers to provide custom parameters for security controls. With this release, findings for controls that support custom parameters will include the parameters used to generate the findings.
+
 # v1.40.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

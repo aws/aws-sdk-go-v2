@@ -1,3 +1,7 @@
+# v1.22.0 (2023-11-27)
+
+* **Feature**: This release introduces support for interpretationSource in the runtime service response.
+
 # v1.21.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

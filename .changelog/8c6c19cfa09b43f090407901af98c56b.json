@@ -1,8 +1,0 @@
-{
-    "id": "8c6c19cf-a09b-43f0-9040-7901af98c56b",
-    "type": "feature",
-    "description": "Users can create, read, update, delete Exports of billing and cost management data.  Users can get details of Export Executions and details of Tables for exporting.  Tagging support is provided for Exports",
-    "modules": [
-        "service/bcmdataexports"
-    ]
-}

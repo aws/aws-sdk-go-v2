@@ -1,3 +1,7 @@
+# v1.28.1 (2023-11-27)
+
+* No change notes available for this release.
+
 # v1.28.0 (2023-11-20)
 
 * **Feature**: Amazon DocumentDB updates for new cluster storage configuration: Amazon DocumentDB I/O-Optimized.

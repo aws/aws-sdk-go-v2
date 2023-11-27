@@ -1,3 +1,7 @@
+# v1.24.0 (2023-11-27)
+
+* **Feature**: AWS Secrets Manager has released the BatchGetSecretValue API, which allows customers to fetch up to 20 Secrets with a single request using a list of secret names or filters.
+
 # v1.23.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

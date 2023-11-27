@@ -1,3 +1,7 @@
+# v1.23.0 (2023-11-27)
+
+* **Feature**: Adds new TestState operation which accepts the definition of a single state and executes it. You can test a state without creating a state machine or updating an existing state machine.
+
 # v1.22.2 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

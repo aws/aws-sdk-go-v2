@@ -1,3 +1,7 @@
+# v1.18.0 (2023-11-27)
+
+* **Feature**: This release enables PutActions and PutActionInteractions
+
 # v1.17.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

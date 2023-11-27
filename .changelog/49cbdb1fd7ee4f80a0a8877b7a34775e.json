@@ -1,8 +1,0 @@
-{
-    "id": "49cbdb1f-d7ee-4f80-a0a8-877b7a34775e",
-    "type": "feature",
-    "description": "This release launches new APIs for trusted identity propagation setup and supports creating datasources using trusted identity propagation as authentication method for QuickSight accounts configured with IAM Identity Center.",
-    "modules": [
-        "service/quicksight"
-    ]
-}

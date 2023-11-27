@@ -1,3 +1,7 @@
+# v1.34.0 (2023-11-27)
+
+* **Feature**: CloudTrail Lake now supports federating event data stores. giving users the ability to run queries against their event data using Amazon Athena.
+
 # v1.33.1 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

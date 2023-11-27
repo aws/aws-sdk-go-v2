@@ -1,8 +1,0 @@
-{
-    "id": "1f988490-666e-42b9-835a-903aa299a431",
-    "type": "feature",
-    "description": "Introduce Amazon S3 Access Grants, a new S3 access control feature that maps identities in directories such as Active Directory, or AWS Identity and Access Management (IAM) Principals, to datasets in S3.",
-    "modules": [
-        "service/s3control"
-    ]
-}

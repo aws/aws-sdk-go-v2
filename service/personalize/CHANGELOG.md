@@ -1,3 +1,7 @@
+# v1.29.0 (2023-11-27)
+
+* **Feature**: Enables metadata in recommendations, recommendations with themes, and next best action recommendations
+
 # v1.28.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "f5a13809-3fc8-44ca-bbcf-c17b0cc0245b",
-    "type": "feature",
-    "description": "Adds new TestState operation which accepts the definition of a single state and executes it. You can test a state without creating a state machine or updating an existing state machine.",
-    "modules": [
-        "service/sfn"
-    ]
-}

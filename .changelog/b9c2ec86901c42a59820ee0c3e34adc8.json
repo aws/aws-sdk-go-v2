@@ -1,8 +1,0 @@
-{
-    "id": "b9c2ec86-901c-42a5-9820-ee0c3e34adc8",
-    "type": "feature",
-    "description": "Add optional NetworkType property to Accessor APIs",
-    "modules": [
-        "service/managedblockchain"
-    ]
-}

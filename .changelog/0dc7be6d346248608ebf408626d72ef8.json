@@ -1,8 +1,0 @@
-{
-    "id": "0dc7be6d-3462-4860-8ebf-408626d72ef8",
-    "type": "feature",
-    "description": "Initial release of Amazon WorkSpaces Thin Client",
-    "modules": [
-        "service/workspacesthinclient"
-    ]
-}

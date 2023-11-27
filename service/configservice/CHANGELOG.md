@@ -1,3 +1,7 @@
+# v1.42.0 (2023-11-27)
+
+* **Feature**: Support Periodic Recording for Configuration Recorder
+
 # v1.41.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

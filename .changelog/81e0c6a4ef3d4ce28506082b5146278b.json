@@ -1,8 +1,0 @@
-{
-    "id": "81e0c6a4-ef3d-4ce2-8506-082b5146278b",
-    "type": "feature",
-    "description": "Adding support for EFS Archive lifecycle configuration.",
-    "modules": [
-        "service/efs"
-    ]
-}

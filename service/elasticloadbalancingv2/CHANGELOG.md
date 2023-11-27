@@ -1,3 +1,7 @@
+# v1.25.0 (2023-11-27)
+
+* **Feature**: This release enables both mutual authentication (mTLS), and Automatic Target Weights (ATW) for Application Load Balancers.
+
 # v1.24.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "13503e6b-9b65-46c2-9d1e-79a5cd8ef97a",
-    "type": "feature",
-    "description": "AWS IoT FleetWise introduces new APIs for vision system data, such as data collected from cameras, radars, and lidars. You can now model and decode complex data types.",
-    "modules": [
-        "service/iotfleetwise"
-    ]
-}

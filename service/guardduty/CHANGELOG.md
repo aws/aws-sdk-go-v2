@@ -1,3 +1,7 @@
+# v1.34.0 (2023-11-27)
+
+* **Feature**: Add support for Runtime Monitoring for ECS and ECS-EC2.
+
 # v1.33.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

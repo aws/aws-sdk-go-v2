@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.25.3
 	github.com/aws/aws-sdk-go-v2/service/lexruntimeservice v1.17.3
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.44.0
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.45.0
 	github.com/aws/aws-sdk-go-v2/service/schemas v1.20.3
 	github.com/aws/smithy-go v1.17.0
 )

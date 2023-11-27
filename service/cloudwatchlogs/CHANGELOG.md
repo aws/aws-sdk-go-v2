@@ -1,3 +1,7 @@
+# v1.28.0 (2023-11-27)
+
+* **Feature**: Added APIs to Create, Update, Get, List and Delete LogAnomalyDetectors and List and Update Anomalies in Detector. Added LogGroupClass attribute for LogGroups to classify loggroup as Standard loggroup with all capabilities or InfrequentAccess loggroup with limited capabilities.
+
 # v1.27.2 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

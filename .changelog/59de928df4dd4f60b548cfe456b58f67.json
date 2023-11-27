@@ -1,8 +1,0 @@
-{
-    "id": "59de928d-f4dd-4f60-b548-cfe456b58f67",
-    "type": "feature",
-    "description": "Add support for Runtime Monitoring for ECS and ECS-EC2.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

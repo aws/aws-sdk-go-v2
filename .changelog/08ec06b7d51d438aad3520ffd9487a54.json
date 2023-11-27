@@ -1,8 +1,0 @@
-{
-    "id": "08ec06b7-d51d-438a-ad35-20ffd9487a54",
-    "type": "feature",
-    "description": "This release enables AWS Compute Optimizer to analyze and generate recommendations with customization and discounts preferences.",
-    "modules": [
-        "service/computeoptimizer"
-    ]
-}

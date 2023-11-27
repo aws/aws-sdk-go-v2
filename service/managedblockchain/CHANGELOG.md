@@ -1,3 +1,7 @@
+# v1.19.0 (2023-11-27)
+
+* **Feature**: Add optional NetworkType property to Accessor APIs
+
 # v1.18.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

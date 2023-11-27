@@ -1,3 +1,7 @@
+# v1.39.0 (2023-11-27)
+
+* **Feature**: Introduce Amazon S3 Access Grants, a new S3 access control feature that maps identities in directories such as Active Directory, or AWS Identity and Access Management (IAM) Principals, to datasets in S3.
+
 # v1.38.0 (2023-11-22)
 
 * **Feature**: **BREAK FIX**: Convert S3Control PublicAccessBlock field types to nilable. See #2384, #2162.

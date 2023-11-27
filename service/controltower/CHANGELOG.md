@@ -1,3 +1,7 @@
+# v1.8.0 (2023-11-27)
+
+* **Feature**: Add APIs to create and manage a landing zone.
+
 # v1.7.2 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

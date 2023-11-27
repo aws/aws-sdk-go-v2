@@ -1,3 +1,7 @@
+# v1.32.0 (2023-11-27)
+
+* **Feature**: This release adds support for transcriptions from audio sources in 64 new languages and introduces generative call summarization in Transcribe Call Analytics (Post call)
+
 # v1.31.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "2af54a03-613d-41f4-9fe0-dbaa7f535763",
-    "type": "feature",
-    "description": "Adds and updates APIs to support customizable security controls. This feature allows Security Hub customers to provide custom parameters for security controls. With this release, findings for controls that support custom parameters will include the parameters used to generate the findings.",
-    "modules": [
-        "service/securityhub"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.20.0 (2023-11-27)
+
+* **Feature**: This release adds support for the CloudFormation Git sync feature. Git sync enables updating a CloudFormation stack from a template stored in a Git repository.
+
 # v1.19.0 (2023-11-20)
 
 * **Feature**: This release updates a few CodeStar Connections related APIs.
